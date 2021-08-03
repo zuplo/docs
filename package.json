@@ -1,0 +1,19 @@
+{
+  "name": "@zuplo/docs",
+  "version": "1.0.0",
+  "description": "Zuplo documentation",
+  "scripts": {
+    "format": "prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zuplo/docs.git"
+  },
+  "keywords": [],
+  "author": "Zuplo, Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zuplo/docs/issues"
+  },
+  "homepage": "https://github.com/zuplo/docs#readme"
+}
