@@ -13,4 +13,4 @@ jobs:
           -H "Accept: application/vnd.github.v3+json" \
           -H "Authorization: token ${{ secrets.GH_CUSTOM_TOKEN }}" \
           https://api.github.com/repos/zuplo/zuplo-docs/actions/workflows/19916176/dispatches \
-          -d '{"ref":"refs/heads/main", "inputs: { "contentVersion": "${{ github.sha }}" }}'
+          -d '{"ref":"refs/heads/main", "inputs": { "contentVersion": "${{ github.sha }}" }}'
