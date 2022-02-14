@@ -6,11 +6,11 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
-      - name: Create new Vercel Deployment
+      - name: Dispatch Container Release Workflow
         run: |
           curl \
           -X POST \
-          -H "Content-Type: application/json" \
-          -H "Authorization: Bearer ${{ secrets.VERCEL_API_TOKEN }}" \
-          https://api.vercel.com/v13/deployments?forceNew=true&teamId=zuplo \
-          -d '{"name":"zuplo-docs"}'
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Authorization: token ${{ secrets.GH_CUSTOM_TOKEN }}" \
+          https://api.github.com/repos/zuplo/zuplo-docs/actions/workflows/19916176/dispatches \
+          -d '{"ref":"refs/heads/main", "inputs: { "contentVersion": "${{ github.sha }}" }}'
