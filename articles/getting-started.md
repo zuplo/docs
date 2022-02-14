@@ -5,9 +5,9 @@ date: "2021-08-01"
 
 ## Proxy a public API
 
-Let's proxy the sample e-commerce API at [https://ecommerce-api.zuplo.com](https://ecommerce-api.zuplo.com) with a Zuplo gateway.
+Let's proxy the sample e-commerce API at `https://ecommerce-api.zuplo.com` with a Zuplo gateway.
 
-1. Open the **routes.json** file in the file and change the **path** of the first route to be `/products/(.*)` - this uses a wildcard `(.*)` to match everything.
+1. Open the **routes.json** file and change the **path** of the first route to be `/products/(.*)` - this uses a wildcard `(.*)` to match everything.
 
 ![Untitled](/media/getting-started/path.png)
 
@@ -19,13 +19,11 @@ Let's proxy the sample e-commerce API at [https://ecommerce-api.zuplo.com](https
 
 ![Untitled](/media/getting-started/route-tester.png)
 
-![Untitled](/media/getting-started/route-match.png)
+![Untitled](/media/getting-started/route-matched.png)
 
-1. Add a rate-limiting policy to limit traffic to your new endpoint - expand the Policies section and click Add Policy. Choose Rate Limit policy and Accept the defaults by clicking OK.
+<!-- 1. Add a rate-limiting policy to limit traffic to your new endpoint - expand the Policies section and click Add Policy. Choose Rate Limit policy and Accept the defaults by clicking OK.
 
-![Untitled](/media/getting-started/add-policy.png)
-
-_[josh note - the goal here is to get them to see all the policies we have, triggering future exploration. We will probably ship this before we have the policy designer - we’ll just skip this step]._
+![Untitled](/media/getting-started/add-policy.png) -->
 
 1. Invoke your API using the Test Console. Click on the lightning tab and select the first file. Change the path to `/v1/todos/1` and hit **Test**.
 
