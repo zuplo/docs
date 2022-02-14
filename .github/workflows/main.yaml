@@ -1,0 +1,16 @@
+name: Build & Release
+on: [push, workflow_dispatch]
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create new Vercel Deployment
+        run: |
+          curl \
+          -X POST \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer ${{ secrets.VERCEL_API_TOKEN }}" \
+          https://api.vercel.com/v13/deployments?forceNew=true&teamId=zuplo \
+          -d '{"name":"zuplo-docs"}'
