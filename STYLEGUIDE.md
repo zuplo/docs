@@ -1,8 +1,10 @@
 # Zuplo Style Guide
 
-This style guide covers the terminology and content specific to Zuplo, along with some comments on common writing issues.
+This style guide covers the terminology and content specific to Zuplo, along
+with some comments on common writing issues.
 
-For general software-industry styles and terminology, see the [Microsoft Writing Style Guide](https://docs.microsoft.com/en-us/style-guide/welcome/).
+For general software-industry styles and terminology, see the
+[Microsoft Writing Style Guide](https://docs.microsoft.com/en-us/style-guide/welcome/).
 
 ## Voice
 
@@ -39,7 +41,8 @@ For general software-industry styles and terminology, see the [Microsoft Writing
 | In this way, setting up a session for the user on the client side is simply a matter of saving the Access Token, ID Token, and a time that the Access Token expires at in browser storage. | To set up a session for the user on the client side, save the following information in browser storage: `access_token`, `id_token`, `expires_in`. |
 
 - When mentioning several elements, use bulleted lists.
-- Subheads are not independent statements. Repeat the information from the subhead in the paragraph.
+- Subheads are not independent statements. Repeat the information from the
+  subhead in the paragraph.
 - Avoid abbreviations.
 
 | **Incorrect**                                                                                     | **Correct**                                                                                   |
@@ -63,16 +66,20 @@ For general software-industry styles and terminology, see the [Microsoft Writing
 
 ## Punctuation
 
-- Use colons to introduce code or examples: "Install the dependencies using yarn: `code_snippet`"
-- Use hyphens between adjectives and the verbs they modify. Don't use a hyphen if the adjective ends with "ly".
+- Use colons to introduce code or examples: "Install the dependencies using
+  yarn: `code_snippet`"
+- Use hyphens between adjectives and the verbs they modify. Don't use a hyphen
+  if the adjective ends with "ly".
 
 | **Incorrect**              | **Correct**                |
 | -------------------------- | -------------------------- |
 | "an easy to remember rule" | "an easy-to-remember rule" |
 | "commonly-used adjectives" | "commonly used adjectives" |
 
-- When you are quoting something in a sentence, keep the punctuation inside the quotation marks.
-- When you are quoting code, do not add any punctuation inside the quotation marks.
+- When you are quoting something in a sentence, keep the punctuation inside the
+  quotation marks.
+- When you are quoting code, do not add any punctuation inside the quotation
+  marks.
 
 ## Formatting
 
@@ -85,22 +92,27 @@ For general software-industry styles and terminology, see the [Microsoft Writing
 | Click "Save".                            | Click **Save**.                      |
 | You **must** save these values securely. | You must save these values securely. |
 
-- Use `code_formatting` to refer to parameters and values. Avoid code formatting when mentioning types of objects.
+- Use `code_formatting` to refer to parameters and values. Avoid code formatting
+  when mentioning types of objects.
 
 | **Incorrect**                                       | **Correct**                                         |
 | --------------------------------------------------- | --------------------------------------------------- |
 | Save the "idToken" value in your client properties. | Save the `idToken` value in your client properties. |
 | An `idToken` helps you identify the user.           | An ID Token helps you identify the user.            |
 
-- The text of a link must include the title of the linked page. This helps the reader decide if they want to click on the link.
+- The text of a link must include the title of the linked page. This helps the
+  reader decide if they want to click on the link.
 
 | **Incorrect**                                        | **Correct**                                                        |
 | ---------------------------------------------------- | ------------------------------------------------------------------ |
 | You can read more about this feature [here](/rules). | Read more about this feature in the [Rules documentation](/rules). |
 
 - Use blockquotes only for quotes. Don't use them for component styles.
-- When you are referring to specific dates, abbreviate the following months: January (Jan.), February (Feb.), August (Aug.), September (Sept.), October (Oct.), November (Nov.), December (Dec.).
-- When you are referring to a month alone or a month and a year, don't abbreviate the month.
+- When you are referring to specific dates, abbreviate the following months:
+  January (Jan.), February (Feb.), August (Aug.), September (Sept.), October
+  (Oct.), November (Nov.), December (Dec.).
+- When you are referring to a month alone or a month and a year, don't
+  abbreviate the month.
 
 | **Incorrect**     | **Correct**    |
 | ----------------- | -------------- |
@@ -110,9 +122,13 @@ For general software-industry styles and terminology, see the [Microsoft Writing
 | Mar. 15           | March 15       |
 | 15 March 2048     | March 15, 2048 |
 
-- Endpoint names should be capitalized when used in-text: Discovery endpoint, Authorization endpoint, Token endpoint.
-- Endpoints with names longer than one or two words should also be capitalized with the exception of prepositions and articles (i.e. with, to, the, a, an) such as Update a Hook endpoint.
-- Endpoint names denoted as a path should not be capitalized but should be in monospace font: `/authorize,` `/post_user_import,` `/clients.`
+- Endpoint names should be capitalized when used in-text: Discovery endpoint,
+  Authorization endpoint, Token endpoint.
+- Endpoints with names longer than one or two words should also be capitalized
+  with the exception of prepositions and articles (i.e. with, to, the, a, an)
+  such as Update a Hook endpoint.
+- Endpoint names denoted as a path should not be capitalized but should be in
+  monospace font: `/authorize,` `/post_user_import,` `/clients.`
 
 | **Incorrect**                                                                                  | **Correct**                                                                                      |
 | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
@@ -132,10 +148,14 @@ For general software-industry styles and terminology, see the [Microsoft Writing
 | 14 plugins are available.                             | Fourteen plugins are available.                   |
 | Configure 12 50GB drives                              | Configure twelve 50GB drives.                     |
 
-- For additional information that is up to four lines long, use [notes](CONTRIBUTING.md#note).
-- For additional information that is longer than four lines, use [panels](CONTRIBUTING.md#panels).
-- For critical security information up to four lines long, use [warnings](CONTRIBUTING.md#warning).
-- For critical security information longer than four lines, use [panel warnings](CONTRIBUTING.md#panel-warning).
+- For additional information that is up to four lines long, use
+  [notes](CONTRIBUTING.md#note).
+- For additional information that is longer than four lines, use
+  [panels](CONTRIBUTING.md#panels).
+- For critical security information up to four lines long, use
+  [warnings](CONTRIBUTING.md#warning).
+- For critical security information longer than four lines, use
+  [panel warnings](CONTRIBUTING.md#panel-warning).
 
 ## Vocabulary
 
@@ -168,14 +188,16 @@ For general software-industry styles and terminology, see the [Microsoft Writing
 - Use "multi-factor authentication" instead of "multifactor authentication".
 - Use "email address" instead of "e-mail address".
 - Use "website" instead of "web site".
-- Use "click on" when referring to text links in a webpage or UI. Use "click" when referring to a button.
+- Use "click on" when referring to text links in a webpage or UI. Use "click"
+  when referring to a button.
 
 | **Incorrect**                                                                      | **Correct**                                                                           |
 | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | Select **Save**.                                                                   | Click **Save**.                                                                       |
 | Click **Go to Settings** at the bottom of the page to access the settings section. | Click on **Go to Settings** at the bottom of the page to access the settings section. |
 
-- Depending on the situation, the reader can "gain access", "grant access", or "allow access".
+- Depending on the situation, the reader can "gain access", "grant access", or
+  "allow access".
 - Refer to the developer's customer as the "user".
 - If you need to use the name of a fictional company, use "ExampleCo".
 - When you use a group of nouns as an adjective, use a hyphen.
@@ -192,13 +214,14 @@ For general software-industry styles and terminology, see the [Microsoft Writing
 
 - Dashboard: the [Zuplo management console](${manage_url}).
 - The dashboard elements are called "section", "tab", "field".
-- Dashboard-related terminology:
-  ![](/media/readme/structure.png)
+- Dashboard-related terminology: ![](/media/readme/structure.png)
 
 ### The application
 
 - Account: a user, their credentials, a profile and other attributes
-- Tenant: a logical isolation unit of the products we offer. Examples of Zuplo tenants: `foo.zuplo.app`, `bar.zuplo.app`
+- Tenant: a logical isolation unit of the products we offer. Examples of Zuplo
+  tenants: `foo.zuplo.app`, `bar.zuplo.app`
 - Auth0 tenants: regular cloud tenants
-- Subscription: a contract or service plan. Examples of subscriptions: trial, free, developer or developer-pro
+- Subscription: a contract or service plan. Examples of subscriptions: trial,
+  free, developer or developer-pro
 - Private Cloud/Managed Private Cloud: single-tenant deployment
