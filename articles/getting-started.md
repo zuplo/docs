@@ -4,6 +4,13 @@ date: "2021-08-01"
 embed: true
 ---
 
+Zuplo isn't your average gateway. It's a **programmable gateway** that can be used to protect and share your own API _and_ used as a simple orchestration layer over SaaS APIs. Choose your getting started guide:
+
+1. **Proxy a public API** 
+2. [Hello World API](getting-started-hello-world)
+3. [Gateway over AirTable](getting-started-airtable)
+4. [Gateway over MongoDB](getting-started-mongo-db)
+
 ## Proxy a public API
 
 Let's proxy the sample e-commerce API at `https://ecommerce-api.zuplo.com` with
@@ -11,8 +18,11 @@ a Zuplo gateway in 4 easy steps.
 
 ## 1
 
-Open the **routes.json** file and change the **path** of the first route to be
-`/products/(.*)` - this uses a wildcard `(.*)` to match everything.
+Open the **routes.json** file and add a new route. 
+
+![Untitled](/media/getting-started/add-route.png)
+
+Change the **path** of the new route to be `/products/(.*)` - this uses a wildcard `(.*)` to match anything after `/products/`.
 
 ![Untitled](/media/getting-started/path.png)
 
@@ -52,8 +62,10 @@ the first file. Change the path to `/v1/todos/1` and hit **Test**.
 You should see the results of your query. Try it five more times to see if the
 results change thanks to your rate limiter.
 
-Now, why not try some of the examples in our documentation:
+Why not try one of the other getting started guides (above) or some of the examples in our documentation:
 
-- [Policies](https://www.notion.so/zuplo/Policies-d94e7c5ee5444532855e7678effaee42)
+- [Write your own policies](https://zuplo.notion.site/Policies-d94e7c5ee5444532855e7678effaee42)
 - [Archive requests to storage](https://zuplo.notion.site/Archiving-requests-to-storage-608a64672de64f1b94309f68993d26d1)
 - [Setting up JWT auth with Auth0](https://zuplo.notion.site/Setting-up-JWT-auth-with-Auth0-9f5ce6ad37f5418aaa781391c1995e00)
+
+[Zuplo Alpha Documentation Home](https://zuplo.notion.site/Zuplo-Docs-Alpha-f6d20ce45d4140859c1c5823fc721a1e)
