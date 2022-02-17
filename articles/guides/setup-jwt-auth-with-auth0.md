@@ -154,8 +154,8 @@ should get a `401: Unauthorized` response from your API.
 ![CleanShot 2021-11-29 at 16.55.43@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.55.432x.png)
 
 Next, let's get a valid token using the cURL script from earlier
-([here in this tutorial](/media/guides.md)). Copy the cURL script from the test
-tab and execute it in a terminal window:
+([here in this tutorial](/guides.md)). Copy the cURL script from the test tab
+and execute it in a terminal window:
 
 ![CleanShot 2021-11-29 at 17.03.34@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.03.342x.png)
 
