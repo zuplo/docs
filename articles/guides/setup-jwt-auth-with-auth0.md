@@ -3,8 +3,8 @@
 > Note - this sample uses Policies, read
 > **[this guide](https://www.notion.so/policies-1ee0cc0d7a10402cb47991453156a2bd)**
 > first. Also, see this
-> [reference on the JWT auth policy](../Policies%20d94e7/Open%20ID%20JW%202030d.md)
-> for more details.
+> [reference on the JWT auth policy](/articles/policies/open-id-jwt) for more
+> details.
 
 ### Overview
 
@@ -102,8 +102,8 @@ API.
 ### Configuring the Zuplo Policy
 
 Next we will configure our Open ID JWT Policy - more documentation on this
-[here](../Policies%20d94e7/Open%20ID%20JW%202030d.md). Add a `policies` array to
-your routes.json as shown below.
+[here](/articles/policies/open-id-jwt). Add a `policies` array to your
+routes.json as shown below.
 
 ![CleanShot 2021-11-29 at 16.35.43@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.35.432x.png)
 
@@ -153,9 +153,9 @@ should get a `401: Unauthorized` response from your API.
 
 ![CleanShot 2021-11-29 at 16.55.43@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.55.432x.png)
 
-Next, let's get a valid token using the cURL script from earlier
-([here in this tutorial](/guides.md)). Copy the cURL script from the test tab
-and execute it in a terminal window:
+Next, let's get a valid token using the cURL script from earlier in this
+tutorial. Copy the cURL script from the test tab and execute it in a terminal
+window:
 
 ![CleanShot 2021-11-29 at 17.03.34@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.03.342x.png)
 

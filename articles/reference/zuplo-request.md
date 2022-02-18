@@ -1,8 +1,8 @@
 # ZuploRequest
 
 The ZuploRequest object is the main parameter passed to both
-[RequestHandlers](../Request%20Ha%202cb0e.md) and
-[Policies](../Policies%20d94e7.md). It represents the incoming request.
+[RequestHandlers](/articles/reference/zuplo-request) and
+[Policies](/articles/policies). It represents the incoming request.
 
 ZuploRequest inherits from the web standard `Request` class used with `fetch` -
 you can read more about this on MDN including an explanation of how all of its
@@ -39,8 +39,8 @@ const foo = request.query.foo;
 ## Constructor
 
 It can be useful to create a new ZuploRequest inside a policy (see
-[policies](../Policies%20d94e7.md)) to forward to the next policy or handler in
-the chain. You can create a completely fresh ZuploRequest as follows:
+[policies](/articles/policies)) to forward to the next policy or handler in the
+chain. You can create a completely fresh ZuploRequest as follows:
 
 ```tsx
 const newCoreRequest = new Request("http://new-host.com/", {
