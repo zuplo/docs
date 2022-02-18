@@ -97,7 +97,7 @@ field) and is on the `/v1/hello-world` URL will invoke that request handler.
 1. Let's customize the new module to echo the params and body back to the
    client, here's some sample code:
 
-```tsx
+```ts
 import { ZuploRequest, ZuploContext } from "@zuplo/runtime";
 
 export default async function (request: ZuploRequest, context: ZuploContext) {

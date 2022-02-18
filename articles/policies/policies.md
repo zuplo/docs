@@ -32,7 +32,7 @@ policy, and finally the request handler.
 If you return a `Response` that tells Zuplo to short-circuit this request and
 immediately respond to the client.
 
-```tsx
+```ts
 export type InboundPolicyHandler<TOptions = any> = (
   request: ZuploRequest,
   context: ZuploContext,
@@ -46,7 +46,7 @@ create a simple auth policy that checks for an `api-key` header:
 
 ### A simple auth policy
 
-```tsx
+```ts
 // my-first-policy.ts
 import { ZuploRequest } from "@zuplo/runtime";
 
@@ -81,7 +81,7 @@ Policies are activated by specifying them on routes in the route.json file
 (designer support for this is coming soon). Here's how we could wire up our new
 auth route:
 
-```tsx
+```json
 {
   "routes": [
     {
@@ -91,10 +91,7 @@ auth route:
         "export": "default",
         "module": "$import(./modules/hello-world)"
       },
-      "methods": [
-        "GET",
-        "POST"
-      ],
+      "methods": ["GET", "POST"],
       "corsPolicy": "AnythingGoes",
       "version": "none",
       "policies": {
@@ -134,19 +131,18 @@ your policy on the options property. In the example below we set an example
 object with some properties of type string and number. Note these objects can be
 as complicated as you like.
 
-```tsx
-
- {
+```json
+{
   "name": "my-first-policy",
   "policyType": "custom-code",
   "handler": {
     "export": "default",
     "module": "$import(./modules/my-first-policy)",
-		"options" : {
-			"you" : "can",
-			"specify" : "anything",
-			"here" : 0,
-		}
+    "options": {
+      "you": "can",
+      "specify": "anything",
+      "here": 0
+    }
   }
 }
 ```
@@ -154,7 +150,7 @@ as complicated as you like.
 The value of this property will be passed to your policy's handler as the
 `options` parameter. Sometimes it's useful to create a type as shown below.
 
-```tsx
+```ts
 type MyPolicyOptionsType = {
   you: string;
   specify: string;
@@ -188,7 +184,7 @@ use Zuplo's policy `options` to extend our example.
 You can pass options to a policy from the routes.json file. In this case we'll
 create a dictionary of api keys to `sub` ids.
 
-```tsx
+```json
 "policies": [
     {
       "name": "my-first-policy",
@@ -209,7 +205,7 @@ create a dictionary of api keys to `sub` ids.
 Now let's update the policy to read these options and use the dictionary keys as
 the `api-key` and to map the sub identifier.
 
-```tsx
+```ts
 import { ZuploRequest, ZuploContext, ResponseFactory } from "@zuplo/runtime";
 
 export default async function (
@@ -237,7 +233,7 @@ export default async function (
 
 We can then use this user object in the request handler
 
-```tsx
+```ts
 import { ZuploRequest } from "@zuplo/runtime";
 
 export default async function (request: ZuploRequest) {

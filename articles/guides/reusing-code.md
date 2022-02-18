@@ -4,7 +4,7 @@ Sharing code across your request handlers and policies is easy with modules.
 Simply create a new module with exports and import them to your other files.
 Here's a module called `util.ts`:
 
-```tsx
+```ts
 //util.ts
 export function increment(n: number) {
   return n + 1;
@@ -13,7 +13,7 @@ export function increment(n: number) {
 
 Now in our request handler we can import this and reuse this code
 
-```tsx
+```ts
 import { ZuploRequest, ZuploContext } from "@zuplo/runtime";
 import { increment } from "./util";
 

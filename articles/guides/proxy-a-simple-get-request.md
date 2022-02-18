@@ -13,7 +13,7 @@ https://www.example.com
 
 Create a simple Request Handler as follows:
 
-```tsx
+```ts
 export async function fetchHtml(request: ZuploRequest, context: ZuploContext) {
   return await fetch("https://www.example.com/");
 }
@@ -27,7 +27,7 @@ export async function fetchHtml(request: ZuploRequest, context: ZuploContext) {
 
 Let's create a new route that maps to that Request Handler.
 
-```tsx
+```json
 {
   "path": "simple-fetch",
   "methods": ["GET", "POST"],
@@ -50,7 +50,7 @@ It’s often important to forward headers to downstream clients. However, some
 incoming headers should be stripped to avoid issues, like `host`.Here’s an
 example:
 
-```jsx
+```ts
 function headersAsRecord(headers: Headers, ...removeKeys: string[]) {
   const newHeaders: Record<string, string> = {};
   for (const [key, value] of headers.entries()) {
@@ -88,7 +88,7 @@ them here, example data shown too:
 
 [https://jsonplaceholder.typicode.com/posts](https://jsonplaceholder.typicode.com/posts)
 
-```tsx
+```json
 [
   {
     "userId": 1,
@@ -100,7 +100,7 @@ them here, example data shown too:
 
 [https://jsonplaceholder.typicode.com/users](https://jsonplaceholder.typicode.com/users)
 
-```tsx
+```json
 [
   {
     "id": 1,
@@ -122,7 +122,7 @@ them here, example data shown too:
 We'll use Zuplo to change these into a single API call that expands the user
 property on each post object, with the following Request Handler:
 
-```tsx
+```ts
 import { ZuploRequest, ZuploContext } from "@zuplo/runtime";
 
 export default async function (request: ZuploRequest, context: ZuploContext) {

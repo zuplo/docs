@@ -7,7 +7,7 @@
   Note that pre-production environments are typically set to a **Info** log
   level, while production is set to **Error**.
 
-```jsx
+```ts
 context.log.debug({ some: "debug-info" });
 context.log.info('info level stuff');
 context.log.warn(['a', 'warning']);
@@ -32,7 +32,7 @@ context.log.error({ "Oh" : "my!"}
   example - note the runtime now knows to wait until the enqueued method
   completes before shutting down.
 
-```jsx
+```ts
 const asyncWork = async () => {
   await fetch("https://supa-logger.io/my-logging-url", {
     method: "POST",

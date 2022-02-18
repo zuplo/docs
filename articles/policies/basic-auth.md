@@ -20,12 +20,12 @@ your RequestHandler.
 Here is an example configuration (this would go in the `policies` section of the
 routes.json file).
 
-```tsx
+```json
 {
-	"routes" : [ ... ]
-	"versions" : [ ... ]
-	"policies" : [
-		{
+  "routes": ["..."],
+  "versions": ["..."],
+  "policies": [
+    {
       "name": "basic-auth-policy",
       "policyType": "basic-auth-inbound-policy",
       "handler": {
@@ -41,7 +41,7 @@ routes.json file).
                 "number": 1
               }
             },
-						{
+            {
               "username": "test-username-2",
               "password": "my-password-2",
               "data": {
@@ -52,7 +52,7 @@ routes.json file).
         }
       }
     }
-	]
+  ]
 }
 ```
 
@@ -82,7 +82,7 @@ routes.json file).
 This policy is then reference on each route where you want the policy to be
 enforced, for example:
 
-```tsx
+```json
 {
   "path": "/products/:123",
   "methods": ["POST"],
@@ -110,7 +110,7 @@ In your
 [RequestHandler](https://www.notion.so/RequestHandler-3ea22fd12fa748458f62014c3ae5b4e1)
 you can use the user object, for example:
 
-```tsx
+```ts
 import { ZuploRequest, ZuploContext } from "@zuplo/runtime";
 
 export default async function (request: ZuploRequest, context: ZuploContext) {

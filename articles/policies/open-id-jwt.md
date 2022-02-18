@@ -27,7 +27,7 @@ the JWT token (including any claims).
 Here is an example configuration (this would go in the `policies` section of the
 routes.json file).
 
-```tsx
+```ts
 {
   "name": "your-jwt-policy-name",
   "policyType": "open-id-jwt-inbound",
@@ -70,7 +70,7 @@ your policy configuration.
 > if you want to have slightly different rules (such as settings for the
 > `allowUnauthenticatedRequests` setting.
 
-```tsx
+```json
 {
   "path": "/products/:123",
   "methods": ["POST"],

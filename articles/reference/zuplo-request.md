@@ -18,7 +18,7 @@ In addition to the standard properties, the following are added for convenience.
   route with path `/products/:productId/vendors/:vendorId`. A match on this
   would yield values as follows:
 
-```jsx
+```ts
 const productId = request.params.productId;
 const vendorId = request.params.vendorId;
 ```
@@ -32,7 +32,7 @@ const vendorId = request.params.vendorId;
 - `query` - a dictionary of query-string values. For example, a URL with a query
   string like `https://example.com?foo=bar` would present as follows:
 
-```jsx
+```ts
 const foo = request.query.foo;
 ```
 
@@ -42,7 +42,7 @@ It can be useful to create a new ZuploRequest inside a policy (see
 [policies](/articles/policies)) to forward to the next policy or handler in the
 chain. You can create a completely fresh ZuploRequest as follows:
 
-```tsx
+```ts
 const newCoreRequest = new Request("http://new-host.com/", {
   method: "POST",
   headers: {
