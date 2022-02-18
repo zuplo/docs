@@ -1,7 +1,7 @@
 # Open ID JWT Authentication Policy
 
 > See this sample
-> ["Setting up JWT auth with Auth0"](../How%20To%20&%20S%20595e6/Setting%20up%209f5ce.md)
+> ["Setting up JWT auth with Auth0"](/articles/guides/setup-jwt-auth-with-auth0)
 > for a guided walkthrough using this policy with Auth0 (also available as a
 > ZupIt! https://github.com/zuplo/samples-auth0-jwt )
 
@@ -89,5 +89,5 @@ your policy configuration.
 ## Using the user property in code
 
 For an example of using the user object in a
-[RequestHandler](../Request%20Ha%202cb0e.md), see
-[Setting up JWT auth with Auth0](../How%20To%20&%20S%20595e6/Setting%20up%209f5ce.md).
+[RequestHandler](/articles/reference/zuplo-request), see
+[Setting up JWT auth with Auth0](/articles/guides/setup-jwt-auth-with-auth0).

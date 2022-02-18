@@ -18,7 +18,7 @@ live API gateway in under 2 minutes.
 
 1. Enter the name of your project. All project names must be in kebab-case.
 2. Click 'Create Project' and you'll be taken to the project view -
-   [guided tour of the portal](The%20Portal%20fcdc9.md).
+   [guided tour of the portal](/articles/portal).
 
 ![Untitled](/media/getting-started-old/Untitled%201.png)
 
@@ -152,5 +152,4 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 
 # Congratulations - y**ou are now a competent Zuplo Developer! Achievement Unlocked 🎉**
 
-Next:
-[Proxy a simple request](How%20To%20&%20S%20595e6/Proxy%20a%20si%20ee52a.md)
+Next: [Proxy a simple request](/articles/guides/proxy-a-simple-get-request)
