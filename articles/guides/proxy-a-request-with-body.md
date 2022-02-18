@@ -5,7 +5,7 @@ Specifically, you must set the body of the outbound fetch. If the body does not
 need to be manipulated, the most efficient method is to set the outbound body to
 the `request.body` property.
 
-```jsx
+```ts
 import { ZuploRequest, ZuploContext } from "@zuplo/runtime";
 
 // route path = root/posts/:id

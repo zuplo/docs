@@ -39,13 +39,12 @@ You'll see the file contains a function that returns `"What zup?"` (that's how
 we say "Hello World" at Zuplo). Change this code to return anything you like,
 maybe actually "Hello world!"
 
-```
+```ts
 import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
 
 export default async function (request: ZuploRequest, context: ZuploContext) {
-
-    context.log.info(`Hi, from inside your zup!`);
-    return "Hello World?";
+  context.log.info(`Hi, from inside your zup!`);
+  return "Hello World?";
 }
 ```
 

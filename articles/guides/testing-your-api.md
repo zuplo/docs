@@ -8,15 +8,13 @@ To add an integration test for your project create a test file in the `tests`
 folder that looks like the following. Write tests using `fetch` and then reading
 the response results.
 
-```bash
+```ts
 import { assert } from "chai";
 import { TestHelper } from "@zuplo/core";
 
 describe("My test suite", function () {
   it("Get hello world", async function () {
-    const result = await fetch(
-      `${TestHelper.TEST_URL}/v1/hello-world`
-    );
+    const result = await fetch(`${TestHelper.TEST_URL}/v1/hello-world`);
     assert.equal(result.ok, true);
   });
 });

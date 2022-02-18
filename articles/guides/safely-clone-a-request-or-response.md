@@ -23,7 +23,7 @@ call) or return it from a request handler - you’ll get that exception.
 Let’s imagine we want to log both the request body and response body of a
 proxied call to a downwind service
 
-```jsx
+```ts
 export default async async function(req: ZuploRequest, ctx: ZuploContext) {
 	// pretend we want to log the request and response body
 	const reqClone = req.clone();

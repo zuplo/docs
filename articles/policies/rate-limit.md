@@ -25,17 +25,17 @@ Here is an example configuration (this would go in the `policies` section of the
 routes.json file). This policy would enforce a rate limit of a maximum of 2
 requests, every 20 seconds for each unique IP address.
 
-```tsx
+```json
 {
   "name": "your-rate-limit-policy",
   "policyType": "basic-rate-limit-policy-inbound",
   "handler": {
     "export": "BasicRateLimitInboundPolicy",
     "module": "$import(@zuplo/runtime)",
-		"options": {
-			"requestsAllowed": 2,
-			"timeWindowSeconds": 20,
-			"rateLimitBy": "ip"
+    "options": {
+      "requestsAllowed": 2,
+      "timeWindowSeconds": 20,
+      "rateLimitBy": "ip"
     }
   }
 }
@@ -79,7 +79,7 @@ This example would create a unique rate-limiting function based on the `foo`
 parameter in routes (note it’s important that a policy like this is applied to a
 route that has a `/:foo` parameter).
 
-```jsx
+```ts
 //module - ./modules/hello-world.ts
 
 import { ZuploRequest } from "@zuplo/runtime"
@@ -89,21 +89,21 @@ export function rateLimitKey = (request:ZuploRequest) => {
 }
 ```
 
-```tsx
+```json
 {
   "name": "your-rate-limit-policy",
   "policyType": "basic-rate-limit-policy-inbound",
   "handler": {
     "export": "BasicRateLimitInboundPolicy",
     "module": "$import(@zuplo/runtime)",
-		"options": {
-			"requestsAllowed": 2,
-			"timeWindowSeconds": 20,
-			"rateLimitBy": "function",
-			"identifier" : {
-				"module" : "$import(./modules/hello-world)",
-				"export" : "rateLimitKey"
-			}
+    "options": {
+      "requestsAllowed": 2,
+      "timeWindowSeconds": 20,
+      "rateLimitBy": "function",
+      "identifier": {
+        "module": "$import(./modules/hello-world)",
+        "export": "rateLimitKey"
+      }
     }
   }
 }

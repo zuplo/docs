@@ -12,7 +12,7 @@ error message (in JSON) explaining why the body was not accepted.
 
 Here's a simple, example JSON Schema
 
-```bash
+```json
 {
   "title": "Car",
   "type": "object",
@@ -57,7 +57,7 @@ purposes of this example let's imagine it is called `car.json`.
 Here is an example configuration (this would go in the `policies` section of the
 routes.json file).
 
-```bash
+```json
 {
   "name": "validate-car-policy",
   "policyType": "validate-json-schema-inbound",
@@ -86,7 +86,7 @@ routes.json file).
 This policy is then reference on each route where you want the policy to be
 enforced, for example:
 
-```bash
+```json
 {
   "path": "/products/:123",
   "methods": ["POST"],
@@ -104,11 +104,11 @@ enforced, for example:
 
 You can test this in the API Test Console with the following (correct) body
 
-```tsx
+```json
 {
-	"make" : "Alfa Romeo",
-	"model" : "156",
-	"maxSpeed" : 134,
-	"color" : "silver"
+  "make": "Alfa Romeo",
+  "model": "156",
+  "maxSpeed": 134,
+  "color": "silver"
 }
 ```

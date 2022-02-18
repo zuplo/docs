@@ -4,7 +4,7 @@ As an API gateway, the Request Handler is the most important part of a zup. A
 request handler is a module with an export that fulfills the following type
 definition (typescript):
 
-```tsx
+```ts
 export type RequestHandler = (
   request: ZuploRequest,
   context: ZuploContext
@@ -14,7 +14,7 @@ export type RequestHandler = (
 An example implementation is provided in the default module template (when you
 add a new module):
 
-```tsx
+```ts
 import { ZuploRequest, ZuploContext } from "@zuplo/runtime";
 
 export default async function (request: ZuploRequest, context: ZuploContext) {
@@ -38,7 +38,7 @@ Route = `/foos/:foo/bars/:bar`
 This route has two parameters `foo` and `bar`. They can be accessed in the
 request handler on the `request.params` object:
 
-```jsx
+```ts
 // GET root/foos/123/bars/car
 export default async function (request: ZuploRequest, context: ZuploContext) {
   return request.params.foo + request.params.bar;
@@ -51,7 +51,7 @@ You can read **query strings** as follows:
 
 URL = `/foos?productId=xkcd&carId=1234`
 
-```jsx
+```ts
 // GET /foos?productId=xkcd&carId=1234
 export default async function (request: ZuploRequest, context: ZuploContext) {
   return request.query.productId + request.query.carId;
@@ -90,7 +90,7 @@ here:
 
 Here's an example
 
-```tsx
+```ts
 import { ZuploRequest, ZuploContext } from "@zuplo/runtime";
 
 export default async function (request: ZuploRequest, context: ZuploContext) {

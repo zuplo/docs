@@ -20,7 +20,7 @@ behavior of our API.
 We will start with the hello-world sample you get when you create a new Zup. So
 you routes file should look like this:
 
-```tsx
+```json
 {
   "routes": [
     {
@@ -53,7 +53,7 @@ you routes file should look like this:
 
 And your hello-world module (request handler) should look like this
 
-```tsx
+```ts
 import { ZuploRequest, ZuploContext } from "@zuplo/runtime";
 
 export default async function (request: ZuploRequest, context: ZuploContext) {
@@ -112,7 +112,7 @@ routes.json as shown below.
 
 Now add the following policy inside the `policies` array:
 
-```tsx
+```json
 {
   "name": "auth-policy",
   "policyType": "open-id-jwt-inbound",
@@ -184,7 +184,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 Execute the test again and you'll see the following JSON output in the **Request
 Logs** window:
 
-```tsx
+```json
 {
   "sub": "B7IE--redacted--nts",
   "data": {
@@ -220,7 +220,7 @@ Add two claims to your M2M tokens using the following code:
 And, critically, remember to click `Deploy`. Also, note that the claims MUST be
 URLs (again, they do not need to be live URLs, just valid in structure).
 
-```tsx
+```ts
 exports.onExecuteCredentialsExchange = async (event, api) => {
   api.accessToken.setCustomClaim(
     "https://example.com/claim1/",
@@ -242,7 +242,7 @@ Paste the token into the test client and re-execute the API.
 
 You should see the following in the **Request Logs**:
 
-```tsx
+```json
 {
   "sub": "B7IE--redacted--nts",
   "data": {
@@ -261,7 +261,7 @@ You should see the following in the **Request Logs**:
 
 Note the two additional claims that can be used in your code, e.g.
 
-```tsx
+```ts
 if (request.user.data["https://example.com/claim1/"] === "this-is-a-claim") {
   // do something
 }
@@ -269,7 +269,7 @@ if (request.user.data["https://example.com/claim1/"] === "this-is-a-claim") {
 
 Or you could even do smart routing based on a claim for this user.
 
-```tsx
+```ts
 const onwardUrl = request.user.data["https://example.com/onward-url"];
 
 const result = fetch(onwardUrl);
