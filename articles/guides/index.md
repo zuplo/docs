@@ -1,6 +1,6 @@
-# How To & Samples
-
-How to guides
+---
+title: How To & Samples
+---
 
 [Proxy a simple GET request](/guides/proxy-a-simple-get-request)
 

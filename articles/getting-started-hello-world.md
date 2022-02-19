@@ -74,5 +74,3 @@ examples in our documentation:
 - [Write your own policies](https://zuplo.notion.site/Policies-d94e7c5ee5444532855e7678effaee42)
 - [Archive requests to storage](https://zuplo.notion.site/Archiving-requests-to-storage-608a64672de64f1b94309f68993d26d1)
 - [Setting up JWT auth with Auth0](https://zuplo.notion.site/Setting-up-JWT-auth-with-Auth0-9f5ce6ad37f5418aaa781391c1995e00)
-
-[Zuplo Alpha Documentation Home](https://zuplo.notion.site/Zuplo-Docs-Alpha-f6d20ce45d4140859c1c5823fc721a1e)

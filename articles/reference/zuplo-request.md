@@ -1,4 +1,6 @@
-# ZuploRequest
+---
+title: ZuploRequest
+---
 
 The ZuploRequest object is the main parameter passed to both
 [RequestHandlers](/articles/reference/zuplo-request) and

@@ -1,4 +1,6 @@
-# Getting Started
+---
+title: Getting Started
+---
 
 We've designed Zuplo to be easy to get started, our goal is you go from zero to
 live API gateway in under 2 minutes.

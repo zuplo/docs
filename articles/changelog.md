@@ -1,4 +1,6 @@
-# Change Log
+---
+title: Change Log
+---
 
 ## 2021-11-19
 

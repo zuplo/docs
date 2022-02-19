@@ -1,4 +1,6 @@
-# Setting up JWT auth with Auth0
+---
+title: Setting up JWT auth with Auth0
+---
 
 > Note - this sample uses Policies, read
 > **[this guide](https://www.notion.so/policies-1ee0cc0d7a10402cb47991453156a2bd)**
@@ -6,7 +8,7 @@
 > [reference on the JWT auth policy](/articles/policies/open-id-jwt) for more
 > details.
 
-### Overview
+## Overview
 
 In this sample we'll show you how to configure Zuplo and Auth0 to require JWT
 tokens to authenticate requests. We'll also use claims in Auth0 to change the
@@ -15,7 +17,7 @@ behavior of our API.
 > **Note** - this sample is available as a Zup It on GitHub - just click ZupIt!
 > to deploy to your Zuplo account:
 
-### Setting up the API
+## Setting up the API
 
 We will start with the hello-world sample you get when you create a new Zup. So
 you routes file should look like this:
@@ -77,7 +79,7 @@ You should already have a test setup in the test client, like this
 The next step is to enforce authentication on this API using Auth0 and JWT
 tokens.
 
-### Setting up Auth0
+## Setting up Auth0
 
 You can create a free Auth0 account at [auth0.com](http://auth0.com). Once
 logged in you can create your first API in Auth0.
@@ -99,7 +101,7 @@ Inside the settings for your new API you should see a Test tab
 We'll need this cURL script shortly to get an access token to test against our
 API.
 
-### Configuring the Zuplo Policy
+## Configuring the Zuplo Policy
 
 Next we will configure our Open ID JWT Policy - more documentation on this
 [here](/articles/policies/open-id-jwt). Add a `policies` array to your
@@ -137,16 +139,16 @@ Now add the following policy inside the `policies` array:
 
 > **Hint** - If you're not sure where to find the issuer or jwkUrl you can
 > easily find it in the Node.JS QuickStart for your API as shown below:
->
-> ![CleanShot 2021-11-29 at 16.47.24@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.47.242x.png)
 
-### Adding the policy to your route(s)
+![CleanShot 2021-11-29 at 16.47.24@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.47.242x.png)
+
+## Adding the policy to your route(s)
 
 Finally, we need to add this policy to our route as follows
 
 ![CleanShot 2021-11-29 at 16.51.59@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.51.592x.png)
 
-### Testing the policy
+## Testing the policy
 
 In the test client, you can now verify that your API has been secured. You
 should get a `401: Unauthorized` response from your API.
@@ -168,7 +170,7 @@ token you got back from cURL.
 
 💥 You are now authenticated with the Zuplo API
 
-### Accessing the user object
+## Accessing the user object
 
 Now let's update our script to explore the values inside the user object. Add
 the following line to the middle of your request handler:
@@ -199,7 +201,7 @@ Logs** window:
 }
 ```
 
-### Adding additional claims in Auth0
+## Adding additional claims in Auth0
 
 Navigate to `Actions > Flows` and choose `Machine to Machine`.
 
@@ -233,7 +235,7 @@ exports.onExecuteCredentialsExchange = async (event, api) => {
 };
 ```
 
-### Re-test your API
+## Re-test your API
 
 Get a fresh token using cURL (same approach as above, it's important to get a
 fresh token so that it contains these new claims).

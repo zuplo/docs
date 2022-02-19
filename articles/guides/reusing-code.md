@@ -1,4 +1,6 @@
-# Share code across request handlers and policies with modules
+---
+title: Share code across request handlers and policies with modules
+---
 
 Sharing code across your request handlers and policies is easy with modules.
 Simply create a new module with exports and import them to your other files.

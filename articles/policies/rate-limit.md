@@ -1,4 +1,6 @@
-# Rate-Limit Policy
+---
+title: Rate-Limit Policy
+---
 
 ### Overview
 

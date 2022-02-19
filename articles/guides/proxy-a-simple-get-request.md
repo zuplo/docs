@@ -1,4 +1,6 @@
-# Proxy a simple GET request
+---
+title: Proxy a simple GET request
+---
 
 ## Test it out by proxying a web page
 

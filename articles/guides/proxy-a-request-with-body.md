@@ -1,4 +1,6 @@
-# Proxy a request with a body (e.g. POST, PUT)
+---
+title: Proxy a request with a body (e.g. POST, PUT)
+---
 
 Proxying a request with a body is also simple, but requires a little more setup.
 Specifically, you must set the body of the outbound fetch. If the body does not

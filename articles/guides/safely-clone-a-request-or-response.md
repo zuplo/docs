@@ -1,4 +1,6 @@
-# Safely clone a request or response
+---
+title: Safely clone a request or response
+---
 
 We often want to read the body of a request or response before forwarding it on
 to the downwind service or back to the client respectively.

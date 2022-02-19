@@ -1,4 +1,6 @@
-# About the Alpha
+---
+title: About the Alpha
+---
 
 Welcome to the Alpha version of Zuplo, we hope you enjoy using the product and
 are willing to share your feedback with us - you can do so via e-mail

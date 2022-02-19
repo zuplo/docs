@@ -1,4 +1,6 @@
-# Archiving requests to storage
+---
+title: Archiving requests to storage
+---
 
 > Note - this sample uses Policies, read
 > [this guide](https://www.notion.so/policies-1ee0cc0d7a10402cb47991453156a2bd)
