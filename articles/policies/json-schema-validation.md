@@ -1,4 +1,6 @@
-# Validate JSON Schema Policy
+---
+title: Validate JSON Schema Policy
+---
 
 ## Overview
 

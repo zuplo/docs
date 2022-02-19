@@ -1,4 +1,6 @@
-# ZuploContext
+---
+title: ZuploContext
+---
 
 ## Properties
 

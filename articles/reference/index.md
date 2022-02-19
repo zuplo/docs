@@ -1,4 +1,6 @@
-# Type Reference
+---
+title: Type Reference
+---
 
 [ZuploRequest](/reference/zuplo-request)
 

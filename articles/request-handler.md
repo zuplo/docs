@@ -1,4 +1,6 @@
-# Request Handlers
+---
+title: Request Handlers
+---
 
 As an API gateway, the Request Handler is the most important part of a zup. A
 request handler is a module with an export that fulfills the following type

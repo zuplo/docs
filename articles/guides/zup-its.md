@@ -1,4 +1,6 @@
-# ZupIts
+---
+title: ZupIts
+---
 
 You can easily clone these repos to your Zuplo account:
 

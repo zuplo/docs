@@ -1,11 +1,13 @@
-# Open ID JWT Authentication Policy
+---
+title: Open ID JWT Authentication Policy
+---
 
 > See this sample
 > ["Setting up JWT auth with Auth0"](/articles/guides/setup-jwt-auth-with-auth0)
 > for a guided walkthrough using this policy with Auth0 (also available as a
 > ZupIt! https://github.com/zuplo/samples-auth0-jwt )
 
-### Overview
+## Overview
 
 The Open ID JWT Authentication policy allows you to authenticate incoming
 requests using an Open ID compliant bearer token. It works with common
@@ -18,7 +20,7 @@ This `user` object will have a `sub` property - taking the `sub` id from the JWT
 token. It will also have a `data` property populated by other data returned in
 the JWT token (including any claims).
 
-### Configuration
+## Configuration
 
 > Be sure to read about policies
 >

@@ -1,4 +1,6 @@
-# Testing Your API
+---
+title: Testing Your API
+---
 
 Zuplo supports integration tests for your API for production customers. The test
 format is [Mocha](https://mochajs.org/) with [chai](https://www.chaijs.com/) for

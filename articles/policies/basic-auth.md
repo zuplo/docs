@@ -1,6 +1,8 @@
-# Basic Authentication Policy
+---
+title: Basic Authentication Policy
+---
 
-### Overview
+## Overview
 
 The Basic Authentication policy allows you to authenticate incoming requests
 using the Basic authentication standard. You can configure multiple accounts
@@ -15,7 +17,7 @@ your RequestHandler.
 > **Note** - this sample is available as a Zup It on GitHub - just click ZupIt!
 > to deploy to your Zuplo account: https://github.com/zuplo/samples-basic-auth
 
-### Configuration
+## Configuration
 
 Here is an example configuration (this would go in the `policies` section of the
 routes.json file).

@@ -1,0 +1,21 @@
+articles:
+  - title: Get Started
+    url: /get-started
+  - title: Policies
+    url: /policies
+    children:
+      - title: Basic Authentication
+        url: /policies/basic-auth
+      - title: OpenId JWT Authentication
+        url: /policies/open-id-jwt
+      - title: Rate Limiting
+        url: /policies/rate-limiting
+      - title: JSON Schema Validation
+        url: json-schema-validation
+  - title: Reference
+    url: /reference
+    children:
+      - title: ZuploContext
+        url: /reference/zuplo-context
+      - title: ZuploRequest
+        url: /reference/zuplo-request
