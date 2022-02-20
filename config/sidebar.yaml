@@ -1,6 +1,6 @@
 articles:
   - title: Get Started
-    url: /articles/get-started
+    url: /articles/getting-started
   - title: Policies
     url: /articles/policies
     children:
