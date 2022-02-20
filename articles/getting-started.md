@@ -8,10 +8,7 @@ Zuplo isn't your average gateway. It's a **programmable gateway** that can be
 used to protect and share your own API _and_ used as a simple orchestration
 layer over SaaS APIs. Choose your getting started guide:
 
-1. **Proxy a public API**
-2. [Hello World API](getting-started-hello-world)
-3. [Gateway over AirTable](getting-started-airtable)
-4. [Gateway over MongoDB](getting-started-mongo-db)
+<GettingStartedPicker />
 
 ## Proxy a public API
 
