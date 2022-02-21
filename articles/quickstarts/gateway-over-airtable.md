@@ -14,18 +14,7 @@ Let's proxy the AirTable Event Planning base in just 4 quick steps.
 
 ## 1
 
-Create a new Airtable base by selecting **Start from Template** > **Event
-Planning** from the AirTable app homepage. Navigate to
-[https://airtable.com/api](https://airtable.com/api) and select your new
-Workspace. On the side-menu select, **Attendees Table** > **Create Records**.
-You will see an example request like below, **copy and save the URL from that
-example**.
-
-```
-curl -v -X POST https://api.airtable.com/v0/applKxZKvlZPu3nh6/%F0%9F%AA%91%20Attendees \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-```
+Create handler
 
 ## 2
 
@@ -40,7 +29,7 @@ Save the file.
 ```ts
 const API_KEY = "YOUR_API_KEY";
 
-const url = "YOUR_BASE_URL";
+const url = "AIRTABLE_ATTENDEES_URL";
 
 const body = await request.json();
 
@@ -76,12 +65,27 @@ return new Response("Success", {
 
 ## 3
 
+Create a new Airtable base by selecting **Start from Template** > **Event
+Planning** from the AirTable app homepage. Navigate to
+[https://airtable.com/api](https://airtable.com/api) and select your new
+Workspace. On the side-menu select, **Attendees Table** > **Create Records**.
+You will see an example request like below, **copy and save the URL from that
+example**.
+
+```
+curl -v -X POST https://api.airtable.com/v0/applKxZKvlZPu3nh6/%F0%9F%AA%91%20Attendees \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+```
+
+## 4
+
 Open the **routes.json** file and change the **path** of the existing route to
 be `/attendees` and set the **method** to `POST`. Save the file.
 
 ![Route Path](/media/quickstarts/gateway-over-airtable/route-path.png)
 
-## 4
+## 5
 
 Open the Route Tester :lightning-bolt:. Set the **path** to `/v1/attendees` and
 the **method** to `POST`. Add JSON to the body as shown.
@@ -98,6 +102,6 @@ to your API from curl or using `fetch` in the browser.
 Why not try one of the other getting started guides (above) or some of the
 examples in our documentation:
 
-- [Write your own policies](https://zuplo.notion.site/Policies-d94e7c5ee5444532855e7678effaee42)
-- [Archive requests to storage](https://zuplo.notion.site/Archiving-requests-to-storage-608a64672de64f1b94309f68993d26d1)
-- [Setting up JWT auth with Auth0](https://zuplo.notion.site/Setting-up-JWT-auth-with-Auth0-9f5ce6ad37f5418aaa781391c1995e00)
+- [Write your own policies](/policies)
+- [Archive requests to storage](/guides/archving-requests-to-storage)
+- [Setting up JWT auth with Auth0](/guides/setup-jwt-auth-with-auth0)

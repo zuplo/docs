@@ -44,7 +44,7 @@ live API gateway in under 2 minutes.
    files section (top icon on the left) and opening the module `hello-world.ts`.
    Edit the file to return anything you like (save by clicking `Save` or hitting
    `⌘S`). You can read more about request handlers
-   [here](https://www.notion.so/Request-Handlers-d94c4e9db5be4351afb61f1755ab6f9c).
+   [here](/reference/request-handler).
 
 ## Routes & Route Testing
 

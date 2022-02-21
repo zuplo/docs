@@ -2,9 +2,7 @@
 title: Archiving requests to storage
 ---
 
-> Note - this sample uses Policies, read
-> [this guide](https://www.notion.so/policies-1ee0cc0d7a10402cb47991453156a2bd)
-> first.
+> Note - this sample uses Policies, read [this guide](/policies) first.
 
 In this sample we'll show how you can archive the text body of incoming requests
 to Azure Blob Storage. First, let's setup Azure. You'll need a container in
