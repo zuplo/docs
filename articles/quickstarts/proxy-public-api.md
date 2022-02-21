@@ -1,6 +1,5 @@
 ---
 title: Proxy a Public API
-embedTitle: Getting Started
 date: "2022-02-18"
 embed: true
 ---

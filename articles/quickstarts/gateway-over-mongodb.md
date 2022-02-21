@@ -1,6 +1,5 @@
 ---
 title: Gateway over MongoDB
-embedTitle: Getting Started
 date: "2021-02-21"
 embed: true
 ---
