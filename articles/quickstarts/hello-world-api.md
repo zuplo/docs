@@ -67,6 +67,6 @@ that "Hello World" response from your browser.
 Why not try one of the other getting started guides (above) or some of the
 examples in our documentation:
 
-- [Write your own policies](https://zuplo.notion.site/Policies-d94e7c5ee5444532855e7678effaee42)
-- [Archive requests to storage](https://zuplo.notion.site/Archiving-requests-to-storage-608a64672de64f1b94309f68993d26d1)
-- [Setting up JWT auth with Auth0](https://zuplo.notion.site/Setting-up-JWT-auth-with-Auth0-9f5ce6ad37f5418aaa781391c1995e00)
+- [Write your own policies](/policies)
+- [Archive requests to storage](/guides/archving-requests-to-storage)
+- [Setting up JWT auth with Auth0](/guides/setup-jwt-auth-with-auth0)

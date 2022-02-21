@@ -8,9 +8,8 @@ to the downwind service or back to the client respectively.
 ![Untitled](/media/guides/Untitled.png)
 
 When we do this inside the zuplo gateway in a
-[Request Handler](https://www.notion.so/The-Request-Handler-fedb704e544d4c9b8247457b514c6294)
-we have to be careful to clone the request or response to avoid causing a
-`body-used` exception.
+[Request Handler](/reference/request-handler) we have to be careful to clone the
+request or response to avoid causing a `body-used` exception.
 
 A `body-used` exception occurs when a `.body` property of a request or response,
 which is of type `ReadableStream`, has already been read. These properties can

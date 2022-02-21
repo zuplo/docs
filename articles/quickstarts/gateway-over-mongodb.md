@@ -11,3 +11,10 @@ layer over SaaS APIs. Choose your getting started guide:
 <QuickstartPicker />
 
 Coming Soon
+
+In the meantime, check out some of our other documentation examples in our
+documentation:
+
+- [Write your own policies](/policies)
+- [Archive requests to storage](/guides/archving-requests-to-storage)
+- [Setting up JWT auth with Auth0](/guides/setup-jwt-auth-with-auth0)
