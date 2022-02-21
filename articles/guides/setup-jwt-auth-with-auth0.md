@@ -5,8 +5,7 @@ title: Setting up JWT auth with Auth0
 > Note - this sample uses Policies, read
 > **[this guide](https://www.notion.so/policies-1ee0cc0d7a10402cb47991453156a2bd)**
 > first. Also, see this
-> [reference on the JWT auth policy](/articles/policies/open-id-jwt) for more
-> details.
+> [reference on the JWT auth policy](/policies/open-id-jwt) for more details.
 
 ## Overview
 
@@ -104,8 +103,8 @@ API.
 ## Configuring the Zuplo Policy
 
 Next we will configure our Open ID JWT Policy - more documentation on this
-[here](/articles/policies/open-id-jwt). Add a `policies` array to your
-routes.json as shown below.
+[here](/policies/open-id-jwt). Add a `policies` array to your routes.json as
+shown below.
 
 ![CleanShot 2021-11-29 at 16.35.43@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.35.432x.png)
 

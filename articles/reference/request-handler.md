@@ -25,8 +25,8 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 ```
 
 This is a request handler that receives a request (of type `ZuploRequest` - more
-on this [here](/articles/reference/zuplo-request)) and returns a response of
-type `string`. You can return any type from a Request Handler and Zuplo will
+on this [here](/reference/zuplo-request)) and returns a response of type
+`string`. You can return any type from a Request Handler and Zuplo will
 auto-serialize the response to JSON and add a `content-type` header to your
 response of `application/json`. This makes it very easy to build simple JSON
 APIs.
@@ -79,7 +79,7 @@ If you want to read the body you have two options:
 - `await request.json()` - this method reads the body and performs a
   JSON.parse() to read the body into an object in memory. Use only if you’re
   confident the body is well-formed JSON (consider pre-validation with the
-  [Validate Policy](/articles/policies/validate-json-schema)).
+  [Validate Policy](/policies/validate-json-schema)).
 
 ## Response Class
 

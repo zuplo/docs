@@ -2,7 +2,18 @@
   "version": "0.2",
   "language": "en",
   // words - list of words to be always considered correct
-  "words": ["Zuplo"],
+  "words": [
+    "Quickstart",
+    "Zuplo",
+    "Waitlist",
+    "heroicons",
+    "preconnect",
+    "prismjs",
+    "signup",
+    "tailwindcss",
+    "unoptimized",
+    "frontmatter"
+  ],
   // flagWords - list of words to be always considered incorrect
   // This is useful for offensive words and common spelling errors.
   // For example "hte" should be "the"

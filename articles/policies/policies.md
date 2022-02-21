@@ -9,13 +9,13 @@ policies.
 
 ### Built-in Policies
 
-[Rate-Limit Policy](/articles/policies/rate-limit)
+[Rate-Limit Policy](/policies/rate-limit)
 
-[Open ID JWT Authentication Policy](/articles/policies/open-id-jwt)
+[Open ID JWT Authentication Policy](/policies/open-id-jwt)
 
-[Validate JSON Schema Policy](/articles/policies/validate-json-schema)
+[Validate JSON Schema Policy](/policies/validate-json-schema)
 
-[Basic Authentication Policy](/articles/policies/basic-auth)
+[Basic Authentication Policy](/policies/basic-auth)
 
 ### How policies work
 
