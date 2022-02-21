@@ -1,16 +1,15 @@
 ---
-title: Getting Started
-date: "2021-08-01"
+title: Hello World API
+embedTitle: Getting Started
+date: "2022-02-18"
+embed: true
 ---
 
 Zuplo isn't your average gateway. It's a **programmable gateway** that can be
 used to protect and share your own API _and_ used as a simple orchestration
 layer over SaaS APIs. Choose your getting started guide:
 
-1. [Proxy a public API](getting-started)
-2. **Hello World API**
-3. [Gateway over AirTable](getting-started-airtable)
-4. [Gateway over MongoDB](getting-started-mongo-db)
+<QuickstartPicker />
 
 ## Hello World API
 

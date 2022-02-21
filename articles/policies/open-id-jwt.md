@@ -3,9 +3,9 @@ title: Open ID JWT Authentication Policy
 ---
 
 > See this sample
-> ["Setting up JWT auth with Auth0"](/articles/guides/setup-jwt-auth-with-auth0)
-> for a guided walkthrough using this policy with Auth0 (also available as a
-> ZupIt! https://github.com/zuplo/samples-auth0-jwt )
+> ["Setting up JWT auth with Auth0"](/guides/setup-jwt-auth-with-auth0) for a
+> guided walkthrough using this policy with Auth0 (also available as a ZupIt!
+> https://github.com/zuplo/samples-auth0-jwt )
 
 ## Overview
 
@@ -24,7 +24,7 @@ the JWT token (including any claims).
 
 > Be sure to read about policies
 >
-> [Policies](/articles/policies)
+> [Policies](/policies)
 
 Here is an example configuration (this would go in the `policies` section of the
 routes.json file).
@@ -91,5 +91,5 @@ your policy configuration.
 ## Using the user property in code
 
 For an example of using the user object in a
-[RequestHandler](/articles/reference/zuplo-request), see
-[Setting up JWT auth with Auth0](/articles/guides/setup-jwt-auth-with-auth0).
+[RequestHandler](/reference/zuplo-request), see
+[Setting up JWT auth with Auth0](/guides/setup-jwt-auth-with-auth0).

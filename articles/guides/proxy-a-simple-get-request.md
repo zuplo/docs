@@ -157,4 +157,4 @@ As shown in the gif below:
 ![2021-11-21 20.34.38.gif](/media/guides/proxy-a-simple-get-request/2021-11-21_20.34.38.gif)
 
 For more advanced proxy capabilities, like adding security to APIs or more,
-check out [Policies](/articles/policies).
+check out [Policies](/policies).
