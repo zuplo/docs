@@ -1,5 +1,5 @@
 ---
-title: How To & Samples
+title: Guides & Samples
 ---
 
 [Proxy a simple GET request](/guides/proxy-a-simple-get-request)
@@ -10,17 +10,9 @@ title: How To & Samples
 
 [Share code across request handlers and policies with modules](/guides/reuseing-code)
 
-[Production Workflow](/guides/Pproduction-workflow)
+[Production Workflow](/guides/production-workflow)
 
-Policies ([Policies overview](/policies))
-
-[Open ID JWT Auth Policy](/policies/open-id-jwt-auth)
-
-[Validate JSON Schema Policy](/policies/validate-json-schema)
-
-[Basic Authentication Policy](/policies/basic-auth)
-
-Samples
+## Samples
 
 [Archiving requests to storage](/guides/archiving-requests-to-storage)
 

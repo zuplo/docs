@@ -1,5 +1,6 @@
 ---
 title: Getting Started
+publish: false
 ---
 
 We've designed Zuplo to be easy to get started, our goal is you go from zero to
@@ -152,6 +153,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
    `await request.json()` and notice how the response changes to show the object
    was parsed.
 
-# Congratulations - y**ou are now a competent Zuplo Developer! Achievement Unlocked 🎉**
+**Congratulations - you are now a competent Zuplo Developer! Achievement
+Unlocked 🎉**
 
 Next: [Proxy a simple request](/guides/proxy-a-simple-get-request)
