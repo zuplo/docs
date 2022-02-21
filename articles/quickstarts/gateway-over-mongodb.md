@@ -10,7 +10,9 @@ layer over SaaS APIs. Choose your getting started guide:
 
 <QuickstartPicker />
 
-Coming Soon
+We are working on adding more quick starts soon. In the meantime, join us on
+[Discord](https://discord.gg/bxEh2GVsGZ) and let us know what you would like to
+see.
 
 In the meantime, check out some of our other documentation examples in our
 documentation:
