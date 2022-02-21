@@ -10,7 +10,7 @@ layer over SaaS APIs. Choose your getting started guide:
 
 <QuickstartPicker />
 
-Let's proxy the AirTable Event Planning base in just XXXX quick steps.
+Let's proxy the AirTable Event Planning base in just 4 quick steps.
 
 ## 1
 

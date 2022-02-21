@@ -10,8 +10,6 @@ layer over SaaS APIs. Choose your getting started guide:
 
 <QuickstartPicker />
 
-## Proxy a public API
-
 Let's proxy the sample e-commerce API at `https://ecommerce-api.zuplo.com` with
 a Zuplo gateway in 4 easy steps.
 

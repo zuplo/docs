@@ -10,8 +10,6 @@ layer over SaaS APIs. Choose your getting started guide:
 
 <QuickstartPicker />
 
-## Hello World API
-
 Because Zuplo is programmable you can easily use it to create an API - with
 built-in gateway features - that can be deployed to the edge.
 
