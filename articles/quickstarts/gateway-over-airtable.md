@@ -1,6 +1,5 @@
 ---
 title: Gateway over AirTable APIs
-embedTitle: Getting Started
 date: "2021-02-21"
 embed: true
 ---
@@ -10,8 +9,6 @@ used to protect and share your own API _and_ used as a simple orchestration
 layer over SaaS APIs. Choose your getting started guide:
 
 <QuickstartPicker />
-
-## Gateway over AirTable
 
 Let's proxy the AirTable Event Planning base in just XXXX quick steps.
 

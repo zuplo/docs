@@ -1,6 +1,5 @@
 ---
 title: Gateway over Salesforce APIs
-embedTitle: Getting Started
 date: "2021-02-21"
 embed: true
 ---
