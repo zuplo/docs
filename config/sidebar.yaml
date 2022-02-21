@@ -1,6 +1,19 @@
 articles:
   - title: Get Started
-    url: /getting-started
+    url: /quickstarts
+  - title: Guides
+    url: /guides
+    children:
+      - title: Proxy a simple GET request
+        url: /guides/proxy-a-simple-get-request
+      - title: Proxy a request with a body
+        url: /guides/proxy-a-request-with-body
+      - title: Clone a request or response
+        url: /guides/safely-clone-a-request-or-response
+      - title: Code Reuse
+        url: /guides/reuseing-code
+      - title: Production Workflow
+        url: /guides/production-workflow
   - title: Policies
     url: /policies
     children:
@@ -11,10 +24,12 @@ articles:
       - title: Rate Limiting
         url: /policies/rate-limiting
       - title: JSON Schema Validation
-        url: json-schema-validation
+        url: /policies/json-schema-validation
   - title: Reference
     url: /reference
     children:
+      - title: Request Handler
+        url: /reference/request-handler
       - title: ZuploContext
         url: /reference/zuplo-context
       - title: ZuploRequest
