@@ -1,6 +1,5 @@
 ---
 title: Gateway over Salesforce APIs
-embedTitle: Getting Started
 date: "2021-02-21"
 embed: true
 ---
@@ -10,8 +9,6 @@ used to protect and share your own API _and_ used as a simple orchestration
 layer over SaaS APIs. Choose your getting started guide:
 
 <QuickstartPicker />
-
-# Gateway over Salesforce APIs
 
 Because Zuplo is programmable you can easily use it to query Salesforce APIs. Below, we will show you how to query for data in Salesforce. In this quickstart we will use Accounts but you can modify it to use any other SObject and operation supported by the Salesforce APIs.
 

@@ -1,5 +1,5 @@
 ---
-title: Gateway over MongoDB
+title: Auth0 JWT Authentication
 date: "2021-02-21"
 embed: true
 ---

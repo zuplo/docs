@@ -7,7 +7,7 @@ multiple policies and apply them to multiple routes. There are built-in policies
 but of course, being a developer-focused platform you can easily create custom
 policies.
 
-### Built-in Policies
+## Built-in Policies
 
 [Rate-Limit Policy](/policies/rate-limit)
 
@@ -17,7 +17,7 @@ policies.
 
 [Basic Authentication Policy](/policies/basic-auth)
 
-### How policies work
+## How policies work
 
 ![Untitled](/media/policies/Untitled.png)
 
@@ -46,7 +46,7 @@ export type InboundPolicyHandler<TOptions = any> = (
 A common use case for policies is authentication. In the following example we'll
 create a simple auth policy that checks for an `api-key` header:
 
-### A simple auth policy
+## A simple auth policy
 
 ```ts
 // my-first-policy.ts
@@ -77,7 +77,7 @@ magic password\*.
 > - this is not a best-practice implementation of a security policy - just an
 >   example of the power of policies.
 
-### Wiring up the policy on routes
+## Wiring up the policy on routes
 
 Policies are activated by specifying them on routes in the route.json file
 (designer support for this is coming soon). Here's how we could wire up our new
@@ -126,7 +126,7 @@ See the gif below to see the flow end-to-end:
 
 ![2021-11-21 21.32.35.gif](/media/policies/2021-11-21_21.32.35.gif)
 
-### Policy Options
+## Policy Options
 
 In your policy configuration you can specify additional information to configure
 your policy on the options property. In the example below we set an example
@@ -172,7 +172,7 @@ export default async function (
 
 You can also use the `any` type if you prefer not to create a type.
 
-### Setting the user property
+## Setting the user property
 
 When building a policy it's common to modify the request object in some way
 before passing control downstream. The `ZuploRequest` type has a `user` property

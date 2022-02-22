@@ -2,10 +2,9 @@
 title: Setting up JWT auth with Auth0
 ---
 
-> Note - this sample uses Policies, read
-> **[this guide](https://www.notion.so/policies-1ee0cc0d7a10402cb47991453156a2bd)**
-> first. Also, see this
-> [reference on the JWT auth policy](/policies/open-id-jwt) for more details.
+> Note - this sample uses Policies, read **[this guide](/policies)** first.
+> Also, see this [reference on the JWT auth policy](/policies/open-id-jwt) for
+> more details.
 
 ## Overview
 

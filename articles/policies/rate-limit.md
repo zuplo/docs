@@ -2,7 +2,7 @@
 title: Rate-Limit Policy
 ---
 
-### Overview
+## Overview
 
 Rate-limiting allows you to set a maximum rate of requests for your API gateway.
 This is useful to enforce rate limits agreed with your clients and protect your
@@ -17,7 +17,7 @@ effect a rate-limit using a function.
 
 When a client reaches a rate limit - the will receive a `429` response code.
 
-### Configuration
+## Configuration
 
 > Be sure to read about policies
 >
