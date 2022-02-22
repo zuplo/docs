@@ -13,10 +13,3 @@ layer over SaaS APIs. Choose your getting started guide:
 We are working on adding more quick starts soon. In the meantime, join us on
 [Discord](https://discord.gg/bxEh2GVsGZ) and let us know what you would like to
 see.
-
-In the meantime, check out some of our other documentation examples in our
-documentation:
-
-- [Write your own policies](/policies)
-- [Archive requests to storage](/guides/archving-requests-to-storage)
-- [Setting up JWT auth with Auth0](/guides/setup-jwt-auth-with-auth0)
