@@ -19,7 +19,7 @@ call) or return it from a request handler - you’ll get that exception.
 > Note - you can check to see if a body has already been used by looking at the
 > `.bodyUsed` property of `ZuploRequest` and `Response`.
 
-### How to clone the request and response
+## How to clone the request and response
 
 Let’s imagine we want to log both the request body and response body of a
 proxied call to a downwind service
