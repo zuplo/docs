@@ -14,17 +14,15 @@ Let's proxy the AirTable Event Planning base in just 4 quick steps.
 
 ## 1
 
-Create handler
+To start, create a new Request Handler and name it `attendees.ts`. This will be
+where we write the custom code.
+
+![Route Path](/media/quickstarts/gateway-over-airtable/new-request-handler.png)
 
 ## 2
 
-Open the module called `hello-world.ts` and replace the body of the function to
-the code below. Replace the values for `YOUR_API_KEY` and `YOUR_BASE_URL`.
-[See here to get your AirTable API key](https://support.airtable.com/hc/en-us/articles/219046777-How-do-I-get-my-API-key-).
-Save the file.
-
-> NOTE: Don't use production values just yet, real secret management is coming
-> very soon.
+Open the new module `attendees.ts` and replace the body of the function to the
+code below.
 
 ```ts
 const API_KEY = "YOUR_API_KEY";
@@ -63,14 +61,22 @@ return new Response("Success", {
 });
 ```
 
+Replac the values for `YOUR_API_KEY` with your
+[AirTable API Key](https://support.airtable.com/hc/en-us/articles/219046777-How-do-I-get-my-API-key-).
+Save the file.
+
+> NOTE: Don't use production values just yet, real secret management is coming
+> very soon.
+
 ## 3
 
-Create a new Airtable base by selecting **Start from Template** > **Event
-Planning** from the AirTable app homepage. Navigate to
+Create a new AirTable workspace from the
+[Event Planning](https://www.airtable.com/templates/featured/exppdJtYjEgfmd6Sq/event-planning)
+template. After it's created, navigate to
 [https://airtable.com/api](https://airtable.com/api) and select your new
-Workspace. On the side-menu select, **Attendees Table** > **Create Records**.
-You will see an example request like below, **copy and save the URL from that
-example**.
+workspace. On the side-menu select, **Attendees Table** > **Create Records**.
+You will see an example request like below, **copy the URL from that example**
+and replace it with the `AIRTABLE_ATTENDEES_URL` value from the previous step.
 
 ```
 curl -v -X POST https://api.airtable.com/v0/applKxZKvlZPu3nh6/%F0%9F%AA%91%20Attendees \
@@ -85,10 +91,32 @@ be `/attendees` and set the **method** to `POST`. Save the file.
 
 ![Route Path](/media/quickstarts/gateway-over-airtable/route-path.png)
 
+Switch to the `routes.json` tab and edit the JSON so that the `/attendees`
+`handler.module` and `handler.export` matches the code below.
+
+> UI for selecting the module and export is coming soon.
+
+```json
+{
+  "path": "/attendees",
+  "corsPolicy": "anything-goes",
+  "label": "",
+  "methods": ["POST"],
+  "handler": {
+    "module": "$import(./modules/attendees)",
+    "export": "default"
+  },
+  "policies": {
+    "inbound": []
+  },
+  "version": "none"
+}
+```
+
 ## 5
 
-Open the Route Tester :lightning-bolt:. Set the **path** to `/v1/attendees` and
-the **method** to `POST`. Add JSON to the body as shown.
+Open the Route Tester <RouteTesterIcon />. Set the **path** to `/v1/attendees`
+and the **method** to `POST`. Add JSON to the body as shown.
 
 ![Test Route](/media/quickstarts/gateway-over-airtable/test-route.png)
 
