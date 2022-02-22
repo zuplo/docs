@@ -26,7 +26,7 @@ After you have the Connected App configured. From the file explorer menu, create
 a new **Empty Module** named `auth.ts`. Add the following code which takes care
 of Salesforce authentication.
 
-# 2
+## 2
 
 Let's start by creating a new module called `query.ts`. In the Zuplo portal. go
 to `Files` then click the `plus` sign in `Modules`, select `New Empty Module`
@@ -83,7 +83,7 @@ export async function getAccessToken(): Promise<RefreshTokenResponse> {
 }
 ```
 
-## 2
+## 3
 
 Now that we can generate an access token, calling the Salesforce API with
 `fetch` is simple. Create another module called `query.ts` and add the following
@@ -112,7 +112,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 
 Make sure to press Save - **note** ⌘+S or CTRL+S works, depending on your OS.
 
-## 3
+## 4
 
 Open the **routes.json** file and change the **path** of the existing route to
 be `/attendees` and set the **method** to `POST`. Save the file.
@@ -143,7 +143,7 @@ Switch to the `routes.json` tab and edit the JSON so that the `/query`
 ]
 ```
 
-## 4
+## 5
 
 Invoke your API using the Test Console. Add the new `/v1/query` configuration
 and hit the Test button to invoke your API!
