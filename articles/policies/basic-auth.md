@@ -79,7 +79,7 @@ routes.json file).
     - `data` a dynamically typed data bucket passed as `data` on
       `ZuploRequest`'s `user` object. This can be used to store arbitrary data
       for each account for use in a
-      [RequestHandler](https://www.notion.so/RequestHandler-edf5bb59da7a4f55bdce041645f51769).
+      [RequestHandler](/reference/request-handler).
 
 This policy is then reference on each route where you want the policy to be
 enforced, for example:
@@ -108,9 +108,8 @@ username and password. You can generate one using a generator like this:
 
 ## Using the user object in code
 
-In your
-[RequestHandler](https://www.notion.so/RequestHandler-3ea22fd12fa748458f62014c3ae5b4e1)
-you can use the user object, for example:
+In your [RequestHandler](/reference/request-handler) you can use the user
+object, for example:
 
 ```ts
 import { ZuploRequest, ZuploContext } from "@zuplo/runtime";
