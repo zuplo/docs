@@ -1,5 +1,7 @@
 articles:
-  - title: Get Started
+  - title: Home
+    url: /
+  - title: Getting Started
     url: /quickstarts
   - title: Guides
     url: /guides
