@@ -1,5 +1,5 @@
 ---
-title: Auth0 JWT Authentication
+title: Coming Soon
 date: "2021-02-21"
 embed: true
 ---
