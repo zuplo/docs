@@ -1,5 +1,5 @@
 ---
-title: Gateway over MongoDB
+title: API Rate Limiting
 date: "2021-02-21"
 embed: true
 ---
@@ -10,6 +10,6 @@ layer over SaaS APIs. Choose your getting started guide:
 
 <QuickstartPicker />
 
-We are working on adding the gateway over MongoDB quick start soon. In the
+We are working on adding the api rate limiting quick start soon. In the
 meantime, join us on [Discord](https://discord.gg/bxEh2GVsGZ) and let us know
 what you would like to see.
