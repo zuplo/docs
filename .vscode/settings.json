@@ -1,6 +1,6 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "npm.packageManager": "npm",
+  "npm.packageManager": "yarn",
   "editor.formatOnSave": true,
   "search.exclude": {
     "**/node_modules": true,
