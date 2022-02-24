@@ -10,30 +10,6 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      # gsutil doesnt support workload idenity yet, when it does switch to this and delete the service account token
-      # - id: "auth"
-      #   name: "Authenticate to Google Cloud"
-      #   uses: "google-github-actions/auth@v0"
-      #   with:
-      #     token_format: "access_token"
-      #     workload_identity_provider: "projects/914576303414/locations/global/workloadIdentityPools/automations-pool/providers/github-provider"
-      #     service_account: "github-actions@zuplo-production.iam.gserviceaccount.com"
-      #     access_token_lifetime: "300s" # optional, default: '3600s' (1 hour)
-
-      - id: "auth"
-        name: "Authenticate to Google Cloud"
-        uses: "google-github-actions/auth@v0"
-        with:
-          credentials_json: "${{ secrets.GCP_PRODUCTION_SA }}"
-
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v0.5.0
-        with:
-          project_id: zuplo-production
-
-      - run: gsutil -m cp -r media gs://cdn.zuplo.com/docs/media
-
       - name: Trigger Vercel Hook
         run:
           curl -X POST
