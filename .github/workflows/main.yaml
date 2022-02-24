@@ -10,6 +10,7 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       # gsutil doesnt support workload idenity yet, when it does switch to this and delete the service account token
       # - id: "auth"
       #   name: "Authenticate to Google Cloud"
@@ -31,7 +32,7 @@ jobs:
         with:
           project_id: zuplo-production
 
-      - run: gsutil -m cp -r ./media gs://cdn.zuplo.com/docs/media
+      - run: gsutil -m cp -r media gs://cdn.zuplo.com/docs/media
 
       - name: Trigger Vercel Hook
         run:
