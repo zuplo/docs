@@ -1,13 +1,15 @@
-name: Docs Release
+name: Upload Images
 on:
   push:
     branches:
       - main
+    paths:
+      - "media/**"
   workflow_dispatch:
 
 jobs:
-  release:
-    name: Release
+  images:
+    name: Upload Images
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
