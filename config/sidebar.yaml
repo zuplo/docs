@@ -13,7 +13,7 @@ articles:
       - title: Clone a request or response
         url: /guides/safely-clone-a-request-or-response
       - title: Code Reuse
-        url: /guides/reuseing-code
+        url: /guides/reusing-code
       - title: Production Workflow
         url: /guides/production-workflow
   - title: Policies
