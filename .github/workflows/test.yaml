@@ -1,0 +1,16 @@
+name: Test
+on:
+  deployment:
+  workflow_dispatch:
+
+jobs:
+  check-links:
+    name: Check Links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
+          cache: "pip"
+      - run: pip install LinkChecker
+      - run: linkchecker https://docs.zuplo.com
