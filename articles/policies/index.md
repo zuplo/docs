@@ -248,8 +248,6 @@ Here is this example working as a gif
 
 ![](/media/policies/2021-11-21_21.44.35.gif)
 
-![](/media/policies/policy-diagram1.png)
-
 ## Limitations of policies today
 
 1. You cannot create an outbound policy today, inbound only. Recommendation -
