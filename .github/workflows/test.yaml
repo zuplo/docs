@@ -12,4 +12,4 @@ jobs:
         with:
           python-version: "3.9"
       - run: pip install --user LinkChecker
-      - run: python -m linkchecker https://docs.zuplo.com
+      - run: ~/.local/bin/linkchecker https://docs.zuplo.com
