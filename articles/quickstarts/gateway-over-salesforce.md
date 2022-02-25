@@ -161,5 +161,5 @@ Why not try one of the other getting started guides (above) or some of the
 examples in our documentation:
 
 - [Write your own policies](/policies)
-- [Archive requests to storage](/guides/archving-requests-to-storage)
+- [Archive requests to storage](/guides/archiving-requests-to-storage)
 - [Setting up JWT auth with Auth0](/guides/setup-jwt-auth-with-auth0)

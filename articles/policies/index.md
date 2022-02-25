@@ -13,13 +13,13 @@ policies.
 
 [Open ID JWT Authentication Policy](/policies/open-id-jwt)
 
-[Validate JSON Schema Policy](/policies/validate-json-schema)
+[Validate JSON Schema Policy](/policies/json-schema-validation)
 
 [Basic Authentication Policy](/policies/basic-auth)
 
 ## How policies work
 
-![Untitled](/media/policies/Untitled.png)
+![How Policies Work](/media/policies/Untitled.png)
 
 A policy can intercept a request and modify the request before it reaches the
 request handler (and the next policy). It can also short-circuit the whole
@@ -124,7 +124,7 @@ auth route:
 
 See the gif below to see the flow end-to-end:
 
-![2021-11-21 21.32.35.gif](/media/policies/2021-11-21_21.32.35.gif)
+![](/media/policies/2021-11-21_21.32.35.gif)
 
 ## Policy Options
 
@@ -246,9 +246,9 @@ export default async function (request: ZuploRequest) {
 
 Here is this example working as a gif
 
-![2021-11-21 21.44.35.gif](/media/policies/2021-11-21_21.44.35.gif)
+![](/media/policies/2021-11-21_21.44.35.gif)
 
-![Untitled](/media/policies/Untitled%201.png)
+![](/media/policies/policy-diagram.png)
 
 ## Limitations of policies today
 

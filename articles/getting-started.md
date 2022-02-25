@@ -31,9 +31,9 @@ live API gateway in under 2 minutes.
 
 ## Test your API
 
-1. W scaffold an example project for you that is ready to go, try it out! To
-   test your new API you can use our integrated test console (as shown in the
-   gif below):
+1. Scaffold an example project for you that is ready to go, try it out! To test
+   your new API you can use our integrated test console (as shown in the gif
+   below):
 
 ![2021-11-15 15.06.39.gif](/media/getting-started-old/2021-11-15_15.06.39.gif)
 
