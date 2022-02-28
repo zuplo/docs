@@ -3,12 +3,9 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "media/**"
-  workflow_dispatch:
 
 jobs:
-  images:
+  release:
     name: Release
     runs-on: ubuntu-latest
     steps:
@@ -34,7 +31,8 @@ jobs:
         with:
           project_id: zuplo-production
 
-      - run: gsutil -m cp -r media gs://cdn.zuplo.com/docs/media
+      - name: Sync Images to CDN
+        run: gsutil -m rsync -r media gs://cdn.zuplo.com/docs/media
 
       - name: Trigger Vercel Hook
         run:
