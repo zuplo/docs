@@ -8,7 +8,7 @@ title: Guides & Samples
 
 [Safely clone a request or response](/guides/safely-clone-a-request-or-response)
 
-[Share code across request handlers and policies with modules](/guides/reuseing-code)
+[Share code across request handlers and policies with modules](/guides/reusing-code)
 
 [Production Workflow](/guides/production-workflow)
 
