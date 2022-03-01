@@ -35,6 +35,6 @@ jobs:
         run: gsutil -m rsync -r media gs://cdn.zuplo.com/docs/media
 
       - name: Trigger Vercel Hook
-        run:
-          curl -X POST
-          https://api.vercel.com/v1/integrations/deploy/prj_Tb8Qh6ViE9DiS8q5CVuGaApt5f36/HoCFxKGo4K
+        run: curl -X POST $HOOK_URL
+        env:
+          HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK }}
