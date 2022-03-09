@@ -26,9 +26,7 @@ code below.
 
 ```ts
 const API_KEY = "YOUR_API_KEY";
-
 const url = "AIRTABLE_ATTENDEES_URL";
-
 const body = await request.json();
 
 const data = {
