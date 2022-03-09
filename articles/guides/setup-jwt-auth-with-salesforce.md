@@ -22,7 +22,9 @@ Using `openssl` we will create a private key `privatekey.pem`, that will be
 used to sign the JWT claim, and a certificate `certificate.pem` that will be
 uploaded to the Salesforce connected app to validate the signed JWT assertions.
 
-`$ openssl req -x509 -sha256 -nodes -days 365000 -newkey rsa:2048 -keyout privatekey.pem -out certificate.pem`
+```
+$ openssl req -x509 -sha256 -nodes -days 365000 -newkey rsa:2048 -keyout privatekey.pem -out certificate.pem`
+```
 
 And follow the prompts...
 
@@ -58,8 +60,8 @@ action next to your new app.
 You now have everything you need to connect to Salesforce using JWT (consumer key, 
 consumer secret and privatekey.pem) but there's one more important thing to complete. 
 
-Before you can use the JWT flow and create an access token, you must have already 
-been granted a refresh token. We'll do that manually below. 
+Before you can use the JWT flow you need to approve the connected app by manually
+requesting an access token
 
 It's important that this is performed once per user or profile being used, otherwise
 you'll get an `Invalid Grant` - `user hasn't approved this consumer` error. 
