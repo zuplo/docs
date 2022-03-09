@@ -93,7 +93,7 @@ variables:
   `https://test.salesforce.com`
 - `SFDC_USERNAME` (config) - Salesforce username (often your e-mail)
 - `SFDC_CONSUMER_KEY` (config) - The consumer key from your connected app
-- `SFDC_PRIVATE_KEY` (secret) - The consumer secret from your connected app
+- `SFDC_PRIVATE_KEY` (secret) - The contents of your privatekey.pem
 
 ![Environment Variables](/media/quickstarts/gateway-over-salesforce/environment-variables.png)
 
