@@ -22,15 +22,14 @@ Using `openssl` we will create a private key `privatekey.pem`, that will be
 used to sign the JWT claim, and a certificate `certificate.pem` that will be
 uploaded to the Salesforce connected app to validate the signed JWT assertions.
 
-```
- $ openssl req -x509 -sha256 -nodes -days 365000 -newkey rsa:2048 -keyout privatekey.pem -out certificate.pem
- .. <follow the prompts>
-```
+`$ openssl req -x509 -sha256 -nodes -days 365000 -newkey rsa:2048 -keyout privatekey.pem -out certificate.pem`
+
+And follow the prompts...
 
 ### Step 2: Create a connected app
 
-Log in to your Salesforce organization and within **Setup** go to **PLATFORM TOOLS
- > Apps > App Manager**  and click **New Connected App** (you can also come back to 
+Log in to your Salesforce organization and within **Setup** go to 
+**PLATFORM TOOLS > Apps > App Manager**  and click **New Connected App** (you can also come back to 
 this screen to view the consumer key and secret for existing apps.)
 
 - Fill out the required fields in the `Basic Information` section. These are for
@@ -75,12 +74,14 @@ tab for this.
   or `https://test.salesforce.com/services/oauth2/authorize` if you are using a
   non-production Org.
 - Redirect URL: your redirect url or `https://callback.zuplo.io`
-- Client Id : The ** Consumer Key** from the connected app
+- Client Id : The **Consumer Key** from the connected app
 - Response type: `code`
 
 The url will look like this - open it in your browser.
 
-`https://login.salesforce.com/services/oauth2/authorize?client_id=<Consumer Key from Connected app>&redirect_uri=https%3A%2F%2Fcallback.zuplo.io&response_type=code`
+```
+https://login.salesforce.com/services/oauth2/authorize?client_id=<Consumer Key from Connected app>&redirect_uri=https%3A%2F%2Fcallback.zuplo.io&response_type=code
+```
 
 It should redirect to `https://callback.zuplo.io` where your Authorization code will be displayed.
 
