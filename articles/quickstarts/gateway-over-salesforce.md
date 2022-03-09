@@ -17,7 +17,7 @@ Salesforce API.
 To get started even quicker you can Zup It! Just click the button below and
 we'll instantly create a new project for you with most of the code you need.
 
-(Zup It!)[https://github.com/zuplo/samples-gateway-over-salesforce.git]
+[Zup It!](https://github.com/zuplo/samples-gateway-over-salesforce.git)
 
 You'll need a 'Connected App' in Salesforce to authenticate. If you don't
 already have one set up,
@@ -36,17 +36,14 @@ Add the following code which takes care of Salesforce authentication.
 ```ts
 import env from "@app/environment";
 import {
-  ZuploContext,
-  ZuploRequest,
   importPKCS8,
   SignJWT,
 } from "@zuplo/runtime";
 
-export const SFDC_INSTANCE_URL = env.SFDC_INSTANCE_URL;
 const SFDC_CONSUMER_KEY = env.SFDC_CONSUMER_KEY;
 const SFDC_USERNAME = env.SFDC_USERNAME;
-const AUDIENCE = env.AUDIENCE;
-const PRIVATE_KEY = env.PRIVATE_KEY;
+const SFDC_AUDIENCE = env.SFDC_AUDIENCE;
+const SFDC_PRIVATE_KEY = env.SFDC_PRIVATE_KEY;
 
 export interface RefreshTokenResponse {
   id: string;
@@ -59,19 +56,19 @@ export interface RefreshTokenResponse {
 export async function getAccessToken(): Promise<RefreshTokenResponse> {
   const ALG = "RS256";
   const JWT_EXPIRATION_TIME = "1h";
-  const ecPrivateKey = await importPKCS8(PRIVATE_KEY, ALG);
+  const ecPrivateKey = await importPKCS8(SFDC_PRIVATE_KEY, ALG);
 
   // Create the JWT assertion
   const token = await new SignJWT({ scope: "api refresh_token" })
     .setProtectedHeader({ alg: ALG, typ: "JWT" })
-    .setAudience(AUDIENCE)
+    .setAudience(SFDC_AUDIENCE)
     .setIssuer(SFDC_CONSUMER_KEY)
     .setSubject(SFDC_USERNAME)
     .setIssuedAt()
     .setExpirationTime(JWT_EXPIRATION_TIME)
     .sign(ecPrivateKey);
 
-  const res = await fetch(`${AUDIENCE}/services/oauth2/token`, {
+  const res = await fetch(`${SFDC_AUDIENCE}/services/oauth2/token`, {
     method: "POST",
     body: new URLSearchParams({
       assertion: token,
@@ -90,10 +87,10 @@ We need to setup your environment. Open the **environment.json** file and delete
 any example config or secret entries. Create the following environment
 variables:
 
-- `SFDC_INSTANCE_URL` (config) - your Salesforce mydomain, e.g.
-  https://[ORG_NAME].my.salesforce.com
-- `SFDC_AUDIENCE` (config) - either https://login.salesforce.com or
-  https://test.salesforce.com
+- `SFDC_INSTANCE_URL` (config) - your Salesforce mydomain e.g.
+  `https://ORG_NAME.my.salesforce.com`
+- `SFDC_AUDIENCE` (config) - either `https://login.salesforce.com` or
+  `https://test.salesforce.com`
 - `SFDC_USERNAME` (config) - Salesforce username (often your e-mail)
 - `SFDC_CONSUMER_KEY` (config) - The consumer key from your connected app
 - `SFDC_PRIVATE_KEY` (secret) - The consumer secret from your connected app
@@ -106,13 +103,15 @@ Let's create another empty module called `query.ts` and populate it with the
 following code, which is hopefully fairly self explanatory.
 
 ```ts
+import { ZuploRequest, ZuploContext } from "@zuplo/runtime";
 import { getAccessToken } from "./auth";
+import env from "@app/environment";
 
 export default async function (request: ZuploRequest, context: ZuploContext) {
   const { access_token } = await getAccessToken();
 
   const queryRes = await fetch(
-    `${SFDC_INSTANCE_URL}/services/data/v54.0/query/?q=Select Id, Name from Account`,
+    `${env.SFDC_INSTANCE_URL}/services/data/v54.0/query/?q=Select Id, Name from Account`,
     {
       method: "GET",
       headers: {
