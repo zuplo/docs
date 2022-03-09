@@ -10,8 +10,8 @@ layer over SaaS APIs. Choose your getting started guide:
 
 <QuickstartPicker />
 
-You can easily use Zuplo with Salesforce APIs. In this quickstart we'll work 
-with the Salesforce Accounts API, but it can be modified to support any other 
+You can easily use Zuplo with Salesforce APIs. In this quickstart we'll work
+with the Salesforce Accounts API, but it can be modified to support any other
 Salesforce API.
 
 To get started even quicker you can Zup It! Just click the button below and
@@ -19,14 +19,15 @@ we'll instantly create a new project for you with most of the code you need.
 
 (Zup It!)[https://github.com/zuplo/samples-gateway-over-salesforce.git]
 
-You'll need a 'Connected App' in Salesforce to authenticate. If you don't already
-have one set up, [follow this guide](/guides/setup-jwt-auth-with-salesforce). 
-Once you have your app's `consumer key`, 
-`consumer secret` and `privatekey.pem` file, you're ready to go!
+You'll need a 'Connected App' in Salesforce to authenticate. If you don't
+already have one set up,
+[follow this guide](/guides/setup-jwt-auth-with-salesforce). Once you have your
+app's `consumer key`, `consumer secret` and `privatekey.pem` file, you're ready
+to go!
 
 ## 1
 
-From the file explorer, create a new **Empty Module** named `auth.ts`. 
+From the file explorer, create a new **Empty Module** named `auth.ts`.
 
 ![New Module](/media/quickstarts/create-new-empty-module.gif)
 
@@ -82,24 +83,27 @@ export async function getAccessToken(): Promise<RefreshTokenResponse> {
   return resJSON;
 }
 ```
+
 ## 2
 
-We need to setup your environment. Open the __environment.json__ file and delete any
-example config or secret entries. Create the following environment variables:
+We need to setup your environment. Open the **environment.json** file and delete
+any example config or secret entries. Create the following environment
+variables:
 
-* `SFDC_INSTANCE_URL` (config) - your Salesforce mydomain, e.g. 
-https://<org-name>.my.salesforce.com
-* `SFDC_AUDIENCE` (config) - either https://login.salesforce.com or https://test.salesforce.com
-* `SFDC_USERNAME` (config) - Salesforce username (often your e-mail)
-* `SFDC_CONSUMER_KEY` (config) - The consumer key from your connected app
-* `SFDC_PRIVATE_KEY` (secret) - The consumer secret from your connected app
+- `SFDC_INSTANCE_URL` (config) - your Salesforce mydomain, e.g.
+  https://[ORG_NAME].my.salesforce.com
+- `SFDC_AUDIENCE` (config) - either https://login.salesforce.com or
+  https://test.salesforce.com
+- `SFDC_USERNAME` (config) - Salesforce username (often your e-mail)
+- `SFDC_CONSUMER_KEY` (config) - The consumer key from your connected app
+- `SFDC_PRIVATE_KEY` (secret) - The consumer secret from your connected app
 
 ![Environment Variables](/media/quickstarts/gateway-over-salesforce/environment-variables.png)
 
 ## 3
 
-Let's create another empty module called `query.ts` and populate it with the following
-code, which is hopefully fairly self explanatory. 
+Let's create another empty module called `query.ts` and populate it with the
+following code, which is hopefully fairly self explanatory.
 
 ```ts
 import { getAccessToken } from "./auth";
@@ -124,10 +128,9 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 
 Make sure to press Save - **note** ⌘+S or CTRL+S works, depending on your OS.
 
-
 ## 3
 
-Open the __routes.json__ file and change the first route's path to `/query`. Use 
+Open the **routes.json** file and change the first route's path to `/query`. Use
 the function picker to select your new `default` export on the `query` module.
 
 ![Route Path](/media/quickstarts/gateway-over-salesforce/function-picker.png)
