@@ -4,20 +4,20 @@ date: "2021-02-21"
 embed: true
 ---
 
-Zuplo isn't your average gateway. It's a **programmable gateway** that can be
-used to protect and share your own API _and_ used as a simple orchestration
+Zuplo isn't your average gateway. It's **programmable** and can be
+used to protect and share your own API _or_ used as a simple orchestration
 layer over SaaS APIs. Choose your getting started guide:
 
 <QuickstartPicker />
 
-You can easily use Zuplo with Salesforce APIs. In this quickstart we'll work
-with the Salesforce Accounts API, but it can be modified to support any other
+It's easy to use Zuplo with Salesforce APIs. In this quickstart we'll work
+with the Accounts API, but it can be modified to support any other
 Salesforce API.
 
 To get started even quicker you can Zup It! Just click the button below and
 we'll instantly create a new project for you with most of the code you need.
 
-[Zup It!](https://github.com/zuplo/samples-gateway-over-salesforce.git)
+[Zup It!](https://portal.zuplo.com/clone?sourceRepoUrl=https://github.com/zuplo/samples-gateway-over-salesforce.git)
 
 You'll need a 'Connected App' in Salesforce to authenticate. If you don't
 already have one set up,
