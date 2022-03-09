@@ -84,7 +84,7 @@ export async function getAccessToken(): Promise<RefreshTokenResponse> {
 ```
 ## 2
 
-We need to setup your environment. Open the environment.json file and delete any
+We need to setup your environment. Open the __environment.json__ file and delete any
 example config or secret entries. Create the following environment variables:
 
 * `SFDC_INSTANCE_URL` (config) - your Salesforce mydomain, e.g. 
@@ -127,34 +127,10 @@ Make sure to press Save - **note** ⌘+S or CTRL+S works, depending on your OS.
 
 ## 3
 
-Open the **routes.json** file and change the **path** of the existing route to
-be `/attendees` and set the **method** to `POST`. Save the file.
+Open the __routes.json__ file and change the first route's path to `/query`. Use 
+the function picker to select your new `default` export on the `query` module.
 
-![Route Path](/media/quickstarts/gateway-over-salesforce/route-path.png)
-
-Switch to the `routes.json` tab and edit the JSON so that the `/query`
-`handler.module` and `handler.export` matches the code below.
-
-> UI for selecting the module and export is coming soon.
-
-```json
-"routes": [
-    {
-      "label": "Query for Salesforce Accounts",
-      "path": "/query",
-      "handler": {
-        "export": "default",
-        "module": "$import(./modules/query)"
-      },
-      "methods": ["GET"],
-      "corsPolicy": "anything-goes",
-      "version": "v1",
-      "policies": {
-        "inbound": []
-      }
-    }
-]
-```
+![Route Path](/media/quickstarts/gateway-over-salesforce/function-picker.png)
 
 ## 4
 
