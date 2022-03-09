@@ -64,7 +64,7 @@ Before you can use the JWT flow you need to approve the connected app by manuall
 requesting an access token
 
 It's important that this is performed once per user or profile being used, otherwise
-you'll get an `Invalid Grant` - `user hasn't approved this consumer` error. 
+you'll get an `INVALID SESSION ID` - `Session expired or invalid` error. 
 
 #### Getting a Authorization Code
 
