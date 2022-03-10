@@ -10,7 +10,7 @@ layer over SaaS APIs. Choose your getting started guide:
 
 <QuickstartPicker />
 
-Let's proxy this sample e-commerce API at `https://ecommerce-api.zuplo.io` with a
+Let's put a gateway over this sample e-commerce API at `https://ecommerce-api.zuplo.io` with a
 Zuplo gateway and add rate limiting. Quickly take a look at the API by opening 
 this URL in your browser: [https://ecommerce-api.zuplo.io/products/10000](https://ecommerce-api.zuplo.io/products/10000)
 
