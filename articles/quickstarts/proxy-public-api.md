@@ -65,6 +65,8 @@ get a `429` response, "Too many requests".
 
 ## Congratulations, you completed a quickstart
 
+Try another quickstart (above) for more awesome.
+
 Why not try one of the other getting started guides (above) or some of the
 examples in our documentation:
 
