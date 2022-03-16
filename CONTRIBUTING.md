@@ -17,6 +17,7 @@ feel free to propose changes to this document in a pull request.
   - [Escaping Strings](#escaping-strings)
   - [Image zooming](#image-zooming)
   - [Screenshots](#screenshots)
+  - [Videos](#videos)
   - [Front Matter](#front-matter)
   - [Linting](#linting)
 - [Sidebar](#sidebar)
@@ -310,7 +311,7 @@ with .svg images.
 
 ### Screenshots
 
-On Mac OS X screenshots of the Auth0 interface need to be taken with Chrome,
+Mac OS X screenshots of the Zuplo interface need to be taken with Chrome,
 taking into account the following:
 
 1.  The browser cannot show any plugins, customizations, or bookmarks.
@@ -355,6 +356,21 @@ For close-ups and other screenshots that do not include the browser window,
 apply a 1px centered border (**select all > edit > stroke**) of color
 **#cccccc** to keep the image from blending with the background and appearing to
 float.
+
+### Videos
+
+Videos of the Zuplo interface need to be recorded with Chrome, taking into account the following:
+
+1.  The browser cannot show any plugins, customizations, or bookmarks.
+1.  The browser cannot be in incognito mode.
+1.  The browser should have only one tab open, the one in the screenshot.
+1.  Record the video in high quality, ideally 4k.
+1.  The browser needs to be resized to the normal video aspect ratio. Using the below
+    script:
+
+```bash
+osascript -e 'tell application "Chrome" to set the bounds of the front window to {100, 150, 1920, 1080}'
+```
 
 ### Front Matter
 
