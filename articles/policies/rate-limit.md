@@ -15,7 +15,7 @@ second per user, or 20 requests per second for a given IP address.
 The Zuplo rate-limiter also allows you to set a custom bucket name by which to
 effect a rate-limit using a function.
 
-When a client reaches a rate limit - the will receive a `429` response code.
+When a client reaches a rate limit - they will receive a `429` response code.
 
 ## Configuration
 
