@@ -18,4 +18,6 @@ title: Guides & Samples
 
 [Setting up JWT auth with Auth0](/guides/setup-jwt-auth-with-auth0)
 
+[Salesforce OAuth 2.0 Bearer JWT flow setup](/guides/setup-jwt-auth-with-salesforce)
+
 [ZupIts](/guides/zup-its)
