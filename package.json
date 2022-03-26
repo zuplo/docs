@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/zuplo/docs#readme",
   "devDependencies": {
-    "prettier": "^2.5.1"
+    "prettier": "^2.6.1"
   }
 }
