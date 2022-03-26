@@ -10,11 +10,14 @@ layer over SaaS APIs. Choose your getting started guide:
 
 <QuickstartPicker />
 
-Let's put a gateway over this sample e-commerce API at `https://ecommerce-api.zuplo.io` with a
-Zuplo gateway and add rate limiting. Quickly take a look at the API by opening 
-this URL in your browser: [https://ecommerce-api.zuplo.io/products/10000](https://ecommerce-api.zuplo.io/products/10000)
+Let's put a gateway over this sample e-commerce API at
+`https://ecommerce-api.zuplo.io` with a Zuplo gateway and add rate limiting.
+Quickly take a look at the API by opening this URL in your browser:
+[https://ecommerce-api.zuplo.io/products/10000](https://ecommerce-api.zuplo.io/products/10000)
 
-> You can also 'Zup It!' to create an instant copy of this project with all the code complete for you: [Zup it!](https://portal.zuplo.com/clone?sourceRepoUrl=https://github.com/zuplo/samples-gateway-over-airtable.git)
+> You can also 'Zup It!' to create an instant copy of this project with all the
+> code complete for you:
+> [Zup it!](https://portal.zuplo.com/clone?sourceRepoUrl=https://github.com/zuplo/samples-gateway-over-airtable.git)
 
 ## 1
 
@@ -29,9 +32,9 @@ Set the **version** to be `v1` and the **path** of the new route to be
 
 ## 2
 
-Set the mode of the Request Handler to be **URL Rewrite** and the rewrite
-path to be `https://ecommerce-api.zuplo.io/products/${params.productId}`.
-Notice that this appends the productId token to the outbound URL.
+Set the mode of the Request Handler to be **URL Rewrite** and the rewrite path
+to be `https://ecommerce-api.zuplo.io/products/${params.productId}`. Notice that
+this appends the productId token to the outbound URL.
 
 ![Untitled](/media/getting-started/rewrite.png)
 
@@ -47,8 +50,8 @@ that your route was matched and the URL re-written appropriately.
 
 ## 4
 
-Expand the Polices section and click the Add Policy button under request. Search 
-for and click the **Rate Limiting** policy. 
+Expand the Polices section and click the Add Policy button under request. Search
+for and click the **Rate Limiting** policy.
 
 ![Rate Limiting](/media/getting-started/rate-limit.png)
 
@@ -63,7 +66,7 @@ the first file. Change the path to `/v1/products/10000` and hit **Test**.
 ![Untitled](/media/getting-started/test-client.png)
 
 Try quickly testing it a few more time to see the rate limiter kick in - you'll
-get a `429` response, "Too many requests". 
+get a `429` response, "Too many requests".
 
 ## Congratulations, you completed a quickstart
 

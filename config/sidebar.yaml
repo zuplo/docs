@@ -27,6 +27,13 @@ articles:
         url: /policies/rate-limiting
       - title: JSON Schema Validation
         url: /policies/json-schema-validation
+  - title: Developer Portal
+    url: /developer-portal
+    children:
+      - title: Open API
+        url: /developer-portal/open-api
+      - title: Documentation Portal
+        url: /developer-portal/doc-portal
   - title: Reference
     url: /reference
     children:
