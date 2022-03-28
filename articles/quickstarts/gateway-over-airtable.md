@@ -5,18 +5,19 @@ embed: true
 ---
 
 Zuplo isn't your average gateway. It's a **programmable gateway** that can be
-used to share your own API _and_ used as a simple orchestration
-layer over SaaS APIs. Choose your getting started guide:
+used to share your own API _and_ used as a simple orchestration layer over SaaS
+APIs. Choose your getting started guide:
 
 <QuickstartPicker />
 
-Let's put a gateway over the AirTable Event Planning example in just a 5 quick steps. 
-We'll start by showing you how you can create a new API which inserts data into the Attendees table.
+Let's put a gateway over the AirTable Event Planning example in just a 5 quick
+steps. We'll start by showing you how you can create a new API which inserts
+data into the Attendees table.
 
 ## 1
 
-Let's setup our environment variables. Open **environment.json** and delete any example
-variables. Add two new variables - one config and one secret:
+Let's setup our environment variables. Open **environment.json** and delete any
+example variables. Add two new variables - one config and one secret:
 
 - `ATTENDEES_TABLE_URL` (config)
 - `API_KEY` (secret)
@@ -26,27 +27,29 @@ variables. Add two new variables - one config and one secret:
 ## 2
 
 Create a new AirTable workspace from the
-[Event Planning Template](https://www.airtable.com/templates/featured/exppdJtYjEgfmd6Sq/event-planning). 
-When done, navigate to [https://airtable.com/api](https://airtable.com/api) and 
-select your new workspace. On the side-menu select, **Attendees Table** > **Create Records**.
-You will see an example request like below, **copy the URL from that example** and paste it in to 
-your `ATTENDEES_TABLE_URL` environment config.
+[Event Planning Template](https://www.airtable.com/templates/featured/exppdJtYjEgfmd6Sq/event-planning).
+When done, navigate to [https://airtable.com/api](https://airtable.com/api) and
+select your new workspace. On the side-menu select, **Attendees Table** >
+**Create Records**. You will see an example request like below, **copy the URL
+from that example** and paste it in to your `ATTENDEES_TABLE_URL` environment
+config.
 
 ![AirTable Curl](/media/quickstarts/gateway-over-airtable/airtable-curl.png)
 
-Get your [AirTable API Key](https://support.airtable.com/hc/en-us/articles/219046777-How-do-I-get-my-API-key-)
-and paste it into you `API_KEY` environment secret. 
+Get your
+[AirTable API Key](https://support.airtable.com/hc/en-us/articles/219046777-How-do-I-get-my-API-key-)
+and paste it into you `API_KEY` environment secret.
 
 Be sure to press Save (you can also use CTRL+S or ⌘+S).
 
 ## 3
 
-Create a new Empty Module and name it `attendees.ts`. This will be
-where we write some custom code to call AirTable
+Create a new Empty Module and name it `attendees.ts`. This will be where we
+write some custom code to call AirTable
 
 ![Route Path](/media/quickstarts/create-new-empty-module.gif)
 
-Copy the following code into that file. 
+Copy the following code into that file.
 
 ```ts
 import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
@@ -93,8 +96,8 @@ be `/attendees`, set the **method** to `POST` and save the file.
 
 ![Route Path](/media/quickstarts/gateway-over-airtable/route-path.png)
 
-Use the function picker [...] and use it to select the `attendees` module and `default` export
-as the request handler. 
+Use the function picker [...] and use it to select the `attendees` module and
+`default` export as the request handler.
 
 ## 5
 
@@ -104,7 +107,7 @@ and the **method** to `POST` and set the body as follows
 ```
 {
   "name" : "Your Name",
-  "email": "you@yourdomain.com"  
+  "email": "you@yourdomain.com"
 }
 ```
 
@@ -115,7 +118,7 @@ and the **method** to `POST` and set the body as follows
 Your API is now live! BTW - you can see the URL in settings. Next, try posting
 to your API from curl.
 
-Also, why not try creating a schema and using a policy to 
+Also, why not try creating a schema and using a policy to
 [validate the incoming body](https://docs.zuplo.com/articles/policies/json-schema-validation)?
 
 ![Project URL](/media/getting-started-hello-world/project-url.png)

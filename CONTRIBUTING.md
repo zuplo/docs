@@ -311,8 +311,8 @@ with .svg images.
 
 ### Screenshots
 
-Mac OS X screenshots of the Zuplo interface need to be taken with Chrome,
-taking into account the following:
+Mac OS X screenshots of the Zuplo interface need to be taken with Chrome, taking
+into account the following:
 
 1.  The browser cannot show any plugins, customizations, or bookmarks.
 1.  The browser cannot be in incognito mode.
@@ -359,14 +359,15 @@ float.
 
 ### Videos
 
-Videos of the Zuplo interface need to be recorded with Chrome, taking into account the following:
+Videos of the Zuplo interface need to be recorded with Chrome, taking into
+account the following:
 
 1.  The browser cannot show any plugins, customizations, or bookmarks.
 1.  The browser cannot be in incognito mode.
 1.  The browser should have only one tab open, the one in the screenshot.
 1.  Record the video in high quality, ideally 4k.
-1.  The browser needs to be resized to the normal video aspect ratio. Using the below
-    script:
+1.  The browser needs to be resized to the normal video aspect ratio. Using the
+    below script:
 
 ```bash
 osascript -e 'tell application "Chrome" to set the bounds of the front window to {100, 150, 1920, 1080}'
