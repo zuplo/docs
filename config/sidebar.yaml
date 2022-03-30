@@ -34,12 +34,3 @@ articles:
         url: /developer-portal/open-api
       - title: Documentation Portal
         url: /developer-portal/doc-portal
-  - title: Reference
-    url: /reference
-    children:
-      - title: Request Handler
-        url: /reference/request-handler
-      - title: ZuploContext
-        url: /reference/zuplo-context
-      - title: ZuploRequest
-        url: /reference/zuplo-request

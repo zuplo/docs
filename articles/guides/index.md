@@ -12,6 +12,12 @@ title: Guides & Samples
 
 [Production Workflow](/guides/production-workflow)
 
+## Types
+
+[ZuploRequest](/guides/zuplo-request)
+
+[ZuploContext](/guides/zuplo-context)
+
 ## Samples
 
 [Archiving requests to storage](/guides/archiving-requests-to-storage)
