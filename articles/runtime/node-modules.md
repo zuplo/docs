@@ -9,4 +9,4 @@ twitter @zuplo or through email whatzup@zuplo.com.
 
 Below are the currently installed modules.
 
-<!-- GENERATED MODULES HERE -->
+{{GENERATED MODULES HERE}}
