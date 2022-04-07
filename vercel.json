@@ -3,6 +3,10 @@
     {
       "source": "/",
       "destination": "/docs"
+    },
+    {
+      "source": "/embed/quickstarts",
+      "destination": "/embed/quickstarts/proxy-public-api"
     }
   ]
 }
