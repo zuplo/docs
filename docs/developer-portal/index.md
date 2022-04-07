@@ -8,6 +8,6 @@ build your own portal, and simply utilize the Open API spec we host on your Zup.
 
 ## Getting Started
 
-[Open API](/developer-portal/open-api)
+[Open API](/docs/developer-portal/open-api)
 
-[Documentation Portal](/developer-portal/doc-portal)
+[Documentation Portal](/docs/developer-portal/doc-portal)

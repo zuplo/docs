@@ -45,7 +45,7 @@ live API gateway in under 2 minutes.
    files section (top icon on the left) and opening the module `hello-world.ts`.
    Edit the file to return anything you like (save by clicking `Save` or hitting
    `⌘S`). You can read more about request handlers
-   [here](/docs/reference/request-handler).
+   [here](/docs/runtime/request-handler).
 
 ## Routes & Route Testing
 

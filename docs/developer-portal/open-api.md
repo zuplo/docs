@@ -34,4 +34,4 @@ APIs. You can learn more about Open API
 Every time you make an update to `open-api.json` we will publish the file to
 `<your project url>/__/zuplo/open-api`. You can use this file in one of many
 [Open API Documentation Generators](https://nordicapis.com/7-open-source-openapi-documentation-generators/)
-or use the [one we provide for you](/developer-portal/doc-portal).
+or use the [one we provide for you](/docs/developer-portal/doc-portal).
