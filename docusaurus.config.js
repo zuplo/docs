@@ -12,7 +12,7 @@ const config = {
   baseUrl: "/",
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
-  favicon: "img/favicon.png",
+  favicon: "https://cdn.zuplo.com/www/favicon.png",
   organizationName: "zuplo", // Usually your GitHub org/user name.
   projectName: "docs", // Usually your repo name.
 
@@ -42,8 +42,8 @@ const config = {
     ({
       navbar: {
         logo: {
-          alt: "Zuplo Logo",
-          src: "img/logo.svg",
+          alt: "Zuplo",
+          src: "https://cdn.zuplo.com/static/logos/logo.svg",
           href: "https://zuplo.com",
         },
         items: [
@@ -60,8 +60,13 @@ const config = {
           },
           { to: "/blog", label: "Blog", position: "left" },
           {
-            href: "https://www.zuplo.com/about",
+            href: "/about",
             label: "About Us",
+            position: "right",
+          },
+          {
+            href: "/careers",
+            label: "Careers",
             position: "right",
           },
           {
