@@ -37,22 +37,6 @@ const config = {
     ],
   ],
 
-  plugins: [
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "embed",
-        path: "docs",
-        breadcrumbs: false,
-        sidebarPath: false,
-        editLocalizedFiles: false,
-        editCurrentVersion: false,
-        routeBasePath: "embed",
-        include: ["**/*.md", "**/*.mdx"],
-      },
-    ],
-  ],
-
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
