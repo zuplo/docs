@@ -45,7 +45,7 @@ live API gateway in under 2 minutes.
    files section (top icon on the left) and opening the module `hello-world.ts`.
    Edit the file to return anything you like (save by clicking `Save` or hitting
    `⌘S`). You can read more about request handlers
-   [here](/reference/request-handler).
+   [here](/docs/reference/request-handler).
 
 ## Routes & Route Testing
 
@@ -156,4 +156,4 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 **Congratulations - you are now a competent Zuplo Developer! Achievement
 Unlocked 🎉**
 
-Next: [Proxy a simple request](/guides/proxy-a-simple-get-request)
+Next: [Proxy a simple request](/docs/guides/proxy-a-simple-get-request)

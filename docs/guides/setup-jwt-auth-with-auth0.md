@@ -3,8 +3,8 @@ title: Setting up JWT auth with Auth0
 ---
 
 > Note - this sample uses Policies, read **[this guide](/policies)** first.
-> Also, see this [reference on the JWT auth policy](/policies/open-id-jwt) for
-> more details.
+> Also, see this [reference on the JWT auth policy](/docs/policies/open-id-jwt)
+> for more details.
 
 ## Overview
 
@@ -72,7 +72,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 
 You should already have a test setup in the test client, like this
 
-![Untitled](/media/guides/setup-jwt-auth-with-auth0/Untitled.png)
+![Untitled](/media/docs/guides/setup-jwt-auth-with-auth0/Untitled.png)
 
 The next step is to enforce authentication on this API using Auth0 and JWT
 tokens.
@@ -82,11 +82,11 @@ tokens.
 You can create a free Auth0 account at [auth0.com](http://auth0.com). Once
 logged in you can create your first API in Auth0.
 
-![CleanShot 2021-11-29 at 16.23.56@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.23.562x.png)
+![CleanShot 2021-11-29 at 16.23.56@2x.png](/media/docs/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.23.562x.png)
 
 Click `+ Create API` to create a new API.
 
-![Untitled](/media/guides/setup-jwt-auth-with-auth0/Untitled_1.png)
+![Untitled](/media/docs/guides/setup-jwt-auth-with-auth0/Untitled_1.png)
 
 The `Identifier` should be a URL but it doesn't have to be an accessible
 endpoint. Here I'm just using the same string as the name with a https://
@@ -94,7 +94,7 @@ protocol and trailing /. We'll need these values later so don't forget them.
 
 Inside the settings for your new API you should see a Test tab
 
-![CleanShot 2021-11-29 at 16.30.40@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.30.402x.png)
+![CleanShot 2021-11-29 at 16.30.40@2x.png](/media/docs/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.30.402x.png)
 
 We'll need this cURL script shortly to get an access token to test against our
 API.
@@ -102,10 +102,10 @@ API.
 ## Configuring the Zuplo Policy
 
 Next we will configure our Open ID JWT Policy - more documentation on this
-[here](/policies/open-id-jwt). Add a `policies` array to your routes.json as
-shown below.
+[here](/docs/policies/open-id-jwt). Add a `policies` array to your routes.json
+as shown below.
 
-![CleanShot 2021-11-29 at 16.35.43@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.35.432x.png)
+![CleanShot 2021-11-29 at 16.35.43@2x.png](/media/docs/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.35.432x.png)
 
 > **Hint** - press _option+shift+F_ to automatically format your code, including
 > JSON in the editor.
@@ -138,33 +138,33 @@ Now add the following policy inside the `policies` array:
 > **Hint** - If you're not sure where to find the issuer or jwkUrl you can
 > easily find it in the Node.JS QuickStart for your API as shown below:
 
-![CleanShot 2021-11-29 at 16.47.24@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.47.242x.png)
+![CleanShot 2021-11-29 at 16.47.24@2x.png](/media/docs/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.47.242x.png)
 
 ## Adding the policy to your route(s)
 
 Finally, we need to add this policy to our route as follows
 
-![CleanShot 2021-11-29 at 16.51.59@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.51.592x.png)
+![CleanShot 2021-11-29 at 16.51.59@2x.png](/media/docs/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.51.592x.png)
 
 ## Testing the policy
 
 In the test client, you can now verify that your API has been secured. You
 should get a `401: Unauthorized` response from your API.
 
-![CleanShot 2021-11-29 at 16.55.43@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.55.432x.png)
+![CleanShot 2021-11-29 at 16.55.43@2x.png](/media/docs/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.55.432x.png)
 
 Next, let's get a valid token using the cURL script from earlier in this
 tutorial. Copy the cURL script from the test tab and execute it in a terminal
 window:
 
-![CleanShot 2021-11-29 at 17.03.34@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.03.342x.png)
+![CleanShot 2021-11-29 at 17.03.34@2x.png](/media/docs/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.03.342x.png)
 
 Carefully extract the access_token only and copy to the clipboard. Paste into a
 header in the test client called `authorization`. Note that the value of the
 header should be `Bearer <access_token>` replacing `<access_token>` with the
 token you got back from cURL.
 
-![CleanShot 2021-11-29 at 17.06.08@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.06.082x.png)
+![CleanShot 2021-11-29 at 17.06.08@2x.png](/media/docs/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.06.082x.png)
 
 💥 You are now authenticated with the Zuplo API
 
@@ -203,19 +203,19 @@ Logs** window:
 
 Navigate to `Actions > Flows` and choose `Machine to Machine`.
 
-![CleanShot 2021-11-29 at 17.17.07@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.17.072x.png)
+![CleanShot 2021-11-29 at 17.17.07@2x.png](/media/docs/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.17.072x.png)
 
 Choose `Add Action > Build Custom`
 
-![CleanShot 2021-11-29 at 17.39.35@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.39.352x.png)
+![CleanShot 2021-11-29 at 17.39.35@2x.png](/media/docs/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.39.352x.png)
 
 Give your custom action a name - we chose 'Set-Claim':
 
-![CleanShot 2021-11-29 at 17.41.04@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.41.042x.png)
+![CleanShot 2021-11-29 at 17.41.04@2x.png](/media/docs/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.41.042x.png)
 
 Add two claims to your M2M tokens using the following code:
 
-![CleanShot 2021-11-29 at 17.44.55@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.44.552x.png)
+![CleanShot 2021-11-29 at 17.44.55@2x.png](/media/docs/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.44.552x.png)
 
 And, critically, remember to click `Deploy`. Also, note that the claims MUST be
 URLs (again, they do not need to be live URLs, just valid in structure).

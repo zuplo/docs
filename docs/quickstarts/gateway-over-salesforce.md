@@ -20,9 +20,9 @@ we'll instantly create a new project for you with most of the code you need.
 
 You'll need a 'Connected App' in Salesforce to authenticate. If you don't
 already have one set up,
-[follow this guide](/guides/setup-jwt-auth-with-salesforce). Once you have your
-app's `consumer key`, `consumer secret` and `privatekey.pem` file, you're ready
-to go!
+[follow this guide](/docs/guides/setup-jwt-auth-with-salesforce). Once you have
+your app's `consumer key`, `consumer secret` and `privatekey.pem` file, you're
+ready to go!
 
 ## 1
 
@@ -148,5 +148,5 @@ Why not try one of the other getting started guides (above) or some of the
 examples in our documentation:
 
 - [Write your own policies](/policies)
-- [Archive requests to storage](/guides/archiving-requests-to-storage)
-- [Setting up JWT auth with Auth0](/guides/setup-jwt-auth-with-auth0)
+- [Archive requests to storage](/docs/guides/archiving-requests-to-storage)
+- [Setting up JWT auth with Auth0](/docs/guides/setup-jwt-auth-with-auth0)
