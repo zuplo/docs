@@ -47,8 +47,6 @@ const config = {
         sidebarPath: false,
         editLocalizedFiles: false,
         editCurrentVersion: false,
-        docTagsListComponent: false,
-        footer: false,
         routeBasePath: "embed",
         include: ["**/*.md", "**/*.mdx"],
       },
