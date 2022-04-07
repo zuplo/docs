@@ -44,7 +44,7 @@ Let's create a new route that maps to that Request Handler.
 
 You can now test this in the test client, as shown in the gif below:
 
-![2021-11-21 20.12.10.gif](/media/docs/guides/proxy-a-simple-get-request/2021-11-21_20.12.10.gif)
+![2021-11-21 20.12.10.gif](/media/guides/proxy-a-simple-get-request/2021-11-21_20.12.10.gif)
 
 ## Forwarding headers
 
@@ -154,7 +154,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 
 As shown in the gif below:
 
-![2021-11-21 20.34.38.gif](/media/docs/guides/proxy-a-simple-get-request/2021-11-21_20.34.38.gif)
+![2021-11-21 20.34.38.gif](/media/guides/proxy-a-simple-get-request/2021-11-21_20.34.38.gif)
 
 For more advanced proxy capabilities, like adding security to APIs or more,
 check out [Policies](/policies).

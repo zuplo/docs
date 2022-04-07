@@ -19,7 +19,7 @@ policies.
 
 ## How policies work
 
-![How Policies Work](/media/docs/policies/Untitled.png)
+![How Policies Work](/media/policies/Untitled.png)
 
 A policy can intercept a request and modify the request before it reaches the
 request handler (and the next policy). It can also short-circuit the whole
@@ -124,7 +124,7 @@ auth route:
 
 See the gif below to see the flow end-to-end:
 
-![](/media/docs/policies/2021-11-21_21.32.35.gif)
+![](/media/policies/2021-11-21_21.32.35.gif)
 
 ## Policy Options
 
@@ -246,7 +246,7 @@ export default async function (request: ZuploRequest) {
 
 Here is this example working as a gif
 
-![](/media/docs/policies/2021-11-21_21.44.35.gif)
+![](/media/policies/2021-11-21_21.44.35.gif)
 
 ## Limitations of policies today
 
