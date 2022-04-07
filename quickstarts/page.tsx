@@ -6,7 +6,7 @@ type Props = {
   slug: string;
 };
 
-const EmbedPage = ({ content }: Props) => {
+const EmbedPage = ({ content, slug }: Props) => {
   return (
     <>
       {/* <Head>
