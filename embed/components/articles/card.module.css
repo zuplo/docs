@@ -1,0 +1,16 @@
+.imageContainer {
+  @apply w-full rounded-lg mb-4 relative overflow-hidden;
+  height: 140px;
+}
+
+.imageContainer.isLoading {
+  background: #1D1520;
+}
+
+.imageContainer > .placeholder {
+  @apply w-full h-full;
+  background-color: #1D1520;
+  background:
+    radial-gradient(circle at top left, rgba(207, 80, 179, 0.3) 0, rgba(123, 42, 201, 0.5) 10%, rgba(29, 21, 32, 0) 45%),
+    radial-gradient(circle at bottom right, rgba(207, 80, 179, 0.3) 0, rgba(123, 42, 201, 0.5) 20%, rgba(29, 21, 32, 1) 60%);
+}

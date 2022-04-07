@@ -1,0 +1,55 @@
+/* Prevent code blocks from messing up mobile */
+.markdown p {
+  @apply overflow-hidden;
+}
+
+/* Inline Code */
+.markdown a > code,
+.markdown li > code,
+.markdown p > code {
+  @apply text-sm text-black rounded-md bg-gray-400 border border-gray-500 whitespace-nowrap font-light font-mono;
+  line-height: 24px;
+  padding: 0 3px;
+}
+
+.reference code,
+.markdown code {
+  @apply text-sm;
+}
+
+.reference > h1 {
+  @apply font-fancy break-normal text-black font-bold pt-6 text-4xl xl:text-5xl;
+}
+
+.reference > h2 {
+  @apply mt-0;
+}
+
+.reference a {
+  @apply text-pink-700 font-mono no-underline hover:underline;
+}
+
+.reference table {
+  @apply text-base table-auto;
+}
+
+/* Breadcrumbs */
+.reference > p:first-child {
+  @apply mb-0;
+}
+
+.reference > p:first-child {
+  @apply text-base text-gray-600 font-medium;
+}
+
+.reference > p:first-child a {
+  @apply text-base md:text-sm text-gray-600 font-medium no-underline hover:underline mr-2;
+}
+
+.reference > p:first-child a:not(:first-child) {
+  @apply ml-2;
+}
+
+.reference > p:first-child a:last-child {
+  @apply no-underline;
+}

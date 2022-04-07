@@ -1,0 +1,8 @@
+_docs/
+build/
+.eslintrc.js
+next-sitemap.js
+tailwind.config.js
+postcss.config.js
+next.config.js
+scripts/
