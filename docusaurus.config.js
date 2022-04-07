@@ -48,7 +48,7 @@ const config = {
         },
         items: [
           {
-            href: "/",
+            href: "/docs",
             position: "left",
             label: "Docs",
           },
