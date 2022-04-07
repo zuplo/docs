@@ -41,15 +41,14 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: "Zuplo",
         logo: {
           alt: "Zuplo Logo",
           src: "img/logo.svg",
+          href: "https://zuplo.com",
         },
         items: [
           {
-            type: "doc",
-            docId: "getting-started",
+            href: "/",
             position: "left",
             label: "Docs",
           },
