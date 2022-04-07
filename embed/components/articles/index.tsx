@@ -1,4 +1,3 @@
-import BundlesTable from "./bundles-table";
 import { Card } from "./card";
 import { RouteTesterIcon } from "./icons";
 import { Message } from "./message";
@@ -9,5 +8,4 @@ export const articleComponents = {
   Message,
   RouteTesterIcon,
   QuickstartPicker,
-  BundlesTable,
 };

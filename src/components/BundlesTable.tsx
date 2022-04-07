@@ -1,4 +1,4 @@
-import data from "./bundles.json";
+import React from "react";
 
 const BundlesTable = () => {
   return (
@@ -8,7 +8,7 @@ const BundlesTable = () => {
         <td width={100}>Version</td>
         <td>Description</td>
       </tr>
-      {data.bundles.map((bundle, i) => (
+      {/* {data.bundles.map((bundle, i) => (
         <tr key={i}>
           <td>
             <a
@@ -22,7 +22,7 @@ const BundlesTable = () => {
           <td>{bundle.version}</td>
           <td>{bundle.description}</td>
         </tr>
-      ))}
+      ))} */}
     </table>
   );
 };
