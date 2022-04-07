@@ -23,9 +23,10 @@ qsDirs.forEach((dir) => {
     if (!el) {
       throw new Error("Cannot find markdown div");
     }
-    const qsOutputPath = path.resolve(outputDir, dir);
-    fs.mkdirSync(qsOutputPath);
     const slug = `/embed/quickstarts/${dir}`;
+    const qsOutputPath = path.join(outputDir, `/quickstarts/${dir}`);
+    console.log(qsOutputPath);
+    fs.mkdirSync(qsOutputPath, { recursive: true });
     render(el.innerHTML, slug, path.join(qsOutputPath, "index.html"));
   }
 });
