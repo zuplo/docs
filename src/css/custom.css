@@ -44,3 +44,7 @@
 [data-theme="dark"] .navbar-sidebar__close {
   background-color: black;
 }
+
+[data-theme="light"] .footer {
+  background-color: black;
+}
