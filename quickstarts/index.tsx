@@ -47,7 +47,7 @@ function Page({ content, slug }: { content: string; slug: string }) {
       <head>
         <meta charSet="utf-8" />
         <title>Zuplo Quickstarts</title>
-        <link rel="stylesheet" href="../index.css" />
+        <link rel="stylesheet" href="index.css" />
         <link
           rel="canonical"
           href={`https://zuplo.com/docs/quickstarts/${slug.replace(
