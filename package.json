@@ -13,7 +13,7 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
-    "embed:styles": "cd quickstarts && tailwindcss -i ./index.css -o ./dist/index.css",
+    "embed:styles": "cd quickstarts && tailwindcss -i ./index.css -o ./dist/index.$(echo ${VERCEL_GIT_COMMIT_SHA:-local}).css",
     "embed:content": "ts-node ./quickstarts/index.tsx",
     "embed:copy": "rm -rf ./build/embed && mkdir ./build/embed && mv ./quickstarts/dist/* ./build/embed",
     "embed": "npm run embed:content && npm run embed:styles && npm run embed:copy"

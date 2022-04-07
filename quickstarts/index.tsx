@@ -43,12 +43,15 @@ function render(content: string, slug: string, outputPath: string) {
 }
 
 function Page({ content, slug }: { content: string; slug: string }) {
+  const { VERCEL_GIT_COMMIT_SHA } = process.env;
+  const cssUrl = `/embed/index.${VERCEL_GIT_COMMIT_SHA ?? "local"}.css`;
+
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <title>Zuplo Quickstarts</title>
-        <link rel="stylesheet" href="/embed/index.css" />
+        <link rel="stylesheet" href={cssUrl} />
         <link
           rel="canonical"
           href={`https://zuplo.com/docs/quickstarts/${slug.replace(
