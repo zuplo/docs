@@ -1,44 +1,41 @@
-# Zuplo Documentation
+# Website
 
-This repository contains the Zuplo documentation. We welcome contributions to
-this content.
+This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
-**Please review the [Contributing Guidelines](CONTRIBUTING.md) before sending a
-PR or opening an issue.**
+### Installation
 
-## Editing Docs Content
+```
+$ yarn
+```
 
-- You can edit Docs content by using the GitHub web editor and editing a file.
-  This is best suited for typos and small changes.
-- You can also pull down the `/docs` repo to your computer via Git and edit
-  files in your local editor, before pushing a new branch (or a branch to your
-  own fork of the project). You can then go to GitHub.com and start a PR. We
-  will be able to review the changes in a Heroku test application prior to
-  merging.
-- Lastly, you can
-  [run and test the docs site locally](https://github.com/zuplo/zuplo-www/blob/master/README.md)
-  (access available to Zuplo employees only). This option is best suited for
-  repeat contributors or for complex contributions. You gain the benefit of
-  locally testing and viewing your changed or added pages, navigation, and
-  config, but you also gain the complexity of dealing with the local docs app,
-  setting it up, and keeping it updated.
+### Local Development
 
-Regardless of which option you use, please review any relevant sections of the
-[Contributing Guidelines](CONTRIBUTING.md) before sending a PR.
+```
+$ yarn start
+```
 
-## Issue Reporting
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
-If you find a bug or inaccuracy in the documentation content, please report it
-in this repository's [issues](https://github.com/zuplo/docs/issues) section.
-Please do not report security vulnerabilities on the public GitHub issue
-tracker. The [Responsible Disclosure Program](https://zuplo.com/whitehat)
-details the procedure for disclosing security issues.
+### Build
 
-## Author
+```
+$ yarn build
+```
 
-[Zuplo](https://zuplo.com)
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
-## License
+### Deployment
 
-This project is licensed under the MIT license. See the [LICENSE](LICENSE) file
-for more info.
+Using SSH:
+
+```
+$ USE_SSH=true yarn deploy
+```
+
+Not using SSH:
+
+```
+$ GIT_USER=<Your GitHub username> yarn deploy
+```
+
+If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
