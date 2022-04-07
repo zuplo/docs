@@ -12,7 +12,7 @@ const config = {
   baseUrl: "/",
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
-  favicon: "img/favicon.ico",
+  favicon: "img/favicon.png",
   organizationName: "zuplo", // Usually your GitHub org/user name.
   projectName: "docs", // Usually your repo name.
 
@@ -37,6 +37,24 @@ const config = {
     ],
   ],
 
+  plugins: [
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "embed",
+        path: "docs",
+        breadcrumbs: false,
+        sidebarPath: false,
+        editLocalizedFiles: false,
+        editCurrentVersion: false,
+        docTagsListComponent: false,
+        footer: false,
+        routeBasePath: "embed",
+        include: ["**/*.md", "**/*.mdx"],
+      },
+    ],
+  ],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -51,9 +69,14 @@ const config = {
             type: "doc",
             docId: "getting-started",
             position: "left",
-            label: "Getting Started",
+            label: "Docs",
           },
           { to: "/blog", label: "Blog", position: "left" },
+          {
+            href: "https://www.zuplo.com/about",
+            label: "About Us",
+            position: "right",
+          },
           {
             href: "https://github.com/zuplo",
             label: "GitHub",

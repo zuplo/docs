@@ -91,5 +91,5 @@ your policy configuration.
 ## Using the user property in code
 
 For an example of using the user object in a
-[RequestHandler](/docs/reference/zuplo-request), see
+[RequestHandler](/docs/runtime/zuplo-request), see
 [Setting up JWT auth with Auth0](/docs/guides/setup-jwt-auth-with-auth0).

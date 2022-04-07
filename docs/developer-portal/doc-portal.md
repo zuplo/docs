@@ -5,7 +5,7 @@ title: Documentation Portal
 ## Overview
 
 We will automatically generate and host documentation for your Zup using the
-data in your [Open API file](/developer-portal/open-api). You can view your
+data in your [Open API file](/docs/developer-portal/open-api). You can view your
 documentation portal at `<your project url>/__zuplo/docs`. The portal supports
 sending API requests to your api, allowing developers to easily interact with
 it. Here's a demo in the gif below:
