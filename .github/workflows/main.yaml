@@ -1,0 +1,15 @@
+name: Release
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel Hook
+        run: curl -X POST $HOOK_URL
+        env:
+          HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK }}
