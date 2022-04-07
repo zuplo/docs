@@ -16,7 +16,7 @@
     "embed:styles": "cd quickstarts && tailwindcss -i ./index.css -o ./dist/index.css",
     "embed:content": "ts-node ./quickstarts/index.tsx",
     "embed:copy": "rm -rf ./build/embed && mkdir ./build/embed && mv ./quickstarts/dist/* ./build/embed",
-    "embed": "npm run embed:content && npm run embed:styles && embed:copy"
+    "embed": "npm run embed:content && npm run embed:styles && npm run embed:copy"
   },
   "dependencies": {
     "@brandicons/react": "^1.0.17",

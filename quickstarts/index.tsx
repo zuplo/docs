@@ -25,29 +25,39 @@ qsDirs.forEach((dir) => {
     }
     const qsOutputPath = path.resolve(outputDir, dir);
     fs.mkdirSync(qsOutputPath);
-    render(el.innerHTML, path.join(qsOutputPath, "index.html"));
+    const slug = `/embed/quickstarts/${dir}`;
+    render(el.innerHTML, slug, path.join(qsOutputPath, "index.html"));
   }
 });
 
 // render();
 
-function render(content: string, outputPath: string) {
-  let html = ReactDOMServer.renderToStaticMarkup(<Page content={content} />);
+function render(content: string, slug: string, outputPath: string) {
+  let html = ReactDOMServer.renderToStaticMarkup(
+    <Page content={content} slug={slug} />
+  );
   let htmlWDoc = "<!DOCTYPE html>" + html;
   fs.writeFileSync(outputPath, htmlWDoc);
   console.log(`Wrote ${outputPath}`);
 }
 
-function Page({ content }: { content: string }) {
+function Page({ content, slug }: { content: string; slug: string }) {
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <title>Zuplo Quickstarts</title>
         <link rel="stylesheet" href="../index.css" />
+        <link
+          rel="canonical"
+          href={`https://zuplo.com/docs/quickstarts/${slug.replace(
+            "/embed/",
+            "/docs/"
+          )}`}
+        />
       </head>
       <body>
-        <EmbedPage content={content} />
+        <EmbedPage content={content} slug={slug} />
       </body>
     </html>
   );

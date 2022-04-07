@@ -3,6 +3,7 @@ import QuickstartPicker from "./quickstart-picker";
 
 type Props = {
   content: string;
+  slug: string;
 };
 
 const EmbedPage = ({ content }: Props) => {
@@ -23,7 +24,7 @@ const EmbedPage = ({ content }: Props) => {
           {/* <h1 className="font-fancy break-normal text-black font-bold  text-4xl xl:text-5xl">
             {article.title}
           </h1> */}
-          <QuickstartPicker />
+          <QuickstartPicker slug={slug} />
           <div
             className="markdown pt-6 pb-2 prose min-h-fit"
             dangerouslySetInnerHTML={{ __html: content }}
