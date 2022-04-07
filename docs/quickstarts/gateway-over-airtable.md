@@ -119,7 +119,7 @@ Your API is now live! BTW - you can see the URL in settings. Next, try posting
 to your API from curl.
 
 Also, why not try creating a schema and using a policy to
-[validate the incoming body](https://docs.zuplo.com/articles/policies/json-schema-validation)?
+[validate the incoming body](https://docs.zuplo.com/articles/docs/policies/json-schema-validation)?
 
 ![Project URL](/media/getting-started-hello-world/project-url.png)
 
@@ -127,5 +127,5 @@ Why not try one of the other getting started guides (above) or some of the
 examples in our documentation:
 
 - [Write your own policies](/policies)
-- [Archive requests to storage](/guides/archiving-requests-to-storage)
-- [Setting up JWT auth with Auth0](/guides/setup-jwt-auth-with-auth0)
+- [Archive requests to storage](/docs/guides/archiving-requests-to-storage)
+- [Setting up JWT auth with Auth0](/docs/guides/setup-jwt-auth-with-auth0)
