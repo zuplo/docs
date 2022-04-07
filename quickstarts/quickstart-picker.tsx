@@ -10,7 +10,7 @@ import cn from "classnames";
 import { Ribbon } from "./ribbon";
 import React from "react";
 
-export default function QuickstartPicker() {
+export default function QuickstartPicker({ slug }: { slug: string }) {
   const articles = [
     {
       text: "Proxy a public API",
@@ -73,12 +73,13 @@ export default function QuickstartPicker() {
       >
         {articles.map((article, index) => (
           <a
+            key={index}
             href={article.url}
             className={cn(
-              // {
-              //   "bg-gradient-to-br from-gray-400 to-gray-100":
-              //     route.asPath === article.url,
-              // },
+              {
+                "bg-gradient-to-br from-gray-400 to-gray-100":
+                  slug === article.url,
+              },
               "no-underline",
               "border-solid",
               "border-2",
