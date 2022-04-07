@@ -1,7 +1,0 @@
-.message a {
-  @apply no-underline font-bold tracking-wide
-}
-
-.message a:hover {
-  @apply font-bold
-}
