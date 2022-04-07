@@ -45,6 +45,7 @@ const config = {
           alt: "Zuplo",
           src: "https://cdn.zuplo.com/static/logos/logo.svg",
           href: "https://zuplo.com",
+          target: "_self",
         },
         items: [
           {
@@ -63,11 +64,13 @@ const config = {
             href: "/about",
             label: "About Us",
             position: "right",
+            target: "_self",
           },
           {
             href: "/careers",
             label: "Careers",
             position: "right",
+            target: "_self",
           },
           {
             href: "https://github.com/zuplo",
@@ -122,7 +125,7 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} Zuplo, Inc.`,
       },
       prism: {
-        theme: lightCodeTheme,
+        theme: darkCodeTheme,
         darkTheme: darkCodeTheme,
       },
     }),

@@ -37,3 +37,10 @@
 [data-theme="dark"] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
 }
+
+[data-theme="dark"] .footer,
+[data-theme="dark"] .navbar,
+[data-theme="dark"] .navbar-sidebar__brand,
+[data-theme="dark"] .navbar-sidebar__close {
+  background-color: black;
+}
