@@ -39,9 +39,6 @@
 }
 
 @layer base {
-  body {
-    @apply bg-black;
-  }
   html {
     @apply font-base font-light;
   }
