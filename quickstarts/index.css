@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "ES Build";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.zuplo.com/static/fonts/esbuild/woff2/ES-Build-Regular.woff2")
+    format("woff2");
+}
+
+@font-face {
+  font-family: "ES Build";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.zuplo.com/static/fonts/esbuild/woff2/ES-Build-Medium.woff2")
+    format("woff2");
+}
+
+@font-face {
+  font-family: "ES Build";
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.zuplo.com/static/fonts/esbuild/woff2/ES-Build-SemiBold.woff2")
+    format("woff2");
+}
+
+@font-face {
+  font-family: "ES Build";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.zuplo.com/static/fonts/esbuild/woff2/ES-Build-Bold.woff2")
+    format("woff2");
+}
+
+@layer base {
+  body {
+    @apply bg-black;
+  }
+  html {
+    @apply font-base font-light;
+  }
+  a {
+    @apply text-pink font-base font-normal underline hover:text-pink-hover;
+  }
+}
+
+@layer utilities {
+  .animate {
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    animation-duration: 150ms;
+  }
+}
+
+@layer components {
+  .content-panel {
+    @apply xl:border-l rounded-lg xl:rounded-none xl:rounded-r-lg w-full xl:w-4/5 py-6 px-3 md:px-4 xl:p-8 leading-normal bg-white border-gray-200;
+  }
+
+  /* Prevent code blocks from messing up mobile */
+  .markdown p {
+    @apply overflow-hidden;
+  }
+
+  /* Inline Code */
+  .markdown a > code,
+  .markdown li > code,
+  .markdown p > code {
+    @apply text-sm text-black rounded-md bg-gray-400 border border-gray-500 whitespace-nowrap font-light font-mono;
+    line-height: 24px;
+    padding: 0 3px;
+  }
+
+  .markdown code {
+    @apply text-sm;
+  }
+
+  /* common */
+  .ribbon {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+  }
+  /* .ribbon::before {
+  top: 0;
+  left: 0;
+}
+.ribbon::after {
+  bottom: 0;
+  right: 0;
+} */
+  .ribbon::before,
+  .ribbon::after {
+    position: absolute;
+    z-index: -1;
+    content: "";
+    display: block;
+    border-top-color: transparent;
+    border-right-color: transparent;
+  }
+  .ribbon span {
+    position: absolute;
+    display: block;
+    width: 120px;
+    padding: 3px 0;
+    text-align: center;
+    left: -0px;
+    top: 28px;
+    transform: rotate(45deg);
+    font-size: 10px;
+    @apply text-white bg-pink font-semibold;
+  }
+}
