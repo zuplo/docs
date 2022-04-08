@@ -7,7 +7,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Zuplo",
-  tagline: "Dinosaurs are cool",
+  tagline: "The programmable API Gateway",
   url: "https://zuplo.com",
   baseUrl: "/",
   onBrokenLinks: "warn",
@@ -51,26 +51,18 @@ const config = {
           {
             href: "/docs",
             position: "left",
-            label: "Docs",
-          },
-          {
-            type: "doc",
-            docId: "getting-started",
-            position: "left",
-            label: "Getting Started",
+            label: "Docs Home",
           },
           { to: "/blog", label: "Blog", position: "left" },
           {
-            href: "/about",
+            href: "https://www.zuplo.com/about",
             label: "About Us",
-            position: "right",
-            target: "_self",
+            position: "right"
           },
           {
-            href: "/careers",
+            href: "https://www.zuplo.com/careers",
             label: "Careers",
             position: "right",
-            target: "_self",
           },
           {
             href: "https://github.com/zuplo",
