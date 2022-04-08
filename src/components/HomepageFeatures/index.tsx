@@ -14,8 +14,8 @@ const FeatureList: FeatureItem[] = [
     Svg: require("@site/static/img/undraw_docusaurus_mountain.svg").default,
     description: (
       <>
-        Learn about how Zuplo can help you secure, manage, and share your API.
-        [See our overview](/docs/overview).
+        Learn about how Zuplo can help you secure, manage, and share your API.{" "}
+        <a href="/docs/overview">Read the overview</a>.
       </>
     ),
   },
@@ -25,8 +25,8 @@ const FeatureList: FeatureItem[] = [
     description: (
       <>
         Zuplo has policies a policy for everything. Authenticate with API Tokens
-        or JWT, rewrite outgoing request, observe and log usage. [See all our
-        policies](/docs/policies).
+        or JWT, rewrite outgoing request, observe and log usage.{" "}
+        <a href="/docs/policies">See Zuplo Policies</a>.
       </>
     ),
   },
@@ -36,8 +36,8 @@ const FeatureList: FeatureItem[] = [
     description: (
       <>
         Configure even complex API management scenarios with just a few click,
-        but escape to code when you need full control. [See our code
-        examples](/docs/examples).
+        but escape to code when you need full control.{" "}
+        <a href="/docs/examples">See code examples</a>.
       </>
     ),
   },
