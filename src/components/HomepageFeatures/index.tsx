@@ -26,7 +26,7 @@ const FeatureList: FeatureItem[] = [
       <>
         Zuplo has policies a policy for everything. Authenticate with API Tokens
         or JWT, rewrite outgoing request, observe and log usage.{" "}
-        <a href="/docs/policies">See Zuplo Policies</a>.
+        <a href="/docs/policies/">See Zuplo Policies</a>.
       </>
     ),
   },
@@ -37,7 +37,7 @@ const FeatureList: FeatureItem[] = [
       <>
         Configure even complex API management scenarios with just a few click,
         but escape to code when you need full control.{" "}
-        <a href="/docs/examples">See code examples</a>.
+        <a href="/docs/quickstarts/">Start Now</a>.
       </>
     ),
   },
