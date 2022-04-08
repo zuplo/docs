@@ -3,15 +3,11 @@ title: Getting Started
 publish: false
 ---
 
-We've designed Zuplo to be easy to get started, our goal is you go from zero to
-live API gateway in under 2 minutes.
-[Let us know if we fail on this and why](https://discord.gg/CEZrnZN897)!
+We've designed Zuplo to be easy to get started, our goal is you go from zero to live API gateway in under 2 minutes. [Let us know if we fail on this and why](https://discord.gg/CEZrnZN897)!
 
 ## Sign in
 
-1. Sign in - you should sign in at
-   [https://portal.zuplo.com](https://portal.zuplo.com) using the e-mail address
-   you asked to be associated with your alpha trial of zuplo.
+1. Sign in - you should sign in at [https://portal.zuplo.com](https://portal.zuplo.com) using the e-mail address you asked to be associated with your alpha trial of zuplo.
 
 ## Create your first API
 
@@ -37,15 +33,9 @@ live API gateway in under 2 minutes.
 
 ![2021-11-15 15.06.39.gif](/media/getting-started-old/2021-11-15_15.06.39.gif)
 
-1. Navigate to the API Test Console (the lightning icon on the left) and choose
-   the `hello-world.json` test.
-2. Click the `Test` button and invoke your API. You can see the status, headers
-   and body from your new API.
-3. You can easily change the response of your simple API by navigating to the
-   files section (top icon on the left) and opening the module `hello-world.ts`.
-   Edit the file to return anything you like (save by clicking `Save` or hitting
-   `⌘S`). You can read more about request handlers
-   [here](/docs/runtime/request-handler).
+1. Navigate to the API Test Console (the lightning icon on the left) and choose the `hello-world.json` test.
+2. Click the `Test` button and invoke your API. You can see the status, headers and body from your new API.
+3. You can easily change the response of your simple API by navigating to the files section (top icon on the left) and opening the module `hello-world.ts`. Edit the file to return anything you like (save by clicking `Save` or hitting `⌘S`). You can read more about request handlers [here](/docs/runtime/request-handler).
 
 ## Routes & Route Testing
 
