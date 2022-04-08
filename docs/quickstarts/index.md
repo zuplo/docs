@@ -1,7 +1,6 @@
 ---
-title: Getting Started
+title: Quick Starts
 date: "2022-02-18"
-embed: true
 ---
 
 Zuplo isn't your average gateway. It's a **programmable gateway** that can be

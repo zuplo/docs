@@ -1,7 +1,8 @@
 ---
+sidebar_position: 0
 title: Gateway over AirTable APIs
 date: "2021-02-21"
-embed: true
+publish: false
 ---
 
 Zuplo isn't your average gateway. It's a **programmable gateway** that can be

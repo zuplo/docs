@@ -1,5 +1,7 @@
 ---
 title: Rate-Limit Policy
+sidebar_label: Rate Limiting
+sidebar_position: 2
 ---
 
 ## Overview

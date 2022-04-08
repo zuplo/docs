@@ -1,5 +1,6 @@
 ---
-title: Setting up JWT auth with Auth0
+title: Auth0 JWT Authentication Policy
+sidebar_label: Auth0 JWT
 ---
 
 > Note - this sample uses Policies, read **[this guide](/policies)** first.

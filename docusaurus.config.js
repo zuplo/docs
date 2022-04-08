@@ -49,20 +49,22 @@ const config = {
         },
         items: [
           {
-            href: "/docs",
+            to: "/docs",
             position: "left",
-            label: "Docs Home",
+            label: "Docs",
           },
           { to: "/blog", label: "Blog", position: "left" },
           {
             href: "https://www.zuplo.com/about",
             label: "About Us",
-            position: "right"
+            position: "right",
+            target: "_self",
           },
           {
             href: "https://www.zuplo.com/careers",
             label: "Careers",
             position: "right",
+            target: "_self",
           },
           {
             href: "https://github.com/zuplo",
@@ -97,7 +99,7 @@ const config = {
               {
                 label: "Stack Overflow",
                 href: "https://stackoverflow.com/questions/tagged/zuplo",
-              }
+              },
             ],
           },
           {

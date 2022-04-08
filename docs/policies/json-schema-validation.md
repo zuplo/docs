@@ -1,5 +1,6 @@
 ---
 title: Validate JSON Schema Policy
+sidebar_label: Validate JSON Schema
 ---
 
 ## Overview
