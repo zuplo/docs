@@ -1,0 +1,12 @@
+/docs/guides/setup-jwt-auth-with-auth0 /docs/policies/auth0-jwt-auth 301
+/docs/getting-started /docs/overview 301
+/docs/guides/archiving-requests-to-storage /docs/examples/archiving-requests-to-storage 301
+/docs/guides/request-handler /docs/runtime/request-handler 301
+/docs/quickstarts/api-rate-limiting /docs/policies/rate-limit 301
+/docs/quickstarts/gateway-over-airtable /docs/examples/gateway-over-airtable 301
+/docs/quickstarts/gateway-over-mongodb /docs/examples/gateway-over-mongodb 301
+/docs/quickstarts/gateway-over-salesforce /docs/examples/gateway-over-salesforce 301
+/docs/quickstarts/hello-world-api /docs/examples/hello-world-api 301
+/docs/quickstarts/proxy-aws-lambda /docs/examples/proxy-aws-lambda 301
+/docs/quickstarts/proxy-public-api /docs/examples/proxy-public-api 301
+/docs/quickstarts/response-rewrite /docs/policies/response-body-rewrite 301

@@ -1,5 +1,6 @@
 ---
-title: Open ID JWT Authentication Policy
+title: OpenId JWT Authentication Policy
+sidebar_label: OpenId JWT
 ---
 
 > See this sample

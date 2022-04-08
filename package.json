@@ -5,14 +5,17 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "build": "docusaurus build",
+    "build": "npm run ci && docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "ci": "npm run ci:bundles",
+    "ci:bundles": "node ./scripts/update-bundles.js",
+    "ci:reference": "rm -rf ./_reference && rm -rf reference.zip && node ./node_modules/.bin/get-build-artifact --owner zuplo --repo core --name runtime-docs --path ./reference.zip && unzip ./reference.zip -d ./_reference && rm -rf ./reference.zip"
   },
   "dependencies": {
     "@docusaurus/core": "2.0.0-beta.18",
@@ -26,6 +29,7 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.0.0-beta.18",
     "@tsconfig/docusaurus": "^1.0.5",
+    "@zuplo/dev": "^1.37.0",
     "typescript": "^4.6.3"
   },
   "browserslist": {

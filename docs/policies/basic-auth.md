@@ -1,5 +1,6 @@
 ---
 title: Basic Authentication Policy
+sidebar_label: Basic Auth
 ---
 
 ## Overview
