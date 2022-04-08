@@ -87,17 +87,17 @@ const config = {
             title: "Community",
             items: [
               {
-                label: "Stack Overflow",
-                href: "https://stackoverflow.com/questions/tagged/zuplo",
-              },
-              {
                 label: "Discord",
-                href: "https://discordapp.com/invite/zuplo",
+                href: "https://discord.gg/W36Ddfcd",
               },
               {
                 label: "Twitter",
                 href: "https://twitter.com/zuplo",
               },
+              {
+                label: "Stack Overflow",
+                href: "https://stackoverflow.com/questions/tagged/zuplo",
+              }
             ],
           },
           {
