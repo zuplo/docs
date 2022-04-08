@@ -99,7 +99,6 @@ const sidebars = {
       type: "category",
       label: "Guides",
       items: [
-        "guides/production-workflow",
         "guides/proxy-a-request-with-body",
         "guides/proxy-a-simple-get-request",
         "guides/reusing-code",
