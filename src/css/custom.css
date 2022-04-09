@@ -5,6 +5,7 @@
  */
 
 /* You can override the default Infima variables here. */
+
 :root {
   --ifm-color-primary: #ff00bd;
   --ifm-color-primary-dark: #e600aa;
@@ -48,3 +49,5 @@
 [data-theme="light"] .footer {
   background-color: black;
 }
+
+@import url("https://cdn.zuplo.com/static/fonts/esbuild/woff2/ES-Build-Bold.woff2");
