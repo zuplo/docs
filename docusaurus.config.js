@@ -6,7 +6,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Zuplo",
+  title: "Zuplo Documentation",
   tagline: "The programmable API Gateway",
   url: "https://zuplo.com",
   baseUrl: "/",

@@ -1,57 +1,96 @@
 import React from "react";
 import clsx from "clsx";
 import styles from "./styles.module.css";
+import { CodeIcon, CloudIcon, ChipIcon } from "@heroicons/react/outline";
+import Link from "@docusaurus/Link";
+
+type Link = {
+  label: string;
+  href: string;
+};
 
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<"svg">>;
+  Icon: React.ComponentType<React.ComponentProps<"svg">>;
   description: JSX.Element;
+  links: Link[];
 };
 
 const FeatureList: FeatureItem[] = [
   {
     title: "Overview",
-    Svg: require("@site/static/img/undraw_docusaurus_mountain.svg").default,
+    Icon: CloudIcon,
     description: (
       <>
         Learn about how Zuplo can help you secure, manage, and share your API.{" "}
         <a href="/docs/overview">Read the overview</a>.
       </>
     ),
+    links: [
+      { label: "Getting Started", href: "/docs/overview" },
+      { label: "What is Zuplo?", href: "/docs/overview/what-is-zuplo" },
+      {
+        label: "How does Zuplo work?",
+        href: "/docs/overview/how-does-zuplo-work",
+      },
+      { label: "Using Handlers", href: "/docs/overview/handlers" },
+      { label: "Using Policies", href: "/docs/overview/policies" },
+    ],
   },
   {
     title: "A Policy for Everything",
-    Svg: require("@site/static/img/undraw_docusaurus_tree.svg").default,
+    Icon: ChipIcon,
     description: (
       <>
-        Zuplo has policies a policy for everything. Authenticate with API Tokens
-        or JWT, rewrite outgoing request, observe and log usage.{" "}
-        <a href="/docs/policies/">See Zuplo Policies</a>.
+        Zuplo has policies a policy for everything from authentication to mock
+        responses and more.
       </>
     ),
+    links: [
+      { label: "Policies", href: "/docs/policies" },
+      { label: "Authentication", href: "/docs/policies/api-key-auth" },
+      { label: "Rate Limits", href: "/docs/policies/rate-limit" },
+      { label: "Access Control", href: "/docs/policies/access-control-lists" },
+      { label: "Validation", href: "/docs/policies/json-schema-validation" },
+    ],
   },
   {
     title: "Configure or Code",
-    Svg: require("@site/static/img/undraw_docusaurus_react.svg").default,
+    Icon: CodeIcon,
     description: (
       <>
-        Configure even complex API management scenarios with just a few click,
-        but escape to code when you need full control.{" "}
-        <a href="/docs/quickstarts/">Start Now</a>.
+        Configure full API management with a few click, but escape to code when
+        you need full control.
       </>
     ),
+    links: [
+      { label: "Proxy an API", href: "/docs/examples/proxy-public-api" },
+      { label: "Proxy AWS Lambda", href: "/docs/examples/proxy-aws-lambda" },
+      {
+        label: "Proxy a SaaS Service",
+        href: "/docs/examples/gateway-over-airtable",
+      },
+      { label: "Writing Custom Code", href: "/docs/examples/hello-world-api" },
+    ],
   },
 ];
 
-function Feature({ title, Svg, description }: FeatureItem) {
+function Feature({ title, Icon, description, links }: FeatureItem) {
   return (
     <div className={clsx("col col--4")}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+        <Icon className={styles.featureSvg} role="img" />
       </div>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>
         <p>{description}</p>
+        <ul className={styles.featureList}>
+          {links.map((link) => (
+            <li>
+              <Link to={link.href}>{link.label}</Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

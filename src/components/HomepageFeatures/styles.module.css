@@ -6,6 +6,11 @@
 }
 
 .featureSvg {
-  height: 200px;
-  width: 200px;
+  height: 50px;
+  width: 50px;
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
 }
