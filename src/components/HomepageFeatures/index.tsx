@@ -22,8 +22,7 @@ const FeatureList: FeatureItem[] = [
     Icon: CloudIcon,
     description: (
       <>
-        Learn about how Zuplo can help you secure, manage, and share your API.{" "}
-        <a href="/docs/overview">Read the overview</a>.
+        Learn about how Zuplo can help you secure, manage, and share your API.
       </>
     ),
     links: [
