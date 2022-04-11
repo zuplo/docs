@@ -16,14 +16,14 @@ We also look at wildcard routes like so `/(.*)`.
 
 Here's the code from the echo API we create
 
-```
-import  { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+```ts
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
 
 export default async function (request: ZuploRequest, context: ZuploContext) {
- const { url, query } = request;
+  const { url, query } = request;
 
- const body = await request.text();
+  const body = await request.text();
 
- return { url, query, body };
+  return { url, query, body };
 }
 ```

@@ -14,24 +14,23 @@ Bad inputs can easily break your API. Stop bad form before it even hits your API
 
 We use JSON Schema with our JSON Validation policy. Here's the schema:
 
-```
+```json
 {
-    "title": "Person",
-    "type": "object",
-    "properties": "{
-        "name" : {
-            "type" : "string",
-            "description" : "The person's first name.",
-            "pattern" : "\\S+ \\S+"
-        },
-        "company" : {
-            "type" : "string"
-        }
+  "title": "Person",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The person's first name.",
+      "pattern": "\\S+ \\S+"
     },
-    {
-        "additionalProperties": false,
-        "required": ["name"]
+    "company": {
+      "type": "string"
     }
+  },
+
+  "additionalProperties": false,
+  "required": ["name"]
 }
 ```
 
