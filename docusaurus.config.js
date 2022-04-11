@@ -23,12 +23,12 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: "https://github.com/zuplo/docs/tree/main/docs/",
+          editUrl: "https://github.com/zuplo/docs/tree/main/",
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
-          editUrl: "https://github.com/zuplo/docs/tree/main/blog/",
+          editUrl: "https://github.com/zuplo/docs/tree/main/",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
