@@ -14,7 +14,7 @@ Zuplo is so fast and flexible, it is the easiest way to setup a mock API. Here w
 
 Here's the code for the request handler:
 
-```
+```ts
 import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
 
 export default async function (request: ZuploRequest, context: ZuploContext) {
