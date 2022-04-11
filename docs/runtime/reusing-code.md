@@ -1,5 +1,6 @@
 ---
 title: Share code across request handlers and policies with modules
+sidebar_label: Code Reuse
 ---
 
 Sharing code across your request handlers and policies is easy with modules.

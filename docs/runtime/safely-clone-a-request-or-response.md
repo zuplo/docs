@@ -1,5 +1,6 @@
 ---
 title: Safely clone a request or response
+sidebar_label: Clone Request/Response
 ---
 
 We often want to read the body of a request or response before forwarding it on
