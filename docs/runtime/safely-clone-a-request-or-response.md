@@ -51,6 +51,6 @@ If you don’t need to read the body - we recommend against cloning the request 
 response as it will make your gateway more memory efficient and increase
 performance.
 
-> Note - in [policies](/policies), if you need to read the body we always
+> Note - in [policies](/docs/policies), if you need to read the body we always
 > recommend using `.clone()` first, as you don’t know what the end request
 > handler might want to do with the originals.
