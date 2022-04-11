@@ -10,3 +10,13 @@
 /docs/quickstarts/proxy-aws-lambda /docs/examples/proxy-aws-lambda 301
 /docs/quickstarts/proxy-public-api /docs/examples/proxy-public-api 301
 /docs/quickstarts/response-rewrite /docs/policies/response-body-rewrite 301
+/docs/guides/proxy-a-simple-get-request /docs/examples/proxy-a-simple-get-request 301
+/docs/guides/proxy-a-request-with-body /docs/examples/proxy-a-request-with-body 301
+/docs/guides/zup-its /docs/examples/zup-its 301
+/docs/guides/production-workflow /docs/advanced/production-workflow 301
+/docs/guides/setup-jwt-auth-with-salesforce /docs/advanced/setup-jwt-auth-with-salesforce 301
+/docs/guides/testing-your-api /docs/runtime/testing-your-api 301
+/docs/guides/reusing-code /docs/runtime/reusing-code 301
+/docs/guides/safely-clone-a-request-or-response /docs/runtime/safely-clone-a-request-or-response 301
+/docs/guides/production-workflow /docs/advanced/production-workflow 301
+/docs/guides/setup-jwt-auth-with-salesforce /docs/advanced/setup-jwt-auth-with-salesforce 301
