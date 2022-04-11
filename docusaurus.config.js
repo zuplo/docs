@@ -81,7 +81,7 @@ const config = {
             items: [
               {
                 label: "Tutorial",
-                to: "/docs/overview/getting-started",
+                to: "/docs/overview/",
               },
             ],
           },

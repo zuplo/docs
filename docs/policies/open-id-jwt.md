@@ -4,7 +4,7 @@ sidebar_label: OpenId JWT
 ---
 
 > See this sample
-> ["Setting up JWT auth with Auth0"](/docs/guides/setup-jwt-auth-with-auth0) for
+> ["Setting up JWT auth with Auth0"](/docs/policies/auth0-jwt-auth) for
 > a guided walkthrough using this policy with Auth0 (also available as a ZupIt!
 > https://github.com/zuplo/samples-auth0-jwt )
 
@@ -93,4 +93,4 @@ your policy configuration.
 
 For an example of using the user object in a
 [RequestHandler](/docs/runtime/zuplo-request), see
-[Setting up JWT auth with Auth0](/docs/guides/setup-jwt-auth-with-auth0).
+[Setting up JWT auth with Auth0](/docs/policies/auth0-jwt-auth).

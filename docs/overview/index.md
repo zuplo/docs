@@ -16,8 +16,7 @@ We've designed Zuplo to be easy to get started, our goal is you go from zero to 
 ![Untitled](/media/getting-started-old/Untitled.png)
 
 1. Enter the name of your project. All project names must be in kebab-case.
-2. Click 'Create Project' and you'll be taken to the project view -
-   [guided tour of the portal](/portal).
+2. Click 'Create Project' and you'll be taken to the project view
 
 ![Untitled](/media/getting-started-old/Untitled_1.png)
 
@@ -146,4 +145,4 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 **Congratulations - you are now a competent Zuplo Developer! Achievement
 Unlocked 🎉**
 
-Next: [Proxy a simple request](/docs/guides/proxy-a-simple-get-request)
+Next: [Proxy a simple request](/docs/examples/proxy-a-simple-get-request)
