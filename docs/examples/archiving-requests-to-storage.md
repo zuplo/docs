@@ -5,7 +5,9 @@ title: Archiving requests to storage
 > Note - this sample uses Policies, read [this guide](/docs/policies) first.
 
 In this sample we'll show how you can archive the text body of incoming requests
-to Azure Blob Storage. First, let's setup Azure. You'll need a container in
+to Azure Blob Storage. We also have a post on [Archiving to AWS S3 Storage](/blog/2022/03/22/custom-policies-in-code-archiving-requests-to-s3).
+
+First, let's setup Azure. You'll need a container in
 Azure storage
 ([docs](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal)).
 Once you have your container you'll need the URL - you can get it on the

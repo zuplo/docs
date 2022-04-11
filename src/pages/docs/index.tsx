@@ -27,13 +27,13 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--primary button--lg"
-            to="/docs/quickstarts"
+            to="/docs/examples/proxy-public-api"
           >
             Get Started &nbsp;&nbsp;→
           </Link>
           <Link
             className="button button--secondary button--lg margin-left--md"
-            to="/docs/examples"
+            to="/docs/examples/proxy-public-api"
           >
             Examples
           </Link>
