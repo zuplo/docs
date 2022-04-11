@@ -3,7 +3,7 @@ title: Auth0 JWT Authentication Policy
 sidebar_label: Auth0 JWT
 ---
 
-> Note - this sample uses Policies, read **[this guide](/policies)** first.
+> Note - this sample uses Policies, read **[this guide](/docs/policies)** first.
 > Also, see this [reference on the JWT auth policy](/docs/policies/open-id-jwt)
 > for more details.
 

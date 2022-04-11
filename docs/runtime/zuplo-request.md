@@ -3,7 +3,7 @@ title: ZuploRequest
 ---
 
 The ZuploRequest object is the main parameter passed to both
-[RequestHandlers](/docs/runtime/zuplo-request) and [Policies](/policies). It
+[RequestHandlers](/docs/runtime/zuplo-request) and [Policies](/docs/policies). It
 represents the incoming request.
 
 ZuploRequest inherits from the web standard `Request` class used with `fetch` -
@@ -41,7 +41,7 @@ const foo = request.query.foo;
 ## Constructor
 
 It can be useful to create a new ZuploRequest inside a policy (see
-[policies](/policies)) to forward to the next policy or handler in the chain.
+[policies](/docs/policies)) to forward to the next policy or handler in the chain.
 You can create a completely fresh ZuploRequest as follows:
 
 ```ts

@@ -25,7 +25,7 @@ the JWT token (including any claims).
 
 > Be sure to read about policies
 >
-> [Policies](/policies)
+> [Policies](/docs/policies)
 
 Here is an example configuration (this would go in the `policies` section of the
 routes.json file).

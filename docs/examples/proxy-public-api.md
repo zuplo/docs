@@ -75,6 +75,6 @@ Try another quickstart (above) for more awesome.
 Why not try one of the other getting started guides (above) or some of the
 examples in our documentation:
 
-- [Write your own policies](/policies)
+- [Write your own policies](/docs/policies)
 - [Archive requests to storage](/docs/guides/archiving-requests-to-storage)
 - [Setting up JWT auth with Auth0](/docs/guides/setup-jwt-auth-with-auth0)
