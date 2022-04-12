@@ -108,6 +108,8 @@ const sidebars = {
         "runtime/testing-your-api",
         "runtime/reusing-code",
         "runtime/safely-clone-a-request-or-response",
+        "runtime/key-value-store",
+        "runtime/globals",
       ],
     },
   ],
