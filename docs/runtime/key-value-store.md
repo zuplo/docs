@@ -47,7 +47,6 @@ import { ZuploContext, ZuploRequest, KeyValueStore } from "@zuplo/runtime";
 
 export default async function (request: ZuploRequest, context: ZuploContext) {
   const cache = new KeyValueStore(context);
-  const data = await cache.delete("string-key");
-  return data;
+  await cache.delete("string-key");
 }
 ```
