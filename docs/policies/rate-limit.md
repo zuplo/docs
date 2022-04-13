@@ -27,7 +27,7 @@ When a client reaches a rate limit - they will receive a `429` response code.
 
 Here is an example configuration (this would go in the `policies` section of the
 routes.json file). This policy would enforce a rate limit of a maximum of 2
-requests, every 20 seconds for each unique IP address.
+requests, every 1 minute for each unique IP address.
 
 ```json
 {
@@ -38,7 +38,7 @@ requests, every 20 seconds for each unique IP address.
     "module": "$import(@zuplo/runtime)",
     "options": {
       "requestsAllowed": 2,
-      "timeWindowSeconds": 20,
+      "timeWindowMinutes": 1,
       "rateLimitBy": "ip"
     }
   }
@@ -56,7 +56,7 @@ requests, every 20 seconds for each unique IP address.
 - `handler/options` The options for this policy:
   - `requestsAllowed` the max number of requests allowed in the given time
     window
-  - `timeWindowSeconds` the time window in which the requests are rate-limited.
+  - `timeWindowMinutes` the time window in which the requests are rate-limited.
     The count restarts after each window expires.
   - `rateLimitBy` the identifying element of the request that enforces distinct
     rate limits. For example, you can limit by `user`, `ip`, `function` or
@@ -102,7 +102,7 @@ export function rateLimitKey = (request:ZuploRequest) => {
     "module": "$import(@zuplo/runtime)",
     "options": {
       "requestsAllowed": 2,
-      "timeWindowSeconds": 20,
+      "timeWindowMinutes": 1,
       "rateLimitBy": "function",
       "identifier": {
         "module": "$import(./modules/hello-world)",
