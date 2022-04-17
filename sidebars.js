@@ -99,8 +99,9 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Runtime",
+      label: "Reference",
       items: [
+        "runtime/path-matching"
         "runtime/request-handler",
         "runtime/zuplo-request",
         "runtime/zuplo-context",
