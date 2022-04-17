@@ -7,8 +7,8 @@ Routes in a Zuplo gateway are defined in the `routes.json` file. Each route defi
 
 Path matching can be tokenized to specify **path parameters**. For example, if your API has the following form
 
-`https://example.com/products/1234567`
-`https://example.com/products/9876543`
+- `https://example.com/products/1234567`
+- `https://example.com/products/9876543`
 
 You might want to define the `productId` as a parameter in your path signature. To do this in Zuplo you use the following form to identify a token: `:productId`.
 
