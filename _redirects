@@ -20,3 +20,4 @@
 /docs/guides/safely-clone-a-request-or-response /docs/runtime/safely-clone-a-request-or-response 301
 /docs/guides/production-workflow /docs/advanced/production-workflow 301
 /docs/guides/setup-jwt-auth-with-salesforce /docs/advanced/setup-jwt-auth-with-salesforce 301
+/docs/runtime/globals /docs/runtime/web-standard-apis 301
