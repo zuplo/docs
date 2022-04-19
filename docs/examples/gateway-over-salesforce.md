@@ -24,7 +24,7 @@ already have one set up,
 your app's `consumer key`, `consumer secret` and `privatekey.pem` file, you're
 ready to go!
 
-## 1
+## 1: Authorize Salesforce
 
 From the file explorer, create a new **Empty Module** named `auth.ts`.
 
@@ -77,7 +77,7 @@ export async function getAccessToken(): Promise<RefreshTokenResponse> {
 }
 ```
 
-## 2
+## 2: Environment Variables
 
 We need to setup your environment. Open the **environment.json** file and delete
 any example config or secret entries. Create the following environment
@@ -93,7 +93,7 @@ variables:
 
 ![Environment Variables](/media/quickstarts/gateway-over-salesforce/environment-variables.png)
 
-## 3
+## 3: Query Module
 
 Let's create another empty module called `query.ts` and populate it with the
 following code, which is hopefully fairly self explanatory.
@@ -123,14 +123,14 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 
 Make sure to press Save - **note** ⌘+S or CTRL+S works, depending on your OS.
 
-## 3
+## 4: Routes Setup
 
 Open the **routes.json** file and change the first route's path to `/query`. Use
 the function picker to select your new `default` export on the `query` module.
 
 ![Route Path](/media/quickstarts/gateway-over-salesforce/function-picker.png)
 
-## 4
+## 5: Test
 
 Invoke your API using the Test Console. Add the new `/v1/query` configuration
 and hit the Test button to invoke your API!
