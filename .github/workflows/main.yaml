@@ -6,10 +6,8 @@ on:
 
 jobs:
   release:
-    name: Release
+    name: Search Index
     runs-on: ubuntu-latest
-    steps:
-      - name: Trigger Vercel Hook
-        run: curl -X POST $HOOK_URL
-        env:
-          HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+    container:
+      image: algolia/docsearch-scraper
+      options: -it --env-file=.env -e "CONFIG=$(cat ./config.json | jq -r tostring)"
