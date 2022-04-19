@@ -14,3 +14,5 @@ jobs:
       env:
         APPLICATION_ID: E7EUGPZYED
         API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+    steps:
+      - run: echo "DONE"
