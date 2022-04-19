@@ -33,6 +33,10 @@ const config = {
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
+        sitemap: {
+          changefreq: "weekly",
+          priority: 0.5,
+        },
       }),
     ],
   ],
@@ -40,6 +44,29 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      algolia: {
+        // The application ID provided by Algolia
+        appId: "E7EUGPZYED",
+
+        // Public API key: it is safe to commit it
+        apiKey: "b2b9d3c7d9be346b7754344b8c3bccdd",
+
+        indexName: "ZUPLO_SITE",
+
+        // Optional: see doc section below
+        contextualSearch: true,
+
+        // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
+        //externalUrlRegex: "external\\.com|domain\\.com",
+
+        // Optional: Algolia search parameters
+        searchParameters: {},
+
+        // Optional: path for search page that enabled by default (`false` to disable it)
+        searchPagePath: "search",
+
+        //... other Algolia params
+      },
       navbar: {
         logo: {
           alt: "Zuplo",
