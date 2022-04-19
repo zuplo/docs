@@ -15,7 +15,7 @@ Let's put a gateway over the AirTable Event Planning example in just a 5 quick
 steps. We'll start by showing you how you can create a new API which inserts
 data into the Attendees table.
 
-## 1
+## 1: Environment Variables
 
 Let's setup our environment variables. Open **environment.json** and delete any
 example variables. Add two new variables - one config and one secret:
@@ -25,7 +25,7 @@ example variables. Add two new variables - one config and one secret:
 
 ![Environment Variables](/media/quickstarts/gateway-over-airtable/environment-variables.png)
 
-## 2
+## 2: Setup Airtable
 
 Create a new AirTable workspace from the
 [Event Planning Template](https://www.airtable.com/templates/featured/exppdJtYjEgfmd6Sq/event-planning).
@@ -43,7 +43,7 @@ and paste it into you `API_KEY` environment secret.
 
 Be sure to press Save (you can also use CTRL+S or ⌘+S).
 
-## 3
+## 3: Attendees Module
 
 Create a new Empty Module and name it `attendees.ts`. This will be where we
 write some custom code to call AirTable
@@ -90,7 +90,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 }
 ```
 
-## 4
+## 4: Routes Config
 
 Open the **routes.json** file and change the **path** of the existing route to
 be `/attendees`, set the **method** to `POST` and save the file.
@@ -100,7 +100,7 @@ be `/attendees`, set the **method** to `POST` and save the file.
 Use the function picker [...] and use it to select the `attendees` module and
 `default` export as the request handler.
 
-## 5
+## 5: Test
 
 Open the Route Tester <RouteTesterIcon />. Set the **path** to `/v1/attendees`
 and the **method** to `POST` and set the body as follows

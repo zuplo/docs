@@ -13,14 +13,14 @@ layer over SaaS APIs. Choose your getting started guide:
 Because Zuplo is programmable you can easily use it to create an API - with
 built-in gateway features - that can be deployed to the edge.
 
-## 1
+## 1: Routes Setup
 
 Open your **routes.json** file. You'll see you already have a route with a path
 `/v1/hello-world` configured.
 
 ![Untitled](/media/getting-started-hello-world/default-route.png)
 
-## 2
+## 2: Open Module
 
 Notice how the Request Handler is set to **Function** - and configured to use
 the `default` export of the `hello-world` module. To see the module you can
@@ -29,7 +29,7 @@ folder.
 
 ![Untitled](/media/getting-started-hello-world/request-handler-link.png)
 
-## 3
+## 3: Edit Module
 
 You'll see the file contains a function that returns `"What zup?"` (that's how
 we say "Hello World" at Zuplo). Change this code to return anything you like,
@@ -46,7 +46,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 
 Make sure to press Save - **note** ⌘+S or CTRL+S works, depending on your OS.
 
-## 4
+## 4: Test
 
 Invoke your API using the Test Console. Click on the lightning tab and select
 the `hello-world.json` file. It should already have the correct Path configured

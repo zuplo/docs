@@ -19,7 +19,7 @@ Quickly take a look at the API by opening this URL in your browser:
 > code complete for you:
 > [Zup it!](https://portal.zuplo.com/clone?sourceRepoUrl=https://github.com/zuplo/samples-gateway-over-airtable.git)
 
-## 1
+## 1: Routes Setup
 
 Open the **routes.json** file and add a new route.
 
@@ -30,7 +30,7 @@ Set the **version** to be `v1` and the **path** of the new route to be
 
 ![Untitled](/media/getting-started/path.png)
 
-## 2
+## 2: Rewrite Handler
 
 Set the mode of the Request Handler to be **URL Rewrite** and the rewrite path
 to be `https://ecommerce-api.zuplo.io/products/${params.productId}`. Notice that
@@ -38,7 +38,7 @@ this appends the productId token to the outbound URL.
 
 ![Untitled](/media/getting-started/rewrite.png)
 
-## 3
+## 3: Test
 
 Use the route tester at the top of the screen to check your re-write logic. Open
 the route tester (top right) and set the path to be `/v1/products/10000`. Verify
@@ -48,7 +48,7 @@ that your route was matched and the URL re-written appropriately.
 
 ![Untitled](/media/getting-started/route-matched.png)
 
-## 4
+## 4: Rate Limiting
 
 Expand the Polices section and click the Add Policy button under request. Search
 for and click the **Rate Limiting** policy.
@@ -58,7 +58,7 @@ for and click the **Rate Limiting** policy.
 Accept the default configuration. Note how it's set to allow only 2 requests
 every 20s for a given IP address.
 
-## 5
+## 5: Test Rate Limiting
 
 Invoke your API using the Test Console. Click on the lightning tab and select
 the first file. Change the path to `/v1/products/10000` and hit **Test**.
