@@ -11,3 +11,6 @@ jobs:
     container:
       image: algolia/docsearch-scraper
       options: -it --env-file=.env -e "CONFIG=$(cat ./config.json | jq -r tostring)"
+      env:
+        APPLICATION_ID: E7EUGPZYED
+        API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
