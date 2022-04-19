@@ -28,7 +28,7 @@ And your routes.json definition
 ## Params object
 
 All parameters captured in the path are available on a `params` object
-that is presented to Zuplo [request handlers](request-handler.md) on the [request](zuplo-request.md) object.
+that is presented to Zuplo [request handlers](../handlers/custom-handler.md) on the [request](zuplo-request.md) object.
 
 You can also use these parameters in a URL Rewrite handler as shown below
 
