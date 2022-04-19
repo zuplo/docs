@@ -1,7 +1,8 @@
 /docs/guides/setup-jwt-auth-with-auth0 /docs/policies/auth0-jwt-auth 301
 /docs/getting-started /docs/overview 301
 /docs/guides/archiving-requests-to-storage /docs/examples/archiving-requests-to-storage 301
-/docs/guides/request-handler /docs/runtime/request-handler 301
+/docs/guides/request-handler /docs/handlers/custom-handler 301
+/docs/runtime/request-handler /docs/handlers/custom-handler 301
 /docs/quickstarts/api-rate-limiting /docs/policies/rate-limit 301
 /docs/quickstarts/gateway-over-airtable /docs/examples/gateway-over-airtable 301
 /docs/quickstarts/gateway-over-mongodb /docs/examples/gateway-over-mongodb 301

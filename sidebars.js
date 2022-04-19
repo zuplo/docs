@@ -85,6 +85,15 @@ const sidebars = {
     },
     {
       type: "category",
+      label: "Handlers",
+      items: [
+        "handlers/url-rewrite",
+        "handlers/aws-lambda",
+        "handlers/custom-handler",
+      ],
+    },
+    {
+      type: "category",
       label: "Examples",
       items: [
         "examples/proxy-public-api",
@@ -101,7 +110,6 @@ const sidebars = {
       type: "category",
       label: "Reference",
       items: [
-        "runtime/request-handler",
         "runtime/zuplo-request",
         "runtime/zuplo-context",
         "runtime/web-standard-apis",
