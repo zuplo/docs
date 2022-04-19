@@ -119,7 +119,7 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} Zuplo, Inc.`,
       },
       prism: {
-        theme: darkCodeTheme,
+        theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
     }),
