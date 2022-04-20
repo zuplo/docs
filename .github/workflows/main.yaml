@@ -8,12 +8,10 @@ jobs:
   release:
     name: Search Index
     runs-on: ubuntu-latest
-    container:
-      image: algolia/docsearch-scraper
-      options: -it -e "CONFIG=$(cat ./config.json | jq -r tostring)"
-      env:
-        APPLICATION_ID: E7EUGPZYED
-        API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
     steps:
       - uses: actions/checkout@v2
-      - run: echo "DONE"
+      - uses: darrenjennings/algolia-docsearch-action@da2ed379c147b356d60dbfec68bdcfacb2791a98
+        with:
+          algolia_application_id: E7EUGPZYED
+          algolia_api_key: ${{ secrets.ALGOLIA_API_KEY }}
+          file: crawler.json
