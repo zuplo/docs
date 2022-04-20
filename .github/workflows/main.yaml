@@ -15,4 +15,5 @@ jobs:
         APPLICATION_ID: E7EUGPZYED
         API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
     steps:
+      - uses: actions/checkout@v2
       - run: echo "DONE"
