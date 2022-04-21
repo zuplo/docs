@@ -88,8 +88,8 @@ route that has a `/:foo` parameter).
 
 import { ZuploRequest } from "@zuplo/runtime"
 
-export function rateLimitKey = (request:ZuploRequest) => {
-	return request.params.foo;
+export function rateLimitKey(request:ZuploRequest) {
+  return request.params.foo;
 }
 ```
 
