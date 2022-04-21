@@ -81,9 +81,9 @@ You can create a rate-limit bucket based on any property of a request using a
 custom function that returns a string (that is the identified used by the
 limiting system).
 
-This example would create a unique rate-limiting function based on the `foo`
+This example would create a unique rate-limiting function based on the `customerId`
 parameter in routes (note it’s important that a policy like this is applied to a
-route that has a `/:foo` parameter).
+route that has a `/:customerId` parameter).
 
 ```ts
 //module - ./modules/rate-limiter.ts
@@ -107,7 +107,7 @@ export function rateLimitKey(request:ZuploRequest) {
       "timeWindowMinutes": 1,
       "rateLimitBy": "function",
       "identifier": {
-        "module": "$import(./modules/hello-world)",
+        "module": "$import(./modules/rate-limiter)",
         "export": "rateLimitKey"
       }
     }
