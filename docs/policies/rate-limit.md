@@ -84,7 +84,7 @@ parameter in routes (note it’s important that a policy like this is applied to
 route that has a `/:foo` parameter).
 
 ```ts
-//module - ./modules/hello-world.ts
+//module - ./modules/rate-limiter.ts
 
 import { ZuploRequest } from "@zuplo/runtime"
 
