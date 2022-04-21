@@ -21,9 +21,11 @@ When a client reaches a rate limit - they will receive a `429` response code.
 
 ## Configuration
 
-> Be sure to read about policies
->
-> [Policies](/docs/policies)
+:::tip
+
+Be sure to read about [policies](/docs/policies)
+
+:::
 
 Here is an example configuration (this would go in the `policies` section of the
 routes.json file). This policy would enforce a rate limit of a maximum of 2
