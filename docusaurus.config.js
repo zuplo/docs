@@ -37,9 +37,9 @@ const config = {
           changefreq: "weekly",
           priority: 0.5,
         },
-        gtag: {
-          trackingID: "G-NG2BFEL3WH",
-        },
+        // gtag: {
+        //   trackingID: "G-NG2BFEL3WH",
+        // },
       }),
     ],
   ],

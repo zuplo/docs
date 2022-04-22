@@ -38,7 +38,7 @@ export default function pluginZaraz(
             tagName: "script",
             attributes: {
               referrerPolicy: "origin",
-              src: mainScript ?? "/cdn-cgi/zaraz/s.js",
+              src: mainScript ?? "/cdn-cgi/zaraz/i.js",
             },
           },
         ],
