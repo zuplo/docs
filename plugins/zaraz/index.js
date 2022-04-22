@@ -24,7 +24,7 @@ function pluginZaraz(context, options) {
               src:
                 mainScript !== null && mainScript !== void 0
                   ? mainScript
-                  : "/cdn-cgi/zaraz/s.js",
+                  : "/cdn-cgi/zaraz/i.js",
             },
           },
         ],
