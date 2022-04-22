@@ -44,6 +44,8 @@ const config = {
     ],
   ],
 
+  plugins: ["./plugins/zaraz"],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
