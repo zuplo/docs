@@ -28,6 +28,10 @@
   --ifm-color-primary-lightest: #ff4dd1;
 }
 
+.theme-code-block {
+  border-radius: var(--ifm-code-border-radius);
+}
+
 .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.1);
   display: block;

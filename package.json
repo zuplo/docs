@@ -5,7 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "build": "npm run ci && docusaurus build && npm run ci:redirects",
+    "build": "npm run ci:pre && docusaurus build && npm run ci:post",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -13,12 +13,16 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
-    "ci": "npm run ci:bundles",
+    "ci:pre": "npm run ci:bundles",
+    "ci:post": "npm run ci:redirects && npm run embed",
     "ci:redirects": "node ./scripts/copy-redirects.js",
     "ci:bundles": "node ./scripts/update-bundles.js",
-    "ci:reference": "rm -rf ./_reference && rm -rf reference.zip && node ./node_modules/.bin/get-build-artifact --owner zuplo --repo core --name runtime-docs --path ./reference.zip && unzip ./reference.zip -d ./_reference && rm -rf ./reference.zip"
+    "ci:reference": "rm -rf ./_reference && rm -rf reference.zip && node ./node_modules/.bin/get-build-artifact --owner zuplo --repo core --name runtime-docs --path ./reference.zip && unzip ./reference.zip -d ./_reference && rm -rf ./reference.zip",
+    "embed": "ts-node ./embed/index.tsx",
+    "embed:watch": "nodemon --watch 'embed/**/*' -e ts,tsx,css --exec 'ts-node' ./embed/index.tsx"
   },
   "dependencies": {
+    "@brandicons/react": "^1.0.17",
     "@docusaurus/core": "2.0.0-beta.18",
     "@docusaurus/plugin-sitemap": "^2.0.0-beta.18",
     "@docusaurus/preset-classic": "2.0.0-beta.18",
@@ -32,7 +36,11 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.0.0-beta.18",
     "@tsconfig/docusaurus": "^1.0.5",
+    "@types/jsdom": "^16.2.14",
     "@zuplo/dev": "^1.37.0",
+    "jsdom": "^19.0.0",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
   },
   "browserslist": {
