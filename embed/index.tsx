@@ -11,11 +11,6 @@ async function run() {
   const quickstartDirs = await fs.readdir(quickstartsPath);
 
   await fs.mkdir(embedPath, { recursive: true });
-
-  await fs.copyFile(
-    path.join(__dirname, "styles.css"),
-    path.join(embedPath, "styles.css")
-  );
   await Promise.all(
     quickstartDirs.map(async (dir) => {
       const dirPath = path.join(quickstartsPath, dir);
@@ -48,8 +43,7 @@ async function run() {
         await render(outputPath, {
           content: article.innerHTML,
           slug: `/quickstart/${dir}`,
-          defaultCssUrl: css.getAttribute("href"),
-          embedCssUrl: "/embed/styles.css",
+          cssUrl: css.getAttribute("href"),
         });
       }
     })
@@ -59,8 +53,7 @@ async function run() {
 interface PageProps {
   content: string;
   slug: string;
-  defaultCssUrl: string;
-  embedCssUrl: string;
+  cssUrl: string;
 }
 
 async function render(outputPath: string, props: PageProps) {
@@ -70,16 +63,31 @@ async function render(outputPath: string, props: PageProps) {
   console.log(`Wrote ${outputPath}`);
 }
 
-function Page({ content, slug, defaultCssUrl, embedCssUrl }: PageProps) {
+function Page({ content, slug, cssUrl }: PageProps) {
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <title>Zuplo Quickstarts</title>
-        <link rel="stylesheet" href={defaultCssUrl} />
-        <link rel="stylesheet" href={embedCssUrl} />
+        <link rel="stylesheet" href={cssUrl} />
         <link rel="canonical" href={`https://zuplo.com/docs${slug}`} />
         <link rel="icon" href="https://cdn.zuplo.com/www/favicon.png"></link>
+        <style>
+          {`
+          html {
+            font-size: 150%;
+          }
+          
+          h1 {
+            padding-top: 20px;
+            padding-bottom: 10px;
+            margin-bottom: 0;
+          }
+          article {
+            padding-bottom: 20px;
+          }        
+          `}
+        </style>
       </head>
       <body>
         <div className="container">
