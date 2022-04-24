@@ -18,8 +18,8 @@
     "ci:redirects": "node ./scripts/copy-redirects.js",
     "ci:bundles": "node ./scripts/update-bundles.js",
     "ci:reference": "rm -rf ./_reference && rm -rf reference.zip && node ./node_modules/.bin/get-build-artifact --owner zuplo --repo core --name runtime-docs --path ./reference.zip && unzip ./reference.zip -d ./_reference && rm -rf ./reference.zip",
-    "embed": "ts-node ./embed/index.tsx",
-    "embed:watch": "nodemon --watch 'embed/**/*' -e ts,tsx,css --exec 'ts-node' ./embed/index.tsx"
+    "embed": "ts-node ./src/embed.tsx",
+    "embed:watch": "nodemon --watch 'src/embed.tsx' --exec 'ts-node' ./src/embed.tsx"
   },
   "dependencies": {
     "@brandicons/react": "^1.0.17",
