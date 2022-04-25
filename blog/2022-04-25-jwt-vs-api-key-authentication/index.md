@@ -54,9 +54,9 @@ JWT-based API auth is a good choice for securing microservices, implementing ser
 
 ## API Key Authentication
 
-With API authentication, each client receives a unique secret key. Unlike JWT tokens, the key itself doesn't contain any actual data, it is simply a unique string associated with the client. Furthermore, there is no standard protocol for API Key authentication like OAuth, etc., so each implementation can differ.
+With API Key authentication, each client receives a unique secret key. Unlike JWT tokens, the key itself doesn't contain any actual data, it is simply a unique string associated with the client. Furthermore, there is no standard protocol for API Key authentication like OAuth, etc., so each implementation can differ.
 
-The simplest example of API token authentication is an environment variable that is checked against each API request.
+The simplest example of API key authentication is an environment variable that is checked against each API request.
 
 ```js
 function myApiHandler(request) {
