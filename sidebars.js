@@ -121,6 +121,10 @@ const sidebars = {
         "runtime/key-value-store",
       ],
     },
+    {
+      type: "doc",
+      id: "sample-apis",
+    },
   ],
 };
 
