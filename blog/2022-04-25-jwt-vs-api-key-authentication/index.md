@@ -48,7 +48,6 @@ JWT-based API auth is a good choice for securing microservices, implementing ser
 - JWT tokens are typically not revokable. In order to prevent a JWT token from calling an API, you must roll the secrets of that client - this will disable ALL JWT tokens currently issued.
 - Permissions with JWT tokens are managed at the identity provider level, meaning that all tokens issued for the same client will have the same permissions.
 - JWT tokens are static; permissions, expiration time, or other properties cannot change once the token is issued.
-- JWT tokens should be kept relatively small in size (i.e., you don't want to put a list of all resources the client is authorized to access in the JTW token itself).
 - When JWT tokens expire, the consumer must request a new token using the Client ID and Secret value.
 - Identity Providers often charge based on the number of tokens issued.
 
@@ -67,9 +66,9 @@ function myApiHandler(request) {
 }
 ```
 
-However, most API Key authentication systems offer more advanced management of keys. For example, an API Gateway could offer a self-serve portal where end-users issue tokens based on permissions and configuration that the API developer has set. Tokens can be issued with various permissions and with custom expirations times.
+However, most API Key authentication systems offer more advanced management of keys. For example, an API Gateway could offer a self-serve portal where end-users issue their own tokens. Tokens can be issued with various permissions and with custom expirations times.
 
-A typical API Key authentication system will validate each key as it comes in with a request. If the key is valid, then data is returned with that key. This data could be identity information, permissions, and even details about their allowed use of the API, such as rate limits or IP restrictions.
+A typical API Key authentication system will validate each key as it comes in with a request. If the key is valid, then data is returned with that key - typically information about their identity and permissions.
 
 ```
 function myApiHandler(request) {
@@ -83,26 +82,18 @@ function myApiHandler(request) {
 }
 ```
 
-### Layered Permissions
-
-One of the most powerful capabilities of API Key authentication is the ability to build "layered" permission capabilities into your API. For example, you, as the API owner, could authorize a customer to create API Keys with permissions like `read:products` and `write:products`. The customer could go into their self-serve portal and issue a token with both permissions, but they could also issue a token with a sub-set of permissions. The benefit of this layered approach is that each token has only the permissions needed for its specific function.
-
-![Token Scopes](./token_scopes.gif)
-
 ### Considerations of API Key Auth
 
 The main difference between API Key auth and JWT token auth is that the JWT Token is self-contained - the information asserted by the token is in the token. Whereas with an API Key the asserted information is stored in an external system. The externalization of assertion data makes API Keys more flexible for certain scenarios.
 
-- Simpler for end-users to use and understand.
-- Individual keys can be revoked.
+- Individual API Keys can be revoked - rather than resetting a whole client/customer.
 - Permissions and expiration times of keys can be changed even after they are issued.
-- Permissions can be layered/customized at different levels
 - Because the key doesn't contain any information, the associated data for each key can effectively be limitless. For example, an API Key Authentication system could also assert that a particular token is allowed to access a particular account.
 - API Keys can be issued without expirations and revoked only when needed (i.e., a customer cancels their account).
 
 ## Summary
 
-Both JWT authentication and API Key authentication are helpful tools when building a secure API. Each one has benefits and drawbacks. API Key authentication tends to be extremely simple for end-users to understand and get started using your API. Still, it is not a standardized protocol and can be more challenging to implement. JWT tends to be more difficult for end-users, but because it is standards-based and so common, it is likely already supported by the framework in which you build your APIs.
+Both JWT authentication and API Key authentication are helpful tools when building a secure API. Each one has benefits and drawbacks. API Key authentication tends to be extremely simple for end-users to understand and get started using your API. Still, it is not a standardized protocol and can be challenging to implement. JWT tends to be more difficult for end-users, but because it is standards-based and so common, it is likely already supported by the framework in which you build your APIs.
 
 ## About Zuplo
 
