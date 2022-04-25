@@ -1,14 +1,14 @@
 ---
-title: Proxy a Public API
-date: "2022-02-18"
-embed: true
+sidebar_position: 1
+title: Setup Your API Proxy
 ---
 
-Zuplo isn't your average gateway. It's a **programmable gateway** that can be
-used to protect and share your own API _and_ used as a simple orchestration
-layer over SaaS APIs. Choose your getting started guide:
+import QuickstartPicker from "@site/src/components/QuickstartPicker";
 
-<QuickstartPicker />
+Zuplo isn't your average gateway. It's a **programmable gateway** that can be
+used to protect and share your own API _and_ is the easiest way to configure API Key Management and API Docs. Choose your getting started guide:
+
+<QuickstartPicker slug="quickstarts/proxy-public-api" />
 
 Let's put a gateway over this sample e-commerce API at
 `https://ecommerce-api.zuplo.io` with a Zuplo gateway and add rate limiting.

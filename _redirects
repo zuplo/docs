@@ -9,7 +9,7 @@
 /docs/quickstarts/gateway-over-salesforce /docs/examples/gateway-over-salesforce 301
 /docs/quickstarts/hello-world-api /docs/examples/hello-world-api 301
 /docs/quickstarts/proxy-aws-lambda /docs/examples/proxy-aws-lambda 301
-/docs/quickstarts/proxy-public-api /docs/examples/proxy-public-api 301
+
 /docs/quickstarts/response-rewrite /docs/policies/response-body-rewrite 301
 /docs/guides/proxy-a-simple-get-request /docs/examples/proxy-a-simple-get-request 301
 /docs/guides/proxy-a-request-with-body /docs/examples/proxy-a-request-with-body 301
@@ -22,3 +22,4 @@
 /docs/guides/production-workflow /docs/advanced/production-workflow 301
 /docs/guides/setup-jwt-auth-with-salesforce /docs/advanced/setup-jwt-auth-with-salesforce 301
 /docs/runtime/globals /docs/runtime/web-standard-apis 301
+/docs/examples/proxy-public-api /docs/quickstarts/proxy-public-api 301
