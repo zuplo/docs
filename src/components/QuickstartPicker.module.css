@@ -1,5 +1,6 @@
 .quickstarts {
   margin-top: var(--ifm-global-spacing);
+  margin-bottom: var(--ifm-global-spacing);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--ifm-global-spacing);
@@ -46,7 +47,7 @@
 }
 
 .quickstarts-item-title {
-  padding: var(--ifm-global-spacing);
+  padding-bottom: var(--ifm-global-spacing);
   color: var(--ifm-font-color-base);
   font-weight: var(--ifm-font-weight-semibold);
 }

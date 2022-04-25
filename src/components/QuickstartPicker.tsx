@@ -1,5 +1,9 @@
-import { DocumentTextIcon, LockClosedIcon } from "@heroicons/react/outline";
-import { BeakerIcon, CodeIcon } from "@heroicons/react/solid";
+import {
+  DocumentTextIcon,
+  LockClosedIcon,
+  FastForwardIcon,
+} from "@heroicons/react/outline";
+import { BeakerIcon } from "@heroicons/react/solid";
 import React from "react";
 import styles from "./QuickstartPicker.module.css";
 
@@ -8,8 +12,8 @@ import { useLocation } from "@docusaurus/router";
 export default function QuickstartPicker({ slug }: { slug: string }) {
   const articles = [
     {
-      text: "Setup Your API Proxy",
-      slug: "quickstarts/setup-your-api-proxy",
+      text: "Proxy a Public API",
+      slug: "quickstarts/proxy-public-api",
       icon: <BeakerIcon className={styles["quickstarts-item-icon"]} />,
     },
     {
@@ -18,14 +22,14 @@ export default function QuickstartPicker({ slug }: { slug: string }) {
       icon: <LockClosedIcon className={styles["quickstarts-item-icon"]} />,
     },
     {
-      text: "Configure Rate Limiting",
-      slug: "quickstarts/configure-rate-limiting",
-      icon: <CodeIcon className={styles["quickstarts-item-icon"]} />,
-    },
-    {
       text: "Publish your Developer Portal",
       slug: "quickstarts/publish-developer-portal",
       icon: <DocumentTextIcon className={styles["quickstarts-item-icon"]} />,
+    },
+    {
+      text: "Per Customer Rate Limiting",
+      slug: "quickstarts/per-customer-rate-limits",
+      icon: <FastForwardIcon className={styles["quickstarts-item-icon"]} />,
     },
   ];
 

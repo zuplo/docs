@@ -32,12 +32,11 @@ const sidebars = {
     {
       type: "category",
       label: "Quick Starts",
-      link: { type: "doc", id: "quickstarts/index" },
       items: [
-        "quickstarts/setup-your-api-proxy",
+        "quickstarts/proxy-public-api",
         "quickstarts/use-api-key-authentication",
-        "quickstarts/configure-rate-limiting",
         "quickstarts/publish-developer-portal",
+        "quickstarts/per-customer-rate-limits",
       ],
     },
     {
@@ -96,7 +95,6 @@ const sidebars = {
       type: "category",
       label: "Examples",
       items: [
-        "examples/proxy-public-api",
         "examples/hello-world-api",
         "examples/proxy-aws-lambda",
         "examples/archiving-requests-to-storage",
