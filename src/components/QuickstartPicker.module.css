@@ -1,8 +1,8 @@
 .quickstarts {
-  margin-top: 20px;
+  margin-top: var(--ifm-global-spacing);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.25rem;
+  gap: var(--ifm-global-spacing);
   margin-left: auto;
   margin-right: auto;
   justify-content: center;
@@ -10,8 +10,8 @@
 
 .quickstarts-item {
   box-sizing: border-box;
-  border: 3px solid #e5e7eb;
-  border-radius: 10px;
+  border: 3px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-pagination-nav-border-radius);
 
   place-content: center;
   text-align: center;
@@ -25,9 +25,8 @@
 
 .quickstarts-item-active,
 .quickstarts-item:hover {
-  background-color: red;
-  --tw-gradient-to: #e5e7eb;
-  --tw-gradient-from: #ededed;
+  --tw-gradient-to: var(--ifm-color-emphasis-200);
+  --tw-gradient-from: var(--ifm-color-emphasis-300);
   --tw-gradient-stops: var(--tw-gradient-from),
     var(--tw-gradient-to, hsla(0, 0%, 93%, 0));
   background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
@@ -39,7 +38,7 @@
 }
 
 .quickstarts-item-head {
-  padding-top: 0.75rem;
+  padding-top: var(--ifm-global-spacing);
   justify-content: center;
   flex-shrink: 0;
   margin-left: auto;
@@ -47,9 +46,9 @@
 }
 
 .quickstarts-item-title {
-  padding: 0.75rem;
-  color: black;
-  font-weight: 500;
+  padding: var(--ifm-global-spacing);
+  color: var(--ifm-font-color-base);
+  font-weight: var(--ifm-font-weight-semibold);
 }
 
 .quickstarts a {

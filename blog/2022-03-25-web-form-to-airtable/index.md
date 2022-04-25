@@ -10,7 +10,7 @@ import YouTubeVideo from "@site/src/components/YouTubeVideo";
 
 Length: 2 minutes
 
-In this post we pickup where left off in this post [Gateway over SaaS?](2022-03-24-an-api-gateway-over-saas.md) and take our AirTable API and make it work directly with a form POST from a website.
+In this post we pickup where left off in this post [Gateway over SaaS?](2022-03-24-an-api-gateway-over-saas/index.md) and take our AirTable API and make it work directly with a form POST from a website.
 
 It even has a honeypot field to filter out simple bots 👏
 
