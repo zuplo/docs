@@ -10,6 +10,6 @@ import YouTubeVideo from "@site/src/components/YouTubeVideo";
 
 Length: 2 minutes
 
-Here we show how easy it is to add JWT authentication to an API using the Zuplo gateway. We extend the demo from this [post](2022-03-14-proxying-an-api-making-it-prettier-go-live.md).
+Here we show how easy it is to add JWT authentication to an API using the Zuplo gateway. We extend the demo from this [post](2022-03-14-proxying-an-api-making-it-prettier-go-live/index.md).
 
 There was no code required for this sample, it's that easy 🙌

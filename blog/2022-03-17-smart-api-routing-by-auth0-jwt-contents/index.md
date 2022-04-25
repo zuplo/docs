@@ -10,7 +10,7 @@ import YouTubeVideo from "@site/src/components/YouTubeVideo";
 
 Length: 2 minutes
 
-We continue with the example from this [post](2022-03-16-jwt-authentication-with-auth0.md) and add smart routing based on claims in the token.
+We continue with the example from this [post](2022-03-16-jwt-authentication-with-auth0/index.md) and add smart routing based on claims in the token.
 
 Here's the function handler we create to do the smart routing
 
