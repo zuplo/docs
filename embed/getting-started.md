@@ -2,7 +2,7 @@
 title: Getting Started
 ---
 
-# A stripe quality API in 4 steps
+# A Stripe quality API in 4 steps
 
 There are three pillars to sharing an API: authentication, protection, and documentation. Let’s add all of these features to this sample e-commerce API at [`https://ecommerce-api.zuplo.io`](https://ecommerce-api.zuplo.io) in just 4 steps.
 
@@ -36,7 +36,7 @@ Click Add new consumer [3] and enter a name for your API key, and enter your own
 
 ## 4. Visit your developer portal to create a key
 
-Click on the Your Dev Portal link near the top left of the portal.
+Click on the **Your Dev Portal** link near the top left of the portal.
 
 ![Open Portal](../static/media/embed/getting-started/open-portal.png)
 
