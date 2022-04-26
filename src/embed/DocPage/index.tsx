@@ -7,68 +7,42 @@
 import renderRoutes from "@docusaurus/renderRoutes";
 import { matchPath } from "@docusaurus/router";
 import {
-  DocsSidebarProvider,
   DocsVersionProvider,
-  docVersionSearchTag,
   HtmlClassNameProvider,
   ThemeClassNames,
-  useDocsSidebar,
 } from "@docusaurus/theme-common";
 import BackToTopButton from "@theme/BackToTopButton";
 import NotFound from "@theme/NotFound";
-import SearchMetadata from "@theme/SearchMetadata";
 import clsx from "clsx";
-import React, { useCallback, useState } from "react";
+import React from "react";
 import Layout from "../Layout";
 import styles from "./styles.module.css";
 
-function DocPageContent({
-  currentDocRoute,
-  versionMetadata,
-  children,
-  sidebarName,
-}) {
-  const sidebar = useDocsSidebar();
+function DocPageContent({ currentDocRoute, versionMetadata, children }) {
   const { pluginId, version } = versionMetadata;
-  const [hiddenSidebarContainer, setHiddenSidebarContainer] = useState(false);
-  const [hiddenSidebar, setHiddenSidebar] = useState(false);
-  const toggleSidebar = useCallback(() => {
-    if (hiddenSidebar) {
-      setHiddenSidebar(false);
-    }
-
-    setHiddenSidebarContainer((value) => !value);
-  }, [hiddenSidebar]);
   return (
-    <>
-      <SearchMetadata
-        version={version}
-        tag={docVersionSearchTag(pluginId, version)}
-      />
-      <Layout>
-        <div className={styles.docPage}>
-          <BackToTopButton />
+    <Layout>
+      <div className={styles.docPage}>
+        <BackToTopButton />
 
-          <main
+        <main
+          className={clsx(
+            styles.docMainContainer,
+            styles.docMainContainerEnhanced
+          )}
+        >
+          <div
             className={clsx(
-              styles.docMainContainer,
-              (hiddenSidebarContainer || !sidebar) &&
-                styles.docMainContainerEnhanced
+              "container padding--lg padding-bottom--xl",
+              styles.docItemWrapper,
+              styles.docItemWrapperEnhanced
             )}
           >
-            <div
-              className={clsx(
-                "container padding-top--md padding-bottom--lg",
-                styles.docItemWrapper,
-                hiddenSidebarContainer && styles.docItemWrapperEnhanced
-              )}
-            >
-              {children}
-            </div>
-          </main>
-        </div>
-      </Layout>
-    </>
+            {children}
+          </div>
+        </main>
+      </div>
+    </Layout>
   );
 }
 
@@ -84,12 +58,8 @@ export default function DocPage(props) {
 
   if (!currentDocRoute) {
     return <NotFound />;
-  } // For now, the sidebarName is added as route config: not ideal!
+  }
 
-  const sidebarName = currentDocRoute.sidebar;
-  const sidebar = sidebarName
-    ? versionMetadata.docsSidebars[sidebarName]
-    : null;
   return (
     <HtmlClassNameProvider
       className={clsx(
@@ -99,17 +69,14 @@ export default function DocPage(props) {
       )}
     >
       <DocsVersionProvider version={versionMetadata}>
-        <DocsSidebarProvider sidebar={sidebar ?? null}>
-          <DocPageContent
-            currentDocRoute={currentDocRoute}
-            versionMetadata={versionMetadata}
-            sidebarName={sidebarName}
-          >
-            {renderRoutes(docRoutes, {
-              versionMetadata,
-            })}
-          </DocPageContent>
-        </DocsSidebarProvider>
+        <DocPageContent
+          currentDocRoute={currentDocRoute}
+          versionMetadata={versionMetadata}
+        >
+          {renderRoutes(docRoutes, {
+            versionMetadata,
+          })}
+        </DocPageContent>
       </DocsVersionProvider>
     </HtmlClassNameProvider>
   );

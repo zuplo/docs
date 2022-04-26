@@ -14,7 +14,7 @@ import ErrorPageContent from "@theme/ErrorPageContent";
 import LayoutProviders from "@theme/LayoutProviders";
 import clsx from "clsx";
 import React from "react";
-import "./styles.css";
+
 export default function Layout(props) {
   const {
     children,
