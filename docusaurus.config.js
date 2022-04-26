@@ -43,7 +43,21 @@ const config = {
       }),
     ],
   ],
-
+  plugins: [
+    [
+      "@docusaurus/plugin-content-docs",
+      /** @type {import('@docusaurus/plugin-content-docs').Options} */
+      ({
+        id: "embed",
+        path: "embed",
+        routeBasePath: "embed",
+        sidebarPath: false,
+        breadcrumbs: false,
+        docLayoutComponent: "@site/src/embed/DocPage",
+        docItemComponent: "@site/src/embed/DocItem",
+      }),
+    ],
+  ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
