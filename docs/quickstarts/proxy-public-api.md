@@ -50,8 +50,7 @@ that your route was matched and the URL re-written appropriately.
 
 ## 4: Rate Limiting
 
-Expand the Polices section and click the Add Policy button under request. Search
-for and click the **Rate Limiting** policy.
+Expand the Policies section and click the Add Policy button under request. Search for and click the **Rate Limiting** policy.
 
 ![Rate Limiting](/media/getting-started/rate-limit.png)
 
