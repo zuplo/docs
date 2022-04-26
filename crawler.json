@@ -1,9 +1,20 @@
 {
   "index_name": "ZUPLO_SITE",
-  "start_urls": ["https://www.zuplo.com/docs"],
+  "start_urls": [
+    {
+      "url": "https://www.zuplo.com/docs/",
+      "selectors_key": "docs",
+      "page_rank": 1
+    },
+    {
+      "url": "https://www.zuplo.com/blog/",
+      "selectors_key": "blog",
+      "page_rank": 5
+    }
+  ],
   "sitemap_urls": ["https://www.zuplo.com/sitemap.xml"],
   "sitemap_alternate_links": true,
-  "stop_urls": ["/tests"],
+  "stop_urls": [],
   "selectors": {
     "lvl0": {
       "selector": "(//ul[contains(@class,'menu__list')]//a[contains(@class, 'menu__link menu__link--sublist menu__link--active')]/text() | //nav[contains(@class, 'navbar')]//a[contains(@class, 'navbar__link--active')]/text())[last()]",
@@ -31,6 +42,5 @@
       "url_without_anchor",
       "type"
     ]
-  },
-  "nb_hits": 46250
+  }
 }

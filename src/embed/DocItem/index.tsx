@@ -8,7 +8,6 @@ import {
   HtmlClassNameProvider,
   PageMetadata,
   ThemeClassNames,
-  useWindowSize,
 } from "@docusaurus/theme-common";
 import DocItemFooter from "@theme/DocItemFooter";
 import DocPaginator from "@theme/DocPaginator";
@@ -43,7 +42,6 @@ function DocItemContent(props) {
   const { metadata, frontMatter } = DocContent;
   const {
     hide_title: hideTitle,
-    hide_table_of_contents: hideTableOfContents,
     toc_min_heading_level: tocMinHeadingLevel,
     toc_max_heading_level: tocMaxHeadingLevel,
   } = frontMatter;
@@ -53,7 +51,6 @@ function DocItemContent(props) {
 
   const shouldAddTitle =
     !hideTitle && typeof DocContent.contentTitle === "undefined";
-  const windowSize = useWindowSize();
   return (
     <div>
       <DocVersionBanner />
@@ -62,13 +59,7 @@ function DocItemContent(props) {
           {/* <DocBreadcrumbs /> */}
           <DocVersionBadge />
 
-          <div
-            className={clsx(
-              ThemeClassNames.docs.docMarkdown,
-              "markdown",
-              styles.markdownCustom
-            )}
-          >
+          <div className={clsx(ThemeClassNames.docs.docMarkdown, "markdown")}>
             {/*
                Title can be declared inside md content or declared through
                front matter and added manually. To make both cases consistent,

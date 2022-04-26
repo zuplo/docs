@@ -16,8 +16,12 @@
   width: 100%;
 }
 
-.docSidebarContainer {
-  display: none;
+.docPage h1 {
+  font-size: xx-large;
+}
+
+.docPage h2 {
+  font-size: x-large;
 }
 
 @media (min-width: 997px) {
@@ -28,50 +32,6 @@
 
   .docMainContainerEnhanced {
     max-width: calc(100% - var(--doc-sidebar-hidden-width));
-  }
-
-  .docSidebarContainer {
-    display: block;
-    width: var(--doc-sidebar-width);
-    margin-top: calc(-1 * var(--ifm-navbar-height));
-    border-right: 1px solid var(--ifm-toc-border-color);
-    will-change: width;
-    transition: width var(--ifm-transition-fast) ease;
-    clip-path: inset(0);
-  }
-
-  .docSidebarContainerHidden {
-    width: var(--doc-sidebar-hidden-width);
-    cursor: pointer;
-  }
-
-  .collapsedDocSidebar {
-    position: sticky;
-    top: 0;
-    height: 100%;
-    max-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color var(--ifm-transition-fast) ease;
-  }
-
-  .collapsedDocSidebar:hover,
-  .collapsedDocSidebar:focus {
-    background-color: var(--ifm-color-emphasis-200);
-  }
-
-  .expandSidebarButtonIcon {
-    transform: rotate(0);
-  }
-
-  [dir='rtl'] .expandSidebarButtonIcon {
-    transform: rotate(180deg);
-  }
-
-  [data-theme='dark'] .collapsedDocSidebar:hover,
-  [data-theme='dark'] .collapsedDocSidebar:focus {
-    background-color: var(--collapse-button-bg-color-dark);
   }
 
   .docItemWrapperEnhanced {
