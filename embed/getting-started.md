@@ -4,11 +4,11 @@ title: Getting Started
 
 # A stripe quality API in 4 steps
 
-There are three pillars to sharing an API: authentication, protection, and documentation. Let’s add all of these features to this sample e-commerce API at `[https://ecommerce-api.zuplo.io](https://ecommerce-api.zuplo.io)` in just 4 steps.
+There are three pillars to sharing an API: authentication, protection, and documentation. Let’s add all of these features to this sample e-commerce API at [`https://ecommerce-api.zuplo.io`](https://ecommerce-api.zuplo.io) in just 4 steps.
 
 ## 1. Setup your first route
 
-Open routes.json in the file editor on the left. Change the first route **path** to `/products/:productId` and the **URL Rewrite** to `[https://ecommerce-api.zuplo.io/${params.productId}](https://ecommerce-api.zuplo.io/${params.productId})`.
+Open routes.json in the file editor on the left. Change the first route **path** to `/products/:productId` and the **URL Rewrite** to [`https://ecommerce-api.zuplo.io/${params.productId}`](https://ecommerce-api.zuplo.io/${params.productId}).
 
 ![Route](../static/media/embed/getting-started/route.png)
 
