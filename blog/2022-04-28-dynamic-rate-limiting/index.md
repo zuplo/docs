@@ -6,7 +6,7 @@ tags: [videos, code, rate-limiting]
 
 import YouTubeVideo from "@site/src/components/YouTubeVideo";
 
-<YouTubeVideo url="https://www.youtube.com/watch?v=uMm01EDJ9_I" />
+<YouTubeVideo url="https://www.youtube-nocookie.com/embed/uMm01EDJ9_I" />
 
 Length: 2 minutes
 
