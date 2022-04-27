@@ -1,5 +1,5 @@
 ---
-title: Dynamic Rate Limiting
+title: It's not the bogeyman that's gonna get you, it's your customers
 authors: josh
 tags: [videos, code, rate-limiting]
 ---
@@ -9,8 +9,6 @@ import YouTubeVideo from "@site/src/components/YouTubeVideo";
 <YouTubeVideo url="https://www.youtube-nocookie.com/embed/uMm01EDJ9_I" />
 
 Length: 2 minutes
-
-TL;DR It's not the bogeyman that's gonna get you. It's your customers.
 
 Before launching any API program you need to think about protection. Many API
 developers don't think they need to worry about rate-limiting because they
