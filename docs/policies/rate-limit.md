@@ -50,7 +50,7 @@ requests, every 1 minute for each unique IP address.
 - `name` the name of your policy instance. This is used as a reference in your
   routes.
 - `policyType` the identifier of the policy. This is used by the Zuplo UI. Value
-  should be `memory-rate-limit-policy-inbound`.
+  should be `basic-rate-limit-policy-inbound`.
 - `handler/export` The name of the exported type. Value should be
   `MemoryRateLimitInboundPolicy`.
 - `handler/module` the module containing the policy. Value should be
