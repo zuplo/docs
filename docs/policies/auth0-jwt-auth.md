@@ -3,23 +3,11 @@ title: Auth0 JWT Authentication Policy
 sidebar_label: Auth0 JWT
 ---
 
-> Note - this sample uses Policies, read **[this guide](/docs/policies)** first.
-> Also, see this [reference on the JWT auth policy](/docs/policies/open-id-jwt)
-> for more details.
-
-## Overview
-
-In this sample we'll show you how to configure Zuplo and Auth0 to require JWT
-tokens to authenticate requests. We'll also use claims in Auth0 to change the
-behavior of our API.
-
-> **Note** - this sample is available as a Zup It on GitHub - just click ZupIt!
-> to deploy to your Zuplo account:
+In this sample we'll show you how to configure Zuplo and Auth0 to require JWT tokens to authenticate requests. We'll also use claims in Auth0 to change the behavior of our API.
 
 ## Setting up the API
 
-We will start with the hello-world sample you get when you create a new Zup. So
-you routes file should look like this:
+We will start with the hello-world sample you get when you create a new Zup. So you routes file should look like this:
 
 ```json
 {
@@ -75,8 +63,7 @@ You should already have a test setup in the test client, like this
 
 ![Untitled](/media/guides/setup-jwt-auth-with-auth0/Untitled.png)
 
-The next step is to enforce authentication on this API using Auth0 and JWT
-tokens.
+The next step is to enforce authentication on this API using Auth0 and JWT tokens.
 
 ## Setting up Auth0
 
@@ -97,19 +84,16 @@ Inside the settings for your new API you should see a Test tab
 
 ![CleanShot 2021-11-29 at 16.30.40@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.30.402x.png)
 
-We'll need this cURL script shortly to get an access token to test against our
-API.
+We'll need this cURL script shortly to get an access token to test against our API.
 
 ## Configuring the Zuplo Policy
 
 Next we will configure our Open ID JWT Policy - more documentation on this
-[here](/docs/policies/open-id-jwt). Add a `policies` array to your routes.json
-as shown below.
+[here](/docs/policies/open-id-jwt). Add a `policies` array to your routes.json as shown below.
 
 ![CleanShot 2021-11-29 at 16.35.43@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.35.432x.png)
 
-> **Hint** - press _option+shift+F_ to automatically format your code, including
-> JSON in the editor.
+> **Hint** - press _option+shift+F_ to automatically format your code, including JSON in the editor.
 
 Now add the following policy inside the `policies` array:
 
@@ -130,14 +114,16 @@ Now add the following policy inside the `policies` array:
 }
 ```
 
-- The `audience` property in options should exactly match the `Identifier` we
-  created in Auth0 earlier, so `https://zuplo-auth-sample/` in this case.
+- The `audience` property in options should exactly match the `Identifier` we created in Auth0 earlier, so `https://zuplo-auth-sample/` in this case.
 - The `issuer` field will be the URL for your Auth0 tenant, e.g.
   `https://zuplo-demo.us.auth0.com/`.
 - The `jwkUrl` is the public URL of your JWK set.
 
-> **Hint** - If you're not sure where to find the issuer or jwkUrl you can
-> easily find it in the Node.JS QuickStart for your API as shown below:
+::: tip
+
+If you're not sure where to find the issuer or jwkUrl you can easily find it in the Node.JS QuickStart for your API as shown below.
+
+:::
 
 ![CleanShot 2021-11-29 at 16.47.24@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.47.242x.png)
 
@@ -155,15 +141,11 @@ should get a `401: Unauthorized` response from your API.
 ![CleanShot 2021-11-29 at 16.55.43@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.55.432x.png)
 
 Next, let's get a valid token using the cURL script from earlier in this
-tutorial. Copy the cURL script from the test tab and execute it in a terminal
-window:
+tutorial. Copy the cURL script from the test tab and execute it in a terminal window:
 
 ![CleanShot 2021-11-29 at 17.03.34@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.03.342x.png)
 
-Carefully extract the access_token only and copy to the clipboard. Paste into a
-header in the test client called `authorization`. Note that the value of the
-header should be `Bearer <access_token>` replacing `<access_token>` with the
-token you got back from cURL.
+Carefully extract the access_token only and copy to the clipboard. Paste into a header in the test client called `authorization`. Note that the value of the header should be `Bearer <access_token>` replacing `<access_token>` with the token you got back from cURL.
 
 ![CleanShot 2021-11-29 at 17.06.08@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.06.082x.png)
 
@@ -171,8 +153,7 @@ token you got back from cURL.
 
 ## Accessing the user object
 
-Now let's update our script to explore the values inside the user object. Add
-the following line to the middle of your request handler:
+Now let's update our script to explore the values inside the user object. Add the following line to the middle of your request handler:
 
 ```tsx
 export default async function (request: ZuploRequest, context: ZuploContext) {
@@ -182,8 +163,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 }
 ```
 
-Execute the test again and you'll see the following JSON output in the **Request
-Logs** window:
+Execute the test again and you'll see the following JSON output in the **Request Logs** window:
 
 ```json
 {
@@ -218,8 +198,7 @@ Add two claims to your M2M tokens using the following code:
 
 ![CleanShot 2021-11-29 at 17.44.55@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.44.552x.png)
 
-And, critically, remember to click `Deploy`. Also, note that the claims MUST be
-URLs (again, they do not need to be live URLs, just valid in structure).
+And, critically, remember to click `Deploy`. Also, note that the claims MUST be URLs (again, they do not need to be live URLs, just valid in structure).
 
 ```ts
 exports.onExecuteCredentialsExchange = async (event, api) => {
@@ -236,8 +215,7 @@ exports.onExecuteCredentialsExchange = async (event, api) => {
 
 ## Re-test your API
 
-Get a fresh token using cURL (same approach as above, it's important to get a
-fresh token so that it contains these new claims).
+Get a fresh token using cURL (same approach as above, it's important to get a fresh token so that it contains these new claims).
 
 Paste the token into the test client and re-execute the API.
 

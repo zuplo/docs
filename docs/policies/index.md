@@ -7,16 +7,6 @@ multiple policies and apply them to multiple routes. There are built-in policies
 but of course, being a developer-focused platform you can easily create custom
 policies.
 
-## Built-in Policies
-
-[Rate-Limit Policy](/docs/policies/rate-limit)
-
-[Open ID JWT Authentication Policy](/docs/policies/open-id-jwt)
-
-[Validate JSON Schema Policy](/docs/policies/json-schema-validation)
-
-[Basic Authentication Policy](/docs/policies/basic-auth)
-
 ## How policies work
 
 ![How Policies Work](/media/policies/Untitled.png)

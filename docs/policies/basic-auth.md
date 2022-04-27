@@ -3,8 +3,6 @@ title: Basic Authentication Policy
 sidebar_label: Basic Auth
 ---
 
-## Overview
-
 The Basic Authentication policy allows you to authenticate incoming requests
 using the Basic authentication standard. You can configure multiple accounts
 with different passwords and a different bucket of user 'data'.
@@ -15,49 +13,14 @@ invalid credentials (or no header) will not be authenticated. Authenticated
 requests will populate the `user` property of the `ZuploRequest` parameter on
 your RequestHandler.
 
-> **Note** - this sample is available as a Zup It on GitHub - just click ZupIt!
-> to deploy to your Zuplo account: https://github.com/zuplo/samples-basic-auth
+<ZupIt repoUrl="https://github.com/zuplo/samples-basic-auth" />
 
 ## Configuration
 
 Here is an example configuration (this would go in the `policies` section of the
 routes.json file).
 
-```json
-{
-  "routes": ["..."],
-  "versions": ["..."],
-  "policies": [
-    {
-      "name": "basic-auth-policy",
-      "policyType": "basic-auth-inbound-policy",
-      "handler": {
-        "export": "BasicAuthInboundPolicy",
-        "module": "$import(@zuplo/runtime)",
-        "options": {
-          "allowUnauthenticatedRequests": false,
-          "accounts": [
-            {
-              "username": "test-username",
-              "password": "my-password",
-              "data": {
-                "number": 1
-              }
-            },
-            {
-              "username": "test-username-2",
-              "password": "my-password-2",
-              "data": {
-                "number": 1
-              }
-            }
-          ]
-        }
-      }
-    }
-  ]
-}
-```
+<PolicyConfig id="basic-auth-inbound-policy" />
 
 - `name` the name of your policy instance. This is used as a reference in your
   routes.

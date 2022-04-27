@@ -3,8 +3,6 @@ title: Validate JSON Schema Policy
 sidebar_label: Validate JSON Schema
 ---
 
-## Overview
-
 The Validate JSON Schema policy is used to validate the body of incoming
 requests. It works using JSON Schemas defined in the `Schemas` folder of your
 project.
@@ -52,8 +50,7 @@ zero and `color` can (in this silly example) can be one of "black", "brown",
 The schemas file should live in the `schemas` folder of your project - for the
 purposes of this example let's imagine it is called `car.json`.
 
-> **Note** - this sample is available as a Zup It on GitHub - just click ZupIt!
-> to deploy to your Zuplo account:
+<ZupIt repoUrl="https://github.com/zuplo/samples-basic-auth" />
 
 ## Configuration
 

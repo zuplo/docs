@@ -21,27 +21,9 @@ Be sure to read about [policies](/docs/policies)
 
 :::
 
-Here is an example configuration (this would go in the `policies` section of the
-routes.json file). This policy would enforce add audit logging to any route it was present. You can configure the options to enable logging of various data related to each request.
+Here is an example configuration (this would go in the `policies` section of the routes.json file). This policy would enforce add audit logging to any route it was present. You can configure the options to enable logging of various data related to each request.
 
-```json
-{
-  "name": "your-audit-log-policy",
-  "policyType": "audit-log-policy-inbound",
-  "handler": {
-    "export": "AuditLogsInboundPolicy",
-    "module": "$import(@zuplo/runtime)",
-    "options": {
-      "logIpAddress": true,
-      "logUser": true,
-      "logGeolocation": true,
-      "logQueryParameters": true,
-      "logRouteParameters": true,
-      "tenantKey": "${params.customerId}"
-    }
-  }
-}
-```
+<PolicyConfig id="audit-log-inbound" />
 
 - `name` the name of your policy instance. This is used as a reference in your
   routes.
