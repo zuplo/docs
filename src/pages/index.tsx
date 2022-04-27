@@ -10,4 +10,5 @@ export default function Home() {
       return <></>;
     }}
   </BrowserOnly>;
+  return <div></div>;
 }
