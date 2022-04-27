@@ -34,7 +34,7 @@ We've designed Zuplo to be easy to get started, our goal is you go from zero to 
 
 1. Navigate to the API Test Console (the lightning icon on the left) and choose the `hello-world.json` test.
 2. Click the `Test` button and invoke your API. You can see the status, headers and body from your new API.
-3. You can easily change the response of your simple API by navigating to the files section (top icon on the left) and opening the module `hello-world.ts`. Edit the file to return anything you like (save by clicking `Save` or hitting `⌘S`). You can read more about request handlers [here](/docs/runtime/request-handler).
+3. You can easily change the response of your simple API by navigating to the files section (top icon on the left) and opening the module `hello-world.ts`. Edit the file to return anything you like (save by clicking `Save` or hitting `⌘S`). You can read more about request handlers [here](/docs/handlers/custom-handler).
 
 ## Routes & Route Testing
 

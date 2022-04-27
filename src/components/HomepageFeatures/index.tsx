@@ -1,8 +1,8 @@
-import React from "react";
-import clsx from "clsx";
-import styles from "./styles.module.css";
-import { CodeIcon, CloudIcon, ChipIcon } from "@heroicons/react/outline";
 import Link from "@docusaurus/Link";
+import { ChipIcon, CloudIcon, CodeIcon } from "@heroicons/react/outline";
+import clsx from "clsx";
+import React from "react";
+import styles from "./styles.module.css";
 
 type Link = {
   label: string;
@@ -63,7 +63,7 @@ const FeatureList: FeatureItem[] = [
       </>
     ),
     links: [
-      { label: "Proxy an API", href: "/docs/examples/proxy-public-api" },
+      { label: "Proxy an API", href: "/docs/quickstarts/proxy-public-api" },
       { label: "Proxy AWS Lambda", href: "/docs/examples/proxy-aws-lambda" },
       {
         label: "Proxy a SaaS Service",

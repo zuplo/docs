@@ -80,7 +80,7 @@ routes.json file).
     - `data` a dynamically typed data bucket passed as `data` on
       `ZuploRequest`'s `user` object. This can be used to store arbitrary data
       for each account for use in a
-      [RequestHandler](/docs/runtime/request-handler).
+      [RequestHandler](/docs/handlers/custom-handler).
 
 This policy is then reference on each route where you want the policy to be
 enforced, for example:
@@ -109,7 +109,7 @@ username and password. You can generate one using a generator like this:
 
 ## Using the user object in code
 
-In your [RequestHandler](/docs/runtime/request-handler) you can use the user
+In your [RequestHandler](/docs/handlers/custom-handler) you can use the user
 object, for example:
 
 ```ts
