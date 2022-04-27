@@ -10,9 +10,11 @@ import YouTubeVideo from "@site/src/components/YouTubeVideo";
 
 Length: 2 minutes
 
+TL;DR It's not the bogeyman that's gonna get you. It's your customers.
+
 Before launching any API program you need to think about protection. Many API
 developers don't think they need to worry about rate-limiting because they
-aren't a target for hackers. That's probably true in the early days, but it isn't the hackers that are gonna get you. It's your customers.
+aren't a target for hackers. That's probably true in the early days, but it isn't the hackers that are going to DoS you; it's your prized customers.
 
 The most common type of API abuse isn't malicious, it's accidental. It's a misplaced for-loop in your partners code that takes you down. This happens often.
 
