@@ -4,8 +4,6 @@ sidebar_label: Rate Limiting
 sidebar_position: 2
 ---
 
-## Overview
-
 Rate-limiting allows you to set a maximum rate of requests for your API gateway.
 This is useful to enforce rate limits agreed with your clients and protect your
 downstream services.
