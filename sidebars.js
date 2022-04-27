@@ -56,6 +56,7 @@ const sidebars = {
           ],
         },
         "policies/rate-limit",
+        "policies/audit-logging",
         {
           type: "category",
           label: "Request Filtering",
