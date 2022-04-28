@@ -1,5 +1,5 @@
 ---
-title: It's not the bogeyman that's gonna get you, it's your customers
+title: It's not the bogeyman that will get you, it's your customers
 authors: josh
 tags: [videos, code, rate-limiting]
 ---
