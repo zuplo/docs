@@ -17,6 +17,12 @@ your RequestHandler.
 
 ## Configuration
 
+:::tip
+
+Be sure to read about [policies](/docs/policies)
+
+:::
+
 Here is an example configuration (this would go in the `policies` section of the
 routes.json file).
 

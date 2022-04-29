@@ -18,7 +18,8 @@
     "ci:redirects": "node ./scripts/copy-redirects.js",
     "ci:bundles": "node ./scripts/update-bundles.js",
     "ci:reference": "rm -rf ./_reference && rm -rf reference.zip && node ./node_modules/.bin/get-build-artifact --owner zuplo --repo core --name runtime-docs --path ./reference.zip && unzip ./reference.zip -d ./_reference && rm -rf ./reference.zip",
-    "ci:policies": "node ./scripts/update-policies.js"
+    "ci:policies": "npm i @zuplo/policies@latest",
+    "update-policies": "node ./scripts/update-policies.js"
   },
   "dependencies": {
     "@brandicons/react": "^1.0.17",
@@ -27,6 +28,7 @@
     "@docusaurus/preset-classic": "2.0.0-beta.18",
     "@heroicons/react": "^1.0.6",
     "@mdx-js/react": "^1.6.22",
+    "@zuplo/policies": "^3.273.0",
     "clsx": "^1.1.1",
     "prism-react-renderer": "^1.3.1",
     "react": "^17.0.2",

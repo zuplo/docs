@@ -89,7 +89,7 @@ We'll need this cURL script shortly to get an access token to test against our A
 ## Configuring the Zuplo Policy
 
 Next we will configure our Open ID JWT Policy - more documentation on this
-[here](/docs/policies/open-id-jwt). Add a `policies` array to your routes.json as shown below.
+[here](./open-id-jwt-auth-inbound.md). Add a `policies` array to your routes.json as shown below.
 
 ![CleanShot 2021-11-29 at 16.35.43@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.35.432x.png)
 

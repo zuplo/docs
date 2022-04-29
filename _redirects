@@ -22,3 +22,16 @@
 /docs/quickstarts/response-rewrite /docs/policies/response-body-rewrite 301
 /docs/runtime/globals /docs/runtime/web-standard-apis 301
 /docs/runtime/request-handler /docs/handlers/custom-handler 301
+
+/docs/policies/access-control-lists /docs/policies/acl-policy-inbound 301
+/docs/policies/api-key-auth /docs/policies/api-key-auth-inbound 301
+/docs/policies/audit-logging /docs/policies/audit-logging-inbound 301
+/docs/policies/auth0-jwt-auth /docs/policies/auth0-jwt-auth-inbound 301
+/docs/policies/basic-auth /docs/policies/basic-auth-inbound 301
+/docs/policies/geo-location /docs/policies/geo-location-inbound 301
+/docs/policies/ip-restrictions /docs/policies/ip-restriction-inbound 301
+/docs/policies/json-schema-validation /docs/policies/validate-json-schema-inbound 301
+/docs/policies/open-id-jwt /docs/policies/open-id-jwt-auth-inbound 301
+/docs/policies/rate-limit /docs/policies/rate-limit-inbound 301
+/docs/policies/request-body-rewrite /docs/policies/transform-body-inbound 301
+/docs/policies/response-body-rewrite /docs/policies/transform-body-outbound 301
