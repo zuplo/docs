@@ -1,23 +1,33 @@
 const fetch = require("node-fetch");
 const path = require("path");
 const fs = require("fs");
+const config = require("../node_modules/@zuplo/policies/policies.v2.json");
 
-async function getPolicies() {
-  const policiesPath = path.resolve(
-    __dirname,
-    "../src/components/policies.json"
-  );
+async function updatePolicies() {
+  const docsPath = path.resolve(__dirname, "../docs/policies");
+  config.policies.forEach((policy) => {
+    const docPath = path.join(docsPath, `${policy.id}.md`);
+    if (!fs.existsSync(docPath)) {
+      const md = `---
+title: ${policy.name}
+sidebar_label: ${policy.name.replace(" Policy", "")}
+---
 
-  const response = await fetch(
-    `https://cdn.zuplo.com/portal/policies.json?t=${Date.now()}`
-  );
-  const fileStream = fs.createWriteStream(policiesPath);
-  await new Promise((resolve, reject) => {
-    response.body.pipe(fileStream);
-    response.body.on("error", reject);
-    fileStream.on("finish", resolve);
+<!-- Description goes here-->
+
+## Configuration
+
+:::tip
+
+Be sure to read about [policies](/docs/policies)
+
+:::
+
+<PolicyConfig id="${policy.id}" />
+`;
+      fs.writeFileSync(docPath, md, "utf-8");
+    }
   });
-  console.log("Updated policies from CDN");
 }
 
-getPolicies().catch(console.error);
+updatePolicies().catch(console.error);
