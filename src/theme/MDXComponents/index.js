@@ -14,6 +14,9 @@ import MDXPre from "@theme/MDXComponents/Pre";
 import MDXUl from "@theme/MDXComponents/Ul";
 import React from "react";
 import PolicyConfig from "../../components/PolicyConfig";
+import PolicyExample from "../../components/PolicyExample";
+import PolicyOptions from "../../components/PolicyOptions";
+import QuickstartPicker from "../../components/QuickstartPicker";
 import ZupIt from "../../components/ZupIt";
 
 const MDXComponents = {
@@ -31,6 +34,9 @@ const MDXComponents = {
   h5: (props) => <MDXHeading as="h5" {...props} />,
   h6: (props) => <MDXHeading as="h6" {...props} />,
   PolicyConfig,
+  PolicyExample,
+  PolicyOptions,
+  QuickstartPicker,
   ZupIt,
 };
 export default MDXComponents;

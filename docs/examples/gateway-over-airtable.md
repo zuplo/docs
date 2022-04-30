@@ -5,12 +5,6 @@ date: "2021-02-21"
 publish: false
 ---
 
-Zuplo isn't your average gateway. It's a **programmable gateway** that can be
-used to share your own API _and_ used as a simple orchestration layer over SaaS
-APIs. Choose your getting started guide:
-
-<QuickstartPicker />
-
 Let's put a gateway over the AirTable Event Planning example in just a 5 quick
 steps. We'll start by showing you how you can create a new API which inserts
 data into the Attendees table.
@@ -102,7 +96,7 @@ Use the function picker [...] and use it to select the `attendees` module and
 
 ## 5: Test
 
-Open the Route Tester <RouteTesterIcon />. Set the **path** to `/v1/attendees`
+Open the Route Tester. Set the **path** to `/v1/attendees`
 and the **method** to `POST` and set the body as follows
 
 ```
