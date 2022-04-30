@@ -4,12 +4,6 @@ date: "2021-02-21"
 embed: true
 ---
 
-Zuplo isn't your average gateway. It's **programmable** and can be used to
-protect and share your own API _or_ used as a simple orchestration layer over
-SaaS APIs. Choose your getting started guide:
-
-<QuickstartPicker />
-
 It's easy to use Zuplo with Salesforce APIs. In this quickstart we'll work with
 the Accounts API, but it can be modified to support any other Salesforce API.
 

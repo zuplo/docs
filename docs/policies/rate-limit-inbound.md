@@ -29,49 +29,15 @@ Here is an example configuration (this would go in the `policies` section of the
 routes.json file). This policy would enforce a rate limit of a maximum of 2
 requests, every 1 minute for each unique IP address.
 
-```json
-{
-  "name": "your-rate-limit-policy",
-  "policyType": "basic-rate-limit-policy-inbound",
-  "handler": {
-    "export": "BasicRateLimitInboundPolicy",
-    "module": "$import(@zuplo/runtime)",
-    "options": {
-      "requestsAllowed": 2,
-      "timeWindowMinutes": 1,
-      "rateLimitBy": "ip"
-    }
-  }
-}
-```
+<PolicyExample policy="rate-limit-inbound" />
 
-- `name` the name of your policy instance. This is used as a reference in your
-  routes.
-- `policyType` the identifier of the policy. This is used by the Zuplo UI. Value
-  should be `basic-rate-limit-policy-inbound`.
-- `handler/export` The name of the exported type. Value should be
-  `MemoryRateLimitInboundPolicy`.
-- `handler/module` the module containing the policy. Value should be
-  `$import(@zuplo/runtime)`.
-- `handler/options` The options for this policy:
-  - `requestsAllowed` the max number of requests allowed in the given time
-    window
-  - `timeWindowMinutes` the time window in which the requests are rate-limited.
-    The count restarts after each window expires.
-  - `rateLimitBy` the identifying element of the request that enforces distinct
-    rate limits. For example, you can limit by `user`, `ip`, `function` or
-    `all` - function allows you to specify a simple function to create a string
-    identifier to create a rate-limit group - this should be set using the
-    following two properties:
-  - `identifier` - used only with `rateLimitBy=function`
-    - `module` - . Specifies the module to load your custom bucket function, in
-      the format `$import(./modules/my-module)`.
-    - `export` - used only with `rateLimitBy=function`. Specifies the export to
-      load your custom bucket function, e.g. `default`, `rateLimitIdentifier`.
+<PolicyOptions policy="rate-limit-inbound" />
 
-> Note you can have multiple instances of rate-limiting policies to use in
-> combination. You should apply the longest duration timeWindow first, in order
-> to the shortest duration time window.
+:::tip
+
+Note you can have multiple instances of rate-limiting policies to use in combination. You should apply the longest duration timeWindow first, in order to the shortest duration time window.
+
+:::
 
 ## Using a custom function
 
@@ -102,22 +68,4 @@ export function rateLimitKey(
 }
 ```
 
-```json
-{
-  "name": "your-rate-limit-policy",
-  "policyType": "basic-rate-limit-policy-inbound",
-  "handler": {
-    "export": "BasicRateLimitInboundPolicy",
-    "module": "$import(@zuplo/runtime)",
-    "options": {
-      "requestsAllowed": 2,
-      "timeWindowMinutes": 1,
-      "rateLimitBy": "function",
-      "identifier": {
-        "module": "$import(./modules/rate-limiter)",
-        "export": "rateLimitKey"
-      }
-    }
-  }
-}
-```
+<PolicyExample policy="rate-limit-inbound" example="custom-rate-limit" />
