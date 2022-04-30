@@ -5,7 +5,7 @@ import data from "../../node_modules/@zuplo/policies/policies.v2.json";
 const PolicyConfig = ({ id }: { id: string }) => {
   const policy = data.policies.find((p) => p.id === id);
   if (!policy) {
-    throw new Error("Invalid policy");
+    throw new Error(`Could not find policy '${id}'`);
   }
 
   const code = {

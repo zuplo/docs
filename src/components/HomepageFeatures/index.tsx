@@ -47,10 +47,16 @@ const FeatureList: FeatureItem[] = [
     ),
     links: [
       { label: "Policies", href: "/docs/policies" },
-      { label: "Authentication", href: "/docs/policies/api-key-auth" },
-      { label: "Rate Limits", href: "/docs/policies/rate-limit" },
-      { label: "Access Control", href: "/docs/policies/access-control-lists" },
-      { label: "Validation", href: "/docs/policies/json-schema-validation" },
+      { label: "Authentication", href: "/docs/policies/api-key-auth-inbound" },
+      { label: "Rate Limits", href: "/docs/policies/rate-limit-inbound" },
+      {
+        label: "Access Control",
+        href: "/docs/policies/acl-policy-inbound",
+      },
+      {
+        label: "Validation",
+        href: "/docs/policies/validate-json-schema-inbound",
+      },
     ],
   },
   {

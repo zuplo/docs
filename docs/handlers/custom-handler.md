@@ -80,7 +80,7 @@ If you want to read the body you have two options:
 - `await request.json()` - this method reads the body and performs a
   JSON.parse() to read the body into an object in memory. Use only if you’re
   confident the body is well-formed JSON (consider pre-validation with the
-  [Validate Policy](/docs/policies/json-schema-validation)).
+  [Validate Policy](../policies/validate-json-schema-inbound.md)).
 
 ## Response Class
 
