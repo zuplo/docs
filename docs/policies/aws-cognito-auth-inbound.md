@@ -13,4 +13,4 @@ Be sure to read about [policies](/docs/policies)
 
 :::
 
-<PolicyConfig id="cognito-jwt-inbound" />
+<PolicyConfig id="cognito-jwt-auth-inbound" />

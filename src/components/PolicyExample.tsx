@@ -11,7 +11,7 @@ const PolicyExample = ({
 }) => {
   const schema = data.policies[policy];
   if (!schema) {
-    throw new Error("Invalid policy");
+    throw new Error(`Could not find policy '${policy}'`);
   }
 
   const { examples } = schema.properties.handler;

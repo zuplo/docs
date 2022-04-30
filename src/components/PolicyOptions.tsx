@@ -27,7 +27,7 @@ const OptionProperties = ({ properties }: { properties: PolicyProperties }) => (
 const PolicyOptions = ({ policy }: { policy: string }) => {
   const schema = data.policies[policy];
   if (!schema) {
-    throw new Error("Invalid policy");
+    policy;
   }
 
   const { required, properties } = schema.properties.handler;

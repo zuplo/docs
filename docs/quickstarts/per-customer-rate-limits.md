@@ -8,7 +8,7 @@ used to protect and share your API _and_ is the easiest way to configure API Key
 
 <QuickstartPicker slug="quickstarts/per-customer-rate-limits" />
 
-The [Proxy a Public API](./proxy-public-api.md) quick start showed how to configure [rate limiting](/docs/policies/rate-limit/) for a route. A default rate limit policy is a great way to protect your API, but sometimes you need more control. In this quickstart, you will learn how to set a custom rate limit policy for a single customer based on a route parameter.
+The [Proxy a Public API](./proxy-public-api.md) quick start showed how to configure [rate limiting](../policies/rate-limit-inbound.md) for a route. A default rate limit policy is a great way to protect your API, but sometimes you need more control. In this quickstart, you will learn how to set a custom rate limit policy for a single customer based on a route parameter.
 
 ## 1: Setup Route
 
@@ -82,6 +82,6 @@ Try another quickstart (above) for more awesome.
 Why not try one of the other getting started guides (above) or some of the
 examples in our documentation:
 
-- [Rate-Limit Policy](/docs/policies/rate-limit/)
+- [Rate-Limit Policy](../policies/rate-limit-inbound.md)
 - [Archive requests to storage](/docs/examples/archiving-requests-to-storage)
-- [Setting up JWT auth with Auth0](/docs/policies/auth0-jwt-auth)
+- [Setting up JWT auth with Auth0](../policies/auth0-jwt-auth-inbound.md)

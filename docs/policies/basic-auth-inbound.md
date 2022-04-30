@@ -26,12 +26,12 @@ Be sure to read about [policies](/docs/policies)
 Here is an example configuration (this would go in the `policies` section of the
 routes.json file).
 
-<PolicyConfig id="basic-auth-inbound-policy" />
+<PolicyConfig id="basic-auth-inbound" />
 
 - `name` the name of your policy instance. This is used as a reference in your
   routes.
 - `policyType` the identifier of the policy. This is used by the Zuplo UI. Value
-  should be `basic-auth-inbound-policy`.
+  should be `basic-auth-inbound`.
 - `handler/export` The name of the exported type. Value should be
   `BasicAuthInboundPolicy`.
 - `handler/module` the module containing the policy. Value should be

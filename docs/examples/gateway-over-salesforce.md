@@ -143,4 +143,4 @@ examples in our documentation:
 
 - [Write your own policies](/docs/policies)
 - [Archive requests to storage](/docs/examples/archiving-requests-to-storage)
-- [Setting up JWT auth with Auth0](/docs/policies/auth0-jwt-auth)
+- [Setting up JWT auth with Auth0](../policies/auth0-jwt-auth-inbound.md)
