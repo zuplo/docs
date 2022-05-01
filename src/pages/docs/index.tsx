@@ -1,11 +1,10 @@
-import React from "react";
-import clsx from "clsx";
-import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import styles from "./index.module.css";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
-import * as d from "@docusaurus/utils";
+import Layout from "@theme/Layout";
+import clsx from "clsx";
+import React from "react";
+import styles from "./index.module.css";
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -34,7 +33,7 @@ function HomepageHeader() {
           </Link>
           <Link
             className="button button--secondary button--lg margin-left--md"
-            to="/docs/examples/proxy-aws-lambda"
+            to="/docs/examples"
           >
             Examples
           </Link>

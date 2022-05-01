@@ -17,6 +17,12 @@ import PolicyConfig from "../../components/PolicyConfig";
 import PolicyExample from "../../components/PolicyExample";
 import PolicyOptions from "../../components/PolicyOptions";
 import QuickstartPicker from "../../components/QuickstartPicker";
+import {
+  BuildStatusTabIcon,
+  CodeEditorTabIcon,
+  DashboardTabIcon,
+  SettingsTabIcon,
+} from "../../components/ui-icons";
 import ZupIt from "../../components/ZupIt";
 
 const MDXComponents = {
@@ -38,5 +44,10 @@ const MDXComponents = {
   PolicyOptions,
   QuickstartPicker,
   ZupIt,
+  CodeEditorTabIcon,
+  BuildStatusTabIcon,
+  SettingsTabIcon,
+  CodeEditorTabIcon,
+  DashboardTabIcon,
 };
 export default MDXComponents;
