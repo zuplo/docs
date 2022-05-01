@@ -7,7 +7,7 @@ The URL Rewrite handler can be used to proxy and rewrite requests to a different
 
 ## Setup via Portal
 
-The Rewrite Handler can be added to any route using the Route Designer. Open the **Route Designer** by navigating to the Code Editor tab <CodeEditorTabIcon /> then clicking **routes.json**. Inside of any route, select **URL Rewrite** from the **Request Handlers** drop down.
+The Rewrite Handler can be added to any route using the Route Designer. Open the **Route Designer** by navigating to the <CodeEditorTabIcon /> **Code Editor** tab then clicking **routes.json**. Inside of any route, select **URL Rewrite** from the **Request Handlers** drop down.
 
 ![Url Rewrite Handler selection](../../static/media/url-rewrite-handler-selection.png)
 
@@ -19,15 +19,16 @@ https://echo.zuplo.io/${method}/${params.productId}
 
 The following objects are available for substitution:
 
-- `request: ZuploRequest` - the full [request](../runtime/zuplo-request.md) object
+- `request: ZuploRequest` - the full [`ZuploRequest`](../runtime/zuplo-request.md) object
 - `params: Record<string, string>` - The parameters of the route. For example, `params.productId` would be the value of `:productId` in a route.
+- `query: Record<string, string>` - The query parameters of the route. For example, `query.filterBy` would be the value of `?filterBy=VALUE`.
+- `headers: Headers` - the incoming request's [headers object](https://developer.mozilla.org/en-US/docs/Web/API/Headers)
 - `url: string` - The full incoming request as a string
-- `host: string` - The ['host'](https://developer.mozilla.org/en-US/docs/Web/API/URL/host) portion of the incoming url
-- `hostname: string` - The ['hostname'](https://developer.mozilla.org/en-US/docs/Web/API/URL/hostname) portion of the incoming url
-- `pathname: string` - The ['pathname'](https://developer.mozilla.org/en-US/docs/Web/API/URL/pathname) portion of the incoming url
-- `port: string` - The ['port'](https://developer.mozilla.org/en-US/docs/Web/API/URL/port) portion of the incoming url
-- `search` - The ['search'](https://developer.mozilla.org/en-US/docs/Web/API/URL/search) portion of the incoming url
-- `searchParams` - The ['searchParams'](https://developer.mozilla.org/en-US/docs/Web/API/URL/searchParams) portion of the incoming url
+- `host: string` - The [`host`](https://developer.mozilla.org/en-US/docs/Web/API/URL/host) portion of the incoming url
+- `hostname: string` - The [`hostname`](https://developer.mozilla.org/en-US/docs/Web/API/URL/hostname) portion of the incoming url
+- `pathname: string` - The [`pathname`](https://developer.mozilla.org/en-US/docs/Web/API/URL/pathname) portion of the incoming url
+- `port: string` - The [`port`](https://developer.mozilla.org/en-US/docs/Web/API/URL/port) portion of the incoming url
+- `search` - The [`search`](https://developer.mozilla.org/en-US/docs/Web/API/URL/search) portion of the incoming url
 
 Use the following methods to encode portions of the URL:
 
@@ -35,6 +36,8 @@ Use the following methods to encode portions of the URL:
 - `e`: An alias to `encodeURIComponent` to help keep urls more readable. Can be used like `${e(params.productId)}`
 
 ### Example Values
+
+A few examples of the values of various substitutions.
 
 - `${headers.get("content-type")}` - `"application/json"`
 - `${host}` - `"example.com:8080"`
@@ -51,7 +54,7 @@ Use the following methods to encode portions of the URL:
 
 ## Setup via Routes.json
 
-The URL Rewrite handler can also be added manually to the `routes.json` file with the following route configuration
+The URL Rewrite handler can also be added manually to the **routes.json** file with the following route configuration.
 
 ```json
 {
