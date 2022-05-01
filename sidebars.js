@@ -133,7 +133,6 @@ const sidebars = {
       label: "Examples",
       items: [
         "examples/hello-world-api",
-        "examples/proxy-aws-lambda",
         "examples/archiving-requests-to-storage",
         "examples/gateway-over-airtable",
         "examples/gateway-over-salesforce",

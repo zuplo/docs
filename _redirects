@@ -35,3 +35,5 @@
 /docs/policies/rate-limit /docs/policies/rate-limit-inbound 301
 /docs/policies/request-body-rewrite /docs/policies/transform-body-inbound 301
 /docs/policies/response-body-rewrite /docs/policies/transform-body-outbound 301
+
+/docs/examples/proxy-aws-lambda /docs/handlers/aws-lambda 301
