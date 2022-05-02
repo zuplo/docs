@@ -62,7 +62,6 @@ const sidebars = {
         {
           type: "category",
           label: "Auth0JwtInboundPolicyOptions",
-          collapsed: true,
           link: { type: "doc", id: "runtime.auth0jwtinboundpolicyoptions" },
           items: [
             {

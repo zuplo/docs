@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "docusaurus start --port 3002",
+    "start": "npm run ci:pre && docusaurus start --port 3002",
     "build": "npm run ci:pre && docusaurus build && npm run ci:post",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
