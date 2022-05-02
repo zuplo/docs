@@ -55,3 +55,7 @@
 }
 
 @import url("https://cdn.zuplo.com/static/fonts/esbuild/woff2/ES-Build-Bold.woff2");
+
+.plugin-id-reference {
+  --doc-sidebar-width: 430px !important;
+}
