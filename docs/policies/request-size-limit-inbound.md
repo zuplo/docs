@@ -5,6 +5,8 @@ sidebar_label: Request Size Limit
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="request-size-limit-inbound" />
+
 ## Configuration
 
 :::tip

@@ -5,6 +5,8 @@ sidebar_label: Caching
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="caching-inbound" />
+
 ## Configuration
 
 :::tip

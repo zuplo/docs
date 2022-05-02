@@ -5,6 +5,8 @@ sidebar_label: Remove Headers
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="remove-headers-outbound" />
+
 ## Configuration
 
 :::tip

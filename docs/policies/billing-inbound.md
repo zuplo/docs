@@ -5,6 +5,8 @@ sidebar_label: Billing
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="billing-inbound" />
+
 ## Configuration
 
 :::tip

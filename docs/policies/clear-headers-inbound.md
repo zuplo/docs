@@ -5,6 +5,8 @@ sidebar_label: Clear Headers
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="clear-headers-inbound" />
+
 ## Configuration
 
 :::tip

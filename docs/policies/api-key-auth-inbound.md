@@ -5,6 +5,8 @@ sidebar_label: API Key Authentication
 
 Authenticate requests based on API Keys.
 
+<PolicyStatus policy="api-key-auth-inbound" />
+
 ## Configuration
 
 :::tip

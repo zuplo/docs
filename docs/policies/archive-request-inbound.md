@@ -5,6 +5,8 @@ sidebar_label: Archive Request to Storage
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="archive-request-inbound" />
+
 ## Configuration
 
 :::tip

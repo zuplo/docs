@@ -5,6 +5,8 @@ sidebar_label: Set Headers
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="set-headers-inbound" />
+
 ## Configuration
 
 :::tip

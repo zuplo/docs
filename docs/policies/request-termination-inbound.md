@@ -5,6 +5,8 @@ sidebar_label: Request Termination
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="request-termination-inbound" />
+
 ## Configuration
 
 :::tip

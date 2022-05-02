@@ -50,9 +50,9 @@ const sidebars = {
           items: [
             "policies/api-key-auth-inbound",
             "policies/auth0-jwt-auth-inbound",
-            "policies/aws-cognito-auth-inbound",
-            "policies/basic-auth-inbound",
+            "policies/cognito-jwt-auth-inbound",
             "policies/open-id-jwt-auth-inbound",
+            "policies/basic-auth-inbound",
             "policies/mtls-auth-inbound",
             "policies/hmac-auth-inbound",
           ],

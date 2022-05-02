@@ -5,6 +5,8 @@ sidebar_label: HMAC Auth
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="hmac-auth-inbound" />
+
 ## Configuration
 
 :::tip

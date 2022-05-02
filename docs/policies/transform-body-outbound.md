@@ -5,6 +5,8 @@ sidebar_label: Transform Response Body
 
 Transform the outgoing body of the response.
 
+<PolicyStatus policy="transform-body-outbound" />
+
 ## Configuration
 
 :::tip

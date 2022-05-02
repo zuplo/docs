@@ -5,6 +5,8 @@ sidebar_label: LDAP Auth
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="ldap-auth-inbound" />
+
 ## Configuration
 
 :::tip

@@ -5,6 +5,8 @@ sidebar_label: Redirect
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="redirect-response-inbound" />
+
 ## Configuration
 
 :::tip

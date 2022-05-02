@@ -5,6 +5,8 @@ sidebar_label: Add Query Parameter
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="add-query-param-inbound" />
+
 ## Configuration
 
 :::tip

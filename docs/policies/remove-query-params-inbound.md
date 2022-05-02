@@ -5,6 +5,8 @@ sidebar_label: Remove Query Parameters
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="remove-query-params-inbound" />
+
 ## Configuration
 
 :::tip
