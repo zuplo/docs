@@ -1,11 +1,23 @@
 ---
-title: Auth0 JWT Authentication Policy
+title: Auth0 JWT Auth Policy
 sidebar_label: Auth0 JWT
 ---
 
-In this sample we'll show you how to configure Zuplo and Auth0 to require JWT tokens to authenticate requests. We'll also use claims in Auth0 to change the behavior of our API.
+Authenticate requests with JWT tokens issued by Auth0. This is a customized version of the [OpenId JWT Policy](./open-id-jwt-auth-inbound.md) specifically for Auth0.
 
-## Setting up the API
+## Configuration
+
+:::tip
+
+Be sure to read about [policies](/docs/policies)
+
+:::
+
+<PolicyExample policy="cognito-jwt-auth-inbound" />
+
+<PolicyOptions policy="cognito-jwt-auth-inbound" />
+
+## Tutorial
 
 We will start with the hello-world sample you get when you create a new Zup. So you routes file should look like this:
 

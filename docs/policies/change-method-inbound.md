@@ -5,6 +5,8 @@ sidebar_label: Change Method
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="change-method-inbound" />
+
 ## Configuration
 
 :::tip

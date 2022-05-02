@@ -5,6 +5,8 @@ sidebar_label: Transform Request Body
 
 Transform the incoming body of the incoming request.
 
+<PolicyStatus policy="transform-body-inbound" />
+
 ## Configuration
 
 :::tip

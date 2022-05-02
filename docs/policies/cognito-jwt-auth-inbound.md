@@ -1,9 +1,9 @@
 ---
 title: AWS Cognito JWT Auth Policy
-sidebar_label: AWS Cognito JWT Auth
+sidebar_label: AWS Cognito JWT
 ---
 
-<!-- Description goes here-->
+Authenticate requests with JWT tokens issued by AWS Cognito. This is a customized version of the [OpenId JWT Policy](./open-id-jwt-auth-inbound.md) specifically for AWS Cognito.
 
 ## Configuration
 
@@ -13,4 +13,6 @@ Be sure to read about [policies](/docs/policies)
 
 :::
 
-<PolicyConfig id="cognito-jwt-auth-inbound" />
+<PolicyExample policy="cognito-jwt-auth-inbound" />
+
+<PolicyOptions policy="cognito-jwt-auth-inbound" />

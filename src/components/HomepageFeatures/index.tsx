@@ -70,7 +70,6 @@ const FeatureList: FeatureItem[] = [
     ),
     links: [
       { label: "Proxy an API", href: "/docs/quickstarts/proxy-public-api" },
-      { label: "Proxy AWS Lambda", href: "/docs/examples/proxy-aws-lambda" },
       {
         label: "Proxy a SaaS Service",
         href: "/docs/examples/gateway-over-airtable",

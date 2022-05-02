@@ -5,6 +5,8 @@ sidebar_label: Quota
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="quota-inbound" />
+
 ## Configuration
 
 :::tip

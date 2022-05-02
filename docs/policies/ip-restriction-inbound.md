@@ -5,6 +5,8 @@ sidebar_label: IP Restriction
 
 Restrict access to routes based on IP addresses.
 
+<PolicyStatus policy="ip-restriction-inbound" />
+
 ## Configuration
 
 :::tip

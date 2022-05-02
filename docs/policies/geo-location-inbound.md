@@ -5,6 +5,8 @@ sidebar_label: Geo-location Filtering
 
 Filter incoming request by geo-location.
 
+<PolicyStatus policy="geo-location-inbound" />
+
 ## Configuration
 
 :::tip

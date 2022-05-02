@@ -5,6 +5,8 @@ sidebar_label: A/B Testing
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="ab-test-inbound" />
+
 ## Configuration
 
 :::tip

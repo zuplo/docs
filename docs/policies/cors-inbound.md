@@ -5,6 +5,8 @@ sidebar_label: CORS
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="cors-inbound" />
+
 ## Configuration
 
 :::tip

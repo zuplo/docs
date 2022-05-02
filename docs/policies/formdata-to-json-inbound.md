@@ -5,6 +5,8 @@ sidebar_label: Form Data to JSON
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="formdata-to-json-inbound" />
+
 ## Configuration
 
 :::tip

@@ -5,6 +5,8 @@ sidebar_label: Archive Response to Storage
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="archive-response-outbound" />
+
 ## Configuration
 
 :::tip

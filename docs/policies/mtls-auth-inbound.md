@@ -5,6 +5,8 @@ sidebar_label: mTLS Auth
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="mtls-auth-inbound" />
+
 ## Configuration
 
 :::tip

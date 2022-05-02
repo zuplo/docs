@@ -5,6 +5,8 @@ sidebar_label: Request Validation
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="request-validation-inbound" />
+
 ## Configuration
 
 :::tip

@@ -5,6 +5,8 @@ sidebar_label: Set Query Parameters
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="set-query-params-inbound" />
+
 ## Configuration
 
 :::tip

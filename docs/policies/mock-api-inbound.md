@@ -5,6 +5,8 @@ sidebar_label: Mock API
 
 <!-- Description goes here-->
 
+<PolicyStatus policy="mock-api-inbound" />
+
 ## Configuration
 
 :::tip
