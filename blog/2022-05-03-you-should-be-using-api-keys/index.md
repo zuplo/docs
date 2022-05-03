@@ -4,21 +4,9 @@ authors: josh
 tags: [videos, code, api-keys]
 ---
 
-Have you noticed what all the best API companies have in common?
+Have you noticed something the best API companies have in common?
 
-![api-first-companies.png](Wait,%20you%E2%80%99re%20not%20using%20API%20Keys%209796396cb1ed4fa4a2f84ab3063c3ad0/api-first-companies.png)
-
-Yes, they all use **API Keys** as their primary authentication method. Why is this? Read more...
-
----
-
-actual post:
-
-# Wait, you’re not using API Keys?
-
-Have you noticed what all the best API companies have in common?
-
-![api-first-companies.png](Wait,%20you%E2%80%99re%20not%20using%20API%20Keys%209796396cb1ed4fa4a2f84ab3063c3ad0/api-first-companies.png)
+![Stripe, SendGrid, Twilio and Airtable logos](./api-first-companies.png)
 
 Folks like Stripe, Twilio, Airtable, SendGrid, and many more?
 
