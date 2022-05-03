@@ -8,7 +8,7 @@ used to protect and share your own API _and_ is the easiest way to configure API
 
 <QuickstartPicker slug="quickstarts/use-api-key-authentication" />
 
-::: note
+:::note
 
 Stay tuned, we will have this up in a few days.
 

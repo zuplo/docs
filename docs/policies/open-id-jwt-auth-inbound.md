@@ -52,7 +52,7 @@ Here is an example configuration (this would go in the `policies` section of the
 Note that sometimes the `issuer` and `audience` will vary between your
 environments (e.g. dev, staging and prod). We recommend storing these values in your environment variables and using `$env(VARIABLE_NAME)` to include them in your policy configuration.
 
-::: note
+:::note
 
 Note you can have multiple instances of the same policy with different `name`s if you want to have slightly different rules (such as settings for the `allowUnauthenticatedRequests` setting.
 
