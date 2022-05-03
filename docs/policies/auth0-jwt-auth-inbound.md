@@ -131,7 +131,7 @@ Now add the following policy inside the `policies` array:
   `https://zuplo-demo.us.auth0.com/`.
 - The `jwkUrl` is the public URL of your JWK set.
 
-::: tip
+:::tip
 
 If you're not sure where to find the issuer or jwkUrl you can easily find it in the Node.JS QuickStart for your API as shown below.
 
