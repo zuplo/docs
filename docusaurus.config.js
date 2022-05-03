@@ -57,16 +57,6 @@ const config = {
         docItemComponent: "@site/src/embed/DocItem",
       }),
     ],
-    [
-      "@docusaurus/plugin-content-docs",
-      /** @type {import('@docusaurus/plugin-content-docs').Options} */
-      ({
-        id: "reference",
-        path: "reference",
-        routeBasePath: "reference",
-        sidebarPath: require.resolve("./sidebar.reference.js"),
-      }),
-    ],
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
