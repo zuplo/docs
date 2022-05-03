@@ -14,15 +14,8 @@ function HomepageHeader() {
       <div className="container">
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className={styles.heroIntro}>
-          Check out our{" "}
-          <Link to="/docs/quickstarts/proxy-public-api">quick starts</Link>,
-          browse <Link to="/docs/examples">examples</Link>, or learn{" "}
-          <Link to="/docs/overview">how Zuplo can help</Link> you share your
-          API. Connect with the team on{" "}
-          <Link to="https://discord.gg/W36Ddfcd" target="_blank">
-            Discord
-          </Link>
-          .
+          Learn how to use Zuplo to add API-key management, developer
+          documentation, and rate-limiting, for any stack.
         </p>
         <div className={styles.buttons}>
           <Link

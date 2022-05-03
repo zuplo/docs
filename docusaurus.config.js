@@ -98,17 +98,30 @@ const config = {
             label: "Docs",
           },
           { to: "/blog", label: "Blog", position: "left" },
+          {
+            href: "https://portal.zuplo.com",
+            label: "Sign In",
+            position: "right",
+          },
         ],
       },
       footer: {
         style: "dark",
         links: [
           {
-            title: "Docs",
+            title: "Company",
             items: [
               {
-                label: "Tutorial",
-                to: "/docs/overview/",
+                label: "About Us",
+                href: "https://www.zuplo.com/about",
+              },
+              {
+                label: "Pricing",
+                href: "https://www.zuplo.com/pricing",
+              },
+              {
+                label: "Careers",
+                href: "https://www.zuplo.com/careers",
               },
             ],
           },
