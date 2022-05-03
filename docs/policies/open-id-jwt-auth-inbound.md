@@ -76,4 +76,4 @@ Note you can have multiple instances of the same policy with different `name`s i
 
 ## Using the user property in code
 
-For an example of using the user object in a [RequestHandler](/docs/runtime/zuplo-request), see [Setting up JWT auth with Auth0](../policies/auth0-jwt-auth-inbound.md).
+For an example of using the user object in a [RequestHandler](../handlers/custom-handler.md), see [Setting up JWT auth with Auth0](../policies/auth0-jwt-auth-inbound.md).
