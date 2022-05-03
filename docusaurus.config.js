@@ -107,25 +107,7 @@ const config = {
             position: "left",
             label: "Docs",
           },
-          { to: "/reference/runtime", label: "Reference", position: "left" },
           { to: "/blog", label: "Blog", position: "left" },
-          {
-            href: "https://www.zuplo.com/about",
-            label: "About Us",
-            position: "right",
-            target: "_self",
-          },
-          {
-            href: "https://www.zuplo.com/careers",
-            label: "Careers",
-            position: "right",
-            target: "_self",
-          },
-          {
-            href: "https://github.com/zuplo",
-            label: "GitHub",
-            position: "right",
-          },
         ],
       },
       footer: {
