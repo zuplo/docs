@@ -41,6 +41,7 @@
     "@tsconfig/docusaurus": "^1.0.5",
     "@types/jsdom": "^16.2.14",
     "@zuplo/dev": "^1.37.0",
+    "chalk": "^4.1.2",
     "jsdom": "^19.0.0",
     "nodemon": "^2.0.16",
     "prettier": "^2.6.2",
