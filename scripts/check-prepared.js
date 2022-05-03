@@ -28,15 +28,6 @@ async function run() {
     return exitWithError("The @zuplo/policies module is not installed.");
   }
 
-  // Check reference docs are synced
-  const referenceIndexDocPath = path.resolve(
-    __dirname,
-    "../reference/index.md"
-  );
-  if (!existsSync(referenceIndexDocPath)) {
-    return exitWithError("Reference documents have not been synced");
-  }
-
   // Check bundle.json exist
   const bundleJsonPath = path.resolve(
     __dirname,
