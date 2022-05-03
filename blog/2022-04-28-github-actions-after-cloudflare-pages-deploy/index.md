@@ -5,7 +5,7 @@ tags: [cloudflare, code]
 date: 2022-04-28
 ---
 
-Unfortunately, the Cloudflare Pages integration for Github doesn't support Githug Deployment status, this means you can't trigger actions on `deployment_status`. `deployment_status` is the ideal event to use when running tests after a deployment as the event details include the URL. This is how we run tests on Vercel deployments after they are finished.
+Unfortunately, the Cloudflare Pages integration for Github doesn't support Github Deployment status, this means you can't trigger actions on `deployment_status`. `deployment_status` is the ideal event to use when running tests after a deployment as the event details include the URL. This is how we run tests on Vercel deployments after they are finished.
 
 Fortunately, there is a pretty hacky way to do this with Cloudflare Pages. The `check_run` event is fired by the pages integration. The check run provides an `output` object in the event. Unfortunately, the contents is meant for human readable output. It looks like this:
 
