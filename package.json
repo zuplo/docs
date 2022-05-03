@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "npm run ci:pre && docusaurus start --port 3002",
-    "dev": "docusaurus start --port 3002",
+    "start": "node ./scripts/check-prepared.js && docusaurus start --port 3002",
     "build": "npm run ci:pre && docusaurus build && npm run ci:post",
+    "local": "npm run ci:pre",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
