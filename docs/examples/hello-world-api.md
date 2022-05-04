@@ -1,7 +1,5 @@
 ---
 title: Hello World API
-date: "2022-02-18"
-embed: true
 ---
 
 Because Zuplo is programmable you can easily use it to create an API - with

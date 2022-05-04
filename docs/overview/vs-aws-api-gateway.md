@@ -1,6 +1,6 @@
 ---
-sidebar_position: 3
-title: vs AWS API Gateway
+title: Zuplo vs AWS API Gateway
+sidebar_title: vs AWS API Gateway
 ---
 
 ## Why should I choose Zuplo over AWS API Gateway?
@@ -9,27 +9,27 @@ Most customers we speak with are building on AWS and have an obvious question...
 
 Here’s a rundown of why Zuplo will get you to market faster, with the right features with lower on-going maintenance burden:
 
-| Feature                                       | AWS API Gateway                 | Zuplo                                                                                                                             |
-| --------------------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| API Key Authentication                        | ❌ [1]                          | ✅ Unlimited keys                                                                                                                 |
-| API Key Portal                                | ❌                              | ✅                                                                                                                                |
-| Rate Limiting                                 | Per API Key only                | Dynamic - can write code to set rate limits on each request ([demo](https://www.zuplo.com/blog/2022/04/28/dynamic-rate-limiting)) |
-| Edge deployment                               | ❌                              | ✅ (100s of datacenters WW)                                                                                                       |
-| Multi-cloud                                   | ❌                              | ✅ [2]                                                                                                                            |
-| Open API support                              | ❌                              | ✅                                                                                                                                |
-| Policy Library                                | ❌                              | ✅ 32 built-in (more coming)                                                                                                      |
-| Max response time                             | 29s                             | 120s+                                                                                                                             |
-| Custom Policies                               | ❌                              | ✅ ([demo](https://www.zuplo.com/blog/2022/03/22/custom-policies-in-code-archiving-requests-to-s3))                               |
-| Dynamic Routing                               | ❌                              | ✅ ([demo](https://www.zuplo.com/blog/2022/03/17/smart-api-routing-by-auth0-jwt-contents))                                        |
-| Hosted Developer Portal                       | ❌                              | ✅                                                                                                                                |
-| Programmability                               | via call to Lambda - slow       | ✅ Runs inside the gateway - fast! ([demo](https://www.zuplo.com/blog/2022/03/24/an-api-gateway-over-saas))                       |
-| Cognito JWT Auth                              | ✅                              | ✅                                                                                                                                |
-| Open ID JWT Auth                              | ❌ requires a custom authorizer | ✅ built-in policy                                                                                                                |
-| Lifecycle Management (versioning)             | ✅                              | ✅                                                                                                                                |
-| SDK Generation                                | ✅                              | ❌ [3]                                                                                                                            |
-| VPC Connectivity                              | ✅                              | ✅ via secure tunnel provided by CloudFlare                                                                                       |
-| Reliability                                   | ✅                              | ✅ Serving Billions of requests every month, with zero downtime to date                                                           |
-| Offers stripe quality developer experience 🙌 | ❌                              | ✅                                                                                                                                |
+| Feature                                       | AWS API Gateway                 | Zuplo                                                                                                        |
+| --------------------------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| API Key Authentication                        | ❌ [1]                          | ✅ Unlimited keys                                                                                            |
+| API Key Portal                                | ❌                              | ✅                                                                                                           |
+| Rate Limiting                                 | Per API Key only                | Dynamic - can write code to set rate limits on each request ([demo](/blog/2022/04/28/dynamic-rate-limiting)) |
+| Edge deployment                               | ❌                              | ✅ (100s of datacenters WW)                                                                                  |
+| Multi-cloud                                   | ❌                              | ✅ [2]                                                                                                       |
+| Open API support                              | ❌                              | ✅                                                                                                           |
+| Policy Library                                | ❌                              | ✅ 32 built-in (more coming)                                                                                 |
+| Max response time                             | 29s                             | 120s+                                                                                                        |
+| Custom Policies                               | ❌                              | ✅ ([demo](/blog/2022/03/22/custom-policies-in-code-archiving-requests-to-s3))                               |
+| Dynamic Routing                               | ❌                              | ✅ ([demo](/blog/2022/03/17/smart-api-routing-by-auth0-jwt-contents))                                        |
+| Hosted Developer Portal                       | ❌                              | ✅                                                                                                           |
+| Programmability                               | via call to Lambda - slow       | ✅ Runs inside the gateway - fast! ([demo](/blog/2022/03/24/an-api-gateway-over-saas))                       |
+| Cognito JWT Auth                              | ✅                              | ✅                                                                                                           |
+| Open ID JWT Auth                              | ❌ requires a custom authorizer | ✅ built-in policy                                                                                           |
+| Lifecycle Management (versioning)             | ✅                              | ✅                                                                                                           |
+| SDK Generation                                | ✅                              | ❌ [3]                                                                                                       |
+| VPC Connectivity                              | ✅                              | ✅ via secure tunnel provided by CloudFlare                                                                  |
+| Reliability                                   | ✅                              | ✅ Serving Billions of requests every month, with zero downtime to date                                      |
+| Offers stripe quality developer experience 🙌 | ❌                              | ✅                                                                                                           |
 
 ### **What about Performance?**
 

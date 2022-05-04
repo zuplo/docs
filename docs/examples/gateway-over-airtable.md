@@ -1,8 +1,5 @@
 ---
-sidebar_position: 0
 title: Gateway over AirTable APIs
-date: "2021-02-21"
-publish: false
 ---
 
 Let's put a gateway over the AirTable Event Planning example in just a 5 quick

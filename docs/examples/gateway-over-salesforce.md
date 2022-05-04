@@ -1,7 +1,5 @@
 ---
 title: Gateway over Salesforce APIs
-date: "2021-02-21"
-embed: true
 ---
 
 It's easy to use Zuplo with Salesforce APIs. In this quickstart we'll work with

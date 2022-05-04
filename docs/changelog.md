@@ -1,6 +1,6 @@
 ---
 title: Change Log
-sidebar_position: 10
+draft: true
 ---
 
 Coming Soon
