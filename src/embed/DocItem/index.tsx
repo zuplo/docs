@@ -8,7 +8,9 @@ import {
   HtmlClassNameProvider,
   PageMetadata,
   ThemeClassNames,
+  useColorMode,
 } from "@docusaurus/theme-common";
+import useIsBrowser from "@docusaurus/useIsBrowser";
 import DocItemFooter from "@theme/DocItemFooter";
 import DocPaginator from "@theme/DocPaginator";
 import DocVersionBadge from "@theme/DocVersionBadge";
@@ -16,7 +18,7 @@ import DocVersionBanner from "@theme/DocVersionBanner";
 import Heading from "@theme/Heading";
 import MDXContent from "@theme/MDXContent";
 import clsx from "clsx";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./styles.module.css";
 
 function DocItemMetadata(props) {
@@ -48,6 +50,22 @@ function DocItemContent(props) {
   const { title } = metadata; // We only add a title if:
   // - user asks to hide it with front matter
   // - the markdown content does not already contain a top-level h1 heading
+
+  const isBrowser = useIsBrowser();
+  const { colorMode } = useColorMode();
+
+  // This is a hack to prevent the dark theme on the embeded pages
+  // the reason we dont just use setColorMode("light") is because that
+  // overrides the color mode the user has set on docs
+  useEffect(() => {
+    if (isBrowser && colorMode === "dark") {
+      console.log("test");
+      document.documentElement.removeAttribute("data-theme");
+      setTimeout(() => {
+        document.documentElement.removeAttribute("data-theme");
+      }, 200);
+    }
+  }, [isBrowser, colorMode]);
 
   const shouldAddTitle =
     !hideTitle && typeof DocContent.contentTitle === "undefined";

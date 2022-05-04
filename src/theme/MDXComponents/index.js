@@ -42,7 +42,6 @@ const MDXComponents = {
   PolicyConfig,
   PolicyExample,
   PolicyOptions,
-  QuickstartPicker,
   ZupIt,
   CodeEditorTabIcon,
   BuildStatusTabIcon,
