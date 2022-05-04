@@ -35,8 +35,6 @@ const sidebars = {
       label: "Quick Starts",
       items: [
         "quickstarts/proxy-public-api",
-        "quickstarts/use-api-key-authentication",
-        "quickstarts/publish-developer-portal",
         "quickstarts/per-customer-rate-limits",
       ],
     },

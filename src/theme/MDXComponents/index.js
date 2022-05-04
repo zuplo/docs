@@ -17,7 +17,6 @@ import PolicyConfig from "../../components/PolicyConfig";
 import PolicyExample from "../../components/PolicyExample";
 import PolicyOptions from "../../components/PolicyOptions";
 import PolicyStatus from "../../components/PolicyStatus";
-import QuickstartPicker from "../../components/QuickstartPicker";
 import {
   BuildStatusTabIcon,
   CodeEditorTabIcon,

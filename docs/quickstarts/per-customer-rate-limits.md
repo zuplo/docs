@@ -1,14 +1,8 @@
 ---
-sidebar_position: 2
 title: Per Customer Rate Limits
 ---
 
-Zuplo isn't your average gateway. It's a **programmable gateway** that can be
-used to protect and share your API _and_ is the easiest way to configure API Key Management and API Docs. Choose your getting started guide:
-
-<QuickstartPicker slug="quickstarts/per-customer-rate-limits" />
-
-The [Proxy a Public API](./proxy-public-api.md) quick start showed how to configure [rate limiting](../policies/rate-limit-inbound.md) for a route. A default rate limit policy is a great way to protect your API, but sometimes you need more control. In this quickstart, you will learn how to set a custom rate limit policy for a single customer based on a route parameter.
+The [Proxy a Public API](./proxy-public-api.md) quick start shows how to configure [rate limiting](../policies/rate-limit-inbound.md) for a route. A default rate limit policy is a great way to protect your API, but sometimes you need more control. In this quickstart, you will learn how to set a custom rate limit policy for a single customer based on a route parameter.
 
 ## 1: Setup Route
 
