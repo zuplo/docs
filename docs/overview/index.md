@@ -5,144 +5,55 @@ publish: false
 
 We've designed Zuplo to be easy to get started, our goal is you go from zero to live API gateway in under 2 minutes. [Let us know if we fail on this and why](https://discord.gg/CEZrnZN897)!
 
-## Sign in
+Before you know it you'll have a Stripe quality API experience you'll be proud of.
 
-1. Sign in - you should sign in at [https://portal.zuplo.com](https://portal.zuplo.com) using the e-mail address you asked to be associated with your alpha trial of zuplo.
+## Sign in and create your gateway
 
-## Create your first API
+Sign up at [https://portal.zuplo.com](https://portal.zuplo.com) and create your gateway. Note, these instructions are actually integrated into the portal
+so you can follow along there too.
 
-1. On your first login, you will automatically be taken to the create screen
+## 1. Setup your first route
 
-![Untitled](/media/getting-started-old/Untitled.png)
+Open routes.json in the file editor on the left. Change the first route **path** to `/products/:productId` and the **URL Rewrite** to [`https://ecommerce-api.zuplo.io/${params.productId}`](https://ecommerce-api.zuplo.io/${params.productId}).
 
-1. Enter the name of your project. All project names must be in kebab-case.
-2. Click 'Create Project' and you'll be taken to the project view
+![Route](/static/media/embed/getting-started/route.png)
 
-![Untitled](/media/getting-started-old/Untitled_1.png)
+## 2. Add authentication and protection
 
-> Note, we will also support development directly in VSCode, Sublime Text or
-> whatever tools you like to use to code TypeScript. For the Alpha our initial
-> focus is on the portal so we ask you to use this experience for now.
+Next, we’ll add two policies to this route to enforce API-key authentication and rate-limiting. Expand the **Policies** section and click **Add policy** on the request pipeline. Search for **API-Key Authentication** and add that policy.
 
-## Test your API
+![Auth Policy](/static/media/embed/getting-started/auth-policy.png)
 
-1. Scaffold an example project for you that is ready to go, try it out! To test
-   your new API you can use our integrated test console (as shown in the gif
-   below):
+Next search for **Rate** **Limiting** and choose that policy. Change the `rateLimitBy` property from IP to `user`. That will rate-limit requests based on the API consumer.
 
-![2021-11-15 15.06.39.gif](/media/getting-started-old/2021-11-15_15.06.39.gif)
+:::tip
 
-1. Navigate to the API Test Console (the lightning icon on the left) and choose the `hello-world.json` test.
-2. Click the `Test` button and invoke your API. You can see the status, headers and body from your new API.
-3. You can easily change the response of your simple API by navigating to the files section (top icon on the left) and opening the module `hello-world.ts`. Edit the file to return anything you like (save by clicking `Save` or hitting `⌘S`). You can read more about request handlers [here](/docs/handlers/custom-handler).
+Many API owners don’t think they need rate limiting protection because they won’t be attacked. However, 99% of the time it’s your customer that attacks you with an accidental for-loop in their code. Don’t ship your API program without protection!
 
-## Routes & Route Testing
+:::
 
-1. Routing is a key part of Zuplo - open routes.json to understand why
-   `/v1/hello-world` invokes the function in `modules/hello-world.ts`.
+## 3. Setup an API Consumer
 
-![Untitled](/media/getting-started-old/Untitled_2.png)
+Now that your API is protected with API-Key authentication you need to create an API consumer that can generate a key. Head to the **Settings** [1] section and choose **API Key Consumers** [2]**.**
 
-1. You'll see the default route called `What zup?` in the Route Designer. Note
-   how it maps to a `default` export on the `hello-world` module as shown in the
-   `Function` field.
+![API Key Consumers](/static/media/embed/getting-started/api-key-consumers.png)
 
-This means that any request that is either a `GET` or `POST` (per the `Method`
-field) and is on the `/v1/hello-world` URL will invoke that request handler.
+Click Add new consumer [3] and enter a name for your API key, and enter your own e-mail address as the manager (so that you can create a key to complete the demo), then click Save - you can leave the metadata blank.
 
-> Note - during alpha the `...` button next to the `Function` field is inactive.
-> To configure a module and export for the handler you'll need to switch to the
-> json view by clicking on the `routes.json` tab. It's hopefully
-> self-explanatory.
+## 4. Visit your developer portal to create a key
 
-1. Let's add a new route with some parameters
-   - Method: GET
-   - Path: `/products/:productId/cats/:catId`
-   - Version: `none`
-   - Label: `My first custom route`
-   - CORS: `Anything Goes`
-   - Function: Click the picker `...` - you'll get an alert saying this is
-     coming soon. For now you'll have to edit the routes.json file directly.
-2. Note that we used the parameters`:productId` and `:catId` in our path. These
-   are tokens that will match other strings. Let's test it out using the route
-   tester (also shown in the gif below).
+Click on the **Your Dev Portal** link near the top left of the portal.
 
-   ![2021-11-15 15.27.35.gif](/media/getting-started-old/2021-11-15_15.27.35.gif)
+![Open Portal](/static/media/embed/getting-started/open-portal.png)
 
-3. Open the `Route Tester` in the top right of the route designer.
-4. Test the default route by clicking `Test Route` - it should highlight the
-   original route.
-5. Now change the test path to `/products/123/cats/cheshire` or similar and
-   click `Test Route`` .
-6. It should highlight your new route - you're now confident this route will
-   work. Note how it highlights the values of the parameters `productId` and
-   `catId`. These would be available in the request handler on the `params`
-   property of the `request` parameter.
+You’ll see the documentation that has been automatically generated for your API 🎉. Click the sign-in button at the top right and sign in with your e-mail address. Click the API Key tab - you should see the name of the key you set up in step 3. Click Create key to generate your API key and copy it to your clipboard... you’re ready to go.
 
-## Your first route handler
+## Now test your API 🚀
 
-1. Now let's add a new handler. On the `Modules` folder click the `+` icon and
-   enter a filename like `my-first-route` (we'll add `.ts` for you)
+Open the integrated **API Test Console** [1] and set the path to `/products/10000` [2]. Hit **Test** [3] to fire an unauthenticated request to your API - you should get a **401 Unauthorized** response.
 
-![2021-11-15 15.44.11.gif](/media/getting-started-old/2021-11-15_15.44.11.gif)
+![Test API](/static/media/embed/getting-started/test-api.png)
 
-1. Let's customize the new module to echo the params and body back to the
-   client, here's some sample code:
+Now add an `authorization` header with the format `Bearer <apikey>` [4], using the API key you copied from the developer portal - you should get a **200** 🎊 .
 
-```ts
-import { ZuploRequest, ZuploContext } from "@zuplo/runtime";
-
-export default async function (request: ZuploRequest, context: ZuploContext) {
-  // to read the body we can use request.text()
-  // it's asynchronous so we need to await it.
-  // if we were confident the body was JSON
-  // we could use request.json() to parse the json
-  // into an object, but in this case we don't know
-  // so we'll just use text
-  const bodyText = await request.text();
-
-  return {
-    productId: request.params.productId,
-    catId: request.params.catId,
-    bodyText,
-  };
-}
-```
-
-1. Edit the routes.json file to point your new route to your new handler:
-
-```json
-//...
-
-{
-  "path": "products/:productId/cats/:catId",
-  "corsPolicy": "AnythingGoes",
-  "label": "My first route",
-  "methods": ["POST"],
-  // Change the `handler` to point your new module as shown below
-  // (the module file without the .ts extension)
-  "handler": {
-    "module": "$import(./modules/my-first-route)",
-    "export": "default"
-  },
-  "version": "none"
-}
-
-//...
-```
-
-1. Test your new handler by adding a new API test file. Choose the API test
-   console and click the `+` icon.
-2. Change the `method` of your new test to `POST`enter a body and update the
-   path, then hit `Test` - see the gif below.
-
-![2021-12-02 20.39.21.gif](/media/getting-started-old/2021-12-02_20.39.21.gif)
-
-1. Try sending JSON in the POST body and then changing the code to use
-   `await request.json()` and notice how the response changes to show the object
-   was parsed.
-
-**Congratulations - you are now a competent Zuplo Developer! Achievement
-Unlocked 🎉**
-
-Next: [Proxy a simple request](/docs/examples/proxy-a-simple-get-request)
+Finally, hit **Test** [3] a few more times to test that rate limiting ✋.
