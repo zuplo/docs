@@ -2,11 +2,6 @@
 title: Setup Your API Proxy
 ---
 
-Zuplo isn't your average gateway. It's a **programmable gateway** that can be
-used to protect and share your own API _and_ is the easiest way to configure API Key Management and API Docs. Choose your getting started guide:
-
-<QuickstartPicker slug="quickstarts/proxy-public-api" />
-
 Let's put a gateway over this sample e-commerce API at
 `https://ecommerce-api.zuplo.io` with a Zuplo gateway and add rate limiting.
 Quickly take a look at the API by opening this URL in your browser:
