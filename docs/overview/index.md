@@ -1,6 +1,5 @@
 ---
 title: Getting Started
-publish: false
 ---
 
 We've designed Zuplo to be easy to get started, our goal is you go from zero to live API gateway in under 2 minutes. [Let us know if we fail on this and why](https://discord.gg/CEZrnZN897)!

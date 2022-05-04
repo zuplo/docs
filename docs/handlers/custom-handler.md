@@ -1,6 +1,5 @@
 ---
 title: Custom Request Handlers
-sidebar_label: Custom Handler
 ---
 
 As an API gateway, the Request Handler is the most important part of a zup. A
