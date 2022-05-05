@@ -6,36 +6,30 @@ We've designed Zuplo to be easy to get started, our goal is you go from zero to 
 
 Before you know it you'll have a Stripe quality API experience you'll be proud of.
 
-## Sign in and create your gateway
-
-Sign up at [https://portal.zuplo.com](https://portal.zuplo.com) and create your gateway. Note, these instructions are actually integrated into the portal
-so you can follow along there too.
-
 ## 1. Setup your first route
 
-Open routes.json in the file editor on the left. Change the first route **path** to `/products/:productId` and the **URL Rewrite** to [`https://ecommerce-api.zuplo.io/${params.productId}`](https://ecommerce-api.zuplo.io/${params.productId}).
+Open the routes.json file in the file editor on the left. Change the first route's **path** to `/products/:productId` and the **URL Rewrite** to `https://ecommerce-api.zuplo.io/products/${params.productId}`.
 
-![Route](../../static/media/embed/getting-started/route.png)
+You now have a route on your gateway that matches an incoming request like `/products/10000` and forwards it to `https://ecommerce-api.zuplo.io/products/10000`.
+
+![Route](../static/media/embed/getting-started/route.png)
 
 ## 2. Add authentication and protection
 
-Next, we’ll add two policies to this route to enforce API-key authentication and rate-limiting. Expand the **Policies** section and click **Add policy** on the request pipeline. Search for **API-Key Authentication** and add that policy.
+Next, we’ll add two policies to this route:
 
-![Auth Policy](../../static/media/embed/getting-started/auth-policy.png)
+- API-Key Authentication
+- Rate-limiting
 
-Next search for **Rate** **Limiting** and choose that policy. Change the `rateLimitBy` property from IP to `user`. That will rate-limit requests based on the API consumer.
+Click the **Add Policy** button on the request pipeline and add each of these policies.
 
-:::tip
-
-Many API owners don’t think they need rate limiting protection because they won’t be attacked. However, 99% of the time it’s your customer that attacks you with an accidental for-loop in their code. Don’t ship your API program without protection!
-
-:::
+![Auth Policy](../static/media/embed/getting-started/auth-policy.png)
 
 ## 3. Setup an API Consumer
 
-Now that your API is protected with API-Key authentication you need to create an API consumer that can generate a key. Head to the **Settings** [1] section and choose **API Key Consumers** [2]**.**
+Now that your API is protected with API-Key authentication you need to create an API consumer that can generate a key. Head to the <image width="15" height="15" src="../static/media/embed/getting-started/settings.png" alt="settings" /> **Settings** section and choose **API Key Consumers**.
 
-![API Key Consumers](../../static/media/embed/getting-started/api-key-consumers.png)
+![API Key Consumers](../static/media/embed/getting-started/api-key-consumers.png)
 
 Click Add new consumer [3] and enter a name for your API key, and enter your own e-mail address as the manager (so that you can create a key to complete the demo), then click Save - you can leave the metadata blank.
 
@@ -43,15 +37,15 @@ Click Add new consumer [3] and enter a name for your API key, and enter your own
 
 Click on the **Your Dev Portal** link near the top left of the portal.
 
-![Open Portal](../../static/media/embed/getting-started/open-portal.png)
+![Open Portal](../static/media/embed/getting-started/open-portal.png)
 
 You’ll see the documentation that has been automatically generated for your API 🎉. Click the sign-in button at the top right and sign in with your e-mail address. Click the API Key tab - you should see the name of the key you set up in step 3. Click Create key to generate your API key and copy it to your clipboard... you’re ready to go.
 
 ## Now test your API 🚀
 
-Open the integrated **API Test Console** [1] and set the path to `/products/10000` [2]. Hit **Test** [3] to fire an unauthenticated request to your API - you should get a **401 Unauthorized** response.
+Open the integrated <image width="15" height="15" src="../static/media/embed/getting-started/test-console.png" alt="settings" /> **API Test Console** [1] and set the path to `/products/10000` [2]. Hit **Test** [3] to fire an unauthenticated request to your API - you should get a **401 Unauthorized** response.
 
-![Test API](../../static/media/embed/getting-started/test-api.png)
+![Test API](../static/media/embed/getting-started/test-api.png)
 
 Now add an `authorization` header with the format `Bearer <apikey>` [4], using the API key you copied from the developer portal - you should get a **200** 🎊 .
 
