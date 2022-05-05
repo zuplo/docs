@@ -2,33 +2,42 @@
 title: Getting Started
 ---
 
-# A Stripe quality API in 4 steps
+# Getting Started - a great API experience for your customers in minutes
 
-There are three pillars to sharing an API: authentication, protection, and documentation. Let’s add all of these features to this sample e-commerce API at [`https://ecommerce-api.zuplo.io`](https://ecommerce-api.zuplo.io) in just 4 steps.
+Our goal is to help you offer an excellent experience to developers consuming your API, while protecting things you care about.
+
+There's a few minimum ingredients to successfully sharing an API:
+
+- Authentication ([we recommend API keys](https://www.zuplo.com/blog/2022/05/03/you-should-be-using-api-keys))
+- Protection (rate-limiting, because your customers will accidentally try to take you down)
+- Documentation (peeps gotta learn how to user your API)
+
+In this getting started guide we'll show you just how easy it is to set up all these things for an example API at [`https://ecommerce-api.zuplo.io`](https://ecommerce-api.zuplo.io).
+
+You can [open this getting started guide in another window](https://www.zuplo.com/docs/overview), if that helps.
 
 ## 1. Setup your first route
 
-Open routes.json in the file editor on the left. Change the first route **path** to `/products/:productId` and the **URL Rewrite** to [`https://ecommerce-api.zuplo.io/${params.productId}`](https://ecommerce-api.zuplo.io/${params.productId}).
+Open the routes.json file in the file editor on the left. Change the first route's **path** to `/products/:productId` and the **URL Rewrite** to `https://ecommerce-api.zuplo.io/products/${params.productId}`.
+
+You now have a route on your gateway that matches an incoming request like `/products/10000` and forwards it to `https://ecommerce-api.zuplo.io/products/10000`.
 
 ![Route](../static/media/embed/getting-started/route.png)
 
 ## 2. Add authentication and protection
 
-Next, we’ll add two policies to this route to enforce API-key authentication and rate-limiting. Expand the **Policies** section and click **Add policy** on the request pipeline. Search for **API-Key Authentication** and add that policy.
+Next, we’ll add two policies to this route:
+
+- API-Key Authentication
+- Rate-limiting
+
+Click the **Add Policy** button on the request pipeline and add each of these policies.
 
 ![Auth Policy](../static/media/embed/getting-started/auth-policy.png)
 
-Next search for **Rate** **Limiting** and choose that policy. Change the `rateLimitBy` property from IP to `user`. That will rate-limit requests based on the API consumer.
-
-:::tip
-
-Many API owners don’t think they need rate limiting protection because they won’t be attacked. However, 99% of the time it’s your customer that attacks you with an accidental for-loop in their code. Don’t ship your API program without protection!
-
-:::
-
 ## 3. Setup an API Consumer
 
-Now that your API is protected with API-Key authentication you need to create an API consumer that can generate a key. Head to the **Settings** [1] section and choose **API Key Consumers** [2]**.**
+Now that your API is protected with API-Key authentication you need to create an API consumer that can generate a key. Head to the <image width="15" height="15" src="../static/media/embed/getting-started/settings.png" alt="settings" /> **Settings** section and choose **API Key Consumers**.
 
 ![API Key Consumers](../static/media/embed/getting-started/api-key-consumers.png)
 
@@ -44,7 +53,7 @@ You’ll see the documentation that has been automatically generated for your AP
 
 ## Now test your API 🚀
 
-Open the integrated **API Test Console** [1] and set the path to `/products/10000` [2]. Hit **Test** [3] to fire an unauthenticated request to your API - you should get a **401 Unauthorized** response.
+Open the integrated <image width="15" height="15" src="../static/media/embed/getting-started/test-console.png" alt="settings" /> **API Test Console** [1] and set the path to `/products/10000` [2]. Hit **Test** [3] to fire an unauthenticated request to your API - you should get a **401 Unauthorized** response.
 
 ![Test API](../static/media/embed/getting-started/test-api.png)
 
