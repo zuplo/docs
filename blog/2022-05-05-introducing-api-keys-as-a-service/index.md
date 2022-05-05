@@ -4,7 +4,8 @@ authors: josh
 tags: [videos, api-keys]
 ---
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/0oYp53Al9nI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+import YouTubeVideo from "@site/src/components/YouTubeVideo";
+
 
 We recently shared some reasoning on [why we think API keys are the best authentication approach for your public API](https://www.zuplo.com/blog/2022/05/03/you-should-be-using-api-keys).
 
@@ -17,6 +18,6 @@ We think this is **so** important that we built it as a feature of the Zuplo gat
 
 See it all in action in this 2-minute video:
 
-<YouTubeVideo url="https://www.youtube-nocookie.com/embed/uMm01EDJ9_I" />
+<YouTubeVideo url="https://www.youtube.com/embed/0oYp53Al9nI" />
 
 Try it out now, for free at [portal.zuplo.com](portal.zuplo.com)
