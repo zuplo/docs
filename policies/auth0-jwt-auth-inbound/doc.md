@@ -1,22 +1,3 @@
----
-title: Auth0 JWT Auth Policy
-sidebar_label: Auth0 JWT
----
-
-Authenticate requests with JWT tokens issued by Auth0. This is a customized version of the [OpenId JWT Policy](./open-id-jwt-auth-inbound.md) specifically for Auth0.
-
-## Configuration
-
-:::tip
-
-Be sure to read about [policies](/docs/policies)
-
-:::
-
-<PolicyExample policy="cognito-jwt-auth-inbound" />
-
-<PolicyOptions policy="cognito-jwt-auth-inbound" />
-
 ## Tutorial
 
 We will start with the hello-world sample you get when you create a new Zup. So you routes file should look like this:

@@ -21,8 +21,7 @@ yarn-error.log*
 
 .env
 
-/docs/policies/*.md
-!/docs/policies/index.md
+/docs/policies/
 
 
 /policies/policies.*.json

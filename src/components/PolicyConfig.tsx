@@ -1,6 +1,6 @@
+import data from "@site/policies/policies.v2.json";
 import CodeBlock from "@theme/CodeBlock";
 import React from "react";
-import data from "../../node_modules/@zuplo/policies/policies.v2.json";
 
 const PolicyConfig = ({ id }: { id: string }) => {
   const policy = data.policies.find((p) => p.id === id);

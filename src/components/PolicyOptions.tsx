@@ -1,4 +1,3 @@
-import data from "@zuplo/policies/policies.v3.json";
 import React from "react";
 import styles from "./PolicyOptions.module.css";
 
@@ -24,12 +23,14 @@ const OptionProperties = ({ properties }: { properties: PolicyProperties }) => (
   </ul>
 );
 
-const PolicyOptions = ({ policy }: { policy: string }) => {
-  const schema = data.policies[policy];
-  if (!schema) {
-    policy;
-  }
-
+const PolicyOptions = ({
+  schema,
+  policyId,
+}: {
+  schema: any;
+  policyId: string;
+}) => {
+  console.log(schema);
   const { required, properties } = schema.properties.handler;
   // if (!Array.isArray(examples) || examples.length === 0) {
   // throw new Error(`There are no examples set for policy ${policy}`);
@@ -43,7 +44,7 @@ const PolicyOptions = ({ policy }: { policy: string }) => {
       </li>
       <li>
         <code>policyType</code> the identifier of the policy. This is used by
-        the Zuplo UI. Value should be <code>{policy}</code>.
+        the Zuplo UI. Value should be <code>{policyId}</code>.
       </li>
       <li>
         <code>handler/export</code> The name of the exported type. Value should

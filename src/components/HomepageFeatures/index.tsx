@@ -46,7 +46,7 @@ const FeatureList: FeatureItem[] = [
       </>
     ),
     links: [
-      { label: "Policies", href: "/docs/policies" },
+      { label: "Policies", href: "/docs/overview/policies" },
       { label: "Authentication", href: "/docs/policies/api-key-auth-inbound" },
       { label: "Rate Limits", href: "/docs/policies/rate-limit-inbound" },
       {

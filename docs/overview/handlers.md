@@ -10,7 +10,7 @@ Zuplo comes with several built-in handlers as well as the ability to write your 
 
 ## Built In Handlers
 
-There are several built-in handlers including [URL Rewrite](../handlers/url-rewrite.md) and [AWS Lambda](../handlers/aws-lambda.md) that allow you to execute requests without writing any code.
+There are several built-in handlers including [URL Rewrite](../handlers/url-rewrite.md) and AWS Lambda that allow you to execute requests without writing any code.
 
 ## Custom Handlers
 

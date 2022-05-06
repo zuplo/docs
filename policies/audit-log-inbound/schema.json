@@ -5,6 +5,7 @@
   "title": "Audit Logs Inbound",
   "description": "Capture detailed logs of requests for auditing purposes",
   "required": ["handler"],
+  "isPreview": true,
   "properties": {
     "handler": {
       "type": "object",

@@ -1,0 +1,485 @@
+{
+  "config": {
+    "legacyIdMaps": {
+      "api-auth-key-inbound-policy": "api-key-auth-inbound",
+      "auth0-jwt-inbound": "auth0-jwt-auth-inbound",
+      "basic-auth-inbound-policy": "basic-auth-inbound",
+      "basic-rate-limit-policy-inbound": "rate-limit-policy-inbound",
+      "cognito-jwt-inbound": "cognito-jwt-auth-inbound",
+      "open-id-jwt-inbound": "open-id-jwt-auth-inbound"
+    }
+  },
+  "policies": [
+    {
+      "name": "Add Query Parameter",
+      "isPreview": true,
+      "id": "add-query-param-inbound",
+      "defaultHandler": {
+        "export": "AddQueryParamInbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItaGVscC1jaXJjbGUiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIj48L2NpcmNsZT48cGF0aCBkPSJNOS4wOSA5YTMgMyAwIDAgMSA1LjgzIDFjMCAyLTMgMy0zIDMiPjwvcGF0aD48bGluZSB4MT0iMTIiIHkxPSIxNyIgeDI9IjEyLjAxIiB5Mj0iMTciPjwvbGluZT48L3N2Zz4="
+    },
+    {
+      "name": "API Key Authentication",
+      "isPreview": false,
+      "id": "api-key-auth-inbound",
+      "defaultHandler": {
+        "export": "ApiAuthKeyInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGNsYXNzPSJoLTYgdy02IiBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZD0iTTcgMjFhNCA0IDAgMDEtNC00VjVhMiAyIDAgMDEyLTJoNGEyIDIgMCAwMTIgMnYxMmE0IDQgMCAwMS00IDR6bTAgMGgxMmEyIDIgMCAwMDItMnYtNGEyIDIgMCAwMC0yLTJoLTIuMzQzTTExIDcuMzQzbDEuNjU3LTEuNjU3YTIgMiAwIDAxMi44MjggMGwyLjgyOSAyLjgyOWEyIDIgMCAwMTAgMi44MjhsLTguNDg2IDguNDg1TTcgMTdoLjAxIiAvPjwvc3ZnPg=="
+    },
+    {
+      "name": "Archive Request to Storage",
+      "isPreview": true,
+      "id": "archive-request-inbound",
+      "defaultHandler": {
+        "export": "ArchiveRequestInbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItdXBsb2FkLWNsb3VkIj48cG9seWxpbmUgcG9pbnRzPSIxNiAxNiAxMiAxMiA4IDE2Ij48L3BvbHlsaW5lPjxsaW5lIHgxPSIxMiIgeTE9IjEyIiB4Mj0iMTIiIHkyPSIyMSI+PC9saW5lPjxwYXRoIGQ9Ik0yMC4zOSAxOC4zOUE1IDUgMCAwIDAgMTggOWgtMS4yNkE4IDggMCAxIDAgMyAxNi4zIj48L3BhdGg+PHBvbHlsaW5lIHBvaW50cz0iMTYgMTYgMTIgMTIgOCAxNiI+PC9wb2x5bGluZT48L3N2Zz4="
+    },
+    {
+      "name": "Archive Response to Storage",
+      "isPreview": true,
+      "id": "archive-response-outbound",
+      "defaultHandler": {
+        "export": "ArchiveResponseOutbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItdXBsb2FkLWNsb3VkIj48cG9seWxpbmUgcG9pbnRzPSIxNiAxNiAxMiAxMiA4IDE2Ij48L3BvbHlsaW5lPjxsaW5lIHgxPSIxMiIgeTE9IjEyIiB4Mj0iMTIiIHkyPSIyMSI+PC9saW5lPjxwYXRoIGQ9Ik0yMC4zOSAxOC4zOUE1IDUgMCAwIDAgMTggOWgtMS4yNkE4IDggMCAxIDAgMyAxNi4zIj48L3BhdGg+PHBvbHlsaW5lIHBvaW50cz0iMTYgMTYgMTIgMTIgOCAxNiI+PC9wb2x5bGluZT48L3N2Zz4="
+    },
+    {
+      "name": "Basic Auth",
+      "isPreview": true,
+      "id": "basic-auth-inbound",
+      "defaultHandler": {
+        "export": "BasicAuthInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXIta2V5Ij48cGF0aCBkPSJNMjEgMmwtMiAybS03LjYxIDcuNjFhNS41IDUuNSAwIDEgMS03Ljc3OCA3Ljc3OCA1LjUgNS41IDAgMCAxIDcuNzc3LTcuNzc3em0wIDBMMTUuNSA3LjVtMCAwbDMgM0wyMiA3bC0zLTNtLTMuNSAzLjVMMTkgNCI+PC9wYXRoPjwvc3ZnPg=="
+    },
+    {
+      "name": "Billing",
+      "isPreview": true,
+      "id": "billing-inbound",
+      "defaultHandler": {
+        "export": "BillingInbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGNsYXNzPSJoLTYgdy02IiBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZD0iTTE3IDlWN2EyIDIgMCAwMC0yLTJINWEyIDIgMCAwMC0yIDJ2NmEyIDIgMCAwMDIgMmgybTIgNGgxMGEyIDIgMCAwMDItMnYtNmEyIDIgMCAwMC0yLTJIOWEyIDIgMCAwMC0yIDJ2NmEyIDIgMCAwMDIgMnptNy01YTIgMiAwIDExLTQgMCAyIDIgMCAwMTQgMHoiIC8+PC9zdmc+"
+    },
+    {
+      "name": "Bot Detection",
+      "isPreview": true,
+      "id": "bot-detection-inbound",
+      "defaultHandler": {
+        "export": "BotDetectionInbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItc3F1YXJlIj48cmVjdCB4PSIzIiB5PSIzIiB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHJ4PSIyIiByeT0iMiI+PC9yZWN0Pjwvc3ZnPg=="
+    },
+    {
+      "name": "Caching",
+      "isPreview": true,
+      "id": "caching-inbound",
+      "defaultHandler": {
+        "export": "CachingInbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItd2luZCI+PHBhdGggZD0iTTkuNTkgNC41OUEyIDIgMCAxIDEgMTEgOEgybTEwLjU5IDExLjQxQTIgMiAwIDEgMCAxNCAxNkgybTE1LjczLTguMjdBMi41IDIuNSAwIDEgMSAxOS41IDEySDIiPjwvcGF0aD48L3N2Zz4="
+    },
+    {
+      "name": "Change Method",
+      "isPreview": false,
+      "id": "change-method-inbound",
+      "defaultHandler": {
+        "export": "ChangeMethodInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItZWRpdC0zIj48cGF0aCBkPSJNMTIgMjBoOSI+PC9wYXRoPjxwYXRoIGQ9Ik0xNi41IDMuNWEyLjEyMSAyLjEyMSAwIDAgMSAzIDNMNyAxOWwtNCAxIDEtNEwxNi41IDMuNXoiPjwvcGF0aD48L3N2Zz4="
+    },
+    {
+      "name": "Clear Headers",
+      "isPreview": false,
+      "id": "clear-headers-inbound",
+      "defaultHandler": {
+        "export": "ClearHeadersInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItYWxpZ24tcmlnaHQiPjxsaW5lIHgxPSIyMSIgeTE9IjEwIiB4Mj0iNyIgeTI9IjEwIj48L2xpbmU+PGxpbmUgeDE9IjIxIiB5MT0iNiIgeDI9IjMiIHkyPSI2Ij48L2xpbmU+PGxpbmUgeDE9IjIxIiB5MT0iMTQiIHgyPSIzIiB5Mj0iMTQiPjwvbGluZT48bGluZSB4MT0iMjEiIHkxPSIxOCIgeDI9IjciIHkyPSIxOCI+PC9saW5lPjwvc3ZnPg=="
+    },
+    {
+      "name": "Clear Headers",
+      "isPreview": true,
+      "id": "clear-headers-outbound",
+      "defaultHandler": {
+        "export": "ClearHeadersOutbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItYWxpZ24tcmlnaHQiPjxsaW5lIHgxPSIyMSIgeTE9IjEwIiB4Mj0iNyIgeTI9IjEwIj48L2xpbmU+PGxpbmUgeDE9IjIxIiB5MT0iNiIgeDI9IjMiIHkyPSI2Ij48L2xpbmU+PGxpbmUgeDE9IjIxIiB5MT0iMTQiIHgyPSIzIiB5Mj0iMTQiPjwvbGluZT48bGluZSB4MT0iMjEiIHkxPSIxOCIgeDI9IjciIHkyPSIxOCI+PC9saW5lPjwvc3ZnPg=="
+    },
+    {
+      "name": "CORS",
+      "isPreview": true,
+      "id": "cors-inbound",
+      "defaultHandler": {
+        "export": "CORSInbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItY2hyb21lIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIxMCI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iNCI+PC9jaXJjbGU+PGxpbmUgeDE9IjIxLjE3IiB5MT0iOCIgeDI9IjEyIiB5Mj0iOCI+PC9saW5lPjxsaW5lIHgxPSIzLjk1IiB5MT0iNi4wNiIgeDI9IjguNTQiIHkyPSIxNCI+PC9saW5lPjxsaW5lIHgxPSIxMC44OCIgeTE9IjIxLjk0IiB4Mj0iMTUuNDYiIHkyPSIxNCI+PC9saW5lPjwvc3ZnPg=="
+    },
+    {
+      "name": "Custom Code",
+      "isPreview": false,
+      "id": "custom-code-inbound",
+      "defaultHandler": {
+        "export": "<YOUR_EXPORT>",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItY29kZSI+PHBvbHlsaW5lIHBvaW50cz0iMTYgMTggMjIgMTIgMTYgNiI+PC9wb2x5bGluZT48cG9seWxpbmUgcG9pbnRzPSI4IDYgMiAxMiA4IDE4Ij48L3BvbHlsaW5lPjwvc3ZnPg=="
+    },
+    {
+      "name": "Custom Code",
+      "isPreview": false,
+      "id": "custom-code-outbound",
+      "defaultHandler": {
+        "export": "<YOUR_EXPORT>",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItY29kZSI+PHBvbHlsaW5lIHBvaW50cz0iMTYgMTggMjIgMTIgMTYgNiI+PC9wb2x5bGluZT48cG9seWxpbmUgcG9pbnRzPSI4IDYgMiAxMiA4IDE4Ij48L3BvbHlsaW5lPjwvc3ZnPg=="
+    },
+    {
+      "name": "Form Data to JSON",
+      "isPreview": false,
+      "id": "formdata-to-json-inbound",
+      "defaultHandler": {
+        "export": "FormDataToJsonInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItZmlsZS10ZXh0Ij48cGF0aCBkPSJNMTQgMkg2YTIgMiAwIDAgMC0yIDJ2MTZhMiAyIDAgMCAwIDIgMmgxMmEyIDIgMCAwIDAgMi0yVjh6Ij48L3BhdGg+PHBvbHlsaW5lIHBvaW50cz0iMTQgMiAxNCA4IDIwIDgiPjwvcG9seWxpbmU+PGxpbmUgeDE9IjE2IiB5MT0iMTMiIHgyPSI4IiB5Mj0iMTMiPjwvbGluZT48bGluZSB4MT0iMTYiIHkxPSIxNyIgeDI9IjgiIHkyPSIxNyI+PC9saW5lPjxwb2x5bGluZSBwb2ludHM9IjEwIDkgOSA5IDggOSI+PC9wb2x5bGluZT48L3N2Zz4="
+    },
+    {
+      "name": "Geo-location filtering",
+      "isPreview": true,
+      "id": "geo-location-inbound",
+      "defaultHandler": {
+        "export": "GeoLocationInbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItZ2xvYmUiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIj48L2NpcmNsZT48bGluZSB4MT0iMiIgeTE9IjEyIiB4Mj0iMjIiIHkyPSIxMiI+PC9saW5lPjxwYXRoIGQ9Ik0xMiAyYTE1LjMgMTUuMyAwIDAgMSA0IDEwIDE1LjMgMTUuMyAwIDAgMS00IDEwIDE1LjMgMTUuMyAwIDAgMS00LTEwIDE1LjMgMTUuMyAwIDAgMSA0LTEweiI+PC9wYXRoPjwvc3ZnPg=="
+    },
+    {
+      "name": "HMAC Auth",
+      "isPreview": true,
+      "id": "hmac-auth-inbound",
+      "defaultHandler": {
+        "export": "HMACAuthInbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItaGFzaCI+PGxpbmUgeDE9IjQiIHkxPSI5IiB4Mj0iMjAiIHkyPSI5Ij48L2xpbmU+PGxpbmUgeDE9IjQiIHkxPSIxNSIgeDI9IjIwIiB5Mj0iMTUiPjwvbGluZT48bGluZSB4MT0iMTAiIHkxPSIzIiB4Mj0iOCIgeTI9IjIxIj48L2xpbmU+PGxpbmUgeDE9IjE2IiB5MT0iMyIgeDI9IjE0IiB5Mj0iMjEiPjwvbGluZT48L3N2Zz4="
+    },
+    {
+      "name": "IP Restriction",
+      "isPreview": true,
+      "id": "ip-restriction-inbound",
+      "defaultHandler": {
+        "export": "IPRestrictionInbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItbGlzdCI+PGxpbmUgeDE9IjgiIHkxPSI2IiB4Mj0iMjEiIHkyPSI2Ij48L2xpbmU+PGxpbmUgeDE9IjgiIHkxPSIxMiIgeDI9IjIxIiB5Mj0iMTIiPjwvbGluZT48bGluZSB4MT0iOCIgeTE9IjE4IiB4Mj0iMjEiIHkyPSIxOCI+PC9saW5lPjxsaW5lIHgxPSIzIiB5MT0iNiIgeDI9IjMuMDEiIHkyPSI2Ij48L2xpbmU+PGxpbmUgeDE9IjMiIHkxPSIxMiIgeDI9IjMuMDEiIHkyPSIxMiI+PC9saW5lPjxsaW5lIHgxPSIzIiB5MT0iMTgiIHgyPSIzLjAxIiB5Mj0iMTgiPjwvbGluZT48L3N2Zz4="
+    },
+    {
+      "name": "LDAP Auth",
+      "isPreview": true,
+      "id": "ldap-auth-inbound",
+      "defaultHandler": {
+        "export": "LDAPAuthInbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItZGF0YWJhc2UiPjxlbGxpcHNlIGN4PSIxMiIgY3k9IjUiIHJ4PSI5IiByeT0iMyI+PC9lbGxpcHNlPjxwYXRoIGQ9Ik0yMSAxMmMwIDEuNjYtNCAzLTkgM3MtOS0xLjM0LTktMyI+PC9wYXRoPjxwYXRoIGQ9Ik0zIDV2MTRjMCAxLjY2IDQgMyA5IDNzOS0xLjM0IDktM1Y1Ij48L3BhdGg+PC9zdmc+"
+    },
+    {
+      "name": "Mock API",
+      "isPreview": true,
+      "id": "mock-api-inbound",
+      "defaultHandler": {
+        "export": "MockAPIInbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItbGF5b3V0Ij48cmVjdCB4PSIzIiB5PSIzIiB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHJ4PSIyIiByeT0iMiI+PC9yZWN0PjxsaW5lIHgxPSIzIiB5MT0iOSIgeDI9IjIxIiB5Mj0iOSI+PC9saW5lPjxsaW5lIHgxPSI5IiB5MT0iMjEiIHgyPSI5IiB5Mj0iOSI+PC9saW5lPjwvc3ZnPg=="
+    },
+    {
+      "name": "mTLS Auth",
+      "isPreview": true,
+      "id": "mtls-auth-inbound",
+      "defaultHandler": {
+        "export": "MTLSAuthInbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGNsYXNzPSJoLTYgdy02IiBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZD0iTTggN2gxMm0wIDBsLTQtNG00IDRsLTQgNG0wIDZING0wIDBsNCA0bS00LTRsNC00IiAvPjwvc3ZnPg=="
+    },
+    {
+      "name": "JWT Auth",
+      "isPreview": true,
+      "id": "open-id-jwt-auth-inbound",
+      "defaultHandler": {
+        "export": "OpenIdJwtInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGNsYXNzPSJoLTYgdy02IiBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZD0iTTEyIDE1djJtLTYgNGgxMmEyIDIgMCAwMDItMnYtNmEyIDIgMCAwMC0yLTJINmEyIDIgMCAwMC0yIDJ2NmEyIDIgMCAwMDIgMnptMTAtMTBWN2E0IDQgMCAwMC04IDB2NGg4eiIgLz48L3N2Zz4="
+    },
+    {
+      "name": "Quota",
+      "isPreview": true,
+      "id": "quota-inbound",
+      "defaultHandler": {
+        "export": "QuotaInbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGNsYXNzPSJoLTYgdy02IiBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZD0iTTMgNmwzIDFtMCAwbC0zIDlhNS4wMDIgNS4wMDIgMCAwMDYuMDAxIDBNNiA3bDMgOU02IDdsNi0ybTYgMmwzLTFtLTMgMWwtMyA5YTUuMDAyIDUuMDAyIDAgMDA2LjAwMSAwTTE4IDdsMyA5bS0zLTlsLTYtMm0wLTJ2Mm0wIDE2VjVtMCAxNkg5bTMgMGgzIiAvPjwvc3ZnPg=="
+    },
+    {
+      "name": "Redirect Policy",
+      "isPreview": true,
+      "id": "redirect-response-inbound",
+      "defaultHandler": {
+        "export": "RedirectResponseInbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItcmVwZWF0Ij48cG9seWxpbmUgcG9pbnRzPSIxNyAxIDIxIDUgMTcgOSI+PC9wb2x5bGluZT48cGF0aCBkPSJNMyAxMVY5YTQgNCAwIDAgMSA0LTRoMTQiPjwvcGF0aD48cG9seWxpbmUgcG9pbnRzPSI3IDIzIDMgMTkgNyAxNSI+PC9wb2x5bGluZT48cGF0aCBkPSJNMjEgMTN2MmE0IDQgMCAwIDEtNCA0SDMiPjwvcGF0aD48L3N2Zz4="
+    },
+    {
+      "name": "Remove Headers",
+      "isPreview": false,
+      "id": "remove-headers-inbound",
+      "defaultHandler": {
+        "export": "RemoveHeadersInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItYWxpZ24tcmlnaHQiPjxsaW5lIHgxPSIyMSIgeTE9IjEwIiB4Mj0iNyIgeTI9IjEwIj48L2xpbmU+PGxpbmUgeDE9IjIxIiB5MT0iNiIgeDI9IjMiIHkyPSI2Ij48L2xpbmU+PGxpbmUgeDE9IjIxIiB5MT0iMTQiIHgyPSIzIiB5Mj0iMTQiPjwvbGluZT48bGluZSB4MT0iMjEiIHkxPSIxOCIgeDI9IjciIHkyPSIxOCI+PC9saW5lPjwvc3ZnPg=="
+    },
+    {
+      "name": "Remove Headers",
+      "isPreview": true,
+      "id": "remove-headers-outbound",
+      "defaultHandler": {
+        "export": "RemoveHeaderOutbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItYWxpZ24tcmlnaHQiPjxsaW5lIHgxPSIyMSIgeTE9IjEwIiB4Mj0iNyIgeTI9IjEwIj48L2xpbmU+PGxpbmUgeDE9IjIxIiB5MT0iNiIgeDI9IjMiIHkyPSI2Ij48L2xpbmU+PGxpbmUgeDE9IjIxIiB5MT0iMTQiIHgyPSIzIiB5Mj0iMTQiPjwvbGluZT48bGluZSB4MT0iMjEiIHkxPSIxOCIgeDI9IjciIHkyPSIxOCI+PC9saW5lPjwvc3ZnPg=="
+    },
+    {
+      "name": "Remove Query Parameters",
+      "isPreview": false,
+      "id": "remove-query-params-inbound",
+      "defaultHandler": {
+        "export": "RemoveQueryParamsInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItaGVscC1jaXJjbGUiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIj48L2NpcmNsZT48cGF0aCBkPSJNOS4wOSA5YTMgMyAwIDAgMSA1LjgzIDFjMCAyLTMgMy0zIDMiPjwvcGF0aD48bGluZSB4MT0iMTIiIHkxPSIxNyIgeDI9IjEyLjAxIiB5Mj0iMTciPjwvbGluZT48L3N2Zz4="
+    },
+    {
+      "name": "Request Size Limit",
+      "isPreview": false,
+      "id": "request-size-limit-inbound",
+      "defaultHandler": {
+        "export": "RequestSizeLimitInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItdHJ1Y2siPjxyZWN0IHg9IjEiIHk9IjMiIHdpZHRoPSIxNSIgaGVpZ2h0PSIxMyI+PC9yZWN0Pjxwb2x5Z29uIHBvaW50cz0iMTYgOCAyMCA4IDIzIDExIDIzIDE2IDE2IDE2IDE2IDgiPjwvcG9seWdvbj48Y2lyY2xlIGN4PSI1LjUiIGN5PSIxOC41IiByPSIyLjUiPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjE4LjUiIGN5PSIxOC41IiByPSIyLjUiPjwvY2lyY2xlPjwvc3ZnPg=="
+    },
+    {
+      "name": "Request Termination",
+      "isPreview": true,
+      "id": "request-termination-inbound",
+      "defaultHandler": {
+        "export": "RequestTerminationInbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXIteC1vY3RhZ29uIj48cG9seWdvbiBwb2ludHM9IjcuODYgMiAxNi4xNCAyIDIyIDcuODYgMjIgMTYuMTQgMTYuMTQgMjIgNy44NiAyMiAyIDE2LjE0IDIgNy44NiA3Ljg2IDIiPjwvcG9seWdvbj48bGluZSB4MT0iMTUiIHkxPSI5IiB4Mj0iOSIgeTI9IjE1Ij48L2xpbmU+PGxpbmUgeDE9IjkiIHkxPSI5IiB4Mj0iMTUiIHkyPSIxNSI+PC9saW5lPjwvc3ZnPg=="
+    },
+    {
+      "name": "Request Validation",
+      "isPreview": true,
+      "id": "request-validation-inbound",
+      "defaultHandler": {
+        "export": "RequestValidationInbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItY2hlY2stY2lyY2xlIj48cGF0aCBkPSJNMjIgMTEuMDhWMTJhMTAgMTAgMCAxIDEtNS45My05LjE0Ij48L3BhdGg+PHBvbHlsaW5lIHBvaW50cz0iMjIgNCAxMiAxNC4wMSA5IDExLjAxIj48L3BvbHlsaW5lPjwvc3ZnPg=="
+    },
+    {
+      "name": "Set Headers",
+      "isPreview": false,
+      "id": "set-headers-inbound",
+      "defaultHandler": {
+        "export": "SetHeadersInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "exampleMarkdown": "```js\nconsole.log(\"It works!\");\n```\n\n## Aspera fugit passo declivibus summum huius nimbosi\n\nLorem markdownum nympharum tenues, tenentis scopulum, nubis Dulichium Alcyone\ninanes: Cynthus. Teli tum omnia quoque, fretum praevitiat potero latuit\ndeposuitque Capherea _cetera flammaeque_ o vultum ira etiam, _Latiis_. Paventes\nplacat, resonabilis in est si fixa, putes? Move petiit, terra Aiax defendere\natque, ut tot hac est _rebus teneri_.\n",
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItYWxpZ24tcmlnaHQiPjxsaW5lIHgxPSIyMSIgeTE9IjEwIiB4Mj0iNyIgeTI9IjEwIj48L2xpbmU+PGxpbmUgeDE9IjIxIiB5MT0iNiIgeDI9IjMiIHkyPSI2Ij48L2xpbmU+PGxpbmUgeDE9IjIxIiB5MT0iMTQiIHgyPSIzIiB5Mj0iMTQiPjwvbGluZT48bGluZSB4MT0iMjEiIHkxPSIxOCIgeDI9IjciIHkyPSIxOCI+PC9saW5lPjwvc3ZnPg=="
+    },
+    {
+      "name": "Set Headers",
+      "isPreview": true,
+      "id": "set-headers-outbound",
+      "defaultHandler": {
+        "export": "SetHeaderOutbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItYWxpZ24tcmlnaHQiPjxsaW5lIHgxPSIyMSIgeTE9IjEwIiB4Mj0iNyIgeTI9IjEwIj48L2xpbmU+PGxpbmUgeDE9IjIxIiB5MT0iNiIgeDI9IjMiIHkyPSI2Ij48L2xpbmU+PGxpbmUgeDE9IjIxIiB5MT0iMTQiIHgyPSIzIiB5Mj0iMTQiPjwvbGluZT48bGluZSB4MT0iMjEiIHkxPSIxOCIgeDI9IjciIHkyPSIxOCI+PC9saW5lPjwvc3ZnPg=="
+    },
+    {
+      "name": "Set Query Parameters",
+      "isPreview": false,
+      "id": "set-query-params-inbound",
+      "defaultHandler": {
+        "export": "SetQueryParamsInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItaGVscC1jaXJjbGUiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIj48L2NpcmNsZT48cGF0aCBkPSJNOS4wOSA5YTMgMyAwIDAgMSA1LjgzIDFjMCAyLTMgMy0zIDMiPjwvcGF0aD48bGluZSB4MT0iMTIiIHkxPSIxNyIgeDI9IjEyLjAxIiB5Mj0iMTciPjwvbGluZT48L3N2Zz4="
+    },
+    {
+      "name": "Sleep / Delay",
+      "isPreview": false,
+      "id": "sleep-inbound",
+      "defaultHandler": {
+        "export": "SleepInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItd2F0Y2giPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjciPjwvY2lyY2xlPjxwb2x5bGluZSBwb2ludHM9IjEyIDkgMTIgMTIgMTMuNSAxMy41Ij48L3BvbHlsaW5lPjxwYXRoIGQ9Ik0xNi41MSAxNy4zNWwtLjM1IDMuODNhMiAyIDAgMCAxLTIgMS44Mkg5LjgzYTIgMiAwIDAgMS0yLTEuODJsLS4zNS0zLjgzbS4wMS0xMC43bC4zNS0zLjgzQTIgMiAwIDAgMSA5LjgzIDFoNC4zNWEyIDIgMCAwIDEgMiAxLjgybC4zNSAzLjgzIj48L3BhdGg+PC9zdmc+"
+    },
+    {
+      "name": "Transform Request Body",
+      "isPreview": true,
+      "id": "transform-body-inbound",
+      "defaultHandler": {
+        "export": "TransformBodyInbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItZWRpdCI+PHBhdGggZD0iTTExIDRINGEyIDIgMCAwIDAtMiAydjE0YTIgMiAwIDAgMCAyIDJoMTRhMiAyIDAgMCAwIDItMnYtNyI+PC9wYXRoPjxwYXRoIGQ9Ik0xOC41IDIuNWEyLjEyMSAyLjEyMSAwIDAgMSAzIDNMMTIgMTVsLTQgMSAxLTQgOS41LTkuNXoiPjwvcGF0aD48L3N2Zz4="
+    },
+    {
+      "name": "Transform Response Body",
+      "isPreview": true,
+      "id": "transform-body-outbound",
+      "defaultHandler": {
+        "export": "TransformBodyOutbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItZWRpdCI+PHBhdGggZD0iTTExIDRINGEyIDIgMCAwIDAtMiAydjE0YTIgMiAwIDAgMCAyIDJoMTRhMiAyIDAgMCAwIDItMnYtNyI+PC9wYXRoPjxwYXRoIGQ9Ik0xOC41IDIuNWEyLjEyMSAyLjEyMSAwIDAgMSAzIDNMMTIgMTVsLTQgMSAxLTQgOS41LTkuNXoiPjwvcGF0aD48L3N2Zz4="
+    },
+    {
+      "name": "JSON Body Validation",
+      "isPreview": true,
+      "id": "validate-json-schema-inbound",
+      "defaultHandler": {
+        "export": "ValidateJsonSchemaInbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItY2hlY2stc3F1YXJlIj48cG9seWxpbmUgcG9pbnRzPSI5IDExIDEyIDE0IDIyIDQiPjwvcG9seWxpbmU+PHBhdGggZD0iTTIxIDEydjdhMiAyIDAgMCAxLTIgMkg1YTIgMiAwIDAgMS0yLTJWNWEyIDIgMCAwIDEgMi0yaDExIj48L3BhdGg+PC9zdmc+"
+    },
+    {
+      "name": "Auth0 JWT Auth",
+      "id": "auth0-jwt-auth-inbound",
+      "defaultHandler": {
+        "export": "Auth0JwtInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyMiAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTcuMjM2IDE5LjQxNSAxNC44IDEybDYuMzc4LTQuNTgyaC03Ljg4M0wxMC44NiAwaDcuODg3bDIuNDQgNy40MThhMTAuNjY4IDEwLjY2OCAwIDAgMS0zLjk1IDExLjk5N1ptLTEyLjc1OCAwTDEwLjg1NiAyNGw2LjM4LTQuNTg1LTYuMzc3LTQuNTgyLTYuMzgxIDQuNTgyWm0tMy45NDQtMTJjLTEuNDkgNC41MzguMjQgOS4zNDQgMy45MzggMTIuMDAzdi0uMDAzTDYuOTEyIDEyIC41MzYgNy40MTVsNy44ODQuMDAzTDEwLjg1NiAwSDIuOTcxTC41MzQgNy40MTVaIiBmaWxsPSIjMDAwIi8+PC9zdmc+"
+    },
+    {
+      "name": "AWS Cognito JWT Auth",
+      "id": "cognito-jwt-auth-inbound",
+      "defaultHandler": {
+        "export": "CognitoJwtInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNTYgMjk5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIj48cGF0aCBkPSJtMjA4Ljc1MiA1OC4wNjEgMjUuNzcxLTYuNjM2LjE5Mi4yODMuNjUxIDE1NS42MDctLjg0My44NDYtNS4zMS4yMjctMjAuMTU5LTMuMTM4LS4zMDItLjc5NFY1OC4wNjFNNTkuNzA1IDIxOC45NzFsLjA5NS4wMDcgNjguMDI3IDE5Ljc2Ny4xNzMuMTMzLjI5Ni4yMzYtLjA5NiA1OS4yMzItLjIuMjUyLTY4LjI5NS0zMy4xNzh2LTQ2LjQ0OSIgZmlsbD0iIzdBM0U2NSIvPjxwYXRoIGQ9Im0yMDguNzUyIDIwNC40NTYtODAuNjQgMTkuMzEyLTQwLjQ4OC05Ljc3My0yNy45MTkgNC45NzZMMTI4IDIzOC44NzhsMTA1LjQwNS0yOC41MzcgMS4xMTgtMi4xOC0yNS43NzEtMy43MDUiIGZpbGw9IiNDRkIyQzEiLz48cGF0aCBkPSJtMTk2LjI5NSA3OS42MjYtLjY1Ny0uNzQ5LTY2LjkwNC0xOS40NC0uNzM0LjI4My0uNjcyLS4zNDNMMjIuMDUyIDg5LjczNGwtLjU3NS43MDMuODQ1LjQ2MyAyNC4wNzUgMy41My44NTEtLjI4OSA4MC42NC0xOS4zMTEgNDAuNDg4IDkuNzczIDI3LjkxOS00Ljk3NyIgZmlsbD0iIzUxMjg0MyIvPjxwYXRoIGQ9Im00Ny4yNDggMjQwLjUzNy0yNS43NzEgNi4yMjEtLjA0NS0uMTQ5LTEuMDE1LTE1NS4wMjYgMS4wNi0xLjE0NiAyNS43NzEgMy43MDR2MTQ2LjM5NiIgZmlsbD0iI0MxN0I5RSIvPjxwYXRoIGQ9Im04Mi4wNCAxODAuNDAzIDQ1Ljk2IDUuMzkxLjM0NS0uNTE1LjE4Ny03MS44ODctLjUzMi0uNTg5LTQ1Ljk2IDUuMzkydjYyLjIwOCIgZmlsbD0iIzdBM0U2NSIvPjxwYXRoIGQ9Ik0xNzMuOTYgMTgwLjQwMyAxMjggMTg1Ljc5NHYtNzIuOTkxbDQ1Ljk2IDUuMzkydjYyLjIwOG0yMi4zMzUtMTAwLjc3N0wxMjggNTkuNzJWMGw2OC4yOTUgMzMuMTc3djQ2LjQ0OSIgZmlsbD0iI0MxN0I5RSIvPjxwYXRoIGQ9Ik0xMjggMCAwIDYxLjc5M3YxNzUuMDExbDIxLjQ3NyA5Ljk1NFY5MC40MzdMMTI4IDU5LjcyVjAiIGZpbGw9IiM3QTNFNjUiLz48cGF0aCBkPSJNMjM0LjUyMyA1MS40MjV2MTU2LjczNkwxMjggMjM4Ljg3OHY1OS43MmwxMjgtNjEuNzk0VjYxLjc5M2wtMjEuNDc3LTEwLjM2OCIgZmlsbD0iI0MxN0I5RSIvPjwvc3ZnPg=="
+    },
+    {
+      "name": "Rate Limit Inbound",
+      "id": "rate-limit-inbound",
+      "defaultHandler": {
+        "export": "BasicRateLimitInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "exampleMarkdown": "The rate-limiting policy is used to limit the number of requests that can be\nmade against your API based on a key.\n\n**Options**\n\n- `rateLimitBy`: Used to determine the key on which to rate limit. Allowed\n  values are `ip` to filter by IP address, `user` to filter by the authenticated\n  user's `sub`, and `function` for custom rate limiting.\n- `requestsAllowed`: the max number of requests allowed in the given time window\n- `timeWindowMinutes`: the time window in which the requests are rate-limited.\n  The count restarts after each window expires.\n\n[See the documentation for more details](https://www.zuplo.com/docs/policies/rate-limit/)\n",
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGNsYXNzPSJoLTYgdy02IiBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZD0iTTExLjkzMyAxMi44YTEgMSAwIDAwMC0xLjZMNi42IDcuMkExIDEgMCAwMDUgOHY4YTEgMSAwIDAwMS42LjhsNS4zMzMtNHpNMTkuOTMzIDEyLjhhMSAxIDAgMDAwLTEuNmwtNS4zMzMtNEExIDEgMCAwMDEzIDh2OGExIDEgMCAwMDEuNi44bDUuMzMzLTR6IiAvPjwvc3ZnPg=="
+    },
+    {
+      "name": "Access Control List Inbound",
+      "isPreview": true,
+      "id": "acl-policy-inbound",
+      "defaultHandler": {
+        "export": "AClPolicyInbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItdXNlci1jaGVjayI+PHBhdGggZD0iTTE2IDIxdi0yYTQgNCAwIDAgMC00LTRINWE0IDQgMCAwIDAtNCA0djIiPjwvcGF0aD48Y2lyY2xlIGN4PSI4LjUiIGN5PSI3IiByPSI0Ij48L2NpcmNsZT48cG9seWxpbmUgcG9pbnRzPSIxNyAxMSAxOSAxMyAyMyA5Ij48L3BvbHlsaW5lPjwvc3ZnPg=="
+    },
+    {
+      "name": "Audit Logs Inbound",
+      "isPreview": true,
+      "id": "audit-log-inbound",
+      "defaultHandler": {
+        "export": "AuditLogsInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGNsYXNzPSJoLTYgdy02IiBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZD0iTTcgNHYxNk0xNyA0djE2TTMgOGg0bTEwIDBoNE0zIDEyaDE4TTMgMTZoNG0xMCAwaDRNNCAyMGgxNmExIDEgMCAwMDEtMVY1YTEgMSAwIDAwLTEtMUg0YTEgMSAwIDAwLTEgMXYxNGExIDEgMCAwMDEgMXoiIC8+PC9zdmc+"
+    },
+    {
+      "name": "A/B Test Inbound",
+      "id": "ab-test-inbound",
+      "defaultHandler": {
+        "export": "ABTestInbound",
+        "module": "$import(@zuplo/runtime)",
+        "options": {}
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItc2VuZCI+PGxpbmUgeDE9IjIyIiB5MT0iMiIgeDI9IjExIiB5Mj0iMTMiPjwvbGluZT48cG9seWdvbiBwb2ludHM9IjIyIDIgMTUgMjIgMTEgMTMgMiA5IDIyIDIiPjwvcG9seWdvbj48L3N2Zz4="
+    }
+  ]
+}

@@ -4,7 +4,7 @@ authors: josh
 tags: [videos, api-keys]
 ---
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/0oYp53Al9nI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+import YouTubeVideo from "@site/src/components/YouTubeVideo";
 
 We recently shared some reasoning on [why we think API keys are the best authentication approach for your public API](ttps://www.zuplo.com/blog/2022/05/03/you-should-be-using-api-keys).
 

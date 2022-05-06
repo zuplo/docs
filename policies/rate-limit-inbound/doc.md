@@ -1,38 +1,3 @@
----
-title: Rate-Limit Policy
-sidebar_label: Rate Limiting
-sidebar_position: 2
----
-
-Rate-limiting allows you to set a maximum rate of requests for your API gateway.
-This is useful to enforce rate limits agreed with your clients and protect your
-downstream services.
-
-The Zuplo Rate-Limit allows you to limit based on different attributes of the
-incoming request. For example, you might set a rate limit of 10 requests per
-second per user, or 20 requests per second for a given IP address.
-
-The Zuplo rate-limiter also allows you to set a custom bucket name by which to
-effect a rate-limit using a function.
-
-When a client reaches a rate limit - they will receive a `429` response code.
-
-## Configuration
-
-:::tip
-
-Be sure to read about [policies](/docs/policies)
-
-:::
-
-Here is an example configuration (this would go in the `policies` section of the
-routes.json file). This policy would enforce a rate limit of a maximum of 2
-requests, every 1 minute for each unique IP address.
-
-<PolicyExample policy="rate-limit-inbound" />
-
-<PolicyOptions policy="rate-limit-inbound" />
-
 :::tip
 
 Note you can have multiple instances of rate-limiting policies to use in combination. You should apply the longest duration timeWindow first, in order to the shortest duration time window.

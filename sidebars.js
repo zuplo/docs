@@ -41,7 +41,6 @@ const sidebars = {
     {
       type: "category",
       label: "Policies",
-      link: { type: "doc", id: "policies/index" },
       items: [
         {
           type: "category",
