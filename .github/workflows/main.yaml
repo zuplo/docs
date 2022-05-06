@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      GITHUB_NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_NPM_TOKEN: ${{ secrets.GH_CUSTOM_TOKEN }}
 
     permissions:
       id-token: "write"
