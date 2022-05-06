@@ -101,7 +101,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 		headers: {
 			"content-type" : "text/html"
 		}
-	}
+	})
   return response;
 }
 ```
