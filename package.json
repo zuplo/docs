@@ -20,8 +20,7 @@
     "ci:post": "npm run ci:redirects",
     "ci:redirects": "node ./scripts/copy-redirects.js",
     "ci:bundles": "node ./scripts/update-bundles.js",
-    "ci:policies": "npm i @zuplo/policies@latest",
-    "update-policies": "node ./scripts/update-policies.mjs"
+    "ci:policies": "node ./scripts/update-policies.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "^2.0.0-beta.19",

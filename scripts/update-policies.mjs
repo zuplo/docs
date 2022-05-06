@@ -87,18 +87,17 @@ sidebar_label: Policies
 ---
   
 import PolicyCatalog from '@site/src/components/PolicyCatalog';
-import { policies } from '@site/policies.v2.json';
+import policyConfig from '@site/policies.v2.json';
 
 <!-- WARNING: This document is generated. DO NOT EDIT BY HAND -->
 
 ${intro}
 
-<PolicyCatalog policies={policies} />
+<PolicyCatalog policies={policyConfig.policies} />
 `;
 }
 
 async function run() {
-  console.info("Updating policies...");
   await mkdir(docsDir, { recursive: true });
 
   const policyConfigJson = await readFile(

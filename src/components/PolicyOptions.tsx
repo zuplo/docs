@@ -30,7 +30,6 @@ const PolicyOptions = ({
   schema: any;
   policyId: string;
 }) => {
-  console.log(schema);
   const { required, properties } = schema.properties.handler;
   // if (!Array.isArray(examples) || examples.length === 0) {
   // throw new Error(`There are no examples set for policy ${policy}`);
