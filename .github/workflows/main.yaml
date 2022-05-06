@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js 14
+      - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
@@ -45,7 +45,7 @@ jobs:
           project_id: zuplo-production
 
       - run: npm install
-      - run: npm run update-policies
+      - run: npm run ci:policies
       - run: gsutil -h "Content-Type:application/json" cp ./policies.v2.json gs://cdn.zuplo.com/portal/policies.v2.json
 
   search-index:

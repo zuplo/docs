@@ -59,7 +59,6 @@ function DocItemContent(props) {
   // overrides the color mode the user has set on docs
   useEffect(() => {
     if (isBrowser && colorMode === "dark") {
-      console.log("test");
       document.documentElement.removeAttribute("data-theme");
       setTimeout(() => {
         document.documentElement.removeAttribute("data-theme");
