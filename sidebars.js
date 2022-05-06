@@ -41,7 +41,10 @@ const sidebars = {
     {
       type: "category",
       label: "Policies",
-      link: { type: "doc", id: "policies/index" },
+      link: {
+        type: "doc",
+        id: "policies/index",
+      },
       items: [
         {
           type: "category",
@@ -53,6 +56,7 @@ const sidebars = {
             "policies/open-id-jwt-auth-inbound",
             "policies/basic-auth-inbound",
             "policies/mtls-auth-inbound",
+            "policies/ldap-auth-inbound",
             "policies/hmac-auth-inbound",
           ],
         },
@@ -64,6 +68,8 @@ const sidebars = {
             "policies/audit-log-inbound",
             "policies/validate-json-schema-inbound",
             "policies/request-validation-inbound",
+            "policies/bot-detection-inbound",
+            "policies/cors-inbound",
           ],
         },
         {
@@ -104,6 +110,7 @@ const sidebars = {
             "policies/remove-query-params-inbound",
             "policies/request-termination-inbound",
             "policies/set-headers-inbound",
+            "policies/set-query-params-inbound",
           ],
         },
         {
@@ -114,6 +121,16 @@ const sidebars = {
             "policies/remove-headers-outbound",
             "policies/clear-headers-outbound",
             "policies/set-headers-outbound",
+          ],
+        },
+        {
+          type: "category",
+          label: "Other",
+          items: [
+            "policies/archive-request-inbound",
+            "policies/archive-response-outbound",
+            "policies/custom-code-inbound",
+            "policies/custom-code-outbound",
           ],
         },
       ],
