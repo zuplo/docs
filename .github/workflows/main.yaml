@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
-          cache: "yarn"
+          cache: "npm"
 
       # gsutil doesnt support workload idenity yet, when it does switch to this and delete the service account token
       # - id: "auth"
@@ -44,7 +44,8 @@ jobs:
         with:
           project_id: zuplo-production
 
-      - run: yarn install
+      - run: npm install
+      - run: npm run update-policies
       - run: gsutil -h "Content-Type:application/json" cp ./policies.v2.json gs://cdn.zuplo.com/portal/policies.v2.json
 
   search-index:
