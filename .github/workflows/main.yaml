@@ -9,6 +9,9 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
 
+    env:
+      GITHUB_NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     permissions:
       id-token: "write"
 
