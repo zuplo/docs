@@ -152,8 +152,16 @@ const policyDataV3 = {
 };
 
 const policiesV2Json = stringify(policyDataV2);
-console.log(path.resolve("./policies.v2.json"));
-writeFileSync(path.resolve("./policies.v2.json"), policiesV2Json, "utf-8");
+
+writeFileSync(
+  path.resolve(policiesDir, "policies.v2.json"),
+  policiesV2Json,
+  "utf-8"
+);
 
 const policiesV3Json = stringify(policyDataV3);
-writeFileSync(path.resolve("./policies.v3.json"), policiesV3Json, "utf-8");
+writeFileSync(
+  path.resolve(policiesDir, "policies.v3.json"),
+  policiesV3Json,
+  "utf-8"
+);

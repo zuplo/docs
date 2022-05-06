@@ -28,6 +28,8 @@ routes.json file).
 
 <PolicyExample policy="basic-auth-inbound" />
 
+<PolicyOptions policy="ab-test-inbound" />
+
 - `name` the name of your policy instance. This is used as a reference in your
   routes.
 - `policyType` the identifier of the policy. This is used by the Zuplo UI. Value
