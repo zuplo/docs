@@ -20,3 +20,8 @@ yarn-debug.log*
 yarn-error.log*
 
 .env
+
+/docs/policies/
+
+
+/policies.*.json

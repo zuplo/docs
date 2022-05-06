@@ -1,30 +1,26 @@
 import CodeBlock from "@theme/CodeBlock";
-import data from "@zuplo/policies/policies.v3.json";
 import React from "react";
 
 const PolicyExample = ({
-  policy,
-  example,
+  schema,
+  policyId,
+  exampleName,
 }: {
-  policy: string;
-  example?: string;
+  schema: any;
+  policyId: string;
+  exampleName?: string;
 }) => {
-  const schema = data.policies[policy];
-  if (!schema) {
-    throw new Error(`Could not find policy '${policy}'`);
-  }
-
   const { examples } = schema.properties.handler;
   if (!Array.isArray(examples) || examples.length === 0) {
-    throw new Error(`There are no examples set for policy ${policy}`);
+    throw new Error(`There are no examples set for policy ${policyId}`);
   }
 
   let handler: any;
-  if (example) {
-    handler = examples.find((e) => e._name === example);
+  if (exampleName) {
+    handler = examples.find((e) => e._name === exampleName);
     if (!handler) {
       throw new Error(
-        `Could not location example ${example} for policy ${policy}`
+        `Could not location example ${exampleName} for policy ${policyId}`
       );
     }
   } else {
@@ -35,8 +31,8 @@ const PolicyExample = ({
   delete copy._name;
 
   const code = {
-    name: `my-${policy}-policy`,
-    policyType: policy,
+    name: `my-${policyId}-policy`,
+    policyType: policyId,
     handler: copy,
   };
 

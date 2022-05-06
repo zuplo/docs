@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/rate-limit-inbound.json",
+  "type": "object",
+  "title": "Access Control List Inbound",
+  "isPreview": true,
+  "description": "The access control list inbound policy limits access to resources based on parameters of the request",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "AClPolicyInbound",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "type": "object",
+          "description": "The options for this policy",
+          "required": ["policies"],
+          "properties": {
+            "policies": {
+              "type": "array",
+              "default": [],
+              "description": "The policies to enforce for the request",
+              "items": {
+                "type": "object",
+                "description": "An access policy",
+                "properties": {
+                  "condition": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "$ref": "../shared.json#/definitions/optionsFunction"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "AClPolicyInbound",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "testKey": "${user.sub}",
+            "modifier": {
+              "module": "$import(./modules/ab-test)",
+              "export": "abTestModifier"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

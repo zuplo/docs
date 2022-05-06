@@ -6,9 +6,7 @@ tags: [videos, code]
 
 import YouTubeVideo from "@site/src/components/YouTubeVideo";
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/YqcLu0cXNfE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<!-- <YouTubeVideo url="https://www.youtube-nocookie.com/embed/Bq-b6z5FyH0" /> -->
+<YouTubeVideo url="https://www.youtube-nocookie.com/embed/YqcLu0cXNfE" />
 
 Length: 3 minutes
 
