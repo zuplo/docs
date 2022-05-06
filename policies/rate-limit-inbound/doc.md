@@ -33,4 +33,17 @@ export function rateLimitKey(
 }
 ```
 
-<PolicyExample policy="rate-limit-inbound" example="custom-rate-limit" />
+```json
+// config - ./config/routes.json
+"export": "BasicRateLimitInboundPolicy",
+"module": "$import(@zuplo/runtime)",
+"options": {
+  "rateLimitBy": "function",
+  "requestsAllowed": 2,
+  "timeWindowMinutes": 1,
+  "identifier": {
+    "module": "$import(./modules/rate-limiter)",
+    "export": "customRateLimit"
+  }
+}
+```

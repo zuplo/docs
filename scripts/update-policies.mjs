@@ -51,8 +51,8 @@ function getPolicyFilePaths(policyId) {
 
 function generateMarkdown(policyId, schema, intro, doc) {
   return `---
-title: ${schema.title}
-sidebar_label: ${schema.title.replace(" Policy", "")}
+title: ${schema.title} Policy
+sidebar_label: ${schema.title}
 ---
 
 import schemaJson from '@site/policies/${policyId}/schema.json';
@@ -76,6 +76,24 @@ Be sure to read about [policies](../overview/policies.md)
 <PolicyOptions schema={schemaJson} policyId="${policyId}" />
 
 ${doc ?? ""}
+`;
+}
+
+async function getIndexPage() {
+  const intro = await readFile(path.join(policiesDir, "_index.md"));
+  return `---
+title: Policy Catalog
+sidebar_label: Policies
+---
+  
+import PolicyCatalog from '@site/src/components/PolicyCatalog';
+import { policies } from '@site/policies.v2.json';
+
+<!-- WARNING: This document is generated. DO NOT EDIT BY HAND -->
+
+${intro}
+
+<PolicyCatalog policies={policies} />
 `;
 }
 
@@ -105,8 +123,7 @@ async function run() {
     );
   });
 
-  const policies = {};
-  const policiesMetaFormat = [];
+  const policies = [];
   const tasks = matches.map(async (match) => {
     const policyId = match.replace("/schema.json", "");
     const schemaJson = readFileSync(path.join(policiesDir, match), "utf-8");
@@ -144,9 +161,7 @@ async function run() {
       const src = `data:image/svg+xml;base64,${btoa(svg)}`;
       meta.icon = src;
     }
-    policiesMetaFormat.push(meta);
-
-    policies[policyId] = schema;
+    policies.push(meta);
 
     let introMd;
     if (existsSync(policyFilePaths.introMd)) {
@@ -165,12 +180,13 @@ async function run() {
 
   await Promise.all(tasks);
 
-  const policyDataV2 = {
-    config: policyConfig,
-    policies: policiesMetaFormat,
-  };
+  await writeFile(
+    path.resolve(docsDir, "index.md"),
+    await getIndexPage(),
+    "utf-8"
+  );
 
-  const policyDataV3 = {
+  const policyDataV2 = {
     config: policyConfig,
     policies,
   };
@@ -180,13 +196,6 @@ async function run() {
   writeFileSync(
     path.resolve(policiesDir, "../policies.v2.json"),
     policiesV2Json,
-    "utf-8"
-  );
-
-  const policiesV3Json = stringify(policyDataV3);
-  writeFileSync(
-    path.resolve(policiesDir, "../policies.v3.json"),
-    policiesV3Json,
     "utf-8"
   );
 
