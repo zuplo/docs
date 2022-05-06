@@ -15,8 +15,8 @@ import MDXUl from "@theme/MDXComponents/Ul";
 import React from "react";
 import PolicyConfig from "../../components/PolicyConfig";
 import PolicyExample from "../../components/PolicyExample";
+import PolicyIntro from "../../components/PolicyIntro";
 import PolicyOptions from "../../components/PolicyOptions";
-import PolicyStatus from "../../components/PolicyStatus";
 import {
   BuildStatusTabIcon,
   CodeEditorTabIcon,
@@ -48,6 +48,6 @@ const MDXComponents = {
   SettingsTabIcon,
   CodeEditorTabIcon,
   DashboardTabIcon,
-  PolicyStatus,
+  PolicyIntro,
 };
 export default MDXComponents;

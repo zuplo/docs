@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/rate-limit-inbound.json",
+  "type": "object",
+  "title": "Rate Limit Inbound",
+  "description": "The rate-limiting policy is used to limit the number of requests that can be made against your API based on a key.",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "BasicRateLimitInboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "type": "object",
+          "description": "The options for this policy",
+          "required": ["rateLimitBy", "requestsAllowed", "timeWindowMinutes"],
+          "properties": {
+            "rateLimitBy": {
+              "type": "string",
+              "default": "user",
+              "enum": ["user", "ip", "function"],
+              "description": "The identifying element of the request that enforces distinct rate limits. For example, you can limit by `user`, `ip`, `function` or `all` - function allows you to specify a simple function to create a string identifier to create a rate-limit group"
+            },
+            "requestsAllowed": {
+              "type": "integer",
+              "default": 1000,
+              "description": "The max number of requests allowed in the given time window"
+            },
+            "timeWindowMinutes": {
+              "type": "integer",
+              "default": 60,
+              "description": "The time window in which the requests are rate-limited. The count restarts after each window expires"
+            },
+            "identifier": {
+              "type": "object",
+              "default": {},
+              "description": "The function that returns dynamic configuration data. Used only with `rateLimitBy=function`",
+              "required": ["export", "module"],
+              "properties": {
+                "export": {
+                  "type": "string",
+                  "default": "$import(./modules/my-module)",
+                  "description": "used only with rateLimitBy=function. Specifies the export to load your custom bucket function, e.g. `default`, `rateLimitIdentifier`.",
+                  "examples": ["$import(./modules/my-module)"]
+                },
+                "module": {
+                  "type": "string",
+                  "default": "",
+                  "description": "Specifies the module to load your custom bucket function, in the format `$import(./modules/my-module)`",
+                  "examples": ["default", "rateLimitIdentifier"]
+                }
+              }
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic-ip",
+          "export": "BasicRateLimitInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "rateLimitBy": "ip",
+            "requestsAllowed": 2,
+            "timeWindowMinutes": 1
+          }
+        },
+        {
+          "_name": "custom-rate-limit",
+          "export": "BasicRateLimitInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "rateLimitBy": "function",
+            "requestsAllowed": 2,
+            "timeWindowMinutes": 1,
+            "identifier": {
+              "module": "$import(./modules/rate-limiter)",
+              "export": "customRateLimit"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

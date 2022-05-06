@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/rate-limit-inbound.json",
+  "type": "object",
+  "title": "A/B Test Inbound",
+  "description": "The A/B test policy is used to handle requests differently based on parameters such as user, ip, etc.",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "ABTestInbound",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "type": "object",
+          "description": "The options for this policy",
+          "required": ["testKey", "modifier"],
+          "properties": {
+            "testKey": {
+              "type": "string",
+              "default": "${user.sub}",
+              "description": "The key to use for determining the group the request belongs"
+            },
+            "modifier": {
+              "description": "The function that modifies the request based on the test key",
+              "$ref": "../shared.json#/definitions/optionsFunction"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "ABTestInbound",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "testKey": "${user.sub}",
+            "modifier": {
+              "module": "$import(./modules/ab-test)",
+              "export": "abTestModifier"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
