@@ -137,7 +137,7 @@ async function run() {
     // Build the meta format for use in the portal
     const meta = {};
     meta.name = schema.title;
-    meta.isPreview = schema.isPreview;
+    meta.isPreview = !!schema.isPreview;
     meta.id = policyId;
 
     if (meta.examples) {
