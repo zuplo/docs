@@ -27,7 +27,6 @@ const config = {
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
           editUrl: "https://github.com/zuplo/docs/tree/main/",
         },
         theme: {
@@ -36,6 +35,7 @@ const config = {
         sitemap: {
           changefreq: "weekly",
           priority: 0.5,
+          ignorePatterns: ["/docs/conferences/**"],
         },
         gtag: {
           trackingID: "G-FJ4E4W746T",
