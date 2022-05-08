@@ -1,5 +1,5 @@
 ---
-title: Share an API with Zuplo for your chance to win a drone and
+title: Share an API with Zuplo for your chance to win a drone
 ---
 
 Share an API with Zuplo for your chance to win a drone and customize it to instantly get a $5 Starbuck’s gift card. You’ll need a laptop or tablet to complete the steps below (you can use ours at the Zuplo stand if you don't have one with you).
