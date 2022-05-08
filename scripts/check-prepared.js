@@ -16,18 +16,6 @@ function exitWithError(error) {
 }
 
 async function run() {
-  const nodeModulesPath = path.resolve(__dirname, "../node_modules");
-
-  // Check @zuplo/policies is recent
-  const zuploPoliciesPkgPath = path.join(
-    nodeModulesPath,
-    "@zuplo/policies/package.json"
-  );
-
-  if (!existsSync(zuploPoliciesPkgPath)) {
-    return exitWithError("The @zuplo/policies module is not installed.");
-  }
-
   // Check bundle.json exist
   const bundleJsonPath = path.resolve(
     __dirname,

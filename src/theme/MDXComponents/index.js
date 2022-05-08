@@ -18,9 +18,11 @@ import PolicyExample from "../../components/PolicyExample";
 import PolicyOptions from "../../components/PolicyOptions";
 import PolicyStatus from "../../components/PolicyStatus";
 import {
+  ApiTestConsoleTabIcon,
   BuildStatusTabIcon,
   CodeEditorTabIcon,
   DashboardTabIcon,
+  LiveLogsTabIcon,
   SettingsTabIcon,
 } from "../../components/ui-icons";
 import ZupIt from "../../components/ZupIt";
@@ -48,6 +50,8 @@ const MDXComponents = {
   SettingsTabIcon,
   CodeEditorTabIcon,
   DashboardTabIcon,
+  ApiTestConsoleTabIcon,
+  LiveLogsTabIcon,
   PolicyStatus,
 };
 export default MDXComponents;
