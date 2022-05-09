@@ -127,6 +127,7 @@ const sidebars = {
           type: "category",
           label: "Other",
           items: [
+            "policies/caching-inbound",
             "policies/archive-request-inbound",
             "policies/archive-response-outbound",
             "policies/custom-code-inbound",

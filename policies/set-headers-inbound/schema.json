@@ -2,21 +2,15 @@
   "$schema": "https://json-schema.org/draft-07/schema",
   "$id": "http://zuplo.com/schemas/policies/set-headers-inbound.json",
   "type": "object",
-  "title": "Set Headers",
+  "title": "Set Headers Inbound",
   "isPreview": false,
   "description": "",
-  "required": [
-    "handler"
-  ],
+  "required": ["handler"],
   "properties": {
     "handler": {
       "type": "object",
       "default": {},
-      "required": [
-        "export",
-        "module",
-        "options"
-      ],
+      "required": ["export", "module", "options"],
       "properties": {
         "export": {
           "const": "SetHeadersInboundPolicy",
