@@ -1,6 +1,14 @@
 ---
-title: Share an API with Zuplo for your chance to win a drone
+title: Zuplo @ NDC London
 ---
+
+[Zuplo](https://www.zuplo.com) is a Programmable API gateway that makes it easy to share your API. Add API-key management, developer documentation, and rate-limiting, for any stack, in under 5 minutes. Companies use Zuplo to put an API in their customers' hands faster.
+
+[Home](https://www.zuplo.com) | [Docs](/docs) | [Blog](/blog) | [Follow Us](https://twitter.com/zuplo)
+
+---
+
+## Share an API with Zuplo for your chance to win a drone
 
 Share an API with Zuplo for your chance to win a drone and customize it to instantly get a $5 Starbuck’s gift card. You’ll need a laptop or tablet to complete the steps below (you can use ours at the Zuplo stand if you don't have one with you).
 
