@@ -2,21 +2,15 @@
   "$schema": "https://json-schema.org/draft-07/schema",
   "$id": "http://zuplo.com/schemas/policies/remove-headers-outbound.json",
   "type": "object",
-  "title": "Remove Headers",
+  "title": "Remove Headers Outbound",
   "isPreview": true,
   "description": "",
-  "required": [
-    "handler"
-  ],
+  "required": ["handler"],
   "properties": {
     "handler": {
       "type": "object",
       "default": {},
-      "required": [
-        "export",
-        "module",
-        "options"
-      ],
+      "required": ["export", "module", "options"],
       "properties": {
         "export": {
           "const": "RemoveHeaderOutbound",
