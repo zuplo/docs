@@ -47,6 +47,8 @@ jobs:
       - run: npm install
       - run: npm run ci:policies
       - run: gsutil -h "Content-Type:application/json" cp ./policies.v2.json gs://cdn.zuplo.com/portal/policies.v2.json
+      - name: Trigger Portal Deployment
+        run: curl -X POST ${{ secrets.PORTAL_DEPLOY_HOOK }}
 
   search-index:
     name: Search Index
