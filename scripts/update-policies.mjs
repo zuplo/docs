@@ -140,8 +140,10 @@ async function run() {
     meta.isPreview = !!schema.isPreview;
     meta.id = policyId;
 
-    if (meta.examples) {
-      const example = { ...schema.examples[0] };
+    const { examples } = schema.properties?.handler;
+    console.log(examples);
+    if (examples && examples.length > 0) {
+      const example = { ...examples[0] };
       delete example._name;
       meta.defaultHandler = example;
     } else {
