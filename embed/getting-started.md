@@ -37,7 +37,7 @@ Click the **Add Policy** button on the request pipeline and add each of these po
 
 ## 3. Setup an API Consumer
 
-Now that your API is protected with API-Key authentication you need to create an API consumer that can generate a key. Head to the <image width="15" height="15" src="../static/media/embed/getting-started/settings.png" alt="settings" /> **Settings** section and choose **API Key Consumers**.
+Now that your API is protected with API-Key authentication you need to create an API consumer that can generate a key. Head to the ![Settings](../static/media/embed/getting-started/settings.png) **Settings** section and choose **API Key Consumers**.
 
 ![API Key Consumers](../static/media/embed/getting-started/api-key-consumers.png)
 
@@ -53,7 +53,7 @@ You’ll see the documentation that has been automatically generated for your AP
 
 ## Now test your API 🚀
 
-Open the integrated <image width="15" height="15" src="../static/media/embed/getting-started/test-console.png" alt="settings" /> **API Test Console** [1] and set the path to `/products/10000` [2]. Hit **Test** [3] to fire an unauthenticated request to your API - you should get a **401 Unauthorized** response.
+Open the integrated ![Test Console](../static/media/embed/getting-started/test-console.png) **API Test Console** [1] and set the path to `/products/10000` [2]. Hit **Test** [3] to fire an unauthenticated request to your API - you should get a **401 Unauthorized** response.
 
 ![Test API](../static/media/embed/getting-started/test-api.png)
 
