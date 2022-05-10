@@ -19,7 +19,7 @@ title: Drone Prize Terms (NDC London)
 
 ## The prize
 
-10. The prize will be one Oculus Go 32 GB Virtual Reality Headset.
+10. The prize will be one DJI Mini 2 drone.
 11. Zuplo's use of particular brands as prizes does not imply any affiliation with or endorsement of such brands.
 12. The winner will be drawn at random.
 13. The prize is non-exchangeable, non-transferable and no cash alternatives will be offered.
