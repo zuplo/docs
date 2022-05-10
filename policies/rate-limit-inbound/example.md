@@ -10,4 +10,4 @@ made against your API based on a key.
 - `timeWindowMinutes`: the time window in which the requests are rate-limited.
   The count restarts after each window expires.
 
-[See the documentation for more details](https://www.zuplo.com/docs/policies/rate-limit/)
+[See the documentation for more details](https://www.zuplo.com/docs/policies/rate-limit-inbound/)
