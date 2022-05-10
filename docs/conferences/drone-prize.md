@@ -35,7 +35,7 @@ See [the documentation about Url Rewrites](../handlers/url-rewrite.md) for more 
 
 Open **routes.json** and add a third route to the example project.
 
-- It should support `POST` only
+- It should support `GET` only
 - The path should be `/products/:productId`
 - Set the URL Rewrite to the legacy e-commerce API as follows
   `https://ecommerce-legacy.zuplo.io/objects?type=products&id=${params.productId}`
@@ -45,7 +45,7 @@ Open **routes.json** and add a third route to the example project.
 
 Open the test client <ApiTestConsoleTabIcon /> in the portal and test your new route
 
-- Set the method to POST
+- Set the method to `GET`
 - Set the URL to `/products/10000`
 - Hit **Test!**
 - Have Nate or Josh scan your badge at the booth
