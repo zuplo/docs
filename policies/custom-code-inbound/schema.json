@@ -13,11 +13,11 @@
       "required": ["export", "module", "options"],
       "properties": {
         "export": {
-          "const": "<YOUR_EXPORT>",
+          "const": "YOUR_EXPORT",
           "description": "The name of the exported type"
         },
         "module": {
-          "const": "$import(@zuplo/runtime)",
+          "const": "$import(./modules/YOUR_MODULE)",
           "description": "The module containing the policy"
         },
         "options": {
@@ -30,8 +30,8 @@
       "examples": [
         {
           "_name": "basic",
-          "export": "<YOUR_EXPORT>",
-          "module": "$import(@zuplo/runtime)",
+          "export": "YOUR_EXPORT",
+          "module": "$import(./modules/YOUR_MODULE)",
           "options": {}
         }
       ]
