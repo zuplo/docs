@@ -3,7 +3,7 @@
   "$id": "http://zuplo.com/schemas/policies/validate-json-schema-inbound.json",
   "type": "object",
   "title": "JSON Body Validation",
-  "isPreview": true,
+  "isPreview": false,
   "description": "",
   "required": [
     "handler"
