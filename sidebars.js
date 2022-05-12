@@ -32,6 +32,16 @@ const sidebars = {
     },
     {
       type: "category",
+      label: "Projects",
+      items: ["projects/github-source-control"],
+    },
+    {
+      type: "category",
+      label: "Deployments",
+      items: ["deployments/environments", "deployments/custom-domains"],
+    },
+    {
+      type: "category",
       label: "Quick Starts",
       items: [
         "quickstarts/proxy-public-api",

@@ -22,6 +22,7 @@ import {
   BuildStatusTabIcon,
   CodeEditorTabIcon,
   DashboardTabIcon,
+  GithubIcon,
   LiveLogsTabIcon,
   SettingsTabIcon,
 } from "../../components/ui-icons";
@@ -52,6 +53,7 @@ const MDXComponents = {
   DashboardTabIcon,
   ApiTestConsoleTabIcon,
   LiveLogsTabIcon,
+  GithubIcon,
   PolicyStatus,
 };
 export default MDXComponents;

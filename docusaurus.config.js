@@ -55,6 +55,8 @@ const config = {
         breadcrumbs: false,
         docLayoutComponent: "@site/src/embed/DocPage",
         docItemComponent: "@site/src/embed/DocItem",
+        showLastUpdateTime: true,
+        showLastUpdateAuthor: true,
       }),
     ],
   ],

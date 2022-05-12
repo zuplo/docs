@@ -141,7 +141,6 @@ async function run() {
     meta.id = policyId;
 
     const { examples } = schema.properties?.handler;
-    console.log(examples);
     if (examples && examples.length > 0) {
       const example = { ...examples[0] };
       delete example._name;
