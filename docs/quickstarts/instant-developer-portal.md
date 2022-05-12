@@ -39,8 +39,8 @@ Your project will open on the **Route Designer** which helps you edit the `route
 ### Route 2
 
 - Method: `POST`
-- Path: `/products/:productId`
-- URL Rewrite: `https://ecommerce-api.zuplo.io/products/${params.productId}`
+- Path: `/products`
+- URL Rewrite: `https://ecommerce-api.zuplo.io/products`
 
 ## Step 3 - Customize your documentation
 
