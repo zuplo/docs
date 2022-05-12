@@ -10,6 +10,13 @@ You can quickly setup a gateway for your API in Zuplo, which includes a develope
 
 Follow this guide to have a developer portal up and running in minutes.
 
+:::note
+
+**How is this different to RapiDoc?**
+
+[RapiDoc](https://rapidocweb.com/) is an open-source library you can use to self-host developer documentation based on Open API/Swagger. Zuplo is a sponsor of that project and uses code from RapiDoc's open source library to create our documentation. Zuplo offers a hosted developer portal experience that goes further and includes a fully featured gateway that can offer API-Key management, Rate-limiting and much more.
+:::
+
 ## Overview
 
 Zuplo uses a `routes.json` file to configure all the routes in the gateway, including any policies applied (like validation and authentication policies) and also stores the metadata that drives the content of the developer portal.
