@@ -26,7 +26,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 ```
 
 This is a request handler that receives a request (of type `ZuploRequest` - more
-on this [here](../guides/zuplo-request.md)) and returns a response of type
+on this [here](../reference/zuplo-request.md)) and returns a response of type
 `string`. You can return any type from a Request Handler and Zuplo will
 auto-serialize the response to JSON and add a `content-type` header to your
 response of `application/json`. This makes it very easy to build simple JSON
@@ -97,12 +97,12 @@ Here's an example
 import { ZuploRequest, ZuploContext } from "@zuplo/runtime";
 
 export default async function (request: ZuploRequest, context: ZuploContext) {
-	const response = new Response(`<html><body>What zup?</body></html>`, {
-		status: 200,
-		headers: {
-			"content-type" : "text/html"
-		}
-	})
+  const response = new Response(`<html><body>What zup?</body></html>`, {
+    status: 200,
+    headers: {
+      "content-type": "text/html",
+    },
+  });
   return response;
 }
 ```
