@@ -27,4 +27,4 @@ git tag v1.4
 git push origin v1.4
 ```
 
-[Testing Your API](../guides/testing-your-api.md)
+[Testing Your API](../reference/testing-your-api.md)
