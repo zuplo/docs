@@ -38,8 +38,8 @@
                 "data": {
                   "number": 1
                 },
-                "password": "<PASSWORD>",
-                "username": "<USERNAME>"
+                "password": "PASSWORD",
+                "username": "USERNAME"
               }
             ],
             "allowUnauthenticatedRequests": false
