@@ -38,7 +38,11 @@ const sidebars = {
     {
       type: "category",
       label: "Deployments",
-      items: ["deployments/environments", "deployments/custom-domains"],
+      items: [
+        "deployments/environments",
+        "deployments/custom-domains",
+        "deployments/deployment-options",
+      ],
     },
     {
       type: "category",
