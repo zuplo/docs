@@ -5,6 +5,7 @@
   "title": "Auth0 JWT Auth",
   "description": "Authenticate users using Auth0 issued JWT tokens.",
   "required": ["handler"],
+  "isPreview": false,
   "properties": {
     "handler": {
       "type": "object",

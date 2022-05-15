@@ -3,20 +3,14 @@
   "$id": "http://zuplo.com/schemas/policies/open-id-jwt-auth-inbound.json",
   "type": "object",
   "title": "JWT Auth",
-  "isPreview": true,
+  "isPreview": false,
   "description": "",
-  "required": [
-    "handler"
-  ],
+  "required": ["handler"],
   "properties": {
     "handler": {
       "type": "object",
       "default": {},
-      "required": [
-        "export",
-        "module",
-        "options"
-      ],
+      "required": ["export", "module", "options"],
       "properties": {
         "export": {
           "const": "OpenIdJwtInboundPolicy",
