@@ -5,6 +5,7 @@
   "title": "Rate Limit Inbound",
   "description": "The rate-limiting policy is used to limit the number of requests that can be made against your API based on a key.",
   "required": ["handler"],
+  "isPreview": false,
   "properties": {
     "handler": {
       "type": "object",

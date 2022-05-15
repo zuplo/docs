@@ -5,6 +5,7 @@
   "title": "AWS Cognito JWT Auth",
   "description": "Authenticate users using AWS Cognito issued JWT tokens.",
   "required": ["handler"],
+  "isPreview": false,
   "properties": {
     "handler": {
       "type": "object",
