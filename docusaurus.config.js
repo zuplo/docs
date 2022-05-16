@@ -59,6 +59,15 @@ const config = {
         showLastUpdateAuthor: true,
       }),
     ],
+    [
+      "docusaurus-plugin-segment",
+      {
+        apiKey: "uk7yI6FDWqqcOtpA4u3Dx1FcfskzMnBt",
+        host: "sg.zuplo.com",
+        ajsPath: "/a/v1/uk7yI6FDWqqcOtpA4u3Dx1FcfskzMnBt/index.js",
+        useHostForBundles: true,
+      },
+    ],
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */

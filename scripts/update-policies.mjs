@@ -2,7 +2,7 @@ import RefParser from "@apidevtools/json-schema-ref-parser";
 import arg from "arg";
 import chokidar from "chokidar";
 import { existsSync, readFileSync, writeFileSync } from "fs";
-import { mkdir, readFile, writeFile } from "fs/promises";
+import { mkdir, readFile, rm, writeFile } from "fs/promises";
 import glob from "glob";
 import path from "path";
 import prettier from "prettier";
@@ -12,6 +12,7 @@ import { unified } from "unified";
 
 const policiesDir = path.resolve(process.cwd(), "./policies");
 const docsDir = path.resolve(process.cwd(), "./docs/policies");
+await rm(docsDir, { recursive: true, force: true });
 
 const renderer = unified().use(remarkParse).use(remarkHtml);
 
