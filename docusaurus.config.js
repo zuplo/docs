@@ -67,8 +67,10 @@ const config = {
         ajsPath: "/a/v1/uk7yI6FDWqqcOtpA4u3Dx1FcfskzMnBt/index.js",
         useHostForBundles: true,
         load: {
-          Intercom: { hideDefaultLauncher: true },
-          "Segment.io": { apiHost: "sg.zuplo.com/v1" },
+          integrations: {
+            Intercom: { hideDefaultLauncher: true },
+            "Segment.io": { apiHost: "sg.zuplo.com/v1" },
+          },
         },
       },
     ],
