@@ -50,6 +50,9 @@ const sidebars = {
       items: [
         "quickstarts/proxy-public-api",
         "quickstarts/per-customer-rate-limits",
+        "quickstarts/instant-developer-portal",
+        "quickstarts/use-api-key-authentication",
+        "quickstarts/validation-and-docs-with-json-schema",
       ],
     },
     {
