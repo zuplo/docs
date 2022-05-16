@@ -68,7 +68,6 @@ const config = {
         useHostForBundles: true,
         load: {
           integrations: {
-            Intercom: { hideDefaultLauncher: true },
             "Segment.io": { apiHost: "sg.zuplo.com/v1" },
           },
         },
