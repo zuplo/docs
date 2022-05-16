@@ -13,7 +13,7 @@ Zuplo provides both public cloud and private deployments options.
 
 All **Private Cloud** deployments are fully managed. Professional Services are available to help with all aspects of your deployment and configuration.
 
-If you have specific questions or would like to discuss your needs please email [sales@zuplo.com](sales@zuplo.com).
+If you have specific questions or would like to discuss your needs please email [sales@zuplo.com](mailto:sales@zuplo.com).
 
 ## Redundancy and Failover
 

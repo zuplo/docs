@@ -81,9 +81,7 @@ const sidebars = {
             "policies/rate-limit-inbound",
             "policies/audit-log-inbound",
             "policies/validate-json-schema-inbound",
-            "policies/request-validation-inbound",
             "policies/bot-detection-inbound",
-            "policies/cors-inbound",
           ],
         },
         {
