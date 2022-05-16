@@ -1,0 +1,9 @@
+{
+  "name": "docusaurus-plugin-segment",
+  "version": "1.0.3",
+  "description": "Segment API Analytics plugin for Docusaurus",
+  "main": "index.js",
+  "dependencies": {
+    "@segment/snippet": "^4.13.2"
+  }
+}
