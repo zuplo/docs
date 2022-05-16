@@ -17,6 +17,7 @@ import PolicyConfig from "../../components/PolicyConfig";
 import PolicyExample from "../../components/PolicyExample";
 import PolicyOptions from "../../components/PolicyOptions";
 import PolicyStatus from "../../components/PolicyStatus";
+import SizedImage from "../../components/SizedImage";
 import {
   ApiTestConsoleTabIcon,
   BuildStatusTabIcon,
@@ -55,5 +56,6 @@ const MDXComponents = {
   LiveLogsTabIcon,
   GithubIcon,
   PolicyStatus,
+  SizedImage,
 };
 export default MDXComponents;
