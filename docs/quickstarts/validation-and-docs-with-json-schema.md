@@ -42,7 +42,7 @@ This route will create a proxy where the gateway will forward traffic to our dem
 
 ## Step 3 - Add a JSON Schema
 
-Go to [JSONSchema.net](jsonschema.net) and sign in (or **continue as guest**) and paste the following example JSON (a product) in the left window:
+Go to [JSONSchema.net](https://jsonschema.net) and sign in (or **continue as guest**) and paste the following example JSON (a product) in the left window:
 
 ```
 {
@@ -55,7 +55,7 @@ Go to [JSONSchema.net](jsonschema.net) and sign in (or **continue as guest**) an
 
 Click **submit** button to generate your JSON Schema specification in the right window. Click the copy button at the top right to copy the generated JSON Schema specification.
 
-Now, in the [Zuplo portal](portal.zuplo.com) make sure you're on the Files tab and click the **[+]** button next to the schemas folder. Choose **New Empty Schema** and enter the file name `product.json`. Paste your JSON Schema definition into the empty file and save your changes.
+Now, in the [Zuplo portal](https://portal.zuplo.com) make sure you're on the Files tab and click the **[+]** button next to the schemas folder. Choose **New Empty Schema** and enter the file name `product.json`. Paste your JSON Schema definition into the empty file and save your changes.
 
 ## Step 4 - Add JSON Schema validation to specify a request body
 
