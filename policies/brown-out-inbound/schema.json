@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/brown-out-inbound.json",
+  "type": "object",
+  "title": "Brown Out",
+  "isPreview": true,
+  "description": "",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "BrownOutInbound",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "type": "object",
+          "description": "The options for this policy",
+          "required": [],
+          "properties": {}
+        }
+      },
+      "examples": [
+        {
+          "export": "BrownOutInbound",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "cronExpression": "",
+            "durationSeconds": 60
+          }
+        }
+      ]
+    }
+  }
+}
