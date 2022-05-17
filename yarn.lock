@@ -1726,7 +1726,7 @@
   "resolved" "https://registry.npmjs.org/@polka/url/-/url-1.0.0-next.21.tgz"
   "version" "1.0.0-next.21"
 
-"@segment/snippet@^4.13.2", "@segment/snippet@^4.15.3":
+"@segment/snippet@^4.13.2":
   "integrity" "sha512-75kVTYaQGYMkwVjJvCLLOlzxV8jCDxvKG68U88joo/rBx95SIXETcjUmIXF6A7SFRCgz83B+zrZbo+JYsmHkig=="
   "resolved" "https://registry.npmjs.org/@segment/snippet/-/snippet-4.15.3.tgz"
   "version" "4.15.3"
@@ -3769,9 +3769,10 @@
   dependencies:
     "@leichtgewicht/ip-codec" "^2.0.1"
 
-"docusaurus-plugin-segment@file:plugins/segment":
-  "resolved" "file:plugins/segment"
-  "version" "1.0.3"
+"docusaurus-plugin-segment@^1.0.4":
+  "integrity" "sha512-kJT0wvhlursmjHNrrQDs7Ce6vAB+yjflr8P6T0s6LE87BPA2+KQ8ifyNb4PwSdX91OJ5bBYyb4V0T8EI8MtGWQ=="
+  "resolved" "https://registry.npmjs.org/docusaurus-plugin-segment/-/docusaurus-plugin-segment-1.0.4.tgz"
+  "version" "1.0.4"
   dependencies:
     "@segment/snippet" "^4.13.2"
 
