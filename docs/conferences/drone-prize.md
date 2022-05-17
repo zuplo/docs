@@ -1,5 +1,5 @@
 ---
-title: Zuplo @ NDC London
+title: Zuplo @ GluCon
 ---
 
 [Zuplo](https://www.zuplo.com) is a Programmable API gateway that makes it easy to share your API. Add API-key management, developer documentation, and rate-limiting, for any stack, in under 5 minutes. Companies use Zuplo to put an API in their customers' hands faster.
@@ -10,11 +10,13 @@ title: Zuplo @ NDC London
 
 ## Share an API with Zuplo for your chance to win a drone
 
-Share an API with Zuplo for your chance to win a drone and customize it to instantly get a $5 Starbuck’s gift card. You’ll need a laptop or tablet to complete the steps below (you can use ours at the Zuplo stand if you don't have one with you).
+Share an API with Zuplo for your chance to win a drone and customize it to instantly get a $5 Starbuck’s gift card.
 
-:::info
+:::caution
 
-This contest is for registered attendees of NDC London only.
+**You’ll need a laptop or tablet to complete the steps below.** The Zuplo portal does not support phones (yet). You can also stop by the booth and use one of our computers if that is easier.
+
+This contest is for registered attendees of GluCon only.
 [Full rules and terms](./drone-prize-terms.md)
 
 :::
@@ -84,7 +86,7 @@ Change the Request Handler of your new route to a custom function.
 import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
 
 export default async function (request: ZuploRequest, context: ZuploContext) {
-  return "Blimey, Zuplo is cool!";
+  return "Wow, Zuplo is cool!";
 }
 ```
 
