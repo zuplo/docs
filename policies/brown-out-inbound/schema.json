@@ -32,7 +32,7 @@
           "export": "BrownOutInbound",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "cronExpression": "",
+            "cronExpression": "0 23 * * ?",
             "durationSeconds": 60
           }
         }
