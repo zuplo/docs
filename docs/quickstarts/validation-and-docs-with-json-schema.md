@@ -1,10 +1,10 @@
 ---
-title: Validate and document your API with JSON Schema
+title: Validate and Document your API with JSON Schema
 ---
 
-Zuplo is an API gateway that helps any business offer a stripe quality experience to developers. You can quickly setup a gateway for your any API, and add validation and documentation in minutes using JSON Schema.
+Zuplo is an API gateway that helps any business offer a Stripe-quality experience to developers. You can quickly set up a gateway for your any API, and add validation and documentation in minutes using JSON Schema.
 
-Follow this guide to have a developer portal up and running in no no time!
+Follow this guide to have a developer portal up and running in no time!
 
 :::note
 
@@ -18,7 +18,7 @@ Follow this guide to have a developer portal up and running in no no time!
 
 Zuplo uses a `routes.json` file to configure all the routes in the gateway, including any policies applied (like validation).
 
-Sign in to Zuplo and get your free developer account at [portal.zuplo.com](https://portal.zuplo.com) and follow these simple steps to see the developer portal in action.
+Get your free developer account at [portal.zuplo.com](https://portal.zuplo.com), sign in to Zuplo, and follow these simple steps to see the developer portal in action.
 
 ## Step 1 - Create a new Zuplo Project
 
@@ -28,7 +28,7 @@ Once you've signed into the portal you'll be prompted to create a new project. E
 
 :::tip
 
-You can also import an Open API specification to setup your gateway and `routes.json` quickly. This feature is in private-beta - e-mail us at [whatzup@zuplo.com](mailto:whatzup@zuplo.com) to request access.
+You can also import an OpenAPI specification to setup your gateway and `routes.json` quickly. This feature is in private beta - e-mail us at [whatzup@zuplo.com](mailto:whatzup@zuplo.com) to request access.
 
 :::
 
@@ -38,7 +38,7 @@ Your project will open on the **Route Designer** which helps you edit the `route
 - Path: `/products`
 - URL Rewrite: `https://ecommerce-api.zuplo.io/products`
 
-This route will create a proxy where the gateway will forward traffic to our demo api at `https://ecommerce-api.zuplo.io/`.
+This route will create a proxy where the gateway will forward traffic to our demo API at `https://ecommerce-api.zuplo.io/`.
 
 ## Step 3 - Add a JSON Schema
 
@@ -75,4 +75,4 @@ Save your changes - your API is now live with validation. Test it out using the 
 
 ## What next?
 
-If you haven't already, why not try the [Getting Started guide](https://www.zuplo.com/docs/overview/) and setup a gateway with Rate-Limiting and API-Key authentication. It's easy!
+If you haven't already, why not try the [Getting Started guide](https://www.zuplo.com/docs/overview/) and set up a gateway with Rate-Limiting and API-Key authentication. It's easy!
