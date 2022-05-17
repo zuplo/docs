@@ -42,7 +42,7 @@ This route will create a proxy where the gateway will forward traffic to our dem
 
 ## Step 3 - Add a JSON Schema
 
-Go to [JSONSchema.net](jsonschema.net) and sign in (or **continue as guest**) and paste the following example JSON (a product) in the left window:
+Go to [JSONSchema.net](https://jsonschema.net/) and sign in (or **continue as guest**) and paste the following example JSON (a product) in the left window:
 
 ```
 {
