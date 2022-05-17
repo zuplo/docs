@@ -1,5 +1,6 @@
 ---
 title: Zuplo Deployment Options
+sidebar_title: Deployment Options
 ---
 
 Zuplo provides both public cloud and private deployments options.
@@ -17,10 +18,12 @@ If you have specific questions or would like to discuss your needs please email 
 
 ## Redundancy and Failover
 
-**Public Cloud**
+### Public Cloud
+
 The public cloud version of the Zuplo gateway services runs in more than 200 edge locations. Failures are instantly and transparently routed to avoid customer impact.
 
-**Private Cloud**
+### Private Cloud
+
 Private cloud deployments can run in one or multiple data centers of your choosing. Multiple instances of the gateway services run at each location ensuring high availability.
 
 ## Data residency
