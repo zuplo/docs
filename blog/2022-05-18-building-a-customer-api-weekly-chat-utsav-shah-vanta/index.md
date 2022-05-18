@@ -4,6 +4,7 @@ authors: josh
 tags: [code, api-keys]
 ---
 
+![building a customer api weekly](./Building-a-customer-api-weekly-banner.png)
 
 Planning to build a new public customer or partner API but not sure where to start your research? Connect with fellow developers and nail development of your new API by joining our weekly meetup on [Discord](https://zuplo.link/3sJq0DV), "Building a Customer API".
 
