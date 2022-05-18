@@ -15,7 +15,6 @@ const config = {
   favicon: "https://cdn.zuplo.com/www/favicon.png",
   organizationName: "zuplo", // Usually your GitHub org/user name.
   projectName: "docs", // Usually your repo name.
-
   presets: [
     [
       "classic",
@@ -77,6 +76,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      image: "https://cdn.zuplo.com/static/social/img-twitter-header.jpg",
       algolia: {
         // The application ID provided by Algolia
         appId: "E7EUGPZYED",
