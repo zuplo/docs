@@ -7,14 +7,14 @@ title: Drone Prize Terms
 
 ## Eligibility to enter
 
-3. The prize draw is open to entrants over 18 years of age and who are registered and attending the GlueCon conference from May 18 to May 19, 2022
+3. The prize draw is open to entrants over 18 years of age and who are registered and attending the conference on the standard presentation days (i.e. excluding and days of workshops, etc.)
 4. In entering the prize draw, you confirm that you are eligible to do so and eligible to claim any prize you may win.
 5. A maximum of one entry per individual is permitted.
 6. The prize draw is free to enter.
 
 ## How to enter
 
-7. The prize draw will include those attendees who complete the [Drone Price Quickstart](drone-prize.md) and return to the Zuplo booth to show the completed quickstart to the booth staff. Entries must be received by 3pm on 19th May 2022. Entries after that time and date will not be included in the draw.
+7. The prize draw will include those attendees who complete the [Drone Price Quickstart](drone-prize.md) and return to the Zuplo booth to show the completed quickstart to the booth staff. Entries must be received by 3pm on the last regular day of the conference. Entries after that time and date will not be included in the draw.
 8. Zuplo will not accept responsibility if contact details provided are incomplete or inaccurate.
 
 ## The prize
