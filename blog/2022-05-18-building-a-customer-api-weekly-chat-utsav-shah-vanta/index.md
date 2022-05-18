@@ -5,14 +5,14 @@ tags: [code, api-keys]
 ---
 
 
-Planning to build a new public customer or partner API but not sure where to start your research? Connect with fellow developers and nail development of your new API by joining our weekly meetup on [Discord] (https://zuplo.link/3sJq0DV), "Building a Customer API".
+Planning to build a new public customer or partner API but not sure where to start your research? Connect with fellow developers and nail development of your new API by joining our weekly meetup on [Discord](https://zuplo.link/3sJq0DV), "Building a Customer API".
 
 On June 2, 2022 at 3pm ET/12pm PT we'll be joined by Utsav Shah of fast growing startup Vanta. He'll share his experience building a customer API and challenges when implementing rate limiting. Then we'll have an open discussion on implementing rate limiting and exposing APIs to customers and partners.
 
-[Register Here] (https://zuplo.link/3sJq0DV)
+[Register Here](https://zuplo.link/3sJq0DV)
 
 **About Utsav Shah**
-Utsav Shah is a software engineer at Vanta and host of the [Software at Scale] (https://www.softwareatscale.dev/) podcast. Before joining Vanta, Utsav was responsible for enabling product velocity and ensuring the reliability of Dropbox’s monolith Python web application and large async systems like Cape. 
+Utsav Shah is a software engineer at Vanta and host of the [Software at Scale](https://www.softwareatscale.dev/) podcast. Before joining Vanta, Utsav was responsible for enabling product velocity and ensuring the reliability of Dropbox’s monolith Python web application and large async systems like Cape. 
 
 **About Vanta**
 Our mission at Vanta is to be a layer of trust on top of cloud services, to secure the internet, increase trust in software companies, and keep consumer data safe. Think of us as your automated security and compliance expert.
@@ -24,4 +24,4 @@ At 3pm ET/12pm PT every Thursday, Zuplo hosts a 1-hour round-table discussion vi
 
 We use Discord for video chats to make it easy to keep the conversation going afterward. Discord limits us to 25 attendees, but we think that's a good size to keep conversation flowing and fruitful. 
 
-Have more questions, check out our event [FAQ] (https://zuplo.notion.site/Building-a-Customer-API-Weekly-Chat-hosted-by-Zuplo-cfa5d37dfbcc4683a0bd12c400d5df35).
+Have more questions, check out our event [FAQ](https://zuplo.notion.site/Building-a-Customer-API-Weekly-Chat-hosted-by-Zuplo-cfa5d37dfbcc4683a0bd12c400d5df35).
