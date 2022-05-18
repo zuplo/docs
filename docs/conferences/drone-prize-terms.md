@@ -7,7 +7,7 @@ title: Drone Prize Terms
 
 ## Eligibility to enter
 
-3. The prize draw is open to entrants over 18 years of age and who are registered and attending the GluCon conference from May 18 to May 19, 2022
+3. The prize draw is open to entrants over 18 years of age and who are registered and attending the GlueCon conference from May 18 to May 19, 2022
 4. In entering the prize draw, you confirm that you are eligible to do so and eligible to claim any prize you may win.
 5. A maximum of one entry per individual is permitted.
 6. The prize draw is free to enter.
