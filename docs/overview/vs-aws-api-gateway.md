@@ -26,6 +26,7 @@ Here’s a rundown of why Zuplo will get you to market faster, with the right fe
 | Cognito JWT Auth                              | ✅                              | ✅                                                                                                           |
 | Open ID JWT Auth                              | ❌ requires a custom authorizer | ✅ built-in policy                                                                                           |
 | Lifecycle Management (versioning)             | ✅                              | ✅                                                                                                           |
+| Can call AWS Lambda directly                  | ✅                              | ✅ (high performance)                                                                                        |
 | SDK Generation                                | ✅                              | ❌ [3]                                                                                                       |
 | VPC Connectivity                              | ✅                              | ✅ via secure tunnel provided by CloudFlare                                                                  |
 | Reliability                                   | ✅                              | ✅ Serving Billions of requests every month, with zero downtime to date                                      |
