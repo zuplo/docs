@@ -8,9 +8,11 @@ description: Learn how to build a public API for customers or partners
 
 Planning to build a new public customer or partner API but not sure where to start your research? Connect with fellow developers and nail development of your new API by joining our weekly meetup on [Discord](https://zuplo.link/3sJq0DV), "Building a Customer API".
 
-On June 2, 2022 at 3pm ET/12pm PT we'll be joined by Utsav Shah of fast growing startup Vanta. He'll share his experience building a customer API and challenges when implementing rate limiting. Then we'll have an open discussion on implementing rate limiting and exposing APIs to customers and partners.
+On June 2, 2022 at 3pm ET/12pm PT we'll be joined by Utsav Shah of fast growing startup Vanta (and host of the [Software at Scale](https://www.softwareatscale.dev/) podcast). He'll share his experience building a customer API and challenges when implementing rate limiting. Then we'll have an open discussion on implementing rate limiting and exposing APIs to customers and partners.
 
 **[Register Here](https://zuplo.link/3sJq0DV)**
+
+![Utsav Shah](./utsav_shah.png)
 
 **About Utsav Shah**
 
