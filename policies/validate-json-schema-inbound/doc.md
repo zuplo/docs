@@ -99,3 +99,31 @@ You can test this in the API Test Console with the following (correct) body
   "color": "silver"
 }
 ```
+
+## Errors
+
+### Missing fields
+
+If the request body is missing a required field, an error similar to the following will be returned.
+
+```json
+{
+  "code": "SCHEMA_VALIDATION_FAILED",
+  "help_url": "https://zup.fail/SCHEMA_VALIDATION_FAILED",
+  "message": "Incoming body did not pass schema validation",
+  "errors": ["Body must have required property 'price'"]
+}
+```
+
+### Invalid Field Type
+
+If the request body contains a field that is not of the correct type, an error similar to the following will be returned.
+
+```json
+{
+  "code": "SCHEMA_VALIDATION_FAILED",
+  "help_url": "https://zup.fail/SCHEMA_VALIDATION_FAILED",
+  "message": "Incoming body did not pass schema validation",
+  "errors": ["price must be number"]
+}
+```
