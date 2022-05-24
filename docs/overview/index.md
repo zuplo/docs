@@ -1,8 +1,6 @@
-import CtaButton from '@site/src/components/CtaButton';
-
 ---
-
-## title: Getting Started
+title: Local Development
+---
 
 The goal of this article is to help you quickly evaluate Zuplo, a gateway that makes it easy to compose your microservices, or protect and share an API. It’s different because it’s programmable, which means it’s easy to add custom code to your gateway.
 
