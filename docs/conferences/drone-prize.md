@@ -27,7 +27,7 @@ This contest is for registered attendees of THAT Texas only.
 
 # Day 1 Challenge
 
-If you don't win today, come back again tomorrow for a new exercise
+If you don't win today, come back again tomorrow for a new exercise. Submit by 5:15pm, we'll draw the winner at 5:30pm today, Tuesday May 24.
 
 ## Part 1: Proxy an API
 
