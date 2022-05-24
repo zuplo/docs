@@ -1,5 +1,5 @@
 ---
-title: Drone Prize Terms
+title: Conference Prize Terms
 ---
 
 1. By entering the prize draw you are agreeing to these prize draw terms and conditions.
@@ -14,12 +14,12 @@ title: Drone Prize Terms
 
 ## How to enter
 
-7. The prize draw will include those attendees who complete the [Drone Price Quickstart](drone-prize.md) and return to the Zuplo booth to show the completed quickstart to the booth staff. Entries must be received by 3pm on the last regular day of the conference. Entries after that time and date will not be included in the draw.
+7. The prize draw will include those attendees who complete the [Conference Prize Quickstart](drone-prize.md) and return to the Zuplo booth to show the completed quickstart to the booth staff. Entries must be received by 3pm on the last regular day of the conference. Entries after that time and date will not be included in the draw.
 8. Zuplo will not accept responsibility if contact details provided are incomplete or inaccurate.
 
 ## The prize
 
-10. The prize will be one DJI Mini 2 drone.
+10. The prize will be a McLaren Lego Technic.
 11. Zuplo's use of particular brands as prizes does not imply any affiliation with or endorsement of such brands.
 12. The winner will be drawn at random.
 13. The prize is non-exchangeable, non-transferable and no cash alternatives will be offered.
