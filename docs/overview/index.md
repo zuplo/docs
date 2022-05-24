@@ -1,5 +1,5 @@
 ---
-title: Local Development
+title: Getting Started
 ---
 
 The goal of this article is to help you quickly evaluate Zuplo, a gateway that makes it easy to compose your microservices, or protect and share an API. It’s different because it’s programmable, which means it’s easy to add custom code to your gateway.
@@ -8,17 +8,17 @@ In this tutorial we’ll create a new gateway that proxies an example API and ad
 
 There are two ways to evaluate Zuplo:
 
-1. **Online, cloud-hosted experience** - sign in for free at [portal.zuplo.com](http://portal.zuplo.com) and have a gateway live in 20s using our web editor.
+- **Online, cloud-hosted experience** - sign in for free at [portal.zuplo.com](http://portal.zuplo.com) and have a gateway live in 20s using our web editor.
 
   <CtaButton text="Sign in →" url="https://zuplo.link/38QeWy5" />
 
-2. **Download Zuplo locally** - install Zuplo on your local machine and edit the source using your preferred IDE.
+- **Download Zuplo locally** - install Zuplo on your local machine and edit the source using your preferred IDE.
 
    <CtaButton text="Download" url="https://zuplo.link/38I8HfY" />
 
 For the rest of tutorial, we’ll assume you’re using our web experience (it’s the fastest way to quickly evaluate Zuplo).
 
-## Step 1 - Sign up at [portal.zuplo.com](http://portal.zuplo.com) and create a project.
+## 1. Sign up at [portal.zuplo.com](http://portal.zuplo.com) and create a project.
 
 Sign up for your free trial at [portal.zuplo.com](http://portal.zuplo.com). Once signed in enter a name for your project (or accept the suggestion) and click Create Project. You can connect your project to GitHub if you wish.
 
@@ -26,7 +26,7 @@ We've designed Zuplo to be easy to get started, our goal is you go from zero to 
 
 Before you know it you'll have a Stripe quality API experience you'll be proud of.
 
-## 1. Setup your first route
+## 2. Setup your first route
 
 Open the routes.json file in the file editor on the left. Change the first route's **path** to `/products/:productId` and the **URL Rewrite** to `https://ecommerce-api.zuplo.io/products/${params.productId}`.
 
@@ -34,7 +34,7 @@ You now have a route on your gateway that matches an incoming request like `/pro
 
 ![Route](../../static/media/embed/getting-started/route.png)
 
-## 2. Add authentication and protection
+## 3. Add authentication and protection
 
 Next, we’ll add two policies to this route:
 
@@ -45,7 +45,7 @@ Click the **Add Policy** button on the request pipeline and add each of these po
 
 ![Auth Policy](../../static/media/embed/getting-started/auth-policy.png)
 
-## 3. Setup an API Consumer
+## 4. Setup an API Consumer
 
 Now that your API is protected with API-Key authentication you need to create an API consumer that can generate a key. Head to the <image width="15" height="15" src="../../static/media/embed/getting-started/settings.png" alt="settings" /> **Settings** section and choose **API Key Consumers**.
 
@@ -53,7 +53,7 @@ Now that your API is protected with API-Key authentication you need to create an
 
 Click Add new consumer [3] and enter a name for your API key, and enter your own e-mail address as the manager (so that you can create a key to complete the demo), then click Save - you can leave the metadata blank.
 
-## 4. Visit your developer portal to create a key
+## 5. Visit your developer portal to create a key
 
 Click on the **Your Dev Portal** link near the top left of the portal.
 
