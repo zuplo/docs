@@ -13,6 +13,7 @@ import MDXImg from "@theme/MDXComponents/Img";
 import MDXPre from "@theme/MDXComponents/Pre";
 import MDXUl from "@theme/MDXComponents/Ul";
 import React from "react";
+import CtaButton from "../../components/CtaButton";
 import PolicyConfig from "../../components/PolicyConfig";
 import PolicyExample from "../../components/PolicyExample";
 import PolicyOptions from "../../components/PolicyOptions";
