@@ -1,8 +1,12 @@
 ---
-title: Zuplo @ GlueCon
+title: Zuplo @ THAT Texas
 ---
 
-[Zuplo](https://www.zuplo.com) is a Programmable API gateway that makes it easy to share your API. Add API-key management, developer documentation, and rate-limiting, for any stack, in under 5 minutes. Companies use Zuplo to put an API in their customers' hands faster.
+![Thumbs up!](./thumbs_up.png)
+
+Now read on to learn how you can win a drone and get an **instant** $5 Starbucks gift card. It's easy!
+
+[Zuplo](https://www.zuplo.com) is a different kind of API gateway. It's programmable, meaning you can customize it in seconds with TypeScript. We make it easy to compose your microservices and/or share your API. Add API-key management, developer documentation, and rate-limiting for any stack, in under 5 minutes.
 
 [Home](https://www.zuplo.com) | [Docs](/docs) | [Blog](/blog) | [Follow Us](https://twitter.com/zuplo)
 
@@ -16,7 +20,7 @@ Share an API with Zuplo for your chance to win a drone and customize it to insta
 
 **You’ll need a laptop or tablet to complete the steps below.** The Zuplo portal does not support phones (yet). You can also stop by the booth and use one of our computers if that is easier.
 
-This contest is for registered attendees of GlueCon only.
+This contest is for registered attendees of THAT Texas only.
 [Full rules and terms](./drone-prize-terms.md)
 
 :::
