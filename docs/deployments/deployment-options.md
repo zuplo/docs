@@ -1,6 +1,6 @@
 ---
 title: Zuplo Deployment Options
-sidebar_title: Deployment Options
+sidebar_label: Deployment Options
 ---
 
 Zuplo provides both public cloud and private deployments options.
