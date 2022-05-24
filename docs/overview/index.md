@@ -10,7 +10,7 @@ There are two ways to evaluate Zuplo:
 
 - **Online, cloud-hosted experience** - sign in for free at [portal.zuplo.com](http://portal.zuplo.com) and have a gateway live in 20s using our web editor.
 
-  <CtaButton text="Sign in →" url="https://zuplo.link/38QeWy5" />
+  <CtaButton text="Sign up →" url="https://zuplo.link/38QeWy5" />
 
 - **Download Zuplo locally** - install Zuplo on your local machine and edit the source using your preferred IDE.
 
