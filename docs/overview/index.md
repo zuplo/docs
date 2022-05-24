@@ -1,6 +1,28 @@
+import CtaButton from '@site/src/components/CtaButton';
+
 ---
-title: Getting Started
----
+
+## title: Getting Started
+
+The goal of this article is to help you quickly evaluate Zuplo, a gateway that makes it easy to compose your microservices, or protect and share an API. It’s different because it’s programmable, which means it’s easy to add custom code to your gateway.
+
+In this tutorial we’ll create a new gateway that proxies an example API and adds rate-limiting, API key authentication, and customize a developer portal.
+
+There are two ways to evaluate Zuplo:
+
+1. **Online, cloud-hosted experience** - sign in for free at [portal.zuplo.com](http://portal.zuplo.com) and have a gateway live in 20s using our web editor.
+
+  <CtaButton text="Sign in →" url="https://zuplo.link/38QeWy5" />
+
+2. **Download Zuplo locally** - install Zuplo on your local machine and edit the source using your preferred IDE.
+
+   <CtaButton text="Download" url="https://zuplo.link/38I8HfY" />
+
+For the rest of tutorial, we’ll assume you’re using our web experience (it’s the fastest way to quickly evaluate Zuplo).
+
+## Step 1 - Sign up at [portal.zuplo.com](http://portal.zuplo.com) and create a project.
+
+Sign up for your free trial at [portal.zuplo.com](http://portal.zuplo.com). Once signed in enter a name for your project (or accept the suggestion) and click Create Project. You can connect your project to GitHub if you wish.
 
 We've designed Zuplo to be easy to get started, our goal is you go from zero to live API gateway in under 2 minutes. [Let us know if we fail on this and why](https://discord.gg/CEZrnZN897)!
 
