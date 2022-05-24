@@ -1,6 +1,6 @@
 ---
 title: Zuplo vs AWS API Gateway
-sidebar_title: vs AWS API Gateway
+sidebar_label: vs AWS API Gateway
 ---
 
 ## Why should I choose Zuplo over AWS API Gateway?
