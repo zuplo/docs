@@ -2,7 +2,7 @@
 title: Zuplo @ THAT Texas
 ---
 
-# Win a McLaren Lego Technic
+# Win a McLaren Lego Technic - one each day!
 
 ![McLaren!](./mclaren.png)
 
@@ -24,6 +24,10 @@ This contest is for registered attendees of THAT Texas only.
 [Full rules and terms](./drone-prize-terms.md)
 
 :::
+
+# Day 1 Challenge
+
+If you don't win today, come back again tomorrow for a new exercise
 
 ## Part 1: Proxy an API
 
