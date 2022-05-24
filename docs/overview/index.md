@@ -16,7 +16,7 @@ There are two ways to evaluate Zuplo:
 
    <CtaButton text="Download" url="https://zuplo.link/38I8HfY" />
 
-For the rest of tutorial, we’ll assume you’re using our web experience (it’s the fastest way to quickly evaluate Zuplo).
+For the rest of tutorial, we’ll assume you’re using our web experience (it’s the fastest way to evaluate Zuplo).
 
 ## 1. Sign up at [portal.zuplo.com](http://portal.zuplo.com) and create a project.
 
@@ -24,7 +24,7 @@ Sign up for your free trial at [portal.zuplo.com](http://portal.zuplo.com). Once
 
 We've designed Zuplo to be easy to get started, our goal is you go from zero to live API gateway in under 2 minutes. [Let us know if we fail on this and why](https://discord.gg/CEZrnZN897)!
 
-Before you know it you'll have a Stripe quality API experience you'll be proud of.
+Before you know it you'll have a Stripe-quality API experience you'll be proud of.
 
 ## 2. Setup your first route
 
