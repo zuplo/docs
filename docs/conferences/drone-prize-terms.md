@@ -9,7 +9,7 @@ title: Conference Prize Terms
 
 3. The prize draw is open to entrants over 18 years of age and who are registered and attending the conference on the standard presentation days (i.e. excluding and days of workshops, etc.)
 4. In entering the prize draw, you confirm that you are eligible to do so and eligible to claim any prize you may win.
-5. A maximum of one entry per individual is permitted.
+5. A maximum of one entry per day, per individual is permitted. Limit of one prize per family during the conference.
 6. The prize draw is free to enter.
 
 ## How to enter
@@ -19,7 +19,7 @@ title: Conference Prize Terms
 
 ## The prize
 
-10. The prize will be a McLaren Lego Technic.
+10. The prize will be a McLaren Lego Technic F1 Car.
 11. Zuplo's use of particular brands as prizes does not imply any affiliation with or endorsement of such brands.
 12. The winner will be drawn at random.
 13. The prize is non-exchangeable, non-transferable and no cash alternatives will be offered.
@@ -28,7 +28,7 @@ title: Conference Prize Terms
 
 ## Winner announcement
 
-16. The winner will be notified after 14 May 2022 via the email associated with your conference registration
+16. The winner will be notified via the email associated with your conference registration.
 17. Zuplo will attempt to contact the winner by email up to two times.
 18. If the winner does not respond to the emails notifying them of their win within 14 days of the second email, they will lose their right to the prize, and Zuplo reserves the right to choose and notify a new winner.
 
