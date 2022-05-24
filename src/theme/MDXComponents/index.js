@@ -57,5 +57,6 @@ const MDXComponents = {
   GithubIcon,
   PolicyStatus,
   SizedImage,
+  CtaButton,
 };
 export default MDXComponents;
