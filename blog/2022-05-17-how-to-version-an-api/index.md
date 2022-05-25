@@ -4,8 +4,6 @@ authors: josh
 tags: [code, api-keys]
 ---
 
-# How to version an API
-
 At some point, you’re going to make an update to your API that would break existing clients if they don’t change their code. That’s OK, change happens.
 
 However, it is critical that you give yourself the option to do two things when this situation arises:

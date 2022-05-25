@@ -6,8 +6,6 @@ tags: [videos, code, rate-limiting]
 
 AKA Why you need rate-limiting, and ideally Dynamic Rate Limiting.
 
-import YouTubeVideo from "@site/src/components/YouTubeVideo";
-
 <YouTubeVideo url="https://www.youtube-nocookie.com/embed/uMm01EDJ9_I" />
 
 Length: 2 minutes
