@@ -2,13 +2,9 @@
 title: How to get clients to move off the old version of your API
 authors: josh
 tags: [code, api-keys, brownout, api gateway]
-description: At Zuplo, we often get asked the question, “How do I move clients off the old version of my API?”. In this post we share techniques we've seen work really well, including using an api gateway for brownouts, for facilitating that transition in a way that works well for you and your clients. 
+description: At Zuplo, we often get asked the question, “How do I move clients off the old version of my API?”. In this post we share techniques we've seen work really well, including using an api gateway for brownouts, for facilitating that transition in a way that works well for you and your clients.
 image: ./move-clients-off-old-api.png
-
 ---
-
-
-# How to get clients to move off the old version of your API
 
 We recently discussed some best practices for versioning your API with (spoiler) a strong recommendation that you should require that clients indicate the version of the API they were designed for. Go read the [article](https://www.zuplo.com/blog/2022/05/17/how-to-version-an-api) for more details.
 
@@ -16,7 +12,13 @@ I’ve been giving a talk at a few conferences recently about how the world’s 
 
 In most cases, you can’t just turn off the old version. In the cases above you’ll cause business harm by breaking the marketing department or taking down one of your loyal customers. These folks have priorities and updating to /v2/ of your API is probably not at the top of the list. So how might you create more urgency?
 
-| **Note** - one of the reasons we strongly recommend requiring the client to indicate the version they were designed for is so that you can continue to maintain multiple versions of your API for as long as you need to. The decision to pressure a customer or department to upgrade is a business decision for you to make. Once you’ve made the call, these techniques can help and are better than just shutting them down one day.
+:::note
+
+One of the reasons we strongly recommend requiring the client to indicate the version they were designed for is so that you can continue to maintain multiple versions of your API for as long as you need to. The decision to pressure a customer or department to upgrade is a business decision for you to make. Once you’ve made the call, these techniques can help and are better than just shutting them down one day.
+
+:::
+
+<HubSpotForm region="na1" portalId="21624128" formId="3dfab034-39b8-4728-8193-3ba8018cb1d5"/>
 
 ## Creating Urgency
 
@@ -30,8 +32,6 @@ Again, this is a business decision but once you’ve decided you need to create 
 
 We introduced a sleep and brownout policy to Zuplo to make this even easier. If you want to try it out for yourself and schedule a brownout, go sign up at www.zuplo.com/docs/overview/.
 
-
-
 **Weekly Zoom Chat**
 
-Are you starting work on, or in the middle of building, a public customer or partner API? Register for our ["Building a Customer API" weekly chat](https://www.zuplo.com/blog/2022/05/18/building-a-customer-api-weekly-chat-utsav-shah-vanta) on Zoom every Thursday at 3pm ET/12pm PT and learn from featured guests and other developers building public APIs. 
+Are you starting work on, or in the middle of building, a public customer or partner API? Register for our ["Building a Customer API" weekly chat](https://www.zuplo.com/blog/2022/05/18/building-a-customer-api-weekly-chat-utsav-shah-vanta) on Zoom every Thursday at 3pm ET/12pm PT and learn from featured guests and other developers building public APIs.
