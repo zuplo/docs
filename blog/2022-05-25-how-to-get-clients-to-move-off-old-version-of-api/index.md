@@ -3,12 +3,12 @@ title: How to get clients to move off the old version of your API
 authors: josh
 tags: [code, api-keys, brownout, api gateway]
 description: At Zuplo, we often get asked the question, “How do I move clients off the old version of my API?”. In this post we share techniques we've seen work really well, including using an api gateway for brownouts, for facilitating that transition in a way that works well for you and your clients. 
-image: (./move-clients-off-old-api.png)
+image: ./move-clients-off-old-api.png
 
 ---
 
 
-## How to get clients to move off the old version of your API
+# How to get clients to move off the old version of your API
 
 We recently discussed some best practices for versioning your API with (spoiler) a strong recommendation that you should require that clients indicate the version of the API they were designed for. Go read the [article](https://www.zuplo.com/blog/2022/05/17/how-to-version-an-api) for more details.
 
@@ -29,6 +29,8 @@ Another technique to encourage folks to move off an old API, and combines well w
 Again, this is a business decision but once you’ve decided you need to create urgency amongst consumers of your soon-to-be-deprecated, old version of your API. This is a better approach to just going dark on active customers on the scheduled date.
 
 We introduced a sleep and brownout policy to Zuplo to make this even easier. If you want to try it out for yourself and schedule a brownout, go sign up at www.zuplo.com/docs/overview/.
+
+
 
 **Weekly Zoom Chat**
 
