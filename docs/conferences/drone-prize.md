@@ -2,7 +2,7 @@
 title: Zuplo @ THAT Texas
 ---
 
-:::warn
+:::caution
 
 Thank you to everyone who entered the contest. The prize was drawn last night.
 
