@@ -1,0 +1,12 @@
+{
+  "configurations": [
+    {
+      "name": "Start",
+      "request": "launch",
+      "runtimeArgs": ["start"],
+      "runtimeExecutable": "npm",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node"
+    }
+  ]
+}
