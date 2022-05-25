@@ -4,8 +4,6 @@ authors: josh
 tags: [videos, api-keys]
 ---
 
-import YouTubeVideo from "@site/src/components/YouTubeVideo";
-
 We recently shared some reasoning on [why we think API keys are the best authentication approach for your public API](https://www.zuplo.com/blog/2022/05/03/you-should-be-using-api-keys).
 
 We think this is **so** important that we built it as a feature of the Zuplo gateway. Our API Key management includes:

@@ -4,8 +4,6 @@ authors: josh
 tags: [video, code]
 ---
 
-import YouTubeVideo from "@site/src/components/YouTubeVideo";
-
 <YouTubeVideo url="https://www.youtube-nocookie.com/embed/YqcLu0cXNfE" />
 
 Length: 3 minutes
