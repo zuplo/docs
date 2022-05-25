@@ -30,7 +30,7 @@ Another technique to encourage folks to move off an old API, and combines well w
 
 Again, this is a business decision but once you’ve decided you need to create urgency amongst consumers of your soon-to-be-deprecated, old version of your API. This is a better approach to just going dark on active customers on the scheduled date.
 
-We introduced a sleep and brownout policy to Zuplo to make this even easier. If you want to try it out for yourself and schedule a brownout, go sign up at www.zuplo.com/docs/overview/.
+We introduced a sleep and brownout policy to Zuplo to make this even easier. If you want to try it out for yourself and schedule a brownout, [go sign up for Zuplo](https://www.zuplo.com/docs/overview/).
 
 **Weekly Zoom Chat**
 
