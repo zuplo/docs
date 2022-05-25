@@ -18,8 +18,6 @@ One of the reasons we strongly recommend requiring the client to indicate the ve
 
 :::
 
-<HubSpotForm region="na1" portalId="21624128" formId="c3d1fde1-b51e-406d-9e68-030ff770bd88"/>
-
 ## Creating Urgency
 
 We do not recommend just turning off the API permanently. Instead, you can take the approach of scheduling a ‘brownout’ or timed, temporary downtime. This is where you take the API down during a low-impact period for a short amount of time, maybe at 3 am in the morning, for 2 minutes. This is probably enough to trigger a bunch of alarms and service alerts that make the impact of the upcoming breaking change clear to the consumer.
