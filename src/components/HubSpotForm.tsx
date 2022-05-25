@@ -20,7 +20,7 @@ export default function HubSpotForm({
       script.onload = () => {
         // @ts-ignore
         hbspt?.forms.create({
-          target: document.getElementById("hubspot-form"),
+          target: "#hubspot-form",
           region,
           portalId,
           formId,
