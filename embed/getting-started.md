@@ -8,13 +8,13 @@ Our goal is to help you offer an excellent experience to developers consuming yo
 
 There's a few minimum ingredients to successfully sharing an API:
 
-- Authentication ([we recommend API keys](https://www.zuplo.com/blog/2022/05/03/you-should-be-using-api-keys))
+- Authentication ([we recommend API keys](https://zuplo.com/blog/2022/05/03/you-should-be-using-api-keys))
 - Protection (rate-limiting, because your customers will accidentally try to take you down)
 - Documentation (peeps gotta learn how to user your API)
 
 In this getting started guide we'll show you just how easy it is to set up all these things for an example API at [`https://ecommerce-api.zuplo.io`](https://ecommerce-api.zuplo.io).
 
-You can [open this getting started guide in another window](https://www.zuplo.com/docs/overview), if that helps.
+You can [open this getting started guide in another window](https://zuplo.com/docs/overview), if that helps.
 
 ## 1. Setup your first route
 

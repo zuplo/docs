@@ -6,7 +6,7 @@ description: At Zuplo, we often get asked the question, “How do I move clients
 image: ./move-clients-off-old-api.png
 ---
 
-We recently discussed some best practices for versioning your API with (spoiler) a strong recommendation that you should require that clients indicate the version of the API they were designed for. Go read the [article](https://www.zuplo.com/blog/2022/05/17/how-to-version-an-api) for more details.
+We recently discussed some best practices for versioning your API with (spoiler) a strong recommendation that you should require that clients indicate the version of the API they were designed for. Go read the [article](https://zuplo.com/blog/2022/05/17/how-to-version-an-api) for more details.
 
 I’ve been giving a talk at a few conferences recently about how the world’s fastest-growing companies develop their public API, which included a piece on versioning. One question I commonly get from attendees after the talk is, “How do I move clients off the old version of my API?”, where clients might be internal depts, long-term customers or even teammates who don’t want to change that UI code that is dependent on v1.
 
@@ -28,8 +28,8 @@ Another technique to encourage folks to move off an old API, and combines well w
 
 Again, this is a business decision but once you’ve decided you need to create urgency amongst consumers of your soon-to-be-deprecated, old version of your API. This is a better approach to just going dark on active customers on the scheduled date.
 
-We introduced a sleep and brownout policy to Zuplo to make this even easier. If you want to try it out for yourself and schedule a brownout, [go sign up for Zuplo](https://www.zuplo.com/docs/overview/).
+We introduced a sleep and brownout policy to Zuplo to make this even easier. If you want to try it out for yourself and schedule a brownout, [go sign up for Zuplo](https://zuplo.com/docs/overview/).
 
 **Weekly Zoom Chat**
 
-Are you starting work on, or in the middle of building, a public customer or partner API? Register for our ["Building a Customer API" weekly chat](https://www.zuplo.com/blog/2022/05/18/building-a-customer-api-weekly-chat-utsav-shah-vanta) on Zoom every Thursday at 3pm ET/12pm PT and learn from featured guests and other developers building public APIs.
+Are you starting work on, or in the middle of building, a public customer or partner API? Register for our ["Building a Customer API" weekly chat](https://zuplo.com/blog/2022/05/18/building-a-customer-api-weekly-chat-utsav-shah-vanta) on Zoom every Thursday at 3pm ET/12pm PT and learn from featured guests and other developers building public APIs.

@@ -14,7 +14,7 @@ Sharing an API is a non-trivial exercise that can eat a surprising amount of you
 
 _How will the partner authenticate securely with your API?_
 
-Most startups go with API-key authentication because it’s secure and the easiest to use for developers (more on this [here](https://www.zuplo.com/blog/2022/05/03/you-should-be-using-api-keys)) - this is the right choice in my experience. There’s a lot to consider when building a secure API-key solution:
+Most startups go with API-key authentication because it’s secure and the easiest to use for developers (more on this [here](https://zuplo.com/blog/2022/05/03/you-should-be-using-api-keys)) - this is the right choice in my experience. There’s a lot to consider when building a secure API-key solution:
 
 - Where do I store the keys and do so securely?
 - How do I let partners self-serve?

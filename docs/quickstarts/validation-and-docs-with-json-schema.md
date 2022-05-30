@@ -75,4 +75,4 @@ Save your changes - your API is now live with validation. Test it out using the 
 
 ## What next?
 
-If you haven't already, why not try the [Getting Started guide](https://www.zuplo.com/docs/overview/) and set up a gateway with Rate-Limiting and API-Key authentication. It's easy!
+If you haven't already, why not try the [Getting Started guide](https://zuplo.com/docs/overview/) and set up a gateway with Rate-Limiting and API-Key authentication. It's easy!

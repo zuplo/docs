@@ -40,7 +40,7 @@ In our performance testing, we’ve actually shown the Zuplo gateway to out-perf
 
 **[1] I thought AWS API Gateway had API Keys?**
 
-Yes, but these are not recommended for authentication. See best practices in their [docs](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html). AWS API Gateway Keys are primarily for use with usage plans. Also, you are limited to 500 API Keys by default. Also, we think API Keys are the **best** choice for public APIs - [read more](https://www.zuplo.com/blog/2022/05/03/you-should-be-using-api-keys).
+Yes, but these are not recommended for authentication. See best practices in their [docs](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html). AWS API Gateway Keys are primarily for use with usage plans. Also, you are limited to 500 API Keys by default. Also, we think API Keys are the **best** choice for public APIs - [read more](https://zuplo.com/blog/2022/05/03/you-should-be-using-api-keys).
 
 **[2] Multi-cloud**
 
