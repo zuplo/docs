@@ -8,7 +8,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 const config = {
   title: "Zuplo Docs",
   tagline: "The programmable API Gateway",
-  url: "https://www.zuplo.com",
+  url: "https://zuplo.com",
   baseUrl: "/",
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
@@ -104,7 +104,7 @@ const config = {
         logo: {
           alt: "Zuplo",
           src: "https://cdn.zuplo.com/static/logos/logo.svg",
-          href: "https://www.zuplo.com",
+          href: "https://zuplo.com",
           target: "_self",
         },
         items: [
@@ -129,15 +129,15 @@ const config = {
             items: [
               {
                 label: "About Us",
-                href: "https://www.zuplo.com/about",
+                href: "https://zuplo.com/about",
               },
               {
                 label: "Pricing",
-                href: "https://www.zuplo.com/pricing",
+                href: "https://zuplo.com/pricing",
               },
               {
                 label: "Careers",
-                href: "https://www.zuplo.com/careers",
+                href: "https://zuplo.com/careers",
               },
             ],
           },

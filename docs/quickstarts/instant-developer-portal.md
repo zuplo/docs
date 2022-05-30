@@ -2,7 +2,7 @@
 title: An Instant Developer Portal
 ---
 
-Zuplo is an API gateway that helps any business offer a stripe quality experience to customers using their API. We previously posted about the [three pillars of an API program](https://www.zuplo.com/blog/2022/05/11/the-three-pillars-of-an-API-program/), and believe great **documentation** is a critical part of sharing an API.
+Zuplo is an API gateway that helps any business offer a stripe quality experience to customers using their API. We previously posted about the [three pillars of an API program](https://zuplo.com/blog/2022/05/11/the-three-pillars-of-an-API-program/), and believe great **documentation** is a critical part of sharing an API.
 
 You can quickly setup a gateway for your API in Zuplo, which includes a developer portal, example shown below:
 
@@ -65,4 +65,4 @@ Click save and check your developer portal again - note that now the second oper
 
 ## What next?
 
-If you haven't already, why not try the [Getting Started guide](https://www.zuplo.com/docs/overview/) and setup a gateway with Rate-Limiting and API-Key authentication. It's easy!
+If you haven't already, why not try the [Getting Started guide](https://zuplo.com/docs/overview/) and setup a gateway with Rate-Limiting and API-Key authentication. It's easy!
