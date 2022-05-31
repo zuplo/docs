@@ -8,7 +8,7 @@ In this tutorial we’ll create a new gateway that proxies an example API and ad
 
 There are two ways to evaluate Zuplo:
 
-- **Online, cloud-hosted experience** - sign in for free at [portal.zuplo.com](http://portal.zuplo.com) and have a gateway live in 20s using our web editor.
+- **Online, cloud-hosted experience** - sign in for free at [portal.zuplo.com](https://zuplo.link/38QeWy5) and have a gateway live in 20s using our web editor.
 
   <CtaButton text="Sign up →" url="https://zuplo.link/38QeWy5" />
 
