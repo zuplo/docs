@@ -21,7 +21,7 @@ It’s simple: **No Version? No Service.**
 
 ![no_version_no_service.png](./no_version_no_service.png)
 
-When giving examples of great APIs, I have a few ‘gotos’
+When giving examples of great APIs, I have a few ‘go-tos’:
 
 | API | API Keys? | Require Version? | URL-based version |
 | --- | --- | --- | --- |
