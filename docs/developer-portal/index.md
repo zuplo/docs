@@ -1,5 +1,6 @@
 ---
-title: Overview
+title: Developer Portal
+sidebar_label: Overview
 draft: true
 ---
 
