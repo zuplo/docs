@@ -6,8 +6,6 @@ description: At Zuplo, we like to look to great companies for best practices. Wh
 image: ./no_version_no_service.png
 ---
 
-# What the GitHub API gets wrong
-
 When providing recommendations we like to use examples of great companies, the decisions they made — that often go against the grain, and why they made those decisions. One of my favorite examples of this is the fact that the best [API companies tend to use API keys](https://zuplo.com/blog/2022/05/03/you-should-be-using-api-keys/).
 
 But what about great companies getting it wrong?
