@@ -53,3 +53,4 @@
 /docs/runtime/web-standard-apis /docs/reference/web-standard-apis 301
 /docs/runtime/zuplo-context /docs/reference/zuplo-context 301
 /docs/runtime/zuplo-request /docs/reference/zuplo-request 301
+/docs/policies/add-query-param-inbound /docs/policies/set-query-params-inbound 301
