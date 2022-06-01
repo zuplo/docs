@@ -32,3 +32,13 @@ To view the deployment of a specific commit hover over the small dot next to the
 Alternatively, all deployments can be viewed by clicking **Environments** on the Github project's side menu.
 
 ![Github Deployment Sidebar](../../static/media/github-project-environments.png)
+
+## Limitations
+
+**Renaming or moving projects in Github**
+
+The Zuplo Github integration does not yet handle moving or renaming repositories. As a workaround, you can first disconnect your project from Github and recreate it in another org or with another name. Do do so, go to <SettingsTabIcon /> **Settings** > <GithubIcon /> **Github Settings** and then click **Disconnect** to disconnect your project from Github. Then follow the above instructions to reconnect your project to Github.
+
+**Connecting an Existing Repository**
+
+The Zuplo Github integration does not yet support connecting an existing repository. You can only create new repositories at this time.
