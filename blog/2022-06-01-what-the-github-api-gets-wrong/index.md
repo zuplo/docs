@@ -19,7 +19,7 @@ We recently wrote recommendations for [versioning your API](https://zuplo.com/bl
 
 It’s simple: **No Version? No Service.**
 
-![no_version_no_service.png](/no_version_no_service.png)
+![no_version_no_service.png](./no_version_no_service.png)
 
 When giving examples of great APIs, I have a few ‘gotos’
 
