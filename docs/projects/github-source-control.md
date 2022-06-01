@@ -21,7 +21,7 @@ To deploy your project from Github you must install the [Zuplo Github App](https
 The Zuplo Github app requires the following permissions:
 
 - **Read** access to code and metadata
-- **Read** and **write** access to checks and deployments
+- **Read** and **write** access to checks, deployments and pull requests
 
 After the Zuplo app is installed, Zuplo will deploy your app to the production environment. The deployment can be viewed several ways from Github.
 
