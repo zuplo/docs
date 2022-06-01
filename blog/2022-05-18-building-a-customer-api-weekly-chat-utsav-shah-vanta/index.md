@@ -1,5 +1,5 @@
 ---
-title: Building a Customer API - Weekly Chat
+title: Building a Customer API - Live Chat
 authors: josh
 tags: [code, api-keys]
 image: ./Building-a-customer-api-weekly-banner.png
