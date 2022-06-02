@@ -203,6 +203,15 @@ const sidebars = {
       type: "doc",
       id: "sample-apis",
     },
+    {
+      type: "html",
+      value: "<hr />", // The HTML to be rendered
+      defaultStyle: false, // Use the default menu item styling
+    },
+    {
+      type: "doc",
+      id: "pricing",
+    },
   ],
 };
 
