@@ -33,8 +33,8 @@ Requests and egress are sold in bundles of 100GB egress + 10M Requests / month f
 | **Feature**                    | **Cost**        |
 | ------------------------------ | --------------- |
 | Key Value Store - Reads        | $0.50 per 1M    |
-| Key Value Store - Writes       | $5.000 per 1M   |
-| Key Value Store - Deletes      | $5.000 per 1M   |
-| Key Value Store - Lists        | $5.000 per 1M   |
+| Key Value Store - Writes       | $5.00 per 1M   |
+| Key Value Store - Deletes      | $5.00 per 1M   |
+| Key Value Store - Lists        | $5.00 per 1M   |
 | Key Value Store - Data Storage | $0.50 per 1GB/m |
 | Additional Custom Domains      | $10 per month   |
