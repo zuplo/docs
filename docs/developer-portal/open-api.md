@@ -1,6 +1,5 @@
 ---
 title: Open API
-draft: true
 ---
 
 Open API is a standard for creating machine-readable documentation for HTTP

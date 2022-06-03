@@ -1,6 +1,5 @@
 ---
 title: API Key Management
-draft: true
 ---
 
 The Zuplo developer portal supports API Key Management for API Consumers.
