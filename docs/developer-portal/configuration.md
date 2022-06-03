@@ -1,6 +1,5 @@
 ---
 title: Configuring Your Portal
-draft: true
 ---
 
 The `routes.json` file within your project supports many properties from the [Open API 3.1.0 spec](https://spec.openapis.org/oas/v3.1.0). In order to streamline the developer experience and prevent your routes file from growing out of control, we only support select properties.
