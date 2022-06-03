@@ -1,6 +1,5 @@
 ---
 title: Version Management
-draft: true
 ---
 
 The `versions` section of your `routes.json` allows you to configure the different versions of your API. Each one of these versions will have its own Open API Spec generated. Users will have the ability to navigate between multiple versions from within the developer portal
