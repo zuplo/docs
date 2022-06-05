@@ -5,18 +5,12 @@
   "title": "Request Size Limit",
   "isPreview": false,
   "description": "",
-  "required": [
-    "handler"
-  ],
+  "required": ["handler"],
   "properties": {
     "handler": {
       "type": "object",
       "default": {},
-      "required": [
-        "export",
-        "module",
-        "options"
-      ],
+      "required": ["export", "module", "options"],
       "properties": {
         "export": {
           "const": "RequestSizeLimitInboundPolicy",
