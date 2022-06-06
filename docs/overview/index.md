@@ -18,9 +18,9 @@ There are two ways to evaluate Zuplo:
 
 For the rest of tutorial, we’ll assume you’re using our web experience (it’s the fastest way to evaluate Zuplo).
 
-## 1. Sign up at [portal.zuplo.com](http://portal.zuplo.com) and create a project.
+## 1. Sign up at [portal.zuplo.com](https://zuplo.link/38QeWy5) and create a project.
 
-Sign up for your free trial at [portal.zuplo.com](http://portal.zuplo.com). Once signed in enter a name for your project (or accept the suggestion) and click Create Project. You can connect your project to GitHub if you wish.
+Sign up for your free trial at [portal.zuplo.com](https://zuplo.link/38QeWy5). Once signed in enter a name for your project (or accept the suggestion) and click Create Project. You can connect your project to GitHub if you wish.
 
 We've designed Zuplo to be easy to get started, our goal is you go from zero to live API gateway in under 2 minutes. [Let us know if we fail on this and why](https://discord.gg/CEZrnZN897)!
 
