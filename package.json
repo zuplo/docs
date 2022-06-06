@@ -53,8 +53,8 @@
     "prettier-plugin-organize-imports": "^2.3.4",
     "remark-html": "^15.0.1",
     "remark-parse": "^10.0.1",
-    "ts-node": "^10.8.0",
-    "typescript": "^4.7.2",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3",
     "unified": "^10.1.2"
   },
   "browserslist": {
