@@ -21,7 +21,7 @@ Follow this guide to have a developer portal up and running in minutes.
 
 Zuplo uses a `routes.json` file to configure all the routes in the gateway, including any policies applied (like validation and authentication policies) and also stores the metadata that drives the content of the developer portal.
 
-Sign in to Zuplo and get your free developer account at [portal.zuplo.com](https://portal.zuplo.com) and follow these simple steps to see the developer portal in action.
+Sign in to Zuplo and get your free developer account at [portal.zuplo.com](https://zuplo.link/3Q2Sd2I) and follow these simple steps to see the developer portal in action.
 
 ## Step 1 - Create a new Zuplo Project
 
