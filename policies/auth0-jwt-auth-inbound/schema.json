@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/rate-limit-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Auth0 JWT Auth",
   "description": "Authenticate users using Auth0 issued JWT tokens.",
