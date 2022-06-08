@@ -1,9 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/cognito-jwt-auth-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/okta-jwt-auth-inbound.json",
   "type": "object",
-  "title": "AWS Cognito JWT Auth",
-  "description": "Authenticate users using AWS Cognito issued JWT tokens.",
+  "title": "Okta JWT Auth",
+  "description": "Authenticate users using Okta issued JWT tokens.",
   "required": ["handler"],
   "isPreview": false,
   "properties": {
@@ -13,7 +13,7 @@
       "required": ["export", "module", "options"],
       "properties": {
         "export": {
-          "const": "CognitoJwtInboundPolicy",
+          "const": "OktaJwtInboundPolicy",
           "description": "The name of the exported type"
         },
         "module": {
@@ -23,18 +23,18 @@
         "options": {
           "type": "object",
           "description": "The options for this policy",
-          "required": ["region", "userPoolId"],
+          "required": ["audience", "issuerUrl"],
           "properties": {
             "allowUnauthenticatedRequests": {
               "type": "boolean",
               "default": false,
               "description": "Allow unauthenticated requests to proceed. This is use useful if you want to use multiple authentication policies or if you want to allow both authenticated and non-authenticated traffic."
             },
-            "region": {
-              "description": "The AWS region where your Cognito instance is deployed"
+            "issuerUrl": {
+              "description": "Your Okta authorization server's issuer URL. For example, https://dev-12345.okta.com/oauth2/abc"
             },
-            "userPoolId": {
-              "description": "The user pool identifier"
+            "audience": {
+              "description": "The Okta audience of your API, for example api://my-api"
             }
           }
         }
@@ -42,12 +42,12 @@
       "examples": [
         {
           "_name": "basic",
-          "export": "CognitoJwtInboundPolicy",
+          "export": "OktaJwtInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
             "allowUnauthenticatedRequests": false,
-            "region": "$env(AWS_REGION)",
-            "userPoolId": "$env(AWS_COGNITO_USER_POOL_ID)"
+            "issuerUrl": "$env(OKTA_ISSUER_URL)",
+            "audience": "$env(OKTA_AUDIENCE)"
           }
         }
       ]

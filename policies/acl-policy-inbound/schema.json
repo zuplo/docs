@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/rate-limit-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/acl-policy-inbound.json",
   "type": "object",
   "title": "Access Control List Inbound",
   "isPreview": true,
