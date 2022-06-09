@@ -69,6 +69,7 @@ const sidebars = {
           items: [
             "policies/api-key-auth-inbound",
             "policies/auth0-jwt-auth-inbound",
+            "policies/okta-jwt-auth-inbound",
             "policies/cognito-jwt-auth-inbound",
             "policies/open-id-jwt-auth-inbound",
             "policies/basic-auth-inbound",
