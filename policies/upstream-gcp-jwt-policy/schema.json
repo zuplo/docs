@@ -4,7 +4,7 @@
   "type": "object",
   "title": "Upstream GCP JWT Policy",
   "isPreview": true,
-  "description": "Mints a GCP JWT from a GCP Service Account",
+  "description": "Creates a JWT token (generated using a Google Service Account JSON) and attaches it to the outgoing request. Useful when calling GCP services like Cloud Endpoints / ESPv2",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -31,7 +31,7 @@
             },
             "serviceAccountJson": {
               "type": "string",
-              "description": "The Google Service Account key in JSON format."
+              "description": "The Google Service Account key in JSON format. Note you can load this from environment variables using the $env(ENV_VAR) syntax."
             }
           }
         }
