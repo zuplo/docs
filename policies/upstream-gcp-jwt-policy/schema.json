@@ -39,7 +39,7 @@
       "examples": [
         {
           "_name": "basic",
-          "export": "SetHeaderOutbound",
+          "export": "UpstreamGcpJwtPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
             "audience": "your_gcp_service.endpoint.com",
