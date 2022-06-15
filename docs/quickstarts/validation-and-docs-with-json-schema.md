@@ -1,10 +1,6 @@
----
-title: Validate and Document your API with JSON Schema
----
+# API Request Validation with JSON Schema
 
 Zuplo is an API gateway that helps any business offer a Stripe-quality experience to developers. You can quickly set up a gateway for your any API, and add validation and documentation in minutes using JSON Schema.
-
-Follow this guide to have a developer portal up and running in no time!
 
 :::note
 
@@ -20,11 +16,11 @@ Zuplo uses a `routes.json` file to configure all the routes in the gateway, incl
 
 Get your free developer account at [portal.zuplo.com](https://portal.zuplo.com), sign in to Zuplo, and follow these simple steps to see the developer portal in action.
 
-## Step 1 - Create a new Zuplo Project
+## 1/ Create a new Zuplo Project
 
 Once you've signed into the portal you'll be prompted to create a new project. Enter a name and click create - in a matter of seconds you'll be able to edit the configuration of your new gateway (and developer portal).
 
-## Step 2 - Create a route
+## 2/ Create a route
 
 :::tip
 
@@ -40,7 +36,7 @@ Your project will open on the **Route Designer** which helps you edit the `route
 
 This route will create a proxy where the gateway will forward traffic to our demo API at `https://ecommerce-api.zuplo.io/`.
 
-## Step 3 - Add a JSON Schema
+## 3/ Add a JSON Schema
 
 Go to [JSONSchema.net](https://jsonschema.net) and sign in (or **continue as guest**) and paste the following example JSON (a product) in the left window:
 
@@ -57,7 +53,7 @@ Click **submit** button to generate your JSON Schema specification in the right 
 
 Now, in the [Zuplo portal](https://portal.zuplo.com) make sure you're on the Files tab and click the **[+]** button next to the schemas folder. Choose **New Empty Schema** and enter the file name `product.json`. Paste your JSON Schema definition into the empty file and save your changes.
 
-## Step 4 - Add JSON Schema validation to specify a request body
+## 4/ Add JSON Schema validation to specify a request body
 
 Zuplo can automatically validate the body of incoming requests using your new JSON Schema. To add this to your route, open **routes.json** again and expand the **Policies** section of your route. Click **Add Policy** to the request pipeline. Choose the JSON Body Validation schema and change the policy configuration as follows (note that it specifies your new file):
 
@@ -73,6 +69,14 @@ Zuplo can automatically validate the body of incoming requests using your new JS
 
 Save your changes - your API is now live with validation. Test it out using the **API Test Console** tab. Also, check out your developer portal by clicking the **Open your Developer Portal** link at the top left of the screen. Note that the documentation contains information about the request body (and you can add much more metadata in the `routes.json` file too to enhance your docs).
 
-## What next?
+## Congratulations - you validated requests with JSON Schema
 
-If you haven't already, why not try the [Getting Started guide](https://zuplo.com/docs/overview/) and set up a gateway with Rate-Limiting and API-Key authentication. It's easy!
+**Related Docs**
+
+- [JSON Schema Validation Policy](/docs/policies/validate-json-schema-inbound)
+- [API Gateway Quickstart](/docs/quickstarts/proxy-public-api.md)
+
+**Next Steps**
+
+- [Add API Key Auth to and API](/docs/quickstarts/add-api-key-auth.md)
+- [Dynamic Rate Limiting](/docs/quickstarts/per-customer-rate-limits.md)

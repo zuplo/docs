@@ -49,10 +49,10 @@ const sidebars = {
       label: "Quick Starts",
       items: [
         "quickstarts/proxy-public-api",
-        "quickstarts/per-customer-rate-limits",
-        "quickstarts/instant-developer-portal",
-        "quickstarts/use-api-key-authentication",
+        "quickstarts/add-api-key-auth",
+        "quickstarts/instant-api-docs-and-dev-portal",
         "quickstarts/validation-and-docs-with-json-schema",
+        "quickstarts/per-customer-rate-limits",
       ],
     },
     {
@@ -166,7 +166,6 @@ const sidebars = {
         "developer-portal/index",
         "developer-portal/configuration",
         "developer-portal/version-management",
-        "developer-portal/api-key-management",
         "developer-portal/open-api",
       ],
     },

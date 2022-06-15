@@ -1,5 +1,5 @@
 ---
-title: Setup Your API Proxy
+title: API Gateway Quickstart
 ---
 
 Let's put a gateway over this sample e-commerce API at
@@ -7,22 +7,14 @@ Let's put a gateway over this sample e-commerce API at
 Quickly take a look at the API by opening this URL in your browser:
 [https://ecommerce-api.zuplo.io/products/10000](https://ecommerce-api.zuplo.io/products/10000)
 
-> You can also 'Zup It!' to create an instant copy of this project with all the
-> code complete for you:
-> [Zup it!](https://portal.zuplo.com/clone?sourceRepoUrl=https://github.com/zuplo/samples-gateway-over-airtable.git)
+## 1/ Routes Setup
 
-## 1: Routes Setup
-
-Open the **routes.json** file and add a new route.
-
-![Untitled](/media/getting-started/add-route.png)
-
-Set the **version** to be `v1` and the **path** of the new route to be
+Open the **Routes** file and add a new route. Set the **version** to be `v1` and the **path** of the new route to be
 `/products/:productId`.
 
 ![Untitled](/media/getting-started/path.png)
 
-## 2: Rewrite Handler
+## 2/ Rewrite Handler
 
 Set the mode of the Request Handler to be **URL Rewrite** and the rewrite path
 to be `https://ecommerce-api.zuplo.io/products/${params.productId}`. Notice that
@@ -30,17 +22,7 @@ this appends the productId token to the outbound URL.
 
 ![Untitled](/media/getting-started/rewrite.png)
 
-## 3: Test
-
-Use the route tester at the top of the screen to check your re-write logic. Open
-the route tester (top right) and set the path to be `/v1/products/10000`. Verify
-that your route was matched and the URL re-written appropriately.
-
-![Untitled](/media/getting-started/route-tester.png)
-
-![Untitled](/media/getting-started/route-matched.png)
-
-## 4: Rate Limiting
+## 3/ Rate Limiting
 
 Expand the Policies section and click the Add Policy button under request. Search for and click the **Rate Limiting** policy.
 
@@ -49,7 +31,7 @@ Expand the Policies section and click the Add Policy button under request. Searc
 Accept the default configuration. Note how it's set to allow only 2 requests
 every 20s for a given IP address.
 
-## 5: Test Rate Limiting
+## 4/ Test Rate Limiting
 
 Invoke your API using the Test Console. Click on the lightning tab and select
 the first file. Change the path to `/v1/products/10000` and hit **Test**.
@@ -59,13 +41,14 @@ the first file. Change the path to `/v1/products/10000` and hit **Test**.
 Try quickly testing it a few more time to see the rate limiter kick in - you'll
 get a `429` response, "Too many requests".
 
-## Congratulations, you completed a quickstart
+## Congratulations, you set up a gateway!
 
-Try another quickstart (above) for more awesome.
+**Related Docs**
 
-Why not try one of the other getting started guides (above) or some of the
-examples in our documentation:
+- [URL Rewrite Handler](/docs/handlers/url-rewrite)
+- [Rate Limit Policy](/docs/policies/rate-limit-inbound)
 
-- [Write your own policies](/docs/policies)
-- [Archive requests to storage](/docs/examples/archiving-requests-to-storage)
-- [Setting up JWT auth with Auth0](../policies/auth0-jwt-auth-inbound.md)
+**Next Steps**
+
+- [Add API Key Auth to and API](/docs/quickstarts/add-api-key-auth.md)
+- [Dynamic Rate Limiting](/docs/quickstarts/per-customer-rate-limits.md)
