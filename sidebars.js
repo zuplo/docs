@@ -146,6 +146,7 @@ const sidebars = {
             "policies/archive-response-outbound",
             "policies/custom-code-inbound",
             "policies/custom-code-outbound",
+            "policies/upstream-gcp-jwt-inbound",
           ],
         },
       ],
