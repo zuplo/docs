@@ -2,6 +2,8 @@
 
 Import your Open API spec or set up a few routes and you’ll have an instant developer portal ready for your API consumers. Follow this guide to get it working in 2 minutes.
 
+Before we start, create a new project in [portal.zuplo.com](https://portal.zuplo.com).
+
 ## 1/ Create some routes
 
 In the **Files** tab, click on the **Routes** entry in the **Config** folder. If it’s a new project you’ll have no routes. You can click on “**Import From Open API**” if you have one, or you can add some routes manually.

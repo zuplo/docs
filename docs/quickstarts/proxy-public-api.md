@@ -7,6 +7,8 @@ Let's put a gateway over this sample e-commerce API at
 Quickly take a look at the API by opening this URL in your browser:
 [https://ecommerce-api.zuplo.io/products/10000](https://ecommerce-api.zuplo.io/products/10000)
 
+Before we start, create a new project in [portal.zuplo.com](https://portal.zuplo.com)
+
 ## 1/ Routes Setup
 
 Open the **Routes** file and add a new route. Set the **version** to be `v1` and the **path** of the new route to be

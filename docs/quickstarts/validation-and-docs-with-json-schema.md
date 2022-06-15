@@ -2,13 +2,7 @@
 
 Zuplo is an API gateway that helps any business offer a Stripe-quality experience to developers. You can quickly set up a gateway for your any API, and add validation and documentation in minutes using JSON Schema.
 
-:::note
-
-**How is this different to JSONSchema.net?**
-
-[JSONSchema.net](https://jsonschema.net/) is online tool that helps you write JSON Schema specifications. We recommend it as the fastest way to create your JSON Schema specifications based on example JSON documents. You can then paste them into Zuplo, where the gateway can generate your documentation and validate incoming request bodies.
-
-:::
+Before we start, create a new project in [portal.zuplo.com](https://portal.zuplo.com)
 
 ## Overview
 
