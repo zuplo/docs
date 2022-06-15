@@ -1,8 +1,8 @@
----
-title: Dynamic Rate Limiting
----
+# Dynamic Rate Limiting
 
 The [API Gateway Quickstart](./proxy-public-api.md) quick start shows how to configure [rate limiting](../policies/rate-limit-inbound.md) for a route. A default rate limit policy is a great way to protect your API, but sometimes you need more control. In this quickstart, you will learn how to set a custom rate limit policy for a single customer based on a route parameter.
+
+Before we start, create a new project in [portal.zuplo.com](https://portal.zuplo.com)
 
 ## 1/ Setup Route
 
