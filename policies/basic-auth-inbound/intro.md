@@ -7,5 +7,3 @@ The API will expect a Basic Auth header (you can generate samples
 invalid credentials (or no header) will not be authenticated. Authenticated
 requests will populate the `user` property of the `ZuploRequest` parameter on
 your RequestHandler.
-
-<ZupIt repoUrl="https://github.com/zuplo/samples-basic-auth" />
