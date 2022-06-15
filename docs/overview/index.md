@@ -19,7 +19,7 @@ We [recommend API key authentication](/blog/2022/05/03/you-should-be-using-api-k
 
 ## API Request Validation with JSON Schema
 
-Quickly set up a gateway for an API and add validation using using JSON Schema with [this guide](/docs/quickstarts/validation-and-docs-with-json-schema). **[Open Quickstart ➡️](/docs/quickstarts/validation-and-docs-with-json-schema)**
+Quickly set up a gateway for an API and add validation using JSON Schema with [this guide](/docs/quickstarts/validation-and-docs-with-json-schema). **[Open Quickstart ➡️](/docs/quickstarts/validation-and-docs-with-json-schema)**
 
 ## Dynamic Rate Limiting
 
