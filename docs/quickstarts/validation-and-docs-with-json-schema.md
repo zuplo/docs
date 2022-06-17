@@ -4,17 +4,7 @@ Zuplo is an API gateway that helps any business offer a Stripe-quality experienc
 
 Before we start, create a new project in [portal.zuplo.com](https://portal.zuplo.com)
 
-## Overview
-
-Zuplo uses a `routes.json` file to configure all the routes in the gateway, including any policies applied (like validation).
-
-Get your free developer account at [portal.zuplo.com](https://portal.zuplo.com), sign in to Zuplo, and follow these simple steps to see the developer portal in action.
-
-## 1/ Create a new Zuplo Project
-
-Once you've signed into the portal you'll be prompted to create a new project. Enter a name and click create - in a matter of seconds you'll be able to edit the configuration of your new gateway (and developer portal).
-
-## 2/ Create a route
+## 1/ Create a route
 
 :::tip
 
@@ -30,7 +20,7 @@ Your project will open on the **Route Designer** which helps you edit the `route
 
 This route will create a proxy where the gateway will forward traffic to our demo API at `https://ecommerce-api.zuplo.io/`.
 
-## 3/ Add a JSON Schema
+## 2/ Add a JSON Schema
 
 Go to [JSONSchema.net](https://jsonschema.net) and sign in (or **continue as guest**) and paste the following example JSON (a product) in the left window:
 
@@ -47,7 +37,7 @@ Click **submit** button to generate your JSON Schema specification in the right 
 
 Now, in the [Zuplo portal](https://portal.zuplo.com) make sure you're on the Files tab and click the **[+]** button next to the schemas folder. Choose **New Empty Schema** and enter the file name `product.json`. Paste your JSON Schema definition into the empty file and save your changes.
 
-## 4/ Add JSON Schema validation to specify a request body
+## 3/ Add JSON Schema validation to specify a request body
 
 Zuplo can automatically validate the body of incoming requests using your new JSON Schema. To add this to your route, open **routes.json** again and expand the **Policies** section of your route. Click **Add Policy** to the request pipeline. Choose the JSON Body Validation schema and change the policy configuration as follows (note that it specifies your new file):
 
