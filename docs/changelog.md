@@ -4,6 +4,7 @@ title: Change Log
 
 ## June 17, 2022
 
+- Added [Upstream GCP JWT Policy](./policies/upstream-gcp-jwt-inbound.md)
 - Deploy from GitHub from multiple branches
 - OAuth Client management
 - **Dev Portal** - Custom OAuth provider for end-user authentication to developer portal
