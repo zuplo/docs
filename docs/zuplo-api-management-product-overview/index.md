@@ -8,7 +8,7 @@ Zuplo is an API Management platform designed for developers. Developers love Zup
 
 1. **Is Programmable** - code your own handlers and policies in typescript.
 2. **Uses Gitops** - integrates with GitHub and deploys via gitops (like Vercel and Netlify).
-3. **Respects your toolset** - use Visual Studio, Sublime, whatever IDE you like, or our [web portal](https://zuplo.com/docs/overview/portal.zuplo.com).
+3. **Respects your toolset** - use Visual Studio, Sublime, whatever IDE you like, or our [web portal](https://portal.zuplo.com/signup).
 4. **Offers infinite scale at the edge** - scales effortlessly to billions of requests, deploy to the edge at over 200 locations around the world with 0ms startup time.
 
 We think Zuplo is the easiest way for developers to share their APIs. Zuplo provides a host of services that allow you to add authentication, observability, and control to your API so that you can safely share it with customers, partners, and other developers.
