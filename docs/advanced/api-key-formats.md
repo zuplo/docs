@@ -7,4 +7,4 @@ Zuplo uses the prefix `zpk*_` for all API key values, where the `*` is a letter 
 Current formats:
 
 - `zpka_` - Zuplo customer API keys
-- `zpkd_` - Zuplo deployment secrets (internally)
+- `zpkd_` - Zuplo deployment secrets (internal use)
