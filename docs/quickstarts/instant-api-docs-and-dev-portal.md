@@ -2,6 +2,8 @@
 
 Import your Open API spec or set up a few routes and you’ll have an instant developer portal ready for your API consumers. Follow this guide to get it working in 2 minutes.
 
+Check out an example developer portal [here](https://rickandmorty.zuplo.app/).
+
 Before we start, create a new project in [portal.zuplo.com](https://portal.zuplo.com).
 
 ## 1/ Create some routes
