@@ -7,4 +7,4 @@ Zuplo gives you the ability to automatically generate an API Developer Portal wh
 
 ![Developer Portal](../../static/media/developer-portal/overview/developer-portal.png)
 
-See our [Developer Portal Quickstart Guide](/docs/quickstarts/instant-developer-portal) to get started.
+See our [Developer Portal Quickstart Guide](https://zuplo.com/docs/quickstarts/instant-api-docs-and-dev-portal) to get started.
