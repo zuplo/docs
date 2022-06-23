@@ -3,7 +3,7 @@ title: Rick and Morty Developer Portal and Documentation
 ---
 
 This is an example API proxied via Zuplo - these docs are generated based on the gateway configuration.  for the Rick and Morty API. 
-[Example Documentaton](https://rickandmorty.zuplo.app/)
+[Example Documentation](https://rickandmorty.zuplo.app/)
 
 The Rick and Morty API is a REST(ish) API based on the television show Rick and Morty. It provides access to about hundreds of characters, images, locations and episodes. The Rick and Morty API is filled with canonical information as seen on the TV show. Full credit to the original and upstream API, which is available at [rickandmortyapi.com](https://rickandmortyapi.com).
 
