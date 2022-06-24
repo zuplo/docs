@@ -1,9 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/set-headers-outbound.json",
+  "$id": "http://zuplo.com/schemas/policies/set-headers-inbound.json",
   "type": "object",
-  "title": "Set Headers Outbound",
-  "isPreview": true,
+  "title": "Add or Set Response Headers",
+  "isPreview": false,
   "description": "",
   "required": ["handler"],
   "properties": {
@@ -13,7 +13,7 @@
       "required": ["export", "module", "options"],
       "properties": {
         "export": {
-          "const": "SetHeaderOutbound",
+          "const": "SetHeadersOutboundPolicy",
           "description": "The name of the exported type"
         },
         "module": {
@@ -30,9 +30,17 @@
       "examples": [
         {
           "_name": "basic",
-          "export": "SetHeaderOutbound",
+          "export": "SetHeadersOutboundPolicy",
           "module": "$import(@zuplo/runtime)",
-          "options": {}
+          "options": {
+            "headers": [
+              {
+                "name": "<HEADER_NAME>",
+                "value": "<HEADER_VALUE>",
+                "overwrite": true
+              }
+            ]
+          }
         }
       ]
     }

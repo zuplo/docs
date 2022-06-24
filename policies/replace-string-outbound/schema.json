@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/remove-headers-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/replace-string-inbound.json",
   "type": "object",
-  "title": "Remove Request Headers",
+  "title": "Replace String in Response Body",
   "isPreview": false,
   "description": "",
   "required": ["handler"],
@@ -13,7 +13,7 @@
       "required": ["export", "module", "options"],
       "properties": {
         "export": {
-          "const": "RemoveHeadersInboundPolicy",
+          "const": "ReplaceStringOutboundPolicy",
           "description": "The name of the exported type"
         },
         "module": {
@@ -30,10 +30,12 @@
       "examples": [
         {
           "_name": "basic",
-          "export": "RemoveHeadersInboundPolicy",
+          "export": "ReplaceStringOutboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "names": ["<HEADER_NAME>"]
+            "mode": "regexp",
+            "match": "https://example.com/api/(v1|v0)/",
+            "replaceWith": "https://my-gateway.com/v1/"
           }
         }
       ]
