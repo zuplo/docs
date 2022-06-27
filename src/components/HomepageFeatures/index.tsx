@@ -41,7 +41,7 @@ const FeatureList: FeatureItem[] = [
     Icon: ChipIcon,
     description: (
       <>
-        Zuplo has policies a policy for everything from authentication to mock
+        Zuplo has policies for everything from authentication to mock
         responses and more.
       </>
     ),
@@ -64,7 +64,7 @@ const FeatureList: FeatureItem[] = [
     Icon: CodeIcon,
     description: (
       <>
-        Configure full API management with a few click, but escape to code when
+        Configure full API management with a few clicks, but escape to code when
         you need full control.
       </>
     ),
