@@ -32,7 +32,7 @@ auto-serialize the response to JSON and add a `content-type` header to your
 response of `application/json`. This makes it very easy to build simple JSON
 APIs.
 
-## Parameters & Querystrings
+## Parameters & Query strings
 
 You can read parameters specified on the route path as follows:
 
