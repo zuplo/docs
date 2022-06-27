@@ -137,7 +137,7 @@ Tags can be added to a route, however only the first value will be used for grou
 
 ## Security
 
-See [API Key Mangement](/docs/developer-portal/api-key-management).
+See [API Key Management](/docs/developer-portal/add-api-key-auth).
 
 ## Excluding a Route
 
