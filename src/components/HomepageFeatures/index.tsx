@@ -64,7 +64,7 @@ const FeatureList: FeatureItem[] = [
     Icon: CodeIcon,
     description: (
       <>
-        Configure full API management with a few click, but escape to code when
+        Configure full API management with a few clicks, but escape to code when
         you need full control.
       </>
     ),
