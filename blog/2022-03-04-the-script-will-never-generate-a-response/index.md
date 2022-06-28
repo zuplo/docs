@@ -9,7 +9,7 @@ tags: [cloudflare, code]
 
 CloudFlare is one of our hosting partners at Zuplo and we recently encountered a
 very tricky error that occurred intermittently and was not throwing an exception
-catchable by our logging framework. Our code wouldn’t didn’t even execute the
+catchable by our logging framework. Our code wouldn’t even execute the
 finally blocks when we countered this. The only clue was deep in the CloudFlare
 Workers streaming logs - that looked something like this...
 
