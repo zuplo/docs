@@ -47,10 +47,10 @@ get a `429` response, "Too many requests".
 
 **Related Docs**
 
-- [URL Rewrite Handler](/docs/handlers/url-rewrite)
-- [Rate Limit Policy](/docs/policies/rate-limit-inbound)
+- [URL Rewrite Handler](../handlers/url-rewrite.md)
+- [Rate Limit Policy](../policies/rate-limit-inbound.md)
 
 **Next Steps**
 
-- [Add API Key Auth to and API](/docs/quickstarts/add-api-key-auth.md)
-- [Dynamic Rate Limiting](/docs/quickstarts/per-customer-rate-limits.md)
+- [Add API Key Auth to and API](../quickstarts/add-api-key-auth.md)
+- [Dynamic Rate Limiting](../quickstarts/per-customer-rate-limits.md)

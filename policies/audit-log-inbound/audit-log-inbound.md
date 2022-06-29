@@ -13,7 +13,7 @@ Adding Audit Logging to your APIs that are secured with Zuplo is as easy as addi
 
 :::tip
 
-Be sure to read about [policies](/docs/policies)
+Be sure to read about [policies](../overview/policies.md)
 
 :::
 

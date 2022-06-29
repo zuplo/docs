@@ -2,7 +2,7 @@
 title: Archiving requests to storage
 ---
 
-> Note - this sample uses Policies, read [this guide](/docs/policies) first.
+> Note - this sample uses Policies, read [this guide](../overview/policies.md) first.
 
 In this sample we'll show how you can archive the text body of incoming requests
 to Azure Blob Storage. We also have a post on [Archiving to AWS S3 Storage](/blog/2022/03/22/custom-policies-in-code-archiving-requests-to-s3).

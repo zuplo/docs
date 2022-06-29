@@ -32,14 +32,16 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Projects",
-      items: ["projects/github-source-control"],
+      label: "Guides",
+      items: ["guides/github-source-control", "guides/api-key-management"],
     },
     {
       type: "category",
       label: "Deployments",
       items: [
         "deployments/environments",
+        "deployments/environment-variables",
+        "deployments/settings-json",
         "deployments/custom-domains",
         "deployments/deployment-options",
       ],
@@ -165,6 +167,7 @@ const sidebars = {
       label: "Developer Portal",
       items: [
         "developer-portal/index",
+        "developer-portal/setup",
         "developer-portal/configuration",
         "developer-portal/version-management",
         "developer-portal/adding-pages",

@@ -73,9 +73,9 @@ Change the path to `/v1/customers/100/data` and try running the test again. You 
 
 **Related Docs**
 
-- [Rate Limit Policy](/docs/policies/rate-limit-inbound)
-- [API Gateway Quickstart](/docs/quickstarts/proxy-public-api.md)
+- [Rate Limit Policy](../policies/rate-limit-inbound.md)
+- [API Gateway Quickstart](../quickstarts/proxy-public-api.md)
 
 **Next Steps**
 
-- [Add API Key Auth to an API](/docs/quickstarts/add-api-key-auth.md)
+- [Add API Key Auth to an API](../quickstarts/add-api-key-auth.md)

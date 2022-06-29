@@ -1,4 +1,7 @@
-# Add API-Key Authentication to any API
+---
+title: Add API Key Authentication to any API
+sidebar_label: Add API Key Authentication
+---
 
 We [recommend API key authentication](/blog/2022/05/03/you-should-be-using-api-keys/) in most API sharing scenarios, but there’s a lot to implement to use API keys successfully. Let us take away all the pain. Follow this guide to get it working in less than 5 minutes.
 
@@ -85,8 +88,8 @@ You can also try using the built-in test client (shown below) setup your request
 
 **Related Docs**
 
-- [API Key Authentication Policy](/docs/policies/api-key-auth-inbound)
+- [API Key Authentication Policy](../policies/api-key-auth-inbound.md)
 
 **Next Steps**
 
-- [Add rate-limiting to your API](/docs/quickstarts/per-customer-rate-limits)
+- [Add rate-limiting to your API](../quickstarts/per-customer-rate-limits.md)

@@ -2,6 +2,13 @@
 title: Change Log
 ---
 
+## June 24, 2022
+
+- Support for outbound policies in portal and runtime
+- New domain - `zuplo.app` for all non-developer environment deployments
+- **Portal** - Improved UI for switching accounts, projects, and environments
+- **Dev Portal** - Style improvements to developer portal custom documentation
+
 ## June 17, 2022
 
 - Added [Upstream GCP JWT Policy](./policies/upstream-gcp-jwt-inbound.md)

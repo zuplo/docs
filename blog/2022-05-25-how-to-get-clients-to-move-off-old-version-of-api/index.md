@@ -28,8 +28,8 @@ Another technique to encourage folks to move off an old API, and combines well w
 
 Again, this is a business decision but once you’ve decided you need to create urgency amongst consumers of your soon-to-be-deprecated, old version of your API. This is a better approach to just going dark on active customers on the scheduled date.
 
-We introduced a sleep and brownout policy to Zuplo to make this even easier. If you want to try it out for yourself and schedule a brownout, [go sign up for Zuplo](https://zuplo.com/docs/overview/).
+We introduced a sleep and brownout policy to Zuplo to make this even easier. If you want to try it out for yourself and schedule a brownout, [go sign up for Zuplo](/docs/overview/).
 
 **Weekly Zoom Chat**
 
-Are you starting work on, or in the middle of building, a public customer or partner API? Register for our ["Building a Customer API" weekly chat](https://zuplo.com/blog/2022/05/18/building-a-customer-api-weekly-chat-utsav-shah-vanta) on Zoom every Thursday at 3pm ET/12pm PT and learn from featured guests and other developers building public APIs.
+Are you starting work on, or in the middle of building, a public customer or partner API? Register for our ["Building a Customer API" weekly chat](/blog/2022/05/18/building-a-customer-api-weekly-chat-utsav-shah-vanta) on Zoom every Thursday at 3pm ET/12pm PT and learn from featured guests and other developers building public APIs.

@@ -1,12 +1,12 @@
 ---
-title: Configuring Your Portal
+title: Routes Configuration
 ---
 
 The `routes.json` file within your project supports many properties from the [Open API 3.1.0 spec](https://spec.openapis.org/oas/v3.1.0). In order to streamline the developer experience and prevent your routes file from growing out of control, we only support select properties.
 
 ## Version Info
 
-Please see the [version management](/docs/developer-portal/version-management) section to learn how to provide information specific to a version of your API
+Please see the [version management](./version-management.md) section to learn how to provide information specific to a version of your API
 
 ## Summary & Descriptions
 
@@ -127,7 +127,7 @@ Schemas are also the only supported way to provide examples for parameters, head
 
 ## Tags
 
-Tags can be added to a route, however only the first value will be used for grouping together routes in the `developer portal`. You can learn how to add a description to your tag in the [version management](/docs/developer-portal/version-management) section.
+Tags can be added to a route, however only the first value will be used for grouping together routes in the `developer portal`. You can learn how to add a description to your tag in the [version management](./version-management.md) section.
 
 ```json
 "tags": [
@@ -137,7 +137,7 @@ Tags can be added to a route, however only the first value will be used for grou
 
 ## Security
 
-See [API Key Management](/docs/developer-portal/add-api-key-auth).
+See [API Key Management](../guides/api-key-management.md).
 
 ## Excluding a Route
 

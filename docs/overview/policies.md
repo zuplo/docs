@@ -7,7 +7,7 @@ multiple policies and apply them to multiple routes. There are built-in policies
 but of course, being a developer-focused platform you can easily create custom
 policies.
 
-Here's a [list and reference guide for policies](/docs/policies/).
+Here's a [list and reference guide for policies](../overview/policies.md).
 
 ## How policies work
 
