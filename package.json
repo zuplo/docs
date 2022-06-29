@@ -50,7 +50,7 @@
     "glob": "^8.0.3",
     "jsdom": "^19.0.0",
     "prettier": "^2.7.1",
-    "prettier-plugin-organize-imports": "^2.3.4",
+    "prettier-plugin-organize-imports": "^3.0.0",
     "remark-html": "^15.0.1",
     "remark-parse": "^10.0.1",
     "ts-node": "^10.8.1",
