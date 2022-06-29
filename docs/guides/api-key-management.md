@@ -12,9 +12,9 @@ For a complete tutorial on adding API Key authentication and management [see the
 
 ## API Key Consumers
 
-API Key Consumers are people, customers, partners, services, etc. that can have API Keys and access your API. API Key consumers are managed by **API Key Managers**. API Key Managers are people authorized to issue and manage API Keys for the API Key Consumer. Adding managers to the API Key Consumer is done by setting email addresses for each user.
+API Key Consumers are entities that can consume your API - typically people, customers, partners or services. API Key consumers are managed by **API Key Managers**. API Key Managers are people authorized to issue and manage API Keys for the API Key Consumer. Adding managers to the API Key Consumer is done by setting email addresses for each user.
 
-Each API Key Manager who logs into the Developer Portal can issue or manage API Keys. Note that every manager has access to the **SAME** API keys. If you would like each user of your API to have their own API Keys, make each user their own API Key Consumer with a single manager.
+Each API Key Manager who logs into the Developer Portal can issue or manage API Keys. Note that every manager on a consumer has access to all the **SAME** API keys for that consumer. If you would like each user of your API to have their own API Keys, make each user their own API Key Consumer with a single manager.
 
 ### API Key Consumer Metadata
 
@@ -34,7 +34,7 @@ would return a `request.user` object to your route if the API Key is successfull
 ```ts
 async function (request: ZuploRequest, context: ZuploContext) {
   return context.user;
-  // returns the follow
+  // returns the following
   // {
   //   "sub": "big-co",
   //   "data": {
