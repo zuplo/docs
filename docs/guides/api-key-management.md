@@ -84,3 +84,11 @@ async function (request: ZuploRequest, context: ZuploContext) {
 ```
 
 The `request.user` object can be used in both [handlers](../handlers/custom-handler.md) and [policies](../policies/custom-code-inbound.md)
+
+## API Key Leak Prevention
+
+API keys should never be stored in source control. Accidentally committing API keys to source control is a common attack vector that leads to compromises of organizations both large and small.
+
+Zuplo participates in [Github's Secret Scanning](https://docs.github.com/en/code-security/secret-scanning/about-secret-scanning) program to detect if you or your customer's API Keys are accidentally checked into source control on Github.
+
+If an API Key for you Zuplo API Gateway is compromised by checking it into a public or private Github repository Zuplo will be notified and take action almost immediately. Depending on your API's configuration Zuplo will either alert you of the potential compromise or immediately revoke the API Key and alert you and/or your customer.
