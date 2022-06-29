@@ -14,7 +14,7 @@ Development environments are only for development purposes and not for any produ
 
 ## Production
 
-A Zup can have multiple production environments. A production environment means that the environment is running on our highly-reliable and scalable infrastructure. To deploy to production environments, your project must be setup with [source control](../projects/github-source-control.md). When you make a commit and push to your git repo - whether from the portal or directly using the tool of your choice - a production deployment will run.
+A Zup can have multiple production environments. A production environment means that the environment is running on our highly-reliable and scalable infrastructure. To deploy to production environments, your project must be setup with [source control](../guides/github-source-control.md). When you make a commit and push to your git repo - whether from the portal or directly using the tool of your choice - a production deployment will run.
 
 Production environments will automatically have a URL like `ivory-dingo-main-244b176.zuplo.app`. The format of the URL is `project-name-branch-RANDOM.zuplo.app`. This URL is permanent as long as the branch the deployment was created from exists. If you delete the branch, the deployment will also be deleted. You can also map a [custom domain](custom-domains.md) to any production environment.
 

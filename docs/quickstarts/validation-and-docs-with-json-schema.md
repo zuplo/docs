@@ -1,4 +1,7 @@
-# API Request Validation with JSON Schema
+---
+title: API Request Validation with JSON Schema
+sidebar_label: API Request Validation
+---
 
 Zuplo is an API gateway that helps any business offer a Stripe-quality experience to developers. You can quickly set up a gateway for your any API, and add validation and documentation in minutes using JSON Schema.
 
@@ -57,10 +60,10 @@ Save your changes - your API is now live with validation. Test it out using the 
 
 **Related Docs**
 
-- [JSON Schema Validation Policy](/docs/policies/validate-json-schema-inbound)
-- [API Gateway Quickstart](/docs/quickstarts/proxy-public-api.md)
+- [JSON Schema Validation Policy](../policies/validate-json-schema-inbound.md)
+- [API Gateway Quickstart](../quickstarts/proxy-public-api.md)
 
 **Next Steps**
 
-- [Add API Key Auth to and API](/docs/quickstarts/add-api-key-auth.md)
-- [Dynamic Rate Limiting](/docs/quickstarts/per-customer-rate-limits.md)
+- [Add API Key Auth to and API](../quickstarts/add-api-key-auth.md)
+- [Dynamic Rate Limiting](../quickstarts/per-customer-rate-limits.md)

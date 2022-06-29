@@ -1,4 +1,7 @@
-# Instant API documentation and Developer Portal
+---
+title: Instant API Documentation and Developer Portal
+sidebar_label: Instant API Documentation
+---
 
 Import your Open API spec or set up a few routes and you’ll have an instant developer portal ready for your API consumers. Follow this guide to get it working in 2 minutes.
 
@@ -36,10 +39,10 @@ Yes, it’s that easy… now you just need to click the link at the top of the G
 
 ## Related docs
 
-- [Developer Portal Overview](/docs/developer-portal/)
-- [Configuring Your Portal](/docs/developer-portal/configuration)
+- [Developer Portal Overview](../developer-portal/index.md)
+- [Configuring Your Portal](../developer-portal/configuration.md)
 
 ## Next steps
 
-- [Explore the policy catalog](/docs/policies/)
-- [Add API Key Authentication](/docs/quickstarts/add-api-key-auth)
+- [Explore the policy catalog](../policies/index.md)
+- [Add API Key Authentication](../quickstarts/add-api-key-auth.md)

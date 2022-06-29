@@ -9,7 +9,7 @@ to the downwind service or back to the client respectively.
 ![Untitled](/media/guides/safely-cone-a-request-or-response/Untitled.png)
 
 When we do this inside the zuplo gateway in a
-[Request Handler](/docs/handlers/custom-handler) we have to be careful to clone
+[Request Handler](../handlers/custom-handler.md) we have to be careful to clone
 the request or response to avoid causing a `body-used` exception.
 
 A `body-used` exception occurs when a `.body` property of a request or response,
@@ -52,6 +52,6 @@ If you don’t need to read the body - we recommend against cloning the request 
 response as it will make your gateway more memory efficient and increase
 performance.
 
-> Note - in [policies](/docs/policies), if you need to read the body we always
+> Note - in [policies](../overview/policies.md), if you need to read the body we always
 > recommend using `.clone()` first, as you don’t know what the end request
 > handler might want to do with the originals.

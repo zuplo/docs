@@ -59,6 +59,6 @@ that "Hello World" response from your browser.
 Why not try one of the other getting started guides (above) or some of the
 examples in our documentation:
 
-- [Write your own policies](/docs/policies)
-- [Archive requests to storage](/docs/examples/archiving-requests-to-storage)
+- [Write your own policies](../overview/policies.md)
+- [Archive requests to storage](../examples/archiving-requests-to-storage.md)
 - [Setting up JWT auth with Auth0](../policies/auth0-jwt-auth-inbound.md)
