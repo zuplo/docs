@@ -48,7 +48,7 @@
     "chokidar": "^3.5.3",
     "concurrently": "^7.2.2",
     "glob": "^8.0.3",
-    "jsdom": "^19.0.0",
+    "jsdom": "^20.0.0",
     "prettier": "^2.7.1",
     "prettier-plugin-organize-imports": "^2.3.4",
     "remark-html": "^15.0.1",
