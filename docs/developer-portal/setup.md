@@ -35,7 +35,7 @@ To configure authentication, you will need to create both an OAuth Client (somet
 If you don't have an Auth0 account, you can sign up for a [free Auth0 account](https://auth0.com/signup) that will provide you will 7,000 monthly active users.
 
 1. [Create an Application](https://auth0.com/docs/get-started/auth0-overview/create-applications). When creating the application select type "Single-Page Web Applications"
-2. Set the `authentication.authority` property to `https://` plus your Auth0 domain, i.e. `https:://my-company.us.auth0.com/`. **Note** the trailing slash `/` is required.
+2. Set the `authentication.authority` property to `https://` plus your Auth0 domain and a trailing slash, i.e. `https:://my-company.us.auth0.com/`
 3. Set the `authentication.jwksUrl` property to `https://` plus your Auth0 domain plus `/.well-known/jwks.json`, i.e. `https:://my-company.us.auth0.com/.well-known/jwks.json`
 4. Set the `authentication.provider` value to `auth0`
 5. Set the `authentication.devPortalClient.clientId` to the Client ID of the application you created in step 1.
