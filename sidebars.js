@@ -33,7 +33,11 @@ const sidebars = {
     {
       type: "category",
       label: "Guides",
-      items: ["guides/github-source-control", "guides/api-key-management"],
+      items: [
+        "guides/github-source-control",
+        "guides/api-key-management",
+        "guides/oauth-client-management",
+      ],
     },
     {
       type: "category",
