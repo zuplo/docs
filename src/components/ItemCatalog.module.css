@@ -1,4 +1,4 @@
-.policy-list {
+.catalog-list {
   margin-top: var(--ifm-global-spacing);
   margin-bottom: var(--ifm-global-spacing);
   display: grid;
@@ -9,7 +9,7 @@
   justify-content: center;
 }
 
-.policy-item {
+.catalog-item {
   box-sizing: border-box;
   border: 1px solid var(--ifm-color-emphasis-300);
   border-radius: var(--ifm-pagination-nav-border-radius);
@@ -24,8 +24,8 @@
   flex-direction: column;
 }
 
-.policy-item-active,
-.policy-item:hover {
+.catalog-item-active,
+.catalog-item:hover {
   --tw-gradient-to: var(--ifm-color-emphasis-200);
   --tw-gradient-from: var(--ifm-color-emphasis-300);
   --tw-gradient-stops: var(--tw-gradient-from),
@@ -33,11 +33,11 @@
   background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
 }
 
-.policy-item-icon {
+.catalog-item-icon {
   color: var(--ifm-color-primary);
 }
 
-.policy-item-head {
+.catalog-item-head {
   padding-top: var(--ifm-global-spacing);
   justify-content: center;
   flex-shrink: 0;
@@ -45,16 +45,16 @@
   margin-right: auto;
 }
 
-.policy-item-title {
+.catalog-item-title {
   padding-bottom: var(--ifm-global-spacing);
   color: var(--ifm-font-color-base);
   font-weight: var(--ifm-font-weight-semibold);
 }
 
-.policy-list a {
+.catalog-list a {
   text-decoration-line: none;
 }
 
-.policy-list a:hover {
+.catalog-list a:hover {
   text-decoration-line: none;
 }

@@ -87,14 +87,14 @@ title: Policy Catalog
 sidebar_label: Policies
 ---
   
-import PolicyCatalog from '@site/src/components/PolicyCatalog';
+import ItemCatalog from '@site/src/components/ItemCatalog';
 import policyConfig from '@site/policies.v2.json';
 
 <!-- WARNING: This document is generated. DO NOT EDIT BY HAND -->
 
 ${intro}
 
-<PolicyCatalog policies={policyConfig.policies} />
+<ItemCatalog items={policyConfig.policies.map(({ id, name, icon }) => ({ id, name, icon, href: "/docs/policies/" + id }))} />
 `;
 }
 
