@@ -1,7 +1,7 @@
 ---
 title: Introducing API Key Leak Prevention
 authors: josh
-tags: [code, version, api gateway, API keys]
+tags: [code, api gateway, api keys]
 description: Zuplo offers API Key Scanning on Github for API keys generated in Zuplo. API Key Leak Prevention is part of our Business and Enterprise subscriptions.
 ---
 
