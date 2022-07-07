@@ -20,6 +20,10 @@ const sidebars = {
     {
       type: "category",
       label: "Overview",
+      link: {
+        type: "doc",
+        id: "index",
+      },
       items: [
         "overview/index",
         "overview/what-is-zuplo",
@@ -160,6 +164,10 @@ const sidebars = {
     {
       type: "category",
       label: "Handlers",
+      link: {
+        type: "doc",
+        id: "handlers/index",
+      },
       items: [
         "handlers/url-rewrite",
         "handlers/aws-lambda",
