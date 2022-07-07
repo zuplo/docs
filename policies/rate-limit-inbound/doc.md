@@ -29,7 +29,6 @@ export function rateLimitKey(
       timeWindowMinutes: 1,
     };
   }
-  return { key: request.params.customerId };
 }
 ```
 
