@@ -42,7 +42,7 @@ export function rateLimitKey(
   "timeWindowMinutes": 1,
   "identifier": {
     "module": "$import(./modules/rate-limiter)",
-    "export": "customRateLimit"
+    "export": "rateLimitKey"
   }
 }
 ```
