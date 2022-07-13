@@ -15,7 +15,7 @@ Each plan includes usage allowances of various features.
 | Requests / month                  | 0.25 million | 10 million   | Custom         |
 | Egress Bandwidth                  | 2.5GB        | 100GB        | Custom         |
 | API Keys                          | 250          | 10,000       | Custom         |
-| Custom Domains                    | -            | 5            | Custom         |
+| Custom Domains                    | -            | 2            | Custom         |
 | Key Value Store - Reads           | 1M           | 10M          | Custom         |
 | Key Value Store - Writes          | 0.1M         | 1M           | Custom         |
 | Key Value Store - Deletes         | 0.1M         | 1M           | Custom         |
