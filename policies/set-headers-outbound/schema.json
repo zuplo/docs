@@ -35,8 +35,8 @@
           "options": {
             "headers": [
               {
-                "name": "<HEADER_NAME>",
-                "value": "<HEADER_VALUE>",
+                "name": "HEADER_NAME",
+                "value": "HEADER_VALUE",
                 "overwrite": true
               }
             ]

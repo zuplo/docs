@@ -33,7 +33,7 @@
           "export": "ClearHeadersOutboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "exclude": ["<HEADER_TO_LEAVE>"]
+            "exclude": ["HEADER_TO_LEAVE"]
           }
         }
       ]

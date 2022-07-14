@@ -33,7 +33,7 @@
           "export": "RemoveHeadersInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "names": ["<HEADER_NAME>"]
+            "names": ["HEADER_NAME"]
           }
         }
       ]
