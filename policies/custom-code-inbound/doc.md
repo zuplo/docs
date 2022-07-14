@@ -71,7 +71,7 @@ auth route:
         "module": "$import(./modules/hello-world)"
       },
       "methods": ["GET", "POST"],
-      "corsPolicy": "AnythingGoes",
+      "corsPolicy": "anything-goes",
       "version": "none",
       "policies": {
         "inbound": [

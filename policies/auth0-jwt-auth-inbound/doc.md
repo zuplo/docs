@@ -13,7 +13,7 @@ We will start with the hello-world sample you get when you create a new Zup. So 
         "module": "$import(./modules/hello-world)"
       },
       "methods": ["GET", "POST"],
-      "corsPolicy": "AnythingGoes",
+      "corsPolicy": "anything-goes",
       "version": "v1",
       "policies": {
         "inbound": []
