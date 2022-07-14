@@ -1,9 +1,4 @@
-/**
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
+import Admonition from "@theme/Admonition";
 import MDXA from "@theme/MDXComponents/A";
 import MDXCode from "@theme/MDXComponents/Code";
 import MDXDetails from "@theme/MDXComponents/Details";
@@ -45,6 +40,7 @@ const MDXComponents = {
   h4: (props) => <MDXHeading as="h4" {...props} />,
   h5: (props) => <MDXHeading as="h5" {...props} />,
   h6: (props) => <MDXHeading as="h6" {...props} />,
+  admonition: Admonition,
   PolicyConfig,
   PolicyExample,
   PolicyOptions,
