@@ -3,7 +3,7 @@ import { get } from "https";
 import { resolve } from "path";
 
 const file = createWriteStream(
-  resolve(__dirname, "../src/components/bundles.json")
+  resolve(process.cwd(), "./src/components/bundles.json")
 );
 get(
   `https://cdn.zuplo.com/portal/bundles.json?t=${Date.now()}`,
