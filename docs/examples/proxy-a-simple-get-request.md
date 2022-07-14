@@ -38,7 +38,7 @@ Let's create a new route that maps to that Request Handler.
     "export": "fetchHtml" // use the export name
   },
   "version": "none",
-  "corsPolicy": "AnythingGoes"
+  "corsPolicy": "anything-goes"
 }
 ```
 
