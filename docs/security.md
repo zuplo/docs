@@ -43,10 +43,10 @@ At Zuplo, application security is considered at every phase of software developm
 
 - Changes are done via pull requests with code reviews.
 - Infrastructure is managed via Terraform, changes go through code reviews.
-- Third-party dependencies are continually scanned for vulnerabilities and patches are opened using automated tools whenever possible.
+- Third-party dependencies are continually scanned for vulnerabilities and patches are applied using automated tools whenever possible.
 - Containers are automatically scanned using GCP Container Scanning.
 - Penetration testing is performed regularly.
-- ABuilds and deployments are fully automated.
+- Builds and deployments are fully automated.
 
 ### Disaster Recovery
 
