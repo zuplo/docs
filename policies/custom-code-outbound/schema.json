@@ -30,7 +30,7 @@
       "examples": [
         {
           "_name": "basic",
-          "export": "YOUR_EXPORT",
+          "export": "default",
           "module": "$import(./modules/YOUR_MODULE)",
           "options": {}
         }

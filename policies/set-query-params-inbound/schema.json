@@ -35,8 +35,8 @@
           "options": {
             "params": [
               {
-                "name": "<PARAM_NAME>",
-                "value": "<PARAM_VALUE>",
+                "name": "PARAM_NAME",
+                "value": "PARAM_VALUE",
                 "overwrite": true
               }
             ]

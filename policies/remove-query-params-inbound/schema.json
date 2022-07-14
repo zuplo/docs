@@ -40,7 +40,7 @@
           "module": "$import(@zuplo/runtime)",
           "options": {
             "names": [
-              "<PARAM_NAME>"
+              "PARAM_NAME"
             ]
           }
         }

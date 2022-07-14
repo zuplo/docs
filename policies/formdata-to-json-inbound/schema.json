@@ -40,7 +40,7 @@
           "module": "$import(@zuplo/runtime)",
           "options": {
             "badRequestIfNotFormData": false,
-            "optionalHoneypotName": "<HONEYPOT_FIELD_NAME>"
+            "optionalHoneypotName": "HONEYPOT_FIELD_NAME"
           }
         }
       ]
