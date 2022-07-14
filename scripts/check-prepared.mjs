@@ -1,7 +1,6 @@
-const { existsSync } = require("fs");
-const fs = require("fs/promises");
-const path = require("path");
-const chalk = require("chalk");
+import chalk from "chalk";
+import { existsSync } from "fs";
+import { resolve } from "path";
 
 // Checks that the pre-build actions have been run
 
@@ -17,9 +16,9 @@ function exitWithError(error) {
 
 async function run() {
   // Check bundle.json exist
-  const bundleJsonPath = path.resolve(
-    __dirname,
-    "../src/components/bundles.json"
+  const bundleJsonPath = resolve(
+    process.cwd(),
+    "./src/components/bundles.json"
   );
   if (!existsSync(bundleJsonPath)) {
     return exitWithError("Bundles have not been synced.");

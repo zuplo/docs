@@ -1,11 +1,11 @@
-const http = require("https");
-const { resolve } = require("path");
-const { createWriteStream } = require("fs");
+import { createWriteStream } from "fs";
+import { get } from "https";
+import { resolve } from "path";
 
 const file = createWriteStream(
   resolve(__dirname, "../src/components/bundles.json")
 );
-http.get(
+get(
   `https://cdn.zuplo.com/portal/bundles.json?t=${Date.now()}`,
   function (response) {
     response.pipe(file);
