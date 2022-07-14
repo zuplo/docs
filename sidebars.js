@@ -227,6 +227,11 @@ const sidebars = {
       type: "doc",
       id: "changelog",
     },
+
+    {
+      type: "doc",
+      id: "security",
+    },
     {
       type: "doc",
       id: "pricing",
