@@ -23,8 +23,34 @@
         "options": {
           "type": "object",
           "description": "The options for this policy",
-          "required": [],
-          "properties": {}
+          "required": ["issuer"],
+          "properties": {
+            "issuer" : {
+              "type": "string",
+              "examples": ["$env(AUTH_ISSUER)"],
+              "description": "The expected issuer claim in the JWT token."
+            },
+            "audience" : {
+              "type": "string",
+              "examples": ["$env(AUTH_AUDIENCE)"],
+              "description": "The expected audience claim in the JWT token (optional)."
+            },
+            "jwkUrl" : {
+              "type": "string",
+              "examples": ["https://zuplo-demo.us.auth0.com/.well-known/jwks.json"],
+              "description": "the url of the JSON Web Key Set (JWKS) - this is used to validate the JWT token signature (either this or `secret` must be set)."
+            },
+            "secret": {
+              "type": "string",
+              "examples": ["$env(AUTH_JWT_SIGNING_KEY"],
+              "description": "The key used to verify the signature of the JWT token (either this or `jwkUrl` must be set)"
+            },
+            "allowUnauthenticatedRequests" : {
+              "type": "boolean",
+              "examples": ["false"],
+              "description": "indicates whether the request should continue if authentication fails. Defaults is `false` which means unauthenticated users will automatically receive a 401 response."
+            }
+          }
         }
       },
       "examples": [
@@ -36,7 +62,7 @@
             "allowUnauthenticatedRequests": false,
             "audience": "$env(AUTH_AUDIENCE)",
             "issuer": "$env(AUTH_ISSUER)",
-            "jwkUrl": "https://zuplo-demo.us.auth0.com/.well-known/jwks.json"
+            "secret": "$env(JWT_SECRET)"
           }
         }
       ]
