@@ -10,4 +10,4 @@ For developers looking to take their existing APIs to the next level, Zuplo offe
 
 ### New Projects
 
-If you are just starting a new API project, Zuplo lets you skip ahead to have an amazing API experience without rewriting common functionality yet again. Use Zuplo to add authentication, documentation, logging, and more leaving you to stay focused on just solving your business problem. Zuplo's free plan will let you grow without spending a dime and save you countless hours of development and maintenance time.
+If you are just starting a new API project, Zuplo lets you skip ahead to have an amazing API experience without rewriting common functionality yet again. Use Zuplo to add authentication, documentation, logging, and more leaving you to stay focused on just solving your business problem.
