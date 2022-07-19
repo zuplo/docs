@@ -27,7 +27,6 @@ const sidebars = {
       items: [
         "overview/index",
         "overview/what-is-zuplo",
-        "overview/vs-aws-api-gateway",
         "overview/how-does-zuplo-work",
         "overview/should-you-use-zuplo",
         "overview/handlers",
