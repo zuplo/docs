@@ -23,7 +23,7 @@ The following settings control how your users authenticate to your developer por
 - **authentication** - Authentication settings
   - **authority** - The URL to your identity provider's OAuth endpoint
   - **jwksUrl** - The url to the identity provider's [JSON Web Key Set](https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-key-sets) url.
-  - **proivder** - The identity provider being used. Either `auth0` or `okta`
+  - **provider** - The identity provider being used. Either `auth0` or `okta`
   - **devPortalClient**
     - **clientId** - The OAuth Client ID used by the Developer Portal for the [Authorization Code OAuth flow](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-proof-key-for-code-exchange-pkce)
     - **audience** - The [audience](https://auth0.com/docs/glossary#A:~:text=multi%2Dfactor%20authentication.-,Audience,-The%20unique%20identifier) of you Zuplo API
