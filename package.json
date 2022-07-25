@@ -41,7 +41,7 @@
     "@apidevtools/json-schema-ref-parser": "^9.0.9",
     "@docusaurus/module-type-aliases": "^2.0.0-rc.1",
     "@tsconfig/docusaurus": "^1.0.6",
-    "@types/jsdom": "^16.2.14",
+    "@types/jsdom": "^20.0.0",
     "@zuplo/dev": "^1.37.0",
     "arg": "^5.0.2",
     "chalk": "^5.0.1",
