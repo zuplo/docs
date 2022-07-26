@@ -2,17 +2,11 @@
 title: Zuplo @ THAT Wisconsin
 ---
 
-# Win a McLaren Lego Technic - one each day!
+# Win a McLaren Lego Technic
 
 ![McLaren!](./mclaren.png)
 
 Now read on to learn how you can win a McLaren Lego Technic and get an **instant** $5 Starbucks gift card. It's easy!
-
-:::tip
-
-Check out Josh's talk at 10:30 am tomorrow (Weds) on why companies like Stripe design their API the way they do. Josh was Head of Product for Payment Methods at Stripe and founded Azure API Management.
-
-:::
 
 [Zuplo](https://zuplo.com) is a different kind of API gateway. It's programmable, meaning you can customize it in seconds with TypeScript. We make it easy to compose your microservices or share your API. Add API-key management (with key protection - ask us what this is), developer documentation, and rate-limiting for any stack, in under 5 minutes.
 
