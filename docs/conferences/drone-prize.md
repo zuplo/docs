@@ -1,6 +1,5 @@
 ---
 title: Zuplo @ THAT Wisconsin
-draft: true
 ---
 
 # Win a McLaren Lego Technic - one each day!
