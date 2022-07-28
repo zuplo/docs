@@ -14,7 +14,7 @@ Now read on to learn how you can win a McLaren Lego Technic and get an **instant
 
 ---
 
-## Share an API with Zuplo for your chance to win a drone
+## Share an API with Zuplo for your chance to win a lego
 
 :::caution
 
