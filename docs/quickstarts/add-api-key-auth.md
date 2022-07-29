@@ -64,7 +64,7 @@ This will open your developer portal which should look like the screenshot below
 
 ![Untitled](add-api-key-auth-media/Untitled%206.png)
 
-Once signed-in, you should see an **API Keys** section under **Authentication**:
+You'll need to sign in to the developer poral - note this is a separate identity from how you log in to Zuplo itself. So if you created an account with your e-mail address, you'll need to sign-up for the developer portal again. Once signed-in, you should see an **API Keys** section under **Authentication**:
 
 ![Untitled](add-api-key-auth-media/Untitled%207.png)
 
