@@ -46,7 +46,7 @@
     "arg": "^5.0.2",
     "chalk": "^5.0.1",
     "chokidar": "^3.5.3",
-    "concurrently": "^7.2.2",
+    "concurrently": "^7.3.0",
     "glob": "^8.0.3",
     "jsdom": "^20.0.0",
     "prettier": "^2.7.1",
