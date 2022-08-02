@@ -23,7 +23,7 @@
     "ci:policies": "node ./scripts/update-policies.mjs"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.0-rc.1",
+    "@docusaurus/core": "^2.0.1",
     "@docusaurus/plugin-sitemap": "^2.0.0-rc.1",
     "@docusaurus/preset-classic": "^2.0.0-rc.1",
     "@heroicons/react": "^1.0.6",
