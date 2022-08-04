@@ -5,7 +5,7 @@ title: Zuplo Product Terms of Service
 
 If you signed a separate Cover Page to access the Zuplo Cloud Service with the same account, and that agreement has not ended, the terms below do not apply to you. Instead, your separate Cover Page applies to your use of the Product.
 
-This Agreement is between Zuplo, Inc. and the company or person accessing or using the Cloud Service. This Agreement consists of: (1) the Order Form and (2) the Key Terms, both of which are on the Cover Page below, and (3) the Common Paper Cloud Service Standard Terms Version 1.0 (“Standard Terms”). Any modifications to the Standard Terms made in the Cover Page will control over conflicts with the Standard Terms. Capitalized words have the meanings given in the Cover Page or the Standard Terms.
+This Agreement is between Zuplo, Inc. and the company or person accessing or using the Cloud Service. This Agreement consists of: (1) the Order Form and (2) the Key Terms, both of which are on the Cover Page below, and (3) the [Common Paper Cloud Service Standard Terms Version 1.0](https://commonpaper.com/standards/cloud-service-agreement/1.0) (“Standard Terms”). Any modifications to the Standard Terms made in the Cover Page will control over conflicts with the Standard Terms. Capitalized words have the meanings given in the Cover Page or the Standard Terms.
 
 If you are accessing or using the Cloud Service on behalf of your company, you represent that you are authorized to accept this Agreement on behalf of your company. By signing up, accessing, or using the Product, Customer indicates its acceptance of this Agreement and agrees to be bound by the terms and conditions of this Agreement.
 
