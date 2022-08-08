@@ -35,3 +35,7 @@ We embedded the Open API `Info Object` into the `version` so each version's spec
 ## Previewing Changes
 
 You can preview changes right after a build is completed from within the Portal. Only once it is deployed to production will it be publicly accessible.
+
+## Excluding a Version
+
+To exclude all routes belonging to a certain version from your developer portal, set the `excludeFromOpenApi` property to `true`.
