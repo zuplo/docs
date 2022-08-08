@@ -20,7 +20,7 @@ You can preview what your page will look like in the developer portal by clickin
 
 ## 3/ Configuring the Sidebar
 
-Next you will configure where your new page will be displayed in the developer portal's sidebar navigation. Open `sidebar.json`. All pages you wish to display should go under the `docs` folder, in the order you want them displayed in the navigation. A sidebar entry consists of the following:
+Next you will configure where your new page will be displayed in the developer portal's sidebar navigation. Open `sidebar.json`. All pages you wish to display should go under the `docs` folder, in the order you want them displayed in the navigation. A typical sidebar entry consists of the following:
 
 ```json
 {
@@ -31,6 +31,21 @@ Next you will configure where your new page will be displayed in the developer p
 ```
 
 Open your developer portal after saving your changes, and you should see your new page in the sidebar!
+
+## 4/ Optional: Select a Version
+
+Your page may only apply to a certain version of your API. You can configure which versions of your API the custom page will be displayed through the `versions` property.
+
+```json
+{
+  "type": "doc",
+  "id": "index",
+  "label": "Index",
+  "versions": ["versionOneName"]
+}
+```
+
+By default, a custom-page will display on all versions of your API unless the `versions` field is specified.
 
 ## Congratulations, you have added a custom page!
 
