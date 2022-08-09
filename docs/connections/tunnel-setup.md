@@ -16,8 +16,8 @@ The easiest way to deploy your tunnel is using a Docker container. The three bas
 
 To run the Docker container on your own infrastructure, refer to instructions from your cloud provider or contact [Zuplo support](mailto:support@zuplo.com) for assistance.
 
-- [Deploying Docker containers on Azure](https://docs.docker.com/cloud/aci-integration/)
-- [Deploying Docker containers on AWS ECS](https://docs.docker.com/cloud/ecs-integration/)
+- [Deploying Docker containers on Azure](https://docs.microsoft.com/en-us/learn/modules/run-docker-with-azure-container-instances/)
+- [Deploying Docker containers on AWS ECS](https://docs.aws.amazon.com/AmazonECS/latest/userguide/getting-started.html)
 - [Deploying container images to Google Cloud Run](https://cloud.google.com/run/docs/deploying)
 
 The docker container is `zuplo/tunnel` and is available on [Docker Hub](https://hub.docker.com/r/zuplo/tunnel).
