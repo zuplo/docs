@@ -3,20 +3,15 @@
   "$id": "http://zuplo.com/schemas/policies/mtls-auth-inbound.json",
   "type": "object",
   "title": "mTLS Auth",
-  "isPreview": true,
+  "isPreview": false,
+  "isPaidAddOn": true,
   "description": "",
-  "required": [
-    "handler"
-  ],
+  "required": ["handler"],
   "properties": {
     "handler": {
       "type": "object",
       "default": {},
-      "required": [
-        "export",
-        "module",
-        "options"
-      ],
+      "required": ["export", "module", "options"],
       "properties": {
         "export": {
           "const": "MTLSAuthInbound",

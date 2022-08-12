@@ -1,0 +1,1 @@
+Detect known and suspected bots based on sophisticated traffic analysis. The bot detection inbound policy provides a bot score for every request that can be used to determine the likelihood the request came from a bot. The policy can be configured to automatically block traffic with a set score or simply pass along the score for you to respond in other policies or handlers.

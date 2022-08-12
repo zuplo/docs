@@ -4,19 +4,14 @@
   "type": "object",
   "title": "Bot Detection",
   "isPreview": true,
+  "isPaidAddOn": true,
   "description": "",
-  "required": [
-    "handler"
-  ],
+  "required": ["handler"],
   "properties": {
     "handler": {
       "type": "object",
       "default": {},
-      "required": [
-        "export",
-        "module",
-        "options"
-      ],
+      "required": ["export", "module", "options"],
       "properties": {
         "export": {
           "const": "BotDetectionInbound",
@@ -30,7 +25,12 @@
           "type": "object",
           "description": "The options for this policy",
           "required": [],
-          "properties": {}
+          "properties": {
+            "blockScoresBelow": {
+              "type": "number",
+              "description": "The threshold at which bots are automatically blocked"
+            }
+          }
         }
       },
       "examples": [
@@ -38,7 +38,9 @@
           "_name": "basic",
           "export": "BotDetectionInbound",
           "module": "$import(@zuplo/runtime)",
-          "options": {}
+          "options": {
+            "blockScoresBelow": 40
+          }
         }
       ]
     }

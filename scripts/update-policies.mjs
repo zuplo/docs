@@ -62,7 +62,9 @@ import schemaJson from '@site/policies/${policyId}/schema.json';
 
 ${intro ?? schema.description}
 
-<PolicyStatus isPreview={${schema.isPreview ?? false}} />
+<PolicyStatus isPreview={${schema.isPreview ?? false}} isPaidAddOn={${
+    schema.isPaidAddOn ?? false
+  }} />
 
 ## Configuration
 
@@ -139,6 +141,7 @@ async function run() {
     const meta = {};
     meta.name = schema.title;
     meta.isPreview = !!schema.isPreview;
+    meta.isPaidAddOn = !!schema.isPaidAddOn;
     meta.id = policyId;
 
     const { examples } = schema.properties?.handler;
