@@ -6,6 +6,7 @@
   "description": "Capture detailed logs of requests for auditing purposes",
   "required": ["handler"],
   "isPreview": true,
+  "isPaidAddOn": true,
   "properties": {
     "handler": {
       "type": "object",
