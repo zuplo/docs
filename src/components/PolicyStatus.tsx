@@ -1,7 +1,23 @@
 import Admonition from "@theme/Admonition";
 import React from "react";
 
-const PolicyStatus = ({ isPreview }: { isPreview: boolean }) => {
+const PolicyStatus: React.FC<{ isPreview: boolean; isPaidAddOn: boolean }> = ({
+  isPreview,
+  isPaidAddOn,
+}) => {
+  if (isPaidAddOn) {
+    return (
+      <div>
+        <Admonition type="info">
+          <p>
+            This policy is only available as a paid add-on. If you would like to
+            try this please reach out to us:{" "}
+            <a href="mailto:sales@zuplo.com">sales@zuplo.com</a>
+          </p>
+        </Admonition>
+      </div>
+    );
+  }
   if (isPreview) {
     return (
       <div>

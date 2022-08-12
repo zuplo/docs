@@ -4,19 +4,14 @@
   "type": "object",
   "title": "Quota",
   "isPreview": true,
+  "isPaidAddOn": true,
   "description": "",
-  "required": [
-    "handler"
-  ],
+  "required": ["handler"],
   "properties": {
     "handler": {
       "type": "object",
       "default": {},
-      "required": [
-        "export",
-        "module",
-        "options"
-      ],
+      "required": ["export", "module", "options"],
       "properties": {
         "export": {
           "const": "QuotaInbound",
