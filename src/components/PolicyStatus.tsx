@@ -1,3 +1,4 @@
+import KeyIcon from "@site/static/img/key.svg";
 import Admonition from "@theme/Admonition";
 import React from "react";
 
@@ -8,7 +9,7 @@ const PolicyStatus: React.FC<{ isPreview: boolean; isPaidAddOn: boolean }> = ({
   if (isPaidAddOn) {
     return (
       <div>
-        <Admonition type="info">
+        <Admonition type="info" icon={<KeyIcon />} title="Paid Add On">
           <p>
             This policy is only available as a paid add-on. If you would like to
             try this please reach out to us:{" "}
@@ -21,7 +22,7 @@ const PolicyStatus: React.FC<{ isPreview: boolean; isPaidAddOn: boolean }> = ({
   if (isPreview) {
     return (
       <div>
-        <Admonition type="caution">
+        <Admonition type="caution" title="Early Access">
           <p>
             This policy is in private beta. If you would like to use this please
             reach out to us:{" "}
