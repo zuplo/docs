@@ -1,25 +1,16 @@
 import RefParser from "@apidevtools/json-schema-ref-parser";
+import { render } from "@zuplo/md-tools";
 import arg from "arg";
 import chokidar from "chokidar";
-import { existsSync, readFileSync, writeFileSync } from "fs";
+import { existsSync } from "fs";
 import { mkdir, readFile, rm, writeFile } from "fs/promises";
 import glob from "glob";
 import path from "path";
 import prettier from "prettier";
-import remarkHtml from "remark-html";
-import remarkParse from "remark-parse";
-import { unified } from "unified";
 
 const policiesDir = path.resolve(process.cwd(), "./policies");
 const docsDir = path.resolve(process.cwd(), "./docs/policies");
 await rm(docsDir, { recursive: true, force: true });
-
-const renderer = unified().use(remarkParse).use(remarkHtml);
-
-async function md(val) {
-  const result = await renderer.process(val);
-  return result.value;
-}
 
 function stringify(obj) {
   if (process.env.NODE_ENV === "production") {
@@ -33,7 +24,7 @@ function stringify(obj) {
 async function processProperties(properties) {
   const tasks = Object.keys(properties).map(async (key) => {
     if (properties[key].description)
-      properties[key].description = await md(properties[key].description);
+      properties[key].description = await render(properties[key].description);
     if (properties[key].properties) {
       await processProperties(properties[key].properties);
     }
@@ -90,7 +81,7 @@ sidebar_label: Policies
 ---
   
 import ItemCatalog from '@site/src/components/ItemCatalog';
-import policyConfig from '@site/policies.v2.json';
+import policyConfig from '@site/policies.v3.json';
 
 <!-- WARNING: This document is generated. DO NOT EDIT BY HAND -->
 
@@ -128,7 +119,7 @@ async function run() {
   const policies = [];
   const tasks = matches.map(async (match) => {
     const policyId = match.replace("/schema.json", "");
-    const schemaJson = readFileSync(path.join(policiesDir, match), "utf-8");
+    const schemaJson = await readFile(path.join(policiesDir, match), "utf-8");
     const rawSchema = JSON.parse(schemaJson);
     // RefParser uses cwd to resolve refs
     process.chdir(path.join(policiesDir, policyId));
@@ -158,10 +149,11 @@ async function run() {
     }
 
     if (existsSync(policyFilePaths.exampleMd)) {
-      meta.exampleMarkdown = readFileSync(policyFilePaths.exampleMd, "utf-8");
+      const md = await readFile(policyFilePaths.exampleMd, "utf-8");
+      meta.exampleHtml = await render(md);
     }
     if (existsSync(policyFilePaths.iconSvg)) {
-      const svg = readFileSync(policyFilePaths.iconSvg, "utf-8");
+      const svg = await readFile(policyFilePaths.iconSvg, "utf-8");
       const src = `data:image/svg+xml;base64,${btoa(svg)}`;
       meta.icon = src;
     }
@@ -190,16 +182,16 @@ async function run() {
     "utf-8"
   );
 
-  const policyDataV2 = {
+  const policyDataV3 = {
     config: policyConfig,
     policies,
   };
 
-  const policiesV2Json = stringify(policyDataV2);
+  const policiesV3Json = stringify(policyDataV3);
 
-  writeFileSync(
-    path.resolve(policiesDir, "../policies.v2.json"),
-    policiesV2Json,
+  await writeFile(
+    path.resolve(policiesDir, "../policies.v3.json"),
+    policiesV3Json,
     "utf-8"
   );
 
