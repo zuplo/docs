@@ -28,6 +28,7 @@
     "@docusaurus/preset-classic": "^2.0.1",
     "@heroicons/react": "^1.0.6",
     "@mdx-js/react": "^1.6.22",
+    "@zuplo/md-tools": "^1.6.0",
     "clsx": "^1.2.1",
     "docusaurus-plugin-segment": "^1.0.4",
     "json-loader": "^0.5.7",
@@ -41,7 +42,9 @@
     "@apidevtools/json-schema-ref-parser": "^9.0.9",
     "@docusaurus/module-type-aliases": "^2.0.0-rc.1",
     "@tsconfig/docusaurus": "^1.0.6",
+    "@types/glob": "^7.2.0",
     "@types/jsdom": "^20.0.0",
+    "@types/prettier": "^2.7.0",
     "@zuplo/dev": "^1.37.0",
     "arg": "^5.0.2",
     "chalk": "^5.0.1",
@@ -51,11 +54,8 @@
     "jsdom": "^20.0.0",
     "prettier": "^2.7.1",
     "prettier-plugin-organize-imports": "^3.0.0",
-    "remark-html": "^15.0.1",
-    "remark-parse": "^10.0.1",
     "ts-node": "^10.8.2",
-    "typescript": "^4.7.4",
-    "unified": "^10.1.2"
+    "typescript": "^4.7.4"
   },
   "browserslist": {
     "production": [

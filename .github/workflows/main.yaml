@@ -39,7 +39,7 @@ jobs:
 
       - run: npm install
       - run: npm run ci:policies
-      - run: gsutil -h "Content-Type:application/json" cp ./policies.v2.json gs://cdn.zuplo.com/portal/policies.v2.json
+      - run: gsutil -h "Content-Type:application/json" cp ./policies.v3.json gs://cdn.zuplo.com/portal/policies.v3.json
       - name: Trigger Portal Deployment
         run: curl -X POST ${{ secrets.PORTAL_DEPLOY_HOOK }}
 
