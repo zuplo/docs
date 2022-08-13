@@ -4,7 +4,7 @@
   "type": "object",
   "title": "Brown Out",
   "isPreview": true,
-  "description": "",
+  "description": "Set periods of downtime based on cron schedules. Useful for alerting users of impending deprecations.",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -24,7 +24,16 @@
           "type": "object",
           "description": "The options for this policy",
           "required": [],
-          "properties": {}
+          "properties": {
+            "cronExpression": {
+              "type": "string",
+              "description": "The cron schedule for when this policy is enabled."
+            },
+            "durationSeconds": {
+              "type": "number",
+              "description": "The length of time in seconds that the policy stays enabled after the scheduled time starts."
+            }
+          }
         }
       },
       "examples": [

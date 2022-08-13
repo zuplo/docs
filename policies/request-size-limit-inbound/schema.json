@@ -4,7 +4,7 @@
   "type": "object",
   "title": "Request Size Limit",
   "isPreview": false,
-  "description": "",
+  "description": "Enforces a maximum size on incoming requests",
   "required": ["handler"],
   "properties": {
     "handler": {

@@ -4,19 +4,13 @@
   "type": "object",
   "title": "Geo-location filtering",
   "isPreview": true,
-  "description": "",
-  "required": [
-    "handler"
-  ],
+  "description": "Block requests based on geo-location parameters",
+  "required": ["handler"],
   "properties": {
     "handler": {
       "type": "object",
       "default": {},
-      "required": [
-        "export",
-        "module",
-        "options"
-      ],
+      "required": ["export", "module", "options"],
       "properties": {
         "export": {
           "const": "GeoLocationInbound",
@@ -30,7 +24,15 @@
           "type": "object",
           "description": "The options for this policy",
           "required": [],
-          "properties": {}
+          "properties": {
+            "countries": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The countries to block"
+            }
+          }
         }
       },
       "examples": [
@@ -38,7 +40,9 @@
           "_name": "basic",
           "export": "GeoLocationInbound",
           "module": "$import(@zuplo/runtime)",
-          "options": {}
+          "options": {
+            "countries": ["RU", "KP"]
+          }
         }
       ]
     }

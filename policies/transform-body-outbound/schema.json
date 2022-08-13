@@ -4,19 +4,13 @@
   "type": "object",
   "title": "Transform Response Body",
   "isPreview": true,
-  "description": "",
-  "required": [
-    "handler"
-  ],
+  "description": "Transform the body of an outgoing response.",
+  "required": ["handler"],
   "properties": {
     "handler": {
       "type": "object",
       "default": {},
-      "required": [
-        "export",
-        "module",
-        "options"
-      ],
+      "required": ["export", "module", "options"],
       "properties": {
         "export": {
           "const": "TransformBodyOutbound",

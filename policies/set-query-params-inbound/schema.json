@@ -4,7 +4,7 @@
   "type": "object",
   "title": "Add or Set Query Parameters",
   "isPreview": false,
-  "description": "",
+  "description": "Adds or sets query parameters on the incoming request",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -24,7 +24,28 @@
           "type": "object",
           "description": "The options for this policy",
           "required": [],
-          "properties": {}
+          "properties": {
+            "params": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the parameter"
+                  },
+                  "value": {
+                    "type": "string",
+                    "description": "The value of the parameter"
+                  },
+                  "overwrite": {
+                    "type": "boolean",
+                    "description": "Overwrite the value if the parameter is already present in the request"
+                  }
+                }
+              }
+            }
+          }
         }
       },
       "examples": [

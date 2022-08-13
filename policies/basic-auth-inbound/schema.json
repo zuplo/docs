@@ -4,7 +4,7 @@
   "type": "object",
   "title": "Basic Auth",
   "isPreview": false,
-  "description": "",
+  "description": "Authenticate requests using basic auth (i.e. username and password)",
   "required": ["handler"],
   "properties": {
     "handler": {

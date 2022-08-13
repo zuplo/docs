@@ -4,19 +4,13 @@
   "type": "object",
   "title": "Caching",
   "isPreview": true,
-  "description": "",
-  "required": [
-    "handler"
-  ],
+  "description": "Respond to matched incoming requests with cached content",
+  "required": ["handler"],
   "properties": {
     "handler": {
       "type": "object",
       "default": {},
-      "required": [
-        "export",
-        "module",
-        "options"
-      ],
+      "required": ["export", "module", "options"],
       "properties": {
         "export": {
           "const": "CachingInbound",

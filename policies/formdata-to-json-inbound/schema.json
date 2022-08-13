@@ -4,19 +4,13 @@
   "type": "object",
   "title": "Form Data to JSON",
   "isPreview": false,
-  "description": "",
-  "required": [
-    "handler"
-  ],
+  "description": "Converts form data in the incoming request to JSON",
+  "required": ["handler"],
   "properties": {
     "handler": {
       "type": "object",
       "default": {},
-      "required": [
-        "export",
-        "module",
-        "options"
-      ],
+      "required": ["export", "module", "options"],
       "properties": {
         "export": {
           "const": "FormDataToJsonInboundPolicy",
@@ -30,7 +24,16 @@
           "type": "object",
           "description": "The options for this policy",
           "required": [],
-          "properties": {}
+          "properties": {
+            "badRequestIfNotFormData": {
+              "type": "boolean",
+              "description": "Should the policy return an error if the request is not of the type form data"
+            },
+            "optionalHoneypotName": {
+              "type": "string",
+              "description": "The name of the honeypot field. Used to provide basic spam filtering."
+            }
+          }
         }
       },
       "examples": [

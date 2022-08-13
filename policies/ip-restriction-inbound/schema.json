@@ -4,19 +4,13 @@
   "type": "object",
   "title": "IP Restriction",
   "isPreview": true,
-  "description": "",
-  "required": [
-    "handler"
-  ],
+  "description": "Block requests based on their IP address.",
+  "required": ["handler"],
   "properties": {
     "handler": {
       "type": "object",
       "default": {},
-      "required": [
-        "export",
-        "module",
-        "options"
-      ],
+      "required": ["export", "module", "options"],
       "properties": {
         "export": {
           "const": "IPRestrictionInbound",
@@ -30,7 +24,15 @@
           "type": "object",
           "description": "The options for this policy",
           "required": [],
-          "properties": {}
+          "properties": {
+            "ipAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The IP addresses or CIDR ranges to block"
+            }
+          }
         }
       },
       "examples": [
@@ -38,7 +40,9 @@
           "_name": "basic",
           "export": "IPRestrictionInbound",
           "module": "$import(@zuplo/runtime)",
-          "options": {}
+          "options": {
+            "ipAddresses": ["1.1.1.1"]
+          }
         }
       ]
     }
