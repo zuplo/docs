@@ -24,7 +24,16 @@
           "type": "object",
           "description": "The options for this policy",
           "required": [],
-          "properties": {}
+          "properties": {
+            "maxSizeInBytes": {
+              "type": "number",
+              "description": "The maximum size of the request in bytes"
+            },
+            "trustContentLengthHeader": {
+              "type": "boolean",
+              "description": "If true, the policy will reject any request with a `content-length` header in excess of `maxSizeInBytes` bytes value, but will not verify the actual size of the request. This is more efficient and offers slightly better memory usage but should only be used if you trust/control the clients calling the gateway to send an accurate content-length. If false, the gateway will actually verify the request size and reject any request with a size in excess of the stated maximum."
+            }
+          }
         }
       },
       "examples": [
