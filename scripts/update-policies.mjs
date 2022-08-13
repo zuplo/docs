@@ -133,6 +133,7 @@ async function run() {
     meta.name = schema.title;
     meta.isPreview = !!schema.isPreview;
     meta.isPaidAddOn = !!schema.isPaidAddOn;
+    meta.documentationUrl = `https://zuplo.com/docs/policies/${policyId}/`;
     meta.id = policyId;
 
     const { examples } = schema.properties?.handler;
