@@ -49,7 +49,12 @@ function getPolicyFilePaths(policyId) {
   };
 }
 
-function generateMarkdown(policyId, schema, intro, doc) {
+function generateMarkdown(
+  policyId: string,
+  schema: PolicySchema,
+  intro: string | undefined,
+  doc: string | undefined
+) {
   return `---
 title: ${schema.title} Policy
 sidebar_label: ${schema.title}
@@ -174,12 +179,12 @@ async function run() {
     }
     policies.push(meta);
 
-    let introMd;
+    let introMd: string | undefined;
     if (existsSync(policyFilePaths.introMd)) {
       introMd = await readFile(policyFilePaths.introMd, "utf-8");
     }
 
-    let docMd;
+    let docMd: string | undefined;
     if (existsSync(policyFilePaths.docMd)) {
       docMd = await readFile(policyFilePaths.docMd, "utf-8");
     }
