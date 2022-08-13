@@ -5,7 +5,7 @@
   "title": "Quota",
   "isPreview": true,
   "isPaidAddOn": true,
-  "description": "",
+  "description": "Enforce quota policies on requests",
   "required": ["handler"],
   "properties": {
     "handler": {

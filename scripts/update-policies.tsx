@@ -128,7 +128,8 @@ async function run() {
   const policies = [];
   const tasks = matches.map(async (match) => {
     const policyId = match.replace("/schema.json", "");
-    const schemaJson = await readFile(path.join(policiesDir, match), "utf-8");
+    const schemaPath = path.join(policiesDir, match);
+    const schemaJson = await readFile(schemaPath, "utf-8");
     const rawSchema = JSON.parse(schemaJson);
     // RefParser uses cwd to resolve refs
     process.chdir(path.join(policiesDir, policyId));
@@ -153,7 +154,8 @@ async function run() {
     } else {
       console.warn(
         chalk.yellow(
-          `WARN: Policy ${policyId} does not have any examples in the schema.json`
+          `WARN: Policy ${policyId} does not have any examples in the schema.json`,
+          schemaJson
         )
       );
       const handler = schema.properties.handler as any;
@@ -163,7 +165,7 @@ async function run() {
         options: {},
       };
     }
-    meta.exampleHtml = await getExampleHtml(policyId, schema);
+    meta.exampleHtml = await getExampleHtml(policyId, schemaPath, schema);
 
     if (existsSync(policyFilePaths.iconSvg)) {
       const svg = await readFile(policyFilePaths.iconSvg, "utf-8");
@@ -187,8 +189,11 @@ async function run() {
     await writeFile(path.join(docsDir, `${policyId}.md`), generatedMd, "utf-8");
   });
 
-  await Promise.all(tasks);
-
+  try {
+    await Promise.all(tasks);
+  } catch (err) {
+    process.exit(1);
+  }
   await writeFile(
     path.resolve(docsDir, "index.md"),
     await getIndexPage(),
@@ -243,30 +248,36 @@ if (args["--watch"]) {
   run().catch(console.error);
 }
 
-async function getExampleHtml(policyId: string, schema: PolicySchema) {
+async function getExampleHtml(
+  policyId: string,
+  policyPath: string,
+  schema: PolicySchema
+) {
   const html: string[] = [];
   if (schema.description) {
     const output = await render(schema.description);
     html.push(output);
   } else {
-    console.warn(
-      chalk.yellow(
-        `WARN: The policy ${policyId} does not have a description set in the schema`
+    console.error(
+      chalk.red(
+        `ERROR: The policy ${policyId} does not have a description set in the schema`,
+        policyPath
       )
     );
+    throw new Error("Invalid schema");
   }
 
   const properties = (schema.properties.handler as any).properties.options
-    .properties;
+    ?.properties;
 
-  if (Object.keys(properties).length > 0) {
+  if (properties && Object.keys(properties).length > 0) {
     const element = renderToStaticMarkup(
       <OptionProperties properties={properties} />
     );
 
     html.push("<h3>Options</h3>");
     html.push(element);
-  } else {
+  } else if (properties !== undefined) {
     console.warn(
       chalk.yellow(
         `WARN: The policy ${policyId} does not have any options set in the schema.`

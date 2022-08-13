@@ -4,7 +4,7 @@
   "type": "object",
   "title": "Clear Request Headers",
   "isPreview": false,
-  "description": "",
+  "description": "Removes all headers from the incoming request except for those in the exclude list.",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -24,7 +24,15 @@
           "type": "object",
           "description": "The options for this policy",
           "required": [],
-          "properties": {}
+          "properties": {
+            "exclude": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The headers that should not be removed"
+            }
+          }
         }
       },
       "examples": [

@@ -4,19 +4,13 @@
   "type": "object",
   "title": "Change Method",
   "isPreview": false,
-  "description": "",
-  "required": [
-    "handler"
-  ],
+  "description": "Changes the HTTP method of the incoming request.",
+  "required": ["handler"],
   "properties": {
     "handler": {
       "type": "object",
       "default": {},
-      "required": [
-        "export",
-        "module",
-        "options"
-      ],
+      "required": ["export", "module", "options"],
       "properties": {
         "export": {
           "const": "ChangeMethodInboundPolicy",

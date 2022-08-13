@@ -4,19 +4,13 @@
   "type": "object",
   "title": "Sleep / Delay",
   "isPreview": false,
-  "description": "",
-  "required": [
-    "handler"
-  ],
+  "description": "Add a delay to the incoming request. Useful for testing.",
+  "required": ["handler"],
   "properties": {
     "handler": {
       "type": "object",
       "default": {},
-      "required": [
-        "export",
-        "module",
-        "options"
-      ],
+      "required": ["export", "module", "options"],
       "properties": {
         "export": {
           "const": "SleepInboundPolicy",
@@ -30,7 +24,12 @@
           "type": "object",
           "description": "The options for this policy",
           "required": [],
-          "properties": {}
+          "properties": {
+            "sleepInMs": {
+              "type": "number",
+              "description": "The number of milliseconds to delay the request"
+            }
+          }
         }
       },
       "examples": [

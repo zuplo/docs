@@ -5,7 +5,7 @@
   "title": "LDAP Auth",
   "isPreview": true,
   "isPaidAddOn": true,
-  "description": "",
+  "description": "Authenticate requests using an LDAP server",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -25,7 +25,12 @@
           "type": "object",
           "description": "The options for this policy",
           "required": [],
-          "properties": {}
+          "properties": {
+            "ldapConnectorName": {
+              "type": "string",
+              "description": "The name of your configured LDAP service connector"
+            }
+          }
         }
       },
       "examples": [
@@ -33,7 +38,9 @@
           "_name": "basic",
           "export": "LDAPAuthInbound",
           "module": "$import(@zuplo/runtime)",
-          "options": {}
+          "options": {
+            "ldapConnectorName": "my-ldap-connector"
+          }
         }
       ]
     }

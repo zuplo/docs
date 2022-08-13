@@ -4,19 +4,13 @@
   "type": "object",
   "title": "Remove Query Parameters",
   "isPreview": false,
-  "description": "",
-  "required": [
-    "handler"
-  ],
+  "description": "Request query parameters from the incoming request",
+  "required": ["handler"],
   "properties": {
     "handler": {
       "type": "object",
       "default": {},
-      "required": [
-        "export",
-        "module",
-        "options"
-      ],
+      "required": ["export", "module", "options"],
       "properties": {
         "export": {
           "const": "RemoveQueryParamsInboundPolicy",
@@ -39,9 +33,7 @@
           "export": "RemoveQueryParamsInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "names": [
-              "PARAM_NAME"
-            ]
+            "names": ["PARAM_NAME"]
           }
         }
       ]

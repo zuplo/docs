@@ -4,19 +4,13 @@
   "type": "object",
   "title": "Request Termination",
   "isPreview": true,
-  "description": "",
-  "required": [
-    "handler"
-  ],
+  "description": "Terminates a requests based on configured criteria",
+  "required": ["handler"],
   "properties": {
     "handler": {
       "type": "object",
       "default": {},
-      "required": [
-        "export",
-        "module",
-        "options"
-      ],
+      "required": ["export", "module", "options"],
       "properties": {
         "export": {
           "const": "RequestTerminationInbound",

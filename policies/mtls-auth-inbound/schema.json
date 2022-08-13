@@ -5,7 +5,7 @@
   "title": "mTLS Auth",
   "isPreview": false,
   "isPaidAddOn": true,
-  "description": "",
+  "description": "Authenticate requests based on the mTLS protocol",
   "required": ["handler"],
   "properties": {
     "handler": {

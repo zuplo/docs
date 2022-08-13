@@ -5,7 +5,7 @@
   "title": "Billing",
   "isPreview": true,
   "isPaidAddOn": true,
-  "description": "",
+  "description": "Bill requests based on usage",
   "required": ["handler"],
   "properties": {
     "handler": {

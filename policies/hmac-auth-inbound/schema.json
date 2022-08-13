@@ -5,7 +5,7 @@
   "title": "HMAC Auth",
   "isPreview": true,
   "isPaidAddOn": true,
-  "description": "",
+  "description": "Authenticate requests using the HMAC-SHA256 authentication scheme.",
   "required": ["handler"],
   "properties": {
     "handler": {

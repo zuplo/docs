@@ -4,7 +4,7 @@
   "type": "object",
   "title": "Replace String in Response Body",
   "isPreview": false,
-  "description": "",
+  "description": "Replace a string in the incoming request body",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -24,7 +24,21 @@
           "type": "object",
           "description": "The options for this policy",
           "required": [],
-          "properties": {}
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": ["regexp"],
+              "description": "The type of string replacement to perform"
+            },
+            "match": {
+              "type": "string",
+              "description": "The pattern to match"
+            },
+            "replaceWith": {
+              "type": "string",
+              "description": "The value to each match is replaced with"
+            }
+          }
         }
       },
       "examples": [
