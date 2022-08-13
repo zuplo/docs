@@ -1,18 +1,27 @@
 import RefParser from "@apidevtools/json-schema-ref-parser";
 import { render } from "@zuplo/md-tools";
 import arg from "arg";
+import chalk from "chalk";
 import chokidar from "chokidar";
 import { existsSync } from "fs";
 import { mkdir, readFile, rm, writeFile } from "fs/promises";
 import glob from "glob";
 import path from "path";
 import prettier from "prettier";
+import React from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+
+import { OptionProperties } from "../src/components/PolicyOptionProperties";
+
+type PolicySchema = RefParser.JSONSchema & {
+  isPreview?: boolean;
+  isPaidAddOn?: boolean;
+};
 
 const policiesDir = path.resolve(process.cwd(), "./policies");
 const docsDir = path.resolve(process.cwd(), "./docs/policies");
-await rm(docsDir, { recursive: true, force: true });
 
-function stringify(obj) {
+function stringify(obj: any) {
   if (process.env.NODE_ENV === "production") {
     return JSON.stringify(obj);
   }
@@ -34,7 +43,6 @@ async function processProperties(properties) {
 
 function getPolicyFilePaths(policyId) {
   return {
-    exampleMd: path.join(policiesDir, policyId, "example.md"),
     iconSvg: path.join(policiesDir, policyId, "icon.svg"),
     introMd: path.join(policiesDir, policyId, "intro.md"),
     docMd: path.join(policiesDir, policyId, "doc.md"),
@@ -92,6 +100,7 @@ ${intro}
 }
 
 async function run() {
+  await rm(docsDir, { recursive: true, force: true });
   await mkdir(docsDir, { recursive: true });
 
   const policyConfigJson = await readFile(
@@ -100,7 +109,7 @@ async function run() {
   );
   const policyConfig = JSON.parse(policyConfigJson);
 
-  const matches = await new Promise((resolve, reject) => {
+  const matches: string[] = await new Promise((resolve, reject) => {
     glob(
       "**/schema.json",
       {
@@ -123,36 +132,39 @@ async function run() {
     const rawSchema = JSON.parse(schemaJson);
     // RefParser uses cwd to resolve refs
     process.chdir(path.join(policiesDir, policyId));
-    const schema = await RefParser.dereference(rawSchema);
+    const schema = (await RefParser.dereference(rawSchema)) as PolicySchema;
     await processProperties(schema.properties);
 
     const policyFilePaths = getPolicyFilePaths(policyId);
 
     // Build the meta format for use in the portal
-    const meta = {};
+    const meta: Record<string, any> = {};
     meta.name = schema.title;
     meta.isPreview = !!schema.isPreview;
     meta.isPaidAddOn = !!schema.isPaidAddOn;
     meta.documentationUrl = `https://zuplo.com/docs/policies/${policyId}/`;
     meta.id = policyId;
 
-    const { examples } = schema.properties?.handler;
+    const { examples } = schema.properties?.handler as any;
     if (examples && examples.length > 0) {
       const example = { ...examples[0] };
       delete example._name;
       meta.defaultHandler = example;
     } else {
+      console.warn(
+        chalk.yellow(
+          `WARN: Policy ${policyId} does not have any examples in the schema.json`
+        )
+      );
+      const handler = schema.properties.handler as any;
       meta.defaultHandler = {
-        export: schema.properties.handler.properties.export.const,
-        module: schema.properties.handler.properties.module.const,
+        export: handler.properties.export.const,
+        module: handler.properties.module.const,
         options: {},
       };
     }
+    meta.exampleHtml = await getExampleHtml(policyId, schema);
 
-    if (existsSync(policyFilePaths.exampleMd)) {
-      const md = await readFile(policyFilePaths.exampleMd, "utf-8");
-      meta.exampleHtml = await render(md);
-    }
     if (existsSync(policyFilePaths.iconSvg)) {
       const svg = await readFile(policyFilePaths.iconSvg, "utf-8");
       const src = `data:image/svg+xml;base64,${btoa(svg)}`;
@@ -229,4 +241,41 @@ if (args["--watch"]) {
   watch().catch(console.error);
 } else {
   run().catch(console.error);
+}
+
+async function getExampleHtml(policyId: string, schema: PolicySchema) {
+  const html: string[] = [];
+  if (schema.description) {
+    const output = await render(schema.description);
+    html.push(output);
+  } else {
+    console.warn(
+      chalk.yellow(
+        `WARN: The policy ${policyId} does not have a description set in the schema`
+      )
+    );
+  }
+
+  const properties = (schema.properties.handler as any).properties.options
+    .properties;
+
+  if (Object.keys(properties).length > 0) {
+    const element = renderToStaticMarkup(
+      <OptionProperties properties={properties} />
+    );
+
+    html.push("<h3>Options</h3>");
+    html.push(element);
+  } else {
+    console.warn(
+      chalk.yellow(
+        `WARN: The policy ${policyId} does not have any options set in the schema.`
+      )
+    );
+  }
+
+  if (html.length === 0) {
+    return undefined;
+  }
+  return html.join("");
 }

@@ -3,7 +3,7 @@
   "$id": "http://zuplo.com/schemas/policies/cognito-jwt-auth-inbound.json",
   "type": "object",
   "title": "AWS Cognito JWT Auth",
-  "description": "Authenticate users using AWS Cognito issued JWT tokens.",
+  "description": "Authenticate requests with JWT tokens issued by AWS Cognito.",
   "required": ["handler"],
   "isPreview": false,
   "properties": {

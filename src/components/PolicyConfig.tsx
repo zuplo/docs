@@ -1,4 +1,4 @@
-import data from "@site/policies.v2.json";
+import data from "@site/policies.v3.json";
 import CodeBlock from "@theme/CodeBlock";
 import React from "react";
 

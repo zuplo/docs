@@ -5,7 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "concurrently \"npm run start:policies\" \"npm run start:docusaurus\"",
-    "start:policies": "node ./scripts/update-policies.mjs --watch",
+    "start:policies": "ts-node ./scripts/update-policies.tsx --watch",
     "start:docusaurus": "node ./scripts/check-prepared.mjs && docusaurus start --port 3002",
     "build": "npm run ci:pre && docusaurus build && npm run ci:post",
     "local": "npm run ci:pre",
@@ -20,7 +20,7 @@
     "ci:post": "npm run ci:redirects",
     "ci:redirects": "node ./scripts/copy-redirects.mjs",
     "ci:bundles": "node ./scripts/update-bundles.mjs",
-    "ci:policies": "node ./scripts/update-policies.mjs"
+    "ci:policies": "ts-node --esm ./scripts/update-policies.tsx"
   },
   "dependencies": {
     "@docusaurus/core": "^2.0.1",
@@ -45,9 +45,11 @@
     "@types/glob": "^7.2.0",
     "@types/jsdom": "^20.0.0",
     "@types/prettier": "^2.7.0",
+    "@types/react": "^17.0.48",
+    "@types/react-dom": "^17.0.17",
     "@zuplo/dev": "^1.37.0",
     "arg": "^5.0.2",
-    "chalk": "^5.0.1",
+    "chalk": "^4.1.2",
     "chokidar": "^3.5.3",
     "concurrently": "^7.3.0",
     "glob": "^8.0.3",

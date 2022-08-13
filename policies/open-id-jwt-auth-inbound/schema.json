@@ -4,7 +4,7 @@
   "type": "object",
   "title": "JWT Auth",
   "isPreview": false,
-  "description": "",
+  "description": "The Open ID JWT Authentication policy allows you to authenticate incoming requests using an Open ID compliant bearer token. ",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -25,19 +25,21 @@
           "description": "The options for this policy",
           "required": ["issuer"],
           "properties": {
-            "issuer" : {
+            "issuer": {
               "type": "string",
               "examples": ["$env(AUTH_ISSUER)"],
               "description": "The expected issuer claim in the JWT token."
             },
-            "audience" : {
+            "audience": {
               "type": "string",
               "examples": ["$env(AUTH_AUDIENCE)"],
               "description": "The expected audience claim in the JWT token (optional)."
             },
-            "jwkUrl" : {
+            "jwkUrl": {
               "type": "string",
-              "examples": ["https://zuplo-demo.us.auth0.com/.well-known/jwks.json"],
+              "examples": [
+                "https://zuplo-demo.us.auth0.com/.well-known/jwks.json"
+              ],
               "description": "the url of the JSON Web Key Set (JWKS) - this is used to validate the JWT token signature (either this or `secret` must be set)."
             },
             "secret": {
@@ -45,7 +47,7 @@
               "examples": ["$env(AUTH_JWT_SIGNING_KEY"],
               "description": "The key used to verify the signature of the JWT token (either this or `jwkUrl` must be set)"
             },
-            "allowUnauthenticatedRequests" : {
+            "allowUnauthenticatedRequests": {
               "type": "boolean",
               "examples": ["false"],
               "description": "indicates whether the request should continue if authentication fails. Defaults is `false` which means unauthenticated users will automatically receive a 401 response."

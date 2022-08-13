@@ -1,27 +1,6 @@
 import React from "react";
+import { OptionProperties } from "./PolicyOptionProperties";
 import styles from "./PolicyOptions.module.css";
-
-type PolicyProperties = Record<
-  string,
-  { description: string; properties?: PolicyProperties }
->;
-
-const OptionProperties = ({ properties }: { properties: PolicyProperties }) => (
-  <ul>
-    {Object.entries(properties).map(([key, value]) => (
-      <li>
-        <code>{key}</code>{" "}
-        <div
-          className={styles["description"]}
-          dangerouslySetInnerHTML={{ __html: value.description }}
-        />
-        {value.properties ? (
-          <OptionProperties properties={value.properties} />
-        ) : undefined}
-      </li>
-    ))}
-  </ul>
-);
 
 const PolicyOptions = ({
   schema,
@@ -53,7 +32,7 @@ const PolicyOptions = ({
         <code>handler/module</code> the module containing the policy. Value
         should be <code>{properties.module.const}</code>.
       </li>
-      <li>
+      <li className={styles.description}>
         <code>handler/options</code> The options for this policy:
         <OptionProperties properties={properties.options.properties} />
       </li>
