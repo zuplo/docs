@@ -4,19 +4,13 @@
   "type": "object",
   "title": "Archive Request to Storage",
   "isPreview": true,
-  "description": "",
-  "required": [
-    "handler"
-  ],
+  "description": "Archive incoming requests to S3 compatible storage. Works with any storage provider compatible with S3 APIs such as AWS S3, GCP Cloud Storage, and Azure Blob Storage.",
+  "required": ["handler"],
   "properties": {
     "handler": {
       "type": "object",
       "default": {},
-      "required": [
-        "export",
-        "module",
-        "options"
-      ],
+      "required": ["export", "module", "options"],
       "properties": {
         "export": {
           "const": "ArchiveRequestInbound",
@@ -30,7 +24,24 @@
           "type": "object",
           "description": "The options for this policy",
           "required": [],
-          "properties": {}
+          "properties": {
+            "bucketName": {
+              "type": "string",
+              "description": "The name of the storage bucket"
+            },
+            "path": {
+              "type": "string",
+              "description": "The path where requests are stored"
+            },
+            "accessKeyId": {
+              "type": "string",
+              "description": "The Access Key ID of the account authorized to write to the bucket"
+            },
+            "accessKeySecret": {
+              "type": "string",
+              "description": "The Access Key Secret of the account authorized to write to the bucket"
+            }
+          }
         }
       },
       "examples": [
@@ -38,7 +49,12 @@
           "_name": "basic",
           "export": "ArchiveRequestInbound",
           "module": "$import(@zuplo/runtime)",
-          "options": {}
+          "options": {
+            "bucketName": "test-bucket-123.s3.amazonaws.com",
+            "path": "requests/",
+            "accessKeyId": "$env(AWS_ACCESS_KEY_ID)",
+            "accessKeySecret": "$env(AWS_ACCESS_KEY_SECRET)"
+          }
         }
       ]
     }

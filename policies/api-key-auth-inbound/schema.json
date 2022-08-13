@@ -4,19 +4,13 @@
   "type": "object",
   "title": "API Key Authentication",
   "isPreview": false,
-  "description": "",
-  "required": [
-    "handler"
-  ],
+  "description": "Authenticates requests based on API Keys using Zuplo API Management",
+  "required": ["handler"],
   "properties": {
     "handler": {
       "type": "object",
       "default": {},
-      "required": [
-        "export",
-        "module",
-        "options"
-      ],
+      "required": ["export", "module", "options"],
       "properties": {
         "export": {
           "const": "ApiAuthKeyInboundPolicy",
@@ -25,12 +19,6 @@
         "module": {
           "const": "$import(@zuplo/runtime)",
           "description": "The module containing the policy"
-        },
-        "options": {
-          "type": "object",
-          "description": "The options for this policy",
-          "required": [],
-          "properties": {}
         }
       },
       "examples": [
