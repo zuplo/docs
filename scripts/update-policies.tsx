@@ -4,19 +4,81 @@ import arg from "arg";
 import chalk from "chalk";
 import chokidar from "chokidar";
 import { existsSync } from "fs";
-import { mkdir, readFile, rm, writeFile } from "fs/promises";
+import { copyFile, mkdir, readFile, rm, writeFile } from "fs/promises";
 import glob from "glob";
 import path from "path";
 import prettier from "prettier";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import { OptionProperties } from "../src/components/PolicyOptionProperties";
-
 type PolicySchema = RefParser.JSONSchema & {
   isPreview?: boolean;
   isPaidAddOn?: boolean;
 };
+
+type PolicyProperties = Record<
+  string,
+  { description: string; properties?: PolicyProperties }
+>;
+
+// NOTE: This component is used to generate policy HTML in the policy script
+// as such it CANNOT include css module imports
+
+export const OptionProperties = ({
+  properties,
+}: {
+  properties: PolicyProperties;
+}) => (
+  <ul>
+    {Object.entries(properties).map(([key, value]) => (
+      <li key={key}>
+        <code>{key}</code>{" "}
+        <div dangerouslySetInnerHTML={{ __html: value.description }} />
+        {value.properties ? (
+          <OptionProperties properties={value.properties} />
+        ) : undefined}
+      </li>
+    ))}
+  </ul>
+);
+
+const PolicyOptions = ({
+  schema,
+  policyId,
+}: {
+  schema: any;
+  policyId: string;
+}) => {
+  const { properties } = schema.properties.handler;
+  return (
+    <ul>
+      <li>
+        <code>name</code> the name of your policy instance. This is used as a
+        reference in your routes.
+      </li>
+      <li>
+        <code>policyType</code> the identifier of the policy. This is used by
+        the Zuplo UI. Value should be <code>{policyId}</code>.
+      </li>
+      <li>
+        <code>handler/export</code> The name of the exported type. Value should
+        be <code>{properties.export.const}</code>.
+      </li>
+      <li>
+        <code>handler/module</code> the module containing the policy. Value
+        should be <code>{properties.module.const}</code>.
+      </li>
+      {properties.options ? (
+        <li>
+          <code>handler/options</code> The options for this policy:
+          <OptionProperties properties={properties.options.properties} />
+        </li>
+      ) : null}
+    </ul>
+  );
+};
+
+export default PolicyOptions;
 
 const policiesDir = path.resolve(process.cwd(), "./policies");
 const docsDir = path.resolve(process.cwd(), "./docs/policies");
@@ -49,28 +111,52 @@ function getPolicyFilePaths(policyId) {
   };
 }
 
-function generateMarkdown(
+async function generateMarkdown(
   policyId: string,
   schema: PolicySchema,
-  intro: string | undefined,
-  doc: string | undefined
+  policyFilePaths: Record<string, string>
 ) {
+  let introMd: string | undefined;
+  if (existsSync(policyFilePaths.introMd)) {
+    introMd = await readFile(policyFilePaths.introMd, "utf-8");
+  }
+
+  let docMd: string | undefined;
+  if (existsSync(policyFilePaths.docMd)) {
+    docMd = await readFile(policyFilePaths.docMd, "utf-8");
+  }
+
+  const { examples } = schema.properties.handler as any;
+  if (!Array.isArray(examples) || examples.length === 0) {
+    throw new Error(`There are no examples set for policy ${policyId}`);
+  }
+
+  const copy = { ...examples[0] };
+  delete copy._name;
+
+  const code = {
+    name: `my-${policyId}-policy`,
+    policyType: policyId,
+    handler: copy,
+  };
+
+  const optionsHtml = renderToStaticMarkup(
+    <PolicyOptions schema={schema} policyId={policyId} />
+  );
   return `---
 title: ${schema.title} Policy
 sidebar_label: ${schema.title}
 ---
 
-import schemaJson from '@site/policies/${policyId}/schema.json';
-
 <!-- WARNING: This document is generated. DO NOT EDIT BY HAND -->
 
-${intro ?? schema.description}
+<!-- start: intro.md -->
+${introMd ?? schema.description}
+<!-- end: intro.md -->
 
 <PolicyStatus isPreview={${schema.isPreview ?? false}} isPaidAddOn={${
     schema.isPaidAddOn ?? false
   }} />
-
-## Configuration
 
 :::tip
 
@@ -78,29 +164,19 @@ Be sure to read about [policies](../overview/policies.md)
 
 :::
 
-<PolicyExample schema={schemaJson} policyId="${policyId}" />
+## Configuration 
 
-<PolicyOptions schema={schemaJson} policyId="${policyId}" />
+\`\`\`json
+${JSON.stringify(code, null, 2)}
+\`\`\`
 
-${doc ?? ""}
-`;
-}
+<div className="policy-options">
+${optionsHtml}
+</div>
 
-async function getIndexPage() {
-  const intro = await readFile(path.join(policiesDir, "_index.md"));
-  return `---
-title: Policy Catalog
-sidebar_label: Policies
----
-  
-import ItemCatalog from '@site/src/components/ItemCatalog';
-import policyConfig from '@site/policies.v3.json';
-
-<!-- WARNING: This document is generated. DO NOT EDIT BY HAND -->
-
-${intro}
-
-<ItemCatalog items={policyConfig.policies.map(({ id, name, icon }) => ({ id, name, icon, href: "/docs/policies/" + id }))} />
+<!-- start: doc.md -->
+${docMd ?? ""}
+<!-- end: doc.md -->
 `;
 }
 
@@ -179,30 +255,20 @@ async function run() {
     }
     policies.push(meta);
 
-    let introMd: string | undefined;
-    if (existsSync(policyFilePaths.introMd)) {
-      introMd = await readFile(policyFilePaths.introMd, "utf-8");
-    }
-
-    let docMd: string | undefined;
-    if (existsSync(policyFilePaths.docMd)) {
-      docMd = await readFile(policyFilePaths.docMd, "utf-8");
-    }
-
-    const generatedMd = generateMarkdown(policyId, schema, introMd, docMd);
+    const generatedMd = await generateMarkdown(
+      policyId,
+      schema,
+      policyFilePaths
+    );
 
     await writeFile(path.join(docsDir, `${policyId}.md`), generatedMd, "utf-8");
   });
 
-  try {
-    await Promise.all(tasks);
-  } catch (err) {
-    process.exit(1);
-  }
-  await writeFile(
-    path.resolve(docsDir, "index.md"),
-    await getIndexPage(),
-    "utf-8"
+  await Promise.all(tasks);
+
+  await copyFile(
+    path.resolve(policiesDir, "index.md"),
+    path.resolve(docsDir, "index.md")
   );
 
   const policyDataV3 = {
@@ -248,9 +314,15 @@ const args = arg({
 });
 
 if (args["--watch"]) {
-  watch().catch(console.error);
+  watch().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
 } else {
-  run().catch(console.error);
+  run().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
 }
 
 async function getExampleHtml(
@@ -259,10 +331,7 @@ async function getExampleHtml(
   schema: PolicySchema
 ) {
   const html: string[] = [];
-  if (schema.description) {
-    const output = await render(schema.description);
-    html.push(output);
-  } else {
+  if (!schema.description) {
     console.error(
       chalk.red(
         `ERROR: The policy ${policyId} does not have a description set in the schema`,
@@ -272,23 +341,29 @@ async function getExampleHtml(
     throw new Error("Invalid schema");
   }
 
+  const description = await render(schema.description);
   const properties = (schema.properties.handler as any).properties.options
     ?.properties;
 
-  if (properties && Object.keys(properties).length > 0) {
-    const element = renderToStaticMarkup(
-      <OptionProperties properties={properties} />
-    );
-
-    html.push("<h3>Options</h3>");
-    html.push(element);
-  } else if (properties !== undefined) {
+  if (properties && Object.keys(properties).length === 0) {
     console.warn(
       chalk.yellow(
         `WARN: The policy ${policyId} does not have any options set in the schema.`
       )
     );
   }
+
+  const element = renderToStaticMarkup(
+    <>
+      <div dangerouslySetInnerHTML={{ __html: description }} />
+      {properties ? (
+        <>
+          <h3>Options</h3>
+          <OptionProperties properties={properties} />{" "}
+        </>
+      ) : null}
+    </>
+  );
 
   if (html.length === 0) {
     return undefined;

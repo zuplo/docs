@@ -10,24 +10,12 @@ const PolicyExample = ({
   policyId: string;
   exampleName?: string;
 }) => {
-  const { examples } = schema.properties.handler;
+  const { examples } = schema.properties.handler as any;
   if (!Array.isArray(examples) || examples.length === 0) {
     throw new Error(`There are no examples set for policy ${policyId}`);
   }
 
-  let handler: any;
-  if (exampleName) {
-    handler = examples.find((e) => e._name === exampleName);
-    if (!handler) {
-      throw new Error(
-        `Could not location example ${exampleName} for policy ${policyId}`
-      );
-    }
-  } else {
-    handler = examples[0];
-  }
-
-  const copy = { ...handler };
+  const copy = { ...examples[0] };
   delete copy._name;
 
   const code = {
