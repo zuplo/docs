@@ -28,6 +28,13 @@
   --ifm-color-primary-lightest: #ff4dd1;
 }
 
+.policy-options p {
+  display: inline;
+}
+.policy-options div {
+  display: inline;
+}
+
 .theme-code-block {
   border-radius: var(--ifm-code-border-radius);
 }

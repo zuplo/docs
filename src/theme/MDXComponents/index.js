@@ -9,9 +9,6 @@ import MDXPre from "@theme/MDXComponents/Pre";
 import MDXUl from "@theme/MDXComponents/Ul";
 import React from "react";
 import HubSpotForm from "../../components/HubSpotForm";
-import PolicyConfig from "../../components/PolicyConfig";
-import PolicyExample from "../../components/PolicyExample";
-import PolicyOptions from "../../components/PolicyOptions";
 import PolicyStatus from "../../components/PolicyStatus";
 import SizedImage from "../../components/SizedImage";
 import {
@@ -41,9 +38,6 @@ const MDXComponents = {
   h5: (props) => <MDXHeading as="h5" {...props} />,
   h6: (props) => <MDXHeading as="h6" {...props} />,
   admonition: Admonition,
-  PolicyConfig,
-  PolicyExample,
-  PolicyOptions,
   ZupIt,
   CodeEditorTabIcon,
   BuildStatusTabIcon,

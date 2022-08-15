@@ -22,7 +22,21 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: "https://github.com/zuplo/docs/tree/main/",
+          editUrl: ({
+            version,
+            versionDocsDirPath,
+            docPath,
+            permalink,
+            locale,
+          }) => {
+            if (docPath.startsWith("policies/")) {
+              const policyId = docPath
+                .replace("policies/", "")
+                .replace(".md", "");
+              return `https://github.com/zuplo/docs/tree/main/policies/${policyId}`;
+            }
+            return "https://github.com/zuplo/docs/tree/main/";
+          },
         },
         blog: {
           showReadingTime: true,
