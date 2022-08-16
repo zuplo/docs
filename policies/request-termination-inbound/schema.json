@@ -4,7 +4,7 @@
   "type": "object",
   "title": "Request Termination",
   "isPreview": true,
-  "description": "Terminates a requests based on configured criteria",
+  "description": "Terminates a requests based on configured criteria.",
   "required": ["handler"],
   "properties": {
     "handler": {
