@@ -180,6 +180,7 @@ const sidebars = {
         "developer-portal/index",
         "developer-portal/setup",
         "developer-portal/configuration",
+        "developer-portal/theme",
         "developer-portal/version-management",
         "developer-portal/adding-pages",
         "developer-portal/open-api",

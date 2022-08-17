@@ -21,6 +21,7 @@ Out of the box, authentication to your developer portal uses Zuplo's test Auth0 
 The following settings control how your users authenticate to your developer portal.
 
 - **authentication** - Authentication settings
+  - **enabled** - Enables or disables authentication to the developer portal
   - **authority** - The URL to your identity provider's OAuth endpoint
   - **jwksUrl** - The url to the identity provider's [JSON Web Key Set](https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-key-sets) url.
   - **provider** - The identity provider being used. Either `auth0` or `okta`
@@ -34,7 +35,7 @@ To configure authentication, you will need to create both an OAuth Client (somet
 
 If you don't have an Auth0 account, you can sign up for a [free Auth0 account](https://auth0.com/signup) that will provide you will 7,000 monthly active users.
 
-1. [Create an Application](https://auth0.com/docs/get-started/auth0-overview/create-applications). When creating the application select type "Single-Page Web Applications"
+1. [Create an Application](https://auth0.com/docs/get-started/auth0-overview/create-applications). When creating the application select type "Single Page Web Applications"
 2. Set the `authentication.authority` property to `https://` plus your Auth0 domain and a trailing slash, i.e. `https:://my-company.us.auth0.com/`
 3. Set the `authentication.jwksUrl` property to `https://` plus your Auth0 domain plus `/.well-known/jwks.json`, i.e. `https:://my-company.us.auth0.com/.well-known/jwks.json`
 4. Set the `authentication.provider` value to `auth0`
@@ -54,6 +55,7 @@ Example `settings.json` file for Auth0
 ```json
 {
   "authentication": {
+    "enabled": true,
     "authority": "https:://my-company.us.auth0.com/",
     "jwksUrl": "https:://my-company.us.auth0.com/.well-known/jwks.json",
     "provider": "auth0",
@@ -72,6 +74,7 @@ Example `settings.json` file for Okta
 ```json
 {
   "authentication": {
+    "enabled": true,
     "authority": "https://dev-123566.okta.com/oauth2/ausXXXXXXXXXXXX",
     "jwksUrl": "https://dev-123566.okta.com/oauth2/ausXXXXXXXXXXXX/v1/keys",
     "provider": "okta",
