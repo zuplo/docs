@@ -13,6 +13,13 @@ Inside the `settings.json` file under the `developerPortal` section, there is co
   - **logoUrl** - The URL to the logo used by the developer portal
   - **faviconUrl** The URL to the favicon used by the developer portal
   - **pageTitle** The value of the `<title>` element used by the developer portal
+  - **sitePathname** The path where the Developer Portal is served on your domain. Defaults to `/docs`.
+
+:::caution
+
+If you change the `sitePathname` value to anything other than the default value of `/docs` you MUST configure a custom authentication provider. The test provider will only work with the default path.
+
+:::
 
 ## Authentication
 
