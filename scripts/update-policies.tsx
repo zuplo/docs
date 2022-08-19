@@ -330,7 +330,6 @@ async function getExampleHtml(
   policyPath: string,
   schema: PolicySchema
 ) {
-  const html: string[] = [];
   if (!schema.description) {
     console.error(
       chalk.red(
@@ -353,7 +352,7 @@ async function getExampleHtml(
     );
   }
 
-  const element = renderToStaticMarkup(
+  const html = renderToStaticMarkup(
     <>
       <div dangerouslySetInnerHTML={{ __html: description }} />
       {properties ? (
@@ -365,8 +364,5 @@ async function getExampleHtml(
     </>
   );
 
-  if (html.length === 0) {
-    return undefined;
-  }
-  return html.join("");
+  return html;
 }
