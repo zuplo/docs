@@ -4,7 +4,7 @@
   "type": "object",
   "title": "Remove Query Parameters",
   "isPreview": false,
-  "description": "Request query parameters from the incoming request",
+  "description": "Remove query parameters from the incoming request",
   "required": ["handler"],
   "properties": {
     "handler": {
