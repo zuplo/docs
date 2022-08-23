@@ -10,7 +10,6 @@ Setup of the Developer Portal is handled using the [`settings.json` file](../dep
 Inside the `settings.json` file under the `developerPortal` section, there is configuration to customize the look of your portal.
 
 - **developerPortal** - Developer Portal Settings
-  - **logoUrl** - The URL to the logo used by the developer portal
   - **faviconUrl** The URL to the favicon used by the developer portal
   - **pageTitle** The value of the `<title>` element used by the developer portal
   - **sitePathname** The path where the Developer Portal is served on your domain. Defaults to `/docs`.
