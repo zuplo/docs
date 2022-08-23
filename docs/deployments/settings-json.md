@@ -45,7 +45,6 @@ Below is an example of a `settings.json` file that is used to configure custom a
   - **managementClient**
     - **apiKey** - The API key used by Zuplo to manage OAuth clients on your identity provider.
 - **developerPortal** - Developer Portal Settings
-  - **logoUrl** - The URL to the logo used by the developer portal
   - **faviconUrl** The URL to the favicon used by the developer portal
   - **pageTitle** The value of the `<title>` element used by the developer portal
 

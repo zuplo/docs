@@ -47,7 +47,7 @@ You can use this class to set custom values for each variable.
 }
 ```
 
-The logo of the portal is set via the `logoUrl` configuration option, but sometimes you need to override this for themes. You can do so using the `.theme-logo` css property.
+The logo of the portal is set via the css class `.theme-logo`.
 
 ```css
 .dark {
