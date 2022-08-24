@@ -34,6 +34,11 @@
               "type" : "array",
               "default": [],
               "description": "Your Auth0 domain. For example, my-company.auth0.com"
+            },
+            "expirationSecondsTtl" : {
+              "type" : "number",
+              "default": 60,
+              "description": "The timeout of the cache in seconds"
             }
           }
         }
@@ -41,11 +46,12 @@
       "examples": [
         {
           "_name": "basic",
-          "export": "CachingInbound",
+          "export": "CachingInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
+            "expirationSecondsTtl": 60,
             "dangerouslyIgnoreAuthorizationHeader" : false,
-            "headers" : ["some-header-to-be-used-as-part-of-cache-key"]
+            "headers" : ["header_used_as_part_of_cache_key"]
           }
         }
       ]
