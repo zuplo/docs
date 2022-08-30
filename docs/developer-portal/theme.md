@@ -24,7 +24,7 @@ The developer portal supports custom theming by editing the `docs/theme.css` fil
 --text-color-h2: Text color for H2 tags (applies to docs section headers and custom pages)
 --text-color-h3: Text color for H3 tags (only used in custom pages)
 --text-color-inline-code: Text color used for inline `code` in markdown descriptions to aid readability
---text-color-nav: Text color used in the navigation sidebar;
+--text-color-nav: Text color used in the navigation sidebar
 --text-color-nav-hovered: Text color used on a hovered over sidebar label
 --text-color-nav-selected: Text color used on a selected over sidebar label
 --text-color-primary: Primary text color used across all pages
