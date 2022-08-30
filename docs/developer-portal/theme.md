@@ -1,28 +1,33 @@
 ---
 title: Developer Portal Theme
-sidebar_label: Theme
+sidebar_label: Theming
 ---
 
-The developer portal supports custom theming by editing the `docs/theme.css` file in your project. The following [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) and classes are supported.
+The developer portal supports custom theming by editing the `docs/theme.css` file in your project. The following [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) and classes are supported. By default we support a `light` and a `dark` theme, which can be toggled between by the user.
 
 ## Variables
 
 ```txt
---background-inline-code
---background-nav
---background-nav-item-selected
---background-primary
---color-divider
---color-nav-divider
---font-family-primary
---text-color-h1
---text-color-h2
---text-color-h3
---text-color-inline-code
---text-color-nav
---text-color-nav-hovered
---text-color-nav-selected
---text-color-primary
+--background-code-sample-header-primary: Background of header for API code sample unit
+--background-code-sample-header-secondary: Highlight and dropdown color used in header for API code sample unit
+--background-example-section-header-primary: Background of header for example body and responses unit
+--background-example-section-header-secondary: Highlight and dropdown color used in header for example body and responses unit
+--background-inline-code: Background used for inline `code` in markdown descriptions to aid readability
+--background-nav-item-selected: Background of navigation label in the sidebar when navigated to
+--background-primary: Primary background across all pages
+--color-divider: Color of divider between sections of the API docs
+--color-nav-divider: Color of divider between sidebar and main page content
+--font-family-primary: Primary font family used across all pages
+--text-color-code-sample-header: Text color for API code sample unit
+--text-color-example-section-header: Text color for example body and responses unit
+--text-color-h1: Text color for H1 tags (applies to page title and custom pages)
+--text-color-h2: Text color for H2 tags (applies to docs section headers and custom pages)
+--text-color-h3: Text color for H3 tags (only used in custom pages)
+--text-color-inline-code: #2a2f45;
+--text-color-nav: Text color used in the navigation sidebar;
+--text-color-nav-hovered: Text color used on a hovered over sidebar label
+--text-color-nav-selected: Text color used on a selected over sidebar label
+--text-color-primary: Primary text color used across all pages
 ```
 
 ## Theming
