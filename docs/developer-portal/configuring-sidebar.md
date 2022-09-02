@@ -62,3 +62,58 @@ You can also add a `doc` item via shorthand notation in which you only include t
 ```
 
 Note that your will be unable to provide versioning, but you can [provide a label](#sidebar-labels) in the `frontmatter`
+
+## Adding a category
+
+A `category` is a directory of `doc` items. Within your Sidebar, the `items` entries will appear nested under the `label` of the `category` item. Each entry in `items` must contain a unique `id` and `label` within the `items` array.
+
+```typescript
+interface CategoryConfig {
+  type: "category";
+  label: string;
+  versions?: VersionsConfig;
+  link?: DocLink | string;
+  /**
+   * @minItems 1
+   */
+  items: (DocConfig | string)[];
+}
+
+interface DocLink {
+  type: "doc";
+  /**
+   * ID Must be unique across within the docs array
+   */
+  id: string;
+  // label and versions are omitted as they are already included on the CategoryConfig
+}
+```
+
+A `category` item can act like a `doc` if a `link` property is provided. When clicked the user will be navigated to the page referenced in the `link`. If no `link` is provided, then the `category` will not be clickable.
+
+Example:
+
+```json
+{
+  "docs": [
+    {
+      "type": "category",
+      "label": "Dog Breeds",
+      "versions": ["v1", "v2"],
+      "link": {
+        "type": "doc",
+        "id": "dog-breeds"
+      },
+      "items": [
+        "french-bulldog",
+        {
+          "type": "doc",
+          "label": "Poodle",
+          "id": "poodle",
+          "versions": ["v2"]
+        }
+      ]
+    }
+  ]
+}
+```
