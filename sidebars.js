@@ -184,6 +184,7 @@ const sidebars = {
         "developer-portal/theme",
         "developer-portal/version-management",
         "developer-portal/adding-pages",
+        "developer-portal/configuring-sidebar",
         "developer-portal/open-api",
       ],
     },
