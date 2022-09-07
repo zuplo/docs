@@ -23,8 +23,13 @@
         "options": {
           "type": "object",
           "description": "The options for this policy",
-          "required": [],
-          "properties": {}
+          "required": ["headers"],
+          "properties": {
+            "headers" : {
+              "type": "array",
+              "description": "A list of headers to be removed from the incoming request"
+            }
+          }
         }
       },
       "examples": [
@@ -33,7 +38,7 @@
           "export": "RemoveHeadersInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "names": ["HEADER_NAME"]
+            "headers": ["HEADER_NAME"]
           }
         }
       ]
