@@ -40,6 +40,7 @@ const sidebars = {
         "guides/github-source-control",
         "guides/api-key-management",
         "guides/oauth-client-management",
+        "guides/testing-deployments",
       ],
     },
     {
@@ -183,6 +184,7 @@ const sidebars = {
         "developer-portal/theme",
         "developer-portal/version-management",
         "developer-portal/adding-pages",
+        "developer-portal/configuring-sidebar",
         "developer-portal/open-api",
       ],
     },
