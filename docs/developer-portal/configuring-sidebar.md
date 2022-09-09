@@ -6,7 +6,7 @@ You can configure your Developer Portal Sidebar through the `sidebar.json` file.
 
 ## Configuring sidebar.json
 
-`sidebar.json` is consists of items of different `types` either `doc` or `category`. The file is configured in a very similar way to [Docusaurus' sidebar.js](https://docusaurus.io/docs/sidebar/items#sidebar-item-category). The `docs` array must contain all the items of the sidebar.
+`sidebar.json` is consists of items of different `types` either `doc`, `category`, or `api-ref`. The file is configured in a very similar way to [Docusaurus' sidebar.js](https://docusaurus.io/docs/sidebar/items#sidebar-item-category). The `docs` array must contain all the items of the sidebar.
 
 ### Versioning
 
@@ -21,6 +21,26 @@ A `label` property is found on most items. It determines what text appears in th
 If a label is provided on both the `sidebar.json` item and the markdown `frontmatter`, the `frontmatter` will take precedence.
 
 :::
+
+## Adding an api-ref
+
+An `api-ref` item dictates the position of your API Reference docs in the sidebar. You can also relabel the top-level label (default is API Reference). The contents of your API Reference are automatically generated from your `routes.json`. You can [group together endpoints under `tags`](./version-management.md#configuring-a-version) for better content organization.
+
+```typescript
+interface APIDocConfig {
+  type: "api-ref";
+  label: string;
+}
+```
+
+When you create a project, we will automatically populate the following `api-ref` item in your `sidebar.json`:
+
+```json
+{
+  "type": "api-ref",
+  "label": "API Reference"
+}
+```
 
 ## Adding a doc
 
