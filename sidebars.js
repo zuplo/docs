@@ -41,6 +41,7 @@ const sidebars = {
         "guides/api-key-management",
         "guides/oauth-client-management",
         "guides/testing-deployments",
+        "guides/custom-cors-policy",
       ],
     },
     {
