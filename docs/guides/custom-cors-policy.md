@@ -29,6 +29,7 @@ for cross-origin requests (both the simple type and pre-flight request).
       "allowedOrigins": ["https://domain1.com", "https://domain2.com"],
       "allowedHeaders": ["origin", "my-special-incoming-header"],
       "allowedMethods": ["GET", "POST"],
+      "exposeHeaders": ["my-special-response-header"],
       "maxAge": 600,
       "allowCredentials": true
     }
