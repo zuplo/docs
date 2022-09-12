@@ -26,14 +26,11 @@ for cross-origin requests (both the simple type and pre-flight request).
   "corsPolicies": [
     {
       "name": "custom-cors",
-      "headers": {
-        "access-control-allow-origin": "https://domain1.com, https://domain2.com",
-        "access-control-allow-methods": "GET, POST",
-        "access-control-allow-headers": "origin, my-special-request-headers",
-        "access-control-expose-headers": "origin, my-special-response-header",
-        "access-control-allow-credentials": "true",
-        "access-control-max-age": "600"
-      }
+      "allowedOrigins": ["https://domain1.com", "https://domain2.com"],
+      "allowedHeaders": ["origin", "my-special-incoming-header"],
+      "allowedMethods": ["GET", "POST"],
+      "maxAge": 600,
+      "allowCredentials": true
     }
   ]
 }
