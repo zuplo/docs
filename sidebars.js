@@ -211,7 +211,6 @@ const sidebars = {
         "reference/web-standard-apis",
         "reference/node-modules",
         "reference/path-matching",
-        "reference/testing-your-api",
         "reference/reusing-code",
         "reference/safely-clone-a-request-or-response",
         "reference/key-value-store",
