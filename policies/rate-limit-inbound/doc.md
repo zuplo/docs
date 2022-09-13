@@ -19,8 +19,13 @@ This example would create a unique rate-limiting function based on the `customer
 import { CustomRateLimitPolicyOptions, ZuploRequest } from "@zuplo/runtime";
 
 export function rateLimitKey(
-  request: ZuploRequest
+  request: ZuploRequest,
+  context: ZuploContext,
+  policyName: string
 ): CustomRateLimitPolicyOptions {
+  context.log.info(
+    `processing customerId '${request.params.customerId}' for rate-limit policy '${policyName}'`
+  );
   if (request.params.customerId === "43567890") {
     // Override timeWindowMinutes & requestsAllowed
     return {
