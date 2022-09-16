@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/clear-headers-outbound.json",
+  "type": "object",
+  "title": "Composite Inbound (Group Policies)",
+  "isPreview": false,
+  "description": "Creates a composite, or group policy - composed of other policies. For reuse across routes.",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "CompositeInboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "type": "object",
+          "description": "The options for this policy",
+          "required": [],
+          "properties": {
+            "policies": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The list of policy references (beware circular references)"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "CompositeInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "polices": ["POLICY_1", "POLICY_2"]
+          }
+        }
+      ]
+    }
+  }
+}
