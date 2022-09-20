@@ -24,7 +24,7 @@ Next you will configure where your new page will be displayed in the developer p
 
 ```json
 {
-  "type": "Type of documentation. Simply use doc for now to add a page",
+  "type": "Type of documentation. Simply use 'doc' for now to add a page",
   "id": "Name of the file you wish to display, not including the extension",
   "label": "Label for the page in the sidebar navigation"
 }

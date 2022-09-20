@@ -45,13 +45,11 @@ It can be useful to create a new ZuploRequest inside a policy (see
 You can create a completely fresh ZuploRequest as follows:
 
 ```ts
-const newCoreRequest = new Request("http://new-host.com/", {
+const newRequest = new ZuploRequest("http://new-host.com/", {
   method: "POST",
   headers: {
     "content-type": "application/json",
   },
   body: "test",
 });
-
-const newZuploRequest = new ZuploRequest(newCoreRequest);
 ```

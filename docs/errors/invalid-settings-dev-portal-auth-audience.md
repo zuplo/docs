@@ -4,10 +4,11 @@ title: Invalid Settings - Dev Portal Auth Audience (INVALID_SETTINGS_DEV_PORTAL_
 
 We were unable to generate documentation because your 'devPortalClient' do not contain a valid auth configuration.
 
-Ensure that the configuration for `authentication.devPortalClient` is set correctly in your `settings.json` file. See the example below.
+Ensure that the configuration for `authentication.devPortalClient` is set correctly in your `dev-portal.json` file. See the example below.
 
 ```json
 {
+  "enableAuthentication": true,
   "authentication": {
     "authority": "https://dev-123566.okta.com/oauth2/ausXXXXXXXXXXXX",
     "jwksUrl": "https://dev-123566.okta.com/oauth2/ausXXXXXXXXXXXX/v1/keys",
@@ -15,9 +16,6 @@ Ensure that the configuration for `authentication.devPortalClient` is set correc
     "devPortalClient": {
       "clientId": "XXXXXXXXXXXX",
       "audience": "api://my-api"
-    },
-    "managementClient": {
-      "apiKey": "$env(OKTA_API_KEY)"
     }
   }
 }

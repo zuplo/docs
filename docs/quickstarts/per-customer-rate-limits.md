@@ -47,9 +47,14 @@ Create a new empty module called `rate-limiter.ts` by clicking the **+** icon ne
 import { CustomRateLimitPolicyOptions, ZuploRequest } from "@zuplo/runtime";
 
 export function rateLimitKey(
-  request: ZuploRequest
+  request: ZuploRequest,
+  context: ZuploContext,
+  policyName: string
 ): CustomRateLimitPolicyOptions {
   if (request.params.customerId === "100") {
+    context.log.info(
+      `inside the rateLimitKey function for the policy ${policyName}`
+    );
     // Override timeWindowMinutes & requestsAllowed
     return {
       key: request.params.customerId,

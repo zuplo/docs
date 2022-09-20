@@ -3,7 +3,7 @@
   "$id": "http://zuplo.com/schemas/policies/caching-inbound.json",
   "type": "object",
   "title": "Caching",
-  "isPreview": true,
+  "isPreview": false,
   "description": "Respond to matched incoming requests with cached content",
   "required": ["handler"],
   "properties": {
@@ -13,7 +13,7 @@
       "required": ["export", "module", "options"],
       "properties": {
         "export": {
-          "const": "CachingInbound",
+          "const": "CachingInboundPolicy",
           "description": "The name of the exported type"
         },
         "module": {
@@ -23,16 +23,36 @@
         "options": {
           "type": "object",
           "description": "The options for this policy",
-          "required": [],
-          "properties": {}
+          "required": ["audience", "auth0Domain"],
+          "properties": {
+            "dangerouslyIgnoreAuthorizationHeader": {
+              "type": "boolean",
+              "default": false,
+              "description": "By default, the Authorization header is always considered in the caching policy. You can disable by setting this to true"
+            },
+            "headers": {
+              "type" : "array",
+              "default": [],
+              "description": "Your Auth0 domain. For example, my-company.auth0.com"
+            },
+            "expirationSecondsTtl" : {
+              "type" : "number",
+              "default": 60,
+              "description": "The timeout of the cache in seconds"
+            }
+          }
         }
       },
       "examples": [
         {
           "_name": "basic",
-          "export": "CachingInbound",
+          "export": "CachingInboundPolicy",
           "module": "$import(@zuplo/runtime)",
-          "options": {}
+          "options": {
+            "expirationSecondsTtl": 60,
+            "dangerouslyIgnoreAuthorizationHeader" : false,
+            "headers" : ["header_used_as_part_of_cache_key"]
+          }
         }
       ]
     }
