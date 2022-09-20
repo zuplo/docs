@@ -4,7 +4,7 @@
   "type": "object",
   "title": "Add or Set Request Headers",
   "isPreview": false,
-  "description": "Adds or sets headers on the incoming request",
+  "description": "Adds or sets headers on the incoming request.",
   "required": ["handler"],
   "properties": {
     "handler": {

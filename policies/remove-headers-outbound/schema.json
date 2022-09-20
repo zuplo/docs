@@ -4,7 +4,7 @@
   "type": "object",
   "title": "Remove Response Headers",
   "isPreview": false,
-  "description": "Remove configured headers from the outgoing response",
+  "description": "Remove configured headers from the outgoing response.",
   "required": ["handler"],
   "properties": {
     "handler": {
