@@ -61,8 +61,8 @@ Example `dev-portal.json` file for Auth0
 {
   "enableAuthentication": true,
   "authentication": {
-    "authority": "https:://my-company.us.auth0.com/",
-    "jwksUrl": "https:://my-company.us.auth0.com/.well-known/jwks.json",
+    "authority": "https://my-company.us.auth0.com/",
+    "jwksUrl": "https://my-company.us.auth0.com/.well-known/jwks.json",
     "provider": "auth0",
     "devPortalClient": {
       "clientId": "XXXXXXXXXXXX",
