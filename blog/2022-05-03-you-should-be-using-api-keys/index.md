@@ -18,7 +18,7 @@ There are two primary reasons
 
 While there is no formal protocol for API Keys and most implementations have some level of variability - at least compared to standards like OAuth and OpenID Connect - they offer a good level of security, arguably greater than using JWT tokens for a few reasons.
 
-- **Revokability** - API Keys can be quickly revoked for any reason, whereas JWT tokens are hard to revoke and often require the reset of an entire certificate or tenant.
+- **Revocability** - API Keys can be quickly revoked for any reason, whereas JWT tokens are hard to revoke and often require the reset of an entire certificate or tenant.
 - **Opaqueness** - unlike JWT tokens, which can be easily decoded using services like [jwt.io](http://jwt.io), API keys are completely opaque and don’t reveal any hint of your internal authorization mechanism.
 - **Self-management** - a good API program with API keys allows consumers to manage API keys themselves and, in the event of a leak (or accidental push to a GitHub repo), the consumer can quickly revoke and roll their keys. If the same mishap occurs with a JWT token, it is typically harder for the consumer to self-serve and revoke the validity of the JWT token.
 

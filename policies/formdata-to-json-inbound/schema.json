@@ -4,7 +4,7 @@
   "type": "object",
   "title": "Form Data to JSON",
   "isPreview": false,
-  "description": "Converts form data in the incoming request to JSON",
+  "description": "Converts form data in the incoming request to JSON.",
   "required": ["handler"],
   "properties": {
     "handler": {
