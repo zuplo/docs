@@ -3,16 +3,15 @@ title: Developer Portal Setup
 sidebar_label: Setup
 ---
 
-Setup of the Developer Portal is handled using the [`settings.json` file](../deployments/settings-json.md). There are several areas of configuration that can change the style as well as things like authentication.
+Setup of the Developer Portal is handled using the [`dev-portal.json` file](../deployments/dev-portal-json.md). There are several areas of configuration that can change the style as well as things like authentication.
 
 ## Customization
 
-Inside the `settings.json` file under the `developerPortal` section, there is configuration to customize the look of your portal.
+Inside the `dev-portal.json` file you can configuration to customize the look of your portal.
 
-- **developerPortal** - Developer Portal Settings
-  - **faviconUrl** The URL to the favicon used by the developer portal
-  - **pageTitle** The value of the `<title>` element used by the developer portal
-  - **sitePathname** The path where the Developer Portal is served on your domain. Defaults to `/docs`.
+- **faviconUrl** The URL to the favicon used by the developer portal
+- **pageTitle** The value of the `<title>` element used by the developer portal
+- **sitePathname** The path where the Developer Portal is served on your domain. Defaults to `/docs`.
 
 :::caution
 
@@ -26,8 +25,8 @@ Out of the box, authentication to your developer portal uses Zuplo's test Auth0 
 
 The following settings control how your users authenticate to your developer portal.
 
+- **enableAuthentication** - If users can login to the developer portal
 - **authentication** - Authentication settings
-  - **enabled** - Enables or disables authentication to the developer portal
   - **authority** - The URL to your identity provider's OAuth endpoint
   - **jwksUrl** - The url to the identity provider's [JSON Web Key Set](https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-key-sets) url.
   - **provider** - The identity provider being used. Either `auth0` or `okta`
@@ -56,12 +55,12 @@ The identifier is commonly a URI, but it doesn't have to be, nor does the URI ha
 
 7. Set the `authentication.devPortalClient.audience` to the value you set as your API **Identifier** in the previous step
 
-Example `settings.json` file for Auth0
+Example `dev-portal.json` file for Auth0
 
 ```json
 {
+  "enableAuthentication": true,
   "authentication": {
-    "enabled": true,
     "authority": "https:://my-company.us.auth0.com/",
     "jwksUrl": "https:://my-company.us.auth0.com/.well-known/jwks.json",
     "provider": "auth0",
@@ -75,12 +74,12 @@ Example `settings.json` file for Auth0
 
 ### Okta Setup
 
-Example `settings.json` file for Okta
+Example `dev-portal.json` file for Okta
 
 ```json
 {
+  "enableAuthentication": true,
   "authentication": {
-    "enabled": true,
     "authority": "https://dev-123566.okta.com/oauth2/ausXXXXXXXXXXXX",
     "jwksUrl": "https://dev-123566.okta.com/oauth2/ausXXXXXXXXXXXX/v1/keys",
     "provider": "okta",
