@@ -4,7 +4,7 @@
   "type": "object",
   "title": "Add or Set Response Headers",
   "isPreview": false,
-  "description": "Adds or sets headers on the on the outgoing",
+  "description": "Adds or sets headers on the on the outgoing.",
   "required": ["handler"],
   "properties": {
     "handler": {

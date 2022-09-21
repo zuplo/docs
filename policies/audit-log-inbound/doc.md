@@ -52,7 +52,7 @@ The structure of an audit log is shown below.
     "longitude": "4.567",
     "postalCode": "29700",
     "metroCode": "100",
-    "region": "Washinton",
+    "region": "Washington",
     "timezone": "America/LosAngeles"
   },
   "metadata": {

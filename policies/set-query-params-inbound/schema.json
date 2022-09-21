@@ -4,7 +4,7 @@
   "type": "object",
   "title": "Add or Set Query Parameters",
   "isPreview": false,
-  "description": "Adds or sets query parameters on the incoming request",
+  "description": "Adds or sets query parameters on the incoming request.",
   "required": ["handler"],
   "properties": {
     "handler": {

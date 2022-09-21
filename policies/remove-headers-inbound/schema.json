@@ -4,7 +4,7 @@
   "type": "object",
   "title": "Remove Request Headers",
   "isPreview": false,
-  "description": "Remove headers from the incoming request",
+  "description": "Remove headers from the incoming request.",
   "required": ["handler"],
   "properties": {
     "handler": {
