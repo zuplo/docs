@@ -3,6 +3,7 @@ import {
   LightningBoltIcon,
   PresentationChartLineIcon,
   RssIcon,
+  TemplateIcon,
 } from "@heroicons/react/outline";
 import React, { FC } from "react";
 import { FileText, List } from "react-feather";
@@ -30,6 +31,9 @@ export const BuildStatusTabIcon: FC = () => {
 };
 export const SettingsTabIcon: FC = () => {
   return <CogIcon style={styles} />;
+};
+export const DeveloperPortalIcon: FC = () => {
+  return <TemplateIcon style={styles} />;
 };
 
 export const GithubIcon: FC = () => (
