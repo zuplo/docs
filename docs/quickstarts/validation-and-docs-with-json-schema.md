@@ -3,7 +3,7 @@ title: API Request Validation with JSON Schema
 sidebar_label: API Request Validation
 ---
 
-Zuplo is an API gateway that helps any business offer a Stripe-quality experience to developers. You can quickly set up a gateway for your any API, and add validation and documentation in minutes using JSON Schema.
+Zuplo is an API gateway that helps any business offer a Stripe-quality experience to developers. You can quickly set up a gateway for any API and add validation and documentation in minutes using JSON Schema.
 
 Before we start, create a new project in [portal.zuplo.com](https://portal.zuplo.com)
 

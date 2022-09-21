@@ -50,7 +50,7 @@ const sidebars = {
       items: [
         "deployments/environments",
         "deployments/environment-variables",
-        "deployments/settings-json",
+        "deployments/dev-portal-json",
         "deployments/custom-domains",
         "deployments/deployment-options",
       ],

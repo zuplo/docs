@@ -41,7 +41,7 @@
           "export": "CompositeInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "polices": ["POLICY_1", "POLICY_2"]
+            "policies": ["POLICY_1", "POLICY_2"]
           }
         }
       ]
