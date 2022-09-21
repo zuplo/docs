@@ -1,5 +1,5 @@
 ---
-title: Settings File
+title: Developer Portal Config File
 ---
 
 The `dev-portal.json` file is the code that drives most of the configuration of your Zuplo Gateway. The primary uses of the `dev-portal.json` file are:
@@ -8,9 +8,9 @@ The `dev-portal.json` file is the code that drives most of the configuration of 
 - Setting custom values to various configuration
 - Mapping environment variables to settings
 
-:::caution
+:::tip
 
-The `dev-portal.json` file is a beta feature. At this time, it is edited directly as raw JSON. Soon this will be replaced by a more rich experience in the <SettingsTabIcon /> **Settings** tab.
+The `dev-portal.json` file can be edited through a more [rich experience](../developer-portal/setup.md) in the <SettingsTabIcon /> **Settings** tab of the Zuplo Portal.
 
 :::
 
