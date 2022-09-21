@@ -16,6 +16,7 @@ import {
   BuildStatusTabIcon,
   CodeEditorTabIcon,
   DashboardTabIcon,
+  DeveloperPortalIcon,
   GithubIcon,
   LiveLogsTabIcon,
   SettingsTabIcon,
@@ -51,5 +52,6 @@ const MDXComponents = {
   YouTubeVideo,
   PolicyStatus,
   SizedImage,
+  DeveloperPortalIcon,
 };
 export default MDXComponents;
