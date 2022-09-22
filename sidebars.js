@@ -201,7 +201,7 @@ const sidebars = {
         "examples/proxy-a-request-with-body",
         "examples/proxy-a-simple-get-request",
         "examples/rick-and-morty-api-developer-portal-example",
-        "examples/check-pi-address",
+        "examples/check-ip-address",
       ],
     },
     {
