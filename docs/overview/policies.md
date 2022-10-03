@@ -24,10 +24,3 @@ Zuplo includes many built-in policies that make it easy to handle things like au
 ## Custom Policies
 
 The ability to write custom policies that run in-process of your Gateway is at the core of what makes Zuplo the Programmable API Gateway. You can write policies to handle virtual any task. To learn more about [writing custom policies see the documentation](../policies/custom-code-inbound.md).
-
-## Limitations of policies today
-
-1. You cannot create an outbound policy today, inbound only. Recommendation -
-   use a request handler to modify your response etc.
-2. You cannot create a completely new request in an inbound policy today, only
-   change the current one. We need to update this capability ASAP.
