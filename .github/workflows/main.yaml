@@ -38,8 +38,18 @@ jobs:
           project_id: zuplo-production
 
       - run: npm install
-      - run: npm run ci:policies
+      - run: npm run build
       - run: gsutil -h "Content-Type:application/json" cp ./policies.v3.json gs://cdn.zuplo.com/portal/policies.v3.json
+
+      - id: publish
+        name: Publish
+        uses: cloudflare/pages-action@1
+        with:
+          apiToken: ${{ secrets.CF_PAGES_TOKEN }}
+          accountId: "4f59a390b9f139a4a82b757edd3c71dd"
+          projectName: zuplo-docs
+          directory: build
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Trigger Portal Release
         run: |
