@@ -1,5 +1,6 @@
 ---
 title: Change Log
+draft: true
 ---
 
 ## June 24, 2022
