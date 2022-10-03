@@ -1,9 +1,9 @@
 ---
-title: Cache - KeyValueStore
-sidebar_label: Caching
+title: Key Value Store
+sidebar_label: Key Value Store
 ---
 
-Zuplo has a high performance cache, called `KeyValueStore` that can be used inside projects. When running in developer mode (e.g. in the portal at portal.zuplo.com) your cache will reset with each build. When running in production mode at the edge the cache will support edge distribution - it can take up to ~1 minute for writes to sync across all nodes globally (though is usually much quicker).
+Zuplo has a globally distributed key value store called `KeyValueStore`. When running in developer mode (e.g. in the portal at portal.zuplo.com) your cache will reset with each build. When running in production mode at the edge the cache will support edge distribution - it can take up to ~1 minute for writes to sync across all nodes globally (though is usually much quicker).
 
 ### Example
 
