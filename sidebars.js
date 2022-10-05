@@ -40,7 +40,7 @@ const sidebars = {
         "guides/github-source-control",
         "guides/api-key-management",
         "guides/oauth-client-management",
-        "guildes/multiple-auth-policies",
+        "guides/multiple-auth-policies",
         "guides/testing-deployments",
         "guides/custom-cors-policy",
       ],
