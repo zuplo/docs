@@ -27,7 +27,7 @@
     "@docusaurus/plugin-sitemap": "^2.0.0-rc.1",
     "@docusaurus/preset-classic": "^2.1.0",
     "@heroicons/react": "^2.0.12",
-    "@mdx-js/react": "^1.6.22",
+    "@mdx-js/react": "^2.1.5",
     "@zuplo/md-tools": "^1.6.0",
     "clsx": "^1.2.1",
     "docusaurus-plugin-segment": "^1.0.4",
