@@ -7,7 +7,7 @@ All Zuplo environments are deployed behind Cloudflare's Web Application Firewall
 
 ## Web Application Firewall Rules
 
-By default, Zuplo has enabled Cloudflare's [OWASP Core Rule Set](https://owasp.org/www-project-modsecurity-core-rule-set/) and [Cloudflare Managed Ruleset](https://developers.cloudflare.com/waf/managed-rulesets/reference/cloudflare-managed-ruleset/) for every API Gateway deployed to Zuplo. These rules provide a high level of protection with a low likely hood of causing false positives for API transactions.
+By default, Zuplo has enabled Cloudflare's [OWASP Core Rule Set](https://owasp.org/www-project-modsecurity-core-rule-set/) and [Cloudflare Managed Ruleset](https://developers.cloudflare.com/waf/managed-rulesets/reference/cloudflare-managed-ruleset/) for every API Gateway deployed to Zuplo. These rules provide a high level of protection with a low likelihood of causing false positives for API transactions.
 
 For most customers, the default set of rules provides a high level of protection without any interruption to services. However, custom WAF rules can be modified as needed for your API running on Zuplo. Rules can be applied to your entire API or based on [custom rule filters](https://developers.cloudflare.com/ruleset-engine/rules-language/).
 
