@@ -35,7 +35,7 @@ const config = {
                 .replace(".md", "");
               return `https://github.com/zuplo/docs/tree/main/policies/${policyId}`;
             }
-            return "https://github.com/zuplo/docs/tree/main/";
+            return `https://github.com/zuplo/docs/tree/main/docs/${docPath}`;
           },
         },
         blog: {
