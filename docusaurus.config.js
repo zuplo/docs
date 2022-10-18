@@ -35,7 +35,7 @@ const config = {
                 .replace(".md", "");
               return `https://github.com/zuplo/docs/tree/main/policies/${policyId}`;
             }
-            return "https://github.com/zuplo/docs/tree/main/";
+            return `https://github.com/zuplo/docs/tree/main/docs/${docPath}`;
           },
         },
         blog: {
@@ -95,7 +95,7 @@ const config = {
         searchParameters: {},
 
         // Optional: path for search page that enabled by default (`false` to disable it)
-        searchPagePath: "search",
+        searchPagePath: "/docs/search",
 
         //... other Algolia params
       },

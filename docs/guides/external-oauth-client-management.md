@@ -1,12 +1,11 @@
 ---
 title: OAuth Client Management
+draft: true
 ---
 
 Zuplo allows developers to add JWT authentication to their API in only a few minutes. With Zuplo's OAuth Client Management you can enable your customers to create OAuth clients in [the developer portal](../developer-portal/index.md) that allow them to securely access your API with custom scopes and permissions.
 
-Zuplo's OAuth Client Management integrates with any standard-based identity provider such as Auth0, Okta, Azure Active Directory, etc.
-
-See [this document for initial setup](./oauth-client-management-setup.md) of the OAuth Client Management feature.
+Zuplo's OAuth Client Management integrates with the most popular identity providers such as Okta and Auth0 to give your customers or developers a seamless experience using your API.
 
 ## OAuth Client Consumers
 
@@ -35,11 +34,9 @@ Authentication and Authorization for OAuth clients is handled using standard JWT
 
 When a user is authenticated with a JWT policy the claims of their `access_token` will be available on the `request.user` object. You can use these claims to authorize or modify how your routes respond to various requests.
 
-By default, Zuplo will forward any claim starting with `https://zuplo.app/` from your Identity Provider through to the Zuplo application.
-
 ```ts
 async function (request: ZuploRequest, context: ZuploContext) {
-  if (request.user.data["https://zuplo.app/claim1/"] === "this-is-a-claim") {
+  if (request.user.data["https://example.com/claim1/"] === "this-is-a-claim") {
     // do something
   }
 }

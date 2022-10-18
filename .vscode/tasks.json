@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "build",
+      "group": "build",
+      "problemMatcher": [],
+      "label": "Build",
+      "detail": "npm run ci:pre && docusaurus build && npm run ci:post"
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "problemMatcher": [],
+      "label": "Run",
+      "detail": "concurrently \"npm run start:policies\" \"npm run start:docusaurus\""
+    },
+    {
+      "type": "npm",
+      "script": "install",
+      "group": "clean",
+      "problemMatcher": [],
+      "label": "Install",
+      "detail": "install dependencies from package"
+    }
+  ]
+}
