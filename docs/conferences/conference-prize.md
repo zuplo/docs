@@ -3,12 +3,16 @@ title: Zuplo @ API Conference Berlin
 ---
 
 # Win a McLaren Lego Technic
-
+disp
 ![McLaren!](./mclaren.png)
 
 Read on to learn how you can win a McLaren Lego Technic.
 
-[Zuplo](https://zuplo.com) is a different kind of API gateway. It's programmable and gitops enabled. We make it easy for you to ship better APIs that other developers love.
+[Zuplo](https://zuplo.com) is a different kind of API gateway. We believe you make better APIs with tools engineers LOVE to use and can collaborate with, vs creating top-down Governance that you **force** on your engineering teams. 
+
+With Zuplo, teams can create unlimited live environments and each takes less than 30 seconds to deploy. Have some fun with this exercise and ask the team for more information!
+
+It's programmable and gitops enabled. We make it easy for you to ship better APIs that other developers love.
 
 [Home](https://zuplo.com) | [Docs](/docs) | [Blog](/blog) | [Follow Us](https://twitter.com/zuplo)
 
