@@ -14,7 +14,7 @@ title: Conference Prize Terms
 
 ## How to enter
 
-7. The prize draw will include those attendees who complete the [Conference Prize Quickstart](drone-prize.md) and return to the Zuplo booth to show the completed quickstart to the booth staff. Entries must be received by 12:15pm on July, 28th 2022. Entries after that time and date will not be included in the draw.
+7. The prize draw will include those attendees who complete the [Conference Prize Quickstart](drone-prize.md) and return to the Zuplo booth to show the completed quickstart to the booth staff. Entries must be received by 4pm on October 19. Entries after that time and date will not be included in the draw.
 8. Zuplo will not accept responsibility if contact details provided are incomplete or inaccurate.
 
 ## The prize
