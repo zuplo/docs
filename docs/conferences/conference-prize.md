@@ -14,6 +14,8 @@ With Zuplo, teams can create unlimited live environments and each takes less tha
 
 It's programmable and gitops enabled. We make it easy for you to ship better APIs that other developers love.
 
+The draw will be at 3:15pm (during the break) on October 19 - you'll need to be present to win your prize. 
+
 [Home](https://zuplo.com) | [Docs](/docs) | [Blog](/blog) | [Follow Us](https://twitter.com/zuplo)
 
 ---
