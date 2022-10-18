@@ -9,9 +9,9 @@ Setting up a custom domain to point to your Zup takes just a few DNS configurati
 You will be provided with two `TXT` records and a `CNAME`. They will look something like the below.
 
 ```txt
-TXT     api.example.com                       ca3-RANDOM-NUBER
-TXT     _cf-custom-hostname.api.example.com   RANDOM-NUMBER
-CNAME   api.example.com                       example.zuploapp.com
+TXT     _acme-challenge.api.example.com       RANDOM-STRING
+TXT     _cf-custom-hostname.api.example.com   RANDOM-STRING
+CNAME   api.example.com                       cname.zuplo.app
 ```
 
 At your DNS host, you create all three records. After you do so it should take a few minutes for your production Zup to start responding to traffic on your custom domain. By default, you can also use the url on `zuploapp.com` although, if you prefer that to be removed contact support and we can disable it for you.

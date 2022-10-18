@@ -1,10 +1,10 @@
 import {
+  BoltIcon,
   CogIcon,
-  LightningBoltIcon,
   PresentationChartLineIcon,
+  RectangleGroupIcon,
   RssIcon,
-  TemplateIcon,
-} from "@heroicons/react/outline";
+} from "@heroicons/react/24/outline";
 import React, { FC } from "react";
 import { FileText, List } from "react-feather";
 
@@ -18,7 +18,7 @@ export const CodeEditorTabIcon: FC = () => {
   return <FileText style={styles} />;
 };
 export const ApiTestConsoleTabIcon: FC = () => {
-  return <LightningBoltIcon style={styles} />;
+  return <BoltIcon style={styles} />;
 };
 export const LiveLogsTabIcon: FC = () => {
   return <RssIcon style={styles} />;
@@ -33,7 +33,7 @@ export const SettingsTabIcon: FC = () => {
   return <CogIcon style={styles} />;
 };
 export const DeveloperPortalIcon: FC = () => {
-  return <TemplateIcon style={styles} />;
+  return <RectangleGroupIcon style={styles} />;
 };
 
 export const GithubIcon: FC = () => (
