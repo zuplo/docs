@@ -14,7 +14,7 @@ Read on to learn how you can win a McLaren Lego Technic.
 
 ---
 
-## Share this example API with Zuplo for your chance to win a lego
+## Share an example API using Zuplo to win!
 
 :::caution
 
