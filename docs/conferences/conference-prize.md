@@ -70,3 +70,5 @@ Open the "Files" tab (top left) and choose "Getting Started". You should see a s
 ### Step 6 - Show your working API to the folks at the Zuplo Stand
 
 - Show them your rate limited API and developer portal and they will take your details to enter you into the prize draw.
+
+- There'll be a new exercise tomorrow so be sure to come back and try again!
