@@ -27,7 +27,7 @@ This contest is for registered attendees of API Conference, Berlin only.
 
 # Challenge
 
-Submit by noon on the last day of the conference. Limit of one prize per person.
+Submit by 4pm on the last day of the conference. Limit of one prize per person.
 
 ## Part 1: Proxy an API
 
@@ -61,33 +61,12 @@ Open the test client <ApiTestConsoleTabIcon /> in the portal and test your new r
 - Set the URL to `/todos`
 - Hit **Test!**
 
-Congratulations, you hae successfully proxied your first API call!
+Congratulations, you have successfully proxied your first API call!
 
-## Part 2: Setup Rate Limiting
-
-### Step 1 - Add another route
-
-Open the Routes file and add a new route
-
-- It should support `GET` only
-- The path should be `/hello-zuplo`
-
-### Step 2 - setup rate-limiting to your new route
-
-[Read the docs about rate limiting](../policies/rate-limit-inbound.md) for more information.
-
-Open the policy editor for your new route
-
-- Add a new policy
-- Choose rate limiting
-- Set a rate limit for IP allowing 2 requests per minute
-
-Try it out in the <ApiTestConsoleTabIcon /> API Test Console, you should get a `429 Too many requests` response after multiple hits.
-
-### Step 3 - Check out your Developer Portal
+### Step 5 - Check out your Developer Portal
 
 Open the "Files" tab (top left) and choose "Getting Started". You should see a section called "Your API Gateway is LIVE" 
 
-### Step 5 - Show your working API to the folks at the Zuplo Stand
+### Step 6 - Show your working API to the folks at the Zuplo Stand
 
 - Show them your rate limited API and developer portal and they will take your details to enter you into the prize draw.
