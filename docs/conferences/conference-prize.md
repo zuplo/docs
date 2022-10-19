@@ -45,7 +45,9 @@ Sign up for a zuplo account at [portal.zuplo.com](https://portal.zuplo.com)
 
 ### Step 2 - Create a gateway
 
-You can use the same gateway you used in yesterdays challenge or, create a new gateway (it takes less than a minute)
+You can use the same gateway you used in yesterdays challenge or, create a new gateway (it takes less than a minute).
+
+In this exercise we will create a simple gateway over a demo 'todo' API. You can imagine this would be your API. In this exercise, we want to show how fast and easy it is to deploy Zuplo - one of the main reasons businesses love us.
 
 ### Step 3 - Add a new route
 
