@@ -2,9 +2,8 @@
 title: Zuplo @ API Conference Berlin
 ---
 
-# Win a McLaren Lego Technic
+# Win a McLaren Lego Technic (Day 2)
 
-disp
 ![McLaren!](./mclaren.png)
 
 Read on to learn how you can win a McLaren Lego Technic.
@@ -21,7 +20,7 @@ The draw will be at 3:15pm (during the break) on October 19 - you'll need to be 
 
 ---
 
-## Share an example API using Zuplo to win!
+## Deploy a gateway to the edge in seconds
 
 :::caution
 
@@ -34,7 +33,7 @@ This contest is for registered attendees of API Conference, Berlin only.
 
 # Challenge
 
-Submit by 3:15pm on the last day of the conference. Limit of one prize per person.
+Submit by 3:15pm on the last day of the conference. Limit of one prize per person. You need an account with GitHub.com to complete this challenge.
 
 ## Part 1: Proxy an API
 
@@ -46,7 +45,7 @@ Sign up for a zuplo account at [portal.zuplo.com](https://portal.zuplo.com)
 
 ### Step 2 - Create a gateway
 
-Create a new gateway (it takes less than a minute)
+You can use the same gateway you used in yesterdays challenge or, create a new gateway (it takes less than a minute)
 
 ### Step 3 - Add a new route
 
@@ -60,22 +59,23 @@ Open **Routes** and add a route to the example project.
   `https://jsonplaceholder.typicode.com/todos`
 - Save your changes (Cmd ⌘ + S or Ctrl + S)
 
-### Step 4 - Show your working gateway to the folks at the Zuplo stand
+### Step 4 - Install the GitHub Deployer so we can deploy your app
 
-Open the test client <ApiTestConsoleTabIcon /> in the portal and test your new route
+Follow the instructions here: [https://zuplo.com/docs/guides/github-source-control/](https://zuplo.com/docs/guides/github-source-control/) to install the [GitHub Deployer](https://github.com/apps/zuplo/installations/new) - this deploys your gateway to the edge at 250+ datacenters.
 
-- Set the method to `GET`
-- Set the URL to `/todos`
-- Hit **Test!**
+### Step 5 - Connect your project to Source Control
 
-Congratulations, you have successfully proxied your first API call!
+Go to the "Settings" tab ('cog' at center-bottom left) and choose "Source Control". Connect your GitHub account and then Create a Repository for your project....
 
-### Step 5 - Check out your Developer Portal
+### Step 6 - As if by magic, your app will be automatically deployed to the edge
 
-Open the "Files" tab (top left) and choose "Getting Started". You should see a section called "Your API Gateway is LIVE"
+If you installed the GitHub deployer correctly, you should see a small green check in GitHub (see below).
 
-### Step 6 - Show your working API to the folks at the Zuplo Stand
+![GitHub](./github.png)
 
-- Show them your rate limited API and developer portal and they will take your details to enter you into the prize draw.
+If you click on this you will see details of your new cloud deployment and how fast we deployed you to 250+ data-centers around the world.
 
-- There'll be a new exercise tomorrow so be sure to come back and try again!
+### Show us your deployed project
+
+- Show the Zuplo staff your deployed GitHub project.
+- Good luck with the draw!
