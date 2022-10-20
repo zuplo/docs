@@ -41,3 +41,15 @@ A single environment variable name cannot overlap environments. For example, if 
 ## Reserved Environment Variables
 
 Environment variables cannot start with `ZUPLO` or `__ZUPLO`.
+
+## Using Environment Variables
+
+Variables can be accessed in code by importing `@app/environment`.
+
+```ts
+import env from "app/environment";
+
+const myVar = env.MY_VAR;
+```
+
+Inside of some configuration files environment variables can be referenced with the pattern `$env(MY_VAR)`.
