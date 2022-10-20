@@ -2,8 +2,42 @@
 title: Environment Variables
 ---
 
-Each deployment of your project has its own unique set of environmental variables. This allows you to have different configuration for your development, test, and production environments. Environment variables are edited by first selecting the environment to work on, then navigating to the **Environment** file in <CodeEditorTabIcon /> **Code Editor**.
+Environment variables are key-value pairs that are stored outside of source code. The values of environment variables can be applied to particular environments in order to change behavior or configuration.
 
-![Environment Editor](https://cdn.zuplo.com/assets/e60e0717-b390-4494-9e44-a89a71342a36.png)
+Environment variables can be read into source code and many configuration files in your project. Variables are only applied to environments on new deployments. If you change an environment variable, you must redeploy the environment in order for the updated value to take affect.
 
-Environment variables are created as either config or secrets. Config is for settings that are not private like icon URLs, or oauth Client IDs. Config values can be viewed after they are set. Secrets are for storing private or sensitive data. Secrets are write-only, meaning that after the value is set it cannot be read again through the portal.
+Environment variables can be configuration or secrets. While all values are stored encrypted at rest, only non-secret values can be read. Secrets are write-only, meaning the value cannot be retrieved once it is set.
+
+## Environment Variable Editor
+
+To set environment variables in your project, open the <SettingsTabIcon /> **Settings** tab and then select the **Environment Variables** section.
+
+To create a new variable, click **Add new variable**.
+
+![](https://cdn.zuplo.com/assets/bec84962-0139-4371-b3fd-a30e70860169.png)
+
+Enter the name and value of your environment variable and select if you would like the value to be a secret or a regular value.
+
+## Environments
+
+Environment variables can be applied to one or many different environments. You can select one or more environments in which to apply the variable.
+
+| Environment  | Description                                                                                                                                                                                |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Prod         | The environment that is deployed from your **default** branch in source control. This is usually called `main`.                                                                            |
+| Preview      | Any environment that is deployed from source control that is **not the default** branch. (i.e. `staging` or `preview`). This also includes any branch that is created from a pull request. |
+| Working Copy | Any environment that is deployed while developing with the portal. Each developer gets their own working copy. Working copies are always deployed to `zuplo.dev`                           |
+
+For the **Preview** environment option, a specific named environment can be selected. For example, if you want a variable set only for the environment deployed from the `staging` branch in source control.
+
+For the **Working Copy** option, developers can set a personal override. This value **ONLY** applies to the developer who set the value.
+
+:::info
+
+A single environment variable name cannot overlap environments. For example, if you set a variable named `MY_VAR` and select all the environments a second variable named `MY_VAR` cannot be set on say the **Production** environments.
+
+:::
+
+## Reserved Environment Variables
+
+Environment variables cannot start with `ZUPLO` or `__ZUPLO`.
