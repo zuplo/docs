@@ -1,5 +1,5 @@
 ---
-title: Using Cloudflare Workers to Fix Auth0 Universal Login
+title: Using Cloudflare Workers to Optimize Auth0 Universal Login
 authors: nate
 tags: [code, auth0, cloudflare, cloudflare workers]
 description: Use Cloudflare Workers to force Auth0 to use a single connection for every authorization request.
