@@ -36,7 +36,7 @@ export const DeveloperPortalIcon: FC = () => {
   return <RectangleGroupIcon style={styles} />;
 };
 
-export const GithubIcon: FC = () => (
+export const GitHubIcon: FC = () => (
   <svg
     style={styles}
     fill="currentColor"

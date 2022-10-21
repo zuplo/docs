@@ -30,7 +30,7 @@ maxWidth={620}
 
 ### Scale
 
-Zuplo builds on servers that run in large data centers and massive scale edge locations. Our infrastructure offers unlimited scale for handling millions or billions of requests with ease.
+Zuplo builds on servers that run in large data centers and massive-scale edge locations. Our infrastructure offers unlimited scale for handling millions or billions of requests with ease.
 
 Zuplo can help you scale your existing API to new levels by adding caching and other policies that can dramatically reduce the traffic that actually reaches your endpoints.
 

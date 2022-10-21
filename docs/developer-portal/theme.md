@@ -3,7 +3,7 @@ title: Developer Portal Theme
 sidebar_label: Theming
 ---
 
-The developer portal supports custom theming by editing the `docs/theme.css` file in your project. The following [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) and classes are supported. By default we support a `light` and a `dark` theme, which can be toggled between by the user.
+The developer portal supports custom theming by editing the `docs/theme.css` file in your project. The following [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) and classes are supported. By default, we support a `light` and a `dark` theme, which can be toggled between by the user.
 
 ## Variables
 
@@ -32,7 +32,7 @@ The developer portal supports custom theming by editing the `docs/theme.css` fil
 
 ## Theming
 
-The theme color is set using the `.dark` or `.light` css class on the `body` like the example below.
+The theme color is set using the `.dark` or `.light` CSS class on the `body` like in the example below.
 
 ```html
 <body class="light">
@@ -52,7 +52,7 @@ You can use this class to set custom values for each variable.
 }
 ```
 
-The logo of the portal is set via the css class `.theme-logo`.
+The logo of the portal is set via the CSS class `.theme-logo`.
 
 ```css
 .dark {
@@ -72,7 +72,7 @@ The logo of the portal is set via the css class `.theme-logo`.
 
 :::danger
 
-Custom styles and css variables beyond what are documented above are not officially supported and may break with future releases. Use custom CSS with caution.
+Custom styles and CSS variables beyond what is documented above are not officially supported and may break with future releases. Use custom CSS with caution.
 
 :::
 

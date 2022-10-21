@@ -73,4 +73,4 @@ You can then reference your custom CORS policy in your route by specifying the n
 
 ```
 
-For more information on CORS, checkout the MDN documentation: [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
+For more information on CORS, check out the MDN documentation: [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)

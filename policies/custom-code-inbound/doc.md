@@ -105,7 +105,7 @@ See the gif below to see the flow end-to-end:
 
 ## Policy Options
 
-In your policy configuration you can specify additional information to configure
+In your policy configuration, you can specify additional information to configure
 your policy on the options property. In the example below we set an example
 object with some properties of type string and number. Note these objects can be
 as complicated as you like.
@@ -154,14 +154,14 @@ You can also use the `any` type if you prefer not to create a type.
 When building a policy it's common to modify the request object in some way
 before passing control downstream. The `ZuploRequest` type has a `user` property
 that is not set for unauthenticated requests. Authenticated requests should have
-a valid `user` property. Since this an authentication policy, we should set that
-property before passing control to the next in line.
+a valid `user` property. Since this is an authentication policy, we should set 
+that property before passing control to the next in line.
 
 The user object should have a `sub` property which is a unique user id. Let's
 use Zuplo's policy `options` to extend our example.
 
-You can pass options to a policy from the routes.json file. In this case we'll
-create a dictionary of api keys to `sub` ids.
+You can pass options to a policy from the routes.json file. In this case, we'll
+create a dictionary of API keys to `sub` ids.
 
 ```json
 "policies": [

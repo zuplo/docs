@@ -11,15 +11,15 @@ Before we start, create a new project in [portal.zuplo.com](https://portal.zuplo
 
 ## 1/ Routes Setup
 
-Open the **Routes** file and add a new route. Set the **version** to be `v1` and the **path** of the new route to be
+Open the **Routes** file and add a new route. Set the **version** to `v1` and the **path** of the new route to
 `/products/:productId`.
 
 ![Untitled](/media/getting-started/path.png)
 
 ## 2/ Rewrite Handler
 
-Set the mode of the Request Handler to be **URL Rewrite** and the rewrite path
-to be `https://ecommerce-api.zuplo.io/products/${params.productId}`. Notice that
+Set the mode of the Request Handler to **URL Rewrite** and the rewrite path
+to `https://ecommerce-api.zuplo.io/products/${params.productId}`. Notice that
 this appends the productId token to the outbound URL.
 
 ![Untitled](/media/getting-started/rewrite.png)
@@ -40,7 +40,7 @@ the first file. Change the path to `/v1/products/10000` and hit **Test**.
 
 ![Untitled](/media/getting-started/test-client.png)
 
-Try quickly testing it a few more time to see the rate limiter kick in - you'll
+Try quickly testing it a few more times to see the rate limiter kick in - you'll
 get a `429` response, "Too many requests".
 
 ## Congratulations, you set up a gateway!
@@ -52,5 +52,5 @@ get a `429` response, "Too many requests".
 
 **Next Steps**
 
-- [Add API Key Auth to and API](../quickstarts/add-api-key-auth.md)
+- [Add API Key Auth to your API](../quickstarts/add-api-key-auth.md)
 - [Dynamic Rate Limiting](../quickstarts/per-customer-rate-limits.md)

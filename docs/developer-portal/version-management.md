@@ -6,7 +6,7 @@ The `versions` section of your `routes.json` allows you to configure the differe
 
 ## Configuring a Version
 
-We embedded the Open API `Info Object` into the `version` so each version's spec can have its own `title`, `description`, and `tags`. Specifying a tag generate a subsection within the developer portal, displaying the tag name, description, and the endpoints belonging to it. Order is determined by the order within the `tags` array.
+We embedded the Open API `Info Object` into the `version` so each version's spec can have its own `title`, `description`, and `tags`. Specifying a tag generates a subsection within the developer portal, displaying the tag name, description, and the endpoints belonging to it. Order is determined by the order within the `tags` array.
 
 ```json
 "versions": [

@@ -1,5 +1,5 @@
 ---
-title: What the Github API Gets Wrong
+title: What the GitHub API Gets Wrong
 authors: josh
 tags: [code, version, api gateway]
 description: At Zuplo, we like to look to great companies for best practices. When it comes to versioning an API, GitHub handles things differently than companies like Stripe, Airtable, Twilio, and SendGrid. We think their approach is asking for trouble and limits your options.

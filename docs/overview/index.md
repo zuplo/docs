@@ -7,7 +7,7 @@ Zuplo is an API Management platform designed for developers. It's **different** 
 3. **Respects your toolset** - use Visual Studio, Sublime, whatever IDE you like, or our [web portal](https://portal.zuplo.com/signup).
 4. **Offers infinite scale at the edge** - scales effortlessly to billions of requests, deploy to the edge at over 200 locations around the world with 0ms startup time.
 
-To get access to Zuplo, schedule a 30 minute demo [here](https://calendly.com/d/dp4-w98-zrg) - choose your quickstart below:
+To get access to Zuplo, schedule a 30-minute demo [here](https://calendly.com/d/dp4-w98-zrg) - choose your quickstart below:
 
 ## Instant API Docs and Developer Portal
 
@@ -15,7 +15,7 @@ Import your Open API spec or set up a few routes and you’ll have an instant de
 
 ## Add API-Key Authentication to any API
 
-We [recommend API key authentication](/blog/2022/05/03/you-should-be-using-api-keys/) in most API sharing scenarios, but there’s a lot to implement to use API keys successfully. Let us take away all the pain. Follow [this guide](../quickstarts/add-api-key-auth.md) to get it working in less than 5 minutes. **[Open Quickstart ➡️](../quickstarts/add-api-key-auth.md)**
+We [recommend API key authentication](/blog/2022/05/03/you-should-be-using-api-keys/) in most API-sharing scenarios, but there’s a lot to implement to use API keys successfully. Let us take away all the pain. Follow [this guide](../quickstarts/add-api-key-auth.md) to get it working in less than 5 minutes. **[Open Quickstart ➡️](../quickstarts/add-api-key-auth.md)**
 
 ## API Request Validation with JSON Schema
 

@@ -38,6 +38,6 @@ The primary reason to use headers over URL-based versioning is to avoid violatin
 
 There are examples of APIs in the public domain that have a default version if the client doesn’t specify a version. Here’s GitHub’s documentation on their API:
 
-![Github version documentation](./github-version-documentation.png)
+![GitHub version documentation](./github-version-documentation.png)
 
 Even though it encourages developers to use the version header, the API still works without it and just assumes v3. We think this is a mistake; if GitHub upgrades to v4 and that becomes the new default, all of those old clients that didn’t follow the best practice will experience unpredictable behavior and strange errors.

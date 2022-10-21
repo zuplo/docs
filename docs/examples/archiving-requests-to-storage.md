@@ -4,10 +4,10 @@ title: Archiving requests to storage
 
 > Note - this sample uses Policies, read [this guide](../overview/policies.md) first.
 
-In this sample we'll show how you can archive the text body of incoming requests
+In this sample, we'll show how you can archive the text body of incoming requests
 to Azure Blob Storage. We also have a post on [Archiving to AWS S3 Storage](/blog/2022/03/22/custom-policies-in-code-archiving-requests-to-s3).
 
-First, let's setup Azure. You'll need a container in
+First, let's set up Azure. You'll need a container in
 Azure storage
 ([docs](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal)).
 Once you have your container you'll need the URL - you can get it on the
@@ -31,8 +31,8 @@ do not recommend restricting IP addresses because Zuplo runs at the edge in over
 
 ![Untitled](/media/guides/archiving-requests-to-storage/Untitled_1.png)
 
-Then generate your SAS token - copy the token (not the url) to clipboard and
-enter into a new environment variable in your zup called `BLOB_CREATE_SAS`.
+Then generate your SAS token - copy the token (not the URL) to the clipboard
+and enter it into a new environment variable in your zup called `BLOB_CREATE_SAS`.
 You'll need another environment variable called `BLOB_CONTAINER_PATH`.
 
 ![Untitled](/media/guides/archiving-requests-to-storage/Untitled_2.png)

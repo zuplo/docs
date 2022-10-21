@@ -127,7 +127,7 @@ Schemas are also the only supported way to provide examples for parameters, head
 
 ## Tags
 
-Tags can be added to a route, however only the first value will be used for grouping together routes in the `developer portal`. You can learn how to add a description to your tag in the [version management](./version-management.md) section.
+Tags can be added to a route. However, only the first value will be used for grouping together routes in the `developer portal`. You can learn how to add a description to your tag in the [version management](./version-management.md) section.
 
 ```json
 "tags": [
