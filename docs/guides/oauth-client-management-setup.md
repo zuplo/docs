@@ -2,7 +2,7 @@
 title: OAuth Client Management Setup
 ---
 
-In order to configure OAuth client management for your Developer Portal, you will need to create an OAuth Client in your identity provider that will be used for federated authentication. This OAuth Client is what Zuplo will use to authenticate with your Identity Provider to determine that your user's are who they say they are.
+In order to configure OAuth client management for your Developer Portal, you will need to create an OAuth Client in your identity provider that will be used for federated authentication. This OAuth Client is what Zuplo will use to authenticate with your Identity Provider to determine that your users are who they say they are.
 
 You can find instructions on creating an OAuth client for your provider in the documents below.
 
@@ -31,9 +31,9 @@ Do not email or otherwise insecurely share the Client Secret. Use something like
 
 ## Custom Claims
 
-When you include custom claims in the above **Scopes** list, you can provide values when a user authenticates that will be included in the access_token in your Zuplo application. For example, if you request the scope `customer_id` your identity provide should provide that claim as part of the auth flow.
+When you include custom claims in the above **Scopes** list, you can provide values when a user authenticates that will be included in the access_token in your Zuplo application. For example, if you request the scope `customer_id` your identity provider should provide that claim as part of the auth flow.
 
-In your application you can access the claim as part of the user object on the response.
+In your application, you can access the claim as part of the user object on the response.
 
 ```ts
 async function (request: ZuploRequest, context: ZuploContext) {

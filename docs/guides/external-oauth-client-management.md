@@ -25,7 +25,7 @@ To add a new OAuth Client Consumer click the **Add new consumer** button and com
 
 ## OAuth Authentication & Authorization
 
-Authentication and Authorization for OAuth clients is handled using standard JWT authentication. Zuplo comes with several JWT Authentication policies out of the box.
+Authentication and Authorization for OAuth clients are handled using standard JWT authentication. Zuplo comes with several JWT Authentication policies out of the box.
 
 - [OpenId JWT Authentication Policy](../policies/open-id-jwt-auth-inbound.md)
 - [Auth0 JWT Authentication Policy](../policies/auth0-jwt-auth-inbound.md)
@@ -44,6 +44,6 @@ async function (request: ZuploRequest, context: ZuploContext) {
 
 ## OAuth Clients in the Developer Portal
 
-When OAuth Client Managers login to the Developer Portal they can create OAuth Clients and manage client secrets.
+When OAuth Client Managers log in to the Developer Portal they can create OAuth Clients and manage client secrets.
 
 ![OAuth Clients in Developer Portal](./oauth-client-management-media/oauth-client-dev-portal.png)

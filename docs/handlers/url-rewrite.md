@@ -7,7 +7,7 @@ The URL Rewrite handler can be used to proxy and rewrite requests to a different
 
 ## Setup via Portal
 
-The Rewrite Handler can be added to any route using the Route Designer. Open the **Route Designer** by navigating to the <CodeEditorTabIcon /> **Code Editor** tab then clicking **routes.json**. Inside of any route, select **URL Rewrite** from the **Request Handlers** drop down.
+The Rewrite Handler can be added to any route using the Route Designer. Open the **Route Designer** by navigating to the <CodeEditorTabIcon /> **Code Editor** tab then click **routes.json**. Inside any route, select **URL Rewrite** from the **Request Handlers** drop-down.
 
 ![Url Rewrite Handler selection](../../static/media/url-rewrite-handler-selection.png)
 
@@ -24,16 +24,16 @@ The following objects are available for substitution:
 - `query: Record<string, string>` - The query parameters of the route. For example, `query.filterBy` would be the value of `?filterBy=VALUE`.
 - `headers: Headers` - the incoming request's [headers object](https://developer.mozilla.org/en-US/docs/Web/API/Headers)
 - `url: string` - The full incoming request as a string
-- `host: string` - The [`host`](https://developer.mozilla.org/en-US/docs/Web/API/URL/host) portion of the incoming url
-- `hostname: string` - The [`hostname`](https://developer.mozilla.org/en-US/docs/Web/API/URL/hostname) portion of the incoming url
-- `pathname: string` - The [`pathname`](https://developer.mozilla.org/en-US/docs/Web/API/URL/pathname) portion of the incoming url
-- `port: string` - The [`port`](https://developer.mozilla.org/en-US/docs/Web/API/URL/port) portion of the incoming url
-- `search` - The [`search`](https://developer.mozilla.org/en-US/docs/Web/API/URL/search) portion of the incoming url
+- `host: string` - The [`host`](https://developer.mozilla.org/en-US/docs/Web/API/URL/host) portion of the incoming URL
+- `hostname: string` - The [`hostname`](https://developer.mozilla.org/en-US/docs/Web/API/URL/hostname) portion of the incoming URL
+- `pathname: string` - The [`pathname`](https://developer.mozilla.org/en-US/docs/Web/API/URL/pathname) portion of the incoming URL
+- `port: string` - The [`port`](https://developer.mozilla.org/en-US/docs/Web/API/URL/port) portion of the incoming URL
+- `search` - The [`search`](https://developer.mozilla.org/en-US/docs/Web/API/URL/search) portion of the incoming URL
 
 Use the following methods to encode portions of the URL:
 
 - `encodeURIComponent`: The [`encodeURIComponent()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) function encodes a URI by replacing each instance of certain characters with escape sequences.
-- `e`: An alias to `encodeURIComponent` to help keep urls more readable. Can be used like `${e(params.productId)}`
+- `e`: An alias to `encodeURIComponent` to help keep URLs more readable. Can be used like `${e(params.productId)}`
 
 ### Example Values
 

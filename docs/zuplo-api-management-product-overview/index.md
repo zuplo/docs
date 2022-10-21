@@ -24,7 +24,7 @@ Zuplo includes:
 - Integrations with other services, like Auth0
 - And much more
 
-Zuplo is handle more than 1.5 billion API requests per month, here’s what some of our users have to say: 
+Zuplo handles more than 1.5 billion API requests per month, here’s what some of our users have to say: 
 
 > ***"Overall, working with Zuplo is much easier than battling with Envoy filters. Excellent work and keep it rolling!"***
 > 
@@ -54,7 +54,7 @@ Zuplo runs on hundreds of data centers worldwide that are close to your users, s
 
 ### Scale
 
-Zuplo builds on servers that run in large data centers and massive scale edge locations. Our infrastructure offers unlimited scale for handling millions or billions of requests with ease.
+Zuplo builds on servers that run in large data centers and massive-scale edge locations. Our infrastructure offers unlimited scale for handling millions or billions of requests with ease.
 
 Zuplo can help you scale your existing API to new levels by adding caching and other policies that can dramatically reduce the traffic that actually reaches your endpoints.
 

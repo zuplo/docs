@@ -6,7 +6,7 @@ You can configure your Developer Portal Sidebar through the `sidebar.json` file.
 
 ## Configuring sidebar.json
 
-`sidebar.json` is consists of items of different `types` either `doc`, `category`, or `api-ref`. The file is configured in a very similar way to [Docusaurus' sidebar.js](https://docusaurus.io/docs/sidebar/items#sidebar-item-category). The `docs` array must contain all the items of the sidebar.
+`sidebar.json` consists of items of different `types` either `doc`, `category`, or `api-ref`. The file is configured in a very similar way to [Docusaurus' sidebar.js](https://docusaurus.io/docs/sidebar/items#sidebar-item-category). The `docs` array must contain all the items of the sidebar.
 
 ### Versioning
 
@@ -24,7 +24,7 @@ If a label is provided on both the `sidebar.json` item and the markdown `frontma
 
 ## Adding an api-ref
 
-An `api-ref` item dictates the position of your API Reference docs in the sidebar. You can also relabel the top-level label (default is API Reference). The contents of your API Reference are automatically generated from your `routes.json`. You can [group together endpoints under `tags`](./version-management.md#configuring-a-version) for better content organization.
+An `api-ref` item dictates the position of your API Reference docs in the sidebar. You can also relabel the top-level label (the default is API Reference). The contents of your API Reference are automatically generated from your `routes.json`. You can [group together endpoints under `tags`](./version-management.md#configuring-a-version) for better content organization.
 
 ```typescript
 interface APIDocConfig {
@@ -81,7 +81,7 @@ You can also add a `doc` item via shorthand notation in which you only include t
 }
 ```
 
-Note that your will be unable to provide versioning, but you can [provide a label](#sidebar-labels) in the `frontmatter`
+Note that you will be unable to provide versioning, but you can [provide a label](#sidebar-labels) in the `frontmatter`
 
 ## Adding a category
 

@@ -11,7 +11,7 @@ Before we start, create a new project in [portal.zuplo.com](https://portal.zuplo
 
 :::tip
 
-You can also import an OpenAPI specification to setup your gateway and `routes.json` quickly. This feature is in private beta - e-mail us at [whatzup@zuplo.com](mailto:whatzup@zuplo.com) to request access.
+You can also import an OpenAPI specification to set up your gateway and `routes.json` quickly. This feature is in private beta - e-mail us at [whatzup@zuplo.com](mailto:whatzup@zuplo.com) to request access.
 
 :::
 
@@ -65,5 +65,5 @@ Save your changes - your API is now live with validation. Test it out using the 
 
 **Next Steps**
 
-- [Add API Key Auth to and API](../quickstarts/add-api-key-auth.md)
+- [Add API Key Auth to your API](../quickstarts/add-api-key-auth.md)
 - [Dynamic Rate Limiting](../quickstarts/per-customer-rate-limits.md)

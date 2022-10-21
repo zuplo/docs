@@ -10,21 +10,21 @@ The most secure way to connect Zuplo to your API is through a secure tunnel. The
 
 ## How does the Tunnel Work?
 
-The Zuplo tunnel can run on virtually any infrastructure. The most common way users install the tunnel is as a Docker container, but we can provider you a build in virtual any format (i.e. an Azure VM, etc.). The tunnel itself is a light-weight service that when started makes an outbound connection to the Zuplo network and then through to your Zuplo Gateway.
+The Zuplo tunnel can run on virtually any infrastructure. The most common way users install the tunnel is as a Docker container, but we can provide you a build in virtually any format (i.e. an Azure VM, etc.). The tunnel itself is a lightweight service that when started makes an outbound connection to the Zuplo network and then through to your Zuplo Gateway.
 
-When the tunnel service connects to the Zuplo network traffic from your gateway can be routed to internal services running in your network or VPC. For example, if your API is running on the internal DNS address `external-api.local`, the tunnel will route traffic from the Zuplo API Gateway to your internal service based only on the code and policies you have setup in your Zuplo Gateway.
+When the tunnel service connects to the Zuplo network traffic from your gateway can be routed to internal services running in your network or VPC. For example, if your API is running on the internal DNS address `external-api.local`, the tunnel will route traffic from the Zuplo API Gateway to your internal service based only on the code and policies you have set up in your Zuplo Gateway.
 
-The example below illustrates how the Zuplo tunnel would be configured in an AWS ECS Cluster. Notice that there is no public IP address or ingress traffic in this configuration. This is completely private VPC. The tunnel makes an outbound connection to the Zuplo Gateway and then uses internal DNS to route requests to the Private API.
+The example below illustrates how the Zuplo tunnel would be configured in an AWS ECS Cluster. Notice that there is no public IP address or ingress traffic in this configuration. This is a completely private VPC. The tunnel makes an outbound connection to the Zuplo Gateway and then uses internal DNS to route requests to the Private API.
 
 ![](https://cdn.zuplo.com/assets/fefdc7fb-f3b6-4908-8485-3d20cb769cfd.png)
 
 ## Is this Secure?
 
-Zuplo builds on top of many different tools to ensure that your gateway and API stay secure. Each tunnel uses a secret key that allows it to securely connect to Zuplo's network. Under the hood Zuplo relies on Cloudflare's network for establishing secure and reliable tunnel connections. Each tunnel is configured with unique access policies that allow only the Zuplo Gateway that you have authorized to make connections over that tunnel. Every incoming request is terminated using Cloudflare's network which provides sophisticated DDoS, bot, and threat protections. Next, the request is routed through your Zuplo Gateway which can be configured with all policies and code you require to control access to your API. By default, no requests will be routed from your gateway to your API until you configure routes, url rewrites, and policies in your Gateway.
+Zuplo builds on top of many different tools to ensure that your gateway and API stay secure. Each tunnel uses a secret key that allows it to securely connect to Zuplo's network. Under the hood, Zuplo relies on Cloudflare's network for establishing secure and reliable tunnel connections. Each tunnel is configured with unique access policies that allow only the Zuplo Gateway that you have authorized to make connections over that tunnel. Every incoming request is terminated using Cloudflare's network which provides sophisticated DDoS, bot, and threat protections. Next, the request is routed through your Zuplo Gateway which can be configured with all policies and code you require to control access to your API. By default, no requests will be routed from your gateway to your API until you configure routes, URL rewrites, and policies in your Gateway.
 
 All traffic is terminated at the edge with SSL certificates and encrypted through the entire route to your API. All requests that your gateway makes to Zuplo's internal services like API Key Management or Rate Limiting are also transported over secure and encrypted tunnels.
 
-Every request is logged and you can configured Zuplo's logs to push to the log service of your choice.
+Every request is logged and you can configure Zuplo's logs to push to the log service of your choice.
 
 ## How will tunnels perform?
 

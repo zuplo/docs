@@ -14,7 +14,7 @@ export function increment(n: number) {
 }
 ```
 
-Now in our request handler we can import this and reuse this code
+Now in our request handler, we can import this and reuse this code
 
 ```ts
 import { ZuploRequest, ZuploContext } from "@zuplo/runtime";

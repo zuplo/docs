@@ -7,7 +7,7 @@ export default function ZupIt({ repoUrl }: { repoUrl: string }) {
     <div>
       <Admonition type="note">
         <p>
-          This sample is available on on <Link href={repoUrl}>Github</Link> or
+          This sample is available on on <Link href={repoUrl}>GitHub</Link> or
           click the button below to open the code directly in the portal.{" "}
         </p>
         <Link href={`http://portal.zuplo.com/clone?sourceRepoUrl=${repoUrl}`}>
