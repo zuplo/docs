@@ -6,10 +6,10 @@ Before we start, create a new project in [portal.zuplo.com](https://portal.zuplo
 
 ## 1/ Setup Route
 
-Open the **routes.json** file and add a new route. Set the **version** to be `v1` and the **path** of the new route to be
+Open the **routes.json** file and add a new route. Set the **version** to `v1` and the **path** of the new route to
 `/customers/:customerId/data`.
 
-Set the **Handler** drop down to **URL Rewrite** and set the value to `https://echo.zuplo.io/${params.customerId}`. This will proxy the echo API with a simple response with our `customerId`
+Set the **Handler** drop-down to **URL Rewrite** and set the value to `https://echo.zuplo.io/${params.customerId}`. This will proxy the echo API with a simple response with our `customerId`
 
 ![Add Route](../../static/media/quickstarts/per-customer-rate-limits/add-route.png)
 
@@ -72,7 +72,7 @@ Open the **API Test Console** by clicking the lightning bolt icon. Create a new 
 
 Click the **Test** button 3 times quickly and you will see the error _Rate limit exceeded, please try again later_.
 
-Change the path to `/v1/customers/100/data` and try running the test again. You will notice that the rate limit wont be triggered - unless you really want to click 100 times ;).
+Change the path to `/v1/customers/100/data` and try running the test again. You will notice that the rate limit won't be triggered - unless you really want to click 100 times ;).
 
 ## Congratulations, you setup dynamic rate limiting
 

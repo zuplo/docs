@@ -21,7 +21,7 @@ If you change the `sitePathname` value to anything other than the default value 
 
 ## Authentication
 
-Out of the box, authentication to your developer portal uses Zuplo's test Auth0 account. **The test Auth0 account cannot be used in production.**. The test account is limited to a small number of users per month per project so you will want to change this to use your own identity provider. The developer portal supports authenticating with any standard-compliant OpenID Connect identity provider such as [Auth0](https://auth0.com), [Okta](https://okta.com), [AWS Cognito](https://aws.amazon.com/cognito/), etc.
+Out of the box, authentication to your developer portal uses Zuplo's test Auth0 account. **The test Auth0 account cannot be used in production**. The test account is limited to a small number of users per month per project so you will want to change this to use your own identity provider. The developer portal supports authenticating with any standard-compliant OpenID Connect identity provider such as [Auth0](https://auth0.com), [Okta](https://okta.com), [AWS Cognito](https://aws.amazon.com/cognito/), etc.
 
 The following settings control how your users authenticate to your developer portal.
 

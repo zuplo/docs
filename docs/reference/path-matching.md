@@ -3,7 +3,7 @@ title: Path Matching
 sidebar_label: Path Matching
 ---
 
-Routes in a Zuplo gateway are defined in the `routes.json` file. Each route definition specifies a list of supported HTTP methods (GET, POST etc) and the path that should be matched.
+Routes in a Zuplo gateway are defined in the `routes.json` file. Each route definition specifies a list of supported HTTP methods (GET, POST, etc) and the path that should be matched.
 
 Path matching can be tokenized to specify **path parameters**. For example, if your API has the following form
 
@@ -42,7 +42,7 @@ For example, you can match anything with a wildcard as follows:
 
 `/products/(.*)`
 
-This would match _any_ url that begins `/products/`, for example:
+This would match _any_ URL that begins `/products/`, for example:
 
 - `/products/123/`
 - `/products/anything/at/all/can/be/here`
@@ -78,7 +78,7 @@ When you match a route, the tester will show you
 - any matched path parameters
 - querystring values
 
-It will also highlight the matching route with a green banner and - best of all - if you're using URL rewrite it will give an example of how the URL will be re-written.
+It will also highlight the matching route with a green banner and - best of all - if you're using URL rewrite it will give an example of how the URL will be rewritten.
 
 ![Route Test Result](../../static/media/runtime/path-matching/route-test-result.png)
 

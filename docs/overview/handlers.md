@@ -14,7 +14,7 @@ There are several built-in handlers including [URL Rewrite](../handlers/url-rewr
 
 ## Custom Handlers
 
-If one of the built in handlers doesn't meet your needs, you can write anything needed in a custom handler. Custom handlers are simple Javascript/Typescript functions with the following signature.
+If one of the built-in handlers doesn't meet your needs, you can write anything needed in a custom handler. Custom handlers are simple Javascript/Typescript functions with the following signature.
 
 ```ts
 import { ZuploRequest, ZuploContext } from "@zuplo/runtime";

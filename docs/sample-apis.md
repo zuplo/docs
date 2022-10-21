@@ -10,7 +10,7 @@ The echo API will accept any request and will return a JSON object with details 
 
 URL: https://echo.zuplo.io
 
-Github: https://github.com/zuplo/echo-api
+GitHub: https://github.com/zuplo/echo-api
 
 **Request**
 
@@ -45,15 +45,15 @@ content-type: application/json
 
 ## E-Commerce API
 
-This API is a large collection of fake ecommerce type data.
+This API is a large collection of fake e-commerce-type data.
 
 URL: https://ecommerce-api.zuplo.io
 
-Github: https://github.com/zuplo/ecommerce-api
+GitHub: https://github.com/zuplo/ecommerce-api
 
 Endpoints:
 
-- `GET /users`: Returns a collection of user objects'
+- `GET /users`: Returns a collection of user objects
 - `GET /users/:id`: Returns a single user by `id`
 - `GET /products`: Returns a collection of products
 - `GET /products/:id`: Returns a single product by `id`
@@ -65,7 +65,7 @@ This is very similar to the E-Commerce API but with a different URL structure.
 
 URL: https://ecommerce-legacy.zuplo.io
 
-Github: https://github.com/zuplo/ecommerce-legacy
+GitHub: https://github.com/zuplo/ecommerce-legacy
 
 Endpoints:
 

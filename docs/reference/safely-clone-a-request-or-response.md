@@ -8,7 +8,7 @@ to the downwind service or back to the client respectively.
 
 ![Untitled](/media/guides/safely-cone-a-request-or-response/Untitled.png)
 
-When we do this inside the zuplo gateway in a
+When we do this inside the Zuplo gateway in a
 [Request Handler](../handlers/custom-handler.md) we have to be careful to clone
 the request or response to avoid causing a `body-used` exception.
 

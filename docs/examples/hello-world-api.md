@@ -52,7 +52,7 @@ the 'Hi, from inside your zup' log entry below the body.
 ## Congratulations
 
 Your API is now live btw - you can see the URL in settings. Why not try getting
-that "Hello World" response from your browser.
+that "Hello World" response from your browser?
 
 ![Untitled](/media/getting-started-hello-world/project-url.png)
 

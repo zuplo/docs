@@ -41,7 +41,7 @@ title: Conference Prize Terms
 20. You consent to any personal information you provide in entering the prize draw being used by Zuplo for the purposes of administering the prize draw, and for those purposes as defined within our privacy notice.
 21. All entrants may apply for details of the winning participant by contacting us at whatzup@zuplo.com
 22. The winner agrees to the release of their first name and place of work to any other prize draw participants if requested via Zuplo.
-23. An announcement of the winners first name and place of work will be made via Zuplo's website and social media.
+23. An announcement of the winner's first name and place of work will be made via Zuplo's website and social media.
 24. All personal information shall be used in accordance with Zuplo's Privacy Policy.
 
 ## Limitation of Liability

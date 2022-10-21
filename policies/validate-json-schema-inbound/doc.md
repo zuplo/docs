@@ -70,7 +70,7 @@ routes.json file).
   - `validator` a
     '$import' reference to the schema - e.g. `$import(./schemas/car.json)`
 
-This policy is then reference on each route where you want the policy to be
+This policy is then referenced from each route where you want the policy to be
 enforced, for example:
 
 ```json

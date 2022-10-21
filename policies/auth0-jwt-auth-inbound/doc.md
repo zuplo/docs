@@ -1,6 +1,6 @@
 ## Tutorial
 
-We will start with the hello-world sample you get when you create a new Zup. So you routes file should look like this:
+We will start with the hello-world sample you get when you create a new Zup. So your routes file should look like this:
 
 ```json
 {
@@ -70,10 +70,10 @@ Click `+ Create API` to create a new API.
 ![Untitled](/media/guides/setup-jwt-auth-with-auth0/Untitled_1.png)
 
 The `Identifier` should be a URL but it doesn't have to be an accessible
-endpoint. Here I'm just using the same string as the name with a https://
+endpoint. Here I'm just using the same string as the name with an https://
 protocol and trailing /. We'll need these values later so don't forget them.
 
-Inside the settings for your new API you should see a Test tab
+Inside the settings for your new API, you should see a Test tab
 
 ![CleanShot 2021-11-29 at 16.30.40@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.30.402x.png)
 
@@ -81,7 +81,7 @@ We'll need this cURL script shortly to get an access token to test against our A
 
 ## Configuring the Zuplo Policy
 
-Next we will configure our Open ID JWT Policy - more documentation on this
+Next, we will configure our Open ID JWT Policy - more documentation on this
 [here](./open-id-jwt-auth-inbound.md). Add a `policies` array to your routes.json as shown below.
 
 ![CleanShot 2021-11-29 at 16.35.43@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.35.432x.png)
@@ -138,7 +138,7 @@ tutorial. Copy the cURL script from the test tab and execute it in a terminal wi
 
 ![CleanShot 2021-11-29 at 17.03.34@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.03.342x.png)
 
-Carefully extract the access_token only and copy to the clipboard. Paste into a header in the test client called `authorization`. Note that the value of the header should be `Bearer <access_token>` replacing `<access_token>` with the token you got back from cURL.
+Carefully extract the access_token only and copy it to the clipboard. Paste into a header in the test client called `authorization`. Note that the value of the header should be `Bearer <access_token>` replacing `<access_token>` with the token you got back from cURL.
 
 ![CleanShot 2021-11-29 at 17.06.08@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.06.082x.png)
 

@@ -4,7 +4,7 @@ title: Environment Variables
 
 Environment variables are key-value pairs that are stored outside of source code. The values of environment variables can be applied to particular environments in order to change behavior or configuration.
 
-Environment variables can be read into source code and many configuration files in your project. Variables are only applied to environments on new deployments. If you change an environment variable, you must redeploy the environment in order for the updated value to take affect.
+Environment variables can be read into source code and many configuration files in your project. Variables are only applied to environments on new deployments. If you change an environment variable, you must redeploy the environment in order for the updated value to take effect.
 
 Environment variables can be configuration or secrets. While all values are stored encrypted at rest, only non-secret values can be read. Secrets are write-only, meaning the value cannot be retrieved once it is set.
 
@@ -52,4 +52,4 @@ import env from "app/environment";
 const myVar = env.MY_VAR;
 ```
 
-Inside of some configuration files environment variables can be referenced with the pattern `$env(MY_VAR)`.
+Inside some configuration files, environment variables can be referenced with the pattern `$env(MY_VAR)`.
