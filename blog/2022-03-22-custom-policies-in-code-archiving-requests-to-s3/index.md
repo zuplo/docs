@@ -11,9 +11,8 @@ Length: 3 minutes
 One of my favorite features of Zuplo is the ability to build custom policies. Here we create a custom policy to archive every request to Amazon's S3 storage. Here's the code in our `archive-request.ts` module:
 
 ```ts
-import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+import { ZuploContext, ZuploRequest, environment } from "@zuplo/runtime";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
-import env from "@app/environment";
 
 type MyPolicyOptionsType = {
   myOption: any;
@@ -24,7 +23,7 @@ export default async function (
   options: MyPolicyOptionsType,
   policyName: string
 ) {
-  context.log.info(env.AWS_SECRET_ACCESS_KEY);
+  context.log.info(environment.AWS_SECRET_ACCESS_KEY);
 
   const s3Client = new S3Client({ region: "us-east-2" });
   const file = `${Date.now()}-${crypto.randomUUID()}.req.txt`;
@@ -46,9 +45,8 @@ export default async function (
 Note, the code above will update S3 in serial with invoking your API, which will increase the latency of your API. However, you can also do this asynchronously, as follows:
 
 ```ts
-import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+import { ZuploContext, ZuploRequest, environment } from "@zuplo/runtime";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
-import env from "@app/environment";
 
 type MyPolicyOptionsType = {
   myOption: any;
@@ -59,7 +57,7 @@ export default async function (
   options: MyPolicyOptionsType,
   policyName: string
 ) {
-  context.log.info(env.AWS_SECRET_ACCESS_KEY);
+  context.log.info(environment.AWS_SECRET_ACCESS_KEY);
 
   const s3Client = new S3Client({ region: "us-east-2" });
   const file = `${Date.now()}-${crypto.randomUUID()}.req.txt`;

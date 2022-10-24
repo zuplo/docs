@@ -15,8 +15,7 @@ In this example we use the [Event Planning Template](https://www.airtable.com/te
 And here's the code in our **request handler**
 
 ```ts
-import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
-import env from "@app/environment";
+import { ZuploContext, ZuploRequest, environment } from "@zuplo/runtime";
 
 export default async function (request: ZuploRequest, context: ZuploContext) {
   const body = await request.json();
@@ -32,10 +31,10 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
     ],
   };
 
-  const response = await fetch(env.ATTENDEES_URL, {
+  const response = await fetch(environment.ATTENDEES_URL, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${env.API_KEY}`,
+      Authorization: `Bearer ${environment.API_KEY}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
