@@ -44,10 +44,10 @@ Environment variables cannot start with `ZUPLO` or `__ZUPLO`.
 
 ## Using Environment Variables
 
-Variables can be accessed in code by importing `@app/environment`.
+Variables can be accessed in code by importing `@zuplo/runtime`.
 
 ```ts
-import env from "app/environment";
+import { environment } from "@zuplo/runtime";
 
 const myVar = env.MY_VAR;
 ```
