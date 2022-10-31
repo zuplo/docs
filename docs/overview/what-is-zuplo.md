@@ -2,19 +2,15 @@
 title: What is Zuplo?
 ---
 
-At its core, Zuplo is a highly customizable API Gateway that makes it easy for developers to expand the capabilities of their API. More specifically, Zuplo is the easiest way for developers to share their APIs. Zuplo provides a host of services that allow you to add authentication, observability, and control to
-your API so that you can safely share it with customers, partners, and other developers.
+Zuplo is a light-weight, fully-managed API Management platform, built for developers (GitOps, fast deployment, unlimited preview environments etc.). We're working with engineering leaders to quickly add:
 
-You probably have an API today that you use internally. As your business grows, you might need to let partners access parts of your API. What are your options? Well, you could certainly write a bunch of code to add new security capabilities, new monitoring/logging, new metering, new... you get the idea. Another option is to enhance your API with Zuplo and start onboarding your customers, partners, and developers in no time.
+* rate limiting
+* auth and access management,
+* programmable layer of abstraction between an API and its consumers (you can write code that executes inside the Gateway)
+* full policy library
 
-Zuplo Makes it easy for you to add:
+Zuplo doesn't come with the crazy costs, training courses, etc. of a traditional API Management platforms, like Apigee or Azure APIM.
 
-- API Key Authentication
-- API Key Management
-- A Developer Portal for your user's to manage their Keys
-- Automatic API Documentation (import your OpenAPI spec if you have one)
-- Add rate limiting and other policies to enforce access compliance
-- And much more
+Zuplo embraces shift-left and infrastructure as code - the gateway definition is all stored in text files that can be source controlled. We can deploy a new environment, to the edge, in under 20s with a simple git commit. 
 
-Zuplo is extremely fast, it is easy to set up, and it is fully customizable with
-both configuration and code.
+We're doing over 1.5 billion API requests per month, supporting API-first engineering teams of 5-50. Zuplo was created by the founder of Azure API Management and is backed by the founders of some of the most exciting developer-centric solutions like Auth0, Snyk, and BigID.
