@@ -120,7 +120,7 @@ We would then configure the policy as follows
     "export": "default",
     "module": "$import(./modules/custom-logging)",
     "options": {
-      "endpoint": "https://YOUR_PIPEDREAM_URL_HERE"
+      "endpoint": "https://YOUR_REQUESTBIN_URL_HERE"
     }
   }
 }
