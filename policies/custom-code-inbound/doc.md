@@ -1,10 +1,19 @@
 ## Writing A Policy
 
-Custom policies can be written to handle any sort of task that modifies the request or changes the behavior of the response. The only requirement for a policy is that it return either a `ZuploRequest` object or a `Response` object.
+Custom policies can be written to extend the functionality of your gateway. This document is about inbound policies that can intercept the request and, if required, modify it before passing down the chain.
 
-Policies have a similar but subtly different signature to a request handler.
+Policies have a similar but subtly different signature to a [request handler](/docs/handlers/custom-handler.md).
+
 They also accept a `ZuploRequest` parameter but they must return either a
-`ZuploRequest` or a `Response`. Returning a `ZuploRequest` is a signal to
+`ZuploRequest` or a `Response`.
+
+::: tip
+
+Note that both `ZuploRequest` and `Response` are based on the web standards [Request](https://developer.mozilla.org/en-US/docs/Web/API/request) and [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response). ZuploRequest adds a few additional properties for convenience, like `user` and `params`.
+
+:::
+
+Returning a `ZuploRequest` is a signal to
 continue the request pipeline and what you return will be passed to the next
 policy, and finally the request handler.
 
@@ -49,10 +58,7 @@ export default async function(
 
 This policy checks for an `api-key` header and rejects requests that don't have
 one. If such a header is found, it then checks the content of the header for a
-magic password\*.
-
-> - this is not a best-practice implementation of a security policy - just an
->   example of the power of policies.
+magic password. This example shouldn't be used in a real API but is demonstrative of how you might build custom authentication.
 
 ## Wiring up the policy on routes
 
@@ -99,16 +105,9 @@ auth route:
 }
 ```
 
-See the gif below to see the flow end-to-end:
-
-![](/media/policies/2021-11-21_21.32.35.gif)
-
 ## Policy Options
 
-In your policy configuration, you can specify additional information to configure
-your policy on the options property. In the example below we set an example
-object with some properties of type string and number. Note these objects can be
-as complicated as you like.
+In your policy configuration, you can specify additional information to configure your policy on the options property. In the example below we set an example object with some properties of type string and number. Note these objects can be as complicated as you like.
 
 ```json
 {
@@ -154,7 +153,7 @@ You can also use the `any` type if you prefer not to create a type.
 When building a policy it's common to modify the request object in some way
 before passing control downstream. The `ZuploRequest` type has a `user` property
 that is not set for unauthenticated requests. Authenticated requests should have
-a valid `user` property. Since this is an authentication policy, we should set 
+a valid `user` property. Since this is an authentication policy, we should set
 that property before passing control to the next in line.
 
 The user object should have a `sub` property which is a unique user id. Let's
@@ -224,3 +223,26 @@ export default async function (request: ZuploRequest) {
 Here is this example working as a gif
 
 ![](/media/policies/2021-11-21_21.44.35.gif)
+
+## Modifying the request headers
+
+Sometimes we need to modify the request more significantly, and this will require creating a new request object. In this case, let's imagine we want to convert incoming parameters to headers.
+
+```ts
+export default async function (request: ZuploRequest) {
+  // create a new request based on the old one,
+  // this is required because the original request's
+  // headers are immutable
+  const newRequest = new ZuploRequest(request);
+  // enumerate over the params object and copy to the new
+  // request
+  Object.keys(request.params).forEach((param) => {
+    newRequest.headers.set(param, request.params[param]);
+  });
+
+  return newRequest;
+}
+```
+
+For a more complex example, check out the [custom logging
+implementation](/docs/guides/custom-logging-example).
