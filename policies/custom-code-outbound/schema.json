@@ -4,7 +4,7 @@
   "type": "object",
   "title": "Custom Code Outbound",
   "isPreview": false,
-  "description": "An custom outbound request policy.",
+  "description": "An custom outbound response policy.",
   "required": ["handler"],
   "properties": {
     "handler": {
