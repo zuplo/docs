@@ -57,7 +57,8 @@ const logReqRes = async (
   endpoint: string,
   req: any,
   response: Response,
-  context: ZuploContext
+  context: ZuploContext,
+  start: number
 ) => {
   // we don't want any errors thrown that might impact
   // our consumers experience so catch everything and
@@ -66,6 +67,7 @@ const logReqRes = async (
     const data = {
       req,
       res: await serializableResponse(response),
+      timeMs: Date.now() - start,
     };
 
     return fetch(endpoint, {
@@ -86,12 +88,19 @@ export default async function (
   // We need to read the body of the request before it's used by the handler
   // so let's serialize the request now
   const req = await serializableRequest(request);
+  const start = Date.now();
 
   // The 'responseSent' event will fire at the very last stage in the response
   // pipeline, when no more mutations can be made - so you can be confident
   // this was the response sent by Zuplo
   context.addEventListener("responseSent", async (event: any) => {
-    const promise = logReqRes(options.endpoint, req, event.response, context);
+    const promise = logReqRes(
+      options.endpoint,
+      req,
+      event.response,
+      context,
+      start
+    );
 
     // We need to ask the runtime now to shut down until this is complete,
     // as this will run asynchronously to our response
