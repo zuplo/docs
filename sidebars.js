@@ -43,6 +43,7 @@ const sidebars = {
         "guides/multiple-auth-policies",
         "guides/testing-deployments",
         "guides/custom-cors-policy",
+        "guides/custom-logging-example",
       ],
     },
     {
