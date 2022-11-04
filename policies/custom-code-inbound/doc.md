@@ -7,7 +7,7 @@ Policies have a similar but subtly different signature to a [request handler](/d
 They also accept a `ZuploRequest` parameter but they must return either a
 `ZuploRequest` or a `Response`.
 
-::: tip
+:::tip
 
 Note that both `ZuploRequest` and `Response` are based on the web standards [Request](https://developer.mozilla.org/en-US/docs/Web/API/request) and [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response). ZuploRequest adds a few additional properties for convenience, like `user` and `params`.
 
