@@ -10,11 +10,7 @@ The most basic path is `/` which will simple match the root path. You can add ot
 
 Path-to-regex supports dynamic matching including a feature that will parameterize parts of the URL. For example:
 
-````
-path: /products/:productId/sizes/:size
-```f
-
-Will match the following paths
+Path: `/products/:productId/sizes/:size` will match the following paths
 
 `/products/pizza/size/small` and set the params object on `request` to:
 
@@ -23,7 +19,7 @@ Will match the following paths
   "productId": "pizza",
   "size": "small"
 }
-````
+```
 
 :::tip
 
