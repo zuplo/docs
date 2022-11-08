@@ -43,7 +43,6 @@ const sidebars = {
         "guides/multiple-auth-policies",
         "guides/testing-deployments",
         "guides/custom-cors-policy",
-        "guides/custom-logging-example",
         "guides/advanced-path-matching",
       ],
     },
@@ -203,6 +202,7 @@ const sidebars = {
         "examples/proxy-a-simple-get-request",
         "examples/rick-and-morty-api-developer-portal-example",
         "examples/check-ip-address",
+        "examples/custom-logging-example",
       ],
     },
     {
