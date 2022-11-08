@@ -44,6 +44,7 @@ const sidebars = {
         "guides/testing-deployments",
         "guides/custom-cors-policy",
         "guides/custom-logging-example",
+        "guides/advanced-path-matching",
       ],
     },
     {
