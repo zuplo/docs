@@ -37,7 +37,7 @@ Path `/(.*)` will match anything.
 
 :::note
 
-This is a true wildcard route can can be used for custom 404s by making this the last route in your routes.json (and matching all methods).
+This is a true wildcard route and can be used for custom 404s by making this the last route in your routes.json (and matching all methods).
 
 :::
 
