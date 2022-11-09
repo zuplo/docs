@@ -7,7 +7,7 @@ Some of our customers want to build custom logging for their gateway runtime. Th
 In this custom inbound policy we show how you could post to a service (in this case we just use RequestBin.com).
 
 ```ts
-import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+import { ZuploContext, ZuploRequest, ResponseSentEvent } from "@zuplo/runtime";
 
 type CustomLoggingOptions = {
   endpoint: string;
@@ -93,7 +93,7 @@ export default async function (
   // The 'responseSent' event will fire at the very last stage in the response
   // pipeline, when no more mutations can be made - so you can be confident
   // this was the response sent by Zuplo
-  context.addEventListener("responseSent", async (event: any) => {
+  context.addEventListener("responseSent", async (event: ResponseSentEvent) => {
     const promise = logReqRes(
       options.endpoint,
       req,
