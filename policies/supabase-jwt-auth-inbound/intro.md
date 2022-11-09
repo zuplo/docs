@@ -1,5 +1,5 @@
 The Supabase JWT Authentication policy allows you to authenticate incoming
-requests using a token created by [supabase.com](supabase.com).
+requests using a token created by [supabase.com](https://supabase.com).
 
 When configured, you can have Zuplo check incoming requests for a JWT token and automatically populate the `ZuploRequest`'s `user` property with a user object.
 
