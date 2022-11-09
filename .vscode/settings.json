@@ -11,5 +11,6 @@
   "[markdown]": {
     "editor.wordWrap": "bounded",
     "editor.wordWrapColumn": 80
-  }
+  },
+  "cSpell.words": ["Supabase"]
 }
