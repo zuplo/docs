@@ -1,4 +1,9 @@
-# Zuplo
+---
+title: API Authentication using Supabase JWT tokens
+authors: josh
+tags: [code, supabase, jwt, auth]
+description: How to use Zuplo to add supabase JWT auth to any API
+---
 
 ## API Authentication using Supabase JWT tokens
 
