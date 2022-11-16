@@ -5,8 +5,6 @@ tags: [code, supabase, jwt, auth]
 description: How to use Zuplo to add supabase JWT auth to any API
 ---
 
-## API Authentication using Supabase JWT tokens
-
 This guide shows you how you can use a Zuplo API gateway to add Supabase JWT Authentication and Authorization to any API, running on any cloud.
 
 ![Untitled](arch.png)
