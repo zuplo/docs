@@ -241,3 +241,5 @@ Now to test this is working, go back to your API test console and change the bod
 Finally, lean back and marvel at your beautiful Developer Portal that took almost zero effort to get this far, wow! Hopefully you already found the link for this when adding API key support :)
 
 ![Developer Portal](dev-portal.png)
+
+See also - [API Authentication with Supabase JWT Tokens](https://zuplo.com/blog/2022/11/15/api-authentication-with-supabase-jwt)
