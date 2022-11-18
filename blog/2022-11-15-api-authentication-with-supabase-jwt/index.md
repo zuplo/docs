@@ -7,6 +7,8 @@ description: How to use Zuplo to add supabase JWT auth to any API
 
 This guide shows you how you can use a Zuplo API gateway to add Supabase JWT Authentication and Authorization to any API, running on any cloud.
 
+There is an accompanying video talk for this blog post: [https://youtu.be/UEeSZkV7o_Y](https://youtu.be/UEeSZkV7o_Y)
+
 ![Untitled](arch.png)
 
 Zuplo is an edge-based programmable API gateway that can augment any existing backend HTTP API to add JWT authentication, dynamic rate-limiting, custom transformations and projections of JSON data.
