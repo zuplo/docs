@@ -42,6 +42,7 @@ const sidebars = {
         "guides/oauth-client-management",
         "guides/multiple-auth-policies",
         "guides/testing-deployments",
+        "guides/custom-ci-cd",
         "guides/custom-cors-policy",
         "guides/advanced-path-matching",
       ],
