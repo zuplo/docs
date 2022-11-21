@@ -19,6 +19,12 @@ The API Key generated is specific for each project. If you have multiple project
 
 4. Write some tests for your API. We provide a rich set of test helpers and utils based on BDD. You can see examples of tests at [samples](https://github.com/zuplo/zup-cli-example-project/tree/main/tests).
 
+:::tip
+
+Your test files need to be under the `tests` folder and end with `.test.ts` to be picked up by the Zuplo CLI.
+
+:::
+
 ## Setting up a custom workflow with GitHub Actions
 
 The full example is available at https://github.com/zuplo/zup-cli-example-project

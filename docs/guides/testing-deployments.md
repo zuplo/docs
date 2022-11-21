@@ -51,6 +51,12 @@ describe("API", () => {
 
 You can find more sample tests [here](https://github.com/zuplo/zup-cli-example-project/tree/main/tests).
 
+::: tip
+
+Your test files need to be under the `tests` folder and end with `.test.ts` to be picked up by the Zuplo CLI.
+
+:::
+
 [GitHub Branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches) can be set in order to enforce policies on when a Pull Request can be merged. The example below sets the "Zuplo Deployment" and "Test API Gateway" as required status that must pass.
 
 ![](https://cdn.zuplo.com/assets/a1d7c322-125d-4d80-add0-fbfb65ccfea1.png)
