@@ -8,9 +8,16 @@ Zuplo provides the Zuplo deployer, a GitHub app that can be used to automaticall
 ## Getting Started
 
 1. Contact [support](mailto:support@zuplo.com) to enable API keys for your Zuplo project.
-1. Navigate to [dev.zuplo.com/docs](https://dev.zuplo.com/docs) and click on "Sign in" on the top right corner.
-1. Navigate to [authentication](https://dev.zuplo.com/docs/v1/#authentication) and generate some API keys. You will use these keys to authenticate with the Zuplo CLI.
-1. Write some tests for your API. We provide a rich set of test helpers and utils based on BDD. You can see examples of tests at [samples](https://github.com/zuplo/zup-cli-example-project/tree/main/tests).
+2. Navigate to [dev.zuplo.com/docs](https://dev.zuplo.com/docs) and click on "Sign in" on the top right corner.
+3. Navigate to [authentication](https://dev.zuplo.com/docs/v1/#authentication) and generate some API keys. You will use these keys to authenticate with the Zuplo CLI.
+
+:::tip
+
+The API Key generated is specific for each project. If you have multiple projects, you will need to generate a new API key for each project. Contact [support](mailto:support@zuplo.com) to enable API keys for every Zuplo project that you want to use the CLI with.
+
+:::
+
+4. Write some tests for your API. We provide a rich set of test helpers and utils based on BDD. You can see examples of tests at [samples](https://github.com/zuplo/zup-cli-example-project/tree/main/tests).
 
 ## Setting up a custom workflow with GitHub Actions
 
