@@ -2,11 +2,16 @@
 title: Testing Deployments
 ---
 
-Using the Zuplo GitHub integration, tests can be run after a deployment and used to block pull requests from being merged. This can help ensure that changes to your Zuplo gateway won't break your production environment.
+:::tip
+
+These instructions assume that you are using custom GitHub Action workflow, in conjunction with the Zuplo deployer. If you prefer setting up your own CI/CD for more fine-grained control, please take a look at [running your own CI/CD](../guides/custom-ci-cd.md).
+:::
+
+Using the Zuplo GitHub integration, tests can be run after a deployment with the Zuplo deployer and used to block pull requests from being merged. This can help ensure that changes to your Zuplo gateway won't break your production environment.
 
 The Zuplo deployer sets [Deployments](https://docs.github.com/en/rest/deployments/deployments) and [Deployment Statuses](https://docs.github.com/en/rest/deployments/statuses) for any push to a GitHub branch.
 
-A simple GitHub Action that runs `mocha` after the deployment is successful. Notice how the property `github.event.deployment_status.environment_url` is set to the `API_URL` environment variable. This is one way you can pass the URL where the preview environment is deployed into your tests.
+Here is a simple GitHub Action that uses the Zuplo CLI to run the tests after the deployment is successful. Notice how the property `github.event.deployment_status.environment_url` is set to the `API_URL` environment variable. This is one way you can pass the URL where the preview environment is deployed into your tests.
 
 ```yaml title="/.github/workflows/main.yaml"
 name: Main
@@ -26,28 +31,31 @@ jobs:
 
       - name: Run Tests
         # Useful properties 'environment', 'state', and 'environment_url'
-        run: API_URL=${{ toJson(github.event.deployment_status.environment_url) }} npx mocha -y -- "./tests/**/*.spec.mjs"
+        run: API_URL=${{ toJson(github.event.deployment_status.environment_url) }} npx @zuplo/cli test --endpoint $API_URL
 ```
 
-Using Node.js 18, it is very easy to write tests that make requests to your API using `fetch` and then validate expectations with `assert`.
+Using Node.js 18 and the Zuplo CLI, it is very easy to write tests that make requests to your API using `fetch` and then validate expectations with `expect` from [chai](https://www.chaijs.com/api/bdd/).
 
 ```js title="/tests/my-test.spec.mjs"
-import assert from "assert";
-
-const apiUrl = process.env.API_URL;
-if (!apiUrl) {
-  console.error("ERROR: API_URL environmental variable is not set");
-  process.exit(1);
-}
+import { describe, it, TestHelper } from "@zuplo/test";
+import { expect } from "chai";
 
 describe("API", () => {
   it("should have a body", async () => {
-    const response = await fetch(`${apiUrl}`);
+    const response = await fetch(TestHelper.TEST_URL);
     const result = await response.text();
-    assert.equal(result, JSON.stringify("What zup?"));
+    expect(result).to.equal(JSON.stringify("What zup?"));
   });
 });
 ```
+
+You can find more sample tests [here](https://github.com/zuplo/zup-cli-example-project/tree/main/tests).
+
+::: tip
+
+Your test files need to be under the `tests` folder and end with `.test.ts` to be picked up by the Zuplo CLI.
+
+:::
 
 [GitHub Branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches) can be set in order to enforce policies on when a Pull Request can be merged. The example below sets the "Zuplo Deployment" and "Test API Gateway" as required status that must pass.
 
