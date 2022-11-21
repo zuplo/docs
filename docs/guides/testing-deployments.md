@@ -51,7 +51,7 @@ describe("API", () => {
 
 You can find more sample tests [here](https://github.com/zuplo/zup-cli-example-project/tree/main/tests).
 
-::: tip
+:::tip
 
 Your test files need to be under the `tests` folder and end with `.test.ts` to be picked up by the Zuplo CLI.
 
