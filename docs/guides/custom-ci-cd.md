@@ -31,7 +31,7 @@ The full example is available at https://github.com/zuplo/zup-cli-example-projec
 
 1. Create a workflow file. You can use the following to help you get started:
 
-```yaml title="/.github/workflows/main.yaml"
+```yaml title=".github/workflows/main.yaml"
 name: Zuplo CI on Pull Request
 
 on:
@@ -76,7 +76,7 @@ jobs:
 
 The full example is available at https://bitbucket.org/zuplocom/zup-cli-example-project/
 
-```yaml title="/bitbucket-pipelines.yml"
+```yaml title="bitbucket-pipelines.yml"
 image: node:18
 
 pipelines:

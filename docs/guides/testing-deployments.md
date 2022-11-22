@@ -36,7 +36,7 @@ jobs:
 
 Using Node.js 18 and the Zuplo CLI, it is very easy to write tests that make requests to your API using `fetch` and then validate expectations with `expect` from [chai](https://www.chaijs.com/api/bdd/).
 
-```js title="/tests/my-test.spec.mjs"
+```js title="/tests/my-test.test.ts"
 import { describe, it, TestHelper } from "@zuplo/test";
 import { expect } from "chai";
 
