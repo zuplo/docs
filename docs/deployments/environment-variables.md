@@ -49,7 +49,7 @@ Variables can be accessed in code by importing `@zuplo/runtime`.
 ```ts
 import { environment } from "@zuplo/runtime";
 
-const myVar = env.MY_VAR;
+const myVar = environment.MY_VAR;
 ```
 
 Inside some configuration files, environment variables can be referenced with the pattern `$env(MY_VAR)`.
