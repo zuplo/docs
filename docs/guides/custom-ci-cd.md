@@ -76,6 +76,8 @@ jobs:
 
 The full example is available at https://bitbucket.org/zuplocom/zup-cli-example-project/
 
+1. Create a pipelines file. You can use the following to help you get started:
+
 ```yaml title="bitbucket-pipelines.yml"
 image: node:18
 
