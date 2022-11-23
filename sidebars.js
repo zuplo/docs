@@ -219,7 +219,6 @@ const sidebars = {
         "reference/reusing-code",
         "reference/safely-clone-a-request-or-response",
         "reference/key-value-store",
-        "reference/cache",
       ],
     },
     {

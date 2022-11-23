@@ -1,6 +1,7 @@
 ---
 title: Cache
 sidebar_label: Cache
+draft: true
 ---
 
 The [Cache API](https://developer.mozilla.org/en-US/docs/Web/API/Cache) provides a persistent storage mechanism for Request / Response object pairs that are cached in long lived memory.
