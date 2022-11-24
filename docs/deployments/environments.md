@@ -10,7 +10,7 @@ There are two distinct types of environment:
 
 - **working-copy** - this is your development environment. You can think of this as your personal cloud laptop. To deploy to this environment you just need to save a change in portal.zuplo.com, that will automatically trigger a build and deploy of your working-copy. A working-copy environment typically ends in a `.dev` URL. These are _not_ deployed to the edge and run in a data-center. There are some subtle differences in behavior between edge deployments and working-copies, so it is important to test both before going to production. Note, every developer using Zuplo gets a private working-copy. These are not shared with anybody else. If you share a project with another person, they will have their own working-copy environment.
 
-:::warn
+:::warning
 Never use a working-copy environment in a production setting. They offer no SLA, and will often sleep after inactivity leading to slower cold-start times. There can be occasional downtime of a few seconds for upgrades.
 :::
 
