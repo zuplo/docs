@@ -1,6 +1,15 @@
 ---
-title: Zuplo for GitHub
+title: GitHub Integration
 ---
+
+GitHub can integrate with Source Control providers like GitHub, BitBucket and GitLab. GitHub is our primary option but contact us if you use BitBucket, GitLab and we can get you set up.
+
+In this article we'll talk about GitHub integration - which has numerous benefits, including:
+
+- source control integration in portal.zuplo.com
+- ability to deploy an [edge-deployment](../deployments/environments.md) just by adding a branch or making a commit.
+
+## Setting it up
 
 To enable the Zuplo integration for GitHub, navigate to <SettingsTabIcon /> **Settings** > <GitHubIcon /> **GitHub Settings**. On the settings page, click the **Connect to GitHub** button. You will be prompted to authorize Zuplo to your GitHub account.
 
@@ -12,9 +21,11 @@ Once you have connected GitHub, you can enter the name of the GitHub repository 
 
 After the project is connected, all of your code will be committed to the `main` branch.
 
-## GitHub Production Deployments
+## GitHub Edge Deployments
 
-To deploy your project from GitHub you must install the [Zuplo GitHub App](https://github.com/apps/zuplo/installations/new). Select the organization to install the application and authorize all repositories or specific repositories.
+For deployments to work you'll need to install the [Zuplo GitHub App](https://github.com/apps/zuplo/installations/new).
+
+Select the organization to install the application and authorize all repositories or specific repositories.
 
 ![GitHub App Permissions](../../static/media/github-app-install-perms.png)
 
