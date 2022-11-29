@@ -6,6 +6,14 @@ description: At Zuplo, we like to look to great companies for best practices. Wh
 image: ./no_version_no_service.png
 ---
 
+**UPDATE 11/28/2022** - six months after publishing this post GitHub made this announcement: [To infinity and beyond: enabling the future of GitHub’s REST API with API versioning](https://github.blog/2022-11-28-to-infinity-and-beyond-enabling-the-future-of-githubs-rest-api-with-api-versioning/).
+
+**"If you have an integration with the REST API, you should update it now to start sending the X-GitHub-Api-Version header." **
+
+No version 👏 No service. 👏
+
+---
+
 When providing recommendations we like to use examples of great companies, the decisions they made — that often go against the grain, and why they made those decisions. One of my favorite examples of this is the fact that the best [API companies tend to use API keys](https://zuplo.com/blog/2022/05/03/you-should-be-using-api-keys/).
 
 But what about great companies getting it wrong?
