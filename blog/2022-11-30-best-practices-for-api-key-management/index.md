@@ -5,7 +5,7 @@ tags: [api key management, api keys, api gateway]
 description: In this guide we share the best practices for API Key Management, including api key authentication, api key security, design tradeoffs, and technical implementation details.
 ---
 
-_This guide is written by Josh Twist, the co-founder and CEO of Zuplo, a fully-managed API gateway for Developers. Before founding Zuplo, Josh led Product for Stripe’s Payment Methods team (responsible for the majority of Stripes payment APIs) and worked at Facebook and Microsoft, where he founded a number of services, including Azure API Management._
+_Before founding Zuplo, Josh led Product for Stripe’s Payment Methods team (responsible for the majority of Stripes payment APIs) and worked at Facebook and Microsoft, where he founded a number of services, including Azure API Management._
 
 Many public APIs choose to use API keys as their authentication mechanism, and with good reason. In this article, we’ll discuss how to approach API key management for your API, including:
 
