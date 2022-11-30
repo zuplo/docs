@@ -5,14 +5,14 @@ tags: [api key management, api keys, api gateway]
 description: In this guide we share the best practices for API Key Management, including api key authentication, api key security, design tradeoffs, and technical implementation details.
 ---
 
-_Before founding Zuplo, Josh led Product for Stripe’s Payment Methods team (responsible for the majority of Stripes payment APIs) and worked at Facebook and Microsoft, where he founded a number of services, including Azure API Management._
-
 Many public APIs choose to use API keys as their authentication mechanism, and with good reason. In this article, we’ll discuss how to approach API key management for your API, including:
 
 - why you should consider API key security
 - design options and tradeoffs
 - best practices of API key authentication
 - technical details of a sound implementation
+
+![API Key Best Practices](./api-key-best-practices.png)
 
 This article is language agnostic and doesn't provide a particular solution for PHP, Python, TypeScript, C# etc but every language should afford the capabilities that would allow you to build an appropriate solution.
 
@@ -87,6 +87,8 @@ One of the reason we have the unusual beginning of the key `"zpka_`" is so that 
 
 At Zuplo, we participate in the GitHub secret scanning program so that we can offer these services to any customer using our API-key policy.
 
+(Aside: _Yes, the example key above triggered our secret scanning when I checked this article into GitHub and we got notified about a token leak_ 👏😆)
+
 **6/ Minimize latency and load on your API Key storage**
 
 To reduce the latency on every API request, you might consider using an in-memory cache to store keys (and any metadata read from the API Key Store). If you have a globally distributed system, you’ll want multiple caches, one in each location. Since Zuplo runs at the edge, we use a high-performance cache in every data center. To increase security it's important to consider only caching the one-way hashed version of the API-key (taking care to avoid hash-collisions by doing a pre-hash collision check at the point of key-creation, using the same hash algorithm).
@@ -133,3 +135,7 @@ Stacking all of that together, here’s a flow chart showing the canonical imple
 ## Conclusion
 
 API keys are a great approach if you want to maximize the developer experience of those using your API, but there are quite a few things to think about when it comes to API key management. An alternative to building this yourself is to use an API Management product with a gateway that does all the work for you and includes a self-serve developer portal. Examples include Apigee, Kong, and — of course — Zuplo.
+
+## The Author
+
+_Before founding Zuplo, Josh led Product for Stripe’s Payment Methods team (responsible for the majority of Stripes payment APIs) and worked at Facebook and Microsoft, where he founded a number of services, including Azure API Management._
