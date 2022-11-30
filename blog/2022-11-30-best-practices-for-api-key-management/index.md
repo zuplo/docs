@@ -1,5 +1,5 @@
 ---
-title: Best Practices for API Key Management
+title:  API Key Management Best Practices
 authors: josh
 tags: [api key management, api keys, api gateway]
 description: In this guide we share the best practices for API Key Management, including api key authentication, api key security, design tradeoffs, and technical implementation details.
@@ -132,7 +132,7 @@ Stacking all of that together, here’s a flow chart showing the canonical imple
 
 ![api-key-check-canonical-flow](./api-key-check-canonical-flow.png)
 
-## Conclusion
+## API Key Management - Great DX, but requires some effort
 
 API keys are a great approach if you want to maximize the developer experience of those using your API, but there are quite a few things to think about when it comes to API key management. An alternative to building this yourself is to use an API Management product with a gateway that does all the work for you and includes a self-serve developer portal. Examples include Apigee, Kong, and — of course — Zuplo.
 
