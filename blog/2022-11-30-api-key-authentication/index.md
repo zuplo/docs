@@ -1,5 +1,5 @@
 ---
-title: Best Practices for API Key authentication
+title: API Key Authentication Best Practices
 authors: josh
 tags:
   [
