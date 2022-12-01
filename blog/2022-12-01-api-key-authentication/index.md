@@ -78,7 +78,7 @@ In Zuplo, we allow folks to have multiple keys so they can temporarily add anoth
 
 It’s important to show developers when the key was created so they can compare the date to any potential incidents. This is especially important if you support multiple keys so that users can differentiate between old and new.
 
-![dont-reveal-api-key](./dont-reveal-api-key.png)
+![api-key-created-date](./api-key-created-date.png)
 
 **4/ Checksum validation**
 
@@ -110,7 +110,7 @@ If this is important to you, you might want to design a way to actively flush a 
 
 Today, everybody has a high-quality camera in their pocket. Don’t show an API key on-screen unless explicitly requested. Avoid the need to show keys at all by providing a copy button. Here’s the supabase console, which almost gets full marks, but would be even better if it provided a copy option **without** needing me to reveal the key visually.
 
-![api-key-created-date](./api-key-created-date.png)
+![dont-reveal-api-key](./dont-reveal-api-key.png)
 
 **8/ Attention to detail — keys need to be copied and pasted**
 
