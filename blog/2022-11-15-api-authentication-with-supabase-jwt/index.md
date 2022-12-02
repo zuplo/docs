@@ -15,7 +15,7 @@ Zuplo is an edge-based programmable API gateway that can augment any existing ba
 
 Zuplo is a fully managed service, sign-up at [zuplo.com](http://zuplo.com) to try it out.
 
-In this example, we’re going to add Supabase JWT authentication and authorization to a demo API and turn on rate-limiting. We’ll use the JSONPlaceholder todo API available at [https://jsonplaceholder.typicode.com/todos](https://jsonplaceholder.typicode.com/todos). For ease of demonstration, this is a public API, but Zuplo has a number of options for secure connectivity to a backend API.
+In this example, we’re going to add [Supabase](https://supabase.com/) JWT authentication and authorization to a demo API and turn on rate-limiting. We’ll use the JSONPlaceholder todo API available at [https://jsonplaceholder.typicode.com/todos](https://jsonplaceholder.typicode.com/todos). For ease of demonstration, this is a public API, but Zuplo has a number of options for secure connectivity to a backend API.
 
 ## Step 1: Proxy your API using Zuplo
 
