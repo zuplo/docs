@@ -52,6 +52,12 @@ jobs:
           directory: build
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
+      - uses: darrenjennings/algolia-docsearch-action@e3b8c5540e90a964b655be6ca73c1ee1aeba2719
+        with:
+          algolia_application_id: E7EUGPZYED
+          algolia_api_key: ${{ secrets.ALGOLIA_API_KEY }}
+          file: crawler.json
+
       - name: Trigger Portal Release
         run: |
           curl \
