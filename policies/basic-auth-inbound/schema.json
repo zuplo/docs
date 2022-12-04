@@ -30,19 +30,21 @@
       "examples": [
         {
           "_name": "basic",
-          "export": "BasicAuthInboundPolicy",
-          "module": "$import(@zuplo/runtime)",
-          "options": {
-            "accounts": [
-              {
-                "data": {
-                  "number": 1
-                },
-                "password": "PASSWORD",
-                "username": "USERNAME"
-              }
-            ],
-            "allowUnauthenticatedRequests": false
+          "handler": {
+            "export": "BasicAuthInboundPolicy",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "accounts": [
+                {
+                  "data": {
+                    "number": 1
+                  },
+                  "password": "PASSWORD",
+                  "username": "USERNAME"
+                }
+              ],
+              "allowUnauthenticatedRequests": false
+            }
           }
         }
       ]
