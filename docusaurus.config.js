@@ -15,6 +15,26 @@ const config = {
   favicon: "https://cdn.zuplo.com/www/favicon.png",
   organizationName: "zuplo", // Usually your GitHub org/user name.
   projectName: "docs", // Usually your repo name.
+  markdown: {
+    mermaid: true,
+  },
+  plugins: [
+    [
+      "docusaurus-plugin-segment",
+      {
+        apiKey: "uk7yI6FDWqqcOtpA4u3Dx1FcfskzMnBt",
+        host: "sg.zuplo.com",
+        ajsPath: "/a/v1/uk7yI6FDWqqcOtpA4u3Dx1FcfskzMnBt/index.js",
+        useHostForBundles: true,
+        load: {
+          integrations: {
+            "Segment.io": { apiHost: "sg.zuplo.com/v1" },
+          },
+        },
+      },
+    ],
+    "@docusaurus/theme-mermaid",
+  ],
   presets: [
     [
       "classic",
@@ -56,22 +76,7 @@ const config = {
       }),
     ],
   ],
-  plugins: [
-    [
-      "docusaurus-plugin-segment",
-      {
-        apiKey: "uk7yI6FDWqqcOtpA4u3Dx1FcfskzMnBt",
-        host: "sg.zuplo.com",
-        ajsPath: "/a/v1/uk7yI6FDWqqcOtpA4u3Dx1FcfskzMnBt/index.js",
-        useHostForBundles: true,
-        load: {
-          integrations: {
-            "Segment.io": { apiHost: "sg.zuplo.com/v1" },
-          },
-        },
-      },
-    ],
-  ],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
