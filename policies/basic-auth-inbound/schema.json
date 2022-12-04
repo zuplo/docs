@@ -23,8 +23,33 @@
         "options": {
           "type": "object",
           "description": "The options for this policy",
-          "required": [],
-          "properties": {}
+          "required": ["accounts"],
+          "properties": {
+            "accounts": {
+              "type": "array",
+              "title": "A list of Basic Auth accounts",
+              "items": {
+                "type": "object",
+                "title": "An account object",
+                "required": ["username", "password"],
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "title": "The username for the account (this will be the `sub` property on `request.user`."
+                  },
+                  "password": {
+                    "type": "string",
+                    "title": "The password for the account - note we recommend storing this in environment variables",
+                    "examples": ["$env(ACCOUNT_FOO_PASSWORD)"]
+                  },
+                  "data": {
+                    "type": "object",
+                    "title": "The data payload you want associated with this account (this will be the `data` property on `request.user`)"
+                  }
+                }
+              }
+            }
+          }
         }
       },
       "examples": [
