@@ -15,6 +15,26 @@ const config = {
   favicon: "https://cdn.zuplo.com/www/favicon.png",
   organizationName: "zuplo", // Usually your GitHub org/user name.
   projectName: "docs", // Usually your repo name.
+  markdown: {
+    mermaid: true,
+  },
+  plugins: [
+    [
+      "docusaurus-plugin-segment",
+      {
+        apiKey: "uk7yI6FDWqqcOtpA4u3Dx1FcfskzMnBt",
+        host: "sg.zuplo.com",
+        ajsPath: "/a/v1/uk7yI6FDWqqcOtpA4u3Dx1FcfskzMnBt/index.js",
+        useHostForBundles: true,
+        load: {
+          integrations: {
+            "Segment.io": { apiHost: "sg.zuplo.com/v1" },
+          },
+        },
+      },
+    ],
+    "@docusaurus/theme-mermaid",
+  ],
   presets: [
     [
       "classic",
@@ -56,26 +76,34 @@ const config = {
       }),
     ],
   ],
-  plugins: [
-    [
-      "docusaurus-plugin-segment",
-      {
-        apiKey: "uk7yI6FDWqqcOtpA4u3Dx1FcfskzMnBt",
-        host: "sg.zuplo.com",
-        ajsPath: "/a/v1/uk7yI6FDWqqcOtpA4u3Dx1FcfskzMnBt/index.js",
-        useHostForBundles: true,
-        load: {
-          integrations: {
-            "Segment.io": { apiHost: "sg.zuplo.com/v1" },
-          },
-        },
-      },
-    ],
-  ],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       image: "https://cdn.zuplo.com/static/social/img-twitter-header.jpg",
+      algolia: {
+        // The application ID provided by Algolia
+        appId: "E7EUGPZYED",
+
+        // Public API key: it is safe to commit it
+        apiKey: "b2b9d3c7d9be346b7754344b8c3bccdd",
+
+        indexName: "ZUPLO_SITE",
+
+        // Optional: see doc section below
+        contextualSearch: true,
+
+        // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
+        //externalUrlRegex: "external\\.com|domain\\.com",
+
+        // Optional: Algolia search parameters
+        searchParameters: {},
+
+        // Optional: path for search page that enabled by default (`false` to disable it)
+        searchPagePath: "/docs/search",
+
+        //... other Algolia params
+      },
       navbar: {
         logo: {
           alt: "Zuplo",

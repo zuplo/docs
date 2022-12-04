@@ -23,9 +23,10 @@
     "ci:policies": "ts-node --esm ./scripts/update-policies.tsx"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.1",
-    "@docusaurus/plugin-sitemap": "^2.0.0-rc.1",
+    "@docusaurus/core": "^2.2.0",
+    "@docusaurus/plugin-sitemap": "^2.2.0",
     "@docusaurus/preset-classic": "^2.2.0",
+    "@docusaurus/theme-mermaid": "^2.2.0",
     "@heroicons/react": "^2.0.12",
     "@mdx-js/react": "^1.6.22",
     "@zuplo/md-tools": "^1.6.0",
@@ -40,7 +41,7 @@
   },
   "devDependencies": {
     "@apidevtools/json-schema-ref-parser": "^9.0.9",
-    "@docusaurus/module-type-aliases": "^2.0.0-rc.1",
+    "@docusaurus/module-type-aliases": "^2.2.0",
     "@tsconfig/docusaurus": "^1.0.6",
     "@types/glob": "^8.0.0",
     "@types/jsdom": "^20.0.0",

@@ -5,7 +5,7 @@ tags: [code, supabase, backend, public, api-first, auth, api-key]
 description: How to use Zuplo to take your supabase backend and make it a developer friendly, public API.
 ---
 
-Supabase is an incredible open-source alternative to Firebase and other BaaS (Backend-as-a-service) options. The design is somewhat optimized for consumption by first-party clients like your own website or mobile app. But what if you wanted to take all that supa-ness and make an API-first product — that is a developer-friendly public API?
+[Supabase](https://supabase.com/) is an incredible open-source alternative to Firebase and other BaaS (Backend-as-a-service) options. The design is somewhat optimized for consumption by first-party clients like your own website or mobile app. But what if you wanted to take all that supa-ness and make an API-first product — that is a developer-friendly public API?
 
 There is an accompanying video for this post: [https://www.youtube.com/watch?v=GJSkbxMnWxE](https://www.youtube.com/watch?v=GJSkbxMnWxE)
 
@@ -24,7 +24,7 @@ We'll allow people, with a valid API key, to read data from the ski results tabl
 
 ## Setting up Supabase
 
-If you haven't already, create a new project in supabase and create a table called ski-reviews with the following columns (feel free to use another domain and invent your own example):
+If you haven't already, create a new project in [supabase](https://app.supabase.com/) and create a table called ski-reviews with the following columns (feel free to use another domain and invent your own example):
 
 - id (int8)
 - created_at (timestamptz)
