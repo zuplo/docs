@@ -62,7 +62,7 @@ The bit of API key authentication advice you’ve been waiting for… the best p
 
 **1/ Secure storage for the keys**
 
-Depending on your choice of **retrievable** vs. **irretrievable,** you’ll need to take a different path. For **irretrievable** keys, it’s best to store them as a hash, ideally using a secure approach like `bcrypt`. There’s an excellent article on this by Auth0, who use `bcrypt` to store user passwords (so it must be good) — [Hashing in action: Understanding bcrypt](https://auth0.com/blog/hashing-in-action-understanding-bcrypt/).
+Depending on your choice of **retrievable** vs. **irretrievable,** you’ll need to take a different path. For **irretrievable** keys, it’s best to store them as a hash, probably using sha256 and ensure that they are stored as primary key (this will help avoid hash collisions, unlikely but possible so you should build in a retry on create and insert).
 
 For **retrievable**, you’ll need to use encryption so that the values can be read from the database to show to the user at a later date. You have a few choices here, like storing the keys in a secure vault, or using encryption programmatically to store in a standard database and manage the keys yourself.
 
@@ -146,3 +146,7 @@ API keys are a great approach if you want to maximize the developer experience o
 ## The Author
 
 _Before founding Zuplo, Josh led Product for Stripe’s Payment Methods team (responsible for the majority of Stripes payment APIs) and worked at Facebook and Microsoft, where he founded a number of services, including Azure API Management._
+
+---
+
+Updated December 4 2022 to update recommended hashing algo to sha256 based on community feedback.
