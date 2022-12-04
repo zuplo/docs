@@ -23,7 +23,7 @@
         "options": {
           "type": "object",
           "description": "The options for this policy",
-          "required": [],
+          "required": ["name", "value"],
           "properties": {
             "headers": {
               "type": "array",
