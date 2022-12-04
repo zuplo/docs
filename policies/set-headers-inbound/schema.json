@@ -27,6 +27,7 @@
           "properties": {
             "headers": {
               "type": "array",
+              "title": "List of headers to set",
               "items": {
                 "type": "object",
                 "properties": {
