@@ -7,7 +7,7 @@ tags:
     api gateway,
   ]
 description: Introducing the Zuplo Free plan, the fastest way to ship your public API. Our Free plan is perfect for developers who are building an API to share with other developers.
-image: https://og-image.zuplo.com?text=Announcing%20the%20Zuplo%20Free%20Plan%20beta/
+image: https://og-image.zuplo.com?text=Announcing%20the%20Zuplo%20Free%20Plan%20beta
 ---
 
 
