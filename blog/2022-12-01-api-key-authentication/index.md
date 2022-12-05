@@ -10,6 +10,7 @@ tags:
     api key management,
   ]
 description: In this guide we share the best practices for API Key Management, including api key authentication, api key security, design tradeoffs, and technical implementation details.
+image: https://og-image.zuplo.com?text=API%20Key%20Authentication%20Best%20Practices
 ---
 
 Many public APIs choose to use API keys as their authentication mechanism, and with good reason. In this article, we’ll discuss how to approach API key security for your API, including:
