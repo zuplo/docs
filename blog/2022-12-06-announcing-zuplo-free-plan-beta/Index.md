@@ -31,7 +31,7 @@ Today we’re announcing a Free (forever) plan for folks looking to get started 
 
 ## Great! What do I do next?
 
-Watch this 2-minute demo to see what makes Zuplo different:[Demo video](https://youtu.be/FMvGJ3dC74M). 
+Watch this 2-minute demo to see what makes Zuplo different: [Demo video](https://youtu.be/FMvGJ3dC74M). 
 
 Ready to start? [Sign up for free](http://portal.zuplo.com/signup) and explore the todo-list sample. 
 
