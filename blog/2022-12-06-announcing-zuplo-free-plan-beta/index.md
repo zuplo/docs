@@ -1,12 +1,10 @@
 ---
-title: Announcing the Zuplo Free Plan (beta)
+title: Announcing Free Plan of Zuplo's Serverless API Gateway
 authors: josh
 tags: [api management, api gateway]
 description: Introducing the Zuplo Free plan, the fastest way to ship your public API. Our Free plan is perfect for developers who are building an API to share with other developers.
 image: https://og-image.zuplo.com?text=Announcing%20the%20Zuplo%20Free%20Plan%20beta
 ---
-
-# Announcing Free Plan of Zuplo's Serverless API Gateway
 
 Today we’re excited to introduce the Zuplo Free plan (beta), offering the fastest way to ship your public API. Zuplo is fully-managed API management that adds authentication, rate limiting, and developer documentation to any API — on any stack or cloud — in minutes.
 
@@ -30,6 +28,7 @@ Watch this 2-minute demo to see what makes Zuplo different in this [Demo video](
 
 <YouTubeVideo url="https://www.youtube-nocookie.com/embed/FMvGJ3dC74M" />
 
+<br/>
 Ready to start? [Sign up for free](http://portal.zuplo.com/signup) and explore the todo-list sample.
 
 Come talk APIs with us and other developers [Join our community on Discord](https://discord.gg/8QbEjr2MgZ).
