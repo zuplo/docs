@@ -7,7 +7,7 @@ description: In this video we show how you can make rate-limiting extraordinaril
 
 One of the best things about Zuplo is it's programmable nature. That combined with our approach to making policies composable means you can do some amazing things with them, like our rate-limiter. In this video we show how you can have the rate-limiter interact with external services and data. Here we use supabase as a data-source for the limits.
 
-<YouTubeVideo url="https://www.youtube-nocookie.com/embed/xvByk_e-s0s" />
+<YouTubeVideo url="https://www.youtube-nocookie.com/embed/zFpfHGB7u6g" />
 
 Here's the key code from the sample
 
@@ -79,4 +79,4 @@ export async function getRateLimit(
 }
 ```
 
-You could make this even higher performance by having the cache have a longer expiry, but periodically reloading the data from supabase asynchronously and pushing the results into the cache; something like an SWR (stale, while revalidate) approach.
+You could make this even higher performance by having the cache have a longer expiry, but periodically reloading the data from supabase asynchronously and pushing the results back into the cache; something like an SWR (stale, while revalidate) approach.
