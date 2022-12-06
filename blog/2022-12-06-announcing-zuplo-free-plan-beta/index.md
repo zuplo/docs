@@ -6,7 +6,7 @@ description: Introducing the Zuplo Free plan, the fastest way to ship your publi
 image: https://og-image.zuplo.com?text=Announcing%20the%20Zuplo%20Free%20Plan%20beta
 ---
 
-# Announcing the Zuplo Free Plan (beta)
+# Announcing Free Plan of Zuplo's Serverless API Gateway
 
 Today we’re excited to introduce the Zuplo Free plan, offering the fastest way to ship your public API. Zuplo is fully-managed API management that adds authentication, rate limiting, and developer documentation to any API — on any stack or cloud — in minutes.
 
