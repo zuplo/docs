@@ -1,5 +1,5 @@
 ---
-title: Supa-dynamic rate-limiting based on data (using supabase in this example)
+title: Supa-dynamic rate-limiting based on data (using supabase)
 authors: josh
 tags: [rate-limiting, api management, supabase]
 description: In this video we show how you can make rate-limiting extraordinarily dynamic by having the rate-limiter interact with external services like Supabase, Xata etc.
