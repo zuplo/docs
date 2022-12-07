@@ -91,4 +91,9 @@ Now we can require that anybody calling our API has a specific claim. To do this
 
 This means anybody calling this particularly route must have a `user_type` claim of `supa_user` to successfully invoke this API.
 
-See also - [Shipping a public API backed by Supabase](https://zuplo.com/blog/2022/11/18/shipping-a-public-api-backed-by-supabase)
+Get started with Zuplo for free today: portal.zuplo.com/signup
+
+See also:
+[Shipping a public API backed by Supabase](https://zuplo.com/blog/2022/11/18/shipping-a-public-api-backed-by-supabase)
+[Supa-dynamic rate-limiting based on data (using supabase)](https://zuplo.com/blog/2022/12/05/supa-dynamic-rate-limiting-based-on-data)
+
