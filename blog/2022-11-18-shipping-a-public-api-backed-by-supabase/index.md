@@ -242,7 +242,7 @@ Finally, lean back and marvel at your beautiful Developer Portal that took almos
 
 ![Developer Portal](dev-portal.png)
 
-Get started with Zuplo for free today: [Sign Up Free](https://portal.zuplo.com/signup)
+Get started with Zuplo for free today: [Sign Up Free](https://zuplo.link/sb-blog-signup)
 
 
 See also:
