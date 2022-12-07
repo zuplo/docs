@@ -242,4 +242,10 @@ Finally, lean back and marvel at your beautiful Developer Portal that took almos
 
 ![Developer Portal](dev-portal.png)
 
-See also - [API Authentication with Supabase JWT Tokens](https://zuplo.com/blog/2022/11/15/api-authentication-with-supabase-jwt)
+Get started with Zuplo for free today: [sign up free](https://portal.zuplo.com/signup)
+
+
+See also:
+[API Authentication with Supabase JWT Tokens](https://zuplo.com/blog/2022/11/15/api-authentication-with-supabase-jwt)
+[Supa-dynamic rate-limiting based on data (using supabase)](https://zuplo.com/blog/2022/12/05/supa-dynamic-rate-limiting-based-on-data)
+
