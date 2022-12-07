@@ -81,7 +81,7 @@ export async function getRateLimit(
 
 You could make this even higher performance by having the cache have a longer expiry, but periodically reloading the data from supabase asynchronously and pushing the results back into the cache; something like an SWR (stale, while revalidate) approach.
 
-Get started with Zuplo for free today: [Sign Up Free](https://portal.zuplo.com/signup)
+Get started with Zuplo for free today: [Sign Up Free](https://zuplo.link/sb-blog-signup)
 
 
 
