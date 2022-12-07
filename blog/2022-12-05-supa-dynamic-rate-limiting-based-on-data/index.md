@@ -3,6 +3,7 @@ title: Supa-dynamic rate-limiting based on data (using supabase)
 authors: josh
 tags: [rate-limiting, api management, supabase]
 description: In this video we show how you can make rate-limiting extraordinarily dynamic by having the rate-limiter interact with external services like Supabase, Xata etc.
+image: https://og-image.zuplo.com?text=Supa-dynamic%20rate%20limiting%20based%20on%20data
 ---
 
 One of the best things about Zuplo is it's programmable nature. That combined with our approach to making policies composable means you can do some amazing things with them, like our rate-limiter. In this video we show how you can have the rate-limiter interact with external services and data. Here we use supabase as a data-source for the limits.
