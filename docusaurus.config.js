@@ -33,6 +33,7 @@ const config = {
         },
       },
     ],
+    "./src/plugins/fathom",
     "@docusaurus/theme-mermaid",
   ],
   presets: [
