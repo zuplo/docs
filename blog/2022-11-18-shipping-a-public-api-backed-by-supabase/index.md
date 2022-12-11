@@ -3,6 +3,7 @@ title: Shipping a public API backed by Supabase
 authors: josh
 tags: [code, supabase, backend, public, api-first, auth, api-key]
 description: How to use Zuplo to take your supabase backend and make it a developer friendly, public API.
+image: https://og-image.zuplo.com?text=Shipping%20a%20Public%20API%20Backed%20by%20Supabase
 ---
 
 [Supabase](https://supabase.com/) is an incredible open-source alternative to Firebase and other BaaS (Backend-as-a-service) options. The design is somewhat optimized for consumption by first-party clients like your own website or mobile app. But what if you wanted to take all that supa-ness and make an API-first product — that is a developer-friendly public API?
@@ -242,4 +243,12 @@ Finally, lean back and marvel at your beautiful Developer Portal that took almos
 
 ![Developer Portal](dev-portal.png)
 
-See also - [API Authentication with Supabase JWT Tokens](https://zuplo.com/blog/2022/11/15/api-authentication-with-supabase-jwt)
+Get started with Zuplo for free today: [Sign Up Free](https://zuplo.link/sb-blog-signup)
+
+
+See also:
+
+[API Authentication with Supabase JWT Tokens](https://zuplo.com/blog/2022/11/15/api-authentication-with-supabase-jwt)
+
+[Supa-dynamic rate-limiting based on data (using supabase)](https://zuplo.com/blog/2022/12/05/supa-dynamic-rate-limiting-based-on-data)
+
