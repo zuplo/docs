@@ -3,6 +3,7 @@ title: API Authentication using Supabase JWT tokens
 authors: josh
 tags: [code, supabase, jwt, auth]
 description: How to use Zuplo to add supabase JWT auth to any API
+image: https://og-image.zuplo.com?text=API%20Authentication%20with%20Supabase%20JWT
 ---
 
 This guide shows you how you can use a Zuplo API gateway to add Supabase JWT Authentication and Authorization to any API, running on any cloud.
@@ -91,4 +92,11 @@ Now we can require that anybody calling our API has a specific claim. To do this
 
 This means anybody calling this particularly route must have a `user_type` claim of `supa_user` to successfully invoke this API.
 
-See also - [Shipping a public API backed by Supabase](https://zuplo.com/blog/2022/11/18/shipping-a-public-api-backed-by-supabase)
+Get started with Zuplo for free today: [Sign Up Free](https://zuplo.link/sb-blog-signup)
+
+See also:
+
+[Shipping a public API backed by Supabase](https://zuplo.com/blog/2022/11/18/shipping-a-public-api-backed-by-supabase)
+
+[Supa-dynamic rate-limiting based on data (using supabase)](https://zuplo.com/blog/2022/12/05/supa-dynamic-rate-limiting-based-on-data)
+
