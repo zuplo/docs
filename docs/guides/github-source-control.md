@@ -9,6 +9,8 @@ In this article we'll talk about GitHub integration - which has numerous benefit
 - source control integration in portal.zuplo.com
 - ability to deploy an [edge-deployment](../deployments/environments.md) just by adding a branch or making a commit.
 
+There's also a recommended [video tutorial](https://youtu.be/a3931OlO2ng) that shows you how to connect GitHub, and deploy your first edge environment.
+
 ## Setting it up
 
 To enable the Zuplo integration for GitHub, navigate to <SettingsTabIcon /> **Settings** > <GitHubIcon /> **GitHub Settings**. On the settings page, click the **Connect to GitHub** button. You will be prompted to authorize Zuplo to your GitHub account.
@@ -34,7 +36,7 @@ The Zuplo GitHub app requires the following permissions:
 - **Read** access to code and metadata
 - **Read** and **write** access to checks, deployments and pull requests
 
-After the Zuplo app is installed, Zuplo will deploy your app to the production environment. The deployment can be viewed in several ways from GitHub.
+After the Zuplo app is installed, Zuplo can deploy your app to an edge deployment. To make this happen for the first time, you'll need to make a commit on your branch (so that the deployer knows to deploy this branch). You can make a simple change (like edit the readme.md in GitHub or add a space to a comment in your code and push).
 
 To view the deployment of a specific commit hover over the small dot next to the commit hash. Click the **Details** link and you will also see the deployment's URL.
 
