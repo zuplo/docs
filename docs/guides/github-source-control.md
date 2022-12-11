@@ -2,7 +2,7 @@
 title: GitHub Integration
 ---
 
-GitHub can integrate with Source Control providers like GitHub, BitBucket and GitLab. GitHub is our primary option but contact us if you use BitBucket, GitLab and we can get you set up.
+Zuplo can integrate with Source Control providers like GitHub, BitBucket and GitLab. GitHub is our primary option - BitBucket and GitLab (including private instances) are available on an enterprise plan.
 
 In this article we'll talk about GitHub integration - which has numerous benefits, including:
 
