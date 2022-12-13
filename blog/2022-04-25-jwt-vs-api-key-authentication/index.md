@@ -112,4 +112,4 @@ However, it can be non-trivial to implement an API Key management solution. You 
 
 ## About Zuplo
 
-Zuplo is the Programmable API Gateway. With Zuplo you can quickly secure your API with API Keys, add rate limiting, get developer documentation and more in minutes. And because you can write code that runs on the Gateway - you can customize Zuplo for any possible business case you face. [Give Zuplo a try](https://portal.zuplo.com)
+Zuplo is a serverless API Gateway, designed for developers. With Zuplo you can quickly secure your API with API Keys, add rate limiting, get developer documentation, and more in record time. [Try Zuplo Free](https://zuplo.link/3j0N6UK)
