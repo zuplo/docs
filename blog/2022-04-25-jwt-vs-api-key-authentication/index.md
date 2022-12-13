@@ -2,6 +2,7 @@
 title: JWT vs API Key Auth for Machine to Machine APIs
 authors: nate
 tags: [apis, authentication, code]
+image: https://og-image.zuplo.com?text=JWT%20vs%20API%20Key%20Auth%20for%20M2M%20APIs
 date: 2022-04-25
 ---
 
@@ -112,4 +113,4 @@ However, it can be non-trivial to implement an API Key management solution. You 
 
 ## About Zuplo
 
-Zuplo is a serverless API Gateway, designed for developers. With Zuplo you can quickly secure your API with API Keys, add rate limiting, get developer documentation, and more in record time. [Try Zuplo Free](https://zuplo.link/3j0N6UK)
+Zuplo is a serverless API Gateway, designed for developers. With Zuplo you can secure your API with API Keys, add rate limiting, get developer documentation, and more in record time. [Try Zuplo Free](https://zuplo.link/3j0N6UK)
