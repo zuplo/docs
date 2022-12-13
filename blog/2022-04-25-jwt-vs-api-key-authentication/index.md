@@ -109,7 +109,7 @@ Both JWT authentication and API Key authentication are good options when buildin
 
 API Key authentication, on the other hand, tends to be extremely simple for developers to understand and implement and is popular with B2B SaaS businesses.
 
-However, it can be non-trivial to implement an API Key management solution. You need to securely store (or hash) the API Keys, have a developer-facing UI where consumers can self-serve and roll keys on demand.
+However, it can be non-trivial to implement an API Key management solution. You need to securely store (or hash) the API Keys, have a developer-facing UI where consumers can self-serve and roll keys on demand. We've written about our [Best Practices for API Key Authentication] (https://zuplo.com/blog/2022/12/01/api-key-authentication) developed from building Zuplo and our team's collective experience at companies like Microsoft, Facebook, Auth0, and Stripe.
 
 ## About Zuplo
 
