@@ -10,8 +10,8 @@ const config = {
   tagline: "The programmable API Gateway",
   url: "https://zuplo.com",
   baseUrl: "/",
-  onBrokenLinks: "warn",
-  onBrokenMarkdownLinks: "warn",
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "throw",
   favicon: "https://cdn.zuplo.com/www/favicon.png",
   organizationName: "zuplo", // Usually your GitHub org/user name.
   projectName: "docs", // Usually your repo name.

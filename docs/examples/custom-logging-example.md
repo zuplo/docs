@@ -132,4 +132,4 @@ You'll then see live entries with details of the requests and responses for your
 
 ![Pipedream output](./media/pipedream.png)
 
-You can create a free requestbin at [requestbin.com](requestbin.com) - to get started quickly look for the link to create a `public bin`.
+You can create a free requestbin at [requestbin.com](https://requestbin.com) - to get started quickly look for the link to create a `public bin`.
