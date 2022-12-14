@@ -24,6 +24,8 @@ Many public APIs choose to use API keys as their authentication mechanism, and w
 
 This article is language agnostic and doesn't provide a particular solution for PHP, Python, TypeScript, C# etc but every language should afford the capabilities that would allow you to build an appropriate solution.
 
+There is an accompanying video presentation of this content: [API Key Authentication Best Practices](https://www.youtube.com/watch?v=ooyOmiczY1g)
+
 ## Why API Keys? Why not?
 
 I talked about this in more detail in [Wait, you’re not using API Keys?](https://zuplo.com/blog/2022/05/03/you-should-be-using-api-keys/) but in summary, API keys are a great choice because they are plenty secure, easier for developers to use vs JWT tokens, are opaque strings that don’t give away any clues to your claims structure, and are used by some of the best API-first companies in the world like Stripe, Twilio, and SendGrid.
