@@ -55,7 +55,7 @@
     "concurrently": "^7.5.0",
     "glob": "^8.0.3",
     "jsdom": "^20.0.2",
-    "prettier": "^2.7.1",
+    "prettier": "^2.8.1",
     "prettier-plugin-organize-imports": "^3.1.1",
     "ts-node": "^10.8.2",
     "typescript": "^4.9.4"
