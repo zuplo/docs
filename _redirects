@@ -2,6 +2,7 @@
 /docs/examples/proxy-aws-lambda /docs/handlers/aws-lambda 301
 /docs/examples/proxy-public-api /docs/quickstarts/proxy-public-api 301
 /docs/getting-started /docs/overview 301
+/docs/guides/advanced-path-matching /docs/reference/advanced-path-matching 301
 /docs/guides/archiving-requests-to-storage /docs/examples/archiving-requests-to-storage 301
 /docs/guides/custom-domain-setup /docs/deployments/custom-domains 301
 /docs/guides/key-value-store /docs/reference/key-value-store 301
@@ -20,7 +21,9 @@
 /docs/guides/zup-its /docs/examples/zup-its 301
 /docs/guides/zuplo-context /docs/reference/zuplo-context 301
 /docs/guides/zuplo-request /docs/reference/zuplo-request 301
+/docs/overview/vs-aws-api-gateway/ /api-gateways/aws-api-gateway-alternative-zuplo 301
 /docs/policies/access-control-lists /docs/policies/acl-policy-inbound 301
+/docs/policies/add-query-param-inbound /docs/policies/set-query-params-inbound 301
 /docs/policies/api-key-auth /docs/policies/api-key-auth-inbound 301
 /docs/policies/audit-logging /docs/policies/audit-log-inbound 301
 /docs/policies/auth0-jwt-auth /docs/policies/auth0-jwt-auth-inbound 301
@@ -34,6 +37,7 @@
 /docs/policies/rate-limit/ /docs/policies/rate-limit-inbound 301
 /docs/policies/request-body-rewrite /docs/policies/transform-body-inbound 301
 /docs/policies/response-body-rewrite /docs/policies/transform-body-outbound 301
+/docs/projects/github-source-control /docs/guides/github-source-control 301
 /docs/quickstarts /docs/quickstarts/proxy-public-api 302
 /docs/quickstarts/api-rate-limiting /docs/policies/rate-limit 301
 /docs/quickstarts/gateway-over-airtable /docs/examples/gateway-over-airtable 301
@@ -53,7 +57,4 @@
 /docs/runtime/web-standard-apis /docs/reference/web-standard-apis 301
 /docs/runtime/zuplo-context /docs/reference/zuplo-context 301
 /docs/runtime/zuplo-request /docs/reference/zuplo-request 301
-/docs/policies/add-query-param-inbound /docs/policies/set-query-params-inbound 301
-/docs/projects/github-source-control /docs/guides/github-source-control 301
-/docs/overview/vs-aws-api-gateway/ /api-gateways/aws-api-gateway-alternative-zuplo 301
 /docs/terms /legal/terms 301
