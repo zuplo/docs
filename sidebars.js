@@ -44,7 +44,6 @@ const sidebars = {
         "guides/testing-deployments",
         "guides/custom-ci-cd",
         "guides/custom-cors-policy",
-        "guides/advanced-path-matching",
       ],
     },
     {
@@ -56,6 +55,7 @@ const sidebars = {
         "deployments/dev-portal-json",
         "deployments/custom-domains",
         "deployments/deployment-options",
+        "deployments/log-export",
       ],
     },
     {
@@ -216,6 +216,7 @@ const sidebars = {
         "reference/web-standard-apis",
         "reference/node-modules",
         "reference/path-matching",
+        "reference/advanced-path-matching",
         "reference/reusing-code",
         "reference/safely-clone-a-request-or-response",
         "reference/key-value-store",
