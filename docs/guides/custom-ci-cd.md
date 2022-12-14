@@ -103,38 +103,63 @@ The full example is available at https://github.com/zuplo/zup-cli-example-projec
 image: node:18
 
 pipelines:
-  default:
-    - step:
-        name: NPM Install
-        script:
-          - npm install
-    - step:
-        name: Zup Deploy
-        # set -o pipefail
-        # This way if the deploy fails, we fail before piping to tee.
-        # Note that you are not required to use tee. We are using it in this example so that the output is available to the terminal and written to the file.
-        script:
-          - set -o pipefail
-          - npx @zuplo/cli deploy --apiKey "$ZUPLO_API_KEY" | tee
-            ./DEPLOYMENT_STDOUT
-        artifacts:
-          - DEPLOYMENT_STDOUT
-    - step:
-        name: Zup Test
-        script:
-          - npx @zuplo/cli test --endpoint $(cat ./DEPLOYMENT_STDOUT |  sed -E
-            's/Deployed to (.*)/\1/')
-    - step:
-        name: Zup Delete (if necessary)
-        script:
-          - if [[ -n "${BITBUCKET_PR_ID}"]]; then npx @zuplo/cli delete --url
-            $(cat ./DEPLOYMENT_STDOUT |  sed -E 's/Deployed to (.*)/\1/')
-            --apiKey "$ZUPLO_API_KEY" --wait; exit; fi
-    # This is not necessary but it showcases how you can list your zups
-    - step:
-        name: Zup List
-        script:
-          - npx @zuplo/cli list --apiKey "$ZUPLO_API_KEY"
+  branches:
+    # If your default branch is not main, change this to match
+    main:
+      - step:
+          name: NPM Install
+          script:
+            - npm install
+      - step:
+          name: Zup Deploy
+          # set -o pipefail
+          # This way if the deploy fails, we fail before piping to tee.
+          # Note that you are not required to use tee. We are using it in this example so that the output is available to the terminal and written to the file.
+          script:
+            - set -o pipefail
+            - npx @zuplo/cli deploy --apiKey "$ZUPLO_API_KEY" | tee
+              ./DEPLOYMENT_STDOUT
+          artifacts:
+            - DEPLOYMENT_STDOUT
+      - step:
+          name: Zup Test
+          script:
+            - npx @zuplo/cli test --endpoint $(cat ./DEPLOYMENT_STDOUT |  sed -E
+              's/Deployed to (.*)/\1/')
+  pull-requests:
+    "**":
+      - step:
+          name: NPM Install
+          script:
+            - npm install
+      - step:
+          name: Zup Deploy
+          # set -o pipefail
+          # This way if the deploy fails, we fail before piping to tee.
+          # Note that you are not required to use tee. We are using it in this example so that the output is available to the terminal and written to the file.
+          script:
+            - set -o pipefail
+            - npx @zuplo/cli deploy --apiKey "$ZUPLO_API_KEY" | tee
+              ./DEPLOYMENT_STDOUT
+          artifacts:
+            - DEPLOYMENT_STDOUT
+      - step:
+          name: Zup Test
+          script:
+            - npx @zuplo/cli test --endpoint $(cat ./DEPLOYMENT_STDOUT |  sed -E
+              's/Deployed to (.*)/\1/')
+      - step:
+          name: Zup Delete (if necessary)
+          script:
+            - echo $BITBUCKET_PR_ID
+            - if [[ -n "$BITBUCKET_PR_ID" ]]; then npx @zuplo/cli delete --url
+              $(cat ./DEPLOYMENT_STDOUT |  sed -E 's/Deployed to (.*)/\1/')
+              --apiKey "$ZUPLO_API_KEY" --wait; exit; fi
+      # This is not necessary but it showcases how you can list your zups
+      - step:
+          name: Zup List
+          script:
+            - npx @zuplo/cli list --apiKey "$ZUPLO_API_KEY"
 ```
 
 2. Create a secret repository variable for your BitBucket Pipelines and be sure to set `ZUPLO_API_KEY` to the API key you generated in the previous step.
