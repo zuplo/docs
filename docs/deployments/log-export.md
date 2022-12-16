@@ -19,7 +19,7 @@ Zuplo supports pushing logs to the following sources:
 
 Logs are batched and sent withing one minute (not guaranteed, but generally less than one minute). Batches will typically contain no more than 10,000 records, but depending on volume of your API a batch could have up to 100,000 records.
 
-Logs are send as files with each log line containing a log entry serialized as JSON. For example a single file would look like the below.
+Logs are send as compressed gzip files. Each gzip file has a single text file with each log line containing a log entry serialized as JSON. For example a single file would look like the below.
 
 ```
 {"ClientIP":"2a16:95c0:3300::103","ClientRequestHost":"api.example.com","ClientRequestMethod":"PO...}
