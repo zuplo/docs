@@ -221,6 +221,7 @@ const sidebars = {
         "reference/safely-clone-a-request-or-response",
         "reference/key-value-store",
         "reference/custom-log-level",
+        "reference/runtime-behaviors",
       ],
     },
     {
