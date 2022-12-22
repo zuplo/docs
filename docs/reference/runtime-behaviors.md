@@ -10,4 +10,4 @@ Because some legacy APIs may require non-standard behavior, most of these behavi
 
 The [standard](https://developer.mozilla.org/en-US/docs/Web/API/Request/body) for `Request.body` specifies that on `GET` and `HEAD` requests the value must be `null`. Different APIs, networks, and gateways follow this spec to varying degrees. In some cases they allow in others they don't.
 
-By default, Zuplo will throw a 500 error in the event that a `GET` or `HEAD` request has a body.
+By default, Zuplo will return a 500 error in the event that a `GET` or `HEAD` request has a body.
