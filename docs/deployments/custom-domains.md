@@ -2,7 +2,7 @@
 title: Custom Domains
 ---
 
-At this time, to add a custom domain to your Zup you will need to contact [support@zuplo.com](mailto:support@zuplo.com). After we create your custom domain, follow the instructions below to enable the domain for your Zup.
+At this time, to add a custom domain to your environment you will need to contact [support@zuplo.com](mailto:support@zuplo.com). After we create your custom domain, follow the instructions below to enable the domain for your Zup.
 
 Setting up a custom domain to point to your Zup takes just a few DNS configurations.
 
@@ -22,11 +22,11 @@ Zuplo uses Cloudflare for routing custom domain traffic to our servers. If you u
 
 For host names managed by Zuplo, you cannot control some Cloudflare settings for your Zuplo subdomain (i.e. `api.example.com`). Examples include:
 
-- Page Rules
-- Firewall Settings
-- Web Application Firewall (WAF)
-- SSL settings
+- Wildcard DNS
+- Spectrum
+- Argo
+- Page Shield
 
-This won't interfere with your ability to use all Cloudflare features on the rest of your domain.
+See [Cloudflare's documentation](https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/#limitations) for more details.
 
-Additionally, when you set up your CNAME to point to Zuplo, you can enable Cloudflare proxy or not. Based on our usage and testing this setting doesn't seem to make any difference (as we already have this configured ourselves). Our current recommendation is to **disable Cloudflare Proxy**.
+Other Cloudflare features that are configured on your Cloudflare Account such as Firewall or WAF rules will function normally.

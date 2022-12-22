@@ -7,17 +7,17 @@ All Zuplo environments are deployed behind Cloudflare's Web Application Firewall
 
 ## Web Application Firewall Rules
 
-By default, Zuplo has enabled Cloudflare's [OWASP Core Rule Set](https://owasp.org/www-project-modsecurity-core-rule-set/) and [Cloudflare Managed Ruleset](https://developers.cloudflare.com/waf/managed-rulesets/reference/cloudflare-managed-ruleset/) for every API Gateway deployed to Zuplo. These rules provide a high level of protection with a low likelihood of causing false positives for API transactions.
+By default, WAF settings are in log only mode. This means that no request should be blocked by the Web Application Firewall.
 
-For most customers, the default set of rules provides a high level of protection without any interruption to services. However, custom WAF rules can be modified as needed for your API running on Zuplo. Rules can be applied to your entire API or based on [custom rule filters](https://developers.cloudflare.com/ruleset-engine/rules-language/).
+You can choose to enable some preconfigured default rulesets to protect your API Gateway. Our default rules provide a high level of protection with a low likelihood of causing false positives for API transactions. For enterprise customers, Zuplo offers the ability to customize WAF rules to suite your specific needs.
 
 ## DDos Protection
 
-DDoS protection is provided for every Zuplo API through [Cloudflare's DDoS protection service](https://support.cloudflare.com/hc/en-us/articles/200172676-Understanding-Cloudflare-DDoS-protection). The **rule sensitivy** setting is set to **default**. This setting can be modified for your API as needed.
+DDoS protection is available for every Zuplo API through [Cloudflare's DDoS protection service](https://support.cloudflare.com/hc/en-us/articles/200172676-Understanding-Cloudflare-DDoS-protection). By default, the **rule sensitivy** setting is set to **Essentially Off** meaning almost no requests will be blocked. For paying customers, we offer the ability to modify this setting as needed.
 
 ## Security Level
 
-Cloudflare uses a blanket [security protection setting](https://support.cloudflare.com/hc/en-us/articles/200170056-Understanding-the-Cloudflare-Security-Level) that uses the IP reputation of a visitor to decide if the request should be blocked. By default, Zuplo uses the setting of **Low** on APIs. As many of our APIs have a high level of automated traffic, the low setting is used to block only the most abusive IP addresses. This setting can be customized as needed for your API.
+Cloudflare uses a blanket [security protection setting](https://support.cloudflare.com/hc/en-us/articles/200170056-Understanding-the-Cloudflare-Security-Level) that uses the IP reputation of a visitor to decide if the request should be blocked. By default, Zuplo this security setting is **Off** for all Zuplo APIs. For paying customers, this setting can be customized as needed for your API.
 
 ## Caching
 
