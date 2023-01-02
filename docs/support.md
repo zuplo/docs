@@ -4,12 +4,12 @@ title: Support Plans
 
 Zuplo offers the following support plans:
 
-| Support Offer      | Available to                                                                                       |
-| ------------------ | -------------------------------------------------------------------------------------------------- |
-| Community Support  | All customers                                                                                      |
-| Standard Support   | Customers with any paid subscription plan (excluding Builder) or those in the initial trial period |
-| Priority Support   | Customers with a priority support plan                                                             |
-| Enterprise Support | Customers with an enterprise support plan                                                          |
+| Support Offer      | Available to                                                                   |
+| ------------------ | ------------------------------------------------------------------------------ |
+| Community Support  | All customers                                                                  |
+| Standard Support   | Customers with any paid subscription plan or those in the initial trial period |
+| Priority Support   | Customers with a priority support plan                                         |
+| Enterprise Support | Customers with an enterprise support plan                                      |
 
 ## Trial subscriptions
 
@@ -19,14 +19,14 @@ At the end of the trial period, customers who have not opted to purchase a paid 
 
 ## Community support
 
-Customers with Zuplo's Builder subscription plan can seek support through the Zuplo Community. Response times may vary and are not guaranteed.
+Customers with Zuplo's free subscription plan can seek support through the Zuplo Community. Response times may vary and are not guaranteed.
 
 ## Standard support
 
-Customers with a paid Zuplo subscription plan (excluding Builder) receive Standard Support, which offers access to the following channels:
+Customers with a paid Zuplo subscription plan receive Standard Support which offers access to the following channels:
 
 - Zuplo Community
-- Zuplo Email Support
+- Zuplo Email Support (best effort response times)
 
 ## Priority Support
 
@@ -60,3 +60,10 @@ The following table describes feature differences of each Zuplo support plan:
 | Email Support         | No        | Yes         | Yes                                     | Yes        |
 | Private Slack Channel | No        | No          | Yes                                     | Yes        |
 | Phone Support         | No        | No          | Yes                                     | Yes        |
+
+## Email Support
+
+For customers with email support, you can contact us using one of the follow email addresses:
+
+- `support@zuplo.com`: Tickets will be responded to as quickly as possible and prioritized based on your support offering.
+- `urgent-support@zuplo.com`: For customers with enterprise support plans, requests sent to this address will receive the highest priority 24x7 support. This support email alerts our on call teams and should be used exclusively for business impacting issues.
