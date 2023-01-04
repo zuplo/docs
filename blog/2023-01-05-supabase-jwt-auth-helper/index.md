@@ -6,7 +6,7 @@ description: A free tool to help you sign in and get a supabase JWT token using 
 image: https://og-image.zuplo.com?text=Auth Helper for Supabase JWT Tokens
 ---
 
-We've recently been playing with [Supabase](supabase.com) a lot and showing how Zuplo can [help you take your Supabase backend and go "API-first"](https://zuplo.com/blog/2022/11/18/shipping-a-public-api-backed-by-supabase).
+We've recently been playing with [Supabase](https://supabase.com) a lot and showing how Zuplo can [help you take your Supabase backend and go "API-first"](https://zuplo.com/blog/2022/11/18/shipping-a-public-api-backed-by-supabase).
 
 Often times, this requires you to have a JWT token from Supabase for testing. Since we're very focused on the API and backend of your infrastructure I got tired of creating test websites to login to Supabase and get myself a valid JWT. For that reason, we created a free online tool to help you get a JWT token from supabase for testing.
 
