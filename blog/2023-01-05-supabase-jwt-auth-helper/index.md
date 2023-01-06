@@ -3,7 +3,7 @@ title: Auth Helper for Supabase JWT tokens
 authors: josh
 tags: [supabase, jwt, auth]
 description: A free tool to help you sign in and get a supabase JWT token using your public anon key.
-image: https://og-image.zuplo.com?text=Auth Helper for Supabase JWT Tokens
+image: https://og-image.zuplo.com?text=Auth%20Helper%20for%20Supabase%20JWT%20Tokens
 ---
 
 We've recently been playing with [Supabase](https://supabase.com) a lot and showing how Zuplo can [help you take your Supabase backend and go "API-first"](https://zuplo.com/blog/2022/11/18/shipping-a-public-api-backed-by-supabase).
