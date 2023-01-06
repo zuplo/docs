@@ -1,7 +1,7 @@
 ---
 title: Simple Query Parameter Validator using Custom Policies
 authors: josh
-tags: [supabase, jwt, auth]
+tags: [query, custom-policy, code]
 description: How to implement a simple Query Parameter validation approach using Custom Policies
 image: https://og-image.zuplo.com?text=Simple%20Query%20Parameter%20Validator%20using%20Custom%20Policies
 ---
