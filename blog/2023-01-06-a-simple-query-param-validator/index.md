@@ -71,3 +71,102 @@ Required query parameter 'foo' missing
 Invalid value for query parameter 'bar': 'hey' is not a valid number
 Invalid value for query parameter 'ble': '23' not a valid boolean value (expect 'true' or false')
 ```
+
+Easy peasy - here's the code for that custom policy
+
+```ts
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+type SupportedTyped = "int" | "number" | "string" | "boolean";
+
+type ParameterValidationRule = {
+  name: string;
+  required?: boolean;
+  type?: SupportedTyped;
+};
+
+type QueryParamValidatorOptions = {
+  params: ParameterValidationRule[];
+  allowAdditionalParameters?: boolean;
+};
+
+const typeValidators: Record<
+  SupportedTyped,
+  (value: string) => string | undefined
+> = {
+  int: (value: string) => {
+    const int = parseFloat(value);
+    if (!Number.isInteger(int)) {
+      return `'${value}' is not a valid integer`;
+    }
+  },
+  number: (value: string) => {
+    const float = parseFloat(value);
+    if (Number.isNaN(float)) {
+      return `'${value}' is not a valid number`;
+    }
+  },
+  string: (value: string) => {
+    if (value.length === 0) {
+      return `empty string provided`;
+    }
+  },
+  boolean: (value: string) => {
+    if (!["true", "false"].includes(value)) {
+      return `'${value}' not a valid boolean value (expect 'true' or false')`;
+    }
+  },
+};
+
+export default async function (
+  request: ZuploRequest,
+  context: ZuploContext,
+  options: QueryParamValidatorOptions,
+  policyName: string
+) {
+  const allowAdditionalParameters = options.allowAdditionalParameters ?? false;
+  const q = request.query;
+  const errors: string[] = [];
+
+  // 1. check no additional parameters
+  if (!allowAdditionalParameters) {
+    const allowedNames = options.params.map((p) => p.name);
+
+    for (const queryName of Object.keys(q)) {
+      if (!allowedNames.includes(queryName)) {
+        errors.push(`Additional query parameter '${queryName}' not allowed`);
+      }
+    }
+  }
+
+  // 2. check required and value types
+  for (const param of options.params) {
+    const value = q[param.name];
+    const required = param.required ?? true;
+    if (!value) {
+      if (!required) {
+        continue;
+      }
+      // required parameter not provided.
+      errors.push(`Required query parameter '${param.name}' missing`);
+    }
+
+    if (param.type && value) {
+      const validatorResult = typeValidators[param.type](value);
+      if (validatorResult) {
+        errors.push(
+          `Invalid value for query parameter '${param.name}': ${validatorResult}`
+        );
+      }
+    }
+  }
+
+  if (errors.length > 0) {
+    return new Response(`Bad Request\n\n${errors.join("\n")}`, { status: 400 });
+  }
+
+  return request;
+}
+```
+
+Have fun!
