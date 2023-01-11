@@ -21,7 +21,7 @@ import {
 import { createClient } from "@supabase/supabase-js";
 
 const CACHE_NAME = "rate-limit-requests-allowed-cache";
-const SB_URL = "https://rxoqdfbalrhwpvjugcio.supabase.co";
+const SB_URL = "https://YOUR_SUPABASE_URL.supabase.co";
 const SB_SERVICE_ROLE_KEY = environment.SB_SERVICE_ROLE_KEY;
 const FALLBACK_REQUESTS_ALLOWED = 100;
 
