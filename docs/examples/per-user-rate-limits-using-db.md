@@ -4,7 +4,7 @@ title: Per user rate-limiting using a database and the ZoneCache
 
 In this example we show a more advanced implementation of [dynamic rate limiting](../quickstarts/per-customer-rate-limits.md). It uses a database lookup to get the customer details and combines that with the ZoneCache to improve performance, reduce latency and lower the load on the database.
 
-In this example we use [supabase](https://supabase.com) as the database but you could use your own API, [Xata](xata.io), [Firebase](firebase.com) etc. The implementation will be similar for all.
+In this example we use [supabase](https://supabase.com) as the database but you could use your own API, [Xata](https://xata.io), [Firebase](https://firebase.com) etc. The implementation will be similar for all.
 
 If you haven't already, check out the [rate-limiting policy](../policies/rate-limit-inbound.md) and the [dynamic rate limiting quickstart](../quickstarts/per-customer-rate-limits.md). Then you should be oriented to how dynamic rate limiting works.
 
