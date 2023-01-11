@@ -4,7 +4,7 @@ Our overall [API Gateway Quickstart](./proxy-public-api.md) shows how to configu
 
 Before we start, create a new project in [portal.zuplo.com](https://portal.zuplo.com)
 
-In this quickstart we'll assume you authentication in place and have some metadata available that tells you what their rate limits should be. In this example, we'll assume you are using [API Key Authentication](../quickstarts/add-api-key-auth.md) and have a property on your consumer's metadata that indicates their `plan` as one of free `free`, `pro` or `enterprise`. You could also use a JWT token that contains a similar claim, or [call a database to look up data about a customer](../examples/per-user-rate-limits-using-db.md).
+In this quickstart we'll assume you authentication in place and have some metadata available that tells you what their rate limits should be. In this example, we'll assume you are using [API Key Authentication](../quickstarts/add-api-key-auth.md) and have a property on your consumer's metadata that indicates their `plan` as one of free `free`, `pro` or `enterprise`. You could also use a JWT token that contains a similar claim, or [call a database to look up data about a customer](../examples/per-user-rate-limits-using-db).
 
 ## 1/ Setup Route
 
@@ -46,7 +46,11 @@ Click **OK**, then **Save** to save the `routes.json` file.
 Create a new empty module called `rate-limiter.ts` by clicking the **+** icon next to the **Modules** folder. Add the following code to your module.
 
 ```ts
-import { CustomRateLimitPolicyOptions, ZuploRequest } from "@zuplo/runtime";
+import {
+  CustomRateLimitPolicyOptions,
+  ZuploContext,
+  ZuploRequest,
+} from "@zuplo/runtime";
 
 // A simple dictionary of account type <=> rate-limits per minute
 const requestsAllowedByAccountType = {

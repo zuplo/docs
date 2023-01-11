@@ -200,6 +200,7 @@ const sidebars = {
       items: [
         "examples/hello-world-api",
         "examples/archiving-requests-to-storage",
+        "examples/per-user-rate-limits-using-db",
         "examples/proxy-a-request-with-body",
         "examples/proxy-a-simple-get-request",
         "examples/rick-and-morty-api-developer-portal-example",
@@ -217,6 +218,7 @@ const sidebars = {
         "reference/node-modules",
         "reference/advanced-path-matching",
         "reference/reusing-code",
+        "reference/zone-cache",
         "reference/safely-clone-a-request-or-response",
         "reference/key-value-store",
         "reference/custom-log-level",
