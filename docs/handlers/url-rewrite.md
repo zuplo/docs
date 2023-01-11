@@ -79,7 +79,7 @@ The URL Rewrite handler can also be added manually to the **routes.json** file w
 
 ## Different Backends per Environment
 
-It's common to want a different backend for your production, staging and preview environments. This can be easily achieved by using [environment variables](./environment-variables.md) to specify the origin of the backend.
+It's common to want a different backend for your production, staging and preview environments. This can be easily achieved by using [environment variables](../deployments/environment-variables.md) to specify the origin of the backend.
 
 For example,
 
