@@ -81,6 +81,7 @@ export function rateLimitKey(
 
 **Related Docs**
 
+- [Per User Rate Limiting With Database](../examples/per-user-rate-limits-using-db.md)
 - [Rate Limit Policy](../policies/rate-limit-inbound.md)
 - [API Gateway Quickstart](../quickstarts/proxy-public-api.md)
 
