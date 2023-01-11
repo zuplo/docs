@@ -19,6 +19,7 @@ https://echo.zuplo.io/${method}/${params.productId}
 
 The following objects are available for substitution:
 
+- `env` - the environment object, to access [Environment Variables](../deployments/environment-variables.md)
 - `request: ZuploRequest` - the full [`ZuploRequest`](../reference/zuplo-request.md) object
 - `params: Record<string, string>` - The parameters of the route. For example, `params.productId` would be the value of `:productId` in a route.
 - `query: Record<string, string>` - The query parameters of the route. For example, `query.filterBy` would be the value of `?filterBy=VALUE`.
@@ -51,6 +52,7 @@ A few examples of the values of various substitutions.
 - `${query.category}` - `"cars"`
 - `${search}` - `"?category=cars"`
 - `${url}` - `"https://example.com:8080/v1/products/:productId?category=cars"`
+- `${env.BASE_URL}` - `"https://example.com"`
 
 ## Setup via Routes.json
 
@@ -73,4 +75,20 @@ The URL Rewrite handler can also be added manually to the **routes.json** file w
   "summary": "Proxy Welcome API",
   "description": "This Route will proxy the welcome.zuplo.io api"
 }
+```
+
+## Different Backends per Environment
+
+It's common to want a different backend for your production, staging and preview environments. This can be easily achieved by using [environment variables](./environment-variables.md) to specify the origin of the backend.
+
+For example,
+
+```json
+${env.BASE_PATH}${pathname}
+```
+
+A url rewrite like this will combine the `BASE_PATH` environment variable, say `https://example.com` with the incoming path, e.g. `/foo/bar` to create a re-written URL:
+
+```json
+https://example.com/foo/bar
 ```

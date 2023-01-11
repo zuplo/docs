@@ -39,3 +39,19 @@ You can't edit the code of an edge-deployment in portal.zuplo.com but you can sw
 - edit API consumers for this environment
 - view analytics for this environment
 - view Live Logs for this environment
+
+## Different Backends per Environment
+
+It's common to want a different backend for your production, staging and preview environments. This can be easily achieved by using [environment variables](./environment-variables.md) to specify the origin of the backend and then using that in your [URL Rewrite Handlers](../handlers/url-rewrite.md).
+
+For example,
+
+```json
+${env.BASE_PATH}${pathname}
+```
+
+A url rewrite like this will combine the `BASE_PATH` environment variable, say `https://example.com` with the incoming path, e.g. `/foo/bar` to create a re-written URL:
+
+```json
+https://example.com/foo/bar
+```

@@ -215,7 +215,6 @@ const sidebars = {
         "reference/zuplo-context",
         "reference/web-standard-apis",
         "reference/node-modules",
-        "reference/path-matching",
         "reference/advanced-path-matching",
         "reference/reusing-code",
         "reference/safely-clone-a-request-or-response",
