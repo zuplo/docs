@@ -4,14 +4,16 @@ Our overall [API Gateway Quickstart](./proxy-public-api.md) shows how to configu
 
 Before we start, create a new project in [portal.zuplo.com](https://portal.zuplo.com)
 
+In this quickstart we'll assume you authentication in place and have some metadata available that tells you what their rate limits should be. In this example, we'll assume you are using [API Key Authentication](../quickstarts/add-api-key-auth.md) and have a property on your consumer's metadata that indicates their `plan` as one of free `free`, `pro` or `enterprise`. You could also use a JWT token that contains a similar claim, or [call a database to look up data about a customer](../examples/per-user-rate-limits-using-db.md).
+
 ## 1/ Setup Route
 
 Open the **routes.json** file and add a new route. Set the **version** to `v1` and the **path** of the new route to
-`/customers/:customerId/data`.
+`/todos`.
 
-Set the **Handler** drop-down to **URL Rewrite** and set the value to `https://echo.zuplo.io/${params.customerId}`. This will proxy the echo API with a simple response with our `customerId`
+Set the **Handler** drop-down to **URL Rewrite** and set the value to `https://jsonplaceholder.typicode.com/todos`. This will proxy a simple, demo todo api.
 
-![Add Route](../../static/media/quickstarts/per-customer-rate-limits/add-route.png)
+![Add Route](./add-route.png)
 
 ## 2/ Add Policy
 
@@ -46,35 +48,32 @@ Create a new empty module called `rate-limiter.ts` by clicking the **+** icon ne
 ```ts
 import { CustomRateLimitPolicyOptions, ZuploRequest } from "@zuplo/runtime";
 
+// A simple dictionary of account type <=> rate-limits per minute
+const requestsAllowedByAccountType = {
+  free: 100,
+  pro: 10000,
+  premium: 1000000,
+};
+
 export function rateLimitKey(
   request: ZuploRequest,
   context: ZuploContext,
   policyName: string
 ): CustomRateLimitPolicyOptions {
-  if (request.params.customerId === "100") {
-    context.log.info(
-      `inside the rateLimitKey function for the policy ${policyName}`
-    );
-    // Override timeWindowMinutes & requestsAllowed
-    return {
-      key: request.params.customerId,
-      requestsAllowed: 100,
-      timeWindowMinutes: 1,
-    };
-  }
-  return { key: request.params.customerId };
+  // Let's read the `accountType` property from the API Key Consumer's
+  // metadata. Note the rate-limit policy must be behind the api-key
+  // policy in the request pipeline to ensure that the request.user object
+  // is hydrated
+  const accountType = request.user.data.accountType;
+  const requestsAllowed = requestsAllowedByAccountType[accountType];
+
+  return {
+    key: request.user.sub, // key by user sub
+    requestsAllowed: requestsAllowed,
+    timeWindowMinutes: 1,
+  };
 }
 ```
-
-## 4/ Test
-
-Open the **API Test Console** by clicking the lightning bolt icon. Create a new test called `rate-limit.json`. Set the **Method** to `GET` and change the **Path** to `/v1/customers/abc/data`.
-
-Click the **Test** button 3 times quickly and you will see the error _Rate limit exceeded, please try again later_.
-
-Change the path to `/v1/customers/100/data` and try running the test again. You will notice that the rate limit won't be triggered - unless you really want to click 100 times ;).
-
-## Congratulations, you setup dynamic rate limiting
 
 **Related Docs**
 
