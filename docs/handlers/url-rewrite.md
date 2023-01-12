@@ -7,7 +7,7 @@ The URL Rewrite handler can be used to proxy and rewrite requests to a different
 
 ## Setup via Portal
 
-The Rewrite Handler can be added to any route using the Route Designer. Open the **Route Designer** by navigating to the <CodeEditorTabIcon /> **Code Editor** tab then click **routes.json**. Inside any route, select **URL Rewrite** from the **Request Handlers** drop-down.
+The Rewrite Handler can be added to any route using the Route Designer. Open the **Route Designer** by navigating to the <CodeEditorTabIcon /> **Code Editor** tab then click **Route Designer**. Inside any route, select **URL Rewrite** from the **Request Handlers** drop-down.
 
 ![Url Rewrite Handler selection](../../static/media/url-rewrite-handler-selection.png)
 

@@ -150,6 +150,7 @@ const sidebars = {
             "policies/remove-headers-outbound",
             "policies/clear-headers-outbound",
             "policies/set-headers-outbound",
+            "policies/set-status-outbound",
           ],
         },
         {
@@ -178,6 +179,7 @@ const sidebars = {
         "handlers/url-rewrite",
         "handlers/aws-lambda",
         "handlers/custom-handler",
+        "handlers/redirect",
       ],
     },
     {
