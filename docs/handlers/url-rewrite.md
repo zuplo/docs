@@ -82,7 +82,7 @@ The URL Rewrite handler can also be added manually to the **routes.json** file w
 The URL Rewrite handler can be configured via `options` to support common use-cases.
 
 - `forwardSearch` - The query string will be automatically included in the rewritten url.
-- `followRedirects` - Determines if redirects should be followed when fetching the rewrite url . When set to `false`, the handler will return a response where the `location` header will indicate the redirected-to url.
+- `followRedirects` - Determines if redirects should be followed when fetching the rewrite url . When set to `false` or not specified, redirects will not be followed - the status and `location` header will be returned as received.
 
 ## Different Backends per Environment
 
