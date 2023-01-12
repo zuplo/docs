@@ -215,7 +215,7 @@ steps:
 
 ## Setting up a custom workflow with GitLab Pipelines
 
-The full example is available at https://github.com/zuplo/zup-cli-example-project/blob/main/gitlab-pipelines.yml
+The full example is available at https://github.com/zuplo/zup-cli-example-project/blob/main/.gitlab-ci.yml
 
 1. Create a pipelines file. You can use the following to help you get started:
 
@@ -237,6 +237,10 @@ zup_deploy:
   stage: deploy
   script:
     - npx @zuplo/cli deploy --apiKey "$ZUPLO_API_KEY" | tee ./DEPLOYMENT_STDOUT
+  artifacts:
+    expire_in: 30 minutes
+    paths:
+      - "./DEPLOYMENT_STDOUT"
 
 zup_test:
   stage: deploy
@@ -246,11 +250,18 @@ zup_test:
 
 zup_delete:
   stage: deploy
-  needs: [zup_test]
+  needs: [zup_deploy, zup_test]
   only:
     - merge_requests
   script:
-    - npx @zuplo/cli test --endpoint $(cat ./DEPLOYMENT_STDOUT |  sed -E 's/Deployed to (.*)/\1/')
+    - npx @zuplo/cli delete --url $(cat ./DEPLOYMENT_STDOUT |  sed -E 's/Deployed to (.*)/\1/') --apiKey "$ZUPLO_API_KEY" --wait
+
+# This is not necessary but it showcases how you can list your zups
+zup_list:
+  stage: deploy
+  needs: [zup_test]
+  script:
+    - npx @zuplo/cli list --apiKey "$ZUPLO_API_KEY"
 ```
 
 2. [Create a variable](https://docs.gitlab.com/ee/ci/variables/#for-a-project) for `ZUPLO_API_KEY` on your GitLab project. Set it to the API key you generated in the previous step. You can choose to [mask](https://docs.gitlab.com/ee/ci/variables/#mask-a-cicd-variable) the variable so it does not display in job logs.
