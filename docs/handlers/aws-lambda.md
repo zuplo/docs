@@ -13,7 +13,7 @@ To setup the AWS Lambda handler in the portal UI, select the AWS Lambda handler 
 
 Configure the properties for your AWS Lambda function.
 
-::: warning
+:::warning
 
 Don't add the AWS Secure Access Key directly in the `routes.json` file. Instead use environment variables like `$env(AWS_SECURE_ACCESS_KEY)`
 
