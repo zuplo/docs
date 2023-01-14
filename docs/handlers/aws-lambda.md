@@ -37,3 +37,30 @@ The AWS Lambda handler can be setup by editing the `routes.json` file directly b
   }
 }
 ```
+
+## API Gateway Compatibility
+
+The AWS Lambda handler can also call Lambda functions that were built for API Gateway.
+
+Setting `options.useLambdaProxyIntegration` to `true` will tell the handler to call the function with the event format that matches with AWS API Gateway. You can also choose between the payload format by setting `options.payloadFormatVersion` to either `1.0` or `2.0`.
+
+For more details about the AWS payload formats see [AWS's documentation](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html).
+
+Below is an example lambda handler configured for proxy integration with payload format 2.0.
+
+```json
+{
+  "handler": {
+    "export": "awsLambdaHandler",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "accessKeyId": "$env(AWS_ACCESS_KEY_ID)",
+      "functionName": "demo-post-1",
+      "region": "us-east-2",
+      "secretAccessKey": "$env(AWS_SECURE_ACCESS_KEY)",
+      "useLambdaProxyIntegration": true,
+      "payloadFormatVersion": "2.0"
+    }
+  }
+}
+```
