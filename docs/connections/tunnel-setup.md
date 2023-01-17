@@ -18,7 +18,7 @@ To run the Docker container on your own infrastructure, refer to instructions fr
 
 - [Deploying Docker containers on Azure](https://docs.microsoft.com/en-us/learn/modules/run-docker-with-azure-container-instances/)
 - [Deploying Docker containers on AWS ECS](https://docs.aws.amazon.com/AmazonECS/latest/userguide/getting-started.html)
-- [Deploying container images to Google Cloud Run](https://cloud.google.com/run/docs/deploying)
+- [Deploying container images to GCP](https://cloud.google.com/compute/docs/containers/deploying-containers)
 
 The docker container is `zuplo/tunnel` and is available on [Docker Hub](https://hub.docker.com/r/zuplo/tunnel).
 
