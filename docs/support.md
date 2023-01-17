@@ -63,6 +63,4 @@ The following table describes feature differences of each Zuplo support plan:
 
 ## Email Support
 
-For customers with email support, you can contact us using one of the follow email addresses:
-
-- `support@zuplo.com`: Tickets will be responded to as quickly as possible and prioritized based on your support offering.
+For customers with email support, you can contact us at `support@zuplo.com`. Tickets will be responded to as quickly as possible and prioritized based on your support offering.
