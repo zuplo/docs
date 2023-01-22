@@ -7,28 +7,42 @@ The developer portal supports custom theming by editing the `docs/theme.css` fil
 
 ## Variables
 
-| Variable                                      | Description                                                                     |
-| --------------------------------------------- | ------------------------------------------------------------------------------- |
-| --background-code-sample-header-primary       | Background of header for API code sample unit                                   |
-| --background-code-sample-header-secondary     | Highlight and dropdown color used in header for API code sample unit            |
-| --background-example-section-header-primary   | Background of header for example body and responses unit                        |
-| --background-example-section-header-secondary | Highlight and dropdown color used in header for example body and responses unit |
-| --background-inline-code                      | Background used for inline `code` in markdown descriptions to aid readability   |
-| --background-nav-item-selected                | Background of navigation label in the sidebar when navigated to                 |
-| --background-primary                          | Primary background across all pages                                             |
-| --color-divider                               | Color of divider between sections of the API docs                               |
-| --color-nav-divider                           | Color of divider between sidebar and main page content                          |
-| --font-family-primary                         | Primary font family used across all pages                                       |
-| --text-color-code-sample-header               | Text color for API code sample unit                                             |
-| --text-color-example-section-header           | Text color for example body and responses unit                                  |
-| --text-color-h1                               | Text color for H1 tags (applies to page title and custom pages)                 |
-| --text-color-h2                               | Text color for H2 tags (applies to docs section headers and custom pages)       |
-| --text-color-h3                               | Text color for H3 tags (only used in custom pages)                              |
-| --text-color-inline-code                      | Text color used for inline `code` in markdown descriptions to aid readability   |
-| --text-color-nav                              | Text color used in the navigation sidebar                                       |
-| --text-color-nav-hovered                      | Text color used on a hovered over sidebar label                                 |
-| --text-color-nav-selected                     | Text color used on a selected over sidebar label                                |
-| --text-color-primary                          | Primary text color used across all pages                                        |
+| Variable                                      | Description                                                                                |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| --background-auth-actions                     | Background color of actions taken on an Authentication method (ex. copy API key)           |
+| --background-button-primary                   | Background for buttons that perform a primary action                                       |
+| --background-button-secondary                 | Background for buttons that perform a second action                                        |
+| --background-code-sample-header-primary       | Background of header for API code sample unit                                              |
+| --background-code-sample-header-secondary     | Highlight and dropdown color used in header for API code sample unit                       |
+| --background-example-section-header-primary   | Background of header for example body and responses unit                                   |
+| --background-example-section-header-secondary | Highlight and dropdown color used in header for example body and responses unit            |
+| --background-inline-code                      | Background used for inline `code` in markdown descriptions to aid readability              |
+| --background-input                            | Background of input fields                                                                 |
+| --background-input-hovered                    | Background of input fields when hovered over                                               |
+| --background-nav-item-selected                | Background of navigation label in the sidebar when navigated to                            |
+| --background-primary                          | Primary background across all pages                                                        |
+| --background-text-selection-color             | Highlight color of text when selected                                                      |
+| --border-inline-code                          | Border around inline `code` (in descriptions) to aid readability                           |
+| --border-input                                | Border of input fields                                                                     |
+| --border-input-hovered                        | Border of input fields when the field is hovered                                           |
+| --color-divider                               | Color of divider between sections of the API docs                                          |
+| --color-nav-divider                           | Color of divider between sidebar and main page content                                     |
+| --font-family-primary                         | Primary font family used across all pages                                                  |
+| --text-color-code-sample-header               | Text color for API code sample unit                                                        |
+| --text-color-enum-header                      | Text color for the header of the generated enum table                                      |
+| --text-color-example-section-header           | Text color for example body and responses unit                                             |
+| --text-color-h1                               | Text color for H1 tags (applies to page title and custom pages)                            |
+| --text-color-h2                               | Text color for H2 tags (applies to docs section headers and custom pages)                  |
+| --text-color-h3                               | Text color for H3 tags (only used in custom pages)                                         |
+| --text-color-inline-code                      | Text color used for inline `code` in markdown descriptions to aid readability              |
+| --text-color-nav                              | Text color used in the navigation sidebar                                                  |
+| --text-color-nav-hovered                      | Text color used on a hovered over sidebar label                                            |
+| --text-color-nav-selected                     | Text color used on a selected over sidebar label                                           |
+| --text-color-primary                          | Primary text color used across all pages                                                   |
+| --text-color-property-constraints             | Text color used for constraints (ex. `optional`) on parameters and request body properties |
+| --text-color-property-name                    | Text color used for names of parameters and request body properties                        |
+| --text-color-placeholder-hovered              | Text color for input field placeholders                                                    |
+| --text-color-required                         | Text color for the `required` constraint, to improve visibility for readers                |
 
 ## Theming
 
