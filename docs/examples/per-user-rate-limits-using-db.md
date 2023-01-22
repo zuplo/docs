@@ -78,7 +78,7 @@ The above function can be applied to a rate limiter with the following configura
 
 ```json
 {
-  "export": "BasicRateLimitInboundPolicy",
+  "export": "RateLimitInboundPolicy",
   "module": "$import(@zuplo/runtime)",
   "options": {
     "rateLimitBy": "function",
