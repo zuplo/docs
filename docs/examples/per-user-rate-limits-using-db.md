@@ -29,7 +29,7 @@ export async function rateLimitKey(
   request: ZuploRequest,
   context: ZuploContext,
   policyName: string
-): Promise<CustomRateLimitPolicyOptions> {
+): Promise<CustomRateLimitDetails> {
   // We'll get the customer ID from the user data.
   // This might be from a JWT or API Key metadata
   const customerId = request.user.data.customerId;
