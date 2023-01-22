@@ -51,7 +51,7 @@ And the config for the rate-limit policy
 
 ```json
 {
-  "export": "BasicRateLimitInboundPolicy",
+  "export": "RateLimitInboundPolicy",
   "module": "$import(@zuplo/runtime)",
   "options": {
     "rateLimitBy": "function",

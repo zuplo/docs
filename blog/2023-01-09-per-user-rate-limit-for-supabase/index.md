@@ -46,7 +46,7 @@ Here are the steps
 
 ```json
 {
-  "export": "BasicRateLimitInboundPolicy",
+  "export": "RateLimitInboundPolicy",
   "module": "$import(@zuplo/runtime)",
   "options": {
     "rateLimitBy": "user",

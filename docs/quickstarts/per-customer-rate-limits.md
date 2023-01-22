@@ -25,7 +25,7 @@ Enter the following configuration as shown in the screenshot.
 
 ```json
 {
-  "export": "BasicRateLimitInboundPolicy",
+  "export": "RateLimitInboundPolicy",
   "module": "$import(@zuplo/runtime)",
   "options": {
     "requestsAllowed": 2,

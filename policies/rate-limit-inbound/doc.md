@@ -39,7 +39,7 @@ export function rateLimitKey(
 
 ```json
 // config - ./config/routes.json
-"export": "BasicRateLimitInboundPolicy",
+"export": "RateLimitInboundPolicy",
 "module": "$import(@zuplo/runtime)",
 "options": {
   "rateLimitBy": "function",
