@@ -47,7 +47,7 @@ Create a new empty module called `rate-limiter.ts` by clicking the **+** icon ne
 
 ```ts
 import {
-  CustomRateLimitPolicyOptions,
+  CustomRateLimitDetails,
   ZuploContext,
   ZuploRequest,
 } from "@zuplo/runtime";
@@ -63,7 +63,7 @@ export function rateLimitKey(
   request: ZuploRequest,
   context: ZuploContext,
   policyName: string
-): CustomRateLimitPolicyOptions {
+): CustomRateLimitDetails {
   // Let's read the `accountType` property from the API Key Consumer's
   // metadata. Note the rate-limit policy must be behind the api-key
   // policy in the request pipeline to ensure that the request.user object

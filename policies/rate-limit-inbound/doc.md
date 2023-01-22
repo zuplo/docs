@@ -7,9 +7,9 @@ Note you can have multiple instances of rate-limiting policies to use in combina
 ## Using a custom function
 
 You can create a rate-limit bucket based on any property of a request using a
-custom function that returns a `CustomRateLimitPolicyOptions` object (which provides the identifier used by the limiting system).
+custom function that returns a `CustomRateLimitDetails` object (which provides the identifier used by the limiting system).
 
-The `CustomRateLimitPolicyOptions` object can be used to override the `timeWindowMinutes` & `requestsAllowed` options.
+The `CustomRateLimitDetails` object can be used to override the `timeWindowMinutes` & `requestsAllowed` options.
 
 This example would create a unique rate-limiting function based on the `customerId` parameter in routes (note it’s important that a policy like this is applied to a route that has a `/:customerId` parameter).
 
@@ -22,7 +22,7 @@ export function rateLimitKey(
   request: ZuploRequest,
   context: ZuploContext,
   policyName: string
-): CustomRateLimitPolicyOptions {
+): CustomRateLimitDetails {
   context.log.info(
     `processing customerId '${request.params.customerId}' for rate-limit policy '${policyName}'`
   );

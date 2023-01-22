@@ -25,14 +25,14 @@ Guess what? That's also easy with Zuplo because you can write **custom code** th
 Here's the code from `request-limit-lookup.ts` file in the video:
 
 ```ts
-import { CustomRateLimitPolicyOptions, ZuploRequest } from "@zuplo/runtime";
+import { CustomRateLimitDetails, ZuploRequest } from "@zuplo/runtime";
 
 const requestsPerMinute = {
   premium: 3,
   free: 1,
 };
 
-export default function (request: ZuploRequest): CustomRateLimitPolicyOptions {
+export default function (request: ZuploRequest): CustomRateLimitDetails {
   const customerType = request.user.data.customerType;
   const reqsPerMinute = requestsPerMinute[customerType];
 
