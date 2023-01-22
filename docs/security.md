@@ -61,7 +61,7 @@ We understand that if we go down, our customers' APIs go down too. While we have
 
 ### Compliance
 
-Zuplo is currently undergoing SOC2 Type II compliance. We expect that to be completed in Q4 of 2022.
+Zuplo is currently undergoing SOC2 Type II compliance. We expect that to be completed in the first half of 2023.
 
 ### Security Questionnaire
 

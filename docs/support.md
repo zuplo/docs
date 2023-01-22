@@ -63,7 +63,4 @@ The following table describes feature differences of each Zuplo support plan:
 
 ## Email Support
 
-For customers with email support, you can contact us using one of the follow email addresses:
-
-- `support@zuplo.com`: Tickets will be responded to as quickly as possible and prioritized based on your support offering.
-- `urgent-support@zuplo.com`: For customers with enterprise support plans, requests sent to this address will receive the highest priority 24x7 support. This support email alerts our on call teams and should be used exclusively for business impacting issues.
+For customers with email support, you can contact us at `support@zuplo.com`. Tickets will be responded to as quickly as possible and prioritized based on your support offering.

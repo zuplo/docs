@@ -77,6 +77,13 @@ The URL Rewrite handler can also be added manually to the **routes.json** file w
 }
 ```
 
+## Options
+
+The URL Rewrite handler can be configured via `options` to support common use-cases.
+
+- `forwardSearch` - The query string will be automatically included in the rewritten url.
+- `followRedirects` - Determines if redirects should be followed when fetching the rewrite url . When set to `false` or not specified, redirects will not be followed - the status and `location` header will be returned as received.
+
 ## Different Backends per Environment
 
 It's common to want a different backend for your production, staging and preview environments. This can be easily achieved by using [environment variables](../deployments/environment-variables.md) to specify the origin of the backend.
