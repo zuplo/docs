@@ -12,7 +12,7 @@ Below is a full implementation of a custom rate limiting function. In our exampl
 
 ```ts
 import {
-  CustomRateLimitPolicyOptions,
+  CustomRateLimitDetails,
   ZoneCache,
   ZuploContext,
   ZuploRequest,
