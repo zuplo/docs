@@ -16,7 +16,7 @@ This example would create a unique rate-limiting function based on the `customer
 ```ts
 //module - ./modules/rate-limiter.ts
 
-import { CustomRateLimitPolicyOptions, ZuploRequest } from "@zuplo/runtime";
+import { CustomRateLimitDetails, ZuploRequest } from "@zuplo/runtime";
 
 export function rateLimitKey(
   request: ZuploRequest,
