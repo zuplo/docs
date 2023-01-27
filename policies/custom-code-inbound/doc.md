@@ -184,7 +184,7 @@ Now let's update the policy to read these options and use the dictionary keys as
 the `api-key` and to map the sub identifier.
 
 ```ts
-import { ZuploRequest, ZuploContext, ResponseFactory } from "@zuplo/runtime";
+import { ZuploRequest, ZuploContext } from "@zuplo/runtime";
 
 export default async function (
   request: ZuploRequest,
