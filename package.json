@@ -23,7 +23,7 @@
     "ci:policies": "ts-node --esm ./scripts/update-policies.tsx"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.2.0",
+    "@docusaurus/core": "^2.3.0",
     "@docusaurus/plugin-sitemap": "^2.2.0",
     "@docusaurus/preset-classic": "^2.2.0",
     "@docusaurus/theme-mermaid": "^2.2.0",
