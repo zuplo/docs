@@ -38,6 +38,26 @@ The AWS Lambda handler can be setup by editing the `routes.json` file directly b
 }
 ```
 
+## Binary Media Types
+
+For content types, the `binaryMediaTypes` option allows specifying which content types get converted to base64 encoded strings when sent as the body to the AWS Lambda function. See [AWS docs for details](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-payload-encodings.html).
+
+```json
+{
+  "handler": {
+    "export": "awsLambdaHandler",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "accessKeyId": "$env(AWS_ACCESS_KEY_ID)",
+      "functionName": "demo-post-1",
+      "region": "us-east-2",
+      "secretAccessKey": "$env(AWS_SECURE_ACCESS_KEY)",
+      "binaryMediaTypes": ["image/png", "application/pdf"]
+    }
+  }
+}
+```
+
 ## API Gateway Compatibility
 
 The AWS Lambda handler can also call Lambda functions that were built for API Gateway.
