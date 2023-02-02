@@ -34,6 +34,16 @@ jobs:
         run: API_URL=${{ toJson(github.event.deployment_status.environment_url) }} npx @zuplo/cli test --endpoint $API_URL
 ```
 
+[GitHub Branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches) can be set in order to enforce policies on when a Pull Request can be merged. The example below sets the "Zuplo Deployment" and "Test API Gateway" as required status that must pass.
+
+![](https://cdn.zuplo.com/assets/a1d7c322-125d-4d80-add0-fbfb65ccfea1.png)
+
+When a developer tries to merge their pull request, they will see that the tests haven't passed and the pull request cannot be merged.
+
+![](https://cdn.zuplo.com/assets/3f3292a3-075c-4568-afb2-00c24e704f03.png)
+
+## Writing Tests
+
 Using Node.js 18 and the Zuplo CLI, it is very easy to write tests that make requests to your API using `fetch` and then validate expectations with `expect` from [chai](https://www.chaijs.com/api/bdd/).
 
 ```js title="/tests/my-test.test.ts"
@@ -57,10 +67,48 @@ Your test files need to be under the `tests` folder and end with `.test.ts` to b
 
 :::
 
-[GitHub Branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches) can be set in order to enforce policies on when a Pull Request can be merged. The example below sets the "Zuplo Deployment" and "Test API Gateway" as required status that must pass.
+## Tips for writing tests
 
-![](https://cdn.zuplo.com/assets/a1d7c322-125d-4d80-add0-fbfb65ccfea1.png)
+This section highlights some of the features of the Zuplo CLI that can help you write and structure your tests. You can find more sample tests [here](https://github.com/zuplo/zup-cli-example-project/tree/main/tests).
 
-When a developer tries to merge their pull request, they will see that the tests haven't passed and the pull request cannot be merged.
+### Ignoring tests
 
-![](https://cdn.zuplo.com/assets/3f3292a3-075c-4568-afb2-00c24e704f03.png)
+You can use `.ignore` and `.only` to ignore or run only specific test. T
+
+```js title="/tests/ignore-only.test.ts"
+import { describe, it } from "@zuplo/test";
+import { expect } from "chai";
+
+/**
+ * This example how to use ignore and only.
+ */
+describe("Ignore and only test example", () => {
+  it.ignore("This is a failing test but it's been ignored", () => {
+    expect(1 + 4).to.equals(6);
+  });
+
+  //   it.only("This is the only test that would run if it were not commented out", () => {
+  //     expect(1 + 4).to.equals(5);
+  //   });
+});
+```
+
+### Filtering tests
+
+You can use the CLI to filter tests by name or regex. The full example is at [filter.test.ts](https://github.com/zuplo/zup-cli-example-project/blob/main/tests/filter.test.ts)
+
+```js title="/tests/filter.test.ts"
+import { describe, it } from "@zuplo/test";
+import { expect } from "chai";
+
+/**
+ * This example shows how to filter the test by the name in the describe() function.
+ * You can run `zup test --filter '#labelA'`
+ * If you want to use regex, you can do `zup test --filter '/#label[Aa]/'`
+ */
+describe("[#labelA #labelB] Addition", () => {
+  it("should add positive numbers", () => {
+    expect(1 + 4).to.equals(5);
+  });
+});
+```
