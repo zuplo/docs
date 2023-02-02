@@ -73,7 +73,7 @@ This section highlights some of the features of the Zuplo CLI that can help you 
 
 ### Ignoring tests
 
-You can use `.ignore` and `.only` to ignore or run only specific test. T
+You can use `.ignore` and `.only` to ignore or run only specific test. The full example is at [ignore-only.test.ts](https://github.com/zuplo/zup-cli-example-project/blob/main/tests/ignore-only.test.ts)
 
 ```js title="/tests/ignore-only.test.ts"
 import { describe, it } from "@zuplo/test";
