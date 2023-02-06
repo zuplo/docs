@@ -51,7 +51,7 @@ graph LR
 
 Each bucket is created with a default API Key that is assigned the role of bucket owner. The bucket owner role has permissions to perform any tasks on a bucket such as creating consumers, api keys, etc. Additional bucket owner tokens may be created through the Zuplo Portal (coming soon).
 
-To start set two environment variables.
+To start set two environment variables (in your terminal, not inside Zuplo)
 
 ```bash
 export API_KEY=YOUR_KEY
