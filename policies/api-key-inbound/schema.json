@@ -3,7 +3,7 @@
   "$id": "http://zuplo.com/schemas/policies/api-key-inbound.json",
   "type": "object",
   "title": "API Key Authentication (Beta)",
-  "isPreview": true,
+  "isPreview": false,
   "description": "Authenticates requests using Zuplo API Key Management",
   "required": ["handler"],
   "properties": {
@@ -54,7 +54,7 @@
           "export": "ApiKeyInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "bucketName": "my-bucket",
+            "bucketName": "CONTACT_SUPPORT_FOR_YOUR_BUCKET_NAME",
             "allowUnauthenticatedRequests": false
           }
         }
