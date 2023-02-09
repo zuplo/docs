@@ -177,9 +177,10 @@ const sidebars = {
         id: "handlers/index",
       },
       items: [
+        "handlers/url-forward",
         "handlers/url-rewrite",
-        "handlers/aws-lambda",
         "handlers/custom-handler",
+        "handlers/aws-lambda",
         "handlers/redirect",
       ],
     },
