@@ -44,6 +44,7 @@ const sidebars = {
         "guides/testing-deployments",
         "guides/custom-ci-cd",
         "guides/custom-cors-policy",
+        "guides/rename-or-move-project",
       ],
     },
     {

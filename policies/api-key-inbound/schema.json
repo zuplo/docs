@@ -4,7 +4,7 @@
   "type": "object",
   "title": "v2 API Key Authentication (Beta)",
   "isPreview": false,
-  "description": "Authenticates requests using Zuplo API Key Management",
+  "description": "** BETA ** This policy is in beta. Use the original API key policy or contact `support@zuplo.com` to request a bucketName for this policy. ",
   "required": ["handler"],
   "properties": {
     "handler": {
