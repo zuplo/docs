@@ -24,6 +24,17 @@ context.log.error({ "Oh" : "my!"}
   policies. This type is immutable - the routing table cannot be updated at
   runtime.
 
+- `incomingRequestProperties` - information about the incoming request such as geolocation data. This is an object with the following properties.
+
+  - `asn` [number] - ASN of the incoming request, for example, 395747.
+  - `asOrganization` [string] - The organization which owns the ASN of the incoming request, for example, Google Cloud.
+  - `city` [string] - City of the incoming request, for example, "Austin".
+  - `continent` [string] - Continent of the incoming request, for example, "NA".
+  - `country` [string] - The two-letter country code in the request.
+  - `latitude` [string] - Latitude of the incoming request, for example, "30.27130".
+  - `longitude` [string] - Longitude of the incoming request, for example, "-97.74260".
+  - `colo` [string] - The three-letter [IATA airport code](https://en.wikipedia.org/wiki/IATA_airport_code) of the data center that the request hit, for example, "DFW".
+
 ## Methods
 
 - `waitUntil` - the Zuplo runtime is a high-density serverless runtime with near
