@@ -40,7 +40,7 @@
     "react-feather": "^2.0.10"
   },
   "devDependencies": {
-    "@apidevtools/json-schema-ref-parser": "^9.0.9",
+    "@apidevtools/json-schema-ref-parser": "^10.1.0",
     "@docusaurus/module-type-aliases": "^2.2.0",
     "@tsconfig/docusaurus": "^1.0.6",
     "@types/glob": "^8.0.0",
