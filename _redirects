@@ -86,7 +86,7 @@
 /docs/guides/oauth-client-management-setup /docs/articles/oauth-client-management-setup 301
 /docs/guides/oauth-client-management /docs/articles/oauth-client-management 301
 /docs/guides/rename-or-move-project /docs/articles/rename-or-move-project 301
-/docs/guides/testing-deployments /docs/articles/testing-deployments 301
+/docs/guides/testing-deployments /docs/articles/testing 301
 /docs/examples/archiving-requests-to-storage /docs/articles/archiving-requests-to-storage 301
 /docs/examples/check-ip-address /docs/articles/check-ip-address 301
 /docs/examples/custom-logging-example /docs/articles/custom-logging-example 301
@@ -98,11 +98,11 @@
 /docs/overview/should-you-use-zuplo /docs/articles/who-uses-zuplo-and-why 301
 /docs/overview/policies /docs/policies
 /docs/overview/how-does-zuplo-work /docs/overview/what-is-zuplo 301
-/docs/quickstarts/add-api-key-auth docs/articles/step-2-add-api-key-auth 301
+/docs/quickstarts/add-api-key-auth /docs/articles/step-2-add-api-key-auth 301
 /docs/quickstarts/per-customer-rate-limits docs/articles/step-3-add-rate-limiting 301
-/docs/quickstarts/proxy-public-api docs/articles/step-2-setup-gateway 301
-/docs/quickstarts/instant-api-docs-and-dev-portal docs/articles/step-5-configure-dev-portal 301
-/docs/quickstarts/validation-and-docs-with-json-schema docs/policies/validate-json-schema-inbound 301
+/docs/quickstarts/proxy-public-api /docs/articles/step-1-setup-basic-gateway 301
+/docs/quickstarts/instant-api-docs-and-dev-portal /docs/articles/step-5-configure-dev-portal 301
+/docs/quickstarts/validation-and-docs-with-json-schema /docs/policies/validate-json-schema-inbound 301
 /docs/security /docs/articles/security 301
 /docs/support /docs/articles/support 301
 /docs/pricing /docs/articles/pricing 301
@@ -118,5 +118,3 @@
 /docs/reference/zone-cache /docs/articles/zone-cache 301
 /docs/reference/zuplo-context /docs/articles/zuplo-context 301
 /docs/reference/zuplo-request /docs/articles/zuplo-request 301
-/docs/reference/ /docs/articles/ 301
-/docs/reference/ /docs/articles/ 301

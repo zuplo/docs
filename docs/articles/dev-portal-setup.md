@@ -3,7 +3,7 @@ title: Developer Portal Setup
 sidebar_label: Setup
 ---
 
-Setup of the Developer Portal is handled using the [`dev-portal.json` file](../deployments/dev-portal-json.md). There are several areas of configuration that can change the style as well as things like authentication. Within the Zuplo Portal, you can edit the `dev-portal.json` via the <DeveloperPortalIcon /> **Developer Portal** settings page.
+Setup of the Developer Portal is handled using the [`dev-portal.json` file](../articles/dev-portal-json.md). There are several areas of configuration that can change the style as well as things like authentication. Within the Zuplo Portal, you can edit the `dev-portal.json` via the <DeveloperPortalIcon /> **Developer Portal** settings page.
 
 ## Customization
 

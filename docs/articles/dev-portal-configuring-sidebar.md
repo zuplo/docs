@@ -24,7 +24,7 @@ If a label is provided on both the `sidebar.json` item and the markdown `frontma
 
 ## Adding an api-ref
 
-An `api-ref` item dictates the position of your API Reference docs in the sidebar. You can also relabel the top-level label (the default is API Reference). The contents of your API Reference are automatically generated from your `routes.json`. You can [group together endpoints under `tags`](./version-management.md#configuring-a-version) for better content organization.
+An `api-ref` item dictates the position of your API Reference docs in the sidebar. You can also relabel the top-level label (the default is API Reference). The contents of your API Reference are automatically generated from your `routes.json`.
 
 ```typescript
 interface APIDocConfig {

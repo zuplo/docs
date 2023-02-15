@@ -2,7 +2,14 @@
 title: Custom Domains
 ---
 
-At this time, to add a custom domain to your environment you will need to contact [support@zuplo.com](mailto:support@zuplo.com). After we create your custom domain, follow the instructions below to enable the domain for your Zup.
+At this time, to add a custom domain to your environment you will need to contact [support@zuplo.com](mailto:support@zuplo.com).
+
+We will need to know
+
+1. The custom domain (e.g. api.contoso.io)
+2. The URL of your [edge deployment](./environments.md) that you want to map to this URL. This typically ends in `.zuplo.app`.
+
+Please include this information when contacting us. After we setyp your custom domain we'll provide you with some records to configure on your DNS. Follow the instructions outlined below.
 
 Setting up a custom domain to point to your Zup takes just a few DNS configurations.
 

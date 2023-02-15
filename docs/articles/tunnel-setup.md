@@ -58,7 +58,7 @@ Tunnel services can also be used in config such as with the URL Rewrite handler.
 
 When using these tunnels in your code or configuration, it is often useful to store the values as an environment variable. This way you can change which environment calls which tunnel without changing code or configuration.
 
-For the production environment you would set the `BASE_TUNNEL_URL` to the production service name. See [this document](../deployments/environment-variables.md) for more about [Environment Variables](../deployments/environment-variables.md)
+For the production environment you would set the `BASE_TUNNEL_URL` to the production service name. See [this document](../articles/environment-variables.md) for more about [Environment Variables](../articles/environment-variables.md)
 
 ```text
 BASE_TUNNEL_URL=service://my-awesome-service-prod

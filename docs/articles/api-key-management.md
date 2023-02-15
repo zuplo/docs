@@ -2,11 +2,11 @@
 title: API Key Management
 ---
 
-Zuplo allows developers to add API key authentication to their API in only a few minutes. With Zuplo's API Key Management you can either issue tokens to your customers or enable [the developer portal](../developer-portal/index.md) to allow self-serve API Keys based on custom permissions and settings.
+Zuplo allows developers to add API key authentication to their API in only a few minutes. With Zuplo's API Key Management you can either issue tokens to your customers or enable [the developer portal](../articles/developer-portal) to allow self-serve API Keys based on custom permissions and settings.
 
 :::tip
 
-For a complete tutorial on adding API Key authentication and management [see the quickstart](../quickstarts/add-api-key-auth.md).
+For a complete tutorial on adding API Key authentication and management [see the quickstart](../articles/step-2-add-api-key-auth.md).
 
 :::
 

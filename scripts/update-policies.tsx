@@ -160,7 +160,7 @@ ${introMd ?? schema.description}
 
 :::tip
 
-Be sure to read about [policies](../overview/policies.md)
+Be sure to read about [policies](../policies)
 
 :::
 

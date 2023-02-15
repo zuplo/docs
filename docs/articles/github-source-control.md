@@ -7,7 +7,7 @@ Zuplo can integrate with Source Control providers like GitHub, BitBucket and Git
 In this article we'll talk about GitHub integration - which has numerous benefits, including:
 
 - source control integration in portal.zuplo.com
-- ability to deploy an [edge-deployment](../deployments/environments.md) just by adding a branch or making a commit.
+- ability to deploy an [edge-deployment](../articles/environments.md) just by adding a branch or making a commit.
 
 There's also a recommended [video tutorial](https://youtu.be/a3931OlO2ng) that shows you how to connect GitHub, and deploy your first edge environment.
 

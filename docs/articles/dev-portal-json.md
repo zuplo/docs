@@ -10,11 +10,11 @@ The `dev-portal.json` file is the code that drives most of the configuration of 
 
 :::tip
 
-The `dev-portal.json` file can be edited through a more [rich experience](../developer-portal/setup.md) in the <SettingsTabIcon /> **Settings** tab of the Zuplo Portal.
+The `dev-portal.json` file can be edited through a more [rich experience](../articles/developer-portal) in the <SettingsTabIcon /> **Settings** tab of the Zuplo Portal.
 
 :::
 
-Below is an example of a `dev-portal.json` file that is used to configure custom authentication to the [Developer Portal](../developer-portal/index.md).
+Below is an example of a `dev-portal.json` file that is used to configure custom authentication to the [Developer Portal](../articles/developer-portal).
 
 ```json
 {

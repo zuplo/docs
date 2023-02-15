@@ -3,7 +3,7 @@ title: OAuth Client Management
 draft: true
 ---
 
-Zuplo allows developers to add JWT authentication to their API in only a few minutes. With Zuplo's OAuth Client Management you can enable your customers to create OAuth clients in [the developer portal](../developer-portal/index.md) that allow them to securely access your API with custom scopes and permissions.
+Zuplo allows developers to add JWT authentication to their API in only a few minutes. With Zuplo's OAuth Client Management you can enable your customers to create OAuth clients in [the developer portal](../articles/developer-portal) that allow them to securely access your API with custom scopes and permissions.
 
 Zuplo's OAuth Client Management integrates with the most popular identity providers such as Okta and Auth0 to give your customers or developers a seamless experience using your API.
 
