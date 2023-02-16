@@ -1,5 +1,5 @@
 ---
-title: Step 3 - Add Rate Limiting
+title: Step 3 - Rate Limiting
 ---
 
 In this guide we'll add Rate Limiting to a route. You can do this for any Zuplo project but will need a route, consider completing [step 1](./step-1-setup-basic-gateway.md) first.
@@ -108,3 +108,5 @@ Update the configuration
 ```
 
 This identifies our `rate-limit` module and the function `rateLimit` that it exports.
+
+**NEXT** Try [step 4 - deploying to the edge](./step-4-deploying-to-the-edge).

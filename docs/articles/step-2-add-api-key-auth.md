@@ -1,5 +1,5 @@
 ---
-title: Step 2 - Add API Key Authentication
+title: Step 2 - API Key Authentication
 ---
 
 In this guide we'll add API Key authentication to a route. You can do this for any Zuplo project but will need a route, consider completing [step 1](./step-1-setup-basic-gateway.md) first.
@@ -74,3 +74,5 @@ You should now get a 200 OK.
 :::note
 We also offer an API for our API key service that allows you to programmatically create consumers and even create your own developer portal or integrate key management into your existing dashboard. Contact us at `support@zuplo.com` for access.
 :::
+
+**NEXT** Try [step 3 - add Rate Limiting to your API](./step-3-add-rate-limiting.md).
