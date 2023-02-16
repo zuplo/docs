@@ -21,18 +21,3 @@ Each plan includes usage allowances of various features.
 | Key Value Store - Deletes      | 0.01M       | 0.1M        | 1M           | Custom         |
 | Key Value Store - Lists        | 0.01M       | 0.1M        | 1M           | Custom         |
 | Key Value Store - Data Storage | .1GB        | 1GB         | 10GB         | Custom         |
-
-## Overages (Business Plan Only)
-
-For the Business plan, additional usage will incur additional charges. The Builder plan is limited to the included usage only and cannot have overages. This section does not apply for Enterprise customers with custom terms.
-
-Requests and egress are sold in bundles of 100GB egress + 10M Requests / month for $100 per month.
-
-| **Feature**                    | **Cost**        |
-| ------------------------------ | --------------- |
-| Key Value Store - Reads        | $0.50 per 1M    |
-| Key Value Store - Writes       | $5.00 per 1M    |
-| Key Value Store - Deletes      | $5.00 per 1M    |
-| Key Value Store - Lists        | $5.00 per 1M    |
-| Key Value Store - Data Storage | $0.50 per 1GB/m |
-| Additional Custom Domains      | $10 per month   |
