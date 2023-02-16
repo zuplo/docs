@@ -158,12 +158,6 @@ ${introMd ?? schema.description}
     schema.isPaidAddOn ?? false
   }} />
 
-:::tip
-
-Be sure to read about [policies](../policies)
-
-:::
-
 ## Configuration 
 
 \`\`\`json
@@ -177,6 +171,8 @@ ${optionsHtml}
 <!-- start: doc.md -->
 ${docMd ?? ""}
 <!-- end: doc.md -->
+
+Read more about [how policies work](/docs/articles/policies)
 `;
 }
 

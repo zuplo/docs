@@ -8,18 +8,22 @@ const SizedImage = ({
   src: string;
   alt: string;
   maxWidth: number;
-}) => (
-  <img
-    loading="lazy"
-    src={src}
-    alt={alt}
-    style={{
-      maxWidth: maxWidth,
-      marginRight: "auto",
-      marginLeft: "auto",
-      display: "inherit",
-    }}
-  />
-);
+}) => {
+  const mw = maxWidth ?? "100%";
+  return (
+    <img
+      loading="lazy"
+      src={src}
+      alt={alt}
+      style={{
+        maxWidth: mw,
+        marginRight: "auto",
+        marginLeft: "auto",
+        display: "inherit",
+        width: "auto",
+      }}
+    />
+  );
+};
 
 export default SizedImage;
