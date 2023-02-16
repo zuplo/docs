@@ -20,6 +20,10 @@ const sidebars = {
     {
       type: "category",
       label: "Introduction",
+      link: {
+        type: "doc",
+        id: "index",
+      },
       items: [
         "articles/what-is-zuplo",
         "articles/who-uses-and-why",
@@ -222,7 +226,8 @@ const sidebars = {
             "articles/reusing-code",
             "articles/zone-cache",
             "articles/safely-clone-a-request-or-response",
-            "articles/key-value-store",
+            // Usage discouraged
+            // "articles/key-value-store",
             "articles/runtime-behaviors",
           ],
         },
