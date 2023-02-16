@@ -90,4 +90,4 @@ The successful merge will trigger a rebuild and deployment of `development` with
 
 ![Readonly view of changes](https://cdn.zuplo.com/assets/3bc451b2-8422-4807-98cc-eee907c46021.png)
 
-This shows how you can use widely recognized gitops practices to manage how code flows through your environments using Pull Requests and protected branches.
+This shows how you can use widely recognized GitOps practices to manage how code flows through your environments using Pull Requests and protected branches.
