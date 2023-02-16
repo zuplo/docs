@@ -54,8 +54,6 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 
 You should already have a test setup in the test client, like this
 
-![Untitled](/media/guides/setup-jwt-auth-with-auth0/Untitled.png)
-
 The next step is to enforce authentication on this API using Auth0 and JWT tokens.
 
 ## Setting up Auth0

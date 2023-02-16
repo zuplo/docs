@@ -6,7 +6,7 @@ tags: [videos, code]
 
 :::caution
 
-The content of this video is outdated. A new Environment Editor is available. You can read more about the [changes in the documentation](/docs/deployments/environment-variables).
+The content of this video is outdated. A new Environment Editor is available. You can read more about the [changes in the documentation](/docs/articles/environment-variables).
 
 :::
 

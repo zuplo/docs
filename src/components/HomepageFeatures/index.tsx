@@ -26,14 +26,14 @@ const FeatureList: FeatureItem[] = [
       </>
     ),
     links: [
-      { label: "Getting Started", href: "/docs/overview" },
-      { label: "What is Zuplo?", href: "/docs/overview/what-is-zuplo" },
+      { label: "Getting Started", href: "/docs" },
+      { label: "What is Zuplo?", href: "/docs/articles/what-is-zuplo" },
       {
         label: "How does Zuplo work?",
-        href: "/docs/overview/how-does-zuplo-work",
+        href: "/docs/articles/how-does-zuplo-work",
       },
-      { label: "Using Handlers", href: "/docs/overview/handlers" },
-      { label: "Using Policies", href: "/docs/overview/policies" },
+      { label: "Using Handlers", href: "/docs/handlers" },
+      { label: "Using Policies", href: "/docs/policies" },
     ],
   },
   {
@@ -41,8 +41,8 @@ const FeatureList: FeatureItem[] = [
     Icon: ChipIcon,
     description: (
       <>
-        Zuplo has policies for everything from authentication to mock
-        responses and more.
+        Zuplo has policies for everything from authentication to mock responses
+        and more.
       </>
     ),
     links: [
@@ -72,9 +72,9 @@ const FeatureList: FeatureItem[] = [
       { label: "Proxy an API", href: "/docs/quickstarts/proxy-public-api" },
       {
         label: "Proxy a SaaS Service",
-        href: "/docs/examples/gateway-over-airtable",
+        href: "/docs/articles/gateway-over-airtable",
       },
-      { label: "Writing Custom Code", href: "/docs/examples/hello-world-api" },
+      { label: "Writing Custom Code", href: "/docs/articles/hello-world-api" },
     ],
   },
 ];
