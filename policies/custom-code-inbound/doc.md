@@ -245,4 +245,4 @@ export default async function (request: ZuploRequest) {
 ```
 
 For a more complex example, check out the [custom logging
-implementation](/docs/examples/custom-logging-example.md).
+implementation](/docs/articles/custom-logging-example.md).

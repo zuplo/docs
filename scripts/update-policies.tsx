@@ -1,4 +1,5 @@
-import RefParser from "@apidevtools/json-schema-ref-parser";
+import { dereference } from "@apidevtools/json-schema-ref-parser";
+import { JSONSchema } from "@apidevtools/json-schema-ref-parser/dist/lib/types";
 import { render } from "@zuplo/md-tools";
 import arg from "arg";
 import chalk from "chalk";
@@ -11,7 +12,7 @@ import prettier from "prettier";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
-type PolicySchema = RefParser.JSONSchema & {
+type PolicySchema = JSONSchema & {
   isPreview?: boolean;
   isPaidAddOn?: boolean;
 };
@@ -158,12 +159,6 @@ ${introMd ?? schema.description}
     schema.isPaidAddOn ?? false
   }} />
 
-:::tip
-
-Be sure to read about [policies](../overview/policies.md)
-
-:::
-
 ## Configuration 
 
 \`\`\`json
@@ -177,6 +172,8 @@ ${optionsHtml}
 <!-- start: doc.md -->
 ${docMd ?? ""}
 <!-- end: doc.md -->
+
+Read more about [how policies work](/docs/articles/policies)
 `;
 }
 
@@ -214,7 +211,7 @@ async function run() {
     const rawSchema = JSON.parse(schemaJson);
     // RefParser uses cwd to resolve refs
     process.chdir(path.join(policiesDir, policyId));
-    const schema = (await RefParser.dereference(rawSchema)) as PolicySchema;
+    const schema = (await dereference(rawSchema)) as PolicySchema;
     await processProperties(schema.properties);
 
     const policyFilePaths = getPolicyFilePaths(policyId);
