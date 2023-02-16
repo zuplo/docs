@@ -25,8 +25,8 @@ https://${env.BASE_HOST_NAME}/${method}/${params.productId}
 
 The following objects are available for substitution:
 
-- `env` - the environment object, to access [Environment Variables](../deployments/environment-variables.md)
-- `request: ZuploRequest` - the full [`ZuploRequest`](../reference/zuplo-request.md) object
+- `env` - the environment object, to access [Environment Variables](../articles/environment-variables.md)
+- `request: ZuploRequest` - the full [`ZuploRequest`](../articles/zuplo-request.md) object
 - `params: Record<string, string>` - The parameters of the route. For example, `params.productId` would be the value of `:productId` in a route.
 - `query: Record<string, string>` - The query parameters of the route. For example, `query.filterBy` would be the value of `?filterBy=VALUE`.
 - `headers: Headers` - the incoming request's [headers object](https://developer.mozilla.org/en-US/docs/Web/API/Headers)
@@ -93,7 +93,7 @@ The URL Rewrite handler can be configured via `options` to support common use-ca
 
 ## Different Backends per Environment
 
-It's common to want a different backend for your production, staging and preview environments. This can be easily achieved by using [environment variables](../deployments/environment-variables.md) to specify the origin of the backend.
+It's common to want a different backend for your production, staging and preview environments. This can be easily achieved by using [environment variables](../articles/environment-variables.md) to specify the origin of the backend.
 
 For example,
 
