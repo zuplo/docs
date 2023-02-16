@@ -1,4 +1,4 @@
-import RefParser from "@apidevtools/json-schema-ref-parser";
+import { JSONSchema } from "@apidevtools/json-schema-ref-parser/dist/lib/types";
 import { render } from "@zuplo/md-tools";
 import arg from "arg";
 import chalk from "chalk";
@@ -11,7 +11,7 @@ import prettier from "prettier";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
-type PolicySchema = RefParser.JSONSchema & {
+type PolicySchema = JSONSchema & {
   isPreview?: boolean;
   isPaidAddOn?: boolean;
 };

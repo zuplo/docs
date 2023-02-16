@@ -1,5 +1,6 @@
 import fs from "fs";
 
+const url = DOCS_BASE_URL ?? "https://zuplo.com";
 const redirectsContent = fs.readFileSync("_redirects");
 
 const lines = redirectsContent.split("\n");
@@ -12,3 +13,9 @@ const data = lines.map((line) => {
     code: items[2],
   };
 });
+
+const errors = [];
+
+data.forEach(entry => {
+    const response = fetch(`${DOCS_BASE_URL}${entry.source}`);
+})
