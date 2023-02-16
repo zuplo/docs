@@ -1,3 +1,4 @@
+import { dereference } from "@apidevtools/json-schema-ref-parser";
 import { JSONSchema } from "@apidevtools/json-schema-ref-parser/dist/lib/types";
 import { render } from "@zuplo/md-tools";
 import arg from "arg";
@@ -210,7 +211,7 @@ async function run() {
     const rawSchema = JSON.parse(schemaJson);
     // RefParser uses cwd to resolve refs
     process.chdir(path.join(policiesDir, policyId));
-    const schema = (await RefParser.dereference(rawSchema)) as PolicySchema;
+    const schema = (await dereference(rawSchema)) as PolicySchema;
     await processProperties(schema.properties);
 
     const policyFilePaths = getPolicyFilePaths(policyId);
