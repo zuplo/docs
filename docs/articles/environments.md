@@ -14,9 +14,9 @@ There are two distinct types of environment:
 Never use a working-copy environment in a production setting. They offer no SLA, and will often sleep after inactivity leading to slower cold-start times. There can be occasional downtime of a few seconds for upgrades.
 :::
 
-- **edge deployment** - these are real deployments that are deployed to the edge at 100s of data-centers around the world. They have 0ms startup time and offer very high availability due to their headless, distributed nature. You can deploy edge environments using our [GitHub integration](/docs/guides/github-source-control) or building a [custom CI/CD pipeline](/docs/guides/custom-ci-cd).
+- **edge deployment** - these are real deployments that are deployed to the edge at 100s of data-centers around the world. They have 0ms startup time and offer very high availability due to their headless, distributed nature. You can deploy edge environments using our [GitHub integration](/docs/articles/github-source-control) or building a [custom CI/CD pipeline](/docs/articles/custom-ci-cd).
 
-Edge deployments typically have a domain ending with `.app` but you can also configure [custom vanity domains](/docs/deployments/custom-domains).
+Edge deployments typically have a domain ending with `.app` but you can also configure [custom vanity domains](/docs/articles/custom-domains).
 
 Edge deployments cannot be directly edited in portal.zuplo.com but they can be viewed - so you can see the source code currently deployed to an environment.
 
@@ -32,7 +32,7 @@ One the right is the current **environment**. By default you will be looking at 
 
 If you have other any **edge-deployments** you will see them listed alongside your working-copy. In this case we have two edge-deployments called `development` and `prod (main)`.
 
-For users using [GitHub integration](../guides/github-source-control) the name of the deployment matches the branch name (yes - creating a new environment is literally as easy as creating a new branch).
+For users using [GitHub integration](/docs/articles/github-source-control) the name of the deployment matches the branch name (yes - creating a new environment is literally as easy as creating a new branch).
 
 You can't edit the code of an edge-deployment in portal.zuplo.com but you can switch into those environments to perform a number of functions, such as:
 

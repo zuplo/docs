@@ -18,7 +18,7 @@ Our promise is that Zuplo should be cheaper and faster - than building these fea
 
 ## Managing multiple APIs
 
-Most of our larger customers are managing multiple APIs behind Zuplo. In some cases combining multiple backends into a single API but also using Zuplo as a way to ensure that all APIs are using consistent Authentication, Rate-Limiting and other common policies described by their architecture teams.
+Most of our larger customers are managing multiple APIs behind Zuplo, including multiple internal APIs. In some cases combining multiple backends into a single API but also using Zuplo as a way to ensure that all APIs are using consistent Authentication, Rate-Limiting and other common policies described by their internal best practices.
 
 Development teams also prefer Zuplo over other API Management products because it allows for a more collaborative workflow within the team. Each team can create as many deployments as necessary for exploration and testing, while architects and leadership can maintain control over protected branches (QA, staging, production) with a clean CI/CD integrated workflow.
 
