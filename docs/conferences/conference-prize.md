@@ -63,7 +63,7 @@ Open **Routes** and add a route to the example project.
 
 ### Step 4 - Install the GitHub Deployer so we can deploy your app
 
-Follow the instructions here: [https://zuplo.com/docs/articles/github-source-control/](https://zuplo.com/docs/articles/github-source-control/) to install the [GitHub Deployer](https://github.com/apps/zuplo/installations/new) - this deploys your gateway to the edge at 250+ datacenters.
+Follow the instructions here: [https://zuplo.com/docs/articles/github-source-control/](https://zuplo.com/docs/articlesv/github-source-control/) to install the [GitHub Deployer](https://github.com/apps/zuplo/installations/new) - this deploys your gateway to the edge at 250+ datacenters.
 
 ### Step 5 - Connect your project to Source Control
 

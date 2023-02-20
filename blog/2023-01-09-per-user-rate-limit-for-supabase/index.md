@@ -20,7 +20,7 @@ Here are the steps
 
 - path: `/(.*)` - this is wildcard route that will match all paths
 - methods: `all` - select all methods in the dropdown
-- CORS: `anything goes` - this is easiest, but [you can set stricter policies](https://zuplo.com/docs/guides/custom-cors-policy)
+- CORS: `anything goes` - this is easiest, but [you can set stricter policies](https://zuplo.com/docs/articles/custom-cors-policy)
 - URL Rewrite: `<https://your-supabase-domain>${pathname}` - make sure to add your supabase URL, e.g. `https://rxodffgalrhwpvjugcio.supabase.co${pathname}`
 
 3/ Add a policy to the request pipeline - choose the `supabase-jwt-auth` policy. Remove the required claims from the JSON template.
