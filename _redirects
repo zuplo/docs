@@ -1,6 +1,8 @@
 /docs/advanced/custom-domain-setup /docs/articles/custom-domains 301
+/docs/advanced/custom-domain-setup/ /docs/articles/custom-domains 301
 /docs/examples/proxy-aws-lambda /docs/handlers/aws-lambda 301
 /docs/getting-started /docs 301
+/docs/getting-started/ /docs 301
 /docs/guides/advanced-path-matching /docs/articles/advanced-path-matching 301
 /docs/guides/archiving-requests-to-storage /docs/articles/archiving-requests-to-storage 301
 /docs/guides/custom-domain-setup /docs/articles/custom-domains 301
