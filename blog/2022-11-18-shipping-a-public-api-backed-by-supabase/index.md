@@ -99,7 +99,7 @@ Once you've got your service_role JWT, click **Add Policy** again on the **Reque
 
 Save your changes.
 
-Next, create two secret [environment variables](https://zuplo.com/docs/deployments/environment-variables) as follows:
+Next, create two secret [environment variables](https://zuplo.com/docs/articles/environment-variables) as follows:
 
 - SUPABASE_API_KEY: `"YOUR_SUPABASE_SECRET_ROLE_JWT"`
 - SUPABASE_AUTHZ_HEADER: `"Bearer YOUR_SUPABASE_SECRET_ROLE_JWT"`
@@ -245,10 +245,8 @@ Finally, lean back and marvel at your beautiful Developer Portal that took almos
 
 Get started with Zuplo for free today: [Sign Up Free](https://zuplo.link/sb-blog-signup)
 
-
 See also:
 
 [API Authentication with Supabase JWT Tokens](https://zuplo.com/blog/2022/11/15/api-authentication-with-supabase-jwt)
 
 [Supa-dynamic rate-limiting based on data (using supabase)](https://zuplo.com/blog/2022/12/05/supa-dynamic-rate-limiting-based-on-data)
-

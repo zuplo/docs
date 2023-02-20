@@ -7,7 +7,7 @@ In order to configure OAuth client management for your Developer Portal, you wil
 You can find instructions on creating an OAuth client for your provider in the documents below.
 
 - [Auth0](https://auth0.com/docs/get-started/auth0-overview/create-applications/regular-web-apps)
-- [Okta](https://developer.okta.com/docs/guides/implement-grant-type/authcode/main/#set-up-your-app)
+- [Okta](https://developer.okta.com/docs/articles/implement-grant-type/authcode/main/#set-up-your-app)
 
 You will need to set the `redirect_uri` (often called Callback URL) and the allowed logout URL when you create your application. Use the values below.
 

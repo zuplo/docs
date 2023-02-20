@@ -28,7 +28,7 @@ Click **Add Route** and configure the route as follows:
 - Path: `/todos`
 - Summary: `Get my todos`
 - Version: `none`
-- CORS: `Anything Goes` (you can configure [custom CORS policies](https://zuplo.com/docs/guides/custom-cors-policy) later).
+- CORS: `Anything Goes` (you can configure [custom CORS policies](https://zuplo.com/docs/articles/custom-cors-policy) later).
 
 In the Request Handler section, set the **URL Rewrite** path to [`https://jsonplaceholder.typicode.com/todos`](https://jsonplaceholder.typicode.com/todos)
 
@@ -99,4 +99,3 @@ See also:
 [Shipping a public API backed by Supabase](https://zuplo.com/blog/2022/11/18/shipping-a-public-api-backed-by-supabase)
 
 [Supa-dynamic rate-limiting based on data (using supabase)](https://zuplo.com/blog/2022/12/05/supa-dynamic-rate-limiting-based-on-data)
-
