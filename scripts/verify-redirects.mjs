@@ -15,7 +15,6 @@ const checkUrl = async (url) => {
 
 const checkEntry = async (entry) => {
   await checkUrl(`${url}${entry.source}`);
-  await checkUrl(`${url}${entry.source}/`);
 };
 
 const main = async () => {

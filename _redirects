@@ -174,8 +174,8 @@
 /docs/overview/how-does-zuplo-work/ /docs/articles/what-is-zuplo 301
 /docs/quickstarts/add-api-key-auth /docs/articles/step-2-add-api-key-auth 301
 /docs/quickstarts/add-api-key-auth/ /docs/articles/step-2-add-api-key-auth 301
-/docs/quickstarts/per-customer-rate-limits docs/articles/step-3-add-rate-limiting 301
-/docs/quickstarts/per-customer-rate-limits/ docs/articles/step-3-add-rate-limiting 301
+/docs/quickstarts/per-customer-rate-limits /docs/articles/step-3-add-rate-limiting 301
+/docs/quickstarts/per-customer-rate-limits/ /docs/articles/step-3-add-rate-limiting 301
 /docs/quickstarts/validation-and-docs-with-json-schema /docs/policies/validate-json-schema-inbound 301
 /docs/quickstarts/validation-and-docs-with-json-schema/ /docs/policies/validate-json-schema-inbound 301
 /docs/security /docs/articles/security 301
@@ -183,7 +183,7 @@
 /docs/support /docs/articles/support 301
 /docs/support /docs/articles/support/ 301
 /docs/pricing /docs/articles/pricing 301
-/docs/pricing /docs/articles/pricing/ 301
+/docs/pricing/ /docs/articles/pricing 301
 /docs/reference/cache /docs/articles/zone-cache 301
 /docs/reference/cache/ /docs/articles/zone-cache 301
 /docs/reference/custom-log-level /docs/articles/custom-log-level 301
@@ -205,7 +205,7 @@
 /docs/reference/zuplo-context /docs/articles/zuplo-context 301
 /docs/reference/zuplo-context/ /docs/articles/zuplo-context 301
 /docs/reference/zuplo-request /docs/articles/zuplo-request 301
-/docs/reference/zuplo-request /docs/articles/zuplo-request 301
+/docs/reference/zuplo-request/ /docs/articles/zuplo-request 301
 /docs/overview/ /docs/ 301
 /docs/support/ /docs/support 301
 /docs/security/ /docs/security 301
