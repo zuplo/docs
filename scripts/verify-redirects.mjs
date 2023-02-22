@@ -15,6 +15,10 @@ const checkUrl = async (url) => {
 
 const checkEntry = async (entry) => {
   await checkUrl(`${url}${entry.source}`);
+  //100ms delay
+  await new Promise((res) => {
+    setTimeout(res, 100);
+  });
 };
 
 const main = async () => {
