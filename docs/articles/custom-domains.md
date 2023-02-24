@@ -21,7 +21,7 @@ TXT     _cf-custom-hostname.api.example.com   RANDOM-STRING
 CNAME   api.example.com                       cname.zuplo.app
 ```
 
-At your DNS host, you create all three records. Cloudflare will then query your domain [periodically](https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/start/hostname-verification-backoff-schedule/) until it can verify everything. If everything is configured correctly, it should take a few minutes for your production Zup to start responding to traffic on your custom domain. On the other hand, if a misconfiguration (typo) occurs and you need to make change, Cloudflare could take up to 4 hours for it to retry the verification. Please be patient if this happens.
+At your DNS host, you create all three records. Cloudflare will then query your domain [periodically](https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/start/hostname-verification-backoff-schedule/) until it can verify everything. If everything is configured correctly, it should take a few minutes for your production Zup to start responding to traffic on your custom domain. On the other hand, if a misconfiguration (typo) occurs and you need to make change, Cloudflare could take up to 4 hours to retry the verification. Please be patient if this happens.
 
 By default, you can also use the url on `zuploapp.com` although, if you prefer that to be removed contact support and we can disable it for you.
 
