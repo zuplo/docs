@@ -229,6 +229,7 @@ const sidebars = {
             // Usage discouraged
             // "articles/key-value-store",
             "articles/runtime-behaviors",
+            "articles/zp-body-removed",
           ],
         },
       ],
