@@ -1,6 +1,6 @@
 # Zuplo API Key Service
 
-Zuplo runs a globally distributed API Key management service that scales to handle millions of daily key validation requests while maintaining low latency from any region around the world.
+Zuplo runs a globally distributed API Key management service that scales to handle billions of daily key validation requests while maintaining low latency from any region around the world.
 
 The Zuplo API Key service is the backend that handles management of API keys and related data as well as key validation when using the API Key Authentication policy in your Zuplo API Gateway. This service can be managed through the Zuplo Portal (coming soon) or directly using the API.
 
@@ -24,32 +24,13 @@ Consumers are the core of the API Key service. The consumer is the "identity" of
 
 A Consumer can have any number of API keys associated with it. Each API Key shares the same identity (i.e. Consumer) when authenticating with this service. Keys can have their own `description` to note the use of the key and can have an expiration date. Expired keys will not be permitted to authenticate after their expiration.
 
-### Roles
-
-This service supports a simple role-based access model. This RBAC is not intended to be a full featured authorization system, but can be useful for certain common and relatively simple uses. Roles are given a name and Consumers can be assigned to any number of roles.
-
-This system does not complex features like role inheritance or groups. For these purposes, a purpose-build RBAC solution should be used.
-
-### Memberships
-
-Consumers are added to roles by creating a "Membership". Consumers can be added to a role with or without an "object" scope. When validating API Keys, the request can optionally check for role membership and scope.
-
-## Relationships
-
-The below diagram show the relationships between the API objects. Notice that the most important object is the consumer - this is the identity of the API Key and the object that contains the `metadata`. Additionally, this is the object that is added as a member to roles. API Keys are used to authenticate as a Consumer.
-
-```mermaid
-graph LR
-  B[Buckets] --> C[Consumers]
-  B-->R[Roles]
-  C-->K[API Keys]
-  C-->M[Memberships]
-  M-->R
-```
+## Managers
 
 ## Usage
 
 Each bucket is created with a default API Key that is assigned the role of bucket owner. The bucket owner role has permissions to perform any tasks on a bucket such as creating consumers, api keys, etc. Additional bucket owner tokens may be created through the Zuplo Portal (coming soon).
+
+Full [API Reference Here](https://apikey.zuplo.com).
 
 To start set two environment variables (in your terminal, not inside Zuplo)
 
