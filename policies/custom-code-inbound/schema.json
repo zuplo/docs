@@ -4,7 +4,7 @@
   "type": "object",
   "title": "Custom Code Inbound",
   "isPreview": false,
-  "description": "An custom inbound request policy.",
+  "description": "Enables a custom code policy written in TypeScript",
   "required": ["handler"],
   "properties": {
     "handler": {
