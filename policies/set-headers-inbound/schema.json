@@ -27,6 +27,7 @@
           "properties": {
             "headers": {
               "type": "array",
+              "description": "An array of name and value objects (with an optional `overwrite` boolean)",
               "title": "List of headers to set",
               "items": {
                 "type": "object",

@@ -27,6 +27,7 @@
           "properties": {
             "params": {
               "type": "array",
+              "description": "An array of object, with a name and value property (and optional `override` boolean)",
               "items": {
                 "type": "object",
                 "properties": {

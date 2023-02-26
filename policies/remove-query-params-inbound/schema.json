@@ -23,8 +23,13 @@
         "options": {
           "type": "object",
           "description": "The options for this policy",
-          "required": [],
-          "properties": {}
+          "required": ["names"],
+          "properties": {
+            "names": {
+              "type": "array",
+              "description": "Array of query parameters to be removed"
+            }
+          }
         }
       },
       "examples": [

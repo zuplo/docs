@@ -23,8 +23,13 @@
         "options": {
           "type": "object",
           "description": "The options for this policy",
-          "required": [],
-          "properties": {}
+          "required": ["method"],
+          "properties": {
+            "method": {
+              "type": "string",
+              "description": "The HTTP Method to be used, e.g. POST, GET, PUT, PATCH, etc"
+            }
+          }
         }
       },
       "examples": [
