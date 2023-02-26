@@ -119,6 +119,7 @@ const sidebars = {
                 "policies/audit-log-inbound",
                 "policies/validate-json-schema-inbound",
                 "policies/bot-detection-inbound",
+                "policies/require-origin-inbound",
               ],
             },
             {
