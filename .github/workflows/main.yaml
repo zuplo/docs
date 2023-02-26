@@ -22,7 +22,7 @@ jobs:
           cache: "npm"
 
       - id: "auth"
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         name: "Authenticate to Google Cloud"
         uses: "google-github-actions/auth@v1"
         with:
@@ -32,7 +32,7 @@ jobs:
           access_token_lifetime: "300s"
 
       - name: Set up Cloud SDK
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         uses: google-github-actions/setup-gcloud@v1.1.0
         with:
           project_id: zuplo-production
