@@ -43,7 +43,7 @@
           "module": "$import(@zuplo/runtime)",
           "options": {
             "origins": "https://contoso.com, https://sub.contoso.com",
-            "failureDetail": "Invalid Request - contact support at support@contos.com"
+            "failureDetail": "Invalid Request - contact support at support@contoso.com"
           }
         }
       ]
