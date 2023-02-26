@@ -27,6 +27,7 @@
           "properties": {
             "accounts": {
               "type": "array",
+              "description": "An array of account objects (username, password and data properties)",
               "title": "A list of Basic Auth accounts",
               "items": {
                 "type": "object",

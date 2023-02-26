@@ -24,7 +24,12 @@
           "type": "object",
           "description": "Options to be passed to the custom policy",
           "required": [],
-          "properties": {}
+          "properties": {
+            "*": {
+              "type": "object",
+              "description": "Any object your custom policy consumes"
+            }
+          }
         }
       },
       "examples": [
