@@ -4,7 +4,7 @@
   "type": "object",
   "title": "Transform Response Body",
   "isPreview": true,
-  "shimUrl": "https://zuplo.com/docs/policies/transform-body-outbound",
+  "fakePolicyUrl": "https://zuplo.com/docs/policies/transform-body-outbound",
   "description": "Transform the body of an outgoing response.",
   "required": ["handler"],
   "properties": {
