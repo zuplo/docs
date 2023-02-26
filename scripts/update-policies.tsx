@@ -15,6 +15,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 type PolicySchema = JSONSchema & {
   isPreview?: boolean;
   isPaidAddOn?: boolean;
+  fakePolicyUrl?: string;
 };
 
 type PolicyProperties = Record<
@@ -221,6 +222,7 @@ async function run() {
     meta.name = schema.title;
     meta.isPreview = !!schema.isPreview;
     meta.isPaidAddOn = !!schema.isPaidAddOn;
+    meta.fakePolicyUrl = !!schema.fakePolicyUrl;
     meta.documentationUrl = `https://zuplo.com/docs/policies/${policyId}/`;
     meta.id = policyId;
 
