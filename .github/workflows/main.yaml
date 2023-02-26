@@ -40,7 +40,7 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: gsutil -h "Content-Type:application/json" cp ./policies.v3.json gs://cdn.zuplo.com/portal/policies.v3.json
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
 
       - id: publish
         name: Publish
@@ -53,14 +53,14 @@ jobs:
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: darrenjennings/algolia-docsearch-action@e3b8c5540e90a964b655be6ca73c1ee1aeba2719
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         with:
           algolia_application_id: E7EUGPZYED
           algolia_api_key: ${{ secrets.ALGOLIA_API_KEY }}
           file: crawler.json
 
       - name: Trigger Portal Release
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         run: |
           curl \
           -X POST \
