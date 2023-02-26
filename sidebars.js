@@ -157,6 +157,7 @@ const sidebars = {
                 "policies/remove-query-params-inbound",
                 "policies/request-termination-inbound",
                 "policies/set-headers-inbound",
+                "policies/set-body-inbound",
                 "policies/set-query-params-inbound",
               ],
             },
