@@ -42,11 +42,13 @@ If you don't have an Auth0 account, you can sign up for a [free Auth0 account](h
 
 1. [Create an Application](https://auth0.com/docs/get-started/auth0-overview/create-applications). When creating the application select type "Single Page Web Applications"
 2. Add your docs site url (i.e. `https://my-app.zuplo.app/docs/`) to the fields **Allow Callback URLs** and **Allowed Logout URLs**.
-3. Set the `authentication.provider` value to `auth0`
-4. Set the `authentication.authority` property to `https://` plus your Auth0 domain and a trailing slash, i.e. `https:://my-company.us.auth0.com/`
-5. **(non-zuplo-portal users only)** Set the `authentication.jwksUrl` property to `https://` plus your Auth0 domain plus `/.well-known/jwks.json`, i.e. `https:://my-company.us.auth0.com/.well-known/jwks.json`
-6. Set the `authentication.devPortalClient.clientId` to the Client ID of the application you created in step 1.
-7. [Set up an API](https://auth0.com/docs/get-started/auth0-overview/set-up-apis). Set the **Identifier** to something like `https://api.my-domain.com/`.
+3. Enable refresh **Refresh Token Rotation** in the application.
+   ![](https://cdn.zuplo.com/assets/359f4a6c-4dd9-48c9-b8a3-27e70aa459c0.png)
+4. Set the `authentication.provider` value to `auth0`
+5. Set the `authentication.authority` property to `https://` plus your Auth0 domain and a trailing slash, i.e. `https:://my-company.us.auth0.com/`
+6. **(non-zuplo-portal users only)** Set the `authentication.jwksUrl` property to `https://` plus your Auth0 domain plus `/.well-known/jwks.json`, i.e. `https:://my-company.us.auth0.com/.well-known/jwks.json`
+7. Set the `authentication.devPortalClient.clientId` to the Client ID of the application you created in step 1.
+8. [Set up an API](https://auth0.com/docs/get-started/auth0-overview/set-up-apis). Set the **Identifier** to something like `https://api.my-domain.com/`.
 
 :::note
 
