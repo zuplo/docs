@@ -15,4 +15,4 @@ You can delete the `routes.json` file by deleting this file in GitHub and doing 
 
 If you need to create a new project with support for the old routing format, please contact [support](mailto:support@zuplo.com) and we can share a template with you and guidance to recreate an old-format project in GitHub. Note - we will be removing support for `routes.json` in mid-2023 when most customers are off-boarded.
 
-We hope you're as excited about our support for open standards like Open API and Problem Details for APIs. As always, [join our Discord]() to chat with the team about any question or concerns you have.
+We hope you're as excited about our support for open standards like Open API and Problem Details for APIs. As always, [join our Discord](https://discord.gg/8QbEjr2MgZ) to chat with the team about any question or concerns you have.
