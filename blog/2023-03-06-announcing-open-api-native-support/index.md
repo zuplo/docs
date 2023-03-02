@@ -26,7 +26,7 @@ Read more about this in our [OpenAPI docs](/docs/articles/open-api).
 To celebrate, we're hosting an OpenAPI week with an interviews with special guests from the OpenAPI community including:
 
 - [**Darrel Miller**](https://youtu.be/L9rUob5_V6E) - editor of the OpenAPI specification
-- **Phil Sturgeon** - staff author and co-host of [APIs you won't hate](https://apisyouwonthate.com)
+- [**Phil Sturgeon**](https://youtu.be/mBYKFTbkM8c) - staff author and co-host of [APIs you won't hate](https://apisyouwonthate.com)
 - **Kevin Swiber** - OpenAPI marketing chair and API lifecycle integration specialist at [Postman](https://getpostman.com)
 - **Erik Wilde** - host of [Getting APIs to work](https://www.youtube.com/ErikWilde) and author of multiple IETF HTTP specifications
 
