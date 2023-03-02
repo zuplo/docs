@@ -2,13 +2,15 @@
 title: Advanced Path Matching
 ---
 
-Path matching in Zuplo uses the popular npmjs package [path-to-regexp](https://github.com/pillarjs/path-to-regexp) - you can learn even more about it on their [repo](https://github.com/pillarjs/path-to-regexp).
+By default, path matching in Zuplo uses the OpenAPI slug format, e.g. `/pizza/{size}` where **size** would be a URL parameter, with the value passed into the runtime as `request.params.size` property.
+
+However, you can opt to use a more advanced path matching approach based on the web standard [URLPattern](https://developer.mozilla.org/en-US/docs/Web/API/URLPattern).
 
 The most basic path is `/` which will simple match the root path. You can add other static paths like `/foo` and `/foo/bar`
 
 ## Dynamic Paths
 
-Path-to-regex supports dynamic matching including a feature that will parameterize parts of the URL. For example:
+URLPattern supports dynamic matching including a feature that will parameterize parts of the URL. For example:
 
 Path: `/products/:productId/sizes/:size` will match the following paths
 
@@ -29,7 +31,7 @@ Query-strings (or search parameters) will not affect path matching.
 
 ## Regular Expressions and Wildcards
 
-You can also use regular expressions in your paths. They must be contained in `()` to indicate to `path-to-regexp` that they are regex.
+You can also use regular expressions in your paths. They must be contained in `()`.
 
 **Examples**
 
@@ -67,7 +69,3 @@ Note that not all regex features are available, us of the following will either 
 - `(?:...)` - named matches
 - `^` or `$` - start or end of string
 - `[abc]` - character classes
-
-## Route tester
-
-There is a simple [route tester](http://forbeslindesay.github.io/express-route-tester/) available that can be used to debug route matching with `path-to-regexp`.
