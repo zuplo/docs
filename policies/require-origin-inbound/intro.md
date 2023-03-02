@@ -1,1 +1,7 @@
-The Set Body policy allows you to set or override the incoming request body. [GET or HEAD requests do not support bodies on Zuplo](/docs/articles/zp-body-removed), so be sure to use the [Change Method](/docs/policies/change-method-inbound) policy to update the method to a `POST` or whatever is appropriate. You might also need to use the [Set Header](/docs/policies/set-headers-inbound) policy to set a `content-type`.
+The Require Origin policy is used to enforce that the client is sending an `origin` header that matches your allow-list specified in the policy options.
+
+This is useful if you want to stop any browser traffic from different domains.
+
+However, it is important to note that it does not guarantee that traffic is only coming from a browser. Somebody could simulate a browser request from a backend server and set any origin they like.
+
+If the incoming origin is missing, or not allowed - a 400 Forbidden Problem Response will be sent to the client. You can customize the `detail` property in the policy options.
