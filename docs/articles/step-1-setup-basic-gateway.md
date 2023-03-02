@@ -10,9 +10,9 @@ To get started, sign in to [portal.zuplo.com](https://portal.zuplo.com) and crea
 
 ## 1/ Add a route
 
-Inside your new project, choose the `routes.json` file and click **Add Route**.
+Inside your new project, choose the `routes.oas.json` file and click **Add Route**.
 
-![Add route](https://cdn.zuplo.com/assets/d11b2e2c-fc34-4ac3-89b3-bc01499f06ed.png)
+![ADd Route](https://cdn.zuplo.com/assets/8cfa5b7b-6ead-4dd0-9339-dbcdc21b6299.png)
 
 Using the Route Designer, let's configure our first route to handle the `GET /todos` route.
 
