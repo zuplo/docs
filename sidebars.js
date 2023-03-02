@@ -48,7 +48,7 @@ const sidebars = {
     //   label: "Popular Use Cases",
     //   items: [
     //     "articles/startup-launching-a-new-api",
-    //     "articles/protecting-an-existing-api",
+    //     "articles/protecting-an-existing-api,
     //     "articles/enterprise-managing-many-apis",
     //     "articles/api-first-with-supabase",
     //     "articles/microservice-gateway",
@@ -66,6 +66,11 @@ const sidebars = {
         //"articles/monitoring",
         "articles/zuplo-in-your-stack",
       ],
+    },
+    {
+      type: "link",
+      label: "OpenAPI",
+      href: "/docs/articles/open-api",
     },
     {
       type: "category",
@@ -211,10 +216,8 @@ const sidebars = {
             "articles/dev-portal-setup",
             "articles/dev-portal-configuration",
             "articles/dev-portal-theme",
-            "articles/dev-portal-version-management",
             "articles/dev-portal-adding-pages",
             "articles/dev-portal-configuring-sidebar",
-            "articles/dev-portal-open-api",
           ],
         },
         {
