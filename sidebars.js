@@ -68,9 +68,13 @@ const sidebars = {
       ],
     },
     {
-      type: "link",
+      type: "category",
       label: "OpenAPI",
-      href: "/docs/articles/open-api",
+      link: {
+        type: "doc",
+        id: "articles/open-api",
+      },
+      items: [],
     },
     {
       type: "category",

@@ -2,8 +2,6 @@
 title: OpenAPI support in Zuplo
 ---
 
-![Zuplo <3 OpenAPI](https://cdn.zuplo.com/assets/6843d057-a45e-49c0-a546-bb3702fd0cd1.png)
-
 Zuplo natively supports the OpenAPI 3.1 (and is compatible with 3.0) specification standard as the core way to configure the gateway.
 
 When you create a new project you will see a `routes.oas.json` file. This is your default OpenAPI routing file (oas = 'open api specification').
