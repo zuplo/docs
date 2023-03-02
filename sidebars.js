@@ -90,6 +90,7 @@ const sidebars = {
         "articles/custom-logging-example",
         "articles/custom-log-level",
         "articles/advanced-path-matching",
+        "articles/lazy-load-configuration-into-cache",
       ],
     },
     {
