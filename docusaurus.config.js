@@ -34,6 +34,20 @@ const config = {
       },
     ],
     "./src/plugins/fathom",
+    [
+      "@docusaurus/plugin-content-blog",
+      {
+        id: "changelog",
+        blogTitle: "Zuplo Changelog",
+        blogSidebarCount: "ALL",
+        blogSidebarTitle: "Changelog",
+        routeBasePath: "/changelog",
+        path: "./changelog",
+        showReadingTime: false,
+        postsPerPage: 20,
+        archiveBasePath: null,
+      },
+    ],
     "@docusaurus/theme-mermaid",
   ],
   presets: [
