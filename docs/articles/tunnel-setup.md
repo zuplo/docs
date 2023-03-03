@@ -88,3 +88,9 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 Environment variables can also be used in configuration, such as the URL Rewrite handler as shown below.
 
 ![](https://cdn.zuplo.com/assets/16b93099-511d-435b-af85-167fab5814b2.png)
+
+## Tunnel Upgrades
+
+Zuplo publishes a new release of the tunnel Docker image about once per month or whenever Cloudflare ships a release to their underlying tunnel tools. The most recent version of the Docker Image is always tagged with the `latest` tag. We recommend periodically checking and upgrading the tunnel to the latest release to ensure you have the latest security and performance updates.
+
+We recommend testing each release of the tunning in a staging environment before rolling out to production.
