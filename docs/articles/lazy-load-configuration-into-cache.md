@@ -58,7 +58,7 @@ export default async function (
   context: ZuploContext,
 ) {
 
-  const config = loadConfig(context);
+  const config = await loadConfig(context);
 
   // use the config in your pipeline or request handler etc
   // ...
