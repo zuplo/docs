@@ -10,7 +10,7 @@ The next fastest place is in [ZoneCache](/docs/articles/zone-cache) which is a c
 
 The MemoryZoneReadthroughCache offers the best of both worlds - it uses memory and zone cache in combination to afford the lowest possible latency.
 
-:::warn
+:::warning
 Do take care not to load so much data into memory that you OOM (out-of-memory) your process. Processes in Zuplo typically have ~120MB of memory to perform all their work, including holding request bodies etc.
 :::
 
