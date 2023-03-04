@@ -70,7 +70,7 @@ The Zuplo handler supports `gzip` and `deflate` compression of the content of th
 
 The response event would look like this:
 
-````json
+```json
 {
   "isBase64Encoded": true,
   "bodyEncoding": "gzip",
@@ -78,7 +78,6 @@ The response event would look like this:
   "...": "other properties..."
 }
 ```
-
 
 ## API Gateway Compatibility
 
@@ -108,4 +107,4 @@ Below is an example lambda handler configured for proxy integration with payload
     }
   }
 }
-````
+```
