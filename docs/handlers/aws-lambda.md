@@ -77,6 +77,7 @@ The response event would look like this:
   "body": "COMPRESSSED AND BASE64 ENCODED BODY",
   "...": "other properties..."
 }
+```
 
 
 ## API Gateway Compatibility
