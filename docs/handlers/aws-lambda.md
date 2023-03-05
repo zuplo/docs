@@ -58,6 +58,27 @@ For content types, the `binaryMediaTypes` option allows specifying which content
 }
 ```
 
+## Compressed Body Content
+
+:::note
+
+This is provided as a work-around for certain Lambda + AWS API Gateway migration scenarios and is not recommended to use on new deployments
+
+:::
+
+The Zuplo handler supports `gzip` and `deflate` compression of the content of the AWS Lambda response `body` property. In order to instruct the Zuplo handler to decompress the body content add a property on the outgoing event called `bodyEncoding` and set the value to `gzip` or `deflate`.
+
+The response event would look like this:
+
+```json
+{
+  "isBase64Encoded": true,
+  "bodyEncoding": "gzip",
+  "body": "COMPRESSSED AND BASE64 ENCODED BODY",
+  "...": "other properties..."
+}
+```
+
 ## API Gateway Compatibility
 
 The AWS Lambda handler can also call Lambda functions that were built for API Gateway.

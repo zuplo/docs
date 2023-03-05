@@ -42,16 +42,6 @@ jobs:
       - run: gsutil -h "Content-Type:application/json" cp ./policies.v3.json gs://cdn.zuplo.com/portal/policies.v3.json
         if: github.ref == 'refs/heads/main'
 
-      - id: publish
-        name: Publish
-        uses: cloudflare/pages-action@1
-        with:
-          apiToken: ${{ secrets.CF_PAGES_TOKEN }}
-          accountId: "4f59a390b9f139a4a82b757edd3c71dd"
-          projectName: zuplo-docs
-          directory: build
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-
       - uses: darrenjennings/algolia-docsearch-action@e3b8c5540e90a964b655be6ca73c1ee1aeba2719
         if: github.ref == 'refs/heads/main'
         with:
