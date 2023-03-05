@@ -1,4 +1,5 @@
 import MDXComponents from "@theme-original/MDXComponents";
+import FeaturePremiere from "../components/FeaturePremiere";
 import HubSpotForm from "../components/HubSpotForm";
 import PolicyStatus from "../components/PolicyStatus";
 import SizedImage from "../components/SizedImage";
@@ -30,4 +31,5 @@ export default {
   PolicyStatus,
   SizedImage,
   DeveloperPortalIcon,
+  FeaturePremiere,
 };

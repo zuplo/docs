@@ -23,11 +23,14 @@ As a result, Zuplo now offers the most seamless workflow for users of OpenAPI. F
 
 Read more about this in our [OpenAPI docs](/docs/articles/open-api).
 
-To celebrate, we're hosting an OpenAPI week with an interviews with special guests from the OpenAPI community including:
+To celebrate, we're hosting an OpenAPI week with an interviews with special guests from the OpenAPI community. Sign up for the premiere of each chat below:
 
-- [**Darrel Miller**](https://youtu.be/L9rUob5_V6E) - editor of the OpenAPI specification
-- [**Phil Sturgeon**](https://youtu.be/mBYKFTbkM8c) - staff author and co-host of [APIs you won't hate](https://apisyouwonthate.com)
-- **Kevin Swiber** - OpenAPI marketing chair and API lifecycle integration specialist at [Postman](https://getpostman.com)
-- **Erik Wilde** - host of [Getting APIs to work](https://www.youtube.com/ErikWilde) and author of multiple IETF HTTP specifications
+<FeaturePremiere name="Darrel Miller" bio="Editor of the OpenAPI specification and API architect at Microsoft." description="On Tuesday, 3/7, we discuss the Future of OpenAPI (and some history)" url="https://youtu.be/L9rUob5_V6E" image="https://cdn.zuplo.com/assets/859169aa-8d1d-4dea-8fbb-f1c0972a5337.png" />
+
+<FeaturePremiere name="Phil Sturgeon" bio="Staff Author and co-host of APIs you won't hate" description="On Wednesday 3/8, we discuss living with OpenAPI in the real world" url="https://youtu.be/mBYKFTbkM8c" image="https://cdn.zuplo.com/assets/32bef4c8-da84-4328-bc9f-460371317c09.png" />
+
+<FeaturePremiere name="Kevin Swiber" bio="Marketing Chair, OpenAPI" description="On Thursday, 3/9 we talk about the spec wars and how OpenAPI plays a role in the API lifecycle" url="https://youtu.be/A61PhWswmHk" image="https://cdn.zuplo.com/assets/340b8a2b-5948-4e3b-91d1-36854692183e.png" />
+
+<FeaturePremiere name="Erik Wilde" bio="Author, RFC 7807" description="On Friday 3/10 we'll look at the new(ish) Problem Details for HTTP APIs specification with one of its authors" url="https://www.youtube.com/channel/UCTH7AlnhkOTPkyaleO3C5wg" image="https://cdn.zuplo.com/assets/6d684d21-693c-4807-9b63-9480fcdd69c4.png" />
 
 These conversations will be premiering on our [YouTube channel](https://www.youtube.com/channel/UCTH7AlnhkOTPkyaleO3C5wg). Subscribe for notifications, follow us on [Twitter](https://twitter.com/zuplo) or our [Discord](https://discord.gg/8QbEjr2MgZ) to get notified when these great conversations drop.
