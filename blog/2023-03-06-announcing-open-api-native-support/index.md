@@ -30,6 +30,6 @@ To celebrate, we're hosting an OpenAPI week with an interviews with special gues
 
 <FeaturePremiere name="Kevin Swiber" bio="Marketing Chair, OpenAPI" description="On Thursday, 3/9 we talk about the spec wars and how OpenAPI plays a role in the API lifecycle" url="https://youtu.be/A61PhWswmHk" image="https://cdn.zuplo.com/assets/340b8a2b-5948-4e3b-91d1-36854692183e.png" />
 
-<FeaturePremiere name="Erik Wilde" bio="Author, RFC 7807" description="On Friday 3/10 we'll look at the new(ish) Problem Details for HTTP APIs specification with one of its authors" url="https://www.youtube.com/channel/UCTH7AlnhkOTPkyaleO3C5wg" image="https://cdn.zuplo.com/assets/6d684d21-693c-4807-9b63-9480fcdd69c4.png" />
+<FeaturePremiere name="Erik Wilde" bio="Author, RFC 7807" description="On Friday 3/10 we'll look at the new(ish) Problem Details for HTTP APIs specification with one of its authors" url="https://youtu.be/OOVUxzoWkhQ" image="https://cdn.zuplo.com/assets/6d684d21-693c-4807-9b63-9480fcdd69c4.png" />
 
 These conversations will be premiering on our [YouTube channel](https://www.youtube.com/channel/UCTH7AlnhkOTPkyaleO3C5wg). Subscribe for notifications, follow us on [Twitter](https://twitter.com/zuplo) or our [Discord](https://discord.gg/8QbEjr2MgZ) to get notified when these great conversations drop.
