@@ -3,8 +3,7 @@ title: Zuplo now natively supports OpenAPI
 authors: josh
 tags: [open-api, gateway, open-source, standards]
 description: Zuplo now uses the OpenAPI specification standard at its core
-image: https://og-image.zuplo.com?text=Zuplo%20is%20now%20native%20OpenAPI
-draft: true
+image: https://og-image.zuplo.com?text=Zuplo%20is%20now%20natively%20powered%20 by%20OpenAPI
 ---
 
 Welcome to OpenAPI week at Zuplo!
@@ -15,11 +14,11 @@ Today we're announcing our official support for OpenAPI. Unlike other gateways, 
 
 Any valid OpenAPI document is a valid API Gateway configuration for Zuplo, additional properties and configuration is added via `x-zuplo` vendor extensions.
 
-Check out the intro video here
+As a result, Zuplo now offers the most seamless workflow for API design-first teams and users of OpenAPI. For those that don't, not to worry, you'll be using OpenAPI in Zuplo but won't even notice.
 
-<YouTubeVideo url="https://www.youtube-nocookie.com/embed/TODOTODO" />
+Check out [the demo video](https://youtu.be/YRDm_tKcS68)
 
-As a result, Zuplo now offers the most seamless workflow for users of OpenAPI. For those that don't use OpenAPI, you'll be using it in Zuplo, but won't even notice. The good news is, you'll be ready to take advantage of OpenAPI at any moment.
+<YouTubeVideo url="https://www.youtube-nocookie.com/embed/YRDm_tKcS68" />
 
 Read more about this in our [OpenAPI docs](/docs/articles/open-api).
 
