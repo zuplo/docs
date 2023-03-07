@@ -45,10 +45,10 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
   const blob = formData.get("foo") as Blob;
 
   // stream the body into memory
-  const json = await serialPayloadBlob.text();
+  const json = await blob.text();
 
   // parse the JSON document
-  const object = JSON.parse(serialPayload);
+  const object = JSON.parse(json);
 
   // Modify the document somehow before forwarding on to the backend
   object.newKey = "newValue";
