@@ -49,6 +49,10 @@
                   }
                 }
               }
+            },
+            "allowUnauthenticatedRequests": {
+              "type": "boolean",
+              "description": "If 'true' allows the request to continue even if authenticated. When 'false' (the default) any unauthenticated request is automatically rejected with a 401"
             }
           }
         }
