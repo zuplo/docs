@@ -58,3 +58,17 @@ context.waitUntil(asyncWork());
 
 return response;
 ```
+
+- `invokeInboundPolicy` - this allows you to programmatically execute a policy in your policy library (e.g. one defined in `policies.json`). This is useful if you want to conditionally execute policies, for example if a query param 'foo' equals 'bar'. Here is an example of a [custom policy](/docs/policies/custom-code-inbound.md) that would achieve this:
+
+```ts
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export default async function (request: ZuploRequest, context: ZuploContext) {
+  if (request.query.foo === "bar") {
+    // "my-policy" is the name given to your policy in policies.json
+    return context.invokeInboundPolicy("my-policy", request);
+  }
+  return request;
+}
+```
