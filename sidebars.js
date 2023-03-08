@@ -167,7 +167,6 @@ const sidebars = {
                 "policies/change-method-inbound",
                 "policies/formdata-to-json-inbound",
                 "policies/remove-query-params-inbound",
-                "policies/request-termination-inbound",
                 "policies/set-headers-inbound",
                 "policies/set-body-inbound",
                 "policies/set-query-params-inbound",

@@ -19,6 +19,15 @@
         "module": {
           "const": "$import(@zuplo/runtime)",
           "description": "The module containing the policy"
+        },
+        "options": {
+          "type": "object",
+          "properties": {
+            "allowUnauthenticatedRequests": {
+              "type": "boolean",
+              "description": "If 'true' allows the request to continue even if authenticated. When 'false' (the default) any unauthenticated request is automatically rejected with a 401"
+            }
+          }
         }
       },
       "examples": [
