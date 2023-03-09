@@ -17,7 +17,7 @@ Here's how you would configure the policy
   "export": "default",
   "module": "$import(./modules/query-param-validator)",
   "options": {
-    "allowAdditionalParameters": false;
+    "allowAdditionalParameters": false,
     "params": [
       {
         "name": "foo",
