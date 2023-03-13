@@ -81,6 +81,6 @@ For example, in the `policies.json` file, an environment variable could be set o
 
 When referencing environment variables inside of the URL Rewrite handler and the URL Forward handler, variables are substituted using Javascript style string interpolation.
 
-```ts
+```txt
 https://${env.API_URL}/path/to/call
 ```
