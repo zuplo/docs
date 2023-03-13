@@ -44,6 +44,10 @@ Environment variables cannot start with `ZUPLO` or `__ZUPLO`.
 
 ## Using Environment Variables
 
+There are several places in Zuplo you can access environment variables.
+
+### Code
+
 Variables can be accessed in code by importing `@zuplo/runtime`.
 
 ```ts
@@ -52,4 +56,31 @@ import { environment } from "@zuplo/runtime";
 const myVar = environment.MY_VAR;
 ```
 
+### Configuration Files
+
 Inside some configuration files, environment variables can be referenced with the pattern `$env(MY_VAR)`.
+
+For example, in the `policies.json` file, an environment variable could be set on a policy option.
+
+```json
+{
+  "name": "my-custom-code-inbound-policy",
+  "policyType": "custom-code-inbound",
+  "handler": {
+    "export": "default",
+    "module": "$import(./modules/YOUR_MODULE)",
+    "options": {
+      "config1": "$env(MY_CONFIG_VAR)",
+      "config2": true
+    }
+  }
+}
+```
+
+### Rewrite & Forwarding Handler
+
+When referencing environment variables inside of the URL Rewrite handler and the URL Forward handler, variables are substituted using Javascript style string interpolation.
+
+```ts
+https://${env.API_URL}/path/to/call
+```
