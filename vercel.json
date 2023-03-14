@@ -1,0 +1,1079 @@
+{
+  "redirects": [
+    {
+      "source": "/docs/advanced/custom-domain-setup",
+      "destination": "/docs/articles/custom-domains",
+      "permanent": true
+    },
+    {
+      "source": "/docs/advanced/custom-domain-setup/",
+      "destination": "/docs/articles/custom-domains",
+      "permanent": true
+    },
+    {
+      "source": "/docs/examples/proxy-aws-lambda",
+      "destination": "/docs/handlers/aws-lambda",
+      "permanent": true
+    },
+    {
+      "source": "/docs/examples/proxy-aws-lambda/",
+      "destination": "/docs/handlers/aws-lambda",
+      "permanent": true
+    },
+    {
+      "source": "/docs/getting-started",
+      "destination": "/docs",
+      "permanent": true
+    },
+    {
+      "source": "/docs/getting-started/",
+      "destination": "/docs",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/advanced-path-matching",
+      "destination": "/docs/articles/advanced-path-matching",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/advanced-path-matching/",
+      "destination": "/docs/articles/advanced-path-matching",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/archiving-requests-to-storage",
+      "destination": "/docs/articles/archiving-requests-to-storage",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/archiving-requests-to-storage/",
+      "destination": "/docs/articles/archiving-requests-to-storage",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/custom-domain-setup",
+      "destination": "/docs/articles/custom-domains",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/custom-domain-setup/",
+      "destination": "/docs/articles/custom-domains",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/key-value-store",
+      "destination": "/docs/articles/key-value-store",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/key-value-store/",
+      "destination": "/docs/articles/key-value-store",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/node-modules",
+      "destination": "/docs/articles/node-modules",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/node-modules/",
+      "destination": "/docs/articles/node-modules",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/path-matching",
+      "destination": "/docs/articles/advanced-path-matching",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/path-matching/",
+      "destination": "/docs/articles/advanced-path-matching",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/request-handler",
+      "destination": "/docs/handlers/custom-handler",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/request-handler/",
+      "destination": "/docs/handlers/custom-handler",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/reusing-code",
+      "destination": "/docs/articles/reusing-code",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/reusing-code/",
+      "destination": "/docs/articles/reusing-code",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/safely-clone-a-request-or-response",
+      "destination": "/docs/articles/safely-clone-a-request-or-response",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/safely-clone-a-request-or-response/",
+      "destination": "/docs/articles/safely-clone-a-request-or-response",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/setup-jwt-auth-with-auth0",
+      "destination": "/docs/policies/auth0-jwt-auth",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/setup-jwt-auth-with-auth0/",
+      "destination": "/docs/policies/auth0-jwt-auth",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/testing-your-api",
+      "destination": "/docs/articles/testing",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/testing-your-api/",
+      "destination": "/docs/articles/testing",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/web-standard-apis",
+      "destination": "/docs/articles/web-standard-apis",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/web-standard-apis/",
+      "destination": "/docs/articles/web-standard-apis",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/zup-its",
+      "destination": "/docs/articles/zup-its",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/zup-its/",
+      "destination": "/docs/articles/zup-its",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/zuplo-context",
+      "destination": "/docs/articles/zuplo-context",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/zuplo-context/",
+      "destination": "/docs/articles/zuplo-context",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/zuplo-request",
+      "destination": "/docs/articles/zuplo-request",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/zuplo-request/",
+      "destination": "/docs/articles/zuplo-request",
+      "permanent": true
+    },
+    {
+      "source": "/docs/overview/vs-aws-api-gateway",
+      "destination": "/api-gateways/aws-api-gateway-alternative-zuplo",
+      "permanent": true
+    },
+    {
+      "source": "/docs/overview/vs-aws-api-gateway/",
+      "destination": "/api-gateways/aws-api-gateway-alternative-zuplo",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/access-control-lists",
+      "destination": "/docs/policies/acl-policy-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/access-control-lists/",
+      "destination": "/docs/policies/acl-policy-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/add-query-param-inbound",
+      "destination": "/docs/policies/set-query-params-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/add-query-param-inbound/",
+      "destination": "/docs/policies/set-query-params-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/api-key-auth",
+      "destination": "/docs/policies/api-key-auth-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/api-key-auth/",
+      "destination": "/docs/policies/api-key-auth-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/audit-logging",
+      "destination": "/docs/policies/audit-log-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/audit-logging/",
+      "destination": "/docs/policies/audit-log-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/auth0-jwt-auth",
+      "destination": "/docs/policies/auth0-jwt-auth-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/auth0-jwt-auth/",
+      "destination": "/docs/policies/auth0-jwt-auth-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/aws-cognito-auth-inbound",
+      "destination": "/docs/policies/cognito-jwt-auth-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/aws-cognito-auth-inbound/",
+      "destination": "/docs/policies/cognito-jwt-auth-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/basic-auth",
+      "destination": "/docs/policies/basic-auth-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/basic-auth/",
+      "destination": "/docs/policies/basic-auth-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/geo-location",
+      "destination": "/docs/policies/geo-location-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/geo-location/",
+      "destination": "/docs/policies/geo-location-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/ip-restrictions",
+      "destination": "/docs/policies/ip-restriction-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/ip-restrictions/",
+      "destination": "/docs/policies/ip-restriction-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/json-schema-validation",
+      "destination": "/docs/policies/validate-json-schema-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/json-schema-validation/",
+      "destination": "/docs/policies/validate-json-schema-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/open-id-jwt",
+      "destination": "/docs/policies/open-id-jwt-auth-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/open-id-jwt/",
+      "destination": "/docs/policies/open-id-jwt-auth-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/rate-limit",
+      "destination": "/docs/policies/rate-limit-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/rate-limit/",
+      "destination": "/docs/policies/rate-limit-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/request-body-rewrite",
+      "destination": "/docs/policies/transform-body-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/request-body-rewrite/",
+      "destination": "/docs/policies/transform-body-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/response-body-rewrite",
+      "destination": "/docs/policies/transform-body-outbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/response-body-rewrite/",
+      "destination": "/docs/policies/transform-body-outbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/projects/github-source-control",
+      "destination": "/docs/articles/github-source-control",
+      "permanent": true
+    },
+    {
+      "source": "/docs/projects/github-source-control/",
+      "destination": "/docs/articles/github-source-control",
+      "permanent": true
+    },
+    {
+      "source": "/docs/quickstarts/api-rate-limiting",
+      "destination": "/docs/policies/rate-limit",
+      "permanent": true
+    },
+    {
+      "source": "/docs/quickstarts/api-rate-limiting/",
+      "destination": "/docs/policies/rate-limit",
+      "permanent": true
+    },
+    {
+      "source": "/docs/quickstarts/proxy-aws-lambda",
+      "destination": "/docs/handlers/aws-lambda",
+      "permanent": true
+    },
+    {
+      "source": "/docs/quickstarts/proxy-aws-lambda/",
+      "destination": "/docs/handlers/aws-lambda",
+      "permanent": true
+    },
+    {
+      "source": "/docs/quickstarts/response-rewrite",
+      "destination": "/docs/policies/response-body-rewrite",
+      "permanent": true
+    },
+    {
+      "source": "/docs/quickstarts/response-rewrite/",
+      "destination": "/docs/policies/response-body-rewrite",
+      "permanent": true
+    },
+    {
+      "source": "/docs/runtime/globals",
+      "destination": "/docs/articles/web-standard-apis",
+      "permanent": true
+    },
+    {
+      "source": "/docs/runtime/globals/",
+      "destination": "/docs/articles/web-standard-apis",
+      "permanent": true
+    },
+    {
+      "source": "/docs/runtime/key-value-store",
+      "destination": "/docs/articles/key-value-store",
+      "permanent": true
+    },
+    {
+      "source": "/docs/runtime/key-value-store/",
+      "destination": "/docs/articles/key-value-store",
+      "permanent": true
+    },
+    {
+      "source": "/docs/runtime/node-modules",
+      "destination": "/docs/articles/node-modules",
+      "permanent": true
+    },
+    {
+      "source": "/docs/runtime/node-modules/",
+      "destination": "/docs/articles/node-modules",
+      "permanent": true
+    },
+    {
+      "source": "/docs/runtime/request-handler",
+      "destination": "/docs/handlers/custom-handler",
+      "permanent": true
+    },
+    {
+      "source": "/docs/runtime/request-handler/",
+      "destination": "/docs/handlers/custom-handler",
+      "permanent": true
+    },
+    {
+      "source": "/docs/runtime/reusing-code",
+      "destination": "/docs/articles/reusing-code",
+      "permanent": true
+    },
+    {
+      "source": "/docs/runtime/reusing-code/",
+      "destination": "/docs/articles/reusing-code",
+      "permanent": true
+    },
+    {
+      "source": "/docs/runtime/safely-clone-a-request-or-response",
+      "destination": "/docs/articles/safely-clone-a-request-or-response",
+      "permanent": true
+    },
+    {
+      "source": "/docs/runtime/safely-clone-a-request-or-response/",
+      "destination": "/docs/articles/safely-clone-a-request-or-response",
+      "permanent": true
+    },
+    {
+      "source": "/docs/runtime/testing-your-api",
+      "destination": "/docs/articles/testing",
+      "permanent": true
+    },
+    {
+      "source": "/docs/runtime/testing-your-api/",
+      "destination": "/docs/articles/testing",
+      "permanent": true
+    },
+    {
+      "source": "/docs/runtime/web-standard-apis",
+      "destination": "/docs/articles/web-standard-apis",
+      "permanent": true
+    },
+    {
+      "source": "/docs/runtime/web-standard-apis/",
+      "destination": "/docs/articles/web-standard-apis",
+      "permanent": true
+    },
+    {
+      "source": "/docs/runtime/zuplo-context",
+      "destination": "/docs/articles/zuplo-context",
+      "permanent": true
+    },
+    {
+      "source": "/docs/runtime/zuplo-context/",
+      "destination": "/docs/articles/zuplo-context",
+      "permanent": true
+    },
+    {
+      "source": "/docs/runtime/zuplo-request",
+      "destination": "/docs/articles/zuplo-request",
+      "permanent": true
+    },
+    {
+      "source": "/docs/runtime/zuplo-request/",
+      "destination": "/docs/articles/zuplo-request",
+      "permanent": true
+    },
+    {
+      "source": "/docs/terms",
+      "destination": "/legal/terms",
+      "permanent": true
+    },
+    {
+      "source": "/docs/terms/",
+      "destination": "/legal/terms",
+      "permanent": true
+    },
+    {
+      "source": "/docs/advanced/api-key-formats",
+      "destination": "/docs/articles/api-key-formats",
+      "permanent": true
+    },
+    {
+      "source": "/docs/advanced/api-key-formats/",
+      "destination": "/docs/articles/api-key-formats",
+      "permanent": true
+    },
+    {
+      "source": "/docs/advanced/cloudflare-settings",
+      "destination": "/docs/articles/cloudflare-settings",
+      "permanent": true
+    },
+    {
+      "source": "/docs/advanced/cloudflare-settings/",
+      "destination": "/docs/articles/cloudflare-settings",
+      "permanent": true
+    },
+    {
+      "source": "/docs/apis/api-key",
+      "destination": "/docs/articles/api-key-api",
+      "permanent": true
+    },
+    {
+      "source": "/docs/apis/api-key/",
+      "destination": "/docs/articles/api-key-api",
+      "permanent": true
+    },
+    {
+      "source": "/docs/connections/secure-tunnel",
+      "destination": "/docs/articles/secure-tunnel",
+      "permanent": true
+    },
+    {
+      "source": "/docs/connections/secure-tunnel/",
+      "destination": "/docs/articles/secure-tunnel",
+      "permanent": true
+    },
+    {
+      "source": "/docs/connections/tunnel-setup",
+      "destination": "/docs/articles/tunnel-setup",
+      "permanent": true
+    },
+    {
+      "source": "/docs/connections/tunnel-setup/",
+      "destination": "/docs/articles/tunnel-setup",
+      "permanent": true
+    },
+    {
+      "source": "/docs/deployments/custom-domains",
+      "destination": "/docs/articles/custom-domains",
+      "permanent": true
+    },
+    {
+      "source": "/docs/deployments/custom-domains/",
+      "destination": "/docs/articles/custom-domains",
+      "permanent": true
+    },
+    {
+      "source": "/docs/deployments/deployment-options",
+      "destination": "/docs/articles/deployment-options",
+      "permanent": true
+    },
+    {
+      "source": "/docs/deployments/deployment-options/",
+      "destination": "/docs/articles/deployment-options",
+      "permanent": true
+    },
+    {
+      "source": "/docs/deployments/dev-portal-json",
+      "destination": "/docs/articles/dev-portal-json",
+      "permanent": true
+    },
+    {
+      "source": "/docs/deployments/dev-portal-json/",
+      "destination": "/docs/articles/dev-portal-json",
+      "permanent": true
+    },
+    {
+      "source": "/docs/deployments/environment-variables",
+      "destination": "/docs/articles/environment-variables",
+      "permanent": true
+    },
+    {
+      "source": "/docs/deployments/environment-variables/",
+      "destination": "/docs/articles/environment-variables",
+      "permanent": true
+    },
+    {
+      "source": "/docs/deployments/environments",
+      "destination": "/docs/articles/environments",
+      "permanent": true
+    },
+    {
+      "source": "/docs/deployments/environments/",
+      "destination": "/docs/articles/environments",
+      "permanent": true
+    },
+    {
+      "source": "/docs/deployments/log-export",
+      "destination": "/docs/articles/log-export",
+      "permanent": true
+    },
+    {
+      "source": "/docs/deployments/log-export/",
+      "destination": "/docs/articles/log-export",
+      "permanent": true
+    },
+    {
+      "source": "/docs/developer-portal/adding-pages",
+      "destination": "/docs/articles/dev-portal-adding-pages",
+      "permanent": true
+    },
+    {
+      "source": "/docs/developer-portal/adding-pages/",
+      "destination": "/docs/articles/dev-portal-adding-pages",
+      "permanent": true
+    },
+    {
+      "source": "/docs/developer-portal/configuration",
+      "destination": "/docs/articles/dev-portal-configuration",
+      "permanent": true
+    },
+    {
+      "source": "/docs/developer-portal/configuration/",
+      "destination": "/docs/articles/dev-portal-configuration",
+      "permanent": true
+    },
+    {
+      "source": "/docs/developer-portal/configuring-sidebar",
+      "destination": "/docs/articles/dev-portal-configuring-sidebar",
+      "permanent": true
+    },
+    {
+      "source": "/docs/developer-portal/configuring-sidebar/",
+      "destination": "/docs/articles/dev-portal-configuring-sidebar",
+      "permanent": true
+    },
+    {
+      "source": "/docs/developer-portal/developer-portal",
+      "destination": "/docs/articles/developer-portal",
+      "permanent": true
+    },
+    {
+      "source": "/docs/developer-portal/developer-portal/",
+      "destination": "/docs/articles/developer-portal",
+      "permanent": true
+    },
+    {
+      "source": "/docs/developer-portal/setup",
+      "destination": "/docs/articles/dev-portal-setup",
+      "permanent": true
+    },
+    {
+      "source": "/docs/developer-portal/setup/",
+      "destination": "/docs/articles/dev-portal-setup",
+      "permanent": true
+    },
+    {
+      "source": "/docs/developer-portal/theme",
+      "destination": "/docs/articles/dev-portal-theme",
+      "permanent": true
+    },
+    {
+      "source": "/docs/developer-portal/theme/",
+      "destination": "/docs/articles/dev-portal-theme",
+      "permanent": true
+    },
+    {
+      "source": "/docs/developer-portal/version-management",
+      "destination": "/docs/articles/dev-portal-version-management",
+      "permanent": true
+    },
+    {
+      "source": "/docs/developer-portal/version-management/",
+      "destination": "/docs/articles/dev-portal-version-management",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/api-key-management",
+      "destination": "/docs/articles/api-key-management",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/api-key-management/",
+      "destination": "/docs/articles/api-key-management",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/custom-ci-cd",
+      "destination": "/docs/articles/custom-ci-cd",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/custom-ci-cd/",
+      "destination": "/docs/articles/custom-ci-cd",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/custom-cors-policies",
+      "destination": "/docs/articles/custom-cors-policy",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/custom-cors-policies/",
+      "destination": "/docs/articles/custom-cors-policy",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/github-source-control",
+      "destination": "/docs/articles/github-source-control",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/github-source-control/",
+      "destination": "/docs/articles/github-source-control",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/how-to-upgrade",
+      "destination": "/docs/articles/how-to-upgrade",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/how-to-upgrade/",
+      "destination": "/docs/articles/how-to-upgrade",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/multiple-auth-policies",
+      "destination": "/docs/articles/multiple-auth-policies",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/multiple-auth-policies/",
+      "destination": "/docs/articles/multiple-auth-policies",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/oauth-client-management-setup",
+      "destination": "/docs/articles/oauth-client-management-setup",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/oauth-client-management-setup/",
+      "destination": "/docs/articles/oauth-client-management-setup",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/oauth-client-management",
+      "destination": "/docs/articles/oauth-client-management",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/oauth-client-management/",
+      "destination": "/docs/articles/oauth-client-management",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/rename-or-move-project",
+      "destination": "/docs/articles/rename-or-move-project",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/rename-or-move-project/",
+      "destination": "/docs/articles/rename-or-move-project",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/testing-deployments",
+      "destination": "/docs/articles/testing",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/testing-deployments/",
+      "destination": "/docs/articles/testing",
+      "permanent": true
+    },
+    {
+      "source": "/docs/examples/archiving-requests-to-storage",
+      "destination": "/docs/articles/archiving-requests-to-storage",
+      "permanent": true
+    },
+    {
+      "source": "/docs/examples/archiving-requests-to-storage/",
+      "destination": "/docs/articles/archiving-requests-to-storage",
+      "permanent": true
+    },
+    {
+      "source": "/docs/examples/check-ip-address",
+      "destination": "/docs/articles/check-ip-address",
+      "permanent": true
+    },
+    {
+      "source": "/docs/examples/check-ip-address/",
+      "destination": "/docs/articles/check-ip-address",
+      "permanent": true
+    },
+    {
+      "source": "/docs/examples/custom-logging-example",
+      "destination": "/docs/articles/custom-logging-example",
+      "permanent": true
+    },
+    {
+      "source": "/docs/examples/custom-logging-example/",
+      "destination": "/docs/articles/custom-logging-example",
+      "permanent": true
+    },
+    {
+      "source": "/docs/examples/per-user-rate-limits-using-db",
+      "destination": "/docs/articles/per-user-rate-limits-using-db",
+      "permanent": true
+    },
+    {
+      "source": "/docs/examples/per-user-rate-limits-using-db/",
+      "destination": "/docs/articles/per-user-rate-limits-using-db",
+      "permanent": true
+    },
+    {
+      "source": "/docs/examples/rick-and-morty-api-developer-portal-example",
+      "destination": "/docs/articles/rick-and-morty-api-developer-portal-example",
+      "permanent": true
+    },
+    {
+      "source": "/docs/examples/rick-and-morty-api-developer-portal-example/",
+      "destination": "/docs/articles/rick-and-morty-api-developer-portal-example",
+      "permanent": true
+    },
+    {
+      "source": "/docs/examples/zup-its",
+      "destination": "/docs/articles/zup-its",
+      "permanent": true
+    },
+    {
+      "source": "/docs/examples/zup-its/",
+      "destination": "/docs/articles/zup-its",
+      "permanent": true
+    },
+    {
+      "source": "/docs/overview/handlers",
+      "destination": "/docs/handlers",
+      "permanent": true
+    },
+    {
+      "source": "/docs/overview/handlers/",
+      "destination": "/docs/handlers",
+      "permanent": true
+    },
+    {
+      "source": "/docs/overview",
+      "destination": "/docs/articles/what-is-zuplo",
+      "permanent": true
+    },
+    {
+      "source": "/docs/overview/",
+      "destination": "/docs/articles/what-is-zuplo",
+      "permanent": true
+    },
+    {
+      "source": "/docs/overview/should-you-use-zuplo",
+      "destination": "/docs/articles/who-uses-and-why",
+      "permanent": true
+    },
+    {
+      "source": "/docs/overview/should-you-use-zuplo/",
+      "destination": "/docs/articles/who-uses-and-why",
+      "permanent": true
+    },
+    {
+      "source": "/docs/overview/policies",
+      "destination": "/docs/policies",
+      "permanent": true
+    },
+    {
+      "source": "/docs/overview/policies/",
+      "destination": "/docs/policies",
+      "permanent": true
+    },
+    {
+      "source": "/docs/overview/how-does-zuplo-work",
+      "destination": "/docs/articles/what-is-zuplo",
+      "permanent": true
+    },
+    {
+      "source": "/docs/overview/how-does-zuplo-work/",
+      "destination": "/docs/articles/what-is-zuplo",
+      "permanent": true
+    },
+    {
+      "source": "/docs/quickstarts/add-api-key-auth",
+      "destination": "/docs/articles/step-2-add-api-key-auth",
+      "permanent": true
+    },
+    {
+      "source": "/docs/quickstarts/add-api-key-auth/",
+      "destination": "/docs/articles/step-2-add-api-key-auth",
+      "permanent": true
+    },
+    {
+      "source": "/docs/quickstarts/per-customer-rate-limits",
+      "destination": "/docs/articles/step-3-add-rate-limiting",
+      "permanent": true
+    },
+    {
+      "source": "/docs/quickstarts/per-customer-rate-limits/",
+      "destination": "/docs/articles/step-3-add-rate-limiting",
+      "permanent": true
+    },
+    {
+      "source": "/docs/quickstarts/validation-and-docs-with-json-schema",
+      "destination": "/docs/policies/validate-json-schema-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/quickstarts/validation-and-docs-with-json-schema/",
+      "destination": "/docs/policies/validate-json-schema-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/security",
+      "destination": "/docs/articles/security",
+      "permanent": true
+    },
+    {
+      "source": "/docs/security",
+      "destination": "/docs/articles/security/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/support",
+      "destination": "/docs/articles/support",
+      "permanent": true
+    },
+    {
+      "source": "/docs/support",
+      "destination": "/docs/articles/support/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/pricing",
+      "destination": "/docs/articles/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/docs/pricing/",
+      "destination": "/docs/articles/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/cache",
+      "destination": "/docs/articles/zone-cache",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/cache/",
+      "destination": "/docs/articles/zone-cache",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/custom-log-level",
+      "destination": "/docs/articles/custom-log-level",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/custom-log-level/",
+      "destination": "/docs/articles/custom-log-level",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/key-value-store",
+      "destination": "/docs/articles/key-value-store",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/key-value-store/",
+      "destination": "/docs/articles/key-value-store",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/node-modules",
+      "destination": "/docs/articles/node-modules",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/node-modules/",
+      "destination": "/docs/articles/node-modules",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/reusing-code",
+      "destination": "/docs/articles/reusing-code",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/reusing-code/",
+      "destination": "/docs/articles/reusing-code",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/runtime-behaviors",
+      "destination": "/docs/articles/runtime-behaviors",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/runtime-behaviors/",
+      "destination": "/docs/articles/runtime-behaviors",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/safely-clone-a-request-or-response",
+      "destination": "/docs/articles/safely-clone-a-request-or-response",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/safely-clone-a-request-or-response/",
+      "destination": "/docs/articles/safely-clone-a-request-or-response",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/web-standard-apis",
+      "destination": "/docs/articles/web-standard-apis",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/web-standard-apis/",
+      "destination": "/docs/articles/web-standard-apis",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/zone-cache",
+      "destination": "/docs/articles/zone-cache",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/zone-cache/",
+      "destination": "/docs/articles/zone-cache",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/zuplo-context",
+      "destination": "/docs/articles/zuplo-context",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/zuplo-context/",
+      "destination": "/docs/articles/zuplo-context",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/zuplo-request",
+      "destination": "/docs/articles/zuplo-request",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/zuplo-request/",
+      "destination": "/docs/articles/zuplo-request",
+      "permanent": true
+    },
+    {
+      "source": "/docs/overview/",
+      "destination": "/docs/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/support/",
+      "destination": "/docs/support",
+      "permanent": true
+    },
+    {
+      "source": "/docs/security/",
+      "destination": "/docs/security",
+      "permanent": true
+    },
+    {
+      "source": "/docs/developer-portal",
+      "destination": "/docs/articles/developer-portal",
+      "permanent": true
+    },
+    {
+      "source": "/docs/developer-portal/",
+      "destination": "/docs/articles/developer-portal",
+      "permanent": true
+    },
+    {
+      "source": "/docs/quickstarts/instant-api-docs-and-dev-portal",
+      "destination": "/docs/articles/step-1-setup-basic-gateway",
+      "permanent": true
+    },
+    {
+      "source": "/docs/quickstarts/instant-api-docs-and-dev-portal/",
+      "destination": "/docs/articles/step-1-setup-basic-gateway",
+      "permanent": true
+    }
+  ]
+}
