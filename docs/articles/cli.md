@@ -1,5 +1,6 @@
 ---
 title: Zuplo CLI
+draft: false
 ---
 
 The Zuplo CLI can be used to automate and manage aspects of your Zuplo Gateway.
@@ -34,9 +35,9 @@ zup deploy
 ```
 
 Options:
-  --version        Show version number                                 [boolean]
-  --help           Show help                                           [boolean]
-  --api-key        The API Key from Zuplo                    [string] [required]
-  --verify-remote  Verify that this Git repository matches the one configured on
-                   Zuplo. Use --no-verify-remote to disable.
-                                                       [boolean] [default: true]
+--version Show version number [boolean]
+--help Show help [boolean]
+--api-key The API Key from Zuplo [string] [required]
+--verify-remote Verify that this Git repository matches the one configured on
+Zuplo. Use --no-verify-remote to disable.
+[boolean] [default: true]
