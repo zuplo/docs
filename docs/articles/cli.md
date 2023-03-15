@@ -1,6 +1,6 @@
 ---
 title: Zuplo CLI
-draft: false
+draft: true
 ---
 
 The Zuplo CLI can be used to automate and manage aspects of your Zuplo Gateway.
