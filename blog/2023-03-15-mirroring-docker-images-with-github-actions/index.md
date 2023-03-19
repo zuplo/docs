@@ -40,9 +40,23 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: zuplo/gcloud-setup-action@v1
+      # Uses workload federation: https://github.com/google-github-actions/auth#setting-up-workload-identity-federation
+      - id: "auth-gcp"
+        name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v1"
+        with:
+          token_format: "access_token"
+          workload_identity_provider: "your-provider"
+          service_account: "your-service-account"
+          access_token_lifetime: "300s"
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1.1.0
         with:
           project_id: ${{ env.PROJECT_ID }}
+
+      - name: Authenticate Docker
+        run: gcloud auth configure-docker us-docker.pkg.dev
 
       - name: Pull Image from Docker Hub
         run: docker pull ${{ matrix.image }}
