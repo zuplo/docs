@@ -13,6 +13,12 @@ The default `zuplo.json` file is shown below. The only current valid `version` o
 }
 ```
 
+:::warning
+
+The `zuplo.json` file is not currently shown or editable in the Zuplo portal. Connect your project to source control and edit inside your source control provider or by pushing a local change with git. If your project does not have a `zuplo.json` it can be added using source control
+
+:::
+
 ## Compatibility Date
 
 Zuplo is constantly shipping updates to the underlying runtime of projects. Occasionally, these updates are not backwards compatible. Additionally, Zuplo deploys portions of projects to Cloudflare Workers who also occasionally make non-backward compatible changes. In order to ensure that your project continues to build, deploy and operate as you expect it you can set a compatibility date to lock in the behavior and APIs of the runtime.
