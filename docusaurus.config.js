@@ -41,7 +41,7 @@ const config = {
         blogTitle: "Zuplo Changelog",
         blogSidebarCount: "ALL",
         blogSidebarTitle: "Changelog",
-        routeBasePath: "/changelog",
+        routeBasePath: "changelog",
         path: "./changelog",
         showReadingTime: false,
         postsPerPage: 20,
