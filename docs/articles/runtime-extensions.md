@@ -50,6 +50,12 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 
 ### Hook: OnResponseSending
 
+:::caution
+
+This hook is in beta and will likely change before release.
+
+:::
+
 The `OnResponseSending` hook allows modification of the `Response` immediately before it is sent to the client. The hook provides the `Request` and `Response` and returns a `Response`. To modify the outgoing response create and return a `new Response()`.
 
 The example below shows modifying the response for a specific path.
@@ -69,6 +75,12 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 ```
 
 ### Hook: OnResponseSent
+
+:::caution
+
+This hook is in beta and will likely change before release.
+
+:::
 
 The `OnResponseSent` hook fires immediately after the response is sent to the client. The `Response` in this hook is immutable and the body has been used. This hook is useful for custom performing various tasks like logging or analytics. This hook does not block the response being sent to the client.
 
