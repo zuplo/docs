@@ -42,8 +42,23 @@ If you want to customize this format, you can configure the `problemResponseForm
 import { RuntimeExtensions } from "@zuplo/runtime";
 
 export function runtimeInit(runtime: RuntimeExtensions) {
-  runtime.problemResponseFormat = (problem, request, context) => {
-    return new Response("Custom Error", { status: problem.problem.status });
+  runtime.problemResponseFormat = (
+    { problem, statusText, additionalHeaders },
+    request,
+    context
+  ) => {
+    // Build the response body
+    const body = JSON.stringify(problem, null, 2);
+
+    // Send the response with headers and status
+    return new Response(body, {
+      status: problem.status,
+      statusText,
+      headers: {
+        ...additionalHeaders,
+        "content-type": "application/problem+json",
+      },
+    });
   };
 }
 ```
