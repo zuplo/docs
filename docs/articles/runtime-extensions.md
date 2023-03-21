@@ -65,7 +65,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 
 ### Hook: OnResponseSending
 
-:::caution
+:::warning
 
 This hook is in beta and will likely change before release.
 
@@ -91,7 +91,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 
 ### Hook: OnResponseSent
 
-:::caution
+:::warning
 
 This hook is in beta and will likely change before release.
 
