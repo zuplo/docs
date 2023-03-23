@@ -67,7 +67,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 
 :::warning
 
-This hook is in beta and will likely change before release.
+This hook is in beta and could change before release.
 
 :::
 
@@ -89,26 +89,34 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 }
 ```
 
-### Hook: OnResponseSent
+### Hook: Context OnResponseSendingFinal
 
 :::warning
 
-This hook is in beta and will likely change before release.
+This hook is in beta and could change before release.
 
 :::
 
-The `OnResponseSent` hook fires immediately after the response is sent to the client. The `Response` in this hook is immutable and the body has been used. This hook is useful for custom performing various tasks like logging or analytics. This hook does not block the response being sent to the client.
+The `OnResponseSendingFinal` hook on `ZuploContext` fires immediately after the response is sent to the client. The `Response` in this hook is immutable and the body has been used. This hook is useful for custom performing various tasks like logging or analytics.
 
 ```ts
-import { RuntimeExtensions } from "@zuplo/runtime";
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
 
-export function runtimeInit(runtime: RuntimeExtensions) {
-  runtime.addResponseSentHook(async (request, response) => {
+export async function pluginWithHook(
+  request: ZuploRequest,
+  context: ZuploContext,
+  policyName: string
+) {
+  const cloned = request.clone();
+  context.addResponseSendingFinalHook(async (response) => {
+    const body = await cloned.text();
     await fetch("https://example.com", {
       method: "GET",
-      body: "A response happened",
+      body,
     });
   });
+
+  return new Response(`Original`, { status: 200 });
 }
 ```
 
