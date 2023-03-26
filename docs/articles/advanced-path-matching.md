@@ -53,7 +53,9 @@ Path `/icon-(\d++).png` will match `/icon-1234.png` or any other series of digit
 
 You can also name your regexp groups so that they appear as named parameters.
 
-Path `products/:productId/icons/icon-:imageIndex(\d+).png` will match `/products/pizza/icons/icon-2.png` and produce a `request.params` object as follows:
+`name:(.*)` - will match a wildcard and call the parameter.
+
+For example, the path `products/:productId/icons/icon-:imageIndex(\d+).png` will match `/products/pizza/icons/icon-2.png` and produce a `request.params` object as follows:
 
 ```json
 {
@@ -61,6 +63,13 @@ Path `products/:productId/icons/icon-:imageIndex(\d+).png` will match `/products
   "imageIndex": "2"
 }
 ```
+
+You can write a [URL Rewrite](../handlers/url-rewrite.md) that takes an incoming wildcard and appends it to the backend request, e.g.
+
+Path: `/foo/bar:path(/.*)`
+Incoming URL: `/foo/bar/apple/banana`
+URL Rewrite Pattern: `https://example.com/x${params.path}`
+Outgoing URL: `https://example.com/x/apple/banana`
 
 ## Not supported
 
