@@ -64,3 +64,15 @@ The following table describes feature differences of each Zuplo support plan:
 ## Email Support
 
 For customers with email support, you can contact us at `support@zuplo.com`. Tickets will be responded to as quickly as possible and prioritized based on your support offering.
+
+## Phone Support
+
+Customers with priority phone support can call +1 833-681-6018 to open an urgent support ticket. After dialing the number, you will need to enter your enterprise support code. This is a five digit number that has been provided to you.
+
+After entering your support code a ticket will be opened and our on call support team will reach out to you within a few minutes. We suggest you sign in to discord as well so we can chat in real time.
+
+:::warning
+
+Calling this number will alert our on call team at any hour. Please only use this number for urgent, business critical issues.
+
+:::
