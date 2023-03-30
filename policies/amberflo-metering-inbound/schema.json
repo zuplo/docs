@@ -22,7 +22,7 @@
         },
         "options": {
           "type": "object",
-          "description": "The options for this policy. Many of them can be overriden at the code level in a request using the `AmberfloMeteringPolicy.setRequestProperties` method.",
+          "description": "The options for this policy. Many of them can be overridden at the code level in a request using the `AmberfloMeteringPolicy.setRequestProperties` method.",
           "required": ["apiKey"],
           "properties": {
             "apiKey": {
