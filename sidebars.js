@@ -92,6 +92,7 @@ const sidebars = {
         "articles/advanced-path-matching",
         "articles/lazy-load-configuration-into-cache",
         "articles/handling-form-data",
+        "articles/local-development",
       ],
     },
     {

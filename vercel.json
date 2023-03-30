@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/docs/changelog/",
+      "destination": "/changelog",
+      "permanent": true
+    },
+    {
       "source": "/docs/advanced/custom-domain-setup",
       "destination": "/docs/articles/custom-domains",
       "permanent": true
@@ -428,6 +433,11 @@
     {
       "source": "/docs/runtime/safely-clone-a-request-or-response/",
       "destination": "/docs/articles/safely-clone-a-request-or-response",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/testing-your-api/",
+      "destination": "/docs/articles/testing",
       "permanent": true
     },
     {
