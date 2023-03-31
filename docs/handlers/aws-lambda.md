@@ -58,6 +58,26 @@ For content types, the `binaryMediaTypes` option allows specifying which content
 }
 ```
 
+## X-Amzn-Trace-Id Header
+
+For the purposes of troubleshooting and tracing, it can be useful to return the `X-Amzn-Trace-Id` header in the the response. This can help correlate AWS Lambda events or errors with Zuplo requests/responses. This header is disabled by default, but it can be enabled by setting the configuration option `returnAmazonTraceIdHeader` to `true`.
+
+```json
+{
+  "handler": {
+    "export": "awsLambdaHandler",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "accessKeyId": "$env(AWS_ACCESS_KEY_ID)",
+      "functionName": "demo-post-1",
+      "region": "us-east-2",
+      "secretAccessKey": "$env(AWS_SECURE_ACCESS_KEY)",
+      "returnAmazonTraceIdHeader": true
+    }
+  }
+}
+```
+
 ## Compressed Body Content
 
 :::note
