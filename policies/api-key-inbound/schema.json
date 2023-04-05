@@ -54,7 +54,6 @@
           "export": "ApiKeyInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "bucketName": "CONTACT_SUPPORT_FOR_YOUR_BUCKET_NAME",
             "allowUnauthenticatedRequests": false
           }
         }
