@@ -52,8 +52,8 @@ const verifyFirebaseJwt = async (firebaseJwt) => {
   return decodedToken.payload;
 };
 
-// This will throw an
 try {
+  // This will throw an error if the token is invalid
   const tokenData = await verifyFirebaseJwt(token);
   console.log(`We got a valid token`, tokenData);
 } catch (err) {
