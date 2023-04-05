@@ -1,7 +1,7 @@
 ---
 title: useEffect is trying to kill you
 authors: josh
-tags: [react, rate-limiting, api, useeffect, performance, protection, security]
+tags: [react, rate-limiting, api, useEffect, performance, protection, security]
 description: useEffect can make you your own worst enemy, protect yourself with rate-limiting
 image: https://og-image.zuplo.com/?text=useEffect%20is%20trying%20to%20kill%20you
 ---
