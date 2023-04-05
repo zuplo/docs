@@ -116,6 +116,7 @@ const sidebars = {
                 "policies/okta-jwt-auth-inbound",
                 "policies/cognito-jwt-auth-inbound",
                 "policies/open-id-jwt-auth-inbound",
+                "policies/firebase-jwt-inbound",
                 "policies/supabase-jwt-auth-inbound",
                 "policies/basic-auth-inbound",
                 "policies/mtls-auth-inbound",
