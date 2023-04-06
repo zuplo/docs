@@ -137,10 +137,11 @@ const sidebars = {
             },
             {
               type: "category",
-              label: "Billing & Quotas",
+              label: "Metrics, Billing & Quotas",
               items: [
                 "policies/quota-inbound",
                 "policies/amberflo-metering-inbound",
+                "policies/readme-metrics-inbound",
               ],
             },
             {

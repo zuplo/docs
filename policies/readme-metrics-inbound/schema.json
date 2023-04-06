@@ -45,18 +45,6 @@
               "type": "boolean",
               "description": "Optional - defaults to false. When true, Zuplo sends the full request path (which might contain sensitive information). By default, we only send the route path which should not contain sensitive information."
             },
-            "customerId": {
-              "type": "string",
-              "description": "The default customerId for all metering calls - overridable in code and by `customerIdPropertyPath`"
-            },
-            "dimensions": {
-              "type": "object",
-              "description": "A dictionary of dimensions to be sent to Amberflo (extensible in code)"
-            },
-            "statusCodes": {
-              "type": "array",
-              "description": "A list of successful status codes that should trigger a metering call to Amberflo - defaults to `result.ok` (200-299)."
-            },
             "url": {
               "type": "string",
               "description": "Optional, the URL to send metering events to (defaults to https://metrics.readme.io/request). This is useful for testing purposes."
