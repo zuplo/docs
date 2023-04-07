@@ -10,7 +10,7 @@ The most basic path is `/` which will simple match the root path. You can add ot
 
 ## Trailing Slashes
 
-In URLPattern, trailing slashes are not accepted unless explicitly specified. For examople:
+In URLPattern, trailing slashes are not accepted unless explicitly specified. For example:
 
 - `/cars/:manufacturer`
 
