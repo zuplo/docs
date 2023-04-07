@@ -436,6 +436,16 @@
       "permanent": true
     },
     {
+      "source": "/docs/reference/advanced-path-matching/",
+      "destination": "/docs/articles/advanced-path-matching",
+      "permanent": true
+    },
+    {
+      "source": "/docs/reference/advanced-path-matching",
+      "destination": "/docs/articles/advanced-path-matching",
+      "permanent": true
+    },
+    {
       "source": "/docs/reference/testing-your-api/",
       "destination": "/docs/articles/testing",
       "permanent": true
