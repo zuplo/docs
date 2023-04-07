@@ -8,6 +8,18 @@ However, you can opt to use a more advanced path matching approach based on the 
 
 The most basic path is `/` which will simple match the root path. You can add other static paths like `/foo` and `/foo/bar`
 
+## Trailing Slashes
+
+In URLPattern, trailing slashes are not accepted unless explicitly specified. For examople:
+
+- `/cars/:manufacturer`
+
+Would match `/cars/ford` but not `/cars/ford/`. If you want to support this you must add a little regex to the end of your path, e.g.
+
+- `/cars/:manufacturer{/}?`
+
+Will match both example routes given above.
+
 ## Dynamic Paths
 
 URLPattern supports dynamic matching including a feature that will parameterize parts of the URL. For example:
