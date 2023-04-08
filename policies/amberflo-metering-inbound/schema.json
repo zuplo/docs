@@ -50,8 +50,8 @@
               "description": "A dictionary of dimensions to be sent to Amberflo (extensible in code)"
             },
             "statusCodes": {
-              "type": "array",
-              "description": "A list of successful status codes that should trigger a metering call to Amberflo - defaults to `result.ok` (200-299)."
+              "type": "string",
+              "description": "A list of successful status codes and ranges \"200-299, 304\" that should trigger a metering call to Amberflo - defaults to `result.ok` (200-299) if not set."
             },
             "url": {
               "type": "string",
@@ -70,7 +70,7 @@
             "customerIdPropertyPath": ".data.accountNumber",
             "meterApiName": "api-calls",
             "meterValue": 1,
-            "statusCodes": [200, 201]
+            "statusCodes": "200-299, 304"
           }
         }
       ]
