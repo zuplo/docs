@@ -56,13 +56,12 @@
         {
           "_name": "basic",
           "module": "$import(@zuplo/runtime)",
-          "export": "AmberfloMeteringInboundPolicy",
+          "export": "ReadmeMetricsInboundPolicy",
           "options": {
             "apiKey": "YOUR_API_KEY",
-            "customerIdPropertyPath": ".data.accountNumber",
-            "meterApiName": "api-calls",
-            "meterValue": 1,
-            "statusCodes": [200, 201]
+            "userLabelPropertyPath": ".sub",
+            "development": true,
+            "useFullRequestPath": false
           }
         }
       ]
