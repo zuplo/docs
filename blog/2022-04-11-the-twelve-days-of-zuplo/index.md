@@ -17,3 +17,4 @@ We recently ran a series of videos over twelve days, and they're a great way to 
 9. [Web-form to Airtable in minutes (with bot protection!)](2022-03-25-web-form-to-airtable/index.md)
 10. [The JSFiddle of APIs](2022-03-28-the-jsfiddle-of-apis/index.md)
 11. [Tour of the Zuplo Portal (essential!)](2022-03-29-tour-of-the-portal/index.md)
+12. [A Better AWS API Gateway? For Lambda!?](2022-03-30-a-better-aws-api-gateway/index.md)
