@@ -123,22 +123,3 @@ export async function pluginWithHook(
   return new Response(`Original`, { status: 200 });
 }
 ```
-
-## Plugin and Handler Extensions
-
-Built-in and custom plugins and handlers can expose their own extensibility. The [AWS Lambda handler](../handlers/aws-lambda.md) exposes the ability to customize the event that is sent when invoking the Lambda function.
-
-The example below shows how to use a route's custom property to set the path on the outgoing event to a custom value.
-
-```ts
-import { AwsLambdaHandlerExtensions, RuntimeExtensions } from "@zuplo/runtime";
-
-export function runtimeInit(runtime: RuntimeExtensions) {
-  AwsLambdaHandlerExtensions.addSendingAwsLambdaEventHook(
-    async (request, context, event: AwsLambdaEventV1) => {
-      event.path = context.custom.lambdaPath ?? event.path;
-      return event;
-    }
-  );
-}
-```

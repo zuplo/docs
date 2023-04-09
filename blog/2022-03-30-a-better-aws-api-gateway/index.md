@@ -4,6 +4,12 @@ authors: josh
 tags: [videos, code]
 ---
 
+:::danger
+
+The content in this video is outdated and has been deprecated.
+
+:::
+
 <YouTubeVideo url="https://www.youtube-nocookie.com/embed/PS9p5RtlLWQ" />
 
 Length: 1 minute
