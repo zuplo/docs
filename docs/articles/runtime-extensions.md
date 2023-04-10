@@ -120,6 +120,6 @@ export async function pluginWithHook(
     });
   });
 
-  return new Response(`Original`, { status: 200 });
+  return request;
 }
 ```
