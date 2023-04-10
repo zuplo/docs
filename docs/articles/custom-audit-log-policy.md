@@ -9,7 +9,7 @@ Adding Audit Logging to your APIs that are secured with Zuplo is as easy as addi
 
 ## Example Policy: WorkOS Audit Logs
 
-WorkOS provides various services that help enable enterprise features on your service such as SSO and Audit Logs. With Zuplo it is easy to create a [custom policy](/docs/policies/custom-code-inbound) that uses [runtime hooks](./runtime-extensions.md) to log API calls using their API.
+[WorkOS](https://workos.com/) provides various services that help enable enterprise features on your service such as SSO and Audit Logs. With Zuplo it is easy to create a [custom policy](/docs/policies/custom-code-inbound) that uses [runtime hooks](./runtime-extensions.md) to log API calls using their API.
 
 ```ts
 import { ZuploContext, ZuploRequest, environment } from "@zuplo/runtime";
