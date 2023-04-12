@@ -20,7 +20,7 @@ my-project/
 ```
 
 - **config/routes.oas.json** - This is your Open API specification that contains the full structure of your API project. [Documentation](./dev-portal-configuration.md)
-- **docs/index.md** - Markdown files are used to include additional documentation in your developer portal. By default an `index.md` file is created. [Documentation](./dev-portal-docs.md)
+- **docs/index.md** - Markdown files are used to include additional documentation in your developer portal. By default an `index.md` file is created. [Documentation](./dev-portal-adding-pages.md)
 - **docs/sidebar.json** - This file contains the configuration for your sidebar and menus on the developer portal. [Documentation](./dev-portal-configuring-sidebar.md)
 - **docs/theme.css** - The developer portal theme can be customized with CSS variables (or even custom CSS) in order to match your branding. [Documentation](./dev-portal-theme.md)
 - **docs/dev-portal.json** - This is the primary configuration for your developer portal with customization for the favicon, authentication settings, etc. [Documentation](./dev-portal-json.md)
