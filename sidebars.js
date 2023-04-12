@@ -225,9 +225,11 @@ const sidebars = {
             "articles/developer-portal",
             "articles/dev-portal-setup",
             "articles/dev-portal-configuration",
+            "articles/dev-portal-auth",
             "articles/dev-portal-theme",
             "articles/dev-portal-adding-pages",
             "articles/dev-portal-configuring-sidebar",
+            "articles/dev-portal-json",
           ],
         },
         {
