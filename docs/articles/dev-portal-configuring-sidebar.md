@@ -1,5 +1,5 @@
 ---
-title: Configuring Your Sidebar
+title: Sidebar Configuration
 ---
 
 You can configure your Developer Portal Sidebar through the `sidebar.json` file. This file allows you to determine which pages get displayed, their labels, and their order.
