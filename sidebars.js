@@ -199,6 +199,7 @@ const sidebars = {
                 "policies/archive-response-outbound",
                 "policies/custom-code-inbound",
                 "policies/custom-code-outbound",
+                "policies/upstream-azure-ad-service-auth-inbound-policy",
                 "policies/upstream-gcp-jwt-inbound",
               ],
             },
