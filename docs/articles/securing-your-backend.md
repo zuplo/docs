@@ -16,9 +16,12 @@ This is the most popular option and is used by companies like Supabase, Firebase
 
 This is a new option where you can configure your cloud service (e.g. GCP or AWS) to trust a JWT token created by the Zuplo runtime. If you're interested in using this option please contact us at `support@zuplo.com`.
 
-## 3/ Upstream GCP JWT Token
+## 3/ Upstream Service Authentication
 
-For GCP users, you can use our [Upstream GCP JWT](../policies/upstream-gcp-jwt-inbound.md) policy. This uses a service.json credential to create JWT tokens that Zuplo will send to requests to GCP.
+Utilize the IAM controls provided by your Cloud host to secure inbound requests and allow only authorized service principals access to your service.
+
+- For Azure users, you can user our [Upstream Azure AD Service Auth](../policies/upstream-azure-ad-service-auth-inbound-policy.md) policy. This uses Azure AD App registrations to create a token that Zuplo will send to requests to Azure.
+- For GCP users, you can use our [Upstream GCP JWT](../policies/upstream-gcp-jwt-inbound.md) policy. This uses a service.json credential to create JWT tokens that Zuplo will send to requests to GCP.
 
 ## 4/ mTLS Authentication
 
