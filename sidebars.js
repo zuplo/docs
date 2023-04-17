@@ -200,7 +200,7 @@ const sidebars = {
                 "policies/custom-code-inbound",
                 "policies/custom-code-outbound",
                 "policies/upstream-azure-ad-service-auth-inbound",
-                "policies/upstream-gcp-service-auth",
+                "policies/upstream-gcp-service-auth-inbound",
                 "policies/upstream-gcp-jwt-inbound",
               ],
             },
