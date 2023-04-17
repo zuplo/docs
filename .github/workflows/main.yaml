@@ -49,15 +49,7 @@ jobs:
         with:
           project_id: zuplo-production
 
-      - run: npm install
-      - run: npm run build
       - run: gsutil -h "Content-Type:application/json" cp ./policies.v3.json gs://cdn.zuplo.com/portal/policies.v3.json
-
-      - uses: darrenjennings/algolia-docsearch-action@e3b8c5540e90a964b655be6ca73c1ee1aeba2719
-        with:
-          algolia_application_id: E7EUGPZYED
-          algolia_api_key: ${{ secrets.ALGOLIA_API_KEY }}
-          file: crawler.json
 
       - name: Trigger Portal Release
         run: |
@@ -67,3 +59,15 @@ jobs:
           -H "Authorization: token ${{ secrets.GH_CUSTOM_TOKEN }}" \
           https://api.github.com/repos/zuplo/portal/actions/workflows/25079060/dispatches \
           -d '{"ref":"refs/heads/main"}'
+
+  search:
+    name: Index Search
+    runs-on: ubuntu-latest
+    needs: [release]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: darrenjennings/algolia-docsearch-action@e3b8c5540e90a964b655be6ca73c1ee1aeba2719
+        with:
+          algolia_application_id: E7EUGPZYED
+          algolia_api_key: ${{ secrets.ALGOLIA_API_KEY }}
+          file: crawler.json
