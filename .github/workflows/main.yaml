@@ -1,10 +1,13 @@
 name: Release
-on: push
+on:
+  - deployment_status
+  - workflow_dispatch
 
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    if: github.event.deployment_status.state == 'success' && github.event.deployment_status.creator.login == 'vercel[bot]' && github.event.deployment.production_environment == true
 
     env:
       GITHUB_NPM_TOKEN: ${{ secrets.GH_CUSTOM_TOKEN }}
