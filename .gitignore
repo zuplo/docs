@@ -27,3 +27,4 @@ yarn-error.log*
 /policies.*.json
 
 yarn.lock
+.vercel
