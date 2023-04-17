@@ -226,6 +226,15 @@ async function run() {
     meta.documentationUrl = `https://zuplo.com/docs/policies/${policyId}/`;
     meta.id = policyId;
 
+    if (policyId.endsWith("-policy")) {
+      console.error(
+        chalk.red(
+          `ERROR: Policy ID '${policyId}' should not end with '-policy'.`
+        )
+      );
+      process.exit(1);
+    }
+
     const { examples } = schema.properties?.handler as any;
     if (examples && examples.length > 0) {
       const example = { ...examples[0] };
