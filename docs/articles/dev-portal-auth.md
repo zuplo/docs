@@ -8,13 +8,13 @@ Out of the box, authentication to your developer portal uses Zuplo's test Auth0 
 
 If you don't have an Auth0 account, you can sign up for a [free Auth0 account](https://auth0.com/signup) that will provide you will 7,000 monthly active users.
 
-### 1. Create Auth0 Application
+### 1/ Create Auth0 Application
 
 [Create a new Auth0 application](https://auth0.com/docs/get-started/auth0-overview/create-applications) in the Auth0 dashboard. When creating the application select type "Single Page Web Applications"
 
 <SizedImage src="https://cdn.zuplo.com/assets/0aaa56b6-37c4-4c87-ac62-d86bc52047e3.png" maxWidth="70%" />
 
-### 2. Configure Auth0 Application
+### 2/ Configure Auth0 Application
 
 You must set the following fields in the Auth0 application:
 
@@ -38,7 +38,7 @@ You must set the following fields in the Auth0 application:
 - **Inactivity Expiration**: Enabled
 - **Inactivity Lifetime**: Can be whatever you want, default is `1296000`
 
-### 3. Create an Auth0 API
+### 3/ Create an Auth0 API
 
 [Create an API](https://auth0.com/docs/get-started/auth0-overview/set-up-apis) in the Auth0 portal. Set the **Identifier** to something like `https://api.my-domain.com/`.
 
@@ -50,7 +50,7 @@ The identifier is commonly a URI, but it doesn't have to be, nor does the URI ha
 
 <SizedImage src="https://cdn.zuplo.com/assets/d91471bd-5897-463e-805c-35abba294616.png" maxWidth="70%" />
 
-### 4. Configure the Developer Portal
+### 4/ Configure the Developer Portal
 
 Inside of the Zuplo Developer portal navigate to the <CodeEditorTabIcon /> **Code Editor** tab and open the `dev-portal.json` file. You can [edit the JSON manually](./dev-portal-json.md), but in this tutorial we will use the UI editor.
 
