@@ -20,7 +20,7 @@ This is a new option where you can configure your cloud service (e.g. GCP or AWS
 
 Utilize the IAM controls provided by your Cloud host to secure inbound requests and allow only authorized service principals access to your service.
 
-- For Azure users, you can user our [Upstream Azure AD Service Auth](../policies/upstream-azure-ad-service-auth-inbound-policy.md) policy. This uses Azure AD App registrations to create a token that Zuplo will send to requests to Azure.
+- For Azure users, you can user our [Upstream Azure AD Service Auth](../policies/upstream-azure-ad-service-auth-inbound.md) policy. This uses Azure AD App registrations to create a token that Zuplo will send to requests to Azure.
 
 - For GCP users, you can use our [Upstream GCP Service AUth](../policies/upstream-gcp-service-auth-inbound.md) or [Upstream GCP JWT](../policies/upstream-gcp-jwt-inbound.md) policies. These use a service.json credential to create or issue JWT tokens that Zuplo will send to requests to GCP.
 
