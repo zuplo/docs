@@ -1,16 +1,18 @@
 name: Release
 on:
-  - deployment_status
-  - workflow_dispatch
+  push:
+    branches:
+      - main
 
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    if: github.event.deployment_status.state == 'success' && github.event.deployment_status.creator.login == 'vercel[bot]' && github.event.deployment.production_environment == true
 
     env:
       GITHUB_NPM_TOKEN: ${{ secrets.GH_CUSTOM_TOKEN }}
+      VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
 
     permissions:
       id-token: "write"
@@ -24,8 +26,16 @@ jobs:
           node-version: 18.x
           cache: "npm"
 
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+
       - id: "auth"
-        if: github.ref == 'refs/heads/main'
         name: "Authenticate to Google Cloud"
         uses: "google-github-actions/auth@v1"
         with:
@@ -35,7 +45,6 @@ jobs:
           access_token_lifetime: "300s"
 
       - name: Set up Cloud SDK
-        if: github.ref == 'refs/heads/main'
         uses: google-github-actions/setup-gcloud@v1.1.0
         with:
           project_id: zuplo-production
@@ -43,17 +52,14 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: gsutil -h "Content-Type:application/json" cp ./policies.v3.json gs://cdn.zuplo.com/portal/policies.v3.json
-        if: github.ref == 'refs/heads/main'
 
       - uses: darrenjennings/algolia-docsearch-action@e3b8c5540e90a964b655be6ca73c1ee1aeba2719
-        if: github.ref == 'refs/heads/main'
         with:
           algolia_application_id: E7EUGPZYED
           algolia_api_key: ${{ secrets.ALGOLIA_API_KEY }}
           file: crawler.json
 
       - name: Trigger Portal Release
-        if: github.ref == 'refs/heads/main'
         run: |
           curl \
           -X POST \
