@@ -29,6 +29,7 @@ Watch this 2-minute demo to see what makes Zuplo different in this [Demo video](
 <YouTubeVideo url="https://www.youtube-nocookie.com/embed/FMvGJ3dC74M" />
 
 <br/>
+
 Ready to start? [Sign up for free](http://portal.zuplo.com/signup) and explore the todo-list sample.
 
 Come talk APIs with us and other developers [Join our community on Discord](https://discord.gg/8QbEjr2MgZ).
