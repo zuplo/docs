@@ -30,6 +30,6 @@ Mutual Certificate authentication allows the configuration of a trust relationsh
 
 ## 5/ Secure Tunneling
 
-Used by some of our larger customers, our [secure tunnels](./secure-tunnel.md) allow you to create a WireGuard based tunnel from your VPC or private data-center that connects directly to your Zuplo gateway. In this solution, your backend API does not need to be exposed to the internet at all. This is a more complex setup and is only available on our [enterprise plan](https://zuplo.com/pricing).
+Used by some of our larger customers, our [secure tunnels](./secure-tunnel.md) allow you to create a WireGuard based tunnel from your VPC or private data-center that connects directly to your Zuplo gateway. This option is generally useful when running workloads in a non-cloud provider (i.e. bare metal, on premises, etc.) that do not have IAM or mTLS capabilities. In this solution, your backend API does not need to be exposed to the internet at all. This is a more complex setup and is only available on our [enterprise plan](https://zuplo.com/pricing).
 
 To discuss security and connectivity options, our [discord channel](https://discord.gg/8QbEjr2MgZ) is a great community, with active participation from the Zuplo team.
