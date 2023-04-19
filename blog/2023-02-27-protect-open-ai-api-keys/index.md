@@ -117,6 +117,11 @@ curl https://open-ai-main-298dc8d.d2.zuplo.dev/v1/my-completions \
 
 However, what if you want to support EventSource in the browser? That is easy to accomplish with Zuplo also by taking the incoming GET request created by EventSource and translating it into a POST request, with the appropriate headers and body inside Zuplo.
 
+:::tip
+Event streaming doesn't work fully on 'working-copy' but works great on your
+'edge deployments'. Read more about [environments](https://zuplo.com/docs/articles/environments) to promote to an edge deployment.
+:::
+
 Create a new route:
 
 - Summary: `My OpenAI Completions for Browser Event Source`
