@@ -2,7 +2,15 @@
 title: Secure Tunnel
 ---
 
-One of the most secure ways to connect Zuplo to your API is through a secure tunnel. The way this system works is by deploying a small service inside your network or VPC that makes a secure outbound connection to Zuplo's infrastructure. Your Zuplo API Gateway can then use this tunnel to securely route traffic to your private API. The benefits of a secure tunnel are:
+::: caution
+
+Secure tunnels are complicated to run and should typically only be used for customers with advanced scenarios or who run on bare metal. For other customers we recommend one of our other ways of [securing your backend](./securing-your-backend.md).
+
+:::
+
+For customers running on bare metal, on-premises, or other non-cloud providers tunnels provides a way to secure your backend without mTLS or IAM.
+
+The way this system works is by deploying a small service inside your network or VPC that makes a secure outbound connection to Zuplo's infrastructure. Your Zuplo API Gateway can then use this tunnel to securely route traffic to your private API. The benefits of a secure tunnel are:
 
 1. Because the tunnel makes an outbound connection, there is no need for your API to be exposed on the internet at all.
 2. All traffic between Zuplo and your API is fully encrypted.
