@@ -191,6 +191,15 @@ const sidebars = {
             },
             {
               type: "category",
+              label: "Upstream Authentication",
+              items: [
+                "policies/upstream-azure-ad-service-auth-inbound",
+                "policies/upstream-gcp-service-auth-inbound",
+                "policies/upstream-gcp-jwt-inbound",
+              ],
+            },
+            {
+              type: "category",
               label: "Other",
               items: [
                 "policies/composite-inbound",
@@ -199,9 +208,6 @@ const sidebars = {
                 "policies/archive-response-outbound",
                 "policies/custom-code-inbound",
                 "policies/custom-code-outbound",
-                "policies/upstream-azure-ad-service-auth-inbound",
-                "policies/upstream-gcp-service-auth-inbound",
-                "policies/upstream-gcp-jwt-inbound",
               ],
             },
           ],
