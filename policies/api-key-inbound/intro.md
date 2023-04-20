@@ -1,1 +1,1 @@
-This policy is in beta. Use the original API key policy or contact `support@zuplo.com` to request a bucketName for this policy.
+This policy uses the managed API key storage provided by Zuplo. `allowUnauthenticatedRequests` defaults to false and rejects any request without a valid API key (returning a `401 - Unauthorized` response). You can override (set `"allowUnauthenticatedRequests" : true`) this to support multiple authentication methods or support both authenticated and anonymous requests.
