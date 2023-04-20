@@ -137,7 +137,7 @@ Expand the policies section and add the same policies (note you can reuse polici
 
 ![existing policies](existing-policies.png)
 
-- api-key-auth-inbound
+- api-key-inbound
 - clear-headers-inbound
 - set-headers-inbound
 

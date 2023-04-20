@@ -57,7 +57,7 @@ To add a new API Key Consumer click the **Add new consumer** button and complete
 
 ## API Key Authentication & Authorization
 
-Each route in your API that you want to be secured with API Key Authentication must be configured with the [API Key Authentication Policy](../policies/api-key-auth-inbound.md). This policy ensures that callers to the route have a valid API key and authenticates the `user` of the request.
+Each route in your API that you want to be secured with API Key Authentication must be configured with the [API Key Authentication Policy](../policies/api-key-inbound.md). This policy ensures that callers to the route have a valid API key and authenticates the `user` of the request.
 
 The API Key Consumer's `metadata` and `sub` are set as the `request.user` object on each request that is authenticated with the API Key Authentication policy. This data can be used to perform authorization, routing, etc. for each request.
 

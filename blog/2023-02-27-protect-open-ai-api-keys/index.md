@@ -19,7 +19,7 @@ You can use a Zuplo gateway to store your API keys and enforce a number of layer
 Zuplo allows you to easily perform authentication translation, that is, change the authentication method your clients use. For example you might require your clients to use
 
 - [JWT tokens](/docs/policies/open-id-jwt-auth-inbound)
-- [API Keys](/docs/policies/api-key-auth-inbound) issued to each of _your_ customers (different to your OpenAI key, so you can identify each individual customer)
+- [API Keys](/docs/policies/api-key-inbound) issued to each of _your_ customers (different to your OpenAI key, so you can identify each individual customer)
 - **Anonymously** in a web browser — but ensure the call is coming from the right origin, enforce CORS and rate-limit by IP etc.
 
 ## Setting up Zuplo to send the API Key
@@ -94,7 +94,7 @@ Look no API key 👏 - but your request should work fine as Zuplo will add the k
 You now have several choices to secure Zuplo.
 
 1. Require your users to login (with a service like Auth0) and then use an [Auth0 JWT with Zuplo](/docs/policies/auth0-jwt-auth-inbound).
-2. Issue API Keys to all your users using [Zuplo's API Key Service](/docs/policies/api-key-auth-inbound).
+2. Issue API Keys to all your users using [Zuplo's API Key Service](/docs/policies/api-key-inbound).
 3. Host anonymously but add additional safe guards, including requiring a specific Origin and strict CORS using [custom CORS policies](/docs/articles/custom-cors-policy).
 
 Make sure to add [rate limiting](/docs/articles/step-3-add-rate-limiting) - based on user or maybe IP (for anonymous use case).
