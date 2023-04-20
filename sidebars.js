@@ -111,7 +111,7 @@ const sidebars = {
               type: "category",
               label: "Authentication",
               items: [
-                "policies/api-key-auth-inbound",
+                "policies/api-key-inbound",
                 "policies/auth0-jwt-auth-inbound",
                 "policies/okta-jwt-auth-inbound",
                 "policies/cognito-jwt-auth-inbound",
