@@ -228,6 +228,15 @@ const sidebars = {
         },
         {
           type: "category",
+          label: "Api Keys",
+          items: [
+            "articles/api-key-management",
+            "articles/api-key-api",
+            "articles/api-key-info",
+          ],
+        },
+        {
+          type: "category",
           label: "Developer Portal",
           items: [
             "articles/developer-portal",
