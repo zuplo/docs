@@ -278,6 +278,11 @@ const sidebars = {
       id: "articles/support",
     },
     {
+      type: "link",
+      label: "Changelog",
+      href: "/changelog",
+    },
+    {
       type: "doc",
       id: "articles/security",
     },
