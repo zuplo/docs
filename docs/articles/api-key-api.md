@@ -1,4 +1,7 @@
-# Zuplo API Key Service
+---
+title: Zuplo API Key Service
+sidebar_label: API Key Service
+---
 
 Zuplo runs a globally distributed API Key management service that scales to handle billions of daily key validation requests while maintaining low latency from any region around the world.
 
