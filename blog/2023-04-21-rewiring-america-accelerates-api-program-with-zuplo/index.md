@@ -4,7 +4,6 @@ authors: josh
 tags: [zuplo, api-key, rate-limiting, developer-portal, api, customer]
 description: A discussion with Tom Carden of Rewiring America about how they
 image: https://og-image.zuplo.com/?text=Rewiring%20America%20Accelerates%20API%20Program%20with%20Zuplo
-draft: true
 ---
 
 I recently got to interview Tom Carden, Head of Engineering at Rewiring America, where he spoke about how they deployed Zuplo’s API Management platform to accelerate their API program.
@@ -23,4 +22,4 @@ Tom also described the value of using Zuplo versus building a solution in-house,
 
 With Zuplo's help, Rewiring America can focus on its mission to help Americans upgrade the machines they depend on and avoid reinventing the wheel when it comes to offering a great developer experience to users of their API.
 
-[Check out the recorded interview here](https://youtu.be/wUKLrNIRC_8).
+<YouTubeVideo url="https://www.youtube-nocookie.com/embed/wUKLrNIRC_8" />
