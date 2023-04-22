@@ -9,7 +9,7 @@ Sometimes multiple types of authentication are needed on an API. For example, an
 
 JWT and API Key authentication can be handled by adding three policies to a route (or using [composite policies](../policies/composite-inbound.md) to keep everything organized). The three policies required are:
 
-1. [API Key Authentication Policy](../policies/api-key-auth-inbound.md)
+1. [API Key Authentication Policy](../policies/api-key-inbound.md)
 1. [Any JWT Authentication Policy](../policies/open-id-jwt-auth-inbound.md)
 1. [A Custom Policy](../policies/custom-code-inbound.md)
 

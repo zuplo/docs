@@ -57,7 +57,7 @@ To add a new API Key Consumer click the **Add new consumer** button and complete
 
 ## API Key Authentication & Authorization
 
-Each route in your API that you want to be secured with API Key Authentication must be configured with the [API Key Authentication Policy](../policies/api-key-auth-inbound.md). This policy ensures that callers to the route have a valid API key and authenticates the `user` of the request.
+Each route in your API that you want to be secured with API Key Authentication must be configured with the [API Key Authentication Policy](../policies/api-key-inbound.md). This policy ensures that callers to the route have a valid API key and authenticates the `user` of the request.
 
 The API Key Consumer's `metadata` and `sub` are set as the `request.user` object on each request that is authenticated with the API Key Authentication policy. This data can be used to perform authorization, routing, etc. for each request.
 
@@ -90,11 +90,3 @@ The `request.user` object can be used in both [handlers](../handlers/custom-hand
 When API Key Managers log into the Developer Portal they can copy, manage, or create new API Keys.
 
 ![API Keys in Developer Portal](./api-key-management-media/api-key-dev-portal.png)
-
-## API Key Leak Prevention
-
-API keys should never be stored in source control. Accidentally committing API keys to source control is a common attack vector that leads to compromises of organizations both large and small.
-
-Zuplo participates in [GitHub's Secret Scanning](https://docs.github.com/en/code-security/secret-scanning/about-secret-scanning) program to detect if your or your customer's API Keys are accidentally checked into source control on GitHub.
-
-If an API Key for your Zuplo API Gateway is compromised by checking it into a public or private GitHub repository, Zuplo will be notified and take action almost immediately. Depending on your API's configuration Zuplo will either alert you of the potential compromise or immediately revoke the API Key and alert you and/or your customer.

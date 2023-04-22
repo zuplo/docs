@@ -714,6 +714,11 @@
       "source": "/docs/guides/proxy-a-request-with-body{/}?",
       "destination": "/docs/articles/step-1-setup-basic-gateway",
       "permanent": true
+    },
+    {
+      "source": "/docs/articles/api-key-formats{/}?",
+      "destination": "/docs/articles/api-key-info",
+      "permanent": true
     }
   ]
 }

@@ -111,7 +111,7 @@ const sidebars = {
               type: "category",
               label: "Authentication",
               items: [
-                "policies/api-key-auth-inbound",
+                "policies/api-key-inbound",
                 "policies/auth0-jwt-auth-inbound",
                 "policies/okta-jwt-auth-inbound",
                 "policies/cognito-jwt-auth-inbound",
@@ -191,6 +191,15 @@ const sidebars = {
             },
             {
               type: "category",
+              label: "Upstream Authentication",
+              items: [
+                "policies/upstream-azure-ad-service-auth-inbound",
+                "policies/upstream-gcp-service-auth-inbound",
+                "policies/upstream-gcp-jwt-inbound",
+              ],
+            },
+            {
+              type: "category",
               label: "Other",
               items: [
                 "policies/composite-inbound",
@@ -199,9 +208,6 @@ const sidebars = {
                 "policies/archive-response-outbound",
                 "policies/custom-code-inbound",
                 "policies/custom-code-outbound",
-                "policies/upstream-azure-ad-service-auth-inbound",
-                "policies/upstream-gcp-service-auth-inbound",
-                "policies/upstream-gcp-jwt-inbound",
               ],
             },
           ],
@@ -218,6 +224,15 @@ const sidebars = {
             "handlers/url-rewrite",
             "handlers/custom-handler",
             "handlers/redirect",
+          ],
+        },
+        {
+          type: "category",
+          label: "Api Keys",
+          items: [
+            "articles/api-key-management",
+            "articles/api-key-api",
+            "articles/api-key-info",
           ],
         },
         {
@@ -261,6 +276,11 @@ const sidebars = {
     {
       type: "doc",
       id: "articles/support",
+    },
+    {
+      type: "link",
+      label: "Changelog",
+      href: "/changelog",
     },
     {
       type: "doc",
