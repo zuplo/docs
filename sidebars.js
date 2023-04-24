@@ -268,7 +268,7 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Command-line interface (CLI)",
+          label: "Zuplo CLI",
           link: {
             type: "doc",
             id: "cli/index",
