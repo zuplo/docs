@@ -172,8 +172,8 @@ const config = {
                 href: "https://twitter.com/zuplo",
               },
               {
-                label: "Stack Overflow",
-                href: "https://stackoverflow.com/questions/tagged/zuplo",
+                label: "LinkedIn",
+                href: "https://www.linkedin.com/company/75040051/admin/",
               },
             ],
           },
