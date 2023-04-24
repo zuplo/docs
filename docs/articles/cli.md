@@ -26,18 +26,44 @@ zup deploy --help
 
 ## Commands
 
-### deploy
-
-Deploys current Git branch of the current directory
-
-```bash
-zup deploy
 ```
+zup <command>
 
-Options:
---version Show version number [boolean]
---help Show help [boolean]
---api-key The API Key from Zuplo [string] [required]
---verify-remote Verify that this Git repository matches the one configured on
-Zuplo. Use --no-verify-remote to disable.
-[boolean] [default: true]
+Commands:
+  zup convert  Converts routes.json to routes.oas.json
+  zup delete   Deletes the zup at the URL
+  zup deploy   Deploys current Git branch of the current directory
+  zup list     Lists all deployed zups
+  zup test     Runs the tests under /tests against an endpoint
+  zup tunnel   Tunnel commands
+  zup variable Environment Variable commands
+
+zup tunnel
+
+Tunnel commands
+
+Commands:
+  zup tunnel create        Creates a new tunnel in your account
+  zup tunnel delete        Deletes a tunnel in your account
+  zup tunnel describe      Describes a tunnel in your account
+  zup tunnel list          Lists the tunnels in your account
+  zup tunnel rotate-token  Rotates the token for a tunnel in your account
+  zup tunnel services      Tunnel services commands
+
+zup tunnel services
+
+Tunnel services commands
+
+Commands:
+  zup tunnel services describe  Describes the services for this tunnel
+  zup tunnel services update    Updates the services for this tunnel
+
+
+zup variable
+
+Variable commands
+
+Commands:
+  zup variable create      Creates a new variable for a branch
+  zup variable update      Updates an existing variable for a branch
+```

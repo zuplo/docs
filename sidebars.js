@@ -266,6 +266,10 @@ const sidebars = {
             "articles/zp-body-removed",
           ],
         },
+        {
+          type: "doc",
+          id: "articles/cli",
+        },
       ],
     },
     {
