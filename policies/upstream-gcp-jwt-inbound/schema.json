@@ -2,9 +2,9 @@
   "$schema": "https://json-schema.org/draft-07/schema",
   "$id": "http://zuplo.com/schemas/policies/upstream-gcp-jwt-policy.json",
   "type": "object",
-  "title": "Upstream GCP JWT",
+  "title": "Upstream GCP Self-Signed JWT",
   "isPreview": false,
-  "description": "Creates a JWT token (generated using a Google Service Account JSON) and attaches it to the outgoing request. Useful when calling GCP services like Cloud Endpoints / ESPv2",
+  "description": "Creates a self-signed JWT token (generated using a Google Service Account JSON) and attaches it to the outgoing request. Useful when calling GCP services like Cloud Endpoints / ESPv2",
   "required": ["handler"],
   "properties": {
     "handler": {
