@@ -719,6 +719,11 @@
       "source": "/docs/articles/api-key-formats{/}?",
       "destination": "/docs/articles/api-key-info",
       "permanent": true
+    },
+    {
+      "source": "/docs/articles/cli{/}?",
+      "destination": "/docs/cli",
+      "permanent": true
     }
   ]
 }
