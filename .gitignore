@@ -22,6 +22,7 @@ yarn-error.log*
 .env
 
 /docs/policies/
+src/components/bundles.json
 
 
 /policies.*.json
