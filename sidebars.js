@@ -267,8 +267,20 @@ const sidebars = {
           ],
         },
         {
-          type: "doc",
-          id: "articles/cli",
+          type: "category",
+          label: "Command-line interface (CLI)",
+          link: {
+            type: "doc",
+            id: "cli/index",
+          },
+          items: [
+            "cli/installation",
+            "cli/authentication",
+            "cli/convert",
+            "cli/deployments",
+            "cli/tunnels",
+            "cli/variables",
+          ],
         },
       ],
     },
