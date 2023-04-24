@@ -11,7 +11,7 @@ To install the Zuplo CLI:
 npm install @zuplo/cli -g
 ```
 
-Upgrading to the lastest version can be done by running:
+Upgrading to the latest version can be done by running:
 
 ```bash
 npm install @zuplo/cli@latest -g
