@@ -2,7 +2,7 @@
 title: Secure Tunnel
 ---
 
-::: caution
+:::caution
 
 Secure tunnels are complicated to run and should typically only be used for customers with advanced scenarios or who run on bare metal. For other customers we recommend one of our other ways of [securing your backend](./securing-your-backend.md).
 
