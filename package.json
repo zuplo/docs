@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "concurrently \"npm run start:policies\" \"npm run start:docusaurus\"",
+    "start": "npm run ci:bundles && concurrently \"npm run start:policies\" \"npm run start:docusaurus\"",
     "start:policies": "ts-node --esm ./scripts/update-policies.tsx --watch",
     "start:docusaurus": "node ./scripts/check-prepared.mjs && docusaurus start --port 3002",
     "build": "npm run ci:pre && docusaurus build",
