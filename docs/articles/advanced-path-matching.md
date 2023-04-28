@@ -2,19 +2,33 @@
 title: Advanced Path Matching
 ---
 
-By default, path matching in Zuplo uses the OpenAPI slug format, e.g. `/pizza/{size}` where **size** would be a URL parameter, with the value passed into the runtime as `request.params.size` property.
+By default, path matching in Zuplo uses the OpenAPI slug format, e.g.
+`/pizza/{size}` where **size** would be a URL parameter, with the value passed
+into the runtime as `request.params.size` property.
 
-However, you can opt to use a more advanced path matching approach based on the web standard [URLPattern](https://developer.mozilla.org/en-US/docs/Web/API/URLPattern).
+However, you can opt to use a more advanced path matching approach based on the
+web standard
+[URLPattern](https://developer.mozilla.org/en-US/docs/Web/API/URLPattern).
 
-The most basic path is `/` which will simple match the root path. You can add other static paths like `/foo` and `/foo/bar`
+The most basic path is `/` which will simple match the root path. You can add
+other static paths like `/foo` and `/foo/bar`
+
+:::tip
+
+Use [URLPattern.com](https://urlpattern.com) to test your URL Patterns in the
+browser.
+
+:::
 
 ## Trailing Slashes
 
-In URLPattern, trailing slashes are not accepted unless explicitly specified. For example:
+In URLPattern, trailing slashes are not accepted unless explicitly specified.
+For example:
 
 - `/cars/:manufacturer`
 
-Would match `/cars/ford` but not `/cars/ford/`. If you want to support this you must add a little regex to the end of your path, e.g.
+Would match `/cars/ford` but not `/cars/ford/`. If you want to support this you
+must add a little regex to the end of your path, e.g.
 
 - `/cars/:manufacturer{/}?`
 
@@ -22,7 +36,8 @@ Will match both example routes given above.
 
 ## Dynamic Paths
 
-URLPattern supports dynamic matching including a feature that will parameterize parts of the URL. For example:
+URLPattern supports dynamic matching including a feature that will parameterize
+parts of the URL. For example:
 
 Path: `/products/:productId/sizes/:size` will match the following paths
 
@@ -43,7 +58,8 @@ Query-strings (or search parameters) will not affect path matching.
 
 ## Regular Expressions and Wildcards
 
-You can also use regular expressions in your paths. They must be contained in `()`.
+You can also use regular expressions in your paths. They must be contained in
+`()`.
 
 **Examples**
 
@@ -51,7 +67,8 @@ Path `/(.*)` will match anything.
 
 :::note
 
-This is a true wildcard route and can be used for custom 404s by making this the last route in your routes.json (and matching all methods).
+This is a true wildcard route and can be used for custom 404s by making this the
+last route in your routes.json (and matching all methods).
 
 :::
 
@@ -59,7 +76,8 @@ Path `/(a?b)` will match either `/ab` or `/b`.
 
 Path `/main/(a|b)` will match `/main/a` or `/main/b`.
 
-Path `/icon-(\d++).png` will match `/icon-1234.png` or any other series of digits for 1234.
+Path `/icon-(\d++).png` will match `/icon-1234.png` or any other series of
+digits for 1234.
 
 ## Named groups
 
@@ -67,7 +85,9 @@ You can also name your regexp groups so that they appear as named parameters.
 
 `name:(.*)` - will match a wildcard and call the parameter.
 
-For example, the path `products/:productId/icons/icon-:imageIndex(\d+).png` will match `/products/pizza/icons/icon-2.png` and produce a `request.params` object as follows:
+For example, the path `products/:productId/icons/icon-:imageIndex(\d+).png` will
+match `/products/pizza/icons/icon-2.png` and produce a `request.params` object
+as follows:
 
 ```json
 {
@@ -76,16 +96,17 @@ For example, the path `products/:productId/icons/icon-:imageIndex(\d+).png` will
 }
 ```
 
-You can write a [URL Rewrite](../handlers/url-rewrite.md) that takes an incoming wildcard and appends it to the backend request, e.g.
+You can write a [URL Rewrite](../handlers/url-rewrite.md) that takes an incoming
+wildcard and appends it to the backend request, e.g.
 
-Path: `/foo/bar:path(/.*)`
-Incoming URL: `/foo/bar/apple/banana`
-URL Rewrite Pattern: `https://example.com/x${params.path}`
-Outgoing URL: `https://example.com/x/apple/banana`
+Path: `/foo/bar:path(/.*)` Incoming URL: `/foo/bar/apple/banana` URL Rewrite
+Pattern: `https://example.com/x${params.path}` Outgoing URL:
+`https://example.com/x/apple/banana`
 
 ## Not supported
 
-Note that not all regex features are available, us of the following will either be ignored or result in an error, including
+Note that not all regex features are available, us of the following will either
+be ignored or result in an error, including
 
 - `(?:...)` - named matches
 - `^` or `$` - start or end of string
