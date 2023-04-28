@@ -19,20 +19,7 @@ const config = {
     mermaid: true,
   },
   plugins: [
-    [
-      "docusaurus-plugin-segment",
-      {
-        apiKey: "uk7yI6FDWqqcOtpA4u3Dx1FcfskzMnBt",
-        host: "sg.zuplo.com",
-        ajsPath: "/a/v1/uk7yI6FDWqqcOtpA4u3Dx1FcfskzMnBt/index.js",
-        useHostForBundles: true,
-        load: {
-          integrations: {
-            "Segment.io": { apiHost: "sg.zuplo.com/v1" },
-          },
-        },
-      },
-    ],
+    "./src/plugins/hubspot",
     "./src/plugins/fathom",
     [
       "@docusaurus/plugin-content-blog",
