@@ -38,6 +38,7 @@ const sidebars = {
         "articles/step-2-add-api-key-auth",
         "articles/step-3-add-rate-limiting",
         "articles/step-4-deploying-to-the-edge",
+        "articles/step-5-project-sharing",
         // TODO - coming after Open API
         // "articles/step-5-customizing-documentation",
       ],
