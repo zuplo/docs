@@ -41,4 +41,4 @@ This makes Zuplo's extensibility easy to use as the concepts are the same as bro
 
 Zuplo handles billions of request every month for our customers and has been load tested to comfortably exceed 10,000 requests per second (including API key security, rate-limiting and other policies).
 
-Zuplo adds minimal latency to your backend - typically a few 10s of milliseconds, depending on the complexity of your gateway. Our policies are highly tuned to reduce latency and are adjustable to optimize for different scenarios.
+Zuplo adds minimal latency to your backend - typically milliseconds, depending on the complexity of your gateway. Our policies are highly tuned to reduce latency and are adjustable to optimize for different scenarios.
