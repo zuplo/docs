@@ -30,6 +30,8 @@ building a high-performance distributed rate-limiting capability. How
 distributed? Try 1000s of instances per customer running in 250+ data centers
 around the world.
 
+This article is also available in [video](https://youtu.be/gO5e9GdvuT0)
+
 We’ll cover
 
 - a canonical rate-limiting implementation for an HTTP API
@@ -249,3 +251,5 @@ Hopefully, you found this useful. As always, if you don’t want to build or
 manage any of this yourself, you can always turn to solutions like Zuplo that
 offer a fully managed, distributed, and programmable rate-limiting capability -
 try it for free at portal.zuplo.com.
+
+<YouTubeVideo url="https://www.youtube-nocookie.com/embed/gO5e9GdvuT0" />
