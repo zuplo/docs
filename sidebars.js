@@ -224,6 +224,7 @@ const sidebars = {
             "handlers/url-forward",
             "handlers/url-rewrite",
             "handlers/custom-handler",
+            "handlers/aws-lambda",
             "handlers/redirect",
           ],
         },
