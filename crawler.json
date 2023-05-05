@@ -2,7 +2,7 @@
   "index_name": "ZUPLO_SITE",
   "start_urls": [
     {
-      "url": "https://zuplo.com/docs/",
+      "url": "https://zuplo.com/docs",
       "selectors_key": "docs",
       "page_rank": 1
     },

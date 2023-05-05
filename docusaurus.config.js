@@ -10,7 +10,9 @@ const config = {
   tagline: "The programmable API Gateway",
   url: "https://zuplo.com",
   baseUrl: "/",
-  trailingSlash: false,
+  // This needs to be undefined, the trailing slash is dealt with
+  // in the zuplo.com rewrite config
+  trailingSlash: undefined,
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
   favicon: "https://cdn.zuplo.com/www/favicon.png",
