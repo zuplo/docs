@@ -19,8 +19,13 @@ request lifecycle and immediately respond to the client.
 
 ## Built-In Policies
 
-Zuplo includes many built-in policies that make it easy to handle things like authentication, validation, and request modification. You can see the [full catalog of policies here](../policies/).
+Zuplo includes many built-in policies that make it easy to handle things like
+authentication, validation, and request modification. You can see the
+[full catalog of policies here](../policies).
 
 ## Custom Policies
 
-The ability to write custom policies that run in-process of your Gateway is at the core of what makes Zuplo the Programmable API Gateway. You can write policies to handle virtually any task. To learn more about [writing custom policies see the documentation](../policies/custom-code-inbound.md).
+The ability to write custom policies that run in-process of your Gateway is at
+the core of what makes Zuplo the Programmable API Gateway. You can write
+policies to handle virtually any task. To learn more about
+[writing custom policies see the documentation](../policies/custom-code-inbound.md).
