@@ -34,7 +34,7 @@ jobs:
           access_token_lifetime: "300s"
 
       - run: npm install
-      - run: npm run ci:bundles
+      - run: npm run ci:policies
 
       - name: Upload the Worker
         uses: "google-github-actions/upload-cloud-storage@v1"
