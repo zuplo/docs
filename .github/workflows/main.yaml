@@ -33,12 +33,16 @@ jobs:
           service_account: "github-actions-docs@zuplo-production.iam.gserviceaccount.com"
           access_token_lifetime: "300s"
 
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v1.1.0
-        with:
-          project_id: zuplo-production
+      - run: npm install
+      - run: npm run ci:bundles
 
-      - run: gsutil -h "Content-Type:application/json" cp ./policies.v3.json gs://cdn.zuplo.com/portal/policies.v3.json
+      - name: Upload the Worker
+        uses: "google-github-actions/upload-cloud-storage@v1"
+        with:
+          path: policies.v3.json
+          destination: cdn.zuplo.com/portal/policies.v3.json
+          headers: |-
+            content-type: text/plain
 
       - name: Trigger Portal Release
         run: |
