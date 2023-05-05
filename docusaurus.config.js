@@ -20,6 +20,7 @@ const config = {
   },
   plugins: [
     "./src/plugins/fathom",
+    "./src/plugins/vercel",
     [
       "@docusaurus/plugin-content-blog",
       {
