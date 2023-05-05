@@ -11,8 +11,6 @@ jobs:
 
     env:
       GITHUB_NPM_TOKEN: ${{ secrets.GH_CUSTOM_TOKEN }}
-      VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID }}
-      VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
 
     permissions:
       id-token: "write"
@@ -25,15 +23,6 @@ jobs:
         with:
           node-version: 18.x
           cache: "npm"
-
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Build Project Artifacts
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - id: "auth"
         name: "Authenticate to Google Cloud"

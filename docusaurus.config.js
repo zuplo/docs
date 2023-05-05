@@ -20,8 +20,7 @@ const config = {
   },
   plugins: [
     // "./src/plugins/hubspot",
-    // "./src/plugins/fathom",
-    "./src/plugins/zaraz",
+    "./src/plugins/fathom",
     [
       "@docusaurus/plugin-content-blog",
       {
