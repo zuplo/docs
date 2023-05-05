@@ -21,7 +21,7 @@ const config = {
   },
   plugins: [
     "./src/plugins/fathom",
-    "./src/plugins/vercel",
+    // "./src/plugins/vercel",
     "./src/plugins/hubspot",
     [
       "@docusaurus/plugin-content-blog",
