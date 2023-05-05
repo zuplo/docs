@@ -21,6 +21,7 @@ const config = {
   plugins: [
     // "./src/plugins/hubspot",
     // "./src/plugins/fathom",
+    "./src/plugins/zaraz",
     [
       "@docusaurus/plugin-content-blog",
       {
