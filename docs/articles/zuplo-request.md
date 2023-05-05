@@ -41,7 +41,7 @@ const foo = request.query.foo;
 ## Constructor
 
 It can be useful to create a new ZuploRequest inside a policy (see
-[policies](../policies/)) to forward to the next policy or handler in the chain.
+[policies](../policies)) to forward to the next policy or handler in the chain.
 You can create a completely fresh ZuploRequest as follows:
 
 ```ts
