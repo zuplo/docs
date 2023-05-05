@@ -2,7 +2,7 @@ module.exports = function () {
   const isProd = process.env.NODE_ENV === "production";
 
   return {
-    name: "docusaurus-plugin-zaraz",
+    name: "docusaurus-plugin-vercel",
 
     injectHtmlTags() {
       if (!isProd) {
@@ -14,7 +14,7 @@ module.exports = function () {
           {
             tagName: "script",
             attributes: {
-              src: `/_a/i.js`,
+              src: `/_vercel/insights/script.js`,
               referrerpolicy: "origin",
             },
           },
