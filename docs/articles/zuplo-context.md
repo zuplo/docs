@@ -42,6 +42,20 @@ context.log.error({ "Oh" : "my!"}
   - `colo` [string] - The three-letter
     [IATA airport code](https://en.wikipedia.org/wiki/IATA_airport_code) of the
     data center that the request hit, for example, "DFW".
+  - `postalCode` [string] - Postal code of the incoming request, for example,
+    "78701".
+  - `metroCode` [string] - Metro code (DMA) of the incoming request, for
+    example, "635".
+  - `region` [string] - If known, the [ISO
+    3166-2](https://en.wikipedia.org/wiki/ISO_3166-2|ISO 3166-2) name for the
+    first level region associated with the IP address of the incoming request,
+    for example, "Texas".
+  - `regionCode` [string] - If known, the [ISO
+    3166-2](https://en.wikipedia.org/wiki/ISO_3166-2|ISO 3166-2) code for the
+    first-level region associated with the IP address of the incoming request,
+    for example, "TX".
+  - `timezone` [string] - Timezone of the incoming request, for example,
+    "America/Chicago".
 
 ## Methods
 
