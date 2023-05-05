@@ -19,7 +19,6 @@ const config = {
     mermaid: true,
   },
   plugins: [
-    // "./src/plugins/hubspot",
     "./src/plugins/fathom",
     [
       "@docusaurus/plugin-content-blog",
