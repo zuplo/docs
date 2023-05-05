@@ -1,6 +1,5 @@
 import MDXComponents from "@theme-original/MDXComponents";
 import FeaturePremiere from "../components/FeaturePremiere";
-import HubSpotForm from "../components/HubSpotForm";
 import PolicyStatus from "../components/PolicyStatus";
 import SizedImage from "../components/SizedImage";
 import {
@@ -26,7 +25,6 @@ export default {
   ApiTestConsoleTabIcon,
   LiveLogsTabIcon,
   GitHubIcon,
-  HubSpotForm,
   YouTubeVideo,
   PolicyStatus,
   SizedImage,
