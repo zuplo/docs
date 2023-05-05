@@ -74,10 +74,6 @@ const config = {
           priority: 0.5,
           ignorePatterns: ["/docs/conferences/**"],
         },
-        gtag: {
-          trackingID: "G-FJ4E4W746T",
-          anonymizeIP: true,
-        },
       }),
     ],
   ],
