@@ -9,7 +9,7 @@ const config = {
   title: "Zuplo Docs",
   tagline: "The programmable API Gateway",
   url: "https://zuplo.com",
-  baseUrl: "/docs/",
+  baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
   favicon: "https://cdn.zuplo.com/www/favicon.png",
