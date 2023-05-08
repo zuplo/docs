@@ -64,8 +64,9 @@ different OAuth Clients depending on environment.
 
 Any **whole** value in the `dev-portal.json` file can be substituted for an
 environment variable. Substitution is done by setting the string value to
-`$env(MY_VARIABLE_NAME)` where `MY_VARIABLE_NAME` is the name of your config or
-secret environment variable.
+`$env(ZUPLO_PUBLIC_MY_VARIABLE_NAME)` where `ZUPLO_PUBLIC_MY_VARIABLE_NAME` is
+the name of your config or secret environment variable. Variable names must
+start with `ZUPLO_PUBLIC` in order to be substituted.
 
 Below is an example `dev-portal.json` file with several values substituted by
 environment variables.
@@ -74,11 +75,11 @@ environment variables.
 {
   "enableAuthentication": true,
   "authentication": {
-    "authority": "$env(OKTA_DEV_PORTAL_AUTHORITY)",
-    "jwksUrl": "$env(OKTA_DEV_PORTAL_JWKS_URL)",
+    "authority": "$env(ZUPLO_PUBLIC_OKTA_DEV_PORTAL_AUTHORITY)",
+    "jwksUrl": "$env(ZUPLO_PUBLIC_OKTA_DEV_PORTAL_JWKS_URL)",
     "provider": "okta",
     "devPortalClient": {
-      "clientId": "$env(OKTA_DEV_PORTAL_CLIENT_ID",
+      "clientId": "$env(ZUPLO_PUBLIC_OKTA_DEV_PORTAL_CLIENT_ID",
       "audience": "api://my-api"
     }
   }
