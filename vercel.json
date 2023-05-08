@@ -1,4 +1,6 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
     {
       "source": "/docs/changelog{/}?",
@@ -432,7 +434,7 @@
     },
     {
       "source": "/docs/overview{/}?",
-      "destination": "/docs/",
+      "destination": "/docs",
       "permanent": true
     },
     {

@@ -10,6 +10,7 @@ const config = {
   tagline: "The programmable API Gateway",
   url: "https://zuplo.com",
   baseUrl: "/",
+  trailingSlash: false,
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
   favicon: "https://cdn.zuplo.com/www/favicon.png",
@@ -19,8 +20,9 @@ const config = {
     mermaid: true,
   },
   plugins: [
-    "./src/plugins/hubspot",
     "./src/plugins/fathom",
+    // "./src/plugins/vercel",
+    "./src/plugins/hubspot",
     [
       "@docusaurus/plugin-content-blog",
       {
@@ -72,9 +74,6 @@ const config = {
           priority: 0.5,
           ignorePatterns: ["/docs/conferences/**"],
         },
-        gtag: {
-          trackingID: "G-FJ4E4W746T",
-        },
       }),
     ],
   ],
@@ -115,7 +114,7 @@ const config = {
         },
         items: [
           {
-            to: "/docs",
+            to: "/docs/intro",
             position: "left",
             label: "Docs",
           },

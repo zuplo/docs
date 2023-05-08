@@ -2,7 +2,7 @@ module.exports = function () {
   const isProd = process.env.NODE_ENV === "production";
 
   return {
-    name: "docusaurus-plugin-hubspot",
+    name: "docusaurus-plugin-vercel",
 
     injectHtmlTags() {
       if (!isProd) {
@@ -14,10 +14,8 @@ module.exports = function () {
           {
             tagName: "script",
             attributes: {
-              src: `https://js.hs-scripts.com/21624128.js`,
-              id: "hs-script-loader",
-              defer: true,
-              async: true,
+              src: `/_vercel/insights/script.js`,
+              referrerpolicy: "origin",
             },
           },
         ],

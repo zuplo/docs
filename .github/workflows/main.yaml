@@ -11,8 +11,6 @@ jobs:
 
     env:
       GITHUB_NPM_TOKEN: ${{ secrets.GH_CUSTOM_TOKEN }}
-      VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID }}
-      VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
 
     permissions:
       id-token: "write"
@@ -26,15 +24,6 @@ jobs:
           node-version: 18.x
           cache: "npm"
 
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Build Project Artifacts
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
-
       - id: "auth"
         name: "Authenticate to Google Cloud"
         uses: "google-github-actions/auth@v1"
@@ -44,12 +33,16 @@ jobs:
           service_account: "github-actions-docs@zuplo-production.iam.gserviceaccount.com"
           access_token_lifetime: "300s"
 
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v1.1.0
-        with:
-          project_id: zuplo-production
+      - run: npm install
+      - run: npm run ci:policies
 
-      - run: gsutil -h "Content-Type:application/json" cp ./policies.v3.json gs://cdn.zuplo.com/portal/policies.v3.json
+      - name: Upload the Worker
+        uses: "google-github-actions/upload-cloud-storage@v1"
+        with:
+          path: policies.v3.json
+          destination: cdn.zuplo.com/portal/policies.v3.json
+          headers: |-
+            content-type: text/plain
 
       - name: Trigger Portal Release
         run: |

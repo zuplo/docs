@@ -22,7 +22,7 @@ const sidebars = {
       label: "Introduction",
       link: {
         type: "doc",
-        id: "index",
+        id: "intro",
       },
       items: [
         "articles/what-is-zuplo",
