@@ -25,7 +25,8 @@ but...
 
 As a company that is all about APIs all the time, we couldn't be more excited.
 We're the only gateway natively powered by OpenAPI which makes us the **fastest
-way to deploy a Chat-GPT plugin**. In this post, I'll show you how.
+way to deploy a Chat-GPT plugin**. In this post, I'll show you how (also
+available in [video](https://youtu.be/hr0pBhgklB0))
 
 For the purposes of this demo, we'll use a simple example API
 
@@ -180,3 +181,7 @@ on court 3?'
 Et voila! A working plugin
 
 ![Working plugin](./working-plugin.png)
+
+Checkout the video version of this content:
+
+<YouTubeVideo url="https://www.youtube-nocookie.com/embed/hr0pBhgklB0" />
