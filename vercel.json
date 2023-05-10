@@ -726,6 +726,11 @@
       "source": "/docs/articles/cli{/}?",
       "destination": "/docs/cli",
       "permanent": true
+    },
+    {
+      "source": "/docs/policies/upstream-azure-ad-service-auth-inbound-policy",
+      "destination": "/docs/policies/upstream-azure-ad-service-auth-inbound",
+      "permanent": true
     }
   ]
 }
