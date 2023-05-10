@@ -1,21 +1,27 @@
 ## Writing A Policy
 
-Custom policies can be written to extend the functionality of your gateway. This document is about inbound policies that can intercept the request and, if required, modify it before passing down the chain.
+Custom policies can be written to extend the functionality of your gateway. This
+document is about inbound policies that can intercept the request and, if
+required, modify it before passing down the chain.
 
-Policies have a similar but subtly different signature to a [request handler](/docs/handlers/custom-handler.md).
+Policies have a similar but subtly different signature to a
+[request handler](/docs/handlers/custom-handler.md).
 
 They also accept a `ZuploRequest` parameter but they must return either a
 `ZuploRequest` or a `Response`.
 
 :::tip
 
-Note that both `ZuploRequest` and `Response` are based on the web standards [Request](https://developer.mozilla.org/en-US/docs/Web/API/request) and [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response). ZuploRequest adds a few additional properties for convenience, like `user` and `params`.
+Note that both `ZuploRequest` and `Response` are based on the web standards
+[Request](https://developer.mozilla.org/en-US/docs/Web/API/request) and
+[Response](https://developer.mozilla.org/en-US/docs/Web/API/Response).
+ZuploRequest adds a few additional properties for convenience, like `user` and
+`params`.
 
 :::
 
-Returning a `ZuploRequest` is a signal to
-continue the request pipeline and what you return will be passed to the next
-policy, and finally the request handler.
+Returning a `ZuploRequest` is a signal to continue the request pipeline and what
+you return will be passed to the next policy, and finally the request handler.
 
 If you return a `Response` that tells Zuplo to short-circuit this request and
 immediately respond to the client.
@@ -58,40 +64,17 @@ export default async function(
 
 This policy checks for an `api-key` header and rejects requests that don't have
 one. If such a header is found, it then checks the content of the header for a
-magic password. This example shouldn't be used in a real API but is demonstrative of how you might build custom authentication.
+magic password. This example shouldn't be used in a real API but is
+demonstrative of how you might build custom authentication.
 
 ## Wiring up the policy on routes
 
-Policies are activated by specifying them on routes in the route.json file
-(designer support for this is coming soon). Here's how we could wire up our new
-auth route:
+Policies are activated by specifying them on routes in the route.oas.json file.
+Here's how we could wire up our new auth route:
 
 ```json
+// /config/policies.json
 {
-  "routes": [
-    {
-      "label": "What zup?",
-      "path": "hello-world",
-      "handler": {
-        "export": "default",
-        "module": "$import(./modules/hello-world)"
-      },
-      "methods": ["GET", "POST"],
-      "corsPolicy": "anything-goes",
-      "version": "none",
-      "policies": {
-        "inbound": [
-          "my-first-policy" // ⬅ Note we specify the policy here
-        ]
-      }
-    }
-  ],
-  "versions": [
-    {
-      "name": "none",
-      "pathPrefix": ""
-    }
-  ],
   "policies": [
     {
       "name": "my-first-policy",
@@ -105,9 +88,43 @@ auth route:
 }
 ```
 
+```json
+// /config/routes.oas.json
+{
+  ...
+  "paths": {
+  "/redirect-test": {
+    "x-zuplo-path": {
+      "pathMode": "open-api"
+    },
+    "get": {
+      "summary": "Testing rewrite handler",
+      "x-zuplo-route": {
+        "corsPolicy": "none",
+        "handler": {
+          "module": "$import(@zuplo/runtime)",
+          "export": "redirectHandler",
+          "options": {
+            "location": "/docs"
+          }
+        }
+      },
+      "policies": {
+        "inbound": ["my-first-policy"]
+      }
+    }
+  }
+}
+
+}
+```
+
 ## Policy Options
 
-In your policy configuration, you can specify additional information to configure your policy on the options property. In the example below we set an example object with some properties of type string and number. Note these objects can be as complicated as you like.
+In your policy configuration, you can specify additional information to
+configure your policy on the options property. In the example below we set an
+example object with some properties of type string and number. Note these
+objects can be as complicated as you like.
 
 ```json
 {
@@ -159,8 +176,8 @@ that property before passing control to the next in line.
 The user object should have a `sub` property which is a unique user id. Let's
 use Zuplo's policy `options` to extend our example.
 
-You can pass options to a policy from the routes.json file. In this case, we'll
-create a dictionary of API keys to `sub` ids.
+You can pass options to a policy from the policies.json file. In this case,
+we'll create a dictionary of API keys to `sub` ids.
 
 ```json
 "policies": [
@@ -226,7 +243,9 @@ Here is this example working as a gif
 
 ## Modifying the request headers
 
-Sometimes we need to modify the request more significantly, and this will require creating a new request object. In this case, let's imagine we want to convert incoming parameters to headers.
+Sometimes we need to modify the request more significantly, and this will
+require creating a new request object. In this case, let's imagine we want to
+convert incoming parameters to headers.
 
 ```ts
 export default async function (request: ZuploRequest) {
@@ -244,5 +263,5 @@ export default async function (request: ZuploRequest) {
 }
 ```
 
-For a more complex example, check out the [custom logging
-implementation](/docs/articles/custom-logging-example.md).
+For a more complex example, check out the
+[custom logging implementation](/docs/articles/custom-logging-example.md).

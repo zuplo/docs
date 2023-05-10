@@ -25,15 +25,16 @@ Configure the properties for your AWS Lambda function.
 
 :::warning
 
-Don't add the AWS Secure Access Key directly in the `routes.json` file. Instead
-use environment variables like `$env(AWS_SECURE_ACCESS_KEY)`
+Don't add the AWS Secure Access Key directly in the `routes.oas.json` file.
+Instead use environment variables like `$env(AWS_SECURE_ACCESS_KEY)`
 
 :::
 
-## Setup via Routes.json
+## Setup via routes.oas.json
 
-The AWS Lambda handler can be setup by editing the `routes.json` file directly
-by configuring the handler property on any route.
+The AWS Lambda handler can be setup by editing the `routes.oas.json` file
+directly by configuring the `handler` property on any route's `x-zuplo-route`
+property.
 
 ```json
 {

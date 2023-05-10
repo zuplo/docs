@@ -1,17 +1,23 @@
 :::tip
 
-Note you can have multiple instances of rate-limiting policies to use in combination. You should apply the longest duration timeWindow first, in order to the shortest duration time window.
+Note you can have multiple instances of rate-limiting policies to use in
+combination. You should apply the longest duration timeWindow first, in order to
+the shortest duration time window.
 
 :::
 
 ## Using a custom function
 
 You can create a rate-limit bucket based on any property of a request using a
-custom function that returns a `CustomRateLimitDetails` object (which provides the identifier used by the limiting system).
+custom function that returns a `CustomRateLimitDetails` object (which provides
+the identifier used by the limiting system).
 
-The `CustomRateLimitDetails` object can be used to override the `timeWindowMinutes` & `requestsAllowed` options.
+The `CustomRateLimitDetails` object can be used to override the
+`timeWindowMinutes` & `requestsAllowed` options.
 
-This example would create a unique rate-limiting function based on the `customerId` parameter in routes (note it’s important that a policy like this is applied to a route that has a `/:customerId` parameter).
+This example would create a unique rate-limiting function based on the
+`customerId` parameter in routes (note it’s important that a policy like this is
+applied to a route that has a `/:customerId` parameter).
 
 ```ts
 //module - ./modules/rate-limiter.ts
@@ -38,7 +44,7 @@ export function rateLimitKey(
 ```
 
 ```json
-// config - ./config/routes.json
+// config - ./config/policies.json
 "export": "RateLimitInboundPolicy",
 "module": "$import(@zuplo/runtime)",
 "options": {

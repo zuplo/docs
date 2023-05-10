@@ -1,35 +1,54 @@
 ## Tutorial
 
-We will start with the hello-world sample you get when you create a new Zup. So your routes file should look like this:
+We will start by adding a route to your `routes.oas.json` file that will use the
+policy. You can paste the following into the file
 
 ```json
 {
-  "routes": [
-    {
-      "label": "What zup?",
-      "path": "hello-world",
-      "handler": {
-        "export": "default",
-        "module": "$import(./modules/hello-world)"
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "My Zuplo API"
+  },
+  "paths": {
+    "/hello-world": {
+      "x-zuplo-path": {
+        "pathMode": "open-api"
       },
-      "methods": ["GET", "POST"],
-      "corsPolicy": "anything-goes",
-      "version": "v1",
-      "policies": {
-        "inbound": []
+      "get": {
+        "summary": "Route 1",
+        "description": "",
+        "operationId": "b53744a5-a41c-468e-a47a-5ab85b0c5866",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "default",
+            "module": "$import(./modules/hello-world)",
+            "options": {}
+          },
+          "policies": {
+            "inbound": []
+          }
+        }
+      },
+      "post": {
+        "summary": "Route 2",
+        "description": "",
+        "operationId": "b0fbbd59-cd35-407a-8fe1-469c4f3ab142",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "default",
+            "module": "$import(./modules/hello-world)",
+            "options": {}
+          },
+          "policies": {
+            "inbound": []
+          }
+        }
       }
     }
-  ],
-  "versions": [
-    {
-      "name": "none",
-      "pathPrefix": ""
-    },
-    {
-      "name": "v1",
-      "pathPrefix": "v1.0/"
-    }
-  ]
+  }
 }
 ```
 
@@ -54,7 +73,8 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 
 You should already have a test setup in the test client, like this
 
-The next step is to enforce authentication on this API using Auth0 and JWT tokens.
+The next step is to enforce authentication on this API using Auth0 and JWT
+tokens.
 
 ## Setting up Auth0
 
@@ -75,18 +95,14 @@ Inside the settings for your new API, you should see a Test tab
 
 ![CleanShot 2021-11-29 at 16.30.40@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.30.402x.png)
 
-We'll need this cURL script shortly to get an access token to test against our API.
+We'll need this cURL script shortly to get an access token to test against our
+API.
 
 ## Configuring the Zuplo Policy
 
 Next, we will configure our Open ID JWT Policy - more documentation on this
-[here](./open-id-jwt-auth-inbound.md). Add a `policies` array to your routes.json as shown below.
-
-![CleanShot 2021-11-29 at 16.35.43@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.35.432x.png)
-
-> **Hint** - press _option+shift+F_ to automatically format your code, including JSON in the editor.
-
-Now add the following policy inside the `policies` array:
+[here](./open-id-jwt-auth-inbound.md). Add the policy to `policies` array to
+your policies.json.
 
 ```json
 {
@@ -105,14 +121,16 @@ Now add the following policy inside the `policies` array:
 }
 ```
 
-- The `audience` property in options should exactly match the `Identifier` we created in Auth0 earlier, so `https://zuplo-auth-sample/` in this case.
+- The `audience` property in options should exactly match the `Identifier` we
+  created in Auth0 earlier, so `https://zuplo-auth-sample/` in this case.
 - The `issuer` field will be the URL for your Auth0 tenant, e.g.
   `https://zuplo-demo.us.auth0.com/`.
 - The `jwkUrl` is the public URL of your JWK set.
 
 :::tip
 
-If you're not sure where to find the issuer or jwkUrl you can easily find it in the Node.JS QuickStart for your API as shown below.
+If you're not sure where to find the issuer or jwkUrl you can easily find it in
+the Node.JS QuickStart for your API as shown below.
 
 :::
 
@@ -120,9 +138,8 @@ If you're not sure where to find the issuer or jwkUrl you can easily find it in 
 
 ## Adding the policy to your route(s)
 
-Finally, we need to add this policy to our route as follows
-
-![CleanShot 2021-11-29 at 16.51.59@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.51.592x.png)
+Finally, we need to add this policy to our route by adding `auth-policy` to the
+`handler.policies.inbound` array property on each route.
 
 ## Testing the policy
 
@@ -132,11 +149,15 @@ should get a `401: Unauthorized` response from your API.
 ![CleanShot 2021-11-29 at 16.55.43@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.55.432x.png)
 
 Next, let's get a valid token using the cURL script from earlier in this
-tutorial. Copy the cURL script from the test tab and execute it in a terminal window:
+tutorial. Copy the cURL script from the test tab and execute it in a terminal
+window:
 
 ![CleanShot 2021-11-29 at 17.03.34@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.03.342x.png)
 
-Carefully extract the access_token only and copy it to the clipboard. Paste into a header in the test client called `authorization`. Note that the value of the header should be `Bearer <access_token>` replacing `<access_token>` with the token you got back from cURL.
+Carefully extract the access_token only and copy it to the clipboard. Paste into
+a header in the test client called `authorization`. Note that the value of the
+header should be `Bearer <access_token>` replacing `<access_token>` with the
+token you got back from cURL.
 
 ![CleanShot 2021-11-29 at 17.06.08@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.06.082x.png)
 
@@ -144,7 +165,8 @@ Carefully extract the access_token only and copy it to the clipboard. Paste into
 
 ## Accessing the user object
 
-Now let's update our script to explore the values inside the user object. Add the following line to the middle of your request handler:
+Now let's update our script to explore the values inside the user object. Add
+the following line to the middle of your request handler:
 
 ```tsx
 export default async function (request: ZuploRequest, context: ZuploContext) {
@@ -154,7 +176,8 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 }
 ```
 
-Execute the test again and you'll see the following JSON output in the **Request Logs** window:
+Execute the test again and you'll see the following JSON output in the **Request
+Logs** window:
 
 ```json
 {
@@ -189,7 +212,8 @@ Add two claims to your M2M tokens using the following code:
 
 ![CleanShot 2021-11-29 at 17.44.55@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.44.552x.png)
 
-And, critically, remember to click `Deploy`. Also, note that the claims MUST be URLs (again, they do not need to be live URLs, just valid in structure).
+And, critically, remember to click `Deploy`. Also, note that the claims MUST be
+URLs (again, they do not need to be live URLs, just valid in structure).
 
 ```ts
 exports.onExecuteCredentialsExchange = async (event, api) => {
@@ -206,7 +230,8 @@ exports.onExecuteCredentialsExchange = async (event, api) => {
 
 ## Re-test your API
 
-Get a fresh token using cURL (same approach as above, it's important to get a fresh token so that it contains these new claims).
+Get a fresh token using cURL (same approach as above, it's important to get a
+fresh token so that it contains these new claims).
 
 Paste the token into the test client and re-execute the API.
 

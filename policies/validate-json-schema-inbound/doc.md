@@ -41,8 +41,7 @@ purposes of this example let's imagine it is called `car.json`.
 
 ## Configuration
 
-Here is an example configuration (this would go in the `policies` section of the
-routes.json file).
+Here is an example configuration (this would go in `policies.json`).
 
 ```json
 {
@@ -104,7 +103,8 @@ You can test this in the API Test Console with the following (correct) body
 
 ### Missing fields
 
-If the request body is missing a required field, an error similar to the following will be returned.
+If the request body is missing a required field, an error similar to the
+following will be returned.
 
 ```json
 {
@@ -117,7 +117,8 @@ If the request body is missing a required field, an error similar to the followi
 
 ### Invalid Field Type
 
-If the request body contains a field that is not of the correct type, an error similar to the following will be returned.
+If the request body contains a field that is not of the correct type, an error
+similar to the following will be returned.
 
 ```json
 {
