@@ -43,7 +43,13 @@ What's more, you can now have more confidence that your OpenAPI represents the
 truth of your API implementation - because it now drives the configuration of
 your gateway.
 
-    **Coming Soon** - we will be shipping support for OpenAPI validation and linting in Zuplo. If you're interested in being an early customer of these features, let us know at [support@zuplo.com](mailto:support@zuplo.com).
+:::info
+
+We will soon be shipping support for OpenAPI validation and linting in Zuplo. If
+you're interested in being an early customer of these features, let us know at
+[support@zuplo.com](mailto:support@zuplo.com).
+
+:::
 
 ## Zuplo extensions
 
@@ -55,11 +61,13 @@ vendor extensions:
 One below the **path** property:
 
 ```json
-  "paths": {
+"paths": {
     "/path-0": {
-      "x-zuplo-path": {
-        "pathMode": "url-pattern"
-      },
+        "x-zuplo-path": {
+            "pathMode": "url-pattern"
+        },
+    }
+}
 ```
 
 `x-zuplo-path` is used to specify the type of path matching you want to use;
@@ -92,11 +100,34 @@ And another inside the operation, below the method:
         }
     },
     "operationId": "e73d0713-b894-494d-8796-2c50b8634d47"
+}
 ```
 
 `x-zuplo-route` is where all of your route settings are configured, including
 [policies](/docs/policies), [handlers](/docs/handlers/),
 [CORS](/docs/articles/custom-cors-policy.md) and more.
+
+## Other Supported Extensions
+
+Zuplo also supports other popular extensions in order to better integrate with
+your existing tooling.
+
+### x-internal
+
+```json
+"get": {
+    "summary": "Internal Route",
+    "x-internal": true,
+    "x-zuplo-route": {
+        ...
+    },
+}
+```
+
+You can set this property to `true` in order to hide a route from the Developer
+Portal. If you are using the
+[OpenAPI Spec Handler](../handlers/open-api-handler.md), internal routes will
+not be present in the generated OpenAPI file.
 
 ## Multiple File Support
 
