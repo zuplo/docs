@@ -42,7 +42,7 @@ If a label is provided on both the `sidebar.json` item and the markdown
 An `api-ref` item dictates the position of your API Reference docs in the
 sidebar. You can also relabel the top-level label (the default is API
 Reference). The contents of your API Reference are automatically generated from
-your `routes.json`.
+your `routes.oas.json`.
 
 ```typescript
 interface APIDocConfig {
