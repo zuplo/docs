@@ -91,24 +91,22 @@ export default async function (
 }
 ```
 
-Finally, you need to configure your routes.json file to include the policy,
+Finally, you need to configure your policies.json file to include the policy,
 example below:
 
 ```json
-"policies": [
-    {
-      "name": "request-archive-policy",
-      "policyType": "code-policy",
-      "handler": {
-        "export": "default",
-        "module": "$import(./modules/archive-request-policy)",
-        "options": {
-					"blobCreateSas" : "$env(BLOB_CREATE_SAS)",
-					"blobContainerPath" : "$env(BLOB_CONTAINER_PATH)"
-				}
-      }
+{
+  "name": "request-archive-policy",
+  "policyType": "code-policy",
+  "handler": {
+    "export": "default",
+    "module": "$import(./modules/archive-request-policy)",
+    "options": {
+      "blobCreateSas": "$env(BLOB_CREATE_SAS)",
+      "blobContainerPath": "$env(BLOB_CONTAINER_PATH)"
     }
-  ]
+  }
+}
 ```
 
 Don't forget to reference the `file-archive-policy` in the policies.inbound
