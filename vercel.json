@@ -731,6 +731,11 @@
       "source": "/docs/policies/upstream-azure-ad-service-auth-inbound-policy",
       "destination": "/docs/policies/upstream-azure-ad-service-auth-inbound",
       "permanent": true
+    },
+    {
+      "source": "/docs/examples/proxy-aws-lambda{/}?",
+      "destination": "/docs/handlers/aws-lambda",
+      "permanent": true
     }
   ]
 }
