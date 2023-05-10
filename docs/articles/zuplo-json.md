@@ -2,20 +2,21 @@
 title: Zuplo Project Config (zuplo.json)
 ---
 
-Certain advanced project-level settings can be configured using the `zuplo.json` file at the root of a project. The `zuplo.json` file is created by default for new projects and contains the default configuration.
+Certain advanced project-level settings can be configured using the `zuplo.jsonc` file at the root of a project. The `zuplo.json` file is created by default for new projects and contains the default configuration.
 
-The default `zuplo.json` file is shown below. The only current valid `version` of the file is `1`.
+The default `zuplo.jsonc` file is shown below. The only current valid `version` of the file is `1`.
 
-```json
+```jsonc
 {
   "version": 1,
+  "project": "my-project",
   "compatibilityDate": "2023-03-14"
 }
 ```
 
 :::warning
 
-The `zuplo.json` file is not currently shown or editable in the Zuplo portal. Connect your project to source control and edit inside your source control provider or by pushing a local change with git. If your project does not have a `zuplo.json` it can be added using source control
+The `zuplo.jsonc` file is not currently shown or editable in the Zuplo portal. Connect your project to source control and edit inside your source control provider or by pushing a local change with git. If your project does not have a `zuplo.jsonc` it can be added using source control
 
 :::
 
