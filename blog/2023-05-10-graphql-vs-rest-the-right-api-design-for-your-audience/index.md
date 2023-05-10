@@ -175,7 +175,7 @@ Run npm start in the project directory and query the server. Try navigating to
 https://localhost:3000/api/users or using your
 [favorite API client](https://httpie.io/desktop) to fetch the list of users.
 
-`[REST API users response](./http-response.png)
+![REST API users response](./http-response.png)
 
 ## Wrapping Up
 
