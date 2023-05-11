@@ -1,5 +1,5 @@
 ---
-title: Step 5 - Adding project collaborators
+title: Add project collaborators
 ---
 
 In this guide, we'll walk you through the steps to add a new user to your

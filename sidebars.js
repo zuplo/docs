@@ -38,7 +38,6 @@ const sidebars = {
         "articles/step-2-add-api-key-auth",
         "articles/step-3-add-rate-limiting",
         "articles/step-4-deploying-to-the-edge",
-        "articles/step-5-project-sharing",
         // TODO - coming after Open API
         // "articles/step-5-customizing-documentation",
       ],
@@ -83,6 +82,7 @@ const sidebars = {
       items: [
         "articles/custom-ci-cd",
         "articles/rename-or-move-project",
+        "articles/add-project-collaborators",
         "articles/multiple-auth-policies",
         "articles/archiving-requests-to-storage",
         "articles/per-user-rate-limits-using-db",
