@@ -14,6 +14,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 
 type PolicySchema = JSONSchema & {
   isPreview?: boolean;
+  isDeprecated?: boolean;
   isPaidAddOn?: boolean;
   fakePolicyUrl?: string;
 };
@@ -269,7 +270,13 @@ async function run() {
       policyFilePaths
     );
 
-    await writeFile(path.join(docsDir, `${policyId}.md`), generatedMd, "utf-8");
+    if (!schema.isDeprecated) {
+      await writeFile(
+        path.join(docsDir, `${policyId}.md`),
+        generatedMd,
+        "utf-8"
+      );
+    }
   });
 
   await Promise.all(tasks);
