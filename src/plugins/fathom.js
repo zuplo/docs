@@ -14,7 +14,7 @@ module.exports = function () {
           {
             tagName: "script",
             attributes: {
-              src: `https://fa.zuplo.com/script.js`,
+              src: `https://cdn.usefathom.com/script.js`,
               "data-spa": "auto",
               "data-site": "CCCPOYBW",
               defer: true,
