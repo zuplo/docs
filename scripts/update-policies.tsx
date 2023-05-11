@@ -223,6 +223,7 @@ async function run() {
     meta.name = schema.title;
     meta.isPreview = !!schema.isPreview;
     meta.isPaidAddOn = !!schema.isPaidAddOn;
+    meta.isDeprecated = !!schema.isDeprecated;
     meta.fakePolicyUrl = schema.fakePolicyUrl;
     meta.documentationUrl = `https://zuplo.com/docs/policies/${policyId}/`;
     meta.id = policyId;
