@@ -82,6 +82,7 @@ const sidebars = {
       items: [
         "articles/custom-ci-cd",
         "articles/rename-or-move-project",
+        "articles/add-project-collaborators",
         "articles/multiple-auth-policies",
         "articles/archiving-requests-to-storage",
         "articles/per-user-rate-limits-using-db",
