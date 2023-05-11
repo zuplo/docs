@@ -736,6 +736,11 @@
       "source": "/docs/examples/proxy-aws-lambda{/}?",
       "destination": "/docs/handlers/aws-lambda",
       "permanent": true
+    },
+    {
+      "source": "/docs/policies/api-key-auth-inbound{/}?",
+      "destination": "/docs/handlers/api-key-inbound",
+      "permanent": true
     }
   ]
 }

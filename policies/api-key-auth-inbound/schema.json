@@ -4,6 +4,7 @@
   "type": "object",
   "title": "Legacy API Key Authentication (deprecated)",
   "isPreview": false,
+  "isDeprecated": true,
   "description": "Deprecated - Please use the new 'API Key Authentication' policy instead. This policy will continue to work but will be removed in a future version of Zuplo.",
   "required": ["handler"],
   "properties": {
