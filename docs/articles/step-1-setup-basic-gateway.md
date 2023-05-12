@@ -25,7 +25,7 @@ Using the Route Designer, let's configure our first route to handle the
 - Summary: `Get all todos`
 - Method: `GET`
 - Path: `/todos`
-- [URL Forward](/docs/handlers/url-forward): `https://todos.zuplo.com`
+- [URL Forward](/docs/handlers/url-forward): `https://todos.zuplo.io`
 
 ![Get all todos](https://cdn.zuplo.com/assets/f2bcc7ad-027f-4f5e-8764-c802079dacdb.png)
 
