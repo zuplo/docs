@@ -72,7 +72,7 @@ used for [Environment Variables](/docs/articles/environment-variables.md).
 
 ![Policy Configuration](https://cdn.zuplo.com/assets/e29a3c79-aeee-48e9-8c40-d1131c10f33a.png)
 
-Save you changes to `routes.oas.json`.
+Save your changes to `routes.oas.json`.
 
 Head over to the Environment Variables screen in settings and click **Add new
 variable**.
