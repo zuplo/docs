@@ -739,7 +739,12 @@
     },
     {
       "source": "/docs/policies/api-key-auth-inbound{/}?",
-      "destination": "/docs/handlers/api-key-inbound",
+      "destination": "/docs/policies/api-key-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/handlers/api-key-inbound{/}?",
+      "destination": "/docs/policies/api-key-inbound",
       "permanent": true
     }
   ]
