@@ -228,6 +228,7 @@ const sidebars = {
             "handlers/aws-lambda",
             "handlers/redirect",
             "handlers/open-api-handler",
+            "handlers/system-handlers",
           ],
         },
         {
