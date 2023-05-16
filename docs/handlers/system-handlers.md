@@ -9,7 +9,6 @@ within your Analytics page. Below is a list of routes we have reserved:
 
 | Name                    | Method  | Path                              | Description                                                                                |
 | ----------------------- | ------- | --------------------------------- | ------------------------------------------------------------------------------------------ |
-| build-data              | GET     | `/__zuplo/build`                  | Provides information about the latest build of the gateway.                                |
 | cors-preflight          | OPTIONS | `/(.*)`                           | Handles CORS preflight requests.                                                           |
 | developer-portal        | GET     | User configured, default: `/docs` | Handles serving the developer portal. Can be [configured](../articles/dev-portal-json.md). |
 | developer-portal-legacy | GET     | `/__zuplo/dev-portal`             | Legacy path for the Developer Portal.                                                      |
