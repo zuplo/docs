@@ -2,9 +2,9 @@
   "$schema": "https://json-schema.org/draft-07/schema",
   "$id": "http://zuplo.com/schemas/policies/mock-api-inbound.json",
   "type": "object",
-  "title": "Mock API",
+  "title": "Mock API Response",
   "isPreview": true,
-  "description": "Return mock responses",
+  "description": "Returns example responses from the OpenAPI document associated with this route.",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -13,7 +13,7 @@
       "required": ["export", "module", "options"],
       "properties": {
         "export": {
-          "const": "MockAPIInbound",
+          "const": "MockApiInboundPolicy",
           "description": "The name of the exported type"
         },
         "module": {
@@ -24,13 +24,30 @@
           "type": "object",
           "description": "The options for this policy",
           "required": [],
-          "properties": {}
+          "properties": {
+            "random": {
+              "type": "boolean",
+              "description": "Optional. Indicates whether the response should be selected randomly, from the available examples (that match any filter criteria). If `false` the first matching example is used. "
+            },
+            "responsePrefixFilter": {
+              "type": "string",
+              "description": "Optional. Specifies a prefix to match the responses to select from. Typically this is a status code like \"200\" or \"2XX\". If you want the policy to select randomly from all 2XX codes, set this property to \"2\" and random to `true`."
+            },
+            "contentType": {
+              "type": "string",
+              "description": "Optional. Specify the content-type of the response to select from. If not specified, the first matching response is used (or random)."
+            },
+            "exampleName": {
+              "type": "string",
+              "description": "Optional. Specify the name of the example to select. If not specified, the first matching response is used (or random)."
+            }
+          }
         }
       },
       "examples": [
         {
           "_name": "basic",
-          "export": "MockAPIInbound",
+          "export": "MockApiInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {}
         }
