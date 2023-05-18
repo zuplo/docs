@@ -40,7 +40,8 @@ jobs:
         uses: "google-github-actions/upload-cloud-storage@v1"
         with:
           path: policies.v3.json
-          destination: cdn.zuplo.com/portal/policies.v3.json
+          process_gcloudignore: false
+          destination: cdn.zuplo.com/portal
           headers: |-
             content-type: text/plain
 
