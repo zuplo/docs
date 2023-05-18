@@ -3,7 +3,7 @@
   "$id": "http://zuplo.com/schemas/policies/mock-api-inbound.json",
   "type": "object",
   "title": "Mock API Response",
-  "isPreview": true,
+  "isPreview": false,
   "description": "Returns example responses from the OpenAPI document associated with this route.",
   "required": ["handler"],
   "properties": {
