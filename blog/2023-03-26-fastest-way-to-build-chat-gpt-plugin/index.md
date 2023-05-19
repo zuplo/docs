@@ -6,6 +6,8 @@ description: Ship your ChatGPT plugin safely and quickly with Zuplo
 image: https://og-image.zuplo.com/?text=Fastest%20way%20to%20ship%20a%20Chat-GPT%20plugin
 ---
 
+**UPDATE** See this post for a detailed walkthrough [Shipping a ChatGPT plugin in record time](https://zuplo.com/blog/2023/05/05/shipping-a-chat-gpt-plugin-in-record-time)
+
 [OpenAI](https://openai.com/) recently announced [Chat Plugins](https://platform.openai.com/docs/plugins/introduction) for Chat GPT.
 
 To make a plugin you just need an API with an accompanying OpenAPI definition that the Chat GPT. The plugin engine is especially impressive - don't take my word for it; here's [Mitchell Hashimoto](https://twitter.com/mitchellh), Founder of HashiCorp:
