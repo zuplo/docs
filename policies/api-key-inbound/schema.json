@@ -46,7 +46,7 @@
               "description": "The time to cache authentication results for a particular key. Higher values will decrease latency. Cached results will be valid until the cache expires even in the event the key is deleted, etc.."
             },
             "disableAutomaticallyAddingKeyHeaderToOpenApi": {
-              "type": "string",
+              "type": "boolean",
               "description": "Zuplo will automatically document your API key header within your OpenAPI specification & Developer Portal. Set this to `true` to disable this behavior."
             }
           }
