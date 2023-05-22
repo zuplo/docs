@@ -12,7 +12,7 @@ for end-users in the Zuplo Developer Portal. However, all management operations
 regarding API Keys can also be performed using the
 [Zuplo Developer API](https://dev.zuplo.com).
 
-::: info
+:::info
 
 In order to obtain an API Key for the Developer API, go to your account settings
 in the Zuplo Portal. [More information](https://dev.zuplo.com/docs/routes/index)
