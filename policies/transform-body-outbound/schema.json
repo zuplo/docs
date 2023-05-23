@@ -4,8 +4,8 @@
   "type": "object",
   "title": "Transform Response Body",
   "isPreview": true,
-  "fakePolicyUrl": "https://zuplo.com/docs/policies/transform-body-outbound",
-  "description": "Transform the body of an outgoing response.",
+  "fakePolicyUrl": "https://zuplo.com/docs/policies/custom-code-outbound#writing-a-policy",
+  "description": "The best way to transform a response body is using a custom code outbound policy.",
   "required": ["handler"],
   "properties": {
     "handler": {
