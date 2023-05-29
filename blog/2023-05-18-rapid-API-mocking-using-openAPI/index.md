@@ -15,7 +15,7 @@ an OpenAPI document - it's just what every
 Sometimes it's better to show than tell, so in that spirit, check out the 2
 minute video below that shows you the end-to-end experience.
 
-<YouTubeVideo url="https://www.youtube.com/watch?v=aS4BwleV_GY" />
+<YouTubeVideo url="https://www.youtube-nocookie.com/embed/aS4BwleV_GY" />
 
 With this powerful new capability, developers can effortlessly generate mock
 endpoints that mimic the behavior of real APIs, speeding up development cycles
