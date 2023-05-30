@@ -1,5 +1,5 @@
 ---
-title: Announcing rapid API mocking via OpenAPI
+title: Be a Mockstar - announcing rapid API mocking via OpenAPI
 authors: josh
 tags: [customers, developers, api, graphql]
 description:
@@ -12,10 +12,9 @@ Today we're excited to announce one of the first cool features resulting from
 Zuplo's bet on the OpenAPI standard: rapid mocking of APIs using examples inside
 an OpenAPI document - it's just what every
 
-Sometimes it's better to show than tell, so in that spirit, check out the 2
-minute video below that shows you the end-to-end experience.
-
-<YouTubeVideo />
+Sometimes it's better to show than tell, so in that spirit, check out the
+[short video](https://youtu.be/aS4BwleV_GY) below that shows you the end-to-end
+experience.
 
 With this powerful new capability, developers can effortlessly generate mock
 endpoints that mimic the behavior of real APIs, speeding up development cycles
@@ -37,4 +36,26 @@ Let's import your OpenAPI doc.
 
 ![Import OpenAPI](./import-open-api.png)
 
-Don't forget to save your changes. Save your changes (CMD+S).
+Don't forget to save your changes (CMD+S). Not all routes in this OpenAPI doc
+have examples but the route named **Single API** does, so lets use that one.
+
+![Singe API](./single-api-policy.png)
+
+Select that route and expand the policies window. Click **Add Policy** to the
+request pipeline and search for `Mock`. You should find the new Mock API policy.
+
+![Mock API Policy](./mock-api-policy.png)
+
+Accept the defaults and click OK. Save your changes (CMD+S).
+
+Click the **Test** button next to the path field and click the URL to open the
+API response in your browser:
+
+![Test URL](./test.png)
+
+And boom 💥 you just mocked some of the postman API. Sign up for a free account
+at [portal.zuplo.com](https://portal.zuplo.com) and enjoy!
+
+Also, check out the video below for a more detailed walkthrough.
+
+<YouTubeVideo url="https://www.youtube-nocookie.com/embed/aS4BwleV_GY" />
