@@ -1,5 +1,5 @@
 ---
-title: Be a Mockstar - announcing rapid API mocking via OpenAPI
+title: Announcing rapid API mocking via OpenAPI
 authors: josh
 tags: [customers, developers, api, graphql]
 description:
@@ -12,9 +12,10 @@ Today we're excited to announce one of the first cool features resulting from
 Zuplo's bet on the OpenAPI standard: rapid mocking of APIs using examples inside
 an OpenAPI document - it's just what every
 
-Sometimes it's better to show than tell, so in that spirit, check out the
-[short video](https://youtu.be/aS4BwleV_GY) below that shows you the end-to-end
-experience.
+Sometimes it's better to show than tell, so in that spirit, check out the 2
+minute video below that shows you the end-to-end experience.
+
+<YouTubeVideo url="https://www.youtube-nocookie.com/embed/aS4BwleV_GY" />
 
 With this powerful new capability, developers can effortlessly generate mock
 endpoints that mimic the behavior of real APIs, speeding up development cycles
@@ -39,7 +40,7 @@ Let's import your OpenAPI doc.
 Don't forget to save your changes (CMD+S). Not all routes in this OpenAPI doc
 have examples but the route named **Single API** does, so lets use that one.
 
-![Singe API](./single-api-policy.png)
+![Single API](./single-api-policy.png)
 
 Select that route and expand the policies window. Click **Add Policy** to the
 request pipeline and search for `Mock`. You should find the new Mock API policy.

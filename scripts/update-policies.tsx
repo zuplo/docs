@@ -371,7 +371,7 @@ async function getExampleHtml(
   const html = renderToStaticMarkup(
     <>
       <div dangerouslySetInnerHTML={{ __html: description }} />
-      {properties ? (
+      {Object.keys(properties).length >= 0 ? (
         <>
           <h3>Options</h3>
           <OptionProperties properties={properties} />{" "}
