@@ -252,6 +252,7 @@ const sidebars = {
             "articles/dev-portal-adding-pages",
             "articles/dev-portal-configuring-sidebar",
             "articles/dev-portal-json",
+            "articles/dev-portal-create-consumer-on-auth",
           ],
         },
         {

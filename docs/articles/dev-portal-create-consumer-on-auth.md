@@ -40,7 +40,7 @@ value.
 
 ![](https://cdn.zuplo.com/assets/2cf32602-9716-4b8d-9641-3830500e01c1.png)
 
-::: info
+:::info
 
 In the code below set the variable `BUCKET_NAME` to the bucket being used by
 your Zuplo Gateway. If you don't know the name of your bucket, you can
