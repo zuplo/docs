@@ -78,11 +78,9 @@ exports.onExecutePostLogin = async (event, api) => {
     managers: [event.user.email],
     metadata: {
       // Any metadata here
-    },
-    name: `c-${randomUUID()}`,
-    tags: {
       user_id: event.user.user_id,
     },
+    name: `c-${randomUUID()}`,
   };
 
   try {
