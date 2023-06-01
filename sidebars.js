@@ -69,6 +69,15 @@ const sidebars = {
     },
     {
       type: "category",
+      label: "API Keys",
+      items: [
+        "articles/api-key-management",
+        "articles/api-key-api",
+        "articles/api-key-leak-prevention",
+      ],
+    },
+    {
+      type: "category",
       label: "OpenAPI",
       link: {
         type: "doc",
@@ -229,15 +238,6 @@ const sidebars = {
             "handlers/redirect",
             "handlers/open-api-handler",
             "handlers/system-handlers",
-          ],
-        },
-        {
-          type: "category",
-          label: "Api Keys",
-          items: [
-            "articles/api-key-management",
-            "articles/api-key-api",
-            "articles/api-key-info",
           ],
         },
         {
