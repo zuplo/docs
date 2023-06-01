@@ -7,8 +7,9 @@ Zuplo runs a globally distributed API Key management service that scales to
 handle billions of daily key validation requests while maintaining low latency
 from any region around the world.
 
-Management of API Keys and consumers is can be performed in the Zuplo Portal and
-for end-users in the Zuplo Developer Portal. However, all management operations
+Management of API Keys and consumers
+[can be performed in the Zuplo Portal](./api-key-management.md) and for
+end-users in the Zuplo Developer Portal. However, all management operations
 regarding API Keys can also be performed using the
 [Zuplo Developer API](https://dev.zuplo.com).
 
