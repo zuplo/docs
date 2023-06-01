@@ -35,6 +35,10 @@ optional if you are not using the [Developer Portal](./developer-portal.md).
 
 You can assign managers in the Zuplo Portal (portal.zuplo.com) or via the API.
 
+If you want to automatically create an API Key for a customer automatically when
+they sign into your developer portal using Auth0,
+[follow this tutorial](./dev-portal-create-consumer-on-auth.md).
+
 ### Consumer Metadata
 
 Each consumer can be assigned metadata. This information (a small JSON object)
