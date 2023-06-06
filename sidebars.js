@@ -144,6 +144,7 @@ const sidebars = {
                 "policies/validate-json-schema-inbound",
                 "policies/bot-detection-inbound",
                 "policies/require-origin-inbound",
+                "policies/open-api-based-request-validation-inbound",
               ],
             },
             {
