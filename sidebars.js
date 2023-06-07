@@ -208,6 +208,8 @@ const sidebars = {
                 "policies/upstream-azure-ad-service-auth-inbound",
                 "policies/upstream-gcp-service-auth-inbound",
                 "policies/upstream-gcp-jwt-inbound",
+                "policies/upstream-firebase-admin-auth-inbound",
+                "policies/upstream-firebase-user-auth-inbound",
               ],
             },
             {

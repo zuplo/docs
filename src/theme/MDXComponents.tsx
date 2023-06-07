@@ -12,6 +12,7 @@ import {
   LiveLogsTabIcon,
   SettingsTabIcon,
 } from "../components/ui-icons";
+import Video from "../components/Video";
 import YouTubeVideo from "../components/YouTubeVideo";
 import ZupIt from "../components/ZupIt";
 
@@ -26,6 +27,7 @@ export default {
   LiveLogsTabIcon,
   GitHubIcon,
   YouTubeVideo,
+  Video,
   PolicyStatus,
   SizedImage,
   DeveloperPortalIcon,
