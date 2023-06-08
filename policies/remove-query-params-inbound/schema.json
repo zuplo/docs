@@ -23,9 +23,9 @@
         "options": {
           "type": "object",
           "description": "The options for this policy",
-          "required": ["names"],
+          "required": ["params"],
           "properties": {
-            "names": {
+            "params": {
               "type": "array",
               "description": "Array of query parameters to be removed"
             }
@@ -38,7 +38,7 @@
           "export": "RemoveQueryParamsInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "names": ["PARAM_NAME"]
+            "params": ["PARAM_NAME"]
           }
         }
       ]
