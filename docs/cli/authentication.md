@@ -2,15 +2,22 @@
 title: Authentication
 ---
 
-The Zuplo CLI, `zup`, uses API Keys to authenticate.
+:::tip
 
-1. Contact [support](mailto:support@zuplo.com) to enable API keys for your Zuplo
-   project.
-2. Navigate to [dev.zuplo.com/docs](https://dev.zuplo.com/docs) and click on
-   "Sign in" on the top right corner.
-3. Navigate to [authentication](https://dev.zuplo.com/docs/v1/#authentication)
-   and generate some API keys. You will use these keys to authenticate with the
-   Zuplo CLI.
+The API key is scoped to your account. So you can use the same one for all
+projects under the same account. If you are a member of multiple accounts, be
+sure to select the right one.
+
+:::
+
+The Zuplo CLI, `zup`, uses API Keys to authenticate. You can find your API Key
+by following these steps:
+
+1. Navigate to [portal.zuplo.com](portal.zuplo.com) and log in.
+2. Select the project that you want to work on.
+3. Click on the "Settings" tab and navigate to the "Zuplo API Keys" section.
+
+![Zuplo API Keys](../../static/media/api-keys/zuplo-api-keys.png)
 
 All commands take an `--api-key` argument. For example, to list your zups, run:
 
