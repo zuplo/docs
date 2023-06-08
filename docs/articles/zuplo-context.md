@@ -99,3 +99,19 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
   return request;
 }
 ```
+**Important** - If you call a policy using `context.invokeInboundPolicy` it will return a `Request` or `Response` object (example checking the type is shown below). A `Response` indicates that the policy wants to short-circuit the command chain and stop processing, returning that response to the client. Most likely you simply want to return that object depending on your scenario. If it returns a `Request` object then that is probably a freshly minted `Request` object that was created by the policy. In most scenarios you should use this request and return it to the runtime. The original request will now be in a locked state, cannot be cloned and any body cannot be read. This could result in errors like `This ReadableStream is currently locked to a reader`.
+
+```ts
+const result = await context.invokeInboundPolicy("my-policy", request);
+
+if (result instanceof Response) {
+  // if you want to do something special if type is Response, maybe log for example
+  context.log.warn(`My policy wanted to short circuit with a status code of '${result.status}'`);
+}
+
+// You almost certainly want to return the result - whether a Response or Request to ensure
+// Returning something else is an advanced use case and care needs to be taken not to break 
+// downstream processing.
+return result; 
+
+```
