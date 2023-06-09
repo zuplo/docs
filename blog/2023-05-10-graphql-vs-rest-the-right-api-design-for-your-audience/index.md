@@ -17,7 +17,7 @@ some of the tradeoffs between GraphQL and REST as well as offer some ideas on
 how this doesn’t have to be an OR decision, but rather how you can relatively
 easily support both GraphQL and REST.
 
-## GraphQL: Powerful, Performant, and Complex
+## GraphQL: Powerful and Complex
 
 GraphQL, a query language for APIs, was developed by Facebook in 2012 to address
 the limitations of traditional REST APIs. A GraphQL API can make your frontend
@@ -88,10 +88,7 @@ plugged into any web server.
 ## Building a REST to GraphQL Proxy
 
 In this next section, we’ll explore how to build expose a GraphQL API with REST
-using SOFA. For this post, we’ll use expressjs, but in an upcoming post I’ll go
-through how this can be accomplished on [Zuplo](https://zuplo.com) without
-having to worry about any infrastructure and how you can deploy to our 250+
-datacenters at the edge instantly.
+using SOFA and expressjs.
 
 You can see the
 [full source of this example on Github](https://github.com/zuplo/graphql-over-rest-sample),
