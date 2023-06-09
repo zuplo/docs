@@ -141,10 +141,9 @@ const sidebars = {
               items: [
                 "policies/rate-limit-inbound",
                 "policies/audit-log-inbound",
-                "policies/validate-json-schema-inbound",
+                "policies/request-validation-inbound",
                 "policies/bot-detection-inbound",
                 "policies/require-origin-inbound",
-                "policies/open-api-based-request-validation-inbound",
               ],
             },
             {
