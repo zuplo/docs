@@ -149,7 +149,7 @@
     },
     {
       "source": "/docs/policies/json-schema-validation{/}?",
-      "destination": "/docs/policies/validate-json-schema-inbound",
+      "destination": "/docs/policies/request-validation-inbound",
       "permanent": true
     },
     {
@@ -464,7 +464,7 @@
     },
     {
       "source": "/docs/quickstarts/validation-and-docs-with-json-schema{/}?",
-      "destination": "/docs/policies/validate-json-schema-inbound",
+      "destination": "/docs/policies/request-validation-inbound",
       "permanent": true
     },
     {
@@ -618,11 +618,6 @@
       "permanent": true
     },
     {
-      "source": "/docs/policies/request-validation-inbound{/}?",
-      "destination": "/docs/policies/validate-json-schema-inbound",
-      "permanent": true
-    },
-    {
       "source": "/docs/quickstarts{/}?",
       "destination": "/docs/articles/step-1-setup-basic-gateway",
       "permanent": true
@@ -745,6 +740,11 @@
     {
       "source": "/docs/handlers/api-key-inbound{/}?",
       "destination": "/docs/policies/api-key-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/validate-json-schema-inbound{/}?",
+      "destination": "/docs/policies/request-validation-inbound",
       "permanent": true
     }
   ]
