@@ -40,7 +40,7 @@ Next, in order to give the request access to call the Firestore REST API, add
 the **Upstream Firebase Admin Auth** policy. Notice the environment variable
 named `SERVICE_ACCOUNT_JSON`.
 
-<Video src="3f11d90de09f5f6e3891ce8164d85d87" />
+<Video id="3f11d90de09f5f6e3891ce8164d85d87" />
 
 In order to generate the Firebase API tokens, you will need to set the
 `SERVICE_ACCOUNT_JSON` environment variable to the value of the private key from
@@ -53,4 +53,4 @@ instances of the `\n` escape character. The JSON file should be a single line.
 
 Next, add the environment variable to your Zuplo project as a secret.
 
-<Video src="f8840dfe93c3f17f064449a1fb028d9e" />
+<Video id="f8840dfe93c3f17f064449a1fb028d9e" />
