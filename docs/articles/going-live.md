@@ -49,6 +49,20 @@ This is adequate for most situations. It is possible to also perform flighting,
 using a CDN like cloudflare to slowly shift the % of traffic going through your
 existing path over to Zuplo.
 
+## Audit Logging
+
+For privacy reasons, Zuplo doesn't look details like the full URL, body or
+headers of your request. If you do run into issues in your live environment it
+can be useful to have audit logging that logs the **full request**. Most
+customers don't wish to log this amount of information permanently so we
+recommend enabling/disabling via an
+[Environment Variable](./environment-variables.md). In the event of unexpected
+errors, this can allow you to capture the full details of the request typically
+making for an easier repro.
+
+Ask support@zuplo.com about our available Audit Log plugins. You can also build
+your own as outlined [here](./custom-logging-example).
+
 ## Health Checks
 
 Ensure you have health checks with endpoints that go through all parts of your
