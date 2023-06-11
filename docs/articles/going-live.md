@@ -1,0 +1,58 @@
+---
+title: Going Live - Tips
+---
+
+We've helped many customers go live with Zuplo from startups launching their
+first API to giant, API-first companies moving from Kong, Apigee and the like.
+These hot swaps are often the most complicated so here are a few tips for folks
+going live on Zuplo. Of course, our enterprise support team is always there to
+help so don't hesitate to contact us if you have any questions.
+
+## Observability
+
+One of the most critical things to have ready before going live is
+observability. Of course, Zuplo can help with this and we have observability
+integrations for DataDog, GCP Cloud Logging, AWS, Loki Grafana and more
+([just ask](mailto:support@zuplo.com)) available as part of our enterprise
+offerings. Additionally, we have advanced analytics in Zuplo - this is available
+for all tiers in working-copy and for as part of an enterprise agreement for
+edge deployments.
+
+## Zuplo Advanced Analytics
+
+![Zuplo Analytics](https://storage.googleapis.com/cdn.zuplo.com/uploads/CleanShot%202023-06-10%20at%2017.30.38%402x.png)
+
+Zuplo's in built analytics (above) can be very useful immediately after a go
+live, helping you visualize your response status code mix. The advanced **Top
+10** and **Rate Limiting** reports can also help you identify any particular
+routes or users that might be experiencing problems.
+
+![Zuplo's Top 10 report](https://storage.googleapis.com/cdn.zuplo.com/uploads/CleanShot%202023-06-10%20at%2017.16.34%402x.png)
+
+As you make changes to configuration you may want to monitor the Primary
+analytics report to identify any changes in status code mix that are unexpected.
+
+## Rollback Happens
+
+For large, hot-swap deployments where you already have a high volume of API
+traffic that you will be switching to move through Zuplo it is difficult for
+teams to have a perfect test setup that models every shape of request. This
+means that, on occasion, you might see a spike in errors after going live that
+could be due to a bug (often in custom policies or handlers) that weren't
+triggered in your test environment.
+
+For this reason, it is important to have an effective and easy rollback strategy
+in place. This is often easy to accomplish and most customers use a simple VIP
+swap that allows an easy configuration change.
+
+This is adequate for most situations. It is possible to also perform flighting,
+using a CDN like cloudflare to slowly shift the % of traffic going through your
+existing path over to Zuplo.
+
+## Health Checks
+
+Ensure you have health checks with endpoints that go through all parts of your
+infrastructure, e.g. client -> zuplo -> secure-tunnel -> backend. Enterprise
+customers can also request us at Zuplo to monitor your health check endpoints
+and we will also monitor them for you as part of our health check (this is a
+requirement for some customers that want a high SLA).
