@@ -56,7 +56,7 @@ addresses, geolocation, customer profile, random sampling, special headers, etc.
 
 ## Audit Logging
 
-For privacy reasons, Zuplo doesn't look details like the full URL, body or
+For privacy reasons, Zuplo doesn't log details like the full URL, body or
 headers of your request. If you do run into issues in your live environment it
 can be useful to have audit logging that logs the **full request**. Most
 customers don't wish to log this amount of information permanently so we
