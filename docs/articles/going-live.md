@@ -22,7 +22,7 @@ edge deployments.
 
 ![Zuplo Analytics](https://storage.googleapis.com/cdn.zuplo.com/uploads/CleanShot%202023-06-10%20at%2017.30.38%402x.png)
 
-Zuplo's in built analytics (above) can be very useful immediately after a go
+Zuplo's built-in analytics (above) can be very useful immediately after a go
 live, helping you visualize your response status code mix. The advanced **Top
 10** and **Rate Limiting** reports can also help you identify any particular
 routes or users that might be experiencing problems.
@@ -42,12 +42,17 @@ could be due to a bug (often in custom policies or handlers) that weren't
 triggered in your test environment.
 
 For this reason, it is important to have an effective and easy rollback strategy
-in place. This is often easy to accomplish and most customers use a simple VIP
-swap that allows an easy configuration change.
+in place. This is often easy to accomplish and most customers use a simple
+Virtual IP (VIP) swap that allows an easy configuration change. For instance,
+you could keep the DNS entry for your API pointing to your existing
+infrastructure and then use a VIP swap to switch traffic over to Zuplo. This
+allows you to quickly rollback by simply reverting the VIP swap.
 
-This is adequate for most situations. It is possible to also perform flighting,
-using a CDN like cloudflare to slowly shift the % of traffic going through your
-existing path over to Zuplo.
+This is adequate for most situations. It is possible to also perform flighting
+(sometimes referred to as canary testing, or gradual rollouts), using a traffic
+router to slowly shift the % of traffic going through your existing path over to
+Zuplo. How to shift traffic could be based on several factors including IP
+addresses, geolocation, customer profile, random sampling, special headers, etc.
 
 ## Audit Logging
 
