@@ -97,8 +97,10 @@ function stringify(obj: any) {
 
 async function processProperties(properties) {
   const tasks = Object.keys(properties).map(async (key) => {
-    if (properties[key].description)
-      properties[key].description = await render(properties[key].description);
+    if (properties[key].description) {
+      const { html } = await render(properties[key].description);
+      properties[key].description = html;
+    }
     if (properties[key].properties) {
       await processProperties(properties[key].properties);
     }
@@ -356,7 +358,7 @@ async function getExampleHtml(
     throw new Error("Invalid schema");
   }
 
-  const description = await render(schema.description);
+  const { html: description } = await render(schema.description);
   const properties = (schema.properties.handler as any).properties.options
     ?.properties;
 
