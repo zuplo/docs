@@ -4,7 +4,7 @@
   "type": "object",
   "title": "JSON Body Validation (legacy)",
   "isPreview": false,
-  "isDeprecated": true,
+  "isDeprecated": false,
   "description": "Validates the body of an incoming request based on a JSON schema.",
   "required": ["handler"],
   "properties": {
