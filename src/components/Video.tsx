@@ -4,16 +4,21 @@ import styles from "./video.module.css";
 
 import "video.js/dist/video-js.css";
 
-const Video: React.FC<{ id: string }> = ({ id }) => {
+const Video: React.FC<{
+  id: string;
+  autoplay: boolean;
+  muted: boolean;
+  loop: boolean;
+}> = ({ id, autoplay = true, muted = true, loop = true }) => {
   const videoRef = React.useRef(null);
   const playerRef = React.useRef(null);
 
   const options = {
-    autoplay: true,
+    autoplay,
     controls: true,
-    muted: true,
+    muted,
     responsive: true,
-    loop: true,
+    loop,
     fluid: true,
     sources: [
       {

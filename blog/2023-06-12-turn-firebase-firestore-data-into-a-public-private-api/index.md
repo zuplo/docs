@@ -108,7 +108,7 @@ export default async function (response: Response) {
 }
 ```
 
-<Video id="8dead98359628f56ea7a85767bbaaf8e" />
+<Video id="8dead98359628f56ea7a85767bbaaf8e" autoplay={false} loop={false} />
 
 ### 7/ Test the Body Rewrite
 
