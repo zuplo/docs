@@ -48,9 +48,9 @@ to `/products/{id}` and the rewrite value to the value below. Replace
 
 Next, to give the request access to call the Firestore REST API, add the
 **Upstream Firebase Admin Auth** policy. Notice the environment variable named
-`SERVICE_ACCOUNT_JSON`.
+`SERVICE_ACCOUNT_JSON`. We'll set this variable in the next step.
 
-<Video id="3f11d90de09f5f6e3891ce8164d85d87" />
+![Add Policy](./add-policy.png)
 
 ### 4/ Environment Variable
 
@@ -62,7 +62,7 @@ the **Service Accounts** tab and then generate and download a private key.
 file to Zuplo's environment variables**, you must remove all line breaks and all
 instances of the `\n` escape character. The JSON file should be a single line.
 
-<Video id="f8840dfe93c3f17f064449a1fb028d9e" />
+![Environment Variable](./env-variable.png)
 
 ### 5/ Test the Route
 
@@ -107,8 +107,6 @@ export default async function (response: Response) {
   return new Response(JSON.stringify(outbound), response);
 }
 ```
-
-<Video id="8dead98359628f56ea7a85767bbaaf8e" autoplay={false} loop={false} />
 
 ### 7/ Test the Body Rewrite
 
