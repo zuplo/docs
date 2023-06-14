@@ -22,6 +22,7 @@ const config = {
   plugins: [
     "./src/plugins/fathom",
     // "./src/plugins/vercel",
+    "./src/plugins/koala",
     "./src/plugins/hubspot",
     [
       "@docusaurus/plugin-content-blog",
