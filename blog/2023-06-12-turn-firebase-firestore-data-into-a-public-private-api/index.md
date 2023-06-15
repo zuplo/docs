@@ -25,6 +25,11 @@ securely without utilizing Firebase's security rules. This can be useful if you
 don't want to tie your system to Firebase rules or maybe you just need
 additional flexibility.
 
+This post walks through the steps, but if you'd prefer you can also watch the
+demo video.
+
+<YouTubeVideo url="https://www.youtube-nocookie.com/embed/sY2H1wuIkPE" />
+
 ### 1/ Firestore Collection
 
 For this walkthrough, we'll assume your Firebase database has a collection
