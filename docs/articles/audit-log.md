@@ -46,8 +46,6 @@ import {
 export function runtimeInit(runtime: RuntimeExtensions) {
 
   runtime.addPlugin(
-    // add the audit plugin, have Datastax write to a requestbin
-    // only log methods with audit === true in the filter
     new AuditLogPlugin(
       new AuditLogDataStaxProvider({
         url: "THE_FULL_URL_TO_YOUR_COLLECTION_HERE",
@@ -55,13 +53,13 @@ export function runtimeInit(runtime: RuntimeExtensions) {
       }),
       {
 	include: {
-		request: {
-			body: false
-		},
-		response: {
-			headers: false
-			}
-		}
+	  request: {
+	    body: false
+	  },
+	  response: {
+	    headers: false
+	  }
+	}
       }
     )
   );
