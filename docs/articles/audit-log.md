@@ -51,22 +51,17 @@ export function runtimeInit(runtime: RuntimeExtensions) {
     new AuditLogPlugin(
       new AuditLogDataStaxProvider({
         url: "THE_FULL_URL_TO_YOUR_COLLECTION_HERE",
-        xCassandraToken: "YOUR_API_KEY_HERE",
-		{
-			include: {
-				request: {
-					body: false
-				},
-				response: {
-					headers: false
-				}
-			}
-		}
+        xCassandraToken: "YOUR_API_KEY_HERE"
       }),
       {
-        requestFilter: async (request, context) => {
-          return request.query.audit === "true";
-        },
+	include: {
+		request: {
+			body: false
+		},
+		response: {
+			headers: false
+			}
+		}
       }
     )
   );
