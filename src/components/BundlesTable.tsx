@@ -9,21 +9,23 @@ const BundlesTable = () => {
         <td width={100}>Version</td>
         <td>Description</td>
       </tr>
-      {data.bundles.map((bundle, i) => (
-        <tr key={i}>
-          <td>
-            <a
-              href={
-                bundle.url ?? `https://www.npmjs.com/package/${bundle.name}`
-              }
-            >
-              {bundle.name}
-            </a>
-          </td>
-          <td>{bundle.version}</td>
-          <td>{bundle.description}</td>
-        </tr>
-      ))}
+      {data.bundles
+        .filter((bundle) => bundle.public)
+        .map((bundle, i) => (
+          <tr key={i}>
+            <td>
+              <a
+                href={
+                  bundle.url ?? `https://www.npmjs.com/package/${bundle.name}`
+                }
+              >
+                {bundle.name}
+              </a>
+            </td>
+            <td>{bundle.version}</td>
+            <td>{bundle.description}</td>
+          </tr>
+        ))}
     </table>
   );
 };

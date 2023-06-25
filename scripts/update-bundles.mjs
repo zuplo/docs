@@ -1,17 +1,11 @@
 import { createWriteStream } from "fs";
-import { get } from "https";
 import { resolve } from "path";
+import { Readable } from "stream";
 
-const file = createWriteStream(
-  resolve(process.cwd(), "./src/components/bundles.json")
-);
-get(
-  `https://cdn.zuplo.com/portal/bundles.json?t=${Date.now()}`,
-  function (response) {
-    response.pipe(file);
-    file.on("finish", () => {
-      file.close();
-      console.log("Updated bundles.json");
-    });
-  }
+fetch(`https://cdn.zuplo.com/types/@zuplo/bundled/bundles.json`, {
+  cache: "no-cache",
+}).then((response) =>
+  Readable.fromWeb(response.body).pipe(
+    createWriteStream(resolve(process.cwd(), "./src/components/bundles.json"))
+  )
 );
