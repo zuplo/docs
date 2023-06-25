@@ -10,3 +10,10 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      eslint-dependencies:
+        patterns:
+          - "*eslint*"
+      prettier-dependencies:
+        patterns:
+          - "*prettier*"
