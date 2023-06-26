@@ -312,10 +312,6 @@ const sidebars = {
       type: "doc",
       id: "articles/security",
     },
-    {
-      type: "doc",
-      id: "articles/pricing",
-    },
   ],
 };
 
