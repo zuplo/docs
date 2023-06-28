@@ -4,8 +4,7 @@ authors: josh
 tags: [firebase, jwt, auth, api]
 description: |
   Create a JWT token for your Firebase user easily with firebasejwt.com
-image: https://og-image.zuplo.com/?text=
-draft: true
+image: https://og-image.zuplo.com/?text=Generate%20Firebase%20JWT%20tokens%20in%20seconds
 ---
 
 In January, we launched [supbasejwt.com](https://supabasejwt.com) -
