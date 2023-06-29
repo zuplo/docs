@@ -1,10 +1,10 @@
 ---
-title: A better deal for small businesses
+title: A better deal for startups and small businesses
 authors: josh
 tags: [price, cost, api, api]
 description: |
   Accelerating time to market for API builders everywhere and making API management accessible to the masses
-image: https://og-image.zuplo.com/?text=A%20better%20deal%20for%20small%20businesses
+image: https://og-image.zuplo.com/?text=A%20better%20deal%20for%20startups%20and%20small%20businesses
 ---
 
 At Zuplo, our mission is to revolutionize API management by modernizing and
