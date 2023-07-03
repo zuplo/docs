@@ -64,7 +64,18 @@
             "allowUnauthenticatedRequests": false,
             "audience": "$env(AUTH_AUDIENCE)",
             "issuer": "$env(AUTH_ISSUER)",
-            "secret": "$env(JWT_SECRET)"
+            "jwkUrl": "$env(JWK_URL)"
+          }
+        },
+        {
+          "_name": "secret",
+          "export": "OpenIdJwtInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "allowUnauthenticatedRequests": false,
+            "audience": "$env(AUTH_AUDIENCE)",
+            "issuer": "$env(AUTH_ISSUER)",
+            "secret": "$env(AUTH_SECRET)"
           }
         }
       ]
