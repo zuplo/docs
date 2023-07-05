@@ -25,6 +25,11 @@
           "description": "The options for this policy",
           "required": [],
           "properties": {
+            "cacheId": {
+              "type": "string",
+              "default": "",
+              "description": "Optional, specifies an id or 'key' for this policy to store cache. This is useful for cache-busting. For example, set this property to an env var and if you change that env var value, you invalidate the cache."
+            },
             "dangerouslyIgnoreAuthorizationHeader": {
               "type": "boolean",
               "default": false,
