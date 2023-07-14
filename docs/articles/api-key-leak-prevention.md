@@ -46,9 +46,8 @@ In order for Zuplo to notify you via Slack of an API Key leak, create a new
 [Incoming Webhook](https://api.slack.com/messaging/webhooks) to the slack
 channel of your choice and contact support@zuplo.com to enable notifications.
 
-When an API Key leak is detected you will receive a notification like this.
-
-![](https://cdn.zuplo.com/assets/c5060eee-9491-4898-987d-3fc56910954a.png)
+When an API Key leak is detected you will receive a slack message with details
+about the leaked key, the project, etc.
 
 ### Email
 
@@ -56,10 +55,8 @@ Zuplo can email you in the event of an API Key leak. We recommend setting up an
 alias email that is then sent to the relevant people. Contact support@zuplo.com
 to enable email notifications.
 
-The notification emails will come from `support@zuplo.com` and look like the
-following.
-
-![](https://cdn.zuplo.com/assets/5a8e4926-1648-4177-bcdc-12327c322c30.png)
+The notification emails will come from `support@zuplo.com` and contain details
+about the leaked key, the project, etc.
 
 ### Webhook
 
