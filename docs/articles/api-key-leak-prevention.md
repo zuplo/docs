@@ -33,7 +33,7 @@ Customers on paid plans can be automatically notified by Zuplo when one of their
 API Keys is found to have leaked. Zuplo supports email, Slack, and webhook
 notifications.
 
-::: note
+:::note
 
 For security reasons we don't include the full API Key in the notifications we
 send. If you need the full API Key please contact support.
