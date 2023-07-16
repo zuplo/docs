@@ -147,6 +147,13 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 }
 ```
 
+:::note
+
+For more information about the `HttpProblems` helper see
+[documentation](https://zuplo.com/docs/articles/http-problems)
+
+:::
+
 ## Migrating Clients + Cleanup
 
 With your API gateway now supporting both authentication providers, clients can

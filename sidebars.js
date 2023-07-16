@@ -265,6 +265,7 @@ const sidebars = {
             "articles/zuplo-context",
             "articles/web-standard-apis",
             "articles/node-modules",
+            "articles/http-problems",
             "articles/reusing-code",
             "articles/zone-cache",
             "articles/safely-clone-a-request-or-response",
