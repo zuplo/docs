@@ -8,20 +8,21 @@ image: https://og-image.zuplo.com/?text=Migrating%20API%20Auth%20with%20Zero%20D
 ---
 
 One of the biggest benefits of an API Gateway is that it provides an abstraction
-layer between your clients and your implementation. This layer allows your
-backend to be unaware of various API implementations and configurations,
-including authentication, authorization, and rate limits. This separation of
-concerns also makes it possible to swap out specific implementations in a single
-place - your gateway - without having to rewrite a large amount of backend code.
+layer between your clients and your backend (i.e. business logic). This layer
+allows your backend to be unaware of various API implementations and
+configurations such as authentication, authorization, and rate limits. This
+separation of concerns also makes it possible to swap out specific
+implementations in a single place - your gateway - without having to rewrite a
+large amount of backend code.
 
-We have assisted Zuplo customers with migrating to new authorization providers,
-such as switching from AWS Cognito to Auth0, or to an entirely new authorization
-system, such as moving from JWT to API Keys. Typically, this type of migration
-would require changes to your API implementation. In the simple case where you
-have a single service, this might be fairly straightforward. However, in
-practice, customers often have many services, each of which needs to implement
-the same authentication service. Regardless, an API gateway can greatly simplify
-the migration process.
+One question we have helped Zuplo customers with is how to migrate to a new
+authorization provider (say AWS Cognito to Auth0) or even to an entirely new
+type of authorization system (say JWT to API Keys). Normally, this type of
+migration would mean code changes to your API implementation - in the simple
+case where you have a single service this might be fairly straightforward, but
+what we have seen in practice is that customers end up with many services that
+each need to implement the same authentication service. In either case though,
+an API gateway can dramatically simplify the migration.
 
 ## Separation of Concerns
 
