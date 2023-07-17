@@ -262,6 +262,7 @@ const sidebars = {
           label: "Programming API",
           items: [
             "articles/zuplo-request",
+            "articles/environment-variables",
             "articles/zuplo-context",
             "articles/web-standard-apis",
             "articles/web-crypto-apis",
