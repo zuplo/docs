@@ -1,6 +1,6 @@
 ---
 title: HttpProblems Helper
-sidebar_label: HttpProblems
+sidebar_label: Problem Details Helper
 ---
 
 Zuplo encourages developers to build APIs with standard and actionable error
