@@ -275,6 +275,8 @@ const sidebars = {
             "articles/runtime-behaviors",
             "articles/zp-body-removed",
             "articles/audit-log",
+            "articles/runtime-extensions",
+            "articles/not-found-handler",
           ],
         },
         {
