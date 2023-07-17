@@ -5,6 +5,13 @@ original: https://github.com/cloudflare/cloudflare-docs/blob/production/content/
 license: https://github.com/cloudflare/cloudflare-docs/blob/production/LICENSE
 ---
 
+<style type="text/css">{`
+/* This is here to make the table not scroll on full screen */
+table th, table td {
+  padding: 6px;
+}
+`}</style>
+
 ## Background
 
 The Web Crypto API provides a set of low-level functions for common
@@ -159,9 +166,21 @@ The runtime implements all operations of the
 following table.
 
 A checkmark (✓) indicates that this feature is believed to be fully supported
-according to the spec.<br> An x (✘) indicates that this feature is part of the
-specification but not implemented.<br> If a feature only implements the
-operation partially, details are listed.
+according to the spec.
+
+An x (✘) indicates that this feature is part of the specification but not
+implemented.
+
+If a feature only implements the operation partially, details are listed.
+
+:::caution
+
+There can occasionally be differences in which alorithms are supported in
+development (working copy) environments. The table below lists support for the
+production edge runtime. If you find an issue with your development environment
+contact support@zuplo.com and we can help resolve the issue.
+
+:::
 
 | Algorithm                                          | sign()<br/>verify() | encrypt()<br/>decrypt() | digest() | deriveBits()<br/>deriveKey() | generateKey() | wrapKey()<br/>unwrapKey() | exportKey() | importKey() |
 | :------------------------------------------------- | :------------------ | :---------------------- | :------- | :--------------------------- | :------------ | :------------------------ | :---------- | :---------- |
@@ -170,9 +189,9 @@ operation partially, details are listed.
 | RSA OAEP                                           |                     | ✓                       |          |                              | ✓             | ✓                         | ✓           | ✓           |
 | ECDSA                                              | ✓                   |                         |          |                              | ✓             |                           | ✓           | ✓           |
 | ECDH                                               |                     |                         |          | ✓                            | ✓             |                           | ✓           | ✓           |
-| Ed25519<sup><a href="#footnote 1">1</a></sup>      | ✓                   |                         |          |                              | ✓             |                           | ✓           | ✓           |
-| X25519<sup><a href="#footnote 1">1</a></sup>       |                     |                         |          | ✓                            | ✓             |                           | ✓           | ✓           |
-| NODE ED25519<sup><a href="#footnote 2">2</a></sup> | ✓                   |                         |          |                              | ✓             |                           | ✓           | ✓           |
+| Ed25519<sup><a href="#footnote-1">1</a></sup>      | ✓                   |                         |          |                              | ✓             |                           | ✓           | ✓           |
+| X25519<sup><a href="#footnote-1">1</a></sup>       |                     |                         |          | ✓                            | ✓             |                           | ✓           | ✓           |
+| NODE ED25519<sup><a href="#footnote-2">2</a></sup> | ✓                   |                         |          |                              | ✓             |                           | ✓           | ✓           |
 | AES CTR                                            |                     | ✓                       |          |                              | ✓             | ✓                         | ✓           | ✓           |
 | AES CBC                                            |                     | ✓                       |          |                              | ✓             | ✓                         | ✓           | ✓           |
 | AES GCM                                            |                     | ✓                       |          |                              | ✓             | ✓                         | ✓           | ✓           |
@@ -182,7 +201,7 @@ operation partially, details are listed.
 | SHA 256                                            |                     |                         | ✓        |                              |               |                           |             |             |
 | SHA 384                                            |                     |                         | ✓        |                              |               |                           |             |             |
 | SHA 512                                            |                     |                         | ✓        |                              |               |                           |             |             |
-| MD5<sup><a href="#footnote 3">3</a></sup>          |                     |                         | ✓        |                              |               |                           |             |             |
+| MD5<sup><a href="#footnote-3">3</a></sup>          |                     |                         | ✓        |                              |               |                           |             |             |
 | HKDF                                               |                     |                         |          | ✓                            |               |                           |             | ✓           |
 | PBKDF2                                             |                     |                         |          | ✓                            |               |                           |             | ✓           |
 
