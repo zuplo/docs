@@ -12,8 +12,6 @@ table th, table td {
 }
 `}</style>
 
-## Background
-
 The Web Crypto API provides a set of low-level functions for common
 cryptographic tasks. The Workers Runtime implements the full surface of this
 API, but with some differences in the
@@ -71,7 +69,9 @@ const uuid = crypto.randomUUID();
 
 ## HMAC Signatures
 
-**Sign a Value**
+The following code blocks show how to sign and verify a string using HMAC.
+
+### Sign a Value
 
 ```ts
 /**
@@ -105,7 +105,7 @@ async function sign(value: string, secret: string) {
 }
 ```
 
-**Verify a Value**
+### Verify a Value
 
 ```ts
 /**
@@ -159,7 +159,7 @@ async function verify(signature: string, value: string, secret: string) {
 }
 ```
 
-### Supported algorithms
+## Supported algorithms
 
 The runtime implements all operations of the
 [WebCrypto standard](https://www.w3.org/TR/WebCryptoAPI/), as shown in the
