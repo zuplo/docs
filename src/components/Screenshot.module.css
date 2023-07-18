@@ -1,0 +1,14 @@
+.screenshot {
+  margin-right: auto;
+  margin-left: auto;
+  display: inherit;
+  width: auto;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+}
+
+@media screen and (max-width: 996px) {
+  .screenshot {
+    max-width: 100%;
+  }
+}

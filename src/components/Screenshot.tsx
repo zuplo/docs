@@ -1,29 +1,27 @@
 import React from "react";
+import styles from "./Screenshot.module.css";
 
-const SizedImage = ({
+const Screenshot = ({
   src,
   alt,
   maxWidth,
 }: {
   src: string;
   alt: string;
-  maxWidth: number;
+  maxWidth: string;
 }) => {
-  const mw = maxWidth ?? "100%";
+  const mw = maxWidth ?? "80%";
   return (
     <img
       loading="lazy"
       src={src}
       alt={alt}
+      className={styles["screenshot"]}
       style={{
         maxWidth: mw,
-        marginRight: "auto",
-        marginLeft: "auto",
-        display: "inherit",
-        width: "auto",
       }}
     />
   );
 };
 
-export default SizedImage;
+export default Screenshot;

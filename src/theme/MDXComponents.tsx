@@ -1,7 +1,8 @@
 import MDXComponents from "@theme-original/MDXComponents";
 import FeaturePremiere from "../components/FeaturePremiere";
 import PolicyStatus from "../components/PolicyStatus";
-import SizedImage from "../components/SizedImage";
+import Screenshot from "../components/Screenshot";
+import StyledImage from "../components/StyledImage";
 import {
   ApiTestConsoleTabIcon,
   BuildStatusTabIcon,
@@ -29,7 +30,8 @@ export default {
   YouTubeVideo,
   Video,
   PolicyStatus,
-  SizedImage,
+  StyledImage,
+  Screenshot,
   DeveloperPortalIcon,
   FeaturePremiere,
 };
