@@ -90,7 +90,7 @@ The next step is to add the Auth0 JWT Auth policy to a route in your project.
 
 ### Test the Policy
 
-Finnally, you'll make two API requests to your route to test that authorization
+Finnally, you'll make two API requests to your route to test that authentication
 is working as expected.
 
 1. In the route designer on the route you added the policy, click the **Test**
