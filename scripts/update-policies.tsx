@@ -5,7 +5,7 @@ import arg from "arg";
 import chalk from "chalk";
 import chokidar from "chokidar";
 import { existsSync } from "fs";
-import { copyFile, mkdir, readFile, rm, writeFile } from "fs/promises";
+import { copyFile, mkdir, readdir, readFile, rm, writeFile } from "fs/promises";
 import glob from "glob";
 import path from "path";
 import prettier from "prettier";
@@ -174,7 +174,7 @@ ${optionsHtml}
 </div>
 
 <!-- start: doc.md -->
-${docMd ?? ""}
+${(docMd ?? "").replace(/!\[(.*)\]\(\.\/(.*)\)/, `![$1](./${policyId}/$2)`)}
 <!-- end: doc.md -->
 
 Read more about [how policies work](/docs/articles/policies)
@@ -214,7 +214,8 @@ async function run() {
     const schemaJson = await readFile(schemaPath, "utf-8");
     const rawSchema = JSON.parse(schemaJson);
     // RefParser uses cwd to resolve refs
-    process.chdir(path.join(policiesDir, policyId));
+    const policyDir = path.join(policiesDir, policyId);
+    process.chdir(policyDir);
     const schema = (await dereference(rawSchema)) as PolicySchema;
     await processProperties(schema.properties);
 
@@ -274,11 +275,29 @@ async function run() {
     );
 
     if (!schema.isDeprecated) {
+      const policyOutDir = path.join(docsDir, policyId);
+      await mkdir(policyOutDir);
+
       await writeFile(
         path.join(docsDir, `${policyId}.md`),
         generatedMd,
         "utf-8"
       );
+
+      // Copy png files
+      const assets = (await readdir(policyDir)).filter((file) => {
+        return file.endsWith(".png");
+      });
+      for (const asset of assets) {
+        const dest = path.resolve(policyOutDir, asset);
+        if (existsSync(dest)) {
+          await rm(dest);
+        }
+        await copyFile(
+          path.resolve(policyDir, asset),
+          path.resolve(policyOutDir, asset)
+        );
+      }
     }
   });
 

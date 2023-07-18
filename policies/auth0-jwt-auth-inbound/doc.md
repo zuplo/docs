@@ -1,275 +1,114 @@
-## Tutorial
+## Using the Policy
 
-We will start by adding a route to your `routes.oas.json` file that will use the
-policy. You can paste the following into the file
+Adding Auth0 to your route takes just a few steps, but before you can add the
+policy you'll need to have Auth0 setup for API Authentication.
 
-```json
-{
-  "openapi": "3.1.0",
-  "info": {
-    "version": "1.0.0",
-    "title": "My Zuplo API"
-  },
-  "paths": {
-    "/hello-world": {
-      "x-zuplo-path": {
-        "pathMode": "open-api"
-      },
-      "get": {
-        "summary": "Route 1",
-        "description": "",
-        "operationId": "b53744a5-a41c-468e-a47a-5ab85b0c5866",
-        "x-zuplo-route": {
-          "corsPolicy": "anything-goes",
-          "handler": {
-            "export": "default",
-            "module": "$import(./modules/hello-world)",
-            "options": {}
-          },
-          "policies": {
-            "inbound": []
-          }
-        }
-      },
-      "post": {
-        "summary": "Route 2",
-        "description": "",
-        "operationId": "b0fbbd59-cd35-407a-8fe1-469c4f3ab142",
-        "x-zuplo-route": {
-          "corsPolicy": "anything-goes",
-          "handler": {
-            "export": "default",
-            "module": "$import(./modules/hello-world)",
-            "options": {}
-          },
-          "policies": {
-            "inbound": []
-          }
-        }
-      }
-    }
-  }
-}
-```
+### Setup Auth0
 
-And your hello-world module (request handler) should look like this
+To use Auth0 as an API authentication provider, you'll need to create both an
+Application and an API in the Auth0 dashboard. The steps below cover the basics,
+but if you need more details see the Auth0 links throughout this document.
 
-```ts
-import { ZuploRequest, ZuploContext } from "@zuplo/runtime";
+1. Create the Auth0 API
+   ([Auth0 Doc](https://auth0.com/docs/get-started/auth0-overview/set-up-apis))
 
-export default async function (request: ZuploRequest, context: ZuploContext) {
-  // Use the built in logging infrastructure available
-  // on the request object for extra logging magic
-  // when testing your API
-  context.log.info(`Hello from inside your Zup`);
+   In the Auth0 dashboard, select **APIs** on the sidebar, then click the **+
+   Create API** button.
 
-  // Zuplo wants to make it easy to build great APIs
-  // You can return an instance of Response or, if
-  // you return another primitive, we'll do our best
-  // to convert it to JSON for you
-  return "What zup?";
-}
-```
+   Enter the **Name** and **Identifier** of your application. The identifier is
+   usually a URI such as `https://api.example.com/`. The URL used in the
+   identifier does NOT have to be the URL of your actual API. A common practice
+   is to use the URL of your production API. Save this value, you'll use it in
+   the next section.
 
-You should already have a test setup in the test client, like this
+2. Get the Auth0 Domain
 
-The next step is to enforce authentication on this API using Auth0 and JWT
-tokens.
+   On your newly created Auth0 API, click the **Test** tab. This tabs shows how
+   to create a
+   [Machine-to-Machine](https://auth0.com/docs/get-started/authentication-and-authorization-flow/call-your-api-using-the-client-credentials-flow)
+   access token from a test application that Auth0 automatically created for
+   your API.
 
-## Setting up Auth0
+   From the first code block on this page, find the URL value as shown below.
+   Copy the **hostname** portion (outlined in red) of this URL (not the
+   `https://` or the trailing `/oauth/token` parts). For example
+   `your-account.us.auth0.com`. Save this value, you'll use it in the next
+   section.
 
-You can create a free Auth0 account at [auth0.com](http://auth0.com). Once
-logged in you can create your first API in Auth0.
+   <Screenshot src="https://cdn.zuplo.com/assets/53f91f6d-17c2-469d-9e23-ac3beb9a804b.png" alt="Auth0 Access Token" />
 
-![CleanShot 2021-11-29 at 16.23.56@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.23.562x.png)
+3. Get an Access Token
 
-Click `+ Create API` to create a new API.
+   Find the code block that contains the `access_token` and copy the **entire**
+   token value (without the quotes) and save it. You'll use this later to test
+   your Auth0 JWT policy in Zuplo.
 
-![Untitled](/media/guides/setup-jwt-auth-with-auth0/Untitled_1.png)
+   <Screenshot src="https://cdn.zuplo.com/assets/991dbd66-2bb9-4bc1-8ae0-8d928b5dcb7e.png" alt="Auth0 Access Token" />
 
-The `Identifier` should be a URL but it doesn't have to be an accessible
-endpoint. Here I'm just using the same string as the name with an https://
-protocol and trailing /. We'll need these values later so don't forget them.
+### Set Environment Variables
 
-Inside the settings for your new API, you should see a Test tab
+Before adding the policy, there are a few environment variables that will need
+to be set that will be used in the Auth0 JWT Policy.
 
-![CleanShot 2021-11-29 at 16.30.40@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.30.402x.png)
+:::caution
 
-We'll need this cURL script shortly to get an access token to test against our
-API.
-
-## Configuring the Zuplo Policy
-
-Next, we will configure our Open ID JWT Policy - more documentation on this
-[here](./open-id-jwt-auth-inbound.md). Add the policy to `policies` array to
-your policies.json.
-
-```json
-{
-  "name": "auth-policy",
-  "policyType": "open-id-jwt-inbound",
-  "handler": {
-    "export": "OpenIdJwtInboundPolicy",
-    "module": "$import(@zuplo/runtime)",
-    "options": {
-      "issuer": "$env(AUTH_ISSUER)",
-      "audience": "$env(AUTH_AUDIENCE)",
-      "jwkUrl": "$env(AUTH_JWKS)",
-      "allowUnauthenticatedRequests": false
-    }
-  }
-}
-```
-
-- The `audience` property in options should exactly match the `Identifier` we
-  created in Auth0 earlier, so `https://zuplo-auth-sample/` in this case.
-- The `issuer` field will be the URL for your Auth0 tenant, e.g.
-  `https://zuplo-demo.us.auth0.com/`.
-- The `jwkUrl` is the public URL of your JWK set.
-
-:::tip
-
-If you're not sure where to find the issuer or jwkUrl you can easily find it in
-the Node.JS QuickStart for your API as shown below.
+It is very important in the next steps that the values match **EXACTLY** as they
+are found in Auth0.
 
 :::
 
-![CleanShot 2021-11-29 at 16.47.24@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.47.242x.png)
+1. In the [Zuplo Portal](https://portal.zuplo.com) open the **Environment
+   Variables** section in the <SettingsTabIcon /> **Settings** tab.
 
-## Adding the policy to your route(s)
+2. Click **Add new Variable** and enter the name `AUTH0_DOMAIN` in the name
+   field. Set the value to
 
-Finally, we need to add this policy to our route by adding `auth-policy` to the
-`handler.policies.inbound` array property on each route.
+3. Click **Add new Variable** again and enter the name `AUTH0_AUDIENCE` in the
+   name field. Set the value to the **identifier** URI you used when creating
+   the Auth0 API in the section above (i.e. `https://api.example.com/`).
 
-## Testing the policy
+### Add the Auth0 Policy
 
-In the test client, you can now verify that your API has been secured. You
-should get a `401: Unauthorized` response from your API.
+The next step is to add the Auth0 JWT Auth policy to a route in your project.
 
-![CleanShot 2021-11-29 at 16.55.43@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_16.55.432x.png)
+1. In the [Zuplo Portal](https://portal.zuplo.com) open the **Route Designer**
+   in the <CodeEditorTabIcon /> **Files** tab then click **routes.oas.json**.
 
-Next, let's get a valid token using the cURL script from earlier in this
-tutorial. Copy the cURL script from the test tab and execute it in a terminal
-window:
+2. Select or create a route that you want to authenticate with Auth0. Expand the
+   **Policies** section and click **Add Policy**. Search for and select the
+   Auth0 JWT Auth policy.
 
-![CleanShot 2021-11-29 at 17.03.34@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.03.342x.png)
+   <Screenshot src="https://cdn.zuplo.com/assets/40c72bc5-be30-4246-809c-58d4ecb18f9e.png" />
 
-Carefully extract the access_token only and copy it to the clipboard. Paste into
-a header in the test client called `authorization`. Note that the value of the
-header should be `Bearer <access_token>` replacing `<access_token>` with the
-token you got back from cURL.
+3. With the policy selected, notice that there are two properties, `auth0Domain`
+   and `audience` that are pre-populated with environment variable names that
+   you set in the previous section.
 
-![CleanShot 2021-11-29 at 17.06.08@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.06.082x.png)
+  <Screenshot src="https://cdn.zuplo.com/assets/2aa3fc6a-0e9c-47f6-b08d-c1cc446e54b9.png" maxWidth="60%" />
+ 
+4. Click **OK** to save the policy.
 
-💥 You are now authenticated with the Zuplo API
+### Test the Policy
 
-## Accessing the user object
+Finnally, you'll make two API requests to your route to test that authorization
+is working as expected.
 
-Now let's update our script to explore the values inside the user object. Add
-the following line to the middle of your request handler:
+1. In the route designer on the route you added the policy, click the **Test**
+   button. In the dialog that opens, click **Test** to make a request.
 
-```tsx
-export default async function (request: ZuploRequest, context: ZuploContext) {
-  context.log.info(request.user); // add this line
+2. The API Gateway should respond with a **401 Unauthorized** response.
 
-  return "What zup?";
-}
-```
+  <Screenshot src="https://cdn.zuplo.com/assets/626e10a2-2350-439a-9081-1ccf1fe90cad.png" maxWidth="60%" />
 
-Execute the test again and you'll see the following JSON output in the **Request
-Logs** window:
+3. Now to make an authenticated request, add a header to the request called
+   `Authorization`. Set the value of the header to `Bearer YOUR_ACCESS_TOKEN`
+   replacing `YOUR_ACCESS_TOKEN` with the value of the Auth0 access token you
+   saved from the first section of this tutorial.
 
-```json
-{
-  "sub": "B7IE--redacted--nts",
-  "data": {
-    "iss": "https://zuplo-demo.us.auth0.com/",
-    "sub": "B7IE--redacted--nts",
-    "aud": "https://zuplo-auth-sample/",
-    "iat": 1638233933,
-    "exp": 1638320333,
-    "azp": "B7IE--redacted--",
-    "gty": "client-credentials"
-  }
-}
-```
+  <Screenshot src="https://cdn.zuplo.com/assets/1486821b-cade-4041-b05b-80d3366327a5.png" maxWidth="80%" />
 
-## Adding additional claims in Auth0
+4. Click the **Test** button and a **200 OK** response should be returned.
 
-Navigate to `Actions > Flows` and choose `Machine to Machine`.
+  <Screenshot src="https://cdn.zuplo.com/assets/8182f932-8db6-4456-842f-f65158b174c0.png" maxWidth="60%" />
 
-![CleanShot 2021-11-29 at 17.17.07@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.17.072x.png)
-
-Choose `Add Action > Build Custom`
-
-![CleanShot 2021-11-29 at 17.39.35@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.39.352x.png)
-
-Give your custom action a name - we chose 'Set-Claim':
-
-![CleanShot 2021-11-29 at 17.41.04@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.41.042x.png)
-
-Add two claims to your M2M tokens using the following code:
-
-![CleanShot 2021-11-29 at 17.44.55@2x.png](/media/guides/setup-jwt-auth-with-auth0/CleanShot_2021-11-29_at_17.44.552x.png)
-
-And, critically, remember to click `Deploy`. Also, note that the claims MUST be
-URLs (again, they do not need to be live URLs, just valid in structure).
-
-```ts
-exports.onExecuteCredentialsExchange = async (event, api) => {
-  api.accessToken.setCustomClaim(
-    "https://example.com/claim1/",
-    `this-is-a-claim`
-  );
-  api.accessToken.setCustomClaim(
-    "https://example.com/claim2/",
-    `here-is-another-claim`
-  );
-};
-```
-
-## Re-test your API
-
-Get a fresh token using cURL (same approach as above, it's important to get a
-fresh token so that it contains these new claims).
-
-Paste the token into the test client and re-execute the API.
-
-You should see the following in the **Request Logs**:
-
-```json
-{
-  "sub": "B7IE--redacted--nts",
-  "data": {
-    "https://example.com/claim1/": "this-is-a-claim", //💥
-    "https://example.com/claim2/": "here-is-another-claim", //🤯
-    "iss": "https://zuplo-demo.us.auth0.com/",
-    "sub": "B7IE--redacted--nts",
-    "aud": "https://zuplo-auth-sample/",
-    "iat": 1638236905,
-    "exp": 1638323305,
-    "azp": "B7IE--redacted--",
-    "gty": "client-credentials"
-  }
-}
-```
-
-Note the two additional claims that can be used in your code, e.g.
-
-```ts
-if (request.user.data["https://example.com/claim1/"] === "this-is-a-claim") {
-  // do something
-}
-```
-
-Or you could even do smart routing based on a claim for this user.
-
-```ts
-const onwardUrl = request.user.data["https://example.com/onward-url"];
-
-const result = fetch(onwardUrl);
-
-return result;
-```
-
-Stay secure out there folks!
+You have now setup Auth0 JWT Authentication on your API Gateway.
