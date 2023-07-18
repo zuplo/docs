@@ -79,12 +79,6 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 
 ### Hook: OnResponseSending
 
-:::warning
-
-This hook is in beta and could change before release.
-
-:::
-
 The `OnResponseSending` hook allows modification of the `Response` immediately
 before it is sent to the client. The hook provides the `Request` and `Response`
 and returns a `Response`. To modify the outgoing response create and return a
@@ -107,12 +101,6 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 ```
 
 ### Hook: Context OnResponseSendingFinal
-
-:::warning
-
-This hook is in beta and could change before release.
-
-:::
 
 The `OnResponseSendingFinal` hook on `ZuploContext` fires immediately after the
 response is sent to the client. The `Response` in this hook is immutable and the
