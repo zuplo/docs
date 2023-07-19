@@ -56,6 +56,56 @@ Once you have written your tests, you can run them using the `test` command.
 zup test --endpoint https:/your-zup.example.com
 ```
 
+## Environment Variables
+
+Environment variables can be used in tests and referenced using the `TestHelper`
+object.
+
+Environment variables can be loaded from the shell or set in a `.env` file at
+the root of your project.
+
+For example, to set a value inline run the test command as shown.
+
+```bash
+MY_VAR=example zup test --endpoint https:/your-zup.example.com
+```
+
+Alternatively, create an `.env` file and set a value as shown.
+
+```text
+MY_VAR=example
+```
+
+Any global environment variables on the system will also be available inside
+your tests.
+
+Using environment variables in the test is done via the `TestHelper` as
+demonstrated below.
+
+```ts title="/tests/auth-test.test.ts"
+import { describe, it, TestHelper } from "@zuplo/test";
+import { expect } from "chai";
+
+describe("API", () => {
+  it("should make authorized request", async () => {
+    const response = await fetch(TestHelper.TEST_URL, {
+      headers: {
+        Authorization: `Bearer ${TestHelper.environment.TEST_TOKEN}`,
+      },
+    });
+    expect(response.status).to.equal(200);
+  });
+});
+```
+
+:::tip
+
+When running tests in a CI environment, secrets such as API Keys or tokens can
+be stored in the secret variable store of your test system and injected at the
+time you run the tests.
+
+:::
+
 ## Tips for writing tests
 
 Look for more testing tips
