@@ -53,7 +53,7 @@ You can find more sample tests
 Once you have written your tests, you can run them using the `test` command.
 
 ```bash
-zup test --enddpoint https:/your-zup.example.com
+zup test --endpoint https:/your-zup.example.com
 ```
 
 ## Tips for writing tests
