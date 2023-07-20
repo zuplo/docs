@@ -7,10 +7,14 @@ per-policy basis, there are times when behaviors need to be modified globally.
 To plug into the global initialization of your gateway, create a file called
 `zuplo.runtime.ts` in the `modules` folder with the following code.
 
-:::warning Any error thrown in the `runtimeInit` method will prevent the gateway
-from starting and yield a 500 error for all requests. Be sure to add only
-reliable code here and use `try/catch` as appropriate to handle any recoverable
-exceptions. :::
+:::warning
+
+Any error thrown in the `runtimeInit` method will prevent the gateway from
+starting and yield a 500 error for all requests. Be sure to add only reliable
+code here and use `try/catch` as appropriate to handle any recoverable
+exceptions.
+
+:::
 
 ```ts
 import { RuntimeExtensions } from "@zuplo/runtime";
@@ -20,8 +24,12 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 }
 ```
 
-> NOTE: the name of the export must be `runtimeInit` and must conform to the
-> above function signature.
+:::note
+
+The name of the export must be `runtimeInit` and must conform to the above
+function signature.
+
+:::
 
 The following configurations are available.
 
