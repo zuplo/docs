@@ -1,6 +1,6 @@
 ---
 title: Introducing - The Posters of Facebook
-authors: nate
+authors: josh
 tags: [api, auth, migrate]
 description:
   We introduce a video interview and series of posts on one facet of Facebook's
