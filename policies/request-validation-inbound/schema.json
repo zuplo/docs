@@ -33,6 +33,18 @@
               "type": "string",
               "description": "Optional. Specify one of the options: 'none, log-only, reject-and-log, reject-only'. Default: none"
             },
+            "validateQueryParameters": {
+              "type": "string",
+              "description": "Optional. Specify one of the options: 'none, log-only, reject-and-log, reject-only'. Default: none"
+            },
+            "validatePathParameters": {
+              "type": "string",
+              "description": "Optional. Specify one of the options: 'none, log-only, reject-and-log, reject-only'. Default: none"
+            },
+            "validateHeaders": {
+              "type": "string",
+              "description": "Optional. Specify one of the options: 'none, log-only, reject-and-log, reject-only'. Default: none"
+            },
             "includeRequestInLogs": {
               "type": "boolean",
               "description": "Optional. Specify whether to include the request in the logs. Default: false"
