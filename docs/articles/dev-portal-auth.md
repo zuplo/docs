@@ -31,9 +31,9 @@ You must set the following fields in the Auth0 application:
 ** Application URIs**
 
 - **Allowed Callback URLs**: Add your docs site url (i.e.
-  `https://my-app.zuplo.app/docs/`)
+  `https://my-app.zuplo.app/docs/`). Note, you should include the trailing slash.
 - **Allowed Logout URLs**: Add your docs site url (i.e.
-  `https://my-app.zuplo.app/docs/`)
+  `https://my-app.zuplo.app/docs/`). Not you should include the trailing slash.
 - **Allowed Web Origins**: Add your docs site url without the path (i.e.
   `https://my-app.zuplo.app`)
 
@@ -55,7 +55,7 @@ You must set the following fields in the Auth0 application:
 
 [Create an API](https://auth0.com/docs/get-started/auth0-overview/set-up-apis)
 in the Auth0 portal. Set the **Identifier** to something like
-`https://api.my-domain.com/`.
+`https://api.my-domain.com/`. You will enter this value into Zuplo as the **Audience** in the next step.
 
 :::note
 
@@ -85,7 +85,7 @@ Set the following settings:
 - **Client ID**: The client ID of the Auth0 application that was created in the
   earlier steps. This is a string of letters an numbers. _The Client ID is not a
   secret value._
-- **Audience**: This is the value for `audience` that you set when creating the
+- **Audience**: This is the value for `identifier` that you set when creating the
   Auth0 API earlier.
 
 <StyledImage src="https://cdn.zuplo.com/assets/16c9b4a0-db9b-4b8c-a16f-00ce5e08071e.png" maxWidth="70%" />
