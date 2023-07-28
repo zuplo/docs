@@ -20,7 +20,8 @@ and zone cache in combination to afford the lowest possible latency.
 
 :::warning Do take care not to load so much data into memory that you OOM
 (out-of-memory) your process. Processes in Zuplo typically have ~120MB of memory
-to perform all their work, including holding request bodies etc. :::
+to perform all their work, including holding request bodies etc. 
+:::
 
 Here's a simple example of the usage of MemoryZoneReadthroughCache being used to
 store configuration data.
