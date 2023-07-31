@@ -746,6 +746,11 @@
       "source": "/docs/policies/validate-json-schema-inbound{/}?",
       "destination": "/docs/policies/request-validation-inbound",
       "permanent": true
+    },
+    {
+      "source": "/docs/handlers/open-api-handler{/}?",
+      "destination": "/docs/handlers/openapi",
+      "permanent": true
     }
   ],
   "headers": [
