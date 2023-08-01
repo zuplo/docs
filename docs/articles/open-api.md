@@ -125,9 +125,8 @@ your existing tooling.
 ```
 
 You can set this property to `true` in order to hide a route from the Developer
-Portal. If you are using the
-[OpenAPI Spec Handler](../handlers/open-api-handler.md), internal routes will
-not be present in the generated OpenAPI file.
+Portal. If you are using the [OpenAPI Spec Handler](../handlers/openapi.md),
+internal routes will not be present in the generated OpenAPI file.
 
 ## Multiple File Support
 
