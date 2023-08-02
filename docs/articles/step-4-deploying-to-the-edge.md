@@ -41,6 +41,8 @@ by creating a new repo or connecting to an existing one.
 
 You can choose the organization in the dropdown and choose a repo name (it
 doesn't have to be the same as the project name, but that is a good practice).
+Make sure the repo you select is either an empty one or one that hosts a Zuplo
+project.
 
 If you've already installed the
 [Zuplo GitHub App](https://github.com/apps/zuplo/installations/new) your project
