@@ -23,7 +23,8 @@ A CORS policy consists of a name and set of CORS headers to be returned for
 cross-origin requests (both the simple type and pre-flight request).
 
 :::warning Make sure to not have a trailing `/` on your allowedOrigins. e.g.
-`https://example.com` is valid, `https://example.com/` will not work. :::
+`https://example.com` is valid, `https://example.com/` will not work. 
+:::
 
 ```json
 {
