@@ -169,7 +169,7 @@ const sidebars = {
               label: "Request Filtering",
               items: [
                 "policies/acl-policy-inbound",
-                "policies/geo-location-inbound",
+                "policies/geo-filter-inbound",
                 "policies/ip-restriction-inbound",
                 "policies/request-size-limit-inbound",
               ],
