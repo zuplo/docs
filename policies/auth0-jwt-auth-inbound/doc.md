@@ -112,3 +112,6 @@ is working as expected.
   <Screenshot src="https://cdn.zuplo.com/assets/8182f932-8db6-4456-842f-f65158b174c0.png" maxWidth="60%" />
 
 You have now setup Auth0 JWT Authentication on your API Gateway.
+
+See [this document](/docs/articles/oauth-authentication) for more information
+about OAuth authorization in Zuplo.
