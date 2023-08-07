@@ -1,5 +1,5 @@
 ---
-title: Welcome to API Key Week
+title: Day 1 - Introducing the ZAPI Management API
 authors: josh
 tags: [api, auth, gateway, security, api-keys]
 description: Announcing a week of API Key related content
@@ -16,8 +16,8 @@ the service since then and have completely re-built our API key management API
 which we're announcing today.
 
 To celebrate this, and even more goodies - we'll have more announcements and
-content every day this week. Stay tuned on
-[twitter.com/zuplo](twitter.com/zuplo) and our
+content every day this week as part of our **API Key Week**. Stay tuned on
+twitter [@zuplo](https://twitter.com/zuplo) and our
 [YouTube channel](https://www.youtube.com/channel/UCTH7AlnhkOTPkyaleO3C5wg).
 
 ## Why API keys?
