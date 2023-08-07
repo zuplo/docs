@@ -1,6 +1,6 @@
 ---
 title: API Key Management API
-sidebar_label: API Key Management API
+sidebar_label: Management API
 ---
 
 Zuplo runs a globally distributed API Key management service that scales to

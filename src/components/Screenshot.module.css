@@ -6,10 +6,11 @@
   border: 1px solid #eaeaea;
   border-radius: 8px;
   box-shadow: var(--ifm-global-shadow-lw);
+  margin-bottom: var(--ifm-leading);
 }
 
-@media screen and (max-width: 996px) {
+@media screen and (max-width: 1500px) {
   .screenshot {
-    max-width: 100%;
+    max-width: 100% !important;
   }
 }

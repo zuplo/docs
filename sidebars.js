@@ -72,6 +72,8 @@ const sidebars = {
       label: "API Keys",
       items: [
         "articles/api-key-management",
+        "articles/api-key-authentication",
+        "articles/api-key-end-users",
         "articles/api-key-api",
         "articles/api-key-leak-detection",
       ],

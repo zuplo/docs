@@ -1,5 +1,6 @@
 ---
-title: API Key Authentication
+title: API Keys Overview
+sidebar_label: Overview
 ---
 
 Zuplo allows developers to rapidly add API key based authentication to an API in
@@ -7,48 +8,57 @@ minutes. There are several benefits to using Zuplo's API Key solution including
 
 - adheres to
   [best practices of API Key implementation](https://zuplo.com/blog/2022/12/01/api-key-authentication)
-- includes
-  [GitHub secret scanning](https://github.blog/changelog/2022-07-13-zuplo-is-now-a-github-secret-scanning-partner/)
-- integrated into the Zuplo Developer Portal or integrate into your own console
-  using [our API](./api-key-api.md).
+- includes [API Key Leak Detection & Notification](./api-key-leak-detection.md)
+- offers [out of the box and customizable solutions](./api-key-end-users.md) for
+  sharing API Keys
 
 :::tip
 
-For a complete tutorial on adding API Key authentication and management
+To start using Zuplo API Keys in only a few minutes
 [see the quickstart](../articles/step-2-add-api-key-auth.md).
 
 :::
+
+## Fully Managed API Key Solution
+
+Zuplo builds and manages a global API Key solution that can handle millions (or
+billions) of API Keys and a virtually unlimited throughput to scale to the most
+demanding services.
+
+The service handles global replication of API Keys allowing your end users to be
+authenticated to your API key with minimal latency. Keys are replicated around
+the world in only a few seconds. Similarly, when keys are revoked or deleted,
+the change replicates in seconds so that your API isn't open to unauthorized
+access.
+
+## API Key Authentication at the Edge
+
+Using Zuplo's API Key Authentication policy, your API is secured from
+unauthorized access. Authorization checks happen at the edge in 300+ data
+centers around the world. This keeps load off your backend and keeps your API
+fast for your end-users.
+
+Zuplo manages all the complexity of replication, caching, and verifying your API
+keys so you don't have to.
+
+Adding API Key authentication using Zuplo takes only a few minutes.
+[See the quickstart to get started](../articles/step-2-add-api-key-auth.md).
 
 ## Key Concepts
 
 ### Consumers
 
-An API Key Consumer is an entity or 'identify' that can invoke your API -
-typically people, customers, partners or services. You can create consumers in
-the Zuplo portal (portal.zuplo.com) or via the [API Key API](./api-key-api.md).
-
-If you're using the Zuplo [Developer Portal](./developer-portal.md), we have an
-integration with the API Key API that allows developers to access their API
-keys, create new ones and delete them. To enable this, you must assign one or
-more managers, via e-mail, to be a manager for your API Key Consumer. This is
-optional if you are not using the [Developer Portal](./developer-portal.md).
-
-You can assign managers in the Zuplo Portal (portal.zuplo.com) or via the API.
-
-If you want to automatically create an API Key for a customer automatically when
-they sign into your developer portal using Auth0,
-[follow this tutorial](./dev-portal-create-consumer-on-auth.md).
+An API Key Consumer is the identity that can invoke your API - typically people,
+customers, partners or services. A consumer can have multiple API Keys
+associated with it - but each key authorizes the same consumer (i.e. identity)
 
 ### Consumer Metadata
 
 Each consumer can be assigned metadata. This information (a small JSON object)
-is made available to the runtime when a user access your API using that key. The
-consumer metadata is passed into the runtime pipeline as the `request.user.data`
-property. Note the `sub` property of the `request.user` object is the name of
-the consumer.
+is made available to the runtime when a user access your API using that key.
 
-For example, an API Key Consumer with the `sub` set to `big-co` and the
-following metadata:
+For example, a Consumer might have metadata that specifies the company they are
+a member of and the plan for the account.
 
 ```json
 {
@@ -57,83 +67,32 @@ following metadata:
 }
 ```
 
-If you had a simple [function handler](../handlers/custom-handler.md) as
-follows, it would return a `request.user` object to your route if the API Key is
-successfully authenticated:
+### Consumer Tags
 
-```ts
-async function (request: ZuploRequest, context: ZuploContext) {
-  // auto-serialize the user object and return it as JSON
-  return request.user;
-}
+Consumers can also have tags associated with them. Tags are simple key value
+pairs. Tags are used for management purposes only (i.e. querying consumers
+through the Zuplo API). Tags do not get sent to the runtime as part of
+authorization.
+
+For example, a Consumer might be tagged in order to track the customer
+associated with the consumer.
+
+```
+customer=1234
 ```
 
-Would return this:
+You can see more on how to use tags in the document on
+[managing consumers and keys using the API](./api-key-api.md)
 
-```json
-{
-  "sub": "big-co",
-  "data": {
-    "companyId": 123,
-    "plan": "gold"
-  }
-}
-```
+### API Keys
 
-### Managing Consumers in the Zuplo Portal
+API Keys are the actual string value used to authenticate with an API. Unlike
+some other forms of bearer tokens, API Keys do not contain any actual data
+within the key itself.
 
-API Key Consumers can be managed in the **API Key Consumers** section under the
-<SettingsTabIcon /> **Settings** tab.
-
-![API Key Consumers](./api-key-management-media/api-key-consumers.png)
-
-To add a new API Key Consumer click the **Add new consumer** button and complete
-the form.
-
-![New API Key Consumer](./api-key-management-media/new-api-key-consumer.png)
-
-## API Key Authentication & Authorization
-
-Each route in your API that you want to be secured with API Key Authentication
-must be configured with the
-[API Key Authentication Policy](../policies/api-key-inbound.md). This policy
-ensures that callers to the route have a valid API key and authenticates the
-`user` of the request.
-
-The API Key Consumer's `metadata` and `sub` are set as the `request.user` object
-on each request that is authenticated with the API Key Authentication policy.
-This data can be used to perform authorization, routing, etc. for each request.
-
-For example, features can be gated based on a `plan` value in the metadata.
-
-```ts
-async function (request: ZuploRequest, context: ZuploContext) {
-  if (request.user?.data.plan !== "gold") {
-    return new Response("You need to upgrade your plan", {
-      status: 403
-    });
-  }
-  return new Response("you have the gold plan!");
-}
-```
-
-The `metadata` could also be used to route requests to dedicated customer
-services.
-
-```ts
-async function (request: ZuploRequest, context: ZuploContext) {
-  const { customerId } = request.user.data;
-  return fetch(`https://${customerId}.customers.example.com/`
-}
-```
-
-The `request.user` object can be used in both
-[handlers](../handlers/custom-handler.md) and
-[policies](../policies/custom-code-inbound.md)
-
-## API Keys in the Developer Portal
-
-When API Key Managers log into the Developer Portal they can copy, manage, or
-create new API Keys.
-
-![API Keys in Developer Portal](./api-key-management-media/api-key-dev-portal.png)
+Zuplo API Keys are prefixed with the string `zpka_` followed by
+cryptographically random characters and a signature. While Zuplo's API Key
+management service supports custom key formats (enterprise plan required), the
+structured format our the key enables us to offer
+[key leak detection services](./api-key-leak-detection.md) to keep your API
+secure.
