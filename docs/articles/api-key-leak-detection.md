@@ -5,9 +5,9 @@ sidebar_label: API Key Leak Detection
 
 ## API Key Format
 
-Zuplo uses a specially formatted API Key structure that allows us to partner
-with GitHub's secret scanning to protect your users from accidentally leaked
-keys.
+Zuplo uses a specially formatted API Key structure that allows us to
+[partner with GitHub's secret scanning](https://github.blog/changelog/2022-07-13-zuplo-is-now-a-github-secret-scanning-partner/)
+to protect your users from accidentally leaked keys.
 
 We think the safety of your API key consumers is paramount, so this feature is
 available to all Zuplo customers, including free.
