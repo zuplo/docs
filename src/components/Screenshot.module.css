@@ -5,6 +5,7 @@
   width: auto;
   border: 1px solid #eaeaea;
   border-radius: 8px;
+  box-shadow: var(--ifm-global-shadow-lw);
 }
 
 @media screen and (max-width: 996px) {

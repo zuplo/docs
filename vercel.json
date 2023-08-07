@@ -751,6 +751,11 @@
       "source": "/docs/handlers/open-api-handler{/}?",
       "destination": "/docs/handlers/openapi",
       "permanent": true
+    },
+    {
+      "source": "/docs/articles/api-key-leak-prevention{/}?",
+      "destination": "/docs/articles/api-key-leak-detection",
+      "permanent": true
     }
   ],
   "headers": [
