@@ -24,8 +24,8 @@ twitter [@zuplo](https://twitter.com/zuplo) and our
 
 So why API keys? Why not use a standard like OAuth and JWT tokens. One thing to
 observe is that the best API companies in the world use API Keys to secure their
-API - [stripe](stripe.com), [github](github.com), and [twilio](twilio.com) are a
-few prominent examples.
+API - [stripe](https://stripe.com), [github](https://github.com), and
+[twilio](https://twilio.com) are a few prominent examples.
 
 One of the key reasons to choose API keys is create the best possible experience
 for your API consumers. API Keys are just easier to work with, easier to cURL,
