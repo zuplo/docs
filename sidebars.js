@@ -73,7 +73,7 @@ const sidebars = {
       items: [
         "articles/api-key-management",
         "articles/api-key-api",
-        "articles/api-key-leak-prevention",
+        "articles/api-key-leak-detection",
       ],
     },
     {
