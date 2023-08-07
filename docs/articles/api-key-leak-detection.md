@@ -1,6 +1,6 @@
 ---
-title: API Key Leak Prevention
-sidebar_label: API Key Leak Prevention
+title: API Key Leak Detection
+sidebar_label: API Key Leak Detection
 ---
 
 ## API Key Format
@@ -12,7 +12,7 @@ keys.
 We think the safety of your API key consumers is paramount, so this feature is
 available to all Zuplo customers, including free.
 
-## API Key Leak Prevention
+## API Key Leak Detection
 
 API keys should never be stored in source control. Accidentally committing API
 keys to source control is a common attack vector that leads to compromises of

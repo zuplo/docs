@@ -1,6 +1,7 @@
 import {
   BoltIcon,
   CogIcon,
+  EyeIcon,
   PresentationChartLineIcon,
   RectangleGroupIcon,
   RssIcon,
@@ -11,30 +12,47 @@ import { FileText, List } from "react-feather";
 const styles = {
   height: "19px",
   width: "19px",
-  marginBottom: "-2px",
+
+  verticalAlign: "text-top",
 };
 
-export const CodeEditorTabIcon: FC = () => {
-  return <FileText style={styles} />;
-};
-export const ApiTestConsoleTabIcon: FC = () => {
-  return <BoltIcon style={styles} />;
-};
-export const LiveLogsTabIcon: FC = () => {
-  return <RssIcon style={styles} />;
-};
-export const DashboardTabIcon: FC = () => {
-  return <PresentationChartLineIcon style={styles} />;
-};
-export const BuildStatusTabIcon: FC = () => {
-  return <List style={styles} />;
-};
-export const SettingsTabIcon: FC = () => {
-  return <CogIcon style={styles} />;
-};
-export const DeveloperPortalIcon: FC = () => {
-  return <RectangleGroupIcon style={styles} />;
-};
+export const CodeEditorTabIcon: FC = () => <FileText style={styles} />;
+
+export const ApiTestConsoleTabIcon: FC = () => <BoltIcon style={styles} />;
+
+export const LiveLogsTabIcon: FC = () => <RssIcon style={styles} />;
+
+export const DashboardTabIcon: FC = () => (
+  <PresentationChartLineIcon style={styles} />
+);
+
+export const BuildStatusTabIcon: FC = () => <List style={styles} />;
+
+export const SettingsTabIcon: FC = () => <CogIcon style={styles} />;
+
+export const DeveloperPortalIcon: FC = () => (
+  <RectangleGroupIcon style={styles} />
+);
+
+export const CopyIcon: FC = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-6 w-6"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={2}
+    style={{ ...styles, rotate: "90deg" }}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+    />
+  </svg>
+);
+
+export const ShowIcon: FC = () => <EyeIcon style={styles} />;
 
 export const GitHubIcon: FC = () => (
   <svg
