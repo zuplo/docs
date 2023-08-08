@@ -121,7 +121,34 @@ multiple keys at any one time - all identifying the same ‘user’.
 
 ## Let’s build the sample (about time)!
 
-#### 1- Clone the Auth Translation API
+#### 1- Clone the Sample Developer Console
+
+This is a sample NextJS project that will be using the open-source API Key
+manager component. Clone the project by running the following command. You can
+also download it using the zip file
+[here](https://github.com/zuplo/api-key-manager/releases/latest/download/nextjs-example.zip).
+
+```sh
+npx create-next-app api-key-demo --example \
+https://github.com/zuplo/api-key-manager/tree/main/examples/nextjs
+```
+
+Go to the sample project and install the dependencies (including the Zuplo
+`@zuplo/react-api-key-manager` component):
+
+```sh
+cd examples/nextjs
+npm install
+```
+
+We'll now need to get the Auth Translation API url from the next steps to start
+the Developer Console.
+
+You can also access the full GitHub monorepo - including the sample and
+component itself:
+[https://github.com/zuplo/api-key-manager](https://github.com/zuplo/api-key-manager).
+
+#### 2- Clone the Auth Translation API
 
 This API is configured to be deployed to Zuplo. You can find the git repo
 [here](https://github.com/zuplo/sample-auth-translation-api), but all you have
