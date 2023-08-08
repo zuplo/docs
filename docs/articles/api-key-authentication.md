@@ -1,19 +1,82 @@
 ---
-title: API Key Authentication
+title: API Key Authentication & Authorization
 sidebar_label: Authentication
 ---
 
-Each route in your API that you want to be secured with API Key Authentication
-must be configured with the
-[API Key Authentication Policy](../policies/api-key-inbound.md). This policy
-ensures that callers to the route have a valid API key and authenticates the
-`user` of the request.
+With the [API Key Authentication Policy](../policies/api-key-inbound.md)
+configured on your API route(s) you can build additional policies that run after
+the API Key Authentication policy to perform additional checks or authorization
+on the consumer.
 
-The API Key Consumer's `metadata` and `sub` are set as the `request.user` object
-on each request that is authenticated with the API Key Authentication policy.
-This data can be used to perform authorization, routing, etc. for each request.
+## Request User Object
 
-For example, features can be gated based on a `plan` value in the metadata.
+After each successful authentication the policy will set the `request.user`
+object. The name of the API Key consumer is set to the `request.user.sub`
+property. Any `metadata` attached to the consumer is set to the
+`request.user.data` property. The interface of `request.user` is shown below.
+
+```ts
+/**
+ * The User object set by the API Key Authentication policy
+ */
+interface User {
+  /**
+   * The name of the API Key consumer
+   */
+  sub: string;
+  /**
+   * The metadata attached to the API Key consumer
+   */
+  data: any;
+}
+```
+
+So if you created a consumer with the following configuration:
+
+```json
+{
+  "name": "my-consumer",
+  "metadata": {
+    "companyId": 12345,
+    "plan": "gold"
+  }
+}
+```
+
+The request object would be the following:
+
+```ts
+context.log.debug(request.user);
+// Outputs:
+// {
+//   sub: "my-consumer",
+//   data: {
+//     companyId: 12345,
+//     plan: "gold"
+//   }
+// }
+```
+
+:::note
+
+One question you might have is why is the `request.user` object not the same
+shape as the API Key Consumer object. i.e. why doesn't it has
+`request.user.name` and `request.user.metadata` properties.
+
+The reason is because the `request.user` object is reused by many different
+kinds of authentication policies and they all conform to the same interface with
+`sub` and `data`.
+
+:::
+
+## Using Consumer Data in Code
+
+It is possible to write additional policies that run after the API Key
+Authentication policy that perform further gating or authorization of the
+request based on the data set in the consumer.
+
+For example, you could gate access to a feature by checking for the `plan` value
+stored in metadata (exposed via `request.user.data.plan`).
 
 ```ts
 async function (request: ZuploRequest, context: ZuploContext) {
@@ -51,13 +114,13 @@ async function (request: ZuploRequest, context: ZuploContext) {
 }
 ```
 
-Would return this:
+Would send the following response.
 
 ```json
 {
-  "sub": "big-co",
+  "sub": "my-consumer",
   "data": {
-    "companyId": 123,
+    "companyId": 12345,
     "plan": "gold"
   }
 }

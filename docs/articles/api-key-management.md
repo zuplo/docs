@@ -54,8 +54,9 @@ associated with it - but each key authorizes the same consumer (i.e. identity)
 
 ### Consumer Metadata
 
-Each consumer can be assigned metadata. This information (a small JSON object)
-is made available to the runtime when a user access your API using that key.
+Each consumer can be assigned metadata. This information (a
+[small JSON object](./api-key-service-limits.md)) is made available to the
+runtime when a user access your API using that key.
 
 For example, a Consumer might have metadata that specifies the company they are
 a member of and the plan for the account.
