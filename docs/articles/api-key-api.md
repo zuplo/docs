@@ -46,6 +46,7 @@ erDiagram
     Consumer {
         string id
         string name
+        string description
         json metadata
         map(string) tags
     }
@@ -53,10 +54,6 @@ erDiagram
         string id
         string key
         string expiresOn
-    }
-    Manager {
-        string sub
-        string email
     }
 ```
 
@@ -82,11 +79,15 @@ Key Authentication policy.
 
 A Consumer can have any number of API keys associated with it. Each API Key
 shares the same identity (i.e. Consumer) when authenticating with this service.
-Keys can have their own `description` to note the use of the key and can have an
-expiration date. Expired keys will not be permitted to authenticate after their
-expiration.
+Expired keys will not be permitted to authenticate after their expiration.
 
-## Managers
+:::tip
+
+In most cases, you wont manage API Keys directly. When using the API, it the
+typical configuration is to create a consumer with an API key and each consumer
+has only a single API key except when performing operations like rolling keys.
+
+:::
 
 ## Usage
 
