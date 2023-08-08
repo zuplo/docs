@@ -62,7 +62,7 @@ following screenshot and described below:
 
 ![demo diagram](./diagram.png)
 
-#### Your Developer Console
+### Your Developer Console
 
 The sample website (NextJS) - labelled “Your Developer Console” above will be a
 Web App that will support login using Auth0 (note: you could use any auth
@@ -70,7 +70,7 @@ provider). Once your user has acquired a JWT token from Auth0, the token can be
 used to call the “Auth Translation API”, which protects your API key store by
 restricting access only to keys the user has permissions to manage.
 
-#### Zuplo API Key Service
+### Zuplo API Key Service
 
 Our API Key service makes it easy to automate the management of your API keys
 via our API. This sample shows you how you can help your users to help
@@ -92,7 +92,7 @@ particular security policies around your API keys. In a cool twist of fate,
 Zuplo is an excellent intermediary well suited to this task, and we’ll use it in
 this demo.
 
-#### Auth Translation API
+### Auth Translation API
 
 Zuplo is a very effective tool for auth translation. With native support for JWT
 auth (including an Auth0 specific policy) and being able to easily modify
@@ -121,34 +121,7 @@ multiple keys at any one time - all identifying the same ‘user’.
 
 ## Let’s build the sample (about time)!
 
-#### 1- Clone the Sample Developer Console
-
-This is a sample NextJS project that will be using the open-source API Key
-manager component. Clone the project by running the following command. You can
-also download it using the zip file
-[here](https://github.com/zuplo/api-key-manager/releases/latest/download/nextjs-example.zip).
-
-```sh
-npx create-next-app api-key-demo --example \
-https://github.com/zuplo/api-key-manager/tree/main/examples/nextjs
-```
-
-Go to the sample project and install the dependencies (including the Zuplo
-`@zuplo/react-api-key-manager` component):
-
-```sh
-cd examples/nextjs
-npm install
-```
-
-We'll now need to get the Auth Translation API url from the next steps to start
-the Developer Console.
-
-You can also access the full GitHub monorepo - including the sample and
-component itself:
-[https://github.com/zuplo/api-key-manager](https://github.com/zuplo/api-key-manager).
-
-#### 2- Clone the Auth Translation API
+### 1- Clone the Auth Translation API
 
 This API is configured to be deployed to Zuplo. You can find the git repo
 [here](https://github.com/zuplo/sample-auth-translation-api), but all you have
@@ -193,8 +166,10 @@ Environment Variables:
 
 1. `BUCKET_URL`: Get the value for this from **_Settings > Project
    Information_** tab. The value is labelled ‘_API Key Bucket URL_’.
-1. `ZAPI_KEY`: Get your ZAPI (Zuplo API) Key from the **_Settings > Zuplo API
-   Keys_** section.
+1. `ZAPI_KEY`: (_Secret_) Get your ZAPI (Zuplo API) Key from the **_Settings >
+   Zuplo API Keys_** section.
+
+All done! Your auth translation service is all ready to go 👏.
 
 :::caution E-mail verification
 
@@ -204,15 +179,12 @@ You should do this in any real implementation.
 
 :::
 
-All done! Your auth translation service is all ready to go 👏.
+### 2- Add some users to the "database" so you can manage some keys
 
-#### 2- Add some users to the "database" so you can manage some keys
-
-To keep the demo simple, we created a fake database in JavaScript/TypeScript in
-the Auth Translation API project. Go the Zuplo portal again and now head to
-**_Files > data.ts_** and edit this file. Add yourself as a member of the
-`sales-east` organization with me (abdallah@zuplo.com). Don’t forget to save
-your changes (CMD+S).
+To keep the demo simple, we created a mock database API project. Go the Zuplo
+portal again and open the **file explorer**. Open the `modules/data.ts` file and
+add yourself as a member of the `sales-east` organization with me
+(abdallah@zuplo.com). Don’t forget to save your changes (CMD+S).
 
 :::note
 
@@ -221,7 +193,7 @@ developer console.
 
 :::
 
-```sh
+```sh title=modules/data.ts {6}
 const DATA = {
   orgs: [
     {
@@ -233,7 +205,7 @@ const DATA = {
 };
 ```
 
-#### 3- Clone and Configure the Developer Console
+### 3- Build the Developer Console
 
 This is a sample NextJS project that will be using the open-source API Key
 manager component. Clone the project by running the following command. You will
@@ -258,14 +230,24 @@ start the Developer Console.
 
 2.  Set the Environment Variable
 
-    In your web app, open the `.env.local` file and add the following variable
-    using the URL of your Zuplo Auth Translation Project:
+    In your web app, open the `.env.local` file and set the
+    `NEXT_PUBLIC_API_URL` variable using the URL from the previous step:
 
-    ```
-    NEXT_PUBLIC_API_URL=YOUR_CURRENT_ENV_URL
+    ```txt title=.env.local {1}
+    NEXT_PUBLIC_API_URL=https://you-url-here.d2.zuplo.dev
+    NEXT_PUBLIC_AUTH0_DOMAIN=zuplo-samples.us.auth0.com
+    NEXT_PUBLIC_AUTH0_CLIENT_ID=OFNbP5hhtsCHkBsXHEtWO72kKQvJtgI3
+    NEXT_PUBLIC_AUTH0_AUDIENCE=https://api.example.com/
     ```
 
-3.  Start the NextJS project locally
+    :::info Auth0 Demo Tenant
+
+    If you are using your own Auth0 account, set the other variables
+    accordingly, otherwise just leave our sample values.
+
+    :::
+
+3.  Start the project
 
     ```
     npm run dev
@@ -283,7 +265,7 @@ create your first API key and try the following
 
 Copy an API Key to use it with the API in the next step.
 
-#### 6- Test the API Key
+### 6- Test the API Key
 
 Copy the gateway URL from **_Files > Getting Started_**
 
@@ -299,7 +281,7 @@ curl https://YOUR_GATEWAY_URL/who-am-i \
 
 Have fun!
 
-### This is only Day 2 of API Key week
+## This is only Day 2 of API Key week
 
 Come back to check out new content and announcements each day!
 
