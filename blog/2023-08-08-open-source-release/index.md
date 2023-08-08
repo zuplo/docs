@@ -110,13 +110,12 @@ API Key, adding constraints — will then call the Zuplo API Key service and lo
 consumers that belong to the specified `orgId` using tags associated with the
 consumer.
 
-:::info
+:::info What is a **consumer**?
 
-What is a **consumer**? In Zuplo’s API Key service, a **consumer** is an
-identity that has associated metadata. Typically a consumer has a single key
-(which is similar to a password) that is used to identify the consumer when
-calling your API. A consumer can have multiple keys at any one time - all
-identifying the same ‘user’.
+In Zuplo’s API Key service, a **consumer** is an identity that has associated
+metadata. Typically a consumer has a single key (which is similar to a password)
+that is used to identify the consumer when calling your API. A consumer can have
+multiple keys at any one time - all identifying the same ‘user’.
 
 :::
 
@@ -138,27 +137,43 @@ Click **Zup It!** to complete the deployment.
 
 ![Create Clone Project](./create-project.png)
 
+:::info Auth0 Demo Tenant
+
+To make it easier to get started with this demo we have provided you with a demo
+Auth0 tenant. You can easily create and configure your own Auth0 tenant by
+modifying the environment variables in the auth translation service and your
+developer console projects.
+
+:::
+
 Go to **_Settings > Environment Variables_** and create the following
 Environment Variables:
 
-1.  `AUTH0_AUDIENCE`: [`https://api.example.com/`](https://api.example.com/)
-2.  `AUTH0_DOMAIN`:
-    [`zuplo-samples.us.auth0.com`](http://zuplo-samples.us.auth0.com/)
-3.  `BUCKET_URL`: Get the value for this from **_Settings > Project
-    Information_** tab. The value is labelled ‘_API Key Bucket URL_’.
-4.  `ZAPI_KEY`: Get your ZAPI (Zuplo API) Key from the **_Settings > Zuplo API
-    Keys_** section.
+1. `AUTH0_AUDIENCE`: This is the value of your configured API Audience in Auth0.
+   For simplicity you can use the value below from our sample Auth0 tenant to
+   test.
 
-:::note
+   ```
+   https://api.example.com/
+   ```
 
-**Auth0**: to make it easier to get started with this demo we have provided you
-with a demo Auth0 tenant. You can easily create and configure your own Auth0
-tenant by modifying the environment variables in the auth translation service
-and your developer console projects.
+1. `AUTH0_DOMAIN`: This is the value of your Auth0 domain. For simplicity, you
+   can use the value below from our sample Auth0 tenant to test.
 
-**E-mail verification**: to keep the demo simple, we did not choose to check
-that the e-mail was verified with Auth0. You should do this in any real
-implementation.
+   ```
+   zuplo-samples.us.auth0.com
+   ```
+
+1. `BUCKET_URL`: Get the value for this from **_Settings > Project
+   Information_** tab. The value is labelled ‘_API Key Bucket URL_’.
+1. `ZAPI_KEY`: Get your ZAPI (Zuplo API) Key from the **_Settings > Zuplo API
+   Keys_** section.
+
+:::caution E-mail verification
+
+To keep the demo simple, we do not check if the user's
+[e-mail is verified](https://auth0.com/docs/manage-users/user-accounts/verify-emails).
+You should do this in any real implementation.
 
 :::
 
@@ -199,15 +214,11 @@ be asked to name your project.
 
 ```sh
 npx create-next-app --example \
-    https://github.com/zuplo/api-key-manager/tree/main/examples/nextjs
+  https://github.com/zuplo/api-key-manager/tree/main/examples/nextjs
 ```
 
-:::note
-
-You can also download it using the zip file
-[here](https://github.com/zuplo/api-key-manager/releases/latest/download/nextjs-example.zip).
-
-:::
+> You can also download the example as a
+> [zip file here](https://github.com/zuplo/api-key-manager/releases/latest/download/nextjs-example.zip)
 
 We'll now need to get the Auth Translation API url from the previous steps to
 start the Developer Console.
