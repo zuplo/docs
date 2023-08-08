@@ -36,8 +36,8 @@ help you set it up. But first... why should you care about API Key Management?
 ## What is Zuplo’s API Key Management?
 
 Building your own API Key Management solution so you can offer your customers a
-way to create, roll, delete API Keys to authenticate against your APIs can take
-months, specially if you want to do it **the right way**.
+way to create, roll, delete API Keys that they will use to authenticate against
+your APIs can take months, specially if you want to do it _The Right Way_:tm:.
 
 Zuplo includes a fully managed API Key Management service that includes advanced
 features such as
@@ -115,13 +115,7 @@ What is a **consumer**? In Zuplo’s API Key service, a **consumer** is an
 identity that has associated metadata. Typically a consumer has a single key
 (which is similar to a password) that is used to identify the consumer when
 calling your API. A consumer can have multiple keys at any one time - all
-identifying the same ‘user’. It’s common for a consumer to have multiple keys
-when a key is being rolled. That is, an old key has been set to expire at some
-time and a new key has been created. The Zuplo API Key services has been
-designed to be very flexible and you have full control over the layout of your
-consumers and keys. This sample follows what we think are the best practices -
-where a consumer typically only has one **active** key and might have multiple
-expiring keys that have been ‘rolled’.
+identifying the same ‘user’.
 
 :::
 
@@ -130,10 +124,13 @@ expiring keys that have been ‘rolled’.
 #### 1- Clone the Developer Console
 
 This is a sample NextJS project that will be using the open-source API Key
-manager component. Clone the project running:
+manager component. Clone the project by running the following command. You can
+also download it using the zip file
+[here](https://github.com/zuplo/api-key-manager/releases/latest/download/nextjs-example.zip).
 
 ```sh
-git clone https://github.com/zuplo/api-key-manager
+npx create-next-app api-key-demo --example \
+https://github.com/zuplo/api-key-manager/tree/main/examples/nextjs
 ```
 
 Go to the sample project and install the dependencies (including the Zuplo
