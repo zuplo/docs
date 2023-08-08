@@ -1,6 +1,6 @@
 ---
-title: API Key Management API
-sidebar_label: Management API
+title: Using the API Key API
+sidebar_label: Using the API
 ---
 
 Zuplo runs a globally distributed API Key management service that scales to
@@ -34,6 +34,7 @@ Consumers can contain one or more API Keys.
 ```mermaid
 erDiagram
     Consumer ||--|{ ApiKey : has
+    Consumer ||--|{ Manager : has
     Consumer }|--|| Bucket   : in
 
     Bucket {
@@ -52,6 +53,10 @@ erDiagram
         string id
         string key
         string expiresOn
+    }
+    Manager {
+        string sub
+        string email
     }
 ```
 
