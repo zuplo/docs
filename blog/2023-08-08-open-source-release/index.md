@@ -6,6 +6,11 @@ description: Announcing a week of API Key related content
 image: https://og-image.zuplo.com/?text=Announcing%20our%20Open-Source%20React%20Component!
 ---
 
+> _Zuplo helps you ship great APIs from day one. Startups and big enterprises
+> ship API authentication, rate limiting, and developer documentation with
+> amazing DX, using our serverless API Gateway deployed at the edge. You can
+> start free at [zuplo.com](http://zuplo.com) and ship an API in minutes._
+
 Day 2 of API Key Week at Zuplo comes with our first open-source release. At
 Zuplo, we use a lot and sponsor and lot of open-source and we are glad to
 announce our first open-source project, an NPM package for adding an API Key
@@ -15,10 +20,9 @@ manager to your React projects.
 
 Zuplo offers in it’s own
 [developer portal](https://zuplo.com/docs/articles/developer-portal) an
-integrated API Key management that your users can use to self-serve. Even though
-the great API docs and out-of-the-box API Key self-serving solution is enough
-for most of our customers, some of our customers prefer to integrate their API
-experiences into their own Dev Console.
+integrated API Key management that your users can use to self-serve API keys to
+use with your API. Altought this is enough for most of our customers, some of
+our users prefer to integrate their API experiences into their own Dev Console.
 
 Our newest open-source component will help you shape your own API experience
 while leveraging all of the other Zuplo features. The component (which is
