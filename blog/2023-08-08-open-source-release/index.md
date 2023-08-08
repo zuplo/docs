@@ -42,7 +42,8 @@ your APIs can take months, specially if you want to do it _The Right Way_:tm:.
 Zuplo includes a fully managed API Key Management service that includes advanced
 features such as
 
-- User based Rate Limiting
+- User based
+  [Rate Limiting](https://zuplo.com/docs/articles/step-3-add-rate-limiting)
 - Customization of API behavior per-user using Typescript
 - [Github secret scanning](https://github.blog/changelog/2022-07-13-zuplo-is-now-a-github-secret-scanning-partner/)
 - Key metadata
@@ -190,7 +191,7 @@ implementation.
 
 All done! Your auth translation service is all ready to go 👏.
 
-#### 3- Add some users to the "database" so you can manage some keys
+#### 2- Add some users to the "database" so you can manage some keys
 
 To keep the demo simple, we created a fake database in JavaScript/TypeScript in
 the Auth Translation API project. Go the Zuplo portal again and now head to
@@ -217,26 +218,47 @@ const DATA = {
 };
 ```
 
-#### 4- Configure the developer console Web App (from step 1) to point to the Auth Translation API
+#### 3- Clone and Configure the Developer Console
+
+This is a sample NextJS project that will be using the open-source API Key
+manager component. Clone the project by running the following command. You will
+be asked to name your project.
+
+```sh
+npx create-next-app --example \
+    https://github.com/zuplo/api-key-manager/tree/main/examples/nextjs
+```
+
+:::note
+
+You can also download it using the zip file
+[here](https://github.com/zuplo/api-key-manager/releases/latest/download/nextjs-example.zip).
+
+:::
+
+We'll now need to get the Auth Translation API url from the previous steps to
+start the Developer Console.
 
 1.  Copy the Auth Translation API url
 
-In Zuplo, Go to the **_Settings > Project Information_** tab in Zuplo and grab
-the Current Env URL value (it will look something like
-`https://sample-auth-translation-api-main-a494b6a.d2.zuplo.dev`)
+    In Zuplo, Go to the **_Settings > Project Information_** tab in Zuplo and
+    grab the Current Env URL value (it will look something like
+    `https://sample-auth-translation-api-main-a494b6a.d2.zuplo.dev`)
 
-2.  Paste the value in your Web App project.
+2.  Set the Environment Variable
 
-Going back to the cloned web app, update the `.env.local` file in the
-`examples/nextjs` folder of your project and add the following variable using
-the URL of your Zuplo Auth Translation Project:
-`NEXT_PUBLIC_API_URL=YOUR_CURRENT_ENV_URL`
+    In your web app, open the `.env.local` file and add the following variable
+    using the URL of your Zuplo Auth Translation Project:
+
+    ```
+    NEXT_PUBLIC_API_URL=YOUR_CURRENT_ENV_URL
+    ```
 
 3.  Start the NextJS project locally
 
-```
-npm run dev
-```
+    ```
+    npm run dev
+    ```
 
 #### 5- Try out your own API Key Manager
 
