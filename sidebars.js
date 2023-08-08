@@ -76,6 +76,7 @@ const sidebars = {
         "articles/api-key-end-users",
         "articles/api-key-api",
         "articles/api-key-leak-detection",
+        "articles/api-key-service-limits",
       ],
     },
     {

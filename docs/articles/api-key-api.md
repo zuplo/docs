@@ -20,11 +20,40 @@ in the Zuplo Portal. [More information](https://dev.zuplo.com/docs/routes/index)
 
 :::
 
-# Service Reference
-
 ## Models
 
-The service consists of several objects:
+The service contains three primary object: **Buckets**, **Consumers**, and **API
+Keys**. For an conceptual overview of these objects see
+[Key Concepts](./api-key-management.md#key-concepts). Below is an ER diagram
+showing the relationships of the three primary objects and their most important
+fields.
+
+The Consumer is the most important object. Each consumer is in a bucket.
+Consumers can contain one or more API Keys.
+
+```mermaid
+erDiagram
+    Consumer ||--|{ ApiKey : has
+    Consumer }|--|| Bucket   : in
+
+    Bucket {
+        string id
+        string name
+        string accountName
+        map(string) tags
+    }
+    Consumer {
+        string id
+        string name
+        json metadata
+        map(string) tags
+    }
+    ApiKey {
+        string id
+        string key
+        string expiresOn
+    }
+```
 
 ### Buckets
 

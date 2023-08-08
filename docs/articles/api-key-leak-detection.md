@@ -1,6 +1,6 @@
 ---
 title: API Key Leak Detection
-sidebar_label: API Key Leak Detection
+sidebar_label: Leak Detection
 ---
 
 ## API Key Format
