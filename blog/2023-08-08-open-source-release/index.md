@@ -121,7 +121,7 @@ identifying the same ‘user’.
 
 ## Let’s build the sample (about time)!
 
-#### 1- Clone the Developer Console
+#### 1- Clone the Sample Developer Console
 
 This is a sample NextJS project that will be using the open-source API Key
 manager component. Clone the project by running the following command. You can
@@ -143,6 +143,10 @@ npm install
 
 We'll now need to get the Auth Translation API url from the next steps to start
 the Developer Console.
+
+You can also access the full GitHub monorepo - including the sample and
+component itself:
+[https://github.com/zuplo/api-key-manager](https://github.com/zuplo/api-key-manager).
 
 #### 2- Clone the Auth Translation API
 
