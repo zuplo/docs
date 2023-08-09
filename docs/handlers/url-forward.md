@@ -37,6 +37,8 @@ The following objects are available for substitution:
   [Environment Variables](../articles/environment-variables.md)
 - `request: ZuploRequest` - the full
   [`ZuploRequest`](../articles/zuplo-request.md) object
+- `context: ZuploContext` - the [`ZuploContext`](../articles/zuplo-context.md)
+  object without functions.
 - `params: Record<string, string>` - The parameters of the route. For example,
   `params.productId` would be the value of `:productId` in a route.
 - `query: Record<string, string>` - The query parameters of the route. For
