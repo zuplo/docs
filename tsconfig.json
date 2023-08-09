@@ -4,5 +4,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "resolveJsonModule": true
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "nodenext"
+    }
   }
 }

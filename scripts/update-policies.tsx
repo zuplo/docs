@@ -6,7 +6,7 @@ import chalk from "chalk";
 import chokidar from "chokidar";
 import { existsSync } from "fs";
 import { copyFile, mkdir, readdir, readFile, rm, writeFile } from "fs/promises";
-import glob from "glob";
+import { glob } from "glob";
 import path from "path";
 import prettier from "prettier";
 import React from "react";
@@ -50,7 +50,7 @@ const PolicyOptions = ({
   policyId,
 }: {
   schema: any;
-  policyId: string;
+  policyIed: string;
 }) => {
   const { properties } = schema.properties.handler;
   return (
@@ -86,11 +86,11 @@ export default PolicyOptions;
 const policiesDir = path.resolve(process.cwd(), "./policies");
 const docsDir = path.resolve(process.cwd(), "./docs/policies");
 
-function stringify(obj: any) {
+async function stringify(obj: any) {
   if (process.env.NODE_ENV === "production") {
     return JSON.stringify(obj);
   }
-  return prettier.format(JSON.stringify(obj), {
+  return await prettier.format(JSON.stringify(obj), {
     parser: "json",
   });
 }
@@ -119,7 +119,7 @@ function getPolicyFilePaths(policyId) {
 async function generateMarkdown(
   policyId: string,
   schema: PolicySchema,
-  policyFilePaths: Record<string, string>
+  policyFilePaths: Record<string, string>,
 ) {
   let introMd: string | undefined;
   if (existsSync(policyFilePaths.introMd)) {
@@ -146,7 +146,7 @@ async function generateMarkdown(
   };
 
   const optionsHtml = renderToStaticMarkup(
-    <PolicyOptions schema={schema} policyId={policyId} />
+    <PolicyOptions schema={schema} policyId={policyId} />,
   );
   return `---
 title: ${schema.title} Policy
@@ -187,24 +187,12 @@ async function run() {
 
   const policyConfigJson = await readFile(
     path.join(policiesDir, "config.json"),
-    "utf-8"
+    "utf-8",
   );
   const policyConfig = JSON.parse(policyConfigJson);
 
-  const matches: string[] = await new Promise((resolve, reject) => {
-    glob(
-      "**/schema.json",
-      {
-        cwd: policiesDir,
-      },
-      (err, result) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(result);
-        }
-      }
-    );
+  const matches: string[] = await glob("**/schema.json", {
+    cwd: policiesDir,
   });
 
   const policies = [];
@@ -234,8 +222,8 @@ async function run() {
     if (policyId.endsWith("-policy")) {
       console.error(
         chalk.red(
-          `ERROR: Policy ID '${policyId}' should not end with '-policy'.`
-        )
+          `ERROR: Policy ID '${policyId}' should not end with '-policy'.`,
+        ),
       );
       process.exit(1);
     }
@@ -249,8 +237,8 @@ async function run() {
       console.warn(
         chalk.yellow(
           `WARN: Policy ${policyId} does not have any examples in the schema.json`,
-          schemaJson
-        )
+          schemaJson,
+        ),
       );
       const handler = schema.properties.handler as any;
       meta.defaultHandler = {
@@ -271,7 +259,7 @@ async function run() {
     const generatedMd = await generateMarkdown(
       policyId,
       schema,
-      policyFilePaths
+      policyFilePaths,
     );
 
     if (!schema.isDeprecated) {
@@ -281,7 +269,7 @@ async function run() {
       await writeFile(
         path.join(docsDir, `${policyId}.md`),
         generatedMd,
-        "utf-8"
+        "utf-8",
       );
 
       // Copy png files
@@ -295,7 +283,7 @@ async function run() {
         }
         await copyFile(
           path.resolve(policyDir, asset),
-          path.resolve(policyOutDir, asset)
+          path.resolve(policyOutDir, asset),
         );
       }
     }
@@ -305,7 +293,7 @@ async function run() {
 
   await copyFile(
     path.resolve(policiesDir, "index.md"),
-    path.resolve(docsDir, "index.md")
+    path.resolve(docsDir, "index.md"),
   );
 
   const policyDataV3 = {
@@ -313,12 +301,12 @@ async function run() {
     policies,
   };
 
-  const policiesV3Json = stringify(policyDataV3);
+  const policiesV3Json = await stringify(policyDataV3);
 
   await writeFile(
     path.resolve(policiesDir, "../policies.v3.json"),
     policiesV3Json,
-    "utf-8"
+    "utf-8",
   );
 
   console.info("Policies updated");
@@ -365,14 +353,14 @@ if (args["--watch"]) {
 async function getExampleHtml(
   policyId: string,
   policyPath: string,
-  schema: PolicySchema
+  schema: PolicySchema,
 ) {
   if (!schema.description) {
     console.error(
       chalk.red(
         `ERROR: The policy ${policyId} does not have a description set in the schema`,
-        policyPath
-      )
+        policyPath,
+      ),
     );
     throw new Error("Invalid schema");
   }
@@ -384,8 +372,8 @@ async function getExampleHtml(
   if (properties && Object.keys(properties).length === 0) {
     console.warn(
       chalk.yellow(
-        `WARN: The policy ${policyId} does not have any options set in the schema.`
-      )
+        `WARN: The policy ${policyId} does not have any options set in the schema.`,
+      ),
     );
   }
 
@@ -398,7 +386,7 @@ async function getExampleHtml(
           <OptionProperties properties={properties} />{" "}
         </>
       ) : null}
-    </>
+    </>,
   );
 
   return html;
