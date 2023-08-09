@@ -11,7 +11,7 @@ Zuplo Developer Portal. In addition to built-in, fully automated self-serve API
 Key management, developers using your API can now access their own view of their
 activity on your API with our new Developer Portal Analytics feature.
 
-![Developer Analytics](./developer-analytics.png)
+![Developer Analytics](https://cdn.zuplo.com/assets/2bff833f-d1e7-4485-8efe-f3a0ab0096dc.png)
 
 The bar for offering a high-quality API experience is constantly being raised,
 you need at least
