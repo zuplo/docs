@@ -47,12 +47,8 @@ jobs:
 
       - name: Trigger Portal Release
         run: |
-          curl \
-          -X POST \
-          -H "Accept: application/vnd.github.v3+json" \
-          -H "Authorization: token ${{ secrets.GH_CUSTOM_TOKEN }}" \
-          https://api.github.com/repos/zuplo/portal/actions/workflows/25079060/dispatches \
-          -d '{"ref":"refs/heads/main"}'
+          curl -X POST \
+          https://api.vercel.com/v1/integrations/deploy/prj_skw4YDCLsPJhlK7SrbLUzyLTdRQr/8Rem6suBuT
 
   search:
     name: Index Search
