@@ -62,7 +62,7 @@ key bucket tagged with that `orgId`.
 The interaction of the different components of this demo are displayed in the
 following screenshot and described below:
 
-![demo diagram](./diagram.png)
+![demo diagram](https://cdn.zuplo.com/assets/90ba2e6f-48ba-4f18-a36e-939e895c4adb.png)
 
 ### Your Developer Console
 
@@ -136,7 +136,7 @@ copy of the project and deploy it for you 😎
 You should see the below screen. Enter a custom name for your project or accept
 the default suggestion. Click **Zup It!** to complete the deployment.
 
-![Create Clone Project](./create-project.png)
+![Create Clone Project](https://cdn.zuplo.com/assets/7622732a-9aed-40f4-b3b7-bdc18a20c619.png)
 
 :::info Auth0 Demo Tenant
 
@@ -270,7 +270,7 @@ Copy an API Key to use it with the API in the next step.
 
 Copy the gateway URL from **_Files > Getting Started_**
 
-![Gateway URL](./gateway-url.png)
+![Gateway URL](https://cdn.zuplo.com/assets/d1a84d3d-f5ed-43d6-afbf-bb67a7ab0afe.png)
 
 Now, try the API Key against a `/who-am-i` endpoint deployed with the Auth
 Translation API.
