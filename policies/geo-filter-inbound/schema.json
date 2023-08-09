@@ -43,6 +43,7 @@
               }
             },
             "allow": {
+              "type": "object",
               "countries": {
                 "type": "string",
                 "description": "comma separated string of country codes to allow ONLY (e.g. \"US, CA\")"
@@ -58,7 +59,7 @@
             },
             "ignoreUnknown": {
               "type": "boolean",
-              "description": "Optional, defaults to true. Specifies whether unknown geo-location parameters should be ignored or blocked."
+              "description": "Optional, defaults to true. Specifies whether unknown geo-location parameters should be ignored (allowed through)."
             }
           }
         }
@@ -66,7 +67,7 @@
       "examples": [
         {
           "_name": "basic",
-          "export": "GeoLocationInbound",
+          "export": "GeoFilterInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
             "allow": {
