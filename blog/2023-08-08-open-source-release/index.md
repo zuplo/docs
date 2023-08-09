@@ -124,6 +124,8 @@ multiple keys at any one time - all identifying the same ‘user’.
 
 ### 1- Clone the Auth Translation API
 
+> You can also watch the [🎥 video walkthrough](https://youtu.be/W9at0UPfoO4)
+
 This API is configured to be deployed to Zuplo. You can find the git repo
 [here](https://github.com/zuplo/sample-auth-translation-api), but all you have
 to do is click on the deploy button below and Zuplo will automatically create a
