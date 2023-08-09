@@ -50,7 +50,7 @@ const PolicyOptions = ({
   policyId,
 }: {
   schema: any;
-  policyIed: string;
+  policyId: string;
 }) => {
   const { properties } = schema.properties.handler;
   return (
