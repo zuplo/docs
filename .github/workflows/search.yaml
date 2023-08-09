@@ -1,0 +1,16 @@
+name: Index Search
+on:
+  deployment_status:
+
+jobs:
+  search:
+    name: Index Search
+    if: github.event.deployment_status.state == 'success' && github.event.deployment_status.environment == 'production'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: darrenjennings/algolia-docsearch-action@e3b8c5540e90a964b655be6ca73c1ee1aeba2719
+        with:
+          algolia_application_id: E7EUGPZYED
+          algolia_api_key: ${{ secrets.ALGOLIA_API_KEY }}
+          file: crawler.json
