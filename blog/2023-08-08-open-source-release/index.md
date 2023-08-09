@@ -12,23 +12,23 @@ image: https://og-image.zuplo.com/?text=Announcing%20our%20Open-Source%20React%2
 > start free at [zuplo.com](http://zuplo.com) and ship an API in minutes._
 
 Day 2 of API Key Week at Zuplo comes with our first open-source release. At
-Zuplo, we use a lot and sponsor and lot of open-source and we are glad to
-announce our first open-source project, an NPM package for adding an API Key
-manager to your React projects.
+Zuplo, we use and sponsor and lot of open-source and we are glad to announce our
+first open-source project, an NPM package for adding an API Key manager to your
+React projects.
 
 ## Why an API Key manager React component?
 
 Zuplo offers in it’s own
 [developer portal](https://zuplo.com/docs/articles/developer-portal) an
 integrated API Key management that your users can use to self-serve API keys to
-use with your API. Altought this is enough for most of our customers, some of
-our users prefer to integrate their API experiences into their own Dev Console.
+authenticate against your API. Although this is enough for most, some of
+customers prefer to integrate their API experiences into their own Dev Console.
 
 Our newest open-source component will help you shape your own API experience
-while leveraging all of the other Zuplo features. The component (which is
-pluggable with a provider model to work with any API Key solution provider) can
-be installed via npm `npm install @zuplo/react-api-key-manager`. You can also
-checkout the code [here](https://github.com/zuplo/api-key-manager).
+while leveraging all of the other Zuplo features for your APIs. The component
+(which is pluggable with a provider model to work with any API Key solution
+provider) can be installed via npm `npm install @zuplo/react-api-key-manager`.
+You can also checkout the code [here](https://github.com/zuplo/api-key-manager).
 
 If you're curious how this work, we have a tutorial in this blogpost that will
 help you set it up. But first... why should you care about API Key Management?
@@ -44,18 +44,20 @@ features such as
 
 - User based
   [Rate Limiting](https://zuplo.com/docs/articles/step-3-add-rate-limiting)
-- Customization of API behavior per-user using Typescript
+- Customization of API behavior per-user using Typescript code
 - [Github secret scanning](https://github.blog/changelog/2022-07-13-zuplo-is-now-a-github-secret-scanning-partner/)
 - Key metadata
 - Multiple keys per consumer and built in key rolling
 
-API Key management on Zuplo allows you to easily secure your API using API keys.
+API Key management on Zuplo allows you to easily secure your API using API keys
+[with best practices](../2022-12-01-api-key-authentication/index.md).
 
 ## Tutorial: Setup a Web App with the newly release component
 
-In this demo we will have users sign in web app using Auth0. Their e-mail
-address will be associated with an `orgId` (e.g. “sales-east”) and have
-permissions to manage any keys in your API key bucket tagged with that `orgId`.
+In this demo we will have users sign in into a web app labelled “Your Developer
+Console” in the diagram below. Their e-mail address will be associated with an
+`orgId` (e.g. “sales-east”) and have permissions to manage any keys in your API
+key bucket tagged with that `orgId`.
 
 The interaction of the different components of this demo are displayed in the
 following screenshot and described below:
@@ -64,11 +66,10 @@ following screenshot and described below:
 
 ### Your Developer Console
 
-The sample website (NextJS) - labelled “Your Developer Console” above will be a
-Web App that will support login using Auth0 (note: you could use any auth
-provider). Once your user has acquired a JWT token from Auth0, the token can be
-used to call the “Auth Translation API”, which protects your API key store by
-restricting access only to keys the user has permissions to manage.
+The sample web app (NextJS) will support login using Auth0 (note: you could use
+any auth provider). Once your user has acquired a JWT token from Auth0, the
+token can be used to call the “Auth Translation API”, which protects your API
+key store by restricting access only to keys the user has permissions to manage.
 
 ### Zuplo API Key Service
 
@@ -82,10 +83,10 @@ themselves by self-serving certain capabilities like
 
 The API Key services API is documented
 [here](https://dev.zuplo.com/docs/routes#api-keys---consumers). When calling
-this service you use your Zuplo API API Key. This key has the power to create,
-read, update and delete all API keys in your system and therefore should be
-treated securely. For this reason **you should never give this key to a customer
-or use it in a website directly.**
+this service you use your Zuplo API (ZAPI) API Key. This key has the power to
+create, read, update and delete all API keys in your system and therefore should
+be treated securely. For this reason **you should never give this key to a
+customer or use it in a website directly.**
 
 Instead, you need an intermediary Auth Translation API to enforce your
 particular security policies around your API keys. In a cool twist of fate,
@@ -131,9 +132,7 @@ copy of the project and deploy it for you 😎
 [![Create Project](https://cdn.zuplo.com/www/zupit.svg)](https://portal.zuplo.com/zup-it?sourceRepoUrl=https://github.com/zuplo/sample-auth-translation-api.git)
 
 You should see the below screen. Enter a custom name for your project or accept
-the default suggestion.
-
-Click **Zup It!** to complete the deployment.
+the default suggestion. Click **Zup It!** to complete the deployment.
 
 ![Create Clone Project](./create-project.png)
 
@@ -253,7 +252,7 @@ start the Developer Console.
     npm run dev
     ```
 
-#### 5- Try out your own API Key Manager
+### 4- Try out your own API Key Manager
 
 Sign in the e-mail you specified and, all being well, you should be able to
 create your first API key and try the following
@@ -265,7 +264,7 @@ create your first API key and try the following
 
 Copy an API Key to use it with the API in the next step.
 
-### 6- Test the API Key
+### 5- Test the API Key
 
 Copy the gateway URL from **_Files > Getting Started_**
 
