@@ -10,13 +10,13 @@ Today — Day 4 of API Key Week — we're proud to share that we are indeed eati
 our own dogfood. We just updated the Developer Portal in Zuplo (which also just
 received a bunch of performance upgrades💨).
 
-// TODO - Screenshot
+![Developer Portal](./dev-portal.png)
 
 This makes for an improvement on our self-serve API keys capability in the Zuplo
 developer portal by making key features like **key-rolling** front and center.
 
 Here's a video showing the new control in action on the developer portal:
 
-<YouTubeVideo url="https://www.youtube-nocookie.com/embed/TODO" />
+<YouTubeVideo url="https://www.youtube-nocookie.com/embed/ZlKnHGtvqcc" />
 
 Be sure to check back tomorrow for the last announcement of API Key Week...
