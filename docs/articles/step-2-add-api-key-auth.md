@@ -26,7 +26,7 @@ JSON. Note,
 :::tip The API key auth policy should usually be one of the first policies in
 your request pipeline, drag it to the top if you have multiple policies.
 
-<StyledImage src="https://cdn.zuplo.com/assets/8f698429-f265-40d9-99d7-156b28b7ef1b.gif" maxWidth="10" />
+<Screenshot src="https://cdn.zuplo.com/assets/8f698429-f265-40d9-99d7-156b28b7ef1b.gif" size="sm" />
 :::
 
 If you test your route, you should get a 401 Unauthorized response

@@ -37,13 +37,13 @@ In order to make a request to the route, you'll need an API Key.
    `my-test`. You can leave the other fields empty. Click **OK** to create the
    consumer.
 
-  <Screenshot src="https://cdn.zuplo.com/assets/68b4571d-fcbc-4c92-977f-7612cd0cfb32.png" maxWidth="60%" />
+  <Screenshot src="https://cdn.zuplo.com/assets/68b4571d-fcbc-4c92-977f-7612cd0cfb32.png" size="md" />
 
 4. Now you can see the newly created consumer and its default API key. Select
    the <CopyIcon /> **Copy** button to copy the API Key. You will use this value
    in the next section.
 
-  <Screenshot src="https://cdn.zuplo.com/assets/98a3d62f-1b61-4f41-8bac-665e0b02309e.png" maxWidth="80%" />
+  <Screenshot src="https://cdn.zuplo.com/assets/98a3d62f-1b61-4f41-8bac-665e0b02309e.png" size="lg" />
 
 ### Test the Policy
 
@@ -55,18 +55,18 @@ is working as expected.
 
 2. The API Gateway should respond with a **401 Unauthorized** response.
 
-  <Screenshot src="https://cdn.zuplo.com/assets/626e10a2-2350-439a-9081-1ccf1fe90cad.png" maxWidth="60%" />
+  <Screenshot src="https://cdn.zuplo.com/assets/626e10a2-2350-439a-9081-1ccf1fe90cad.png" size="md" />
 
 3. Now to make an authenticated request, add a header to the request called
    `Authorization`. Set the value of the header to `Bearer YOUR_API_KEY`
    replacing `YOUR_API_KEY` with the value of the API Key you copied in the
    previous section.
 
-  <Screenshot src="https://cdn.zuplo.com/assets/11a3f88a-8613-43c9-9429-4c82e1f1ab4d.png" maxWidth="80%" />
+  <Screenshot src="https://cdn.zuplo.com/assets/11a3f88a-8613-43c9-9429-4c82e1f1ab4d.png" size="lg" />
 
 4. Click the **Test** button and a **200 OK** response should be returned.
 
-  <Screenshot src="https://cdn.zuplo.com/assets/8182f932-8db6-4456-842f-f65158b174c0.png" maxWidth="60%" />
+  <Screenshot src="https://cdn.zuplo.com/assets/8182f932-8db6-4456-842f-f65158b174c0.png" size="md" />
 
 You have now setup API Key Authentication on your API Gateway.
 

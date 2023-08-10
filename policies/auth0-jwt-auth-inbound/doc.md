@@ -84,7 +84,7 @@ The next step is to add the Auth0 JWT Auth policy to a route in your project.
    and `audience` that are pre-populated with environment variable names that
    you set in the previous section.
 
-  <Screenshot src="https://cdn.zuplo.com/assets/2aa3fc6a-0e9c-47f6-b08d-c1cc446e54b9.png" maxWidth="60%" />
+  <Screenshot src="https://cdn.zuplo.com/assets/2aa3fc6a-0e9c-47f6-b08d-c1cc446e54b9.png" size="md" />
  
 4. Click **OK** to save the policy.
 
@@ -98,18 +98,18 @@ is working as expected.
 
 2. The API Gateway should respond with a **401 Unauthorized** response.
 
-  <Screenshot src="https://cdn.zuplo.com/assets/626e10a2-2350-439a-9081-1ccf1fe90cad.png" maxWidth="60%" />
+  <Screenshot src="https://cdn.zuplo.com/assets/626e10a2-2350-439a-9081-1ccf1fe90cad.png" size="md" />
 
 3. Now to make an authenticated request, add a header to the request called
    `Authorization`. Set the value of the header to `Bearer YOUR_ACCESS_TOKEN`
    replacing `YOUR_ACCESS_TOKEN` with the value of the Auth0 access token you
    saved from the first section of this tutorial.
 
-  <Screenshot src="https://cdn.zuplo.com/assets/1486821b-cade-4041-b05b-80d3366327a5.png" maxWidth="80%" />
+  <Screenshot src="https://cdn.zuplo.com/assets/1486821b-cade-4041-b05b-80d3366327a5.png" size="lg" />
 
 4. Click the **Test** button and a **200 OK** response should be returned.
 
-  <Screenshot src="https://cdn.zuplo.com/assets/8182f932-8db6-4456-842f-f65158b174c0.png" maxWidth="60%" />
+  <Screenshot src="https://cdn.zuplo.com/assets/8182f932-8db6-4456-842f-f65158b174c0.png" size="md" />
 
 You have now setup Auth0 JWT Authentication on your API Gateway.
 

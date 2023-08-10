@@ -7,7 +7,7 @@ title: API Key Administration
 API Key Consumers can be managed in the Zuplo Portal's **API Key Consumers**
 section under the <SettingsTabIcon /> **Settings** tab.
 
-<Screenshot src="https://cdn.zuplo.com/assets/4c43a1c7-8d9b-4659-9ab0-2129a0aa7e8e.png"  maxWidth="80%" />
+<Screenshot src="https://cdn.zuplo.com/assets/4c43a1c7-8d9b-4659-9ab0-2129a0aa7e8e.png"  size="lg" />
 
 To add a new API Key Consumer click the **Add new consumer** button and complete
 the form.
