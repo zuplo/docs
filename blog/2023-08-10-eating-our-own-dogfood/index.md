@@ -1,5 +1,5 @@
 ---
-title: Day 3 - Eating our own dogfood 🐶🥣
+title: Day 4 - Eating our own dogfood 🐶🥣
 authors: josh
 tags: [api, api-keys, portal, open-source]
 description: Self-serve analytics for the developers using your API
