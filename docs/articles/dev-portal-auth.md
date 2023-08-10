@@ -22,7 +22,7 @@ monthly active users.
 in the Auth0 dashboard. When creating the application select type "Single Page
 Web Applications"
 
-<StyledImage src="https://cdn.zuplo.com/assets/0aaa56b6-37c4-4c87-ac62-d86bc52047e3.png" maxWidth="70%" />
+<Screenshot src="https://cdn.zuplo.com/assets/0aaa56b6-37c4-4c87-ac62-d86bc52047e3.png" size="md" />
 
 ### 2/ Configure Auth0 Application
 
@@ -31,7 +31,8 @@ You must set the following fields in the Auth0 application:
 ** Application URIs**
 
 - **Allowed Callback URLs**: Add your docs site url (i.e.
-  `https://my-app.zuplo.app/docs/`). Note, you should include the trailing slash.
+  `https://my-app.zuplo.app/docs/`). Note, you should include the trailing
+  slash.
 - **Allowed Logout URLs**: Add your docs site url (i.e.
   `https://my-app.zuplo.app/docs/`). Not you should include the trailing slash.
 - **Allowed Web Origins**: Add your docs site url without the path (i.e.
@@ -42,7 +43,7 @@ You must set the following fields in the Auth0 application:
 - **Rotation**: Enabled
 - **Reuse Interval**: Leave at `0`
 
-<StyledImage src="https://cdn.zuplo.com/assets/359f4a6c-4dd9-48c9-b8a3-27e70aa459c0.png" maxWidth="70%" />
+<Screenshot src="https://cdn.zuplo.com/assets/359f4a6c-4dd9-48c9-b8a3-27e70aa459c0.png" size="md" />
 
 ** Refresh Token Expiration**
 
@@ -55,7 +56,8 @@ You must set the following fields in the Auth0 application:
 
 [Create an API](https://auth0.com/docs/get-started/auth0-overview/set-up-apis)
 in the Auth0 portal. Set the **Identifier** to something like
-`https://api.my-domain.com/`. You will enter this value into Zuplo as the **Audience** in the next step.
+`https://api.my-domain.com/`. You will enter this value into Zuplo as the
+**Audience** in the next step.
 
 :::note
 
@@ -66,7 +68,7 @@ different URLs.
 
 :::
 
-<StyledImage src="https://cdn.zuplo.com/assets/d91471bd-5897-463e-805c-35abba294616.png" maxWidth="70%" />
+<Screenshot src="https://cdn.zuplo.com/assets/d91471bd-5897-463e-805c-35abba294616.png" size="md" />
 
 ### 4/ Configure the Developer Portal
 
@@ -85,7 +87,7 @@ Set the following settings:
 - **Client ID**: The client ID of the Auth0 application that was created in the
   earlier steps. This is a string of letters an numbers. _The Client ID is not a
   secret value._
-- **Audience**: This is the value for `identifier` that you set when creating the
-  Auth0 API earlier.
+- **Audience**: This is the value for `identifier` that you set when creating
+  the Auth0 API earlier.
 
-<StyledImage src="https://cdn.zuplo.com/assets/16c9b4a0-db9b-4b8c-a16f-00ce5e08071e.png" maxWidth="70%" />
+<Screenshot src="https://cdn.zuplo.com/assets/16c9b4a0-db9b-4b8c-a16f-00ce5e08071e.png" size="md" />

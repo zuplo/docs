@@ -15,7 +15,7 @@ create and manage consumers and their keys.
 
 For quick access the newest, non-expired API key is shown in this section.
 
-<Screenshot src="https://cdn.zuplo.com/assets/98a3d62f-1b61-4f41-8bac-665e0b02309e.png" maxWidth="80%" />
+<Screenshot src="https://cdn.zuplo.com/assets/98a3d62f-1b61-4f41-8bac-665e0b02309e.png" size="lg" />
 
 ## Zuplo Developer Portal
 

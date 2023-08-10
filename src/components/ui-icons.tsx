@@ -56,10 +56,9 @@ export const ShowIcon: FC = () => <EyeIcon style={styles} />;
 
 export const GitHubIcon: FC = () => (
   <svg
-    style={styles}
+    style={{ height: "21px", width: "21px", verticalAlign: "middle" }}
     fill="currentColor"
     viewBox="0 0 24 24"
-    className="mr-3 text-opacity-50 transform"
   >
     <path
       fillRule="evenodd"

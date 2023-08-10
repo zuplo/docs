@@ -4,22 +4,18 @@ import styles from "./Screenshot.module.css";
 const Screenshot = ({
   src,
   alt,
-  maxWidth,
+  size = "lg",
 }: {
   src: string;
   alt: string;
-  maxWidth: string;
+  size: "lg" | "md" | "sm";
 }) => {
-  const mw = maxWidth ?? "80%";
   return (
     <img
       loading="lazy"
       src={src}
       alt={alt}
-      className={styles["screenshot"]}
-      style={{
-        maxWidth: mw,
-      }}
+      className={styles["screenshot"] + " " + styles[`screenshot-${size}`]}
     />
   );
 };
