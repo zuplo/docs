@@ -91,69 +91,153 @@ has only a single API key except when performing operations like rolling keys.
 
 ## Usage
 
-Each bucket is created with a default API Key that is assigned the role of
-bucket owner. The bucket owner role has permissions to perform any tasks on a
-bucket such as creating consumers, api keys, etc. Additional bucket owner tokens
-may be created through the Zuplo Portal (coming soon).
+This section explains common scenarios for managing API keys using the API. For
+other uses, see the full [Developer API reference](https://dev.zuplo.com).
 
-Full [API Reference Here](https://dev.zuplo.com).
-
-To start set two environment variables (in your terminal, not inside Zuplo)
+All examples assume two environment variables are set (in your terminal, not
+inside Zuplo)
 
 ```bash
-export API_KEY=YOUR_KEY
-export BUCKET_NAME=the-bucket
+# Your Zuplo Account Name
+export ACCOUNT_NAME=my-account
+# Your bucket API URL (Found in Settings > Project Information)
+export BUCKET_NAME=my-bucket
+# Your Zuplo API Key (Found in Settings > Zuplo API Keys)
+export ZAPI_KEY=zpka_YOUR_API_KEY
 ```
 
-Next, create a consumer and an API Key.
+### Creating a Consumer with a Key
 
-```bash
+// typically you would store some useful metadata // like the organizationId,
+etc.
+
+// Tags are used for querying the consumers later. // It is often useful to
+store some external identifier // that links this consumer to your internal data
+
+```shell
 curl \
-  -H "Content-type: application/json" \
-  -H "Authorization: Bearer $API_KEY" \
-  -d '{ "metadata": { "testId": "1234" }, "name": "my-consumer" }' \
-  https://dev.zuplo.com/v1/accounts/:accountName/key-buckets/$BUCKET_NAME/consumers
+  https://dev.zuplo.com/v1/accounts/$ACCOUNT_NAME/key-buckets/$BUCKET_NAME/consumers?with-api-key=true \
+  --request POST \
+  --header "Content-type: application/json" \
+  --header "Authorization: Bearer $API_KEY" \
+  --data @- << EOF
+{
+  "name": "my-consumer",
+  "description": "My Consumer",
+  "metadata": {
+    "orgId": 1234,
+    "plan": "gold"
+  },
+  "tags": {
+    "externalId": "acct_12345"
+  }
+}
+EOF
 ```
 
-The response should look like this:
+The response will look like this:
 
 ```json
 {
   "id": "csmr_sikZcE754kJu17X8yahPFO8J",
   "name": "my-consumer",
+  "description": "My Consumer",
   "createdOn": "2023-02-03T21:33:17.067Z",
   "updatedOn": "2023-02-03T21:33:17.067Z",
-  "description": null,
-  "tags": {},
-  "metadata": { "testId": "1234" }
-}
-```
-
-Next, create an API Key for this consumer.
-
-```bash
-curl \
- -H "Content-type: application/json" \
- -H "Authorization: Bearer $API_KEY" \
- -d '{ "description": "My first API Key" }' \
- https://dev.zuplo.com/v1/accounts/:accountName/key-buckets/$BUCKET_NAME/consumers/my-consumer/keys
-```
-
-The response should look like this:
-
-```json
-{
-  "id": "key_Lcu5VVvuJWpgLS86oVo5mfDJ",
-  "description": null,
-  "createdOn": "2023-02-03T21:35:22.047Z",
-  "updatedOn": "2023-02-03T21:35:22.047Z",
-  "expiresOn": null,
-  "key": "zpka_d67b7e241bb948758f415b79aa8ec822_2efb7009"
+  "tags": {
+    "externalId": "acct_12345"
+  },
+  "metadata": {
+    "orgId": 1234,
+    "plan": "gold"
+  },
+  "apiKeys": [
+    {
+      "id": "key_AM7eAiR0BiaXTam951XmC9kK",
+      "createdOn": "2023-06-19T17:32:17.737Z",
+      "updatedOn": "2023-06-19T17:32:17.737Z",
+      "expiresOn": null,
+      "key": "zpka_d67b7e241bb948758f415b79aa8ec822_2efb7009"
+    }
+  ]
 }
 ```
 
 You can use this API Key to call your Zuplo API Gateway that is protected by the
 [API Key Authentication](/docs/policies/api-key-inbound) policy.
+
+### Query Consumers with API Keys By Tags
+
+```shell
+export ORG_ID=1234
+curl \
+  https://dev.zuplo.com/v1/accounts/$ACCOUNT_NAME/key-buckets/$BUCKET_NAME/consumers/?include-api-keys=true&key-format=visible&tag.orgId=$ORG_ID \
+  --header "Authorization: Bearer $API_KEY"
+```
+
+The response will look like this:
+
+```json
+{
+  "data": [
+    {
+      "id": "csmr_sikZcE754kJu17X8yahPFO8J",
+      "name": "my-consumer",
+      "description": "My Consumer",
+      "createdOn": "2023-02-03T21:33:17.067Z",
+      "updatedOn": "2023-02-03T21:33:17.067Z",
+      "tags": {
+        "externalId": "acct_12345"
+      },
+      "metadata": {
+        "orgId": 1234,
+        "plan": "gold"
+      },
+      "apiKeys": [
+        {
+          "id": "key_AM7eAiR0BiaXTam951XmC9kK",
+          "createdOn": "2023-06-19T17:32:17.737Z",
+          "updatedOn": "2023-06-19T17:32:17.737Z",
+          "expiresOn": null,
+          "key": "zpka_d67b7e241bb948758f415b79aa8ec822_2efb7009"
+        }
+      ]
+    }
+  ],
+  "offset": 0,
+  "limit": 1000
+}
+```
+
+### Roll a Consumer's Keys
+
+Sometimes you will want to create a new key and expire the current keys. Instead
+of calling the API for each key and manually creating a new key, you can simply
+call the roll key endpoint.
+
+:::tip Tags for Request Authorization
+
+One useful feature of the API Key service is that most requests can have `tags`
+added to the query parameter even if they aren't get requests. This is useful
+when you want to call the API and ensure some basic condition is met without
+having to first do a GET to retrieve data on the object. For example, in the
+roll key request below the `orgId` tag is set on the request - this ensures that
+the consumer being updated is tagged with that org.
+
+:::
+
+The following call with set all existing keys to have the expiration date set in
+the request body and will create a new key without an expiration.
+
+```shell
+export ORG_ID=1234
+export CONSUMER_NAME=my-consumer
+curl \
+  https://dev.zuplo.com/v1/accounts/$ACCOUNT_NAME/key-buckets/$BUCKET_NAME/consumers/$CONSUMER_NAME/roll-key?tag.orgId=$ORG_ID \
+  --request POST \
+  --header "Authorization: Bearer $API_KEY"
+  --data '{"expiresOn":"2023-04-18"}'
+```
 
 ## Reference
 
