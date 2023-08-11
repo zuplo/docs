@@ -35,10 +35,10 @@ Make sure to not have a trailing `/` on your allowedOrigins. e.g.
   "corsPolicies": [
     {
       "name": "custom-cors",
-      "allowedOrigins": ["https://domain1.com", "https://domain2.com"],
-      "allowedHeaders": ["origin", "my-special-incoming-header"],
+      "allowedOrigins": "https://domain1.com, https://domain2.com",
+      "allowedHeaders": "origin, my-special-incoming-header",
       "allowedMethods": ["GET", "POST"],
-      "exposeHeaders": ["my-special-response-header"],
+      "exposeHeaders": "my-special-response-header",
       "maxAge": 600,
       "allowCredentials": true
     }
@@ -80,3 +80,26 @@ UI).
 
 For more information on CORS, check out the MDN documentation:
 [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
+
+## Using environment variables
+
+If you need to support different origins, headers, etc. in different environments, you can use environment variables
+
+```json
+{
+  //... rest of policies.json file
+  "corsPolicies": [
+    {
+      "name": "custom-cors",
+      "allowedOrigins": "$env(ALLOWED_ORIGINS)", // "https://domain1.com, https://domain2.com",
+      "allowedHeaders": "$env(ALLOWED_HEADERS)", "origin, my-special-incoming-header",
+      "allowedMethods": ["GET", "POST"],
+      "exposeHeaders": "my-special-response-header",
+      "maxAge": 600,
+      "allowCredentials": true
+    }
+  ]
+}
+```
+
+
