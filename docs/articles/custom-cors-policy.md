@@ -92,7 +92,7 @@ If you need to support different origins, headers, etc. in different environment
     {
       "name": "custom-cors",
       "allowedOrigins": "$env(ALLOWED_ORIGINS)", // "https://domain1.com, https://domain2.com",
-      "allowedHeaders": "$env(ALLOWED_HEADERS)", "origin, my-special-incoming-header",
+      "allowedHeaders": "$env(ALLOWED_HEADERS)", // "origin, my-special-incoming-header",
       "allowedMethods": ["GET", "POST"],
       "exposeHeaders": "my-special-response-header",
       "maxAge": 600,
