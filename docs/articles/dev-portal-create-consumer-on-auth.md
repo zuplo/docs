@@ -86,7 +86,7 @@ exports.onExecutePostLogin = async (event, api) => {
   try {
     // Create the consumer
     const response = await fetch(
-      `https://dev.zuplo.com/v1/accounts/${ZUPLO_ACCOUNT}/key-buckets/${API_KEY_BUCKET}/consumers`,
+      `https://dev.zuplo.com/v1/accounts/${ZUPLO_ACCOUNT}/key-buckets/${API_KEY_BUCKET}/consumers?with-api-key=true`,
       {
         method: "POST",
         body: JSON.stringify(body),
