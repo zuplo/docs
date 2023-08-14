@@ -1,5 +1,5 @@
 ---
-title: API Key Buckets
+title: Buckets & Environments
 ---
 
 API Keys are stored in 'buckets' - you'll see these mentioned in the
