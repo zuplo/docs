@@ -78,6 +78,7 @@ const sidebars = {
         "articles/api-key-react-component",
         "articles/api-key-leak-detection",
         "articles/api-key-service-limits",
+        "articles/api-key-buckets",
       ],
     },
     {
