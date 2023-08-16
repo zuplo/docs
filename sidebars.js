@@ -65,6 +65,7 @@ const sidebars = {
         // TODO - coming soon
         //"articles/monitoring",
         "articles/zuplo-in-your-stack",
+        "articles/log-plugins",
       ],
     },
     {
@@ -321,6 +322,11 @@ const sidebars = {
     {
       type: "doc",
       id: "articles/security",
+    },
+    {
+      type: "link",
+      label: "Trust & Compliance",
+      href: "https://trust.zuplo.com",
     },
   ],
 };
