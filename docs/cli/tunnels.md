@@ -33,13 +33,22 @@ zup tunnel list
 
 ### Running the tunnel
 
-Refer to the [tunnel documentation](../articles/tunnel-setup.md) for more
-information.
+To run the Docker container on your own infrastructure, refer to instructions
+from your cloud provider or contact [Zuplo support](mailto:support@zuplo.com)
+for assistance.
 
-### Specifying services
+- [Deploying Docker containers on Azure](https://docs.microsoft.com/en-us/learn/modules/run-docker-with-azure-container-instances/)
+- [Deploying Docker containers on AWS ECS](https://docs.aws.amazon.com/AmazonECS/latest/userguide/getting-started.html)
+- [Deploying container images to GCP](https://cloud.google.com/compute/docs/containers/deploying-containers)
 
-Once you have created a tunnel, you can specify which services it should expose
-using a configuration file. Here's a sample configuration file:
+Your running container needs a single environment variable named
+`TUNNEL_TOKEN``. You should store the value as a secret using the recommended
+means of secret storage and environment variable injection for your platform.
+
+### Configuring services
+
+Once you have created a tunnel, you can configure which services it should
+expose using a configuration file. Here's a sample configuration file:
 
 ```json
 {
@@ -47,18 +56,32 @@ using a configuration file. Here's a sample configuration file:
   "services": [
     {
       // This is the name of the service that you will use from your zup
-      "name": "my-service",
+      "name": "my-awesome-service-prod",
       // This is the local endpoint of your service that you tunnel can connect to
       "endpoint": "http://localhost:8000",
       "configurations": [
         // You can specify which projects and which environments can access this service
         {
           "project": "my-project",
-          "accessibleBy": ["preview", "production"]
+          "accessibleBy": ["production"]
         },
         {
           "project": "my-other-project",
-          "accessibleBy": ["working-copy"]
+          "accessibleBy": ["production"]
+        }
+      ]
+    },
+    {
+      "name": "my-awesome-service-staging",
+      "endpoint": "http://localhost:9000",
+      "configurations": [
+        {
+          "project": "my-project",
+          "accessibleBy": ["staging", "working-copy"]
+        },
+        {
+          "project": "my-other-project",
+          "accessibleBy": ["staging", "working-copy"]
         }
       ]
     }
