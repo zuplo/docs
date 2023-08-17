@@ -55,6 +55,9 @@ erDiagram
         string key
         string expiresOn
     }
+    Manager {
+      string email
+    }
 ```
 
 ### Buckets
