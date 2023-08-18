@@ -111,7 +111,7 @@ const sidebars = {
         "articles/handling-form-data",
         "articles/local-development",
         "articles/testing-graphql",
-        "docs/articles/gke-with-upstream-auth-policy",
+        "articles/gke-with-upstream-auth-policy",
       ],
     },
     {
