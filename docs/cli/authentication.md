@@ -22,13 +22,13 @@ by following these steps:
 All commands take an `--api-key` argument. For example, to list your zups, run:
 
 ```bash
-zup list --api-key zpka_79192455000204849918945812060565_517xxxx
+zup list --api-key zpka_d67b7e241bb948758f415b79aa8exxxx_2efbxxxx
 ```
 
 If you do not wish to pass your API Key to every command, you can set it as an
 environment variable:
 
 ```bash
-export ZUPLO_API_KEY=zpka_79192455000204849918945812060565_517xxxx
+export ZUPLO_API_KEY=zpka_d67b7e241bb948758f415b79aa8exxxx_2efbxxxx
 zup list --api-key
 ```

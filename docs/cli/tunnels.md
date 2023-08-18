@@ -25,7 +25,7 @@ Zuplo project.
 
 ```bash
 # For brevity, the commands assume that you have exported your API key as an environment variable,
-# export ZUPLO_API_KEY=zpka_79192455000204849918945812060565_517xxxx
+# export ZUPLO_API_KEY=zpka_d67b7e241bb948758f415b79aa8exxxx_2efbxxxx
 
 zup tunnel create --tunnel-name my-tunnel
 zup tunnel list
