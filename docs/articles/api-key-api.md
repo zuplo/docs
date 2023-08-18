@@ -160,7 +160,7 @@ The response will look like this:
       "createdOn": "2023-06-19T17:32:17.737Z",
       "updatedOn": "2023-06-19T17:32:17.737Z",
       "expiresOn": null,
-      "key": "zpka_d67b7e241bb948758f415b79aa8ec822_2efb7009"
+      "key": "zpka_d67b7e241bb948758f415b79aa8exxxx_2efbxxxx"
     }
   ]
 }
@@ -202,7 +202,7 @@ The response will look like this:
           "createdOn": "2023-06-19T17:32:17.737Z",
           "updatedOn": "2023-06-19T17:32:17.737Z",
           "expiresOn": null,
-          "key": "zpka_d67b7e241bb948758f415b79aa8ec822_2efb7009"
+          "key": "zpka_d67b7e241bb948758f415b79aa8exxxx_2efbxxxx"
         }
       ]
     }
