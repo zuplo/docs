@@ -39,13 +39,6 @@ const config = {
       },
     ],
     "@docusaurus/theme-mermaid",
-    [
-      "posthog-docusaurus",
-      {
-        apiKey: "phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW",
-        enableInDevelopment: false, // optional
-      },
-    ],
   ],
   presets: [
     [
