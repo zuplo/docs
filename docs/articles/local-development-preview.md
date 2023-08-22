@@ -53,7 +53,7 @@ Windows at this time.
    all the necessary dependencies.
 
 ```bash
-   npm install --ignore-scripts @zuplo/cli
+   npm install  @zuplo/cli
 ```
 
 :::tip
@@ -96,5 +96,5 @@ During the preview release, we will be updating the Zuplo CLI frequently. To
 update, please run
 
 ```bash
-   npm install --ignore-scripts @zuplo/cli
+   npm install @zuplo/cli
 ```
