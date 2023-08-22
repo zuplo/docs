@@ -53,7 +53,7 @@ Windows at this time.
    all the necessary dependencies.
 
 ```bash
-   npm install  @zuplo/cli
+   npm install @zuplo/cli
 ```
 
 :::tip
