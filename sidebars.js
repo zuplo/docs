@@ -110,6 +110,7 @@ const sidebars = {
         "articles/lazy-load-configuration-into-cache",
         "articles/handling-form-data",
         "articles/local-development",
+        "articles/local-development-preview",
         "articles/testing-graphql",
         "articles/gke-with-upstream-auth-policy",
       ],
