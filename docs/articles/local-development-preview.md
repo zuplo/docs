@@ -79,6 +79,11 @@ machine.
 9. Once you are done running your Zuplo Gateway locally, you can press `Ctrl+C`
    to stop the Zuplo CLI.
 
+## Configuration for Local Development
+
+Some features of the Zuplo Gateway require additional configuration to run
+locally.
+
 ## Limitations
 
 The following features are not supported when running your Zuplo Gateway
@@ -87,6 +92,23 @@ locally:
 - Developer Portal
 - API Analytics
 - Rate Limiting
+
+## Environment variables
+
+:::warning
+
+As the .env file could contain sensitive information, it should not be committed
+to your version system. Consider adding .env to your .gitignore file.
+
+:::
+
+1. Create a .env file in the root of your project.
+2. Follow the following format
+
+```
+KEY1=VALUE1
+KEY2=VALUE2
+```
 
 ## Troubleshooting
 
