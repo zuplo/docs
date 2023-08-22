@@ -58,9 +58,10 @@ Windows at this time.
 
 :::tip
 
-This installs the alpha version of the Zuplo CLI, `zup`, locally in your current
-working directory. This prevents it from interfering from the production version
-of the Zuplo CLI, `zup`, that you may have installed globally on your machine.
+This installs the preview version of the Zuplo CLI, `zup`, locally in your
+current working directory. This prevents it from interfering from the production
+version of the Zuplo CLI, `zup`, that you may have installed globally on your
+machine.
 
 :::
 
