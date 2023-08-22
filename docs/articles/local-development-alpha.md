@@ -1,9 +1,9 @@
 ---
-title: Running your Zuplo Gateway locally (Alpha)
-sidebar_label: Running your Zuplo Gateway locally (Alpha)
+title: Running your Zuplo Gateway locally (Preview)
+sidebar_label: Running your Zuplo Gateway locally (Preview)
 ---
 
-As of August 2023, we are pleased to announce an early version of the Zuplo
+As of August 2023, we are pleased to announce a preview version of the Zuplo
 Gateway that can be run locally.
 
 For advanced users, local development speeds up your development time by
@@ -18,14 +18,15 @@ providing feedback, please contact us at `support@zuplo.com`.
 
 :::warning
 
-Running your Zuplo Gateway locally is an alpha feature. There may be bugs and
-other issues. Please report any issues to `support@zuplo.com`.
+Running your Zuplo Gateway locally is a preview feature. There may be bugs and
+other issues. Please use a version control system to manage your source code.
+You can report any issues to `support@zuplo.com`.
 
 :::
 
 ## Getting Started
 
-Local development is powered by an alpha version of the Zuplo CLI, `zup`, which
+Local development is powered by a preview version of the Zuplo CLI, `zup`, which
 is built using Node.js. It requires a minimum version of Node.js 18.0.0.
 
 Currently, local development only works on Linux and Mac OS X. We do not support
@@ -47,9 +48,9 @@ Windows at this time.
 4. When prompted, enter the username and password that `support@zuplo.com` has
    provided to you. If everything is successful, you will see a `.npmrc` file in
    the root of your Zuplo Gateway.
-5. Install the alpha version of the Zuplo CLI, `zup`, by executing the following
-   command. This might take some a few minutes since it is bringing in all the
-   necessary dependencies.
+5. Install the preview version of the Zuplo CLI, `zup`, by executing the
+   following command. This might take some a few minutes since it is bringing in
+   all the necessary dependencies.
 
 ```bash
    npm install --ignore-scripts @zuplo/cli
@@ -90,7 +91,7 @@ locally:
 
 ### Updating the Zuplo CLI
 
-During the alpha release, we will be updating the Zuplo CLI frequently. To
+During the preview release, we will be updating the Zuplo CLI frequently. To
 update, please run
 
 ```bash
