@@ -89,8 +89,10 @@ locally.
 The following features are not supported when running your Zuplo Gateway
 locally:
 
+- Analytics
+- API Keys
 - Developer Portal
-- API Analytics
+- Log Streaming
 - Rate Limiting
 
 ## Environment variables
@@ -109,6 +111,11 @@ to your version system. Consider adding .env to your .gitignore file.
 KEY1=VALUE1
 KEY2=VALUE2
 ```
+
+## Changing the port number
+
+By default the Zuplo CLI runs on port 9000. To change the port number, you can
+call `npx zup dev --port <port number>`.
 
 ## Troubleshooting
 
