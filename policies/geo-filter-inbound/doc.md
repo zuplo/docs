@@ -2,8 +2,9 @@
 
 Specify an allow list or block list of:
 
-- **Countries** - Country of the incoming request. The two-letter country code
-  in the request, for example, "US".
+- **Countries** - Country of the incoming request. The
+  [two-letter country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) in
+  the request, for example, "US".
 - **regionCodes** - If known, the
   [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) code for the
   first-level region associated with the IP address of the incoming request, for
