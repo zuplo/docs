@@ -38,17 +38,25 @@ Windows at this time.
    this out, we recommend cloning the
    [samples-todo-list-open-api](https://github.com/zuplo/samples-todo-list-open-api)
    project.
-3. Execute the following commands from the root of your Zuplo Gateway. This
-   authenticates you against our private NPM registry at npm.zuplo.dev
+3. Execute the following commands from the _root_ of your Zuplo Gateway. For
+   instance, if your project is
+   `/Users/me/development/zuplo/samples-todo-list-open-api`, then the commands
+   need to be executed from that directory. If you have multiple projects that
+   you want to try, then these commands need to be repeated for each project.
+   The reason is that we are isolating the preview version of the CLI to each
+   project.
+4. The following command authenticates you against our private NPM registry at
+   npm.zuplo.dev and stores the credentials in a local .npmrc file to your
+   project.
 
 ```bash
    npm login --scope=@zuplo --registry https://npm.zuplo.dev --auth-type=legacy --userconfig .npmrc
 ```
 
-4. When prompted, enter the username and password that `support@zuplo.com` has
+5. When prompted, enter the username and password that `support@zuplo.com` has
    provided to you. If everything is successful, you will see a `.npmrc` file in
    the root of your Zuplo Gateway.
-5. Install the preview version of the Zuplo CLI, `zup`, by executing the
+6. Install the preview version of the Zuplo CLI, `zup`, by executing the
    following command. This might take some a few minutes since it is bringing in
    all the necessary dependencies.
 
@@ -60,24 +68,24 @@ Windows at this time.
 
 This installs the preview version of the Zuplo CLI, `zup`, locally in your
 current working directory. This prevents it from interfering from the production
-version of the Zuplo CLI, `zup`, that you may have installed globally on your
+version of the Zuplo CLI, `zup`, that you might have installed globally on your
 machine.
 
 :::
 
-6. To start your Zuplo Gateway locally, execute the following command from the
+7. To start your Zuplo Gateway locally, execute the following command from the
    root of your Zuplo Gateway.
 
 ```bash
    npx zup dev
 ```
 
-7. Visit `http://localhost:9000` in your browser. If you have a route configured
+8. Visit `http://localhost:9000` in your browser. If you have a route configured
    for `/`, you should see the response from your Zuplo Gateway.
-8. The Zuplo CLI is running in `watch` mode. Any changes that you make will be
+9. The Zuplo CLI is running in `watch` mode. Any changes that you make will be
    automatically compiled behind the scenes for you.
-9. Once you are done running your Zuplo Gateway locally, you can press `Ctrl+C`
-   to stop the Zuplo CLI.
+10. Once you are done running your Zuplo Gateway locally, you can press `Ctrl+C`
+    to stop the Zuplo CLI.
 
 ## Configuration for Local Development
 
@@ -125,5 +133,5 @@ During the preview release, we will be updating the Zuplo CLI frequently. To
 update, please run
 
 ```bash
-   npm install @zuplo/cli
+   npm install @zuplo/cli@latest
 ```
