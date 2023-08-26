@@ -13,9 +13,6 @@ Zuplo Gateway locally. So, for most users, the
 [Zuplo Portal](https://portal.zuplo.com/) will provide the best out-of-the-box
 experience with zero configuration.
 
-If you're interested in trying out the local development experience and
-providing feedback, please contact us at `support@zuplo.com`.
-
 :::warning
 
 Running your Zuplo Gateway locally is a preview feature. There may be bugs and
