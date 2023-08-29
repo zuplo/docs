@@ -548,11 +548,6 @@
       "permanent": true
     },
     {
-      "source": "/blog/2022/11/30/best-practices-for-api-key-management{/}?",
-      "destination": "/blog/2022/12/01/api-key-authentication",
-      "permanent": true
-    },
-    {
       "source": "/embed/getting-started{/}?",
       "destination": "/docs/articles/step-1-setup-basic-gateway",
       "permanent": true
@@ -769,10 +764,6 @@
         {
           "key": "X-Frame-Options",
           "value": "DENY"
-        },
-        {
-          "key": "content-security-policy-report-only",
-          "value": "script-src 'none'; connect-src 'none'; report-uri https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report"
         }
       ]
     }
