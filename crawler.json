@@ -15,6 +15,7 @@
   "sitemap_urls": ["https://zuplo.com/sitemap.xml"],
   "sitemap_alternate_links": true,
   "stop_urls": [],
+  "js_render": true,
   "selectors": {
     "docs": {
       "lvl0": {
@@ -40,18 +41,5 @@
       "lvl5": "article h6",
       "text": "article p, article li, article pre, article code, article td:last-child"
     }
-  },
-  "strip_chars": " .,;:#",
-  "custom_settings": {
-    "separatorsToIndex": "_",
-    "attributesForFaceting": ["language", "version", "type", "docusaurus_tag"],
-    "attributesToRetrieve": [
-      "hierarchy",
-      "content",
-      "anchor",
-      "url",
-      "url_without_anchor",
-      "type"
-    ]
   }
 }
