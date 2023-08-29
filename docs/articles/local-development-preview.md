@@ -26,8 +26,8 @@ You can report any issues to `support@zuplo.com`.
 Local development is powered by a preview version of the Zuplo CLI, `zup`, which
 is built using Node.js. It requires a minimum version of Node.js 18.0.0.
 
-Currently, local development only works on Linux and Mac OS X. We do not support
-Windows at this time.
+Currently, local development only works on Linux, Mac OS X and Windows Subsystem
+for Linux (WSL). We do not support Windows at this time.
 
 1. Install Node.js 18.0.0 or later. You can download it from
    [nodejs.org](https://nodejs.org/en/download).
