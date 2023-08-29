@@ -15,7 +15,6 @@
   "sitemap_urls": ["https://zuplo.com/sitemap.xml"],
   "sitemap_alternate_links": true,
   "stop_urls": [],
-  "js_render": true,
   "selectors": {
     "docs": {
       "lvl0": {
