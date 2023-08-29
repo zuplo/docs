@@ -101,17 +101,17 @@ committed to your version system. Consider adding .env to your .gitignore file.
 To use API keys locally, you must have a Zuplo account and an existing project.
 You will be using the API keys from the working-copy of your project.
 
-1. Run `zup login` to log into your account in your browser. `zup login` opens a
-   local port (port 57801) on your machine and redirects you to the Zuplo login
-   page. Once you have logged in, you can close the browser window.
-2. Run `zup link` to bring in relevant information from your Zuplo account and
-   project. If you have multiple accounts and/or projects, `zup link` will
-   prompt you to select one.
+1. Run `npx zup login` to log into your account in your browser. `npx zup login`
+   opens a local port (port 57801) on your machine and redirects you to the
+   Zuplo login page. Once you have logged in, you can close the browser window.
+2. Run `npx zup link` to bring in relevant information from your Zuplo account
+   and project. If you have multiple accounts and/or projects, `npx zup link`
+   will prompt you to select one.
 3. At this point, you will see a file called .env.zuplo that contains some
    information about the bucket to use for your API Keys.
 4. You can run `npm run dev` as normal.
-5. You only need to repeat the `zup login` and `zup link` if you are switching
-   projects.
+5. You only need to repeat the `npx zup login` and `npx zup link` if you are
+   switching projects.
 
 ## Configuring Environment variables
 
