@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/propel-auth-jwt-inbound.json",
+  "type": "object",
+  "title": "PropelAuth JWT Auth",
+  "description": "Authenticate users using PropelAuth issued JWT tokens.",
+  "required": ["handler"],
+  "isPreview": false,
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "PropelAuthJwtInboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "type": "object",
+          "description": "The options for this policy",
+          "required": ["audience", "auth0Domain"],
+          "properties": {
+            "allowUnauthenticatedRequests": {
+              "type": "boolean",
+              "default": false,
+              "description": "Allow unauthenticated requests to proceed. This is use useful if you want to use multiple authentication policies or if you want to allow both authenticated and non-authenticated traffic."
+            },
+            "authUrl": {
+              "description": "Your PropelAuth authUrl. For example, https://6587563.propelauthtest.com"
+            },
+            "verifierKey": {
+              "description": "Your public (verifier) key that is used to verify access tokens. This key has a value that begins with '-----BEGIN PUBLIC KEY-----'. Make sure to remove all line breaks from the key before saving the variable."
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "PropelAuthJwtInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "allowUnauthenticatedRequests": false,
+            "authUrl": "https://6587563.propelauthtest.com",
+            "verifierKey": "$env(PROPEL_VERIFIER_KEY)"
+          }
+        }
+      ]
+    }
+  }
+}
