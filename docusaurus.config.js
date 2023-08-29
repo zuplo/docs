@@ -63,10 +63,6 @@ const config = {
             return `https://github.com/zuplo/docs/tree/main/docs/${docPath}`;
           },
         },
-        blog: {
-          showReadingTime: true,
-          editUrl: "https://github.com/zuplo/docs/tree/main/",
-        },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
@@ -119,7 +115,7 @@ const config = {
             position: "left",
             label: "Docs",
           },
-          { to: "/blog", label: "Blog", position: "left" },
+          { href: "https://zuplo.com/blog", label: "Blog", position: "left" },
           {
             href: "https://portal.zuplo.com",
             label: "Sign In",
@@ -169,7 +165,7 @@ const config = {
             items: [
               {
                 label: "Blog",
-                to: "/blog",
+                href: "https://zuplo.com/blog",
               },
               {
                 label: "GitHub",
