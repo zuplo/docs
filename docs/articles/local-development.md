@@ -22,7 +22,7 @@ referencing an old version of the NPM modules. To upgrade your types to the
 latest version run:
 
 ```
-npm i @zuplo/runtime@latest @zuplo/core@latest
+npm install zuplo@latest
 ```
 
 With the types installed, you should get code completion inside of any `.ts`
