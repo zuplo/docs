@@ -77,11 +77,11 @@ expose using a configuration file. Here's a sample configuration file:
       "configurations": [
         {
           "project": "my-project",
-          "accessibleBy": ["staging", "working-copy"]
+          "accessibleBy": ["preview", "working-copy"]
         },
         {
           "project": "my-other-project",
-          "accessibleBy": ["staging", "working-copy"]
+          "accessibleBy": ["preview", "working-copy"]
         }
       ]
     }
