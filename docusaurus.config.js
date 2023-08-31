@@ -110,6 +110,7 @@ const config = {
           target: "_self",
         },
         items: [
+          { href: "https://zuplo.com", label: "Home", position: "left" },
           {
             to: "/docs/intro",
             position: "left",
