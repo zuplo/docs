@@ -2,7 +2,7 @@ import { createWriteStream } from "fs";
 import { resolve } from "path";
 import { Readable } from "stream";
 
-fetch(`https://cdn.zuplo.com/types/@zuplo/bundled/bundles.json`, {
+fetch(`https://cdn.zuplo.com/types/@zuplo/bundled/bundles.v2.json`, {
   cache: "no-cache",
 }).then((response) =>
   Readable.fromWeb(response.body).pipe(
