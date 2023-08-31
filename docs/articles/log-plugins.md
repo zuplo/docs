@@ -22,7 +22,7 @@ different logging plugins.
 
 :::caution Paid Feature
 
-Custom logging is limited to Business and Enterprise plans. However, logging can
+Custom logging is limited to Enterprise plans. However, logging can
 be used for trial purposes on any plan.
 
 :::
