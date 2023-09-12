@@ -321,7 +321,7 @@ const sidebars = {
     {
       type: "link",
       label: "Changelog",
-      href: "/changelog",
+      href: "https://zuplo.com/changelog",
     },
     {
       type: "doc",
