@@ -3,11 +3,6 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/docs/changelog{/}?",
-      "destination": "/changelog",
-      "permanent": true
-    },
-    {
       "source": "/docs/advanced/custom-domain-setup{/}?",
       "destination": "/docs/articles/custom-domains",
       "permanent": true
