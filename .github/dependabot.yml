@@ -1,19 +1,24 @@
 version: 2
+registries:
+  npm-github:
+    type: npm-registry
+    url: https://npm.pkg.github.com
+    token: ${{secrets.GH_NPM_PACKAGE_READ_TOKEN}}
 updates:
-  # Maintain dependencies for GitHub Actions
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
-      interval: "weekly"
-  # Maintain dependencies for npm
-  - package-ecosystem: "npm"
-    directory: "/"
+      interval: weekly
+  - package-ecosystem: npm
+    directory: /
+    registries:
+      - npm-github
     schedule:
-      interval: "weekly"
+      interval: weekly
     groups:
-      eslint-dependencies:
+      eslint:
         patterns:
           - "*eslint*"
-      prettier-dependencies:
+      prettier:
         patterns:
           - "*prettier*"
