@@ -41,7 +41,7 @@
   "devDependencies": {
     "@apidevtools/json-schema-ref-parser": "^10.1.0",
     "@docusaurus/module-type-aliases": "^2.4.1",
-    "@tsconfig/docusaurus": "^2.0.1",
+    "@tsconfig/docusaurus": "~1.0.7",
     "@types/glob": "^8.0.0",
     "@types/jsdom": "^21.1.0",
     "@types/prettier": "^2.7.0",
