@@ -299,6 +299,7 @@ const sidebars = {
           },
           items: [
             "cli/installation",
+            "cli/analytics",
             "cli/authentication",
             "cli/convert",
             "cli/deployments",
