@@ -86,7 +86,6 @@ Gateway locally:
 
 - Analytics
 - Developer Portal
-- Rate Limiting
 - Tunnels
 
 ## Configuring API Keys
