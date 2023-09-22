@@ -21,10 +21,10 @@
     "ci:policies": "ts-node --esm ./scripts/update-policies.tsx"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.4.1",
-    "@docusaurus/plugin-sitemap": "^2.4.1",
-    "@docusaurus/preset-classic": "^2.4.1",
-    "@docusaurus/theme-mermaid": "^2.4.1",
+    "@docusaurus/core": "^2.4.3",
+    "@docusaurus/plugin-sitemap": "^2.4.3",
+    "@docusaurus/preset-classic": "^2.4.3",
+    "@docusaurus/theme-mermaid": "^2.4.3",
     "@heroicons/react": "^2.0.12",
     "@mdx-js/react": "^1.6.22",
     "@vercel/analytics": "^1.0.1",
@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@apidevtools/json-schema-ref-parser": "^10.1.0",
-    "@docusaurus/module-type-aliases": "^2.4.1",
+    "@docusaurus/module-type-aliases": "^2.4.3",
     "@tsconfig/docusaurus": "~1.0.7",
     "@types/glob": "^8.0.0",
     "@types/jsdom": "^21.1.0",
