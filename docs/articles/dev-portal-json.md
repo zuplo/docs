@@ -46,8 +46,8 @@ authentication to the [Developer Portal](../articles/developer-portal).
   Portal is accessed. By default it is '/docs' but you can customize this to be
   anything nested in the root folder. Note, it must start with a / but cannot be
   / alone.
-- **generateExamples** - Use the schema property on your requestBody and
-  responses entries to generate example request and response bodies in the
+- **generateExamples** - Use the schema property on your route's `requestBody`
+  and `responses` entries to generate example request and response bodies in the
   Developer Portal.
 - **enableAuthentication** - Do you want to enable sign-in to your Developer
   Portal? This is required to enable self-serve of API keys. You must select an
