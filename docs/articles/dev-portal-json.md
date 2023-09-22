@@ -22,6 +22,7 @@ authentication to the [Developer Portal](../articles/developer-portal).
 ```json
 {
   "enableAuthentication": true,
+  "generateExamples": true,
   "authentication": {
     "authority": "https://dev-123566.okta.com/oauth2/ausXXXXXXXXXXXX",
     "jwksUrl": "https://dev-123566.okta.com/oauth2/ausXXXXXXXXXXXX/v1/keys",
@@ -36,22 +37,40 @@ authentication to the [Developer Portal](../articles/developer-portal).
 
 ## Properties
 
-- **faviconUrl** The URL to the favicon used by the developer portal
-- **pageTitle** The value of the `<title>` element used by the developer portal
-- **sitePathname** The path where the Developer Portal is served on your domain.
-  Defaults to `/docs`.
-- **enableAuthentication** - If users can log in to the developer portal
+- **pageTitle** - The title of the Developer Portal as seen in the tabs of most
+  browsers. Default: Zuplo Dev Portal.
+- **faviconUrl** - The icon or 'favicon' for your Developer Portal, as seen in
+  the tabs of most browsers. This should be a full, valid https URL. Default:
+  https://cdn.zuplo.com/dev-portal/v2/favicon-dev.ico
+- **sitePathname** - The path on your gateway's domain at which the Developer
+  Portal is accessed. By default it is '/docs' but you can customize this to be
+  anything nested in the root folder. Note, it must start with a / but cannot be
+  / alone.
+- **generateExamples** - Use the schema property on your route's `requestBody`
+  and `responses` entries to generate example request and response bodies in the
+  Developer Portal.
+- **enableAuthentication** - Do you want to enable sign-in to your Developer
+  Portal? This is required to enable self-serve of API keys. You must select an
+  Auth Provider if this is enabled - by default we give you a demo Auth0
+  configuration (you should not use this in production).
 - **authentication** - Authentication settings
-  - **authority** - The URL to your identity provider's OAuth endpoint
+  - **provider** - Choose your preferred identity provider (Auth0, Okta, etc.).
+    Note, we provide you with a demonstration identity provider - this is fine
+    for learning how Zuplo works but should not be used in production or on real
+    APIs.
+  - **authority** - The full URL of the authorization server (e.g.
+    https://customer-auth.zuplo.dev/). Note it must be a fully valid https URL
+    and should end with a /.
   - **jwksUrl** - The URL to the identity provider's
     [JSON Web Key Set](https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-key-sets)
     URL.
-  - **provider** - The identity provider being used. Either `auth0` or `okta`
   - **devPortalClient**
-    - **clientId** - The OAuth Client ID used by the Developer Portal for the
+    - **clientId** - The OAuth
+      [Client ID](https://auth0.com/docs/glossary#A:~:text=about%20an%20entity.-,Client%20ID,-Identification%20value%20assigned)
+      used by the Developer Portal for the
       [Authorization Code OAuth flow](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-proof-key-for-code-exchange-pkce)
     - **audience** - The
-      [audience](https://auth0.com/docs/glossary#A:~:text=multi%2Dfactor%20authentication.-,Audience,-The%20unique%20identifier)
+      [audience](https://auth0.com/docs/glossary#A:~:text=.-,Audience,-Unique%20identifier%20of)
       of you Zuplo API
 
 ## Mapping environment variables to settings
