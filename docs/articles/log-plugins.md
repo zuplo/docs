@@ -22,8 +22,9 @@ different logging plugins.
 
 :::caution Paid Feature
 
-Custom logging is limited to Enterprise plans. However, logging can
-be used for trial purposes on any plan.
+Custom logging is limited to Enterprise plans. If you test custom logging,
+contact [sales@zuplo.com](mailto:sales@zuplo.com) to have an enterprise trial
+enabled.
 
 :::
 
