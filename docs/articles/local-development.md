@@ -183,6 +183,9 @@ You need to include the `@latest` to ensure that you are getting the latest.
 Otherwise, you could end up with an older version that is cached locally on your
 machine.
 
+You can compare if you have the latest version by looking at the version number
+on [NPM](https://www.npmjs.com/package/zuplo?activeTab=versions)
+
 ### Getting help
 
 Please reach out to support@zuplo.com or join our
