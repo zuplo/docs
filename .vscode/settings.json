@@ -12,5 +12,12 @@
     "editor.wordWrap": "bounded",
     "editor.wordWrapColumn": 80
   },
-  "cSpell.words": ["Amberflo", "asns", "overridable", "Supabase"]
+  "cSpell.words": ["Amberflo", "asns", "overridable", "Supabase"],
+  "grammarly.selectors": [
+    {
+      "language": "markdown",
+      "scheme": "file",
+      "pattern": "docs/articles/local-development.md"
+    }
+  ]
 }

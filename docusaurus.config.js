@@ -21,10 +21,19 @@ const config = {
   },
   plugins: [
     "./src/plugins/fathom",
-    // "./src/plugins/vercel",
     "./src/plugins/koala",
     "./src/plugins/hubspot",
-    "@docusaurus/theme-mermaid",
+    [
+      "@docusaurus/theme-mermaid",
+      {
+        redirects: [
+          {
+            to: "/articles/local-development-preview",
+            from: "/articles/local-development",
+          },
+        ],
+      },
+    ],
   ],
   presets: [
     [
