@@ -49,6 +49,12 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 
 ## Dynatrace
 
+To setup Dynatrace logging, you'll need to set the URL to your Dynatrace
+instance's
+[ingest API endpoint](https://www.dynatrace.com/support/help/dynatrace-api/environment-api/events-v2/post-event).
+
+You'll need to create an API Token with `events.ingest` scope.
+
 ```ts
 import {
   RuntimeExtensions,
