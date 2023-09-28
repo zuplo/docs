@@ -48,10 +48,9 @@ npm run dev
 6. The Zuplo CLI is running in `watch` mode. Any changes you make will be
    automatically compiled behind the scenes.
 7. While you can edit your routes.oas.json files by hand, we also have a Route
-   Designer that you can run. Just run `npx zup editor` to start the Route
-   Designer locally. You can open the Route Designer in your browser at
-   http://localhost:5500. If you are using VS Code, you can open it in the
-   Simple Browser to see it side-by-side.
+   Designer that is started when you run `npm run dev`. You can open the Route
+   Designer in your browser at http://localhost:9100. If you are using VS Code,
+   you can open it in the Simple Browser to see it side-by-side.
 8. Once you are done running your Zuplo Gateway locally, you can press `Ctrl+C`
    to stop the Zuplo CLI.
 
@@ -72,9 +71,9 @@ npm run dev
 4. Alternatively, you could also edit it manually so that it looks _like_ the
    following. You might have customized your package.json to add your own
    dependencies. You can keep your dependencies, but you should ensure that you
-   only have
-   `"zuplo": "latest"` as the zuplo dependency. Older versions of the auto-generated package.json used to add `@zuplo/core`, `@zuplo/runtime`, and `@zuplo/test`
-   as dependencies. You should remove those dependencies.
+   only have `"zuplo": "latest"` as the zuplo dependency. Older versions of the
+   auto-generated package.json used to add `@zuplo/core`, `@zuplo/runtime`, and
+   `@zuplo/test` as dependencies. You should remove those dependencies.
 
 ```json
 {
@@ -100,10 +99,9 @@ npm run dev
 8. The Zuplo CLI is running in `watch` mode. Any changes you make will be
    automatically compiled behind the scenes.
 9. While you can edit your routes.oas.json files by hand, we also have a Route
-   Designer that you can run. Just run `npx zup editor` to start the Route
-   Designer locally. You can open the Route Designer in your browser at
-   http://localhost:5500. If you are using VS Code, you can open it in the
-   Simple Browser to see it side-by-side.
+   Designer that is started when you run `npm run dev`. You can open the Route
+   Designer in your browser at http://localhost:9100. If you are using VS Code,
+   you can open it in the Simple Browser to see it side-by-side.
 10. Once you are done running your Zuplo Gateway locally, you can press `Ctrl+C`
     to stop the Zuplo CLI.
 
@@ -163,10 +161,11 @@ KEY1=VALUE1
 KEY2=VALUE2
 ```
 
-## Changing the port number
+## Changing the port number(s)
 
-By default the Zuplo CLI runs on port 9000. To change the port number, you can
-call `npx zup dev --port <port number>`.
+By default the Zuplo local server runs on port 9000 and route designer runs on
+port 9100. To change the port number, you can call
+`npx zup dev --port <port number> --editor-port <editor port number>`.
 
 ## Troubleshooting
 
