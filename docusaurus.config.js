@@ -23,8 +23,9 @@ const config = {
     "./src/plugins/fathom",
     "./src/plugins/koala",
     "./src/plugins/hubspot",
+    "@docusaurus/theme-mermaid",
     [
-      "@docusaurus/theme-mermaid",
+      "@docusaurus/plugin-client-redirects",
       {
         redirects: [
           {
