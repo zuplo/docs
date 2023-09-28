@@ -24,17 +24,6 @@ const config = {
     "./src/plugins/koala",
     "./src/plugins/hubspot",
     "@docusaurus/theme-mermaid",
-    [
-      "@docusaurus/plugin-client-redirects",
-      {
-        redirects: [
-          {
-            to: "/docs/articles/local-development",
-            from: "/docs/articles/local-development-preview",
-          },
-        ],
-      },
-    ],
   ],
   presets: [
     [
