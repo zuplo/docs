@@ -29,8 +29,8 @@ const config = {
       {
         redirects: [
           {
-            to: "docs/articles/local-development",
-            from: "docs/articles/local-development-preview",
+            to: "/docs/articles/local-development",
+            from: "/docs/articles/local-development-preview",
           },
         ],
       },
