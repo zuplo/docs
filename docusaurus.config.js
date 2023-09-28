@@ -20,10 +20,17 @@ const config = {
     mermaid: true,
   },
   plugins: [
-    "./src/plugins/fathom",
     "./src/plugins/koala",
     "./src/plugins/hubspot",
     "@docusaurus/theme-mermaid",
+    [
+      "posthog-docusaurus",
+      {
+        apiKey: "phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW",
+        appUrl: "https://app.posthog.com", // optional
+        enableInDevelopment: false, // optional
+      },
+    ],
   ],
   presets: [
     [
@@ -55,9 +62,6 @@ const config = {
           changefreq: "weekly",
           priority: 0.5,
           ignorePatterns: ["/docs/conferences/**"],
-        },
-        googleTagManager: {
-          containerId: "GTM-W4TRDM8",
         },
       }),
     ],
