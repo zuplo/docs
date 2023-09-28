@@ -6,21 +6,21 @@ For most users, the [Zuplo Portal](https://portal.zuplo.com/) will provide the
 best out-of-the-box experience with zero configuration.
 
 However, for advanced users, local development helps speed up your development
-time by allowing you to test your changes locally and to connect to services
-that are running locally (e.g., on localhost). Some setup is necessary for
-running the Zuplo Gateway locally (see below).
+time by allowing you to test your changes locally and connect to services
+running locally (e.g., on localhost). Some setup is necessary for running the
+Zuplo Gateway locally (see below).
 
 ## Getting Started
 
 :::tip
 
-Currently, local development only works on Linux, Mac OS X and Windows Subsystem
-for Linux (WSL). We do not support Windows at this time.
+Currently, local development only works on Linux, Mac OS X, and Windows
+Subsystem for Linux (WSL). We do not support Windows at this time.
 
 :::
 
-Local development is powered by the Zuplo CLI, `zup`, which is built using
-Node.js. It requires a minimum version of Node.js 18.0.0.
+Local development is powered by the Zuplo CLI, zup, built using Node.js. It
+requires a minimum version of Node.js 18.0.0.
 
 You can download Node.js from [nodejs.org](https://nodejs.org/en/download). If
 you need to switch between different versions of Node.js, you can use a version
@@ -28,9 +28,9 @@ manager such as [NVM](https://github.com/nvm-sh/nvm).
 
 ### Getting started with a new empty project
 
-1. Open up a terminal. If you are on Windows, ensure that you are using a
-   Windows Subsystem for Linux (WSL) terminal. You can find more information
-   about WSL [here](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
+1. Open up a terminal. If you are on Windows, ensure you use a Windows Subsystem
+   for Linux (WSL) terminal. You can find more information about WSL
+   [here](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 2. Run `npm create zuplo-api@latest`. Follow the prompts and provide a project
    name.
 3. Follow the instructions on the prompt
@@ -45,13 +45,13 @@ npm run dev
    editor. We recommend using [VS Code](https://code.visualstudio.com/).
 5. Visit `http://localhost:9000` in your browser. If you have a route configured
    for `/`, you should see the response from your Zuplo Gateway.
-6. The Zuplo CLI is running in `watch` mode. Any changes that you make will be
-   automatically compiled behind the scenes for you.
+6. The Zuplo CLI is running in `watch` mode. Any changes you make will be
+   automatically compiled behind the scenes.
 7. While you can edit your routes.oas.json files by hand, we also have a Route
    Designer that you can run. Just run `npx zup editor` to start the Route
    Designer locally. You can open the Route Designer in your browser at
    http://localhost:5500. If you are using VS Code, you can open it in the
-   Simple Browser so that you can see it side-by-side.
+   Simple Browser to see it side-by-side.
 8. Once you are done running your Zuplo Gateway locally, you can press `Ctrl+C`
    to stop the Zuplo CLI.
 
@@ -65,13 +65,13 @@ npm run dev
    project.
 2. Execute the following commands from the _root_ of your Zuplo Gateway. For
    instance, if your project is
-   `/Users/me/development/zuplo/samples-todo-list-open-api`, then the commands
-   need to be executed from that directory.
+   `/Users/me/development/zuplo/samples-todo-list-open-api`, the commands must
+   be executed from that directory.
 3. If you have an older project you might need to edit your package.json to
    update it. You could run `npx zup update` to update your project.
 4. Alternatively, you could also edit it manually so that it looks _like_ the
    following. You might have customized your package.json to add your own
-   dependencies. You can keep your dependencies but you should ensure that you
+   dependencies. You can keep your dependencies, but you should ensure that you
    only have
    `"zuplo": "latest" as the zuplo dependency. Older versions of the auto-generated package.json used to add `@zuplo/core`, `@zuplo/runtime`, and `@zuplo/test`
    as dependencies. You should remove those dependencies.
@@ -97,13 +97,13 @@ npm run dev
    script in the package.json shown above.
 7. Visit `http://localhost:9000` in your browser. If you have a route configured
    for `/`, you should see the response from your Zuplo Gateway.
-8. The Zuplo CLI is running in `watch` mode. Any changes that you make will be
-   automatically compiled behind the scenes for you.
+8. The Zuplo CLI is running in `watch` mode. Any changes you make will be
+   automatically compiled behind the scenes.
 9. While you can edit your routes.oas.json files by hand, we also have a Route
    Designer that you can run. Just run `npx zup editor` to start the Route
    Designer locally. You can open the Route Designer in your browser at
    http://localhost:5500. If you are using VS Code, you can open it in the
-   Simple Browser so that you can see it side-by-side.
+   Simple Browser to see it side-by-side.
 10. Once you are done running your Zuplo Gateway locally, you can press `Ctrl+C`
     to stop the Zuplo CLI.
 
@@ -140,8 +140,8 @@ You will be using the API keys from the working-copy of your project.
 2. Run `npx zup link` to bring in relevant information from your Zuplo account
    and project. If you have multiple accounts and/or projects, `npx zup link`
    will prompt you to select one.
-3. At this point, you will see a file called .env.zuplo that contains some
-   information about the bucket to use for your API Keys.
+3. At this point, you will see a file called .env.zuplo containing some
+   information about the bucket for you
 4. You can run `npm run dev` as normal.
 5. You only need to repeat the `npx zup login` and `npx zup link` if you are
    switching projects.
@@ -179,9 +179,8 @@ update, please run in your project directory.
    npm install zuplo@latest
 ```
 
-You need to include the `@latest` to ensure that you are getting the latest.
-Otherwise, you could end up with an older version that is cached locally on your
-machine.
+You must include the @latest to ensure you are getting the latest. Otherwise,
+you could have an older version cached locally on your machine.
 
 You can compare if you have the latest version by looking at the version number
 on [NPM](https://www.npmjs.com/package/zuplo?activeTab=versions)
