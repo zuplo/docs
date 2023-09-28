@@ -73,7 +73,7 @@ npm run dev
    following. You might have customized your package.json to add your own
    dependencies. You can keep your dependencies, but you should ensure that you
    only have
-   `"zuplo": "latest" as the zuplo dependency. Older versions of the auto-generated package.json used to add `@zuplo/core`, `@zuplo/runtime`, and `@zuplo/test`
+   `"zuplo": "latest"` as the zuplo dependency. Older versions of the auto-generated package.json used to add `@zuplo/core`, `@zuplo/runtime`, and `@zuplo/test`
    as dependencies. You should remove those dependencies.
 
 ```json
