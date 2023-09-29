@@ -40,7 +40,7 @@ Unfamiliar with Next JS? Try out the
 
 Once your repo and environment variables are setup, you should see the following
 
-[INSERT SCREENSHOT]
+![img](../../static/media/supabase-auth/initial-login.png)
 
 Once you are ready, deploy your project to production.
 
@@ -51,17 +51,14 @@ Navigate to Authentication > URL Configuration > Site URL and paste in the full
 URL (ex. https://nextjs-with-supabase-xi-seven.vercel.app) in the Site URL
 field.
 
-[INSERT SCREENSHOT]
+![img](../../static/media/supabase-auth/supabase-site-url.png)
 
 ## 3/ Configuring Your Developer Portal To Use Supabase Auth
 
 From the Files view on your Zuplo project, navigate to the `dev-portal.json`
-file under `Config`
-
-[INSERT SCREENSHOT]
-
-This is the configuration view for your Zuplo Developer Portal. Zuplo will
-automatically generate a developer portal from your OpenAPI spec.
+file under `Config`. This is the configuration view for your Zuplo Developer
+Portal. Zuplo will automatically generate a developer portal from your OpenAPI
+spec.
 
 Change the Provider from `Demo` to `External`. You will see two new fields
 appear: `Login URL` and `Logout URL`. These correspond to the `/login` and
@@ -70,17 +67,21 @@ endpoints (ex. `https://nextjs-with-supabase-xi-seven.vercel.app/login`). Your
 developer portal will navigate to these pages to create and end sessions. Your
 Authentication Settings should look like this once you are done:
 
+![img](../../static/media/supabase-auth/dev-portal.png)
+
+Or in the JSON file:
+
 ```json
 {
   "$schema": "https://cdn.zuplo.com/schemas/dev-portal.json",
   "enableAuthentication": true,
-  "generateExamples": true,
-  "pageTitle": "Foo",
+  "pageTitle": "Supabase Auth Test",
   "authentication": {
     "provider": "external",
     "loginUrl": "https://nextjs-with-supabase-xi-seven.vercel.app/login",
     "logoutUrl": "https://nextjs-with-supabase-xi-seven.vercel.app/auth/sign-out"
-  }
+  },
+  "generateExamples": true
 }
 ```
 
@@ -91,7 +92,7 @@ key is used to securely connect your Supabase Auth App with the Developer
 Portal. From the side nav, go to your Project Settings and then click on Zuplo
 API Keys. Copy your API key.
 
-[INSERT SCREENSHOT]
+![img](../../static/media/supabase-auth/copy-key.png)
 
 ## 5/ Connecting Your Supabase Auth App to the Dev Portal
 
@@ -149,7 +150,7 @@ Auth App codebase from earlier.
 5. Open your Sign Up route handler (`app/auth/sign-up`) and replace the
    `supabase.auth.signUp` call with the following
 
-   ```tsx
+   ```ts
    const sessionCreateUrl = requestUrl.searchParams.get("session-create-url");
    const redirectUrl = new URL(`${requestUrl.origin}/auth/callback`);
    if (sessionCreateUrl) {
@@ -171,7 +172,7 @@ Auth App codebase from earlier.
 6. Open your Callback route handler (`app/auth/callback`) and replace the code
    with the following
 
-   ```tsx
+   ```ts
    import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
    import { cookies } from "next/headers";
    import { NextResponse } from "next/server";
@@ -249,21 +250,23 @@ Auth App codebase from earlier.
    your `dev-portal.json`.
 8. Once deployed, navigate to your Dev Portal (you can find the link the header
    of the Developer Portal Settings) and click the “Sign In” button at the top
-   right (DOGFOOD ONLY: Make sure the dev portal cookie is set)
+   right
 
-   [INSERT IMAGE HERE]
+   ![img](../../static/media/supabase-auth/dev-portal-loaded.png)
 
 9. You should be redirected to your Supabase Auth App. Enter the email and
    password and click “Sign Up”.
 10. A email verification link will be sent to your email. Open the email and
     click the confirmation link
 
-    [INSERT IMAGE HERE]
+    ![img](../../static/media/supabase-auth/email.png)
 
 11. You will be redirected back to the Dev portal and be signed into your
     Supabase account!
 
 ### Sign in Support
+
+![img](../../static/media/supabase-auth/supabase-login.gif)
 
 Now that you have created your first user, follow the guide below to allow them
 to sign into your Supabase project via the Developer Portal
@@ -271,7 +274,7 @@ to sign into your Supabase project via the Developer Portal
 1. Navigate to the file for your Login page(`app/login/page.tsx`)
 2. Add a Sign In button after the password input field
 
-   ```
+   ```tsx
    <button className="bg-green-700 rounded px-4 py-2 text-white mb-2">
      Sign In
    </button>
@@ -297,7 +300,7 @@ to sign into your Supabase project via the Developer Portal
 4. Open your Sign In route handler (`app/auth/sign-in`) and replace the code
    with the following
 
-   ```tsx
+   ```ts
    import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
    import { cookies } from "next/headers";
    import { NextResponse } from "next/server";
@@ -389,7 +392,7 @@ how to sign them out.
 1. Navigate to your Sign Out route handler (`app/auth/sign-out`) and add the
    following function
 
-   ```
+   ```ts
    export async function GET(request: Request) {
      const requestUrl = new URL(request.url);
      // The Developer Portal will send a `redirect_uri` query parameter to this
@@ -409,18 +412,16 @@ how to sign them out.
 2. Deploy your code and navigate to your Dev Portal. Sign in if you aren’t
    already. Then click your user icon and “Logout”
 
-   [INSERT IMAGE HERE]
-
 3. You should now be signed out of your Supabase Account
 
 ### (Optional) Additional Auth Provider Support via Supabase
 
+![img](../../static/media/supabase-auth/supabase-github-login.gif)
+
 Supabase allows you to connect
 [many different Auth Providers](https://supabase.com/docs/guides/auth/social-login).
-Follow the steps below to enable your users to sign up via Github.
-**\*\***\*\***\*\***\*\***\*\***\*\***\*\***\*\*\*\***\*\***\*\***\*\***\*\***\*\***\*\***\*\***Note:
-You need to have completed the Sign Up Support section above
-first**\*\***\*\***\*\***\*\***\*\***\*\***\*\***\*\*\*\***\*\***\*\***\*\***\*\***\*\***\*\***\*\***
+Follow the steps below to enable your users to sign up via Github. **Note: You
+need to have completed the Sign Up Support section above first**
 
 1. Follow
    [this Supabase guide](https://supabase.com/docs/guides/auth/social-login/auth-github)
@@ -428,7 +429,7 @@ first**\*\***\*\***\*\***\*\***\*\***\*\***\*\***\*\*\*\***\*\***\*\***\*\***\*\
 2. Create a new file called `GithubLogin.tsx` in your `app/login` directory and
    paste in the following code
 
-   ```
+   ```ts
    "use client";
 
    import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -485,8 +486,6 @@ first**\*\***\*\***\*\***\*\***\*\***\*\***\*\***\*\*\*\***\*\***\*\***\*\***\*\
 
    You should now see a Github button on your login page
 
-   [INSERT IMAGE]
-
 4. Deploy your code and navigate to your Dev Portal. Then click the “Sign In”
    button
 5. You should be redirected to your Supabase Auth App. Click the “Github” button
@@ -502,7 +501,7 @@ some steps to try next:
 
 - Elevate your API and Developer Portal experience with a custom domain to match
   your Supabase Auth App.
-  [Get started with our Builder plan today!](https://zuplo.com/pricing)
+  [Get started with our Builder plan today](https://zuplo.com/pricing)!
 - Want to get more out of your Developer Portal? You can setup
-  [API Key Authentication](https://zuplo.com/docs/articles/step-2-add-api-key-auth)
-  to allow your new users to manage their keys in the Developer Portal directly!
+  [API Key Authentication](../articles/step-2-add-api-key-auth.md) to allow your
+  new users to manage their keys in the Developer Portal directly!
