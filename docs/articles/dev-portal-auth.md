@@ -9,7 +9,7 @@ want to change this to use your own identity provider. The developer portal
 supports authenticating with any standard-compliant OpenID Connect identity
 provider such as [Auth0](https://auth0.com), [Okta](https://okta.com),
 [AWS Cognito](https://aws.amazon.com/cognito/), etc. The developer portal also
-supports external auth sources like [Supabase](./supabase-auth.md).
+supports external auth sources like [Supabase](./dev-portal-supabase-auth.md).
 
 ## Auth0 Setup
 
@@ -96,5 +96,5 @@ Set the following settings:
 ## External Auth Setup
 
 You can setup non-OIDC auth sources to work with the developer portal. See our
-[Supabase Auth Guide](./supabase-auth.md) to learn how to configure an external
-auth provider.
+[Supabase Auth Guide](./dev-portal-supabase-auth.md) to learn how to configure
+an external auth provider.
