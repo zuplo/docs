@@ -751,6 +751,11 @@
       "source": "/docs/articles/api-key-leak-prevention{/}?",
       "destination": "/docs/articles/api-key-leak-detection",
       "permanent": true
+    },
+    {
+      "source": "/docs/articles/supabase-auth{/}?",
+      "destination": "/docs/articles/dev-portal-supabase-auth",
+      "permanent": true
     }
   ],
   "headers": [

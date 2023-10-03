@@ -119,7 +119,6 @@ const sidebars = {
         "articles/handling-form-data",
         "articles/testing-graphql",
         "articles/gke-with-upstream-auth-policy",
-        "articles/supabase-auth",
       ],
     },
     {
@@ -267,6 +266,7 @@ const sidebars = {
             "articles/dev-portal-setup",
             "articles/dev-portal-configuration",
             "articles/dev-portal-auth",
+            "articles/dev-portal-supabase-auth",
             "articles/dev-portal-theme",
             "articles/dev-portal-adding-pages",
             "articles/dev-portal-configuring-sidebar",
