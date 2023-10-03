@@ -1,4 +1,6 @@
-# Supabase Auth Setup
+---
+title: Supabase Auth
+---
 
 Do you want to share your API documentation and keys with your Supabase users?
 Look no further! You can easily connect your existing Supabase authentication
