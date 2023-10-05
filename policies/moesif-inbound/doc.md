@@ -20,3 +20,21 @@ setMoesifContext(context, {
   },
 });
 ```
+
+## Execute on every route
+
+If you want to execute this policy on every route, you can add a hook in your
+[runtime extensions](/docs/articles/runtime-extensions) file `zuplo.runtime.ts`:
+
+```ts
+import { RuntimeExtensions } from "@zuplo/runtime";
+
+export function runtimeInit(runtime: RuntimeExtensions) {
+  runtime.addRequestHook((request, context) => {
+    return context.invokeInboundPolicy("moesif-inbound", request);
+  });
+}
+```
+
+Note you can add a guard clause around the context.invokeInboundPolicy if you
+want to exclude a few routes.
