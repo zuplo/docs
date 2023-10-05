@@ -44,7 +44,7 @@
         {
           "_name": "basic",
           "module": "$import(@zuplo/runtime)",
-          "export": "AmberfloMeteringInboundPolicy",
+          "export": "MoesifInboundPolicy",
           "options": {
             "applicationId": "YOUR_MOESIF_APPLICATION_ID",
             "logRequestBody": true,
