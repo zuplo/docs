@@ -2,9 +2,9 @@
   "$schema": "https://json-schema.org/draft-07/schema",
   "$id": "http://zuplo.com/schemas/policies/open-id-jwt-auth-inbound.json",
   "type": "object",
-  "title": "Amberflo Metering / Billing",
+  "title": "Moesif Analytics & Billing",
   "isPreview": false,
-  "description": "Amberflo is a usage metering and billing service. This policy allows you to send metering calls for each API to their meter ingest endpoint.",
+  "description": "Moesif is an API analytics and billing service. This policy allows you to send metering calls for each API to their events batch endpoint.",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -13,7 +13,7 @@
       "required": ["export", "module", "options"],
       "properties": {
         "export": {
-          "const": "AmberfloMeteringInboundPolicy",
+          "const": "MoesifInboundPolicy",
           "description": "The name of the exported type"
         },
         "module": {
@@ -25,37 +25,17 @@
           "description": "The options for this policy. Many of them can be overridden at the code level in a request using the `AmberfloMeteringPolicy.setRequestProperties` method.",
           "required": ["apiKey"],
           "properties": {
-            "apiKey": {
+            "applicationId": {
               "type": "string",
-              "description": "The API key to use when sending metering calls to Amberflo"
+              "description": "Your Moesif application ID (required)"
             },
-            "meterApiName": {
-              "type": "string",
-              "description": "The name of the meter to use when sending metering calls to Amberflo (overridable in code)"
+            "logRequestBody": {
+              "type": "boolean",
+              "description": "Set to false to disable sending the request body to Moesif (optional)"
             },
-            "meterValue": {
-              "type": "number",
-              "description": "The value to use when sending metering calls to Amberflo (overridable in code)"
-            },
-            "customerIdPropertyPath": {
-              "type": "string",
-              "description": "The path to the property on `request.user`contains the customer ID. For example `.data.accountNumber` would read the `request.user.data.accountNumber` property."
-            },
-            "customerId": {
-              "type": "string",
-              "description": "The default customerId for all metering calls - overridable in code and by `customerIdPropertyPath`"
-            },
-            "dimensions": {
-              "type": "object",
-              "description": "A dictionary of dimensions to be sent to Amberflo (extensible in code)"
-            },
-            "statusCodes": {
-              "type": "string",
-              "description": "A list of successful status codes and ranges \"200-299, 304\" that should trigger a metering call to Amberflo - defaults to `result.ok` (200-299) if not set."
-            },
-            "url": {
-              "type": "string",
-              "description": "Optional, the URL to send metering events to (defaults to https://app.amberflo.io/ingest). This is useful for testing purposes."
+            "logResponseBody": {
+              "type": "boolean",
+              "description": "Set to false to disable sending the response body to Moesif (optional)"
             }
           }
         }
@@ -66,11 +46,9 @@
           "module": "$import(@zuplo/runtime)",
           "export": "AmberfloMeteringInboundPolicy",
           "options": {
-            "apiKey": "YOUR_API_KEY",
-            "customerIdPropertyPath": ".data.accountNumber",
-            "meterApiName": "api-calls",
-            "meterValue": 1,
-            "statusCodes": "200-299, 304"
+            "applicationId": "YOUR_MOESIF_APPLICATION_ID",
+            "logRequestBody": true,
+            "logResponseBody": true
           }
         }
       ]

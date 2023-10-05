@@ -1,45 +1,22 @@
-You can set the customerId globally (not recommended) by setting it at the policy level or use the `customerIdPropertyPath` to read the customerId from the user object on each request. For example, if you're using API Key auth or JWT auth and want to use the `sub` property as the customerId, you would set the value as follows
+By default, Zuplo will read the `request.user.sub` property and assign this as
+the moesif `user_id` attribute when sending to Moesif. However, this and the
+following attributes can be overriden in a
+[custom code policy](/policies/custom-code-inbound).
 
-`"customerIdPropertyPath" : ".sub"`
+- `api_version`
+- `company_id`
+- `session_token`
+- `user_id`
+- `metadata`
 
-You can also dive into the properties of the metadata. Imagine the `request.user` property is as follows (either based on contents of a JWT token or API Key metadata)
-
-```json
-{
-  "sub": "bobby-tables",
-  "data": {
-    "email": "bob@example.com",
-    "name": "Bobby Tables",
-    "accountNumber": 1233423,
-    "roles": ["admin"]
-  }
-}
-```
-
-You could access the `accountNumber` property as follows. Note the required preceding `'.'`.
-
-`"customerIdPropertyPath" : ".data.accountNumber"`
-
-You can also set many of the properties of the meter payload programmatically, either in a custom policy or handler. Here is some example code in a custom inbound policy:
+Here is some example code that shows how to override two of these attributes
 
 ```ts
-import {
-  AmberfloMeteringPolicy,
-  ZuploContext,
-  ZuploRequest,
-} from "@zuplo/runtime";
-
-export default async function (
-  request: ZuploRequest,
-  context: ZuploContext,
-  options: MyPolicyOptionsType,
-  policyName: string
-) {
-  AmberfloMeteringPolicy.setRequestProperties(context, {
-    customerId: request.user.sub,
-    meterApiName: request.params.color,
-  });
-
-  return request;
-}
+setMoesifContext(context, {
+  userId: "user-1234",
+  metadata: {
+    some: "arbitrary",
+    meta: "data",
+  },
+});
 ```

@@ -1,3 +1,6 @@
-Amberflo ([amberflo.io](https://www.amberflo.io/)) is a usage metering and billing service. This policy allows you to meter API calls going through Zuplo and send them to your Amberflo account using your Amberflo API key.
+Moesif [moesif.com](https://moesif.com) is an API analytics and monetization
+platform. This policy allows you to measure (and meter) API calls flowing
+through your Zuplo gateway.
 
-Add the policy to each route you want to meter. Note you can specify the Meter API Name and Meter Value (meter increment) at the policy level.
+Add the policy to each route you want to meter. Note you can specify the Meter
+API Name and Meter Value (meter increment) at the policy level.
