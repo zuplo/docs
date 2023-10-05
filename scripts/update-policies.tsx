@@ -1,5 +1,4 @@
 import { dereference } from "@apidevtools/json-schema-ref-parser";
-import { JSONSchema } from "@apidevtools/json-schema-ref-parser/dist/lib/types";
 import { render } from "@zuplo/md-tools";
 import arg from "arg";
 import chalk from "chalk";
@@ -7,12 +6,13 @@ import chokidar from "chokidar";
 import { existsSync } from "fs";
 import { copyFile, mkdir, readdir, readFile, rm, writeFile } from "fs/promises";
 import glob from "glob";
+import { JSONSchema7 } from "json-schema";
 import path from "path";
 import prettier from "prettier";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
-type PolicySchema = JSONSchema & {
+type PolicySchema = JSONSchema7 & {
   isPreview?: boolean;
   isDeprecated?: boolean;
   isPaidAddOn?: boolean;
@@ -21,7 +21,11 @@ type PolicySchema = JSONSchema & {
 
 type PolicyProperties = Record<
   string,
-  { description: string; properties?: PolicyProperties }
+  {
+    default?: boolean | string | number;
+    description: string;
+    properties?: PolicyProperties;
+  }
 >;
 
 // NOTE: This component is used to generate policy HTML in the policy script
@@ -98,7 +102,7 @@ function stringify(obj: any) {
 async function processProperties(properties) {
   const tasks = Object.keys(properties).map(async (key) => {
     if (properties[key].description) {
-      const html = await render(properties[key].description);
+      const { html } = await render(properties[key].description);
       properties[key].description = html;
     }
     if (properties[key].properties) {
@@ -252,10 +256,10 @@ async function run() {
           schemaJson
         )
       );
-      const handler = schema.properties.handler as any;
+      const handler = schema.properties.handler as JSONSchema7;
       meta.defaultHandler = {
-        export: handler.properties.export.const,
-        module: handler.properties.module.const,
+        export: (handler.properties.export as JSONSchema7).const,
+        module: (handler.properties.module as JSONSchema7).const,
         options: {},
       };
     }
@@ -377,10 +381,10 @@ async function getExampleHtml(
     throw new Error("Invalid schema");
   }
 
-  const description = await render(schema.description);
+  const { html: description } = await render(schema.description);
+
   const properties = (schema.properties.handler as any).properties.options
     ?.properties;
-
   if (properties && Object.keys(properties).length === 0) {
     console.warn(
       chalk.yellow(
