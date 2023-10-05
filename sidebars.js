@@ -167,6 +167,7 @@ const sidebars = {
               label: "Metrics, Billing & Quotas",
               items: [
                 "policies/quota-inbound",
+                "policies/moesif-inbound",
                 "policies/amberflo-metering-inbound",
                 "policies/readme-metrics-inbound",
               ],
