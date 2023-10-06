@@ -24,7 +24,9 @@ export function runtimeInit(runtime: RuntimeExtensions) {
   runtime.addPlugin(
     new VMWareLogInsightLoggingPlugin({
       url: "https://loginsight.example.com",
-      fields: [{ name: "appname", content: "zuplo" }],
+      fields: {
+        appname: "zuplo",
+      },
     })
   );
 }
