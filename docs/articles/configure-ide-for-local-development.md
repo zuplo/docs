@@ -39,7 +39,6 @@ Zuplo publishes the following JSON Schemas:
 - [Custom OpenAPI 3.0 - config/\*.oas.json](https://cdn.zuplo.com/schemas/openapi-v3.0-zuplo.json)
 - [Dev Portal Config - config/dev-portal.json](https://cdn.zuplo.com/schemas/dev-portal.json)
 - [Dev Portal Sidebar Config - docs/sidebar.json](https://cdn.zuplo.com/schemas/sidebar.json)
-- [Legacy Routes Config - config/routes.json](https://cdn.zuplo.com/schemas/routes.json)
 
 To configure these files for validation and code completion in VS Code you can
 set the following in your `.vscode/settings.json` file.
@@ -55,10 +54,6 @@ set the following in your `.vscode/settings.json` file.
     {
       "fileMatch": ["config/policies.json"],
       "url": "https://cdn.zuplo.com/schemas/policies.json"
-    },
-    {
-      "fileMatch": ["config/routes.json"],
-      "url": "https://cdn.zuplo.com/schemas/routes.json"
     },
     {
       "fileMatch": ["config/dev-portal.json"],
