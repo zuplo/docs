@@ -12,6 +12,7 @@ Currently, Zuplo supports logging to the following sources:
 - Google Cloud Logging
 - Loki
 - Sumo Logic
+- VMWare Log Insight
 
 If you would like to log to a different source, reach out to support@zuplo.com
 and we'd be happy to work with you to add a new logging plugin.
@@ -136,3 +137,9 @@ export function runtimeInit(runtime: RuntimeExtensions) {
   );
 }
 ```
+
+## VMWare Log Insight
+
+The VMWare Log Insight plugin enables pushing logs to your VMWare Log Insights
+via the REST API. See [the document](./log-plugin-vmware-log-insight.md) on this
+plugin for more information.
