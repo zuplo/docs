@@ -13,7 +13,7 @@ logs, for example if you want to include an `appname` field that indicates the
 name of your Zuplo API, you can do so as shown below. Theses fields will be
 included on every log entry.
 
-```ts
+```ts title="modules/zuplo.runtime.ts"
 import {
   RuntimeExtensions,
   VMWareLogInsightLoggingPlugin,
