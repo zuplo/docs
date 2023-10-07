@@ -1,19 +1,19 @@
-import clsx from 'clsx'
+import clsx from "classnames"
 
 import { Icon } from '@/components/Icon'
 
 const styles = {
   note: {
     container:
-      'bg-sky-50 dark:bg-slate-800/60 dark:ring-1 dark:ring-slate-300/10',
-    title: 'text-sky-900 dark:text-sky-400',
-    body: 'text-sky-800 [--tw-prose-background:theme(colors.sky.50)] prose-a:text-sky-900 prose-code:text-sky-900 dark:text-slate-300 dark:prose-code:text-slate-300',
+      'bg-pink-50 dark:bg-slate-800/60 dark:ring-1 dark:ring-slate-300/10',
+    title: 'text-pink-900 dark:text-pink-400',
+    body: 'text-pink-800 [--tw-prose-background:theme(colors.pink.50)] prose-a:text-pink-900 prose-code:text-pink-900 dark:text-slate-300 dark:prose-code:text-slate-300',
   },
   warning: {
     container:
       'bg-amber-50 dark:bg-slate-800/60 dark:ring-1 dark:ring-slate-300/10',
     title: 'text-amber-900 dark:text-amber-500',
-    body: 'text-amber-800 [--tw-prose-underline:theme(colors.amber.400)] [--tw-prose-background:theme(colors.amber.50)] prose-a:text-amber-900 prose-code:text-amber-900 dark:text-slate-300 dark:[--tw-prose-underline:theme(colors.sky.700)] dark:prose-code:text-slate-300',
+    body: 'text-amber-800 [--tw-prose-underline:theme(colors.amber.400)] [--tw-prose-background:theme(colors.amber.50)] prose-a:text-amber-900 prose-code:text-amber-900 dark:text-slate-300 dark:[--tw-prose-underline:theme(colors.pink.700)] dark:prose-code:text-slate-300',
   },
 }
 

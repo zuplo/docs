@@ -1,8 +1,8 @@
 'use client'
 
+import clsx from "classnames"
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import clsx from 'clsx'
 
 import { navigation } from '@/lib/navigation'
 

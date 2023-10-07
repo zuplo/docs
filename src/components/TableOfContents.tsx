@@ -1,8 +1,8 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import clsx from "classnames"
 import Link from 'next/link'
-import clsx from 'clsx'
+import { useCallback, useEffect, useState } from 'react'
 
 import { type Section, type Subsection } from '@/lib/sections'
 
@@ -80,7 +80,7 @@ export function TableOfContents({
                       href={`#${section.id}`}
                       className={clsx(
                         isActive(section)
-                          ? 'text-sky-500'
+                          ? 'text-pink-500'
                           : 'font-normal text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300',
                       )}
                     >
@@ -98,7 +98,7 @@ export function TableOfContents({
                             href={`#${subSection.id}`}
                             className={
                               isActive(subSection)
-                                ? 'text-sky-500'
+                                ? 'text-pink-500'
                                 : 'hover:text-slate-600 dark:hover:text-slate-300'
                             }
                           >

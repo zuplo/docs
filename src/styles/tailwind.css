@@ -1,10 +1,73 @@
-@import 'tailwindcss/base';
-@import './prism.css';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "./prism.css";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@font-face {
+  font-family: "ES Build";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.zuplo.com/static/fonts/esbuild/woff2/ES-Build-Regular.woff2")
+    format("woff2");
+}
+
+@font-face {
+  font-family: "ES Build";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.zuplo.com/static/fonts/esbuild/woff2/ES-Build-Medium.woff2")
+    format("woff2");
+}
+
+@font-face {
+  font-family: "ES Build";
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.zuplo.com/static/fonts/esbuild/woff2/ES-Build-SemiBold.woff2")
+    format("woff2");
+}
+
+@font-face {
+  font-family: "ES Build";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.zuplo.com/static/fonts/esbuild/woff2/ES-Build-Bold.woff2")
+    format("woff2");
+}
 
 @layer base {
   [inert] ::-webkit-scrollbar {
     display: none;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply block whitespace-nowrap rounded-lg px-5 py-3 text-center text-sm font-semibold no-underline transition-colors;
+  }
+  .btn.btn-primary-light {
+    @apply bg-pink text-white hover:bg-black;
+  }
+  .btn.btn-primary-dark {
+    @apply bg-pink text-white hover:bg-white hover:text-black;
+  }
+  .btn.btn-large {
+    @apply rounded-xl px-12 py-5 text-base;
+  }
+  .btn.btn-secondary-light {
+    @apply border border-gray-500 bg-transparent text-black hover:bg-[#d9d9d9];
+  }
+  .btn.btn-secondary-dark {
+    @apply border border-gray-600 bg-transparent text-white hover:bg-[#ffffff59];
+  }
+  .input {
+    @apply w-full rounded-2xl border border-gray-500 text-lg transition-all placeholder:font-light placeholder:text-gray-600 hover:border-2 hover:border-pink focus:outline-0;
+  }
+  .label {
+    @apply font-fancy text-sm font-semibold uppercase tracking-[3px] text-zinc-400;
   }
 }
