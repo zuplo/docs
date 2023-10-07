@@ -12,6 +12,7 @@
   "dependencies": {
     "@algolia/autocomplete-core": "^1.9.2",
     "@headlessui/react": "^1.7.13",
+    "@heroicons/react": "^2.0.18",
     "@markdoc/markdoc": "0.3.0",
     "@markdoc/next.js": "0.3.1",
     "@sindresorhus/slugify": "^2.1.0",
@@ -39,6 +40,7 @@
   "devDependencies": {
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.16",
+    "gray-matter": "^4.0.3",
     "prettier": "^3.0.1",
     "prettier-plugin-tailwindcss": "^0.5.2",
     "sharp": "^0.32.0"

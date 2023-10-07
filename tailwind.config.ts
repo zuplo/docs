@@ -1,5 +1,12 @@
 import typographyPlugin from "@tailwindcss/typography";
-import { type Config } from "tailwindcss";
+
+const typographyHeading = (overrides: any) => ({
+  fontFamily: "ES Build",
+  fontStyle: "normal",
+  fontWeight: "bold",
+  lineHeight: "120%",
+  ...overrides,
+});
 
 export default {
   content: ["./src/**/*.{js,jsx,ts,tsx,md}"],
@@ -80,6 +87,38 @@ export default {
       maxWidth: {
         "8xl": "88rem",
       },
+      typography: ({ theme }: { theme: any }) => ({
+        DEFAULT: {
+          css: {
+            a: {
+              color: theme("colors.pink.DEFAULT"),
+              "&:hover": {
+                color: theme("colors.pink.hover"),
+                fontWeight: "inherit",
+              },
+              fontWeight: "inherit",
+            },
+            h1: typographyHeading({ fontSize: "30px" }),
+            h2: typographyHeading({ fontSize: "26px" }),
+            h3: typographyHeading({ fontSize: "20px" }),
+            h4: typographyHeading({ fontSize: "18px" }),
+            h5: typographyHeading({ fontSize: "16px" }),
+            li: {
+              "&::marker": {
+                color: "black",
+              },
+            },
+            "code::before": {
+              content: null,
+            },
+            "code::after": {
+              content: null,
+            },
+            "blockquote p:first-of-type::before": { content: "none" },
+            "blockquote p:first-of-type::after": { content: "none" },
+          },
+        },
+      }),
     },
     fontFamily: {
       sans: ["var(--font-be-vietnam-pro)", "sans-serif"],

@@ -1,5 +1,6 @@
-
-
+import { readFileSync } from "fs";
+import matter from "gray-matter";
+import path from "path";
 
 const sidebar = [
   {
@@ -110,123 +111,123 @@ const sidebar = [
     type: "category",
     label: "Reference",
     items: [
-      {
-        type: "category",
-        label: "Policies",
-        link: {
-          type: "doc",
-          id: "policies/index",
-        },
-        items: [
-          {
-            type: "category",
-            label: "Authentication",
-            items: [
-              "policies/api-key-inbound",
-              "policies/auth0-jwt-auth-inbound",
-              "policies/okta-jwt-auth-inbound",
-              "policies/cognito-jwt-auth-inbound",
-              "policies/propel-auth-jwt-inbound",
-              "policies/open-id-jwt-auth-inbound",
-              "policies/firebase-jwt-inbound",
-              "policies/supabase-jwt-auth-inbound",
-              "policies/basic-auth-inbound",
-              "policies/mtls-auth-inbound",
-              "policies/ldap-auth-inbound",
-              "policies/hmac-auth-inbound",
-            ],
-          },
-          {
-            type: "category",
-            label: "Security & Validation",
-            items: [
-              "policies/rate-limit-inbound",
-              "policies/audit-log-inbound",
-              "policies/request-validation-inbound",
-              "policies/bot-detection-inbound",
-              "policies/require-origin-inbound",
-            ],
-          },
-          {
-            type: "category",
-            label: "Metrics, Billing & Quotas",
-            items: [
-              "policies/quota-inbound",
-              "policies/moesif-inbound",
-              "policies/amberflo-metering-inbound",
-              "policies/readme-metrics-inbound",
-            ],
-          },
-          {
-            type: "category",
-            label: "Testing",
-            items: [
-              "policies/ab-test-inbound",
-              "policies/mock-api-inbound",
-              "policies/sleep-inbound",
-            ],
-          },
-          {
-            type: "category",
-            label: "Request Filtering",
-            items: [
-              "policies/acl-policy-inbound",
-              "policies/geo-filter-inbound",
-              "policies/ip-restriction-inbound",
-              "policies/request-size-limit-inbound",
-            ],
-          },
-          {
-            type: "category",
-            label: "Request Modification",
-            items: [
-              "policies/transform-body-inbound",
-              "policies/remove-headers-inbound",
-              "policies/clear-headers-inbound",
-              "policies/change-method-inbound",
-              "policies/formdata-to-json-inbound",
-              "policies/remove-query-params-inbound",
-              "policies/set-headers-inbound",
-              "policies/set-body-inbound",
-              "policies/set-query-params-inbound",
-            ],
-          },
-          {
-            type: "category",
-            label: "Response Modification",
-            items: [
-              "policies/transform-body-outbound",
-              "policies/remove-headers-outbound",
-              "policies/clear-headers-outbound",
-              "policies/set-headers-outbound",
-              "policies/set-status-outbound",
-            ],
-          },
-          {
-            type: "category",
-            label: "Upstream Authentication",
-            items: [
-              "policies/upstream-azure-ad-service-auth-inbound",
-              "policies/upstream-gcp-service-auth-inbound",
-              "policies/upstream-gcp-jwt-inbound",
-              "policies/upstream-firebase-admin-auth-inbound",
-              "policies/upstream-firebase-user-auth-inbound",
-            ],
-          },
-          {
-            type: "category",
-            label: "Other",
-            items: [
-              "policies/composite-inbound",
-              "policies/caching-inbound",
-              "policies/archive-request-inbound",
-              "policies/archive-response-outbound",
-              "policies/custom-code-inbound",
-              "policies/custom-code-outbound",
-            ],
-          },
-        ],
-      },
+      // {
+      //   type: "category",
+      //   label: "Policies",
+      //   link: {
+      //     type: "doc",
+      //     id: "policies/index",
+      //   },
+      //   items: [
+      //     {
+      //       type: "category",
+      //       label: "Authentication",
+      //       items: [
+      //         "policies/api-key-inbound",
+      //         "policies/auth0-jwt-auth-inbound",
+      //         "policies/okta-jwt-auth-inbound",
+      //         "policies/cognito-jwt-auth-inbound",
+      //         "policies/propel-auth-jwt-inbound",
+      //         "policies/open-id-jwt-auth-inbound",
+      //         "policies/firebase-jwt-inbound",
+      //         "policies/supabase-jwt-auth-inbound",
+      //         "policies/basic-auth-inbound",
+      //         "policies/mtls-auth-inbound",
+      //         "policies/ldap-auth-inbound",
+      //         "policies/hmac-auth-inbound",
+      //       ],
+      //     },
+      //     {
+      //       type: "category",
+      //       label: "Security & Validation",
+      //       items: [
+      //         "policies/rate-limit-inbound",
+      //         "policies/audit-log-inbound",
+      //         "policies/request-validation-inbound",
+      //         "policies/bot-detection-inbound",
+      //         "policies/require-origin-inbound",
+      //       ],
+      //     },
+      //     {
+      //       type: "category",
+      //       label: "Metrics, Billing & Quotas",
+      //       items: [
+      //         "policies/quota-inbound",
+      //         "policies/moesif-inbound",
+      //         "policies/amberflo-metering-inbound",
+      //         "policies/readme-metrics-inbound",
+      //       ],
+      //     },
+      //     {
+      //       type: "category",
+      //       label: "Testing",
+      //       items: [
+      //         "policies/ab-test-inbound",
+      //         "policies/mock-api-inbound",
+      //         "policies/sleep-inbound",
+      //       ],
+      //     },
+      //     {
+      //       type: "category",
+      //       label: "Request Filtering",
+      //       items: [
+      //         "policies/acl-policy-inbound",
+      //         "policies/geo-filter-inbound",
+      //         "policies/ip-restriction-inbound",
+      //         "policies/request-size-limit-inbound",
+      //       ],
+      //     },
+      //     {
+      //       type: "category",
+      //       label: "Request Modification",
+      //       items: [
+      //         "policies/transform-body-inbound",
+      //         "policies/remove-headers-inbound",
+      //         "policies/clear-headers-inbound",
+      //         "policies/change-method-inbound",
+      //         "policies/formdata-to-json-inbound",
+      //         "policies/remove-query-params-inbound",
+      //         "policies/set-headers-inbound",
+      //         "policies/set-body-inbound",
+      //         "policies/set-query-params-inbound",
+      //       ],
+      //     },
+      //     {
+      //       type: "category",
+      //       label: "Response Modification",
+      //       items: [
+      //         "policies/transform-body-outbound",
+      //         "policies/remove-headers-outbound",
+      //         "policies/clear-headers-outbound",
+      //         "policies/set-headers-outbound",
+      //         "policies/set-status-outbound",
+      //       ],
+      //     },
+      //     {
+      //       type: "category",
+      //       label: "Upstream Authentication",
+      //       items: [
+      //         "policies/upstream-azure-ad-service-auth-inbound",
+      //         "policies/upstream-gcp-service-auth-inbound",
+      //         "policies/upstream-gcp-jwt-inbound",
+      //         "policies/upstream-firebase-admin-auth-inbound",
+      //         "policies/upstream-firebase-user-auth-inbound",
+      //       ],
+      //     },
+      //     {
+      //       type: "category",
+      //       label: "Other",
+      //       items: [
+      //         "policies/composite-inbound",
+      //         "policies/caching-inbound",
+      //         "policies/archive-request-inbound",
+      //         "policies/archive-response-outbound",
+      //         "policies/custom-code-inbound",
+      //         "policies/custom-code-outbound",
+      //       ],
+      //     },
+      //   ],
+      // },
       {
         type: "category",
         label: "Handlers",
@@ -326,4 +327,38 @@ const sidebar = [
     label: "Trust & Compliance",
     href: "https://trust.zuplo.com",
   },
-]
+];
+
+function migrateItem(item) {
+  if (typeof item === "string") {
+    const title = getTitle(item);
+    return { title, href: `/docs/${item}` };
+  } else if (item.type === "doc") {
+    const title = getTitle(item.id);
+    return {
+      title,
+      href: `/docs/${item.id}`,
+    };
+  } else if (item.type === "link") {
+    return {
+      title: item.label,
+      href: item.href,
+    };
+  } else if (item.type === "category") {
+    return {
+      title: item.label,
+      links: item.items.map(migrateItem),
+    };
+  }
+}
+
+function getTitle(id) {
+  const docPath = path.join(process.cwd(), "/src/app/docs", id, "page.md");
+  const docContent = readFileSync(docPath, "utf-8");
+  const { data } = matter(docContent);
+
+  return data.sidebar_label ?? data.title;
+}
+
+const nav = sidebar.map(migrateItem).filter((i) => typeof i !== "undefined");
+console.dir(nav, { depth: 100 });
