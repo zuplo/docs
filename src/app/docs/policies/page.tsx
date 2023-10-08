@@ -35,11 +35,13 @@ export default async function Page() {
             >
               <a key={item.meta.id} href={item.meta.href}>
                 <div className="flex flex-col">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item.meta.icon}
                     width={48}
                     height={48}
                     className="mx-auto my-3"
+                    alt={item.meta.name}
                   />
 
                   <div className="mx-auto mb-3 text-center">

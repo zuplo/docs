@@ -98,7 +98,7 @@ function stringify(obj: any) {
   });
 }
 
-async function processProperties(properties) {
+async function processProperties(properties: any) {
   const tasks = Object.keys(properties).map(async (key) => {
     if (properties[key].description) {
       const { html } = await render(properties[key].description);
@@ -198,7 +198,7 @@ async function run() {
     cwd: policiesDir,
   });
 
-  const policies = [];
+  const policies: any = [];
   const tasks = matches.map(async (match) => {
     const policyId = match.replace("/schema.json", "");
     const schemaPath = path.join(policiesDir, match);
@@ -243,10 +243,10 @@ async function run() {
           schemaJson,
         ),
       );
-      const handler = schema.properties.handler as JSONSchema7;
+      const handler = schema.properties!.handler as JSONSchema7;
       meta.defaultHandler = {
-        export: (handler.properties.export as JSONSchema7).const,
-        module: (handler.properties.module as JSONSchema7).const,
+        export: (handler.properties!.export as JSONSchema7).const,
+        module: (handler.properties!.module as JSONSchema7).const,
         options: {},
       };
     }
@@ -323,7 +323,7 @@ async function watch() {
     ignoreInitial: true,
   });
 
-  function changed(path) {
+  function changed(path: string) {
     run().catch(console.error);
   }
 
@@ -370,7 +370,7 @@ async function getExampleHtml(
 
   const { html: description } = await render(schema.description);
 
-  const properties = (schema.properties.handler as any).properties.options
+  const properties = (schema.properties!.handler as any).properties.options
     ?.properties;
   if (properties && Object.keys(properties).length === 0) {
     console.warn(

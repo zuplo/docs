@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postinstall": "node ./scripts/update-bundles.mjs",
     "start": "next start",
     "lint": "next lint"
   },
