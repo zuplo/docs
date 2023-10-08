@@ -31,7 +31,7 @@ function SubNavSection({
   return (
     <li className={`relative`}>
       <a
-        className="flex  w-full pl-1 text-slate-500 cursor-pointer"
+        className="flex  w-full cursor-pointer pl-1 text-slate-500"
         onClick={onClick}
       >
         <span className="flex-grow">{link.title}</span>
@@ -45,7 +45,7 @@ function SubNavSection({
         role="list"
         className={`${
           hidden ? "hidden" : ""
-        } mt-2 space-y-2 border-l border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-200 ml-2`}
+        } ml-2 mt-2 space-y-2 border-l border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-200`}
       >
         {link.links.map((link, i) => (
           <NavSection
@@ -96,7 +96,7 @@ function NavSection({
           className={clsx(
             "block w-full pl-3.5 ",
             link.href === pathname
-              ? "font-medium  border-l border-pink"
+              ? "border-l  border-pink font-medium"
               : "text-slate-500 hover:text-slate-600  dark:text-slate-400  dark:hover:text-slate-300",
           )}
         >

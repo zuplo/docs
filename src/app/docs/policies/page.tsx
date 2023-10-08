@@ -11,7 +11,7 @@ export default async function Page() {
   const policies = await getAllPolicies();
 
   return (
-    <div className="min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-none lg:pl-8 lg:pr-0 xl:px-4 prose">
+    <div className="prose min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-none lg:pl-8 lg:pr-0 xl:px-4">
       <DocsHeader title="Policies" />
       <p>
         Zuplo includes policies for any solution you need for securing and
@@ -29,14 +29,14 @@ export default async function Page() {
 
       <ul
         role="list"
-        className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-8 not-prose pl-0 list-none"
+        className="not-prose mt-8 grid list-none grid-cols-1 gap-6 pl-0 sm:grid-cols-2 lg:grid-cols-3"
       >
         {policies
           .sort((a, b) => a.meta.name.localeCompare(b.meta.name))
           .map((item, index) => (
             <li
               key={item.meta.id}
-              className="col-span-1 divide-y divide-gray-200 rounded-lg bg-white border hover:bg-gray-100 border-gray-500 pl-0"
+              className="col-span-1 divide-y divide-gray-200 rounded-lg border border-gray-500 bg-white pl-0 hover:bg-gray-100"
             >
               <a key={item.meta.id} href={item.meta.href}>
                 <div className="flex flex-col">

@@ -2,6 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
+  "framework": "nextjs",
   "redirects": [
     {
       "source": "/docs/articles/local-development-preview",

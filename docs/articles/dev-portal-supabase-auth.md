@@ -140,11 +140,11 @@ Auth App codebase from earlier.
      formAction={`/auth/sign-up${
        typeof searchParams?.["session-create-url"] === "string"
          ? `?session-create-url=${encodeURIComponent(
-             searchParams["session-create-url"]
+             searchParams["session-create-url"],
            )}`
          : ""
      }`}
-     className="border border-gray-700 rounded px-4 py-2 text-black dark:text-white mb-2"
+     className="mb-2 rounded border border-gray-700 px-4 py-2 text-black dark:text-white"
    >
      Sign Up
    </button>
@@ -200,7 +200,7 @@ Auth App codebase from earlier.
            `${requestUrl.origin}/login?error=Could not authenticate user`,
            {
              status: 301,
-           }
+           },
          );
        }
 
@@ -229,7 +229,7 @@ Auth App codebase from earlier.
              `${requestUrl.origin}/login?error=Could not authenticate user`,
              {
                status: 301,
-             }
+             },
            );
          }
 
@@ -278,7 +278,7 @@ to sign into your Supabase project via the Developer Portal
 2. Add a Sign In button after the password input field
 
    ```tsx
-   <button className="bg-green-700 rounded px-4 py-2 text-white mb-2">
+   <button className="mb-2 rounded bg-green-700 px-4 py-2 text-white">
      Sign In
    </button>
    ```
@@ -328,7 +328,7 @@ to sign into your Supabase project via the Developer Portal
          {
            // a 301 status is required to redirect from a POST to a GET route
            status: 301,
-         }
+         },
        );
      }
 
@@ -359,7 +359,7 @@ to sign into your Supabase project via the Developer Portal
            `${requestUrl.origin}/login?error=Could not authenticate user`,
            {
              status: 301,
-           }
+           },
          );
        }
 

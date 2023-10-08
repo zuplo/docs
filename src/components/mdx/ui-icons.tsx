@@ -11,7 +11,7 @@ import { FileText, List } from "react-feather";
 
 function SvgWrapper({ children }: PropsWithChildren) {
   return (
-    <span className="inline-flex align-text-top h-[19px] w-[19px]">
+    <span className="inline-flex h-[19px] w-[19px] align-text-top">
       {children}
     </span>
   );

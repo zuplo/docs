@@ -270,7 +270,7 @@ const SearchInput = forwardRef<
       <input
         ref={inputRef}
         className={clsx(
-          "flex-auto appearance-none bg-transparent pl-12 text-slate-900 dark:text-white outline-none placeholder:text-slate-400 focus:outline-none focus:w-full focus:flex-none sm:text-sm [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden",
+          "flex-auto appearance-none bg-transparent pl-12 text-slate-900 outline-none placeholder:text-slate-400 focus:w-full focus:flex-none focus:outline-none dark:text-white sm:text-sm [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden",
           autocompleteState.status === "stalled" ? "pr-11" : "pr-4",
         )}
         {...inputProps}
@@ -451,7 +451,7 @@ export function Search() {
     <>
       <button
         type="button"
-        className="group flex h-6 w-6 items-center justify-center sm:justify-start md:h-auto md:w-80 md:flex-none md:rounded-lg md:py-2.5 md:pl-4 md:pr-3.5 md:text-sm md:ring-1 md:ring-slate-200  md:bg-slate-800/75 md:ring-inset md:ring-white/5 md:hover:bg-slate-700/40 md:hover:ring-slate-500 lg:w-96"
+        className="group flex h-6 w-6 items-center justify-center sm:justify-start md:h-auto md:w-80 md:flex-none md:rounded-lg md:bg-slate-800/75 md:py-2.5 md:pl-4 md:pr-3.5 md:text-sm md:ring-1  md:ring-inset md:ring-slate-200 md:ring-white/5 md:hover:bg-slate-700/40 md:hover:ring-slate-500 lg:w-96"
         {...buttonProps}
       >
         <SearchIcon className="h-5 w-5 flex-none fill-slate-500 group-hover:fill-slate-500  md:group-hover:fill-slate-400" />

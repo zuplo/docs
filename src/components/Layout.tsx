@@ -32,19 +32,19 @@ function Header() {
         "!dark:bg-black": scrollY > 10,
       })}
     >
-      <div className="mx-auto flex w-full max-w-[1212px] items-center justify-between py-2 lg:pr-5 lg:py-6">
+      <div className="mx-auto flex w-full max-w-[1212px] items-center justify-between py-2 lg:py-6 lg:pr-5">
         <div className="mr-6 flex lg:hidden">
           <MobileNavigation />
         </div>
         <div className="relative flex basis-0 items-center">
           <Logo className="ml-4 block w-28 lg:ml-0 lg:w-36" />
         </div>
-        <div className="flex justify-center flex-grow">
+        <div className="flex flex-grow justify-center">
           <div className="-my-5 mr-6 sm:mr-8 md:mr-0">
             <Search />
           </div>
         </div>
-        <div className="hidden lg:flex justify-end">
+        <div className="hidden justify-end lg:flex">
           <ThemeSelector className="relative z-10 my-auto mr-8" />
           <StartFreeCTAButton />
         </div>

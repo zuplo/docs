@@ -34,7 +34,7 @@ const myDigest = await crypto.subtle.digest(
   {
     name: "SHA-256",
   },
-  myText // The data you want to hash as an ArrayBuffer
+  myText, // The data you want to hash as an ArrayBuffer
 );
 
 console.log(new Uint8Array(myDigest));
@@ -89,7 +89,7 @@ async function sign(value: string, secret: string) {
     secretKeyData,
     { name: "HMAC", hash: "SHA-256" },
     false,
-    ["sign"]
+    ["sign"],
   );
 
   const mac = await crypto.subtle.sign("HMAC", key, encoder.encode(value));
@@ -136,7 +136,7 @@ async function verify(signature: string, value: string, secret: string) {
     secretKeyData,
     { name: "HMAC", hash: "SHA-256" },
     false,
-    ["verify"]
+    ["verify"],
   );
 
   // The received MAC is Base64-encoded, so you have to go to some trouble to
@@ -152,7 +152,7 @@ async function verify(signature: string, value: string, secret: string) {
     "HMAC",
     key,
     receivedMac,
-    encoder.encode(value)
+    encoder.encode(value),
   );
 
   return verified;

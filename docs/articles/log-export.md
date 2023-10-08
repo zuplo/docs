@@ -4,11 +4,14 @@ title: Log Export
 
 :::note
 
-The log export option is available only to customers on a Zuplo enterprise plan. For more information contact [sales@zuplo.com](mailto:sales@zuplo.com).
+The log export option is available only to customers on a Zuplo enterprise plan.
+For more information contact [sales@zuplo.com](mailto:sales@zuplo.com).
 
 :::
 
-In addition to viewing logs in the the portal, it may be useful to have logs pushed to you so that they can be used in your monitoring, alerting, and troubleshooting processes.
+In addition to viewing logs in the the portal, it may be useful to have logs
+pushed to you so that they can be used in your monitoring, alerting, and
+troubleshooting processes.
 
 Zuplo supports pushing logs to the following sources:
 
@@ -17,9 +20,13 @@ Zuplo supports pushing logs to the following sources:
 - Google Cloud Storage
 - Cloudflare R2
 
-Logs are batched and sent withing one minute (not guaranteed, but generally less than one minute). Batches will typically contain no more than 10,000 records, but depending on volume of your API a batch could have up to 100,000 records.
+Logs are batched and sent withing one minute (not guaranteed, but generally less
+than one minute). Batches will typically contain no more than 10,000 records,
+but depending on volume of your API a batch could have up to 100,000 records.
 
-Logs are send as compressed gzip files. Each gzip file has a single text file with each log line containing a log entry serialized as JSON. For example a single file would look like the below.
+Logs are send as compressed gzip files. Each gzip file has a single text file
+with each log line containing a log entry serialized as JSON. For example a
+single file would look like the below.
 
 ```
 {"ClientIP":"2a16:95c0:3300::103","ClientRequestHost":"api.example.com","ClientRequestMethod":"PO...}
@@ -39,13 +46,18 @@ Logs are send as compressed gzip files. Each gzip file has a single text file wi
 {"ClientIP":"35.199.23.186","ClientRequestHost":"api.example.com","ClientRequestMethod":"GET","Cl...}
 ```
 
-To send the logs into the system of your choice, run a job on either a schedule or based on events from your storage provider.
+To send the logs into the system of your choice, run a job on either a schedule
+or based on events from your storage provider.
 
 In order to activate log export for your account, contact your support.
 
 You will need to provide us with the following information:
 
-1. The credentials to your storage account - typically something like an access key and secret.
+1. The credentials to your storage account - typically something like an access
+   key and secret.
 2. The url of the storage account
 
-Note, the storage account that you provide to us only needs permission to write files. We don't need to list or delete buckets or objects. If you would like to clean up objects, we recommend doing that after you ingest the logs or through expiration policies on the storage bucket itself.
+Note, the storage account that you provide to us only needs permission to write
+files. We don't need to list or delete buckets or objects. If you would like to
+clean up objects, we recommend doing that after you ingest the logs or through
+expiration policies on the storage bucket itself.
