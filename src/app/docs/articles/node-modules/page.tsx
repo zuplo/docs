@@ -1,8 +1,13 @@
 import { DocsLayout } from "@/components/DocsLayout";
 import { Bundle } from "@/lib/interfaces";
 import { readFile } from "fs/promises";
+import { Metadata } from "next";
 import Link from "next/link";
 import { join } from "path";
+
+export const metadata: Metadata = {
+  title: "Node Modules",
+};
 
 export default async function Page() {
   const data = (

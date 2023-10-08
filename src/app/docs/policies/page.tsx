@@ -1,6 +1,11 @@
+import { Metadata } from "next";
 import Link from "next/link";
 import { DocsHeader } from "../../../components/DocsHeader";
 import { getAllPolicies } from "../../../lib/policies";
+
+export const metadata: Metadata = {
+  title: "Policies",
+};
 
 export default async function Page() {
   const policies = await getAllPolicies();
