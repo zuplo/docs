@@ -1,4 +1,3 @@
-import { dereference } from "@apidevtools/json-schema-ref-parser";
 import { render } from "@zuplo/md-tools";
 import arg from "arg";
 import chalk from "chalk";
@@ -203,11 +202,10 @@ async function run() {
     const policyId = match.replace("/schema.json", "");
     const schemaPath = path.join(policiesDir, match);
     const schemaJson = await readFile(schemaPath, "utf-8");
-    const rawSchema = JSON.parse(schemaJson);
+    const schema = JSON.parse(schemaJson) as PolicySchema;
     // RefParser uses cwd to resolve refs
     const policyDir = path.join(policiesDir, policyId);
     process.chdir(policyDir);
-    const schema = (await dereference(rawSchema)) as PolicySchema;
     await processProperties(schema.properties);
 
     const policyFilePaths = getPolicyFilePaths(policyId);
