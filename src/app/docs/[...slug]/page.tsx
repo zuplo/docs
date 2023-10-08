@@ -14,8 +14,6 @@ export async function generateMetadata({
   params: { slug: string[] };
 }): Promise<Metadata> {
   const result = await getContentBySlug<ArticleFrontMatter>({
-    dir: "docs",
-    baseUrlPath: "/docs",
     slug: params.slug,
   });
   if (!result) {
@@ -30,8 +28,6 @@ export async function generateMetadata({
 
 export default async function Page({ params }: { params: { slug: string[] } }) {
   const result = await getContentBySlug<ArticleFrontMatter>({
-    dir: "docs",
-    baseUrlPath: "/docs",
     slug: params.slug,
   });
   if (!result) {
@@ -48,10 +44,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
 }
 
 export async function generateStaticParams() {
-  const posts = await getAllContent({
-    dir: "docs",
-    baseUrlPath: "/docs",
-  });
+  const posts = await getAllContent();
   return posts.map((post) => ({
     slug: post.slug,
   }));

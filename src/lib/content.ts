@@ -1,8 +1,8 @@
 import { existsSync } from "fs";
 import fs from "fs/promises";
+import { glob } from "glob";
 import matter from "gray-matter";
 import path from "path";
-
 export interface BaseContent<Data = Record<string, any>> {
   source: string;
   data: Data;
@@ -18,18 +18,12 @@ export interface Content<Data = Record<string, any>> {
 }
 
 export async function getContentBySlug<Data = Record<string, any>>({
-  dir,
-  baseUrlPath,
   slug,
 }: {
-  dir: string;
-  baseUrlPath: string;
   slug: string[];
 }): Promise<Content<Data> | undefined> {
   const fileName = `${slug.join("/")}.md`;
-  console.log(fileName);
-  const directory = path.join(process.cwd(), dir);
-  const filepath = path.join(directory, fileName);
+  const filepath = path.join(process.cwd(), "docs", fileName);
   if (!existsSync(filepath)) {
     return undefined;
   }
@@ -41,31 +35,23 @@ export async function getContentBySlug<Data = Record<string, any>>({
   const result: Content<Data> = {
     source: content,
     data: data as Data,
-    href: `${baseUrlPath}/${slug}`,
+    href: `/docs/${slug}`,
     slug,
   };
   return result;
 }
 
-export async function getAllContent<Data = Record<string, any>>({
-  dir,
-  baseUrlPath,
-  limit,
-}: {
-  dir: string;
-  baseUrlPath: string;
+export async function getAllContent<Data = Record<string, any>>(options?: {
   limit?: number;
 }): Promise<Content<Data>[]> {
-  const directory = path.join(process.cwd(), dir);
-  const contentFiles = await fs.readdir(directory);
-
+  const contentFiles = await glob(`docs/**/*.md`);
   const results = await Promise.all(
     contentFiles
       .filter((f) => f.endsWith(".md"))
       .sort()
       .reverse()
       .map(async (file) => {
-        const filepath = path.join(directory, file);
+        const filepath = path.join(process.cwd(), file);
         const source = await fs.readFile(filepath);
 
         const { data, content } = matter(source);
@@ -73,15 +59,15 @@ export async function getAllContent<Data = Record<string, any>>({
         const result: Content<Data> = {
           source: content,
           data: data as Data,
-          href: `${baseUrlPath}/${file}`,
+          href: file.replace(".md", ""),
           slug: file.replace(".md", "").split("/"),
         };
         return result;
       }),
   );
 
-  if (limit) {
-    return results.splice(0, limit);
+  if (options?.limit) {
+    return results.splice(0, options.limit);
   }
 
   return results;
