@@ -50,10 +50,10 @@ export default function withSearch(nextConfig = {}) {
         test: __filename,
         use: [
           createLoader(function () {
-            let pagesDir = path.resolve("./src/app");
+            let pagesDir = path.resolve("./docs");
             this.addContextDependency(pagesDir);
 
-            let files = glob.sync("**/page.md", { cwd: pagesDir });
+            let files = glob.sync("**/*.md", { cwd: pagesDir });
             let data = files.map((file) => {
               let url =
                 file === "page.md"

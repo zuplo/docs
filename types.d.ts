@@ -1,11 +1,15 @@
-import { type SearchOptions } from 'flexsearch'
+declare module "remark-admonitions";
+declare module "badwords-list";
+declare module "simple-functional-loader";
 
-declare module '@/markdoc/search.mjs' {
+import { type SearchOptions } from "flexsearch";
+
+declare module "@/markdoc/search.mjs" {
   export type Result = {
-    url: string
-    title: string
-    pageTitle?: string
-  }
+    url: string;
+    title: string;
+    pageTitle?: string;
+  };
 
-  export function search(query: string, options?: SearchOptions): Array<Result>
+  export function search(query: string, options?: SearchOptions): Array<Result>;
 }

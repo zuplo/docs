@@ -1,5 +1,6 @@
 "use client";
 
+import { NavItem, NavSection, navigation } from "@/lib/navigation";
 import { type Result } from "@/markdoc/search.mjs";
 import {
   createAutocomplete,
@@ -22,12 +23,10 @@ import {
 } from "react";
 import Highlighter from "react-highlight-words";
 
-import { NavItem, NavSection, navigation } from "@/lib/navigation";
-
 type EmptyObject = Record<string, never>;
 
 type Autocomplete = AutocompleteApi<
-  Result,
+  any,
   React.SyntheticEvent,
   React.MouseEvent,
   React.KeyboardEvent
@@ -95,7 +94,7 @@ function useAutocomplete({
                 return search(query, { limit: 5 });
               },
               getItemUrl({ item }) {
-                return item.url;
+                return `/docs/${item.url.replace(".md", "")}`;
               },
               onSelect: navigate,
             },

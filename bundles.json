@@ -1,0 +1,1610 @@
+{
+  "bundles": [
+    {
+      "name": "fast-json-stable-stringify",
+      "version": "2.1.0",
+      "types": "index.d.ts",
+      "files": [
+        "index.d.ts"
+      ],
+      "description": "deterministic `JSON.stringify()` - a faster version of substack's json-stable-strigify without jsonify",
+      "url": "https://github.com/epoberezkin/fast-json-stable-stringify",
+      "public": false
+    },
+    {
+      "name": "universal-user-agent",
+      "version": "6.0.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "Get a user agent string in both browser and node",
+      "public": false
+    },
+    {
+      "name": "@sendgrid/client",
+      "version": "7.7.0",
+      "types": "index.d.ts",
+      "files": [
+        "index.d.ts"
+      ],
+      "description": "Twilio SendGrid NodeJS API client",
+      "url": "https://sendgrid.com",
+      "public": false
+    },
+    {
+      "name": "await-lock",
+      "version": "2.2.2",
+      "types": "build/AwaitLock.d.ts",
+      "files": [
+        "build/AwaitLock.d.ts"
+      ],
+      "description": "Mutex locks for async functions",
+      "url": "https://github.com/ide/await-lock",
+      "public": false
+    },
+    {
+      "name": "dom-serializer",
+      "version": "2.0.0",
+      "types": "lib/index.d.ts",
+      "files": [
+        "lib/index.d.ts"
+      ],
+      "description": "render domhandler DOM nodes to a string",
+      "public": false
+    },
+    {
+      "name": "dotenv",
+      "version": "8.6.0",
+      "types": "types/index.d.ts",
+      "files": [
+        "types/index.d.ts"
+      ],
+      "description": "Loads environment variables from .env file",
+      "public": false
+    },
+    {
+      "name": "canonicalize",
+      "version": "1.0.8",
+      "types": "lib/canonicalize.d.ts",
+      "files": [
+        "lib/canonicalize.d.ts"
+      ],
+      "description": "JSON canonicalize function ",
+      "url": "https://github.com/erdtman/canonicalize#readme",
+      "public": false
+    },
+    {
+      "name": "hash.js",
+      "version": "1.1.7",
+      "types": "lib/hash.d.ts",
+      "files": [
+        "lib/hash.d.ts"
+      ],
+      "description": "Various hash functions that could be run by both browser and node",
+      "url": "https://github.com/indutny/hash.js",
+      "public": false
+    },
+    {
+      "name": "cookie",
+      "version": "0.5.0",
+      "types": "cookie/index.d.ts",
+      "files": [
+        "cookie/index.d.ts"
+      ],
+      "description": "HTTP server cookie parsing and serialization",
+      "public": false
+    },
+    {
+      "name": "jsbi",
+      "version": "3.2.5",
+      "types": "jsbi.d.ts",
+      "files": [
+        "jsbi.d.ts"
+      ],
+      "public": false
+    },
+    {
+      "name": "node-abort-controller",
+      "version": "3.1.1",
+      "types": "index.d.ts",
+      "files": [
+        "index.d.ts"
+      ],
+      "description": "AbortController for Node based on EventEmitter",
+      "url": "https://github.com/southpolesteve/node-abort-controller#readme",
+      "public": false
+    },
+    {
+      "name": "base64-js",
+      "version": "1.5.1",
+      "types": "index.d.ts",
+      "files": [
+        "index.d.ts"
+      ],
+      "description": "Base64 encoding/decoding in pure JS",
+      "url": "https://github.com/beatgammit/base64-js",
+      "public": false
+    },
+    {
+      "name": "queue-microtask",
+      "version": "1.2.3",
+      "types": "index.d.ts",
+      "files": [
+        "index.d.ts"
+      ],
+      "description": "fast, tiny `queueMicrotask` shim for modern engines",
+      "url": "https://github.com/feross/queue-microtask",
+      "public": false
+    },
+    {
+      "name": "es6-promise",
+      "version": "4.2.8",
+      "types": "es6-promise.d.ts",
+      "files": [
+        "es6-promise.d.ts"
+      ],
+      "description": "A lightweight library that provides tools for organizing asynchronous code",
+      "url": "https://github.com/stefanpenner/es6-promise",
+      "public": false
+    },
+    {
+      "name": "fast-sha256",
+      "version": "1.3.0",
+      "types": "sha256.d.ts",
+      "files": [
+        "sha256.d.ts"
+      ],
+      "description": "SHA-256, HMAC and PBKDF2 implementation with typed arrays for modern browsers and Node.js",
+      "public": false
+    },
+    {
+      "name": "stacktrace-js",
+      "version": "2.0.2",
+      "types": "stacktrace-js.d.ts",
+      "files": [
+        "stacktrace-js.d.ts"
+      ],
+      "description": "Framework-agnostic, micro-library for getting stack traces in all environments",
+      "url": "https://www.stacktracejs.com",
+      "public": false
+    },
+    {
+      "name": "@sentry/types",
+      "version": "7.11.1",
+      "types": "types/index.d.ts",
+      "files": [
+        "types/index.d.ts"
+      ],
+      "description": "Types for all Sentry JavaScript SDKs",
+      "url": "https://github.com/getsentry/sentry-javascript/tree/master/packages/types",
+      "public": false
+    },
+    {
+      "name": "@stablelib/base64",
+      "version": "1.0.1",
+      "types": "lib/base64.d.ts",
+      "files": [
+        "lib/base64.d.ts"
+      ],
+      "description": "Base64 encoding and decoding",
+      "url": "https://github.com/StableLib/stablelib/tree/master/packages/base64",
+      "public": false
+    },
+    {
+      "name": "bcryptjs",
+      "version": "2.4.3",
+      "types": "bcryptjs/index.d.ts",
+      "files": [
+        "bcryptjs/index.d.ts"
+      ],
+      "description": "Optimized bcrypt in plain JavaScript with zero dependencies. Compatible to 'bcrypt'.",
+      "public": true
+    },
+    {
+      "name": "fast-xml-parser",
+      "version": "4.2.5",
+      "types": "src/fxp.d.ts",
+      "files": [
+        "src/fxp.d.ts"
+      ],
+      "description": "Validate XML, Parse XML, Build XML without C/C++ based libraries",
+      "public": false
+    },
+    {
+      "name": "@sendgrid/mail",
+      "version": "7.7.0",
+      "types": "index.d.ts",
+      "files": [
+        "index.d.ts"
+      ],
+      "description": "Twilio SendGrid NodeJS mail service",
+      "url": "https://sendgrid.com",
+      "public": true
+    },
+    {
+      "name": "detect-browser",
+      "version": "5.3.0",
+      "types": "index.d.ts",
+      "files": [
+        "index.d.ts"
+      ],
+      "description": "Unpack a browser type and version from the useragent string",
+      "url": "https://github.com/DamonOehlman/detect-browser",
+      "public": false
+    },
+    {
+      "name": "js-base64",
+      "version": "3.7.5",
+      "types": "base64.d.ts",
+      "files": [
+        "base64.d.ts"
+      ],
+      "description": "Yet another Base64 transcoder in pure-JS",
+      "public": false
+    },
+    {
+      "name": "nanoid",
+      "version": "3.3.6",
+      "types": "index.d.ts",
+      "files": [
+        "index.d.ts"
+      ],
+      "description": "A tiny (116 bytes), secure URL-friendly unique string ID generator",
+      "public": false
+    },
+    {
+      "name": "agentkeepalive",
+      "version": "4.5.0",
+      "types": "index.d.ts",
+      "files": [
+        "index.d.ts"
+      ],
+      "description": "Missing keepalive http.Agent",
+      "public": false
+    },
+    {
+      "name": "bson",
+      "version": "4.7.2",
+      "types": "bson.d.ts",
+      "files": [
+        "bson.d.ts"
+      ],
+      "description": "A bson parser for node.js and the browser",
+      "public": false
+    },
+    {
+      "name": "cookie",
+      "version": "0.5.0",
+      "types": "cookie/index.d.ts",
+      "files": [
+        "cookie/index.d.ts"
+      ],
+      "description": "HTTP server cookie parsing and serialization",
+      "public": true
+    },
+    {
+      "name": "uuid",
+      "version": "8.3.2",
+      "types": "uuid/index.d.ts",
+      "files": [
+        "uuid/index.d.ts"
+      ],
+      "description": "RFC4122 (v1, v4, and v5) UUIDs",
+      "public": false
+    },
+    {
+      "name": "expression-eval",
+      "version": "4.0.0",
+      "types": "dist/index.d.ts",
+      "files": [
+        "dist/index.d.ts"
+      ],
+      "description": "JavaScript expression parsing and evaluation.",
+      "public": false
+    },
+    {
+      "name": "cheerio-select",
+      "version": "2.1.0",
+      "types": "lib/index.d.ts",
+      "files": [
+        "lib/index.d.ts"
+      ],
+      "description": "CSS selector engine supporting jQuery selectors",
+      "public": false
+    },
+    {
+      "name": "h3",
+      "version": "1.7.1",
+      "types": "dist/index.d.ts",
+      "files": [
+        "dist/index.d.ts"
+      ],
+      "description": "Tiny JavaScript Server",
+      "public": false
+    },
+    {
+      "name": "realm-web",
+      "version": "1.7.0",
+      "types": "dist/bundle.d.ts",
+      "files": [
+        "dist/bundle.d.ts"
+      ],
+      "description": "Authenticate and communicate with the MongoDB Realm platform, from your web-browser",
+      "url": "https://github.com/realm/realm-js/tree/master/packages/realm-web#readme",
+      "public": true
+    },
+    {
+      "name": "eventsource-parser",
+      "version": "1.0.0",
+      "types": "dist/index.d.ts",
+      "files": [
+        "dist/index.d.ts"
+      ],
+      "description": "Streaming, source-agnostic EventSource/Server-Sent Events parser",
+      "url": "https://github.com/rexxars/eventsource-parser#readme",
+      "public": false
+    },
+    {
+      "name": "abort-controller",
+      "version": "3.0.0",
+      "types": "dist/abort-controller.d.ts",
+      "files": [
+        "dist/abort-controller.d.ts"
+      ],
+      "description": "An implementation of WHATWG AbortController interface.",
+      "url": "https://github.com/mysticatea/abort-controller#readme",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/hash-node",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/hash-node",
+      "public": false
+    },
+    {
+      "name": "@xata.io/client",
+      "version": "0.21.1",
+      "types": "dist/index.d.ts",
+      "files": [
+        "dist/index.d.ts"
+      ],
+      "description": "Xata.io SDK for TypeScript and JavaScript",
+      "url": "https://xata.io/docs/sdk/getting-started",
+      "public": true
+    },
+    {
+      "name": "algoliasearch",
+      "version": "4.14.3",
+      "types": "index.d.ts",
+      "files": [
+        "index.d.ts"
+      ],
+      "description": "A fully-featured and blazing-fast JavaScript API client to interact with Algolia API.",
+      "public": true
+    },
+    {
+      "name": "stripe",
+      "version": "11.1.0",
+      "types": "types/2022-11-15/index.d.ts",
+      "files": [
+        "types/2022-11-15/index.d.ts"
+      ],
+      "description": "Stripe API wrapper",
+      "url": "https://github.com/stripe/stripe-node",
+      "public": true
+    },
+    {
+      "name": "@azure/core-rest-pipeline",
+      "version": "1.11.0",
+      "types": "core-rest-pipeline.shims.d.ts",
+      "files": [
+        "core-rest-pipeline.shims.d.ts"
+      ],
+      "description": "Isomorphic client library for making HTTP requests in node.js and browser.",
+      "url": "https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/core/core-rest-pipeline/",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/middleware-sdk-rds",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/middleware-sdk-rds",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/hash-blob-browser",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/hash-blob-browser",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/md5-js",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/md5-js",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/middleware-expect-continue",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/middleware-expect-continue",
+      "public": false
+    },
+    {
+      "name": "@azure/core-auth",
+      "version": "1.4.0",
+      "types": "types/latest/core-auth.d.ts",
+      "files": [
+        "types/latest/core-auth.d.ts"
+      ],
+      "description": "Provides low-level interfaces and helper methods for authentication in Azure SDK",
+      "url": "https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/core/core-auth/README.md",
+      "public": false
+    },
+    {
+      "name": "@algolia/cache-browser-local-storage",
+      "version": "4.14.3",
+      "types": "dist/cache-browser-local-storage.d.ts",
+      "files": [
+        "dist/cache-browser-local-storage.d.ts"
+      ],
+      "description": "Promise-based cache library for browser using local storage.",
+      "public": false
+    },
+    {
+      "name": "@realm.io/common",
+      "version": "0.1.5",
+      "types": "dist/bundle.d.ts",
+      "files": [
+        "dist/bundle.d.ts"
+      ],
+      "description": "Cross-product common code used by Realm",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/middleware-ssec",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/middleware-ssec",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/util-format-url",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/util-format-url",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/fetch-http-handler",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "Provides a way to make requests",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/fetch-http-handler",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/invalid-dependency",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/invalid-dependency",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/s3-request-presigner",
+      "version": "3.342.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/s3-request-presigner",
+      "public": true
+    },
+    {
+      "name": "ajv-formats",
+      "version": "2.1.1",
+      "types": "dist/index.d.ts",
+      "files": [
+        "dist/index.d.ts"
+      ],
+      "description": "Format validation for Ajv v7+",
+      "url": "https://github.com/ajv-validator/ajv-formats#readme",
+      "public": true
+    },
+    {
+      "name": "@aws-sdk/middleware-content-length",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/middleware-content-length",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/middleware-host-header",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/middleware-host-header",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/middleware-recursion-detection",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/middleware-recursion-detection",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/url-parser",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/url-parser",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/util-user-agent-node",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/util-user-agent-node",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/eventstream-serde-browser",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/eventstream-serde-browser",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/eventstream-serde-config-resolver",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/eventstream-serde-config-resolver",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/eventstream-serde-node",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/eventstream-serde-node",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/util-stream",
+      "version": "3.358.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/util-stream",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/hash-stream-node",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/hash-stream-node",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/middleware-location-constraint",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/middleware-location-constraint",
+      "public": false
+    },
+    {
+      "name": "@azure/core-tracing",
+      "version": "1.0.1",
+      "types": "types/core-tracing.d.ts",
+      "files": [
+        "types/core-tracing.d.ts"
+      ],
+      "description": "Provides low-level interfaces and helper methods for tracing in Azure SDK",
+      "url": "https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/core/core-tracing/README.md",
+      "public": false
+    },
+    {
+      "name": "@algolia/cache-common",
+      "version": "4.14.3",
+      "types": "dist/cache-common.d.ts",
+      "files": [
+        "dist/cache-common.d.ts"
+      ],
+      "description": "Common interfaces for promise-based caching libraries",
+      "public": false
+    },
+    {
+      "name": "@algolia/cache-in-memory",
+      "version": "4.14.3",
+      "types": "dist/cache-in-memory.d.ts",
+      "files": [
+        "dist/cache-in-memory.d.ts"
+      ],
+      "description": "Promise-based cache library using memory.",
+      "public": false
+    },
+    {
+      "name": "@algolia/client-account",
+      "version": "4.14.3",
+      "types": "dist/client-account.d.ts",
+      "files": [
+        "dist/client-account.d.ts"
+      ],
+      "public": false
+    },
+    {
+      "name": "@algolia/client-analytics",
+      "version": "4.14.3",
+      "types": "dist/client-analytics.d.ts",
+      "files": [
+        "dist/client-analytics.d.ts"
+      ],
+      "public": false
+    },
+    {
+      "name": "@algolia/client-common",
+      "version": "4.14.3",
+      "types": "dist/client-common.d.ts",
+      "files": [
+        "dist/client-common.d.ts"
+      ],
+      "public": false
+    },
+    {
+      "name": "@algolia/client-personalization",
+      "version": "4.14.3",
+      "types": "dist/client-personalization.d.ts",
+      "files": [
+        "dist/client-personalization.d.ts"
+      ],
+      "public": false
+    },
+    {
+      "name": "@algolia/client-search",
+      "version": "4.14.3",
+      "types": "dist/client-search.d.ts",
+      "files": [
+        "dist/client-search.d.ts"
+      ],
+      "public": false
+    },
+    {
+      "name": "@algolia/logger-common",
+      "version": "4.14.3",
+      "types": "dist/logger-common.d.ts",
+      "files": [
+        "dist/logger-common.d.ts"
+      ],
+      "description": "Common interfaces for promise-based log libraries",
+      "public": false
+    },
+    {
+      "name": "@algolia/logger-console",
+      "version": "4.14.3",
+      "types": "dist/logger-console.d.ts",
+      "files": [
+        "dist/logger-console.d.ts"
+      ],
+      "description": "Promise-based log library using console log.",
+      "public": false
+    },
+    {
+      "name": "@algolia/requester-browser-xhr",
+      "version": "4.14.3",
+      "types": "dist/requester-browser-xhr.d.ts",
+      "files": [
+        "dist/requester-browser-xhr.d.ts"
+      ],
+      "description": "Promise-based request library for browser using xhr.",
+      "public": false
+    },
+    {
+      "name": "@algolia/requester-common",
+      "version": "4.14.3",
+      "types": "dist/requester-common.d.ts",
+      "files": [
+        "dist/requester-common.d.ts"
+      ],
+      "description": "Common interfaces for promise-based request libraries",
+      "public": false
+    },
+    {
+      "name": "@algolia/requester-node-http",
+      "version": "4.14.3",
+      "types": "dist/requester-node-http.d.ts",
+      "files": [
+        "dist/requester-node-http.d.ts"
+      ],
+      "description": "Promise-based request library for node using the native http module.",
+      "public": false
+    },
+    {
+      "name": "@algolia/transporter",
+      "version": "4.14.3",
+      "types": "dist/transporter.d.ts",
+      "files": [
+        "dist/transporter.d.ts"
+      ],
+      "description": "Promise-based transporter layer with embedded retry strategy.",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/middleware-sdk-s3",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/middleware-sdk-s3",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/signature-v4-multi-region",
+      "version": "3.342.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/signature-v4-multi-region",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/protocol-http",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/protocol-http",
+      "public": false
+    },
+    {
+      "name": "@sentry/hub",
+      "version": "7.11.1",
+      "types": "types/index.d.ts",
+      "files": [
+        "types/index.d.ts"
+      ],
+      "description": "Sentry hub which handles global state managment.",
+      "url": "https://github.com/getsentry/sentry-javascript/tree/master/packages/hub",
+      "public": false
+    },
+    {
+      "name": "mmdynamo",
+      "version": "0.3.0",
+      "types": "dist/client.d.ts",
+      "files": [
+        "dist/client.d.ts"
+      ],
+      "description": "The official C8 Dynamo JavaScript driver.",
+      "url": "https://github.com/macrometacorp/mmdynamo",
+      "public": true
+    },
+    {
+      "name": "toucan-js",
+      "version": "2.5.0",
+      "types": "dist/index.d.ts",
+      "files": [
+        "dist/index.d.ts"
+      ],
+      "description": "Cloudflare Workers client for Sentry",
+      "url": "https://github.com/robertcepa/toucan-js#readme",
+      "public": true
+    },
+    {
+      "name": "@aws-sdk/credential-provider-node",
+      "version": "3.358.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "AWS credential provider that sources credentials from a Node.JS environment. ",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/credential-provider-node",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/middleware-logger",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/middleware-logger",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/middleware-serde",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/middleware-serde",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/middleware-signing",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/middleware-signing",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/middleware-user-agent",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/middleware-user-agent",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/node-http-handler",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "Provides a way to make requests",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/node-http-handler",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/util-base64",
+      "version": "3.310.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "A Base64 <-> UInt8Array converter",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/util-base64",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/util-body-length-browser",
+      "version": "3.310.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "Determines the length of a request body in browsers",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/util-body-length-browser",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/util-body-length-node",
+      "version": "3.310.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "Determines the length of a request body in node.js",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/util-body-length-node",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/util-user-agent-browser",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/util-user-agent-browser",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/util-utf8",
+      "version": "3.310.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "A UTF-8 string <-> UInt8Array converter",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/util-utf8",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/util-waiter",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "Shared utilities for client waiters for the AWS SDK",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/util-waiter",
+      "public": false
+    },
+    {
+      "name": "domhandler",
+      "version": "5.0.3",
+      "types": "lib/index.d.ts",
+      "files": [
+        "lib/index.d.ts"
+      ],
+      "description": "Handler for htmlparser2 that turns pages into a dom",
+      "public": false
+    },
+    {
+      "name": "domutils",
+      "version": "3.1.0",
+      "types": "lib/index.d.ts",
+      "files": [
+        "lib/index.d.ts"
+      ],
+      "description": "Utilities for working with htmlparser2's dom",
+      "public": false
+    },
+    {
+      "name": "htmlparser2",
+      "version": "8.0.2",
+      "types": "lib/index.d.ts",
+      "files": [
+        "lib/index.d.ts"
+      ],
+      "description": "Fast & forgiving HTML/XML parser",
+      "public": false
+    },
+    {
+      "name": "chalk",
+      "version": "5.2.0",
+      "types": "source/index.d.ts",
+      "files": [
+        "source/index.d.ts"
+      ],
+      "description": "Terminal string styling done right",
+      "public": false
+    },
+    {
+      "name": "serialize-error-cjs",
+      "version": "0.1.3",
+      "types": "dist/index.d.ts",
+      "files": [
+        "dist/index.d.ts"
+      ],
+      "description": "",
+      "public": false
+    },
+    {
+      "name": "@azure/abort-controller",
+      "version": "1.1.0",
+      "types": "types/src/index.d.ts",
+      "files": [
+        "types/src/index.d.ts"
+      ],
+      "description": "Microsoft Azure SDK for JavaScript - Aborter",
+      "url": "https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/abort-controller/README.md",
+      "public": false
+    },
+    {
+      "name": "rfc4648",
+      "version": "1.5.2",
+      "types": "lib/src/index.d.ts",
+      "files": [
+        "lib/src/index.d.ts"
+      ],
+      "description": "Encoding and decoding for base64, base32, base16, and friends",
+      "public": false
+    },
+    {
+      "name": "@azure/cosmos",
+      "version": "3.17.1",
+      "types": "dist/types/latest/cosmos.d.ts",
+      "files": [
+        "dist/types/latest/cosmos.d.ts"
+      ],
+      "description": "Microsoft Azure Cosmos DB Service Node.js SDK for SQL API",
+      "url": "https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/cosmosdb/cosmos/README.md",
+      "public": true
+    },
+    {
+      "name": "@aws-crypto/sha256-browser",
+      "version": "3.0.0",
+      "types": "build/index.d.ts",
+      "files": [
+        "build/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-crypto-helpers/tree/master/packages/sha256-browser",
+      "public": false
+    },
+    {
+      "name": "@smithy/protocol-http",
+      "version": "1.1.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/awslabs/smithy-typescript/tree/main/packages/protocol-http",
+      "public": false
+    },
+    {
+      "name": "@aws-crypto/sha1-browser",
+      "version": "3.0.0",
+      "types": "build/index.d.ts",
+      "files": [
+        "build/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-crypto-helpers/tree/master/packages/sha1-browser",
+      "public": false
+    },
+    {
+      "name": "@azure/core-auth",
+      "version": "1.4.0",
+      "types": "types/latest/core-auth.d.ts",
+      "files": [
+        "types/latest/core-auth.d.ts"
+      ],
+      "description": "Provides low-level interfaces and helper methods for authentication in Azure SDK",
+      "url": "https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/core/core-auth/README.md",
+      "public": true
+    },
+    {
+      "name": "@aws-sdk/client-rds-data",
+      "version": "3.359.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "AWS SDK for JavaScript Rds Data Client for Node.js, Browser and React Native",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-rds-data",
+      "public": true
+    },
+    {
+      "name": "@sentry/tracing",
+      "version": "7.11.1",
+      "types": "types/index.d.ts",
+      "files": [
+        "types/index.d.ts"
+      ],
+      "description": "Extensions for Sentry AM",
+      "url": "https://github.com/getsentry/sentry-javascript/tree/master/packages/tracing",
+      "public": true
+    },
+    {
+      "name": "@aws-crypto/sha256-js",
+      "version": "3.0.0",
+      "types": "build/index.d.ts",
+      "files": [
+        "build/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-crypto-helpers/tree/master/packages/sha256-js",
+      "public": false
+    },
+    {
+      "name": "@sentry/core",
+      "version": "6.11.0",
+      "types": "dist/index.d.ts",
+      "files": [
+        "dist/index.d.ts"
+      ],
+      "description": "Base implementation for all Sentry JavaScript SDKs",
+      "url": "https://github.com/getsentry/sentry-javascript/tree/master/packages/core",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/middleware-flexible-checksums",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/middleware-flexible-checksums",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/xml-builder",
+      "version": "3.310.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "XML builder for the AWS SDK",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/xml-builder",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/middleware-sdk-sqs",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/middleware-sdk-sqs",
+      "public": false
+    },
+    {
+      "name": "@supabase/functions-js",
+      "version": "2.1.5",
+      "types": "dist/module/index.d.ts",
+      "files": [
+        "dist/module/index.d.ts"
+      ],
+      "description": "JS Client library to interact with Supabase Functions.",
+      "url": "https://github.com/supabase/functions-js#readme",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/node-config-provider",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "Load config default values from ini config files and environmental variable",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/node-config-provider",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/smithy-client",
+      "version": "3.358.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/smithy-client",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/types",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "Types for the AWS SDK",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/types",
+      "public": false
+    },
+    {
+      "name": "cheerio",
+      "version": "1.0.0-rc.11",
+      "types": "lib/index.d.ts",
+      "files": [
+        "lib/index.d.ts"
+      ],
+      "description": "Tiny, fast, and elegant implementation of core jQuery designed specifically for the server",
+      "url": "https://cheerio.js.org/",
+      "public": true
+    },
+    {
+      "name": "@aws-sdk/client-sts",
+      "version": "3.359.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "AWS SDK for JavaScript Sts Client for Node.js, Browser and React Native",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-sts",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/middleware-endpoint",
+      "version": "3.342.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/middleware-endpoint",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/util-endpoints",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "Utilities to help with endpoint resolution",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/util-endpoints",
+      "public": false
+    },
+    {
+      "name": "@smithy/types",
+      "version": "1.1.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/awslabs/smithy-typescript/tree/main/packages/types",
+      "public": false
+    },
+    {
+      "name": "@sentry/utils",
+      "version": "7.11.1",
+      "types": "types/index.d.ts",
+      "files": [
+        "types/index.d.ts"
+      ],
+      "description": "Utilities for all Sentry JavaScript SDKs",
+      "url": "https://github.com/getsentry/sentry-javascript/tree/master/packages/utils",
+      "public": false
+    },
+    {
+      "name": "@cfworker/cosmos",
+      "version": "1.13.4",
+      "types": "dist/index.d.ts",
+      "files": [
+        "dist/index.d.ts"
+      ],
+      "description": "Azure Cosmos DB client for Cloudflare Workers and service workers",
+      "url": "https://github.com/cfworker/cfworker/tree/master/packages/cosmos/README.md",
+      "public": true
+    },
+    {
+      "name": "@supabase/supabase-js",
+      "version": "2.36.0",
+      "types": "dist/module/index.d.ts",
+      "files": [
+        "dist/module/index.d.ts"
+      ],
+      "description": "Isomorphic Javascript client for Supabase",
+      "url": "https://github.com/supabase/supabase-js",
+      "public": true
+    },
+    {
+      "name": "@supabase/realtime-js",
+      "version": "2.7.4",
+      "types": "dist/module/index.d.ts",
+      "files": [
+        "dist/module/index.d.ts"
+      ],
+      "description": "Listen to realtime updates to your PostgreSQL database",
+      "url": "https://github.com/supabase/realtime-js",
+      "public": false
+    },
+    {
+      "name": "jose",
+      "version": "4.14.4",
+      "types": "dist/types/index.d.ts",
+      "files": [
+        "dist/types/index.d.ts"
+      ],
+      "description": "'JSON Web Almost Everything' - JWA, JWS, JWE, JWT, JWK, JWKS for Node.js, Browser, Cloudflare Workers, Deno, Bun, and other Web-interoperable runtimes",
+      "url": "https://github.com/panva/jose",
+      "public": true
+    },
+    {
+      "name": "@supabase/gotrue-js",
+      "version": "2.54.0",
+      "types": "dist/module/index.d.ts",
+      "files": [
+        "dist/module/index.d.ts"
+      ],
+      "description": "Isomorphic GoTrue client",
+      "url": "https://github.com/supabase/gotrue-js",
+      "public": false
+    },
+    {
+      "name": "@supabase/postgrest-js",
+      "version": "1.8.4",
+      "types": "dist/module/index.d.ts",
+      "files": [
+        "dist/module/index.d.ts"
+      ],
+      "description": "Isomorphic PostgREST client",
+      "url": "https://github.com/supabase/postgrest-js",
+      "public": false
+    },
+    {
+      "name": "@supabase/storage-js",
+      "version": "2.5.4",
+      "types": "dist/module/index.d.ts",
+      "files": [
+        "dist/module/index.d.ts"
+      ],
+      "description": "Isomorphic storage client for Supabase.",
+      "url": "https://github.com/supabase/storage-js",
+      "public": false
+    },
+    {
+      "name": "swr-store",
+      "version": "0.10.6",
+      "types": "dist/types/index.d.ts",
+      "files": [
+        "dist/types/index.d.ts"
+      ],
+      "description": "SWR stores for data-fetching",
+      "url": "https://github.com/lxsmnsyc/swr-store",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/client-kinesis",
+      "version": "3.359.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "AWS SDK for JavaScript Kinesis Client for Node.js, Browser and React Native",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-kinesis",
+      "public": true
+    },
+    {
+      "name": "@aws-sdk/client-sqs",
+      "version": "3.359.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "AWS SDK for JavaScript Sqs Client for Node.js, Browser and React Native",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-sqs",
+      "public": true
+    },
+    {
+      "name": "ajv",
+      "version": "8.12.0",
+      "types": "dist/ajv.d.ts",
+      "files": [
+        "dist/ajv.d.ts"
+      ],
+      "description": "Another JSON Schema Validator",
+      "url": "https://ajv.js.org",
+      "public": false
+    },
+    {
+      "name": "zod",
+      "version": "3.22.4",
+      "types": "index.d.ts",
+      "files": [
+        "index.d.ts"
+      ],
+      "description": "TypeScript-first schema declaration and validation library with static type inference",
+      "url": "https://zod.dev",
+      "public": false
+    },
+    {
+      "name": "casbin.js",
+      "version": "1.0.1",
+      "types": "lib/index.d.ts",
+      "files": [
+        "lib/index.d.ts"
+      ],
+      "description": "An authorization library that supports access control models like ACL, RBAC, ABAC in Typescript",
+      "url": "https://casbin.org",
+      "public": true
+    },
+    {
+      "name": "@aws-sdk/middleware-stack",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "Provides a means for composing multiple middleware functions into a single handler",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/middleware-stack",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/util-retry",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "Shared retry utilities to be used in middleware packages.",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/master/packages/util-retry",
+      "public": false
+    },
+    {
+      "name": "faunadb",
+      "version": "4.5.4",
+      "types": "index.d.ts",
+      "files": [
+        "index.d.ts"
+      ],
+      "description": "FaunaDB Javascript driver for Node.JS and Browsers",
+      "url": "https://fauna.com",
+      "public": true
+    },
+    {
+      "name": "solid-swr-store",
+      "version": "0.10.7",
+      "types": "dist/types/index.d.ts",
+      "files": [
+        "dist/types/index.d.ts"
+      ],
+      "description": "SolidJS bindings for swr-store",
+      "url": "https://github.com/lxsmnsyc/swr-store/tree/main/packages/solid-swr-store",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/client-dynamodb",
+      "version": "3.359.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "AWS SDK for JavaScript Dynamodb Client for Node.js, Browser and React Native",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-dynamodb",
+      "public": true
+    },
+    {
+      "name": "@aws-sdk/middleware-bucket-endpoint",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/middleware-bucket-endpoint",
+      "public": false
+    },
+    {
+      "name": "inngest",
+      "version": "2.4.0",
+      "types": "index.d.ts",
+      "files": [
+        "index.d.ts",
+        "edge.d.ts"
+      ],
+      "description": "Official SDK for Inngest.com",
+      "url": "https://github.com/inngest/inngest-js#readme",
+      "public": true
+    },
+    {
+      "name": "graphql",
+      "version": "16.8.1",
+      "types": "index.d.ts",
+      "files": [
+        "index.d.ts"
+      ],
+      "description": "A Query Language and Runtime which can target any service.",
+      "url": "https://github.com/graphql/graphql-js",
+      "public": true
+    },
+    {
+      "name": "@aws-sdk/client-lambda",
+      "version": "3.359.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "AWS SDK for JavaScript Lambda Client for Node.js, Browser and React Native",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-lambda",
+      "public": true
+    },
+    {
+      "name": "@aws-sdk/middleware-endpoint-discovery",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/middleware-endpoint-discovery",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/middleware-retry",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/middleware-retry",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/util-defaults-mode-browser",
+      "version": "3.358.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/util-defaults-mode-node",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/util-defaults-mode-node",
+      "version": "3.358.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/util-defaults-mode-node",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/config-resolver",
+      "version": "3.357.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/config-resolver",
+      "public": false
+    },
+    {
+      "name": "@aws-sdk/client-s3",
+      "version": "3.359.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "AWS SDK for JavaScript S3 Client for Node.js, Browser and React Native",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-s3",
+      "public": true
+    },
+    {
+      "name": "svix",
+      "version": "1.4.12",
+      "types": "dist/index.d.ts",
+      "files": [
+        "dist/index.d.ts"
+      ],
+      "description": "Svix API client",
+      "public": true
+    },
+    {
+      "name": "@aws-sdk/client-rds",
+      "version": "3.359.0",
+      "types": "dist-types/index.d.ts",
+      "files": [
+        "dist-types/index.d.ts"
+      ],
+      "description": "AWS SDK for JavaScript Rds Client for Node.js, Browser and React Native",
+      "url": "https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-rds",
+      "public": true
+    }
+  ]
+}

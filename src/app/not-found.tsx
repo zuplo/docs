@@ -14,10 +14,10 @@ export default function NotFound() {
           Sorry, we couldn’t find the page you’re looking for.
         </p>
         <Link
-          href="/"
+          href="/docs"
           className="mt-8 text-sm font-medium text-slate-900 dark:text-white"
         >
-          Go back home
+          Go back to docs
         </Link>
       </div>
     </div>

@@ -4,7 +4,7 @@ import clsx from "classnames";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
-import { type Section, type Subsection } from "@/lib/sections";
+import { type Section } from "@/lib/interfaces";
 
 export function TableOfContents({
   tableOfContents,
@@ -51,7 +51,7 @@ export function TableOfContents({
     };
   }, [getHeadings, tableOfContents]);
 
-  function isActive(section: Section | Subsection) {
+  function isActive(section: Section) {
     if (section.id === currentSection) {
       return true;
     }

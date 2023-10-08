@@ -19,3 +19,20 @@ export interface PolicySchema extends JSONSchema7 {
   isPaidAddOn?: boolean;
   fakePolicyUrl?: string;
 }
+
+export interface Section {
+  id: string;
+  title: string;
+  level: number;
+  children: Array<Section>;
+}
+
+export interface Bundle {
+  name: string;
+  version: string;
+  types: string;
+  files: string[];
+  description: string;
+  url: string;
+  public: boolean;
+}

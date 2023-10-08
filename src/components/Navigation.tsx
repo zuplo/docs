@@ -15,11 +15,18 @@ function SubNavSection({
   onLinkClick?: React.MouseEventHandler<HTMLAnchorElement>;
   depth: number;
 }) {
-  const [hidden, setHidden] = useState(true);
+  const pathname = usePathname();
+  const [hidden, setHidden] = useState(
+    !link.links.some((l) => "href" in l && l.href === pathname),
+  );
 
   function onClick() {
     setHidden(!hidden);
   }
+
+  // useEffect(() => {
+  //   setHidden(!link.links.some((l) => "href" in l && l.href === pathname));
+  // }, [pathname, setHidden, link.links]);
 
   return (
     <li className={`relative`}>

@@ -20,7 +20,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   const { content, toc } = await compileMdx(source);
 
   return (
-    <DocsLayout frontmatter={data} nodes={[]}>
+    <DocsLayout frontmatter={data} sections={toc}>
       {content}
     </DocsLayout>
   );

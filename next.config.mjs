@@ -1,5 +1,4 @@
 import withMarkdoc from "@markdoc/next.js";
-import { createLoader } from "simple-functional-loader";
 
 import withSearch from "./src/markdoc/search.mjs";
 
@@ -7,17 +6,6 @@ import withSearch from "./src/markdoc/search.mjs";
 const nextConfig = {
   pageExtensions: ["js", "jsx", "md", "ts", "tsx"],
   webpack(config) {
-    config.module.rules.unshift({
-      test: /\.md$/,
-      use: [
-        createLoader(function (source) {
-          return (
-            source + "\nexport const metadata = frontmatter.nextjs?.metadata;"
-          );
-        }),
-      ],
-    });
-
     config.module.rules.push({
       test: /\.svg$/i,
       use: ["@svgr/webpack"],

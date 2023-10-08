@@ -12,10 +12,8 @@ export default function remarkTransformLink(): Transformer {
     visit(root, "link", (node: Link, index, parent) => {
       promises.push(
         (async () => {
-          if (node.type === "link" || node.type === "image") {
-            if (node.url.endsWith(".md")) {
-              node.url = node.url.replace(".md", "");
-            }
+          if (node.url.endsWith(".md")) {
+            node.url = node.url.replace(".md", "");
           }
         })(),
       );
