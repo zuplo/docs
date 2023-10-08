@@ -13,6 +13,13 @@ module.exports = {
       },
     ],
   },
+  redirects: async () => [
+    {
+      source: "/",
+      destination: "/docs",
+      statusCode: 308,
+    },
+  ],
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
