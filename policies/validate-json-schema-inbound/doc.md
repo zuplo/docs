@@ -37,7 +37,8 @@ zero and `color` can (in this silly example) can be one of "black", "brown",
 The schemas file should live in the `schemas` folder of your project - for the
 purposes of this example let's imagine it is called `car.json`.
 
-<ZupIt repoUrl="https://github.com/zuplo/samples-basic-auth" />
+You can find a sample using this policy on
+[Github](https://github.com/zuplo/samples-basic-auth).
 
 ## Configuration
 

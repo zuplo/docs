@@ -12,5 +12,6 @@
     "editor.wordWrap": "bounded",
     "editor.wordWrapColumn": 80
   },
-  "cSpell.words": ["Amberflo", "asns", "Moesif", "overridable", "Supabase"]
+  "cSpell.words": ["Amberflo", "asns", "Moesif", "overridable", "Supabase"],
+  "typescript.preferences.importModuleSpecifier": "non-relative"
 }
