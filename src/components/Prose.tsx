@@ -19,7 +19,7 @@ export function Prose<T extends React.ElementType = "div">({
         // lead
         "prose-lead:text-slate-500 dark:prose-lead:text-slate-400",
         // links
-        "prose-a:font-semibold dark:prose-a:text-pink-400",
+        "prose-a:font-normal dark:prose-a:text-pink-400",
         // link underline
         "prose-a:no-underline prose-a:font-normal hover:prose-a:underline hover:prose-a:font-normal ",
         // pre

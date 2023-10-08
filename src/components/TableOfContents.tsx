@@ -36,7 +36,7 @@ export function TableOfContents({
       let top = window.scrollY;
       let current = headings[0].id;
       for (let heading of headings) {
-        if (top >= heading.top - 10) {
+        if (top >= heading.top - 20) {
           current = heading.id;
         } else {
           break;
@@ -62,7 +62,7 @@ export function TableOfContents({
   }
 
   return (
-    <div className="hidden xl:sticky xl:top-[4.75rem] xl:-mr-6 xl:block xl:h-[calc(100vh-4.75rem)] xl:flex-none xl:overflow-y-auto xl:py-16 xl:pl-6">
+    <div className="hidden xl:sticky xl:top-[4.75rem] xl:-mr-6 xl:block xl:h-[calc(100vh-4.75rem)] xl:flex-none xl:overflow-y-auto xl:py-16 xl:p-6">
       <nav aria-labelledby="on-this-page-title" className="w-56">
         {tableOfContents.length > 0 && (
           <>

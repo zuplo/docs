@@ -32,7 +32,28 @@
             },
             "modifier": {
               "description": "The function that modifies the request based on the test key",
-              "$ref": "../shared.json#/definitions/optionsFunction"
+              "type": "object",
+              "additionalProperties": false,
+              "definitions": {
+                "optionsFunction": {
+                  "type": "object",
+                  "required": ["export", "module"],
+                  "properties": {
+                    "export": {
+                      "type": "string",
+                      "default": "default",
+                      "description": "Specifies the export to load your function, e.g. `default`, `myFunction`.",
+                      "examples": ["default", "myFunction"]
+                    },
+                    "module": {
+                      "type": "string",
+                      "default": "$import(./modules/my-module)",
+                      "description": "Specifies the module to load your function, in the format `$import(./modules/my-module)`",
+                      "examples": ["$import(./modules/my-module)"]
+                    }
+                  }
+                }
+              }
             }
           }
         }

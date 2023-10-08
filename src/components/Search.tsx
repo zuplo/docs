@@ -22,7 +22,7 @@ import {
 } from "react";
 import Highlighter from "react-highlight-words";
 
-import { navigation } from "@/lib/navigation";
+import { NavItem, NavSection, navigation } from "@/lib/navigation";
 
 type EmptyObject = Record<string, never>;
 
@@ -161,9 +161,16 @@ function SearchResult({
 }) {
   let id = useId();
 
-  let sectionTitle = navigation.find((section) =>
-    section.links.find((link) => link.href === result.url.split("#")[0]),
-  )?.title;
+  const findLink = (link: NavSection | NavItem): boolean => {
+    if ("href" in link) {
+      return link.href === result.url.split("#")[0];
+    } else {
+      return link.links.some(findLink);
+    }
+  };
+
+  let sectionTitle = navigation.find((section) => section.links.find(findLink))
+    ?.title;
   let hierarchy = [sectionTitle, result.pageTitle].filter(
     (x): x is string => typeof x === "string",
   );
@@ -262,7 +269,7 @@ const SearchInput = forwardRef<
       <input
         ref={inputRef}
         className={clsx(
-          "flex-auto appearance-none bg-transparent pl-12 text-white outline-none placeholder:text-slate-400 focus:outline-none focus:w-full focus:flex-none sm:text-sm [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden",
+          "flex-auto appearance-none bg-transparent pl-12 text-slate-900 dark:text-white outline-none placeholder:text-slate-400 focus:outline-none focus:w-full focus:flex-none sm:text-sm [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden",
           autocompleteState.status === "stalled" ? "pr-11" : "pr-4",
         )}
         {...inputProps}

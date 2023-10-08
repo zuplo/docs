@@ -1,4 +1,5 @@
 import typographyPlugin from "@tailwindcss/typography";
+import { Config } from "tailwindcss";
 
 const typographyHeading = (overrides: any) => ({
   fontFamily: "ES Build",

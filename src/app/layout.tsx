@@ -1,19 +1,11 @@
 import clsx from "classnames";
 import { type Metadata } from "next";
-import localFont from "next/font/local";
 
 import { Providers } from "@/app/providers";
 import { Layout } from "@/components/Layout";
 
 import "@/styles/tailwind.css";
 import { beVietnamProFont } from "../lib/fonts";
-
-// Use local version of Lexend so that we can use OpenType features
-const lexend = localFont({
-  src: "../fonts/lexend.woff2",
-  display: "swap",
-  variable: "--font-lexend",
-});
 
 export const metadata: Metadata = {
   title: {
@@ -32,11 +24,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={clsx(
-        "h-full antialiased",
-        lexend.variable,
-        beVietnamProFont.variable,
-      )}
+      className={clsx("h-full antialiased", beVietnamProFont.variable)}
       suppressHydrationWarning
     >
       <body className="flex min-h-full bg-white dark:bg-black">
