@@ -34,11 +34,12 @@ request pipeline, drag it to the top if you have multiple policies.
 
 If you test your route, you should get a 401 Unauthorized response
 
-```
+```json
 {
   "status": 401,
   "title": "Unauthorized",
-  "type": "https://httpproblems.com/http-status/401",
+  "type": "https://httpproblems.com/http-status/401"
+}
 ```
 
 ## 2/ Set up an API key consumer

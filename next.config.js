@@ -2,11 +2,6 @@
 module.exports = {
   swcMinify: true,
   reactStrictMode: true,
-  experimental: {
-    outputFileTracingIncludes: {
-      "/docs/**": ["node_modules/shiki/**/*"],
-    },
-  },
   images: {
     deviceSizes: [576, 640, 760, 828, 992, 1180, 1440],
     imageSizes: [96, 128, 256, 384],

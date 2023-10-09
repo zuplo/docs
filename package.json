@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postinstall": "node ./scripts/update-bundles.mjs",
+    "postinstall": "node ./scripts/update-bundles.mjs && node ./scripts/copy-shiki.mjs",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write ."

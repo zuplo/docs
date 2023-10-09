@@ -80,6 +80,7 @@ export default {
           gray: "rgb(225, 228, 232)",
           dark: "rgb(106, 115, 125)",
           blue: "rgb(121, 184, 255)",
+          border: "rgb(229, 231, 235)",
         },
       },
       lineHeight: {
