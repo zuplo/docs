@@ -9,8 +9,6 @@ export interface PolicyMeta {
   href: string;
   id: string;
   icon: string;
-  introMd: string;
-  docMd: string;
 }
 
 export interface PolicySchema extends JSONSchema7 {
@@ -35,4 +33,14 @@ export interface Bundle {
   description: string;
   url: string;
   public: boolean;
+}
+
+export interface NavCategory {
+  label: string;
+  items: (NavCategory | NavItem)[];
+}
+
+export interface NavItem {
+  label: string;
+  href: string;
 }

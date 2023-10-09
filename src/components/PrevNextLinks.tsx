@@ -1,10 +1,10 @@
 "use client";
 
+import { navigation } from "@/build/navigation.mjs";
+import { NavCategory, NavItem } from "@/lib/interfaces";
 import clsx from "classnames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-import { NavItem, NavSection, navigation } from "@/lib/navigation";
 
 function ArrowIcon(props: React.ComponentPropsWithoutRef<"svg">) {
   return (
@@ -52,15 +52,15 @@ function PageLink({
 
 export function PrevNextLinks() {
   let pathname = usePathname();
-  const findLink = (link: NavSection | NavItem): boolean => {
+  const findLink = (link: NavCategory | NavItem): boolean => {
     if ("href" in link) {
       return link.href === pathname.split("#")[0];
     } else {
-      return link.links.some(findLink);
+      return link.items.some(findLink);
     }
   };
 
-  let allLinks = navigation.flatMap((section) => section.links);
+  let allLinks = navigation.flatMap((section) => section.items);
   let linkIndex = allLinks.findIndex(findLink);
   let previousPage = linkIndex > -1 ? allLinks[linkIndex - 1] : null;
   let nextPage = linkIndex > -1 ? allLinks[linkIndex + 1] : null;

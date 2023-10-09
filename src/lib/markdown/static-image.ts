@@ -26,7 +26,7 @@ export default function remarkStaticImage(): Transformer {
                 )}' could not be resolved.`,
               );
             }
-            node.url = url.replace(staticPath, "");
+            node.url = `/docs${url.replace(staticPath, "")}`;
           }
         })(),
       );

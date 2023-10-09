@@ -1,4 +1,5 @@
-import withSearch from "./src/markdoc/search.mjs";
+import withNavigation from "./src/build/navigation.mjs";
+import withSearch from "./src/build/search.mjs";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -26,4 +27,4 @@ const nextConfig = {
   },
 };
 
-export default withSearch(nextConfig);
+export default withNavigation(withSearch(nextConfig));

@@ -3,7 +3,8 @@ import clsx from "classnames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { NavItem, NavSection, navigation } from "@/lib/navigation";
+import { navigation } from "@/build/navigation.mjs";
+import { NavCategory, NavItem } from "@/lib/interfaces";
 import { useState } from "react";
 
 function SubNavSection({
@@ -11,13 +12,13 @@ function SubNavSection({
   onLinkClick,
   depth,
 }: {
-  link: NavSection;
+  link: NavCategory;
   onLinkClick?: React.MouseEventHandler<HTMLAnchorElement>;
   depth: number;
 }) {
   const pathname = usePathname();
   const [hidden, setHidden] = useState(
-    !link.links.some((l) => "href" in l && l.href === pathname),
+    !link.items.some((l) => "href" in l && l.href === pathname),
   );
 
   function onClick() {
@@ -34,7 +35,7 @@ function SubNavSection({
         className="flex  w-full cursor-pointer pl-1 text-slate-500"
         onClick={onClick}
       >
-        <span className="flex-grow">{link.title}</span>
+        <span className="flex-grow">{link.label}</span>
         {hidden ? (
           <ChevronRightIcon className="h-4 w-4" />
         ) : (
@@ -47,7 +48,7 @@ function SubNavSection({
           hidden ? "hidden" : ""
         } ml-2 mt-2 space-y-2 border-l border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-200`}
       >
-        {link.links.map((link, i) => (
+        {link.items.map((link, i) => (
           <NavSection
             link={link}
             key={i}
@@ -65,7 +66,7 @@ function NavSection({
   onLinkClick,
   depth,
 }: {
-  link: NavSection | NavItem;
+  link: NavCategory | NavItem;
   onLinkClick?: React.MouseEventHandler<HTMLAnchorElement>;
   depth: number;
 }) {
@@ -83,7 +84,7 @@ function NavSection({
               : "text-slate-500  hover:text-slate-600  dark:text-slate-400  dark:hover:text-slate-300",
           )}
         >
-          {link.title}
+          {link.label}
         </Link>
       </li>
     );
@@ -100,12 +101,12 @@ function NavSection({
               : "text-slate-500 hover:text-slate-600  dark:text-slate-400  dark:hover:text-slate-300",
           )}
         >
-          {link.title}
+          {link.label}
         </Link>
       </li>
     );
   } else {
-    return <SubNavSection link={link} depth={depth} key={link.title} />;
+    return <SubNavSection link={link} depth={depth} key={link.label} />;
   }
 }
 
@@ -120,12 +121,12 @@ export function Navigation({
     <nav className={clsx("text-base lg:text-sm", className)}>
       <ul role="list" className="space-y-9">
         {navigation.map((section) => (
-          <li key={section.title}>
+          <li key={section.label}>
             <h2 className="font-display font-semibold text-slate-900 dark:text-white">
-              {section.title}
+              {section.label}
             </h2>
             <ul role="list" className="mt-2 space-y-2 lg:mt-4 lg:space-y-4 ">
-              {section.links.map((link, i) => (
+              {section.items.map((link, i) => (
                 <NavSection
                   link={link}
                   key={i}

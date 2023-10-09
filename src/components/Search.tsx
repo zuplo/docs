@@ -1,7 +1,8 @@
 "use client";
 
-import { NavItem, NavSection, navigation } from "@/lib/navigation";
-import { type Result } from "@/markdoc/search.mjs";
+import { navigation } from "@/build/navigation.mjs";
+import { type Result } from "@/build/search.mjs";
+import { NavCategory, NavItem } from "@/lib/interfaces";
 import {
   createAutocomplete,
   type AutocompleteApi,
@@ -86,7 +87,7 @@ function useAutocomplete({
         navigate,
       },
       getSources({ query }) {
-        return import("@/markdoc/search.mjs").then(({ search }) => {
+        return import("@/build/search.mjs").then(({ search }) => {
           return [
             {
               sourceId: "documentation",
@@ -160,16 +161,16 @@ function SearchResult({
 }) {
   let id = useId();
 
-  const findLink = (link: NavSection | NavItem): boolean => {
+  const findLink = (link: NavCategory | NavItem): boolean => {
     if ("href" in link) {
       return link.href === result.url.split("#")[0];
     } else {
-      return link.links.some(findLink);
+      return link.items.some(findLink);
     }
   };
 
-  let sectionTitle = navigation.find((section) => section.links.find(findLink))
-    ?.title;
+  let sectionTitle = navigation.find((section) => section.items.find(findLink))
+    ?.label;
   let hierarchy = [sectionTitle, result.pageTitle].filter(
     (x): x is string => typeof x === "string",
   );

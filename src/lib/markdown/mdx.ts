@@ -16,9 +16,13 @@ import rehypePrettyCode, {
 } from "rehype-pretty-code";
 import rehypeRewrite, { RehypeRewriteOptions } from "rehype-rewrite";
 import rehypeSlug from "rehype-slug";
+import rehypeStringify from "rehype-stringify";
 import remarkDirective from "remark-directive";
 import remarkGfm from "remark-gfm";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
 import shiki from "shiki";
+import { unified } from "unified";
 import { VFileCompatible } from "vfile";
 import remarkCallout from "./callout";
 
@@ -85,6 +89,54 @@ const getRehypeCodeOptions = (): Partial<PrettyCodeOptions> => ({
   },
 });
 
+const rehypeAutolinkHeadingsOptions: RehypeAutolinkHeadingsOptions = {
+  behavior: "append",
+  properties: {
+    class:
+      "no-underline pl-1 mb-3 cursor-pointer opacity-0 hover:!opacity-100 group-hover:!opacity-100",
+  },
+  // group(node) {
+  //   return h("a");
+  // },
+  content(node) {
+    return h("span", "#");
+  },
+};
+
+const rehypeRewriteOptions: RehypeRewriteOptions = {
+  rewrite: (node, i, parent) => {
+    if (
+      node.type === "element" &&
+      node.properties &&
+      ["h2", "h3", "h4", "h5", "h6"].includes(node.tagName)
+    ) {
+      // node.properties.className =
+      //   "group scroll-mt-20 text-[26px] lg:text-[32px] md:scroll-mt-32";
+      node.properties.className = "group scroll-mt-20 md:scroll-mt-32";
+    }
+    if (
+      node.type === "element" &&
+      node.properties &&
+      ["p", "li"].includes(node.tagName)
+    ) {
+      node.properties.className = "text-xl";
+    }
+  },
+};
+
+function getHeaderRewriteOptions(headings: Element[]): RehypeRewriteOptions {
+  return {
+    rewrite: (node) => {
+      if (
+        node.type === "element" &&
+        (node.tagName === "h2" || node.tagName === "h3")
+      ) {
+        headings.push(node as Element);
+      }
+    },
+  };
+}
+
 function getOptions(headings: Element[]): SerializeOptions {
   return {
     parseFrontmatter: false,
@@ -99,60 +151,32 @@ function getOptions(headings: Element[]): SerializeOptions {
       rehypePlugins: [
         [rehypePrettyCode, getRehypeCodeOptions()],
         rehypeSlug,
-        [
-          rehypeAutolinkHeadings,
-          {
-            behavior: "append",
-            properties: {
-              class:
-                "no-underline pl-1 mb-3 cursor-pointer opacity-0 hover:!opacity-100 group-hover:!opacity-100",
-            },
-            // group(node) {
-            //   return h("a");
-            // },
-            content(node) {
-              return h("span", "#");
-            },
-          } as RehypeAutolinkHeadingsOptions,
-        ],
-        [
-          rehypeRewrite,
-          {
-            rewrite: (node, i, parent) => {
-              if (
-                node.type === "element" &&
-                node.properties &&
-                ["h2", "h3", "h4", "h5", "h6"].includes(node.tagName)
-              ) {
-                node.properties.className =
-                  "group scroll-mt-20 text-[26px] lg:text-[32px] md:scroll-mt-32";
-              }
-              if (
-                node.type === "element" &&
-                node.properties &&
-                ["p", "li"].includes(node.tagName)
-              ) {
-                node.properties.className = "text-xl";
-              }
-            },
-          } as RehypeRewriteOptions,
-        ],
-        [
-          rehypeRewrite,
-          {
-            rewrite: (node) => {
-              if (
-                node.type === "element" &&
-                (node.tagName === "h2" || node.tagName === "h3")
-              ) {
-                headings.push(node as Element);
-              }
-            },
-          } as RehypeRewriteOptions,
-        ],
+        [rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions],
+        [rehypeRewrite, rehypeRewriteOptions],
+        [rehypeRewrite, getHeaderRewriteOptions(headings)],
       ],
     },
   };
+}
+
+export async function render(markdown: string) {
+  const nodes: (Element & { tagName: "h2" | "h3" })[] = [];
+  const result = await unified()
+    .use(remarkParse)
+    .use(remarkTransformLink)
+    .use(remarkStaticImage)
+    .use(remarkGfm)
+    .use(remarkDirective)
+    .use(remarkCallout)
+    .use(remarkRehype)
+    .use(rehypePrettyCode, getRehypeCodeOptions())
+    .use(rehypeSlug)
+    .use(rehypeAutolinkHeadings)
+    .use(rehypeStringify)
+    .process(markdown);
+
+  const toc = buildTableOfContents(nodes);
+  return { content: result.value, toc };
 }
 
 export async function compileMdx<Frontmatter = Record<string, any>>(
