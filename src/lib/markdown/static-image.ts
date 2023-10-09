@@ -16,9 +16,7 @@ export default function remarkStaticImage(): Transformer {
           if (node.url.startsWith(".")) {
             const staticPath = path.join(process.cwd(), "public");
             const url = path.resolve(path.dirname(vfile.path), node.url);
-            console.log(url);
-            console.log(staticPath);
-            if (url.startsWith(staticPath)) {
+            if (!url.startsWith(staticPath)) {
               throw new Error(
                 `Images must be in the 'public' folder. The image '${
                   node.url
