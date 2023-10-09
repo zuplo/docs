@@ -12,16 +12,12 @@ type PolicyProperties = Record<
   }
 >;
 
-export const OptionProperties = ({
-  properties,
-}: {
-  properties: PolicyProperties;
-}) => (
+const OptionProperties = ({ properties }: { properties: PolicyProperties }) => (
   <ul>
     {Object.entries(properties).map(([key, value]) => (
       <li key={key}>
         <code>{key}</code>{" "}
-        <div dangerouslySetInnerHTML={{ __html: value.description }} />
+        <div dangerouslySetInnerHTML={{ __html: value.description ?? "" }} />
         {value.properties ? (
           <OptionProperties properties={value.properties} />
         ) : undefined}
@@ -129,11 +125,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <DocsLayout frontmatter={{ title: meta.name }} sections={sections}>
-      {introHtml ? (
-        <div dangerouslySetInnerHTML={{ __html: introHtml }} />
-      ) : (
-        <div dangerouslySetInnerHTML={{ __html: description }} />
-      )}
+      <div dangerouslySetInnerHTML={{ __html: introHtml ?? description }} />
+
       <h2 id="configuration">
         Configuration
         <a
@@ -143,7 +136,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
           #
         </a>
       </h2>
-      <div dangerouslySetInnerHTML={{ __html: exampleHtml }} />
+      {exampleHtml ? (
+        <div dangerouslySetInnerHTML={{ __html: exampleHtml }} />
+      ) : null}
       {Object.keys(properties).length >= 0 ? (
         <>
           <h3 id="options">
@@ -155,7 +150,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
               #
             </a>
           </h3>
-          <OptionProperties properties={properties} />{" "}
+          <PolicyOptions schema={schema} policyId={policyId} />
         </>
       ) : null}
       {docHtml ? <div dangerouslySetInnerHTML={{ __html: docHtml }} /> : null}

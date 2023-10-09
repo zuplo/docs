@@ -15,12 +15,12 @@ function ArrowIcon(props: React.ComponentPropsWithoutRef<"svg">) {
 }
 
 function PageLink({
-  title,
+  label,
   href,
   dir = "next",
   ...props
 }: Omit<React.ComponentPropsWithoutRef<"div">, "dir" | "title"> & {
-  title: string;
+  label: string;
   href: string;
   dir?: "previous" | "next";
 }) {
@@ -37,7 +37,7 @@ function PageLink({
             dir === "previous" && "flex-row-reverse",
           )}
         >
-          {title}
+          {label}
           <ArrowIcon
             className={clsx(
               "h-4 w-4 flex-none fill-current",
