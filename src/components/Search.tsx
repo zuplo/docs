@@ -94,7 +94,7 @@ function useAutocomplete({
                 return search(query, { limit: 5 });
               },
               getItemUrl({ item }) {
-                return `/docs/${item.url.replace(".md", "")}`;
+                return `/${item.url.replace(".md", "")}`;
               },
               onSelect: navigate,
             },

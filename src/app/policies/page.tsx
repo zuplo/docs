@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { DocsHeader } from "../../../components/DocsHeader";
-import { getAllPolicies } from "../../../lib/policies";
+import { DocsHeader } from "../../components/DocsHeader";
+import { getAllPolicies } from "../../lib/policies";
 
 export const metadata: Metadata = {
   title: "Policies",
@@ -16,15 +16,14 @@ export default async function Page() {
       <p>
         Zuplo includes policies for any solution you need for securing and
         sharing your API. See the{" "}
-        <Link href="/docs/policies">policy introduction</Link> to learn about
-        using policies.
+        <Link href="/policies">policy introduction</Link> to learn about using
+        policies.
       </p>
 
       <p>
-        The <Link href="/docs/articles/custom-cors-policy">CORS policy</Link> is
-        a special type of policy that is configured separately. Check out
-        details
-        <Link href="/docs/articles/custom-cors-policy">here</Link>.
+        The <Link href="/articles/custom-cors-policy">CORS policy</Link> is a
+        special type of policy that is configured separately. Check out details
+        <Link href="/articles/custom-cors-policy">here</Link>.
       </p>
 
       <ul

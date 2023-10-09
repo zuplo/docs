@@ -39,7 +39,7 @@ export async function getContentBySlug<Data = Record<string, any>>({
   const result: Content<Data> = {
     source: vfile,
     data: data as Data,
-    href: `/docs/${slug}`,
+    href: `/${slug}`,
     slug,
   };
   return result;
@@ -63,7 +63,7 @@ export async function getAllContent<Data = Record<string, any>>(options?: {
         const result: Content<Data> = {
           source: content,
           data: data as Data,
-          href: file.replace(".md", ""),
+          href: file.substring(5).replace(".md", ""),
           // Remove the /docs
           slug: file.substring(5).replace(".md", "").split("/"),
         };

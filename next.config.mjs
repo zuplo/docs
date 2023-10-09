@@ -4,6 +4,7 @@ import withSearch from "./src/markdoc/search.mjs";
 const nextConfig = {
   swcMinify: true,
   reactStrictMode: true,
+  basePath: "/docs",
   images: {
     deviceSizes: [576, 640, 760, 828, 992, 1180, 1440],
     imageSizes: [96, 128, 256, 384],
@@ -15,13 +16,6 @@ const nextConfig = {
       },
     ],
   },
-  redirects: async () => [
-    {
-      source: "/",
-      destination: "/docs",
-      statusCode: 308,
-    },
-  ],
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,

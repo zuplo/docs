@@ -14,7 +14,7 @@ export default function NotFound() {
           Sorry, we couldn’t find the page you’re looking for.
         </p>
         <Link
-          href="/docs"
+          href="/"
           className="mt-8 text-sm font-medium text-slate-900 dark:text-white"
         >
           Go back to docs
