@@ -43,7 +43,7 @@ Unfamiliar with Next JS? Try out the
 
 Once your repo and environment variables are setup, you should see the following
 
-![img](../../public/media/supabase-auth/initial-login.png)
+![img](https://cdn.zuplo.com/assets/0e91e59a-0631-4708-b92d-89cb16214169.png)
 
 Once you are ready, deploy your project to production.
 
@@ -54,7 +54,7 @@ Navigate to Authentication > URL Configuration > Site URL and paste in the full
 URL (ex. https://nextjs-with-supabase-xi-seven.vercel.app) in the Site URL
 field.
 
-![img](../../public/media/supabase-auth/supabase-site-url.png)
+![img](https://cdn.zuplo.com/assets/d5ef498f-62fe-4b83-b197-632256231d93.png)
 
 ## 3/ Configuring Your Developer Portal To Use Supabase Auth
 
@@ -70,7 +70,7 @@ endpoints (ex. `https://nextjs-with-supabase-xi-seven.vercel.app/login`). Your
 developer portal will navigate to these pages to create and end sessions. Your
 Authentication Settings should look like this once you are done:
 
-![img](../../public/media/supabase-auth/dev-portal.png)
+![img](https://cdn.zuplo.com/assets/792491b3-7098-4066-ab75-4703821e5b3c.png)
 
 Or in the JSON file:
 
@@ -95,7 +95,7 @@ key is used to securely connect your Supabase Auth App with the Developer
 Portal. From the side nav, go to your Project Settings and then click on Zuplo
 API Keys. Copy your API key.
 
-![img](../../public/media/supabase-auth/copy-key.png)
+![img](https://cdn.zuplo.com/assets/b7d40f0a-0180-4aea-9f66-b165dec44a09.png)
 
 ## 5/ Connecting Your Supabase Auth App to the Dev Portal
 
@@ -255,21 +255,21 @@ Auth App codebase from earlier.
    of the Developer Portal Settings) and click the “Sign In” button at the top
    right
 
-   ![img](../../public/media/supabase-auth/dev-portal-loaded.png)
+   ![img](https://cdn.zuplo.com/assets/d37b8bf7-ad63-4d77-965f-5868404a4c77.png)
 
 9. You should be redirected to your Supabase Auth App. Enter the email and
    password and click “Sign Up”.
 10. A email verification link will be sent to your email. Open the email and
     click the confirmation link
 
-    ![img](../../public/media/supabase-auth/email.png)
+    ![img](https://cdn.zuplo.com/assets/003704d2-6786-43dc-a70a-d9f88cc34fc7.png)
 
 11. You will be redirected back to the Dev portal and be signed into your
     Supabase account!
 
 ### Sign in Support
 
-![img](../../public/media/supabase-auth/supabase-login.gif)
+![img](https://cdn.zuplo.com/assets/db2fce79-4dd9-4b6a-9760-231991df2ec2.gif)
 
 Now that you have created your first user, follow the guide below to allow them
 to sign into your Supabase project via the Developer Portal
@@ -419,7 +419,7 @@ how to sign them out.
 
 ### (Optional) Additional Auth Provider Support via Supabase
 
-![img](../../public/media/supabase-auth/supabase-github-login.gif)
+![img](https://cdn.zuplo.com/assets/519dd3a2-53b7-4c76-bdc4-1dd395e9e37c.gif)
 
 Supabase allows you to connect
 [many different Auth Providers](https://supabase.com/docs/guides/auth/social-login).

@@ -5,15 +5,6 @@ import * as path from "path";
 import { createLoader } from "simple-functional-loader";
 import * as url from "url";
 
-// export async function getNavigation(): Promise<NavSection[]> {
-//   const nav: NavSection[] = [];
-//   for (const rawSection of navigation) {
-//     const section = await buildNavSection(rawSection);
-//     nav.push(section);
-//   }
-//   return nav;
-// }
-
 const __filename = url.fileURLToPath(import.meta.url);
 
 function buildNavSection(rawSection) {

@@ -18,7 +18,7 @@ API Test Console.
    easily
 4. Paste the JSON Body into the test's Body field and click the Test button
 
-![Docs Folder](../../public/media/guides/testing-graphql/test-request.png)
+![Docs Folder](https://cdn.zuplo.com/assets/495192f5-cf33-42c3-b4d6-8090db99117c.png)
 
 ## 2/ Using a Third-Party Request Tool
 
