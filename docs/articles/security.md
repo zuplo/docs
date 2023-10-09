@@ -13,7 +13,7 @@ infrastructure is safe and secure.
 
 **Reporting Issues**: If you have a security concern or believe you have found a
 vulnerability in any part of Zuplo please contact us immediately by emailing us
-at <security@zuplo.com>.
+at [security@zuplo.com](mailto:security@zuplo.com).
 
 :::
 

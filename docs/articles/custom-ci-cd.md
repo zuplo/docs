@@ -27,7 +27,7 @@ Keys to authenticate. You can find your API Key by following these steps:
 2. Select the project that you want to work on.
 3. Click on the "Settings" tab and navigate to the "Zuplo API Keys" section.
 
-![Zuplo API Keys](../../static/media/api-keys/zuplo-api-keys.png)
+![Zuplo API Keys](../../../public/media/api-keys/zuplo-api-keys.png)
 
 4. Write some tests for your API. We provide a rich set of test helpers and
    utils based on BDD. You can see examples of tests at

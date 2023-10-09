@@ -1,6 +1,7 @@
 import components from "@/components/mdx";
 import { Section } from "@/lib/interfaces";
 import remarkTransformLink from "@/lib/markdown/md-link";
+import remarkStaticImage from "@/lib/markdown/static-image";
 import fs from "fs/promises";
 import { Element } from "hast";
 import { h } from "hastscript";
@@ -90,6 +91,7 @@ function getOptions(headings: Element[]): SerializeOptions {
     mdxOptions: {
       remarkPlugins: [
         remarkTransformLink,
+        remarkStaticImage,
         remarkGfm,
         remarkDirective,
         remarkCallout,

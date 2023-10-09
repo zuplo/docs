@@ -17,7 +17,7 @@ The Rewrite Handler can be added to any route using the Route Designer. Open the
 click **routes.oas.json**. Inside any route, select **URL Rewrite** from the
 **Request Handlers** drop-down.
 
-![Url Rewrite Handler selection](../../static/media/url-rewrite-handler-selection.png)
+![Url Rewrite Handler selection](../../public/media/url-rewrite-handler-selection.png)
 
 In the text box enter the URL to rewrite the request. Values can be mixed into
 the URL string using Javascript string interpolation syntax. For example:

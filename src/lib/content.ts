@@ -3,6 +3,7 @@ import fs from "fs/promises";
 import { glob } from "glob";
 import matter from "gray-matter";
 import path from "path";
+import { VFile, VFileCompatible } from "vfile";
 export interface BaseContent<Data = Record<string, any>> {
   source: string;
   data: Data;
@@ -11,7 +12,7 @@ export interface BaseContent<Data = Record<string, any>> {
 }
 
 export interface Content<Data = Record<string, any>> {
-  source: string;
+  source: VFileCompatible;
   data: Data;
   href: string;
   slug: string[];
@@ -32,8 +33,11 @@ export async function getContentBySlug<Data = Record<string, any>>({
 
   const { content, data } = matter(source);
 
+  const vfile = new VFile(content);
+  vfile.path = filepath;
+
   const result: Content<Data> = {
-    source: content,
+    source: vfile,
     data: data as Data,
     href: `/docs/${slug}`,
     slug,
