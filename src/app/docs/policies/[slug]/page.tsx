@@ -1,4 +1,5 @@
 import { DocsHeader } from "@/components/DocsHeader";
+import { getAllPolicies } from "@/lib/policies";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   if (!params?.slug || typeof params.slug !== "string") {
@@ -10,4 +11,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <DocsHeader title="Policies" />
     </div>
   );
+}
+
+export async function generateStaticParams() {
+  const policies = await getAllPolicies();
+  return policies.map((policy) => ({
+    slug: policy.meta.id,
+  }));
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { NavItem, NavSection, navigation } from "@/lib/navigation";
+import { type Result } from "@/markdoc/search.mjs";
 import {
   createAutocomplete,
   type AutocompleteApi,
@@ -21,8 +22,6 @@ import {
   useState,
 } from "react";
 import Highlighter from "react-highlight-words";
-
-type Result = any;
 
 type EmptyObject = Record<string, never>;
 
@@ -87,21 +86,20 @@ function useAutocomplete({
         navigate,
       },
       getSources({ query }) {
-        return [];
-        // return import("@/markdoc/search.mjs").then(({ search }) => {
-        //   return [
-        //     {
-        //       sourceId: "documentation",
-        //       getItems() {
-        //         return search(query, { limit: 5 });
-        //       },
-        //       getItemUrl({ item }) {
-        //         return `/docs/${item.url.replace(".md", "")}`;
-        //       },
-        //       onSelect: navigate,
-        //     },
-        //   ];
-        // });
+        return import("@/markdoc/search.mjs").then(({ search }) => {
+          return [
+            {
+              sourceId: "documentation",
+              getItems() {
+                return search(query, { limit: 5 });
+              },
+              getItemUrl({ item }) {
+                return `/docs/${item.url.replace(".md", "")}`;
+              },
+              onSelect: navigate,
+            },
+          ];
+        });
       },
     }),
   );

@@ -1,5 +1,7 @@
+import withSearch from "./src/markdoc/search.mjs";
+
 /** @type {import('next').NextConfig} */
-module.exports = {
+const nextConfig = {
   swcMinify: true,
   reactStrictMode: true,
   images: {
@@ -29,3 +31,5 @@ module.exports = {
     return config;
   },
 };
+
+export default withSearch(nextConfig);

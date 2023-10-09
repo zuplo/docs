@@ -40,3 +40,8 @@ src/components/bundles.json
 /policies.*.json
 /bundles.json
 src/shiki
+
+
+public/robots.txt
+public/sitemap.xml
+public/sitemap-0.xml

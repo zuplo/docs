@@ -67,7 +67,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <div className="flex w-full flex-col">
       <Header />
 
-      <div className="relative mx-auto flex w-full max-w-[1212px] flex-auto justify-center lg:mt-20 ">
+      <div className="relative mx-auto flex w-full max-w-8xl flex-auto justify-center lg:mt-20 ">
         <div className="hidden lg:relative lg:block lg:flex-none">
           {/* <div className="absolute inset-y-0 right-0 w-[50vw] dark:hidden" />
           <div className="absolute bottom-0 right-0 top-16 hidden h-12 w-px bg-gradient-to-t from-slate-800 dark:block" />

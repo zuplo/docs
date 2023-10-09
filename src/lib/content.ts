@@ -64,7 +64,8 @@ export async function getAllContent<Data = Record<string, any>>(options?: {
           source: content,
           data: data as Data,
           href: file.replace(".md", ""),
-          slug: file.replace(".md", "").split("/"),
+          // Remove the /docs
+          slug: file.substring(5).replace(".md", "").split("/"),
         };
         return result;
       }),
