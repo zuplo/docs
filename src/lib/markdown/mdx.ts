@@ -219,7 +219,7 @@ function buildTableOfContents(nodes: (Element & { tagName: "h2" | "h3" })[]) {
   const toc: Section[] = [];
   let previous: Section;
   headings.forEach((heading) => {
-    if (previous && previous.level > heading.level) {
+    if (previous && previous.level < heading.level) {
       previous.children.push({
         ...heading,
         children: [],
