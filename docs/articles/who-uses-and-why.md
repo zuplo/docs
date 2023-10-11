@@ -6,6 +6,23 @@ We have customers ranging in size from 1-person startups to mature, large enterp
 
 There are a number of reasons people decide to use Zuplo:
 
+### Enterprise Customers
+
+We have many enterprise customers using Zuplo to manage multiple APIs, some examples include
+
+* [BlockDaemon](https://blockdaemon.com) - the leading infrastructure provider for blockchain with an incredible customer list including Goldman Sachs, Microsoft, Plaid and many more.
+* [Imburse Payments](https://imbursepayments.com) part of [Duck Creek Technologies](https://www.duckcreek.com/) - a leading payments platform for Insurance companies. See our 🎥 video interview with the Imburse team here: [Why Imburse Payments chose Zuplo as their API Gateway](https://youtu.be/z94pRJE2zfs)
+
+### Startup Customers
+
+We also have many smaller businesses using Zuplo, launching a delightful Stripe-quality experience in record time. Examples include:
+
+* [Rewiring America](https://www.rewiringamerica.org/) - the leading electrification nonprofit, focused on electrifying our homes, businesses, and communities. We develop accessible, actionable data and tools, and build coalitions and partnerships to make going electric easier for households and communities. See our 🎥 video interview with the Rewiring America team here: [Tom Carden of Rewiring America on accelerating an API Program with Zuplo](https://youtu.be/wUKLrNIRC_8)
+
+* [iTicket](https://iticket.co.nz) - New Zealand's largest ticketing provider, leading a revolution against customers being held to ransom when buying event tickets. See our 🎥 video interview with the iTicket team here: [Azure API Management alternative - why iTicket chose Zuplo instead](https://youtu.be/ZWS4x4pwyuo)
+
+* [Common Paper](https://commonpaper.com) - YC-backed startup looking to make contracts as clear and programmable as APIs, built on open-source standards. See our 🎥 video interview with the iTicket team here: [How Common Paper shipped their API *fast*](https://youtu.be/1rAxJFVXU84)
+
 ## Launching a new API
 
 Most of our startup customers are looking to launch an API and want to achieve a 'Stripe-quality' API experience for their customers quickly.
