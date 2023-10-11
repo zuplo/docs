@@ -11,7 +11,7 @@ There are a number of reasons people decide to use Zuplo:
 We have many enterprise customers using Zuplo to manage multiple APIs, some examples include
 
 * [BlockDaemon](https://blockdaemon.com) - the leading infrastructure provider for blockchain with an incredible customer list including Goldman Sachs, Microsoft, Plaid and many more.
-* [Imburse Payments](https://imbursepayments.com) part of [Duck Creek Technologies](https://www.duckcreek.com/) - a leading payments platform for Insurance companies. See our 🎥 video interview with the Imburse team here: [Why Imburse Payments chose Zuplo as their API Gateway](https://youtu.be/z94pRJE2zfs)
+* [Imburse Payments](https://imbursepayments.com) part of [Duck Creek Technologies](https://www.duckcreek.com/) - a leading payments platform for Insurance companies. See our 🎥 video interview with the Imburse team here: [▶️ Why Imburse Payments chose Zuplo as their API Gateway](https://youtu.be/z94pRJE2zfs)
 
 ### Startup Customers
 
