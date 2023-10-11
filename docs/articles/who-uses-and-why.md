@@ -17,11 +17,11 @@ We have many enterprise customers using Zuplo to manage multiple APIs, some exam
 
 We also have many smaller businesses using Zuplo, launching a delightful Stripe-quality experience in record time. Examples include:
 
-* [Rewiring America](https://www.rewiringamerica.org/) - the leading electrification nonprofit, focused on electrifying our homes, businesses, and communities. We develop accessible, actionable data and tools, and build coalitions and partnerships to make going electric easier for households and communities. See our 🎥 video interview with the Rewiring America team here: [Tom Carden of Rewiring America on accelerating an API Program with Zuplo](https://youtu.be/wUKLrNIRC_8)
+* [Rewiring America](https://www.rewiringamerica.org/) - the leading electrification nonprofit, focused on electrifying our homes, businesses, and communities. We develop accessible, actionable data and tools, and build coalitions and partnerships to make going electric easier for households and communities. See our 🎥 video interview with the Rewiring America team here: [▶️ Tom Carden of Rewiring America on accelerating an API Program with Zuplo](https://youtu.be/wUKLrNIRC_8)
 
-* [iTicket](https://iticket.co.nz) - New Zealand's largest ticketing provider, leading a revolution against customers being held to ransom when buying event tickets. See our 🎥 video interview with the iTicket team here: [Azure API Management alternative - why iTicket chose Zuplo instead](https://youtu.be/ZWS4x4pwyuo)
+* [iTicket](https://iticket.co.nz) - New Zealand's largest ticketing provider, leading a revolution against customers being held to ransom when buying event tickets. See our 🎥 video interview with the iTicket team here: [▶️ Azure API Management alternative - why iTicket chose Zuplo instead](https://youtu.be/ZWS4x4pwyuo)
 
-* [Common Paper](https://commonpaper.com) - YC-backed startup looking to make contracts as clear and programmable as APIs, built on open-source standards. See our 🎥 video interview with the iTicket team here: [How Common Paper shipped their API *fast*](https://youtu.be/1rAxJFVXU84)
+* [Common Paper](https://commonpaper.com) - YC-backed startup looking to make contracts as clear and programmable as APIs, built on open-source standards. See our 🎥 video interview with the iTicket team here: [▶️ How Common Paper shipped their API *fast*](https://youtu.be/1rAxJFVXU84)
 
 ## Launching a new API
 
