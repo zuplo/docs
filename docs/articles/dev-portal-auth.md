@@ -2,11 +2,13 @@
 title: Authentication
 ---
 
-developer portal supports authenticating with any standard-compliant OpenID
-Connect identity provider such as [Auth0](https://auth0.com),
+The Zuplo Developer Portal supports authenticating with any standard-compliant
+OpenID Connect identity provider such as [Auth0](https://auth0.com),
 [Okta](https://okta.com), [AWS Cognito](https://aws.amazon.com/cognito/), etc.
 The developer portal also supports external auth sources like
 [Supabase](./dev-portal-supabase-auth.md).
+
+Below are instructions on how to configure some of the common providers.
 
 :::caution Production Authentication
 
