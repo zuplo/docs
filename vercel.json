@@ -468,6 +468,16 @@
       "permanent": true
     },
     {
+      "source": "/docs/security{/}?",
+      "destination": "/docs/articles/security",
+      "permanent": true
+    },
+    {
+      "source": "/docs/support{/}?",
+      "destination": "/docs/articles/support",
+      "permanent": true
+    },
+    {
       "source": "/docs/pricing{/}?",
       "destination": "/pricing",
       "permanent": true
