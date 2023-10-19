@@ -33,6 +33,28 @@ enabled.
 
 Below you will find details on each logger.
 
+### AWS CloudWatch
+
+```ts
+import {
+  RuntimeExtensions,
+  AWSLoggingPlugin,
+  environment,
+} from "@zuplo/runtime";
+
+export function runtimeInit(runtime: RuntimeExtensions) {
+  runtime.addPlugin(
+    new AWSLoggingPlugin({
+      region: environment.AWS_REGION,
+      accessKeyId: environment.AWS_ACCESS_KEY_ID,
+      secretAccessKey: environment.AWS_SECRET_ACCESS_KEY,
+      logGroupName: "zuplo",
+      logStreamName: "my-stream",
+    })
+  );
+}
+```
+
 ### Data Dog
 
 ```ts
@@ -47,7 +69,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
     new DataDogLoggingPlugin({
       url: "https://http-intake.logs.datadoghq.com/api/v2/logs",
       apiKey: environment.DATA_DOG_API_KEY,
-    }),
+    })
   );
 }
 ```
@@ -72,7 +94,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
     new DynaTraceLoggingPlugin({
       url: "https://xxxxxxx.live.dynatrace.com/api/v2/logs/ingest",
       apiToken: environment.DYNATRACE_API_TOKEN,
-    }),
+    })
   );
 }
 ```
@@ -91,7 +113,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
     new GoogleCloudLoggingPlugin({
       logName: "my-api-gateway",
       serviceAccountJson: environment.GCP_SERVICE_ACCOUNT,
-    }),
+    })
   );
 }
 ```
@@ -111,7 +133,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
       url: "https://logs-prod-us-central1.grafana.net/loki/api/v1/push",
       username: "my-username",
       password: environment.LOKI_PASSWORD,
-    }),
+    })
   );
 }
 ```
@@ -137,7 +159,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
   runtime.addPlugin(
     new SumoLogicLoggingPlugin({
       url: "https://endpoint4.collection.sumologic.com/receiver/v1/http/XXXXXX",
-    }),
+    })
   );
 }
 ```
