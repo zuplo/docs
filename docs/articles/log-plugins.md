@@ -7,6 +7,7 @@ as limited error logging in production. If you would like your logs to be sent
 to your own logging service, you can enable one of Zuplo's logging plugins.
 Currently, Zuplo supports logging to the following sources:
 
+- AWS CloudWatch
 - DataDog
 - Dynatrace
 - Google Cloud Logging
