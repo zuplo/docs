@@ -40,8 +40,9 @@ Success team.
 
 ## Enterprise Support
 
-Customers with an Enterprise support plan receive 24/7 support hours,
-prioritized response times, and access to the Customer Success team.
+Various support terms are available for enterprise plans. Zuplo offers up to
+24/7 support with SLAs on response times. For specific terms please reach out to
+our sales team.
 
 ### Plan features
 
@@ -70,11 +71,14 @@ The following table describes feature differences of each Zuplo support plan:
 
 | Support Feature               | Community | Standard    | Priority                                | Enterprise |
 | ----------------------------- | --------- | ----------- | --------------------------------------- | ---------- |
-| Response Times                | N/A       | Best Effort | (8am to 8pm US Eastern time (UTC−05:00) | 24/7       |
+| Response Times                | N/A       | Best Effort | (8am to 8pm US Eastern time (UTC−05:00) | 24/7[1]    |
 | Community Support             | Yes       | Yes         | Yes                                     | Yes        |
 | Email Support                 | No        | Yes         | Yes                                     | Yes        |
 | Private Discord/Slack Channel | No        | No          | Yes                                     | Yes        |
 | Phone Support                 | No        | No          | Yes                                     | Yes        |
+
+[1] Enterprise support terms are customizable based on each contract. Zuplo
+offers up to 24/7 support with customizable response SLAs.
 
 ## Email Support
 
