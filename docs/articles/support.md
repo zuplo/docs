@@ -1,55 +1,9 @@
 ---
-title: Support Plans
+title: Support
 ---
 
-Zuplo offers the following support plans:
-
-| Support Offer      | Available to                                                                   |
-| ------------------ | ------------------------------------------------------------------------------ |
-| Community Support  | All customers                                                                  |
-| Standard Support   | Customers with any paid subscription plan or those in the initial trial period |
-| Priority Support   | Customers with a priority support plan                                         |
-| Enterprise Support | Customers with an enterprise support plan                                      |
-
-## Trial subscriptions
-
-New Zuplo customers receive Standard Support during the trial period (customers
-may check on how many trial days they have left by logging into the portal).
-
-At the end of the trial period, customers who have not opted to purchase a paid
-subscription can use the Zuplo Community for assistance.
-
-## Community support
-
-Customers with Zuplo's free subscription plan can seek support through the Zuplo
-Community. Response times may vary and are not guaranteed.
-
-## Standard support
-
-Customers with a paid Zuplo subscription plan receive Standard Support which
-offers access to the following channels:
-
-- Zuplo Community
-- Zuplo Email Support (best effort response times)
-
-## Priority Support
-
-Customers with a Priority support plan receive support time from 8am to 8pm US
-Eastern time (UTC−05:00), quicker response times, and access to the Customer
-Success team.
-
-## Enterprise Support
-
-Various support terms are available for enterprise plans. Zuplo offers up to
-24/7 support with SLAs on response times. For specific terms please reach out to
-our sales team.
-
-### Plan features
-
-Your sales order indicates whether you are subscribed to the Standard, Priority,
-or Enterprise support.
-
-The following features are provided with every support plan:
+Zuplo offers a variety of support options tailored toward particular uses of the
+API. The following features are provided with every support plan:
 
 - Answer questions concerning usage issues related to Zuplo platform-specific
   features, options and configurations.
@@ -67,26 +21,71 @@ The following features are provided with every support plan:
 - Access to Zuplo's customer community forums to collaborate with fellow Zuplo
   customers.
 
-The following table describes feature differences of each Zuplo support plan:
+## Support Plans
 
-| Support Feature               | Community | Standard    | Priority                                | Enterprise |
-| ----------------------------- | --------- | ----------- | --------------------------------------- | ---------- |
-| Response Times                | N/A       | Best Effort | (8am to 8pm US Eastern time (UTC−05:00) | 24/7[1]    |
-| Community Support             | Yes       | Yes         | Yes                                     | Yes        |
-| Email Support                 | No        | Yes         | Yes                                     | Yes        |
-| Private Discord/Slack Channel | No        | No          | Yes                                     | Yes        |
-| Phone Support                 | No        | No          | Yes                                     | Yes        |
+Zuplo offers the following support plans:
 
-[1] Enterprise support terms are customizable based on each contract. Zuplo
-offers up to 24/7 support with customizable response SLAs.
+| Support Offer     | Available to                                                                   |
+| ----------------- | ------------------------------------------------------------------------------ |
+| Community Support | All customers                                                                  |
+| Standard Support  | Customers with any paid subscription plan or those in the initial trial period |
+| Premium Support   | Customers who have purchased support as part of an enterprise plan             |
 
-## Email Support
+### Community support
+
+Customers with Zuplo's free subscription plan can seek support through the Zuplo
+Community. Response times may vary and are not guaranteed.
+
+### Standard support
+
+Customers with a paid Zuplo subscription plan receive standard support which
+offers access to the following channels:
+
+- Zuplo Community
+- Zuplo Email Support (best effort response times)
+
+### Premium support
+
+Customers on a Zuplo enterprise plan can choose from premium support offerings
+that include specific SLAs for response time as well as additional means of
+contact such as a private Slack channel.
+
+As part of premium support, Zuplo can also offer:
+
+- Assistance migrating or onboarding to Zuplo
+- Guidance implementing custom policies
+- Advice on best-practices designing your Zuplo API
+- Troubleshooting
+
+## Contact Methods
+
+Zuplo offers multiple methods to contact support detailed below.
+
+The following table describes the different contact methods available for each
+plan:
+
+| Support Feature               | Community | Standard | Enterprise |
+| ----------------------------- | --------- | -------- | ---------- |
+| Community Support             | Yes       | Yes      | Yes        |
+| Email Support                 | No        | Yes      | Yes        |
+| Phone Support                 | No        | No       | Yes        |
+| Private Discord/Slack Channel | No        | No       | Available  |
+
+For customers with an enterprise contract, your sales contract will indicate the
+specifics of your premium support offering.
+
+### Community Support
+
+Every customer may join the Zuplo Discord forum and chat with other customers or
+Zuplo employees.
+
+### Email Support
 
 For customers with email support, you can contact us at `support@zuplo.com`.
 Tickets will be responded to as quickly as possible and prioritized based on
 your support offering.
 
-## Private Discord/Slack Channel
+### Private Discord/Slack Channel
 
 Enterprise support contracts can chat directly with the Zuplo team in a private
 Discord or Slack channel. These channels are useful for posting feature
@@ -100,11 +99,12 @@ phone support.
 
 :::
 
-## Phone Support
+### Emergency Phone Support
 
-Customers with priority phone support can call +1 833-681-6018 to open an urgent
-support ticket. After dialing the number, you will need to enter your enterprise
-support code. This is a five digit number that has been provided to you.
+Customers with emergency phone support can call +1 833-681-6018 to open an
+emergency support ticket. After dialing the number, you will need to enter your
+enterprise support code. This is a five digit number that has been provided to
+you.
 
 After entering your support code a ticket will be opened and our on call support
 team will reach out to you within a few minutes. We suggest you sign in to
@@ -116,3 +116,23 @@ Calling this number will alert our on call team at any hour. Please only use
 this number for urgent, business critical issues.
 
 :::
+
+## Response Times
+
+For premium support plans, Zuplo offers SLAs on response times based on the
+severity of issues and the level of the plan. Zuplo uses four categories to
+define a technical issue as explained below.
+
+| Severity |                                                                                                                                                                                       | Premium (Bronze)  | Premium (Silver)   | Premium (Gold)     |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | ------------------ | ------------------ |
+| Level 0  | Zuplo's services are down resulting in a critical and immediate impact on the Customer's production environment with major business impact.                                           | 2 business hours  | 1 hour (24x7x365)  | 1 hour (24x7x365)  |
+| Level 1  | Zuplo's services are impaired resulting in a severe impact on the Customer's production environment with a partial business impact.                                                   | 4 business hours  | 4 hours (24x7x365) | 4 hours (24x7x365) |
+| Level 2  | Zuplo's services are operational, but have minor functional issues resulting in partial impact on the Customer's production or staging environment with a low impact business impact. | 8 business hours  | 4 business hours   | 4 business hours   |
+| Level 3  | Issues or questions related to development and testing.                                                                                                                               | 16 business hours | 8 business hours   | 8 business hours   |
+
+**Business Hours** means 9:00 am Pacific Time to 8:00 pm Pacific Time, Monday
+through Friday, excluding local, state, and federal holidays.
+
+**Response Time** means the time required for a support engineer to respond
+confirming receipt of the support notification and informing the customer if
+additional information is needed to proceed with analysis.
