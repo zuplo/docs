@@ -2,8 +2,9 @@
 title: Support
 ---
 
-Zuplo offers a variety of support options tailored toward particular uses of the
-API. The following features are provided with every support plan:
+This document explains the Zuplo support plans, communication methods,
+severities, and response times provided by Zuplo support. The following features
+are provided with every support plan:
 
 - Answer questions concerning usage issues related to Zuplo platform-specific
   features, options and configurations.
