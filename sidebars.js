@@ -67,6 +67,7 @@ const sidebars = {
         //"articles/monitoring",
         "articles/zuplo-in-your-stack",
         "articles/log-plugins",
+        "articles/metrics-plugins",
       ],
     },
     {
