@@ -14,7 +14,7 @@ Zuplo hosts mission-critical infrastructure for our customers and as such we tak
 
 ### Corporate Security
 
-Zuplo implements a number of security controls to ensure that only authorized Zuplo team members have access to company infrastructure. Zuplo is currently in the process of undergoing SOC 2 compliance, but this section is intended to give a high level of our security practices.
+Zuplo implements a number of security controls to ensure that only authorized Zuplo team members have access to company infrastructure. This section is intended to give a high level of our security practices.
 
 - Access to services, applications, and infrastructure is controlled via SSO using our corporate identity provider.
 - We require strong, phishing-resistant 2FA on all identity accounts.
