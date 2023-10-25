@@ -43,9 +43,13 @@ configure which metrics you want to send.
 Due to the pricing model of DataDog, we aim to be thrifty with what we send.
 Refer to
 [counting custom metrics](https://docs.datadoghq.com/account_management/billing/custom_metrics/?tab=countrate#counting-custom-metrics)
-for more information. As of October 2023, we are in the process of becoming an
-official integration with DataDog, which would reduce the way our metrics are
-counted.
+for more information. In general, try to avoid high-dimensionality/cardinality
+tags since those are counted as separate metrics. This
+[article](https://www.datadoghq.com/blog/the-power-of-tagged-metrics/) by
+DataDog has some good guidelines.
+
+As of October 2023, we are in the process of becoming an official integration
+with DataDog, which would reduce the way some of our metrics are counted.
 
 ```ts
 import {
