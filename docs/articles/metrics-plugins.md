@@ -120,9 +120,9 @@ Zuplo supports the following metrics:
 By default, we send all three to Dynatrace. However, you have the option below
 to configure which metrics you want to send.
 
-::: caution Strict format
+:::warning Strict format
 
-Dynatrace has a strict format for its payload. It also has some _surprising_
+Dynatrace has a strict format for its payload, which has some _surprising_
 requirements.
 
 From
