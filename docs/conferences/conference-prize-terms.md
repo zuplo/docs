@@ -12,7 +12,7 @@ title: Conference Prize Terms
    registered and attending the conference in-person on the standard
    presentation days (i.e. excluding and days of workshops, etc.). Ticketed
    attendees and speakers are eligible to enter. Exhibitors, sponsors, and
-   conference employees are **not** eligible.
+   conference staff are **not** eligible.
 4. In entering the prize draw, you confirm that you are eligible to do so and
    eligible to claim any prize you may win.
 5. A maximum of one entry per individual is permitted. Limit of one prize per
