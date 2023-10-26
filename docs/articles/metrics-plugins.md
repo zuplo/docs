@@ -120,6 +120,24 @@ Zuplo supports the following metrics:
 By default, we send all three to Dynatrace. However, you have the option below
 to configure which metrics you want to send.
 
+::: caution Strict format
+
+Dynatrace has a strict format for its payload. It also has some _surprising_
+requirements.
+
+From
+https://docs.dynatrace.com/docs/extend-dynatrace/extend-metrics/reference/metric-ingestion-protocol#dimension
+
+> Allowed characters for the key are lowercase letters, numbers, hyphens (-),
+> periods (.), and underscores (\_). Special letters (like ö) are not allowed.
+
+The _surprising_ part is that uppercase characters are **not** allowed.
+
+Do be mindful when you are crafting your own dimensions since an invalid
+property will cause the entire payload to be rejected.
+
+:::
+
 ```ts
 import {
   RuntimeExtensions,
