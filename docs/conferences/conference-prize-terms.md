@@ -23,7 +23,7 @@ title: Conference Prize Terms
 
 7. The prize draw will include those attendees who complete the project that is
    shared at the booth and return to the Zuplo booth to show the completed
-   quickstart to the booth staff. Entries must be received 15 minutes before the
+   quickstart to the booth staff. Entries must be received 45 minutes before the
    scheduled drawing. Entries after that time and date will not be included in
    the draw.
 8. Zuplo will not accept responsibility if contact details provided are
