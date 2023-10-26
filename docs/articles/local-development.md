@@ -115,6 +115,16 @@ running your Zuplo Gateway locally:
 - Developer Portal
 - Tunnels
 
+Additionally, any modules that you add to your package.json for local
+development will not be available when you deploy your Zuplo Gateway to the
+cloud. These modules might work locally in local development, but they will not
+be available in production. Consult https://zuplo.com/docs/articles/node-modules
+for the official list of supported modules.
+
+As of October 2023, we are looking into ways to support bringing in your own
+modules. We are proceeding carefully as we want to ensure that we can provide a
+secure and reliable experience for our users.
+
 ## Configuration for Local Development
 
 Some features of the Zuplo Gateway require additional configuration to run
