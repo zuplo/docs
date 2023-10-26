@@ -9,6 +9,7 @@ your metrics service, you can enable one of Zuplo's logging plugins. Currently,
 Zuplo supports logging to the following sources:
 
 - DataDog (Beta)
+- Dynatrace (Beta)
 
 If you would like to log to a different source, reach out to support@zuplo.com
 and we'd be happy to work with you to add a new logging plugin.
@@ -73,6 +74,13 @@ export function runtimeInit(runtime: RuntimeExtensions) {
         requestContentLength: true,
         responseContentLength: true,
       },
+      // You can also choose to add additional tags to include in the metrics.
+      // Be mindful of what other information you wish to include since it will incur costs on your cardinality
+      include: {
+        country: false,
+        method: false,
+        statusCode: false,
+      },
     })
   );
 }
@@ -95,6 +103,76 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
   const someValue = "hello";
   DataDogMetricsPlugin.setContext(context, {
     tags: [`my-custom-tag:${someValue}`],
+  });
+
+  return "What zup?";
+}
+```
+
+### Dynatrace (Beta)
+
+Zuplo supports the following metrics:
+
+- request latency
+- request content length
+- response content length
+
+By default, we send all three to Dynatrace. However, you have the option below
+to configure which metrics you want to send.
+
+```ts
+import {
+  RuntimeExtensions,
+  DynatraceMetricsPlugin,
+  environment,
+} from "@zuplo/runtime";
+
+export function runtimeInit(runtime: RuntimeExtensions) {
+  runtime.addPlugin(
+    new DynatraceMetricsPlugin({
+      // You can find the documentation on how to get your URL at
+      // https://www.dynatrace.com/support/help/dynatrace-api/environment-api/metric-v2/post-ingest-metrics#example
+      url: "https://demo.live.dynatrace.com/api/v2/metrics/ingest",
+      apiToken: environment.DYNATRACE_API_TOKEN,
+      // Dimensions should conform to Dynatrace ingest protocol
+      // See https://www.dynatrace.com/support/help/extend-dynatrace/extend-metrics/reference/metric-ingestion-protocol
+      dimensions: [
+        'app="my-service-name"',
+        `environment="${environment.ENVIRONMENT ?? "DEVELOPMENT"}"`,
+      ],
+      metrics: {
+        latency: true,
+        requestContentLength: true,
+        responseContentLength: true,
+      },
+      // You can also choose to add additional tags to include in the metrics.
+      include: {
+        country: false,
+        method: false,
+        statusCode: false,
+      },
+    })
+  );
+}
+```
+
+The above configuration applies globally for all metrics send to Dynatrace. If
+you wish to dynamically configure information for a particular ZuploContext, you
+can use the `DynatraceMetricsPlugin` in your code. Currently, the only
+configuration you can set is the dimensions. The values you set here will be
+appended to those set globally in the `zuplo.runtime.ts` file.
+
+```ts
+import {
+  ZuploContext,
+  ZuploRequest,
+  DynatraceMetricsPlugin,
+} from "@zuplo/runtime";
+
+export default async function (request: ZuploRequest, context: ZuploContext) {
+  const someValue = "hello";
+  DynatraceMetricsPlugin.setContext(context, {
+    dimentions: [`my-custom-dimension="${someValue}"`],
   });
 
   return "What zup?";
