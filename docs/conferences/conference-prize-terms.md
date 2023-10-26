@@ -45,7 +45,7 @@ title: Conference Prize Terms
 ## Winner announcement
 
 16. The winner for each day will be announced at the end of the day (6pm on
-    Wednesday, 3pm on Thursday)
+    Wednesday, 4:05pm on Thursday)
 17. The winner must be present at the time of the announcement to receive the
     prize or another winner will be selected.
 
