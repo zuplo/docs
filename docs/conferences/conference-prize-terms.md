@@ -9,9 +9,10 @@ title: Conference Prize Terms
 ## Eligibility to enter
 
 3. The prize draw is open to entrants over 18 years of age and who are
-   registered and attending the conference on the standard presentation days
-   (i.e. excluding and days of workshops, etc.). Attendees and Speakers are
-   eligible to enter. Exhibitors are **not** eligible.
+   registered and attending the conference in-person on the standard
+   presentation days (i.e. excluding and days of workshops, etc.). Ticketed
+   attendees and speakers are eligible to enter. Exhibitors, sponsors, and
+   conference employees are **not** eligible.
 4. In entering the prize draw, you confirm that you are eligible to do so and
    eligible to claim any prize you may win.
 5. A maximum of one entry per individual is permitted. Limit of one prize per
@@ -20,11 +21,11 @@ title: Conference Prize Terms
 
 ## How to enter
 
-7. The prize draw will include those attendees who complete the
-   [Conference Prize Quickstart](conference-prize.md) and return to the Zuplo
-   booth to show the completed quickstart to the booth staff. Entries must be
-   received by 4pm on October 19. Entries after that time and date will not be
-   included in the draw.
+7. The prize draw will include those attendees who complete the project that is
+   shared at the booth and return to the Zuplo booth to show the completed
+   quickstart to the booth staff. Entries must be received 15 minutes before the
+   scheduled drawing. Entries after that time and date will not be included in
+   the draw.
 8. Zuplo will not accept responsibility if contact details provided are
    incomplete or inaccurate.
 
@@ -44,7 +45,7 @@ title: Conference Prize Terms
 ## Winner announcement
 
 16. The winner for each day will be announced at the end of the day (6pm on
-    Wednesday, 4pm on Thursday)
+    Wednesday, 3pm on Thursday)
 17. The winner must be present at the time of the announcement to receive the
     prize or another winner will be selected.
 
