@@ -132,7 +132,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
     new DynatraceMetricsPlugin({
       // You can find the documentation on how to get your URL at
       // https://www.dynatrace.com/support/help/dynatrace-api/environment-api/metric-v2/post-ingest-metrics#example
-      url: "https://demo.live.dynatrace.com/api/v2/metrics/ingest"
+      url: "https://demo.live.dynatrace.com/api/v2/metrics/ingest",
       apiToken: environment.DYNATRACE_API_TOKEN,
       // Dimensions should conform to Dynatrace ingest protocol
       // See https://www.dynatrace.com/support/help/extend-dynatrace/extend-metrics/reference/metric-ingestion-protocol
