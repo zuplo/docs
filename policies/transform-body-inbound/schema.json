@@ -3,7 +3,7 @@
   "$id": "http://zuplo.com/schemas/policies/transform-body-inbound.json",
   "type": "object",
   "title": "Transform Request Body",
-  "isPreview": true,
+  "isCustom": true,
   "description": "Transform the body of an incoming request.",
   "required": ["handler"],
   "properties": {
@@ -26,15 +26,7 @@
           "required": [],
           "properties": {}
         }
-      },
-      "examples": [
-        {
-          "_name": "basic",
-          "export": "TransformBodyInbound",
-          "module": "$import(@zuplo/runtime)",
-          "options": {}
-        }
-      ]
+      }
     }
   }
 }

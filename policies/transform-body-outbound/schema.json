@@ -3,39 +3,25 @@
   "$id": "http://zuplo.com/schemas/policies/transform-body-outbound.json",
   "type": "object",
   "title": "Transform Response Body",
-  "isPreview": true,
-  "fakePolicyUrl": "https://zuplo.com/docs/policies/custom-code-outbound#writing-a-policy",
-  "description": "The best way to transform a response body is using a custom code outbound policy.",
+  "isPreview": false,
+  "isCustom": true,
+  "description": "Transform the body of an outgoing response.",
   "required": ["handler"],
   "properties": {
     "handler": {
       "type": "object",
       "default": {},
-      "required": ["export", "module", "options"],
+      "required": ["export", "module"],
       "properties": {
         "export": {
-          "const": "TransformBodyOutbound",
-          "description": "The name of the exported type"
+          "const": "default",
+          "description": "The export from the custom policy"
         },
         "module": {
-          "const": "$import(@zuplo/runtime)",
+          "const": "$import(./modules/YOUR_MODULE)",
           "description": "The module containing the policy"
-        },
-        "options": {
-          "type": "object",
-          "description": "The options for this policy",
-          "required": [],
-          "properties": {}
         }
-      },
-      "examples": [
-        {
-          "_name": "basic",
-          "export": "TransformBodyOutbound",
-          "module": "$import(@zuplo/runtime)",
-          "options": {}
-        }
-      ]
+      }
     }
   }
 }

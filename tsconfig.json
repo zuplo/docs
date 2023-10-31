@@ -4,5 +4,6 @@
   "compilerOptions": {
     "baseUrl": ".",
     "resolveJsonModule": true
-  }
+  },
+  "exclude": ["policies/**"]
 }
