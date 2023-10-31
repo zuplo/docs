@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/graphql-deph-limit-inbound.json",
+  "type": "object",
+  "title": "GraphQL Depth Limit",
+  "isPreview": false,
+  "description": "Limits incoming GraphQL queries to a maximum depth",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "GraphQLDepthLimitInboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "type": "object",
+          "description": "The options for this policy",
+          "required": [],
+          "properties": {
+            "depthLimit": {
+              "type": "number",
+              "description": "The maximum depth a query is allowed to have"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "GraphQLDepthLimitInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "depthLimit": 20
+          }
+        }
+      ]
+    }
+  }
+}
