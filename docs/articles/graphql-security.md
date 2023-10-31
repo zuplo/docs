@@ -7,7 +7,7 @@ sidebar_label: Secure your GraphQL API
 
 GraphQL is a powerful query language for your APIs. While it offers great flexibility for clients, it also exposes potential security risks. Fortunately, with Zuplo, you can secure your GraphQL API by implementing various policies. This article walks you through three crucial security policies: "GraphQL Depth Limit", "GraphQL Complexity Limit", and "GraphQL Disable Introspection".
 
-### 1. Understanding the Risks:
+### 1. Understanding the Risks
 
 #### a. Deeply Nested Queries
 
@@ -21,56 +21,122 @@ Even without deep nesting, a query can be crafted to be very complex. This could
 
 GraphQL allows clients to introspect your schema. While this is beneficial during development, it can expose detailed schema information to potential attackers in production.
 
-### 2. Example Repository
+### 2. Add your GraphQL API to Zuplo
 
-For those who prefer a hands-on approach or wish to see these configurations in action, we've created a GitHub repository with everything set up. This repository offers a comprehensive example of how to configure and secure a GraphQL API using Zuplo. Check out the [GraphQL API with Zuplo example repository](https://github.com/example/Zuplo-GraphQL-Security) to dive deeper.
+
+
 
 ### 3. Setting Up Zuplo Policies
 
-#### a. GraphQL Depth Limit:
+#### Setup POST endpoint
+If you did not already do so, you need to setup a POST endpoint in your API. This endpoint will be used to send the GraphQL queries to your API. We'll use the urlRewriteHandler to rewrite the request to your GraphQL API.
+For this example let's assume your GraphQL API is hosted at `https://api.example.com/graphql`.
 
-This policy limits how deep a query can be nested.
+To do so, add the following to your `config/routes.oas.json`
 
-1. **Setup**:
-    - Navigate to the Zuplo dashboard.
-    - Under your API settings, select "Policies".
-    - Click on "Add Policy" and choose "GraphQL Depth Limit".
+```json
+{
+  "post": {
+    "summary": "GraphQL Query",
+    "description": "The endpoint for GraphQL queries.",
+    "x-zuplo-route": {
+      "corsPolicy": "none",
+      "handler": {
+        "export": "urlRewriteHandler",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "rewritePattern": "https://api.example.com/graphql"
+        }
+      },
+      "policies": {
+        "inbound": [
+          "graphql-depth-limit",
+          "graphql-complexity-points",
+          "graphql-disable-introspection-policy"
+        ]
+      }
+    },
+    "operationId": "52bdf225-eaa7-441c-afb9-b7df046a142e"
+  }
+}
+```
 
-2. **Configuration**:
-    - Set the maximum allowed depth. For instance, a depth of 5 would allow a query with 5 levels of nesting but block anything deeper.
-    - Save your changes.
+For all the risks mentioned above, Zuplo offers policies that can be configured to protect your GraphQL API. These policies can be configured for Zuplo.
+We'll create the configuration for the three policies "graphql-depth-limit", "graphql-complexity-points" and "graphql-disable-introspection-policy" next.
+
+#### a. GraphQL Depth Limit
+
+This policy limits how deep a query can be nested. You can find the detailed documentation [here](/docs/policies/graphql-depth-limit-inbound)
+
+Add this into your `config/policies.json`
+
+```json
+{
+  "policies": [
+     {
+        "name": "graphql-depth-limit-policy",
+        "policyType": "graphql-depth-limit-inbound",
+        "handler": {
+           "export": "GraphQLDepthLimitInboundPolicy",
+           "module": "$import(@zuplo/runtime)",
+           "options": {
+              "depthLimit": 20
+           }
+        }
+     }
+   ]
+}
+```
 
 By limiting the query depth, you prevent malicious or mistakenly deep queries from consuming excessive server resources.
 
-#### b. GraphQL Complexity Limit:
+#### b. GraphQL Complexity Limit
 
 This policy defines a complexity score for each type of operation, and then it limits the total complexity a query can have.
 
-1. **Setup**:
-    - Go to the Zuplo dashboard.
-    - Under your API settings, select "Policies".
-    - Click on "Add Policy" and choose "GraphQL Complexity Limit".
-
-2. **Configuration**:
-    - You can assign complexity values to specific fields or use default values.
-    - Set a maximum allowed complexity for any single query. Any query exceeding this complexity will be blocked.
-    - Save the configurations.
+```json
+{
+  "policies": [
+     {
+        "name": "graphql-depth-limit-policy",
+        "policyType": "graphql-depth-limit-inbound",
+        "handler": {
+           "export": "GraphQLDepthLimitInboundPolicy",
+           "module": "$import(@zuplo/runtime)",
+           "options": {
+              "depthLimit": 20
+           }
+        }
+     }
+   ]
+}
+```
 
 The complexity limit ensures that a potential attacker cannot overload the system by sending overly complicated queries.
 
-#### c. GraphQL Disable Introspection:
+#### c. GraphQL Disable Introspection
 
 Disable introspection in production environments to hide schema details.
 
-1. **Setup**:
-    - Navigate to the Zuplo dashboard.
-    - Under your API settings, choose "Policies".
-    - Click "Add Policy" and select "GraphQL Disable Introspection".
-
-2. **Configuration**:
-    - It's simple: just enable the policy.
-    - Save your changes.
-
+```json
+{
+  "policies": [
+     {
+        "name": "graphql-disable-introspection-policy",
+        "policyType": "graphql-disable-introspection-inbound",
+        "handler": {
+           "export": "GraphQLDisableIntrospectionInboundPolicy",
+           "module": "$import(@zuplo/runtime)",
+           "options": {
+           }
+        }
+     }
+   ]
+}
+```
 By disabling introspection in production, you prevent attackers from gaining insights into your GraphQL schema, thereby reducing potential attack vectors.
 
+### 4. Example Repository
+
+For those who prefer a hands-on approach or wish to see these configurations in action, we've created a GitHub repository with everything set up. This repository offers a comprehensive example of how to configure and secure a GraphQL API using Zuplo. Check out the [GraphQL API with Zuplo example repository](https://github.com/example/Zuplo-GraphQL-Security) to dive deeper.
 
