@@ -1,5 +1,5 @@
 ---
-title: Securing your GraphQL API with Zuplo
+title: Secure your GraphQL API with Zuplo
 sidebar_label: GraphQL Security
 ---
 
