@@ -124,7 +124,7 @@ For premium support plans, Zuplo offers SLAs on response times based on the
 severity of issues and the level of the plan. Zuplo uses four categories to
 define a technical issue as explained below.
 
-| Severity |                                                                                                                                                                                       | Premium (Bronze)  | Premium (Silver)   | Premium (Custom) |
+| Severity |                                                                                                                                                                                       | Standard Enterprise  | Premium Enterprise   | Custom |
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | ------------------ | ---------------- |
 | Level 0  | Zuplo's services are down resulting in a critical and immediate impact on the Customer's production environment with major business impact.                                           | 2 business hours  | 2 hour (24x7x365)  | Custom agreement |
 | Level 1  | Zuplo's services are impaired resulting in a severe impact on the Customer's production environment with a partial business impact.                                                   | 4 business hours  | 4 hours (24x7x365) | Custom agreement |
