@@ -5,12 +5,14 @@ sidebar_label: WebSocket Handler
 
 The WebSocket Handler enables you to manage WebSocket connections to your
 backend WebSocket APIs. It can be configured alongside other existing policies
-like Rate Limit, API Keys, etc. and is available for use on all environments.
+like [Rate Limiting](../policies/rate-limit-inbound.md),
+[API Keys](../policies/api-key-inbound.md), etc. and is available for use on all
+environments.
 
 This handler is currently in beta and only configurable via the JSON View on a
 project's Route Designer or directly in your project's `*.oas.json` file.
 
-## Configuring the Handler
+## Setup in routes.oas.json
 
 Configuration of the WebSocket Handler is similar to other available handlers.
 Set the name of the path that your WebSocket API route will use, set the use of
@@ -45,6 +47,13 @@ Your configuration will look like below:
   }
 },
 ```
+
+## Handler Options
+
+The WebSocket Handler can be configured via `options` property. It has the
+following configuration properties
+
+- `rewritePattern` - the URL the incoming pathname will be appended to.
 
 Similar to other handlers using `rewritePattern`, it supports Javascript string
 interpolation syntax and can be used to shape the URL based on data from the
@@ -111,13 +120,6 @@ A few examples of the values of various substitutions.
 - `${search}` - `"?category=cars"`
 - `${url}` - `"https://example.com:8080/v1/products/:productId?category=cars"`
 - `${env.BASE_URL}` - `"https://example.com"`
-
-## Handler Options
-
-The WebSocket Handler can be configured via `options` property. It has the
-following configuration properties
-
-- `rewritePattern` - the URL the incoming pathname will be appended to.
 
 ## Different Backends per Environment
 
