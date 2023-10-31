@@ -93,13 +93,14 @@ This policy defines a complexity score for each type of operation, and then it l
 {
   "policies": [
      {
-        "name": "graphql-depth-limit-policy",
-        "policyType": "graphql-depth-limit-inbound",
+        "name": "graphql-complexity-limit-policy",
+        "policyType": "graphql-complexity-limit-inbound",
         "handler": {
-           "export": "GraphQLDepthLimitInboundPolicy",
+           "export": "GraphQLComplexityLimitInboundPolicy",
            "module": "$import(@zuplo/runtime)",
            "options": {
-              "depthLimit": 20
+             "complexityLimit": 50,
+             "endpointUrl": "https://api.example.com/graphql"
            }
         }
      }
