@@ -2,9 +2,9 @@
   "$schema": "https://json-schema.org/draft-07/schema",
   "$id": "http://zuplo.com/schemas/policies/graphql-complexity-limit-inbound.json",
   "type": "object",
-  "title": "GraphQL Complexity Limit",
+  "title": "GraphQL Disable Introspection",
   "isPreview": false,
-  "description": "Limits the complexity of a GraphQL query",
+  "description": "Disables introspection queries on your API. This is useful in production to prevent attackers from learning about your API. You can still keep introspection enabled for any request not going through Zuplo.",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -13,7 +13,7 @@
       "required": ["export", "module", "options"],
       "properties": {
         "export": {
-          "const": "GraphQLComplexityLimitInboundPolicy",
+          "const": "GraphQLDisableIntrospectionInboundPolicy",
           "description": "The name of the exported type"
         },
         "module": {
@@ -25,14 +25,7 @@
           "description": "The options for this policy",
           "required": [],
           "properties": {
-            "maxComplexity": {
-              "type": "number",
-              "description": "The maximum depth a query is allowed to have"
-            },
-            "endpointUrl": {
-              "type": "number",
-              "description": "The URL of the GraphQL endpoint to query"
-            }
+
           }
         }
       },
@@ -42,7 +35,7 @@
           "export": "GraphQLComplexityLimitInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "depthLimit": 20
+
           }
         }
       ]

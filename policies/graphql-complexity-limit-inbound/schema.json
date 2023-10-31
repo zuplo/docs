@@ -42,7 +42,8 @@
           "export": "GraphQLComplexityLimitInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "depthLimit": 20
+            "complexityLimit": 50,
+            "endpointUrl": "https://api.example.com/graphql"
           }
         }
       ]
