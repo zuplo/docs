@@ -5,7 +5,7 @@ sidebar_label: Secure your GraphQL API
 
 **Secure your GraphQL API with Zuplo**
 
-GraphQL is a powerful query language for your APIs. While it offers great flexibility for clients, it also exposes potential security risks. Fortunately, with Zuplo, you can secure your GraphQL API by implementing various policies. This article walks you through three crucial security policies: "GraphQL Depth Limit", "GraphQL Complexity Limit", and "GraphQL Disable Introspection".
+GraphQL is a powerful query language for your APIs. While it offers great flexibility for clients, it also exposes potential security risks. Fortunately, with Zuplo, you can secure your GraphQL API by implementing various policies. This article walks you through three crucial security policies: [GraphQL Depth Limit](docs/policies/graphql-depth-limit-inbound), [GraphQL Complexity Limit](docs/policies/graphql-complexity-limit-inbound), and [GraphQL Disable Introspection](/docs/policies/graphql-disable-introspection-inbound).
 
 ### 1. Understanding the Risks
 
@@ -22,8 +22,6 @@ Even without deep nesting, a query can be crafted to be very complex. This could
 GraphQL allows clients to introspect your schema. While this is beneficial during development, it can expose detailed schema information to potential attackers in production.
 
 ### 2. Add your GraphQL API to Zuplo
-
-
 
 
 ### 3. Setting Up Zuplo Policies
