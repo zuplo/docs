@@ -32,10 +32,9 @@
       "examples": [
         {
           "_name": "basic",
-          "export": "GraphQLComplexityLimitInboundPolicy",
+          "export": "GraphQLDisableIntrospectionInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-
           }
         }
       ]
