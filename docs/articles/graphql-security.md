@@ -21,10 +21,7 @@ Even without deep nesting, a query can be crafted to be very complex. This could
 
 GraphQL allows clients to introspect your schema. While this is beneficial during development, it can expose detailed schema information to potential attackers in production.
 
-### 2. Add your GraphQL API to Zuplo
-
-
-### 3. Setting Up Zuplo Policies
+### 2. Add your GraphQL API & setting up Policies
 
 #### Setup POST endpoint
 If you did not already do so, you need to setup a POST endpoint in your API. This endpoint will be used to send the GraphQL queries to your API. We'll use the urlRewriteHandler to rewrite the request to your GraphQL API.
