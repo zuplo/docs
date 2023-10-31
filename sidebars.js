@@ -120,6 +120,7 @@ const sidebars = {
         "articles/handling-form-data",
         "articles/testing-graphql",
         "articles/gke-with-upstream-auth-policy",
+        "articles/graphql-security",
       ],
     },
     {
