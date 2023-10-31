@@ -16,7 +16,7 @@ type PolicySchema = JSONSchema7 & {
   isPreview?: boolean;
   isDeprecated?: boolean;
   isPaidAddOn?: boolean;
-  fakePolicyUrl?: string;
+  isCustom?: boolean;
 };
 
 type PolicyProperties = Record<
@@ -75,7 +75,7 @@ const PolicyOptions = ({
         <code>handler/module</code> the module containing the policy. Value
         should be <code>{properties.module.const}</code>.
       </li>
-      {properties.options ? (
+      {properties.options && Object.keys(properties.options).length > 0 ? (
         <li>
           <code>handler/options</code> The options for this policy:
           <OptionProperties properties={properties.options.properties} />
@@ -117,6 +117,7 @@ function getPolicyFilePaths(policyId) {
     iconSvg: path.join(policiesDir, policyId, "icon.svg"),
     introMd: path.join(policiesDir, policyId, "intro.md"),
     docMd: path.join(policiesDir, policyId, "doc.md"),
+    policyTs: path.join(policiesDir, policyId, "policy.ts"),
   };
 }
 
@@ -135,19 +136,44 @@ async function generateMarkdown(
     docMd = await readFile(policyFilePaths.docMd, "utf-8");
   }
 
-  const { examples } = schema.properties.handler as any;
-  if (!Array.isArray(examples) || examples.length === 0) {
+  let code: any;
+  const { examples } = schema.properties?.handler as any;
+  if (schema.isCustom) {
+    code = {
+      name: policyId,
+      policyType: policyId.endsWith("-inbound")
+        ? "custom-code-inbound"
+        : "custom-code-outbound",
+      handler: {
+        export: "default",
+        module: `$import(./modules/${policyId})`,
+      },
+    };
+  } else if (examples && examples.length > 0) {
+    const example = { ...examples[0] };
+    delete example._name;
+    code = {
+      name: `my-${policyId}-policy`,
+      policyType: policyId,
+      handler: example,
+    };
+  } else {
     throw new Error(`There are no examples set for policy ${policyId}`);
   }
 
-  const copy = { ...examples[0] };
-  delete copy._name;
+  let customCode = "";
 
-  const code = {
-    name: `my-${policyId}-policy`,
-    policyType: policyId,
-    handler: copy,
-  };
+  if (schema.isCustom && existsSync(policyFilePaths.policyTs)) {
+    const policyTs = await readFile(policyFilePaths.policyTs, "utf-8");
+    customCode = `
+# Example Custom Policy
+
+The code below shows an example of what the custom policy would look like.
+
+\`\`\`ts title="modules/${policyId}.ts"
+${policyTs}
+\`\`\``;
+  }
 
   const optionsHtml = renderToStaticMarkup(
     <PolicyOptions schema={schema} policyId={policyId} />
@@ -166,6 +192,8 @@ ${introMd ?? schema.description}
 <PolicyStatus isPreview={${schema.isPreview ?? false}} isPaidAddOn={${
     schema.isPaidAddOn ?? false
   }} />
+
+${customCode}
 
 ## Configuration 
 
@@ -230,8 +258,8 @@ async function run() {
     meta.name = schema.title;
     meta.isPreview = !!schema.isPreview;
     meta.isPaidAddOn = !!schema.isPaidAddOn;
+    meta.isCustom = !!schema.isCustom;
     meta.isDeprecated = !!schema.isDeprecated;
-    meta.fakePolicyUrl = schema.fakePolicyUrl;
     meta.documentationUrl = `https://zuplo.com/docs/policies/${policyId}/`;
     meta.id = policyId;
 
@@ -245,7 +273,12 @@ async function run() {
     }
 
     const { examples } = schema.properties?.handler as any;
-    if (examples && examples.length > 0) {
+    if (schema.isCustom) {
+      meta.defaultHandler = {
+        export: "default",
+        module: `$import(./modules/${policyId})`,
+      };
+    } else if (examples && examples.length > 0) {
       const example = { ...examples[0] };
       delete example._name;
       meta.defaultHandler = example;
@@ -263,13 +296,25 @@ async function run() {
         options: {},
       };
     }
-    meta.exampleHtml = await getExampleHtml(policyId, schemaPath, schema);
+    if (schema.isCustom && existsSync(policyFilePaths.introMd)) {
+      const intro = await readFile(policyFilePaths.introMd, "utf-8");
+      const { html } = await render(intro);
+      meta.exampleHtml = html;
+    } else {
+      meta.exampleHtml = await getExampleHtml(policyId, schemaPath, schema);
+    }
 
     if (existsSync(policyFilePaths.iconSvg)) {
       const svg = await readFile(policyFilePaths.iconSvg, "utf-8");
       const src = `data:image/svg+xml;base64,${btoa(svg)}`;
       meta.icon = src;
     }
+
+    if (schema.isCustom && existsSync(policyFilePaths.policyTs)) {
+      const policyTs = await readFile(policyFilePaths.policyTs, "utf-8");
+      meta.customPolicyTemplate = policyTs;
+    }
+
     policies.push(meta);
 
     const generatedMd = await generateMarkdown(
@@ -385,6 +430,9 @@ async function getExampleHtml(
 
   const properties = (schema.properties.handler as any).properties.options
     ?.properties;
+  if (!properties) {
+    return;
+  }
   if (properties && Object.keys(properties).length === 0) {
     console.warn(
       chalk.yellow(
@@ -396,7 +444,7 @@ async function getExampleHtml(
   const html = renderToStaticMarkup(
     <>
       <div dangerouslySetInnerHTML={{ __html: description }} />
-      {Object.keys(properties).length >= 0 ? (
+      {Object.keys(properties).length > 0 ? (
         <>
           <h3>Options</h3>
           <OptionProperties properties={properties} />{" "}

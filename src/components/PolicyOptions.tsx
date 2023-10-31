@@ -32,10 +32,13 @@ const PolicyOptions = ({
         <code>handler/module</code> the module containing the policy. Value
         should be <code>{properties.module.const}</code>.
       </li>
-      <li className={styles.description}>
-        <code>handler/options</code> The options for this policy:
-        <OptionProperties properties={properties.options.properties} />
-      </li>
+      {properties.options?.properties &&
+      Object.keys(properties.options.properties).length > 0 ? (
+        <li className={styles.description}>
+          <code>handler/options</code> The options for this policy:
+          <OptionProperties properties={properties.options.properties} />
+        </li>
+      ) : null}
     </ul>
   );
 };
