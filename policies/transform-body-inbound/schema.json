@@ -10,21 +10,15 @@
     "handler": {
       "type": "object",
       "default": {},
-      "required": ["export", "module", "options"],
+      "required": ["export", "module"],
       "properties": {
         "export": {
-          "const": "TransformBodyInbound",
-          "description": "The name of the exported type"
+          "const": "default",
+          "description": "The export from the custom policy"
         },
         "module": {
-          "const": "$import(@zuplo/runtime)",
+          "const": "$import(./modules/YOUR_MODULE)",
           "description": "The module containing the policy"
-        },
-        "options": {
-          "type": "object",
-          "description": "The options for this policy",
-          "required": [],
-          "properties": {}
         }
       }
     }

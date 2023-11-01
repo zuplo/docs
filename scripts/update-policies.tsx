@@ -168,7 +168,7 @@ async function generateMarkdown(
     customCode = `
 # Example Custom Policy
 
-The code below shows an example of what the custom policy would look like.
+The code below is an example of how this custom policy module could be implemented.
 
 \`\`\`ts title="modules/${policyId}.ts"
 ${policyTs}
@@ -185,6 +185,12 @@ sidebar_label: ${schema.title}
 
 <!-- WARNING: This document is generated. DO NOT EDIT BY HAND -->
 
+${
+  schema.isCustom
+    ? `<CustomPolicyNotice name="${schema.title}" id="${policyId}" />`
+    : null
+}
+
 <!-- start: intro.md -->
 ${introMd ?? schema.description}
 <!-- end: intro.md -->
@@ -193,11 +199,19 @@ ${introMd ?? schema.description}
     schema.isPaidAddOn ?? false
   }} />
 
+
+
 ${customCode}
 
 ## Configuration 
 
-\`\`\`json
+${
+  schema.isCustom
+    ? `The example below shows how to configure a custom code policy in the 'policies.json' document that utilizes the above example policy code.`
+    : `The configuration shows how to configure the policy in the 'policies.json' document.`
+}
+
+\`\`\`json title="config/policies.json"
 ${JSON.stringify(code, null, 2)}
 \`\`\`
 
