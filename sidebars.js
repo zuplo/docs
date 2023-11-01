@@ -312,6 +312,7 @@ const sidebars = {
             "cli/authentication",
             "cli/convert",
             "cli/deployments",
+            "cli/project",
             "cli/test",
             "cli/tunnels",
             "cli/variables",
