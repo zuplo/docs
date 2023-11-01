@@ -1,10 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/transform-body-outbound.json",
+  "$id": "http://zuplo.com/schemas/policies/ab-test-outbound.json",
   "type": "object",
-  "title": "Transform Response Body",
+  "title": "A/B Test Outbound",
   "isCustom": true,
-  "description": "Transform the body of an outgoing response.",
+  "description": "An A/B test policy is used to handle responses differently based on parameters such as user, ip, etc.",
   "required": ["handler"],
   "properties": {
     "handler": {

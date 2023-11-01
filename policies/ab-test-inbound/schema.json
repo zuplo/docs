@@ -3,54 +3,24 @@
   "$id": "http://zuplo.com/schemas/policies/ab-test-inbound.json",
   "type": "object",
   "title": "A/B Test Inbound",
-  "isPreview": true,
-  "description": "The A/B test policy is used to handle requests differently based on parameters such as user, ip, etc.",
+  "isCustom": true,
+  "description": "An A/B test policy is used to handle requests differently based on parameters such as user, ip, etc.",
   "required": ["handler"],
   "properties": {
     "handler": {
       "type": "object",
       "default": {},
-      "required": ["export", "module", "options"],
+      "required": ["export", "module"],
       "properties": {
         "export": {
-          "const": "ABTestInbound",
-          "description": "The name of the exported type"
+          "const": "default",
+          "description": "The export from the custom policy"
         },
         "module": {
-          "const": "$import(@zuplo/runtime)",
+          "const": "$import(./modules/YOUR_MODULE)",
           "description": "The module containing the policy"
-        },
-        "options": {
-          "type": "object",
-          "description": "The options for this policy",
-          "required": ["testKey", "modifier"],
-          "properties": {
-            "testKey": {
-              "type": "string",
-              "default": "${user.sub}",
-              "description": "The key to use for determining the group the request belongs"
-            },
-            "modifier": {
-              "description": "The function that modifies the request based on the test key",
-              "$ref": "../shared.json#/definitions/optionsFunction"
-            }
-          }
         }
-      },
-      "examples": [
-        {
-          "_name": "basic",
-          "export": "ABTestInbound",
-          "module": "$import(@zuplo/runtime)",
-          "options": {
-            "testKey": "${user.sub}",
-            "modifier": {
-              "module": "$import(./modules/ab-test)",
-              "export": "abTestModifier"
-            }
-          }
-        }
-      ]
+      }
     }
   }
 }
