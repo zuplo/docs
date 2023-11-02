@@ -756,6 +756,11 @@
       "source": "/docs/articles/supabase-auth{/}?",
       "destination": "/docs/articles/dev-portal-supabase-auth",
       "permanent": true
+    },
+    {
+      "source": "/docs/policies/brown-out-inbound{/}?",
+      "destination": "/docs/policies/brownout-inbound",
+      "permanent": true
     }
   ],
   "headers": [
