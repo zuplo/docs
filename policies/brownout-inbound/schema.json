@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/brown-out-inbound.json",
+  "type": "object",
+  "title": "Brown Out",
+  "description": "Set periods of downtime based on cron schedules. Useful for alerting users of impending deprecations.",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "BrownOutInbound",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "type": "object",
+          "description": "The options for this policy",
+          "required": ["cronSchedule"],
+          "properties": {
+            "cronSchedule": {
+              "oneOf": [
+                { "type": "string" },
+                { "type": "array", "item": { "type": "string" } }
+              ],
+              "description": "The cron schedule for when this policy is enabled. This can be a single cron string or an array of multiple cron strings"
+            },
+            "problem": {
+              "type": "object",
+              "description": "The problem that is returned in the response body when this policy is enabled",
+              "additionalProperties": true,
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "The type of problem"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "The title of problem"
+                },
+                "detail": {
+                  "type": "string",
+                  "description": "The detail of problem"
+                },
+                "status": {
+                  "type": "number",
+                  "description": "Http status code of the problem"
+                }
+              }
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "export": "BrownOutInbound",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "cronSchedule": "0 23 * * *",
+            "problem": {
+              "detail": "This endpoint is deprecated and will be removed in the next version"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

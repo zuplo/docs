@@ -188,7 +188,7 @@ sidebar_label: ${schema.title}
 ${
   schema.isCustom
     ? `<CustomPolicyNotice name="${schema.title}" id="${policyId}" />`
-    : null
+    : ""
 }
 
 <!-- start: intro.md -->
