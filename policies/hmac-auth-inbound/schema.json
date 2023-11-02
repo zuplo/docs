@@ -3,8 +3,7 @@
   "$id": "http://zuplo.com/schemas/policies/hmac-auth-inbound.json",
   "type": "object",
   "title": "HMAC Auth",
-  "isPreview": true,
-  "isPaidAddOn": true,
+  "isCustom": true,
   "description": "Authenticate requests using the HMAC-SHA256 authentication scheme.",
   "required": ["handler"],
   "properties": {
@@ -14,26 +13,38 @@
       "required": ["export", "module", "options"],
       "properties": {
         "export": {
-          "const": "HMACAuthInbound",
-          "description": "The name of the exported type"
+          "const": "default",
+          "description": "The export from the custom policy"
         },
         "module": {
-          "const": "$import(@zuplo/runtime)",
+          "const": "$import(./modules/YOUR_MODULE)",
           "description": "The module containing the policy"
         },
         "options": {
           "type": "object",
           "description": "The options for this policy",
-          "required": [],
-          "properties": {}
+          "required": ["secret", "headerName"],
+          "properties": {
+            "secret": {
+              "type": "string",
+              "description": "The secret to use for HMAC authentication"
+            },
+            "headerName": {
+              "type": "string",
+              "description": "The header where the HMAC signature is send"
+            }
+          }
         }
       },
       "examples": [
         {
           "_name": "basic",
-          "export": "HMACAuthInbound",
-          "module": "$import(@zuplo/runtime)",
-          "options": {}
+          "export": "default",
+          "module": "$import(./modules/YOUR_MODULE)",
+          "options": {
+            "secret": "$env(MY_SECRET)",
+            "headerName": "signed-request"
+          }
         }
       ]
     }
