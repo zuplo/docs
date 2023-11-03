@@ -8,7 +8,7 @@ sending metrics to a variety of services. If you want your logs to be sent to
 your metrics service, you can enable one of Zuplo's logging plugins. Currently,
 Zuplo supports logging to the following sources:
 
-- DataDog (Beta)
+- Datadog (Beta)
 - Dynatrace (Beta)
 
 If you would like to log to a different source, reach out to support@zuplo.com
@@ -30,7 +30,7 @@ enabled.
 
 Below, you will find details on each metrics plugin.
 
-### Data Dog (Beta)
+### Datadog (Beta)
 
 Zuplo supports the following metrics:
 
@@ -38,19 +38,19 @@ Zuplo supports the following metrics:
 - request content length
 - response content length
 
-By default, we send all three to DataDog. However, you have the option below to
+By default, we send all three to Datadog. However, you have the option below to
 configure which metrics you want to send.
 
-Due to the pricing model of DataDog, we aim to be thrifty with what we send.
+Due to the pricing model of Datadog, we aim to be thrifty with what we send.
 Refer to
 [counting custom metrics](https://docs.datadoghq.com/account_management/billing/custom_metrics/?tab=countrate#counting-custom-metrics)
 for more information. In general, try to avoid high-dimensionality/cardinality
 tags since those are counted as separate metrics. This
 [article](https://www.datadoghq.com/blog/the-power-of-tagged-metrics/) by
-DataDog has some good guidelines.
+Datadog has some good guidelines.
 
 As of October 2023, we are in the process of becoming an official integration
-with DataDog, which would reduce the way some of our metrics are counted.
+with Datadog, which would reduce the way some of our metrics are counted.
 
 ```ts
 import {
@@ -62,7 +62,7 @@ import {
 export function runtimeInit(runtime: RuntimeExtensions) {
   runtime.addPlugin(
     new DataDogMetricsPlugin({
-      apiKey: environment.DATA_DOG_API_KEY,
+      apiKey: environment.DATADOG_API_KEY,
       // You can add what tags you want.
       // See https://docs.datadoghq.com/tagging/#defining-tags for more information
       tags: [
@@ -86,7 +86,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 }
 ```
 
-The above configuration applies globally for all metrics send to DataDog. If you
+The above configuration applies globally for all metrics send to Datadog. If you
 wish to dynamically configure information for a particular ZuploContext, you can
 use the `DataDogMetricsPlugin` in your code. Currently, the only configuration
 you can set is the tags. The values you set here will be appended to those set
