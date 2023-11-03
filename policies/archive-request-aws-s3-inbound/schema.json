@@ -1,10 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/archive-request-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/archive-request-aws-s3-inbound.json",
   "type": "object",
-  "title": "Archive Request to Storage",
-  "isPreview": true,
-  "description": "Archive incoming requests to S3 compatible storage. Works with any storage provider compatible with S3 APIs such as AWS S3, GCP Cloud Storage, and Azure Blob Storage.",
+  "title": "Archive Request to AWS S3",
+  "isCustom": true,
+  "description": "Archive the incoming request body to AWS S3 storage",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -13,11 +13,11 @@
       "required": ["export", "module", "options"],
       "properties": {
         "export": {
-          "const": "ArchiveRequestInbound",
+          "const": "default",
           "description": "The name of the exported type"
         },
         "module": {
-          "const": "$import(@zuplo/runtime)",
+          "const": "$import(./modules/YOUR_MODULE)",
           "description": "The module containing the policy"
         },
         "options": {
@@ -25,6 +25,10 @@
           "description": "The options for this policy",
           "required": [],
           "properties": {
+            "region": {
+              "type": "string",
+              "description": "The AWS region where the bucket is located"
+            },
             "bucketName": {
               "type": "string",
               "description": "The name of the storage bucket"
@@ -47,11 +51,12 @@
       "examples": [
         {
           "_name": "basic",
-          "export": "ArchiveRequestInbound",
+          "export": "ArchiveResponseOutbound",
           "module": "$import(@zuplo/runtime)",
           "options": {
+            "region": "us-east-1",
             "bucketName": "test-bucket-123.s3.amazonaws.com",
-            "path": "requests/",
+            "path": "responses/",
             "accessKeyId": "$env(AWS_ACCESS_KEY_ID)",
             "accessKeySecret": "$env(AWS_ACCESS_KEY_SECRET)"
           }

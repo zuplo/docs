@@ -761,6 +761,16 @@
       "source": "/docs/policies/brown-out-inbound{/}?",
       "destination": "/docs/policies/brownout-inbound",
       "permanent": true
+    },
+    {
+      "source": "/docs/policies/archive-request-outbound{/}?",
+      "destination": "/docs/policies/archive-request-aws-s3-outbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/archive-request-inbound{/}?",
+      "destination": "/docs/policies/archive-request-aws-s3-inbound",
+      "permanent": true
     }
   ],
   "headers": [

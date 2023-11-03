@@ -138,7 +138,15 @@ async function generateMarkdown(
 
   let code: any;
   const { examples } = schema.properties?.handler as any;
-  if (schema.isCustom) {
+  if (examples && examples.length > 0) {
+    const example = { ...examples[0] };
+    delete example._name;
+    code = {
+      name: `my-${policyId}-policy`,
+      policyType: policyId,
+      handler: example,
+    };
+  } else if (schema.isCustom) {
     code = {
       name: policyId,
       policyType: policyId.endsWith("-inbound")
@@ -148,14 +156,6 @@ async function generateMarkdown(
         export: "default",
         module: `$import(./modules/${policyId})`,
       },
-    };
-  } else if (examples && examples.length > 0) {
-    const example = { ...examples[0] };
-    delete example._name;
-    code = {
-      name: `my-${policyId}-policy`,
-      policyType: policyId,
-      handler: example,
     };
   } else {
     throw new Error(`There are no examples set for policy ${policyId}`);
