@@ -12,7 +12,7 @@ help so don't hesitate to contact us if you have any questions.
 
 One of the most critical things to have ready before going live is
 observability. Of course, Zuplo can help with this and we have observability
-integrations for DataDog, GCP Cloud Logging, AWS, Loki Grafana and more
+integrations for Datadog, GCP Cloud Logging, AWS, Loki Grafana and more
 ([just ask](mailto:support@zuplo.com)) available as part of our enterprise
 offerings. Additionally, we have advanced analytics in Zuplo - this is available
 for all tiers in working-copy and for as part of an enterprise agreement for

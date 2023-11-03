@@ -8,7 +8,7 @@ to your own logging service, you can enable one of Zuplo's logging plugins.
 Currently, Zuplo supports logging to the following sources:
 
 - AWS CloudWatch
-- DataDog
+- Datadog
 - Dynatrace
 - Google Cloud Logging
 - Loki
@@ -56,7 +56,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 }
 ```
 
-### Data Dog
+### Datadog
 
 ```ts
 import {
@@ -69,7 +69,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
   runtime.addPlugin(
     new DataDogLoggingPlugin({
       url: "https://http-intake.logs.datadoghq.com/api/v2/logs",
-      apiKey: environment.DATA_DOG_API_KEY,
+      apiKey: environment.DATADOG_API_KEY,
     })
   );
 }
