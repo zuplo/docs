@@ -231,13 +231,21 @@ const sidebars = {
             },
             {
               type: "category",
+              label: "Async & Archival",
+              items: [
+                "policies/archive-request-azure-storage-inbound",
+                "policies/archive-request-aws-s3-inbound",
+                "policies/archive-response-azure-storage-outbound",
+                "policies/archive-response-aws-s3-outbound",
+              ],
+            },
+            {
+              type: "category",
               label: "Other",
               items: [
                 "policies/composite-inbound",
                 "policies/brownout-inbound",
                 "policies/caching-inbound",
-                "policies/archive-request-inbound",
-                "policies/archive-response-outbound",
                 "policies/custom-code-inbound",
                 "policies/custom-code-outbound",
               ],
