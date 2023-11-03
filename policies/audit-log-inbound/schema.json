@@ -5,7 +5,6 @@
   "title": "Audit Logs Inbound",
   "description": "Capture detailed logs of requests for auditing purposes",
   "required": ["handler"],
-  "isPreview": true,
   "isPaidAddOn": true,
   "properties": {
     "handler": {
@@ -47,8 +46,7 @@
               "description": "if the route parameters should be logged (i.e. the value of `customerId` in the route `/customers/:customerId`)"
             },
             "metadata": {
-              "description": "A function to add additional data to the audit logs",
-              "$ref": "../shared.json#/definitions/optionsFunction"
+              "description": "A function to add additional data to the audit logs"
             }
           }
         }

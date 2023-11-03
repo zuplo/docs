@@ -3,8 +3,8 @@
   "$id": "http://zuplo.com/schemas/policies/ip-restriction-inbound.json",
   "type": "object",
   "title": "IP Restriction",
-  "isPreview": true,
-  "description": "Block requests based on their IP address.",
+  "isCustom": true,
+  "description": "Block or allow requests based on their IP address.",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -13,11 +13,11 @@
       "required": ["export", "module", "options"],
       "properties": {
         "export": {
-          "const": "IPRestrictionInbound",
+          "const": "default",
           "description": "The name of the exported type"
         },
         "module": {
-          "const": "$import(@zuplo/runtime)",
+          "const": "$import(./modules/YOUR_MODULE)",
           "description": "The module containing the policy"
         },
         "options": {
@@ -25,12 +25,19 @@
           "description": "The options for this policy",
           "required": [],
           "properties": {
-            "ipAddresses": {
+            "allowedIpAddresses": {
               "type": "array",
               "items": {
                 "type": "string"
               },
-              "description": "The IP addresses or CIDR ranges to block"
+              "description": "The IP addresses or CIDR ranges to allow"
+            },
+            "blockedIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The IP addresses or CIDR ranges to allow"
             }
           }
         }
@@ -38,10 +45,10 @@
       "examples": [
         {
           "_name": "basic",
-          "export": "IPRestrictionInbound",
-          "module": "$import(@zuplo/runtime)",
+          "export": "default",
+          "module": "$import(./modules/YOUR_MODULE)",
           "options": {
-            "ipAddresses": ["1.1.1.1"]
+            "allowedIpAddresses": ["184.42.1.4", "102.1.5.2/24"]
           }
         }
       ]

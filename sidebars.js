@@ -154,6 +154,16 @@ const sidebars = {
             },
             {
               type: "category",
+              label: "Authorization",
+              items: [
+                "policies/acl-policy-inbound",
+                "policies/rbac-policy-inbound",
+                "policies/geo-filter-inbound",
+                "policies/ip-restriction-inbound",
+              ],
+            },
+            {
+              type: "category",
               label: "Security & Validation",
               items: [
                 "policies/rate-limit-inbound",
@@ -161,6 +171,7 @@ const sidebars = {
                 "policies/request-validation-inbound",
                 "policies/bot-detection-inbound",
                 "policies/require-origin-inbound",
+                "policies/request-size-limit-inbound",
               ],
             },
             {
@@ -180,16 +191,6 @@ const sidebars = {
                 "policies/ab-test-inbound",
                 "policies/mock-api-inbound",
                 "policies/sleep-inbound",
-              ],
-            },
-            {
-              type: "category",
-              label: "Request Filtering",
-              items: [
-                "policies/acl-policy-inbound",
-                "policies/geo-filter-inbound",
-                "policies/ip-restriction-inbound",
-                "policies/request-size-limit-inbound",
               ],
             },
             {

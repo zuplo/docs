@@ -2,9 +2,9 @@
   "$schema": "https://json-schema.org/draft-07/schema",
   "$id": "http://zuplo.com/schemas/policies/acl-policy-inbound.json",
   "type": "object",
-  "title": "Access Control List",
+  "title": "RBAC Authorization",
   "isCustom": true,
-  "description": "The access control list inbound policy limits access to resources based on parameters on the authenticated user.",
+  "description": "The RBAC authorization inbound policy limits access to resources based on the roles of the authenticated user.",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -23,14 +23,14 @@
         "options": {
           "type": "object",
           "description": "The options for this policy",
-          "required": ["users"],
+          "required": ["policies"],
           "properties": {
-            "users": {
+            "allowedRoles": {
               "type": "array",
-              "description": "The list of users authorized to access the resource",
+              "default": [],
+              "description": "The roles allowed to access the resource",
               "items": {
-                "type": "string",
-                "description": "The user's sub"
+                "type": "string"
               }
             }
           }
@@ -42,7 +42,7 @@
           "export": "default",
           "module": "$import(./modules/YOUR_MODULE)",
           "options": {
-            "users": ["google|12345", "google|23456"]
+            "allowedRoles": ["admin", "editor"]
           }
         }
       ]

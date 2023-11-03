@@ -3,7 +3,6 @@
   "$id": "http://zuplo.com/schemas/policies/ldap-auth-inbound.json",
   "type": "object",
   "title": "LDAP Auth",
-  "isPreview": true,
   "isPaidAddOn": true,
   "description": "Authenticate requests using an LDAP server",
   "required": ["handler"],

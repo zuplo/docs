@@ -3,7 +3,6 @@
   "$id": "http://zuplo.com/schemas/policies/quota-inbound.json",
   "type": "object",
   "title": "Quota",
-  "isPreview": true,
   "isPaidAddOn": true,
   "description": "Enforce quota policies on requests",
   "required": ["handler"],
