@@ -7,7 +7,9 @@ title: Testing
 These instructions assume that you are using custom GitHub Action workflow, in
 conjunction with the Zuplo deployer. If you prefer setting up your own CI/CD for
 more fine-grained control, please take a look at
-[running your own CI/CD](../articles/custom-ci-cd.md). :::
+[running your own CI/CD](../articles/custom-ci-cd.md).
+
+:::
 
 Using the Zuplo GitHub integration, tests can be run after a deployment with the
 Zuplo deployer and used to block pull requests from being merged. This can help
@@ -142,7 +144,7 @@ describe("[#labelA #labelB] Addition", () => {
 
 ## Unit Tests & Mocking
 
-::: caution Advanced
+:::caution Advanced
 
 Custom testing can be complicated and is best used only to test your own logic
 rather than trying to mock large portions of your API Gateway.
