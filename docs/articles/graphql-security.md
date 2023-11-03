@@ -45,8 +45,7 @@ To do so, add the following to your `config/routes.oas.json`
       },
       "policies": {
         "inbound": [
-          "graphql-depth-limit",
-          "graphql-complexity-points",
+          "graphql-complexity-limit-policy",
           "graphql-disable-introspection-policy"
         ]
       }
@@ -61,7 +60,7 @@ We'll create the configuration for the three policies "graphql-depth-limit", "gr
 
 #### a. GraphQL Depth Limit
 
-This policy limits how deep a query can be nested. You can find the detailed documentation [here](/docs/policies/graphql-depth-limit-inbound)
+This policy limits how deep a query can be nested. You can find the detailed documentation [here](/docs/policies/graphql-complexity-limit-inbound)
 
 Add this into your `config/policies.json`
 
@@ -69,13 +68,15 @@ Add this into your `config/policies.json`
 {
   "policies": [
      {
-        "name": "graphql-depth-limit-policy",
-        "policyType": "graphql-depth-limit-inbound",
+        "name": "graphql-complexity-limit-policy",
+        "policyType": "graphql-complexity-limit-inbound",
         "handler": {
-           "export": "GraphQLDepthLimitInboundPolicy",
-           "module": "$import(@zuplo/runtime)",
+           "export": "GraphQLComplexityLimitInboundPolicy",
+           "module": "$import(@zuplo/graphql)",
            "options": {
-              "depthLimit": 20
+              "useDepthLimit": {
+                "depthLimit": 20
+              }
            }
         }
      }
@@ -87,7 +88,8 @@ By limiting the query depth, you prevent malicious or mistakenly deep queries fr
 
 #### b. GraphQL Complexity Limit
 
-This policy defines a complexity score for each type of operation, and then it limits the total complexity a query can have.
+We can extend the same policy to also check for compexity. By defining a max for each type of operation, and then it limits the total complexity a query can have.
+In order to use the Complexity Limit you need to allow introspection in your GraphQL API.
 
 ```json
 {
@@ -97,10 +99,15 @@ This policy defines a complexity score for each type of operation, and then it l
         "policyType": "graphql-complexity-limit-inbound",
         "handler": {
            "export": "GraphQLComplexityLimitInboundPolicy",
-           "module": "$import(@zuplo/runtime)",
+           "module": "$import(@zuplo/graphql)",
            "options": {
-             "complexityLimit": 50,
-             "endpointUrl": "https://api.example.com/graphql"
+             "useDepthLimit": {
+               "depthLimit": 20
+             },
+             "useComplexityLimit": {
+               "complexityLimit": 50,
+               "endpointUrl": "https://api.example.com/graphql"  
+             }
            }
         }
      }
@@ -122,7 +129,7 @@ Disable introspection in production environments to hide schema details.
         "policyType": "graphql-disable-introspection-inbound",
         "handler": {
            "export": "GraphQLDisableIntrospectionInboundPolicy",
-           "module": "$import(@zuplo/runtime)",
+           "module": "$import(@zuplo/graphql)",
            "options": {
            }
         }
