@@ -17,7 +17,7 @@
           "description": "The name of the exported type"
         },
         "module": {
-          "const": "$import(@zuplo/runtime)",
+          "const": "$import(@zuplo/graphql)",
           "description": "The module containing the policy"
         },
         "options": {
@@ -25,13 +25,21 @@
           "description": "The options for this policy",
           "required": [],
           "properties": {
-            "maxComplexity": {
-              "type": "number",
-              "description": "The maximum depth a query is allowed to have"
+            "useComplexityLimit": {
+              "maxComplexity": {
+                "type": "number",
+                "description": "The maximum depth a query is allowed to have"
+              },
+              "endpointUrl": {
+                "type": "number",
+                "description": "The URL of the GraphQL endpoint to query"
+              }
             },
-            "endpointUrl": {
-              "type": "number",
-              "description": "The URL of the GraphQL endpoint to query"
+            "useDepthLimit": {
+              "maxDepth": {
+                "type": "number",
+                "description": "The maximum depth a query is allowed to have"
+              }
             }
           }
         }
@@ -40,7 +48,7 @@
         {
           "_name": "basic",
           "export": "GraphQLComplexityLimitInboundPolicy",
-          "module": "$import(@zuplo/runtime)",
+          "module": "$import(@zuplo/graphql)",
           "options": {
             "complexityLimit": 50,
             "endpointUrl": "https://api.example.com/graphql"

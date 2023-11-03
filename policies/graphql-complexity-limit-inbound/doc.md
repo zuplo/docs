@@ -1,11 +1,40 @@
 ## GraphQL Complexity Limit
 
-This policy allows you to add a simple limit the complexity of a GraphQL query.
+This policy allows you to add a limit for the depth and a limit for the complexity of a GraphQL query.
 
-- **maxComplexity** - Total complexity a GraphQL query is allowed to query for.
-- **endpointUrl** - The GraphQL endpoint to query, introspection must be allowed.
+### Depth Limit
 
+Limit the depth a GraphQL query is allowed to query for.
+
+- **maxDepth** - Number of levels a GraphQL query is allowed to query for.
+
+This allows you to limit the depth of a GraphQL query. This is useful to prevent
+DoS attacks on your GraphQL server.
+
+```
+{
+  # Level 0
+  me {
+    # Level 1
+    name
+    friends {
+      # Level 2
+      name
+      friends {
+        # Level 3
+        name
+        # ...
+      }
+    }
+  }
+}
+```
+
+###  Complexity Limit
 Example:
+
+- **maxComplexity** - Maximum complexity allowed for a query.
+
 
 ```
 {
