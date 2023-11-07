@@ -59,7 +59,7 @@ const sidebars = {
       label: "Getting to Production",
       items: [
         "articles/environments",
-        "articles/github-source-control",
+        "articles/source-control",
         "articles/securing-your-backend",
         "articles/custom-domains",
         "articles/testing",

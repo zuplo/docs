@@ -771,6 +771,11 @@
       "source": "/docs/policies/archive-request-inbound{/}?",
       "destination": "/docs/policies/archive-request-aws-s3-inbound",
       "permanent": true
+    },
+    {
+      "source": "/docs/github-source-control",
+      "destination": "/docs/source-control",
+      "permanent": true
     }
   ],
   "headers": [
