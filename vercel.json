@@ -174,7 +174,7 @@
     },
     {
       "source": "/docs/projects/github-source-control{/}?",
-      "destination": "/docs/articles/github-source-control",
+      "destination": "/docs/articles/source-control",
       "permanent": true
     },
     {
@@ -364,7 +364,7 @@
     },
     {
       "source": "/docs/guides/github-source-control{/}?",
-      "destination": "/docs/articles/github-source-control",
+      "destination": "/docs/articles/source-control",
       "permanent": true
     },
     {
@@ -773,7 +773,7 @@
       "permanent": true
     },
     {
-      "source": "/docs/articles/github-source-control",
+      "source": "/docs/articles/github-source-control{/}?",
       "destination": "/docs/articles/source-control",
       "permanent": true
     }

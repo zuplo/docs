@@ -5,7 +5,7 @@ sidebar_label: Rename/Move Project
 
 Projects cannot be moved between accounts or renamed in Zuplo but there is an easy workaround using Source Control.
 
-If the project you want to move or rename is not already connected to source control then [follow our GitHub integration guide](/docs/articles/github-source-control). This will copy the contents of your project to a GitHub repo.
+If the project you want to move or rename is not already connected to source control then [follow our GitHub integration guide](/docs/articles/source-control). This will copy the contents of your project to a GitHub repo.
 
 If your project is already connected to Source Control (or you just connected it above) the next step is to push any changes you want to be included in when you move to a different project.
 
