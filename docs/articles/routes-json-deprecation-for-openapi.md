@@ -31,4 +31,4 @@ This will generate a new `routes.oas.json` and `policies.json` file in your `/co
 
 You're now on the OpenAPI train 🚂 (choo choo).
 
-For more on GitHub Source Control integration see [GitHub integration](/docs/articles/github-source-control).
+For more on GitHub Source Control integration see [GitHub integration](/docs/articles/source-control).

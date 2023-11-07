@@ -1,12 +1,18 @@
 ---
-title: GitHub Integration
+title: Source Control
 ---
 
 import GithubSetup from './\_github-setup.md';
 
+:::infoGitlab and Bitbucket Support
+
 Zuplo can integrate with Source Control providers like GitHub, BitBucket and
 GitLab. GitHub is our primary option - BitBucket and GitLab (including private
-instances) are available on an enterprise plan.
+instances) are available on an [enterprise plan](https://zuplo.com/pricing).
+
+:::
+
+## GitHub Integration
 
 In this article we'll talk about GitHub integration - which has numerous
 benefits, including:
