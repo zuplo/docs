@@ -174,7 +174,7 @@
     },
     {
       "source": "/docs/projects/github-source-control{/}?",
-      "destination": "/docs/articles/github-source-control",
+      "destination": "/docs/articles/source-control",
       "permanent": true
     },
     {
@@ -364,7 +364,7 @@
     },
     {
       "source": "/docs/guides/github-source-control{/}?",
-      "destination": "/docs/articles/github-source-control",
+      "destination": "/docs/articles/source-control",
       "permanent": true
     },
     {
@@ -770,6 +770,11 @@
     {
       "source": "/docs/policies/archive-request-inbound{/}?",
       "destination": "/docs/policies/archive-request-aws-s3-inbound",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/github-source-control{/}?",
+      "destination": "/docs/articles/source-control",
       "permanent": true
     }
   ],
