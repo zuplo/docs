@@ -773,8 +773,8 @@
       "permanent": true
     },
     {
-      "source": "/docs/github-source-control",
-      "destination": "/docs/source-control",
+      "source": "/docs/articles/github-source-control",
+      "destination": "/docs/articles/source-control",
       "permanent": true
     }
   ],
