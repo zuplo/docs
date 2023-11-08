@@ -40,6 +40,11 @@
               "default": [],
               "description": "The headers to be considered when caching"
             },
+            "cacheHttpMethods": {
+              "type": "array",
+              "default": ["GET"],
+              "description": "HTTP Methods to be cached - defaults to GET if none specified. Valid methods are: GET, POST, PUT, PATCH, DELETE, HEAD"
+            },
             "expirationSecondsTtl": {
               "type": "number",
               "default": 60,
@@ -63,7 +68,8 @@
           "options": {
             "expirationSecondsTtl": 60,
             "dangerouslyIgnoreAuthorizationHeader": false,
-            "headers": ["header_used_as_part_of_cache_key"]
+            "headers": ["header_used_as_part_of_cache_key"],
+            "cacheHttpMethods": ["GET"]
           }
         }
       ]
