@@ -3,16 +3,11 @@ title: AWS Lambda Handler
 sidebar_label: AWS Lambda
 ---
 
-:::danger
-
-The AWS Lambda Handler is in beta. While it closely mimics the functionality of
-AWS API Gateway, it should not be considered a drop in replacement.
-
-:::
-
 The AWS Lambda handler is used to send requests to AWS Lambda. This handler can
 be used as a drop in replacement for AWS API Gateway when exposing Lambda
 functions as an API or HTTP endpoint.
+
+Note: Many customers use Zuplo's AWS Lamdba handler as a replacement for using AWS API Gateway, however it should not be considered a complete fire-and-forget replacement. Some features, such as the way certain errors are handled may differ, we recommend testing your error flows to ensure the behavior is as you expect. 
 
 ## Setup via Portal
 
