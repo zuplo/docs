@@ -141,5 +141,5 @@ By disabling introspection in production, you prevent attackers from gaining ins
 
 ### 4. Example Repository
 
-For those who prefer a hands-on approach or wish to see these configurations in action, we've created a GitHub repository with everything set up. This repository offers a comprehensive example of how to configure and secure a GraphQL API using Zuplo. Check out the [GraphQL API with Zuplo example repository](https://github.com/example/Zuplo-GraphQL-Security) to dive deeper.
+For those who prefer a hands-on approach or wish to see these configurations in action, we've created a GitHub repository with everything set up. This repository offers a comprehensive example of how to configure and secure a GraphQL API using Zuplo. Check out the [GraphQL API with Zuplo example repository](https://github.com/zuplo/zuplo-graphql-example) to dive deeper.
 
