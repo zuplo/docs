@@ -26,23 +26,32 @@ enabled.
 
 :::
 
+## Metrics
+
+Zuplo supports the following metrics:
+
+- request latency
+  - This measures the the total time (in milliseconds) that a request takes once
+    it has entered the API Gateway. It includes any outbounds calls from the
+    gateway.
+- request content length
+  - The content length of the request as reported by the content-length header.
+    May be omitted if the content-length header is not present.
+- response content length.
+  - The content length of the response as reported by the content-length header.
+    May be omitted if the content-length header is not present.
+
 ## Plugins
 
 Below, you will find details on each metrics plugin.
 
 ### Datadog (Beta)
 
-Zuplo supports the following metrics:
+By default, we send all metrics to Datadog. However, you have the option below
+to configure which metrics you want to send.
 
-- request latency
-- request content length
-- response content length
-
-By default, we send all three to Datadog. However, you have the option below to
-configure which metrics you want to send.
-
-Due to the pricing model of Datadog, we aim to be thrifty with what we send.
-Refer to
+Due to the pricing model of Datadog, we recommend being thrifty with what is
+being sent. Refer to
 [counting custom metrics](https://docs.datadoghq.com/account_management/billing/custom_metrics/?tab=countrate#counting-custom-metrics)
 for more information. In general, try to avoid high-dimensionality/cardinality
 tags since those are counted as separate metrics. This
@@ -111,13 +120,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 
 ### Dynatrace (Beta)
 
-Zuplo supports the following metrics:
-
-- request latency
-- request content length
-- response content length
-
-By default, we send all three to Dynatrace. However, you have the option below
+By default, we send all metrics to Dynatrace. However, you have the option below
 to configure which metrics you want to send.
 
 :::warning Strict format
