@@ -269,6 +269,7 @@ const sidebars = {
             "handlers/redirect",
             "handlers/openapi",
             "handlers/system-handlers",
+            "handlers/websocket-handler",
           ],
         },
         {
