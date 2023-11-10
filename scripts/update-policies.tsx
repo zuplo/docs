@@ -185,19 +185,17 @@ sidebar_label: ${schema.title}
 
 <!-- WARNING: This document is generated. DO NOT EDIT BY HAND -->
 
-${
-  schema.isCustom
-    ? `<CustomPolicyNotice name="${schema.title}" id="${policyId}" />`
-    : ""
-}
+${schema.isCustom
+      ? `<CustomPolicyNotice name="${schema.title}" id="${policyId}" />`
+      : ""
+    }
 
 <!-- start: intro.md -->
 ${introMd ?? schema.description}
 <!-- end: intro.md -->
 
-<PolicyStatus isPreview={${schema.isPreview ?? false}} isPaidAddOn={${
-    schema.isPaidAddOn ?? false
-  }} />
+<PolicyStatus isPreview={${schema.isPreview ?? false}} isPaidAddOn={${schema.isPaidAddOn ?? false
+    }} />
 
 
 
@@ -205,11 +203,10 @@ ${customCode}
 
 ## Configuration 
 
-${
-  schema.isCustom
-    ? `The example below shows how to configure a custom code policy in the 'policies.json' document that utilizes the above example policy code.`
-    : `The configuration shows how to configure the policy in the 'policies.json' document.`
-}
+${schema.isCustom
+      ? `The example below shows how to configure a custom code policy in the 'policies.json' document that utilizes the above example policy code.`
+      : `The configuration shows how to configure the policy in the 'policies.json' document.`
+    }
 
 \`\`\`json title="config/policies.json"
 ${JSON.stringify(code, null, 2)}

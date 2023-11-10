@@ -171,6 +171,13 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
+    customFields: {
+      inkeepCredentials: {
+        apiKey: '499c156cf7a9798343949c8bb5665ac95e48132c6d68c42e',
+        integrationId: 'clot3asdz0000s601nc8jwnzx',
+        organizationId: 'org_dDOlt2uJlMWM8oIS',
+      }
+    }
 };
 
 module.exports = config;

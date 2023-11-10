@@ -26,6 +26,7 @@
     "@docusaurus/preset-classic": "^2.4.3",
     "@docusaurus/theme-mermaid": "^2.4.3",
     "@heroicons/react": "^2.0.12",
+    "@inkeep/widgets-embed": "0.2.234",
     "@mdx-js/react": "^1.6.22",
     "@vercel/analytics": "^1.0.1",
     "@zuplo/md-tools": "^1.6.0",
@@ -42,6 +43,7 @@
   "devDependencies": {
     "@apidevtools/json-schema-ref-parser": "^10.1.0",
     "@docusaurus/module-type-aliases": "^2.4.3",
+    "@inkeep/widgets": "0.2.234",
     "@tsconfig/docusaurus": "~1.0.7",
     "@types/glob": "^8.0.0",
     "@types/jsdom": "^21.1.0",
