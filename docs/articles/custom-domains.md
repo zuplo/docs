@@ -2,8 +2,11 @@
 title: Custom Domains
 ---
 
-At this time, to add a custom domain to your environment you will need to
-contact [support@zuplo.com](mailto:support@zuplo.com).
+This guide will walk you through the process of setting up a custom domain for
+your project's edge deployment environment. You can manage all domain settings
+related to a project in the Custom Domains section of the Settings tab of your
+project. Custom Domains are available on
+[Builder plans and above](https://zuplo.com/pricing).
 
 :::note
 
@@ -14,30 +17,45 @@ do not support custom domains.
 
 :::
 
-We will need to know
+## Adding a new custom domain
 
-1. The custom domain (e.g. api.contoso.io)
-2. The URL of your [edge deployment](./environments.md) that you want to map to
-   this URL. This typically ends in `.zuplo.app`.
+The following steps will guide you on how to add and configure a custom domain
+for your Zuplo project.
 
-Please include this information when contacting us. After we setup your custom
-domain we'll provide you with some records to configure on your DNS. Follow the
-instructions outlined below.
+1. Navigate to your project's Custom Domain Settings
 
-Setting up a custom domain to point to your Zup takes just a few DNS
-configurations.
+Go to your project in the Zuplo portal and open to the <SettingsTabIcon />
+**Settings** tab (1), then select **Custom Domain** (2) and click on the
+`Add New Custom Domain` button to open the `New Custom Domain` configuration
+modal.
 
-You will be provided with two `TXT` records and a `CNAME`. They will look
-something like the ones below.
+<Screenshot
+src=""
+size="xs" />
+
+2. Add your domain
+
+Then, pick the edge deployed environment you want to assign the domain to and
+enter your apex domain (e.g. example.com) or subdomain (e.g. api.example.com)
+
+<Screenshot
+src=""
+size="xs" />
+
+Once saved, you will be provided with a `CNAME` configuration that will look
+something like the one below that you'll use in the next step.
 
 ```txt
-TXT     _acme-challenge.api.example.com       RANDOM-STRING
-TXT     _cf-custom-hostname.api.example.com   RANDOM-STRING
 CNAME   api.example.com                       cname.zuplo.app
 ```
 
-At your DNS host, you create all three records. Cloudflare will then query your
-domain
+3. Configure your DNS
+
+Once you have added your custom domain to your Zuplo project, you will need to
+configure the DNS records of your domain with your registrar.
+
+Using the CNAME configuration provided at the end of the previous step, you will
+create that record on your DNS registrar. Cloudflare will then query your domain
 [periodically](https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/start/hostname-verification-backoff-schedule/)
 until it can verify everything. If everything is configured correctly, it should
 take a few minutes for your production Zup to start responding to traffic on
@@ -68,3 +86,7 @@ for more details.
 
 Other Cloudflare features that are configured on your Cloudflare Account such as
 Firewall or WAF rules will function normally.
+
+At this time, to use a wildcard domain or other complex custom domain for your
+environment you will need to contact
+[support@zuplo.com](mailto:support@zuplo.com).
