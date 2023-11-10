@@ -22,7 +22,7 @@ do not support custom domains.
 The following steps will guide you on how to add and configure a custom domain
 for your Zuplo project.
 
-1. Navigate to your project's Custom Domain Settings
+### 1. Navigate to your project's Custom Domain Settings
 
 Go to your project in the Zuplo portal and open to the <SettingsTabIcon />
 **Settings** tab (1), then select **Custom Domain** (2) and click on the
@@ -33,7 +33,7 @@ modal.
 src=""
 size="xs" />
 
-2. Add your domain
+### 2. Add your domain
 
 Then, pick the edge deployed environment you want to assign the domain to and
 enter your apex domain (e.g. example.com) or subdomain (e.g. api.example.com)
@@ -49,7 +49,7 @@ something like the one below that you'll use in the next step.
 CNAME   api.example.com                       cname.zuplo.app
 ```
 
-3. Configure your DNS
+### 3. Configure your DNS
 
 Once you have added your custom domain to your Zuplo project, you will need to
 configure the DNS records of your domain with your registrar.
