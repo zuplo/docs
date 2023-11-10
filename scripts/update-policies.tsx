@@ -180,7 +180,6 @@ async function processProperties(properties) {
       await processProperties(properties[key].properties);
     }
   });
-
   return Promise.all(tasks);
 }
 
