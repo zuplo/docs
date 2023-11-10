@@ -1,5 +1,4 @@
 import { dereference } from "@apidevtools/json-schema-ref-parser";
-import { render } from "@zuplo/md-tools";
 import arg from "arg";
 import chalk from "chalk";
 import chokidar from "chokidar";
@@ -7,10 +6,14 @@ import { existsSync } from "fs";
 import { copyFile, mkdir, readdir, readFile, rm, writeFile } from "fs/promises";
 import glob from "glob";
 import { JSONSchema7 } from "json-schema";
+import { Heading as AstHeading } from "mdast";
 import path from "path";
 import prettier from "prettier";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
+import { Node } from "unist";
+import visit from "unist-util-visit";
+import toString = require("mdast-util-to-string/index");
 
 type PolicySchema = JSONSchema7 & {
   isPreview?: boolean;
@@ -27,6 +30,17 @@ type PolicyProperties = Record<
     properties?: PolicyProperties;
   }
 >;
+
+type Heading = {
+  depth: number;
+  value: string;
+  data?: any;
+};
+
+type RenderResult = {
+  html: string | Buffer;
+  headings: Array<Heading>;
+};
 
 // NOTE: This component is used to generate policy HTML in the policy script
 // as such it CANNOT include css module imports
@@ -90,6 +104,35 @@ export default PolicyOptions;
 const policiesDir = path.resolve(process.cwd(), "./policies");
 const docsDir = path.resolve(process.cwd(), "./docs/policies");
 
+const headings = (root: Node): Array<Heading> => {
+  const headingList: Array<Heading> = [];
+
+  visit(root, { type: "heading" }, (node: AstHeading) => {
+    const heading: Heading = {
+      depth: node.depth,
+      value: toString(node, { includeImageAlt: false }),
+    };
+
+    // Other remark plugins can store arbitrary data
+    // inside a node's `data` property, such as a
+    // custom heading id.
+    const data = node?.data;
+    if (data) {
+      heading.data = data;
+    }
+
+    headingList.push(heading);
+  });
+
+  return headingList;
+};
+
+function remarkHeadings(): (node: Node, file: any) => void {
+  return (node, file) => {
+    file.data.headings = headings(node);
+  };
+}
+
 function stringify(obj: any) {
   if (process.env.NODE_ENV === "production") {
     return JSON.stringify(obj);
@@ -97,6 +140,34 @@ function stringify(obj: any) {
   return prettier.format(JSON.stringify(obj), {
     parser: "json",
   });
+}
+
+async function render(markdown: string): Promise<RenderResult> {
+  const unified = (await import("unified")).unified;
+  const rehypeSlug = (await import("rehype-slug")).default;
+  const rehypeStringify = (await import("rehype-stringify")).default;
+  const remarkGfm = (await import("remark-gfm")).default;
+  const remarkParse = (await import("remark-parse")).default;
+  const remarkRehype = (await import("remark-rehype")).default;
+  const rehypeAutolinkHeadings = (await import("rehype-autolink-headings"))
+    .default;
+  const rehypePrettyCode = (await import("rehype-pretty-code")).default;
+
+  const result = await unified()
+    .use(remarkParse)
+    .use(remarkGfm)
+    .use(remarkHeadings)
+    .use(remarkRehype)
+    .use(rehypePrettyCode)
+    .use(rehypeSlug)
+    .use(rehypeAutolinkHeadings)
+    .use(rehypeStringify)
+    .process(markdown);
+
+  return {
+    html: result.value,
+    headings: result.data.headings as Array<Heading>,
+  };
 }
 
 async function processProperties(properties) {
@@ -109,6 +180,7 @@ async function processProperties(properties) {
       await processProperties(properties[key].properties);
     }
   });
+
   return Promise.all(tasks);
 }
 
