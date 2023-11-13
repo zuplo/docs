@@ -30,7 +30,7 @@ Go to your project in the Zuplo portal and open to the <SettingsTabIcon />
 modal.
 
 <Screenshot
-src=""
+src="https://cdn.zuplo.com/assets/4b34e012-447b-49c8-8df1-cd5e0e6ec5a7.png"
 size="xs" />
 
 ### 2. Add your domain
@@ -39,7 +39,7 @@ Then, pick the edge deployed environment you want to assign the domain to and
 enter your apex domain (e.g. example.com) or subdomain (e.g. api.example.com)
 
 <Screenshot
-src=""
+src="https://cdn.zuplo.com/assets/cac30cc7-511a-4e88-926b-2e0504105719.png"
 size="xs" />
 
 Once saved, you will be provided with a `CNAME` configuration that will look
