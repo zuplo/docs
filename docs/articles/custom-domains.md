@@ -30,8 +30,7 @@ Go to your project in the Zuplo portal and open to the <SettingsTabIcon />
 modal.
 
 <Screenshot
-src="https://cdn.zuplo.com/assets/4b34e012-447b-49c8-8df1-cd5e0e6ec5a7.png"
-size="xs" />
+src="https://cdn.zuplo.com/assets/4b34e012-447b-49c8-8df1-cd5e0e6ec5a7.png" />
 
 ### 2. Add your domain
 
