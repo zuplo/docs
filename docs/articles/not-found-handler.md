@@ -27,7 +27,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
         request,
         context,
         {},
-        { allow: allowedMethods }
+        { allow: allowedMethods },
       );
     }
 

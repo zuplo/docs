@@ -2,7 +2,8 @@
 title: Settings to Dev Portal Migrations
 ---
 
-The `/config/settings.json` file has been deprecated. You should migrate to the new `/config/dev-portal.json` file.
+The `/config/settings.json` file has been deprecated. You should migrate to the
+new `/config/dev-portal.json` file.
 
 The old `settings.json` file looks like this.
 

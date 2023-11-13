@@ -22,10 +22,10 @@ policies:
 A CORS policy consists of a name and set of CORS headers to be returned for
 cross-origin requests (both the simple type and pre-flight request).
 
-:::warning 
+:::warning
 
 Make sure to not have a trailing `/` on your allowedOrigins. e.g.
-`https://example.com` is valid, `https://example.com/` will not work. 
+`https://example.com` is valid, `https://example.com/` will not work.
 
 :::
 
@@ -83,7 +83,8 @@ For more information on CORS, check out the MDN documentation:
 
 ## Using environment variables
 
-If you need to support different origins, headers, etc. in different environments, you can use environment variables
+If you need to support different origins, headers, etc. in different
+environments, you can use environment variables
 
 ```json
 {
@@ -101,5 +102,3 @@ If you need to support different origins, headers, etc. in different environment
   ]
 }
 ```
-
-

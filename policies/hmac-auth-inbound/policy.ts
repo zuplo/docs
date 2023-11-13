@@ -9,17 +9,17 @@ export default async function (
   request: ZuploRequest,
   context: ZuploContext,
   options: PolicyOptions,
-  policyName: string
+  policyName: string,
 ) {
   // Validate the policy options
   if (typeof options.secret !== "string") {
     throw new Error(
-      `The option 'secret' on policy '${policyName}' must be a string. Received ${typeof options.secret}.`
+      `The option 'secret' on policy '${policyName}' must be a string. Received ${typeof options.secret}.`,
     );
   }
   if (typeof options.headerName !== "string") {
     throw new Error(
-      `The option 'headerName' on policy '${policyName}' must be a string. Received ${typeof options.headerName}.`
+      `The option 'headerName' on policy '${policyName}' must be a string. Received ${typeof options.headerName}.`,
     );
   }
 
@@ -33,7 +33,7 @@ export default async function (
 
   // Convert the hex encoded token to an Uint8Array
   const tokenData = new Uint8Array(
-    token.match(/../g)!.map((h) => parseInt(h, 16))
+    token.match(/../g)!.map((h) => parseInt(h, 16)),
   );
 
   // Get the data to verify
@@ -49,7 +49,7 @@ export default async function (
     encodedSecret,
     { name: "HMAC", hash: "SHA-256" },
     false,
-    ["verify"]
+    ["verify"],
   );
 
   // Verify that the data
@@ -57,7 +57,7 @@ export default async function (
     "HMAC",
     key,
     tokenData,
-    encoder.encode(data)
+    encoder.encode(data),
   );
 
   // Check if the data is verified, if not return unauthorized

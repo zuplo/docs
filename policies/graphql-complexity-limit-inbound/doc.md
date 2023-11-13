@@ -1,6 +1,7 @@
 ## GraphQL Complexity Limit
 
-This policy allows you to add a limit for the depth and a limit for the complexity of a GraphQL query.
+This policy allows you to add a limit for the depth and a limit for the
+complexity of a GraphQL query.
 
 ### Depth Limit
 
@@ -30,19 +31,19 @@ DoS attacks on your GraphQL server.
 }
 ```
 
-###  Complexity Limit
+### Complexity Limit
+
 Example:
 
 - **maxComplexity** - Maximum complexity allowed for a query.
 
-
 ```
 {
-  me { 
+  me {
     name  # Complexity +1
     age   # Complexity +1
     email # Complexity +1
-    friends { 
+    friends {
       name   # Complexity +1
       height # Complexity +1
     }
