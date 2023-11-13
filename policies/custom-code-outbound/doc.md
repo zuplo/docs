@@ -1,12 +1,21 @@
 ## Writing A Policy
 
-Custom policies can be written to extend the functionality of your gateway. This document is about outbound policies that can intercept the request and, if required, modify it before passing down the chain.
+Custom policies can be written to extend the functionality of your gateway. This
+document is about outbound policies that can intercept the request and, if
+required, modify it before passing down the chain.
 
-The outbound custom policy is similar to the inbound custom policy but also accepts a `Response` parameter. The outbound policy must return a valid `Response` (or throw an error, which will result in a 500 Internal Server Error for your consumer, not recommended).
+The outbound custom policy is similar to the inbound custom policy but also
+accepts a `Response` parameter. The outbound policy must return a valid
+`Response` (or throw an error, which will result in a 500 Internal Server Error
+for your consumer, not recommended).
 
 :::tip
 
-Note that both `ZuploRequest` and `Response` are based on the web standards [Request](https://developer.mozilla.org/en-US/docs/Web/API/request) and [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response). ZuploRequest adds a few additional properties for convenience, like `user` and `params`.
+Note that both `ZuploRequest` and `Response` are based on the web standards
+[Request](https://developer.mozilla.org/en-US/docs/Web/API/request) and
+[Response](https://developer.mozilla.org/en-US/docs/Web/API/Response).
+ZuploRequest adds a few additional properties for convenience, like `user` and
+`params`.
 
 :::
 
@@ -16,11 +25,13 @@ export type OutboundPolicyHandler<TOptions = any> = (
   request: ZuploRequest,
   context: ZuploContext,
   options: TOptions,
-  policyName: string
+  policyName: string,
 ) => Promise<ZuploRequest | Response>;
 ```
 
-A common use case for outbound policies is to change the body of the response. In this example, we'll imagine we are proxying the `/todos` example api at [https://jsonplaceholder.typicode.com/todos](https://jsonplaceholder.typicode.com/todos).
+A common use case for outbound policies is to change the body of the response.
+In this example, we'll imagine we are proxying the `/todos` example api at
+[https://jsonplaceholder.typicode.com/todos](https://jsonplaceholder.typicode.com/todos).
 
 The format of the /todos response looks like this
 
@@ -53,7 +64,7 @@ export default async function (
   request: ZuploRequest,
   context: ZuploContext,
   options: any,
-  policyName: string
+  policyName: string,
 ) {
   if (response.status !== 200) {
     // if we get an unexpected response code, something went wrong, just let the response flow
@@ -80,7 +91,11 @@ export default async function (
 
 :::tip
 
-Note, that because we're not using the original response here (we just use the new one called `newResponse`) we didn't need to `clone` the original response before reading the body with `.json()`. If you need to read the body and use that same instance you must first `clone()` to avoid runtime errors such as "Body is unusable".
+Note, that because we're not using the original response here (we just use the
+new one called `newResponse`) we didn't need to `clone` the original response
+before reading the body with `.json()`. If you need to read the body and use
+that same instance you must first `clone()` to avoid runtime errors such as
+"Body is unusable".
 
 :::
 
@@ -95,7 +110,7 @@ export default async function (
   request: ZuploRequest,
   context: ZuploContext,
   options: any,
-  policyName: string
+  policyName: string,
 ) {
   // create a new response
   const newResponse = new Response(response.body, {

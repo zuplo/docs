@@ -8,7 +8,7 @@ const token = await sign("my data", environment.MY_SECRET);
 
 async function sign(
   key: string | ArrayBuffer,
-  val: string
+  val: string,
 ): Promise<ArrayBuffer> {
   const encoder = new TextEncoder();
   const cryptoKey = await crypto.subtle.importKey(
@@ -16,12 +16,12 @@ async function sign(
     typeof key === "string" ? encoder.encode(key) : key,
     { name: "HMAC", hash: { name: "SHA-256" } },
     false,
-    ["sign"]
+    ["sign"],
   );
   const token = await crypto.subtle.sign(
     "HMAC",
     cryptoKey,
-    encoder.encode(val)
+    encoder.encode(val),
   );
   return Array.prototype.map
     .call(new Uint8Array(token), (x) => ("0" + x.toString(16)).slice(-2))
