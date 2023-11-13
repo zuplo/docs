@@ -7,13 +7,16 @@ import { copyFile, mkdir, readdir, readFile, rm, writeFile } from "fs/promises";
 import glob from "glob";
 import { JSONSchema7 } from "json-schema";
 import { Heading as AstHeading } from "mdast";
+import { toString } from "mdast-util-to-string";
 import path from "path";
 import prettier from "prettier";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { Node } from "unist";
-import visit from "unist-util-visit";
-import toString = require("mdast-util-to-string/index");
+import { visit } from "unist-util-visit";
+
+// here just to keep the react import
+const version = React.version;
 
 type PolicySchema = JSONSchema7 & {
   isPreview?: boolean;
@@ -107,7 +110,7 @@ const docsDir = path.resolve(process.cwd(), "./docs/policies");
 const headings = (root: Node): Array<Heading> => {
   const headingList: Array<Heading> = [];
 
-  visit(root, { type: "heading" }, (node: AstHeading) => {
+  visit(root, "heading", (node: AstHeading) => {
     const heading: Heading = {
       depth: node.depth,
       value: toString(node, { includeImageAlt: false }),
@@ -299,9 +302,10 @@ Read more about [how policies work](/docs/articles/policies)
 }
 
 async function run() {
-  await rm(docsDir, { recursive: true, force: true });
-  await mkdir(docsDir, { recursive: true });
-
+  // await rm(docsDir, { recursive: true, force: true });
+  if (!existsSync(docsDir)) {
+    await mkdir(docsDir, { recursive: true });
+  }
   const policyConfigJson = await readFile(
     path.join(policiesDir, "config.json"),
     "utf-8"
@@ -410,8 +414,9 @@ async function run() {
 
     if (!schema.isDeprecated) {
       const policyOutDir = path.join(docsDir, policyId);
-      await mkdir(policyOutDir);
-
+      if (!existsSync(policyOutDir)) {
+        await mkdir(policyOutDir);
+      }
       await writeFile(
         path.join(docsDir, `${policyId}.md`),
         generatedMd,

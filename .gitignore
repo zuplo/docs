@@ -26,6 +26,7 @@ src/components/bundles.json
 
 
 /policies.*.json
+scripts/update-policies.mjs
 
 yarn.lock
 .vercel
