@@ -68,7 +68,7 @@ const API_KEY_BUCKET = "my-bucket";
 exports.onExecutePostLogin = async (event, api) => {
   if (event.user.app_metadata.api_consumer) {
     console.log(
-      `Skipping creating of API consumer. Already exists: ${event.user.app_metadata.api_consumer}`,
+      `Skipping creating of API consumer. Already exists: ${event.user.app_metadata.api_consumer}`
     );
     return;
   }
@@ -94,7 +94,7 @@ exports.onExecutePostLogin = async (event, api) => {
           Authorization: `Bearer ${event.secrets.API_KEY}`,
           "content-type": "application/json",
         },
-      },
+      }
     );
     const result = await response.json();
     if (response.status !== 200) {

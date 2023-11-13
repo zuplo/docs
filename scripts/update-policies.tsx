@@ -1,5 +1,7 @@
 import { dereference } from "@apidevtools/json-schema-ref-parser";
+import arg from "arg";
 import chalk from "chalk";
+import chokidar from "chokidar";
 import { existsSync } from "fs";
 import { copyFile, mkdir, readdir, readFile, rm, writeFile } from "fs/promises";
 import glob from "glob";
@@ -450,7 +452,7 @@ async function run() {
     policies,
   };
 
-  const policiesV3Json = await stringify(policyDataV3);
+  const policiesV3Json = stringify(policyDataV3);
 
   await writeFile(
     path.resolve(policiesDir, "../policies.v3.json"),
@@ -459,6 +461,44 @@ async function run() {
   );
 
   console.info("Policies updated");
+}
+
+async function watch() {
+  await run();
+  var watcher = chokidar.watch(policiesDir, {
+    ignored: /^\./,
+    persistent: true,
+    ignoreInitial: true,
+  });
+
+  function changed(path) {
+    run().catch(console.error);
+  }
+
+  watcher
+    .on("add", changed)
+    .on("change", changed)
+    .on("unlink", changed)
+    .on("error", function (error) {
+      console.error("Error happened", error);
+    });
+}
+
+const args = arg({
+  // Types
+  "--watch": Boolean,
+});
+
+if (args["--watch"]) {
+  watch().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+} else {
+  run().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
 }
 
 async function getExampleHtml(

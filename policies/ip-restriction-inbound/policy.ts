@@ -10,7 +10,7 @@ export default async function (
   request: ZuploRequest,
   context: ZuploContext,
   options: PolicyOptions,
-  policyName: string,
+  policyName: string
 ) {
   // TODO: Validate the policy options. Skipping in the example for brevity
 

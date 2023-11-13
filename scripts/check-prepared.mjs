@@ -8,8 +8,8 @@ function exitWithError(error) {
   console.error(chalk.redBright(`[ERROR] ${error}`));
   console.warn(
     chalk.yellowBright(
-      "[WARN] You must run 'npm run local' before you can start the site.",
-    ),
+      "[WARN] You must run 'npm run local' before you can start the site."
+    )
   );
   process.exit(1);
 }
@@ -18,7 +18,7 @@ async function run() {
   // Check bundle.json exist
   const bundleJsonPath = resolve(
     process.cwd(),
-    "./src/components/bundles.json",
+    "./src/components/bundles.json"
   );
   if (!existsSync(bundleJsonPath)) {
     return exitWithError("Bundles have not been synced.");
@@ -26,8 +26,8 @@ async function run() {
 
   console.warn(
     chalk.yellowBright(
-      "[WARN] Using cached local content, to update cache run 'npm run local'",
-    ),
+      "[WARN] Using cached local content, to update cache run 'npm run local'"
+    )
   );
 }
 

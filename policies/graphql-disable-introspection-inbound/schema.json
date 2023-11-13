@@ -24,7 +24,9 @@
           "type": "object",
           "description": "The options for this policy",
           "required": [],
-          "properties": {}
+          "properties": {
+
+          }
         }
       },
       "examples": [
@@ -32,7 +34,8 @@
           "_name": "basic",
           "export": "GraphQLDisableIntrospectionInboundPolicy",
           "module": "$import(@zuplo/runtime)",
-          "options": {}
+          "options": {
+          }
         }
       ]
     }

@@ -158,7 +158,7 @@ HttpProblems.badRequest(
   },
   {
     "my-error-code": "230",
-  },
+  }
 );
 ```
 

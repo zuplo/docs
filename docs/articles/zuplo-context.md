@@ -117,7 +117,7 @@ const result = await context.invokeInboundPolicy("my-policy", request);
 if (result instanceof Response) {
   // if you want to do something special if type is Response, maybe log for example
   context.log.warn(
-    `My policy wanted to short circuit with a status code of '${result.status}'`,
+    `My policy wanted to short circuit with a status code of '${result.status}'`
   );
 }
 
