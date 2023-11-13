@@ -25,9 +25,9 @@ benefits, including:
 
 ## Connecting Existing Repositories
 
-If you have an existing Github repository that contains a Zuplo project, you can
+If you have an existing GitHub repository that contains a Zuplo project, you can
 connect to that repository when you create a new project. Select **Advanced**
-then select your Github organization and repository.
+then select your GitHub organization and repository.
 
 <Screenshot
 src="https://cdn.zuplo.com/assets/f09aa7ac-abc0-4f20-9e41-df42b7761748.png"
