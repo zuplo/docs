@@ -31,7 +31,7 @@ export type InboundPolicyHandler<TOptions = any> = (
   request: ZuploRequest,
   context: ZuploContext,
   options: TOptions,
-  policyName: string,
+  policyName: string
 ) => Promise<ZuploRequest | Response>;
 ```
 
@@ -155,7 +155,7 @@ export default async function (
   request: ZuploRequest,
   context: ZuploContext,
   options: MyPolicyOptionsType,
-  policyName: string,
+  policyName: string
 ) {
   // your policy code goes here, and can use the options to perform any
   // configuration
@@ -207,7 +207,7 @@ export default async function (
   request: ZuploRequest,
   context: ZuploContext,
   options: any,
-  policyName: string,
+  policyName: string
 ) {
   const apiKeyHeader = request.headers.get("api-key");
   if (!apiKeyHeader) {

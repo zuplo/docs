@@ -140,7 +140,7 @@ Auth App codebase from earlier.
      formAction={`/auth/sign-up${
        typeof searchParams?.["session-create-url"] === "string"
          ? `?session-create-url=${encodeURIComponent(
-             searchParams["session-create-url"],
+             searchParams["session-create-url"]
            )}`
          : ""
      }`}
@@ -200,7 +200,7 @@ Auth App codebase from earlier.
            `${requestUrl.origin}/login?error=Could not authenticate user`,
            {
              status: 301,
-           },
+           }
          );
        }
 
@@ -229,7 +229,7 @@ Auth App codebase from earlier.
              `${requestUrl.origin}/login?error=Could not authenticate user`,
              {
                status: 301,
-             },
+             }
            );
          }
 
@@ -328,7 +328,7 @@ to sign into your Supabase project via the Developer Portal
          {
            // a 301 status is required to redirect from a POST to a GET route
            status: 301,
-         },
+         }
        );
      }
 
@@ -359,7 +359,7 @@ to sign into your Supabase project via the Developer Portal
            `${requestUrl.origin}/login?error=Could not authenticate user`,
            {
              status: 301,
-           },
+           }
          );
        }
 

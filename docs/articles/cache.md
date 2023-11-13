@@ -4,23 +4,17 @@ sidebar_label: Cache
 draft: true
 ---
 
-The [Cache API](https://developer.mozilla.org/en-US/docs/Web/API/Cache) provides
-a persistent storage mechanism for Request / Response object pairs that are
-cached in long lived memory.
+The [Cache API](https://developer.mozilla.org/en-US/docs/Web/API/Cache) provides a persistent storage mechanism for Request / Response object pairs that are cached in long lived memory.
 
 :::tip
 
-Only a subset of the standard Cache API is supported. Below are the interfaces
-and methods that are supported and known limitations.
+Only a subset of the standard Cache API is supported. Below are the interfaces and methods that are supported and known limitations.
 
 :::
 
 ## CacheStorage
 
-The `CacheStorage` is exposed as the `caches` global object. This object allows
-you to open instances of a `Cache`. When calling `caches.open` if the named
-cache does not exist it will be created, otherwise the existing cache will be
-returned.
+The `CacheStorage` is exposed as the `caches` global object. This object allows you to open instances of a `Cache`. When calling `caches.open` if the named cache does not exist it will be created, otherwise the existing cache will be returned.
 
 **Definition**
 
@@ -38,8 +32,7 @@ const cache = await caches.open("MY_CACHE");
 
 ## Cache
 
-The `Cache` object stores `Request` and `Response` objects based on header
-values.
+The `Cache` object stores `Request` and `Response` objects based on header values.
 
 **Definition**
 
@@ -48,7 +41,7 @@ interface Cache {
   put(request: RequestInfo, response: Response): Promise<void>;
   match(
     request: RequestInfo,
-    options?: CacheQueryOptions,
+    options?: CacheQueryOptions
   ): Promise<Response | undefined>;
   delete(request: RequestInfo, options?: CacheQueryOptions): Promise<boolean>;
 }
@@ -71,9 +64,7 @@ interface CacheQueryOptions {
 
 :::warning
 
-At this time, the `options` parameter will be ignored entirely when running on
-in a developer environment (i.e. working copy). In non-developer environments,
-the `ignoreMethod` property is supported. All other properties will be ignored.
+At this time, the `options` parameter will be ignored entirely when running on in a developer environment (i.e. working copy). In non-developer environments, the `ignoreMethod` property is supported. All other properties will be ignored.
 
 :::
 
@@ -83,8 +74,7 @@ the `ignoreMethod` property is supported. All other properties will be ignored.
 await cache.put(request, response);
 ```
 
-The `put()` method of the `Cache` interface allows key/value pairs to be added
-to the current Cache object.
+The `put()` method of the `Cache` interface allows key/value pairs to be added to the current Cache object.
 
 ### Match
 
@@ -92,9 +82,7 @@ to the current Cache object.
 const response = await cache.match(request);
 ```
 
-The `match()` method of the `Cache` interface returns a Promise that resolves to
-the Response associated with the first matching request in the Cache object. If
-no match is found, the Promise resolves to `undefined`.
+The `match()` method of the `Cache` interface returns a Promise that resolves to the Response associated with the first matching request in the Cache object. If no match is found, the Promise resolves to `undefined`.
 
 ### Delete
 
@@ -102,27 +90,20 @@ no match is found, the Promise resolves to `undefined`.
 await cache.delete(request);
 ```
 
-The delete() method of the Cache interface finds the Cache entry whose key is
-the request, and if found, deletes the Cache entry and returns a Promise that
-resolves to true. If no Cache entry is found, it resolves to false.
+The delete() method of the Cache interface finds the Cache entry whose key is the request, and if found, deletes the Cache entry and returns a Promise that resolves to true. If no Cache entry is found, it resolves to false.
 
 ## Headers
 
-The following headers can be used to control the cache when adding a response
-using the `put()` method.
+The following headers can be used to control the cache when adding a response using the `put()` method.
 
-- `Cache-Control`: Controls caching directives.
-  [More info](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control)
-- `ETag`: Allows cache.match() to evaluate conditional requests with
-  If-None-Match.
+- `Cache-Control`: Controls caching directives. [More info](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control)
+- `ETag`: Allows cache.match() to evaluate conditional requests with If-None-Match.
 - `Expires`: A string that specifies when the resource becomes invalid.
-- `Last-Modified`: Allows cache.match() to evaluate conditional requests with
-  If-Modified-Since.
+- `Last-Modified`: Allows cache.match() to evaluate conditional requests with If-Modified-Since.
 
 ## Examples
 
-The below example shows how to use a cached response and populate the cache in
-the event there is no response already cached.
+The below example shows how to use a cached response and populate the cache in the event there is no response already cached.
 
 ```ts
 const request = new Request(`https://echo.zuplo.io`);
@@ -136,8 +117,7 @@ if (!response) {
 const data = await response.json();
 ```
 
-If you just want to store the value, just create a new simple Response and set
-the `Cache-Control` header.
+If you just want to store the value, just create a new simple Response and set the `Cache-Control` header.
 
 ```ts
 const request = new Request(`https://echo.zuplo.io`);
@@ -155,9 +135,7 @@ const cachedResponse = new Response(response, {
 await cache.put(request, cachedResponse);
 ```
 
-When adding to the cache, headers are used to control how long resources are
-stored. If you are reusing the response headers, make sure to account for
-additional cache headers that may have been sent.
+When adding to the cache, headers are used to control how long resources are stored. If you are reusing the response headers, make sure to account for additional cache headers that may have been sent.
 
 ```ts
 const request = new Request(`https://echo.zuplo.io`);

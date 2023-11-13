@@ -3,7 +3,7 @@ import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
 export default async function (
   response: Response,
   request: ZuploRequest,
-  context: ZuploContext,
+  context: ZuploContext
 ) {
   // Generate a random number to segment the test groups
   const score = Math.random();

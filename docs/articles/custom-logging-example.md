@@ -2,11 +2,9 @@
 title: Custom Logging Policy
 ---
 
-Some of our customers want to build custom logging for their gateway runtime.
-This is an example of just how powerful the programmability of Zuplo is.
+Some of our customers want to build custom logging for their gateway runtime. This is an example of just how powerful the programmability of Zuplo is.
 
-In this custom inbound policy we show how you could post to a service (in this
-case we just use RequestBin.com).
+In this custom inbound policy we show how you could post to a service (in this case we just use RequestBin.com).
 
 ```ts
 import { ZuploContext, ZuploRequest, ResponseSentEvent } from "@zuplo/runtime";
@@ -60,7 +58,7 @@ const logReqRes = async (
   req: any,
   response: Response,
   context: ZuploContext,
-  start: number,
+  start: number
 ) => {
   // we don't want any errors thrown that might impact
   // our consumers experience so catch everything and
@@ -85,7 +83,7 @@ export default async function (
   request: ZuploRequest,
   context: ZuploContext,
   options: CustomLoggingOptions,
-  policyName: string,
+  policyName: string
 ) {
   // We need to read the body of the request before it's used by the handler
   // so let's serialize the request now
@@ -101,7 +99,7 @@ export default async function (
       req,
       event.response,
       context,
-      start,
+      start
     );
 
     // We need to ask the runtime now to shut down until this is complete,
@@ -128,14 +126,10 @@ We would then configure the policy as follows
 }
 ```
 
-And don't forget to register your new custom policy on your routes! This should
-be the very first inbound policy to see the incoming request, unmodified by
-other policies (or blocked by auth, rate-limiting etc).
+And don't forget to register your new custom policy on your routes! This should be the very first inbound policy to see the incoming request, unmodified by other policies (or blocked by auth, rate-limiting etc).
 
-You'll then see live entries with details of the requests and responses for your
-test calls:
+You'll then see live entries with details of the requests and responses for your test calls:
 
 ![Pipedream output](./media/pipedream.png)
 
-You can create a free requestbin at [requestbin.com](https://requestbin.com) -
-to get started quickly look for the link to create a `public bin`.
+You can create a free requestbin at [requestbin.com](https://requestbin.com) - to get started quickly look for the link to create a `public bin`.

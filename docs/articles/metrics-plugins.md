@@ -90,7 +90,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
         method: false,
         statusCode: false,
       },
-    }),
+    })
   );
 }
 ```
@@ -172,7 +172,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
         method: false,
         statusCode: false,
       },
-    }),
+    })
   );
 }
 ```

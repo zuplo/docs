@@ -67,7 +67,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
   runtime.problemResponseFormat = (
     { problem, statusText, additionalHeaders },
     request,
-    context,
+    context
   ) => {
     // Build the response body
     const body = JSON.stringify(problem, null, 2);
@@ -121,7 +121,7 @@ import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
 export async function pluginWithHook(
   request: ZuploRequest,
   context: ZuploContext,
-  policyName: string,
+  policyName: string
 ) {
   const cloned = request.clone();
   context.addResponseSendingFinalHook(
@@ -131,7 +131,7 @@ export async function pluginWithHook(
         method: "GET",
         body,
       });
-    },
+    }
   );
 
   return request;
@@ -155,7 +155,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
     async (request, context, event: AwsLambdaEventV1) => {
       event.path = context.custom.lambdaPath ?? event.path;
       return event;
-    },
+    }
   );
 }
 ```

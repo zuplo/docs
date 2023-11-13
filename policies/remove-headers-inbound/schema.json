@@ -25,7 +25,7 @@
           "description": "The options for this policy",
           "required": ["headers"],
           "properties": {
-            "headers": {
+            "headers" : {
               "type": "array",
               "description": "A list of headers to be removed from the incoming request"
             }

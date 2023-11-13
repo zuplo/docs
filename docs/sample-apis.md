@@ -2,13 +2,11 @@
 title: Sample APIs
 ---
 
-Zuplo maintains a variety of sample APIs that are all built with Zuplo. These
-are free for anyone to use for testing or demos.
+Zuplo maintains a variety of sample APIs that are all built with Zuplo. These are free for anyone to use for testing or demos.
 
 ## Echo API
 
-The echo API will accept any request and will return a JSON object with details
-of that request. This API accepts all HTTP methods and any body content.
+The echo API will accept any request and will return a JSON object with details of that request. This API accepts all HTTP methods and any body content.
 
 URL: https://echo.zuplo.io
 
@@ -72,7 +70,6 @@ GitHub: https://github.com/zuplo/ecommerce-legacy
 Endpoints:
 
 - `GET /objects?type=OBJECT_TYPE`: Returns a collection of the object type
-- `GET /objects?type=OBJECT_TYPE&id=OBJECT_ID`: Returns a single object based on
-  ID
+- `GET /objects?type=OBJECT_TYPE&id=OBJECT_ID`: Returns a single object based on ID
 
 Valid `type` values are `product`, `user`, and `transaction`.

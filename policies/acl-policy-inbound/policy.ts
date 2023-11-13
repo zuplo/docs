@@ -8,13 +8,13 @@ export default async function (
   request: ZuploRequest,
   context: ZuploContext,
   options: PolicyOptions,
-  policyName: string,
+  policyName: string
 ) {
   // Check that an authenticated user is set
   // NOTE: This policy requires an authentication policy to run before
   if (!request.user) {
     context.log.error(
-      "User is not authenticated. A authorization policy must come before the ACL policy.",
+      "User is not authenticated. A authorization policy must come before the ACL policy."
     );
     return HttpProblems.unauthorized(request, context);
   }
@@ -22,7 +22,7 @@ export default async function (
   // Check that the user has one of the allowed roles
   if (!options.users.includes(request.user.sub)) {
     context.log.error(
-      `The user '${request.user.sub}' is not authorized to perform this action.`,
+      `The user '${request.user.sub}' is not authorized to perform this action.`
     );
     return HttpProblems.forbidden(request, context);
   }

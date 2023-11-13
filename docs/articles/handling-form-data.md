@@ -2,17 +2,13 @@
 title: Handling FormData
 ---
 
-Zuplo supports working with `FormData` including `multipart/form-data`. In this
-simple example we show how you can parse a multipart entry and read the stream
-into memory for use in the Zuplo runtime.
+Zuplo supports working with `FormData` including `multipart/form-data`. In this simple example we show how you can parse a multipart entry and read the stream into memory for use in the Zuplo runtime.
 
-In this case, we upload a JSON file as a multipart/form-data entry using
-Insomnia, with a key `foo`
+In this case, we upload a JSON file as a multipart/form-data entry using Insomnia, with a key `foo`
 
 ![Insomnia multipart/form-data](https://cdn.zuplo.com/assets/2d372851-af24-429b-8eeb-cb880589f30d.png)
 
-We can then handle this programmatically inside Zuplo using a function handler.
-We also modify the JSON before forwarding on to the target backend server.
+We can then handle this programmatically inside Zuplo using a function handler. We also modify the JSON before forwarding on to the target backend server.
 
 ```ts
 import { ZuploContext, ZuploRequest } from "@zuplo/runtime";

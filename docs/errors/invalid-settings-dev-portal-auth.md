@@ -2,11 +2,9 @@
 title: Invalid Settings - Dev Portal Auth (INVALID_SETTINGS_DEV_PORTAL_AUTH)
 ---
 
-We were unable to generate documentation because your 'devPortalClient' does not
-contain a valid auth configuration for 'audience'.
+We were unable to generate documentation because your 'devPortalClient' does not contain a valid auth configuration for 'audience'.
 
-Ensure that the property `authentication.devPortalClient.audience` is set
-correctly in your `dev-portal.json` file. See the example below.
+Ensure that the property `authentication.devPortalClient.audience` is set correctly in your `dev-portal.json` file. See the example below.
 
 ```json
 {

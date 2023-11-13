@@ -1,7 +1,4 @@
-The set header policy adds a header to the request in the inbound pipeline. This
-can be used to set a security header required by the downstream service. For
-example, if your backend service uses basic authentication you might use this
-policy to attach the Basic auth header to the request:
+The set header policy adds a header to the request in the inbound pipeline. This can be used to set a security header required by the downstream service. For example, if your backend service uses basic authentication you might use this policy to attach the Basic auth header to the request:
 
 ```json
 {
@@ -19,8 +16,7 @@ policy to attach the Basic auth header to the request:
 }
 ```
 
-When doing this, you most likely want to set the secret as an environment
-variable, which can be accessed in the policy as follows
+When doing this, you most likely want to set the secret as an environment variable, which can be accessed in the policy as follows
 
 ```json
 {
@@ -38,5 +34,4 @@ variable, which can be accessed in the policy as follows
 }
 ```
 
-And you would set the environment variable `BASIC_AUTHORIZATION_HEADER_VALUE` to
-`Basic DIGEST_HERE`.
+And you would set the environment variable `BASIC_AUTHORIZATION_HEADER_VALUE` to `Basic DIGEST_HERE`.
