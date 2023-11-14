@@ -56,7 +56,7 @@ ContextData.set<{ key: string }>(context, "my-data", { key: "hello" });
 
 Below are a few examples of how **NOT** to share data in your API.
 
-::: danger
+:::danger
 
 Do NOT write code like this in your API. It will not work reliably. These are
 examples of what NOT to do. See the next section for best practices.
