@@ -23,8 +23,10 @@ JSON. Note,
 
 ![Add API Key Authentication](https://cdn.zuplo.com/assets/811a8152-9648-4377-a070-be6ec539a4d6.png).
 
-:::tip The API key auth policy should usually be one of the first policies in
-your request pipeline, drag it to the top if you have multiple policies.
+:::tip
+
+The API key auth policy should usually be one of the first policies in your
+request pipeline, drag it to the top if you have multiple policies.
 
 <Screenshot src="https://cdn.zuplo.com/assets/8f698429-f265-40d9-99d7-156b28b7ef1b.gif" size="sm" />
 :::
@@ -91,10 +93,14 @@ You should now get a 200 OK.
 
 ![200 OK](https://cdn.zuplo.com/assets/82823f9d-62ad-4f18-9e07-bb89dc9ad32d.png)
 
-:::note We also offer an API for our API key service that allows you to
-programmatically create consumers and even create your own developer portal or
-integrate key management into your existing dashboard. Contact us at
-`support@zuplo.com` for access. :::
+:::note
+
+We also offer an API for our API key service that allows you to programmatically
+create consumers and even create your own developer portal or integrate key
+management into your existing dashboard. Contact us at `support@zuplo.com` for
+access.
+
+:::
 
 **NEXT** Try
 [step 3 - add Rate Limiting to your API](./step-3-add-rate-limiting.md).
