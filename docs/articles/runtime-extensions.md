@@ -67,7 +67,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
   runtime.problemResponseFormat = (
     { problem, statusText, additionalHeaders },
     request,
-    context
+    context,
   ) => {
     // Build the response body
     const body = JSON.stringify(problem, null, 2);
@@ -121,7 +121,7 @@ import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
 export async function pluginWithHook(
   request: ZuploRequest,
   context: ZuploContext,
-  policyName: string
+  policyName: string,
 ) {
   const cloned = request.clone();
   context.addResponseSendingFinalHook(
@@ -131,7 +131,7 @@ export async function pluginWithHook(
         method: "GET",
         body,
       });
-    }
+    },
   );
 
   return request;
@@ -148,14 +148,19 @@ The example below shows how to use a route's custom property to set the path on
 the outgoing event to a custom value.
 
 ```ts
-import { AwsLambdaHandlerExtensions, RuntimeExtensions } from "@zuplo/runtime";
+import {
+  AwsLambdaHandlerExtensions,
+  RuntimeExtensions,
+  ContextData,
+} from "@zuplo/runtime";
 
 export function runtimeInit(runtime: RuntimeExtensions) {
   AwsLambdaHandlerExtensions.addSendingAwsLambdaEventHook(
     async (request, context, event: AwsLambdaEventV1) => {
-      event.path = context.custom.lambdaPath ?? event.path;
+      const lambdaPath = ContextData.get(context, "lambdaPath");
+      event.path = lambdaPath ?? event.path;
       return event;
-    }
+    },
   );
 }
 ```
