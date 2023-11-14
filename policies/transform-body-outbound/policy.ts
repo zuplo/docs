@@ -3,7 +3,7 @@ import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
 export default async function (
   response: Response,
   request: ZuploRequest,
-  context: ZuploContext
+  context: ZuploContext,
 ) {
   // Get the outgoing body as an Object
   const obj = await response.json();

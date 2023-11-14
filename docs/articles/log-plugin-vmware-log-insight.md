@@ -27,7 +27,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
       fields: {
         appname: "zuplo",
       },
-    })
+    }),
   );
 }
 ```
