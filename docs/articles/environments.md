@@ -23,9 +23,13 @@ There are two distinct types of environment:
   shared with anybody else. If you share a project with another person, they
   will have their own working-copy environment.
 
-:::warning Never use a working-copy environment in a production setting. They
-offer no SLA, and will often sleep after inactivity leading to slower cold-start
-times. There can be occasional downtime of a few seconds for upgrades. :::
+:::warning
+
+Never use a working-copy environment in a production setting. They offer no SLA,
+and will often sleep after inactivity leading to slower cold-start times. There
+can be occasional downtime of a few seconds for upgrades.
+
+:::
 
 - **edge deployment** - these are real deployments that are deployed to the edge
   at 100s of data-centers around the world. They have 0ms startup time and offer
