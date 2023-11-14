@@ -295,6 +295,8 @@ const sidebars = {
             "articles/zuplo-request",
             "articles/environment-variables",
             "articles/zuplo-context",
+            "articles/context-data",
+            "articles/route-raw",
             "articles/web-standard-apis",
             "articles/web-crypto-apis",
             "articles/node-modules",
