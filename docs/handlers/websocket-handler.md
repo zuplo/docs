@@ -3,9 +3,8 @@ title: WebSocket Handler
 sidebar_label: WebSocket Handler
 ---
 
-::: note
-This is an Enterprise only policy at this time. Please contact us to trial this or sign up for an Enterprise account. 
-:::
+::: note This is an Enterprise only policy at this time. Please contact us to
+trial this or sign up for an Enterprise account. :::
 
 The WebSocket Handler enables you to manage WebSocket connections to your
 backend WebSocket APIs. It can be configured alongside other existing policies

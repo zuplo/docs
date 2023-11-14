@@ -10,7 +10,7 @@ definition (typescript):
 ```ts
 export type RequestHandler = (
   request: ZuploRequest,
-  context: ZuploContext
+  context: ZuploContext,
 ) => Promise<any>;
 ```
 

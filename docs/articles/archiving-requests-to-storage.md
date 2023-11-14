@@ -55,7 +55,7 @@ export type RequestArchivePolicyOptions = {
 export default async function (
   request: ZuploRequest,
   context: ZuploContext,
-  options: RequestArchivePolicyOptions
+  options: RequestArchivePolicyOptions,
 ) {
   // because we will read the body, we need to
   // create a clone of this request first, otherwise
