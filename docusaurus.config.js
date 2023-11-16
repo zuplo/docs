@@ -103,6 +103,7 @@ const config = {
             position: "left",
             label: "Docs",
           },
+          { href: "https://dev.zuplo.com/docs", label: "API", position: "left" },
           { href: "https://zuplo.com/blog", label: "Blog", position: "left" },
           {
             href: "https://portal.zuplo.com",
