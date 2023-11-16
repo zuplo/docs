@@ -61,7 +61,7 @@ are found in Auth0.
    Variables** section in the <SettingsTabIcon /> **Settings** tab.
 
 2. Click **Add new Variable** and enter the name `AUTH0_DOMAIN` in the name
-   field. Set the value to
+   field. Set the value to your Auth0 domain.
 
 3. Click **Add new Variable** again and enter the name `AUTH0_AUDIENCE` in the
    name field. Set the value to the **identifier** URI you used when creating
