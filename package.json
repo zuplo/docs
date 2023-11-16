@@ -5,7 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "npm run ci:pre && npm run start:docusaurus",
-    "start:policies": "node ./scripts/build.mjs && nodemon --watch policies -e md,json,ts,svg ./scripts/update-policies.mjs",
+    "start:policies": "node ./scripts/build.mjs && nodemon --watch policies -e md,json,ts,svg,png ./scripts/update-policies.mjs",
     "start:docusaurus": "node ./scripts/check-prepared.mjs && docusaurus start --port 3002",
     "build": "npm run ci:pre && docusaurus build",
     "build:scripts": "node ./scripts/build.mjs",
