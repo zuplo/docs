@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "npm run ci:pre && npm run start:docusaurus",
-    "start:policies": "node ./scripts/build.mjs && nodemon --watch policies -e md,json,ts,svg,png ./scripts/update-policies.mjs",
+    "start": "npm run ci:pre && concurrently \"npm run start:policies\" \"npm run start:docusaurus\"",
+    "start:policies": "node ./scripts/build.mjs && node ./scripts/update-policies.main.mjs --watch",
     "start:docusaurus": "node ./scripts/check-prepared.mjs && docusaurus start --port 3002",
     "build": "npm run ci:pre && docusaurus build",
     "build:scripts": "node ./scripts/build.mjs",
@@ -20,7 +20,7 @@
     "typecheck": "tsc",
     "ci:pre": "npm run ci:bundles && npm run ci:policies",
     "ci:bundles": "node ./scripts/update-bundles.mjs",
-    "ci:policies": "node ./scripts/build.mjs && node ./scripts/update-policies.mjs"
+    "ci:policies": "node ./scripts/build.mjs && node ./scripts/update-policies.main.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "^3.0.0",
@@ -56,13 +56,14 @@
     "@types/jsdom": "^21.1.0",
     "@types/react": "^18.2.29",
     "@types/react-dom": "^18.2.15",
+    "arg": "^5.0.2",
     "chalk": "^4.1.2",
+    "chokidar": "^3.5.3",
     "concurrently": "^8.2.0",
     "esbuild": "^0.19.5",
     "glob": "^8.1.0",
     "jsdom": "^22.0.0",
     "json-schema": "^0.4.0",
-    "nodemon": "^3.0.1",
     "prettier": "^3.1.0",
     "prettier-plugin-organize-imports": "^3.1.1",
     "ts-node": "^10.8.2"
