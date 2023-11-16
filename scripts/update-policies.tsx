@@ -249,6 +249,8 @@ sidebar_label: ${schema.title}
 
 <!-- WARNING: This document is generated. DO NOT EDIT BY HAND -->
 
+# ${schema.title}
+
 ${
   schema.isCustom
     ? `<CustomPolicyNotice name="${schema.title}" id="${policyId}" />`
