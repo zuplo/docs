@@ -1,5 +1,6 @@
 import { dereference } from "@apidevtools/json-schema-ref-parser";
 import chalk from "chalk";
+import chokidar from "chokidar";
 import { existsSync } from "fs";
 import { copyFile, mkdir, readdir, readFile, rm, writeFile } from "fs/promises";
 import glob from "glob";
@@ -43,14 +44,7 @@ type RenderResult = {
   headings: Array<Heading>;
 };
 
-// NOTE: This component is used to generate policy HTML in the policy script
-// as such it CANNOT include css module imports
-
-export const OptionProperties = ({
-  properties,
-}: {
-  properties: PolicyProperties;
-}) => (
+const OptionProperties = ({ properties }: { properties: PolicyProperties }) => (
   <ul>
     {Object.entries(properties).map(([key, value]) => (
       <li key={key}>
@@ -99,8 +93,6 @@ const PolicyOptions = ({
     </ul>
   );
 };
-
-export default PolicyOptions;
 
 const policiesDir = path.resolve(process.cwd(), "./policies");
 const docsDir = path.resolve(process.cwd(), "./docs/policies");
@@ -299,7 +291,7 @@ Read more about [how policies work](/docs/articles/policies)
 `;
 }
 
-async function run() {
+export async function run() {
   // await rm(docsDir, { recursive: true, force: true });
   if (!existsSync(docsDir)) {
     await mkdir(docsDir, { recursive: true });
@@ -506,6 +498,23 @@ async function getExampleHtml(
   return html;
 }
 
-run().catch((err) => {
-  console.error(err);
-});
+export async function watch() {
+  await run();
+  var watcher = chokidar.watch(policiesDir, {
+    ignored: /^\./,
+    persistent: true,
+    ignoreInitial: true,
+  });
+
+  function changed(path) {
+    run().catch(console.error);
+  }
+
+  watcher
+    .on("add", changed)
+    .on("change", changed)
+    .on("unlink", changed)
+    .on("error", function (error) {
+      console.error("Error happened", error);
+    });
+}
