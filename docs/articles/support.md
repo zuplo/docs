@@ -48,7 +48,7 @@ offers access to the following channels:
 ### Premium support
 
 Customers on a Zuplo enterprise plan can choose from premium support offerings
-that include specific SLAs for response time as well as additional means of
+that can optionally include specific SLAs for response time as well as additional means of
 contact such as a private Slack channel.
 
 As part of premium support, Zuplo can also offer:
@@ -57,6 +57,8 @@ As part of premium support, Zuplo can also offer:
 - Guidance implementing custom policies
 - Advice on best-practices designing your Zuplo API
 - Troubleshooting
+
+Contact sales to explore adding these options to your agreement. 
 
 ## Contact Methods
 
@@ -88,9 +90,9 @@ your support offering.
 
 ### Private Discord/Slack Channel
 
-Enterprise support contracts can chat directly with the Zuplo team in a private
+Enterprise support contracts can optionally chat directly with the Zuplo team in a private
 Discord or Slack channel. These channels are useful for posting feature
-requests, asking questions, or general troubleshooting.
+requests, asking questions, or general troubleshooting. Contact sales for more info.
 
 :::caution
 
