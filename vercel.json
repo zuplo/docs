@@ -776,6 +776,11 @@
       "source": "/docs/articles/github-source-control{/}?",
       "destination": "/docs/articles/source-control",
       "permanent": true
+    },
+    {
+      "source": "/docs/intro{/}?",
+      "destination": "/docs",
+      "permanent": true
     }
   ],
   "headers": [

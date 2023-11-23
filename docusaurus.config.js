@@ -99,7 +99,7 @@ const config = {
         items: [
           { href: "https://zuplo.com", label: "Home", position: "left" },
           {
-            to: "/docs/intro",
+            to: "/docs",
             position: "left",
             label: "Docs",
           },
