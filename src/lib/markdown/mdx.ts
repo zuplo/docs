@@ -23,7 +23,6 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import shiki from "shiki";
 import { unified } from "unified";
-import { VFileCompatible } from "vfile";
 import remarkCallout from "./callout";
 
 // Shiki loads languages and themes using "fs" instead of "import", so Next.js
@@ -180,7 +179,7 @@ export async function render(markdown: string) {
 }
 
 export async function compileMdx<Frontmatter = Record<string, any>>(
-  source: VFileCompatible,
+  source: any,
 ) {
   const nodes: (Element & { tagName: "h2" | "h3" })[] = [];
   const options = getOptions(nodes);
