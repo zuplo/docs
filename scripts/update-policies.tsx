@@ -1,20 +1,27 @@
-import { render } from "@zuplo/md-tools";
-import arg from "arg";
+import { dereference } from "@apidevtools/json-schema-ref-parser";
 import chalk from "chalk";
 import chokidar from "chokidar";
 import { existsSync } from "fs";
 import { copyFile, mkdir, readdir, readFile, rm, writeFile } from "fs/promises";
-import { glob } from "glob";
+import glob from "glob";
 import { JSONSchema7 } from "json-schema";
+import { Heading as AstHeading } from "mdast";
+import { toString } from "mdast-util-to-string";
 import path from "path";
 import prettier from "prettier";
+import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
+import { Node } from "unist";
+import { visit } from "unist-util-visit";
+
+// here just to keep the react import
+const version = React.version;
 
 type PolicySchema = JSONSchema7 & {
   isPreview?: boolean;
   isDeprecated?: boolean;
   isPaidAddOn?: boolean;
-  fakePolicyUrl?: string;
+  isCustom?: boolean;
 };
 
 type PolicyProperties = Record<
@@ -26,14 +33,18 @@ type PolicyProperties = Record<
   }
 >;
 
-// NOTE: This component is used to generate policy HTML in the policy script
-// as such it CANNOT include css module imports
+type Heading = {
+  depth: number;
+  value: string;
+  data?: any;
+};
 
-export const OptionProperties = ({
-  properties,
-}: {
-  properties: PolicyProperties;
-}) => (
+type RenderResult = {
+  html: string | Buffer;
+  headings: Array<Heading>;
+};
+
+const OptionProperties = ({ properties }: { properties: PolicyProperties }) => (
   <ul>
     {Object.entries(properties).map(([key, value]) => (
       <li key={key}>
@@ -73,7 +84,7 @@ const PolicyOptions = ({
         <code>handler/module</code> the module containing the policy. Value
         should be <code>{properties.module.const}</code>.
       </li>
-      {properties.options ? (
+      {properties.options && Object.keys(properties.options).length > 0 ? (
         <li>
           <code>handler/options</code> The options for this policy:
           <OptionProperties properties={properties.options.properties} />
@@ -83,10 +94,37 @@ const PolicyOptions = ({
   );
 };
 
-export default PolicyOptions;
-
 const policiesDir = path.resolve(process.cwd(), "./policies");
 const docsDir = path.resolve(process.cwd(), "./docs/policies");
+
+const headings = (root: Node): Array<Heading> => {
+  const headingList: Array<Heading> = [];
+
+  visit(root, "heading", (node: AstHeading) => {
+    const heading: Heading = {
+      depth: node.depth,
+      value: toString(node, { includeImageAlt: false }),
+    };
+
+    // Other remark plugins can store arbitrary data
+    // inside a node's `data` property, such as a
+    // custom heading id.
+    const data = node?.data;
+    if (data) {
+      heading.data = data;
+    }
+
+    headingList.push(heading);
+  });
+
+  return headingList;
+};
+
+function remarkHeadings(): (node: Node, file: any) => void {
+  return (node, file) => {
+    file.data.headings = headings(node);
+  };
+}
 
 function stringify(obj: any) {
   if (process.env.NODE_ENV === "production") {
@@ -97,7 +135,35 @@ function stringify(obj: any) {
   });
 }
 
-async function processProperties(properties: any) {
+async function render(markdown: string): Promise<RenderResult> {
+  const unified = (await import("unified")).unified;
+  const rehypeSlug = (await import("rehype-slug")).default;
+  const rehypeStringify = (await import("rehype-stringify")).default;
+  const remarkGfm = (await import("remark-gfm")).default;
+  const remarkParse = (await import("remark-parse")).default;
+  const remarkRehype = (await import("remark-rehype")).default;
+  const rehypeAutolinkHeadings = (await import("rehype-autolink-headings"))
+    .default;
+  const rehypePrettyCode = (await import("rehype-pretty-code")).default;
+
+  const result = await unified()
+    .use(remarkParse)
+    .use(remarkGfm)
+    .use(remarkHeadings)
+    .use(remarkRehype)
+    .use(rehypePrettyCode)
+    .use(rehypeSlug)
+    .use(rehypeAutolinkHeadings)
+    .use(rehypeStringify)
+    .process(markdown);
+
+  return {
+    html: result.value,
+    headings: result.data.headings as Array<Heading>,
+  };
+}
+
+async function processProperties(properties) {
   const tasks = Object.keys(properties).map(async (key) => {
     if (properties[key].description) {
       const { html } = await render(properties[key].description);
@@ -110,11 +176,12 @@ async function processProperties(properties: any) {
   return Promise.all(tasks);
 }
 
-function getPolicyFilePaths(policyId: string) {
+function getPolicyFilePaths(policyId) {
   return {
     iconSvg: path.join(policiesDir, policyId, "icon.svg"),
     introMd: path.join(policiesDir, policyId, "intro.md"),
     docMd: path.join(policiesDir, policyId, "doc.md"),
+    policyTs: path.join(policiesDir, policyId, "policy.ts"),
   };
 }
 
@@ -133,19 +200,44 @@ async function generateMarkdown(
     docMd = await readFile(policyFilePaths.docMd, "utf-8");
   }
 
-  const { examples } = schema.properties!.handler as any;
-  if (!Array.isArray(examples) || examples.length === 0) {
+  let code: any;
+  const { examples } = schema.properties?.handler as any;
+  if (examples && examples.length > 0) {
+    const example = { ...examples[0] };
+    delete example._name;
+    code = {
+      name: `my-${policyId}-policy`,
+      policyType: policyId,
+      handler: example,
+    };
+  } else if (schema.isCustom) {
+    code = {
+      name: policyId,
+      policyType: policyId.endsWith("-inbound")
+        ? "custom-code-inbound"
+        : "custom-code-outbound",
+      handler: {
+        export: "default",
+        module: `$import(./modules/${policyId})`,
+      },
+    };
+  } else {
     throw new Error(`There are no examples set for policy ${policyId}`);
   }
 
-  const copy = { ...examples[0] };
-  delete copy._name;
+  let customCode = "";
 
-  const code = {
-    name: `my-${policyId}-policy`,
-    policyType: policyId,
-    handler: copy,
-  };
+  if (schema.isCustom && existsSync(policyFilePaths.policyTs)) {
+    const policyTs = await readFile(policyFilePaths.policyTs, "utf-8");
+    customCode = `
+# Example Custom Policy
+
+The code below is an example of how this custom policy module could be implemented.
+
+\`\`\`ts title="modules/${policyId}.ts"
+${policyTs}
+\`\`\``;
+  }
 
   const optionsHtml = renderToStaticMarkup(
     <PolicyOptions schema={schema} policyId={policyId} />,
@@ -157,6 +249,14 @@ sidebar_label: ${schema.title}
 
 <!-- WARNING: This document is generated. DO NOT EDIT BY HAND -->
 
+# ${schema.title}
+
+${
+  schema.isCustom
+    ? `<CustomPolicyNotice name="${schema.title}" id="${policyId}" />`
+    : ""
+}
+
 <!-- start: intro.md -->
 ${introMd ?? schema.description}
 <!-- end: intro.md -->
@@ -165,9 +265,19 @@ ${introMd ?? schema.description}
     schema.isPaidAddOn ?? false
   }} />
 
+
+
+${customCode}
+
 ## Configuration 
 
-\`\`\`json
+${
+  schema.isCustom
+    ? `The example below shows how to configure a custom code policy in the 'policies.json' document that utilizes the above example policy code.`
+    : `The configuration shows how to configure the policy in the 'policies.json' document.`
+}
+
+\`\`\`json title="config/policies.json"
 ${JSON.stringify(code, null, 2)}
 \`\`\`
 
@@ -183,29 +293,43 @@ Read more about [how policies work](/docs/articles/policies)
 `;
 }
 
-async function run() {
-  await rm(docsDir, { recursive: true, force: true });
-  await mkdir(docsDir, { recursive: true });
-
+export async function run() {
+  // await rm(docsDir, { recursive: true, force: true });
+  if (!existsSync(docsDir)) {
+    await mkdir(docsDir, { recursive: true });
+  }
   const policyConfigJson = await readFile(
     path.join(policiesDir, "config.json"),
     "utf-8",
   );
   const policyConfig = JSON.parse(policyConfigJson);
 
-  const matches: string[] = await glob("**/schema.json", {
-    cwd: policiesDir,
+  const matches: string[] = await new Promise((resolve, reject) => {
+    glob(
+      "**/schema.json",
+      {
+        cwd: policiesDir,
+      },
+      (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      },
+    );
   });
 
-  const policies: any = [];
+  const policies = [];
   const tasks = matches.map(async (match) => {
     const policyId = match.replace("/schema.json", "");
     const schemaPath = path.join(policiesDir, match);
     const schemaJson = await readFile(schemaPath, "utf-8");
-    const schema = JSON.parse(schemaJson) as PolicySchema;
+    const rawSchema = JSON.parse(schemaJson);
     // RefParser uses cwd to resolve refs
     const policyDir = path.join(policiesDir, policyId);
     process.chdir(policyDir);
+    const schema = (await dereference(rawSchema)) as PolicySchema;
     await processProperties(schema.properties);
 
     const policyFilePaths = getPolicyFilePaths(policyId);
@@ -215,8 +339,8 @@ async function run() {
     meta.name = schema.title;
     meta.isPreview = !!schema.isPreview;
     meta.isPaidAddOn = !!schema.isPaidAddOn;
+    meta.isCustom = !!schema.isCustom;
     meta.isDeprecated = !!schema.isDeprecated;
-    meta.fakePolicyUrl = schema.fakePolicyUrl;
     meta.documentationUrl = `https://zuplo.com/docs/policies/${policyId}/`;
     meta.id = policyId;
 
@@ -230,7 +354,12 @@ async function run() {
     }
 
     const { examples } = schema.properties?.handler as any;
-    if (examples && examples.length > 0) {
+    if (schema.isCustom) {
+      meta.defaultHandler = {
+        export: "default",
+        module: `$import(./modules/${policyId})`,
+      };
+    } else if (examples && examples.length > 0) {
       const example = { ...examples[0] };
       delete example._name;
       meta.defaultHandler = example;
@@ -241,20 +370,32 @@ async function run() {
           schemaJson,
         ),
       );
-      const handler = schema.properties!.handler as JSONSchema7;
+      const handler = schema.properties.handler as JSONSchema7;
       meta.defaultHandler = {
-        export: (handler.properties!.export as JSONSchema7).const,
-        module: (handler.properties!.module as JSONSchema7).const,
+        export: (handler.properties.export as JSONSchema7).const,
+        module: (handler.properties.module as JSONSchema7).const,
         options: {},
       };
     }
-    meta.exampleHtml = await getExampleHtml(policyId, schemaPath, schema);
+    if (schema.isCustom && existsSync(policyFilePaths.introMd)) {
+      const intro = await readFile(policyFilePaths.introMd, "utf-8");
+      const { html } = await render(intro);
+      meta.exampleHtml = html;
+    } else {
+      meta.exampleHtml = await getExampleHtml(policyId, schemaPath, schema);
+    }
 
     if (existsSync(policyFilePaths.iconSvg)) {
       const svg = await readFile(policyFilePaths.iconSvg, "utf-8");
       const src = `data:image/svg+xml;base64,${btoa(svg)}`;
       meta.icon = src;
     }
+
+    if (schema.isCustom && existsSync(policyFilePaths.policyTs)) {
+      const policyTs = await readFile(policyFilePaths.policyTs, "utf-8");
+      meta.customPolicyTemplate = policyTs;
+    }
+
     policies.push(meta);
 
     const generatedMd = await generateMarkdown(
@@ -265,8 +406,9 @@ async function run() {
 
     if (!schema.isDeprecated) {
       const policyOutDir = path.join(docsDir, policyId);
-      await mkdir(policyOutDir);
-
+      if (!existsSync(policyOutDir)) {
+        await mkdir(policyOutDir);
+      }
       await writeFile(
         path.join(docsDir, `${policyId}.md`),
         generatedMd,
@@ -313,44 +455,6 @@ async function run() {
   console.info("Policies updated");
 }
 
-async function watch() {
-  await run();
-  var watcher = chokidar.watch(policiesDir, {
-    ignored: /^\./,
-    persistent: true,
-    ignoreInitial: true,
-  });
-
-  function changed(path: string) {
-    run().catch(console.error);
-  }
-
-  watcher
-    .on("add", changed)
-    .on("change", changed)
-    .on("unlink", changed)
-    .on("error", function (error) {
-      console.error("Error happened", error);
-    });
-}
-
-const args = arg({
-  // Types
-  "--watch": Boolean,
-});
-
-if (args["--watch"]) {
-  watch().catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
-} else {
-  run().catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
-}
-
 async function getExampleHtml(
   policyId: string,
   policyPath: string,
@@ -368,8 +472,11 @@ async function getExampleHtml(
 
   const { html: description } = await render(schema.description);
 
-  const properties = (schema.properties!.handler as any).properties.options
+  const properties = (schema.properties.handler as any).properties.options
     ?.properties;
+  if (!properties) {
+    return;
+  }
   if (properties && Object.keys(properties).length === 0) {
     console.warn(
       chalk.yellow(
@@ -381,7 +488,7 @@ async function getExampleHtml(
   const html = renderToStaticMarkup(
     <>
       <div dangerouslySetInnerHTML={{ __html: description }} />
-      {Object.keys(properties).length >= 0 ? (
+      {Object.keys(properties).length > 0 ? (
         <>
           <h3>Options</h3>
           <OptionProperties properties={properties} />{" "}
@@ -391,4 +498,25 @@ async function getExampleHtml(
   );
 
   return html;
+}
+
+export async function watch() {
+  await run();
+  var watcher = chokidar.watch(policiesDir, {
+    ignored: /^\./,
+    persistent: true,
+    ignoreInitial: true,
+  });
+
+  function changed(path) {
+    run().catch(console.error);
+  }
+
+  watcher
+    .on("add", changed)
+    .on("change", changed)
+    .on("unlink", changed)
+    .on("error", function (error) {
+      console.error("Error happened", error);
+    });
 }
