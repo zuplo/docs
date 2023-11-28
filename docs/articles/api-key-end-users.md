@@ -26,7 +26,7 @@ the portal.
 When API Key Managers log into the Developer Portal they can copy, manage, or
 create new API Keys.
 
-![API Keys in Developer Portal](./api-key-management-media/api-key-dev-portal.png)
+![API Keys in Developer Portal](https://cdn.zuplo.com/assets/beaeba62-153b-461b-a6e4-9ed5e0297393.png)
 
 ## React Component and API
 

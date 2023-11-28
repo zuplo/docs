@@ -239,7 +239,7 @@ export default async function (request: ZuploRequest) {
 
 Here is this example working as a gif
 
-![](/media/policies/2021-11-21_21.44.35.gif)
+![](https://cdn.zuplo.com/assets/e42be9df-34d2-4835-9465-509046a3c25a.gif)
 
 ## Modifying the request headers
 

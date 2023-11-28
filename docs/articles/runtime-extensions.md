@@ -148,17 +148,12 @@ The example below shows how to use a route's custom property to set the path on
 the outgoing event to a custom value.
 
 ```ts
-import {
-  AwsLambdaHandlerExtensions,
-  RuntimeExtensions,
-  ContextData,
-} from "@zuplo/runtime";
+import { AwsLambdaHandlerExtensions, RuntimeExtensions } from "@zuplo/runtime";
 
 export function runtimeInit(runtime: RuntimeExtensions) {
   AwsLambdaHandlerExtensions.addSendingAwsLambdaEventHook(
     async (request, context, event: AwsLambdaEventV1) => {
-      const lambdaPath = ContextData.get(context, "lambdaPath");
-      event.path = lambdaPath ?? event.path;
+      event.path = context.custom.lambdaPath ?? event.path;
       return event;
     },
   );

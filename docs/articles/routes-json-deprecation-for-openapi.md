@@ -56,4 +56,4 @@ git/GitHub again.
 You're now on the OpenAPI train 🚂 (choo choo).
 
 For more on GitHub Source Control integration see
-[GitHub integration](/docs/articles/source-control).
+[GitHub integration](/docs/articles/github-source-control).

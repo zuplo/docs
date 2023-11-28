@@ -135,7 +135,7 @@ other policies (or blocked by auth, rate-limiting etc).
 You'll then see live entries with details of the requests and responses for your
 test calls:
 
-![Pipedream output](./media/pipedream.png)
+![Pipedream output](https://cdn.zuplo.com/assets/523e6978-6c3b-4b6d-8076-2bfc209068f0.png)
 
 You can create a free requestbin at [requestbin.com](https://requestbin.com) -
 to get started quickly look for the link to create a `public bin`.

@@ -12,7 +12,7 @@ Within your project in the Zuplo Portal, you will notice a `Docs` directory,
 with an `index.md` and `sidebar.json` file. `index.md` is a custom page we
 created to get you started.
 
-![Docs Folder](../../static/media/developer-portal/adding-pages/docs-folder.png)
+![Docs Folder](https://cdn.zuplo.com/assets/e49b5626-e013-45bd-81fc-28e214102ead.png)
 
 Navigate to `index.md`, and make some changes to the markdown. If you are
 unfamiliar with Markdown, check out [this guide](https://www.markdownguide.org/)
@@ -23,7 +23,7 @@ to get started. You can also create a new docs page via the new file button.
 You can preview what your page will look like in the developer portal by
 clicking the 'Markdown Preview' tab above the editor.
 
-![Markdown Preview](../../static/media/developer-portal/adding-pages/style-preview.png)
+![Markdown Preview](https://cdn.zuplo.com/assets/cbc42890-83a2-4cf0-9bf3-6df0a6c81cf1.png)
 
 ## Configuring the Sidebar
 

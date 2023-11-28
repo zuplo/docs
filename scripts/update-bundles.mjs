@@ -6,6 +6,6 @@ fetch(`https://cdn.zuplo.com/types/@zuplo/bundled/bundles.v2.json`, {
   cache: "no-cache",
 }).then((response) =>
   Readable.fromWeb(response.body).pipe(
-    createWriteStream(resolve(process.cwd(), "./src/components/bundles.json")),
+    createWriteStream(resolve(process.cwd(), "./bundles.json")),
   ),
 );

@@ -2,23 +2,14 @@
 title: Authentication
 ---
 
-The Zuplo Developer Portal supports authenticating with any standard-compliant
-OpenID Connect identity provider such as [Auth0](https://auth0.com),
-[Okta](https://okta.com), [AWS Cognito](https://aws.amazon.com/cognito/), etc.
-The developer portal also supports external auth sources like
-[Supabase](./dev-portal-supabase-auth.md).
-
-Below are instructions on how to configure some of the common providers.
-
-:::caution Production Authentication
-
-Production Developer Portals must setup custom authentication.
-
 Out of the box, authentication to your developer portal uses Zuplo's test Auth0
-account. The test Auth0 account cannot be used in production (it will fail on
-custom domains) and is limited to a small number of users per month per project.
-
-:::
+account. **The test Auth0 account cannot be used in production**. The test
+account is limited to a small number of users per month per project so you will
+want to change this to use your own identity provider. The developer portal
+supports authenticating with any standard-compliant OpenID Connect identity
+provider such as [Auth0](https://auth0.com), [Okta](https://okta.com),
+[AWS Cognito](https://aws.amazon.com/cognito/), etc. The developer portal also
+supports external auth sources like [Supabase](./dev-portal-supabase-auth.md).
 
 ## Auth0 Setup
 
