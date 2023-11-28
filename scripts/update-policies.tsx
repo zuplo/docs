@@ -251,12 +251,6 @@ sidebar_label: ${schema.title}
 
 # ${schema.title}
 
-${
-  schema.isCustom
-    ? `<CustomPolicyNotice name="${schema.title}" id="${policyId}" />`
-    : ""
-}
-
 <!-- start: intro.md -->
 ${introMd ?? schema.description}
 <!-- end: intro.md -->
