@@ -12,9 +12,15 @@ When running API key Authentication locally, if you
 [link](/docs/cli/local-development) the project to an project the same API Key
 Bucket used in working copy will also be used for local development.
 
-Alternatively, you can specify any API Key Bucket on the
+## Setting the API Key Bucket Name
+
+Either locally or in CI/CD you can specify any API Key Bucket on the
 [API Key Authentication](/docs/policies/api-key-inbound) policy by setting the
-`bucketName` property.
+`bucketName` property. This allows using a consistent API Key Bucket that is
+setup with consumers, etc. as required for testing. You can use the
+[Zuplo Developer API](https://dev.zuplo.com) to
+[create](/docs/articles/api-key-management) and manage buckets, consumers, keys,
+etc.
 
 ## Selectively Disabling
 
