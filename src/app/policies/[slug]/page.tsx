@@ -89,18 +89,30 @@ export default async function Page({ params }: { params: { slug: string } }) {
   }
 
   const { examples } = schema.properties!.handler as any;
-  if (!Array.isArray(examples) || examples.length === 0) {
+  let code: any;
+
+  if (examples && examples.length > 0) {
+    const example = { ...examples[0] };
+    delete example._name;
+    code = {
+      name: `my-${policyId}-policy`,
+      policyType: policyId,
+      handler: example,
+    };
+  } else if (schema.isCustom) {
+    code = {
+      name: policyId,
+      policyType: policyId.endsWith("-inbound")
+        ? "custom-code-inbound"
+        : "custom-code-outbound",
+      handler: {
+        export: "default",
+        module: `$import(./modules/${policyId})`,
+      },
+    };
+  } else {
     throw new Error(`There are no examples set for policy ${policyId}`);
   }
-
-  const copy = { ...examples[0] };
-  delete copy._name;
-
-  const code = {
-    name: `my-${policyId}-policy`,
-    policyType: policyId,
-    handler: copy,
-  };
 
   const sections: Section[] = [
     {

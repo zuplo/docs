@@ -16,6 +16,7 @@ export interface PolicySchema extends JSONSchema7 {
   isDeprecated?: boolean;
   isPaidAddOn?: boolean;
   fakePolicyUrl?: string;
+  isCustom?: boolean;
 }
 
 export interface Section {
