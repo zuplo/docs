@@ -331,6 +331,7 @@ const sidebars = {
             "cli/test",
             "cli/tunnels",
             "cli/variables",
+            "cli/local-development",
           ],
         },
       ],
