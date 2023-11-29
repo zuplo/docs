@@ -72,3 +72,9 @@ You have now setup API Key Authentication on your API Gateway.
 
 See [this document](/docs/articles/api-key-management) for more information
 about API Keys and API Key Management with Zuplo.
+
+## Writing Tests with the Auth Policy
+
+For information on running tests while using API Key Authentication see the
+document
+[Testing API Key Authentication](/docs/articles/testing-api-key-authentication).
