@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "prebuild": "node ./scripts/build.mjs && node ./scripts/update-policies.main.mjs",
     "postinstall": "node ./scripts/update-bundles.mjs && node ./scripts/copy-shiki.mjs",
     "postbuild": "next-sitemap",
     "start": "next start",
@@ -26,6 +27,7 @@
     "@types/react-highlight-words": "^0.16.4",
     "autoprefixer": "^10.4.12",
     "classnames": "^2.3.2",
+    "esbuild": "^0.19.8",
     "flexsearch": "^0.7.31",
     "glob": "^10.3.10",
     "gray-matter": "^4.0.3",
@@ -55,8 +57,8 @@
     "simple-functional-loader": "^1.2.1",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.2.2",
-    "unist-util-visit": "^5.0.0",
     "unified": "^10.1.2",
+    "unist-util-visit": "^5.0.0",
     "video.js": "^8.3.0"
   },
   "devDependencies": {
