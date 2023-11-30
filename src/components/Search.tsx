@@ -265,7 +265,7 @@ const SearchInput = forwardRef<
 
   return (
     <div className="group relative flex h-12">
-      <SearchIcon className="pointer-events-none absolute left-4 top-0 h-full w-5 fill-slate-500" />
+      <SearchIcon />
       <input
         ref={inputRef}
         className={clsx(
@@ -437,32 +437,19 @@ function useSearchProps() {
 }
 
 export function Search() {
-  let [modifierKey, setModifierKey] = useState<string>();
   let { buttonProps, dialogProps } = useSearchProps();
-
-  useEffect(() => {
-    setModifierKey(
-      /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform) ? "⌘" : "Ctrl ",
-    );
-  }, []);
 
   return (
     <>
       <button
         type="button"
-        className="group flex h-6 w-6 items-center justify-center sm:justify-start md:h-auto md:w-80 md:flex-none md:rounded-lg md:bg-slate-800/75 md:py-2.5 md:pl-4 md:pr-3.5 md:text-sm md:ring-1  md:ring-inset md:ring-slate-200 md:ring-white/5 md:hover:bg-slate-700/40 md:hover:ring-slate-500 lg:w-96"
+        className="group flex h-6 w-6 items-center justify-center rounded-xl bg-transparent p-3.5 pr-5 hover:bg-white hover:ring-2 hover:ring-pink sm:justify-start md:h-auto md:w-80 md:flex-none md:text-sm md:ring-1 md:ring-inset md:ring-gray-600 lg:w-96"
         {...buttonProps}
       >
-        <SearchIcon className="h-5 w-5 flex-none fill-slate-500 group-hover:fill-slate-500  md:group-hover:fill-slate-400" />
-        <span className="sr-only md:not-sr-only md:ml-2 md:text-slate-400">
-          Search docs
+        <SearchIcon className="h-5 w-5 flex-none fill-white opacity-50 group-hover:fill-gray-600" />
+        <span className="sr-only text-base group-hover:text-black md:not-sr-only md:ml-1.5 md:text-white/75">
+          Search
         </span>
-        {modifierKey && (
-          <kbd className="ml-auto hidden font-medium text-slate-500 md:block">
-            <kbd className="font-sans">{modifierKey}</kbd>
-            <kbd className="font-sans">K</kbd>
-          </kbd>
-        )}
       </button>
       <SearchDialog {...dialogProps} />
     </>

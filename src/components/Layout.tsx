@@ -32,7 +32,7 @@ function Header() {
         "!dark:bg-black": scrollY > 10,
       })}
     >
-      <div className="mx-auto flex w-full max-w-[1212px] items-center justify-between py-2 lg:py-6 lg:pr-5">
+      <div className="mx-auto box-content flex min-h-[52px] w-full max-w-[1180px] items-center justify-between py-2 lg:py-5">
         <div className="mr-6 flex lg:hidden">
           <MobileNavigation />
         </div>

@@ -69,7 +69,7 @@ export function ThemeSelector(
         <LightIcon
           className={clsx(
             "h-4 w-4 dark:hidden",
-            theme === "system" ? "fill-slate-400" : "fill-pink-400",
+            theme === "system" ? "fill-gray-600" : "fill-pink-400",
           )}
         />
         <DarkIcon
