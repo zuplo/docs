@@ -43,7 +43,7 @@ communicates via HTTP, Zuplo is a great choice.
 
 ## Integrations
 
-We have support for integrations with Datadog (for monitoring, logging), GCP
+We have support for integrations with DataDog (for monitoring, logging), GCP
 Cloud Logging and are adding new integrations on demand for customers quickly.
 Contact us if you need an integration that you don't see.
 

@@ -13,8 +13,8 @@ here is an example function that would implement this behavior:
 
 ```ts
 export function runtimeInit(runtime: RuntimeExtensions) {
-  //add a custom not found handler
-  runtime.notFoundHandler = async (request, context, notFoundOptions) => {
+    //add a custom not found handler
+    runtime.notFoundHandler = async (request, context, notFoundOptions) => {
     if (notFoundOptions.routesMatchedByPathOnly.length > 0) {
       // It is required to have an 'Allow' header with a 405 response
       // Generate a string of allowed methods
@@ -27,13 +27,13 @@ export function runtimeInit(runtime: RuntimeExtensions) {
         request,
         context,
         {},
-        { allow: allowedMethods },
+        { allow: allowedMethods }
       );
     }
 
     return HttpProblems.notFound(request, context);
   };
-}
+
 ```
 
 :::warning

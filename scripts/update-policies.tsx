@@ -3,7 +3,7 @@ import chalk from "chalk";
 import chokidar from "chokidar";
 import { existsSync } from "fs";
 import { copyFile, mkdir, readdir, readFile, rm, writeFile } from "fs/promises";
-import glob from "glob";
+import { glob } from "glob";
 import { JSONSchema7 } from "json-schema";
 import { Heading as AstHeading } from "mdast";
 import { toString } from "mdast-util-to-string";
@@ -163,7 +163,7 @@ async function render(markdown: string): Promise<RenderResult> {
   };
 }
 
-async function processProperties(properties) {
+async function processProperties(properties: any) {
   const tasks = Object.keys(properties).map(async (key) => {
     if (properties[key].description) {
       const { html } = await render(properties[key].description);
@@ -176,7 +176,7 @@ async function processProperties(properties) {
   return Promise.all(tasks);
 }
 
-function getPolicyFilePaths(policyId) {
+function getPolicyFilePaths(policyId: string) {
   return {
     iconSvg: path.join(policiesDir, policyId, "icon.svg"),
     introMd: path.join(policiesDir, policyId, "intro.md"),
@@ -251,12 +251,6 @@ sidebar_label: ${schema.title}
 
 # ${schema.title}
 
-${
-  schema.isCustom
-    ? `<CustomPolicyNotice name="${schema.title}" id="${policyId}" />`
-    : ""
-}
-
 <!-- start: intro.md -->
 ${introMd ?? schema.description}
 <!-- end: intro.md -->
@@ -304,23 +298,11 @@ export async function run() {
   );
   const policyConfig = JSON.parse(policyConfigJson);
 
-  const matches: string[] = await new Promise((resolve, reject) => {
-    glob(
-      "**/schema.json",
-      {
-        cwd: policiesDir,
-      },
-      (err, result) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(result);
-        }
-      },
-    );
+  const matches: string[] = await glob("**/schema.json", {
+    cwd: policiesDir,
   });
 
-  const policies = [];
+  const policies: any = [];
   const tasks = matches.map(async (match) => {
     const policyId = match.replace("/schema.json", "");
     const schemaPath = path.join(policiesDir, match);
@@ -370,10 +352,10 @@ export async function run() {
           schemaJson,
         ),
       );
-      const handler = schema.properties.handler as JSONSchema7;
+      const handler = schema.properties!.handler as JSONSchema7;
       meta.defaultHandler = {
-        export: (handler.properties.export as JSONSchema7).const,
-        module: (handler.properties.module as JSONSchema7).const,
+        export: (handler.properties!.export as JSONSchema7).const,
+        module: (handler.properties!.module as JSONSchema7).const,
         options: {},
       };
     }
@@ -472,7 +454,7 @@ async function getExampleHtml(
 
   const { html: description } = await render(schema.description);
 
-  const properties = (schema.properties.handler as any).properties.options
+  const properties = (schema.properties!.handler as any).properties.options
     ?.properties;
   if (!properties) {
     return;
@@ -508,7 +490,7 @@ export async function watch() {
     ignoreInitial: true,
   });
 
-  function changed(path) {
+  function changed() {
     run().catch(console.error);
   }
 

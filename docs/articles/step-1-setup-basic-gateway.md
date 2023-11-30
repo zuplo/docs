@@ -39,7 +39,7 @@ You can quickly test this route by clicking the **Test** button next to the
 
 You should receive a 401 Unauthorized that says something similar to
 
-```
+```json
 {
   "status": 401,
   "title": "Unauthorized",
@@ -47,7 +47,6 @@ You should receive a 401 Unauthorized that says something similar to
   "type": "https://httpproblems.com/http-status/401",
   "instance": "/todos",
   "hint": "This is a demo API that requires authentication. You must add a header 'api-key' with a value '4f0aeaf7-d17f-4b2b-9b71-5177bd194759'"
-  ...
 }
 ```
 
@@ -91,7 +90,7 @@ Go back to your route in the Route Designer and click the **Test** button next
 to the **Path** field. Open the URL in the browser and you should see a list of
 todoitems.
 
-```
+```json
 [
   {
     "userId": 1,

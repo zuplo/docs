@@ -23,19 +23,15 @@ There are two distinct types of environment:
   shared with anybody else. If you share a project with another person, they
   will have their own working-copy environment.
 
-:::warning
-
-Never use a working-copy environment in a production setting. They offer no SLA,
-and will often sleep after inactivity leading to slower cold-start times. There
-can be occasional downtime of a few seconds for upgrades.
-
-:::
+:::warning Never use a working-copy environment in a production setting. They
+offer no SLA, and will often sleep after inactivity leading to slower cold-start
+times. There can be occasional downtime of a few seconds for upgrades. :::
 
 - **edge deployment** - these are real deployments that are deployed to the edge
   at 100s of data-centers around the world. They have 0ms startup time and offer
   very high availability due to their headless, distributed nature. You can
   deploy edge environments using our
-  [GitHub integration](/docs/articles/source-control) or building a
+  [GitHub integration](/docs/articles/github-source-control) or building a
   [custom CI/CD pipeline](/docs/articles/custom-ci-cd).
 
 Edge deployments typically have a domain ending with `.app` but you can also
@@ -57,15 +53,15 @@ One the right is the current **environment**. By default you will be looking at
 **working-copy** which is your private, editable, instance of the current
 project you are working on.
 
-![Environments](./media/environments.png)
+![Environments](https://cdn.zuplo.com/assets/b383128d-73e9-4b4d-bac2-3faee971422c.png)
 
 If you have other any **edge-deployments** you will see them listed alongside
 your working-copy. In this case we have two edge-deployments called
 `development` and `prod (main)`.
 
-For users using [GitHub integration](/docs/articles/source-control) the name of
-the deployment matches the branch name (yes - creating a new environment is
-literally as easy as creating a new branch).
+For users using [GitHub integration](/docs/articles/github-source-control) the
+name of the deployment matches the branch name (yes - creating a new environment
+is literally as easy as creating a new branch).
 
 You can't edit the code of an edge-deployment in portal.zuplo.com but you can
 switch into those environments to perform a number of functions, such as:

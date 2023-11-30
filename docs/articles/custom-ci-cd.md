@@ -27,7 +27,7 @@ Keys to authenticate. You can find your API Key by following these steps:
 2. Select the project that you want to work on.
 3. Click on the "Settings" tab and navigate to the "Zuplo API Keys" section.
 
-![Zuplo API Keys](../../static/media/api-keys/zuplo-api-keys.png)
+![Zuplo API Keys](https://cdn.zuplo.com/assets/57cf5417-1d98-49f2-8762-0eadc5f34d10.png)
 
 4. Write some tests for your API. We provide a rich set of test helpers and
    utils based on BDD. You can see examples of tests at
@@ -293,78 +293,3 @@ zup_list:
    generated in the previous step. You can choose to
    [mask](https://docs.gitlab.com/ee/ci/variables/#mask-a-cicd-variable) the
    variable so it does not display in job logs.
-
-## Advanced Use Cases
-
-The above samples showcase the most common use case for our customers. However,
-you might have more advanced use cases that require more control. The following
-sections describe some other parameters that you can control.
-
-### You have multiple sub-folders in your repository
-
-You might end up with this structure because you are using git submodules to
-connect multiple repositories together. Or, you might have multiple projects in
-the same repository because you are trying to migrate to a monorepo.
-
-If you have multiple sub-folders in your repository, each representing a
-different Zuplo project, you can deploy each one separately.
-
-1. Ensure you use the right API key for each project. You can specify the API
-   key by passing it with the `--apiKey` flag.
-2. Ensure that you have the project name configured in the zuplo.jsonc file in
-   the subfolder. This tells the Zuplo CLI which project to deploy to.
-3. You might need to use the --no-verify-remote flag to bypass verification. By
-   default, the CLI checks that the repository matches what is configured on the
-   server. If you have moved or renamed your repository, you must bypass the
-   verification.
-
-Here's a complete example.
-
-Assuming you have the following structure and the appropriate zuplo.jsonc
-configured for each project. Take a look at
-[https://github.com/zuplo/zup-cli-example-project/tree/main/nested-projects](https://github.com/zuplo/zup-cli-example-project/tree/main/nested-projects)
-
-```bash
-nested-projects
-├── zup-cli-nested-project1
-│   ├── README.md
-│   ├── config
-│   ├── docs
-│   ├── local-config
-│   ├── modules
-│   ├── package.json
-│   ├── schemas
-│   ├── tests
-│   ├── tsconfig.json
-│   └── zuplo.jsonc
-└── zup-cli-nested-project2
-    ├── README.md
-    ├── config
-    ├── docs
-    ├── local-config
-    ├── modules
-    ├── package.json
-    ├── schemas
-    ├── tests
-    ├── tsconfig.json
-    └── zuplo.jsonc
-```
-
-And here's how you would deploy it using the CLI
-
-```bash
-# Let's deploy the first project
-cd zup-cli-nested-project1
-npx @zuplo/cli deploy --api-key $YOUR_API_KEY_FOR_THE_ACCOUNT_THAT_CONTAINS_PROJECT1 --no-verify-remote
-
-
-# Let's deploy the second project
-cd ..
-cd zup-cli-nested-project2
-npx @zuplo/cli deploy --api-key $YOUR_API_KEY_FOR_THE_ACCOUNT_THAT_CONTAINS_PROJECT2 --no-verify-remote
-```
-
-The `npx @zuplo/cli deploy` command takes the current Git branch that you are on
-into consideration when deploying. If you are on your `main` branch, it will
-deploy to your production. If you are on any other branch, it will deploy to a
-staging environment with the name of your branch.

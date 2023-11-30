@@ -54,7 +54,7 @@ npm run dev
 8. Once you are done running your Zuplo Gateway locally, you can press `Ctrl+C`
    to stop the Zuplo CLI.
 
-![Local Development Experience inside VS Code](./media/local-development.png)
+![Local Development Experience inside VS Code](https://cdn.zuplo.com/assets/3dc00c8f-6536-48d1-b0c1-1d94a29aa4b2.png)
 
 ### Getting started with an existing project
 
@@ -114,16 +114,6 @@ running your Zuplo Gateway locally:
 - Analytics
 - Developer Portal
 - Tunnels
-
-Additionally, any modules that you add to your package.json for local
-development will not be available when you deploy your Zuplo Gateway to the
-cloud. These modules might work locally in local development, but they will not
-be available in production. Consult https://zuplo.com/docs/articles/node-modules
-for the official list of supported modules.
-
-As of October 2023, we are looking into ways to support bringing in your own
-modules. We are proceeding carefully as we want to ensure that we can provide a
-secure and reliable experience for our users.
 
 ## Configuration for Local Development
 

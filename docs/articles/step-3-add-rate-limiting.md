@@ -31,7 +31,7 @@ Assuming you followed [step 2](./step-2-add-api-key-auth.md) and setup API Key
 Authentication, set the policy to `rateLimitBy` `user` and allow 1 request every
 1 minute.
 
-```
+```json
 {
   "export": "RateLimitInboundPolicy",
   "module": "$import(@zuplo/runtime)",

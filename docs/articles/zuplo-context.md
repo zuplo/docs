@@ -5,7 +5,7 @@ title: ZuploContext
 ## Properties
 
 - `log` - a logger you can use to help debug your code. Logs will appear in your
-  log tail in the portal and in your integrated log solution (e.g. Datadog).
+  log tail in the portal and in your integrated log solution (e.g. DataDog).
   Note that pre-production environments are typically set to an **Info** log
   level, while production is set to **Error**.
 

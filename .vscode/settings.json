@@ -5,12 +5,13 @@
   "search.exclude": {
     "**/node_modules": true,
     "**/bower_components": true,
-    "**/*.code-search": true,
+  "**/*.code-search": true,
     "**/.next": true
   },
   "[markdown]": {
     "editor.wordWrap": "bounded",
     "editor.wordWrapColumn": 80
   },
-  "cSpell.words": ["Amberflo", "asns", "Moesif", "overridable", "Supabase"]
+  "cSpell.words": ["Amberflo", "asns", "Moesif", "overridable", "Supabase"],
+  "typescript.preferences.importModuleSpecifier": "non-relative"
 }

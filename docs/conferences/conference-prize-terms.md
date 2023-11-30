@@ -9,29 +9,27 @@ title: Conference Prize Terms
 ## Eligibility to enter
 
 3. The prize draw is open to entrants over 18 years of age and who are
-   registered and attending the conference in-person on the standard
-   presentation days (i.e. excluding and days of workshops, etc.). Ticketed
-   attendees and speakers are eligible to enter. Exhibitors, sponsors, and
-   conference staff are **not** eligible.
+   registered and attending the conference on the standard presentation days
+   (i.e. excluding and days of workshops, etc.)
 4. In entering the prize draw, you confirm that you are eligible to do so and
    eligible to claim any prize you may win.
-5. A maximum of one entry per individual per day is permitted. Limit of one
-   prize per family during the conference.
+5. A maximum of one entry per individual is permitted. Limit of one prize per
+   family during the conference.
 6. The prize draw is free to enter.
 
 ## How to enter
 
-7. The prize draw will include those attendees who complete the project that is
-   shared at the booth and return to the Zuplo booth to show the completed
-   quickstart to the booth staff. Entries must be received 15 minutes before the
-   scheduled drawing. Entries after that time and date will not be included in
-   the draw.
+7. The prize draw will include those attendees who complete the
+   [Conference Prize Quickstart](conference-prize.md) and return to the Zuplo
+   booth to show the completed quickstart to the booth staff. Entries must be
+   received by 4pm on October 19. Entries after that time and date will not be
+   included in the draw.
 8. Zuplo will not accept responsibility if contact details provided are
    incomplete or inaccurate.
 
 ## The prize
 
-10. The prize will be a Lego kit (one of those on display at the booth).
+10. The prize will be a McLaren Lego Technic F1 Car.
 11. Zuplo's use of particular brands as prizes does not imply any affiliation
     with or endorsement of such brands.
 12. The winner will be drawn at random.
@@ -44,37 +42,47 @@ title: Conference Prize Terms
 
 ## Winner announcement
 
-16. The winner for each day will be announced at the end of the day (6pm on
-    Wednesday, 4:05pm on Thursday)
-17. The winner must be present at the time of the announcement to receive the
-    prize or another winner will be selected.
+16. The winner will be notified via the email associated with your conference
+    registration.
+17. Zuplo will attempt to contact the winner by email up to two times.
+18. If the winner does not respond to the emails notifying them of their win
+    within 14 days of the second email, they will lose their right to the prize,
+    and Zuplo reserves the right to choose and notify a new winner.
+
+## Receipt of the prize
+
+19. Please allow up to 30 days for delivery of the prize or alternative
+    collection or delivery arrangements may be made through mutual agreement.
 
 ## Data protection and publicity
 
-18. You consent to any personal information you provide in entering the prize
+20. You consent to any personal information you provide in entering the prize
     draw being used by Zuplo for the purposes of administering the prize draw,
     and for those purposes as defined within our privacy notice.
-19. All entrants may apply for details of the winning participant by contacting
+21. All entrants may apply for details of the winning participant by contacting
     us at whatzup@zuplo.com
-20. The winner agrees to the release of their first name and place of work to
+22. The winner agrees to the release of their first name and place of work to
     any other prize draw participants if requested via Zuplo.
-21. An announcement of the winner's first name and place of work will be made
+23. An announcement of the winner's first name and place of work will be made
     via Zuplo's website and social media.
-22. All personal information shall be used in accordance with Zuplo's Privacy
+24. All personal information shall be used in accordance with Zuplo's Privacy
     Policy.
 
 ## Limitation of Liability
 
-23. Zuplo does not accept any liability for any damage, loss, injury or
+25. Zuplo does not accept any liability for any damage, loss, injury or
     disappointment suffered by any entrants as a result of either participating
     in the prize draw or being selected for a prize, save that Zuplo does not
     exclude its liability for death or personal injury as a result of its own
     negligence.
-24. Zuplo does not provide any form of practical or IT support for this prize.
+26. Zuplo does not provide any form of practical or IT support for this prize.
     On receipt, all responsibilities relating to warranty and the product are
     that of the prize winner.
 
 ## General
 
-25. Zuplo reserves the right to cancel the prize draw or amend these terms and
+27. Zuplo reserves the right to cancel the prize draw or amend these terms and
     conditions at any time, without prior notice.
+28. The prize draw and these terms and conditions will be governed by English
+    law and any disputes will be subject to the exclusive jurisdiction of the
+    courts of England and Wales.

@@ -2,8 +2,6 @@
 title: Step 4 - Deploying to the Edge
 ---
 
-import GithubSetup from './\_github-setup.md';
-
 In this guide we'll show you how to deploy your gateway to the edge, at over 200
 data-centers around the world. The act of deployment creates new
 [environments](./environments) and it's worth familiarizing yourself with
@@ -25,7 +23,7 @@ To follow this tutorial you'll need
   GitHub - you can do that
   [here](https://github.com/apps/zuplo/installations/new)
 
-<GithubSetup />
+import "./partials/github-setup.md"
 
 ## 3/ Deploy another environment
 

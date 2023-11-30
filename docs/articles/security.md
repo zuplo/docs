@@ -22,8 +22,9 @@ at [security@zuplo.com](mailto:security@zuplo.com).
 ### Corporate Security
 
 Zuplo implements a number of security controls to ensure that only authorized
-Zuplo team members have access to company infrastructure. This section is
-intended to give a high level of our security practices.
+Zuplo team members have access to company infrastructure. Zuplo is currently in
+the process of undergoing SOC 2 compliance, but this section is intended to give
+a high level of our security practices.
 
 - Access to services, applications, and infrastructure is controlled via SSO
   using our corporate identity provider.

@@ -144,7 +144,7 @@ describe("[#labelA #labelB] Addition", () => {
 
 ## Unit Tests & Mocking
 
-:::caution Advanced
+:::caution{title="Advanced"}
 
 Custom testing can be complicated and is best used only to test your own logic
 rather than trying to mock large portions of your API Gateway.
