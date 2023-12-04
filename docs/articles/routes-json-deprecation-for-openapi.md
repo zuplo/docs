@@ -30,8 +30,8 @@ off-boarded.
 
 We hope you're as excited about our support for open standards like Open API and
 Problem Details for APIs. As always,
-[join our Discord](https://discord.gg/8QbEjr2MgZ) to chat with the team about
-any question or concerns you have.
+[join our Discord](https://discord.zuplo.com) to chat with the team about any
+question or concerns you have.
 
 ## Migrating from `routes.json`
 

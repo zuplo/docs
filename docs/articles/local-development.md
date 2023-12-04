@@ -197,4 +197,4 @@ on [NPM](https://www.npmjs.com/package/zuplo?activeTab=versions)
 ### Getting help
 
 Please reach out to support@zuplo.com or join our
-[Discord server](https://discord.gg/8QbEjr2MgZ).
+[Discord server](https://discord.zuplo.com).
