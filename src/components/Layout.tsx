@@ -32,15 +32,15 @@ function Header() {
         "!dark:bg-black": scrollY > 10,
       })}
     >
-      <div className="mx-auto box-content flex min-h-[52px] w-full max-w-[1180px] items-center justify-between py-2 lg:py-5">
-        <div className="mr-6 flex lg:hidden">
+      <div className="mx-auto flex min-h-[52px] w-full max-w-[1180px] items-center justify-between px-4 py-2 lg:box-content lg:px-0 lg:py-5">
+        <div className="flex p-3 lg:hidden">
           <MobileNavigation />
         </div>
         <div className="relative flex basis-0 items-center">
-          <Logo className="ml-4 block w-28 lg:ml-0 lg:w-36" />
+          <Logo className="block w-28 lg:w-36" />
         </div>
-        <div className="flex flex-grow justify-center">
-          <div className="-my-5 mr-6 sm:mr-8 md:mr-0">
+        <div className="flex flex-grow justify-end lg:justify-center">
+          <div className="">
             <Search />
           </div>
         </div>
