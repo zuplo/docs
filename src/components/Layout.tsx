@@ -68,12 +68,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <div className="flex w-full flex-col bg-black">
       <Header />
       <div className="relative mx-auto w-full max-w-8xl rounded-xl bg-white lg:mt-[92px]">
-        <Container className="flex flex-auto justify-center">
+        <Container className="flex h-[calc(100vh-7rem)] flex-auto justify-center">
           <aside className="hidden lg:relative lg:block lg:flex-none">
             {/* <div className="absolute inset-y-0 right-0 w-[50vw] dark:hidden" />
             <div className="absolute bottom-0 right-0 top-16 hidden h-12 w-px bg-gradient-to-t from-slate-800 dark:block" />
             <div className="absolute bottom-0 right-0 top-28 hidden w-px bg-slate-800 dark:block" /> */}
-            <div className="sticky top-[4.75rem] -ml-0.5 h-[calc(100vh-4.75rem)] w-64 overflow-y-auto overflow-x-hidden py-16 pl-0.5 pr-8 xl:w-72 xl:pr-8">
+            <div className="sticky top-[4.75rem] -ml-0.5 h-[calc(100vh-10rem)] w-64 overflow-y-auto overflow-x-hidden py-16 pl-0.5 xl:w-72 xl:pr-8">
               <Navigation />
             </div>
           </aside>

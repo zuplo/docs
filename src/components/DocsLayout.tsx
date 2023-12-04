@@ -15,14 +15,16 @@ export function DocsLayout({
 }) {
   return (
     <>
-      <div className="min-w-0 max-w-2xl flex-auto px-4 py-[60px] lg:max-w-none lg:pl-8 lg:pr-0 xl:px-5">
-        <article>
-          <DocsHeader title={title} />
-          <Prose>{children}</Prose>
-        </article>
-        <PrevNextLinks />
+      <div className="sticky top-[4.75rem] -ml-0.5 flex h-[calc(100vh-10rem)] min-w-0 max-w-2xl overflow-y-auto overflow-x-hidden py-[60px] lg:max-w-none">
+        <div className="px-8">
+          <article>
+            <DocsHeader title={title} />
+            <Prose>{children}</Prose>
+          </article>
+          <PrevNextLinks />
+        </div>
+        <TableOfContents tableOfContents={sections} />
       </div>
-      <TableOfContents tableOfContents={sections} />
     </>
   );
 }
