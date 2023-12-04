@@ -23,7 +23,7 @@ export const StartFreeCTAButton = ({
         )}
         href={"https://portal.zuplo.com"}
       >
-        Start free
+        Sign Up
       </Link>
       <Link
         className={classNames(
