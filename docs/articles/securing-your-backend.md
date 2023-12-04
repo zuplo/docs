@@ -63,5 +63,5 @@ This is a more complex setup and is only available on our
 [enterprise plan](https://zuplo.com/pricing).
 
 To discuss security and connectivity options, our
-[discord channel](https://discord.gg/8QbEjr2MgZ) is a great community, with
-active participation from the Zuplo team.
+[discord channel](https://discord.zuplo.com) is a great community, with active
+participation from the Zuplo team.

@@ -141,7 +141,7 @@ const config = {
             items: [
               {
                 label: "Discord",
-                href: "https://discord.gg/W36Ddfcd",
+                href: "https://discord.zuplo.com",
               },
               {
                 label: "Twitter",
