@@ -5,6 +5,7 @@ import { Providers } from "@/app/providers";
 import { Layout } from "@/components/Layout";
 
 import "@/styles/tailwind.css";
+import "@/styles/styles.css";
 import { beVietnamProFont } from "../lib/fonts";
 
 export const metadata: Metadata = {
