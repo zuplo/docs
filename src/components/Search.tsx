@@ -443,7 +443,7 @@ export function Search() {
     <>
       <button
         type="button"
-        className="group flex h-6 w-6 items-center justify-center rounded-xl bg-transparent p-3.5 pr-5 hover:bg-white hover:ring-2 hover:ring-pink sm:justify-start md:h-auto md:w-80 md:flex-none md:text-sm md:ring-1 md:ring-inset md:ring-gray-600 lg:w-96"
+        className="group flex h-6 w-6 items-center justify-center rounded-xl bg-transparent px-3.5 hover:bg-white hover:ring-2 hover:ring-pink md:h-auto md:w-80 md:flex-none md:justify-start md:p-3.5 md:pr-5 md:text-sm md:ring-1 md:ring-inset md:ring-gray-600 lg:w-96"
         {...buttonProps}
       >
         <SearchIcon className="h-5 w-5 flex-none fill-white opacity-50 group-hover:fill-gray-600" />

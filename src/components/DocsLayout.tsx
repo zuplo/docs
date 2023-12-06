@@ -1,3 +1,4 @@
+import { DocsContainer } from "@/components/DocsContainer";
 import { DocsHeader } from "@/components/DocsHeader";
 import { PrevNextLinks } from "@/components/PrevNextLinks";
 import { Prose } from "@/components/Prose";
@@ -15,7 +16,7 @@ export function DocsLayout({
 }) {
   return (
     <>
-      <div className="sticky top-[4.75rem] -ml-0.5 flex h-[calc(100vh-10rem)] min-w-0 max-w-2xl overflow-y-auto overflow-x-hidden py-[60px] lg:max-w-none">
+      <DocsContainer>
         <div className="px-8">
           <article>
             <DocsHeader title={title} />
@@ -23,8 +24,8 @@ export function DocsLayout({
           </article>
           <PrevNextLinks />
         </div>
-        <TableOfContents tableOfContents={sections} />
-      </div>
+      </DocsContainer>
+      <TableOfContents tableOfContents={sections} />
     </>
   );
 }
