@@ -15,12 +15,12 @@ export async function getAllPolicies() {
 
   const policies = await Promise.all(
     matches.map(async (match) => {
-      const policyId = match.replace("/schema.json", "");
+      const policyId = match.replace(/[\\/]schema.json$/, "");
       return getPolicy(policyId);
     }),
   );
 
-  return policies;
+  return policies.sort((a, b) => a.meta.name.localeCompare(b.meta.name));
 }
 
 export async function getPolicy(policyId: string) {
@@ -88,8 +88,8 @@ export async function getPolicy(policyId: string) {
 async function processProperties(
   properties:
     | {
-        [key: string]: JSONSchema7Definition;
-      }
+      [key: string]: JSONSchema7Definition;
+    }
     | undefined,
 ) {
   if (!properties) {
