@@ -75,7 +75,7 @@
     @apply bg-pink text-white hover:bg-black;
   }
   .btn.btn-primary-dark {
-    @apply bg-pink text-white hover:bg-white hover:text-black;
+    @apply bg-pink text-white hover:bg-pink-hover dark:hover:bg-white dark:hover:text-black;
   }
   .btn.btn-large {
     @apply rounded-xl px-12 py-5 text-base;
@@ -85,6 +85,9 @@
   }
   .btn.btn-secondary-dark {
     @apply border border-gray-600 bg-transparent text-white hover:bg-[#ffffff59];
+  }
+  .btn.btn-tertiary-dark {
+    @apply bg-pink text-white hover:bg-pink-hover;
   }
   .input {
     @apply w-full rounded-2xl border border-gray-500 text-lg transition-all placeholder:font-light placeholder:text-gray-600 hover:border-2 hover:border-pink focus:outline-0;

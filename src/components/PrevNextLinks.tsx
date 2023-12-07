@@ -70,7 +70,7 @@ export function PrevNextLinks() {
   }
 
   return (
-    <dl className="mt-5 flex border-t border-slate-200 pt-5 dark:border-slate-800">
+    <dl className="mt-[60px] flex border-t border-slate-200 py-5 dark:border-slate-800">
       {previousPage && "href" in previousPage && (
         <PageLink dir="previous" {...previousPage} />
       )}

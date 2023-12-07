@@ -57,7 +57,7 @@ export default {
         },
         gray: {
           DEFAULT: "#EDEDED",
-          400: "#EDEDED",
+          400: "#1B1B1B",
           500: "#D9D9D9",
           600: "#808080",
         },
@@ -119,11 +119,6 @@ export default {
             h3: typographyHeading({ fontSize: "20px" }),
             h4: typographyHeading({ fontSize: "18px" }),
             h5: typographyHeading({ fontSize: "14px" }),
-            li: {
-              "&::marker": {
-                color: "black",
-              },
-            },
             "code::before": {
               content: null,
             },
@@ -132,6 +127,18 @@ export default {
             },
             "blockquote p:first-of-type::before": { content: "none" },
             "blockquote p:first-of-type::after": { content: "none" },
+            "--tw-prose-body": theme("colors.white"),
+            "--tw-prose-invert-body": theme("colors.black"),
+            "--tw-prose-code": theme("colors.white"),
+            "--tw-prose-invert-code": theme("colors.black"),
+            "--tw-prose-bold": theme("colors.white"),
+            "--tw-prose-invert-bold": theme("colors.black"),
+            "--tw-prose-headings": theme("colors.white"),
+            "--tw-prose-invert-headings": theme("colors.black"),
+            "--tw-prose-bullets": theme("colors.white"),
+            "--tw-prose-invert-bullets": theme("colors.black"),
+            "--tw-prose-counters": theme("colors.white"),
+            "--tw-prose-invert-counters": theme("colors.black"),
           },
         },
       }),
@@ -155,7 +162,7 @@ export default {
       widest: ".3em",
     },
     textShadow: {
-      DEFAULT: "0.5px 0 #CC0797",
+      DEFAULT: "0.5px 0 #FF00BD",
     },
   },
   plugins: [
