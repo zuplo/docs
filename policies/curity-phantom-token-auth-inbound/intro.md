@@ -1,0 +1,2 @@
+A policy implementing the [Curity Phantom Token Pattern](https://curity.io/resources/learn/phantom-token-pattern/). Authenticate requests with opaque tokens issued by Curity. 
+The opaque token will be introspected and a signed JWT returned in the introspection response. The JWT will replace the opaque token in the `Authorization` header for upstream consumption.

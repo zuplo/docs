@@ -139,6 +139,7 @@ const sidebars = {
               type: "category",
               label: "Authentication",
               items: [
+                "policies/curity-phantom-token-auth-inbound",
                 "policies/api-key-inbound",
                 "policies/auth0-jwt-auth-inbound",
                 "policies/clerk-jwt-auth-inbound",
