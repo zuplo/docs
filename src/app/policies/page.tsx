@@ -14,7 +14,7 @@ export default async function Page() {
   const policies = await getAllPolicies();
 
   return (
-    <DocsContainer>
+    <DocsContainer className="w-full px-8">
       <Prose>
         <DocsHeader title="Policies" />
         <p>
