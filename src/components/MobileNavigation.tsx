@@ -6,8 +6,9 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useState } from "react";
 import { Bars3Icon as MenuIcon } from "@heroicons/react/24/outline";
 
-import Logo from "@/components/Logo";
+import LogoIcon from "./svgs/logo.svg";
 import { Navigation } from "@/components/Navigation";
+import { ThemeSelector } from "@/components/ThemeSelector";
 
 function CloseIcon(props: React.ComponentPropsWithoutRef<"svg">) {
   return (
@@ -71,18 +72,21 @@ export function MobileNavigation() {
         className="fixed inset-0 z-50 flex items-start overflow-y-auto bg-slate-900/50 pr-10 backdrop-blur lg:hidden"
         aria-label="Navigation"
       >
-        <Dialog.Panel className="min-h-full w-full max-w-xs bg-white px-4 pb-12 pt-5 dark:bg-slate-900 sm:px-6">
-          <div className="flex items-center">
-            <button
-              type="button"
-              onClick={() => close()}
-              aria-label="Close navigation"
-            >
-              <CloseIcon className="h-6 w-6 stroke-slate-500" />
-            </button>
+        <Dialog.Panel className="min-h-full w-full max-w-xs bg-gray-400 px-4 pb-12 pt-5 dark:bg-white sm:px-6">
+          <div className="flex items-center justify-between">
             <Link href="/" className="ml-6" aria-label="Home page">
-              <Logo className="h-9 w-9" />
+              <LogoIcon alt="Zuplo logo" className="w-28 text-transparent" />
             </Link>
+            <div className="flex">
+              <ThemeSelector className="relative z-10 my-auto mr-8" />
+              <button
+                type="button"
+                onClick={() => close()}
+                aria-label="Close navigation"
+              >
+                <CloseIcon className="h-6 w-6 stroke-slate-500" />
+              </button>
+            </div>
           </div>
           <Navigation className="mt-5 px-1" onLinkClick={onLinkClick} />
         </Dialog.Panel>
