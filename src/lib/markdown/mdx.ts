@@ -67,22 +67,21 @@ const getRehypeCodeOptions = (): Partial<PrettyCodeOptions> => ({
   // Requirements for theme:
   // - Has light and dark version
   // - Uses italic in several places
-  theme: { light: "github-dark" },
+  theme: { light: "poimandres" },
   // Need to use a custom highlighter because rehype-pretty-code doesn't
   // let us customize "paths".
   getHighlighter,
-
   onVisitTitle(element) {
     const hast = h(
       "div",
       {
-        class: "p-1 text-slate-800 dark:text-syntax-gray text-sm font-mono  ",
+        class: "text-pink text-xs leading-loose px-5 font-medium pt-1",
       },
       element.children as any,
     );
 
     element.properties = {
-      class: `not-prose mb-[-2.4em] pb-[1em] `,
+      class: `not-prose mb-[-2.2em] h-[30px] relative bg-black rounded-t-xl`,
     };
     element.children = [hast as any];
   },

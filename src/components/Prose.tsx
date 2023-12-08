@@ -13,7 +13,7 @@ export function Prose<T extends React.ElementType = "div">({
     <Component
       className={clsx(
         className,
-        "dark:white prose max-w-none text-lg dark:prose-invert",
+        "dark:white prose max-w-none leading-normal dark:prose-invert",
         // headings
         "prose-headings:mb-2.5 prose-headings:text-2xl prose-h2:mt-10",
         // lead
@@ -32,6 +32,8 @@ export function Prose<T extends React.ElementType = "div">({
         "prose-ul:my-2.5 prose-li:my-0 prose-li:px-0",
         //img
         "prose-img:my-10",
+        //code
+        "prose-code:text-base prose-code:font-normal",
       )}
       {...props}
     />
