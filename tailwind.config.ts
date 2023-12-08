@@ -1,6 +1,8 @@
 import typographyPlugin from "@tailwindcss/typography";
 import { Config } from "tailwindcss";
 
+const plugin = require("tailwindcss/plugin");
+
 const typographyHeading = (overrides: any) => ({
   fontFamily: "ES Build",
   fontStyle: "normal",
@@ -13,13 +15,26 @@ export default {
   content: ["./src/**/*.{js,jsx,ts,tsx,md}"],
   darkMode: "class",
   theme: {
+    container: {
+      center: true,
+      padding: "var(--page-px)",
+      screens: {
+        xl: "1212px",
+      },
+    },
+    screens: {
+      sm: "576px",
+      md: "760px",
+      lg: "992px",
+      xl: "1212px",
+    },
     extend: {
       fontSize: {
         // xs: ["0.75rem", { lineHeight: "1rem" }],
         // sm: ["0.875rem", { lineHeight: "1.5rem" }],
         lg: ["1.125rem", { lineHeight: "1.75rem" }],
         xl: ["1.25rem", { lineHeight: "2rem" }],
-        "2xl": ["1.5rem", { lineHeight: "2.5rem" }],
+        "2xl": ["1.5rem", { lineHeight: "1.2" }],
         "3xl": ["2rem", { lineHeight: "2.5rem" }],
         "4xl": ["2.5rem", { lineHeight: "3rem" }],
         "5xl": ["3rem", { lineHeight: "3.5rem" }],
@@ -42,7 +57,7 @@ export default {
         },
         gray: {
           DEFAULT: "#EDEDED",
-          400: "#EDEDED",
+          400: "#1B1B1B",
           500: "#D9D9D9",
           600: "#808080",
         },
@@ -86,7 +101,7 @@ export default {
         narrow: "1.2",
       },
       maxWidth: {
-        "8xl": "88rem",
+        "8xl": "87.5rem",
       },
       typography: ({ theme }: { theme: any }) => ({
         DEFAULT: {
@@ -103,12 +118,7 @@ export default {
             h2: typographyHeading({ fontSize: "26px" }),
             h3: typographyHeading({ fontSize: "20px" }),
             h4: typographyHeading({ fontSize: "18px" }),
-            h5: typographyHeading({ fontSize: "16px" }),
-            li: {
-              "&::marker": {
-                color: "black",
-              },
-            },
+            h5: typographyHeading({ fontSize: "14px" }),
             "code::before": {
               content: null,
             },
@@ -117,6 +127,18 @@ export default {
             },
             "blockquote p:first-of-type::before": { content: "none" },
             "blockquote p:first-of-type::after": { content: "none" },
+            "--tw-prose-body": theme("colors.white"),
+            "--tw-prose-invert-body": theme("colors.black"),
+            "--tw-prose-code": theme("colors.white"),
+            "--tw-prose-invert-code": theme("colors.black"),
+            "--tw-prose-bold": theme("colors.white"),
+            "--tw-prose-invert-bold": theme("colors.black"),
+            "--tw-prose-headings": theme("colors.white"),
+            "--tw-prose-invert-headings": theme("colors.black"),
+            "--tw-prose-bullets": theme("colors.white"),
+            "--tw-prose-invert-bullets": theme("colors.black"),
+            "--tw-prose-counters": theme("colors.white"),
+            "--tw-prose-invert-counters": theme("colors.black"),
           },
         },
       }),
@@ -139,6 +161,21 @@ export default {
       wider: ".05em",
       widest: ".3em",
     },
+    textShadow: {
+      DEFAULT: "0.5px 0 #FF00BD",
+    },
   },
-  plugins: [typographyPlugin],
+  plugins: [
+    typographyPlugin,
+    plugin(({ matchUtilities, theme }: any) => {
+      matchUtilities(
+        {
+          "text-shadow": (value: string) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme("textShadow") },
+      );
+    }),
+  ],
 } satisfies Config;

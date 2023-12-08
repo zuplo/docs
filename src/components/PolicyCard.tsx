@@ -10,7 +10,7 @@ export const PolicyCard: React.FC<Props> = ({ name, href, icon }) => {
   return (
     <Link
       href={href}
-      className="group block flex items-center gap-4 rounded-lg border border-gray-500 bg-white p-4 text-black transition-colors hover:bg-gray-500/50 md:h-36 md:flex-col md:justify-center md:px-5 md:py-6 md:text-center"
+      className="bg-transpatent group flex items-center gap-4 rounded-lg border border-gray-500 p-4 text-white transition-colors hover:bg-gray-500/50 dark:text-black md:h-36 md:flex-col md:justify-center md:px-5 md:py-6 md:text-center"
     >
       <div className="rounded-lg bg-pink/10 p-2">
         <div

@@ -14,7 +14,7 @@ export default async function Page() {
   const policies = await getAllPolicies();
 
   return (
-    <DocsContainer>
+    <DocsContainer className="w-full flex-col px-8 pb-[60px]">
       <Prose>
         <DocsHeader title="Policies" />
         <p>
@@ -39,12 +39,14 @@ export default async function Page() {
           so developers can simply write code to customize any aspect of Zuplo.
         </p>
       </Prose>
-      <Link
-        href="/articles/policies"
-        className="not-prose btn btn-large btn-secondary-light mt-6 inline-block no-underline"
-      >
-        Check out details
-      </Link>
+      <div>
+        <Link
+          href="/articles/policies"
+          className="btn btn-large btn-secondary-light mt-6 inline-block no-underline"
+        >
+          Check out details
+        </Link>
+      </div>
 
       <div
         role="list"

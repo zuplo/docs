@@ -1,8 +1,20 @@
 import { PropsWithChildren } from "react";
+import clsx from "classnames";
 
-export function DocsContainer({ children }: PropsWithChildren) {
+export function DocsContainer({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <div className="min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-none lg:pl-8 lg:pr-0 xl:px-4">
+    <div
+      className={clsx(
+        className,
+        "sticky top-[4.75rem] -ml-0.5 flex h-[calc(100vh-7rem)] overflow-y-auto overflow-x-hidden pt-[60px]",
+      )}
+    >
       {children}
     </div>
   );

@@ -26,7 +26,14 @@ export default function RootLayout({
       className={clsx("h-full antialiased", beVietnamProFont.variable)}
       suppressHydrationWarning
     >
-      <body className="flex min-h-full bg-white dark:bg-black">
+      <head>
+        <link
+          rel="icon"
+          type="image/x-icon"
+          href="https://cdn.zuplo.com/www/favicon.png"
+        />
+      </head>
+      <body className="flex min-h-full bg-white text-white dark:bg-black dark:text-black">
         <Providers>
           <Layout>{children}</Layout>
         </Providers>
