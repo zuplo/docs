@@ -81,7 +81,7 @@
     @apply rounded-xl px-12 py-5 text-base;
   }
   .btn.btn-secondary-light {
-    @apply border border-gray-500 bg-transparent text-black hover:bg-[#d9d9d9];
+    @apply border border-gray-500 bg-transparent text-white hover:bg-[#d9d9d9] dark:text-black;
   }
   .btn.btn-secondary-dark {
     @apply border border-gray-600 bg-transparent text-white hover:bg-[#ffffff59];
