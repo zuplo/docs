@@ -440,7 +440,7 @@ export function Search() {
   let { buttonProps, dialogProps } = useSearchProps();
 
   return (
-    <>
+    <div>
       <button
         type="button"
         className="group flex h-6 w-6 items-center justify-center rounded-xl bg-transparent px-3.5 hover:bg-white hover:ring-2 hover:ring-pink md:h-auto md:w-80 md:flex-none md:justify-start md:p-3.5 md:pr-5 md:text-sm md:ring-1 md:ring-inset md:ring-gray-600 lg:w-96"
@@ -452,6 +452,6 @@ export function Search() {
         </span>
       </button>
       <SearchDialog {...dialogProps} />
-    </>
+    </div>
   );
 }

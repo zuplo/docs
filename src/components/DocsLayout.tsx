@@ -21,7 +21,7 @@ export function DocsLayout({
       <DocsContainer>
         <div className="w-full px-1 md:px-8">
           <article>
-            <DocsHeader title={title} />
+            <DocsHeader tableOfContents={sections} title={title} />
             <Prose>{children}</Prose>
           </article>
           <ArticleRate />

@@ -14,7 +14,7 @@ export default async function Page() {
   const policies = await getAllPolicies();
 
   return (
-    <DocsContainer className="w-full flex-col px-8 pb-[60px]">
+    <DocsContainer className="w-full flex-col px-1 pb-[60px] md:px-8">
       <DocsHeader title="Policies" />
       <Prose>
         <p>
@@ -42,7 +42,7 @@ export default async function Page() {
       <div>
         <Link
           href="/articles/policies"
-          className="btn btn-large btn-secondary-light mt-6 inline-block no-underline"
+          className="btn btn-large btn-secondary-light mt-6 inline-block w-full no-underline sm:w-auto"
         >
           Check out details
         </Link>

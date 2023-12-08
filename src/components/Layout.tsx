@@ -42,9 +42,7 @@ function Header() {
             <Logo className="block w-28 lg:w-36" />
           </div>
           <div className="flex flex-grow justify-end lg:justify-center">
-            <div className="">
-              <Search />
-            </div>
+            <Search />
           </div>
           <div className="hidden justify-end lg:flex">
             <ThemeSelector className="relative z-10 my-auto mr-8" />

@@ -3,11 +3,18 @@
 import { usePathname } from "next/navigation";
 
 import { navigation } from "@/build/navigation.mjs";
-import { NavCategory, NavItem } from "@/lib/interfaces";
+import { NavCategory, NavItem, Section } from "@/lib/interfaces";
 import Link from "next/link";
 import ChevronRightIcon from "@/components/svgs/chevron-right.svg";
+import { MobileTableOfContents } from "@/components/MobileTableOfContents";
 
-export function DocsHeader({ title }: { title?: string }) {
+export function DocsHeader({
+  title,
+  tableOfContents,
+}: {
+  title?: string;
+  tableOfContents?: Array<Section>;
+}) {
   let pathname = usePathname();
 
   const findLink = (link: NavCategory | NavItem): boolean => {
@@ -26,15 +33,19 @@ export function DocsHeader({ title }: { title?: string }) {
 
   return (
     <header className="mb-5">
-      <div className="mb-10 flex items-center gap-x-[3px] text-sm leading-6 tracking-wider text-gray-600">
+      <div className="mb-4 flex items-center gap-x-[3px] text-sm leading-6 tracking-wider text-gray-600 lg:mb-10">
         <Link href="#">Home</Link>
         {section && (
           <>
             <ChevronRightIcon />
-            <p className="">{section.label}</p>
+            <p>{section.label}</p>
           </>
         )}
       </div>
+
+      {tableOfContents && (
+        <MobileTableOfContents tableOfContents={tableOfContents} />
+      )}
 
       {title && (
         <h1 className="mb-2.5 text-3xl leading-narrow text-white dark:text-black">
