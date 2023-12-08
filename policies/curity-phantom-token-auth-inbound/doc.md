@@ -25,10 +25,10 @@ other solutions could also be used.
 
 #### OAuth Tools
 With the server up and running and available you can use [OAuth Tools](https://oauth.tools/) to test 
-the configuration and make sure that you are able to obtain a token.
+the configuration and make sure that you are able to obtain a token. I an opaque token is possible to
+obtain you are good to continue.
 
 ### Set Environment Variables
-
 Before adding the policy, there are a few environment variables that will need
 to be set that will be used in the Curity Phantom Token Policy.
 
@@ -44,22 +44,16 @@ to be set that will be used in the Curity Phantom Token Policy.
 
 4. Click **Add new Variable** again and enter the name `CLIENT_SECRET` in the
    name field. Set the value to the secret of the client that you added the introspection capability to.
+   **Make sure to enable `is Secret?`.**
+   
 
 ### Create the module
-
 In the [Zuplo Portal](https://portal.zuplo.com) open the **Route Designer**
    in the <CodeEditorTabIcon /> **Files** tab then click `+` next to **Modules**, choose **Empty Module** to add a new module. 
    Name the module `curity-phantom-token.ts`. Next paste the below code into the editor.
 
 ```js
-/* curity-phantom-token.ts
-Implement the Phantom Token Pattern https://curity.io/resources/learn/phantom-token-pattern/
-
-Introspects incoming opaque access token to retrieve a signed JWT and replaces 
-the upstream Authorization header to send the JWT instead of the incoming 
-opaque token.
-*/
-
+// curity-phantom-token.ts
 import { ZuploRequest, ZuploContext, environment } from "@zuplo/runtime";
 
 export default async function (
@@ -112,6 +106,7 @@ function getToken(authHeader) {
   return null;
 }
 ```
+
 ### Add the Curity Phantom Token Policy
 
 The next step is to add the Curity Phantom Token Auth policy to a route in your project.
@@ -120,34 +115,40 @@ The next step is to add the Curity Phantom Token Auth policy to a route in your 
    in the <CodeEditorTabIcon /> **Files** tab then click **routes.oas.json**.
 
 2. Select or create a route that you want to authenticate with the Curity Phantom Token Pattern. Expand the
-   **Policies** section and click **Add Policy**. Search for and select the
-   Phantom Token policy.
+   **Policies** section and click **Add Policy**. Search for and select the **Custom Code Inbound** policy.
+
+3. In the configuration editor, paste the following to overwrite the existing configuration:
+
+```json
+{
+  "export": "default",
+  "module": "$import(./modules/curity-phantom-token)",
+  "options": {
+    "allowUnauthenticatedRequests": false
+  }
+}
+```
  
-3. Click **OK** to save the policy.
+4. Click **OK** to save the policy.
+
+5. Click **Save All** to save all the configurations.
 
 ### Test the Policy
 
-Finally, you'll make two API requests to your route to test that authentication
-is working as expected.
+Head over to OAuth Tools to test the policy.
 
-1. In the route designer on the route you added the policy, click the **Test**
-   button. In the dialog that opens, click **Test** to make a request.
+1. Run a flow to obtain an opaque token (typically Code Flow)
 
-2. The API Gateway should respond with a **401 Unauthorized** response.
+2. Configure an **External API** flow and add your Zuplo endpoint in the **API Endpoint** 
+  field. Set the request method and choose the opaque token obtained in step 1. 
 
-  <Screenshot src="https://cdn.zuplo.com/assets/626e10a2-2350-439a-9081-1ccf1fe90cad.png" size="md" />
+![img](../../static/media/curity-phantom-token-auth/curity-oauth-tools-call-api.png)
 
-3. Now to make an authenticated request, add a header to the request called
-   `Authorization`. Set the value of the header to `Bearer YOUR_ACCESS_TOKEN`
-   replacing `YOUR_ACCESS_TOKEN` with the opaque token issued by Curity.
+3. Click **Send**. The panel on the right should now display the response from the API. 
+  If the upstream API echos back what is sent you will see that the `Authorization` header now
+  contains a JWT instead of the original opaque token that was sent in the request.
 
-  <Screenshot src="https://cdn.zuplo.com/assets/1486821b-cade-4041-b05b-80d3366327a5.png" size="lg" />
-
-4. Click the **Test** button and a **200 OK** response should be returned.
-
-  <Screenshot src="https://cdn.zuplo.com/assets/8182f932-8db6-4456-842f-f65158b174c0.png" size="md" />
-
-You have now setup the Curity Phantom Token Pattern for Authentication on your API Gateway.
-
-See [this document](/docs/articles/oauth-authentication) for more information
-about OAuth authorization in Zuplo.
+### Conclusion
+You have now setup the Curity Phantom Token Pattern for Authentication. Your API Gateway now accepts 
+an opaque access token in the Authorization header and will handle obtaining a corresponding signed JWT
+that will be passed on to the upstream API.
