@@ -28,8 +28,12 @@ export function DocsHeader({ title }: { title?: string }) {
     <header className="mb-5">
       <div className="mb-10 flex items-center gap-x-[3px] text-sm leading-6 tracking-wider text-gray-600">
         <Link href="#">Home</Link>
-        <ChevronRightIcon />
-        {section && <p className="">{section.label}</p>}
+        {section && (
+          <>
+            <ChevronRightIcon />
+            <p className="">{section.label}</p>
+          </>
+        )}
       </div>
 
       {title && (

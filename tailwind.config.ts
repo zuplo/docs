@@ -44,6 +44,7 @@ export default {
         "9xl": ["8rem", { lineHeight: "1" }],
       },
       borderRadius: {
+        sm: "8px",
         lg: "10px",
         xl: "14px",
       },
@@ -71,17 +72,17 @@ export default {
           300: "#B3DAFF",
         },
         warning: {
-          DEFAULT: "#FDC420",
+          DEFAULT: "#D1B000",
           100: "#FAF6E1",
           300: "#E7DFB6",
         },
         error: {
-          DEFAULT: "#FD2067",
+          DEFAULT: "#E0073B",
           100: "#FFF0F4",
           300: "#F6D5DD",
         },
         success: {
-          DEFAULT: "#1CCC94",
+          DEFAULT: "#00B594",
           100: "#E9FBF8",
           300: "#B6E7DE",
         },
@@ -139,6 +140,8 @@ export default {
             "--tw-prose-invert-bullets": theme("colors.black"),
             "--tw-prose-counters": theme("colors.white"),
             "--tw-prose-invert-counters": theme("colors.black"),
+            "--tw-prose-quotes": theme("colors.white"),
+            "--tw-prose-invert-quotes": theme("colors.black"),
           },
         },
       }),

@@ -15,8 +15,8 @@ export default async function Page() {
 
   return (
     <DocsContainer className="w-full flex-col px-8 pb-[60px]">
+      <DocsHeader title="Policies" />
       <Prose>
-        <DocsHeader title="Policies" />
         <p>
           Zuplo includes policies for any solution you need for securing and
           sharing your API. See the{" "}

@@ -96,3 +96,7 @@
     @apply font-fancy text-sm font-semibold uppercase tracking-[3px] text-zinc-400;
   }
 }
+
+:not(pre) > code {
+  @apply rounded-sm bg-white bg-opacity-10 px-1.5 py-0.5 font-normal tracking-wider ring-transparent dark:bg-gray dark:ring-1 dark:ring-gray-500;
+}
