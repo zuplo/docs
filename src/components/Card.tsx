@@ -6,7 +6,7 @@ interface Props {
   icon: string;
 }
 
-export const PolicyCard: React.FC<Props> = ({ name, href, icon }) => {
+export const Card: React.FC<Props> = ({ name, href, icon }) => {
   return (
     <Link
       href={href}

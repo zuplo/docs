@@ -4,7 +4,7 @@ import { DocsHeader } from "../../components/DocsHeader";
 import { getAllPolicies } from "../../lib/policies";
 import { DocsContainer } from "@/components/DocsContainer";
 import { Prose } from "@/components/Prose";
-import { PolicyCard } from "@/components/PolicyCard";
+import { Card } from "@/components/Card";
 
 export const metadata: Metadata = {
   title: "Policies",
@@ -53,7 +53,7 @@ export default async function Page() {
         className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
       >
         {policies.map((item) => (
-          <PolicyCard
+          <Card
             key={item.meta.id}
             name={item.meta.name}
             href={item.meta.href}
