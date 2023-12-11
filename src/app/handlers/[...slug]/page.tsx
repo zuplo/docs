@@ -8,8 +8,7 @@ interface ArticleFrontMatter {
   title: string;
 }
 
-const sourceDir = "docs";
-
+const sourceDir = "docs/handlers";
 export async function generateMetadata({
   params,
 }: {
@@ -19,6 +18,7 @@ export async function generateMetadata({
     slug: params.slug,
     sourceDir,
   });
+
   if (!result) {
     return {};
   }

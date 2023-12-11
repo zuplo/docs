@@ -18,13 +18,15 @@ export interface Content<Data = Record<string, any>> {
   slug: string[];
 }
 
-export async function getContentBySlug<Data = Record<string, any>>({
+export async function getSlugContent<Data = Record<string, any>>({
   slug,
+  sourceDir,
 }: {
-  slug: string[];
+  slug: Array<string>;
+  sourceDir: string;
 }): Promise<Content<Data> | undefined> {
   const fileName = `${slug.join("/")}.md`;
-  const filepath = path.join(process.cwd(), "docs", fileName);
+  const filepath = path.join(process.cwd(), sourceDir, fileName);
   if (!existsSync(filepath)) {
     return undefined;
   }
