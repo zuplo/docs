@@ -42,9 +42,7 @@ function Header() {
             <Logo className="block w-28 lg:w-36" />
           </div>
           <div className="flex flex-grow justify-end lg:justify-center">
-            <div className="">
-              <Search />
-            </div>
+            <Search />
           </div>
           <div className="hidden justify-end lg:flex">
             <ThemeSelector className="relative z-10 my-auto mr-8" />
@@ -70,7 +68,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <div className="flex w-full flex-col bg-white dark:bg-black">
       <Header />
       <div className="relative w-full px-5">
-        <div className="relative mx-auto w-full max-w-8xl rounded-xl bg-gray-400 dark:bg-white lg:mt-[92px]">
+        <div className="relative mx-auto mt-[70px] w-full max-w-8xl rounded-xl bg-gray-400 dark:bg-white lg:mt-[92px]">
           <Container className="flex h-[calc(100vh-7rem)] flex-auto justify-center">
             <aside className="hidden border-r border-gray-500 lg:relative lg:block lg:flex-none">
               {/* <div className="absolute inset-y-0 right-0 w-[50vw] dark:hidden" />
