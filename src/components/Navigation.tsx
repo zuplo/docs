@@ -78,7 +78,7 @@ function NavSection({
 }) {
   const pathname = usePathname();
   const linkClassName =
-    "block w-full px-6 leading-6 tracking-wider transition-all hover:text-pink hover:text-shadow";
+    "block w-full px-6 leading-6 tracking-wider transition-all hover:text-pink hover:text-shadow cursor-pointer";
 
   if ("href" in link) {
     return (

@@ -8,7 +8,6 @@ import { Navigation } from "@/components/Navigation";
 import classNames from "classnames";
 import { Search } from "./Search";
 import { StartFreeCTAButton } from "./StartFreeCTAButton";
-import { ThemeSelector } from "./ThemeSelector";
 import { Container } from "@/components/shared/Container";
 
 function Header() {
@@ -45,7 +44,6 @@ function Header() {
             <Search />
           </div>
           <div className="hidden justify-end lg:flex">
-            <ThemeSelector className="relative z-10 my-auto mr-8" />
             <StartFreeCTAButton />
           </div>
           {/* <div className="-my-5 mr-6 sm:mr-8 md:mr-0">
