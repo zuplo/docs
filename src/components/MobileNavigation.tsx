@@ -78,7 +78,6 @@ export function MobileNavigation() {
               <LogoIcon alt="Zuplo logo" className="w-28 text-transparent" />
             </Link>
             <div className="flex">
-              <ThemeSelector className="relative z-10 my-auto mr-8" />
               <button
                 type="button"
                 onClick={() => close()}
