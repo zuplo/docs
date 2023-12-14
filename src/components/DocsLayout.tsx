@@ -5,16 +5,18 @@ import { Prose } from "@/components/Prose";
 import { TableOfContents } from "@/components/TableOfContents";
 import ArticleRate from "@/components/shared/article/Rate";
 import ArticleSupport from "@/components/shared/article/Support";
-import { Section } from "@/lib/interfaces";
+import { Section } from "@/lib/types";
 
 export function DocsLayout({
   children,
   frontmatter: { title },
   sections,
+  useRateSection = true,
 }: {
   children: React.ReactNode;
   frontmatter: { title?: string };
-  sections: Section[];
+  sections: Array<Section>;
+  useRateSection?: boolean;
 }) {
   return (
     <>
@@ -24,7 +26,7 @@ export function DocsLayout({
             <DocsHeader tableOfContents={sections} title={title} />
             <Prose>{children}</Prose>
           </article>
-          <ArticleRate />
+          {useRateSection && <ArticleRate />}
           <ArticleSupport />
           <PrevNextLinks />
         </div>

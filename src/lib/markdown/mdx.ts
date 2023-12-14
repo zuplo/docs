@@ -1,5 +1,5 @@
 import components from "@/components/mdx";
-import { Section } from "@/lib/interfaces";
+import { Section } from "@/lib/types";
 import remarkTransformLink from "@/lib/markdown/md-link";
 import remarkStaticImage from "@/lib/markdown/static-image";
 import fs from "fs/promises";

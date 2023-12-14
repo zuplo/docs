@@ -1,7 +1,7 @@
 "use client";
 
 import { navigation } from "@/build/navigation.mjs";
-import { NavCategory, NavItem } from "@/lib/interfaces";
+import { NavCategory, NavItem } from "@/lib/types";
 import clsx from "classnames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -70,7 +70,7 @@ export function PrevNextLinks() {
   }
 
   return (
-    <dl className="mt-[60px] flex border-t border-slate-200 py-5 dark:border-slate-800">
+    <dl className="flex border-t border-slate-200 py-5 dark:border-slate-800">
       {previousPage && "href" in previousPage && (
         <PageLink dir="previous" {...previousPage} />
       )}

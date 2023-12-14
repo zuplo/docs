@@ -6,7 +6,7 @@ import ChevronDownIcon from "@/components/svgs/chevron-down.svg";
 import ArrowIcon from "@/components/svgs/arrow.svg";
 
 import { navigation } from "@/build/navigation.mjs";
-import { NavCategory, NavItem } from "@/lib/interfaces";
+import { NavCategory, NavItem } from "@/lib/types";
 import { useState } from "react";
 
 function SubNavSection({

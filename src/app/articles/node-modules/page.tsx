@@ -1,5 +1,5 @@
 import { DocsLayout } from "@/components/DocsLayout";
-import { Bundle } from "@/lib/interfaces";
+import { Bundle } from "@/lib/types";
 import { readFile } from "fs/promises";
 import { Metadata } from "next";
 import Link from "next/link";

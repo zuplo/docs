@@ -1,5 +1,5 @@
 import { DocsLayout } from "@/components/DocsLayout";
-import { Section } from "@/lib/interfaces";
+import { Section } from "@/lib/types";
 import { getAllPolicies, getPolicy } from "@/lib/policies";
 import { getHighlighter } from "shiki";
 

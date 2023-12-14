@@ -2,7 +2,7 @@
 
 import { navigation } from "@/build/navigation.mjs";
 import { type Result } from "@/build/search.mjs";
-import { NavCategory, NavItem } from "@/lib/interfaces";
+import { NavCategory, NavItem } from "@/lib/types";
 import {
   createAutocomplete,
   type AutocompleteApi,

@@ -1,6 +1,6 @@
 "use client";
 
-import { Section } from "@/lib/interfaces";
+import { Section } from "@/lib/types";
 import { Listbox, Transition } from "@headlessui/react";
 import clsx from "classnames";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/20/solid";
