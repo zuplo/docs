@@ -1,11 +1,19 @@
 import Link from "next/link";
 
 import { Icon } from "@/components/Icon";
+import { QuickLinkItem } from "@/lib/types";
 
-export function QuickLinks({ children }: { children: React.ReactNode }) {
+export function QuickLinks({ items }: { items: Array<QuickLinkItem> }) {
   return (
     <div className="not-prose grid grid-cols-1 gap-6 sm:grid-cols-2">
-      {children}
+      {items.map((item) => (
+        <QuickLink
+          key={item.id}
+          title={item.title}
+          href={item.href}
+          icon={item.icon}
+        />
+      ))}
     </div>
   );
 }

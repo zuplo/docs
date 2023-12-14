@@ -25,25 +25,41 @@ export default async function Page() {
     },
   ];
 
+  const gettingStartedItems: Array<QuickLinkItem> = [
+    {
+      id: nanoid(),
+      title: "Step 1 - Setup Basic Gateway",
+      href: "/articles/step-1-setup-basic-gateway",
+      icon: "installation",
+    },
+    {
+      id: nanoid(),
+      title: "Step 2 - API Key Auth",
+      href: "/articles/step-2-add-api-key-auth",
+      icon: "installation",
+    },
+    {
+      id: nanoid(),
+      title: "Step 3 - Rate Limiting",
+      href: "/articles/step-3-add-rate-limiting",
+      icon: "installation",
+    },
+    {
+      id: nanoid(),
+      title: "Step 4 - Deploying to the Edge",
+      href: "/articles/step-4-deploying-to-the-edge",
+      icon: "installation",
+    },
+  ];
+
   return (
-    <DocsLayout
-      frontmatter={{ title: "Zuplo Docs" }}
-      sections={[]}
-      useRateSection={false}
-    >
+    <DocsLayout frontmatter={{ title: "Zuplo Docs" }} useRateSection={false}>
       Learn how to use Zuplo to add API-key management, developer documentation,
       and rate-limiting, for any stack.
       <h2>Overview</h2>
-      <QuickLinks>
-        {overviewItems.map((item) => (
-          <QuickLink
-            key={item.id}
-            title={item.title}
-            href={item.href}
-            icon={item.icon}
-          />
-        ))}
-      </QuickLinks>
+      <QuickLinks items={overviewItems} />
+      <h2>Getting Started</h2>
+      <QuickLinks items={gettingStartedItems} />
     </DocsLayout>
   );
 }

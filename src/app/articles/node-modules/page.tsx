@@ -17,7 +17,7 @@ export default async function Page() {
   ).bundles.filter((bundle) => bundle.public);
 
   return (
-    <DocsLayout frontmatter={{ title: "Node Modules" }} sections={[]}>
+    <DocsLayout frontmatter={{ title: "Node Modules" }}>
       <p>
         Zuplo generally supports node modules, but to ensure the security and
         performance of each API Gateway we must approve each module. This

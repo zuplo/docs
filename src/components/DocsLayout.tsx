@@ -10,12 +10,12 @@ import { Section } from "@/lib/types";
 export function DocsLayout({
   children,
   frontmatter: { title },
-  sections,
+  sections = [],
   useRateSection = true,
 }: {
   children: React.ReactNode;
   frontmatter: { title?: string };
-  sections: Array<Section>;
+  sections?: Array<Section>;
   useRateSection?: boolean;
 }) {
   return (
