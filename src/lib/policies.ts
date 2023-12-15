@@ -4,7 +4,7 @@ import { readFile } from "fs/promises";
 import { glob } from "glob";
 import { JSONSchema7Definition } from "json-schema";
 import path from "path";
-import { PolicyMeta, PolicySchema, Section } from "./interfaces";
+import { PolicyMeta, PolicySchema, Section } from "./types";
 
 const policiesDir = path.resolve(process.cwd(), "./policies");
 
@@ -88,8 +88,8 @@ export async function getPolicy(policyId: string) {
 async function processProperties(
   properties:
     | {
-      [key: string]: JSONSchema7Definition;
-    }
+        [key: string]: JSONSchema7Definition;
+      }
     | undefined,
 ) {
   if (!properties) {

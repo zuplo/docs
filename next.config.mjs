@@ -1,6 +1,8 @@
 import withNavigation from "./src/build/navigation.mjs";
 import withSearch from "./src/build/search.mjs";
 
+const protectedRoutes = ["/", "/docs"];
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   swcMinify: true,
@@ -16,6 +18,16 @@ const nextConfig = {
         hostname: "cdn.zuplo.com",
       },
     ],
+  },
+  async redirects() {
+    return [
+      ...protectedRoutes.map((source) => ({
+        source,
+        destination: "/docs/intro",
+        permanent: true,
+        basePath: false,
+      })),
+    ];
   },
   webpack(config) {
     config.module.rules.push({

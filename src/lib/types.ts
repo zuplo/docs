@@ -1,47 +1,56 @@
 import { JSONSchema7 } from "json-schema";
+import { Icon } from "@/components/Icon";
 
-export interface PolicyMeta {
+export type PolicyMeta = {
   name: string;
   isPreview: boolean;
   isPaidAddOn: boolean;
   isDeprecated: boolean;
-  fakePolicyUrl: string | undefined;
+  fakePolicyUrl?: string;
   href: string;
   id: string;
   icon: string;
-}
+};
 
-export interface PolicySchema extends JSONSchema7 {
+export type PolicySchema = JSONSchema7 & {
   isPreview?: boolean;
   isDeprecated?: boolean;
   isPaidAddOn?: boolean;
   fakePolicyUrl?: string;
   isCustom?: boolean;
-}
+};
 
-export interface Section {
+export type Section = {
   id: string;
   title: string;
   level: number;
   children: Array<Section>;
-}
+};
 
-export interface Bundle {
+export type Bundle = {
   name: string;
   version: string;
   types: string;
-  files: string[];
+  files: Array<string>;
   description: string;
   url: string;
   public: boolean;
-}
+};
 
-export interface NavCategory {
+export type NavCategory = {
   label: string;
-  items: (NavCategory | NavItem)[];
-}
+  items: Array<NavCategory | NavItem>;
+};
 
-export interface NavItem {
+export type NavItem = {
   label: string;
   href: string;
-}
+};
+
+export type QuickLinkItem = {
+  id: string;
+  title: string;
+  description?: string;
+  href: string;
+  icon: React.ComponentProps<typeof Icon>["icon"];
+};

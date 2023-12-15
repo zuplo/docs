@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 
 import { navigation } from "@/build/navigation.mjs";
-import { NavCategory, NavItem, Section } from "@/lib/interfaces";
+import { NavCategory, NavItem, Section } from "@/lib/types";
 import Link from "next/link";
 import ChevronRightIcon from "@/components/svgs/chevron-right.svg";
 import { MobileTableOfContents } from "@/components/MobileTableOfContents";
@@ -34,7 +34,7 @@ export function DocsHeader({
   return (
     <header className="mb-5">
       <div className="mb-4 flex items-center gap-x-[3px] text-sm leading-6 tracking-wider text-gray-600 lg:mb-10">
-        <Link href="#">Home</Link>
+        <Link href="/">Home</Link>
         {section && (
           <>
             <ChevronRightIcon />

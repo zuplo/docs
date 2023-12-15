@@ -1,7 +1,7 @@
 declare module "remark-admonitions";
 declare module "badwords-list";
 declare module "simple-functional-loader";
-import { NavCategory } from "@/lib/interfaces";
+import { NavCategory } from "@/lib/types";
 import { type SearchOptions } from "flexsearch";
 
 declare module "@/build/search.mjs" {
