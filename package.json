@@ -18,6 +18,8 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
+    "postinstall": "npm run get-policies",
+    "get-policies": "sh ./scripts/get-policies.sh",
     "ci:pre": "npm run ci:bundles && npm run ci:policies",
     "ci:bundles": "node ./scripts/update-bundles.mjs",
     "ci:policies": "node ./scripts/build.mjs && node ./scripts/update-policies.main.mjs"

@@ -2,7 +2,7 @@ import { dereference } from "@apidevtools/json-schema-ref-parser";
 import chalk from "chalk";
 import chokidar from "chokidar";
 import { existsSync } from "fs";
-import { copyFile, mkdir, readdir, readFile, rm, writeFile } from "fs/promises";
+import { copyFile, mkdir, readFile, writeFile } from "fs/promises";
 import glob from "glob";
 import { JSONSchema7 } from "json-schema";
 import { Heading as AstHeading } from "mdast";
@@ -22,6 +22,7 @@ type PolicySchema = JSONSchema7 & {
   isDeprecated?: boolean;
   isPaidAddOn?: boolean;
   isCustom?: boolean;
+  isHidden?: boolean;
 };
 
 type PolicyProperties = Record<
@@ -94,8 +95,8 @@ const PolicyOptions = ({
   );
 };
 
-const policiesDir = path.resolve(process.cwd(), "./policies");
 const docsDir = path.resolve(process.cwd(), "./docs/policies");
+const policiesDir = path.resolve(process.cwd(), "./policies");
 
 const headings = (root: Node): Array<Heading> => {
   const headingList: Array<Heading> = [];
@@ -176,12 +177,12 @@ async function processProperties(properties) {
   return Promise.all(tasks);
 }
 
-function getPolicyFilePaths(policyId) {
+function getPolicyFilePaths(policyDir) {
   return {
-    iconSvg: path.join(policiesDir, policyId, "icon.svg"),
-    introMd: path.join(policiesDir, policyId, "intro.md"),
-    docMd: path.join(policiesDir, policyId, "doc.md"),
-    policyTs: path.join(policiesDir, policyId, "policy.ts"),
+    iconSvg: path.join(policyDir, "icon.svg"),
+    introMd: path.join(policyDir, "intro.md"),
+    docMd: path.join(policyDir, "doc.md"),
+    policyTs: path.join(policyDir, "policy.ts"),
   };
 }
 
@@ -305,34 +306,32 @@ export async function run() {
   const policyConfig = JSON.parse(policyConfigJson);
 
   const matches: string[] = await new Promise((resolve, reject) => {
-    glob(
-      "**/schema.json",
-      {
-        cwd: policiesDir,
-      },
-      (err, result) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(result);
-        }
-      },
-    );
+    glob("./{policies,temp}/**/schema.json", (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
   });
 
   const policies = [];
   const tasks = matches.map(async (match) => {
-    const policyId = match.replace("/schema.json", "");
-    const schemaPath = path.join(policiesDir, match);
+    const policyDir = path.join(
+      process.cwd(),
+      match.replace("/schema.json", ""),
+    );
+    const policyId = match.split("/")[2];
+
+    const schemaPath = path.join(policyDir, "schema.json");
     const schemaJson = await readFile(schemaPath, "utf-8");
     const rawSchema = JSON.parse(schemaJson);
     // RefParser uses cwd to resolve refs
-    const policyDir = path.join(policiesDir, policyId);
     process.chdir(policyDir);
     const schema = (await dereference(rawSchema)) as PolicySchema;
     await processProperties(schema.properties);
 
-    const policyFilePaths = getPolicyFilePaths(policyId);
+    const policyFilePaths = getPolicyFilePaths(policyDir);
 
     // Build the meta format for use in the portal
     const meta: Record<string, any> = {};
@@ -382,7 +381,7 @@ export async function run() {
       const { html } = await render(intro);
       meta.exampleHtml = html;
     } else {
-      meta.exampleHtml = await getExampleHtml(policyId, schemaPath, schema);
+      meta.exampleHtml = await getExampleHtml(policyId, schema);
     }
 
     if (existsSync(policyFilePaths.iconSvg)) {
@@ -404,11 +403,11 @@ export async function run() {
       policyFilePaths,
     );
 
-    if (!schema.isDeprecated) {
-      const policyOutDir = path.join(docsDir, policyId);
-      if (!existsSync(policyOutDir)) {
-        await mkdir(policyOutDir);
-      }
+    if (!schema.isHidden) {
+      // const policyOutDir = path.join(docsDir, policyId);
+      // if (!existsSync(policyOutDir)) {
+      //   await mkdir(policyOutDir);
+      // }
       await writeFile(
         path.join(docsDir, `${policyId}.md`),
         generatedMd,
@@ -416,19 +415,19 @@ export async function run() {
       );
 
       // Copy png files
-      const assets = (await readdir(policyDir)).filter((file) => {
-        return file.endsWith(".png");
-      });
-      for (const asset of assets) {
-        const dest = path.resolve(policyOutDir, asset);
-        if (existsSync(dest)) {
-          await rm(dest);
-        }
-        await copyFile(
-          path.resolve(policyDir, asset),
-          path.resolve(policyOutDir, asset),
-        );
-      }
+      // const assets = (await readdir(policyDir)).filter((file) => {
+      //   return file.endsWith(".png");
+      // });
+      // for (const asset of assets) {
+      //   const dest = path.resolve(policyOutDir, asset);
+      //   if (existsSync(dest)) {
+      //     await rm(dest);
+      //   }
+      //   await copyFile(
+      //     path.resolve(policyDir, asset),
+      //     path.resolve(policyOutDir, asset),
+      //   );
+      // }
     }
   });
 
@@ -447,7 +446,7 @@ export async function run() {
   const policiesV3Json = await stringify(policyDataV3);
 
   await writeFile(
-    path.resolve(policiesDir, "../policies.v3.json"),
+    path.resolve(process.cwd(), "policies.v3.json"),
     policiesV3Json,
     "utf-8",
   );
@@ -455,16 +454,11 @@ export async function run() {
   console.info("Policies updated");
 }
 
-async function getExampleHtml(
-  policyId: string,
-  policyPath: string,
-  schema: PolicySchema,
-) {
+async function getExampleHtml(policyId: string, schema: PolicySchema) {
   if (!schema.description) {
     console.error(
       chalk.red(
         `ERROR: The policy ${policyId} does not have a description set in the schema`,
-        policyPath,
       ),
     );
     throw new Error("Invalid schema");
@@ -477,6 +471,7 @@ async function getExampleHtml(
   if (!properties) {
     return;
   }
+
   if (properties && Object.keys(properties).length === 0) {
     console.warn(
       chalk.yellow(
@@ -502,7 +497,7 @@ async function getExampleHtml(
 
 export async function watch() {
   await run();
-  var watcher = chokidar.watch(policiesDir, {
+  var watcher = chokidar.watch(path.join(policiesDir), {
     ignored: /^\./,
     persistent: true,
     ignoreInitial: true,
