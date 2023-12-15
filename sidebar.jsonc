@@ -2,6 +2,7 @@
   {
     "label": "Introduction",
     "href": "/",
+    "type": "category",
     "items": [
       "articles/what-is-zuplo",
       "articles/who-uses-and-why",
@@ -10,6 +11,7 @@
   },
   {
     "label": "Getting Started",
+    "type": "category",
     "items": [
       "articles/step-1-setup-basic-gateway",
       "articles/step-2-add-api-key-auth",
@@ -33,6 +35,7 @@
   // },
   {
     "label": "Getting to Production",
+    "type": "category",
     "items": [
       "articles/environments",
       "articles/github-source-control",
@@ -47,6 +50,7 @@
   },
   {
     "label": "API Keys",
+    "type": "category",
     "items": [
       "articles/api-key-management",
       "articles/api-key-authentication",
@@ -65,9 +69,11 @@
   // },
   {
     "label": "How to Guides",
+    "type": "category",
     "items": [
       {
         "label": "Local Development",
+        "type": "sub_category",
         "items": [
           "articles/local-development",
           "articles/configure-ide-for-local-development"
@@ -93,9 +99,11 @@
   {
     "label": "Policies",
     "href": "/policies",
+    "type": "category",
     "items": [
       {
         "label": "Authentication",
+        "type": "sub_category",
         "items": [
           "policies/api-key-inbound",
           "policies/auth0-jwt-auth-inbound",
@@ -113,6 +121,7 @@
       },
       {
         "label": "Security & Validation",
+        "type": "sub_category",
         "items": [
           "policies/rate-limit-inbound",
           "policies/audit-log-inbound",
@@ -123,6 +132,7 @@
       },
       {
         "label": "Metrics, Billing & Quotas",
+        "type": "sub_category",
         "items": [
           "policies/quota-inbound",
           "policies/moesif-inbound",
@@ -132,6 +142,7 @@
       },
       {
         "label": "Testing",
+        "type": "sub_category",
         "items": [
           "policies/ab-test-inbound",
           "policies/mock-api-inbound",
@@ -140,6 +151,7 @@
       },
       {
         "label": "Request Filtering",
+        "type": "sub_category",
         "items": [
           "policies/acl-policy-inbound",
           "policies/geo-filter-inbound",
@@ -149,6 +161,7 @@
       },
       {
         "label": "Request Modification",
+        "type": "sub_category",
         "items": [
           "policies/transform-body-inbound",
           "policies/remove-headers-inbound",
@@ -163,6 +176,7 @@
       },
       {
         "label": "Response Modification",
+        "type": "sub_category",
         "items": [
           "policies/transform-body-outbound",
           "policies/remove-headers-outbound",
@@ -173,6 +187,7 @@
       },
       {
         "label": "Upstream Authentication",
+        "type": "sub_category",
         "items": [
           "policies/upstream-azure-ad-service-auth-inbound",
           "policies/upstream-gcp-service-auth-inbound",
@@ -183,6 +198,7 @@
       },
       {
         "label": "Other",
+        "type": "sub_category",
         "items": [
           "policies/composite-inbound",
           "policies/caching-inbound",
@@ -194,10 +210,12 @@
   },
   {
     "label": "Reference",
+    "type": "category",
     "items": [
       {
         "label": "Handlers",
         "href": "/handlers",
+        "type": "sub_category",
         "items": [
           "handlers/url-forward",
           "handlers/url-rewrite",
@@ -210,6 +228,7 @@
       },
       {
         "label": "Developer Portal",
+        "type": "sub_category",
         "items": [
           "articles/developer-portal",
           "articles/dev-portal-setup",
@@ -225,6 +244,7 @@
       },
       {
         "label": "Programming API",
+        "type": "sub_category",
         "items": [
           "articles/zuplo-request",
           "articles/environment-variables",
@@ -251,6 +271,7 @@
       {
         "label": "Zuplo CLI",
         "href": "/cli",
+        "type": "sub_category",
         "items": [
           "cli/installation",
           "cli/analytics",
@@ -266,15 +287,18 @@
   },
   {
     "label": "Product Info",
-    "item": [
+    "type": "category",
+    "items": [
       "articles/support",
       {
         "label": "Changelog",
+        "isExternal": true,
         "href": "https://zuplo.com/changelog"
       },
       "articles/security",
       {
         "label": "Trust & Compliance",
+        "isExternal": true,
         "href": "https://trust.zuplo.com"
       }
     ]

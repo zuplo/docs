@@ -1,5 +1,6 @@
 import { JSONSchema7 } from "json-schema";
 import { Icon } from "@/components/Icon";
+import { NavigationType } from "@/lib/enums/navigation-type";
 
 export type PolicyMeta = {
   name: string;
@@ -39,12 +40,10 @@ export type Bundle = {
 
 export type NavCategory = {
   label: string;
-  items: Array<NavCategory | NavItem>;
-};
-
-export type NavItem = {
-  label: string;
-  href: string;
+  href?: string;
+  type?: NavigationType;
+  isExternal?: boolean;
+  items?: Array<NavCategory>;
 };
 
 export type QuickLinkItem = {

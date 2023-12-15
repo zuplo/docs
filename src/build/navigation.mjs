@@ -10,6 +10,8 @@ const __filename = url.fileURLToPath(import.meta.url);
 function buildNavSection(rawSection) {
   let section = {
     label: rawSection.label,
+    href: rawSection.href,
+    type: rawSection.type,
     items: [],
   };
   if (!rawSection.items) {
