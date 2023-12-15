@@ -23,21 +23,24 @@ export function DocsHeader({
     return null;
   }
 
-  const breadcrumbItems: Array<NavCategory> = [
-    { label: "Home", href: "/" },
-    { label: section.label, href: section.href },
-  ];
+  const breadcrumbItems: Array<NavCategory> = [{ label: "Home", href: "/" }];
 
-  let currentSection = section;
+  if (section) {
+    breadcrumbItems.push({
+      label: section.label,
+      href: section.href,
+    });
+    let currentSection = section;
 
-  while (currentSection?.items?.length) {
-    currentSection = currentSection.items.find(useFindNavItemByLink);
+    while (currentSection?.items?.length) {
+      currentSection = currentSection.items.find(useFindNavItemByLink);
 
-    if (currentSection) {
-      breadcrumbItems.push({
-        label: currentSection.label,
-        href: currentSection?.href,
-      });
+      if (currentSection) {
+        breadcrumbItems.push({
+          label: currentSection.label,
+          href: currentSection?.href,
+        });
+      }
     }
   }
 
