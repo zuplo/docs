@@ -27,7 +27,6 @@ type PolicySchema = JSONSchema7 & {
   isUnlisted?: boolean;
   isPaidAddOn?: boolean;
   isCustom?: boolean;
-  isHidden?: boolean;
   deprecatedMessage?: string;
 };
 
@@ -487,6 +486,7 @@ export async function run() {
     meta.isPaidAddOn = !!schema.isPaidAddOn;
     meta.isCustom = !!schema.isCustom;
     meta.isDeprecated = !!schema.isDeprecated;
+    meta.deprecationMessage = schema.deprecatedMessage;
     meta.documentationUrl = `https://zuplo.com/docs/policies/${policyId}/`;
     meta.id = policyId;
 
@@ -549,32 +549,7 @@ export async function run() {
       policyFilePaths,
     );
 
-    if (!schema.isHidden) {
-      // const policyOutDir = path.join(docsDir, policyId);
-      // if (!existsSync(policyOutDir)) {
-      //   await mkdir(policyOutDir);
-      // }
-      await writeFile(
-        path.join(docsDir, `${policyId}.md`),
-        generatedMd,
-        "utf-8",
-      );
-
-      // Copy png files
-      // const assets = (await readdir(policyDir)).filter((file) => {
-      //   return file.endsWith(".png");
-      // });
-      // for (const asset of assets) {
-      //   const dest = path.resolve(policyOutDir, asset);
-      //   if (existsSync(dest)) {
-      //     await rm(dest);
-      //   }
-      //   await copyFile(
-      //     path.resolve(policyDir, asset),
-      //     path.resolve(policyOutDir, asset),
-      //   );
-      // }
-    }
+    await writeFile(path.join(docsDir, `${policyId}.md`), generatedMd, "utf-8");
   });
 
   await Promise.all(tasks);
@@ -615,6 +590,21 @@ async function getExampleHtml(
   const { properties } = handler;
   const { options } = properties;
 
+  let deprecatedHtml = null;
+  if (schema.isDeprecated) {
+    let deprecatedInnerHtml = "<strong>This policy is deprecated.</strong>";
+    if (schema.deprecatedMessage) {
+      const { html } = await render(schema.deprecatedMessage);
+      deprecatedInnerHtml += " " + html;
+    }
+    deprecatedHtml = (
+      <div
+        className="policy-deprecated"
+        dangerouslySetInnerHTML={{ __html: deprecatedInnerHtml }}
+      />
+    );
+  }
+
   if (properties.options && Object.keys(properties.options).length === 0) {
     console.warn(
       chalk.yellow(
@@ -623,8 +613,11 @@ async function getExampleHtml(
     );
   }
 
+  // TODO: Move the deprecated message into custom UI in the portal
+  // and remove from here.
   const html = renderToStaticMarkup(
     <>
+      {deprecatedHtml}
       <div dangerouslySetInnerHTML={{ __html: introHtml }} />
       {options && Object.keys(options).length > 0 ? (
         <>
