@@ -28,6 +28,7 @@ type PolicySchema = JSONSchema7 & {
   isPaidAddOn?: boolean;
   isCustom?: boolean;
   isHidden?: boolean;
+  deprecatedMessage?: string;
 };
 
 type Heading = {
@@ -388,6 +389,17 @@ ${
     : ""
 }
 
+
+${
+  schema.isDeprecated
+    ? `:::danger Deprecated
+
+This policy is deprecated. ${schema.deprecatedMessage ?? ""}
+
+:::`
+    : ""
+}
+
 <!-- start: intro.md -->
 ${introMd ?? schema.description}
 <!-- end: intro.md -->
@@ -395,8 +407,6 @@ ${introMd ?? schema.description}
 <PolicyStatus isPreview={${schema.isPreview ?? false}} isPaidAddOn={${
     schema.isPaidAddOn ?? false
   }} />
-
-
 
 ${customCode}
 
