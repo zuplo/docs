@@ -78,11 +78,11 @@ function ObjectSchema({ schema }: { schema: JSONSchema7 }) {
                 const comma = i < value.enum.length - 1 ? ", " : null;
                 const and = i === value.enum.length - 1 ? "and " : null;
                 return (
-                  <>
+                  <span key={i}>
                     {and}
                     <code>{v as string}</code>
                     {comma}
-                  </>
+                  </span>
                 );
               })}
               .
