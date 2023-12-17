@@ -4,7 +4,7 @@ import chokidar from "chokidar";
 import { existsSync } from "fs";
 import { copyFile, mkdir, readFile, writeFile } from "fs/promises";
 import glob from "glob";
-import { JSONSchema7 } from "json-schema";
+import { JSONSchema7, JSONSchema7Definition } from "json-schema";
 import { Heading as AstHeading } from "mdast";
 import { toString } from "mdast-util-to-string";
 import path from "path";
@@ -17,6 +17,10 @@ import { visit } from "unist-util-visit";
 // here just to keep the react import
 const version = React.version;
 
+type SchemaRecord = {
+  [key: string]: JSONSchema7;
+};
+
 type PolicySchema = JSONSchema7 & {
   isPreview?: boolean;
   isDeprecated?: boolean;
@@ -24,15 +28,6 @@ type PolicySchema = JSONSchema7 & {
   isCustom?: boolean;
   isHidden?: boolean;
 };
-
-type PolicyProperties = Record<
-  string,
-  {
-    default?: boolean | string | number;
-    description: string;
-    properties?: PolicyProperties;
-  }
->;
 
 type Heading = {
   depth: number;
@@ -45,53 +40,183 @@ type RenderResult = {
   headings: Array<Heading>;
 };
 
-const OptionProperties = ({ properties }: { properties: PolicyProperties }) => (
-  <ul>
-    {Object.entries(properties).map(([key, value]) => (
-      <li key={key}>
-        <code>{key}</code>{" "}
-        <div dangerouslySetInnerHTML={{ __html: value.description }} />
-        {value.properties ? (
-          <OptionProperties properties={value.properties} />
-        ) : undefined}
-      </li>
-    ))}
-  </ul>
-);
+const OptionProperty = ({ schema }: { schema: JSONSchema7 }) => {
+  isObjectSchema(schema);
+
+  if (schema.type === "object" && schema.properties) {
+    return <ObjectSchema schema={schema} />;
+  } else if (schema.type === "array" && schema.items) {
+    return <ArraySchema schema={schema} />;
+  }
+};
+
+function ObjectSchema({ schema }: { schema: JSONSchema7 }) {
+  return (
+    <ul>
+      {Object.entries(schema.properties as SchemaRecord).map(([key, value]) => (
+        <li key={key}>
+          <code>{key}</code>
+          <OptionType value={value} />
+          {schema.required?.includes(key) && (
+            <span className="required-option">{" (Required)"}</span>
+          )}
+          {" - "}
+          {value.description && (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: value.description.trim().endsWith(".")
+                  ? value.description.trim()
+                  : `${value.description.trim()}.`,
+              }}
+            />
+          )}
+          {value.type === "string" && value.enum && (
+            <span className="allow-values">
+              {" "}
+              Allowed values are{" "}
+              {value.enum.map((v, i) => {
+                const comma = i < value.enum.length - 1 ? ", " : null;
+                const and = i === value.enum.length - 1 ? "and " : null;
+                return (
+                  <>
+                    {and}
+                    <code>{v as string}</code>
+                    {comma}
+                  </>
+                );
+              })}
+              .
+            </span>
+          )}
+          {value.default && (
+            <span className="default-value">
+              {" "}
+              Defaults to <code>{value.default as string}</code>.
+            </span>
+          )}
+          <OptionProperty schema={value} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function ArraySchema({ schema }: { schema: JSONSchema7 }) {
+  const items = schema.items as JSONSchema7;
+  if (items.type === "object" && items.properties) {
+    return <ObjectSchema schema={items} />;
+  }
+  return null;
+}
+
+function OptionType({ value }: { value: JSONSchema7 }) {
+  let typeString: string | undefined;
+  if (value.type === "array") {
+    const arrayType = (value.items as JSONSchema7 | undefined)?.type;
+    typeString = arrayType ? `${arrayType}[]` : "array";
+  } else if (value.type) {
+    typeString = value.type.toString();
+  } else if (value.oneOf) {
+    typeString = value.oneOf
+      .map((o: JSONSchema7) => {
+        if (o.items && (o.items as JSONSchema7).type) {
+          return `${(o.items as JSONSchema7).type.toString()}[]`;
+        }
+        return o.type?.toString();
+      })
+      .filter((t) => t !== undefined)
+      .join(" | ");
+  }
+  if (typeString) {
+    return <span className="type-option">{` <${typeString}>`}</span>;
+  }
+}
+
+function isObjectSchema(val: unknown): asserts val is object {
+  if (typeof val === "boolean") {
+    throw new Error("Invalid schema");
+  }
+}
+
+function Heading3({ title, id }: { title: string; id: string }) {
+  return (
+    <h3
+      className="anchor anchorWithStickyNavbar_node_modules-@docusaurus-theme-classic-lib-theme-Heading-styles-module"
+      id={id}
+    >
+      {title}
+      <a
+        href={`#${id}`}
+        className="hash-link"
+        aria-label={`Direct link to ${title}`}
+        title={`Direct link to ${title}`}
+      >
+        ​
+      </a>
+    </h3>
+  );
+}
 
 const PolicyOptions = ({
   schema,
   policyId,
 }: {
-  schema: any;
+  schema: JSONSchema7Definition;
   policyId: string;
 }) => {
-  const { properties } = schema.properties.handler;
+  isObjectSchema(schema);
+  const { handler } = schema.properties;
+  isObjectSchema(handler);
+  const { properties } = handler;
+  const { module: handlerModule, export: handlerExport, options } = properties;
+  isObjectSchema(handlerModule);
+  isObjectSchema(handlerExport);
   return (
-    <ul>
-      <li>
-        <code>name</code> the name of your policy instance. This is used as a
-        reference in your routes.
-      </li>
-      <li>
-        <code>policyType</code> the identifier of the policy. This is used by
-        the Zuplo UI. Value should be <code>{policyId}</code>.
-      </li>
-      <li>
-        <code>handler/export</code> The name of the exported type. Value should
-        be <code>{properties.export.const}</code>.
-      </li>
-      <li>
-        <code>handler/module</code> the module containing the policy. Value
-        should be <code>{properties.module.const}</code>.
-      </li>
-      {properties.options && Object.keys(properties.options).length > 0 ? (
+    <div>
+      <Heading3 title="Policy Configuration" id="policy-configuration" />
+      <ul>
         <li>
-          <code>handler/options</code> The options for this policy:
-          <OptionProperties properties={properties.options.properties} />
+          <code>name</code> <span className="type-option">{"<string>"}</span> -
+          The name of your policy instance. This is used as a reference in your
+          routes.
         </li>
+        <li>
+          <code>policyType</code>{" "}
+          <span className="type-option">{"<string>"}</span> - The identifier of
+          the policy. This is used by the Zuplo UI. Value should be{" "}
+          <code>{policyId}</code>.
+        </li>
+        <li>
+          <code>handler.export</code>{" "}
+          <span className="type-option">{"<string>"}</span> - The name of the
+          exported type. Value should be{" "}
+          <code>{handlerExport.const as string}</code>.
+        </li>
+        <li>
+          <code>handler.module</code>{" "}
+          <span className="type-option">{"<string>"}</span> - The module
+          containing the policy. Value should be{" "}
+          <code>{handlerModule.const as string}</code>.
+        </li>
+        {properties.options && Object.keys(properties.options).length > 0 ? (
+          <li>
+            <code>handler.options</code>{" "}
+            <span className="type-option">{"<object>"}</span> - The options for
+            this policy. <a href="#policy-options">See Policy Options</a> below.
+          </li>
+        ) : null}
+      </ul>
+      {properties.options && Object.keys(properties.options).length > 0 ? (
+        <>
+          <Heading3 title="Policy Options" id="policy-options" />
+          <p>
+            The options for this policy are specified below. All properties are
+            optional unless specifically marked as required.
+          </p>
+          <OptionProperty schema={options as JSONSchema7} />
+        </>
       ) : null}
-    </ul>
+    </div>
   );
 };
 
@@ -286,6 +411,7 @@ ${JSON.stringify(code, null, 2)}
 ${optionsHtml}
 </div>
 
+## Using the Policy
 <!-- start: doc.md -->
 ${(docMd ?? "").replace(/!\[(.*)\]\(\.\/(.*)\)/, `![$1](./${policyId}/$2)`)}
 <!-- end: doc.md -->
@@ -466,13 +592,13 @@ async function getExampleHtml(policyId: string, schema: PolicySchema) {
 
   const { html: description } = await render(schema.description);
 
-  const properties = (schema.properties.handler as any).properties.options
+  const options = (schema.properties.handler as any).properties.options
     ?.properties;
-  if (!properties) {
+  if (!options) {
     return;
   }
 
-  if (properties && Object.keys(properties).length === 0) {
+  if (options && Object.keys(options).length === 0) {
     console.warn(
       chalk.yellow(
         `WARN: The policy ${policyId} does not have any options set in the schema.`,
@@ -483,10 +609,10 @@ async function getExampleHtml(policyId: string, schema: PolicySchema) {
   const html = renderToStaticMarkup(
     <>
       <div dangerouslySetInnerHTML={{ __html: description }} />
-      {Object.keys(properties).length > 0 ? (
+      {Object.keys(options).length > 0 ? (
         <>
           <h3>Options</h3>
-          <OptionProperties properties={properties} />{" "}
+          <OptionProperty schema={options} />{" "}
         </>
       ) : null}
     </>,

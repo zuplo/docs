@@ -1,0 +1,13 @@
+{
+  "config": {
+    "legacyIdMaps": {
+      "api-auth-key-inbound-policy": "api-key-auth-inbound",
+      "auth0-jwt-inbound": "auth0-jwt-auth-inbound",
+      "basic-auth-inbound-policy": "basic-auth-inbound",
+      "basic-rate-limit-policy-inbound": "rate-limit-policy-inbound",
+      "cognito-jwt-inbound": "cognito-jwt-auth-inbound",
+      "open-id-jwt-inbound": "open-id-jwt-auth-inbound"
+    }
+  },
+  "policies": []
+}

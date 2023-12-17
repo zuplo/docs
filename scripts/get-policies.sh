@@ -1,6 +1,7 @@
 rm -rf temp
-curl https://cdn.zuplo.com/policies/runtime.zip -o runtime.zip
-curl https://cdn.zuplo.com/policies/graphql.zip -o graphql.zip
+RANDOM=(curl https://uuid.new)
+curl https://cdn.zuplo.com/policies/runtime.zip?$RANDOM -o runtime.zip
+curl https://cdn.zuplo.com/policies/graphql.zip?$RANDOM  -o graphql.zip
 unzip -q graphql.zip -d temp 
 unzip -q runtime.zip -d temp 
 rm graphql.zip

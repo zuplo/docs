@@ -22,7 +22,7 @@
     "get-policies": "sh ./scripts/get-policies.sh",
     "ci:pre": "npm run ci:bundles && npm run ci:policies",
     "ci:bundles": "node ./scripts/update-bundles.mjs",
-    "ci:policies": "node ./scripts/build.mjs && node ./scripts/update-policies.main.mjs"
+    "ci:policies": "node ./scripts/build.mjs && node --enable-source-maps ./scripts/update-policies.main.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "^3.0.0",
@@ -56,6 +56,7 @@
     "@docusaurus/types": "3.0.0",
     "@types/glob": "^8.0.0",
     "@types/jsdom": "^21.1.0",
+    "@types/json-schema": "^7.0.15",
     "@types/react": "^18.2.29",
     "@types/react-dom": "^18.2.15",
     "arg": "^5.0.2",
