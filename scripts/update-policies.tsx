@@ -65,9 +65,7 @@ function ObjectSchema({ schema }: { schema: JSONSchema7 }) {
           {value.description && (
             <div
               dangerouslySetInnerHTML={{
-                __html: value.description.trim().endsWith(".")
-                  ? value.description.trim()
-                  : `${value.description.trim()}.`,
+                __html: value.description,
               }}
             />
           )}
