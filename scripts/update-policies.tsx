@@ -198,7 +198,7 @@ const PolicyOptions = ({
           containing the policy. Value should be{" "}
           <code>{handlerModule.const as string}</code>.
         </li>
-        {properties.options && Object.keys(properties.options).length > 0 ? (
+        {options && Object.keys(options).length > 0 ? (
           <li>
             <code>handler.options</code>{" "}
             <span className="type-option">{"<object>"}</span> - The options for
@@ -206,7 +206,7 @@ const PolicyOptions = ({
           </li>
         ) : null}
       </ul>
-      {properties.options && Object.keys(properties.options).length > 0 ? (
+      {options && Object.keys(options).length > 0 ? (
         <>
           <Heading3 title="Policy Options" id="policy-options" />
           <p>
@@ -222,6 +222,10 @@ const PolicyOptions = ({
 
 const docsDir = path.resolve(process.cwd(), "./docs/policies");
 const policiesDir = path.resolve(process.cwd(), "./policies");
+const policyManifestOutputPath = path.resolve(
+  process.cwd(),
+  "policies.v3.json",
+);
 
 const headings = (root: Node): Array<Heading> => {
   const headingList: Array<Heading> = [];
@@ -356,7 +360,7 @@ async function generateMarkdown(
   if (schema.isCustom && existsSync(policyFilePaths.policyTs)) {
     const policyTs = await readFile(policyFilePaths.policyTs, "utf-8");
     customCode = `
-# Example Custom Policy
+## Example Custom Policy
 
 The code below is an example of how this custom policy module could be implemented.
 
@@ -502,13 +506,12 @@ export async function run() {
         options: {},
       };
     }
-    if (schema.isCustom && existsSync(policyFilePaths.introMd)) {
-      const intro = await readFile(policyFilePaths.introMd, "utf-8");
-      const { html } = await render(intro);
-      meta.exampleHtml = html;
-    } else {
-      meta.exampleHtml = await getExampleHtml(policyId, schema);
-    }
+
+    meta.exampleHtml = await getExampleHtml(
+      policyId,
+      schema,
+      policyFilePaths.introMd,
+    );
 
     if (existsSync(policyFilePaths.iconSvg)) {
       const svg = await readFile(policyFilePaths.iconSvg, "utf-8");
@@ -570,35 +573,32 @@ export async function run() {
   };
 
   const policiesV3Json = await stringify(policyDataV3);
-
-  await writeFile(
-    path.resolve(process.cwd(), "policies.v3.json"),
-    policiesV3Json,
-    "utf-8",
-  );
+  await writeFile(policyManifestOutputPath, policiesV3Json, "utf-8");
 
   console.info("Policies updated");
 }
 
-async function getExampleHtml(policyId: string, schema: PolicySchema) {
-  if (!schema.description) {
-    console.error(
-      chalk.red(
-        `ERROR: The policy ${policyId} does not have a description set in the schema`,
-      ),
-    );
-    throw new Error("Invalid schema");
+async function getExampleHtml(
+  policyId: string,
+  schema: PolicySchema,
+  introMdPath: string,
+) {
+  let introOrDescription: string;
+  if (existsSync(introMdPath)) {
+    introOrDescription = await readFile(introMdPath, "utf-8");
+  } else {
+    introOrDescription = schema.description;
   }
 
-  const { html: description } = await render(schema.description);
+  const { html: introHtml } = await render(introOrDescription);
 
-  const options = (schema.properties.handler as any).properties.options
-    ?.properties;
-  if (!options) {
-    return;
-  }
+  isObjectSchema(schema);
+  const { handler } = schema.properties;
+  isObjectSchema(handler);
+  const { properties } = handler;
+  const { options } = properties;
 
-  if (options && Object.keys(options).length === 0) {
+  if (properties.options && Object.keys(properties.options).length === 0) {
     console.warn(
       chalk.yellow(
         `WARN: The policy ${policyId} does not have any options set in the schema.`,
@@ -608,11 +608,15 @@ async function getExampleHtml(policyId: string, schema: PolicySchema) {
 
   const html = renderToStaticMarkup(
     <>
-      <div dangerouslySetInnerHTML={{ __html: description }} />
-      {Object.keys(options).length > 0 ? (
+      <div dangerouslySetInnerHTML={{ __html: introHtml }} />
+      {options && Object.keys(options).length > 0 ? (
         <>
           <h3>Options</h3>
-          <OptionProperty schema={options} />{" "}
+          <p>
+            The options for this policy are specified below. All properties are
+            optional unless specifically marked as required.
+          </p>
+          <OptionProperty schema={options as JSONSchema7} />
         </>
       ) : null}
     </>,
