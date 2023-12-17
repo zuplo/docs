@@ -50,13 +50,9 @@ function PageLink({
   );
 }
 function collect(array: Array<NavCategory>, result: Array<NavCategory>): void {
-  array.forEach((el) => {
-    if (el.items) {
-      collect(el.items, result);
-    } else {
-      result.push(el);
-    }
-  });
+  array.forEach((value) =>
+    value.items ? collect(value.items, result) : result.push(value),
+  );
 }
 
 export function PrevNextLinks() {
