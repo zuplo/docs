@@ -5,6 +5,7 @@ import { NavCategory, NavItem } from "@/lib/types";
 import clsx from "classnames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 function ArrowIcon(props: React.ComponentPropsWithoutRef<"svg">) {
   return (
@@ -49,6 +50,15 @@ function PageLink({
     </div>
   );
 }
+function collect(array: Array<any>, result: Array<any>) {
+  array.forEach((el) => {
+    if (el.items) {
+      collect(el.items, result);
+    } else {
+      result.push(el);
+    }
+  });
+}
 
 export function PrevNextLinks() {
   let pathname = usePathname();
@@ -60,7 +70,10 @@ export function PrevNextLinks() {
     }
   };
 
-  let allLinks = navigation.flatMap((section) => section.items);
+  let navigationLinks = navigation.flatMap((section) => section.items);
+  const allLinks: any = [];
+  collect(navigationLinks, allLinks);
+
   let linkIndex = allLinks.findIndex(findLink);
   let previousPage = linkIndex > -1 ? allLinks[linkIndex - 1] : null;
   let nextPage = linkIndex > -1 ? allLinks[linkIndex + 1] : null;
