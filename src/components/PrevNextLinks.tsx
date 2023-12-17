@@ -1,11 +1,10 @@
 "use client";
 
 import { navigation } from "@/build/navigation.mjs";
-import { NavCategory, NavItem } from "@/lib/types";
+import { useFindNavItemByLink } from "@/lib/hooks/useFindNavItemByLink";
+import { NavCategory } from "@/lib/types";
 import clsx from "classnames";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect } from "react";
 
 function ArrowIcon(props: React.ComponentPropsWithoutRef<"svg">) {
   return (
@@ -50,7 +49,7 @@ function PageLink({
     </div>
   );
 }
-function collect(array: Array<any>, result: Array<any>) {
+function collect(array: Array<NavCategory>, result: Array<NavCategory>): void {
   array.forEach((el) => {
     if (el.items) {
       collect(el.items, result);
@@ -61,20 +60,11 @@ function collect(array: Array<any>, result: Array<any>) {
 }
 
 export function PrevNextLinks() {
-  let pathname = usePathname();
-  const findLink = (link: NavCategory | NavItem): boolean => {
-    if ("href" in link) {
-      return link.href === pathname.split("#")[0];
-    } else {
-      return link.items.some(findLink);
-    }
-  };
-
   let navigationLinks = navigation.flatMap((section) => section.items);
-  const allLinks: any = [];
+  let allLinks: Array<NavCategory> = [];
   collect(navigationLinks, allLinks);
 
-  let linkIndex = allLinks.findIndex(findLink);
+  let linkIndex = allLinks.findIndex(useFindNavItemByLink);
   let previousPage = linkIndex > -1 ? allLinks[linkIndex - 1] : null;
   let nextPage = linkIndex > -1 ? allLinks[linkIndex + 1] : null;
 
@@ -84,11 +74,19 @@ export function PrevNextLinks() {
 
   return (
     <dl className="flex border-t border-slate-200 py-5 dark:border-slate-800">
-      {previousPage && "href" in previousPage && (
-        <PageLink dir="previous" {...previousPage} />
+      {previousPage && !!previousPage?.href && (
+        <PageLink
+          dir="previous"
+          label={previousPage.label}
+          href={previousPage.href}
+        />
       )}
-      {nextPage && "href" in nextPage && (
-        <PageLink className="ml-auto text-right" {...nextPage} />
+      {nextPage && !!nextPage?.href && (
+        <PageLink
+          className="ml-auto text-right"
+          label={nextPage.label}
+          href={nextPage.href}
+        />
       )}
     </dl>
   );

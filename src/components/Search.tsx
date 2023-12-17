@@ -2,7 +2,7 @@
 
 import { navigation } from "@/build/navigation.mjs";
 import { type Result } from "@/build/search.mjs";
-import { NavCategory, NavItem } from "@/lib/types";
+import { useFindNavItemByLink } from "@/lib/hooks/useFindNavItemByLink";
 import {
   createAutocomplete,
   type AutocompleteApi,
@@ -160,17 +160,9 @@ function SearchResult({
   query: string;
 }) {
   let id = useId();
-
-  const findLink = (link: NavCategory | NavItem): boolean => {
-    if ("href" in link) {
-      return link.href === result.url.split("#")[0];
-    } else {
-      return link.items.some(findLink);
-    }
-  };
-
-  let sectionTitle = navigation.find((section) => section.items.find(findLink))
-    ?.label;
+  let sectionTitle = navigation.find((section) =>
+    section.items.find(useFindNavItemByLink),
+  )?.label;
   let hierarchy = [sectionTitle, result.pageTitle].filter(
     (x): x is string => typeof x === "string",
   );

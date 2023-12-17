@@ -64,7 +64,7 @@ export async function getPolicy(policyId: string) {
     isPaidAddOn: !!schema.isPaidAddOn,
     isDeprecated: !!schema.isDeprecated,
     fakePolicyUrl: schema.fakePolicyUrl,
-    href: `/docs/policies/${policyId}/`,
+    href: `/policies/${policyId}/`,
     id: policyId,
     icon,
   };

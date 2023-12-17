@@ -1,7 +1,6 @@
 declare module "remark-admonitions";
 declare module "badwords-list";
 declare module "simple-functional-loader";
-import { NavCategory } from "@/lib/types";
 import { type SearchOptions } from "flexsearch";
 
 declare module "@/build/search.mjs" {
@@ -15,5 +14,5 @@ declare module "@/build/search.mjs" {
 }
 
 declare module "@/build/navigation.mjs" {
-  export const navigation: NavCategory[];
+  export const navigation: Array<NavCategory>;
 }

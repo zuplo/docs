@@ -1,12 +1,12 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-
 import { navigation } from "@/build/navigation.mjs";
-import { NavCategory, NavItem, Section } from "@/lib/types";
+import { NavCategory, Section } from "@/lib/types";
 import Link from "next/link";
 import ChevronRightIcon from "@/components/svgs/chevron-right.svg";
 import { MobileTableOfContents } from "@/components/MobileTableOfContents";
+import { useFindNavItemByLink } from "@/lib/hooks/useFindNavItemByLink";
+import { nanoid } from "nanoid";
 
 export function DocsHeader({
   title,
@@ -15,32 +15,48 @@ export function DocsHeader({
   title?: string;
   tableOfContents?: Array<Section>;
 }) {
-  let pathname = usePathname();
-
-  const findLink = (link: NavCategory | NavItem): boolean => {
-    if ("href" in link) {
-      return link.href === pathname.split("#")[0];
-    } else {
-      return link.items.some(findLink);
-    }
-  };
-
-  let section = navigation.find((section) => section.items.find(findLink));
+  const section = navigation.find((section) =>
+    section.items.find(useFindNavItemByLink),
+  );
 
   if (!title && !section) {
     return null;
   }
 
+  const breadcrumbItems: Array<NavCategory> = [{ label: "Home", href: "/" }];
+
+  if (section) {
+    breadcrumbItems.push({
+      label: section.label,
+      href: section.href,
+    });
+    let currentSection = section;
+
+    while (currentSection?.items?.length) {
+      currentSection = currentSection.items.find(useFindNavItemByLink);
+
+      if (currentSection) {
+        breadcrumbItems.push({
+          label: currentSection.label,
+          href: currentSection?.href,
+        });
+      }
+    }
+  }
+
   return (
     <header className="mb-5">
-      <div className="mb-4 flex items-center gap-x-[3px] text-sm leading-6 tracking-wider text-gray-600 lg:mb-10">
-        <Link href="/">Home</Link>
-        {section && (
-          <>
-            <ChevronRightIcon />
-            <p>{section.label}</p>
-          </>
-        )}
+      <div className="mb-4 flex flex-wrap items-center gap-x-[3px] text-sm leading-6 tracking-wider text-gray-600 lg:mb-10">
+        {breadcrumbItems.map((item, index) => (
+          <div className="flex items-center" key={nanoid()}>
+            {!!item?.href ? (
+              <Link href={item.href}>{item.label}</Link>
+            ) : (
+              <p>{item.label}</p>
+            )}
+            {index < breadcrumbItems.length - 1 && <ChevronRightIcon />}
+          </div>
+        ))}
       </div>
 
       {tableOfContents && (
