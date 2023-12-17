@@ -595,13 +595,11 @@ async function getExampleHtml(
     let deprecatedInnerHtml = "<strong>This policy is deprecated.</strong>";
     if (schema.deprecatedMessage) {
       const { html } = await render(schema.deprecatedMessage);
-      deprecatedInnerHtml += " " + html;
+      deprecatedInnerHtml =
+        "<p>" + deprecatedInnerHtml + " " + html.toString().substring(3);
     }
     deprecatedHtml = (
-      <div
-        className="policy-deprecated"
-        dangerouslySetInnerHTML={{ __html: deprecatedInnerHtml }}
-      />
+      <div dangerouslySetInnerHTML={{ __html: deprecatedInnerHtml }} />
     );
   }
 
