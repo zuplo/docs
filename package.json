@@ -3,13 +3,16 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "npm run ci:pre && next dev",
+    "build": "npm run ci:pre && next build",
     "postinstall": "node ./scripts/update-bundles.mjs && node ./scripts/copy-shiki.mjs",
     "postbuild": "next-sitemap",
-    "start": "next start",
+    "start": "npm run ci:pre && next start",
     "lint": "next lint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "ci:pre": "npm run ci:bundles && npm run ci:policies",
+    "ci:bundles": "node ./scripts/update-bundles.mjs",
+    "ci:policies": "node ./scripts/build.mjs && node ./scripts/update-policies.main.mjs"
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
