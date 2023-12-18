@@ -1,7 +1,7 @@
 :::tip
 The outbound policy will only execute if the response status code is 'ok' 
 (e.g. `response.ok === true` or the status code is 200-299) - see 
-(response.ok on MDN)[https://developer.mozilla.org/en-US/docs/Web/API/Response/ok]. 
+[response.ok on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Response/ok). 
 :::
 
 ### Writing A Policy
