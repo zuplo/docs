@@ -2,6 +2,7 @@
 
 import { navigation } from "@/build/navigation.mjs";
 import { useFindNavItemByLink } from "@/lib/hooks/useFindNavItemByLink";
+import { NavCategory } from "@/lib/types";
 import clsx from "classnames";
 import Link from "next/link";
 
@@ -48,9 +49,17 @@ function PageLink({
     </div>
   );
 }
+function collect(array: Array<NavCategory>, result: Array<NavCategory>): void {
+  array.forEach((value) =>
+    value.items ? collect(value.items, result) : result.push(value),
+  );
+}
 
 export function PrevNextLinks() {
-  let allLinks = navigation.flatMap((section) => section.items);
+  let navigationLinks = navigation.flatMap((section) => section.items);
+  let allLinks: Array<NavCategory> = [];
+  collect(navigationLinks, allLinks);
+
   let linkIndex = allLinks.findIndex(useFindNavItemByLink);
   let previousPage = linkIndex > -1 ? allLinks[linkIndex - 1] : null;
   let nextPage = linkIndex > -1 ? allLinks[linkIndex + 1] : null;
