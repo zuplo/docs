@@ -7,6 +7,4 @@ assignees: ''
 
 ---
 
-**Policy**: The policy name
-
-<!-- Describe the issue or suggestion -->
+<!-- Describe the issue or suggestion for the policy -->
