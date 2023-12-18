@@ -3,12 +3,14 @@ import { Config } from "tailwindcss";
 
 const plugin = require("tailwindcss/plugin");
 
-const typographyHeading = (overrides: any) => ({
+const typographyHeading = () => ({
   fontFamily: "ES Build",
   fontStyle: "normal",
   fontWeight: "bold",
   lineHeight: "120%",
-  ...overrides,
+  marginTop: "2.5rem",
+  marginBottom: "10px",
+  fontSize: "1.5rem",
 });
 
 export default {
@@ -109,17 +111,23 @@ export default {
           css: {
             a: {
               color: theme("colors.pink.DEFAULT"),
+              textDecorationLine: "none",
               "&:hover": {
-                color: theme("colors.pink.hover"),
-                fontWeight: "inherit",
+                textDecorationLine: "underline",
               },
-              fontWeight: "inherit",
+              fontWeight: "normal",
             },
-            h1: typographyHeading({ fontSize: "30px" }),
-            h2: typographyHeading({ fontSize: "26px" }),
-            h3: typographyHeading({ fontSize: "20px" }),
-            h4: typographyHeading({ fontSize: "18px" }),
-            h5: typographyHeading({ fontSize: "14px" }),
+            h1: typographyHeading(),
+            h2: typographyHeading(),
+            h3: typographyHeading(),
+            h4: typographyHeading(),
+            h5: typographyHeading(),
+            img: { marginBottom: theme("spacing.10") },
+            p: { margin: "10px 0" },
+            ul: { margin: "10px 0" },
+            li: { margin: "0" },
+            code: { fontWeight: theme("fontWeight.normal") },
+            '[class~="lead"]': { color: "colors.white" },
             "code::before": {
               content: null,
             },
@@ -142,6 +150,7 @@ export default {
             "--tw-prose-invert-counters": theme("colors.black"),
             "--tw-prose-quotes": theme("colors.white"),
             "--tw-prose-invert-quotes": theme("colors.black"),
+            "--tw-prose-hr": theme("colors.slate[800]"),
           },
         },
       }),
