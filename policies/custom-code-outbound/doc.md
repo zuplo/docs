@@ -1,4 +1,10 @@
-## Writing A Policy
+:::tip
+The outbound policy will only execute if the response status code is 'ok' 
+(e.g. `response.ok === true` or the status code is 200-299) - see 
+[response.ok on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Response/ok). 
+:::
+
+### Writing A Policy
 
 Custom policies can be written to extend the functionality of your gateway. This
 document is about outbound policies that can intercept the request and, if
@@ -99,7 +105,7 @@ that same instance you must first `clone()` to avoid runtime errors such as
 
 :::
 
-## Adding headers
+### Adding headers
 
 Note if you just need to add headers, it more efficient not read the body stream
 and reuse it, e.g.

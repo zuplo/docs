@@ -38,6 +38,8 @@ next-env.d.ts
 /docs/policies/
 src/components/bundles.json
 /policies.*.json
+scripts/update-policies.mjs.map
+/temp
 scripts/update-policies.mjs
 /bundles.json
 src/shiki
