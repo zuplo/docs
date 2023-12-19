@@ -23,7 +23,7 @@ export default async function Page() {
         performance of each API Gateway we must approve each module. This
         process only takes a few hours so if you need something new please reach
         out to use on twitter{" "}
-        <Link href="https://twitter.com/zuplo">@zuplo</Link> or through email
+        <Link href="https://twitter.com/zuplo">@zuplo</Link> or through email{" "}
         <Link href="mailto:whatzup@zuplo.com">whatzup@zuplo.com</Link>
       </p>
 
@@ -41,13 +41,15 @@ export default async function Page() {
           {data.map((bundle) => (
             <tr key={bundle.name}>
               <td>
-                <a
+                <Link
                   href={
                     bundle.url ?? `https://www.npmjs.com/package/${bundle.name}`
                   }
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
                   {bundle.name}
-                </a>
+                </Link>
               </td>
               <td>{bundle.version}</td>
               <td>{bundle.description}</td>
