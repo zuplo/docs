@@ -79,7 +79,7 @@ function ObjectSchema({ schema }: { schema: JSONSchema7 }) {
                 return (
                   <span key={i}>
                     {and}
-                    <code>{v as string}</code>
+                    <code>{v.toString()}</code>
                     {comma}
                   </span>
                 );
@@ -90,7 +90,7 @@ function ObjectSchema({ schema }: { schema: JSONSchema7 }) {
           {value.default && (
             <span className="default-value">
               {" "}
-              Defaults to <code>{value.default as string}</code>.
+              Defaults to <code>{value.default.toString()}</code>.
             </span>
           )}
           <OptionProperty schema={value} />
@@ -189,13 +189,13 @@ const PolicyOptions = ({
           <code>handler.export</code>{" "}
           <span className="type-option">{"<string>"}</span> - The name of the
           exported type. Value should be{" "}
-          <code>{handlerExport.const as string}</code>.
+          <code>{handlerExport.const.toString()}</code>.
         </li>
         <li>
           <code>handler.module</code>{" "}
           <span className="type-option">{"<string>"}</span> - The module
           containing the policy. Value should be{" "}
-          <code>{handlerModule.const as string}</code>.
+          <code>{handlerModule.const.toString()}</code>.
         </li>
         {options && Object.keys(options).length > 0 ? (
           <li>
