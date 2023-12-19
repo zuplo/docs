@@ -26,7 +26,11 @@ export async function getSlugContent<Data = Record<string, any>>({
   sourceDir: string;
 }): Promise<Content<Data> | undefined> {
   const fileName = `${slug.join("/")}.md`;
-  const filepath = path.join(process.cwd(), sourceDir, fileName);
+  const filepath = path.join(
+    process.cwd(),
+    sourceDir,
+    fileName.replace("%5C", "/"),
+  );
   if (!existsSync(filepath)) {
     return undefined;
   }
