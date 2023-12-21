@@ -4,7 +4,7 @@ import { Config } from "tailwindcss";
 const plugin = require("tailwindcss/plugin");
 
 const typographyHeading = () => ({
-  fontFamily: "ES Build",
+  fontFamily: ["Fira Sans", "sans-serif"],
   fontStyle: "normal",
   fontWeight: "bold",
   lineHeight: "120%",
@@ -156,12 +156,12 @@ export default {
       }),
     },
     fontFamily: {
-      sans: ["var(--font-be-vietnam-pro)", "sans-serif"],
-      display: ["var(--font-be-vietnam-pro)", "sans-serif"],
+      sans: ["Inter", "sans-serif"],
+      display: ["Inter", "sans-serif"],
 
       // Zuplo Fonts
-      base: ["var(--font-be-vietnam-pro)", "sans-serif"],
-      fancy: ["ES Build", "sans-serif"],
+      base: ["Inter", "sans-serif"],
+      fancy: ["Fira Sans", "sans-serif"],
       mono: ["Consolas", "Monaco", "Andale Mono", "Ubuntu Mono", "monospace"],
     },
     letterSpacing: {

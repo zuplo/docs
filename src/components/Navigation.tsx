@@ -143,7 +143,7 @@ export function Navigation({
         {navigation.map((section: NavCategory) => (
           <li key={section.label}>
             {section?.type === NavigationType.CATEGORY && (
-              <h5 className="pl-6 uppercase leading-normal tracking-widest text-gray-600">
+              <h5 className="pl-6 text-sm text-slate-400 font-medium">
                 {section?.href ? (
                   <Link href={section.href}>{section.label}</Link>
                 ) : (
