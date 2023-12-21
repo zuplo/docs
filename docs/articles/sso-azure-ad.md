@@ -47,6 +47,6 @@ A few options for securely sharing secrets with Zuplo:
 :::note
 
 You can find Zuplo support's PGP public key at:
-https://zuplo.com/.well-known/support-key.txt
+https://keys.openpgp.org/vks/v1/by-fingerprint/53A66C757B3F88908D395F9E0237A8212358D92C
 
 :::
