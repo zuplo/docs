@@ -61,7 +61,7 @@ The properties in the `services` objects are explained below.
   - `accessibleBy` - The environments which can use the tunnel. Valid values are
     `production`, `preview`, and `working-copy`.
 
-```json
+```json title="tunnel-config.json"
 {
   "version": 1,
   "services": [
