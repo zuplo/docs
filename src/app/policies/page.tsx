@@ -51,6 +51,7 @@ export default async function Page() {
       <div
         role="list"
         className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        data-testid="policies-grid"
       >
         {policies.map((item) => (
           <Card
@@ -58,6 +59,7 @@ export default async function Page() {
             name={item.meta.name}
             href={item.meta.href}
             icon={item.meta.icon}
+            testID="policy-card"
           />
         ))}
       </div>
