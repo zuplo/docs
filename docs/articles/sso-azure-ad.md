@@ -11,11 +11,11 @@ client to be used with Zuplo.
    [Microsoft's quickstart](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
    Record the client ID value to share with Zuplo.
 
-   The **Redirect URI** value should be set to
-   `https://auth.zuplo.com/login/callback`
-
-   > You do not need to configure any special permissions. Zuplo only requires
-   > basic profile information (name and email).
+   - The application type should be "web".
+   - The **Redirect URI** value should be set to
+     `https://auth.zuplo.com/login/callback`
+   - No special permissions are needed. Zuplo only requires basic profile
+     information (name and email).
 
 2. Create a client secret for you application. To create a client secret, see
    Microsoft's Quickstart:
