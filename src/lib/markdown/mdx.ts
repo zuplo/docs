@@ -209,10 +209,10 @@ function buildTableOfContents(nodes: (Element & { tagName: "h2" | "h3" })[]) {
       }
     })
     .filter((h) => typeof h !== "undefined") as {
-    id: string;
-    title: string;
-    level: 2 | 3;
-  }[];
+      id: string;
+      title: string;
+      level: 2 | 3;
+    }[];
 
   const toc: Section[] = [];
   let previous: Section;

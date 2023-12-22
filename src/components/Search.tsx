@@ -11,6 +11,7 @@ import {
 } from "@algolia/autocomplete-core";
 import { Dialog } from "@headlessui/react";
 import clsx from "classnames";
+import { SearchIcon } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   Fragment,
@@ -32,14 +33,6 @@ type Autocomplete = AutocompleteApi<
   React.MouseEvent,
   React.KeyboardEvent
 >;
-
-function SearchIcon(props: React.ComponentPropsWithoutRef<"svg">) {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 20 20" {...props}>
-      <path d="M16.293 17.707a1 1 0 0 0 1.414-1.414l-1.414 1.414ZM9 14a5 5 0 0 1-5-5H2a7 7 0 0 0 7 7v-2ZM4 9a5 5 0 0 1 5-5V2a7 7 0 0 0-7 7h2Zm5-5a5 5 0 0 1 5 5h2a7 7 0 0 0-7-7v2Zm8.707 12.293-3.757-3.757-1.414 1.414 3.757 3.757 1.414-1.414ZM14 9a4.98 4.98 0 0 1-1.464 3.536l1.414 1.414A6.98 6.98 0 0 0 16 9h-2Zm-1.464 3.536A4.98 4.98 0 0 1 9 14v2a6.98 6.98 0 0 0 4.95-2.05l-1.414-1.414Z" />
-    </svg>
-  );
-}
 
 function useAutocomplete({
   close,
@@ -257,7 +250,7 @@ const SearchInput = forwardRef<
 
   return (
     <div className="group relative flex h-12">
-      <SearchIcon />
+      <SearchIcon className="absolute bottom-0 left-3 top-0 m-auto text-slate-400" />
       <input
         ref={inputRef}
         className={clsx(
@@ -438,7 +431,7 @@ export function Search() {
         className="group flex h-6 w-6 items-center justify-center rounded-xl bg-transparent px-3.5 hover:bg-white hover:ring-2 hover:ring-pink md:h-auto md:w-80 md:flex-none md:justify-start md:p-3.5 md:pr-5 md:text-sm md:ring-1 md:ring-inset md:ring-gray-600 lg:w-96"
         {...buttonProps}
       >
-        <SearchIcon className="h-5 w-5 flex-none fill-gray-600 opacity-50 group-hover:fill-gray-600 dark:fill-white" />
+        <SearchIcon className="h-5 w-5 flex-none text-gray-600 opacity-50 group-hover:text-gray-600 dark:text-white" />
         <span className="sr-only text-base text-gray-600 group-hover:text-black md:not-sr-only md:ml-1.5">
           Search
         </span>

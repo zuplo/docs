@@ -4,26 +4,10 @@ import { Dialog } from "@headlessui/react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useState } from "react";
-import { Bars3Icon as MenuIcon } from "@heroicons/react/24/outline";
 
 import LogoIcon from "./svgs/logo.svg";
 import { Navigation } from "@/components/Navigation";
-import { ThemeSelector } from "@/components/ThemeSelector";
-
-function CloseIcon(props: React.ComponentPropsWithoutRef<"svg">) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      fill="none"
-      strokeWidth="2"
-      strokeLinecap="round"
-      {...props}
-    >
-      <path d="M5 5l14 14M19 5l-14 14" />
-    </svg>
-  );
-}
+import { MenuIcon, X as CloseIcon } from "lucide-react";
 
 function CloseOnNavigation({ close }: { close: () => void }) {
   let pathname = usePathname();
@@ -83,7 +67,7 @@ export function MobileNavigation() {
                 onClick={() => close()}
                 aria-label="Close navigation"
               >
-                <CloseIcon className="h-6 w-6 stroke-slate-500" />
+                <CloseIcon className="text-slate-500" />
               </button>
             </div>
           </div>
