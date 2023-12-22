@@ -12,7 +12,7 @@ section under the <SettingsTabIcon /> **Settings** tab.
 To add a new API Key Consumer click the **Add new consumer** button and complete
 the form.
 
-![New API Key Consumer](./api-key-management-media/new-api-key-consumer.png)
+![New API Key Consumer](./media/new-api-key-consumer.png)
 
 If you're using the Zuplo [Developer Portal](./developer-portal.md), we have an
 integration with the API Key API that allows developers to access their API
