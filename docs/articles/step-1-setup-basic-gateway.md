@@ -88,28 +88,9 @@ important secret).
 ## 3/ Test your API
 
 Go back to your route in the Route Designer and click the **Test** button next
-to the **Path** field. Open the URL in the browser and you should see a list of
-todoitems.
+to the **Path** field. Click the **Test** button in the dialog that opens.
 
-```
-[
-  {
-    "userId": 1,
-    "id": 1,
-    "title": "delectus aut autem",
-    "completed": false
-  },
-  {
-    "userId": 1,
-    "id": 2,
-    "title": "quis ut nam facilis et officia qui",
-    "completed": false
-  },
-  {
-    "userId": 1,
-    "id": 3,
-
-```
+<Screenshot src="https://cdn.zuplo.com/assets/c1753ead-6bd3-4b6f-99d2-ef4c964d7b32.png" />
 
 Congratulations, your gateway is working 👏👏👏
 
