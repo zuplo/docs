@@ -66,8 +66,10 @@
     "video.js": "^8.3.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.40.1",
     "@types/json-schema": "^7.0.13",
     "@types/node": "^18.18.4",
+    "checkly": "^4.5.2",
     "eslint": "^8.51.0",
     "eslint-config-next": "^13.5.4",
     "eslint-config-prettier": "^9.0.0",

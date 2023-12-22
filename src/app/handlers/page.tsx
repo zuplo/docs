@@ -40,6 +40,7 @@ export default async function Page() {
       <div
         role="list"
         className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        data-testid="handlers-grid"
       >
         {handlers.map((item) => (
           <Card
@@ -47,6 +48,7 @@ export default async function Page() {
             name={item.name}
             href={item.href}
             icon={item.icon}
+            testID="handler-card"
           />
         ))}
       </div>

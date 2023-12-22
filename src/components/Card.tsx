@@ -4,13 +4,15 @@ interface Props {
   name: string;
   href: string;
   icon: string;
+  testID?: string;
 }
 
-export const Card: React.FC<Props> = ({ name, href, icon }) => {
+export const Card: React.FC<Props> = ({ name, href, icon, testID }) => {
   return (
     <Link
       href={href}
       className="bg-transpatent group flex items-center gap-4 rounded-lg border border-gray-500 p-4 text-white transition-colors hover:bg-gray-500/50 dark:text-black md:h-36 md:flex-col md:justify-center md:px-5 md:py-6 md:text-center"
+      data-testid={testID}
     >
       <div className="rounded-lg bg-pink/10 p-2">
         <div
