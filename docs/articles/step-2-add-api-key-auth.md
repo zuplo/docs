@@ -40,7 +40,7 @@ If you test your route, you should get a 401 Unauthorized response
   "type": "https://httpproblems.com/http-status/401",
 ```
 
-## 2/ Set up an API key consumer
+## 2/ Set up an API Key
 
 In order to call your API, you need to configure an API consumer. Go to
 Settings > API Consumers. Click **Add New Consumer**
@@ -55,24 +55,12 @@ used to authenticate.
 
 ![New Consumer](https://cdn.zuplo.com/assets/71bee20e-eac7-4067-b1a3-50bc8267b330.png)
 
-## 3/ Go the the Developer Portal to get your key
+## 3/ Copy Your API Key
 
-Find the URL for your Developer Portal - this is available on the Getting
-Started page in the Files tab.
+After your API Key consumer is created, click the button to copy your new API
+Key.
 
-![Developer Portal link](https://cdn.zuplo.com/assets/f5b5f82a-4424-43f4-9b8f-2f4e91c4113e.png)
-
-Navigate to your developer portal - you'll see a **Sign In** button. Click it
-and sign in, using the same e-mail you specified as the Key manager.
-
-![Dev Portal](https://cdn.zuplo.com/assets/b59f82d1-4e91-4874-a432-a73796fc1632.png)
-
-You should now see a key, ready to be minted, in the **Authentication** section
-of your Developer Portal.
-
-![Authentication section](https://cdn.zuplo.com/assets/7dfa4541-bb4b-4e79-88b2-8cffed6c79d7.png)
-
-Create a key for this consumer identity and copy the key to the clipboard.
+![New Key](https://cdn.zuplo.com/assets/aa2561ec-f6b8-4a72-8005-95dfa1ff1970.png)
 
 ## 4/ Test out your new key
 
