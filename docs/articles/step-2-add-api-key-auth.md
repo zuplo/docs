@@ -28,8 +28,9 @@ JSON. Note,
 The API key auth policy should usually be one of the first policies in your
 request pipeline, drag it to the top if you have multiple policies.
 
-<Screenshot src="https://cdn.zuplo.com/assets/8f698429-f265-40d9-99d7-156b28b7ef1b.gif" size="sm" />
 :::
+
+<Screenshot src="https://cdn.zuplo.com/assets/8f698429-f265-40d9-99d7-156b28b7ef1b.gif" size="sm" />
 
 If you test your route, you should get a 401 Unauthorized response
 
@@ -68,10 +69,10 @@ Since we need to send the key in a header, it's hard to use the browser for this
 test. We'll use our built in test client in Zuplo but you could also use Postman
 for this part.
 
-Go to the API Test Console and create a new **Manual Test**. Set the **path** to
-`/todos` and hit **Test**.
+Next to the path of your route in Route Designer click the **Test** button. Set
+the **path** to `/todos` and hit **Test**.
 
-![Test Console](https://cdn.zuplo.com/assets/611050a5-257e-4594-a914-1da68d504371.png)
+<Screenshot src="https://cdn.zuplo.com/assets/c2db1247-eb72-474d-bfed-8b14b3b62b5e.png" />
 
 You should get a 401 Unauthorized response. Add an new `authorization` header
 with the value `Bearer YOUR_API_KEY` and insert the API Key you got from the
@@ -79,14 +80,14 @@ developer portal.
 
 You should now get a 200 OK.
 
-![200 OK](https://cdn.zuplo.com/assets/82823f9d-62ad-4f18-9e07-bb89dc9ad32d.png)
+<Screenshot src="https://cdn.zuplo.com/assets/87c03fc4-4525-43dd-8eb7-15808b545fef.png" />
 
 :::note
 
 We also offer an API for our API key service that allows you to programmatically
 create consumers and even create your own developer portal or integrate key
-management into your existing dashboard. Contact us at `support@zuplo.com` for
-access.
+management into your existing dashboard. See
+[this document for details](./api-key-api.md).
 
 :::
 
