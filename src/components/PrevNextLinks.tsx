@@ -4,15 +4,8 @@ import { navigation } from "@/build/navigation.mjs";
 import { useFindNavItemByLink } from "@/lib/hooks/useFindNavItemByLink";
 import { NavCategory } from "@/lib/types";
 import clsx from "classnames";
+import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
-
-function ArrowIcon(props: React.ComponentPropsWithoutRef<"svg">) {
-  return (
-    <svg viewBox="0 0 16 16" aria-hidden="true" {...props}>
-      <path d="m9.182 13.423-1.17-1.16 3.505-3.505H3V7.065h8.517l-3.506-3.5L9.181 2.4l5.512 5.511-5.511 5.512Z" />
-    </svg>
-  );
-}
 
 function PageLink({
   label,
@@ -38,12 +31,11 @@ function PageLink({
           )}
         >
           {label}
-          <ArrowIcon
-            className={clsx(
-              "h-6 w-6 flex-none fill-current",
-              dir === "previous" && "-scale-x-100",
-            )}
-          />
+          {dir === "previous" ? (
+            <ArrowLeftIcon className="flex-none" />
+          ) : (
+            <ArrowRightIcon className="flex-none" />
+          )}
         </Link>
       </dd>
     </div>

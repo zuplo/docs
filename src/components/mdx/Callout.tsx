@@ -1,9 +1,9 @@
 import {
-  ExclamationTriangleIcon,
-  InformationCircleIcon,
-  LightBulbIcon,
-  ShieldExclamationIcon,
-} from "@heroicons/react/20/solid";
+  AlertTriangleIcon,
+  InfoIcon,
+  LightbulbIcon,
+  ShieldAlertIcon,
+} from "lucide-react";
 
 type CalloutType = "note" | "tip" | "info" | "caution" | "danger";
 
@@ -24,10 +24,7 @@ const Note = ({ children, title }: Omit<CalloutProps, "type">) => (
   >
     <div className="flex">
       <div className="flex-shrink-0 pt-[6px]">
-        <InformationCircleIcon
-          className={`h-5 w-5 text-gray-600`}
-          aria-hidden="true"
-        />
+        <InfoIcon className={`h-5 w-5 text-gray-600`} aria-hidden="true" />
       </div>
       <div className="ml-3">
         <h3 className={`text-md font-medium text-gray-800`}>
@@ -47,7 +44,7 @@ const Tip = ({ children, title }: Omit<CalloutProps, "type">) => (
   >
     <div className="flex">
       <div className="flex-shrink-0 pt-[6px]">
-        <LightBulbIcon
+        <LightbulbIcon
           className={`h-5 w-5 text-green-400`}
           aria-hidden="true"
         />
@@ -70,10 +67,7 @@ const Info = ({ children, title }: Omit<CalloutProps, "type">) => (
   >
     <div className="flex">
       <div className="flex-shrink-0 pt-[6px]">
-        <InformationCircleIcon
-          className={`h-5 w-5 text-blue-400`}
-          aria-hidden="true"
-        />
+        <InfoIcon className={`h-5 w-5 text-blue-400`} aria-hidden="true" />
       </div>
       <div className="ml-3">
         <h3 className={`text-md font-medium text-blue-700`}>
@@ -93,7 +87,7 @@ const Caution = ({ children, title }: Omit<CalloutProps, "type">) => (
   >
     <div className="flex">
       <div className="flex-shrink-0 pt-[6px]">
-        <ExclamationTriangleIcon
+        <AlertTriangleIcon
           className={`h-5 w-5 text-yellow-400`}
           aria-hidden="true"
         />
@@ -116,7 +110,7 @@ const Danger = ({ children, title }: Omit<CalloutProps, "type">) => (
   >
     <div className="flex">
       <div className="flex-shrink-0 pt-[6px]">
-        <ShieldExclamationIcon
+        <ShieldAlertIcon
           className={`h-5 w-5 text-red-400`}
           aria-hidden="true"
         />
