@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
+  "type": "object",
+  "title": "Supabase JWT Auth",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "The Supabase JWT Authentication policy supports user JWT tokens created by Supabase.\n\n",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "SupabaseJwtInboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "title": "SupabaseJwtInboundPolicyOptions",
+          "type": "object",
+          "description": "The options for this policy",
+          "additionalProperties": false,
+          "required": ["secret"],
+          "properties": {
+            "secret": {
+              "type": "string",
+              "examples": ["$env(SUPABASE_JWT_SECRET)"],
+              "description": "The key used to verify the signature of the JWT token"
+            },
+            "allowUnauthenticatedRequests": {
+              "type": "boolean",
+              "default": false,
+              "description": "Indicates whether the request should continue if authentication fails. Default is `false` which means unauthenticated users will automatically receive a 401 response."
+            },
+            "requiredClaims": {
+              "type": "object",
+              "examples": [
+                {
+                  "claim_1": ["valid_value_1", "valid_value_2"]
+                }
+              ],
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "description": "Any claims that must be present for authentication to succeed - multiple valid values can be specified for each claim."
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "SupabaseJwtInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "allowUnauthenticatedRequests": false,
+            "requiredClaims": {
+              "claim_1": ["valid_value_1", "valid_value_2"]
+            },
+            "secret": "$env(SUPABASE_JWT_SECRET)"
+          }
+        }
+      ]
+    }
+  }
+}

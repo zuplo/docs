@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
+  "type": "object",
+  "title": "Basic Auth",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Authenticate requests using basic auth (i.e. username and password)\n\n",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "BasicAuthInboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "title": "BasicAuthInboundPolicyOptions",
+          "type": "object",
+          "description": "The options for this policy",
+          "additionalProperties": false,
+          "required": ["accounts"],
+          "properties": {
+            "accounts": {
+              "type": "array",
+              "description": "An array of account objects (username, password and data properties)",
+              "items": {
+                "type": "object",
+                "title": "BasicAuthAccount",
+                "description": "An account object",
+                "additionalProperties": false,
+                "required": ["username", "password"],
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "The username for the account (this will be the `sub` property on `request.user`<!-- -->.",
+                    "examples": ["$env(ACCOUNT_JOHN_USERNAME)"]
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "The password for the account - note we recommend storing this in environment variables",
+                    "examples": ["$env(ACCOUNT_JOHN_PASSWORD)"]
+                  },
+                  "data": {
+                    "type": "object",
+                    "description": "The data payload you want associated with this account (this will be the `data` property on `request.user`<!-- -->)",
+                    "examples": [
+                      {
+                        "name": "John Doe",
+                        "email": "john.doe@gmail.com"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "allowUnauthenticatedRequests": {
+              "type": "boolean",
+              "default": false,
+              "description": "If 'true' allows the request to continue even if authenticated. When 'false' (the default) any unauthenticated request is automatically rejected with a 401"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "BasicAuthInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "accounts": [
+              [
+                {
+                  "data": {
+                    "name": "John Doe",
+                    "email": "john.doe@gmail.com"
+                  },
+                  "password": "$env(ACCOUNT_JOHN_PASSWORD)",
+                  "username": "$env(ACCOUNT_JOHN_USERNAME)"
+                }
+              ]
+            ],
+            "allowUnauthenticatedRequests": false
+          }
+        }
+      ]
+    }
+  }
+}

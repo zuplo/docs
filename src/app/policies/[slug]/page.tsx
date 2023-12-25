@@ -55,7 +55,9 @@ const PolicyOptions = ({
       {properties.options ? (
         <li>
           <code>handler/options</code> The options for this policy:
-          <OptionProperties properties={properties.options.properties} />
+          {properties.options.properties && (
+            <OptionProperties properties={properties.options.properties} />
+          )}
         </li>
       ) : null}
     </ul>

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
+  "type": "object",
+  "title": "PropelAuth JWT Auth",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Authenticate users using PropelAuth issued JWT tokens.\n\n",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "PropelAuthJwtInboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "title": "PropelAuthJwtInboundPolicyOptions",
+          "type": "object",
+          "description": "The options for this policy",
+          "additionalProperties": false,
+          "required": ["authUrl", "verifierKey"],
+          "properties": {
+            "allowUnauthenticatedRequests": {
+              "type": "boolean",
+              "default": false,
+              "description": "Allow unauthenticated requests to proceed. This is use useful if you want to use multiple authentication policies or if you want to allow both authenticated and non-authenticated traffic."
+            },
+            "authUrl": {
+              "type": "string",
+              "examples": ["https://6587563.propelauthtest.com"],
+              "description": "Your PropelAuth authUrl. For example, https://6587563.propelauthtest.com"
+            },
+            "verifierKey": {
+              "type": "string",
+              "examples": ["$env(PROPEL_VERIFIER_KEY)"],
+              "description": "Your public (verifier) key that is used to verify access tokens. This key has a value that begins with '\\-\\-\\---BEGIN PUBLIC KEY\\-\\-\\---'. Make sure to remove all line breaks from the key before saving the variable."
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "PropelAuthJwtInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "allowUnauthenticatedRequests": false,
+            "authUrl": "https://6587563.propelauthtest.com",
+            "verifierKey": "$env(PROPEL_VERIFIER_KEY)"
+          }
+        }
+      ]
+    }
+  }
+}

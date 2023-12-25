@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
+  "type": "object",
+  "title": "Require Origin",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Sets an allow-list for an origin header\n\n",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "RequireOriginInboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "title": "RequireOriginInboundPolicyOptions",
+          "type": "object",
+          "description": "The options for this policy",
+          "additionalProperties": false,
+          "required": ["origins"],
+          "properties": {
+            "origins": {
+              "type": "string",
+              "examples": ["https://example.com, https://example.org"],
+              "description": "A comma separated string containing valid origins"
+            },
+            "failureDetail": {
+              "type": "string",
+              "default": "Forbidden",
+              "examples": [
+                "Your origin is not authorized to make this request."
+              ],
+              "description": "The `detail` of the HTTP Problem response, if the origin is missing or disallowed"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "RequireOriginInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "failureDetail": "Your origin is not authorized to make this request.",
+            "origins": "https://example.com, https://example.org"
+          }
+        }
+      ]
+    }
+  }
+}

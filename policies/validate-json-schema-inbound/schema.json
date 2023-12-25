@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
+  "type": "object",
+  "title": "JSON Body Validation",
+  "isDeprecated": true,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Validates the body of an incoming request based on a JSON schema.\n\n",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "ValidateJsonSchemaInbound",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "title": "ValidateJsonSchemaInboundOptions",
+          "type": "object",
+          "description": "The options for this policy",
+          "additionalProperties": false,
+          "required": ["validator"],
+          "properties": {
+            "validator": {
+              "type": "string",
+              "examples": ["$import(./schemas/example-schema.json)"],
+              "description": "The JSON schema to validate against."
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "ValidateJsonSchemaInbound",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "validator": "$import(./schemas/example-schema.json)"
+          }
+        }
+      ]
+    }
+  }
+}

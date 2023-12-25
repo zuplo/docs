@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
+  "type": "object",
+  "title": "Set Body",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Sets the body of the request in the inbound pipeline - make sure to convert a GET/HEAD request to another method when using this policy.\n\n",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "SetBodyInboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "title": "SetBodyInboundPolicyOptions",
+          "type": "object",
+          "description": "The options for this policy",
+          "additionalProperties": false,
+          "required": ["body"],
+          "properties": {
+            "body": {
+              "type": "string",
+              "examples": ["Hello World!"],
+              "description": "The value to set for the body"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "SetBodyInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "body": "Hello World!"
+          }
+        }
+      ]
+    }
+  }
+}

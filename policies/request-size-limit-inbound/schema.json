@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
+  "type": "object",
+  "title": "Request Size Limit",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Enforces a maximum size in bytes of the incoming request.\n\n",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "RequestSizeLimitInboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "title": "RequestSizeLimitInboundPolicyOptions",
+          "type": "object",
+          "description": "The options for this policy",
+          "additionalProperties": false,
+          "required": ["maxSizeInBytes"],
+          "properties": {
+            "maxSizeInBytes": {
+              "type": "number",
+              "examples": [10000],
+              "description": "The maximum size of the request in bytes"
+            },
+            "trustContentLengthHeader": {
+              "type": "boolean",
+              "description": "If true, the policy will reject any request with a `content-length` header in excess of `maxSizeInBytes` bytes value, but will not verify the actual size of the request. This is more efficient and offers slightly better memory usage but should only be used if you trust/control the clients calling the gateway to send an accurate content-length. If false, the gateway will actually verify the request size and reject any request with a size in excess of the stated maximum."
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "RequestSizeLimitInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "maxSizeInBytes": 10000
+          }
+        }
+      ]
+    }
+  }
+}

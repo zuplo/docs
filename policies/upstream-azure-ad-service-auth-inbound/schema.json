@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
+  "type": "object",
+  "title": "Upstream Azure AD Service Auth",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Uses Azure Active Directory to add an Authorization header to the request in order to authenticate requests using Azure identity.\n\n",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "UpstreamAzureAdServiceAuthInboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "title": "UpstreamAzureAdServiceAuthInboundPolicyOptions",
+          "type": "object",
+          "description": "The options for this policy",
+          "additionalProperties": false,
+          "required": [
+            "activeDirectoryTenantId",
+            "activeDirectoryClientId",
+            "activeDirectoryClientSecret"
+          ],
+          "properties": {
+            "activeDirectoryTenantId": {
+              "type": "string",
+              "examples": ["b8e4141e-31f4-43e3-9a96-f97f3eba1eea"],
+              "description": "Azure Active Directory Tenant ID."
+            },
+            "activeDirectoryClientId": {
+              "type": "string",
+              "examples": ["20edbb34-13e9-42d0-a63c-1b6a0a20d02d"],
+              "description": "The Application (client) ID of the Azure AD App Registration."
+            },
+            "activeDirectoryClientSecret": {
+              "type": "string",
+              "examples": ["$env(ACTIVE_DIRECTORY_CLIENT_SECRET)"],
+              "description": "The client secret of the Azure AD App Registration."
+            },
+            "tokenRetries": {
+              "type": "number",
+              "default": 3,
+              "description": "The number of times to retry fetching the token in the event of a failure.."
+            },
+            "expirationOffsetSeconds": {
+              "type": "number",
+              "default": 300,
+              "description": "The number of seconds less than the token expiration to cache the token."
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "UpstreamAzureAdServiceAuthInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "activeDirectoryClientId": "20edbb34-13e9-42d0-a63c-1b6a0a20d02d",
+            "activeDirectoryClientSecret": "$env(ACTIVE_DIRECTORY_CLIENT_SECRET)",
+            "activeDirectoryTenantId": "b8e4141e-31f4-43e3-9a96-f97f3eba1eea",
+            "expirationOffsetSeconds": 300,
+            "tokenRetries": 3
+          }
+        }
+      ]
+    }
+  }
+}

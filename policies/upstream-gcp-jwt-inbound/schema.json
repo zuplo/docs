@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
+  "type": "object",
+  "title": "Upstream GCP Self-Signed JWT",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Creates a self-signed JWT token (generated using a Google Service Account JSON) and attaches it to the outgoing request. Useful when calling GCP services like Cloud Endpoints / ESPv2\n\n",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "UpstreamGcpJwtInboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "title": "UpstreamGcpJwtInboundPolicyOptions",
+          "type": "object",
+          "description": "The options for this policy",
+          "additionalProperties": false,
+          "required": ["audience", "serviceAccountJson"],
+          "properties": {
+            "audience": {
+              "type": "string",
+              "examples": ["your_gcp_service.endpoint.com"],
+              "description": "The audience for the minted JWT. See the document [AuthRequirement](https://cloud.google.com/endpoints/docs/grpc-service-config/reference/rpc/google.api#google.api.AuthRequirement) for details."
+            },
+            "serviceAccountJson": {
+              "type": "string",
+              "examples": ["$env(SERVICE_ACCOUNT_JSON)"],
+              "description": "The Google Service Account key in JSON format. Note you can load this from environment variables using the $env(ENV\\_VAR) syntax."
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "UpstreamGcpJwtInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "audience": "your_gcp_service.endpoint.com",
+            "serviceAccountJson": "$env(SERVICE_ACCOUNT_JSON)"
+          }
+        }
+      ]
+    }
+  }
+}

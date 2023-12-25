@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
+  "type": "object",
+  "title": "Set Status Code",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Sets the status code on the on the outgoing response.\n\n",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "SetStatusOutboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "title": "SetStatusOutboundPolicyOptions",
+          "type": "object",
+          "description": "The options for this policy",
+          "additionalProperties": false,
+          "required": [],
+          "properties": {
+            "status": {
+              "type": "number",
+              "examples": [200, 404, 500],
+              "description": "The status code to be used in the response"
+            },
+            "statusText": {
+              "type": "string",
+              "examples": ["OK", "Not Found"],
+              "description": "The statusText to be used in the response."
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "SetStatusOutboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "status": 200,
+            "statusText": "OK"
+          }
+        }
+      ]
+    }
+  }
+}

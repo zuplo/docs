@@ -20,8 +20,18 @@ function buildNavSection(rawSection) {
   for (const item of rawSection.items) {
     if (typeof item === "string") {
       if (item.startsWith("policies/")) {
-        const schemaPath = path.resolve(path.join(item, `schema.json`));
-        const schemaJson = fs.readFileSync(schemaPath, "utf8");
+        let schemaPath = path.resolve(path.join(item, `schema.json`));
+        let schemaJson;
+
+        if (fs.existsSync(schemaPath)) {
+          schemaJson = fs.readFileSync(schemaPath, "utf8");
+        } else {
+          const itemPath = path.join(item.split("/")[1]);
+
+          schemaPath = path.resolve("temp", itemPath, `schema.json`);
+          schemaJson = fs.readFileSync(schemaPath, "utf8");
+        }
+
         const schema = JSON.parse(schemaJson);
         section.items.push({
           label: schema.title,

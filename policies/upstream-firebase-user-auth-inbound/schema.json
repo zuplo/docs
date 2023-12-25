@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
+  "type": "object",
+  "title": "Upstream Firebase User Auth",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Creates a Firebase custom user token and attaches it to the outgoing request. Useful when calling Firebase services as user.\n\n",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "UpstreamFirebaseUserAuthInboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "title": "UpstreamFirebaseUserAuthInboundPolicyOptions",
+          "type": "object",
+          "description": "The options for this policy",
+          "additionalProperties": false,
+          "required": ["serviceAccountJson", "webApiKey"],
+          "properties": {
+            "serviceAccountJson": {
+              "type": "string",
+              "examples": ["$env(SERVICE_ACCOUNT_JSON)"],
+              "description": "The Google Service Account key in JSON format. Note you can load this from environment variables using the $env(ENV\\_VAR) syntax."
+            },
+            "userId": {
+              "type": "string",
+              "examples": ["1234"],
+              "description": "The userId to use as the custom token's subject."
+            },
+            "userIdPropertyPath": {
+              "type": "string",
+              "description": "The property on the incoming request.user object to retrieve the value of the userId"
+            },
+            "developerClaims": {
+              "type": "object",
+              "tsType": "Record<string, string | number | boolean | null>",
+              "additionalItems": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "examples": [
+                {
+                  "premium": true
+                }
+              ],
+              "description": "Additional claims to include in the custom token's payload."
+            },
+            "webApiKey": {
+              "type": "string",
+              "examples": ["$env(WEB_API_KEY)"],
+              "description": "The Firebase Web API Key (found in project settings)"
+            },
+            "tokenRetries": {
+              "type": "number",
+              "default": 3,
+              "description": "The number of times to retry fetching the token in the event of a failure."
+            },
+            "expirationOffsetSeconds": {
+              "type": "number",
+              "default": 300,
+              "description": "The number of seconds less than the token expiration to cache the token."
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "UpstreamFirebaseUserAuthInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "developerClaims": {
+              "premium": true
+            },
+            "expirationOffsetSeconds": 300,
+            "serviceAccountJson": "$env(SERVICE_ACCOUNT_JSON)",
+            "tokenRetries": 3,
+            "userId": "1234",
+            "webApiKey": "$env(WEB_API_KEY)"
+          }
+        }
+      ]
+    }
+  }
+}

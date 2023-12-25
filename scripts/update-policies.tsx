@@ -467,7 +467,6 @@ export async function run() {
       process.cwd(),
       match.replace(/[\\/]schema.json$/, ""),
     );
-    console.log(match.split(/[\\/]/)[2]);
     const policyId = match.split(/[\\/]/)[2];
 
     const schemaPath = path.join(policyDir, "schema.json");

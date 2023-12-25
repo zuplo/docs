@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
+  "type": "object",
+  "title": "AWS Cognito JWT Auth",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Authenticate requests with JWT tokens issued by AWS Cognito.\n\n",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "CognitoJwtInboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "title": "CognitoJwtInboundPolicyOptions",
+          "type": "object",
+          "description": "The options for this policy",
+          "additionalProperties": false,
+          "required": ["region", "userPoolId"],
+          "properties": {
+            "allowUnauthenticatedRequests": {
+              "type": "boolean",
+              "default": false,
+              "description": "Allow unauthenticated requests to proceed. This is use useful if you want to use multiple authentication policies or if you want to allow both authenticated and non-authenticated traffic."
+            },
+            "region": {
+              "type": "string",
+              "examples": ["us-east-1"],
+              "description": "The AWS region where your Cognito instance is deployed"
+            },
+            "userPoolId": {
+              "type": "string",
+              "examples": ["$env(AWS_COGNITO_USER_POOL_ID)"],
+              "description": "The user pool identifier"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "CognitoJwtInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "allowUnauthenticatedRequests": false,
+            "region": "us-east-1",
+            "userPoolId": "$env(AWS_COGNITO_USER_POOL_ID)"
+          }
+        }
+      ]
+    }
+  }
+}

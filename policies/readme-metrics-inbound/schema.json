@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
+  "type": "object",
+  "title": "Readme Metrics",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Readme is a developer documentation and API metrics company. This policy pushes logs to their API calls dashboard.\n\n",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "ReadmeMetricsInboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "title": "ReadmeMeteringInboundPolicyOptions",
+          "type": "object",
+          "description": "The options for this policy. Many of them can be overridden at the code level in a request using the `AmberfloMeteringPolicy.setRequestProperties` method.",
+          "additionalProperties": false,
+          "required": ["apiKey"],
+          "properties": {
+            "apiKey": {
+              "type": "string",
+              "examples": ["$env(README_API_KEY)"],
+              "description": "The API key to use when sending metrics calls to Readme"
+            },
+            "userLabelPropertyPath": {
+              "type": "string",
+              "x-show-example": false,
+              "default": ".sub",
+              "description": "This is the path to the property on `request.user` that contains the label you want to use. For example `.data.accountNumber` would read the `request.user.data.accountNumber` property."
+            },
+            "userEmailPropertyPath": {
+              "type": "string",
+              "default": "",
+              "description": "This is the path to the property on `request.user` that contains the e-mail of the user. For example `.data.email` would read the `request.user.data.email` property."
+            },
+            "development": {
+              "type": "boolean",
+              "description": "Whether the data should be ingested as 'development' mode or not. Defaults to true for working-copy and false for all other environments."
+            },
+            "useFullRequestPath": {
+              "type": "boolean",
+              "default": false,
+              "description": "When true, Zuplo sends the full request path (which might contain sensitive information). By default, we only send the route path which should not contain sensitive information."
+            },
+            "url": {
+              "type": "string",
+              "default": "https://metrics.readme.io/request",
+              "description": "The URL to send metering events. This is useful for testing purposes."
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "ReadmeMetricsInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "apiKey": "$env(README_API_KEY)",
+            "url": "https://metrics.readme.io/request",
+            "useFullRequestPath": false,
+            "userEmailPropertyPath": ""
+          }
+        }
+      ]
+    }
+  }
+}

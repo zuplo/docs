@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
+  "type": "object",
+  "title": "Replace String in Response Body",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Replace a string in the incoming request body\n\n",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "ReplaceStringOutboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "title": "ReplaceStringOutboundPolicyOptions",
+          "type": "object",
+          "description": "The options for this policy",
+          "additionalProperties": false,
+          "required": ["mode", "match", "replaceWith"],
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": ["regexp", "string"],
+              "examples": ["regexp"],
+              "description": "The type of string replacement to perform"
+            },
+            "match": {
+              "type": "string",
+              "examples": ["/(\\d+)/g"],
+              "description": "The pattern to match"
+            },
+            "replaceWith": {
+              "type": "string",
+              "examples": ["1234"],
+              "description": "The value to each match is replaced with"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "ReplaceStringOutboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "match": "/(\\d+)/g",
+            "mode": "regexp",
+            "replaceWith": "1234"
+          }
+        }
+      ]
+    }
+  }
+}

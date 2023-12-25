@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
+  "type": "object",
+  "title": "Set Status Code",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Adds or sets headers on the on the outgoing.\n\n",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "SetHeadersOutboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "title": "SetHeadersOutboundPolicyOptions",
+          "type": "object",
+          "description": "The options for this policy",
+          "additionalProperties": false,
+          "required": ["headers"],
+          "properties": {
+            "headers": {
+              "type": "array",
+              "description": "An array of headers to set on the response. By default, headers will be overwritten if they already exists in the response, specify the overwrite property to change this behavior.",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["name", "value"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "examples": ["my-header"],
+                    "description": "The name of the header."
+                  },
+                  "value": {
+                    "type": "string",
+                    "examples": ["my-value"],
+                    "description": "The value of the header."
+                  },
+                  "overwrite": {
+                    "type": "boolean",
+                    "x-show-example": false,
+                    "default": true,
+                    "description": "Overwrite the value if the header is already present in the response."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "SetHeadersOutboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "headers": [
+              [
+                {
+                  "name": "my-header",
+                  "value": "my-value"
+                }
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

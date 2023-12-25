@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
+  "type": "object",
+  "title": "Moesif Analytics & Billing",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Moesif is an API analytics and billing service. This policy allows you to send metering calls for each API to their events batch endpoint.\n\n",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "MoesifInboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "title": "MoesifInboundPolicyOptions",
+          "type": "object",
+          "description": "The options for this policy. Many of them can be overridden at the code level in a request using the `AmberfloMeteringPolicy.setRequestProperties` method.",
+          "additionalProperties": false,
+          "required": ["applicationId"],
+          "properties": {
+            "applicationId": {
+              "type": "string",
+              "examples": ["$env(MOESIF_APPLICATION_ID)"],
+              "description": "Your Moesif application ID."
+            },
+            "logRequestBody": {
+              "type": "boolean",
+              "default": true,
+              "description": "Set to false to disable sending the request body to Moesif."
+            },
+            "logResponseBody": {
+              "type": "boolean",
+              "default": true,
+              "description": "Set to false to disable sending the response body to Moesif."
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "MoesifInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "applicationId": "$env(MOESIF_APPLICATION_ID)",
+            "logRequestBody": true,
+            "logResponseBody": true
+          }
+        }
+      ]
+    }
+  }
+}

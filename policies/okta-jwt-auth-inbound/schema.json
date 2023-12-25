@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
+  "type": "object",
+  "title": "Okta JWT Auth",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Authenticate users using Okta issued JWT tokens.\n\n",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "OktaJwtInboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "title": "OktaJwtInboundPolicyOptions",
+          "type": "object",
+          "description": "The options for this policy",
+          "additionalProperties": false,
+          "required": ["issuerUrl"],
+          "properties": {
+            "allowUnauthenticatedRequests": {
+              "type": "boolean",
+              "default": false,
+              "description": "Allow unauthenticated requests to proceed. This is use useful if you want to use multiple authentication policies or if you want to allow both authenticated and non-authenticated traffic."
+            },
+            "issuerUrl": {
+              "type": "string",
+              "examples": ["https://dev-12345.okta.com/oauth2/abc"],
+              "description": "Your Okta authorization server's issuer URL. For example, https://dev-12345.okta.com/oauth2/abc"
+            },
+            "audience": {
+              "type": "string",
+              "examples": ["api://my-api"],
+              "description": "The Okta audience of your API, for example api://my-api"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "OktaJwtInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "allowUnauthenticatedRequests": false,
+            "audience": "api://my-api",
+            "issuerUrl": "https://dev-12345.okta.com/oauth2/abc"
+          }
+        }
+      ]
+    }
+  }
+}

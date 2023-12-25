@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
+  "type": "object",
+  "title": "Brown Out",
+  "isDeprecated": false,
+  "isPaidAddOn": true,
+  "isUnlisted": false,
+  "description": "Authenticate requests based on the mTLS protocol.\n\n",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "BrownOutInboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "title": "BrownOutInboundPolicyOptions",
+          "type": "object",
+          "description": "The options for this policy",
+          "additionalProperties": false,
+          "required": ["cronSchedule"],
+          "properties": {
+            "cronSchedule": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array",
+                  "item": {
+                    "type": "string"
+                  }
+                }
+              ],
+              "description": "The cron schedule for when this policy is enabled. This can be a single cron string or an array of multiple cron strings"
+            },
+            "problem": {
+              "type": "object",
+              "description": "The problem that is returned in the response body when this policy is enabled",
+              "additionalProperties": true,
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "The type of problem"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "The title of problem"
+                },
+                "detail": {
+                  "type": "string",
+                  "description": "The detail of problem"
+                },
+                "status": {
+                  "type": "number",
+                  "description": "Http status code of the problem"
+                }
+              }
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "BrownOutInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "problem": [{}]
+          }
+        }
+      ]
+    }
+  }
+}

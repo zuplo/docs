@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
+  "type": "object",
+  "title": "GraphQL Disable Introspection",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Disables introspection queries on your API. This is useful in production to prevent attackers from learning about your API. You can still keep introspection enabled for any request not going through Zuplo.\n\n",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "GraphQLDisableIntrospectionInboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "title": "GraphqlDisableIntrospectionInboundPolicyOptions",
+          "type": "object",
+          "description": "The options for this policy",
+          "required": [],
+          "additionalProperties": false,
+          "properties": {}
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "GraphQLDisableIntrospectionInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {}
+        }
+      ]
+    }
+  }
+}

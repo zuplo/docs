@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
+  "type": "object",
+  "title": "Remove Query Parameters",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Remove query parameters from the incoming request\n\n",
+  "required": ["handler"],
+  "properties": {
+    "handler": {
+      "type": "object",
+      "default": {},
+      "required": ["export", "module", "options"],
+      "properties": {
+        "export": {
+          "const": "RemoveQueryParamsInboundPolicy",
+          "description": "The name of the exported type"
+        },
+        "module": {
+          "const": "$import(@zuplo/runtime)",
+          "description": "The module containing the policy"
+        },
+        "options": {
+          "title": "RemoveQueryParamsInboundPolicyOptions",
+          "type": "object",
+          "description": "The options for this policy",
+          "additionalProperties": false,
+          "required": ["params"],
+          "properties": {
+            "params": {
+              "type": "array",
+              "description": "An array of query parameters to be removed from the incoming request.",
+              "examples": [["param1", "param2"]],
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "_name": "basic",
+          "export": "RemoveQueryParamsInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "params": ["param1", "param2"]
+          }
+        }
+      ]
+    }
+  }
+}
