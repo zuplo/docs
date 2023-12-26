@@ -15,6 +15,7 @@ import {
   ShowIcon,
 } from "./ui-icons";
 import BundlesTable from "@/components/mdx/BundlesTable";
+import GithubButton from "@/components/mdx/GithubButton";
 
 const components = {
   FeaturePremiere,
@@ -32,6 +33,7 @@ const components = {
   GitHubIcon,
   Screenshot,
   BundlesTable,
+  GithubButton,
 };
 
 export default components;
