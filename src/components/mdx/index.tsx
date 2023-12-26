@@ -14,6 +14,7 @@ import {
   SettingsTabIcon,
   ShowIcon,
 } from "./ui-icons";
+import BundlesTable from "@/components/mdx/BundlesTable";
 
 const components = {
   FeaturePremiere,
@@ -30,6 +31,7 @@ const components = {
   ShowIcon,
   GitHubIcon,
   Screenshot,
+  BundlesTable,
 };
 
 export default components;
