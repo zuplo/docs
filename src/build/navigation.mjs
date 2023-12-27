@@ -28,7 +28,7 @@ function buildNavSection(rawSection) {
           href: `/${item}`,
         });
       } else {
-        const docPath = path.resolve(path.join("docs", `${item}.md`));
+        const docPath = path.resolve(path.join("docs", `${item}.mdx`));
         const docMd = fs.readFileSync(docPath, "utf8");
         const { data } = matter(docMd);
         section.items.push({

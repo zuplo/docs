@@ -11,7 +11,7 @@ Specify an allow list or block list of:
   example, "TX"
 - **ASNs** - ASN of the incoming request, for example, 395747.
 
-:::warning
+:::caution
 
 If you specify an allow and block list for the same location type (e.g.
 `country`) may have no effect or block all requests.
