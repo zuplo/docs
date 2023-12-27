@@ -1,13 +1,14 @@
 import {
-  BoltIcon,
   CogIcon,
   EyeIcon,
-  PresentationChartLineIcon,
-  RectangleGroupIcon,
+  FileTextIcon,
+  LayoutTemplateIcon,
+  ListIcon,
+  PresentationIcon,
   RssIcon,
-} from "@heroicons/react/24/outline";
+  ZapIcon,
+} from "lucide-react";
 import { FC, PropsWithChildren } from "react";
-import { FileText, List } from "react-feather";
 
 function SvgWrapper({ children }: PropsWithChildren) {
   return (
@@ -19,13 +20,13 @@ function SvgWrapper({ children }: PropsWithChildren) {
 
 export const CodeEditorTabIcon: FC = () => (
   <SvgWrapper>
-    <FileText />
+    <FileTextIcon />
   </SvgWrapper>
 );
 
 export const ApiTestConsoleTabIcon: FC = () => (
   <SvgWrapper>
-    <BoltIcon />
+    <ZapIcon />
   </SvgWrapper>
 );
 
@@ -37,13 +38,13 @@ export const LiveLogsTabIcon: FC = () => (
 
 export const DashboardTabIcon: FC = () => (
   <SvgWrapper>
-    <PresentationChartLineIcon />
+    <PresentationIcon />
   </SvgWrapper>
 );
 
 export const BuildStatusTabIcon: FC = () => (
   <SvgWrapper>
-    <List />
+    <ListIcon />
   </SvgWrapper>
 );
 
@@ -55,7 +56,7 @@ export const SettingsTabIcon: FC = () => (
 
 export const DeveloperPortalIcon: FC = () => (
   <SvgWrapper>
-    <RectangleGroupIcon />
+    <LayoutTemplateIcon />
   </SvgWrapper>
 );
 
