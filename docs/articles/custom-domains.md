@@ -65,6 +65,12 @@ verification. Please be patient if this happens.
 By default, you can also use the url on `zuploapp.com` although, if you prefer
 that to be removed contact support and we can disable it for you.
 
+### 4. Redeploy
+
+Some changes, like the domain set in your developer portal, only get picked up
+on the deployment. After you set a custom domain it is a good idea to redeploy
+your environment to ensure everything is applied correctly.
+
 ## Cloudflare Customers
 
 Zuplo uses Cloudflare for routing custom domain traffic to our servers. If you
