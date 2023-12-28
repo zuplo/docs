@@ -5,7 +5,7 @@ title: Config (dev-portal.json)
 The `dev-portal.json` file is the code that drives most of the configuration of
 your Zuplo Gateway. The primary uses of the `dev-portal.json` file are:
 
-- Enabling or disabling features of the Gateway
+- Enabling or disabling features of the Developer Portal
 - Setting custom values to various configuration
 - Mapping environment variables to settings
 
@@ -37,6 +37,8 @@ authentication to the [Developer Portal](../articles/developer-portal).
 
 ## Properties
 
+- **enabled** - Determines whether the Developer Portal is enabled or disabled.
+  Default: true
 - **pageTitle** - The title of the Developer Portal as seen in the tabs of most
   browsers. Default: Zuplo Dev Portal.
 - **faviconUrl** - The icon or 'favicon' for your Developer Portal, as seen in
@@ -53,7 +55,8 @@ authentication to the [Developer Portal](../articles/developer-portal).
   Portal? This is required to enable self-serve of API keys. You must select an
   Auth Provider if this is enabled - by default we give you a demo Auth0
   configuration (you should not use this in production).
-- **authentication** - Authentication settings
+- **authentication** - Authentication settings. Checkout the
+  [setup guide](./dev-portal-auth.md) to get started.
   - **provider** - Choose your preferred identity provider (Auth0, Okta, etc.).
     Note, we provide you with a demonstration identity provider - this is fine
     for learning how Zuplo works but should not be used in production or on real
