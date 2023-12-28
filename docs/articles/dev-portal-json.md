@@ -55,7 +55,8 @@ authentication to the [Developer Portal](../articles/developer-portal).
   Portal? This is required to enable self-serve of API keys. You must select an
   Auth Provider if this is enabled - by default we give you a demo Auth0
   configuration (you should not use this in production).
-- **authentication** - Authentication settings
+- **authentication** - Authentication settings. Checkout the
+  [setup guide](./dev-portal-auth.md) to get started.
   - **provider** - Choose your preferred identity provider (Auth0, Okta, etc.).
     Note, we provide you with a demonstration identity provider - this is fine
     for learning how Zuplo works but should not be used in production or on real
