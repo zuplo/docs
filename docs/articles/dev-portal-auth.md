@@ -38,7 +38,7 @@ Web Applications"
 
 You must set the following fields in the Auth0 application:
 
-** Application URIs**
+**Application URIs**
 
 - **Allowed Callback URLs**: Add your docs site url (i.e.
   `https://my-app.zuplo.app/docs/`). Note, you should include the trailing
@@ -48,14 +48,14 @@ You must set the following fields in the Auth0 application:
 - **Allowed Web Origins**: Add your docs site url without the path (i.e.
   `https://my-app.zuplo.app`)
 
-** Refresh Token Rotation**
+**Refresh Token Rotation**
 
 - **Rotation**: Enabled
 - **Reuse Interval**: Leave at `0`
 
 <Screenshot src="https://cdn.zuplo.com/assets/359f4a6c-4dd9-48c9-b8a3-27e70aa459c0.png" size="md" />
 
-** Refresh Token Expiration**
+**Refresh Token Expiration**
 
 - **Absolute Expiration**: Enabled
 - **Absolute Lifetime**: Can be whatever time you want, default is `2592000`
