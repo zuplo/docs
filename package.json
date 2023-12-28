@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "npm run ci:pre && next dev",
     "build": "npm run ci:pre && next build",
-    "postinstall": "npm run get-policies && ci:bundles && npm run ci:shiki",
+    "postinstall": "npm run get-policies && npm run ci:shiki",
     "get-policies": "sh ./scripts/get-policies.sh",
     "postbuild": "next-sitemap",
     "start": "next start",
