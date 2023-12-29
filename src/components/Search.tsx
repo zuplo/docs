@@ -428,11 +428,11 @@ export function Search() {
     <div>
       <button
         type="button"
-        className="group flex h-6 w-6 items-center justify-center rounded-xl bg-transparent px-3.5 hover:bg-white hover:ring-2 hover:ring-pink md:h-auto md:w-80 md:flex-none md:justify-start md:p-3.5 md:pr-5 md:text-sm md:ring-1 md:ring-inset md:ring-gray-600 lg:w-96"
+        className="group flex h-6 w-6 items-center justify-center rounded-xl bg-transparent px-3.5 hover:bg-white hover:ring-2 hover:ring-pink md:h-auto md:w-80 md:flex-none md:justify-start md:p-3 md:text-sm md:ring-1 md:ring-inset md:ring-gray-600 lg:w-[198px]"
         {...buttonProps}
       >
-        <SearchIcon className="h-5 w-5 flex-none text-gray-600 opacity-50 group-hover:text-gray-600 dark:text-white" />
-        <span className="sr-only text-base text-gray-600 group-hover:text-black md:not-sr-only md:ml-1.5">
+        <SearchIcon className="h-4 w-4 flex-none text-gray-600 opacity-50 group-hover:text-gray-600 dark:text-white" />
+        <span className="sr-only text-sm text-gray-600 group-hover:text-black md:not-sr-only md:ml-2">
           Search
         </span>
       </button>

@@ -27,20 +27,16 @@ function Header() {
   }, []);
 
   return (
-    <header
-      className={classNames("fixed top-0 z-20 w-full bg-white dark:bg-black ", {
-        "!dark:bg-black": scrollY > 10,
-      })}
-    >
-      <div className="relative w-full px-5">
-        <div className="mx-auto flex min-h-[52px] w-full max-w-[1180px] items-center justify-between py-2 lg:box-content lg:px-0 lg:py-5">
+    <header className={classNames("fixed top-5 z-20 w-full")}>
+      <div className="relative mx-5 rounded-xl bg-white dark:bg-black">
+        <div className="mx-auto box-border flex min-h-[52px] w-full max-w-[1180px] items-center justify-between px-5 py-2 lg:box-content lg:gap-10 lg:py-5">
           <div className="flex p-3 lg:hidden">
             <MobileNavigation />
           </div>
           <div className="relative flex basis-0 items-center">
             <Logo className="block w-28 lg:w-36" />
           </div>
-          <div className="flex flex-grow justify-end lg:justify-center">
+          <div className="flex flex-grow justify-end lg:justify-end">
             <Search />
           </div>
           <div className="hidden justify-end lg:flex">
@@ -63,10 +59,10 @@ function Header() {
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex w-full flex-col bg-white dark:bg-black">
+    <div className="flex w-full flex-col bg-white">
       <Header />
       <div className="relative w-full px-5">
-        <div className="relative mx-auto mt-[70px] w-full max-w-8xl rounded-xl bg-gray-400 dark:bg-white lg:mt-[92px]">
+        <div className="relative mx-auto mt-[70px] w-full max-w-8xl rounded-xl bg-gray-400 dark:bg-white lg:mt-[112px]">
           <Container className="flex h-[calc(100vh-7rem)] flex-auto justify-center">
             <aside className="hidden border-r border-gray-500 lg:relative lg:block lg:flex-none">
               {/* <div className="absolute inset-y-0 right-0 w-[50vw] dark:hidden" />
