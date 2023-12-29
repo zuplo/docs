@@ -1,10 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/basic-auth-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Basic Auth",
-  "isPreview": false,
-  "description": "Authenticate requests using basic auth (i.e. username and password)",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Authenticate requests using basic auth (i.e. username and password)\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -21,37 +23,48 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "BasicAuthInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
+          "additionalProperties": false,
           "required": ["accounts"],
           "properties": {
             "accounts": {
               "type": "array",
               "description": "An array of account objects (username, password and data properties)",
-              "title": "A list of Basic Auth accounts",
               "items": {
                 "type": "object",
-                "title": "An account object",
+                "title": "BasicAuthAccount",
+                "description": "An account object",
+                "additionalProperties": false,
                 "required": ["username", "password"],
                 "properties": {
                   "username": {
                     "type": "string",
-                    "title": "The username for the account (this will be the `sub` property on `request.user`."
+                    "description": "The username for the account (this will be the `sub` property on `request.user`<!-- -->.",
+                    "examples": ["$env(ACCOUNT_JOHN_USERNAME)"]
                   },
                   "password": {
                     "type": "string",
-                    "title": "The password for the account - note we recommend storing this in environment variables",
-                    "examples": ["$env(ACCOUNT_FOO_PASSWORD)"]
+                    "description": "The password for the account - note we recommend storing this in environment variables",
+                    "examples": ["$env(ACCOUNT_JOHN_PASSWORD)"]
                   },
                   "data": {
                     "type": "object",
-                    "title": "The data payload you want associated with this account (this will be the `data` property on `request.user`)"
+                    "description": "The data payload you want associated with this account (this will be the `data` property on `request.user`<!-- -->)",
+                    "examples": [
+                      {
+                        "name": "John Doe",
+                        "email": "john.doe@gmail.com"
+                      }
+                    ]
                   }
                 }
               }
             },
             "allowUnauthenticatedRequests": {
               "type": "boolean",
+              "default": false,
               "description": "If 'true' allows the request to continue even if authenticated. When 'false' (the default) any unauthenticated request is automatically rejected with a 401"
             }
           }
@@ -64,13 +77,16 @@
           "module": "$import(@zuplo/runtime)",
           "options": {
             "accounts": [
-              {
-                "data": {
-                  "number": 1
-                },
-                "password": "PASSWORD",
-                "username": "USERNAME"
-              }
+              [
+                {
+                  "data": {
+                    "name": "John Doe",
+                    "email": "john.doe@gmail.com"
+                  },
+                  "password": "$env(ACCOUNT_JOHN_PASSWORD)",
+                  "username": "$env(ACCOUNT_JOHN_USERNAME)"
+                }
+              ]
             ],
             "allowUnauthenticatedRequests": false
           }

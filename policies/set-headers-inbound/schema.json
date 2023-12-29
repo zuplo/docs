@@ -1,10 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/set-headers-outbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Add or Set Request Headers",
-  "isPreview": false,
-  "description": "Adds or sets headers on the incoming request.",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Adds or sets headers on the incoming request.\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -21,27 +23,34 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "SetHeadersInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
-          "required": ["name", "value"],
+          "additionalProperties": false,
+          "required": ["headers"],
           "properties": {
             "headers": {
               "type": "array",
-              "description": "An array of name and value objects (with an optional `overwrite` boolean)",
-              "title": "List of headers to set",
+              "description": "An array of headers to set in the request. By default, headers will be overwritten if they already exists in the request, specify the overwrite property to change this behavior.",
               "items": {
                 "type": "object",
+                "additionalProperties": false,
+                "required": ["name", "value"],
                 "properties": {
                   "name": {
                     "type": "string",
+                    "examples": ["my-custom-header"],
                     "description": "The name of the header"
                   },
                   "value": {
                     "type": "string",
+                    "examples": ["test"],
                     "description": "The value of the header"
                   },
                   "overwrite": {
                     "type": "boolean",
+                    "x-show-example": false,
+                    "default": true,
                     "description": "Overwrite the value if the header is already present in the request"
                   }
                 }
@@ -57,11 +66,12 @@
           "module": "$import(@zuplo/runtime)",
           "options": {
             "headers": [
-              {
-                "name": "HEADER_NAME",
-                "value": "HEADER_VALUE",
-                "overwrite": true
-              }
+              [
+                {
+                  "name": "my-custom-header",
+                  "value": "test"
+                }
+              ]
             ]
           }
         }

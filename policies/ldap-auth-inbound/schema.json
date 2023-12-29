@@ -1,10 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/ldap-auth-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "LDAP Auth",
+  "isDeprecated": false,
   "isPaidAddOn": true,
-  "description": "Authenticate requests using an LDAP server",
+  "isUnlisted": false,
+  "description": "Authenticate requests using an LDAP server.\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -13,7 +15,7 @@
       "required": ["export", "module", "options"],
       "properties": {
         "export": {
-          "const": "LDAPAuthInbound",
+          "const": "LDAPAuthInboundPolicy",
           "description": "The name of the exported type"
         },
         "module": {
@@ -21,12 +23,15 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "LDAPAuthInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
-          "required": [],
+          "additionalProperties": false,
+          "required": ["ldapConnectorName"],
           "properties": {
             "ldapConnectorName": {
               "type": "string",
+              "examples": ["my-ldap-connector"],
               "description": "The name of your configured LDAP service connector"
             }
           }
@@ -35,7 +40,7 @@
       "examples": [
         {
           "_name": "basic",
-          "export": "LDAPAuthInbound",
+          "export": "LDAPAuthInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
             "ldapConnectorName": "my-ldap-connector"

@@ -1,10 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/open-id-jwt-auth-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Supabase JWT Auth",
-  "isPreview": false,
-  "description": "The Supabase JWT Authentication policy supports user JWT tokens created by Supabase.",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "The Supabase JWT Authentication policy supports user JWT tokens created by Supabase.\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -21,8 +23,10 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "SupabaseJwtInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
+          "additionalProperties": false,
           "required": ["secret"],
           "properties": {
             "secret": {
@@ -32,12 +36,22 @@
             },
             "allowUnauthenticatedRequests": {
               "type": "boolean",
-              "examples": ["false"],
+              "default": false,
               "description": "Indicates whether the request should continue if authentication fails. Default is `false` which means unauthenticated users will automatically receive a 401 response."
             },
             "requiredClaims": {
               "type": "object",
-              "examples": [{ "claim_1": ["valid_value_1", "valid_value_2"] }],
+              "examples": [
+                {
+                  "claim_1": ["valid_value_1", "valid_value_2"]
+                }
+              ],
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "description": "Any claims that must be present for authentication to succeed - multiple valid values can be specified for each claim."
             }
           }
@@ -49,12 +63,11 @@
           "export": "SupabaseJwtInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "secret": "$env(SUPABASE_JWT_SECRET)",
             "allowUnauthenticatedRequests": false,
             "requiredClaims": {
-              "claim_1": ["valid_value_1", "valid_value_2"],
-              "claim_2": ["valid_value_1", "valid_value_2"]
-            }
+              "claim_1": ["valid_value_1", "valid_value_2"]
+            },
+            "secret": "$env(SUPABASE_JWT_SECRET)"
           }
         }
       ]

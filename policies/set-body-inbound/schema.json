@@ -1,11 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/rate-limit-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Set Body",
-  "description": "Sets the body of the request in the inbound pipeline - make sure to convert a GET/HEAD request to another method when using this policy.",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Sets the body of the request in the inbound pipeline - make sure to convert a GET/HEAD request to another method when using this policy.\n\n",
   "required": ["handler"],
-  "isPreview": false,
   "properties": {
     "handler": {
       "type": "object",
@@ -21,12 +23,15 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "SetBodyInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
+          "additionalProperties": false,
           "required": ["body"],
           "properties": {
             "body": {
               "type": "string",
+              "examples": ["Hello World!"],
               "description": "The value to set for the body"
             }
           }
@@ -34,11 +39,11 @@
       },
       "examples": [
         {
-          "_name": "set-body-inbound",
+          "_name": "basic",
           "export": "SetBodyInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "body": "{ \"model\": \"babbage\", \"prompt\": \"Say this is a test\", \"max_tokens\": 7, \"temperature\": 0, \"stream\": true }"
+            "body": "Hello World!"
           }
         }
       ]

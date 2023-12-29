@@ -1,11 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/rate-limit-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Rate Limiting",
-  "description": "The rate-limiting policy is used to limit the number of requests that can be made against your API based on a key.",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "The rate-limiting policy is used to limit the number of requests that can be made against your API based on a key.\n\n",
   "required": ["handler"],
-  "isPreview": false,
   "properties": {
     "handler": {
       "type": "object",
@@ -21,15 +23,18 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "RateLimitInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
+          "additionalProperties": false,
           "required": ["rateLimitBy", "requestsAllowed", "timeWindowMinutes"],
           "properties": {
             "rateLimitBy": {
               "type": "string",
               "default": "user",
-              "enum": ["user", "ip", "function"],
-              "description": "The identifying element of the request that enforces distinct rate limits. For example, you can limit by `user`, `ip`, `function` or `all` - function allows you to specify a simple function to create a string identifier to create a rate-limit group"
+              "title": "RateLimitByType",
+              "enum": ["user", "ip", "function", "all"],
+              "description": "The identifying element of the request that enforces distinct rate limits. For example, you can limit by `user`<!-- -->, `ip`<!-- -->, `function` or `all` - function allows you to specify a simple function to create a string identifier to create a rate-limit group"
             },
             "requestsAllowed": {
               "type": "integer",
@@ -43,14 +48,14 @@
             },
             "identifier": {
               "type": "object",
-              "default": {},
+              "additionalProperties": false,
               "description": "The function that returns dynamic configuration data. Used only with `rateLimitBy=function`",
               "required": ["export", "module"],
               "properties": {
                 "export": {
                   "type": "string",
                   "default": "$import(./modules/my-module)",
-                  "description": "used only with rateLimitBy=function. Specifies the export to load your custom bucket function, e.g. `default`, `rateLimitIdentifier`.",
+                  "description": "used only with rateLimitBy=function. Specifies the export to load your custom bucket function, e.g. `default`<!-- -->, `rateLimitIdentifier`<!-- -->.",
                   "examples": ["$import(./modules/my-module)"]
                 },
                 "module": {
@@ -60,33 +65,60 @@
                   "examples": ["default", "rateLimitIdentifier"]
                 }
               }
+            },
+            "headerMode": {
+              "type": "string",
+              "default": "user",
+              "title": "RateLimitHeaderMode",
+              "enum": ["none", "retry-after"],
+              "description": "Adds the retry-after header, defaults to true"
+            },
+            "throwOnFailure": {
+              "type": "boolean",
+              "default": false,
+              "description": "If true, the policy will throw an error in the event there is a problem connecting to the rate limit service"
+            },
+            "mode": {
+              "type": "string",
+              "default": "strict",
+              "title": "RateLimitMode",
+              "enum": ["strict", "async"],
+              "description": "The mode of the policy. If set to `async`<!-- -->, the policy will check if the request is over the rate limit without blocking. This can result in some requests allowed over the rate limit."
             }
-          }
+          },
+          "examples": [
+            {
+              "rateLimitBy": "user",
+              "requestsAllowed": 1000
+            },
+            {
+              "rateLimitBy": "function",
+              "identifier": {
+                "export": "$import(./modules/my-module)",
+                "module": "default"
+              }
+            }
+          ]
         }
       },
       "examples": [
         {
-          "_name": "basic-ip",
+          "_name": "basic",
           "export": "RateLimitInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "rateLimitBy": "ip",
-            "requestsAllowed": 2,
-            "timeWindowMinutes": 1
-          }
-        },
-        {
-          "_name": "custom-rate-limit",
-          "export": "RateLimitInboundPolicy",
-          "module": "$import(@zuplo/runtime)",
-          "options": {
-            "rateLimitBy": "function",
-            "requestsAllowed": 2,
-            "timeWindowMinutes": 1,
-            "identifier": {
-              "module": "$import(./modules/rate-limiter)",
-              "export": "customRateLimit"
-            }
+            "headerMode": "user",
+            "identifier": [
+              {
+                "export": "$import(./modules/my-module)",
+                "module": "default"
+              }
+            ],
+            "mode": "strict",
+            "rateLimitBy": "user",
+            "requestsAllowed": 1000,
+            "throwOnFailure": false,
+            "timeWindowMinutes": 60
           }
         }
       ]

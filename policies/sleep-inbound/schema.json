@@ -1,10 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/sleep-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Sleep / Delay",
-  "isPreview": false,
-  "description": "Add a delay to the incoming request. Useful for testing.",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Add a delay to the incoming request. Useful for testing.\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -21,12 +23,15 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "SleepInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
-          "required": [],
+          "additionalProperties": false,
+          "required": ["sleepInMs"],
           "properties": {
             "sleepInMs": {
               "type": "number",
+              "examples": [1000],
               "description": "The number of milliseconds to delay the request"
             }
           }

@@ -1,10 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/set-headers-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Set Status Code",
-  "isPreview": false,
-  "description": "Adds or sets headers on the on the outgoing.",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Sets the status code on the on the outgoing response.\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -21,17 +23,21 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "SetStatusOutboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
-          "required": ["status"],
+          "additionalProperties": false,
+          "required": [],
           "properties": {
             "status": {
               "type": "number",
+              "examples": [200, 404, 500],
               "description": "The status code to be used in the response"
             },
             "statusText": {
               "type": "string",
-              "description": "The statusText to be used in the response (optional)"
+              "examples": ["OK", "Not Found"],
+              "description": "The statusText to be used in the response."
             }
           }
         }

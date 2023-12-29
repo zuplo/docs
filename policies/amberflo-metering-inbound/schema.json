@@ -1,10 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/open-id-jwt-auth-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Amberflo Metering / Billing",
-  "isPreview": false,
-  "description": "Amberflo is a usage metering and billing service. This policy allows you to send metering calls for each API to their meter ingest endpoint.",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Amberflo is a usage metering and billing service. This policy allows you to send metering calls for each API to their meter ingest endpoint.\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -21,41 +23,63 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "AmberfloMeteringInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy. Many of them can be overridden at the code level in a request using the `AmberfloMeteringPolicy.setRequestProperties` method.",
           "required": ["apiKey"],
+          "additionalProperties": false,
           "properties": {
             "apiKey": {
               "type": "string",
-              "description": "The API key to use when sending metering calls to Amberflo"
+              "examples": ["$env(AMBERFLO_API_KEY)"],
+              "description": "The API key to use when sending metering calls to Amberflo."
             },
             "meterApiName": {
               "type": "string",
-              "description": "The name of the meter to use when sending metering calls to Amberflo (overridable in code)"
+              "examples": ["$env(AMBERFLO_METER_API_NAME)"],
+              "description": "The name of the meter to use when sending metering calls to Amberflo (overridable in code)."
             },
             "meterValue": {
               "type": "number",
-              "description": "The value to use when sending metering calls to Amberflo (overridable in code)"
+              "examples": ["$env(AMBERFLO_METER_VALUE)"],
+              "description": "The value to use when sending metering calls to Amberflo (overridable in code)."
             },
             "customerIdPropertyPath": {
               "type": "string",
-              "description": "The path to the property on `request.user`contains the customer ID. For example `.data.accountNumber` would read the `request.user.data.accountNumber` property."
+              "examples": [".sub"],
+              "default": ".sub",
+              "description": "The path to the property on `request.user`<!-- -->contains the customer ID. For example `.data.accountNumber` would read the `request.user.data.accountNumber` property."
             },
             "customerId": {
               "type": "string",
-              "description": "The default customerId for all metering calls - overridable in code and by `customerIdPropertyPath`"
+              "description": "The default customerId for all metering calls - overridable in code and by `customerIdPropertyPath`<!-- -->."
             },
             "dimensions": {
               "type": "object",
-              "description": "A dictionary of dimensions to be sent to Amberflo (extensible in code)"
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "A dictionary of dimensions to be sent to Amberflo (extensible in code)."
             },
             "statusCodes": {
-              "type": "string",
-              "description": "A list of successful status codes and ranges \"200-299, 304\" that should trigger a metering call to Amberflo - defaults to `result.ok` (200-299) if not set."
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              ],
+              "description": "A list of successful status codes and ranges \"200-299, 304\" that should trigger a metering call to Amberflo.",
+              "default": "200-299"
             },
             "url": {
               "type": "string",
-              "description": "Optional, the URL to send metering events to (defaults to https://app.amberflo.io/ingest). This is useful for testing purposes."
+              "default": " https://app.amberflo.io/ingest",
+              "description": "The URL to send metering events. This is useful for testing purposes."
             }
           }
         }
@@ -63,14 +87,16 @@
       "examples": [
         {
           "_name": "basic",
-          "module": "$import(@zuplo/runtime)",
           "export": "AmberfloMeteringInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
           "options": {
-            "apiKey": "YOUR_API_KEY",
-            "customerIdPropertyPath": ".data.accountNumber",
-            "meterApiName": "api-calls",
-            "meterValue": 1,
-            "statusCodes": "200-299, 304"
+            "apiKey": "$env(AMBERFLO_API_KEY)",
+            "customerIdPropertyPath": ".sub",
+            "dimensions": {},
+            "meterApiName": "$env(AMBERFLO_METER_API_NAME)",
+            "meterValue": "$env(AMBERFLO_METER_VALUE)",
+            "statusCodes": "200-299",
+            "url": " https://app.amberflo.io/ingest"
           }
         }
       ]

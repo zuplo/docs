@@ -1,11 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/audit-log-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
-  "title": "Audit Logs Inbound",
-  "description": "Capture detailed logs of requests for auditing purposes",
-  "required": ["handler"],
+  "title": "Audit Logs",
+  "isDeprecated": false,
   "isPaidAddOn": true,
+  "isUnlisted": false,
+  "description": "Capture detailed logs of requests for auditing purposes.\n\n",
+  "required": ["handler"],
   "properties": {
     "handler": {
       "type": "object",
@@ -21,9 +23,11 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "AuditLogsInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
-          "required": [],
+          "additionalProperties": false,
+          "required": ["blockScoresBelow"],
           "properties": {
             "logIpAddress": {
               "default": true,
@@ -31,7 +35,7 @@
             },
             "logUser": {
               "default": true,
-              "description": " if the user's `sub` should be logged"
+              "description": "if the user's `sub` should be logged"
             },
             "logGeolocation": {
               "default": true,
@@ -41,9 +45,12 @@
               "default": true,
               "description": "log the values of query parameters"
             },
-            "logRouteParameters": { "default": true, "description": "" },
+            "logRouteParameters": {
+              "default": true,
+              "description": ""
+            },
             "tenant": {
-              "description": "if the route parameters should be logged (i.e. the value of `customerId` in the route `/customers/:customerId`)"
+              "description": "if the route parameters should be logged (i.e. the value of `customerId` in the route `/customers/:customerId`<!-- -->)"
             },
             "metadata": {
               "description": "A function to add additional data to the audit logs"
@@ -57,16 +64,11 @@
           "export": "AuditLogsInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "logIpAddress": true,
-            "logUser": true,
             "logGeolocation": true,
+            "logIpAddress": true,
             "logQueryParameters": true,
             "logRouteParameters": true,
-            "tenant": "${params.tenantId}",
-            "metadata": {
-              "module": "$import(./modules/audit-logs)",
-              "export": "auditLogData"
-            }
+            "logUser": true
           }
         }
       ]

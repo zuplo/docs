@@ -1,9 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/brown-out-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Brown Out",
-  "description": "Set periods of downtime based on cron schedules. Useful for alerting users of impending deprecations.",
+  "isDeprecated": false,
+  "isPaidAddOn": true,
+  "isUnlisted": false,
+  "description": "Authenticate requests based on the mTLS protocol.\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -12,7 +15,7 @@
       "required": ["export", "module", "options"],
       "properties": {
         "export": {
-          "const": "BrownOutInbound",
+          "const": "BrownOutInboundPolicy",
           "description": "The name of the exported type"
         },
         "module": {
@@ -20,14 +23,23 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "BrownOutInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
+          "additionalProperties": false,
           "required": ["cronSchedule"],
           "properties": {
             "cronSchedule": {
               "oneOf": [
-                { "type": "string" },
-                { "type": "array", "item": { "type": "string" } }
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array",
+                  "item": {
+                    "type": "string"
+                  }
+                }
               ],
               "description": "The cron schedule for when this policy is enabled. This can be a single cron string or an array of multiple cron strings"
             },
@@ -59,13 +71,11 @@
       },
       "examples": [
         {
-          "export": "BrownOutInbound",
+          "_name": "basic",
+          "export": "BrownOutInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "cronSchedule": "0 23 * * *",
-            "problem": {
-              "detail": "This endpoint is deprecated and will be removed in the next version"
-            }
+            "problem": [{}]
           }
         }
       ]

@@ -22,6 +22,7 @@ function buildNavSection(rawSection) {
       if (item.startsWith("policies/")) {
         const schemaPath = path.resolve(path.join(item, `schema.json`));
         const schemaJson = fs.readFileSync(schemaPath, "utf8");
+
         const schema = JSON.parse(schemaJson);
         section.items.push({
           label: schema.title,

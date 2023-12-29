@@ -1,10 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/open-id-jwt-auth-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "JWT Auth",
-  "isPreview": false,
-  "description": "The Open ID JWT Authentication policy allows you to authenticate incoming requests using an Open ID compliant bearer token. ",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "The Open ID JWT Authentication policy allows you to authenticate incoming requests using an Open ID compliant bearer token.\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -21,9 +23,11 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "OpenIdJwtInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
-          "required": ["issuer"],
+          "additionalProperties": false,
+          "required": [],
           "properties": {
             "issuer": {
               "type": "string",
@@ -33,7 +37,7 @@
             "audience": {
               "type": "string",
               "examples": ["$env(AUTH_AUDIENCE)"],
-              "description": "The expected audience claim in the JWT token (optional)."
+              "description": "The expected audience claim in the JWT token."
             },
             "jwkUrl": {
               "type": "string",
@@ -49,8 +53,20 @@
             },
             "allowUnauthenticatedRequests": {
               "type": "boolean",
-              "examples": ["false"],
+              "default": false,
               "description": "indicates whether the request should continue if authentication fails. Defaults is `false` which means unauthenticated users will automatically receive a 401 response."
+            },
+            "subPropertyName": {
+              "type": "string",
+              "examples": ["sub"],
+              "description": "The name of the property in the JWT token that contains the user's unique identifier."
+            },
+            "headers": {
+              "type": "object",
+              "description": "Additional headers to send with the JWK request.",
+              "additionalProperties": {
+                "type": "string"
+              }
             }
           }
         }
@@ -63,19 +79,11 @@
           "options": {
             "allowUnauthenticatedRequests": false,
             "audience": "$env(AUTH_AUDIENCE)",
+            "headers": {},
             "issuer": "$env(AUTH_ISSUER)",
-            "jwkUrl": "$env(JWK_URL)"
-          }
-        },
-        {
-          "_name": "secret",
-          "export": "OpenIdJwtInboundPolicy",
-          "module": "$import(@zuplo/runtime)",
-          "options": {
-            "allowUnauthenticatedRequests": false,
-            "audience": "$env(AUTH_AUDIENCE)",
-            "issuer": "$env(AUTH_ISSUER)",
-            "secret": "$env(AUTH_SECRET)"
+            "jwkUrl": "https://zuplo-demo.us.auth0.com/.well-known/jwks.json",
+            "secret": "$env(AUTH_JWT_SIGNING_KEY",
+            "subPropertyName": "sub"
           }
         }
       ]

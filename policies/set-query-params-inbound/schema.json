@@ -1,10 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/set-query-params-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Add or Set Query Parameters",
-  "isPreview": false,
-  "description": "Adds or sets query parameters on the incoming request.",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Adds or sets query parameters on the incoming request.\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -21,27 +23,35 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "SetQueryParamsInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
-          "required": [],
+          "additionalProperties": false,
+          "required": ["params"],
           "properties": {
             "params": {
               "type": "array",
-              "description": "An array of object, with a name and value property (and optional `override` boolean)",
+              "description": "An array of query params to set in the request. By default, query parameters will be overwritten if they already exist in the request, specify the overwrite property to change this behavior.",
               "items": {
                 "type": "object",
+                "additionalProperties": false,
+                "required": ["name", "value"],
                 "properties": {
                   "name": {
                     "type": "string",
-                    "description": "The name of the parameter"
+                    "examples": ["my-key"],
+                    "description": "The name of the param"
                   },
                   "value": {
                     "type": "string",
-                    "description": "The value of the parameter"
+                    "examples": ["my-value"],
+                    "description": "The value of the param"
                   },
                   "overwrite": {
                     "type": "boolean",
-                    "description": "Overwrite the value if the parameter is already present in the request"
+                    "x-show-example": false,
+                    "default": true,
+                    "description": "Overwrite the value if the param is already present in the request."
                   }
                 }
               }
@@ -56,11 +66,12 @@
           "module": "$import(@zuplo/runtime)",
           "options": {
             "params": [
-              {
-                "name": "PARAM_NAME",
-                "value": "PARAM_VALUE",
-                "overwrite": true
-              }
+              [
+                {
+                  "name": "my-key",
+                  "value": "my-value"
+                }
+              ]
             ]
           }
         }

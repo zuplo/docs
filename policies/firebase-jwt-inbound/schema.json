@@ -3,9 +3,11 @@
   "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Firebase JWT Auth",
-  "description": "Authenticate users using Firebase issued JWT tokens.",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Authenticate users using Firebase issued JWT tokens.\n\n",
   "required": ["handler"],
-  "isPreview": false,
   "properties": {
     "handler": {
       "type": "object",
@@ -21,9 +23,11 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "FirebaseJwtInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
-          "required": ["audience", "auth0Domain"],
+          "additionalProperties": false,
+          "required": ["projectId"],
           "properties": {
             "allowUnauthenticatedRequests": {
               "type": "boolean",
@@ -31,10 +35,9 @@
               "description": "Allow unauthenticated requests to proceed. This is use useful if you want to use multiple authentication policies or if you want to allow both authenticated and non-authenticated traffic."
             },
             "projectId": {
+              "type": "string",
+              "examples": ["my-project-id"],
               "description": "Your Firebase Project ID"
-            },
-            "certUrl": {
-              "description": "Optional - override the URL hosting the public keys used to verify the JWT."
             }
           }
         }
@@ -45,8 +48,8 @@
           "export": "FirebaseJwtInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "projectId": "YOUR_PROJECT_ID",
-            "allowUnauthenticatedRequests": false
+            "allowUnauthenticatedRequests": false,
+            "projectId": "my-project-id"
           }
         }
       ]

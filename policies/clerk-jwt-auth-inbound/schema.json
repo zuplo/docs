@@ -1,11 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/clerk-jwt-auth-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Clerk JWT Auth",
-  "description": "Authenticate users using Clerk issued JWT tokens.",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Authenticate users using Clerk issued JWT tokens.\n\n",
   "required": ["handler"],
-  "isPreview": false,
   "properties": {
     "handler": {
       "type": "object",
@@ -21,9 +23,11 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "ClerkJwtInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
-          "required": ["audience", "auth0Domain"],
+          "additionalProperties": false,
+          "required": ["frontendApiUrl"],
           "properties": {
             "allowUnauthenticatedRequests": {
               "type": "boolean",
@@ -31,6 +35,8 @@
               "description": "Allow unauthenticated requests to proceed. This is use useful if you want to use multiple authentication policies or if you want to allow both authenticated and non-authenticated traffic."
             },
             "frontendApiUrl": {
+              "type": "string",
+              "examples": ["https://sensible-skunk-49.clerk.accounts.dev"],
               "description": "Your Clerk frontend api url, i.e. 'https://sensible-skunk-49.clerk.accounts.dev'. Can be found in the Clerk portal: https://dashboard.clerk.com/last-active?path=api-keys"
             }
           }
@@ -43,7 +49,7 @@
           "module": "$import(@zuplo/runtime)",
           "options": {
             "allowUnauthenticatedRequests": false,
-            "frontendApiUrl": "$env(CLERK_FRONTEND_API_URL)"
+            "frontendApiUrl": "https://sensible-skunk-49.clerk.accounts.dev"
           }
         }
       ]

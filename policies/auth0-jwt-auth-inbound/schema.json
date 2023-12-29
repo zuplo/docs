@@ -3,9 +3,11 @@
   "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Auth0 JWT Auth",
-  "description": "Authenticate users using Auth0 issued JWT tokens.",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Authenticate users using Auth0 issued JWT tokens.\n\n",
   "required": ["handler"],
-  "isPreview": false,
   "properties": {
     "handler": {
       "type": "object",
@@ -21,9 +23,11 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "Auth0JwtInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
-          "required": ["audience", "auth0Domain"],
+          "additionalProperties": false,
+          "required": ["auth0Domain"],
           "properties": {
             "allowUnauthenticatedRequests": {
               "type": "boolean",
@@ -31,9 +35,13 @@
               "description": "Allow unauthenticated requests to proceed. This is use useful if you want to use multiple authentication policies or if you want to allow both authenticated and non-authenticated traffic."
             },
             "auth0Domain": {
+              "type": "string",
+              "examples": ["my-company.auth0.com"],
               "description": "Your Auth0 domain. For example, my-company.auth0.com"
             },
             "audience": {
+              "type": "string",
+              "examples": ["https://api.example.com/"],
               "description": "The Auth0 audience of your API, for example https://api.example.com/"
             }
           }
@@ -46,8 +54,8 @@
           "module": "$import(@zuplo/runtime)",
           "options": {
             "allowUnauthenticatedRequests": false,
-            "auth0Domain": "$env(AUTH0_DOMAIN)",
-            "audience": "$env(AUTH0_AUDIENCE)"
+            "audience": "https://api.example.com/",
+            "auth0Domain": "my-company.auth0.com"
           }
         }
       ]

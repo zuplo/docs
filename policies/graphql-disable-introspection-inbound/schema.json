@@ -1,10 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/graphql-complexity-limit-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "GraphQL Disable Introspection",
-  "isPreview": false,
-  "description": "Disables introspection queries on your API. This is useful in production to prevent attackers from learning about your API. You can still keep introspection enabled for any request not going through Zuplo.",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Disables introspection queries on your API. This is useful in production to prevent attackers from learning about your API. You can still keep introspection enabled for any request not going through Zuplo.\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -21,9 +23,11 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "GraphqlDisableIntrospectionInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
           "required": [],
+          "additionalProperties": false,
           "properties": {}
         }
       },

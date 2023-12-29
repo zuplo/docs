@@ -1,10 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/request-size-limit-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Request Size Limit",
-  "isPreview": false,
-  "description": "Enforces a maximum size on incoming requests",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Enforces a maximum size in bytes of the incoming request.\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -21,12 +23,15 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "RequestSizeLimitInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
-          "required": [],
+          "additionalProperties": false,
+          "required": ["maxSizeInBytes"],
           "properties": {
             "maxSizeInBytes": {
               "type": "number",
+              "examples": [10000],
               "description": "The maximum size of the request in bytes"
             },
             "trustContentLengthHeader": {
@@ -42,8 +47,7 @@
           "export": "RequestSizeLimitInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "maxSizeInBytes": 4098,
-            "trustContentLengthHeader": true
+            "maxSizeInBytes": 10000
           }
         }
       ]

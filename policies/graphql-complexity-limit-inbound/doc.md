@@ -1,8 +1,3 @@
-## GraphQL Complexity Limit
-
-This policy allows you to add a limit for the depth and a limit for the
-complexity of a GraphQL query.
-
 ### Depth Limit
 
 Limit the depth a GraphQL query is allowed to query for.

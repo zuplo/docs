@@ -1,10 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/geo-location-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Geo-location filtering",
-  "isPreview": false,
-  "description": "Block requests based on geo-location parameters: country, region code, and ASN",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Block requests based on geo-location parameters: country, region code, and ASN\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -21,45 +23,58 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "GeoFilterInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
+          "additionalProperties": false,
           "required": [],
           "properties": {
             "block": {
               "type": "object",
+              "additionalProperties": false,
               "properties": {
                 "countries": {
                   "type": "string",
-                  "description": "comma separated string of country codes to block (e.g. \"US, CA\")"
+                  "examples": ["US, CA"],
+                  "description": "comma separated string of country codes to allow (e.g. \"US, CA\")"
                 },
                 "regionCodes": {
                   "type": "string",
-                  "description": "comma separated string of region codes to block (e.g. \"TX, WA\")"
+                  "examples": ["TX, WA"],
+                  "description": "comma separated string of region codes to allow (e.g. \"TX, WA\")"
                 },
                 "asns": {
                   "type": "string",
-                  "description": "comma separated string of ASNs to block (e.g. \"395747, 28304\")"
+                  "examples": ["395747, 28304"],
+                  "description": "comma separated string of ASNs to allow (e.g. \"395747, 28304\")"
                 }
               }
             },
             "allow": {
               "type": "object",
-              "countries": {
-                "type": "string",
-                "description": "comma separated string of country codes to allow ONLY (e.g. \"US, CA\")"
-              },
-              "regionCodes": {
-                "type": "string",
-                "description": "comma separated string of region codes to allow ONLY (e.g. \"TX, WA\")"
-              },
-              "asns": {
-                "type": "string",
-                "description": "comma separated string of ASNs to allow ONLY(e.g. \"395747, 28304\")"
+              "additionalProperties": false,
+              "properties": {
+                "countries": {
+                  "type": "string",
+                  "examples": ["US, CA"],
+                  "description": "comma separated string of country codes to allow (e.g. \"US, CA\")"
+                },
+                "regionCodes": {
+                  "type": "string",
+                  "examples": ["TX, WA"],
+                  "description": "comma separated string of region codes to allow (e.g. \"TX, WA\")"
+                },
+                "asns": {
+                  "type": "string",
+                  "examples": ["395747, 28304"],
+                  "description": "comma separated string of ASNs to allow (e.g. \"395747, 28304\")"
+                }
               }
             },
             "ignoreUnknown": {
               "type": "boolean",
-              "description": "Optional, defaults to true. Specifies whether unknown geo-location parameters should be ignored (allowed through)."
+              "default": true,
+              "description": "Specifies whether unknown geo-location parameters should be ignored (allowed through)."
             }
           }
         }
@@ -70,13 +85,20 @@
           "export": "GeoFilterInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "allow": {
-              "countries": "US, CA"
-            },
-            "block": {
-              "asns": "$env(ASNS_TO_BLOCK)",
-              "regionCodes": "TX, WA"
-            },
+            "allow": [
+              {
+                "asns": "395747, 28304",
+                "countries": "US, CA",
+                "regionCodes": "TX, WA"
+              }
+            ],
+            "block": [
+              {
+                "asns": "395747, 28304",
+                "countries": "US, CA",
+                "regionCodes": "TX, WA"
+              }
+            ],
             "ignoreUnknown": true
           }
         }

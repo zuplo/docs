@@ -1,10 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/formdata-to-json-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Form Data to JSON",
-  "isPreview": false,
-  "description": "Converts form data in the incoming request to JSON.",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Converts form data in the incoming request to JSON.\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -21,12 +23,15 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "FormDataToJsonInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
+          "additionalProperties": false,
           "required": [],
           "properties": {
             "badRequestIfNotFormData": {
               "type": "boolean",
+              "default": true,
               "description": "Should the policy return an error if the request is not of the type form data"
             },
             "optionalHoneypotName": {
@@ -42,8 +47,7 @@
           "export": "FormDataToJsonInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "badRequestIfNotFormData": false,
-            "optionalHoneypotName": "HONEYPOT_FIELD_NAME"
+            "badRequestIfNotFormData": true
           }
         }
       ]

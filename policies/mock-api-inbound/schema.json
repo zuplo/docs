@@ -1,10 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/mock-api-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Mock API Response",
-  "isPreview": false,
-  "description": "Returns example responses from the OpenAPI document associated with this route.",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Returns example responses from the OpenAPI document associated with this route.\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -21,25 +23,30 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "MockApiInboundOptions",
           "type": "object",
           "description": "The options for this policy",
+          "additionalProperties": false,
           "required": [],
           "properties": {
             "random": {
               "type": "boolean",
-              "description": "Optional. Indicates whether the response should be selected randomly, from the available examples (that match any filter criteria). If `false` the first matching example is used. "
+              "default": false,
+              "description": "Indicates whether the response should be selected randomly, from the available examples (that match any filter criteria). If `false` the first matching example is used."
             },
             "responsePrefixFilter": {
               "type": "string",
-              "description": "Optional. Specifies a prefix to match the responses to select from. Typically this is a status code like \"200\" or \"2XX\". If you want the policy to select randomly from all 2XX codes, set this property to \"2\" and random to `true`."
+              "description": "Specifies a prefix to match the responses to select from. Typically this is a status code like \"200\" or \"2XX\". If you want the policy to select randomly from all 2XX codes, set this property to \"2\" and random to `true`<!-- -->."
             },
             "contentType": {
               "type": "string",
-              "description": "Optional. Specify the content-type of the response to select from. If not specified, the first matching response is used (or random)."
+              "examples": ["application/json"],
+              "description": "Specify the content-type of the response to select from. If not specified, the first matching response is used (or random)."
             },
             "exampleName": {
               "type": "string",
-              "description": "Optional. Specify the name of the example to select. If not specified, the first matching response is used (or random)."
+              "examples": ["example1"],
+              "description": "Specify the name of the example to select. If not specified, the first matching response is used (or random)."
             }
           }
         }
@@ -49,7 +56,11 @@
           "_name": "basic",
           "export": "MockApiInboundPolicy",
           "module": "$import(@zuplo/runtime)",
-          "options": {}
+          "options": {
+            "contentType": "application/json",
+            "exampleName": "example1",
+            "random": false
+          }
         }
       ]
     }

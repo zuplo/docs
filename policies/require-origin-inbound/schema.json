@@ -1,11 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/rate-limit-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Require Origin",
-  "description": "Sets an allow-list for an origin header",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Sets an allow-list for an origin header\n\n",
   "required": ["handler"],
-  "isPreview": false,
   "properties": {
     "handler": {
       "type": "object",
@@ -21,16 +23,23 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "RequireOriginInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
+          "additionalProperties": false,
           "required": ["origins"],
           "properties": {
             "origins": {
               "type": "string",
+              "examples": ["https://example.com, https://example.org"],
               "description": "A comma separated string containing valid origins"
             },
             "failureDetail": {
               "type": "string",
+              "default": "Forbidden",
+              "examples": [
+                "Your origin is not authorized to make this request."
+              ],
               "description": "The `detail` of the HTTP Problem response, if the origin is missing or disallowed"
             }
           }
@@ -38,12 +47,12 @@
       },
       "examples": [
         {
-          "_name": "require-origin-inbound",
+          "_name": "basic",
           "export": "RequireOriginInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "origins": "https://contoso.com, https://sub.contoso.com",
-            "failureDetail": "Invalid Request - contact support at support@contoso.com"
+            "failureDetail": "Your origin is not authorized to make this request.",
+            "origins": "https://example.com, https://example.org"
           }
         }
       ]

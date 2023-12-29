@@ -1,11 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/mtls-auth-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "mTLS Auth",
-  "isPreview": false,
+  "isDeprecated": false,
   "isPaidAddOn": true,
-  "description": "Authenticate requests based on the mTLS protocol",
+  "isUnlisted": false,
+  "description": "Authenticate requests based on the mTLS protocol.\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -14,7 +15,7 @@
       "required": ["export", "module", "options"],
       "properties": {
         "export": {
-          "const": "MTLSAuthInbound",
+          "const": "MTLSAuthInboundPolicy",
           "description": "The name of the exported type"
         },
         "module": {
@@ -22,16 +23,17 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "MTLSAuthInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
-          "required": [],
-          "properties": {}
+          "additionalProperties": false,
+          "required": []
         }
       },
       "examples": [
         {
           "_name": "basic",
-          "export": "MTLSAuthInbound",
+          "export": "MTLSAuthInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {}
         }

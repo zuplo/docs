@@ -1,11 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/api-key-auth-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
-  "title": "Legacy API Key Authentication (deprecated)",
-  "isPreview": false,
+  "title": "API Key Authentication",
   "isDeprecated": true,
-  "description": "Deprecated - Please use the new 'API Key Authentication' policy instead. This policy will continue to work but will be removed in a future version of Zuplo.",
+  "isPaidAddOn": false,
+  "isUnlisted": true,
+  "description": "Authenticates requests based on API Keys using Zuplo API Management. You can learn more about the Zuplo API Key Service \\[here\\](https://zuplo.com/docs/articles/api-key-api\\#buckets)\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -22,10 +23,16 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "ApiAuthKeyInboundPolicyOptions",
           "type": "object",
+          "description": "The options for this policy",
+          "additionalProperties": false,
+          "required": [],
+          "deprecated": true,
           "properties": {
             "allowUnauthenticatedRequests": {
               "type": "boolean",
+              "default": false,
               "description": "If 'true' allows the request to continue even if authenticated. When 'false' (the default) any unauthenticated request is automatically rejected with a 401"
             }
           }

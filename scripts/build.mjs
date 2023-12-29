@@ -7,5 +7,6 @@ esbuild.buildSync({
   platform: "node",
   packages: "external",
   format: "esm",
+  sourcemap: true,
   outfile: path.resolve(process.cwd(), "./scripts/update-policies.mjs"),
 });

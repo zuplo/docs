@@ -1,10 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/open-id-jwt-auth-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Readme Metrics",
-  "isPreview": false,
-  "description": "Readme is a developer documentation and API metrics company. This policy pushes logs to their API calls dashboard.",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Readme is a developer documentation and API metrics company. This policy pushes logs to their API calls dashboard.\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -21,33 +23,41 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "ReadmeMeteringInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy. Many of them can be overridden at the code level in a request using the `AmberfloMeteringPolicy.setRequestProperties` method.",
+          "additionalProperties": false,
           "required": ["apiKey"],
           "properties": {
             "apiKey": {
               "type": "string",
+              "examples": ["$env(README_API_KEY)"],
               "description": "The API key to use when sending metrics calls to Readme"
             },
             "userLabelPropertyPath": {
               "type": "string",
-              "description": "Optional - defaults to '.sub'. This is the path to the property on `request.user` that contains the label you want to use. For example `.data.accountNumber` would read the `request.user.data.accountNumber` property."
+              "x-show-example": false,
+              "default": ".sub",
+              "description": "This is the path to the property on `request.user` that contains the label you want to use. For example `.data.accountNumber` would read the `request.user.data.accountNumber` property."
             },
             "userEmailPropertyPath": {
               "type": "string",
-              "description": "Optional - defaults to empty. This is the path to the property on `request.user` that contains the e-mail of the user. For example `.data.email` would read the `request.user.data.email` property."
+              "default": "",
+              "description": "This is the path to the property on `request.user` that contains the e-mail of the user. For example `.data.email` would read the `request.user.data.email` property."
             },
             "development": {
               "type": "boolean",
-              "description": "Optional. Whether the data should be ingested as 'development' mode or not. Defaults to true for working-copy and false for all other environments."
+              "description": "Whether the data should be ingested as 'development' mode or not. Defaults to true for working-copy and false for all other environments."
             },
             "useFullRequestPath": {
               "type": "boolean",
-              "description": "Optional - defaults to false. When true, Zuplo sends the full request path (which might contain sensitive information). By default, we only send the route path which should not contain sensitive information."
+              "default": false,
+              "description": "When true, Zuplo sends the full request path (which might contain sensitive information). By default, we only send the route path which should not contain sensitive information."
             },
             "url": {
               "type": "string",
-              "description": "Optional, the URL to send metering events to (defaults to https://metrics.readme.io/request). This is useful for testing purposes."
+              "default": "https://metrics.readme.io/request",
+              "description": "The URL to send metering events. This is useful for testing purposes."
             }
           }
         }
@@ -55,13 +65,13 @@
       "examples": [
         {
           "_name": "basic",
-          "module": "$import(@zuplo/runtime)",
           "export": "ReadmeMetricsInboundPolicy",
+          "module": "$import(@zuplo/runtime)",
           "options": {
-            "apiKey": "YOUR_API_KEY",
-            "userLabelPropertyPath": ".sub",
-            "development": true,
-            "useFullRequestPath": false
+            "apiKey": "$env(README_API_KEY)",
+            "url": "https://metrics.readme.io/request",
+            "useFullRequestPath": false,
+            "userEmailPropertyPath": ""
           }
         }
       ]

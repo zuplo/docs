@@ -1,5 +1,3 @@
-## Using the Policy
-
 Adding Clerk authentication to your route takes just a few steps. Follow the
 instructions below to setup Clerk and the Clerk policy.
 

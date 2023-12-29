@@ -1,10 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/quota-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Quota",
+  "isDeprecated": false,
   "isPaidAddOn": true,
-  "description": "Enforce quota policies on requests",
+  "isUnlisted": false,
+  "description": "Enforce quota policies on requests.\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -13,7 +15,7 @@
       "required": ["export", "module", "options"],
       "properties": {
         "export": {
-          "const": "QuotaInbound",
+          "const": "QuotaInboundPolicy",
           "description": "The name of the exported type"
         },
         "module": {
@@ -21,16 +23,17 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "QuotaInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
-          "required": [],
-          "properties": {}
+          "additionalProperties": false,
+          "required": []
         }
       },
       "examples": [
         {
           "_name": "basic",
-          "export": "QuotaInbound",
+          "export": "QuotaInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {}
         }

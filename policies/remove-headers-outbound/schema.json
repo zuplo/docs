@@ -1,10 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/remove-headers-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Remove Response Headers",
-  "isPreview": false,
-  "description": "Remove configured headers from the outgoing response.",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Remove configured headers from the outgoing response.\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -21,10 +23,21 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "RemoveHeadersOutboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
-          "required": [],
-          "properties": {}
+          "additionalProperties": false,
+          "required": ["headers"],
+          "properties": {
+            "headers": {
+              "type": "array",
+              "description": "An array of headers to be removed from the outgoing response.",
+              "examples": [["x-amz-content-sha256", "x-amz-date"]],
+              "items": {
+                "type": "string"
+              }
+            }
+          }
         }
       },
       "examples": [
@@ -33,7 +46,7 @@
           "export": "RemoveHeadersOutboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "headers": ["HEADER_NAME"]
+            "headers": ["x-amz-content-sha256", "x-amz-date"]
           }
         }
       ]

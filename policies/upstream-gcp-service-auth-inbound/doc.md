@@ -1,5 +1,3 @@
-## Using the Policy
-
 This policy requires a Google Service Account and key that will be used to
 identify the Zuplo API Gateway. Once this policy is configured you will need to
 configure your GCP backend to only accept authenticated requests.

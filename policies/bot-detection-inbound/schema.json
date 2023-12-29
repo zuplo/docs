@@ -1,10 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/bot-detection-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Bot Detection",
+  "isDeprecated": false,
   "isPaidAddOn": true,
-  "description": "Detect known and suspected bots based on sophisticated traffic analysis. The bot detection inbound policy provides a bot score for every request that can be used to determine the likelihood the request came from a bot. The policy can be configured to automatically block traffic with a set score or simply pass along the score for you to respond in other policies or handlers.",
+  "isUnlisted": false,
+  "description": "Detect known and suspected bots based on sophisticated traffic analysis.\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -13,7 +15,7 @@
       "required": ["export", "module", "options"],
       "properties": {
         "export": {
-          "const": "BotDetectionInbound",
+          "const": "BotDetectionInboundPolicy",
           "description": "The name of the exported type"
         },
         "module": {
@@ -21,12 +23,15 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "BotDetectionInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
-          "required": [],
+          "additionalProperties": false,
+          "required": ["blockScoresBelow"],
           "properties": {
             "blockScoresBelow": {
               "type": "number",
+              "examples": [80],
               "description": "The threshold at which bots are automatically blocked"
             }
           }
@@ -35,10 +40,10 @@
       "examples": [
         {
           "_name": "basic",
-          "export": "BotDetectionInbound",
+          "export": "BotDetectionInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "blockScoresBelow": 40
+            "blockScoresBelow": 80
           }
         }
       ]

@@ -5,14 +5,16 @@
   "scripts": {
     "dev": "npm run ci:pre && next dev",
     "build": "npm run ci:pre && next build",
-    "postinstall": "node ./scripts/update-bundles.mjs && node ./scripts/copy-shiki.mjs",
+    "postinstall": "npm run get-policies && npm run ci:shiki",
+    "get-policies": "sh ./scripts/get-policies.sh",
     "postbuild": "next-sitemap",
-    "start": "npm run ci:pre && next start",
+    "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
     "ci:pre": "npm run ci:bundles && npm run ci:policies",
     "ci:bundles": "node ./scripts/update-bundles.mjs",
-    "ci:policies": "node ./scripts/build.mjs && node ./scripts/update-policies.main.mjs"
+    "ci:shiki": "node ./scripts/copy-shiki.mjs",
+    "ci:policies": "node ./scripts/build.mjs && node --enable-source-maps ./scripts/update-policies.main.mjs"
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
@@ -46,6 +48,7 @@
     "next-mdx-remote": "^4.4.1",
     "next-sitemap": "^4.2.3",
     "next-themes": "^0.2.1",
+    "posthog-js": "^1.96.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-highlight-words": "^0.20.0",
@@ -65,8 +68,8 @@
     "video.js": "^8.3.0"
   },
   "devDependencies": {
+    "@types/json-schema": "^7.0.15",
     "@playwright/test": "^1.40.1",
-    "@types/json-schema": "^7.0.13",
     "@types/node": "^18.18.4",
     "checkly": "^4.5.2",
     "eslint": "^8.51.0",

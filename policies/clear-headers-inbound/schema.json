@@ -1,10 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/clear-headers-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Clear Request Headers",
-  "isPreview": false,
-  "description": "Removes all headers from the incoming request except for those in the exclude list.",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Removes all headers from the incoming request except for those in the exclude list.\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -21,8 +23,10 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "ClearHeadersInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
+          "additionalProperties": false,
           "required": [],
           "properties": {
             "exclude": {
@@ -30,6 +34,7 @@
               "items": {
                 "type": "string"
               },
+              "examples": [["my-header", "aws-request-id"]],
               "description": "The headers that should not be removed"
             }
           }
@@ -41,7 +46,7 @@
           "export": "ClearHeadersInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
-            "exclude": ["HEADER_TO_LEAVE"]
+            "exclude": ["my-header", "aws-request-id"]
           }
         }
       ]

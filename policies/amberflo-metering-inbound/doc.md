@@ -42,7 +42,7 @@ export default async function (
   request: ZuploRequest,
   context: ZuploContext,
   options: MyPolicyOptionsType,
-  policyName: string,
+  policyName: string
 ) {
   AmberfloMeteringPolicy.setRequestProperties(context, {
     customerId: request.user.sub,

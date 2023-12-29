@@ -1,10 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/open-api-based-request-validation-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "Request Validation",
-  "isPreview": false,
-  "description": "Validate inbound requests based on Open API specification",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Validate inbound requests based on Open API specification\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -21,33 +23,53 @@
           "description": "The module containing the policy"
         },
         "options": {
+          "title": "RequestValidationInboundPolicyOptions",
           "type": "object",
           "description": "The options for this policy",
+          "additionalProperties": false,
           "required": [],
           "properties": {
             "logLevel": {
               "type": "string",
-              "description": "Optional. Specify one of the log levels: 'error | warn | info | debug'. Default: info"
+              "default": "info",
+              "description": "The log level to use when logging validation errors.",
+              "enum": ["error", "warn", "info", "debug"]
             },
             "validateBody": {
+              "examples": ["reject-and-log"],
               "type": "string",
-              "description": "Optional. Specify one of the options: 'none, log-only, reject-and-log, reject-only'. Default: none"
+              "title": "ValidationOptions",
+              "defualt": "none",
+              "description": "The action to perform when validation fails.",
+              "enum": ["none", "log-only", "reject-and-log", "reject-only"]
             },
             "validateQueryParameters": {
+              "examples": ["log-only"],
               "type": "string",
-              "description": "Optional. Specify one of the options: 'none, log-only, reject-and-log, reject-only'. Default: none"
+              "title": "ValidationOptions",
+              "defualt": "none",
+              "description": "The action to perform when validation fails.",
+              "enum": ["none", "log-only", "reject-and-log", "reject-only"]
             },
             "validatePathParameters": {
+              "examples": ["log-only"],
               "type": "string",
-              "description": "Optional. Specify one of the options: 'none, log-only, reject-and-log, reject-only'. Default: none"
+              "title": "ValidationOptions",
+              "defualt": "none",
+              "description": "The action to perform when validation fails.",
+              "enum": ["none", "log-only", "reject-and-log", "reject-only"]
             },
             "validateHeaders": {
               "type": "string",
-              "description": "Optional. Specify one of the options: 'none, log-only, reject-and-log, reject-only'. Default: none"
+              "title": "ValidationOptions",
+              "defualt": "none",
+              "description": "The action to perform when validation fails.",
+              "enum": ["none", "log-only", "reject-and-log", "reject-only"]
             },
             "includeRequestInLogs": {
               "type": "boolean",
-              "description": "Optional. Specify whether to include the request in the logs. Default: false"
+              "default": false,
+              "description": "Whether to include the request in the logs."
             }
           }
         }
@@ -58,9 +80,11 @@
           "export": "RequestValidationInboundPolicy",
           "module": "$import(@zuplo/runtime)",
           "options": {
+            "includeRequestInLogs": false,
             "logLevel": "info",
-            "validateBody": "log-only",
-            "includeRequestInLogs": false
+            "validateBody": "reject-and-log",
+            "validatePathParameters": "log-only",
+            "validateQueryParameters": "log-only"
           }
         }
       ]

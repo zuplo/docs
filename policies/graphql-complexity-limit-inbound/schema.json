@@ -1,10 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "http://zuplo.com/schemas/policies/graphql-complexity-limit-inbound.json",
+  "$id": "http://zuplo.com/schemas/policies/auth0-jwt-auth-inbound.json",
   "type": "object",
   "title": "GraphQL Complexity Limit",
-  "isPreview": false,
-  "description": "Limits the complexity of a GraphQL query",
+  "isDeprecated": false,
+  "isPaidAddOn": false,
+  "isUnlisted": false,
+  "description": "Limits the complexity of a GraphQL query\n\n",
   "required": ["handler"],
   "properties": {
     "handler": {
@@ -17,28 +19,47 @@
           "description": "The name of the exported type"
         },
         "module": {
-          "const": "$import(@zuplo/graphql)",
+          "const": "$import(@zuplo/runtime)",
           "description": "The module containing the policy"
         },
         "options": {
           "type": "object",
+          "title": "GraphQLComplexityLimitInboundPolicyOptions",
           "description": "The options for this policy",
-          "required": [],
+          "required": ["useComplexityLimit", "useDepthLimit"],
+          "additionalProperties": false,
           "properties": {
             "useComplexityLimit": {
-              "maxComplexity": {
-                "type": "number",
-                "description": "The maximum depth a query is allowed to have"
-              },
-              "endpointUrl": {
-                "type": "number",
-                "description": "The URL of the GraphQL endpoint to query"
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["maxComplexity", "variables"],
+              "properties": {
+                "complexityLimit": {
+                  "type": "number",
+                  "description": "The maximum complexity a query is allowed to have"
+                },
+                "endpointUrl": {
+                  "type": "string",
+                  "description": "The endpoint URL to use for the complexity calculation"
+                }
               }
             },
             "useDepthLimit": {
-              "maxDepth": {
-                "type": "number",
-                "description": "The maximum depth a query is allowed to have"
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["maxDepth"],
+              "properties": {
+                "depthLimit": {
+                  "type": "number",
+                  "description": "The maximum depth a query is allowed to have"
+                },
+                "ignore": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "The fields to ignore when calculating the depth of a query"
+                }
               }
             }
           }
@@ -48,10 +69,14 @@
         {
           "_name": "basic",
           "export": "GraphQLComplexityLimitInboundPolicy",
-          "module": "$import(@zuplo/graphql)",
+          "module": "$import(@zuplo/runtime)",
           "options": {
-            "complexityLimit": 50,
-            "endpointUrl": "https://api.example.com/graphql"
+            "useComplexityLimit": [{}],
+            "useDepthLimit": [
+              {
+                "ignore": []
+              }
+            ]
           }
         }
       ]
