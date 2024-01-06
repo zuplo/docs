@@ -48,7 +48,7 @@ const config = {
               const policyId = docPath
                 .replace("policies/", "")
                 .replace(".md", "");
-              return `https://github.com/zuplo/docs/tree/main/policies/${policyId}`;
+              return `https://github.com/zuplo/docs/issues/new?assignees=&labels=&projects=&template=policies-doc.md&title=[Policy] ${policyId}`;
             }
             return `https://github.com/zuplo/docs/tree/main/docs/${docPath}`;
           },
@@ -141,7 +141,7 @@ const config = {
             items: [
               {
                 label: "Discord",
-                href: "https://discord.gg/W36Ddfcd",
+                href: "https://discord.zuplo.com",
               },
               {
                 label: "Twitter",

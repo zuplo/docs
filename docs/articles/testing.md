@@ -152,7 +152,7 @@ rather than trying to mock large portions of your API Gateway.
 :::
 
 It is usually possible to use test frameworks like
-[Mocha](https://github.com/zuplo-samples/test-mocks) and mocking tools like
-[Sinon](https://sinonjs.org/) to unit tests handlers, policies, or other
-modules. To see an example of how that works see this sample on Github:
-https://github.com/zuplo-samples/test-mocks
+[Mocha](https://github.com/zuplo/zuplo/tree/main/examples/test-mocks) and
+mocking tools like [Sinon](https://sinonjs.org/) to unit tests handlers,
+policies, or other modules. To see an example of how that works see this sample
+on Github: https://github.com/zuplo/zuplo/tree/main/examples/test-mocks

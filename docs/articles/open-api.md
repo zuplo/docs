@@ -134,4 +134,4 @@ You can have multiple `.oas.json` files if you wish to break up your route
 definitions. Note that routes will be executed in document order, based on the
 `.oas.json` files being sorted alphabetically.
 
-Join the conversation on our [Discord](https://discord.gg/8QbEjr2MgZ).
+Join the conversation on our [Discord](https://discord.zuplo.com).

@@ -2,9 +2,9 @@ import { dereference } from "@apidevtools/json-schema-ref-parser";
 import chalk from "chalk";
 import chokidar from "chokidar";
 import { existsSync } from "fs";
-import { copyFile, mkdir, readdir, readFile, rm, writeFile } from "fs/promises";
+import { copyFile, mkdir, readFile, writeFile } from "fs/promises";
 import glob from "glob";
-import { JSONSchema7 } from "json-schema";
+import { JSONSchema7, JSONSchema7Definition } from "json-schema";
 import { Heading as AstHeading } from "mdast";
 import { toString } from "mdast-util-to-string";
 import path from "path";
@@ -17,21 +17,18 @@ import { visit } from "unist-util-visit";
 // here just to keep the react import
 const version = React.version;
 
+type SchemaRecord = {
+  [key: string]: JSONSchema7;
+};
+
 type PolicySchema = JSONSchema7 & {
   isPreview?: boolean;
   isDeprecated?: boolean;
+  isUnlisted?: boolean;
   isPaidAddOn?: boolean;
   isCustom?: boolean;
+  deprecatedMessage?: string;
 };
-
-type PolicyProperties = Record<
-  string,
-  {
-    default?: boolean | string | number;
-    description: string;
-    properties?: PolicyProperties;
-  }
->;
 
 type Heading = {
   depth: number;
@@ -44,58 +41,190 @@ type RenderResult = {
   headings: Array<Heading>;
 };
 
-const OptionProperties = ({ properties }: { properties: PolicyProperties }) => (
-  <ul>
-    {Object.entries(properties).map(([key, value]) => (
-      <li key={key}>
-        <code>{key}</code>{" "}
-        <div dangerouslySetInnerHTML={{ __html: value.description }} />
-        {value.properties ? (
-          <OptionProperties properties={value.properties} />
-        ) : undefined}
-      </li>
-    ))}
-  </ul>
-);
+const OptionProperty = ({ schema }: { schema: JSONSchema7 }) => {
+  isObjectSchema(schema);
+
+  if (schema.type === "object" && schema.properties) {
+    return <ObjectSchema schema={schema} />;
+  } else if (schema.type === "array" && schema.items) {
+    return <ArraySchema schema={schema} />;
+  }
+};
+
+function ObjectSchema({ schema }: { schema: JSONSchema7 }) {
+  return (
+    <ul>
+      {Object.entries(schema.properties as SchemaRecord).map(([key, value]) => (
+        <li key={key}>
+          <code>{key}</code>
+          <OptionType value={value} />
+          {schema.required?.includes(key) && (
+            <span className="required-option">{" (Required)"}</span>
+          )}
+          {" - "}
+          {value.description && (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: value.description,
+              }}
+            />
+          )}
+          {value.type === "string" && value.enum && (
+            <span className="allow-values">
+              {" "}
+              Allowed values are{" "}
+              {value.enum.map((v, i) => {
+                const comma = i < value.enum.length - 1 ? ", " : null;
+                const and = i === value.enum.length - 1 ? "and " : null;
+                return (
+                  <span key={i}>
+                    {and}
+                    <code>{v.toString()}</code>
+                    {comma}
+                  </span>
+                );
+              })}
+              .
+            </span>
+          )}
+          {value.default && (
+            <span className="default-value">
+              {" "}
+              Defaults to <code>{value.default.toString()}</code>.
+            </span>
+          )}
+          <OptionProperty schema={value} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function ArraySchema({ schema }: { schema: JSONSchema7 }) {
+  const items = schema.items as JSONSchema7;
+  if (items.type === "object" && items.properties) {
+    return <ObjectSchema schema={items} />;
+  }
+  return null;
+}
+
+function OptionType({ value }: { value: JSONSchema7 }) {
+  let typeString: string | undefined;
+  if (value.type === "array") {
+    const arrayType = (value.items as JSONSchema7 | undefined)?.type;
+    typeString = arrayType ? `${arrayType}[]` : "array";
+  } else if (value.type) {
+    typeString = value.type.toString();
+  } else if (value.oneOf) {
+    typeString = value.oneOf
+      .map((o: JSONSchema7) => {
+        if (o.items && (o.items as JSONSchema7).type) {
+          return `${(o.items as JSONSchema7).type.toString()}[]`;
+        }
+        return o.type?.toString();
+      })
+      .filter((t) => t !== undefined)
+      .join(" | ");
+  }
+  if (typeString) {
+    return <span className="type-option">{` <${typeString}>`}</span>;
+  }
+}
+
+function isObjectSchema(val: unknown): asserts val is object {
+  if (typeof val === "boolean") {
+    throw new Error("Invalid schema");
+  }
+}
+
+function Heading3({ title, id }: { title: string; id: string }) {
+  return (
+    <h3
+      className="anchor anchorWithStickyNavbar_node_modules-@docusaurus-theme-classic-lib-theme-Heading-styles-module"
+      id={id}
+    >
+      {title}
+      <a
+        href={`#${id}`}
+        className="hash-link"
+        aria-label={`Direct link to ${title}`}
+        title={`Direct link to ${title}`}
+      >
+        ​
+      </a>
+    </h3>
+  );
+}
 
 const PolicyOptions = ({
   schema,
   policyId,
 }: {
-  schema: any;
+  schema: JSONSchema7Definition;
   policyId: string;
 }) => {
-  const { properties } = schema.properties.handler;
+  isObjectSchema(schema);
+  const { handler } = schema.properties;
+  isObjectSchema(handler);
+  const { properties } = handler;
+  const { module: handlerModule, export: handlerExport, options } = properties;
+  isObjectSchema(handlerModule);
+  isObjectSchema(handlerExport);
   return (
-    <ul>
-      <li>
-        <code>name</code> the name of your policy instance. This is used as a
-        reference in your routes.
-      </li>
-      <li>
-        <code>policyType</code> the identifier of the policy. This is used by
-        the Zuplo UI. Value should be <code>{policyId}</code>.
-      </li>
-      <li>
-        <code>handler/export</code> The name of the exported type. Value should
-        be <code>{properties.export.const}</code>.
-      </li>
-      <li>
-        <code>handler/module</code> the module containing the policy. Value
-        should be <code>{properties.module.const}</code>.
-      </li>
-      {properties.options && Object.keys(properties.options).length > 0 ? (
+    <div>
+      <Heading3 title="Policy Configuration" id="policy-configuration" />
+      <ul>
         <li>
-          <code>handler/options</code> The options for this policy:
-          <OptionProperties properties={properties.options.properties} />
+          <code>name</code> <span className="type-option">{"<string>"}</span> -
+          The name of your policy instance. This is used as a reference in your
+          routes.
         </li>
+        <li>
+          <code>policyType</code>{" "}
+          <span className="type-option">{"<string>"}</span> - The identifier of
+          the policy. This is used by the Zuplo UI. Value should be{" "}
+          <code>{policyId}</code>.
+        </li>
+        <li>
+          <code>handler.export</code>{" "}
+          <span className="type-option">{"<string>"}</span> - The name of the
+          exported type. Value should be{" "}
+          <code>{handlerExport.const.toString()}</code>.
+        </li>
+        <li>
+          <code>handler.module</code>{" "}
+          <span className="type-option">{"<string>"}</span> - The module
+          containing the policy. Value should be{" "}
+          <code>{handlerModule.const.toString()}</code>.
+        </li>
+        {options && Object.keys(options).length > 0 ? (
+          <li>
+            <code>handler.options</code>{" "}
+            <span className="type-option">{"<object>"}</span> - The options for
+            this policy. <a href="#policy-options">See Policy Options</a> below.
+          </li>
+        ) : null}
+      </ul>
+      {options && Object.keys(options).length > 0 ? (
+        <>
+          <Heading3 title="Policy Options" id="policy-options" />
+          <p>
+            The options for this policy are specified below. All properties are
+            optional unless specifically marked as required.
+          </p>
+          <OptionProperty schema={options as JSONSchema7} />
+        </>
       ) : null}
-    </ul>
+    </div>
   );
 };
 
-const policiesDir = path.resolve(process.cwd(), "./policies");
 const docsDir = path.resolve(process.cwd(), "./docs/policies");
+const policiesDir = path.resolve(process.cwd(), "./policies");
+const policyManifestOutputPath = path.resolve(
+  process.cwd(),
+  "policies.v3.json",
+);
 
 const headings = (root: Node): Array<Heading> => {
   const headingList: Array<Heading> = [];
@@ -176,12 +305,12 @@ async function processProperties(properties) {
   return Promise.all(tasks);
 }
 
-function getPolicyFilePaths(policyId) {
+function getPolicyFilePaths(policyDir) {
   return {
-    iconSvg: path.join(policiesDir, policyId, "icon.svg"),
-    introMd: path.join(policiesDir, policyId, "intro.md"),
-    docMd: path.join(policiesDir, policyId, "doc.md"),
-    policyTs: path.join(policiesDir, policyId, "policy.ts"),
+    iconSvg: path.join(policyDir, "icon.svg"),
+    introMd: path.join(policyDir, "intro.md"),
+    docMd: path.join(policyDir, "doc.md"),
+    policyTs: path.join(policyDir, "policy.ts"),
   };
 }
 
@@ -230,7 +359,7 @@ async function generateMarkdown(
   if (schema.isCustom && existsSync(policyFilePaths.policyTs)) {
     const policyTs = await readFile(policyFilePaths.policyTs, "utf-8");
     customCode = `
-# Example Custom Policy
+## Example Custom Policy
 
 The code below is an example of how this custom policy module could be implemented.
 
@@ -257,6 +386,17 @@ ${
     : ""
 }
 
+
+${
+  schema.isDeprecated
+    ? `:::danger Deprecated
+
+This policy is deprecated. ${schema.deprecatedMessage ?? ""}
+
+:::`
+    : ""
+}
+
 <!-- start: intro.md -->
 ${introMd ?? schema.description}
 <!-- end: intro.md -->
@@ -264,8 +404,6 @@ ${introMd ?? schema.description}
 <PolicyStatus isPreview={${schema.isPreview ?? false}} isPaidAddOn={${
     schema.isPaidAddOn ?? false
   }} />
-
-
 
 ${customCode}
 
@@ -285,6 +423,7 @@ ${JSON.stringify(code, null, 2)}
 ${optionsHtml}
 </div>
 
+## Using the Policy
 <!-- start: doc.md -->
 ${(docMd ?? "").replace(/!\[(.*)\]\(\.\/(.*)\)/, `![$1](./${policyId}/$2)`)}
 <!-- end: doc.md -->
@@ -305,34 +444,38 @@ export async function run() {
   const policyConfig = JSON.parse(policyConfigJson);
 
   const matches: string[] = await new Promise((resolve, reject) => {
-    glob(
-      "**/schema.json",
-      {
-        cwd: policiesDir,
-      },
-      (err, result) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(result);
-        }
-      },
-    );
+    glob("./{policies,temp}/**/schema.json", (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
   });
 
   const policies = [];
   const tasks = matches.map(async (match) => {
-    const policyId = match.replace("/schema.json", "");
-    const schemaPath = path.join(policiesDir, match);
+    const policyDir = path.join(
+      process.cwd(),
+      match.replace("/schema.json", ""),
+    );
+    const policyId = match.split("/")[2];
+
+    const schemaPath = path.join(policyDir, "schema.json");
     const schemaJson = await readFile(schemaPath, "utf-8");
     const rawSchema = JSON.parse(schemaJson);
     // RefParser uses cwd to resolve refs
-    const policyDir = path.join(policiesDir, policyId);
     process.chdir(policyDir);
     const schema = (await dereference(rawSchema)) as PolicySchema;
+
+    // Skip unlisted policies, they don't get docs or included in the output
+    if (schema.isUnlisted) {
+      return;
+    }
+
     await processProperties(schema.properties);
 
-    const policyFilePaths = getPolicyFilePaths(policyId);
+    const policyFilePaths = getPolicyFilePaths(policyDir);
 
     // Build the meta format for use in the portal
     const meta: Record<string, any> = {};
@@ -341,6 +484,7 @@ export async function run() {
     meta.isPaidAddOn = !!schema.isPaidAddOn;
     meta.isCustom = !!schema.isCustom;
     meta.isDeprecated = !!schema.isDeprecated;
+    meta.deprecationMessage = schema.deprecatedMessage;
     meta.documentationUrl = `https://zuplo.com/docs/policies/${policyId}/`;
     meta.id = policyId;
 
@@ -377,13 +521,12 @@ export async function run() {
         options: {},
       };
     }
-    if (schema.isCustom && existsSync(policyFilePaths.introMd)) {
-      const intro = await readFile(policyFilePaths.introMd, "utf-8");
-      const { html } = await render(intro);
-      meta.exampleHtml = html;
-    } else {
-      meta.exampleHtml = await getExampleHtml(policyId, schemaPath, schema);
-    }
+
+    meta.exampleHtml = await getExampleHtml(
+      policyId,
+      schema,
+      policyFilePaths.introMd,
+    );
 
     if (existsSync(policyFilePaths.iconSvg)) {
       const svg = await readFile(policyFilePaths.iconSvg, "utf-8");
@@ -404,32 +547,7 @@ export async function run() {
       policyFilePaths,
     );
 
-    if (!schema.isDeprecated) {
-      const policyOutDir = path.join(docsDir, policyId);
-      if (!existsSync(policyOutDir)) {
-        await mkdir(policyOutDir);
-      }
-      await writeFile(
-        path.join(docsDir, `${policyId}.md`),
-        generatedMd,
-        "utf-8",
-      );
-
-      // Copy png files
-      const assets = (await readdir(policyDir)).filter((file) => {
-        return file.endsWith(".png");
-      });
-      for (const asset of assets) {
-        const dest = path.resolve(policyOutDir, asset);
-        if (existsSync(dest)) {
-          await rm(dest);
-        }
-        await copyFile(
-          path.resolve(policyDir, asset),
-          path.resolve(policyOutDir, asset),
-        );
-      }
-    }
+    await writeFile(path.join(docsDir, `${policyId}.md`), generatedMd, "utf-8");
   });
 
   await Promise.all(tasks);
@@ -445,39 +563,45 @@ export async function run() {
   };
 
   const policiesV3Json = await stringify(policyDataV3);
-
-  await writeFile(
-    path.resolve(policiesDir, "../policies.v3.json"),
-    policiesV3Json,
-    "utf-8",
-  );
+  await writeFile(policyManifestOutputPath, policiesV3Json, "utf-8");
 
   console.info("Policies updated");
 }
 
 async function getExampleHtml(
   policyId: string,
-  policyPath: string,
   schema: PolicySchema,
+  introMdPath: string,
 ) {
-  if (!schema.description) {
-    console.error(
-      chalk.red(
-        `ERROR: The policy ${policyId} does not have a description set in the schema`,
-        policyPath,
-      ),
+  let introOrDescription: string;
+  if (existsSync(introMdPath)) {
+    introOrDescription = await readFile(introMdPath, "utf-8");
+  } else {
+    introOrDescription = schema.description;
+  }
+
+  const { html: introHtml } = await render(introOrDescription);
+
+  isObjectSchema(schema);
+  const { handler } = schema.properties;
+  isObjectSchema(handler);
+  const { properties } = handler;
+  const { options } = properties;
+
+  let deprecatedHtml = null;
+  if (schema.isDeprecated) {
+    let deprecatedInnerHtml = "<strong>This policy is deprecated.</strong>";
+    if (schema.deprecatedMessage) {
+      const { html } = await render(schema.deprecatedMessage);
+      deprecatedInnerHtml =
+        "<p>" + deprecatedInnerHtml + " " + html.toString().substring(3);
+    }
+    deprecatedHtml = (
+      <div dangerouslySetInnerHTML={{ __html: deprecatedInnerHtml }} />
     );
-    throw new Error("Invalid schema");
   }
 
-  const { html: description } = await render(schema.description);
-
-  const properties = (schema.properties.handler as any).properties.options
-    ?.properties;
-  if (!properties) {
-    return;
-  }
-  if (properties && Object.keys(properties).length === 0) {
+  if (properties.options && Object.keys(properties.options).length === 0) {
     console.warn(
       chalk.yellow(
         `WARN: The policy ${policyId} does not have any options set in the schema.`,
@@ -485,13 +609,20 @@ async function getExampleHtml(
     );
   }
 
+  // TODO: Move the deprecated message into custom UI in the portal
+  // and remove from here.
   const html = renderToStaticMarkup(
     <>
-      <div dangerouslySetInnerHTML={{ __html: description }} />
-      {Object.keys(properties).length > 0 ? (
+      {deprecatedHtml}
+      <div dangerouslySetInnerHTML={{ __html: introHtml }} />
+      {options && Object.keys(options).length > 0 ? (
         <>
           <h3>Options</h3>
-          <OptionProperties properties={properties} />{" "}
+          <p>
+            The options for this policy are specified below. All properties are
+            optional unless specifically marked as required.
+          </p>
+          <OptionProperty schema={options as JSONSchema7} />
         </>
       ) : null}
     </>,
@@ -502,7 +633,7 @@ async function getExampleHtml(
 
 export async function watch() {
   await run();
-  var watcher = chokidar.watch(policiesDir, {
+  var watcher = chokidar.watch(path.join(policiesDir), {
     ignored: /^\./,
     persistent: true,
     ignoreInitial: true,

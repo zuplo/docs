@@ -30,6 +30,29 @@
   --docusaurus-highlighted-code-line-bg: rgb(57, 58, 52);
 }
 
+.policy-options code {
+  border: none;
+}
+.policy-options p + ul {
+  margin-top: var(--ifm-leading);
+}
+.policy-options ul > li > ul {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+}
+.policy-options ul > li > ul > li > ul {
+  padding-left: 40px;
+}
+.policy-options li + li {
+  margin-top: 5px;
+}
+.policy-options .required-option {
+  font-weight: bold;
+}
+.policy-options .type-option {
+  color: #43853d;
+}
 .policy-options p {
   display: inline;
 }

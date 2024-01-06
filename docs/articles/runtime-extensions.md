@@ -33,7 +33,7 @@ function signature.
 
 The following configurations are available.
 
-### Custom Problem (Error) Response Formatter
+## Custom Problem (Error) Response Formatter
 
 Zuplo includes built-in error handling that returns errors in the format of the
 [Problem Details for HTTP APIs](http://httpproblems.com/) proposed standard.
@@ -85,64 +85,75 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 }
 ```
 
-### Hook: OnResponseSending
+## Hooks
 
-The `OnResponseSending` hook allows modification of the `Response` immediately
-before it is sent to the client. The hook provides the `Request` and `Response`
-and returns a `Response`. To modify the outgoing response create and return a
-`new Response()`.
+Hooks allow code to be run as part of the request/response pipeline. Hooks can
+be created at the API level in `zuplo.runtime.ts` as shown below or can be added
+via a plugin as [documented here](./hooks.md).
 
-The example below shows modifying the response for a specific path.
+:::tip
+
+All hooks can be either synchronous or asynchronous. To make your hook
+asynchronous simply add the `async` keyword on the function.
+
+:::
+
+The following hooks can be set globally in the `zuplo.runtime.ts`:
+
+### Hook: OnRequest
+
+Runs when a request is received, before any plugins or handlers.
 
 ```ts
 import { RuntimeExtensions } from "@zuplo/runtime";
 
 export function runtimeInit(runtime: RuntimeExtensions) {
-  runtime.addResponseSendingHook(async (response, latestRequest, context) => {
-    const url = new URL(request.url);
-    if (url.pathname === "/path-to-change-response") {
-      return new Response("New Response", response);
-    }
+  runtime.addRequestHook((request, context) => {
+    // Code here
+
+    // Can return a request or a response. If a response is returned the
+    // pipeline stops and the response is returned.
+    return request;
+  });
+}
+```
+
+### Hooks: OnResponseSending
+
+Runs before a response is sent. Response can be modified.
+[More details.](/docs/articles/hooks#hook-onresponsesending)
+
+```ts
+import { RuntimeExtensions } from "@zuplo/runtime";
+
+export function runtimeInit(runtime: RuntimeExtensions) {
+  runtime.addResponseSendingHook((response, request, context) => {
+    // Code here
     return response;
   });
 }
 ```
 
-### Hook: Context OnResponseSendingFinal
+### Hooks: OnResponseSendingFinal
 
-The `OnResponseSendingFinal` hook on `ZuploContext` fires immediately after the
-response is sent to the client. The `Response` in this hook is immutable and the
-body has been used. This hook is useful for custom performing various tasks like
-logging or analytics.
+Runs before a response is sent. The response cannot be modified.
+[More details.](/docs/articles/hooks#hook-onresponsesendingfinal)
 
 ```ts
-import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+import { RuntimeExtensions } from "@zuplo/runtime";
 
-export async function pluginWithHook(
-  request: ZuploRequest,
-  context: ZuploContext,
-  policyName: string,
-) {
-  const cloned = request.clone();
-  context.addResponseSendingFinalHook(
-    async (response, latestRequest, context) => {
-      const body = await cloned.text();
-      await fetch("https://example.com", {
-        method: "GET",
-        body,
-      });
-    },
-  );
-
-  return request;
+export function runtimeInit(runtime: RuntimeExtensions) {
+  runtime.addResponseSendingFinalHook((response, request, context) => {
+    // Code here
+  });
 }
 ```
 
 ## Plugin and Handler Extensions
 
-Built-in and custom plugins and handlers can expose their own extensibility. The
-[AWS Lambda handler](../handlers/aws-lambda.md) exposes the ability to customize
-the event that is sent when invoking the Lambda function.
+Built-in and custom plugins and handlers can expose their own extensibility. For
+example, [AWS Lambda handler](../handlers/aws-lambda.md) exposes the ability to
+customize the event that is sent when invoking the Lambda function.
 
 The example below shows how to use a route's custom property to set the path on
 the outgoing event to a custom value.

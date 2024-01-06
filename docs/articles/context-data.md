@@ -44,7 +44,7 @@ const data = myData.get(context);
 
 ### Typing
 
-The methods of `CustomData` support generics in order to support typing.
+The methods of `ContextData` support generics in order to support typing.
 
 ```ts
 const myData = new ContextData<{ key: string }>("my-data");
@@ -91,10 +91,10 @@ throughout the lifecycle of a request.
 ### Using static methods
 
 ```ts
-import { CustomData, ZuploContext, ZuploRequest } from "@zuplo/runtime";
+import { ContextData, ZuploContext, ZuploRequest } from "@zuplo/runtime";
 
 export function myFirstPolicy(request: ZuploRequest, context: ZuploContext) {
-  CustomData.set(context, "currentRequestId", context.requestId;
+  ContextData.set(context, "currentRequestId", context.requestId);
 
   const currentRequestId = ContextData.get(context, "currentRequestId");
   context.log.info(`The current requestId is: ${currentRequestId}`);

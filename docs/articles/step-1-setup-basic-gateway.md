@@ -12,6 +12,13 @@ the key is provided in the unauthenticated error message.
 To get started, sign in to [portal.zuplo.com](https://portal.zuplo.com) and
 create a free account. Create a new **empty** project. Then...
 
+:::tip Local Development
+
+Zuplo also supports building and running your API locally. To learn more
+[see the documentation](./local-development.md).
+
+:::
+
 ## 1/ Add a route
 
 Inside your new project, choose the `routes.oas.json` file and click **Add
@@ -33,9 +40,10 @@ Save your changes (you can click the disk icon next to `routes.oas.json` or
 press CMD+S).
 
 You can quickly test this route by clicking the **Test** button next to the
-**Path** field and clicking the URL in the dialog that opens.
+**Path** field. You can use the built in test tool or click the URL to open in a
+new tab.
 
-![Test](https://cdn.zuplo.com/assets/cd094b3c-efbe-4c2b-995c-60ce0302704a.png)
+<Screenshot src="https://cdn.zuplo.com/assets/ef3005b5-2e69-4704-bcfe-12b2db62e0b4.png" />
 
 You should receive a 401 Unauthorized that says something similar to
 
@@ -88,28 +96,9 @@ important secret).
 ## 3/ Test your API
 
 Go back to your route in the Route Designer and click the **Test** button next
-to the **Path** field. Open the URL in the browser and you should see a list of
-todoitems.
+to the **Path** field. Click the **Test** button in the dialog that opens.
 
-```
-[
-  {
-    "userId": 1,
-    "id": 1,
-    "title": "delectus aut autem",
-    "completed": false
-  },
-  {
-    "userId": 1,
-    "id": 2,
-    "title": "quis ut nam facilis et officia qui",
-    "completed": false
-  },
-  {
-    "userId": 1,
-    "id": 3,
-
-```
+<Screenshot src="https://cdn.zuplo.com/assets/c1753ead-6bd3-4b6f-99d2-ef4c964d7b32.png" />
 
 Congratulations, your gateway is working 👏👏👏
 

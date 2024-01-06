@@ -48,19 +48,27 @@ means of secret storage and environment variable injection for your platform.
 ### Configuring services
 
 Once you have created a tunnel, you can configure which services it should
-expose using a configuration file. Here's a sample configuration file:
+expose using a configuration file. Below is a sample configuration file.
 
-```json
+The properties in the `services` objects are explained below.
+
+- `name` - This is the name of the service that you will use from your zup
+- `endpoint` - This is the local endpoint of your service that you tunnel can
+  connect to
+- `configurations` - This object specifies which projects and which environments
+  can access this service.
+  - `project` - The name of the zuplo project
+  - `accessibleBy` - The environments which can use the tunnel. Valid values are
+    `production`, `preview`, and `working-copy`.
+
+```json title="tunnel-config.json"
 {
   "version": 1,
   "services": [
     {
-      // This is the name of the service that you will use from your zup
       "name": "my-awesome-service-prod",
-      // This is the local endpoint of your service that you tunnel can connect to
       "endpoint": "http://localhost:8000",
       "configurations": [
-        // You can specify which projects and which environments can access this service
         {
           "project": "my-project",
           "accessibleBy": ["production"]
