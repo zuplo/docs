@@ -102,7 +102,11 @@ const sidebars = {
           label: "Local Development",
           items: [
             "articles/local-development",
-            "articles/configure-ide-for-local-development",
+            "articles/local-development-routes-designer",
+            "articles/local-development-installing-packages",
+            "articles/local-development-api-keys",
+            "articles/local-development-env-variables",
+            "articles/local-development-troubleshooting",
           ],
         },
         "articles/custom-ci-cd",
