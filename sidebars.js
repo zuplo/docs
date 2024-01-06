@@ -56,6 +56,18 @@ const sidebars = {
     // },
     {
       type: "category",
+      label: "Local Development",
+      items: [
+        "articles/local-development",
+        "articles/local-development-routes-designer",
+        "articles/local-development-installing-packages",
+        "articles/local-development-api-keys",
+        "articles/local-development-env-variables",
+        "articles/local-development-troubleshooting",
+      ],
+    },
+    {
+      type: "category",
       label: "Getting to Production",
       items: [
         "articles/environments",
@@ -86,29 +98,9 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "OpenAPI",
-      link: {
-        type: "doc",
-        id: "articles/open-api",
-      },
-      items: [],
-    },
-    {
-      type: "category",
       label: "How to Guides",
       items: [
-        {
-          type: "category",
-          label: "Local Development",
-          items: [
-            "articles/local-development",
-            "articles/local-development-routes-designer",
-            "articles/local-development-installing-packages",
-            "articles/local-development-api-keys",
-            "articles/local-development-env-variables",
-            "articles/local-development-troubleshooting",
-          ],
-        },
+        "articles/open-api",
         "articles/custom-ci-cd",
         "articles/rename-or-move-project",
         "articles/add-project-collaborators",
