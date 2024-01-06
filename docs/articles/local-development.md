@@ -65,11 +65,10 @@ running your Zuplo Gateway locally:
 
 ## Next steps
 
-- Use the [local Route Designer](/docs/articles/route-designer) to create your
-  first route.
+- Use the [local Route Designer](./local-development-routes-designer) to create
+  your first route.
 - Install [packages](/docs/articles/node-modules) to extend your Zuplo Gateway.
-- Use the [API keys](/docs/articles/local-development-api-keys) service locally
-  to secure your routes.
-- Add
-  [environment variables](/docs/articles/local-development-environment-variables)
-  to your project.
+- Use the [API keys](./local-development-api-keys) service locally to secure
+  your routes.
+- Add [environment variables](./local-development-env-variables) to your
+  project.
