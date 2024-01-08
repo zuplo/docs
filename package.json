@@ -25,9 +25,9 @@
     "ci:policies": "node ./scripts/build.mjs && node --enable-source-maps ./scripts/update-policies.main.mjs"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.0.0",
-    "@docusaurus/preset-classic": "^3.0.0",
-    "@docusaurus/theme-mermaid": "^3.0.0",
+    "@docusaurus/core": "^3.1.0",
+    "@docusaurus/preset-classic": "^3.1.0",
+    "@docusaurus/theme-mermaid": "^3.1.0",
     "@heroicons/react": "^2.0.12",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^1.2.1",
@@ -51,9 +51,9 @@
   },
   "devDependencies": {
     "@apidevtools/json-schema-ref-parser": "^10.1.0",
-    "@docusaurus/module-type-aliases": "^3.0.0",
-    "@docusaurus/tsconfig": "3.0.0",
-    "@docusaurus/types": "3.0.0",
+    "@docusaurus/module-type-aliases": "^3.1.0",
+    "@docusaurus/tsconfig": "^3.1.0",
+    "@docusaurus/types": "^3.1.0",
     "@types/glob": "^8.0.0",
     "@types/jsdom": "^21.1.0",
     "@types/json-schema": "^7.0.15",
