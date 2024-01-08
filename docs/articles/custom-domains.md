@@ -65,6 +65,15 @@ verification. Please be patient if this happens.
 By default, you can also use the url on `zuploapp.com` although, if you prefer
 that to be removed contact support and we can disable it for you.
 
+:::caution
+
+If you use Cloudflare as your DNS provider, you MUST enable Cloudflare Proxy on
+your custom domain.
+
+![](https://cdn.zuplo.com/assets/a40beef2-9eed-44fd-a41e-3f337afbaee2.png)
+
+:::
+
 ### 4. Redeploy
 
 Some changes, like the domain set in your developer portal, only get picked up
