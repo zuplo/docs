@@ -7,7 +7,7 @@ feature allowed developers to create and save "manual" tests that could be run
 against their Zuplo API.
 
 This feature has been replaced instead by the inline test running in the
-[Route Builder](https://zuplo.com/docs/articles/step-1-setup-basic-gateway#3-test-your-api).
+[Route Builder](/docs/articles/step-1-setup-basic-gateway#3-test-your-api).
 
 The below screenshot shows the Manual Test Runner UI. This tab will be
 completely removed in the Zuplo portal.
@@ -25,4 +25,4 @@ tooling such as [HTTPie](https://httpie.io/),
 Zuplo code tests written in typescript will move to the main code editor tab
 where you can continue to edit or view these files. Running tests with the Zuplo
 CLI is still fully supported (and recommended!). For more information on testing
-your Zuplo API see [the documentation](https://zuplo.com/docs/articles/testing).
+your Zuplo API see [the documentation](/docs/articles/testing).
