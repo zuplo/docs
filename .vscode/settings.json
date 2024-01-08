@@ -4,6 +4,7 @@
   "editor.formatOnSave": true,
   "search.exclude": {
     "**/node_modules": true,
+    "**/package-lock.json": true,
     "**/bower_components": true,
     "**/*.code-search": true,
     "**/.next": true
