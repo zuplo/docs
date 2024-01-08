@@ -144,6 +144,7 @@ const sidebars = {
                 "policies/open-id-jwt-auth-inbound",
                 "policies/propel-auth-jwt-inbound",
                 "policies/supabase-jwt-auth-inbound",
+                "policies/curity-phantom-token-inbound",
                 "policies/basic-auth-inbound",
                 "policies/mtls-auth-inbound",
                 "policies/ldap-auth-inbound",
