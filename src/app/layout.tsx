@@ -6,7 +6,7 @@ import { Layout } from "@/components/Layout";
 
 import "@/styles/tailwind.css";
 import "@/styles/styles.css";
-import { beVietnamProFont } from "../lib/fonts";
+import { inter, firaSans } from "../lib/fonts";
 
 export const metadata: Metadata = {
   title: {
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={clsx("h-full antialiased", beVietnamProFont.variable)}
+      className={clsx("h-full antialiased", inter.variable, firaSans.variable)}
       suppressHydrationWarning
     >
       <head>

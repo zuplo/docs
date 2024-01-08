@@ -4,7 +4,7 @@ import { Config } from "tailwindcss";
 const plugin = require("tailwindcss/plugin");
 
 const typographyHeading = () => ({
-  fontFamily: ["Fira Sans", "sans-serif"],
+  fontFamily: ["var(--font-fira-sans)", "sans-serif"],
   fontStyle: "normal",
   fontWeight: "bold",
   lineHeight: "120%",
@@ -156,12 +156,12 @@ export default {
       }),
     },
     fontFamily: {
-      sans: ["Inter", "sans-serif"],
-      display: ["Inter", "sans-serif"],
+      sans: ["var(--font-inter)", "sans-serif"],
+      display: ["var(--font-inter)", "sans-serif"],
 
       // Zuplo Fonts
-      base: ["Inter", "sans-serif"],
-      fancy: ["Fira Sans", "sans-serif"],
+      base: ["var(--font-inter)", "sans-serif"],
+      fancy: ["var(--font-fira-sans)", "sans-serif"],
       mono: ["Consolas", "Monaco", "Andale Mono", "Ubuntu Mono", "monospace"],
     },
     letterSpacing: {
