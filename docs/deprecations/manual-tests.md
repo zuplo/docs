@@ -6,8 +6,8 @@ The manually test tab in the Zuplo portal will be removed in January 2024. This
 feature allowed developers to create and save "manual" tests that could be run
 against their Zuplo API.
 
-This feature has been replaced instead by the inline test running in the Route
-Builder.
+This feature has been replaced instead by the inline test running in the
+[Route Builder](https://zuplo.com/docs/articles/step-1-setup-basic-gateway#3-test-your-api).
 
 The below screenshot shows the Manual Test Runner UI. This tab will be
 completely removed in the Zuplo portal.
