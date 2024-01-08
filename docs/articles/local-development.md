@@ -15,9 +15,11 @@ purposes, at the convenience of your code editor.
 
 ### Create a new project from scratch
 
-1. Run `npm create zuplo-api@latest`. Follow the prompts and provide a project
-   name.
-2. Follow the instructions on the prompt
+1. Create a new project using
+
+```
+npm create zuplo-api@latest
+```
 
 ```bash title="Expected output: "
 cd <your-new-project-directory>
@@ -25,7 +27,8 @@ npm install
 npm run dev
 ```
 
-3. Run `npm run dev` to start your Zuplo Gateway locally.
+3. Start your local gateway using `npm run dev`.
+
 4. Use the [local Route Designer](./local-development-routes-designer.md) to
    create your first route.
 
@@ -46,9 +49,17 @@ project into your local machine.
 npx @zuplo/cli project update
 ```
 
-4. Install the necessary dependencies using `npm install`.
+4. Install the necessary dependencies:
 
-5. Run `npm run dev` to start your Zuplo Gateway locally.
+```sh
+npm install
+```
+
+5. Start your Zuplo Gateway locally;
+
+```sh
+npm run dev
+```
 
 6. Use the [local Route Designer](./local-development-routes-designer.md) to
    create your first route.
