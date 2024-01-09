@@ -9,7 +9,7 @@ $ npm install
 ### Local Development
 
 ```
-$ npm start
+$ npm run dev
 ```
 
 This command starts a local development server and opens up a browser window.

@@ -17,5 +17,5 @@ for (const file of files) {
   );
   const dirname = path.dirname(filePath);
   await fs.mkdir(dirname, { recursive: true });
-  await fs.rename(file, filePath);
+  await fs.copyFile(file, filePath);
 }
