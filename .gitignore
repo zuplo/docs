@@ -50,4 +50,11 @@ yarn.lock
 
 
 # Temporary while migrating
-src/app/docs/
+src/app/articles
+src/app/cli
+src/app/conferences
+src/app/deprecations
+src/app/errors
+src/app/handlers
+src/app/overview
+src/app/sample-apis
