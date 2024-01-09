@@ -26,7 +26,7 @@ function PageLink({
         <Link
           href={href}
           className={clsx(
-            "flex items-center gap-x-2.5 text-sm font-bold leading-6 tracking-wider text-pink",
+            "flex items-center gap-x-2.5 text-sm leading-6 text-slate-400 hover:text-pink",
             dir === "previous" && "flex-row-reverse",
           )}
         >
@@ -61,7 +61,7 @@ export function PrevNextLinks() {
   }
 
   return (
-    <dl className="flex border-t border-slate-200 py-5 dark:border-slate-800">
+    <dl className="flex border-t border-slate-200 py-5">
       {previousPage && !!previousPage?.href && (
         <PageLink
           dir="previous"

@@ -91,7 +91,7 @@ function NavSection({
 }) {
   const pathname = usePathname();
   const linkClassName =
-    "block w-full px-6 leading-6 tracking-wider transition-all hover:text-pink hover:text-shadow cursor-pointer relative";
+    "block w-full px-6 transition-all text-slate-600 hover:text-pink cursor-pointer relative";
 
   return (
     <>
@@ -143,7 +143,7 @@ export function Navigation({
         {navigation.map((section: NavCategory) => (
           <li key={section.label}>
             {section?.type === NavigationType.CATEGORY && (
-              <h5 className="pl-6 text-sm text-slate-400 font-medium">
+              <h5 className="pl-6 text-sm text-slate-400 font-light">
                 {section?.href ? (
                   <Link href={section.href}>{section.label}</Link>
                 ) : (
@@ -151,7 +151,7 @@ export function Navigation({
                 )}
               </h5>
             )}
-            <ul role="list" className="mt-2 space-y-2 lg:mt-3.5 lg:space-y-4 ">
+            <ul role="list" className="mt-2 space-y-2 lg:mt-3.5 lg:space-y-2 ">
               {!!section?.items &&
                 section?.items.map((navItem, i) => (
                   <NavSection

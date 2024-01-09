@@ -111,8 +111,9 @@ export default {
           css: {
             a: {
               color: theme("colors.pink.DEFAULT"),
-              textDecorationLine: "none",
+              textDecorationLine: "underline",
               "&:hover": {
+                color: theme("colors.pink.hover"),
                 textDecorationLine: "underline",
               },
               fontWeight: "normal",

@@ -54,8 +54,8 @@ export default async function Page() {
 
   return (
     <DocsLayout frontmatter={{ title: "Zuplo Docs" }} useRateSection={false}>
-      Learn how to use Zuplo to add API-key management, developer documentation,
-      and rate-limiting, for any stack.
+      <p>Learn how to use Zuplo to add API-key management, developer documentation,
+      and rate-limiting, for any stack.</p>
       <h2>Overview</h2>
       <QuickLinks items={overviewItems} />
       <h2>Getting Started</h2>

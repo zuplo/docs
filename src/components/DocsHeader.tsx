@@ -46,11 +46,11 @@ export function DocsHeader({
 
   return (
     <header className="mb-5">
-      <div className="mb-4 flex flex-wrap items-center gap-x-[3px] text-sm leading-6 tracking-wider text-gray-600 lg:mb-10">
+      <div className="mb-4 flex flex-wrap items-center gap-x-[3px] text-sm leading-6 text-slate-400 lg:mb-2">
         {breadcrumbItems.map((item, index) => (
           <div className="flex items-center" key={nanoid()}>
             {!!item?.href ? (
-              <Link href={item.href}>{item.label}</Link>
+              <Link href={item.href} className="hover:text-pink">{item.label}</Link>
             ) : (
               <p>{item.label}</p>
             )}

@@ -68,30 +68,30 @@ export function TableOfContents({
           <>
             <h2
               id="on-this-page-title"
-              className="text-sm text-slate-400 font-medium"
+              className="text-sm text-slate-400 font-light"
             >
               On this page
             </h2>
-            <ol role="list" className="mt-4 space-y-3 text-sm">
+            <ol role="list" className="mt-4 space-y-2 text-sm">
               {tableOfContents.map((section) => (
-                <li key={section.id} className="leading-6 tracking-wider">
+                <li key={section.id} className="leading-6">
                   <Link
                     href={`#${section.id}`}
                     className={clsx(
-                      "block w-full transition-all hover:text-pink hover:text-shadow",
+                      "block w-full transition-all text-slate-500 hover:text-pink",
                       isActive(section) ? "font-bold" : "font-medium",
                     )}
                   >
                     {section.title}
                   </Link>
                   {section.children.length > 0 && (
-                    <ol role="list" className="mt-2 space-y-3 pl-5">
+                    <ol role="list" className="mt-2 space-y-2 pl-5">
                       {section.children.map((subSection) => (
                         <li key={subSection.id}>
                           <Link
                             href={`#${subSection.id}`}
                             className={clsx(
-                              "transition-all hover:text-pink hover:text-shadow",
+                              "transition-all text-slate-500 hover:text-pink",
                               isActive(subSection)
                                 ? "font-bold"
                                 : "font-medium",

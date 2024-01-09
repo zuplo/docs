@@ -4,7 +4,7 @@ import DislikeIcon from "@/components/svgs/dislike.svg";
 import clsx from "classnames";
 
 export default function ArticleRate() {
-  const linkClassName = "btn btn-tertiary-dark flex items-center";
+  const linkClassName = "btn border hover:border-dark flex items-center opacity-50 hover:opacity-100 text-black";
 
   return (
     <div className="flex flex-wrap items-center gap-5 pt-[60px]">
