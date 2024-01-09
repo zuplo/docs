@@ -30,7 +30,7 @@ const config = {
       },
     ],
   ],
-  themes: ["@inkeep/docusaurus/chatButton"],
+  themes: ["@inkeep/docusaurus/searchBar"],
   presets: [
     [
       "classic",
