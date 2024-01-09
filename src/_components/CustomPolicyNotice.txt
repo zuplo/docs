@@ -1,5 +1,4 @@
 import Admonition from "@theme/Admonition";
-import React from "react";
 
 export default function CustomPolicyNotice({
   name,
@@ -15,10 +14,10 @@ export default function CustomPolicyNotice({
     <div>
       <Admonition type="tip" title="Custom Policy Example">
         <p>
-          Zuplo is extensible, so we don't have a built-in policy for {name},
-          instead we have a template here that shows you how you can use your
-          superpower (code) to achieve your goals. To learn more about custom
-          policies{" "}
+          Zuplo is extensible, so we don&apos;t have a built-in policy for{" "}
+          {name}, instead we have a template here that shows you how you can use
+          your superpower (code) to achieve your goals. To learn more about
+          custom policies{" "}
           <a href={href} target="_blank">
             see the documentation
           </a>

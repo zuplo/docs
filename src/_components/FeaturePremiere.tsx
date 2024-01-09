@@ -1,5 +1,3 @@
-import React from "react";
-
 interface Props {
   name: string;
   bio: string;
@@ -34,7 +32,7 @@ const FeaturePremiere = ({ name, bio, description, image, url }: Props) => {
         <div style={{ fontWeight: "bold", fontSize: "30px" }}>{name}</div>
         <div>{bio}</div>
         <div>{description}</div>
-        <a href={url}>Watch {name}'s session here</a>
+        <a href={url}>Watch {name}&apos;s session here</a>
       </div>
     </div>
   );

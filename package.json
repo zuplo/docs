@@ -7,19 +7,15 @@
     "build": "next build",
     "_build": "npm run ci:pre && docusaurus build",
     "start": "next start",
-    "_start": "npm run ci:pre && concurrently \"npm run start:policies\" \"npm run start:docusaurus\"",
     "lint": "next lint",
-    "start:policies": "node ./scripts/build.mjs && node ./scripts/update-policies.main.mjs --watch",
-    "start:docusaurus": "node ./scripts/check-prepared.mjs && docusaurus start --port 3002",
     "build:scripts": "node ./scripts/build.mjs",
     "format": "prettier --write .",
     "local": "npm run ci:pre",
     "typecheck": "tsc",
     "postinstall": "npm run get-policies",
     "get-policies": "sh ./scripts/get-policies.sh",
-    "ci:pre": "npm run ci:bundles && npm run ci:policies",
-    "ci:bundles": "node ./scripts/update-bundles.mjs",
-    "ci:policies": "node ./scripts/build.mjs && node --enable-source-maps ./scripts/update-policies.main.mjs"
+    "ci:pre": "npm run ci:bundles",
+    "ci:bundles": "node ./scripts/update-bundles.mjs"
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
