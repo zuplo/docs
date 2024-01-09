@@ -21,7 +21,7 @@ Use these commands to help your manage your
 [tunnels](../articles/secure-tunnel.md). They must be run from the root of your
 Zuplo project.
 
-### Creating a tunnel
+## Creating a tunnel
 
 ```bash
 # For brevity, the commands assume that you have exported your API key as an environment variable,
@@ -31,7 +31,7 @@ zup tunnel create --tunnel-name my-tunnel
 zup tunnel list
 ```
 
-### Running the tunnel
+## Running the tunnel
 
 To run the Docker container on your own infrastructure, refer to instructions
 from your cloud provider or contact [Zuplo support](mailto:support@zuplo.com)
@@ -45,7 +45,7 @@ Your running container needs a single environment variable named
 `TUNNEL_TOKEN``. You should store the value as a secret using the recommended
 means of secret storage and environment variable injection for your platform.
 
-### Configuring services
+## Configuring services
 
 Once you have created a tunnel, you can configure which services it should
 expose using a configuration file. Below is a sample configuration file.

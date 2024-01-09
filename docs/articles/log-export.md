@@ -28,7 +28,7 @@ Logs are send as compressed gzip files. Each gzip file has a single text file
 with each log line containing a log entry serialized as JSON. For example a
 single file would look like the below.
 
-```
+```txt
 {"ClientIP":"2a16:95c0:3300::103","ClientRequestHost":"api.example.com","ClientRequestMethod":"PO...}
 {"ClientIP":"35.243.129.13","ClientRequestHost":"api.example.com","ClientRequestMethod":"GET","Cl...}
 {"ClientIP":"11.156.176.11","ClientRequestHost":"api.example.com,"ClientRequestMethod":"GET","Cli...}

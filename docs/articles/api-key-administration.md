@@ -2,7 +2,7 @@
 title: API Key Administration
 ---
 
-### Managing Consumers in the Zuplo Portal
+## Managing Consumers in the Zuplo Portal
 
 API Key Consumers can be managed in the Zuplo Portal's **API Key Consumers**
 section under the <SettingsTabIcon /> **Settings** tab.

@@ -22,7 +22,7 @@ click **routes.oas.json**. Inside any route, select **URL Rewrite** from the
 In the text box enter the URL to rewrite the request. Values can be mixed into
 the URL string using Javascript string interpolation syntax. For example:
 
-```
+```txt
 https://echo.zuplo.io/${method}/${params.productId}
 ```
 
