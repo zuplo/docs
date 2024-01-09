@@ -70,26 +70,6 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       image: "https://cdn.zuplo.com/static/social/img-twitter-header.jpg",
-      algolia: {
-        // The application ID provided by Algolia
-        appId: "E7EUGPZYED",
-
-        // Public API key: it is safe to commit it
-        apiKey: "b2b9d3c7d9be346b7754344b8c3bccdd",
-
-        indexName: "ZUPLO_SITE",
-
-        // Optional: see doc section below
-        contextualSearch: true,
-
-        // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
-        externalUrlRegex: "zuplo\\.com/blog|zuplo\\.com/pricing",
-
-        // Optional: Algolia search parameters
-        searchParameters: {},
-
-        //... other Algolia params
-      },
       navbar: {
         logo: {
           alt: "Zuplo",
