@@ -16,7 +16,7 @@ GitHub: https://github.com/zuplo/echo-api
 
 **Request**
 
-```
+```txt
 POST https://echo.zuplo.io/my/path
 content-type: application/json
 

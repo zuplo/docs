@@ -78,7 +78,7 @@ authorization.
 For example, a Consumer might be tagged in order to track the customer
 associated with the consumer.
 
-```
+```txt
 customer=1234
 ```
 

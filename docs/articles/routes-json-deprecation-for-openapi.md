@@ -42,7 +42,7 @@ new OpenAPI support. We have provided a CLI tool that can be invoked via
 Simply execute the following cmd in your root Zuplo folder (at the level of the
 `/config` and `/module` folders):
 
-```
+```bash
 npx @zuplo/cli@latest convert
 ```
 
