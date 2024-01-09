@@ -14,6 +14,27 @@ export const navigation = [
     ],
   },
   {
+    title: "Getting Started",
+    links: [
+      {
+        title: "Step 1 - Setup a Basic Gateway",
+        href: "/docs/articles/step-1-setup-basic-gateway",
+      },
+      {
+        title: "Step 2 - API Key Authentication",
+        href: "/docs/articles/step-2-add-api-key-auth",
+      },
+      {
+        title: "Step 3 - Rate Limiting",
+        href: "/docs/articles/step-3-add-rate-limiting",
+      },
+      {
+        title: "Step 4 - Deploying to the Edge",
+        href: "/docs/articles/step-4-deploying-to-the-edge",
+      },
+    ],
+  },
+  {
     title: "Core concepts",
     links: [
       { title: "Understanding caching", href: "/docs/understanding-caching" },
