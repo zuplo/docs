@@ -27,7 +27,7 @@ click **routes.oas.json**. Inside any route, select **URL Forward** from the
 In the text box enter the URL to rewrite the request. Values can be mixed into
 the URL string using Javascript string interpolation syntax. For example:
 
-```
+```txt
 https://${env.BASE_HOST_NAME}/${method}/${params.productId}
 ```
 
@@ -141,13 +141,13 @@ origin of the backend.
 
 For example,
 
-```
+```js
 ${env.BASE_PATH}
 ```
 
 A url rewrite like this will combine the `BASE_PATH` environment variable, say
 `https://example.com`
 
-```
+```txt
 https://example.com/foo/bar
 ```

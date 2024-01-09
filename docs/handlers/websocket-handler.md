@@ -66,7 +66,7 @@ Similar to other handlers using `rewritePattern`, it supports Javascript string
 interpolation syntax and can be used to shape the URL based on data from the
 incoming request and environment variables defined in the project.
 
-```
+```txt
 https://${env.BASE_HOST_NAME}/${method}/${params.productId}
 ```
 
@@ -137,14 +137,14 @@ origin of the backend.
 
 For example,
 
-```
+```js
 ${env.BASE_PATH}
 ```
 
 Using the `rewritePattern` in `options` you can combine the `BASE_PATH`
 environment variable, say `https://example.com` to achieve this.
 
-```
+```txt
 https://${env.BASE_PATH}/foo/bar
 
 // Runtime value is
