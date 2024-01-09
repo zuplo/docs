@@ -30,6 +30,7 @@ const config = {
       },
     ],
   ],
+  themes: ["@inkeep/docusaurus/chatButton"],
   presets: [
     [
       "classic",
@@ -180,6 +181,37 @@ const config = {
         ],
         theme: themes.github,
         darkTheme: themes.dracula,
+      },
+      inkeepConfig: {
+        chatButtonType: "ICON_TEXT",
+        baseSettings: {
+          apiKey: "499c156cf7a9798343949c8bb5665ac95e48132c6d68c42e",
+          integrationId: "clot3asdz0000s601nc8jwnzx",
+          organizationId: "org_dDOlt2uJlMWM8oIS",
+          primaryBrandColor: "#ff00bd", // required -- your brand color, the widget color scheme is derived from this
+          organizationDisplayName: "Zuplo",
+          theme: {
+            syntaxHighlighter: {
+              lightTheme: themes.github,
+              darkTheme: themes.dracula,
+            },
+          },
+        },
+        // modalSettings: {
+        //   // optional settings
+        // },
+        // searchSettings: {
+        //   // optional settings
+        // },
+        // aiChatSettings: {
+        //   // optional settings
+        //   botAvatarSrcUrl: "/img/logo.svg", // optional -- use your own bot avatar
+        //   quickQuestions: [
+        //     "Example question 1?",
+        //     "Example question 2?",
+        //     "Example question 3?",
+        //   ],
+        // },
       },
     }),
 };
