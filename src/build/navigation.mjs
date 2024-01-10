@@ -18,9 +18,12 @@ function buildNavSection(rawSection) {
   for (const item of rawSection.items) {
     if (typeof item === "string") {
       if (item.startsWith("policies/")) {
-        let schemaPath = path.resolve(
-          path.join(item.replace("policies/", "temp/"), `schema.json`),
-        );
+        let schemaPath = path.resolve(path.join(item, `schema.json`));
+        if (!fs.existsSync(schemaPath)) {
+          schemaPath = path.resolve(
+            path.join(item.replace("policies/", "temp/"), `schema.json`),
+          );
+        }
         if (!fs.existsSync(schemaPath)) {
           throw new Error(`Schema file not found: ${schemaPath}`);
         }
