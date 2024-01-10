@@ -1,37 +1,63 @@
 import {
-  BoltIcon,
   CogIcon,
   EyeIcon,
-  PresentationChartLineIcon,
-  RectangleGroupIcon,
+  FileTextIcon,
+  LayoutTemplateIcon,
+  ListIcon,
+  PresentationIcon,
   RssIcon,
-} from "@heroicons/react/24/outline";
-import React, { FC } from "react";
-import { FileText, List } from "react-feather";
+  ZapIcon,
+} from "lucide-react";
+import { FC, PropsWithChildren } from "react";
 
-const styles = {
-  height: "19px",
-  width: "19px",
+function SvgWrapper({ children }: PropsWithChildren) {
+  return (
+    <span className="inline-flex h-[19px] w-[19px] align-text-top">
+      {children}
+    </span>
+  );
+}
 
-  verticalAlign: "text-top",
-};
-
-export const CodeEditorTabIcon: FC = () => <FileText style={styles} />;
-
-export const ApiTestConsoleTabIcon: FC = () => <BoltIcon style={styles} />;
-
-export const LiveLogsTabIcon: FC = () => <RssIcon style={styles} />;
-
-export const DashboardTabIcon: FC = () => (
-  <PresentationChartLineIcon style={styles} />
+export const CodeEditorTabIcon: FC = () => (
+  <SvgWrapper>
+    <FileTextIcon />
+  </SvgWrapper>
 );
 
-export const BuildStatusTabIcon: FC = () => <List style={styles} />;
+export const ApiTestConsoleTabIcon: FC = () => (
+  <SvgWrapper>
+    <ZapIcon />
+  </SvgWrapper>
+);
 
-export const SettingsTabIcon: FC = () => <CogIcon style={styles} />;
+export const LiveLogsTabIcon: FC = () => (
+  <SvgWrapper>
+    <RssIcon />
+  </SvgWrapper>
+);
+
+export const DashboardTabIcon: FC = () => (
+  <SvgWrapper>
+    <PresentationIcon />
+  </SvgWrapper>
+);
+
+export const BuildStatusTabIcon: FC = () => (
+  <SvgWrapper>
+    <ListIcon />
+  </SvgWrapper>
+);
+
+export const SettingsTabIcon: FC = () => (
+  <SvgWrapper>
+    <CogIcon />
+  </SvgWrapper>
+);
 
 export const DeveloperPortalIcon: FC = () => (
-  <RectangleGroupIcon style={styles} />
+  <SvgWrapper>
+    <LayoutTemplateIcon />
+  </SvgWrapper>
 );
 
 export const CopyIcon: FC = () => (
@@ -42,7 +68,7 @@ export const CopyIcon: FC = () => (
     viewBox="0 0 24 24"
     stroke="currentColor"
     strokeWidth={2}
-    style={{ ...styles, rotate: "90deg" }}
+    style={{ rotate: "90deg" }}
   >
     <path
       strokeLinecap="round"
@@ -52,7 +78,11 @@ export const CopyIcon: FC = () => (
   </svg>
 );
 
-export const ShowIcon: FC = () => <EyeIcon style={styles} />;
+export const ShowIcon: FC = () => (
+  <SvgWrapper>
+    <EyeIcon />
+  </SvgWrapper>
+);
 
 export const GitHubIcon: FC = () => (
   <svg

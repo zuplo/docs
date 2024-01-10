@@ -1,50 +1,143 @@
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import clsx from 'clsx'
+import clsx from "clsx";
+import { ChevronDownIcon, ChevronRightIcon } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-import { navigation } from '@/lib/navigation'
+import { navigation } from "@/build/navigation.mjs";
+import { NavCategory, NavItem } from "@/lib/interfaces";
+import { useState } from "react";
+
+function SubNavSection({
+  link,
+  onLinkClick,
+  depth,
+}: {
+  link: NavCategory;
+  onLinkClick?: React.MouseEventHandler<HTMLAnchorElement>;
+  depth: number;
+}) {
+  const pathname = usePathname();
+  const [hidden, setHidden] = useState(
+    !link.items.some((l) => "href" in l && l.href === pathname),
+  );
+
+  function onClick() {
+    setHidden(!hidden);
+  }
+
+  // useEffect(() => {
+  //   setHidden(!link.links.some((l) => "href" in l && l.href === pathname));
+  // }, [pathname, setHidden, link.links]);
+
+  return (
+    <li className={`relative`}>
+      <a
+        className="flex  w-full cursor-pointer pl-1 text-slate-500"
+        onClick={onClick}
+      >
+        <span className="flex-grow">{link.label}</span>
+        {hidden ? (
+          <ChevronRightIcon className="h-4 w-4" />
+        ) : (
+          <ChevronDownIcon className="h-4 w-4" />
+        )}
+      </a>
+      <ul
+        role="list"
+        className={`${
+          hidden ? "hidden" : ""
+        } ml-2 mt-2 space-y-2 border-l border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-200`}
+      >
+        {link.items.map((link, i) => (
+          <NavSection
+            link={link}
+            key={i}
+            onLinkClick={onLinkClick}
+            depth={depth + 1}
+          />
+        ))}
+      </ul>
+    </li>
+  );
+}
+
+function NavSection({
+  link,
+  onLinkClick,
+  depth,
+}: {
+  link: NavCategory | NavItem;
+  onLinkClick?: React.MouseEventHandler<HTMLAnchorElement>;
+  depth: number;
+}) {
+  let pathname = usePathname();
+  if ("href" in link && depth === 0) {
+    return (
+      <li key={link.href} className="relative">
+        <Link
+          href={link.href}
+          onClick={onLinkClick}
+          className={clsx(
+            "block w-full pl-1 ",
+            link.href === pathname
+              ? "font-medium  "
+              : "text-slate-500  hover:text-slate-600  dark:text-slate-400  dark:hover:text-slate-300",
+          )}
+        >
+          {link.label}
+        </Link>
+      </li>
+    );
+  } else if ("href" in link) {
+    return (
+      <li key={link.href} className="relative">
+        <Link
+          href={link.href}
+          onClick={onLinkClick}
+          className={clsx(
+            "block w-full pl-3.5 ",
+            link.href === pathname
+              ? "border-l  border-pink font-medium"
+              : "text-slate-500 hover:text-slate-600  dark:text-slate-400  dark:hover:text-slate-300",
+          )}
+        >
+          {link.label}
+        </Link>
+      </li>
+    );
+  } else {
+    return <SubNavSection link={link} depth={depth} key={link.label} />;
+  }
+}
 
 export function Navigation({
   className,
   onLinkClick,
 }: {
-  className?: string
-  onLinkClick?: React.MouseEventHandler<HTMLAnchorElement>
+  className?: string;
+  onLinkClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }) {
-  let pathname = usePathname()
-
   return (
-    <nav className={clsx('text-base lg:text-sm', className)}>
+    <nav className={clsx("text-base lg:text-sm", className)}>
       <ul role="list" className="space-y-9">
         {navigation.map((section) => (
-          <li key={section.title}>
-            <h2 className="font-display font-medium text-slate-900 dark:text-white">
-              {section.title}
+          <li key={section.label}>
+            <h2 className="font-display font-semibold text-slate-900 dark:text-white">
+              {section.label}
             </h2>
-            <ul
-              role="list"
-              className="mt-2 space-y-2 border-l-2 border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-200"
-            >
-              {section.links.map((link) => (
-                <li key={link.href} className="relative">
-                  <Link
-                    href={link.href}
-                    onClick={onLinkClick}
-                    className={clsx(
-                      'block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full',
-                      link.href === pathname
-                        ? 'font-semibold text-sky-500 before:bg-sky-500'
-                        : 'text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300',
-                    )}
-                  >
-                    {link.title}
-                  </Link>
-                </li>
+            <ul role="list" className="mt-2 space-y-2 lg:mt-4 lg:space-y-4 ">
+              {section.items.map((link, i) => (
+                <NavSection
+                  link={link}
+                  key={i}
+                  onLinkClick={onLinkClick}
+                  depth={0}
+                />
               ))}
             </ul>
           </li>
         ))}
       </ul>
     </nav>
-  )
+  );
 }

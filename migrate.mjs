@@ -1,6 +1,8 @@
 import glob from "fast-glob";
-import fs from "fs/promises";
+import fs from "fs";
 import path from "path";
+import sidebars from "./sidebars.js";
+
 const files = await glob("docs/**/*.md");
 const folders = [
   "articles",
@@ -14,7 +16,7 @@ const folders = [
 ];
 await Promise.all(
   folders.map((folder) =>
-    fs.mkdir(path.join(process.cwd(), "src/app", folder), {
+    fs.promises.mkdir(path.join(process.cwd(), "src/app", folder), {
       recursive: true,
     }),
   ),
@@ -29,6 +31,12 @@ for (const file of files) {
     "page.md",
   );
   const dirname = path.dirname(filePath);
-  await fs.mkdir(dirname, { recursive: true });
-  await fs.copyFile(file, filePath);
+  await fs.promises.mkdir(dirname, { recursive: true });
+  await fs.promises.copyFile(file, filePath);
 }
+
+await fs.promises.writeFile(
+  "./sidebar.jsonc",
+  JSON.stringify(sidebars.docs, null, 2),
+  "utf-8",
+);
