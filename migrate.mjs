@@ -32,7 +32,9 @@ for (const file of files) {
   );
   const dirname = path.dirname(filePath);
   await fs.promises.mkdir(dirname, { recursive: true });
-  await fs.promises.copyFile(file, filePath);
+  const content = await fs.promises.readFile(file, "utf-8");
+  const modified = await migrateContent(content);
+  await fs.promises.writeFile(filePath, modified, "utf-8");
 }
 
 await fs.promises.writeFile(
@@ -40,3 +42,7 @@ await fs.promises.writeFile(
   JSON.stringify(sidebars.docs, null, 2),
   "utf-8",
 );
+
+async function migrateContent(content) {
+  return content.replace(/<Screenshot src="(.*)" \/>/g, "![]($1)");
+}
