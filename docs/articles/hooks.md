@@ -13,7 +13,7 @@ asynchronous simply add the `async` keyword on the function.
 
 :::
 
-### Hook: OnResponseSending
+## Hook: OnResponseSending
 
 The `OnResponseSending` hook on `ZuploContext` fires just before the response is
 sent to the client. The `Response` can be modified by returning a new `Response`
@@ -58,7 +58,7 @@ export async function tracingPlugin(
 }
 ```
 
-### Hook: OnResponseSendingFinal
+## Hook: OnResponseSendingFinal
 
 The `OnResponseSendingFinal` hook on `ZuploContext` fires immediately after the
 response is sent to the client. The `Response` in this hook is immutable and the

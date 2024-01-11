@@ -17,7 +17,7 @@ purposes, at the convenience of your code editor.
 
 1. Create a new project using
 
-```
+```bash
 npm create zuplo-api@latest
 ```
 

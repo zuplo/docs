@@ -13,7 +13,7 @@ committed to your version system. Consider adding .env to your .gitignore file.
 
 :::
 
-```
+```txt
 KEY1=VALUE1
 KEY2=VALUE2
 ```
