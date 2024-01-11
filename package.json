@@ -13,9 +13,9 @@
     "typecheck": "tsc",
     "postinstall": "npm run get-policies && npm run ci:pre",
     "get-policies": "sh ./scripts/get-policies.sh",
-    "ci:pre": "npm run ci:bundles && node ./migrate.mjs && npm run ci:policies",
-    "ci:bundles": "node ./scripts/update-bundles.mjs",
-    "ci:policies": "node ./scripts/build.mjs && IS_NEXT=true node --enable-source-maps ./scripts/update-policies.main.mjs"
+    "ci:pre": "npm run ci:bundles && npm run ci:migrate",
+    "ci:migrate": "node ./migrate.mjs",
+    "ci:bundles": "node ./scripts/update-bundles.mjs"
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {

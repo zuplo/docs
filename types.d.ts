@@ -13,3 +13,8 @@ declare module "@/markdoc/search.mjs" {
 declare module "@/build/navigation.mjs" {
   export const navigation: NavCategory[];
 }
+
+declare module "@/build/policies.mjs" {
+  const namedExports: Record<string, any>;
+  export = namedExports;
+}
