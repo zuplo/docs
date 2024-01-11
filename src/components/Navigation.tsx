@@ -46,7 +46,7 @@ function SubNavSection({
         role="list"
         className={`${
           hidden ? "hidden" : ""
-        } ml-2 mt-2 space-y-2 border-l border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-200`}
+        } ml-2 pl-2 mt-2 space-y-2 border-l border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-200`}
       >
         {link.items.map((link, i) => (
           <NavSection
@@ -80,7 +80,7 @@ function NavSection({
           className={clsx(
             "block w-full pl-1 ",
             link.href === pathname
-              ? "font-medium  "
+              ? "font-medium text-pink "
               : "text-slate-500  hover:text-slate-600  dark:text-slate-400  dark:hover:text-slate-300",
           )}
         >
@@ -97,7 +97,7 @@ function NavSection({
           className={clsx(
             "block w-full pl-3.5 ",
             link.href === pathname
-              ? "border-l  border-pink font-medium"
+              ? "border-l  text-pink font-medium"
               : "text-slate-500 hover:text-slate-600  dark:text-slate-400  dark:hover:text-slate-300",
           )}
         >
