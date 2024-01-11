@@ -22,6 +22,7 @@ authentication to the [Developer Portal](../articles/developer-portal).
 ```json
 {
   "enableAuthentication": true,
+  "requireAuthentication": false,
   "generateExamples": true,
   "authentication": {
     "authority": "https://dev-123566.okta.com/oauth2/ausXXXXXXXXXXXX",
@@ -55,6 +56,11 @@ authentication to the [Developer Portal](../articles/developer-portal).
   Portal? This is required to enable self-serve of API keys. You must select an
   Auth Provider if this is enabled - by default we give you a demo Auth0
   configuration (you should not use this in production).
+- **requireAuthentication** - If set to true, all users are required to
+  authenticate to your Developer Portal. Users who navigate to your Developer
+  Portal will immediately be directed to the login page. The developer portal
+  will not be accessible to anonymous users (including bots such as Google's
+  crawler).
 - **authentication** - Authentication settings. Checkout the
   [setup guide](./dev-portal-auth.md) to get started.
   - **provider** - Choose your preferred identity provider (Auth0, Okta, etc.).
