@@ -1,9 +1,11 @@
 import { dereference } from "@apidevtools/json-schema-ref-parser";
+
 import fs, { readFileSync } from "fs";
 import { glob } from "glob";
 import path from "path";
 import { createLoader } from "simple-functional-loader";
 import url from "url";
+import { migrateContent } from "./migrate.mjs";
 
 const __filename = url.fileURLToPath(import.meta.url);
 
@@ -84,10 +86,10 @@ async function getPolicies() {
       };
       for (const file of files) {
         if (fs.existsSync(file.path)) {
-          policy.files[file.name] = await fs.promises.readFile(
-            file.path,
-            "utf-8",
-          );
+          const source = await fs.promises.readFile(file.path, "utf-8");
+          policy.files[file.name] = ["introMd", "docMd"].includes(file.name)
+            ? await migrateContent(source)
+            : source;
         }
       }
       policies.push(policy);
@@ -100,16 +102,11 @@ async function getPolicies() {
 async function processProperties(properties) {
   const tasks = Object.keys(properties).map(async (key) => {
     if (properties[key].description) {
-      const { html } = await render(properties[key].description);
-      properties[key].description = html;
+      properties[key].description = properties[key].description;
     }
     if (properties[key].properties) {
       await processProperties(properties[key].properties);
     }
   });
   return Promise.all(tasks);
-}
-
-async function render(content) {
-  return content;
 }

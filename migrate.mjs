@@ -2,6 +2,7 @@ import glob from "fast-glob";
 import fs from "fs";
 import path from "path";
 import sidebars from "./sidebars.js";
+import { migrateContent } from "./src/build/migrate.mjs";
 
 const files = await glob("docs/**/*.md");
 const folders = [
@@ -42,7 +43,3 @@ await fs.promises.writeFile(
   JSON.stringify(sidebars.docs, null, 2),
   "utf-8",
 );
-
-async function migrateContent(content) {
-  return content.replace(/<Screenshot src="(.*)" \/>/g, "![]($1)");
-}

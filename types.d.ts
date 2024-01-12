@@ -1,5 +1,5 @@
 import { type SearchOptions } from "flexsearch";
-import { NavCategory } from "./src/lib/interfaces";
+import { NavCategory, Policy } from "./src/lib/interfaces";
 declare module "@/markdoc/search.mjs" {
   export type Result = {
     url: string;
@@ -15,6 +15,6 @@ declare module "@/build/navigation.mjs" {
 }
 
 declare module "@/build/policies.mjs" {
-  const namedExports: Record<string, any>;
+  const namedExports: Record<string, Policy>;
   export = namedExports;
 }
