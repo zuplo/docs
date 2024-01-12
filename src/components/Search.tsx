@@ -1,6 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import type {
+  InkeepCustomTriggerProps,
+  InkeepWidgetBaseSettings,
+} from "@inkeep/widgets";
+import dynamic from "next/dynamic";
+import { useCallback, useEffect, useState } from "react";
 
 function SearchIcon(props: React.ComponentPropsWithoutRef<"svg">) {
   return (
@@ -10,6 +15,29 @@ function SearchIcon(props: React.ComponentPropsWithoutRef<"svg">) {
   );
 }
 
+const InkeepCustomTrigger: any = dynamic(
+  () => import("@inkeep/widgets").then((mod) => mod.InkeepCustomTrigger),
+  { ssr: false },
+);
+
+const baseSettings: InkeepWidgetBaseSettings = {
+  apiKey: "499c156cf7a9798343949c8bb5665ac95e48132c6d68c42e",
+  integrationId: "clot3asdz0000s601nc8jwnzx",
+  organizationId: "org_dDOlt2uJlMWM8oIS",
+  primaryBrandColor: "#ff00bd",
+  organizationDisplayName: "Zuplo",
+  theme: {
+    components: {
+      SearchBarTrigger: {
+        defaultProps: {
+          size: "expand",
+          variant: "subtle", // Choose from 'emphasized' or 'subtle'
+        },
+      },
+    },
+  },
+};
+
 export function Search() {
   let [modifierKey, setModifierKey] = useState<string>();
   useEffect(() => {
@@ -18,11 +46,43 @@ export function Search() {
     );
   }, []);
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      return;
+    }
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "k" && (event.metaKey || event.ctrlKey)) {
+        event.preventDefault();
+        setIsOpen(true);
+      }
+    }
+
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [isOpen, setIsOpen]);
+
+  const handleClose = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
+  const inkeepCustomTriggerProps: InkeepCustomTriggerProps = {
+    isOpen,
+    onClose: handleClose,
+    baseSettings,
+  };
+
   return (
     <>
       <button
         type="button"
         className="group flex h-6 w-6 items-center justify-center sm:justify-start md:h-auto md:w-80 md:flex-none md:rounded-lg md:py-2.5 md:pl-4 md:pr-3.5 md:text-sm md:ring-1 md:ring-slate-200 md:hover:ring-slate-300 dark:md:bg-slate-800/75 dark:md:ring-inset dark:md:ring-white/5 dark:md:hover:bg-slate-700/40 dark:md:hover:ring-slate-500 lg:w-96"
+        onClick={() => setIsOpen(true)}
       >
         <SearchIcon className="h-5 w-5 flex-none fill-slate-400 group-hover:fill-slate-500 dark:fill-slate-500 md:group-hover:fill-slate-400" />
         <span className="sr-only md:not-sr-only md:ml-2 md:text-slate-500 md:dark:text-slate-400">
@@ -35,6 +95,7 @@ export function Search() {
           </kbd>
         )}
       </button>
+      <InkeepCustomTrigger {...inkeepCustomTriggerProps} />
     </>
   );
 }
