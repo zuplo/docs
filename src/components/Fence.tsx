@@ -1,7 +1,11 @@
 "use client";
 
-import { Highlight } from "prism-react-renderer";
+import { Highlight, Prism } from "prism-react-renderer";
 import { Fragment } from "react";
+
+(typeof global !== "undefined" ? global : window).Prism = Prism;
+//@ts-ignore
+import("prismjs/components/prism-json");
 
 export function Fence({
   children,

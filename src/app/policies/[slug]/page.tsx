@@ -4,6 +4,7 @@ import CustomPolicyNotice from "@/components/policies/CustomPolicyNotice";
 import PolicyStatus from "@/components/policies/PolicyStatus";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Fence } from "../../../components/Fence";
 
 type PolicyProperties = Record<
   string,
@@ -115,14 +116,16 @@ export default async function Page({ params }: { params: { slug: string } }) {
         isPreview={schema.isPreview ?? false}
         isPaidAddOn={schema.isPaidAddOn ?? false}
       />
-      {schema.isCustom && files.policyTs ? <pre>{files.policyTs}</pre> : null}
+      {schema.isCustom && files.policyTs ? (
+        <Fence language="typescript">{files.policyTs}</Fence>
+      ) : null}
       <h2>Configuration</h2>
       <p>
         {schema.isCustom
           ? `The example below shows how to configure a custom code policy in the 'policies.json' document that utilizes the above example policy code.`
           : `The configuration shows how to configure the policy in the 'policies.json' document.`}
       </p>
-      <pre>{JSON.stringify(code, null, 2)}</pre>
+      <Fence language="json">{JSON.stringify(code, null, 2)}</Fence>
       <PolicyOptions schema={schema} policyId={policyId} />
       <h2>Using the Policy</h2>
       {/* ${(docMd ?? "").replace(/!\[(.*)\]\(\.\/(.*)\)/, `![$1](./${policyId}/$2)`)} */}
