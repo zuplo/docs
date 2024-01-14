@@ -48,6 +48,17 @@ function buildNavSection(rawSection) {
     } else if ("items" in item) {
       const child = buildNavSection(item);
       section.items.push(child);
+    } else if ("type" in item && item.type === "doc") {
+      const docPath = path.resolve(path.join("src", "app", item.id, `page.md`));
+      if (!fs.existsSync(docPath)) {
+        throw new Error(`Doc file not found: ${docPath}`);
+      }
+      const docMd = fs.readFileSync(docPath, "utf8");
+      const { data } = matter(docMd);
+      section.items.push({
+        label: data.sidebar_label ?? data.title,
+        href: `/${item.id}`,
+      });
     } else {
       section.items.push(item);
     }

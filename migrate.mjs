@@ -59,8 +59,23 @@ for (const file of files) {
   await fs.promises.writeFile(filePath, modified, "utf-8");
 }
 
+const product = [
+  sidebars.docs.pop(),
+  sidebars.docs.pop(),
+  sidebars.docs.pop(),
+  sidebars.docs.pop(),
+];
+const navigation = [
+  ...sidebars.docs.splice(0, sidebars.docs.length - 1),
+  {
+    type: "category",
+    label: "Product",
+    items: product,
+  },
+];
+
 await fs.promises.writeFile(
   "./sidebar.jsonc",
-  JSON.stringify(sidebars.docs, null, 2),
+  JSON.stringify(navigation, null, 2),
   "utf-8",
 );

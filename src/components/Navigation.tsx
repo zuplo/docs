@@ -18,7 +18,7 @@ function SubNavSection({
 }) {
   const pathname = usePathname();
   const [hidden, setHidden] = useState(
-    !link.items.some((l) => "href" in l && l.href === pathname),
+    !link.items?.some((l) => "href" in l && l.href === pathname),
   );
 
   function onClick() {
@@ -48,7 +48,7 @@ function SubNavSection({
           hidden ? "hidden" : ""
         } ml-2 pl-2 mt-2 space-y-2 border-l border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-200`}
       >
-        {link.items.map((link, i) => (
+        {link.items?.map((link, i) => (
           <NavSection
             link={link}
             key={i}
