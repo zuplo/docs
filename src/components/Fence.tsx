@@ -1,41 +1,25 @@
-"use client";
+import * as shiki from "shiki";
+import { CodeGroup } from "./Code";
 
-import { Highlight, Prism } from "prism-react-renderer";
-import { Fragment } from "react";
-
-(typeof global !== "undefined" ? global : window).Prism = Prism;
-//@ts-ignore
-import("prismjs/components/prism-json");
-
-export function Fence({
+export async function Fence({
   children,
   language,
 }: {
   children: string;
   language: string;
 }) {
+  const highlighter = await shiki.getHighlighter({
+    theme: "github-dark",
+  });
+
+  const html = highlighter.codeToHtml(children, { lang: language });
   return (
-    <Highlight
-      code={children.trimEnd()}
-      language={language ?? "txt"}
-      theme={{ plain: {}, styles: [] }}
+    <CodeGroup
+      code={children}
+      title={""}
+      backgroundColor={highlighter.getBackgroundColor()}
     >
-      {({ className, style, tokens, getTokenProps }) => (
-        <pre className={className} style={style}>
-          <code>
-            {tokens.map((line, lineIndex) => (
-              <Fragment key={lineIndex}>
-                {line
-                  .filter((token) => !token.empty)
-                  .map((token, tokenIndex) => (
-                    <span key={tokenIndex} {...getTokenProps({ token })} />
-                  ))}
-                {"\n"}
-              </Fragment>
-            ))}
-          </code>
-        </pre>
-      )}
-    </Highlight>
+      <div dangerouslySetInnerHTML={{ __html: html }} />
+    </CodeGroup>
   );
 }

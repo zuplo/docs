@@ -76,14 +76,15 @@ export default {
             },
             "blockquote p:first-of-type::before": { content: "none" },
             "blockquote p:first-of-type::after": { content: "none" },
-            // '.prose :where(code):not(:where([class ~ ="not-prose"], [class ~ ="not-prose"] *))': {
-            //   fontWeight: 500,
-            //   borderWidth: 1,
-            //   borderColor: theme("colors.gray.300"),
-            //   backgroundColor: theme("colors.gray.50"),
-            //   borderRadius: 4,
-            //   padding: 4,
-            // },
+            // '.prose :where(code):not(:where([class ~ ="not-prose"], [class ~ ="not-prose"] *))':
+            //   {
+            //     fontWeight: 500,
+            //     borderWidth: 1,
+            //     borderColor: theme("colors.gray.300"),
+            //     backgroundColor: theme("colors.gray.50"),
+            //     borderRadius: 4,
+            //     padding: 4,
+            //   },
           },
         },
         lg: {

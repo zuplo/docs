@@ -1,69 +1,167 @@
 import { GenericLayout } from "@/components/GenericLayout";
-import { MarkdocComponent } from "@/components/MarkdocComponent";
+import { MarkdocInline } from "@/components/MarkdocComponent";
 import CustomPolicyNotice from "@/components/policies/CustomPolicyNotice";
 import PolicyStatus from "@/components/policies/PolicyStatus";
+import { JSONSchema7, JSONSchema7Definition } from "json-schema";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Fence } from "../../../components/Fence";
 
-type PolicyProperties = Record<
-  string,
-  {
-    default?: boolean | string | number;
-    description: string;
-    properties?: PolicyProperties;
+type SchemaRecord = {
+  [key: string]: JSONSchema7;
+};
+
+const OptionProperty = ({ schema }: { schema: JSONSchema7 }) => {
+  isObjectSchema(schema);
+
+  if (schema.type === "object" && schema.properties) {
+    return <ObjectSchema schema={schema} />;
+  } else if (schema.type === "array" && schema.items) {
+    return <ArraySchema schema={schema} />;
   }
->;
+};
 
-const OptionProperties = ({ properties }: { properties: PolicyProperties }) => (
-  <ul>
-    {Object.entries(properties).map(([key, value]) => (
-      <li key={key}>
-        <code>{key}</code>{" "}
-        <div dangerouslySetInnerHTML={{ __html: value.description ?? "" }} />
-        {value.properties ? (
-          <OptionProperties properties={value.properties} />
-        ) : undefined}
-      </li>
-    ))}
-  </ul>
-);
+function ObjectSchema({ schema }: { schema: JSONSchema7 }) {
+  return (
+    <ul>
+      {Object.entries(schema.properties as SchemaRecord).map(([key, value]) => (
+        <li key={key}>
+          <code>{key}</code> <OptionType value={value} />
+          {schema.required?.includes(key) && (
+            <span className="font-semibold">{" (Required)"}</span>
+          )}
+          {" - "}
+          {value.description && (
+            <MarkdocInline markdown={value.description ?? ""} />
+          )}
+          {value.type === "string" && value.enum && (
+            <span>
+              {" "}
+              Allowed values are{" "}
+              {value.enum.map((v, i) => {
+                const comma = i < value.enum!.length - 1 ? ", " : null;
+                const and = i === value.enum!.length - 1 ? "and " : null;
+                return (
+                  <span key={i}>
+                    {and}
+                    <code>{v!.toString()}</code>
+                    {comma}
+                  </span>
+                );
+              })}
+              .
+            </span>
+          )}
+          {value.default && (
+            <span>
+              {" "}
+              Defaults to <code>{value.default.toString()}</code>.
+            </span>
+          )}
+          <OptionProperty schema={value} />
+        </li>
+      ))}
+    </ul>
+  );
+}
 
+function ArraySchema({ schema }: { schema: JSONSchema7 }) {
+  const items = schema.items as JSONSchema7;
+  if (items.type === "object" && items.properties) {
+    return <ObjectSchema schema={items} />;
+  }
+  return null;
+}
+
+function OptionType({ value }: { value: JSONSchema7 }) {
+  let typeString: string | undefined;
+  if (value.type === "array") {
+    const arrayType = (value.items as JSONSchema7 | undefined)?.type;
+    typeString = arrayType ? `${arrayType}[]` : "array";
+  } else if (value.type) {
+    typeString = value.type.toString();
+  } else if (value.oneOf) {
+    typeString = (value.oneOf as JSONSchema7[])
+      .map((o: JSONSchema7) => {
+        if (o.items && (o.items as JSONSchema7).type) {
+          return `${(o.items as JSONSchema7).type!.toString()}[]`;
+        }
+        return o.type?.toString();
+      })
+      .filter((t) => t !== undefined)
+      .join(" | ");
+  }
+  if (typeString) {
+    return <span className="text-green-600">{` <${typeString}>`}</span>;
+  }
+}
+
+function isObjectSchema(val: unknown): asserts val is object {
+  if (typeof val === "boolean") {
+    throw new Error("Invalid schema");
+  }
+}
 const PolicyOptions = ({
   schema,
   policyId,
 }: {
-  schema: any;
+  schema: JSONSchema7Definition;
   policyId: string;
 }) => {
-  const { properties } = schema.properties.handler;
+  isObjectSchema(schema);
+  const { handler } = schema.properties!;
+  isObjectSchema(handler);
+  const { properties } = handler;
+  const { module: handlerModule, export: handlerExport, options } = properties!;
+  isObjectSchema(handlerModule);
+  isObjectSchema(handlerExport);
   return (
-    <ul>
-      <li>
-        <code>name</code> the name of your policy instance. This is used as a
-        reference in your routes.
-      </li>
-      <li>
-        <code>policyType</code> the identifier of the policy. This is used by
-        the Zuplo UI. Value should be <code>{policyId}</code>.
-      </li>
-      <li>
-        <code>handler/export</code> The name of the exported type. Value should
-        be <code>{properties.export.const}</code>.
-      </li>
-      <li>
-        <code>handler/module</code> the module containing the policy. Value
-        should be <code>{properties.module.const}</code>.
-      </li>
-      {properties.options ? (
+    <div>
+      <h3>Policy Configuration</h3>
+      <ul>
         <li>
-          <code>handler/options</code> The options for this policy:
-          {properties.options.properties && (
-            <OptionProperties properties={properties.options.properties} />
-          )}
+          <code>name</code> <span className="text-green-600">{"<string>"}</span>{" "}
+          - The name of your policy instance. This is used as a reference in
+          your routes.
         </li>
+        <li>
+          <code>policyType</code>{" "}
+          <span className="text-green-600">{"<string>"}</span> - The identifier
+          of the policy. This is used by the Zuplo UI. Value should be{" "}
+          <code>{policyId}</code>.
+        </li>
+        <li>
+          <code>handler.export</code>{" "}
+          <span className="text-green-600">{"<string>"}</span> - The name of the
+          exported type. Value should be{" "}
+          <code>{handlerExport.const!.toString()}</code>.
+        </li>
+        <li>
+          <code>handler.module</code>{" "}
+          <span className="text-green-600">{"<string>"}</span> - The module
+          containing the policy. Value should be{" "}
+          <code>{handlerModule.const!.toString()}</code>.
+        </li>
+        {options && Object.keys(options).length > 0 ? (
+          <li>
+            <code>handler.options</code>{" "}
+            <span className="text-green-600">{"<object>"}</span> - The options
+            for this policy. <a href="#policy-options">See Policy Options</a>{" "}
+            below.
+          </li>
+        ) : null}
+      </ul>
+      {options && Object.keys(options).length > 0 ? (
+        <>
+          <h3>Policy Options</h3>
+          <p>
+            The options for this policy are specified below. All properties are
+            optional unless specifically marked as required.
+          </p>
+          <OptionProperty schema={options as JSONSchema7} />
+        </>
       ) : null}
-    </ul>
+    </div>
   );
 };
 
@@ -111,7 +209,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       {schema.isDeprecated ? (
         <pre>This policy is deprecated. ${schema.deprecatedMessage ?? ""}</pre>
       ) : null}
-      <MarkdocComponent markdown={files.introMd ?? schema.description ?? ""} />
+      <MarkdocInline markdown={files.introMd ?? schema.description ?? ""} />
       <PolicyStatus
         isPreview={schema.isPreview ?? false}
         isPaidAddOn={schema.isPaidAddOn ?? false}
@@ -129,7 +227,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <PolicyOptions schema={schema} policyId={policyId} />
       <h2>Using the Policy</h2>
       {/* ${(docMd ?? "").replace(/!\[(.*)\]\(\.\/(.*)\)/, `![$1](./${policyId}/$2)`)} */}
-      <MarkdocComponent markdown={files.docMd ?? ""} />
+      <MarkdocInline markdown={files.docMd ?? ""} />
       <p>
         Read more about{" "}
         <Link href={"/docs/articles/policies"}>how policies work</Link>

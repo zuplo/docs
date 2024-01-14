@@ -1,0 +1,15 @@
+[
+  {
+    "id": "zuplo-docs",
+    "path": "src",
+    "schema": {
+      "path": "src/markdoc/schema.js",
+      "type": "node",
+      "property": "default",
+      "watch": true
+    },
+    "routing": {
+      "frontmatter": "route"
+    }
+  }
+]

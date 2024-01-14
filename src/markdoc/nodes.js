@@ -1,5 +1,5 @@
 import { nodes as defaultNodes, Tag } from "@markdoc/markdoc";
-import { slugifyWithCounter } from "@sindresorhus/slugify";
+import slugify, { slugifyWithCounter } from "@sindresorhus/slugify";
 import yaml from "js-yaml";
 
 import { DocsLayout } from "@/components/DocsLayout";
@@ -7,6 +7,7 @@ import { Fence } from "@/components/Fence";
 
 let documentSlugifyMap = new Map();
 
+/** @type {import("@markdoc/markdoc").ConfigType["nodes"]} */
 export const commonNodes = {
   th: {
     ...defaultNodes.th,
@@ -28,6 +29,7 @@ export const commonNodes = {
   },
 };
 
+/** @type {import("@markdoc/markdoc").ConfigType["nodes"]} */
 const nodes = {
   document: {
     ...defaultNodes.document,
@@ -48,13 +50,16 @@ const nodes = {
   heading: {
     ...defaultNodes.heading,
     transform(node, config) {
-      let slugify = documentSlugifyMap.get(config);
+      let slug = documentSlugifyMap.get(config) ?? slugify;
       let attributes = node.transformAttributes(config);
       let children = node.transformChildren(config);
       let text = children
         .filter((child) => typeof child === "string")
         .join(" ");
-      let id = attributes.id ?? slugify(text);
+      if (!slugify) {
+        console.log(node);
+      }
+      let id = attributes.id ?? slug(text);
 
       return new Tag(
         `h${node.attributes.level}`,

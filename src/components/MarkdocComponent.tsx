@@ -10,12 +10,22 @@ const config: Config = {
   variables: {},
 };
 
+const renderConfig = {
+  components: { Callout },
+};
+
 export function MarkdocComponent({ markdown }: { markdown: string }) {
-  const nodes: any = Markdoc.parse(markdown);
+  const nodes = Markdoc.parse(markdown);
+
   const content = Markdoc.transform(nodes, config);
 
-  const renderConfig = {
-    components: { Callout },
-  };
+  return Markdoc.renderers.react(content, React, renderConfig);
+}
+
+export function MarkdocInline({ markdown }: { markdown: string }) {
+  const nodes = Markdoc.parse(markdown);
+  nodes.children[0].attributes["class"] = "inline";
+  const content = Markdoc.transform(nodes.children, config);
+
   return Markdoc.renderers.react(content, React, renderConfig);
 }

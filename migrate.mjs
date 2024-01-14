@@ -4,6 +4,27 @@ import path from "path";
 import sidebars from "./sidebars.js";
 import { migrateContent } from "./src/build/migrate.mjs";
 
+// Partials
+const partials = path.join(process.cwd(), "src/markdoc/partials");
+await fs.promises.rm(partials, { recursive: true, force: true });
+await fs.promises.mkdir(path.join(process.cwd(), "src/markdoc/partials"));
+const source = path.join(process.cwd(), "docs/articles/_github-setup.md");
+const dest = path.join(process.cwd(), "src/markdoc/partials/_github-setup.md");
+const partial = await fs.promises.readFile(source, "utf-8");
+const migrated = await migrateContent(partial);
+await fs.promises.writeFile(dest, migrated, "utf-8");
+
+// Images
+const staticDir = path.join(process.cwd(), "static");
+const publicDir = path.join(process.cwd(), "public");
+const mediaDir = path.join(process.cwd(), "docs/articles/media");
+const publicMediaDir = path.join(publicDir, "media");
+if (!fs.existsSync(publicDir)) {
+  await fs.promises.cp(staticDir, publicDir, { recursive: true });
+  await fs.promises.cp(mediaDir, publicMediaDir, { recursive: true });
+}
+
+// Docs
 const files = await glob("docs/**/*.md");
 const folders = [
   "articles",

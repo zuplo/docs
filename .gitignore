@@ -59,3 +59,5 @@ src/app/handlers
 src/app/overview
 src/app/sample-apis
 sidebar.jsonc
+src/markdoc/partials/_github-setup.md
+public/
