@@ -27,7 +27,7 @@ export function Logo(props: React.ComponentPropsWithoutRef<"svg">) {
       aria-hidden="true"
       viewBox="0 0 147 33"
       {...props}
-      class="text-transparent"
+      className="text-transparent"
     >
       <path
         fill="#FF00BD"
