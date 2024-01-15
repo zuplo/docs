@@ -76,6 +76,8 @@ export default function withNavigation(nextConfig = {}) {
       config.module.rules.push({
         test: __filename,
         use: [
+          // Adding the babel loader enables fast refresh
+          options.defaultLoaders.babel,
           createLoader(function () {
             let navPath = path.resolve("./sidebar.jsonc");
             this.addContextDependency(navPath);

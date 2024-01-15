@@ -20,6 +20,7 @@ export interface Policy {
     isUnlisted?: false;
     deprecatedMessage?: string;
   };
+  icon: string;
   files: {
     iconSvg?: string;
     introMd?: string;

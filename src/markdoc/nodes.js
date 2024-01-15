@@ -56,9 +56,6 @@ const nodes = {
       let text = children
         .filter((child) => typeof child === "string")
         .join(" ");
-      if (!slugify) {
-        console.log(node);
-      }
       let id = attributes.id ?? slug(text);
 
       return new Tag(

@@ -18,9 +18,11 @@ export default function withPolicies(nextConfig = {}) {
       config.module.rules.push({
         test: __filename,
         use: [
+          // Adding the babel loader enables fast refresh
+          options.defaultLoaders.babel,
           createLoader(function () {
             const callback = this.async();
-            getPolicies()
+            getPolicies(this)
               .then((policies) => {
                 const result = [];
                 policies.forEach((policy) => {
@@ -47,7 +49,7 @@ export default function withPolicies(nextConfig = {}) {
   });
 }
 
-async function getPolicies() {
+async function getPolicies(loader) {
   const matches = await glob("./{policies,temp}/**/schema.json", {
     cwd: process.cwd(),
   });
@@ -59,6 +61,9 @@ async function getPolicies() {
 
       const policyId = match.split("/")[1];
       const schemaPath = path.join(policyDir, "schema.json");
+
+      loader.addContextDependency(schemaPath);
+
       const schemaJson = readFileSync(schemaPath, "utf-8");
       const rawSchema = JSON.parse(schemaJson);
       // RefParser uses cwd to resolve refs
@@ -86,10 +91,17 @@ async function getPolicies() {
       };
       for (const file of files) {
         if (fs.existsSync(file.path)) {
-          const source = await fs.promises.readFile(file.path, "utf-8");
-          policy.files[file.name] = ["introMd", "docMd"].includes(file.name)
-            ? await migrateContent(source, file.path)
-            : source;
+          const sourcePath = path.resolve(file.path);
+          loader.addContextDependency(sourcePath);
+          const source = await fs.promises.readFile(sourcePath, "utf-8");
+
+          if (["introMd", "docMd"].includes(file.name)) {
+            policy.files[file.name] = await migrateContent(source, file.path);
+          } else if (file.name === "iconSvg") {
+            policy.icon = `data:image/svg+xml;base64,${btoa(source)}`;
+          } else {
+            policy.files[file.name] = source;
+          }
         }
       }
       policies.push(policy);

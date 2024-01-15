@@ -9,5 +9,10 @@ const nextConfig = {
 };
 
 export default withPolicies(
-  withNavigation(withMarkdoc({ schemaPath: "./src/markdoc" })(nextConfig)),
+  withNavigation(
+    withMarkdoc({
+      schemaPath: "./src/markdoc",
+      nextjsExports: ["title", "metadata", "revalidate"],
+    })(nextConfig),
+  ),
 );
