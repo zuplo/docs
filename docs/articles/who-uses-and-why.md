@@ -1,4 +1,4 @@
----
+![CleanShot 2024-01-14 at 11 00 12@2x](https://github.com/zuplo/docs/assets/1085573/78b2f755-9d81-4a23-9488-db55aea2f97a)---
 title: Who uses Zuplo, and why?
 ---
 
@@ -89,7 +89,7 @@ metadata. This is covered in this
 
 ## API over BaaS
 
-Some of our smaller customers are choosing to use Backed-as-a-Service (BaaS)
+Some of our smaller customers are choosing to use Backend-as-a-Service (BaaS)
 solutions like supabase, firebase etc and want to use Zuplo as programmable
 API-first presentation of their backend. More on this scenario in this
 [video guide](https://www.youtube.com/watch?v=GJSkbxMnWxE).
