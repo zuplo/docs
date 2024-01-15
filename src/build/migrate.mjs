@@ -59,33 +59,4 @@ function replaceAdmonitions(content, fsPath) {
   } while (i < lines.length - 1);
 
   return outputLines.join("\n");
-  //   let index;
-  //   let end = 0;
-  //   do {
-  //     index = content.indexOf(":::", end);
-
-  //     if (index > -1) {
-  //       end = content.indexOf(":::", index);
-  //       if (end === -1) {
-  //         throw new Error(`Missing closing ::: at ${index}`);
-  //       }
-  //       console.log({ index, end });
-  //       const lines = content.substring(index, end).split("\n");
-  //       let type = lines[0].replace(":::", "").trim();
-  //       let title;
-  //       let space = type.indexOf(" ");
-  //       if (space > -1) {
-  //         title = type.substring(space).trim();
-  //         type = type.substring(0, space).trim();
-  //       }
-  //       const body = lines.slice(1).join("\n").trim();
-  //       const replacement = `{% callout type="${type}"${
-  //         title ? ` title="${title}"` : ""
-  //       } %}\n\n${body}\n\n{% /callout %}`;
-  //       content =
-  //         content.substring(0, index) + replacement + content.substring(end + 4);
-  //     }
-  //   } while (index > -1 && end > -1);
-  //   return content;
-  // }
 }

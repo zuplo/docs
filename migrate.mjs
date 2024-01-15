@@ -47,22 +47,21 @@ await Promise.all(
 const skip = ["docs/articles/node-modules.md"];
 
 for (const file of files) {
-  if (skip.includes(file)) {
-    break;
+  if (!skip.includes(file)) {
+    const basename = path.basename(file);
+    const filePath = path.join(
+      "src",
+      "app",
+      file.replace(basename, "").replace("docs/", ""),
+      basename.replace(/\.md$/, ""),
+      "page.md",
+    );
+    const dirname = path.dirname(filePath);
+    await fs.promises.mkdir(dirname, { recursive: true });
+    const content = await fs.promises.readFile(file, "utf-8");
+    const modified = await migrateContent(content, filePath);
+    await fs.promises.writeFile(filePath, modified, "utf-8");
   }
-  const basename = path.basename(file);
-  const filePath = path.join(
-    "src",
-    "app",
-    file.replace(basename, "").replace("docs/", ""),
-    basename.replace(/\.md$/, ""),
-    "page.md",
-  );
-  const dirname = path.dirname(filePath);
-  await fs.promises.mkdir(dirname, { recursive: true });
-  const content = await fs.promises.readFile(file, "utf-8");
-  const modified = await migrateContent(content, filePath);
-  await fs.promises.writeFile(filePath, modified, "utf-8");
 }
 
 function migrateCategory(category) {
