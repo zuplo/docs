@@ -48,7 +48,6 @@ scripts/update-policies.mjs.map
 yarn.lock
 .vercel
 
-
 # Temporary while migrating
 src/app/articles/**/*.md
 src/app/cli/**/*.md
