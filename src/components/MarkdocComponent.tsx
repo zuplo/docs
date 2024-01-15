@@ -24,7 +24,10 @@ export function MarkdocComponent({ markdown }: { markdown: string }) {
 
 export function MarkdocInline({ markdown }: { markdown: string }) {
   const nodes = Markdoc.parse(markdown);
-  nodes.children[0].attributes["class"] = "inline";
+  if (nodes && nodes.children.length > 0) {
+    nodes.children[0].attributes["class"] = "inline";
+  }
+
   const content = Markdoc.transform(nodes.children, config);
 
   return Markdoc.renderers.react(content, React, renderConfig);
