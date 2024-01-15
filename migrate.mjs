@@ -11,7 +11,7 @@ await fs.promises.mkdir(path.join(process.cwd(), "src/markdoc/partials"));
 const source = path.join(process.cwd(), "docs/articles/_github-setup.md");
 const dest = path.join(process.cwd(), "src/markdoc/partials/_github-setup.md");
 const partial = await fs.promises.readFile(source, "utf-8");
-const migrated = await migrateContent(partial);
+const migrated = await migrateContent(partial, source);
 await fs.promises.writeFile(dest, migrated, "utf-8");
 
 // Images
@@ -43,7 +43,13 @@ await Promise.all(
     }),
   ),
 );
+
+const skip = ["docs/articles/node-modules.md"];
+
 for (const file of files) {
+  if (skip.includes(file)) {
+    break;
+  }
   const basename = path.basename(file);
   const filePath = path.join(
     "src",
@@ -55,8 +61,29 @@ for (const file of files) {
   const dirname = path.dirname(filePath);
   await fs.promises.mkdir(dirname, { recursive: true });
   const content = await fs.promises.readFile(file, "utf-8");
-  const modified = await migrateContent(content);
+  const modified = await migrateContent(content, filePath);
   await fs.promises.writeFile(filePath, modified, "utf-8");
+}
+
+function migrateCategory(category) {
+  category.items = category.items.map((item) => {
+    if (typeof item === "string") {
+      if (item === "articles/node-modules") {
+        return {
+          type: "link",
+          label: "Node Modules",
+          href: "/articles/node-modules",
+        };
+      } else {
+        return item;
+      }
+    } else if (item.type === "category") {
+      return migrateCategory(item);
+    } else {
+      return item;
+    }
+  });
+  return category;
 }
 
 const product = [
@@ -72,7 +99,7 @@ const navigation = [
     label: "Product",
     items: product,
   },
-];
+].map(migrateCategory);
 
 await fs.promises.writeFile(
   "./sidebar.jsonc",

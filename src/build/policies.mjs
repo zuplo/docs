@@ -88,7 +88,7 @@ async function getPolicies() {
         if (fs.existsSync(file.path)) {
           const source = await fs.promises.readFile(file.path, "utf-8");
           policy.files[file.name] = ["introMd", "docMd"].includes(file.name)
-            ? await migrateContent(source)
+            ? await migrateContent(source, file.path)
             : source;
         }
       }

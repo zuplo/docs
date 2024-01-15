@@ -1,7 +1,7 @@
 /// <reference lib="es2022" />
 
-export async function migrateContent(content) {
-  return replaceAdmonitions(content)
+export async function migrateContent(content, fsPath) {
+  return replaceAdmonitions(content, fsPath)
     .replaceAll("import GithubSetup from './\\_github-setup.md';", ``)
     .replaceAll("<GithubSetup />", `{% partial file="_github-setup.md" /%}`)
     .replaceAll(
@@ -17,28 +17,75 @@ export async function migrateContent(content) {
  *
  * @param {string} content
  */
-function replaceAdmonitions(content) {
-  let index;
-  let end = 0;
+function replaceAdmonitions(content, fsPath) {
+  const lines = content.split("\n");
+
+  const outputLines = [];
+  let i = 0;
   do {
-    index = content.indexOf(":::", end);
-    if (index > -1) {
-      end = content.indexOf("\n:::", index);
-      const lines = content.substring(index, end).split("\n");
-      let type = lines[0].replace(":::", "").trim();
+    if (lines[i].trim().startsWith(":::")) {
+      let leadingSpaces = "";
+      for (const char of lines[i]) {
+        if (char === " ") {
+          leadingSpaces += " ";
+        }
+      }
+
+      let type = lines[i].replace(":::", "").trim();
       let title;
       let space = type.indexOf(" ");
       if (space > -1) {
         title = type.substring(space).trim();
         type = type.substring(0, space).trim();
       }
-      const body = lines.slice(1).join("\n").trim();
-      const replacement = `{% callout type="${type}"${
+      const body = [];
+      let nextLine = lines[++i];
+      do {
+        if (!nextLine.trim().startsWith(":::")) {
+          body.push(nextLine);
+        }
+        nextLine = lines[++i];
+      } while (!nextLine.trim().startsWith(":::"));
+      const callout = `${leadingSpaces}{% callout type="${type}"${
         title ? ` title="${title}"` : ""
-      } %}\n\n${body}\n\n{% /callout %}`;
-      content =
-        content.substring(0, index) + replacement + content.substring(end + 4);
+      } %}\n\n${leadingSpaces}${body
+        .join("\n")
+        .trim()}\n\n${leadingSpaces}{% /callout %}`;
+      outputLines.push(callout);
+    } else {
+      outputLines.push(lines[i]);
     }
-  } while (index > -1 && end > -1);
-  return content;
+    i++;
+  } while (i < lines.length - 1);
+
+  return outputLines.join("\n");
+  //   let index;
+  //   let end = 0;
+  //   do {
+  //     index = content.indexOf(":::", end);
+
+  //     if (index > -1) {
+  //       end = content.indexOf(":::", index);
+  //       if (end === -1) {
+  //         throw new Error(`Missing closing ::: at ${index}`);
+  //       }
+  //       console.log({ index, end });
+  //       const lines = content.substring(index, end).split("\n");
+  //       let type = lines[0].replace(":::", "").trim();
+  //       let title;
+  //       let space = type.indexOf(" ");
+  //       if (space > -1) {
+  //         title = type.substring(space).trim();
+  //         type = type.substring(0, space).trim();
+  //       }
+  //       const body = lines.slice(1).join("\n").trim();
+  //       const replacement = `{% callout type="${type}"${
+  //         title ? ` title="${title}"` : ""
+  //       } %}\n\n${body}\n\n{% /callout %}`;
+  //       content =
+  //         content.substring(0, index) + replacement + content.substring(end + 4);
+  //     }
+  //   } while (index > -1 && end > -1);
+  //   return content;
+  // }
 }

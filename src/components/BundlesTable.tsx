@@ -1,7 +1,19 @@
-import React from "react";
-import data from "./bundles.json";
-
-const BundlesTable = () => {
+interface BundlesFile {
+  bundles: {
+    name: string;
+    url?: string;
+    version: string;
+    types: string;
+    files: string[];
+    description: string;
+    public: boolean;
+  }[];
+}
+export default async function BundlesTable() {
+  const response = await fetch(
+    "https://cdn.zuplo.com/types/@zuplo/bundled/bundles.v2.json",
+  );
+  const data: BundlesFile = await response.json();
   return (
     <table>
       <tr>
@@ -28,6 +40,4 @@ const BundlesTable = () => {
         ))}
     </table>
   );
-};
-
-export default BundlesTable;
+}
