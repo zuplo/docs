@@ -32,3 +32,13 @@ scripts/update-policies.mjs.map
 
 yarn.lock
 .vercel
+
+
+# Stuff from nextjs, putting here so we dont accidently commit
+# when switching branches
+src/app/
+src/markdoc/
+.next/
+.vercel/
+next-env.d.ts
+sidebar.jsonc
