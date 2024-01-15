@@ -1,4 +1,4 @@
-![CleanShot 2024-01-14 at 11 00 12@2x](https://github.com/zuplo/docs/assets/1085573/78b2f755-9d81-4a23-9488-db55aea2f97a)---
+---
 title: Who uses Zuplo, and why?
 ---
 
