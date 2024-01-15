@@ -69,13 +69,13 @@ export function ThemeSelector(
         <LightIcon
           className={clsx(
             'h-4 w-4 dark:hidden',
-            theme === 'system' ? 'fill-slate-400' : 'fill-sky-400',
+            theme === 'system' ? 'fill-slate-400' : 'fill-pink',
           )}
         />
         <DarkIcon
           className={clsx(
             'hidden h-4 w-4 dark:block',
-            theme === 'system' ? 'fill-slate-400' : 'fill-sky-400',
+            theme === 'system' ? 'fill-slate-400' : 'fill-pink',
           )}
         />
       </Listbox.Button>
@@ -88,7 +88,7 @@ export function ThemeSelector(
               clsx(
                 'flex cursor-pointer select-none items-center rounded-[0.625rem] p-1',
                 {
-                  'text-sky-500': selected,
+                  'text-pink': selected,
                   'text-slate-900 dark:text-white': active && !selected,
                   'text-slate-700 dark:text-slate-400': !active && !selected,
                   'bg-slate-100 dark:bg-slate-900/40': active,
@@ -103,7 +103,7 @@ export function ThemeSelector(
                     className={clsx(
                       'h-4 w-4',
                       selected
-                        ? 'fill-sky-400 dark:fill-sky-400'
+                        ? 'fill-pink dark:fill-pink'
                         : 'fill-slate-400',
                     )}
                   />

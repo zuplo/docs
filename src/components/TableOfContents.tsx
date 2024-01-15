@@ -98,7 +98,7 @@ export function TableOfContents({
                             href={`#${subSection.id}`}
                             className={
                               isActive(subSection)
-                                ? "text-sky-500"
+                                ? "text-pink"
                                 : "hover:text-slate-600 dark:hover:text-slate-300"
                             }
                           >
