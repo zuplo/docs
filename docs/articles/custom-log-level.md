@@ -17,8 +17,12 @@ else. You can override this by setting an
 [environment variable](../articles/environment-variables) called
 `ZUPLO_LOG_LEVEL` to one of the values above.
 
-:::warning The log levels are case sensitive - they must be entered correctly,
-in lower case for logging to work. :::
+:::warning
+
+The log levels are case sensitive - they must be entered correctly, in lower
+case for logging to work.
+
+:::
 
 The log levels map to the different methods on `context.log`, e.g.
 
