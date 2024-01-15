@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { Callout } from "../Callout";
+
 export default function CustomPolicyNotice({
   name,
   id,
@@ -10,18 +13,18 @@ export default function CustomPolicyNotice({
     : "/docs/policies/custom-code-outbound";
   return (
     <div>
-      {/* <Admonition type="tip" title="Custom Policy Example"> */}
-      <p>
-        Zuplo is extensible, so we don&apos;t have a built-in policy for {name},
-        instead we have a template here that shows you how you can use your
-        superpower (code) to achieve your goals. To learn more about custom
-        policies{" "}
-        <a href={href} target="_blank">
-          see the documentation
-        </a>
-        .
-      </p>
-      {/* </Admonition> */}
+      <Callout type="tip" title="Custom Policy Example">
+        <p>
+          Zuplo is extensible, so we don&apos;t have a built-in policy for{" "}
+          {name}, instead we have a template here that shows you how you can use
+          your superpower (code) to achieve your goals. To learn more about
+          custom policies{" "}
+          <Link href={href} target="_blank">
+            see the documentation
+          </Link>
+          .
+        </p>
+      </Callout>
     </div>
   );
 }
