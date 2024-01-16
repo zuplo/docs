@@ -2,7 +2,7 @@
 
 import { Tab } from "@headlessui/react";
 import clsx from "clsx";
-import { Copy } from "lucide-react";
+import { Check, Copy } from "lucide-react";
 import {
   Children,
   createContext,
@@ -56,7 +56,7 @@ function CopyButton({ code }: { code: string }) {
     <button
       type="button"
       className={clsx(
-        "group/button absolute right-4 top-3.5 overflow-hidden rounded-full py-1 pl-2 pr-3 text-2xs font-medium opacity-0 backdrop-blur transition focus:opacity-100 group-hover:opacity-100",
+        "group/button absolute right-4 top-3.5 overflow-hidden rounded-md py-1 pl-2 pr-2 text-2xs font-medium opacity-0 backdrop-blur transition focus:opacity-100 group-hover:opacity-100",
         copied
           ? "bg-emerald-400/10 ring-1 ring-inset ring-emerald-400/20"
           : "bg-white/5 hover:bg-white/7.5 dark:bg-white/2.5 dark:hover:bg-white/5",
@@ -75,7 +75,6 @@ function CopyButton({ code }: { code: string }) {
         )}
       >
         <Copy className="h-5 w-5 fill-zinc-500/20 stroke-zinc-500 transition-colors group-hover/button:stroke-zinc-400" />
-        Copy
       </span>
       <span
         aria-hidden={!copied}
@@ -84,7 +83,7 @@ function CopyButton({ code }: { code: string }) {
           !copied && "tran-gray-y-1.5 opacity-0",
         )}
       >
-        Copied!
+        <Check className="h-5 w-5 fill-zinc-500/20 stroke-zinc-500 transition-colors group-hover/button:stroke-zinc-400" />
       </span>
     </button>
   );
@@ -102,11 +101,9 @@ function CodePanelHeader({ tag, label }: { tag?: string; label?: string }) {
           <Tag variant="small">{tag}</Tag>
         </div>
       )}
-      {tag && label && (
-        <span className="h-0.5 w-0.5 rounded-full bg-zinc-500" />
-      )}
+      {tag && label && <span className="h-0.5 w-0.5 rounded-md bg-zinc-500" />}
       {label && (
-        <span className="font-mono text-xs text-zinc-400">{label}</span>
+        <span className="font-mono text-sm text-zinc-400">{label}</span>
       )}
     </div>
   );
@@ -141,7 +138,7 @@ function CodePanel({
     <div className="group dark:bg-white/2.5">
       <CodePanelHeader tag={tag} label={label} />
       <div className="relative">
-        <pre className="overflow-x-auto p-4 text-xs text-white">{children}</pre>
+        <pre className="overflow-x-auto p-4 text-sm text-white">{children}</pre>
         <CopyButton code={code} />
       </div>
     </div>
@@ -166,12 +163,12 @@ function CodeGroupHeader({
   return (
     <div className="flex min-h-[calc(theme(spacing.12)+1px)] flex-wrap items-start gap-x-4 border-b border-zinc-700 bg-zinc-800 px-4 dark:border-zinc-800 dark:bg-transparent">
       {title && (
-        <h3 className="mr-auto pt-3 text-xs font-semibold text-white">
+        <h3 className="mr-auto pt-3 text-sm font-semibold text-white">
           {title}
         </h3>
       )}
       {hasTabs && (
-        <Tab.List className="-mb-px flex gap-4 text-xs font-medium">
+        <Tab.List className="-mb-px flex gap-4 text-sm font-medium">
           {Children.map(children, (child, childIndex) => (
             <Tab
               className={clsx(
@@ -305,7 +302,7 @@ export function CodeGroup({
   let hasTabs = Children.count(children) > 1;
 
   let containerClassName =
-    "my-6 overflow-hidden rounded-2xl bg-zinc-900 shadow-md dark:ring-1 dark:ring-white/10";
+    "my-6 overflow-hidden rounded-md bg-zinc-900 shadow-md dark:ring-1 dark:ring-white/10";
   let header = (
     <CodeGroupHeader title={title} selectedIndex={tabGroupProps.selectedIndex}>
       {children}

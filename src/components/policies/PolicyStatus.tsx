@@ -1,4 +1,4 @@
-import { Callout } from "../Callout";
+import Callout from "@/components/markdown/Callout";
 
 export default function PolicyStatus({
   isPreview,
@@ -23,7 +23,7 @@ export default function PolicyStatus({
   if (isPreview) {
     return (
       <div>
-        <Callout type="warning" title="Early Access">
+        <Callout type="caution" title="Early Access">
           <p>
             This policy is in private beta. If you would like to use this please
             reach out to us:{" "}

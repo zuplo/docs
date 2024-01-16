@@ -5,7 +5,7 @@ import { existsSync } from "fs";
 import { copyFile, mkdir, readFile, writeFile } from "fs/promises";
 import { glob } from "glob";
 import { JSONSchema7, JSONSchema7Definition } from "json-schema";
-import { Heading as AstHeading } from "mdast";
+import type { Heading as AstHeading } from "mdast";
 import { toString } from "mdast-util-to-string";
 import path from "path";
 import prettier from "prettier";

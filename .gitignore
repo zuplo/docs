@@ -48,15 +48,14 @@ scripts/update-policies.mjs.map
 yarn.lock
 .vercel
 
+
+
+
 # Temporary while migrating
-src/app/articles/**/*.md
-src/app/cli/**/*.md
-src/app/conferences/**/*.md
-src/app/deprecations/**/*.md
-src/app/errors/**/*.md
-src/app/handlers/**/*.md
-src/app/overview/**/*.md
-src/app/sample-apis/**/*.md
 sidebar.jsonc
-src/markdoc/partials/_github-setup.md
-public/
+
+# Generated Content
+src/shiki/
+public/robots.txt
+public/sitemap.xml
+public/sitemap-*.xml

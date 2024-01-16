@@ -1,11 +1,13 @@
-import { GenericLayout } from "@/components/GenericLayout";
-import { MarkdocInline } from "@/components/MarkdocComponent";
+import { DocsLayout } from "@/components/DocsLayout";
+import { Fence } from "@/components/Fence";
 import CustomPolicyNotice from "@/components/policies/CustomPolicyNotice";
 import PolicyStatus from "@/components/policies/PolicyStatus";
+import { Section } from "@/lib/interfaces";
+import { compileMdx } from "@/lib/markdown/mdx";
 import { JSONSchema7, JSONSchema7Definition } from "json-schema";
+import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Fence } from "../../../components/Fence";
 
 type SchemaRecord = {
   [key: string]: JSONSchema7;
@@ -31,9 +33,7 @@ function ObjectSchema({ schema }: { schema: JSONSchema7 }) {
             <span className="font-semibold">{" (Required)"}</span>
           )}
           {" - "}
-          {value.description && (
-            <MarkdocInline markdown={value.description ?? ""} />
-          )}
+          {value.description}
           {value.type === "string" && value.enum && (
             <span>
               {" "}
@@ -117,7 +117,7 @@ const PolicyOptions = ({
   isObjectSchema(handlerExport);
   return (
     <div>
-      <h3>Policy Configuration</h3>
+      <h3 id="policy-configuration">Policy Configuration</h3>
       <ul>
         <li>
           <code>name</code> <span className="text-green-600">{"<string>"}</span>{" "}
@@ -153,7 +153,7 @@ const PolicyOptions = ({
       </ul>
       {options && Object.keys(options).length > 0 ? (
         <>
-          <h3>Policy Options</h3>
+          <h3 id="policy-options">Policy Options</h3>
           <p>
             The options for this policy are specified below. All properties are
             optional unless specifically marked as required.
@@ -164,6 +164,23 @@ const PolicyOptions = ({
     </div>
   );
 };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const mod = await import("@/build/policies.mjs");
+  const policy = mod[params.slug.replaceAll("-", "_")];
+  if (!policy) {
+    return {};
+  }
+
+  const { schema } = policy;
+  return {
+    title: schema.title,
+  };
+}
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const mod = await import("@/build/policies.mjs");
@@ -198,10 +215,48 @@ export default async function Page({ params }: { params: { slug: string } }) {
     throw new Error(`There are no examples set for policy ${policyId}`);
   }
 
+  const sections: Section[] = [
+    {
+      title: "Configuration",
+      id: "configuration",
+      level: 2,
+      children: [
+        {
+          title: "Policy Configuration",
+          id: "policy-configuration",
+          level: 3,
+          children: [],
+        },
+        {
+          title: "Policy Options",
+          id: "policy-options",
+          level: 3,
+          children: [],
+        },
+      ],
+    },
+    {
+      title: "Using the Policy",
+      id: "using-the-policy",
+      level: 2,
+      children: [],
+    },
+  ];
+
+  const { content: intro } = await compileMdx(
+    files.introMd ?? schema.description ?? "",
+    `./policy/intro.md`,
+  );
+  const { content: doc, toc: docToc } = await compileMdx(
+    files.docMd ?? "",
+    "./policy/doc.md",
+  );
+  sections.push(...docToc);
+
   return (
-    <GenericLayout
+    <DocsLayout
       frontmatter={{ title: `${schema.title} Policy` }}
-      sections={[]}
+      sections={sections}
     >
       {schema.isCustom ? (
         <CustomPolicyNotice name="${schema.title}" id="${policyId}" />
@@ -209,7 +264,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       {schema.isDeprecated ? (
         <pre>This policy is deprecated. ${schema.deprecatedMessage ?? ""}</pre>
       ) : null}
-      <MarkdocInline markdown={files.introMd ?? schema.description ?? ""} />
+      {intro}
       <PolicyStatus
         isPreview={schema.isPreview ?? false}
         isPaidAddOn={schema.isPaidAddOn ?? false}
@@ -217,7 +272,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       {schema.isCustom && files.policyTs ? (
         <Fence language="typescript">{files.policyTs}</Fence>
       ) : null}
-      <h2>Configuration</h2>
+      <h2 id="configuration">Configuration</h2>
       <p>
         {schema.isCustom
           ? `The example below shows how to configure a custom code policy in the 'policies.json' document that utilizes the above example policy code.`
@@ -225,14 +280,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
       </p>
       <Fence language="json">{JSON.stringify(code, null, 2)}</Fence>
       <PolicyOptions schema={schema} policyId={policyId} />
-      <h2>Using the Policy</h2>
-      {/* ${(docMd ?? "").replace(/!\[(.*)\]\(\.\/(.*)\)/, `![$1](./${policyId}/$2)`)} */}
-      <MarkdocInline markdown={files.docMd ?? ""} />
+      <h2 id="using-the-policy">Using the Policy</h2>
+      {doc}
       <p>
         Read more about{" "}
         <Link href={"/docs/articles/policies"}>how policies work</Link>
       </p>
-    </GenericLayout>
+    </DocsLayout>
   );
 }
 

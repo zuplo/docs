@@ -17,7 +17,7 @@ const links = [
     name: "Product",
   },
   {
-    href: "https://zuplo.com/docs",
+    href: "/",
     name: "Docs",
     active: true,
   },
@@ -105,8 +105,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex w-full flex-col items-center px-4">
       <Header />
-
-      {/* {isHomePage && <Hero />} */}
 
       <div className="max-w-8xl relative mx-auto mt-[-2rem] flex w-full flex-auto justify-center sm:px-2 lg:px-8 xl:px-12">
         <div className="hidden lg:relative lg:block lg:flex-none">

@@ -46,11 +46,11 @@ function replaceAdmonitions(content, fsPath) {
         }
         nextLine = lines[++i];
       } while (!nextLine.trim().startsWith(":::"));
-      const callout = `${leadingSpaces}{% callout type="${type}"${
+      const callout = `${leadingSpaces}<Callout type="${type}"${
         title ? ` title="${title}"` : ""
-      } %}\n\n${leadingSpaces}${body
+      } >\n\n${leadingSpaces}${body
         .join("\n")
-        .trim()}\n\n${leadingSpaces}{% /callout %}`;
+        .trim()}\n\n${leadingSpaces}</Callout>`;
       outputLines.push(callout);
     } else {
       outputLines.push(lines[i]);

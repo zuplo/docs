@@ -10,17 +10,14 @@ export function QuickLinks({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function QuickLink({
-  title,
-  description,
-  href,
-  icon,
-}: {
+export interface Props {
   title: string;
   description: string;
   href: string;
   icon: React.ComponentProps<typeof Icon>["icon"];
-}) {
+}
+
+export function QuickLink({ title, description, href, icon }: Props) {
   return (
     <div className="hover:border-pink group relative rounded-xl border border-gray-200 dark:border-gray-800 dark:hover:border-pink transition duration-300">
       <div className="relative overflow-hidden rounded-xl p-6">
