@@ -28,3 +28,10 @@ export interface Policy {
     policyTs?: string;
   };
 }
+
+export type Section = {
+  id: string;
+  title: string;
+  level: number;
+  children: Array<Section>;
+};

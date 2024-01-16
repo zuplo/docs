@@ -1,8 +1,8 @@
 import * as policies from "@/build/policies.mjs";
 import { Card } from "@/components/Card";
-import { GenericLayout } from "@/components/GenericLayout";
 import { Metadata } from "next";
 import Link from "next/link";
+import { DocsLayout } from "../../components/DocsLayout";
 
 export const metadata: Metadata = {
   title: "Policies",
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   return (
-    <GenericLayout frontmatter={{ title: `Policies` }} sections={[]}>
+    <DocsLayout frontmatter={{ title: `Policies` }} sections={[]}>
       <p>
         Zuplo includes policies for any solution you need for securing and
         sharing your API. See the{" "}
@@ -48,6 +48,6 @@ export default async function Page() {
           />
         ))}
       </div>
-    </GenericLayout>
+    </DocsLayout>
   );
 }

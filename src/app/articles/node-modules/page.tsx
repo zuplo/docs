@@ -1,5 +1,5 @@
 import BundlesTable from "@/components/BundlesTable";
-import { GenericLayout } from "@/components/GenericLayout";
+import { DocsLayout } from "@/components/DocsLayout";
 
 export const metadata = {
   title: "Node Modules",
@@ -7,7 +7,7 @@ export const metadata = {
 
 export default async function Page() {
   return (
-    <GenericLayout frontmatter={{ title: metadata.title }} sections={[]}>
+    <DocsLayout frontmatter={{ title: metadata.title }} sections={[]}>
       <p>
         Zuplo generally supports node modules, but to ensure the security and
         performance of each API Gateway we must approve each module. This
@@ -17,6 +17,6 @@ export default async function Page() {
       </p>
       <p>Below are the currently installed modules.</p>
       <BundlesTable />
-    </GenericLayout>
+    </DocsLayout>
   );
 }

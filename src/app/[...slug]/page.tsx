@@ -1,22 +1,56 @@
-import BundlesTable from "@/components/BundlesTable";
-import { GenericLayout } from "@/components/GenericLayout";
+import { DocsLayout } from "@/components/DocsLayout";
+import { getAllContent, getSlugContent } from "@/lib/content";
+import { compileMdx } from "@/lib/markdown/mdx";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
-export const metadata = {
-  title: "Node Modules",
-};
+interface ArticleFrontMatter {
+  title: string;
+}
 
-export default async function Page() {
+const sourceDir = "docs";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string[] };
+}): Promise<Metadata> {
+  const result = await getSlugContent<ArticleFrontMatter>({
+    slug: params.slug,
+    sourceDir,
+  });
+  if (!result) {
+    return {};
+  }
+
+  const { data } = result;
+  return {
+    title: data.title,
+  };
+}
+
+export default async function Page({ params }: { params: { slug: string[] } }) {
+  const result = await getSlugContent<ArticleFrontMatter>({
+    slug: params.slug,
+    sourceDir,
+  });
+  if (!result) {
+    return notFound();
+  }
+
+  const { data, source } = result;
+  const { content, toc } = await compileMdx(source, result.filepath);
+
   return (
-    <GenericLayout frontmatter={{ title: metadata.title }} sections={[]}>
-      <p>
-        Zuplo generally supports node modules, but to ensure the security and
-        performance of each API Gateway we must approve each module. This
-        process only takes a few hours so if you need something new please reach
-        out to use on twitter <a href="https://twitter.com/zuplo">@zuplo</a> or
-        through email <a href="mailto:whatzup@zuplo.com">whatzup@zuplo.com</a>.
-      </p>
-      <p>Below are the currently installed modules.</p>
-      <BundlesTable />
-    </GenericLayout>
+    <DocsLayout frontmatter={{ title: data.title }} sections={toc}>
+      {content}
+    </DocsLayout>
   );
+}
+
+export async function generateStaticParams() {
+  const posts = await getAllContent();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
 }

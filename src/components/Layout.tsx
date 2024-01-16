@@ -17,7 +17,7 @@ const links = [
     name: "Product",
   },
   {
-    href: "https://zuplo.com/docs",
+    href: "/",
     name: "Docs",
   },
   {
@@ -84,7 +84,10 @@ function Header() {
           ))}
         </div>
         <ThemeSelector className="relative z-10" />
-        <Link href="https://portal.zuplo.com/signup" className="hidden tracking-wider btn btn-primary-dark md:inline-block font-base block whitespace-nowrap rounded-lg px-5 py-3 text-center text-sm font-semibold no-underline transition-colors bg-pink text-white hover:bg-white hover:text-black">
+        <Link
+          href="https://portal.zuplo.com/signup"
+          className="hidden tracking-wider btn btn-primary-dark md:inline-block font-base block whitespace-nowrap rounded-lg px-5 py-3 text-center text-sm font-semibold no-underline transition-colors bg-pink text-white hover:bg-white hover:text-black"
+        >
           Start free
         </Link>
       </div>
@@ -99,8 +102,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex w-full flex-col">
       <Header />
-
-      {/* {isHomePage && <Hero />} */}
 
       <div className="max-w-8xl relative mx-auto mt-[-2rem] flex w-full flex-auto justify-center sm:px-2 lg:px-8 xl:px-12">
         <div className="hidden lg:relative lg:block lg:flex-none">

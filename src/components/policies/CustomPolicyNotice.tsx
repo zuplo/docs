@@ -1,5 +1,5 @@
+import Callout from "@/components/markdown/Callout";
 import Link from "next/link";
-import { Callout } from "../Callout";
 
 export default function CustomPolicyNotice({
   name,

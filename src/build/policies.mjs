@@ -5,7 +5,6 @@ import { glob } from "glob";
 import path from "path";
 import { createLoader } from "simple-functional-loader";
 import url from "url";
-import { migrateContent } from "./migrate.mjs";
 
 const __filename = url.fileURLToPath(import.meta.url);
 
@@ -75,8 +74,6 @@ async function getPolicies(loader) {
         return;
       }
 
-      await processProperties(schema.properties);
-
       const files = [
         { name: "iconSvg", path: path.join(policyDir, "icon.svg") },
         { name: "introMd", path: path.join(policyDir, "intro.md") },
@@ -95,9 +92,7 @@ async function getPolicies(loader) {
           loader.addContextDependency(sourcePath);
           const source = await fs.promises.readFile(sourcePath, "utf-8");
 
-          if (["introMd", "docMd"].includes(file.name)) {
-            policy.files[file.name] = await migrateContent(source, file.path);
-          } else if (file.name === "iconSvg") {
+          if (file.name === "iconSvg") {
             policy.icon = `data:image/svg+xml;base64,${btoa(source)}`;
           } else {
             policy.files[file.name] = source;
@@ -109,16 +104,4 @@ async function getPolicies(loader) {
   );
 
   return policies;
-}
-
-async function processProperties(properties) {
-  const tasks = Object.keys(properties).map(async (key) => {
-    if (properties[key].description) {
-      properties[key].description = properties[key].description;
-    }
-    if (properties[key].properties) {
-      await processProperties(properties[key].properties);
-    }
-  });
-  return Promise.all(tasks);
 }
