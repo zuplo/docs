@@ -1,16 +1,5 @@
 import fs from "fs";
-import path from "path";
 import sidebars from "./sidebars.js";
-
-// Images
-const staticDir = path.join(process.cwd(), "static");
-const publicDir = path.join(process.cwd(), "public");
-const mediaDir = path.join(process.cwd(), "docs/articles/media");
-const publicMediaDir = path.join(publicDir, "media");
-if (!fs.existsSync(publicDir)) {
-  await fs.promises.cp(staticDir, publicDir, { recursive: true });
-  await fs.promises.cp(mediaDir, publicMediaDir, { recursive: true });
-}
 
 function migrateCategory(category) {
   category.items = category.items.map((item) => {

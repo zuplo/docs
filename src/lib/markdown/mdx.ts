@@ -2,7 +2,6 @@ import { migrateContent } from "@/build/migrate.mjs";
 import components from "@/components/markdown/index";
 import { Section } from "@/lib/interfaces";
 import remarkTransformLink from "@/lib/markdown/md-links";
-import remarkStaticImage from "@/lib/markdown/static-images";
 import { CompileOptions } from "@mdx-js/mdx";
 import fs from "fs/promises";
 import { Element } from "hast";
@@ -106,7 +105,7 @@ function getOptions(headings: Element[]): SerializeOptions {
   return {
     parseFrontmatter: false,
     mdxOptions: {
-      remarkPlugins: [remarkTransformLink as any, remarkStaticImage, remarkGfm],
+      remarkPlugins: [remarkTransformLink as any, remarkGfm],
       rehypePlugins: [
         rehypeSlug,
         [rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions],
