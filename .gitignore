@@ -48,7 +48,14 @@ scripts/update-policies.mjs.map
 yarn.lock
 .vercel
 
-src/shiki/
+
+
 
 # Temporary while migrating
 sidebar.jsonc
+
+# Generated Content
+src/shiki/
+public/robots.txt
+public/sitemap.xml
+public/sitemap-*.xml

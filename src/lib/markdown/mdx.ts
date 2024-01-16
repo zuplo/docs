@@ -14,7 +14,9 @@ import rehypeAutolinkHeadings, {
 import rehypeRewrite, { RehypeRewriteOptions } from "rehype-rewrite";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
+import remarkImages from "remark-images";
 import { VFile } from "vfile";
+import remarkStaticImage from "./static-images";
 
 export interface SerializeOptions {
   /**
@@ -105,7 +107,12 @@ function getOptions(headings: Element[]): SerializeOptions {
   return {
     parseFrontmatter: false,
     mdxOptions: {
-      remarkPlugins: [remarkTransformLink as any, remarkGfm],
+      remarkPlugins: [
+        remarkTransformLink as any,
+        remarkImages,
+        remarkStaticImage,
+        remarkGfm,
+      ],
       rehypePlugins: [
         rehypeSlug,
         [rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions],
