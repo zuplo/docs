@@ -57,7 +57,7 @@ One the right is the current **environment**. By default you will be looking at
 **working-copy** which is your private, editable, instance of the current
 project you are working on.
 
-![Environments](./media/environments.png)
+![Environments](../../static/media/environments.png)
 
 If you have other any **edge-deployments** you will see them listed alongside
 your working-copy. In this case we have two edge-deployments called
