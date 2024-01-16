@@ -1,15 +1,14 @@
 import type { Image } from "mdast";
 import path from "path";
-import type { Node } from "unist";
+import { Parent } from "unist";
 import { visit } from "unist-util-visit";
 import type { VFile } from "vfile";
-
 /**
  * Removes the md extension from links that reference the file path
  * @returns
  */
 export default function remarkStaticImage() {
-  return async (root: Node, vfile: VFile) => {
+  return async (root: Parent, vfile: VFile) => {
     const promises: Promise<void>[] = [];
     visit(root, "image", (node: Image, index, parent) => {
       promises.push(
