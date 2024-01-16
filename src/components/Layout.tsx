@@ -19,6 +19,7 @@ const links = [
   {
     href: "https://zuplo.com/docs",
     name: "Docs",
+    active: true,
   },
   {
     href: "https://zuplo.com/pricing",
@@ -52,10 +53,10 @@ function Header() {
   return (
     <header
       className={clsx(
-        "sticky top-4 z-50 m-4 flex h-24 flex-none flex-wrap items-center justify-between rounded-xl bg-slate-900/95 px-4 py-5 shadow-md shadow-slate-900/25 transition duration-500 sm:px-6 lg:px-8",
+        "max-w-wide sticky top-4 z-50 m-4 flex h-24 w-full flex-none flex-wrap items-center justify-between rounded-xl bg-black/95 px-4 py-5 shadow-md shadow-gray-900/25 transition duration-500 sm:px-6 lg:px-8",
         isScrolled
-          ? "dark:bg-slate-900/95 dark:backdrop-blur dark:[@supports(backdrop-filter:blur(0))]:bg-slate-900/75"
-          : "dark:bg-slate-900/95",
+          ? "dark:bg-black/95 dark:backdrop-blur dark:[@supports(backdrop-filter:blur(0))]:bg-black/75"
+          : "dark:bg-black/95",
       )}
     >
       <div className="mr-6 flex lg:hidden">
@@ -63,8 +64,8 @@ function Header() {
       </div>
       <div className="relative flex basis-0 items-center">
         <Link href="/" aria-label="Home page">
-          <Logomark className="md:hidden h-9 w-9" />
-          <Logo className="hidden md:inline-block h-7 w-auto" />
+          <Logomark className="h-9 w-9 md:hidden" />
+          <Logo className="hidden h-7 w-auto md:inline-block" />
         </Link>
       </div>
       <div className="relative flex basis-0 items-center justify-end gap-6 sm:gap-8 md:flex-grow">
@@ -76,7 +77,9 @@ function Header() {
             <Link
               key={item.name}
               href={item.href}
-              className="strong hover:text-pink tracking-wider text-white no-underline outline-none transition-colors"
+              className={`strong hover:text-pink tracking-wider no-underline outline-none transition-colors ${
+                item.active ? "text-pink" : " text-white"
+              }`}
               aria-current={item.href === currentPath ? "page" : undefined}
             >
               {item.name}
@@ -84,7 +87,10 @@ function Header() {
           ))}
         </div>
         <ThemeSelector className="relative z-10" />
-        <Link href="https://portal.zuplo.com/signup" className="hidden tracking-wider btn btn-primary-dark md:inline-block font-base block whitespace-nowrap rounded-lg px-5 py-3 text-center text-sm font-semibold no-underline transition-colors bg-pink text-white hover:bg-white hover:text-black">
+        <Link
+          href="https://portal.zuplo.com/signup"
+          className="btn btn-primary-dark font-base bg-pink block hidden whitespace-nowrap rounded-lg px-5 py-3 text-center text-sm font-semibold tracking-wider text-white no-underline transition-colors hover:bg-white hover:text-black md:inline-block"
+        >
           Start free
         </Link>
       </div>
@@ -97,16 +103,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
   let isHomePage = pathname === "/";
 
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex w-full flex-col items-center px-4">
       <Header />
 
       {/* {isHomePage && <Hero />} */}
 
       <div className="max-w-8xl relative mx-auto mt-[-2rem] flex w-full flex-auto justify-center sm:px-2 lg:px-8 xl:px-12">
         <div className="hidden lg:relative lg:block lg:flex-none">
-          <div className="absolute inset-y-0 right-0 w-[50vw] bg-slate-50 dark:hidden" />
-          <div className="absolute bottom-0 right-0 top-16 hidden h-12 w-px bg-gradient-to-t from-slate-800 dark:block" />
-          <div className="absolute bottom-0 right-0 top-28 hidden w-px bg-slate-800 dark:block" />
+          <div className="absolute inset-y-0 right-0 w-[50vw] bg-gray-50 dark:hidden" />
+          <div className="absolute bottom-0 right-0 top-16 hidden h-12 w-px bg-gradient-to-t from-gray-800 dark:block" />
+          <div className="absolute bottom-0 right-0 top-28 hidden w-px bg-gray-800 dark:block" />
           <div className="sticky top-[4rem] -ml-0.5 h-[calc(100vh-4rem)] w-64 overflow-y-auto overflow-x-hidden py-16 pl-0.5 pr-8 xl:w-72 xl:pr-16">
             <Navigation />
           </div>

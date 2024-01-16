@@ -22,16 +22,16 @@ export function QuickLink({
   icon: React.ComponentProps<typeof Icon>["icon"];
 }) {
   return (
-    <div className="hover:border-pink group relative rounded-xl border border-slate-200 dark:border-slate-800 dark:hover:border-pink transition duration-300">
+    <div className="hover:border-pink group relative rounded-xl border border-gray-200 dark:border-gray-800 dark:hover:border-pink transition duration-300">
       <div className="relative overflow-hidden rounded-xl p-6">
         <Icon icon={icon} className="h-8 w-8" />
-        <h2 className="font-display mt-4 text-base text-slate-900 dark:text-white">
+        <h2 className="font-display mt-4 text-base text-gray-900 dark:text-white">
           <Link href={href}>
             <span className="absolute -inset-px rounded-xl" />
             {title}
           </Link>
         </h2>
-        <p className="mt-1 text-sm text-slate-700 dark:text-slate-400">
+        <p className="mt-1 text-sm text-gray-700 dark:text-gray-400">
           {description}
         </p>
       </div>

@@ -71,7 +71,7 @@ function CopyButton({ code }: { code: string }) {
         aria-hidden={copied}
         className={clsx(
           "pointer-events-none flex items-center gap-0.5 text-zinc-400 transition duration-300",
-          copied && "-translate-y-1.5 opacity-0",
+          copied && "-tran-gray-y-1.5 opacity-0",
         )}
       >
         <Copy className="h-5 w-5 fill-zinc-500/20 stroke-zinc-500 transition-colors group-hover/button:stroke-zinc-400" />
@@ -81,7 +81,7 @@ function CopyButton({ code }: { code: string }) {
         aria-hidden={!copied}
         className={clsx(
           "pointer-events-none absolute inset-0 flex items-center justify-center text-emerald-400 transition duration-300",
-          !copied && "translate-y-1.5 opacity-0",
+          !copied && "tran-gray-y-1.5 opacity-0",
         )}
       >
         Copied!

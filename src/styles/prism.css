@@ -1,5 +1,5 @@
 pre[class*='language-'] {
-  color: theme('colors.slate.50');
+  color: theme('colors.gray.50');
 }
 
 .token.tag,
@@ -16,7 +16,7 @@ pre[class*='language-'] {
 .token.rule,
 .token.pseudo-class,
 .token.important {
-  color: theme('colors.slate.300');
+  color: theme('colors.gray.300');
 }
 
 .token.module {
@@ -32,7 +32,7 @@ pre[class*='language-'] {
 
 .token.punctuation,
 .token.attr-equals {
-  color: theme('colors.slate.500');
+  color: theme('colors.gray.500');
 }
 
 .token.unit,
@@ -43,5 +43,5 @@ pre[class*='language-'] {
 .token.comment,
 .token.operator,
 .token.combinator {
-  color: theme('colors.slate.400');
+  color: theme('colors.gray.400');
 }

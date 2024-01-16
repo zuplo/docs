@@ -32,7 +32,7 @@ function SubNavSection({
   return (
     <li className={`relative`}>
       <a
-        className="flex  w-full cursor-pointer pl-1 text-slate-500"
+        className="flex  w-full cursor-pointer pl-1 text-gray-500"
         onClick={onClick}
       >
         <span className="flex-grow">{link.label}</span>
@@ -46,7 +46,7 @@ function SubNavSection({
         role="list"
         className={`${
           hidden ? "hidden" : ""
-        } ml-2 pl-2 mt-2 space-y-2 border-l border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-200`}
+        } ml-2 pl-2 mt-2 space-y-2 border-l border-gray-100 dark:border-gray-800 lg:mt-4 lg:space-y-4 lg:border-gray-200`}
       >
         {link.items?.map((link, i) => (
           <NavSection
@@ -81,7 +81,7 @@ function NavSection({
             "block w-full pl-1 ",
             link.href === pathname
               ? "font-medium text-pink "
-              : "text-slate-500  hover:text-slate-600  dark:text-slate-400  dark:hover:text-slate-300",
+              : "text-gray-500  hover:text-gray-600  dark:text-gray-400  dark:hover:text-gray-300",
           )}
         >
           {link.label}
@@ -98,7 +98,7 @@ function NavSection({
             "block w-full pl-3.5 ",
             link.href === pathname
               ? "border-l  text-pink font-medium"
-              : "text-slate-500 hover:text-slate-600  dark:text-slate-400  dark:hover:text-slate-300",
+              : "text-gray-500 hover:text-gray-600  dark:text-gray-400  dark:hover:text-gray-300",
           )}
         >
           {link.label}
@@ -122,7 +122,7 @@ export function Navigation({
       <ul role="list" className="space-y-9">
         {navigation.map((section) => (
           <li key={section.label}>
-            <h2 className="font-display font-semibold text-slate-900 dark:text-white">
+            <h2 className="font-display font-semibold text-gray-900 dark:text-white">
               {section.label}
             </h2>
             <ul role="list" className="mt-2 space-y-2 lg:mt-4 lg:space-y-4 ">
