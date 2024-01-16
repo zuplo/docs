@@ -4,7 +4,6 @@ export function Logomark(props: React.ComponentPropsWithoutRef<"svg">) {
       aria-hidden="true"
       {...props}
       viewBox="0 0 330 330"
-      fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -23,11 +22,9 @@ export function Logo(props: React.ComponentPropsWithoutRef<"svg">) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
       aria-hidden="true"
       viewBox="0 0 147 33"
       {...props}
-      className="text-transparent"
     >
       <path
         fill="#FF00BD"

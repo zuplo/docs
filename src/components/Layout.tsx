@@ -63,8 +63,8 @@ function Header() {
       </div>
       <div className="relative flex basis-0 items-center">
         <Link href="/" aria-label="Home page">
-          <Logomark className="h-9 w-9" />
-          <Logo className="h-9 w-auto" />
+          <Logomark className="md:hidden h-9 w-9" />
+          <Logo className="hidden md:inline-block h-7 w-auto" />
         </Link>
       </div>
       <div className="relative flex basis-0 items-center justify-end gap-6 sm:gap-8 md:flex-grow">
