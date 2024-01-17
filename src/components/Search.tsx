@@ -1,10 +1,10 @@
 "use client";
 
-// import type {
-//   InkeepCustomTriggerProps,
-//   InkeepWidgetBaseSettings,
-// } from "@inkeep/widgets";
-// import dynamic from "next/dynamic";
+import type {
+  InkeepCustomTriggerProps,
+  InkeepWidgetBaseSettings,
+} from "@inkeep/widgets";
+import dynamic from "next/dynamic";
 import { useCallback, useEffect, useState } from "react";
 
 function SearchIcon(props: React.ComponentPropsWithoutRef<"svg">) {
@@ -15,28 +15,28 @@ function SearchIcon(props: React.ComponentPropsWithoutRef<"svg">) {
   );
 }
 
-// const InkeepCustomTrigger: any = dynamic(
-//   () => import("@inkeep/widgets").then((mod) => mod.InkeepCustomTrigger),
-//   { ssr: false },
-// );
+const InkeepCustomTrigger: any = dynamic(
+  () => import("@inkeep/widgets").then((mod) => mod.InkeepCustomTrigger),
+  { ssr: false },
+);
 
-// const baseSettings: InkeepWidgetBaseSettings = {
-//   apiKey: "499c156cf7a9798343949c8bb5665ac95e48132c6d68c42e",
-//   integrationId: "clot3asdz0000s601nc8jwnzx",
-//   organizationId: "org_dDOlt2uJlMWM8oIS",
-//   primaryBrandColor: "#ff00bd",
-//   organizationDisplayName: "Zuplo",
-//   theme: {
-//     components: {
-//       SearchBarTrigger: {
-//         defaultProps: {
-//           size: "expand",
-//           variant: "subtle", // Choose from 'emphasized' or 'subtle'
-//         },
-//       },
-//     },
-//   },
-// };
+const baseSettings: InkeepWidgetBaseSettings = {
+  apiKey: "499c156cf7a9798343949c8bb5665ac95e48132c6d68c42e",
+  integrationId: "clot3asdz0000s601nc8jwnzx",
+  organizationId: "org_dDOlt2uJlMWM8oIS",
+  primaryBrandColor: "#ff00bd",
+  organizationDisplayName: "Zuplo",
+  theme: {
+    components: {
+      SearchBarTrigger: {
+        defaultProps: {
+          size: "expand",
+          variant: "subtle", // Choose from 'emphasized' or 'subtle'
+        },
+      },
+    },
+  },
+};
 
 export function Search() {
   let [modifierKey, setModifierKey] = useState<string>();
@@ -71,11 +71,11 @@ export function Search() {
     setIsOpen(false);
   }, []);
 
-  // const inkeepCustomTriggerProps: InkeepCustomTriggerProps = {
-  //   isOpen,
-  //   onClose: handleClose,
-  //   baseSettings,
-  // };
+  const inkeepCustomTriggerProps: InkeepCustomTriggerProps = {
+    isOpen,
+    onClose: handleClose,
+    baseSettings,
+  };
 
   return (
     <>
@@ -95,7 +95,7 @@ export function Search() {
           </kbd>
         )}
       </button>
-      {/* <InkeepCustomTrigger {...inkeepCustomTriggerProps} /> */}
+      <InkeepCustomTrigger {...inkeepCustomTriggerProps} />
     </>
   );
 }
