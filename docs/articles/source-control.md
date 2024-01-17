@@ -2,8 +2,6 @@
 title: Source Control
 ---
 
-import GithubSetup from './\_github-setup.md';
-
 :::info
 
 Gitlab and Bitbucket Support
@@ -23,7 +21,8 @@ benefits, including:
 - ability to deploy an [edge-deployment](../articles/environments.md) just by
   adding a branch or making a commit.
 
-<GithubSetup />
+For full instructions on setting up github see
+[the quickstart tutorial](../articles/step-4-deploying-to-the-edge.md).
 
 ## Connecting Existing Repositories
 
@@ -31,9 +30,7 @@ If you have an existing GitHub repository that contains a Zuplo project, you can
 connect to that repository when you create a new project. Select **Advanced**
 then select your GitHub organization and repository.
 
-<Screenshot
-src="https://cdn.zuplo.com/assets/f09aa7ac-abc0-4f20-9e41-df42b7761748.png"
-size="sm" />
+![](https://cdn.zuplo.com/assets/f09aa7ac-abc0-4f20-9e41-df42b7761748.png)
 
 ## Limitations
 
