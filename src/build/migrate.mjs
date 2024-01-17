@@ -6,7 +6,7 @@ export async function migrateContent(content, fsPath) {
       /<Screenshot\s+src="(.*?)"(?:\s+alt="(.*?)")?(?:\s+size="(.*?)")?\s*\/>/gm,
       "![$2]($1)",
     )
-    .replaceAll(/<!--.*?-->/g, "");
+    .replaceAll(/<!--.*?-->/gs, "");
 }
 
 /**

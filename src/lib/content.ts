@@ -29,7 +29,7 @@ export async function getSlugContent<Data = Record<string, any>>({
   const filepath = path.join(
     process.cwd(),
     sourceDir,
-    fileName.replace("%5C", "/"),
+    fileName.replaceAll("%5C", "/"),
   );
   if (!existsSync(filepath)) {
     return undefined;

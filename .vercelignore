@@ -1,4 +1,4 @@
-public/media/\*
+public/media/*
 .github
 .vscode
 README.md
