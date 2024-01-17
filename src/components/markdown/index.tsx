@@ -3,6 +3,7 @@ import { MDXProvider } from "@mdx-js/react";
 import { ChevronLeftIcon } from "lucide-react";
 import { Fence } from "../Fence";
 import Callout from "./Callout";
+import ZupIt from "./ZupIt";
 import {
   ApiTestConsoleTabIcon,
   BuildStatusTabIcon,
@@ -30,6 +31,7 @@ const components: React.ComponentProps<typeof MDXProvider>["components"] = {
   GitHubIcon,
   GithubButton,
   Callout,
+  ZupIt,
   pre: Fence as any,
   img: (props) => (
     // eslint-disable-next-line jsx-a11y/alt-text, @next/next/no-img-element

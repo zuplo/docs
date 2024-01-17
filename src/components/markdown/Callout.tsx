@@ -10,7 +10,7 @@ type CalloutType = "note" | "tip" | "info" | "warning" | "caution" | "danger";
 type CalloutProps = {
   type: CalloutType;
   children: any;
-  title: string;
+  title?: string;
 };
 
 // -----------------------------------------------------------

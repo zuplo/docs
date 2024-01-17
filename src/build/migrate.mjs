@@ -1,7 +1,12 @@
 /// <reference lib="es2022" />
 
 export async function migrateContent(content, fsPath) {
-  return replaceAdmonitions(content, fsPath).replaceAll("<!-- -->", "");
+  return replaceAdmonitions(content, fsPath)
+    .replaceAll(
+      /<Screenshot\s+src="(.*?)"(?:\s+alt="(.*?)")?(?:\s+size="(.*?)")?\s*\/>/gm,
+      "![$2]($1)",
+    )
+    .replaceAll(/<!--.*?-->/g, "");
 }
 
 /**
