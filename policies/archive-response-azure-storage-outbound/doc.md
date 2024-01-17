@@ -14,7 +14,7 @@ Once you have your container you'll need the URL - you can get it on the
 > to deploy to your Zuplo account:
 > https://github.com/zuplo/samples-req-archive-filestorage
 
-![Untitled](../../static/media/guides/archiving-requests-to-storage/Untitled.png)
+![Untitled](../../public/media/guides/archiving-requests-to-storage/Untitled.png)
 
 This URL will be the `blobPath` in our policy options.
 
@@ -26,10 +26,10 @@ permission. Choose a sensible start and expiration time for your token. Note, we
 do not recommend restricting IP addresses because Zuplo runs at the edge in over
 200 data-centers world-wide.
 
-![Untitled](../../static/media/guides/archiving-requests-to-storage/Untitled_1.png)
+![Untitled](../../public/media/guides/archiving-requests-to-storage/Untitled_1.png)
 
 Then generate your SAS token - copy the token (not the URL) to the clipboard and
 enter it into a new environment variable in your zup called `BLOB_CREATE_SAS`.
 You'll need another environment variable called `BLOB_CONTAINER_PATH`.
 
-![Untitled](../../static/media/guides/archiving-requests-to-storage/Untitled_2.png)
+![Untitled](../../public/media/guides/archiving-requests-to-storage/Untitled_2.png)

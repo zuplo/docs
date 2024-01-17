@@ -10,7 +10,7 @@ provides as a clean layer of separation in their architecture.
 
 There are a number of reasons people decide to use Zuplo:
 
-### Enterprise Customers
+## Enterprise Customers
 
 We have many enterprise customers using Zuplo to manage multiple APIs, some
 examples include
@@ -24,7 +24,7 @@ examples include
   team here:
   [▶️ Why Imburse Payments chose Zuplo as their API Gateway](https://youtu.be/z94pRJE2zfs)
 
-### Startup Customers
+## Startup Customers
 
 We also have many smaller businesses using Zuplo, launching a delightful
 Stripe-quality experience in record time. Examples include:
