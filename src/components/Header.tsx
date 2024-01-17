@@ -62,7 +62,7 @@ export default function Header() {
         <MobileNavigation />
       </div>
       <div className="relative flex basis-0 items-center">
-        <Link href="/" aria-label="Home page">
+        <Link href="https://zuplo.com" aria-label="Home page">
           <Logomark className="h-9 w-9 md:hidden" />
           <Logo className="hidden h-7 w-auto md:inline-block" />
         </Link>
