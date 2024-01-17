@@ -43,7 +43,7 @@ You can quickly test this route by clicking the **Test** button next to the
 **Path** field. You can use the built in test tool or click the URL to open in a
 new tab.
 
-<Screenshot src="https://cdn.zuplo.com/assets/ef3005b5-2e69-4704-bcfe-12b2db62e0b4.png" />
+![](https://cdn.zuplo.com/assets/ef3005b5-2e69-4704-bcfe-12b2db62e0b4.png)
 
 You should receive a 401 Unauthorized that says something similar to
 
@@ -98,7 +98,7 @@ important secret).
 Go back to your route in the Route Designer and click the **Test** button next
 to the **Path** field. Click the **Test** button in the dialog that opens.
 
-<Screenshot src="https://cdn.zuplo.com/assets/c1753ead-6bd3-4b6f-99d2-ef4c964d7b32.png" />
+![](https://cdn.zuplo.com/assets/c1753ead-6bd3-4b6f-99d2-ef4c964d7b32.png)
 
 Congratulations, your gateway is working 👏👏👏
 

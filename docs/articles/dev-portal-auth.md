@@ -32,7 +32,7 @@ monthly active users.
 in the Auth0 dashboard. When creating the application select type "Single Page
 Web Applications"
 
-<Screenshot src="https://cdn.zuplo.com/assets/0aaa56b6-37c4-4c87-ac62-d86bc52047e3.png" size="md" />
+![](https://cdn.zuplo.com/assets/0aaa56b6-37c4-4c87-ac62-d86bc52047e3.png)
 
 ### 2/ Configure Auth0 Application
 
@@ -53,7 +53,7 @@ You must set the following fields in the Auth0 application:
 - **Rotation**: Enabled
 - **Reuse Interval**: Leave at `0`
 
-<Screenshot src="https://cdn.zuplo.com/assets/359f4a6c-4dd9-48c9-b8a3-27e70aa459c0.png" size="md" />
+![](https://cdn.zuplo.com/assets/359f4a6c-4dd9-48c9-b8a3-27e70aa459c0.png)
 
 **Refresh Token Expiration**
 
@@ -78,7 +78,7 @@ different URLs.
 
 :::
 
-<Screenshot src="https://cdn.zuplo.com/assets/d91471bd-5897-463e-805c-35abba294616.png" size="md" />
+![](https://cdn.zuplo.com/assets/d91471bd-5897-463e-805c-35abba294616.png)
 
 ### 4/ Configure the Developer Portal
 
@@ -100,7 +100,7 @@ Set the following settings:
 - **Audience**: This is the value for `identifier` that you set when creating
   the Auth0 API earlier.
 
-<Screenshot src="https://cdn.zuplo.com/assets/16c9b4a0-db9b-4b8c-a16f-00ce5e08071e.png" size="md" />
+![](https://cdn.zuplo.com/assets/16c9b4a0-db9b-4b8c-a16f-00ce5e08071e.png)
 
 ## External Auth Setup
 
