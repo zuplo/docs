@@ -11,10 +11,10 @@ import { Search } from "@/components/Search";
 import { ThemeSelector } from "@/components/ThemeSelector";
 
 const links = [
-  {
-    href: "https://zuplo.com/features",
-    name: "Product",
-  },
+  // {
+  //   href: "https://zuplo.com/features",
+  //   name: "Product",
+  // },
   {
     href: "/",
     name: "Docs",
