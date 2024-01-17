@@ -126,7 +126,7 @@ export async function compileMdx<Frontmatter = Record<string, any>>(
   const migrated = await migrateContent(source);
 
   const vfile = new VFile(migrated);
-  vfile.path = filepath;
+  vfile.path = filepath.replace(".md", ".mdx"); // Trick mdxjs that this is MDX
 
   const nodes: (Element & { tagName: "h2" | "h3" })[] = [];
   const options = getOptions(nodes);
