@@ -33,10 +33,10 @@ const components: React.ComponentProps<typeof MDXProvider>["components"] = {
   Callout,
   ZupIt,
   pre: Fence as any,
-  img: (props) => (
-    // eslint-disable-next-line jsx-a11y/alt-text, @next/next/no-img-element
-    <img {...props} className="border border-gray-300 rounded-md" />
-  ),
+  // img: (props) => (
+  //   // eslint-disable-next-line jsx-a11y/alt-text, @next/next/no-img-element
+  //   <img {...props} className="border border-gray-300 rounded-md" />
+  // ),
 };
 
 export default components;
