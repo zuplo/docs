@@ -5,6 +5,19 @@ import withPolicies from "./src/build/policies.mjs";
 const nextConfig = {
   basePath: "/docs",
   pageExtensions: ["js", "jsx", "md", "ts", "tsx"],
+  swcMinify: true,
+  reactStrictMode: true,
+  images: {
+    deviceSizes: [576, 640, 760, 828, 992, 1180, 1440],
+    imageSizes: [96, 128, 256, 384],
+    formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.zuplo.com",
+      },
+    ],
+  },
 };
 
 export default withPolicies(withNavigation(nextConfig));
