@@ -15,7 +15,6 @@ import {
   SettingsTabIcon,
   ShowIcon,
 } from "./ui-icons";
-import BundlesTable from "../BundlesTable";
 
 const components: React.ComponentProps<typeof MDXProvider>["components"] = {
   ChevronLeftIcon,
@@ -30,7 +29,6 @@ const components: React.ComponentProps<typeof MDXProvider>["components"] = {
   ShowIcon,
   GitHubIcon,
   GithubButton,
-  BundlesTable,
   Callout,
   pre: Fence as any,
   img: (props) => (

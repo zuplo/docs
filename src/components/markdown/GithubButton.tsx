@@ -13,7 +13,7 @@ export default function GithubButton({
     <a
       href={href}
       target="_blank"
-      className={`clean-btn button button--primary rounded-lg px-5 py-3 ${styles["github-button"]}`}
+      className={`clean-btn button button--primary ${styles["github-button"]}`}
     >
       {text} <GitHubIcon />
     </a>

@@ -34,7 +34,7 @@ function buildNavSection(rawSection) {
           href: `/${item}`,
         });
       } else {
-        const docPath = path.resolve(path.join("docs", `${item}.mdx`));
+        const docPath = path.resolve(path.join("docs", `${item}.md`));
         if (!fs.existsSync(docPath)) {
           throw new Error(`Doc file not found: ${docPath}`);
         }
@@ -49,7 +49,7 @@ function buildNavSection(rawSection) {
       const child = buildNavSection(item);
       section.items.push(child);
     } else if ("type" in item && item.type === "doc") {
-      const docPath = path.resolve(path.join("docs", `${item.id}.mdx`));
+      const docPath = path.resolve(path.join("docs", `${item.id}.md`));
       if (!fs.existsSync(docPath)) {
         throw new Error(`Doc file not found: ${docPath}`);
       }

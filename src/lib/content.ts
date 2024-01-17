@@ -25,7 +25,7 @@ export async function getSlugContent<Data = Record<string, any>>({
   slug: Array<string>;
   sourceDir: string;
 }): Promise<Content<Data> | undefined> {
-  const fileName = `${slug.join("/")}.mdx`;
+  const fileName = `${slug.join("/")}.md`;
   const filepath = path.join(
     process.cwd(),
     sourceDir,
@@ -52,10 +52,10 @@ export async function getSlugContent<Data = Record<string, any>>({
 export async function getAllContent<Data = Record<string, any>>(options?: {
   limit?: number;
 }): Promise<Content<Data>[]> {
-  const contentFiles = await glob(`docs/**/*.mdx`);
+  const contentFiles = await glob(`docs/**/*.md`);
   const results = await Promise.all(
     contentFiles
-      .filter((f) => f.endsWith(".mdx"))
+      .filter((f) => f.endsWith(".md"))
       .sort()
       .reverse()
       .map(async (file) => {
@@ -68,9 +68,9 @@ export async function getAllContent<Data = Record<string, any>>(options?: {
           filepath,
           source: content,
           data: data as Data,
-          href: file.substring(5).replace(".mdx", ""),
+          href: file.substring(5).replace(".md", ""),
           // Remove the /docs
-          slug: file.substring(5).replace(".mdx", "").split("/"),
+          slug: file.substring(5).replace(".md", "").split("/"),
         };
         return result;
       }),

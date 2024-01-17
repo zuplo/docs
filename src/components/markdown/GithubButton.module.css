@@ -1,9 +1,7 @@
 .github-button {
   margin-right: auto;
   margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 5px;
+  display: inherit;
   width: fit-content;
   background-color: black;
   border: black;
