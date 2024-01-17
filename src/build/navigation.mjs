@@ -1,6 +1,5 @@
 import * as fs from "fs";
 import matter from "gray-matter";
-import { parse } from "jsonc-parser";
 import * as path from "path";
 import { createLoader } from "simple-functional-loader";
 import * as url from "url";
@@ -79,11 +78,11 @@ export default function withNavigation(nextConfig = {}) {
           // Adding the babel loader enables fast refresh
           options.defaultLoaders.babel,
           createLoader(function () {
-            let navPath = path.resolve("./sidebar.jsonc");
+            let navPath = path.resolve("./sidebar.json");
             this.addContextDependency(navPath);
 
             const json = fs.readFileSync(navPath, "utf8");
-            const raw = parse(json);
+            const raw = JSON.parse(json);
             const navigation = [];
             for (const rawSection of raw) {
               const section = buildNavSection(rawSection);
