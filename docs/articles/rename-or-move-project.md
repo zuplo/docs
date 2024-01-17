@@ -18,12 +18,12 @@ move to a different project.
 If you're confident all your code is stored safely in the repo you can now
 disconnect the project from Source Control.
 
-![Disconnect Project](../../static/media/disconnect-project.png)
+![Disconnect Project](../../public/media/disconnect-project.png)
 
 Next create a new project in the correct account if moving accounts or with the
 correct name. Choose the `Advanced` option on the new project dialog.
 
-![Advanced New Project](../../static/media/advanced-new-project.png)
+![Advanced New Project](../../public/media/advanced-new-project.png)
 
 You should see a list of Orgs and Repos - pick the source repo you wanted to
 move and click Create Project from Repository.

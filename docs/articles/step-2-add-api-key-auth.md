@@ -34,7 +34,7 @@ request pipeline, drag it to the top if you have multiple policies.
 
 If you test your route, you should get a 401 Unauthorized response
 
-```
+```json
 {
   "status": 401,
   "title": "Unauthorized",

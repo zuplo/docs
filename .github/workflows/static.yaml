@@ -1,0 +1,51 @@
+name: Static Assets
+on:
+  push:
+    branches:
+      - main
+      - nextjs_v2
+
+jobs:
+  policies:
+    name: Upload Static Assets
+    runs-on: ubuntu-latest
+
+    env:
+      GITHUB_NPM_TOKEN: ${{ secrets.GH_CUSTOM_TOKEN }}
+
+    permissions:
+      id-token: "write"
+      deployments: "write"
+
+    steps:
+      - uses: actions/checkout@v4
+      - id: "auth"
+        name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v2"
+        with:
+          token_format: "access_token"
+          workload_identity_provider: "projects/914576303414/locations/global/workloadIdentityPools/github-actions-wi-pool/providers/github-actions-wi-provider"
+          service_account: "github-actions-docs@zuplo-production.iam.gserviceaccount.com"
+          access_token_lifetime: "300s"
+
+      - name: Upload Media (png)
+        uses: "google-github-actions/upload-cloud-storage@v2"
+        with:
+          path: public/media/
+          glob: "**/*.png"
+          destination: cdn.zuplo.com/docs
+          process_gcloudignore: false
+          headers: |-
+            cache-control: max-age=31536000
+            content-type: image/png
+
+      - name: Upload Media (gif)
+        uses: "google-github-actions/upload-cloud-storage@v2"
+        with:
+          path: public/media/
+          glob: "**/*.gif"
+          destination: cdn.zuplo.com/docs
+          process_gcloudignore: false
+          headers: |-
+            cache-control: max-age=31536000
+            content-type: image/gif

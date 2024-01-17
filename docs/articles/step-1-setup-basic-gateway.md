@@ -47,7 +47,7 @@ new tab.
 
 You should receive a 401 Unauthorized that says something similar to
 
-```
+```txt
 {
   "status": 401,
   "title": "Unauthorized",
