@@ -1,14 +1,14 @@
+import { Providers, SuspendedProviders } from "@/app/providers";
+import { Layout } from "@/components/Layout";
+import { KOALA_URL, ZARAZ_URL } from "@/lib/env";
 import clsx from "clsx";
 import { type Metadata } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
-
-import { Providers, SuspendedProviders } from "@/app/providers";
-import { Layout } from "@/components/Layout";
-import { KOALA_URL, ZARAZ_URL } from "@/lib/env";
-import "@/styles/tailwind.css";
 import Script from "next/script";
 import { Suspense } from "react";
+
+import "@/styles/tailwind.css";
 
 const inter = Inter({
   subsets: ["latin"],

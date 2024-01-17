@@ -1,1 +1,0 @@
-- Docs that use partials don't list all headings on TOC

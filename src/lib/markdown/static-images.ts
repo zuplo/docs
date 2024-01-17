@@ -9,17 +9,23 @@ import type { VFile } from "vfile";
  */
 export default function remarkStaticImage() {
   return async (root: Parent, vfile: VFile) => {
+    const promises: Promise<void>[] = [];
     visit(root, "image", (node: Image, index, parent) => {
-      if (!node.url.startsWith("http")) {
-        const publicDir = path.join(process.cwd(), "public");
-        let url = path.resolve(path.dirname(vfile.path), node.url);
-        const relativePath = url.replace(publicDir, "");
-        if (process.env.USE_IMAGE_CDN) {
-          node.url = `https://cdn.zuplo.com/docs${relativePath}`;
-        } else {
-          node.url = `/docs${relativePath}`;
-        }
-      }
+      promises.push(
+        (async () => {
+          if (!node.url.startsWith("http")) {
+            const publicDir = path.join(process.cwd(), "public");
+            let url = path.resolve(path.dirname(vfile.path), node.url);
+            const relativePath = url.replace(publicDir, "");
+            if (process.env.USE_IMAGE_CDN) {
+              node.url = `https://cdn.zuplo.com/docs${relativePath}`;
+            } else {
+              node.url = `/docs${relativePath}`;
+            }
+          }
+        })(),
+      );
     });
+    await Promise.all(promises);
   };
 }

@@ -8,10 +8,16 @@ import type { VFile } from "vfile";
  */
 export default function remarkTransformLink() {
   return async (root: Node, vfile: VFile) => {
+    const promises: Promise<void>[] = [];
     visit(root, "link", (node: Link, index, parent) => {
-      if (node.url.endsWith(".md")) {
-        node.url = node.url.replace(".md", "");
-      }
+      promises.push(
+        (async () => {
+          if (node.url.endsWith(".md")) {
+            node.url = node.url.replace(".md", "");
+          }
+        })(),
+      );
     });
+    await Promise.all(promises);
   };
 }

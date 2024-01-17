@@ -1,10 +1,11 @@
+"use client";
+
+import { navigation } from "@/build/navigation.mjs";
+import { NavCategory, NavItem } from "@/lib/interfaces";
 import clsx from "clsx";
 import { ChevronDownIcon, ChevronRightIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-import { navigation } from "@/build/navigation.mjs";
-import { NavCategory, NavItem } from "@/lib/interfaces";
 import { useState } from "react";
 
 function SubNavSection({
