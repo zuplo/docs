@@ -1,11 +1,10 @@
 import { dereference } from "@apidevtools/json-schema-ref-parser";
 import chalk from "chalk";
-import chokidar from "chokidar";
 import { existsSync } from "fs";
 import { copyFile, mkdir, readFile, writeFile } from "fs/promises";
-import glob from "glob";
+import { glob } from "glob";
 import { JSONSchema7, JSONSchema7Definition } from "json-schema";
-import { Heading as AstHeading } from "mdast";
+import type { Heading as AstHeading } from "mdast";
 import { toString } from "mdast-util-to-string";
 import path from "path";
 import prettier from "prettier";
@@ -13,6 +12,8 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { Node } from "unist";
 import { visit } from "unist-util-visit";
+
+const isNext = !!process.env.IS_NEXT;
 
 // here just to keep the react import
 const version = React.version;
@@ -74,12 +75,12 @@ function ObjectSchema({ schema }: { schema: JSONSchema7 }) {
               {" "}
               Allowed values are{" "}
               {value.enum.map((v, i) => {
-                const comma = i < value.enum.length - 1 ? ", " : null;
-                const and = i === value.enum.length - 1 ? "and " : null;
+                const comma = i < value.enum!.length - 1 ? ", " : null;
+                const and = i === value.enum!.length - 1 ? "and " : null;
                 return (
                   <span key={i}>
                     {and}
-                    <code>{v.toString()}</code>
+                    <code>{v!.toString()}</code>
                     {comma}
                   </span>
                 );
@@ -117,9 +118,9 @@ function OptionType({ value }: { value: JSONSchema7 }) {
     typeString = value.type.toString();
   } else if (value.oneOf) {
     typeString = value.oneOf
-      .map((o: JSONSchema7) => {
-        if (o.items && (o.items as JSONSchema7).type) {
-          return `${(o.items as JSONSchema7).type.toString()}[]`;
+      .map((o: any) => {
+        if (o.items && o.items.type) {
+          return `${o.items.type.toString()}[]`;
         }
         return o.type?.toString();
       })
@@ -164,10 +165,10 @@ const PolicyOptions = ({
   policyId: string;
 }) => {
   isObjectSchema(schema);
-  const { handler } = schema.properties;
+  const { handler } = schema.properties!;
   isObjectSchema(handler);
   const { properties } = handler;
-  const { module: handlerModule, export: handlerExport, options } = properties;
+  const { module: handlerModule, export: handlerExport, options } = properties!;
   isObjectSchema(handlerModule);
   isObjectSchema(handlerExport);
   return (
@@ -189,13 +190,13 @@ const PolicyOptions = ({
           <code>handler.export</code>{" "}
           <span className="type-option">{"<string>"}</span> - The name of the
           exported type. Value should be{" "}
-          <code>{handlerExport.const.toString()}</code>.
+          <code>{handlerExport.const!.toString()}</code>.
         </li>
         <li>
           <code>handler.module</code>{" "}
           <span className="type-option">{"<string>"}</span> - The module
           containing the policy. Value should be{" "}
-          <code>{handlerModule.const.toString()}</code>.
+          <code>{handlerModule.const!.toString()}</code>.
         </li>
         {options && Object.keys(options).length > 0 ? (
           <li>
@@ -219,7 +220,10 @@ const PolicyOptions = ({
   );
 };
 
-const docsDir = path.resolve(process.cwd(), "./docs/policies");
+const docsDir = path.resolve(
+  process.cwd(),
+  isNext ? "./src/app/policies" : "./docs/policies",
+);
 const policiesDir = path.resolve(process.cwd(), "./policies");
 const policyManifestOutputPath = path.resolve(
   process.cwd(),
@@ -433,6 +437,7 @@ Read more about [how policies work](/docs/articles/policies)
 }
 
 export async function run() {
+  console.log("Generating policies");
   // await rm(docsDir, { recursive: true, force: true });
   if (!existsSync(docsDir)) {
     await mkdir(docsDir, { recursive: true });
@@ -443,24 +448,15 @@ export async function run() {
   );
   const policyConfig = JSON.parse(policyConfigJson);
 
-  const matches: string[] = await new Promise((resolve, reject) => {
-    glob("./{policies,temp}/**/schema.json", (err, result) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(result);
-      }
-    });
-  });
+  const matches: string[] = await glob("./{policies,temp}/**/schema.json");
 
-  const policies = [];
+  const policies: any[] = [];
   const tasks = matches.map(async (match) => {
     const policyDir = path.join(
       process.cwd(),
       match.replace("/schema.json", ""),
     );
-    const policyId = match.split("/")[2];
-
+    const policyId = match.split("/")[1];
     const schemaPath = path.join(policyDir, "schema.json");
     const schemaJson = await readFile(schemaPath, "utf-8");
     const rawSchema = JSON.parse(schemaJson);
@@ -514,10 +510,10 @@ export async function run() {
           schemaJson,
         ),
       );
-      const handler = schema.properties.handler as JSONSchema7;
+      const handler = schema.properties!.handler as JSONSchema7;
       meta.defaultHandler = {
-        export: (handler.properties.export as JSONSchema7).const,
-        module: (handler.properties.module as JSONSchema7).const,
+        export: (handler.properties!.export as JSONSchema7).const,
+        module: (handler.properties!.module as JSONSchema7).const,
         options: {},
       };
     }
@@ -547,7 +543,12 @@ export async function run() {
       policyFilePaths,
     );
 
-    await writeFile(path.join(docsDir, `${policyId}.md`), generatedMd, "utf-8");
+    const outPath = isNext
+      ? path.join(docsDir, policyId, `page.md`)
+      : path.join(docsDir, `${policyId}.md`);
+    const outdir = path.dirname(outPath);
+    await mkdir(outdir, { recursive: true });
+    await writeFile(outPath, generatedMd, "utf-8");
   });
 
   await Promise.all(tasks);
@@ -577,18 +578,18 @@ async function getExampleHtml(
   if (existsSync(introMdPath)) {
     introOrDescription = await readFile(introMdPath, "utf-8");
   } else {
-    introOrDescription = schema.description;
+    introOrDescription = schema.description!;
   }
 
   const { html: introHtml } = await render(introOrDescription);
 
   isObjectSchema(schema);
-  const { handler } = schema.properties;
+  const { handler } = schema.properties!;
   isObjectSchema(handler);
   const { properties } = handler;
-  const { options } = properties;
+  const { options } = properties!;
 
-  let deprecatedHtml = null;
+  let deprecatedHtml;
   if (schema.isDeprecated) {
     let deprecatedInnerHtml = "<strong>This policy is deprecated.</strong>";
     if (schema.deprecatedMessage) {
@@ -601,7 +602,7 @@ async function getExampleHtml(
     );
   }
 
-  if (properties.options && Object.keys(properties.options).length === 0) {
+  if (properties!.options && Object.keys(properties!.options).length === 0) {
     console.warn(
       chalk.yellow(
         `WARN: The policy ${policyId} does not have any options set in the schema.`,
@@ -629,25 +630,4 @@ async function getExampleHtml(
   );
 
   return html;
-}
-
-export async function watch() {
-  await run();
-  var watcher = chokidar.watch(path.join(policiesDir), {
-    ignored: /^\./,
-    persistent: true,
-    ignoreInitial: true,
-  });
-
-  function changed(path) {
-    run().catch(console.error);
-  }
-
-  watcher
-    .on("add", changed)
-    .on("change", changed)
-    .on("unlink", changed)
-    .on("error", function (error) {
-      console.error("Error happened", error);
-    });
 }

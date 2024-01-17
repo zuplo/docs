@@ -1,5 +1,3 @@
-## Signing a Value
-
 The example below demonstrates how you could sign a value in order to create an
 HMAC signature for use with this policy.
 
@@ -24,7 +22,9 @@ async function sign(
     encoder.encode(val),
   );
   return Array.prototype.map
-    .call(new Uint8Array(token), (x) => ("0" + x.toString(16)).slice(-2))
+    .call(new Uint8Array(token), function (x) {
+      return ("0" + x.toString(16)).slice(-2);
+    })
     .join("");
 }
 ```
