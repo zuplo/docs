@@ -1,12 +1,9 @@
-import { Providers, SuspendedProviders } from "@/app/providers";
+import { Providers } from "@/app/providers";
 import { Layout } from "@/components/Layout";
-import { KOALA_URL, ZARAZ_URL } from "@/lib/env";
 import clsx from "clsx";
 import { type Metadata } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
-import Script from "next/script";
-import { Suspense } from "react";
 
 import "@/styles/tailwind.css";
 
@@ -48,7 +45,7 @@ export default function RootLayout({
           type="image/x-icon"
           href="https://cdn.zuplo.com/www/favicon.png"
         />
-        {ZARAZ_URL && (
+        {/* {ZARAZ_URL && (
           <Script
             id="zaraz"
             strategy="afterInteractive"
@@ -67,13 +64,13 @@ export default function RootLayout({
           window.koalaSettings = { host: '${KOALA_URL}' };
           !function(t){if(window.ko)return;window.ko=[],["identify","track","removeListeners","open","on","off","qualify","ready"].forEach(function(t){ko[t]=function(){var n=[].slice.call(arguments);return n.unshift(t),ko.push(n),ko}});var n=document.createElement("script");n.async=!0,n.setAttribute("src","${KOALA_URL}/v1/pk_32d64a435a311ccc9462e3721dba58cb3e35/sdk.js"),(document.body || document.head).appendChild(n)}();`,
             }}
-          />
+          /> */}
         )}
       </head>
       <body className="flex min-h-full bg-white dark:bg-black">
-        <Suspense>
+        {/* <Suspense>
           <SuspendedProviders />
-        </Suspense>
+        </Suspense> */}
         <Providers>
           <Layout>{children}</Layout>
         </Providers>
