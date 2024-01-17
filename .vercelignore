@@ -1,1 +1,11 @@
-public/media/*
+public/media/\*
+.github
+.vscode
+README.md
+.eslintrc
+.prettierignore
+.nvmrc
+checkly.config.ts
+CONTRIBUTING.md
+prettier.config.js
+__checks__
