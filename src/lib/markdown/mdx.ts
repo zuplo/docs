@@ -104,7 +104,7 @@ function getHeaderRewriteOptions(headings: Element[]): RehypeRewriteOptions {
 
 function getOptions(headings: Element[]): SerializeOptions {
   return {
-    parseFrontmatter: true,
+    parseFrontmatter: false,
     mdxOptions: {
       remarkPlugins: [remarkTransformLink as any, remarkStaticImage, remarkGfm],
       rehypePlugins: [
