@@ -1,5 +1,6 @@
 import { Providers, SuspendedProviders } from "@/app/providers";
 import { Layout } from "@/components/Layout";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import clsx from "clsx";
 import { type Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -67,7 +68,7 @@ export default function RootLayout({
           window.koalaSettings = { host: '${KOALA_URL}' };
           !function(t){if(window.ko)return;window.ko=[],["identify","track","removeListeners","open","on","off","qualify","ready"].forEach(function(t){ko[t]=function(){var n=[].slice.call(arguments);return n.unshift(t),ko.push(n),ko}});var n=document.createElement("script");n.async=!0,n.setAttribute("src","${KOALA_URL}/v1/pk_32d64a435a311ccc9462e3721dba58cb3e35/sdk.js"),(document.body || document.head).appendChild(n)}();`,
             }}
-          /> 
+          />
         )}
       </head>
       <body className="flex min-h-full bg-white dark:bg-black">
@@ -77,6 +78,7 @@ export default function RootLayout({
         <Providers>
           <Layout>{children}</Layout>
         </Providers>
+        <SpeedInsights />
       </body>
     </html>
   );

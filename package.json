@@ -27,6 +27,7 @@
     "@types/react-dom": "18.2.7",
     "@types/unist": "^2.0.10",
     "@typescript-eslint/parser": "^6.19.0",
+    "@vercel/speed-insights": "^1.0.5",
     "autoprefixer": "^10.4.12",
     "clsx": "^1.2.1",
     "glob": "^10.3.10",
