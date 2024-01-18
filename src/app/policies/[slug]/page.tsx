@@ -284,7 +284,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       {doc}
       <p>
         Read more about{" "}
-        <Link href={"/docs/articles/policies"}>how policies work</Link>
+        <Link href={"/articles/policies"}>how policies work</Link>
       </p>
     </DocsLayout>
   );
