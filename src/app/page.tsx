@@ -67,11 +67,11 @@ export default async function Page() {
         <CustomTOCListSection>
           <CustomTOCListHead>OVERVIEW</CustomTOCListHead>
           <CustomTOCListContent>
-            <Link href="/docs/articles/what-is-zuplo">What is Zuplo?</Link>
-            <Link href="/docs/articles/who-uses-and-why">
+            <Link href="/articles/what-is-zuplo">What is Zuplo?</Link>
+            <Link href="/articles/who-uses-and-why">
               Who uses Zuplo, and why?
             </Link>
-            <Link href="/docs/articles/zuplo-in-your-stack">
+            <Link href="/articles/zuplo-in-your-stack">
               Zuplo in your stack
             </Link>
           </CustomTOCListContent>
@@ -79,16 +79,16 @@ export default async function Page() {
         <CustomTOCListSection>
           <CustomTOCListHead>Getting Started</CustomTOCListHead>
           <CustomTOCListContent>
-            <Link href="/docs/articles/step-1-setup-basic-gateway">
+            <Link href="/articles/step-1-setup-basic-gateway">
               Step 1 - Setup Basic Gateway
             </Link>
-            <Link href="/docs/articles/step-2-add-api-key-auth">
+            <Link href="/articles/step-2-add-api-key-auth">
               Step 2 - API Key Auth
             </Link>
-            <Link href="/docs/articles/step-3-add-rate-limiting">
+            <Link href="/articles/step-3-add-rate-limiting">
               Step 3 - Rate Limiting
             </Link>
-            <Link href="/docs/articles/step-4-deploying-to-the-edge">
+            <Link href="/articles/step-4-deploying-to-the-edge">
               Step 4 - Deploying to the Edge
             </Link>
           </CustomTOCListContent>
