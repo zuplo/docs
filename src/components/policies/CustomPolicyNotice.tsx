@@ -9,8 +9,8 @@ export default function CustomPolicyNotice({
   id: string;
 }) {
   const href = id.endsWith("-inbound")
-    ? "/docs/policies/custom-code-inbound"
-    : "/docs/policies/custom-code-outbound";
+    ? "/policies/custom-code-inbound"
+    : "/policies/custom-code-outbound";
   return (
     <div>
       <Callout type="tip" title="Custom Policy Example">
