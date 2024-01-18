@@ -1,7 +1,7 @@
+import Pre from "@/components/Pre";
 import GithubButton from "@/components/markdown/GithubButton";
 import { MDXProvider } from "@mdx-js/react";
 import { ChevronLeftIcon } from "lucide-react";
-import { Fence } from "../Fence";
 import Callout from "./Callout";
 import ZupIt from "./ZupIt";
 import {
@@ -32,7 +32,8 @@ const components: React.ComponentProps<typeof MDXProvider>["components"] = {
   GithubButton,
   Callout,
   ZupIt,
-  pre: Fence as any,
+  pre: Pre,
+  // pre: Fence as any,
   img: (props) => (
     // eslint-disable-next-line jsx-a11y/alt-text, @next/next/no-img-element
     <img {...props} className="border border-gray-300 rounded-md" />
