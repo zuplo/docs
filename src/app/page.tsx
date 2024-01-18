@@ -1,5 +1,4 @@
 import { DocsLayout } from "@/components/DocsLayout";
-import { Props } from "@/components/QuickLinks";
 import Link from "next/link";
 import {
   CustomTOCList,
@@ -9,54 +8,6 @@ import {
 } from "../components/CustomTOCList";
 
 export default async function Page() {
-  const overviewItems: Props[] = [
-    {
-      title: "What is Zuplo?",
-      href: "/articles/what-is-zuplo",
-      icon: "installation",
-      description: "",
-    },
-    {
-      title: "Who uses Zuplo, and why?",
-      href: "/articles/who-uses-and-why",
-      icon: "installation",
-      description: "",
-    },
-    {
-      title: "Zuplo in your stack",
-      href: "/articles/zuplo-in-your-stack",
-      icon: "installation",
-      description: "",
-    },
-  ];
-
-  const gettingStartedItems: Props[] = [
-    {
-      title: "Step 1 - Setup Basic Gateway",
-      href: "/articles/step-1-setup-basic-gateway",
-      icon: "installation",
-      description: "",
-    },
-    {
-      title: "Step 2 - API Key Auth",
-      href: "/articles/step-2-add-api-key-auth",
-      icon: "installation",
-      description: "",
-    },
-    {
-      title: "Step 3 - Rate Limiting",
-      href: "/articles/step-3-add-rate-limiting",
-      icon: "installation",
-      description: "",
-    },
-    {
-      title: "Step 4 - Deploying to the Edge",
-      href: "/articles/step-4-deploying-to-the-edge",
-      icon: "installation",
-      description: "",
-    },
-  ];
-
   return (
     <DocsLayout frontmatter={{ title: "Zuplo Docs" }} sections={[]}>
       <p>
