@@ -42,7 +42,7 @@ export default async function Page() {
           <Card
             key={item.policyId}
             name={item.schema.title!}
-            href={`/docs/policies/${item.policyId}`}
+            href={`/policies/${item.policyId}`}
             icon={item.icon!}
             testID="policy-card"
           />
