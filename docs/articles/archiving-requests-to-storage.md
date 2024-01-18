@@ -43,8 +43,7 @@ You'll need another environment variable called `BLOB_CONTAINER_PATH`.
 We'll write a policy called `request-archive-policy` that can be used on all
 routes.
 
-```ts
-// file-archive-policy.ts
+```ts title="file-archive-policy.ts"
 import { ZuploRequest, ZuploContext } from "@zuplo/runtime";
 
 export type RequestArchivePolicyOptions = {

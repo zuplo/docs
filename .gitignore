@@ -45,7 +45,6 @@ yarn.lock
 .vercel
 
 # Generated Content
-src/shiki/
 public/robots.txt
 public/sitemap.xml
 public/sitemap-*.xml
