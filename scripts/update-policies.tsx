@@ -454,9 +454,9 @@ export async function run() {
   const tasks = matches.map(async (match) => {
     const policyDir = path.join(
       process.cwd(),
-      match.replace("/schema.json", ""),
+      match.replace(/[\\/]schema.json$/, ""),
     );
-    const policyId = match.split("/")[1];
+    const policyId = match.split(/[\\/]/)[1];
     const schemaPath = path.join(policyDir, "schema.json");
     const schemaJson = await readFile(schemaPath, "utf-8");
     const rawSchema = JSON.parse(schemaJson);

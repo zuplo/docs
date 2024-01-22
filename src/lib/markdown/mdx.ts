@@ -114,7 +114,7 @@ const rehypeAddRawCode: Plugin<[], Root, Root> = () => (tree: any) => {
   });
 };
 
-function getOptions(headings?: Element[]): SerializeOptions {
+function getOptions(headings: Element[] = []): SerializeOptions {
   return {
     parseFrontmatter: true,
     mdxOptions: {
@@ -126,9 +126,7 @@ function getOptions(headings?: Element[]): SerializeOptions {
         rehypeSlug,
         [rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions],
         [rehypeRewrite as any, rehypeRewriteOptions],
-        ...(headings
-          ? [rehypeRewrite as any, getHeaderRewriteOptions(headings)]
-          : []),
+        [rehypeRewrite, getHeaderRewriteOptions(headings)],
       ],
     },
   };

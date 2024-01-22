@@ -56,9 +56,8 @@ async function getPolicies(loader) {
 
   await Promise.all(
     matches.map(async (match) => {
-      const policyDir = path.resolve(match.replace("/schema.json", ""));
-
-      const policyId = match.split("/")[1];
+      const policyDir = path.resolve(match.replace(/[\\/]schema.json$/, ""));
+      const policyId = match.split(/[\\/]/)[1];
       const schemaPath = path.join(policyDir, "schema.json");
 
       loader.addContextDependency(schemaPath);
