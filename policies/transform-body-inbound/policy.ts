@@ -10,6 +10,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
   // Stringify the object
   const body = JSON.stringify(obj);
 
-  // Return a new request with the new body
-  return new Request(body, request);
+  // Return a new request based on the
+  // original but with the new body
+  return new ZuploRequest(request, { body });
 }
