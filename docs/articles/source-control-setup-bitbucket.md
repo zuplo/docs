@@ -2,7 +2,17 @@
 title: "Source Control: Setup BitBucket"
 ---
 
-In order to setup source control for BitBucket, you will need to
+## BitBucket.org
+
+If you are using the SaaS Bitbucket hosted at bitbucket.org, all you need to do
+is have Zuplo support (support@zuplo.com) enable BitBucket on your account.
+
+You will need to provide support with your BitBucket Workspace ID. This value
+can be found on your Workspace Settings page.
+
+## Self-Hosted BitBucket
+
+In order to setup source control for self-hosted BitBucket, you will need to
 [setup a custom BitBucket OAuth App](https://support.atlassian.com/bitbucket-cloud/docs/integrate-another-application-through-oauth/)
 and then provide Zuplo support with the following values:
 
