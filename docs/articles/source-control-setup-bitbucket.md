@@ -27,3 +27,16 @@ When configuring your app you will need to set the following values:
 
 - **Callback URL** - `https://portal.zuplo.com`
 - **Permissions** - `repo user read:org`
+
+## Limiting Access
+
+Unfortunately, BitBucket does not support scoping access to an OAuth app to a
+specific repo or repos. This is a limitation of BitBucket, not Zuplo. If you
+want to limit the access that Zuplo has to your BitBucket repos there are two
+options:
+
+1. Create a new workspace and install the Zuplo app only in that workspace.
+2. Create a new service account user and use that user to connect BitBucket to
+   Zuplo. BitBucket apps are limited to the permissions of the user who
+   installed the app so if the service account user only has access to a single
+   repository, Zuplo will only have access to that same single repository.
