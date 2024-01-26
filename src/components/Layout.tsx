@@ -1,5 +1,5 @@
 import { Navigation } from "@/components/Navigation";
-import Header from "./Header";
+import Header from "./header/Header";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (

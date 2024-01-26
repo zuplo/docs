@@ -35,3 +35,14 @@ export type Section = {
   level: number;
   children: Array<Section>;
 };
+
+export interface LinkData {
+  name: string;
+  href: string;
+  shortDescription?: string;
+}
+
+export interface LinksCategory {
+  name: string;
+  links: Array<LinkData>;
+}
