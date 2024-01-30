@@ -112,7 +112,7 @@ import {
 export function runtimeInit(runtime: RuntimeExtensions) {
   runtime.addPlugin(
     new GoogleCloudLoggingPlugin({
-      logName: "my-api-gateway",
+      logName: "projects/my-project/logs/my-api",
       serviceAccountJson: environment.GCP_SERVICE_ACCOUNT,
     }),
   );
