@@ -33,7 +33,10 @@ function ObjectSchema({ schema }: { schema: JSONSchema7 }) {
             <span className="font-semibold">{" (Required)"}</span>
           )}
           {" - "}
-          {value.description}
+          <div
+            className="inline"
+            dangerouslySetInnerHTML={{ __html: value.description ?? "" }}
+          />
           {value.type === "string" && value.enum && (
             <span>
               {" "}
@@ -52,12 +55,14 @@ function ObjectSchema({ schema }: { schema: JSONSchema7 }) {
               .
             </span>
           )}
-          {value.default && (
-            <span>
-              {" "}
-              Defaults to <code>{value.default.toString()}</code>.
-            </span>
-          )}
+          {value.default !== undefined &&
+            value.default !== null &&
+            value.default !== "" && (
+              <span>
+                {" "}
+                Defaults to <code>{JSON.stringify(value.default)}</code>.
+              </span>
+            )}
           <OptionProperty schema={value} />
         </li>
       ))}
