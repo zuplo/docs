@@ -13,5 +13,9 @@
     "editor.wordWrap": "bounded",
     "editor.wordWrapColumn": 80
   },
+  "markdown.validate.enabled": true,
+  "markdown.copyFiles.destination": {
+    "/docs/**/*": "../../public/media/${documentBaseName}/image.${fileExtName}"
+  },
   "cSpell.words": ["Amberflo", "asns", "Moesif", "overridable", "Supabase"]
 }
