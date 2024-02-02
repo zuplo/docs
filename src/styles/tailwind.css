@@ -25,3 +25,15 @@
   mask-position: center;
   mask-size: contain;
 }
+
+pre {
+  @apply !rounded-md;
+}
+
+[data-rehype-pretty-code-title] {
+  @apply bg-gray-900 text-zinc-200 rounded-t-md py-2 px-3 font-semibold text-sm border-b border-b-gray-700;
+}
+
+figcaption + div > pre {
+  @apply !rounded-t-none;
+}

@@ -2,21 +2,22 @@ import { migrateContent } from "@/build/migrate.mjs";
 import { Section } from "@/lib/interfaces";
 import remarkTransformLink from "@/lib/markdown/md-links";
 import { CompileOptions } from "@mdx-js/mdx";
-import fs from "fs/promises";
 import { Element } from "hast";
 import { h } from "hastscript";
+import { Root } from "mdast";
 import { compileMDX } from "next-mdx-remote/rsc";
-import path from "path";
 import rehypeAutolinkHeadings, {
   Options as RehypeAutolinkHeadingsOptions,
 } from "rehype-autolink-headings";
+import rehypeCode, { Options as CodeOptions } from "rehype-pretty-code";
 import rehypeRewrite, { RehypeRewriteOptions } from "rehype-rewrite";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
+import { Plugin } from "unified";
+import { visit } from "unist-util-visit";
 import { VFile } from "vfile";
 import components from "../../components/markdown";
 import remarkStaticImage from "./static-images";
-
 export interface SerializeOptions {
   /**
    * Pass-through variables for use in the MDX content
@@ -32,27 +33,6 @@ export interface SerializeOptions {
    */
   parseFrontmatter?: boolean;
 }
-
-// Shiki loads languages and themes using "fs" instead of "import", so Next.js
-// doesn't bundle them into production build. To work around, we manually copy
-// them over to our source code (lib/shiki/*) and update the "paths".
-//
-// Note that they are only referenced on server side
-// See: https://github.com/shikijs/shiki/issues/138
-const getShikiPath = (): string => {
-  return path.join(process.cwd(), "src/shiki");
-};
-
-const touched = { current: false };
-
-// "Touch" the shiki assets so that Vercel will include them in the production
-// bundle. This is required because shiki itself dynamically access these files,
-// so Vercel doesn't know about them by default
-const touchShikiPath = (): void => {
-  if (touched.current) return; // only need to do once
-  fs.readdir(getShikiPath()); // fire and forget
-  touched.current = true;
-};
 
 const rehypeAutolinkHeadingsOptions: RehypeAutolinkHeadingsOptions = {
   behavior: "append",
@@ -89,6 +69,11 @@ const rehypeRewriteOptions: RehypeRewriteOptions = {
   },
 };
 
+const rehypeCodeOptions: CodeOptions = {
+  theme: "github-dark",
+  keepBackground: false,
+};
+
 function getHeaderRewriteOptions(headings: Element[]): RehypeRewriteOptions {
   return {
     rewrite: (node) => {
@@ -102,27 +87,68 @@ function getHeaderRewriteOptions(headings: Element[]): RehypeRewriteOptions {
   };
 }
 
-function getOptions(headings: Element[]): SerializeOptions {
+const rehypeGetRawCode: Plugin<[], Root, Root> = () => (tree: any) => {
+  visit(tree, (node) => {
+    if (node?.type === "element" && node?.tagName === "pre") {
+      const [codeEl] = node.children;
+
+      if (codeEl.tagName !== "code") return;
+
+      node.raw = codeEl.children?.[0].value;
+    }
+  });
+};
+const rehypeAddRawCode: Plugin<[], Root, Root> = () => (tree: any) => {
+  visit(tree, (node) => {
+    if (node?.type === "element" && node?.tagName === "figure") {
+      if (!("data-rehype-pretty-code-figure" in node.properties)) {
+        return;
+      }
+
+      for (const child of node.children) {
+        if (child.tagName === "pre") {
+          child.properties["raw"] = node.raw;
+        }
+      }
+    }
+  });
+};
+
+function getOptions(headings: Element[] = []): SerializeOptions {
   return {
     parseFrontmatter: true,
     mdxOptions: {
       remarkPlugins: [remarkTransformLink as any, remarkStaticImage, remarkGfm],
       rehypePlugins: [
+        rehypeGetRawCode,
+        [rehypeCode as any, rehypeCodeOptions],
+        rehypeAddRawCode,
         rehypeSlug,
         [rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions],
         [rehypeRewrite as any, rehypeRewriteOptions],
-        [rehypeRewrite as any, getHeaderRewriteOptions(headings)],
+        [rehypeRewrite, getHeaderRewriteOptions(headings)],
       ],
     },
   };
+}
+
+export async function compileMdxFragment(source: string) {
+  const vfile = new VFile(source);
+  vfile.path = "fragement.mdx";
+
+  const options = getOptions();
+  const result = await compileMDX({
+    source: vfile as any,
+    options,
+    components,
+  });
+  return result.content;
 }
 
 export async function compileMdx<Frontmatter = Record<string, any>>(
   source: string,
   filepath: string,
 ) {
-  touchShikiPath();
-
   const migrated = await migrateContent(source);
 
   const vfile = new VFile(migrated);

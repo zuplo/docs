@@ -1,5 +1,6 @@
 import { Providers, SuspendedProviders } from "@/app/providers";
 import { Layout } from "@/components/Layout";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import clsx from "clsx";
 import { type Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -11,6 +12,7 @@ import { Suspense } from "react";
 import { KOALA_URL, ZARAZ_URL } from "../lib/env";
 
 const inter = Inter({
+  weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
@@ -77,6 +79,7 @@ export default function RootLayout({
         <Providers>
           <Layout>{children}</Layout>
         </Providers>
+        <SpeedInsights />
       </body>
     </html>
   );

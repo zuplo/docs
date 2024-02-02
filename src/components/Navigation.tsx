@@ -12,10 +12,12 @@ function SubNavSection({
   link,
   onLinkClick,
   depth,
+  isCategory,
 }: {
   link: NavCategory;
   onLinkClick?: React.MouseEventHandler<HTMLAnchorElement>;
   depth: number;
+  isCategory?: boolean;
 }) {
   const pathname = usePathname();
   const [hidden, setHidden] = useState(
@@ -33,7 +35,11 @@ function SubNavSection({
   return (
     <li className={`relative`}>
       <a
-        className="flex  w-full cursor-pointer pl-1 text-gray-500"
+        className={clsx([
+          "flex w-full cursor-pointer pl-1 text-gray-500",
+          isCategory &&
+            "font-display font-semibold text-gray-900 dark:text-white",
+        ])}
         onClick={onClick}
       >
         <span className="flex-grow">{link.label}</span>
@@ -120,23 +126,14 @@ export function Navigation({
 }) {
   return (
     <nav className={clsx("text-base lg:text-sm", className)}>
-      <ul role="list" className="space-y-9">
+      <ul role="list" className="space-y-5">
         {navigation.map((section) => (
-          <li key={section.label}>
-            <h2 className="font-display font-semibold text-gray-900 dark:text-white">
-              {section.label}
-            </h2>
-            <ul role="list" className="mt-2 space-y-2 lg:mt-4 lg:space-y-4 ">
-              {section.items.map((link, i) => (
-                <NavSection
-                  link={link}
-                  key={i}
-                  onLinkClick={onLinkClick}
-                  depth={0}
-                />
-              ))}
-            </ul>
-          </li>
+          <SubNavSection
+            key={section.label}
+            link={section}
+            depth={0}
+            isCategory
+          />
         ))}
       </ul>
     </nav>

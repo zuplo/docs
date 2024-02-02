@@ -29,7 +29,7 @@ import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
 export async function tracingPlugin(
   request: ZuploRequest,
   context: ZuploContext,
-  policyName: string,
+  policyName: string
 ) {
   // Get the trace header
   let traceparent = request.headers.get("traceparent");
@@ -39,7 +39,7 @@ export async function tracingPlugin(
     traceparent = crypto.randomUUID();
     const headers = new Headers(request.headers);
     headers.set("traceparent", traceparent);
-    return new Request(request, { headers });
+    return new ZuploRequest(request, { headers });
   }
 
   context.addResponseSendingHook((response, latestRequest, context) => {
@@ -71,7 +71,7 @@ import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
 export async function pluginWithHook(
   request: ZuploRequest,
   context: ZuploContext,
-  policyName: string,
+  policyName: string
 ) {
   const cloned = request.clone();
   context.addResponseSendingFinalHook(
@@ -81,7 +81,7 @@ export async function pluginWithHook(
         method: "GET",
         body,
       });
-    },
+    }
   );
 
   return request;

@@ -37,11 +37,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version-file: ".nvmrc"
 
       - name: Run Tests
         # Useful properties 'environment', 'state', and 'environment_url'

@@ -63,12 +63,12 @@ jobs:
       ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       # This explicitly tells action to use the latest version of Zuplo from the public NPM registry
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: "18.x"
+          node-version-file: ".nvmrc"
           registry-url: "https://registry.npmjs.com"
           scope: "@zuplo"
 

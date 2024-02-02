@@ -5,6 +5,7 @@ import { glob } from "glob";
 import path from "path";
 import { createLoader } from "simple-functional-loader";
 import url from "url";
+import { processProperties } from "./markdown.mjs";
 
 const __filename = url.fileURLToPath(import.meta.url);
 
@@ -56,9 +57,8 @@ async function getPolicies(loader) {
 
   await Promise.all(
     matches.map(async (match) => {
-      const policyDir = path.resolve(match.replace("/schema.json", ""));
-
-      const policyId = match.split("/")[1];
+      const policyDir = path.resolve(match.replace(/[\\/]schema.json$/, ""));
+      const policyId = match.split(/[\\/]/)[1];
       const schemaPath = path.join(policyDir, "schema.json");
 
       loader.addContextDependency(schemaPath);
@@ -68,6 +68,8 @@ async function getPolicies(loader) {
       // RefParser uses cwd to resolve refs
       // process.chdir(policyDir);
       const schema = await dereference(rawSchema);
+
+      await processProperties(schema.properties);
 
       // Skip unlisted policies, they don't get docs or included in the output
       if (schema.isUnlisted) {

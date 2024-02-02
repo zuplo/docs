@@ -140,3 +140,7 @@ to ensure you have the latest security and performance updates.
 
 We recommend testing each release of the tunning in a staging environment before
 rolling out to production.
+
+## Troubleshooting
+
+For troubleshooting see [this document](./tunnel-troubleshooting.md).

@@ -22,9 +22,3 @@ updates:
       prettier:
         patterns:
           - "*prettier*"
-      docusaurus:
-        patterns:
-          - "*docusaurus*"
-        updates-types:
-          - "minor"
-          - "patch"
