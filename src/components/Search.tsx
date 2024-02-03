@@ -1,38 +1,20 @@
 "use client";
 
-import type {
-  InkeepCustomTriggerProps,
-  InkeepWidgetBaseSettings,
-} from "@inkeep/widgets";
+import type { InkeepCustomTriggerProps } from "@inkeep/widgets";
 import { SearchIcon } from "lucide-react";
 import dynamic from "next/dynamic";
+import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import { aiChatSettings, baseSettings } from "../lib/search";
 
 const InkeepCustomTrigger: any = dynamic(
   () => import("@inkeep/widgets").then((mod) => mod.InkeepCustomTrigger),
   { ssr: false },
 );
 
-const baseSettings: InkeepWidgetBaseSettings = {
-  apiKey: "499c156cf7a9798343949c8bb5665ac95e48132c6d68c42e",
-  integrationId: "clot3asdz0000s601nc8jwnzx",
-  organizationId: "org_dDOlt2uJlMWM8oIS",
-  primaryBrandColor: "#ff00bd",
-  organizationDisplayName: "Zuplo",
-  theme: {
-    components: {
-      SearchBarTrigger: {
-        defaultProps: {
-          size: "expand",
-          variant: "subtle", // Choose from 'emphasized' or 'subtle'
-        },
-      },
-    },
-  },
-};
-
 export function Search() {
-  let [modifierKey, setModifierKey] = useState<string>();
+  const searchParams = useSearchParams();
+  const [modifierKey, setModifierKey] = useState<string>();
   useEffect(() => {
     setModifierKey(
       /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform) ? "⌘" : "Ctrl ",
@@ -60,6 +42,13 @@ export function Search() {
     };
   }, [isOpen, setIsOpen]);
 
+  const search = searchParams.get("search");
+  useEffect(() => {
+    if (search) {
+      setIsOpen(true);
+    }
+  }, []);
+
   const handleClose = useCallback(() => {
     setIsOpen(false);
   }, []);
@@ -68,6 +57,10 @@ export function Search() {
     isOpen,
     onClose: handleClose,
     baseSettings,
+    aiChatSettings,
+    searchSettings: {
+      prefilledQuery: search ?? undefined,
+    },
   };
 
   return (
