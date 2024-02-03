@@ -786,6 +786,10 @@
         {
           "key": "X-Frame-Options",
           "value": "DENY"
+        },
+        {
+          "key": "Content-Security-Policy-Report-Only",
+          "value": "default-src 'none'; form-action 'none'; frame-ancestors 'none'; report-uri https://8c1930c5e50ce432e8bf2af0bab7179c.report-uri.com/r/d/csp/wizard"
         }
       ]
     }
