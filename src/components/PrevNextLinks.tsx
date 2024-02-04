@@ -2,7 +2,7 @@
 
 import { navigation } from "@/build/navigation.mjs";
 import { useFindNavItemByLink } from "@/lib/hooks/useFindNavItemByLink";
-import { NavItem } from "@/lib/interfaces";
+import { getInnerNavLinkItems } from "@/lib/utils/get-inner-nav-link-items";
 import clsx from "clsx";
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
@@ -46,16 +46,9 @@ function PageLink({
   );
 }
 
-function collect(array: Array<NavItem>, result: Array<NavItem>): void {
-  array.forEach((value) =>
-    value.items ? collect(value.items, result) : result.push(value),
-  );
-}
-
 export function PrevNextLinks() {
   let navigationLinks = navigation.flatMap((section) => section.items || []);
-  let allLinks: Array<NavItem> = [];
-  collect(navigationLinks, allLinks);
+  const allLinks = getInnerNavLinkItems(navigationLinks);
 
   let linkIndex = allLinks.findIndex(useFindNavItemByLink);
   let previousPage = linkIndex > -1 ? allLinks[linkIndex - 1] : null;

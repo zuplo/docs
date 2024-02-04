@@ -53,16 +53,6 @@ export function MobileNavigation() {
   let [isOpen, setIsOpen] = useState(false);
   let close = useCallback(() => setIsOpen(false), [setIsOpen]);
 
-  function onLinkClick(event: React.MouseEvent<HTMLAnchorElement>) {
-    let link = event.currentTarget;
-    if (
-      link.pathname + link.search + link.hash ===
-      window.location.pathname + window.location.search + window.location.hash
-    ) {
-      close();
-    }
-  }
-
   return (
     <>
       <button
