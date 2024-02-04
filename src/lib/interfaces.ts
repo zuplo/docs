@@ -1,14 +1,10 @@
 import { JSONSchema7 } from "json-schema";
 
-export interface NavCategory {
+export type NavItem = {
   label: string;
-  items: (NavCategory | NavItem)[];
-}
-
-export interface NavItem {
-  label: string;
-  href: string;
-}
+  href?: string;
+  items?: Array<NavItem>;
+};
 
 export interface Policy {
   policyId: string;

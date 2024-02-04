@@ -1,31 +1,28 @@
 "use client";
 
 import { navigation } from "@/build/navigation.mjs";
-import { NavCategory, NavItem } from "@/lib/interfaces";
+import { useFindNavItemByLink } from "@/lib/hooks/useFindNavItemByLink";
+import { NavItem } from "@/lib/interfaces";
 import clsx from "clsx";
+import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-
-function ArrowIcon(props: React.ComponentPropsWithoutRef<"svg">) {
-  return (
-    <svg viewBox="0 0 16 16" aria-hidden="true" {...props}>
-      <path d="m9.182 13.423-1.17-1.16 3.505-3.505H3V7.065h8.517l-3.506-3.5L9.181 2.4l5.512 5.511-5.511 5.512Z" />
-    </svg>
-  );
-}
 
 function PageLink({
   label,
   href,
   dir = "next",
-  ...props
+  ...restProps
 }: Omit<React.ComponentPropsWithoutRef<"div">, "dir" | "title"> & {
   label: string;
   href: string;
   dir?: "previous" | "next";
 }) {
+  if (!href) {
+    return null;
+  }
+
   return (
-    <div {...props}>
+    <div {...restProps}>
       <dt className="font-display text-sm font-medium text-gray-900 dark:text-white">
         {dir === "next" ? "Next" : "Previous"}
       </dt>
@@ -38,30 +35,29 @@ function PageLink({
           )}
         >
           {label}
-          <ArrowIcon
-            className={clsx(
-              "h-4 w-4 flex-none fill-current",
-              dir === "previous" && "-scale-x-100",
-            )}
-          />
+          {dir === "previous" ? (
+            <ArrowLeftIcon className="flex-none" />
+          ) : (
+            <ArrowRightIcon className="flex-none" />
+          )}
         </Link>
       </dd>
     </div>
   );
 }
 
-export function PrevNextLinks() {
-  let pathname = usePathname();
-  const findLink = (link: NavCategory | NavItem): boolean => {
-    if ("href" in link) {
-      return link.href === pathname.split("#")[0];
-    } else {
-      return link.items.some(findLink);
-    }
-  };
+function collect(array: Array<NavItem>, result: Array<NavItem>): void {
+  array.forEach((value) =>
+    value.items ? collect(value.items, result) : result.push(value),
+  );
+}
 
-  let allLinks = navigation.flatMap((section) => section.items);
-  let linkIndex = allLinks.findIndex(findLink);
+export function PrevNextLinks() {
+  let navigationLinks = navigation.flatMap((section) => section.items || []);
+  let allLinks: Array<NavItem> = [];
+  collect(navigationLinks, allLinks);
+
+  let linkIndex = allLinks.findIndex(useFindNavItemByLink);
   let previousPage = linkIndex > -1 ? allLinks[linkIndex - 1] : null;
   let nextPage = linkIndex > -1 ? allLinks[linkIndex + 1] : null;
 
@@ -71,11 +67,19 @@ export function PrevNextLinks() {
 
   return (
     <dl className="mt-12 flex border-t border-gray-200 pt-6 dark:border-gray-800">
-      {previousPage && "href" in previousPage && (
-        <PageLink dir="previous" {...previousPage} />
+      {previousPage && previousPage.href && (
+        <PageLink
+          dir="previous"
+          label={previousPage.label}
+          href={previousPage?.href}
+        />
       )}
-      {nextPage && "href" in nextPage && (
-        <PageLink className="ml-auto text-right" {...nextPage} />
+      {nextPage && nextPage.href && (
+        <PageLink
+          className="ml-auto text-right"
+          label={nextPage.label}
+          href={nextPage?.href}
+        />
       )}
     </dl>
   );

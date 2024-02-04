@@ -1,7 +1,7 @@
 "use client";
 
 import { navigation } from "@/build/navigation.mjs";
-import { NavCategory, NavItem } from "@/lib/interfaces";
+import { NavItem } from "@/lib/interfaces";
 import clsx from "clsx";
 import { ChevronDownIcon, ChevronRightIcon } from "lucide-react";
 import Link from "next/link";
@@ -14,7 +14,7 @@ function SubNavSection({
   depth,
   isCategory,
 }: {
-  link: NavCategory;
+  link: NavItem;
   onLinkClick?: React.MouseEventHandler<HTMLAnchorElement>;
   depth: number;
   isCategory?: boolean;
@@ -73,12 +73,17 @@ function NavSection({
   onLinkClick,
   depth,
 }: {
-  link: NavCategory | NavItem;
+  link: NavItem;
   onLinkClick?: React.MouseEventHandler<HTMLAnchorElement>;
   depth: number;
 }) {
   let pathname = usePathname();
-  if ("href" in link && depth === 0) {
+
+  if (link.items || !link.href) {
+    return <SubNavSection link={link} depth={depth} key={link.label} />;
+  }
+
+  if (depth === 0) {
     return (
       <li key={link.href} className="relative">
         <Link
@@ -88,23 +93,6 @@ function NavSection({
             "block w-full pl-1 ",
             link.href === pathname
               ? "font-medium text-pink "
-              : "text-gray-500  hover:text-gray-600  dark:text-gray-400  dark:hover:text-gray-300",
-          )}
-        >
-          {link.label}
-        </Link>
-      </li>
-    );
-  } else if ("href" in link) {
-    return (
-      <li key={link.href} className="relative">
-        <Link
-          href={link.href}
-          onClick={onLinkClick}
-          className={clsx(
-            "block w-full pl-3.5 ",
-            link.href === pathname
-              ? "border-l  text-pink font-medium"
               : "text-gray-500 hover:text-gray-600  dark:text-gray-400  dark:hover:text-gray-300",
           )}
         >
@@ -113,7 +101,22 @@ function NavSection({
       </li>
     );
   } else {
-    return <SubNavSection link={link} depth={depth} key={link.label} />;
+    return (
+      <li key={link.href} className="relative">
+        <Link
+          href={link.href}
+          onClick={onLinkClick}
+          className={clsx(
+            "block w-full pl-3.5 ",
+            link.href === pathname
+              ? "border-l text-pink font-medium"
+              : "text-gray-500 hover:text-gray-600  dark:text-gray-400  dark:hover:text-gray-300",
+          )}
+        >
+          {link.label}
+        </Link>
+      </li>
+    );
   }
 }
 
@@ -130,6 +133,7 @@ export function Navigation({
         {navigation.map((section) => (
           <SubNavSection
             key={section.label}
+            onLinkClick={onLinkClick}
             link={section}
             depth={0}
             isCategory
