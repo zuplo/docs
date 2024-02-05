@@ -4,6 +4,7 @@ export type NavItem = {
   label: string;
   href?: string;
   items?: Array<NavItem>;
+  isExpandedByDefault?: boolean;
 };
 
 export interface Policy {

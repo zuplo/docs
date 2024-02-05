@@ -2,8 +2,8 @@ import { NavItem } from "@/lib/interfaces";
 import { hasActiveNavLinkItem } from "@/lib/utils/has-active-nav-link-item";
 import clsx from "clsx";
 import { ChevronRightIcon, ChevronDownIcon } from "lucide-react";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { NavigationLinkItem } from "./NavigationLinkItem";
 
 type Props = {
@@ -11,19 +11,37 @@ type Props = {
   isRoot?: boolean;
 };
 
-export function NavigationCategory({ navItem, isRoot }: Props) {
-  const pathname = usePathname();
-  const [isCollapsed, setIsCollapsed] = useState(
-    !hasActiveNavLinkItem(navItem, pathname),
-  );
-
-  function onClick() {
-    setIsCollapsed((isCollapsed) => !isCollapsed);
+function getItemHref(navItem: NavItem): string {
+  if (navItem.href) {
+    return navItem.href;
   }
 
-  // useEffect(() => {
-  //   setHidden(!hasActiveNavLinkItem(link, pathname));
-  // }, [pathname, setHidden, link.links]);
+  return navItem.items?.[0] ? getItemHref(navItem.items[0]) : "";
+}
+
+function isCategoryExpanded(navItem: NavItem, pathname: string): boolean {
+  return navItem.isExpandedByDefault || hasActiveNavLinkItem(navItem, pathname);
+}
+
+export function NavigationCategory({ navItem, isRoot }: Props) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const [isCollapsed, setIsCollapsed] = useState(
+    !isCategoryExpanded(navItem, pathname),
+  );
+  const categoryHref = getItemHref(navItem);
+
+  const onClick = () => {
+    if (isCollapsed) {
+      router.push(categoryHref);
+    } else {
+      setIsCollapsed(true);
+    }
+  };
+
+  useEffect(() => {
+    setIsCollapsed(!isCategoryExpanded(navItem, pathname));
+  }, [pathname, setIsCollapsed, navItem]);
 
   return (
     <li className={clsx(!isRoot && "pl-4")}>
