@@ -14,7 +14,7 @@ export interface Policy {
     isCustom?: boolean;
     isDeprecated?: false;
     isPaidAddOn?: false;
-    isUnlisted?: false;
+    isInternal?: false;
     deprecatedMessage?: string;
   };
   icon: string;
