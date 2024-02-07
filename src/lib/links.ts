@@ -27,7 +27,7 @@ export const signInLink: LinkData = {
 
 export const customStories: LinkData = {
   name: "Customer Stories",
-  href: `${wwwLink.href}/resources`
+  href: `${wwwLink.href}/resources`,
 };
 
 export const changeLogLink: LinkData = {
@@ -37,27 +37,27 @@ export const changeLogLink: LinkData = {
 
 export const comparisonLinks: Array<LinkData> = [
   {
-    href: "/api-gateways/kong-alternative-zuplo",
+    href: `${wwwLink.href}/api-gateways/kong-alternative-zuplo`,
     name: "vs. Kong",
   },
   {
-    href: "/api-gateways/azure-api-management-alternative-zuplo",
+    href: `${wwwLink.href}/api-gateways/azure-api-management-alternative-zuplo`,
     name: "vs. Azure API Management",
   },
   {
-    href: "/api-gateways/apigee-alternative-zuplo",
+    href: `${wwwLink.href}/api-gateways/apigee-alternative-zuplo`,
     name: "vs. Apigee",
   },
   {
-    href: "/api-gateways/tyk-api-management-alternative-zuplo",
+    href: `${wwwLink.href}/api-gateways/tyk-api-management-alternative-zuplo`,
     name: "vs. Tyk",
   },
   {
-    href: "/api-gateways/solo-alternative-zuplo",
+    href: `${wwwLink.href}/api-gateways/solo-alternative-zuplo`,
     name: "vs. Solo.io",
   },
   {
-    href: "/api-gateways/aws-api-gateway-alternative-zuplo",
+    href: `${wwwLink.href}/api-gateways/aws-api-gateway-alternative-zuplo`,
     name: "vs. AWS API Gateway",
   },
 ].sort((l1, l2) => l1.name.localeCompare(l2.name));
@@ -101,6 +101,6 @@ export const featuresLinks: Array<LinkData> = [
   {
     href: "/policies",
     name: "Policies",
-    shortDescription: "Add policies to your APIs."
+    shortDescription: "Add policies to your APIs.",
   },
 ].sort((l1, l2) => l1.name.localeCompare(l2.name));
