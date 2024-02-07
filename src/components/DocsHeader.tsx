@@ -3,20 +3,20 @@
 import { usePathname } from "next/navigation";
 
 import { navigation } from "@/build/navigation.mjs";
-import { NavCategory, NavItem } from "@/lib/interfaces";
+import { NavItem } from "@/lib/interfaces";
 
 export function DocsHeader({ title }: { title?: string }) {
   let pathname = usePathname();
 
-  const findLink = (link: NavCategory | NavItem): boolean => {
-    if ("href" in link) {
+  const findLink = (link: NavItem): boolean => {
+    if (link.href) {
       return link.href === pathname.split("#")[0];
     } else {
-      return link.items.some(findLink);
+      return !!link.items?.some(findLink);
     }
   };
 
-  let section = navigation.find((section) => section.items.find(findLink));
+  let section = navigation.find((section) => section.items?.find(findLink));
 
   if (!title && !section) {
     return null;

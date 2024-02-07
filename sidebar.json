@@ -10,7 +10,8 @@
       "articles/what-is-zuplo",
       "articles/who-uses-and-why",
       "articles/zuplo-in-your-stack"
-    ]
+    ],
+    "isExpandedByDefault": true
   },
   {
     "type": "category",
@@ -20,7 +21,8 @@
       "articles/step-2-add-api-key-auth",
       "articles/step-3-add-rate-limiting",
       "articles/step-4-deploying-to-the-edge"
-    ]
+    ],
+    "isExpandedByDefault": true
   },
   {
     "type": "category",
@@ -307,22 +309,22 @@
     "label": "Product",
     "items": [
       {
+        "type": "doc",
+        "id": "articles/security"
+      },
+      {
+        "type": "doc",
+        "id": "articles/support"
+      },
+      {
         "type": "link",
         "label": "Trust & Compliance",
         "href": "https://trust.zuplo.com"
       },
       {
-        "type": "doc",
-        "id": "articles/security"
-      },
-      {
         "type": "link",
         "label": "Changelog",
         "href": "https://zuplo.com/changelog"
-      },
-      {
-        "type": "doc",
-        "id": "articles/support"
       }
     ]
   }
