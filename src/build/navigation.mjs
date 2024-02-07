@@ -10,6 +10,7 @@ function buildNavSection(rawSection) {
   let section = {
     label: rawSection.label,
     items: [],
+    isExpandedByDefault: rawSection.isExpandedByDefault,
   };
   if (!rawSection.items) {
     return section;
