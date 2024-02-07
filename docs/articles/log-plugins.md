@@ -124,7 +124,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 ```ts
 import {
   RuntimeExtensions,
-  GoogleCloudLoggingPlugin,
+  LokiLoggingPlugin,
   environment,
 } from "@zuplo/runtime";
 
@@ -152,7 +152,7 @@ logs.
 ```ts
 import {
   RuntimeExtensions,
-  GoogleCloudLoggingPlugin,
+  SumoLogicLoggingPlugin,
   environment,
 } from "@zuplo/runtime";
 
