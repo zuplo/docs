@@ -7,6 +7,7 @@ import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 
 import "@/styles/tailwind.css";
+import "@/styles/styles.css";
 import Script from "next/script";
 import { Suspense } from "react";
 import { KOALA_URL, ZARAZ_URL } from "../lib/env";
