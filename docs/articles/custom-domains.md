@@ -101,3 +101,9 @@ Firewall or WAF rules will function normally.
 At this time, to use a wildcard domain or other complex custom domain for your
 environment you will need to contact
 [support@zuplo.com](mailto:support@zuplo.com).
+
+## Vercel DNS Customers
+
+If you are using Vercel DNS, you may encounter an issue with the SSL certificate
+created with your domain name. If this happens, please contact support@zuplo and
+mention that you are using Vercel DNS.

@@ -786,6 +786,10 @@
         {
           "key": "X-Frame-Options",
           "value": "DENY"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "connect-src 'self' kapi.zuplo.com track.hubspot.com wss://kapi.zuplo.com za.zuplo.com wss://api.inkeep.com api.inkeep.com api.management.inkeep.com zuplo.com; font-src 'self' fonts.gstatic.com; img-src 'self' cdn.zuplo.com data: i.vimeocdn.com i.ytimg.com zuplo.com; script-src-elem 'self' 'unsafe-inline' cdn.jsdelivr.net kapi.zuplo.com kcdn.zuplo.com za.zuplo.com; script-src 'unsafe-eval' 'self' 'unsafe-inline' kcdn.zuplo.com za.zuplo.com; style-src-attr 'unsafe-inline'; style-src-elem 'self' 'unsafe-inline' fonts.googleapis.com cdn.jsdelivr.net; frame-src player.vimeo.com; style-src 'self' fonts.googleapis.com; report-uri https://8c1930c5e50ce432e8bf2af0bab7179c.report-uri.com/r/d/csp/wizard"
         }
       ]
     }

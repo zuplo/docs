@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { Logo, Logomark } from "@/components/Logo";
-import { MobileNavigation } from "@/components/MobileNavigation";
+import { MobileNavigation } from "@/components/navigation/MobileNavigation";
 import { Search } from "@/components/Search";
 import { ThemeSelector } from "@/components/ThemeSelector";
 import { MenuPopoverItem } from "./MenuPopoverItem";
@@ -28,7 +28,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="max-w-wide sticky top-0 pt-4 mb-4 z-50 w-full [@supports(backdrop-filter:blur(0))]:backdrop-blur-[2px]">
+    <header className="max-w-wide sticky top-0 pt-4 z-50 w-full [@supports(backdrop-filter:blur(0))]:backdrop-blur-[2px]">
       <div
         className={clsx(
           "max-w-wide flex h-24 w-full flex-none flex-wrap items-center justify-between rounded-xl bg-black/95 px-6 py-5 shadow-md shadow-gray-900/25 transition duration-500 lg:px-8",
