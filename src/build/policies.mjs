@@ -71,8 +71,8 @@ async function getPolicies(loader) {
 
       await processProperties(schema.properties);
 
-      // Skip unlisted policies, they don't get docs or included in the output
-      if (schema.isUnlisted) {
+      // Skip internal policies, they don't get docs or included in the output
+      if (schema.isInternal) {
         return;
       }
 

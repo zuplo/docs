@@ -25,7 +25,7 @@ type SchemaRecord = {
 type PolicySchema = JSONSchema7 & {
   isPreview?: boolean;
   isDeprecated?: boolean;
-  isUnlisted?: boolean;
+  isInternal?: boolean;
   isPaidAddOn?: boolean;
   isCustom?: boolean;
   deprecatedMessage?: string;
@@ -463,11 +463,6 @@ export async function run() {
     // RefParser uses cwd to resolve refs
     process.chdir(policyDir);
     const schema = (await dereference(rawSchema)) as PolicySchema;
-
-    // Skip unlisted policies, they don't get docs or included in the output
-    if (schema.isUnlisted) {
-      return;
-    }
 
     await processProperties(schema.properties);
 
