@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 import { Logo, Logomark } from "@/components/Logo";
 import { MobileNavigation } from "@/components/navigation/MobileNavigation";
@@ -37,7 +37,7 @@ export default function Header() {
             : "dark:bg-black/95",
         )}
       >
-        <div className="mr-6 flex xl:hidden">
+        <div className="mr-6 flex lg:hidden">
           <MobileNavigation />
         </div>
         <div className="relative flex basis-0 items-center">
@@ -47,7 +47,9 @@ export default function Header() {
           </Link>
         </div>
         <div className="relative flex basis-0 items-center justify-end gap-8 md:flex-grow">
-          <Search />
+          <Suspense fallback={null}>
+            <Search />
+          </Suspense>
           <div className="hidden items-center gap-8 text-base font-semibold text-white xl:flex">
             <MenuPopoverItem links={data.productLinks}>Product</MenuPopoverItem>
             {data.navLinks.map((item) => (

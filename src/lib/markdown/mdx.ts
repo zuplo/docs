@@ -18,6 +18,7 @@ import { visit } from "unist-util-visit";
 import { VFile } from "vfile";
 import components from "../../components/markdown";
 import remarkStaticImage from "./static-images";
+import path from 'node:path';
 export interface SerializeOptions {
   /**
    * Pass-through variables for use in the MDX content
@@ -152,7 +153,7 @@ export async function compileMdx<Frontmatter = Record<string, any>>(
   const migrated = await migrateContent(source);
 
   const vfile = new VFile(migrated);
-  vfile.path = filepath.replace(".md", ".mdx"); // Trick mdxjs that this is MDX
+  vfile.path = path.join(process.cwd(), filepath.replace(".md", ".mdx")); // Trick mdxjs that this is MDX
 
   const nodes: (Element & { tagName: "h2" | "h3" })[] = [];
   const options = getOptions(nodes);
@@ -187,10 +188,10 @@ function buildTableOfContents(nodes: (Element & { tagName: "h2" | "h3" })[]) {
       }
     })
     .filter((h) => typeof h !== "undefined") as {
-    id: string;
-    title: string;
-    level: 2 | 3;
-  }[];
+      id: string;
+      title: string;
+      level: 2 | 3;
+    }[];
 
   const toc: Section[] = [];
   let previous: Section;

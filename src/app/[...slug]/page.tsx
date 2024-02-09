@@ -38,11 +38,15 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
     return notFound();
   }
 
-  const { data, source } = result;
-  const { content, toc } = await compileMdx(source, result.filepath);
+  const { data, source, filepath } = result;
+  const { content, toc } = await compileMdx(source, filepath);
 
   return (
-    <DocsLayout frontmatter={{ title: data.title }} sections={toc}>
+    <DocsLayout
+      frontmatter={{ title: data.title }}
+      sections={toc}
+      filepath={filepath}
+    >
       {content}
     </DocsLayout>
   );
