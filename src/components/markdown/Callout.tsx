@@ -30,9 +30,7 @@ const Note = ({ children, title }: Omit<CalloutProps, "type">) => (
         <h3 className={`text-md font-medium text-gray-800`}>
           {title ?? "Note"}
         </h3>
-        <div className={`text-md mt-2 text-gray-700`}>
-          <p>{children}</p>
-        </div>
+        <div className={`text-md mt-2 text-gray-700`}>{children}</div>
       </div>
     </div>
   </div>
@@ -53,9 +51,7 @@ const Tip = ({ children, title }: Omit<CalloutProps, "type">) => (
         <h3 className={`text-md font-medium text-green-800`}>
           {title ?? "Tip"}
         </h3>
-        <div className={`text-md mt-2 text-green-700`}>
-          <p>{children}</p>
-        </div>
+        <div className={`text-md mt-2 text-green-700`}>{children}</div>
       </div>
     </div>
   </div>
@@ -73,9 +69,7 @@ const Info = ({ children, title }: Omit<CalloutProps, "type">) => (
         <h3 className={`text-md font-medium text-blue-700`}>
           {title ?? "Info"}
         </h3>
-        <div className={`text-md mt-2 text-blue-600`}>
-          <p>{children}</p>
-        </div>
+        <div className={`text-md mt-2 text-blue-600`}>{children}</div>
       </div>
     </div>
   </div>
@@ -96,9 +90,7 @@ const Caution = ({ children, title }: Omit<CalloutProps, "type">) => (
         <h3 className={`text-md font-medium text-yellow-800`}>
           {title ?? "Caution"}
         </h3>
-        <div className={`text-md mt-2 text-yellow-700`}>
-          <p>{children}</p>
-        </div>
+        <div className={`text-md mt-2 text-yellow-700`}>{children}</div>
       </div>
     </div>
   </div>
@@ -119,9 +111,7 @@ const Danger = ({ children, title }: Omit<CalloutProps, "type">) => (
         <h3 className={`text-md font-medium text-red-800`}>
           {title ?? "Danger"}
         </h3>
-        <div className={`text-md mt-2 text-red-700`}>
-          <p>{children}</p>
-        </div>
+        <div className={`text-md mt-2 text-red-700`}>{children}</div>
       </div>
     </div>
   </div>
