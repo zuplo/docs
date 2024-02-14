@@ -80,7 +80,7 @@ export default function RootLayout({
         <Providers>
           <Layout>{children}</Layout>
         </Providers>
-        <SpeedInsights endpoint="https://zuplo.com/docs/_vercel/speed-insights/vitals" />
+        <SpeedInsights endpoint="https://docs.zuplo.site/_vercel/speed-insights/vitals" />
       </body>
     </html>
   );
