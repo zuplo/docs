@@ -1,5 +1,5 @@
 ---
-title: "Local dev: Configuring API Keys"
+title: "Configuring API Keys"
 sidebar_label: API Keys
 ---
 

@@ -1,6 +1,5 @@
 ---
-title: "Local dev: Troubleshooting"
-sidebar_label: Troubleshooting
+title: "Troubleshooting"
 ---
 
 ## Changing the port number(s)
