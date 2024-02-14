@@ -1,6 +1,5 @@
 ---
-title: "Local dev: Installing Packages"
-sidebar_label: Installing Packages
+title: "Installing Packages"
 ---
 
 You can install packages from npm to use in your Zuplo Gateway, but bear in mind
