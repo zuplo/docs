@@ -37,7 +37,7 @@ export default function Header() {
             : "dark:bg-black/95",
         )}
       >
-        <div className="mr-6 flex xl:hidden">
+        <div className="mr-6 flex lg:hidden">
           <MobileNavigation />
         </div>
         <div className="relative flex basis-0 items-center">

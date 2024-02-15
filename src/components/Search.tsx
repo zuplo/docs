@@ -4,7 +4,7 @@ import type { InkeepCustomTriggerProps } from "@inkeep/widgets";
 import { SearchIcon } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import { aiChatSettings, baseSettings } from "../lib/search";
 
 const InkeepCustomTrigger: any = dynamic(
@@ -13,7 +13,22 @@ const InkeepCustomTrigger: any = dynamic(
 );
 
 export function Search() {
+  return (
+    <Suspense fallback={<SearchInner />}>
+      <ClientSideSearch />
+    </Suspense>
+  );
+}
+
+function ClientSideSearch() {
   const searchParams = useSearchParams();
+
+  const search = searchParams.get("search");
+
+  return <SearchInner prefilledQuery={search} />;
+}
+
+function SearchInner({ prefilledQuery }: { prefilledQuery?: string | null }) {
   const [modifierKey, setModifierKey] = useState<string>();
   useEffect(() => {
     setModifierKey(
@@ -21,7 +36,7 @@ export function Search() {
     );
   }, []);
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(!!prefilledQuery);
 
   useEffect(() => {
     if (isOpen) {
@@ -42,13 +57,6 @@ export function Search() {
     };
   }, [isOpen, setIsOpen]);
 
-  const search = searchParams.get("search");
-  useEffect(() => {
-    if (search) {
-      setIsOpen(true);
-    }
-  }, []);
-
   const handleClose = useCallback(() => {
     setIsOpen(false);
   }, []);
@@ -59,7 +67,7 @@ export function Search() {
     baseSettings,
     aiChatSettings,
     searchSettings: {
-      prefilledQuery: search ?? undefined,
+      prefilledQuery: prefilledQuery || undefined,
     },
   };
 

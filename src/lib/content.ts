@@ -3,6 +3,7 @@ import fs from "fs/promises";
 import { glob } from "glob";
 import matter from "gray-matter";
 import path from "path";
+
 export interface BaseContent<Data = Record<string, any>> {
   source: string;
   data: Data;
@@ -10,11 +11,8 @@ export interface BaseContent<Data = Record<string, any>> {
   slug: string | string[];
 }
 
-export interface Content<Data = Record<string, any>> {
-  source: string;
+export interface Content<Data = Record<string, any>> extends BaseContent<Data> {
   filepath: string;
-  data: Data;
-  href: string;
   slug: string[];
 }
 
@@ -27,7 +25,6 @@ export async function getSlugContent<Data = Record<string, any>>({
 }): Promise<Content<Data> | undefined> {
   const fileName = `${slug.join("/")}.md`;
   const filepath = path.join(
-    process.cwd(),
     sourceDir,
     fileName.replaceAll("%5C", "/"),
   );
@@ -58,8 +55,7 @@ export async function getAllContent<Data = Record<string, any>>(options?: {
       .filter((f) => f.endsWith(".md"))
       .sort()
       .reverse()
-      .map(async (file) => {
-        const filepath = path.join(process.cwd(), file);
+      .map(async (filepath) => {
         const source = await fs.readFile(filepath);
 
         const { data, content } = matter(source);
@@ -68,9 +64,9 @@ export async function getAllContent<Data = Record<string, any>>(options?: {
           filepath,
           source: content,
           data: data as Data,
-          href: file.substring(5).replace(".md", ""),
+          href: filepath.substring(5).replace(".md", ""),
           // Remove the /docs
-          slug: file.substring(5).replace(".md", "").split("/"),
+          slug: filepath.substring(5).replace(".md", "").split("/"),
         };
         return result;
       }),

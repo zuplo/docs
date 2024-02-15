@@ -104,3 +104,8 @@ export const featuresLinks: Array<LinkData> = [
     shortDescription: "Add policies to your APIs.",
   },
 ].sort((l1, l2) => l1.name.localeCompare(l2.name));
+
+export const docsRepoBaseEditLink: LinkData = {
+  href: "https://github.com/zuplo/docs/edit/main",
+  name: "Zuplo Documentation",
+}
