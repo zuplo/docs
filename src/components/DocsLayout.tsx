@@ -3,15 +3,18 @@ import { PrevNextLinks } from "@/components/PrevNextLinks";
 import { Prose } from "@/components/Prose";
 import { TableOfContents } from "@/components/TableOfContents";
 import { Section } from "@/lib/interfaces";
+import { DocsFooter } from "./DocsFooter";
 
 export function DocsLayout({
   children,
   frontmatter: { title },
   sections,
+  filepath,
 }: {
   children: React.ReactNode;
   frontmatter: { title?: string };
   sections: Array<Section>;
+  filepath?: string;
 }) {
   return (
     <>
@@ -19,6 +22,7 @@ export function DocsLayout({
         <article>
           <DocsHeader title={title} />
           <Prose>{children}</Prose>
+          {filepath && <DocsFooter filepath={filepath} />}
         </article>
         <PrevNextLinks />
       </div>

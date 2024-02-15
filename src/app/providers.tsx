@@ -49,9 +49,9 @@ export function SuspendedProviders() {
 export function Providers({ children }: PropsWithChildren) {
   return (
     <PostHogProvider client={posthog}>
-    <ThemeProvider attribute="class" disableTransitionOnChange>
-      {children}
-    </ThemeProvider>
+      <ThemeProvider attribute="class" disableTransitionOnChange>
+        {children}
+      </ThemeProvider>
     </PostHogProvider>
   );
 }
