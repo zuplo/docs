@@ -1,6 +1,5 @@
 ---
-title: "Local dev: Routes Designer"
-sidebar_label: Routes Designer
+title: "Routes Designer"
 ---
 
 The Routes Designer is a visual tool that allows you to create and edit routes,

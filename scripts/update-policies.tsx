@@ -132,6 +132,7 @@ export async function run() {
     meta.isPaidAddOn = !!schema.isPaidAddOn;
     meta.isCustom = !!schema.isCustom;
     meta.isDeprecated = !!schema.isDeprecated;
+    meta.isInternal = !!schema.isInternal;
     meta.deprecationMessage = schema.deprecatedMessage;
     meta.documentationUrl = `https://zuplo.com/docs/policies/${policyId}/`;
     meta.id = policyId;
