@@ -1,11 +1,13 @@
 name: Policies
 on:
   deployment_status:
+  workflow_dispatch:
+  workflow_call:
 
 jobs:
   policies:
     name: Update Policies
-    if: github.event.deployment_status.state == 'success' && github.event.deployment_status.environment == 'production'
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call' || github.event.deployment_status.state == 'success' && github.event.deployment_status.environment == 'production'
     runs-on: ubuntu-latest
 
     env:
@@ -35,7 +37,7 @@ jobs:
       - run: npm install
       - run: npm run ci:policies
 
-      - name: Upload the Worker
+      - name: Upload the Policies
         uses: "google-github-actions/upload-cloud-storage@v2"
         with:
           path: policies.v3.json
@@ -43,8 +45,3 @@ jobs:
           destination: cdn.zuplo.com/portal
           headers: |-
             content-type: text/plain
-
-      - name: Trigger Portal Release
-        run: |
-          curl -X POST \
-          https://api.vercel.com/v1/integrations/deploy/prj_skw4YDCLsPJhlK7SrbLUzyLTdRQr/8Rem6suBuT
