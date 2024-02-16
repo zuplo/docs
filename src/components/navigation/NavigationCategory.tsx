@@ -47,7 +47,7 @@ export function NavigationCategory({ navItem, isRoot }: Props) {
     <li className={clsx(!isRoot && "pl-4")}>
       <a
         className={clsx([
-          "flex w-full cursor-pointer",
+          "flex w-full cursor-pointer items-center",
           isRoot
             ? "font-display font-semibold text-gray-900 dark:text-white"
             : "text-gray-500 dark:text-gray-400 dark:hover:text-gray-300",
