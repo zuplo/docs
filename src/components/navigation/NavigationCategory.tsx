@@ -3,7 +3,7 @@ import { hasActiveNavLinkItem } from "@/lib/utils/has-active-nav-link-item";
 import clsx from "clsx";
 import { ChevronRightIcon } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NavigationLinkItem } from "./NavigationLinkItem";
 
 type Props = {
@@ -23,19 +23,6 @@ function isCategoryExpanded(navItem: NavItem, pathname: string): boolean {
   return navItem.isExpandedByDefault || hasActiveNavLinkItem(navItem, pathname);
 }
 
-const recursiveHasActiveItemInCategory = (
-  navItem: NavItem,
-  pathname: string,
-): boolean => {
-  if (navItem.href && navItem.href === pathname) return true;
-
-  return (
-    navItem.items?.some((item) =>
-      recursiveHasActiveItemInCategory(item, pathname),
-    ) ?? false
-  );
-};
-
 export function NavigationCategory({ navItem, isRoot }: Props) {
   const pathname = usePathname();
   const router = useRouter();
@@ -46,21 +33,12 @@ export function NavigationCategory({ navItem, isRoot }: Props) {
 
   const onClick = () => {
     if (isCollapsed) {
-      const hasActiveItemInCategory = recursiveHasActiveItemInCategory(
-        navItem,
-        pathname,
-      );
-
-      if (!hasActiveItemInCategory) router.push(categoryHref);
+      if (!hasActiveNavLinkItem(navItem, pathname)) router.push(categoryHref);
       setIsCollapsed(false);
     } else {
       setIsCollapsed(true);
     }
   };
-
-  useEffect(() => {
-    setIsCollapsed(!isCategoryExpanded(navItem, pathname));
-  }, [pathname, navItem]);
 
   return (
     <li className={clsx(!isRoot && "pl-4")}>
@@ -81,11 +59,11 @@ export function NavigationCategory({ navItem, isRoot }: Props) {
       <ul
         role="list"
         className={clsx([
-          "grid duration-200 mt-2 space-y-2 border-l border-gray-100 dark:border-gray-800 lg:mt-4 lg:space-y-4 lg:border-gray-200",
+          "grid duration-200 mt-2 mb-4 border-l border-gray-100 dark:border-gray-800 lg:mt-4 lg:border-gray-200",
           isCollapsed ? "grid-rows-[0fr]" : "grid-rows-[1fr]",
         ])}
       >
-        <div className="overflow-hidden">
+        <div className="overflow-hidden flex flex-col gap-4">
           {navItem.items?.map((innerItem) =>
             innerItem.items?.length ? (
               <NavigationCategory navItem={innerItem} key={innerItem.label} />
