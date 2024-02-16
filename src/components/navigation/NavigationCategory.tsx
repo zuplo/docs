@@ -23,6 +23,19 @@ function isCategoryExpanded(navItem: NavItem, pathname: string): boolean {
   return navItem.isExpandedByDefault || hasActiveNavLinkItem(navItem, pathname);
 }
 
+const recursiveHasActiveItemInCategory = (
+  navItem: NavItem,
+  pathname: string,
+): boolean => {
+  if (navItem.href && navItem.href === pathname) return true;
+
+  return (
+    navItem.items?.some((item) =>
+      recursiveHasActiveItemInCategory(item, pathname),
+    ) ?? false
+  );
+};
+
 export function NavigationCategory({ navItem, isRoot }: Props) {
   const pathname = usePathname();
   const router = useRouter();
@@ -33,7 +46,13 @@ export function NavigationCategory({ navItem, isRoot }: Props) {
 
   const onClick = () => {
     if (isCollapsed) {
-      router.push(categoryHref);
+      const hasActiveItemInCategory = recursiveHasActiveItemInCategory(
+        navItem,
+        pathname,
+      );
+
+      if (!hasActiveItemInCategory) router.push(categoryHref);
+      setIsCollapsed(false);
     } else {
       setIsCollapsed(true);
     }
@@ -41,7 +60,7 @@ export function NavigationCategory({ navItem, isRoot }: Props) {
 
   useEffect(() => {
     setIsCollapsed(!isCategoryExpanded(navItem, pathname));
-  }, [pathname, setIsCollapsed, navItem]);
+  }, [pathname, navItem]);
 
   return (
     <li className={clsx(!isRoot && "pl-4")}>
