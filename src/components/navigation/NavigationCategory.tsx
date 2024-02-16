@@ -60,9 +60,8 @@ export function NavigationCategory({ navItem, isRoot }: Props) {
         role="list"
         className={clsx([
           "grid duration-200 border-l border-gray-100 dark:border-gray-800 lg:border-gray-200",
-          isCollapsed ? "grid-rows-[0fr]" : "grid-rows-[1fr] ",
-          !isCollapsed && "my-3",
-          isRoot && "my-3",
+          isCollapsed ? "grid-rows-[0fr]" : "grid-rows-[1fr]",
+          (!isCollapsed || isRoot) && "my-3",
         ])}
       >
         <div className="overflow-hidden flex flex-col gap-3">
