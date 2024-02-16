@@ -59,11 +59,13 @@ export function NavigationCategory({ navItem, isRoot }: Props) {
       <ul
         role="list"
         className={clsx([
-          "grid duration-200 mt-2 mb-4 border-l border-gray-100 dark:border-gray-800 lg:mt-4 lg:border-gray-200",
-          isCollapsed ? "grid-rows-[0fr]" : "grid-rows-[1fr]",
+          "grid duration-200 border-l border-gray-100 dark:border-gray-800 lg:border-gray-200",
+          isCollapsed ? "grid-rows-[0fr]" : "grid-rows-[1fr] ",
+          !isCollapsed && "my-3",
+          isRoot && "my-3",
         ])}
       >
-        <div className="overflow-hidden flex flex-col gap-4">
+        <div className="overflow-hidden flex flex-col gap-3">
           {navItem.items?.map((innerItem) =>
             innerItem.items?.length ? (
               <NavigationCategory navItem={innerItem} key={innerItem.label} />
