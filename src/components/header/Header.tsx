@@ -28,7 +28,12 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="max-w-wide sticky top-0 pt-4 z-50 w-full [@supports(backdrop-filter:blur(0))]:backdrop-blur-[2px]">
+    <header
+      className={clsx(
+        "max-w-wide sticky top-0 pt-4 z-50 w-full",
+        "before:content-[''] before:h-4 before:inset-0 before:absolute before:bg-white before:dark:bg-black",
+      )}
+    >
       <div
         className={clsx(
           "max-w-wide flex h-24 w-full flex-none flex-wrap items-center justify-between rounded-xl bg-black/95 px-6 py-5 shadow-md shadow-gray-900/25 transition duration-500 lg:px-8",
