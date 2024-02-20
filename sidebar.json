@@ -38,6 +38,20 @@
   },
   {
     "type": "category",
+    "label": "Monetization",
+    "items": [
+      "articles/monetization-intro",
+      "articles/monetization-understanding-stripe",
+      "articles/monetization-create-stripe-product",
+      "articles/monetization-create-zuplo-api",
+      "articles/monetization-creating-api-plan",
+      "articles/monetization-pricing-page",
+      "articles/monetization-configure-webhook",
+      "articles/monetization-test-api"
+    ]
+  },
+  {
+    "type": "category",
     "label": "Getting to Production",
     "items": [
       "articles/environments",
