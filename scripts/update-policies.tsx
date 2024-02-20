@@ -1,9 +1,9 @@
 import { dereference } from "@apidevtools/json-schema-ref-parser";
 import chalk from "chalk";
 import { existsSync } from "fs";
-import { copyFile, mkdir, readFile, writeFile } from "fs/promises";
+import { mkdir, readFile, writeFile } from "fs/promises";
 import { glob } from "glob";
-import { JSONSchema7, JSONSchema7Definition } from "json-schema";
+import { JSONSchema7 } from "json-schema";
 import type { Heading as AstHeading } from "mdast";
 import { toString } from "mdast-util-to-string";
 import path from "path";
@@ -23,7 +23,7 @@ type SchemaRecord = {
 };
 
 type PolicySchema = JSONSchema7 & {
-  isPreview?: boolean;
+  isBeta?: boolean;
   isDeprecated?: boolean;
   isInternal?: boolean;
   isPaidAddOn?: boolean;
@@ -138,88 +138,6 @@ function isObjectSchema(val: unknown): asserts val is object {
   }
 }
 
-function Heading3({ title, id }: { title: string; id: string }) {
-  return (
-    <h3
-      className="anchor anchorWithStickyNavbar_node_modules-@docusaurus-theme-classic-lib-theme-Heading-styles-module"
-      id={id}
-    >
-      {title}
-      <a
-        href={`#${id}`}
-        className="hash-link"
-        aria-label={`Direct link to ${title}`}
-        title={`Direct link to ${title}`}
-      >
-        ​
-      </a>
-    </h3>
-  );
-}
-
-const PolicyOptions = ({
-  schema,
-  policyId,
-}: {
-  schema: JSONSchema7Definition;
-  policyId: string;
-}) => {
-  isObjectSchema(schema);
-  const { handler } = schema.properties!;
-  isObjectSchema(handler);
-  const { properties } = handler;
-  const { module: handlerModule, export: handlerExport, options } = properties!;
-  isObjectSchema(handlerModule);
-  isObjectSchema(handlerExport);
-  return (
-    <div>
-      <Heading3 title="Policy Configuration" id="policy-configuration" />
-      <ul>
-        <li>
-          <code>name</code> <span className="type-option">{"<string>"}</span> -
-          The name of your policy instance. This is used as a reference in your
-          routes.
-        </li>
-        <li>
-          <code>policyType</code>{" "}
-          <span className="type-option">{"<string>"}</span> - The identifier of
-          the policy. This is used by the Zuplo UI. Value should be{" "}
-          <code>{policyId}</code>.
-        </li>
-        <li>
-          <code>handler.export</code>{" "}
-          <span className="type-option">{"<string>"}</span> - The name of the
-          exported type. Value should be{" "}
-          <code>{handlerExport.const!.toString()}</code>.
-        </li>
-        <li>
-          <code>handler.module</code>{" "}
-          <span className="type-option">{"<string>"}</span> - The module
-          containing the policy. Value should be{" "}
-          <code>{handlerModule.const!.toString()}</code>.
-        </li>
-        {options && Object.keys(options).length > 0 ? (
-          <li>
-            <code>handler.options</code>{" "}
-            <span className="type-option">{"<object>"}</span> - The options for
-            this policy. <a href="#policy-options">See Policy Options</a> below.
-          </li>
-        ) : null}
-      </ul>
-      {options && Object.keys(options).length > 0 ? (
-        <>
-          <Heading3 title="Policy Options" id="policy-options" />
-          <p>
-            The options for this policy are specified below. All properties are
-            optional unless specifically marked as required.
-          </p>
-          <OptionProperty schema={options as JSONSchema7} />
-        </>
-      ) : null}
-    </div>
-  );
-};
-
 const docsDir = path.resolve(
   process.cwd(),
   isNext ? "./src/app/policies" : "./docs/policies",
@@ -318,6 +236,8 @@ function getPolicyFilePaths(policyDir) {
   };
 }
 
+<<<<<<< HEAD
+=======
 async function generateMarkdown(
   policyId: string,
   schema: PolicySchema,
@@ -405,7 +325,7 @@ This policy is deprecated. ${schema.deprecatedMessage ?? ""}
 ${introMd ?? schema.description}
 <!-- end: intro.md -->
 
-<PolicyStatus isPreview={${schema.isPreview ?? false}} isPaidAddOn={${
+<PolicyStatus isBeta={${schema.isBeta ?? false}} isPaidAddOn={${
     schema.isPaidAddOn ?? false
   }} />
 
@@ -436,6 +356,7 @@ Read more about [how policies work](/docs/articles/policies)
 `;
 }
 
+>>>>>>> parent of 447cb30 (Revert "Support beta policies")
 export async function run() {
   console.log("Generating policies");
   // await rm(docsDir, { recursive: true, force: true });
@@ -471,7 +392,7 @@ export async function run() {
     // Build the meta format for use in the portal
     const meta: Record<string, any> = {};
     meta.name = schema.title;
-    meta.isPreview = !!schema.isPreview;
+    meta.isBeta = !!schema.isBeta;
     meta.isPaidAddOn = !!schema.isPaidAddOn;
     meta.isCustom = !!schema.isCustom;
     meta.isDeprecated = !!schema.isDeprecated;
@@ -532,27 +453,9 @@ export async function run() {
     }
 
     policies.push(meta);
-
-    const generatedMd = await generateMarkdown(
-      policyId,
-      schema,
-      policyFilePaths,
-    );
-
-    const outPath = isNext
-      ? path.join(docsDir, policyId, `page.md`)
-      : path.join(docsDir, `${policyId}.md`);
-    const outdir = path.dirname(outPath);
-    await mkdir(outdir, { recursive: true });
-    await writeFile(outPath, generatedMd, "utf-8");
   });
 
   await Promise.all(tasks);
-
-  await copyFile(
-    path.resolve(policiesDir, "index.md"),
-    path.resolve(docsDir, "index.md"),
-  );
 
   const policyDataV3 = {
     config: policyConfig,

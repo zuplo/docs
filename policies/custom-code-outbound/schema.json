@@ -3,7 +3,6 @@
   "$id": "http://zuplo.com/schemas/policies/custom-code-outbound.json",
   "type": "object",
   "title": "Custom Code Outbound",
-  "isPreview": false,
   "description": "A custom outbound response policy.",
   "required": ["handler"],
   "properties": {
