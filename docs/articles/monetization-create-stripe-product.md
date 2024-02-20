@@ -12,7 +12,7 @@ Once you have your Stripe account, start by creating the "Basic" product.
 2. Click on the **Add product** button.
 3. Fill in the product details as in the image below:
    ![Create a product in Stripe](https://cdn.zuplo.com/assets/0b7bc4e5-9e92-4b24-a4d5-16fe389bec8f.png)
-4. Click on the **Create product** button.
+4. Click on the **Add product** button.
 5. Repeat the process to create the "Pro" product with the details:
    - **Name**: Pro
    - **Description**: Pro plan for the API

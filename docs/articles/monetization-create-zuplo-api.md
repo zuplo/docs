@@ -3,15 +3,15 @@ title: Step 3 - Create a simple Zuplo API
 ---
 
 In this step, we will create a simple API using Zuplo. The backend will be the
-[ToDo API](https://jsonplaceholder.typicode.com) from
-[JSONPlaceholder](https://jsonplaceholder.typicode.com). We will create a simple
-wrapper around this API to demonstrate how to use Zuplo to monetize your API,
-but you can use any API you want.
+ToDo API from [JSONPlaceholder](https://jsonplaceholder.typicode.com). We will
+create a simple wrapper around this API to demonstrate how to monetize your
+backend API, but you can connect your own backend if you want throughout this
+tutorial.
 
 ## 1/ Create a new Zuplo project
 
-First, create a new Zuplo project and choose the Monetization template as the
-starting point.
+First, [create a new Zuplo project](https://portal.zuplo.com) and choose the
+Monetization template as the starting point.
 
 ![Monetization template](https://cdn.zuplo.com/assets/d97c6b00-7c14-4898-a774-4c5dad33e8d4.png)
 
@@ -34,12 +34,14 @@ when adding the endpoint.
 
 ![/v1/todos path](https://cdn.zuplo.com/assets/5ba77117-0095-4415-b4ce-516499a51971.png)
 
-1. This is the path of your API endpoint. Your users will access this endpoint
-   by making a request to `https://yourapidomain.com/v1/todos`.
+Description of the elements in the image above:
+
+1. This is the path in your public API endpoint. Your users will access this
+   endpoint by making a request to `https://yourapidomain.com/v1/todos`.
 2. You can add multiple policies to your endpoint. For this example, we are
    using the pre-built `monetization` policy. Without this, the endpoint will be
    accessible without any restrictions.
-3. The _Handler_ is the way Zuplo will handle the request. For this example, we
+3. The _Handler_ tells Zuplo which backend to connect to. For this example, we
    are using the [URL Rewrite handler](/docs/handlers/url-rewrite.md) to rewrite
    the request. In this case, a request to `https://yourapidomain.com/v1/todos`
    will be hitting the URL you set here.
@@ -51,10 +53,11 @@ Now add a new route `/v1/todos/:todosId` endpoint using the following details:
 - **Path**: /v1/todos/:todoId
 - **Method**: GET
 - **Handler**: URL Rewrite
-- **Policy**: add the existing "monetization" policy as seen in the image below
 - **URL**: `https://jsonplaceholder.typicode.com/todos/${params.todoId}`
+- **Request Policy**: add the existing request policy "monetization" as seen in
+  the image below
 
-![](https://cdn.zuplo.com/assets/22e22a02-4500-41f3-93e1-cf2f43317dd1.png)
+![](https://cdn.zuplo.com/assets/a2767cd0-7a28-4827-b8eb-cc3ffbf42e83.gif)
 
 Finally, make sure to **Save** the changes.
 
@@ -62,7 +65,7 @@ Finally, make sure to **Save** the changes.
 
 Zuplo generates an API documentation that you can use to test your API.
 
-Go to your generated API documentation by opening the URL which you can find in
+Open your generated API documentation by opening the URL which you can find in
 toolbar in the bottom of the page.
 
 ![](https://cdn.zuplo.com/assets/d0dc0e7e-f4d8-402c-8b38-211a3695a2c8.png)

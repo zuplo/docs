@@ -24,7 +24,7 @@ customers are using your API.
 
 At the end of this guide, you will have a fully monetized API with Zuplo. The
 API will have a Basic and a Pro plan, both with different limits in terms of
-requests per month and custom limit that we'll call `computeUnits` which can
+requests per month and a custom limit that we'll call `computeUnits` which can
 represent any custom credit system you want to use for your API.
 
 The guide is divided into the following sections:
@@ -52,3 +52,8 @@ pricing models in the very near future.
 
 Zuplo uses [Stripe](https://stripe.com) as the billing and payments processor.
 You will need to create a Stripe account to use Zuplo's monetization features.
+
+Currently, Stripe has limited support for countries and currencies. If you are
+in a country that Stripe does not support, please
+[let us know](https://discord.zuplo.com) and we will work with you to find a
+solution.

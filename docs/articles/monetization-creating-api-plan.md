@@ -2,8 +2,14 @@
 title: Step 4 - Create your API Plans
 ---
 
-In this step, we will create the plans for your API using Zuplo. The plans will
-be connected to the products we created in Stripe in Step 2.
+In this step, we will create the plans for your API using Zuplo. An API plan
+contains the metering limits of a plan, which your customers will be assigned to
+when they subscribe to your API.
+
+A plan can have multiple meters, and each meter can have a different limit. Each
+plan will be connected to a product in Stripe.
+
+![Zuplo Plans and Stripe Products](https://cdn.zuplo.com/assets/3dd78386-2b93-41f4-b81f-a841e5314a4f.png)
 
 ## 1/ Open the Metering Service
 
@@ -28,7 +34,7 @@ Product ID at the top of the page.
 
 ![Stripe Product ID](https://cdn.zuplo.com/assets/cba6e9ec-a40f-4123-a269-52e49b972109.png)
 
-## 3/ Create the Basic Plan
+## 3/ Create the Basic API Plan and configure the limits
 
 Back in Zuplo, in your Working Copy Metering Service, click on the **Create
 Plan**.
