@@ -9,6 +9,13 @@ were you don't need or want to send information 1:1 with requests arriving into
 the gateway. The BackgroundDispatcher will group entries and invoke a callback,
 specified by you, with a batch of entries every 'n' milliseconds.
 
+:::note
+
+This component is in Beta - please use with care and provide feedback to the
+team if you encounter any issues.
+
+:::
+
 Below is an example usage
 
 ```ts

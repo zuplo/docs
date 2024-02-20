@@ -8,6 +8,13 @@ background while minimizing gateway latency using this information. It is ideal
 to use for critical configuration that might be powering your gateway for smart
 routing or similar.
 
+:::note
+
+This component is in Beta - please use with care and provide feedback to the
+team if you encounter any issues.
+
+:::
+
 Obviously, you don't want to incur the cost of an async cost load on every
 request so it's important to cache any config you load into your gateway.
 However, sometimes this information is critical to keep very up to date so a
