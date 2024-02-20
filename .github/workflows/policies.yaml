@@ -45,3 +45,4 @@ jobs:
           destination: cdn.zuplo.com/portal
           headers: |-
             content-type: text/plain
+            Cache-Control: public, max-age=3600, stale-while-revalidate=30
