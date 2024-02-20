@@ -13,7 +13,7 @@ A pricing page is automatically generated for you with your Zuplo
 can easily see the different plans and sign up for them directly on your API
 documentation.
 
-![](https://cdn.zuplo.com/assets/d3b39d6e-2d20-4337-a839-700c1ce1a0c3.png)
+![](https://cdn.zuplo.com/assets/ed61dd91-a28e-4460-a97c-dc7f87599887.png)
 
 You can also see all your API analytics with Zuplo to understand how your
 customers are using your API.
@@ -34,6 +34,8 @@ The guide is divided into the following sections:
 - [Step 3 - Creating a simple API with Zuplo](/docs/articles/monetization-create-zuplo-api.md)
 - [Step 4 - Creating your API Plans](/docs/articles/monetization-creating-api-plan.md)
 - [Step 5 - Creating a Pricing Page](/docs/articles/monetization-pricing-page.md)
+- [Step 6 - Configuring Stripe Webhook](/docs/articles/monetization-configure-webhook.md)
+- [Step 7 - Test your API](/docs/articles/monetization-test-api.md)
 
 ## Supported Pricing Models
 
