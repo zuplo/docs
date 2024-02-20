@@ -23,7 +23,7 @@ type SchemaRecord = {
 };
 
 type PolicySchema = JSONSchema7 & {
-  isBeta?: boolean;
+  isPreview?: boolean;
   isDeprecated?: boolean;
   isInternal?: boolean;
   isPaidAddOn?: boolean;
@@ -405,7 +405,7 @@ This policy is deprecated. ${schema.deprecatedMessage ?? ""}
 ${introMd ?? schema.description}
 <!-- end: intro.md -->
 
-<PolicyStatus isBeta={${schema.isBeta ?? false}} isPaidAddOn={${
+<PolicyStatus isPreview={${schema.isPreview ?? false}} isPaidAddOn={${
     schema.isPaidAddOn ?? false
   }} />
 
@@ -471,7 +471,7 @@ export async function run() {
     // Build the meta format for use in the portal
     const meta: Record<string, any> = {};
     meta.name = schema.title;
-    meta.isBeta = !!schema.isBeta;
+    meta.isPreview = !!schema.isPreview;
     meta.isPaidAddOn = !!schema.isPaidAddOn;
     meta.isCustom = !!schema.isCustom;
     meta.isDeprecated = !!schema.isDeprecated;

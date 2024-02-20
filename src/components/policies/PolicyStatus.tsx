@@ -1,10 +1,10 @@
 import Callout from "@/components/markdown/Callout";
 
 export default function PolicyStatus({
-  isBeta,
+  isPreview,
   isPaidAddOn,
 }: {
-  isBeta: boolean;
+  isPreview: boolean;
   isPaidAddOn: boolean;
 }) {
   if (isPaidAddOn) {
@@ -20,13 +20,14 @@ export default function PolicyStatus({
       </div>
     );
   }
-  if (isBeta) {
+  if (isPreview) {
     return (
       <div>
-        <Callout type="caution" title="Beta">
+        <Callout type="caution" title="Early Access">
           <p>
-            This policy is in beta. You can use it today, but it may change in
-            non-backward compatible ways before the final release.
+            This policy is in private beta. If you would like to use this please
+            reach out to us:{" "}
+            <a href="mailto:whatzup@zuplo.com">whatzup@zuplo.com</a>
           </p>
         </Callout>
       </div>

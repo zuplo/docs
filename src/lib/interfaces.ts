@@ -10,7 +10,7 @@ export type NavItem = {
 export interface Policy {
   policyId: string;
   schema: JSONSchema7 & {
-    isBeta?: boolean;
+    isPreview?: boolean;
     isCustom?: boolean;
     isDeprecated?: false;
     isPaidAddOn?: false;

@@ -271,7 +271,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       ) : null}
       {intro}
       <PolicyStatus
-        isBeta={schema.isBeta ?? false}
+        isPreview={schema.isPreview ?? false}
         isPaidAddOn={schema.isPaidAddOn ?? false}
       />
       {schema.isCustom && files.policyTs ? (
