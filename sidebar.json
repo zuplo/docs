@@ -55,7 +55,8 @@
         "label": "Reference",
         "items": [
           "articles/monetization-glossary",
-          "articles/monetization-programmatic-quotas"
+          "articles/monetization-programmatic-quotas",
+          "articles/stripe-monetization-plugin"
         ]
       }
     ]

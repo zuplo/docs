@@ -1,3 +1,4 @@
 ---
-title: Monetization Terms Glossary
+title: Monetization Glossary
+sidebar_label: Glossary
 ---
