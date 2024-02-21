@@ -2,6 +2,7 @@ import { NavItem } from "@/lib/interfaces";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 type Props = {
   link: NavItem;
@@ -10,9 +11,19 @@ type Props = {
 export function NavigationLinkItem({ link }: Props) {
   const pathname = usePathname();
   const isActive = link.href === pathname;
+  const ranOnce = useRef(false);
+  const liRef = useRef<HTMLLIElement>(null);
+
+  useEffect(() => {
+    if (ranOnce.current || !liRef.current) return;
+
+    liRef.current.scrollIntoView({ block: "nearest" });
+    ranOnce.current = true;
+  }, [isActive]);
 
   return (
     <li
+      ref={liRef}
       className={clsx(
         "pl-4 border-l hover:border-pink",
         isActive ? "border-pink" : "border-transparent",
