@@ -8,18 +8,10 @@ managed API. If you don't already have a Zuplo API, you can create a new project
 and use the "Todo" sample or follow the
 [getting started quickstart](./step-1-setup-basic-gateway.md).
 
-After you have a working Zuplo API, you can proceed to monetizing your API.
+After you have a working Zuplo API, we can move forward!
 
 The first step to monetize our API is to enable the pricing page and checkout in
 the API Developer Portal.
-
-:::tip
-
-For you first time through this tutorial we recommend using
-[Test Mode](https://docs.stripe.com/test-mode) on your Stripe account. This will
-allow you to purchase API subscriptions without using real money.
-
-:::
 
 ## 1/ Stripe Pricing Table
 
@@ -31,7 +23,9 @@ create one.
 ::: tip
 
 You don't need to go through the full setup of Stripe. You can follow this
-tutorial using Stripe's test mode.
+tutorial using Stripe's test mode. We recommend using
+[Test Mode](https://docs.stripe.com/test-mode) on your Stripe account. This will
+allow you to purchase API subscriptions without using real money.
 
 :::
 
@@ -40,7 +34,7 @@ Your API customers will subscribe to "Plans". Plans are associated with
 Stripe Product is what determines the price your customers will pay for access
 to your API. The "Plan" in Zuplo is where you will define the limits of each
 plan, for example the "Basic" plan might be limited to 10,000 requests per month
-and the "Premium" plan is limited to 1,000,000 requests per month.
+and the "Premium" plan may be limited to 1,000,000 requests per month.
 
 When you create your products in Stripe set each product as **Recurring** on a
 **Monthly** billing cycle.
