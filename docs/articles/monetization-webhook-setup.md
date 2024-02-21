@@ -3,18 +3,20 @@ title: Step 2 - Configure Subscription Events
 sidebar_label: Step 2 - Configure Subscription Events
 ---
 
-In the previous step, you configured the developer portal to enable your
-customers to subscribe to your API. In order for Stripe to notify your API that
-a customer has purchased a plan, you will next setup Stripe webhooks.
+In the previous step, you configured the Developer Portal to enable your
+customers to subscribe to your Zuplo API. In this step, you will configure a
+Stripe Webhook in order for Stripe to notify your Zuplo API that a customer has
+subscribed to a plan.
 
 ## 1/ Configure Plans
 
-When Stripe calls your Zuplo API with a webhook event it will connect the Stripe
-Subscription and Product with the Plan in your Zuplo API. In order for this to
-work, you'll need to create Plans in your Zuplo Metering Service.
+When Stripe sends a subscription event, your Zuplo API will use that event to
+connect the Stripe Subscription and Product with the Plan in your Zuplo API. In
+order for this to work, you'll need to create Plans in your Zuplo Metering
+Service.
 
-1. Click on the **Services** tab in the Zuplo portal and click **Configure** on
-   your "Metering Service".
+1. In Zuplo Portal, go to your project, select the **Services** tab and click
+   **Configure** on your "Metering Service".
 
 ![Metering Service](../../public/media/monetization-webhook-setup/image.png)
 
@@ -33,28 +35,23 @@ work, you'll need to create Plans in your Zuplo Metering Service.
 
 4. Next, set a Meter for the plan. To start, create a single meter called
    `Requests`.
-5. Set the **Max Value** to the number of Requests the users on the plan is
-   allowed to make against your API per month.
+5. Set **Max Value** to the number of Requests a user can make against your API
+   per month.
 
 :::tip
 
-To start with, set the value of the **Max Value** to a low number like `10`.
-This will allow you to test the quota later on in this tutorial.
+During the test phase, set the value of the **Max Value** to a low number like
+`10`. This will allow you to test the quota later on in this tutorial.
 
 :::
 
-## 2/ Setup the Zuplo Plugin
+## 2/ Set Up the Zuplo Plugin
 
-The Zuplo `StripeMonetizationPlugin` makes it easy to listen to Stripe Webhooks
-that enable subscriptions. This plugin adds a webhook endpoint and configures
-the
-[Stripe Webhook Verification Inbound](/docs/policies/stripe-webhook-verification-inbound)
-policy to secure the webhooks.
+The Zuplo `StripeMonetizationPlugin` enables your Zuplo API to listen to Stripe
+Webhook subscription events. This plugin adds an endpoint that is used when
+configuring the Stripe Webhook.
 
-With this plugin installed and webhooks configured, your users will have an API
-key created for them automatically after they complete the Stripe checkout.
-
-1. To start, navigate to the **Code** section of the Zuplo portal. On the
+1. To start, navigate to the **Code** section of the Zuplo Portal. On the
    `modules` folder click the **+** button and select **Runtime Extension**.
 
 :::tip
@@ -90,25 +87,26 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 ```
 
 The plugin is using two environment variables. The `STRIPE_SECRET_KEY` is the
-same value that was added in the previous steps of this tutorial. The
-`STRIPE_WEBHOOK_SIGNING_SECRET` is a value that you will get after you create a
+same value that was added in the Step 1 of this tutorial. The
+`STRIPE_WEBHOOK_SIGNING_SECRET` is a value that you will get after you set up a
 new Webhook in Stripe.
 
-## 3/ Setup the Stripe Webhook
+## 3/ Set Up the Stripe Webhook
 
-1. Navigate to the
-   [Webhooks section](https://dashboard.stripe.com/test/webhooks) in Stripe's
-   portal. Click **+ Add Endpoint** to register a new webhook.
+1. In Stripe, navigate to the
+   [Webhooks section](https://dashboard.stripe.com/test/webhooks) and click **+
+   Add Endpoint** to register a new webhook.
 
-2. The **Endpoint URL** for your webhook is
-   `<https://your-api-url.dev>/__plugins/stripe/webhooks`. Enter it in the form.
+2. In the **Endpoint URL** input enter
+   `<https://your-api-url.dev>/__plugins/stripe/webhooks`.
 
-3. Click the **+ Select events** button and click to enable the following
-   events. Click **Add events** after you have selected the three events.
+3. Click the **+ Select events** button and select the following events:
 
    - `customer.subscription.created`
    - `customer.subscription.updated`
    - `customer.subscription.deleted`
+
+   Click **Add events** to finish selecting the events.
 
 4. Click **Add endpoint** to register your webhook.
 
@@ -117,8 +115,8 @@ new Webhook in Stripe.
 
 ![alt text](../../public/media/monetization-webhook-setup/image-2.png)
 
-6. Return to the Zuplo Portal and open the **Environment Variables** section
-   under the **Settings** tab.
+6. Return to the Zuplo Portal, open your project and go to the **Environment
+   Variables** section under the **Settings** tab.
 
 7. Create a new Environment Variable. Set it as a **Secret** and name the
    variable `STRIPE_WEBHOOK_SIGNING_SECRET`. Paste the value of webhook's
