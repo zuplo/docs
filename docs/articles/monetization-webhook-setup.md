@@ -101,8 +101,7 @@ new Webhook in Stripe.
    portal. Click **+ Add Endpoint** to register a new webhook.
 
 2. The **Endpoint URL** for your webhook is
-   `https://your-api-url.zuplo.dev/__plugins/stripe/webhooks`. Enter it in the
-   form.
+   `<https://your-api-url.dev>/__plugins/stripe/webhooks`. Enter it in the form.
 
 3. Click the **+ Select events** button and click to enable the following
    events. Click **Add events** after you have selected the three events.

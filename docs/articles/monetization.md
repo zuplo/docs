@@ -30,6 +30,7 @@ The guide is divided into the following sections:
 
 - [Step 1 - Setup Developer Portal Monetization](/docs/articles/monetization-dev-portal-setup.md)
 - [Step 2 - Connect Stripe Webhook](/docs/articles/monetization-webhook-setup.md)
+- [Step 3 - Monetization Policy](/docs/articles/monetization-policy-setup.md)
 
 ## Payment Processor & Pricing Model
 
@@ -39,7 +40,7 @@ You will need to create a Stripe account to use Zuplo's monetization features.
 We exclusively support monthly subscription plans. We believe this is the most
 common use case for API monetization as it allows for predictable billing.
 
-<Callout type="caution" title="Countries and currencies support" >Stripe has
-limited support for countries and currencies. If you are in a country that
-Stripe does not support, please [let us know](https://discord.zuplo.com) and we
-will work with you to find a solution. </Callout>
+<Callout type="caution" title="Countries and currencies support" >If Stripe does
+not support your country or currency, please
+[let us know](https://discord.zuplo.com) and we will work with you to find a
+solution. </Callout>
