@@ -9,7 +9,7 @@ API plans.
 
 If you don't already have a Zuplo API, you can create a new project using the
 "ToDo" sample or following step 1 of the
-[Getting Started quickstart](./step-1-setup-basic-gateway.md).
+[Getting Started guide](./step-1-setup-basic-gateway.md).
 
 You'll also need a Stripe account. If you don't already have one, you'll need to
 [register](https://dashboard.stripe.com/register) for one.
@@ -102,7 +102,7 @@ Now that your Developer Portal is configured for monetization you can open it
 and view the pricing page. Click the toolbar on the bottom of the Zuplo Portal
 to find the URL of your Developer Portal.
 
-![Dev Portal Link](../../public/media/monetization-dev-portal-setup/image-3a.png)
+![Developer Portal Link](../../public/media/monetization-dev-portal-setup/image-3a.png)
 
 Once you open your Developer Portal, you will find a link to the **Pricing**
 page on the top right menu section. Open the **Pricing** page in your Developer

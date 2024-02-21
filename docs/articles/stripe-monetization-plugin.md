@@ -1,21 +1,21 @@
 ---
 title: Stripe Monetization Plugin
-sidebar_label: Stripe Plugin
+sidebar_label: Stripe Monetization Plugin
 ---
 
-The Stripe Monetization Plugin makes makes it easy to register a Stripe Webhook
-in your Zuplo API that will handle Stripe subscription events.
-
-When you register the Stripe Plugin a new route is configured on your API at the
-path `/__plugins/stripe/webhook`. This route is used to receive webhooks sent by
-stripe for Stripe subscription events.
+The Stripe Monetization Plugin makes it easy to register a Stripe Webhook in
+your Zuplo API that will handle Stripe subscription events.
 
 The Plugin is registered in the `zuplo.runtime.ts` extension. It requires
 setting the `webhooks.signingSecret` value and the `stripeSecretKey` in order to
 function.
 
-There is additional configuration if you wan to customize the path, etc, but for
-most cases no additional configuration is required.
+When you register the Stripe Monetization Plugin, a new route is configured on
+your API at the path `/__plugins/stripe/webhook`. This route is used to receive
+webhooks sent by Stripe for subscription events.
+
+There is additional configuration if you want to customize the path, etc. In
+most cases, no additional configuration is required.
 
 ```ts
 import {
@@ -39,9 +39,9 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 
 ## Debugging & Troubleshooting
 
-The Runtime Plugin emits logs that show what the Webhook is doing. For example,
-when a new subscription is created, the plugin will log information about the
-Stripe subscription, user, etc.
+The Plugin emits logs that show what the Webhook is doing. For example, when a
+new subscription is created, the plugin will log information about the Stripe
+subscription, user, etc.
 
 If are having trouble with the Webhooks, reviewing the logs for the Plugin is
 the place to start.

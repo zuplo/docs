@@ -46,9 +46,10 @@ During the test phase, set the value of the **Max Value** to a low number like
 
 ## 2/ Set Up the Zuplo Plugin
 
-The Zuplo `StripeMonetizationPlugin` enables your Zuplo API to listen to Stripe
-Webhook subscription events. This plugin adds an endpoint that is used when
-configuring the Stripe Webhook.
+The Zuplo
+[`StripeMonetizationPlugin`](/docs/articles/stripe-monetization-plugin.md)
+enables your Zuplo API to listen to Stripe Webhook subscription events. This
+plugin adds an endpoint that is used when configuring the Stripe Webhook.
 
 1. To start, navigate to the **Code** section of your Zuplo project. On the
    `modules` folder click the **+** button and select **Runtime Extension**.
