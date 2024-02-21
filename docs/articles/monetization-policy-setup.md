@@ -12,9 +12,6 @@ We will configure this using Zuplo's
 [API Key Authentication Policy](/docs/policies/api-key-inbound) and the
 [Monetization Inbound Policy](/docs/policies/monetization-inbound).
 
-The Monetization Inbound Policy is what ensures that customers are only able to
-call your API withing the quotas set in their Plan.
-
 ## 1/ Add API Key Authentication
 
 In order to identify customers calling your API, you'll add the
@@ -46,7 +43,9 @@ endpoint.
 ## 2/ Add the Monetization Policy
 
 With the user identified via the API Key Authentication policy, next you will
-enforce that they are calling the API within the limits of their plan.
+enforce that they are calling the API within the limits of their plan. The
+[Monetization Inbound Policy](/docs/policies/monetization-inbound) is what
+enables us to do that.
 
 1. Open the **Policies** section of the same route and click **Add Policy**.
 
@@ -84,9 +83,11 @@ header.
 
 ![Successful response](../../public/media/monetization-policy-setup/image-1.png)
 
-5. Close the API Playground and click the **Subscription** link in the Dev
-   Portal header. Notice the Analytics section now shows that you have consumed
-   some of your request quota from your plan.
+5. Close the API Playground and click the **Subscription** link in the Developer
+   Portal header. Notice the Usage section shows that you have consumed some of
+   your request quota from your plan.
+
+![Max quota status](../../public/media/monetization-policy-setup/image-2.png)
 
 6. Return to the API Playground and click **Test** until you receive an error
    response telling you that you have exhausted your quota.
@@ -97,7 +98,5 @@ If you set a large number in the **Max Value** of your request quota in the
 earlier steps, this is going to take a while.
 
 :::
-
-![Max quota status](../../public/media/monetization-policy-setup/image-2.png)
 
 Congratulations, you are now ready to monetize your API!
