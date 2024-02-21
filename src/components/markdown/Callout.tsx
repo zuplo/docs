@@ -4,6 +4,7 @@ import {
   LightbulbIcon,
   ShieldAlertIcon,
 } from "lucide-react";
+import clsx from "clsx";
 
 type CalloutType = "note" | "tip" | "info" | "warning" | "caution" | "danger";
 
@@ -11,6 +12,7 @@ type CalloutProps = {
   type: CalloutType;
   children: any;
   title?: string;
+  className?: string;
 };
 
 // -----------------------------------------------------------
@@ -18,10 +20,8 @@ type CalloutProps = {
 // WITH THE STYLES IN lib/markdown/callout.ts
 // -----------------------------------------------------------
 
-const Note = ({ children, title }: Omit<CalloutProps, "type">) => (
-  <div
-    className={`callout not-prose mb-4 rounded-md border-l-4 border-gray-600 bg-gray-50 p-4`}
-  >
+const Note = ({ children, title, className }: Omit<CalloutProps, "type">) => (
+  <div className={clsx(`border-gray-600 bg-gray-50`, className)}>
     <div className="flex">
       <div className="flex-shrink-0 pt-[6px]">
         <InfoIcon className={`h-5 w-5 text-gray-600`} aria-hidden="true" />
@@ -36,10 +36,8 @@ const Note = ({ children, title }: Omit<CalloutProps, "type">) => (
   </div>
 );
 
-const Tip = ({ children, title }: Omit<CalloutProps, "type">) => (
-  <div
-    className={`callout not-prose mb-4 rounded-md border-l-4 border-green-400 bg-green-50 p-4`}
-  >
+const Tip = ({ children, title, className }: Omit<CalloutProps, "type">) => (
+  <div className={clsx(`border-green-400 bg-green-50`, className)}>
     <div className="flex">
       <div className="flex-shrink-0 pt-[6px]">
         <LightbulbIcon
@@ -57,10 +55,8 @@ const Tip = ({ children, title }: Omit<CalloutProps, "type">) => (
   </div>
 );
 
-const Info = ({ children, title }: Omit<CalloutProps, "type">) => (
-  <div
-    className={`callout not-prose mb-4 rounded-md border-l-4 border-blue-400 bg-blue-50 p-4`}
-  >
+const Info = ({ children, title, className }: Omit<CalloutProps, "type">) => (
+  <div className={clsx(`border-blue-400 bg-blue-50`, className)}>
     <div className="flex">
       <div className="flex-shrink-0 pt-[6px]">
         <InfoIcon className={`h-5 w-5 text-blue-400`} aria-hidden="true" />
@@ -75,10 +71,12 @@ const Info = ({ children, title }: Omit<CalloutProps, "type">) => (
   </div>
 );
 
-const Caution = ({ children, title }: Omit<CalloutProps, "type">) => (
-  <div
-    className={`callout not-prose mb-4 rounded-md border-l-4 border-yellow-400 bg-yellow-50 p-4`}
-  >
+const Caution = ({
+  children,
+  title,
+  className,
+}: Omit<CalloutProps, "type">) => (
+  <div className={clsx(`border-yellow-400 bg-yellow-50`, className)}>
     <div className="flex">
       <div className="flex-shrink-0 pt-[6px]">
         <AlertTriangleIcon
@@ -96,10 +94,8 @@ const Caution = ({ children, title }: Omit<CalloutProps, "type">) => (
   </div>
 );
 
-const Danger = ({ children, title }: Omit<CalloutProps, "type">) => (
-  <div
-    className={`callout not-prose mb-4 rounded-md border-l-4 border-red-400 bg-red-50 p-4`}
-  >
+const Danger = ({ children, title, className }: Omit<CalloutProps, "type">) => (
+  <div className={clsx(`border-red-400 bg-red-50`, className)}>
     <div className="flex">
       <div className="flex-shrink-0 pt-[6px]">
         <ShieldAlertIcon
@@ -131,5 +127,12 @@ export default function Callout({ children, title, type }: CalloutProps) {
   if (!El) {
     throw new Error(`Callout type '${type}' is not valid`);
   }
-  return <El title={title}>{children}</El>;
+  return (
+    <El
+      title={title}
+      className="callout not-prose mb-4 rounded-md border-l-4 p-4 [&_a]:underline"
+    >
+      {children}
+    </El>
+  );
 }
