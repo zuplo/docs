@@ -105,6 +105,11 @@ export default {
             ul: {
               color: "white",
             },
+            li: {
+              "&::marker": {
+                color: "white",
+              },
+            },
           },
         },
       }),
