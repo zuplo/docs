@@ -87,6 +87,8 @@ header.
    Portal header. Notice the Usage section shows that you have consumed some of
    your request quota from your plan.
 
+![Max quota status](../../public/media/monetization-policy-setup/image-2.png)
+
 6. Return to the API Playground and click **Test** until you receive an error
    response telling you that you have exhausted your quota.
 
@@ -96,7 +98,5 @@ If you set a large number in the **Max Value** of your request quota in the
 earlier steps, this is going to take a while.
 
 :::
-
-![Max quota status](../../public/media/monetization-policy-setup/image-2.png)
 
 Congratulations, you are now ready to monetize your API!
