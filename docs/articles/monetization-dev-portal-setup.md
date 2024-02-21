@@ -1,5 +1,5 @@
 ---
-title: Step 1 - Set Up Developer Portal Monetization
+title: Step 1 - Set Up Developer Portal
 sidebar_label: Step 1 - Set Up Dev Portal
 ---
 
@@ -24,9 +24,9 @@ money.
 
 :::
 
-## 1/ Stripe Set Up
+## 1/ Set Up in Stripe
 
-You need to have a couple things setup in Stripe before enabling Zuplo
+You need to have a couple things set up in Stripe before enabling Zuplo
 monetization.
 
 Your API customers will subscribe to a "Plan" in Zuplo. Plans are associated
@@ -53,15 +53,16 @@ Once you've created your products, you will need to create a Stripe Pricing
 table. Follow
 [Stripe's guide for creating a Pricing Table](https://docs.stripe.com/payments/checkout/pricing-table).
 
-## 2/ Add Stripe Environment Variable
+## 2/ Set Up in Zuplo Portal
 
 In order for your Zuplo API to connect to Stripe, you'll need to set your Stripe
 API Key as an environment variable.
 
-1. Navigate to the [API keys section](https://dashboard.stripe.com/apikeys) of
-   Stripe's developer dashboard. Copy the value of the **Secret Key**.
-2. Return to the Zuplo Portal and open the **Environment Variables** section in
-   the **Settings** tab.
+1. In Stripe, navigate to the
+   [API keys section](https://dashboard.stripe.com/apikeys) of Stripe's
+   developer dashboard. Copy the value of the **Secret Key**.
+2. Return to the Zuplo Portal, go to your project and open the **Environment
+   Variables** section in the **Settings** tab.
 3. Click **Add Variable** and name your new environment variable
    `STRIPE_SECRET_KEY`.
 4. Set this variable as a **secret** and paste the Stripe API Key as the value.
@@ -69,12 +70,12 @@ API Key as an environment variable.
 
 ![Save Environment Variable](../../public/media/monetization-dev-portal-setup/image-1a.png)
 
-## 3/ Configure Dev Portal Monetization
+## 3/ Configure Developer Portal Monetization
 
 Next, you will enable the monetization pages in your Developer Portal.
 
-1. Open the **Code** tab in the Zuplo Portal and select the file
-   `dev-portal.json`.
+1. In Zuplo Portal, open your project, go to the **Code** tab and select the
+   file `dev-portal.json`.
 2. Scroll to the bottom of the form and select the checkbox **Enable
    Monetization**.
 3. The values for the fields **Pricing Table ID** and **Publishable Key** can be
