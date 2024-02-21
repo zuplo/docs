@@ -54,9 +54,9 @@ configuring the Stripe Webhook.
 1. To start, navigate to the **Code** section of your Zuplo project. On the
    `modules` folder click the **+** button and select **Runtime Extension**.
 
-:::Note
+:::note
 
-The `zuplo.runtime.ts` file is where you can
+The **zuplo.runtime.ts** file is where you can
 [register global plugins](https://zuplo.com/docs/articles/runtime-extensions#plugin-and-handler-extensions)
 and [setup hooks](https://zuplo.com/docs/articles/runtime-extensions#hooks)
 within your Zuplo API.
@@ -139,8 +139,8 @@ to end subscription experience.
 
 :::tip
 
-In test mode, use Stripe test credit card number `4242 4242 4242 4242`. Set any
-future date as the expiration and any three digits as the CVC.
+In test mode, use Stripe test credit card number **4242 4242 4242 4242**. Set
+any future date as the expiration and any three digits as the CVC.
 
 :::
 
