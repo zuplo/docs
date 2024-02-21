@@ -39,7 +39,11 @@
   {
     "type": "category",
     "label": "Monetization",
-    "items": ["articles/monetization", "articles/monetization-dev-portal-setup"]
+    "items": [
+      "articles/monetization",
+      "articles/monetization-dev-portal-setup",
+      "monetization-webhook-setup"
+    ]
   },
   {
     "type": "category",

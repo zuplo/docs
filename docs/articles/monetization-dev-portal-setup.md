@@ -1,5 +1,6 @@
 ---
 title: Step 1 - Setup Developer Portal Monetization
+sidebar_label: Step 1 - Setup Dev Portal
 ---
 
 This tutorial will walk through the steps required to monetize your Zuplo
@@ -11,6 +12,14 @@ After you have a working Zuplo API, you can proceed to monetizing your API.
 
 The first step to monetize our API is to enable the pricing page and checkout in
 the API Developer Portal.
+
+:::tip
+
+For you first time through this tutorial we recommend using
+[Test Mode](https://docs.stripe.com/test-mode) on your Stripe account. This will
+allow you to purchase API subscriptions without using real money.
+
+:::
 
 ## 1/ Stripe Pricing Table
 
@@ -100,4 +109,4 @@ was created.
 
 :::
 
-![NICE PRICING TABLE IMAGE HERE](https://example.com)
+![Pricing Table](../../public/media/monetization-dev-portal-setup/image.png)
