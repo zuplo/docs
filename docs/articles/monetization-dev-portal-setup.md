@@ -24,7 +24,7 @@ money.
 
 :::
 
-## 1/ Stripe Pricing Table
+## 1/ Stripe Set Up
 
 You need to have a couple things setup in Stripe before enabling Zuplo
 monetization.
@@ -34,16 +34,20 @@ with [Stripe Products](https://docs.stripe.com/products-prices/getting-started).
 The Stripe Product is what determines the price your customers will pay to use
 your API.
 
-The "Plan" in Zuplo is where you will define the limits of each plan. For
-example, the "Basic" plan might be limited to 10,000 requests per month while
-"Premium" plan may be limited to 1,000,000 requests per month.
-
 ![](https://cdn.zuplo.com/assets/aa34975a-2906-4869-9dd6-bd13e5b0dcda.png)
 
-When you create your products in Stripe set each product as **Recurring** on a
+The "Plan" in Zuplo is where you will define the limits of each plan. For
+example, the "Basic" plan might be limited to 10,000 requests per month while
+the "Premium" plan may be limited to 1,000,000 requests per month.
+
+### Creating Stripe Products
+
+When you create your products in Stripe, set each product as **Recurring** on a
 **Monthly** billing cycle.
 
 ![](https://cdn.zuplo.com/assets/0b7bc4e5-9e92-4b24-a4d5-16fe389bec8f.png)
+
+### Creating a Stripe Pricing Table
 
 Once you've created your products, you will need to create a Stripe Pricing
 table. Follow
