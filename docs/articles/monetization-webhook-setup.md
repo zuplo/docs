@@ -9,7 +9,7 @@ a customer has purchased a plan, you will next setup Stripe webhooks.
 
 ## 1/ Configure Plans
 
-When Stripe calls your Zuplo API with a webhook it will connect the Stripe
+When Stripe calls your Zuplo API with a webhook event it will connect the Stripe
 Subscription and Product with the Plan in your Zuplo API. In order for this to
 work, you'll need to create Plans in your Zuplo Metering Service.
 
@@ -33,8 +33,8 @@ work, you'll need to create Plans in your Zuplo Metering Service.
 
 4. Next, set a Meter for the plan. To start, create a single meter called
    `Requests`.
-5. Set the **Max Value** to the number of Requests users on the plan are allowed
-   to make against your API per month.
+5. Set the **Max Value** to the number of Requests the users on the plan is
+   allowed to make against your API per month.
 
 :::tip
 
@@ -46,7 +46,7 @@ This will allow you to test the quota later on in this tutorial.
 ## 2/ Setup the Zuplo Plugin
 
 The Zuplo `StripeMonetizationPlugin` makes it easy to listen to Stripe Webhooks
-that enable subscriptions. This plugin adds an a webhook endpoint and configures
+that enable subscriptions. This plugin adds a webhook endpoint and configures
 the
 [Stripe Webhook Verification Inbound](/docs/policies/stripe-webhook-verification-inbound)
 policy to secure the webhooks.
@@ -159,11 +159,11 @@ as the expiration and any three digits as the CVC.
 If you are having trouble diagnosing issues with your Webhooks, the logs are a
 good place to see what is going on. You can also open the
 [**Webhooks**](https://dashboard.stripe.com/webhooks) page in Stripe and see the
-history of webhooks and their responses.
+history of webhook events and their responses.
 
 :::
 
 You now have an API Subscription and are almost ready to start monetizing your
-API. In the next section you will see how to add policies to your routes to
-enforce quotas to ensure that users are only allowed to use your API according
+API. In the next section you will see how to add policies to your routes,
+enforce quotas and ensure that users are only allowed to use your API according
 to their plan.
