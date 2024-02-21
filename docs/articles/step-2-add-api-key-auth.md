@@ -19,14 +19,14 @@ section.
 ![Add policy](https://cdn.zuplo.com/assets/14b608c1-d95c-4b98-9ae8-16affad90eca.png)
 
 Add the API key authentication policy and click OK to accept the default policy
-JSON. Note,
+JSON.
 
 ![Add API Key Authentication](https://cdn.zuplo.com/assets/811a8152-9648-4377-a070-be6ec539a4d6.png).
 
 :::tip
 
-The API key auth policy should usually be one of the first policies in your
-request pipeline, drag it to the top if you have multiple policies.
+The API key authentication policy should usually be one of the first policies in
+your request pipeline, drag it to the top if you have multiple policies.
 
 :::
 
@@ -38,7 +38,8 @@ If you test your route, you should get a 401 Unauthorized response
 {
   "status": 401,
   "title": "Unauthorized",
-  "type": "https://httpproblems.com/http-status/401",
+  "type": "https://httpproblems.com/http-status/401"
+}
 ```
 
 ## 2/ Set up an API Key
