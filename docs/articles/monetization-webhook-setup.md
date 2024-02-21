@@ -148,7 +148,7 @@ as the expiration and any three digits as the CVC.
    Portal. After a few seconds, you should see your subscription page with your
    API Key.
 
-![SUBSCRIPTION SUCCESSFUL IMAGE HERE](https://example.com)
+![Successful subscription](../../public/media/monetization-webhook-setup/image-3.png)
 
 5. Return to the Zuplo Portal and open the **Logs** tab. Notice the logs that
    show information about the incoming webhook.
