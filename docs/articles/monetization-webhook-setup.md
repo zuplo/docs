@@ -4,16 +4,15 @@ sidebar_label: Step 2 - Configure Subscription Events
 ---
 
 In the previous step, you configured the Developer Portal to enable your
-customers to subscribe to your Zuplo API. In this step, you will configure a
-Stripe Webhook in order for Stripe to notify your Zuplo API that a customer has
-subscribed to a plan.
+customers to subscribe to your Zuplo API. In this step, you will configure
+Stripe and your Zuplo API to handle a customer subscribing to your API Plans.
 
 ## 1/ Configure Plans
 
-When Stripe sends a subscription event, your Zuplo API will use that event to
-connect the Stripe Subscription and Product with the Plan in your Zuplo API. In
-order for this to work, you'll need to create Plans in your Zuplo Metering
-Service.
+Stripe can send subscription events, through Stripe Webhooks, when a customer
+subscribes to your API Plans. Your Zuplo API will use those events to connect
+the Stripe Subscriptions with the Plans in your Zuplo API. For this to work,
+you'll need to create Plans in your Zuplo Metering Service.
 
 1. In Zuplo Portal, go to your project, select the **Services** tab and click
    **Configure** on your "Metering Service".
