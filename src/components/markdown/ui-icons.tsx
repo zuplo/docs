@@ -75,9 +75,9 @@ export const ShowIcon: FC = () => (
 );
 
 export const EnvironmentVariablePicker: FC = () => (
-  <SvgWrapper>
+  <span className="inline-flex h-[19px] w-[19px] align-text-bottom">
     <ListEnd />
-  </SvgWrapper>
+  </span>
 );
 
 export const GitHubIcon: FC = () => (

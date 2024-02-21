@@ -44,8 +44,8 @@ table. Follow
 
 ## 2/ Add Stripe Environment Variable
 
-In order for your Zuplo API to connect to Stripe, you'll need to set add your
-Stripe API Key as an environment variable.
+In order for your Zuplo API to connect to Stripe, you'll need to set your Stripe
+API Key as an environment variable.
 
 1. Navigate to the [API keys section](https://dashboard.stripe.com/apikeys) of
    Stripe's developer dashboard. Copy the value of the **Secret Key**.
