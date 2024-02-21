@@ -5,7 +5,7 @@ sidebar_label: Step 1 - Setup Dev Portal
 
 This tutorial will walk through the steps required to monetize your Zuplo
 managed API. If you don't already have a Zuplo API, you can create a new project
-and use the "Todo" sample or follow the
+and use the "Todo" sample or follow step 1 of the
 [getting started quickstart](./step-1-setup-basic-gateway.md).
 
 After you have a working Zuplo API, we can move forward!
@@ -35,6 +35,8 @@ Stripe Product is what determines the price your customers will pay for access
 to your API. The "Plan" in Zuplo is where you will define the limits of each
 plan, for example the "Basic" plan might be limited to 10,000 requests per month
 and the "Premium" plan may be limited to 1,000,000 requests per month.
+
+![](https://cdn.zuplo.com/assets/aa34975a-2906-4869-9dd6-bd13e5b0dcda.png)
 
 When you create your products in Stripe set each product as **Recurring** on a
 **Monthly** billing cycle.
