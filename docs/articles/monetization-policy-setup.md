@@ -78,7 +78,7 @@ header.
 4. Edit the API Request if needed and click **Test**. You should see a
    successful response. Click **Test** a few more times.
 
-![SUCCESSFUL TEST RESPONSE](https://example.com)
+![Successful response](../../public/media/monetization-policy-setup/image-1.png)
 
 5. Close the API Playground and click the **Subscription** link in the Dev
    Portal header. Notice the Analytics section now shows that you have consumed
@@ -94,6 +94,6 @@ earlier steps, this is going to take a while.
 
 :::
 
-![MAX QUOTA ERROR](https://example.com)
+![Max quota status](../../public/media/monetization-policy-setup/image-2.png)
 
 Congratulations, you are now ready to monetize your API!
