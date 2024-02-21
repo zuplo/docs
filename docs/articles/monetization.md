@@ -12,8 +12,8 @@ and sign up to the plans you've configured for your API.
 
 ![Pricing Table](../../public/media/monetization-dev-portal-setup/image.png)
 
-You can also access API analytics to understand how your customers are using
-your API.
+You can also access API analytics to understand how customers are using your
+API.
 
 ![](https://cdn.zuplo.com/assets/353fb3d5-f019-443b-92d6-a4127814b1f0.png)
 
@@ -24,7 +24,7 @@ API will have multiple plans with different limits.
 
 The guide is divided into the following sections:
 
-- [Step 1 - Setup Developer Portal Monetization](/docs/articles/monetization-dev-portal-setup.md)
+- [Step 1 - Setup Dev Portal](/docs/articles/monetization-dev-portal-setup.md)
 - [Step 2 - Connect Stripe Webhook](/docs/articles/monetization-webhook-setup.md)
 - [Step 3 - Monetization Policy](/docs/articles/monetization-policy-setup.md)
 
@@ -42,5 +42,5 @@ a different pricing model.
 
 <Callout type="caution" title="Countries and currencies support" >If Stripe does
 not support your country or currency, please
-[let us know](https://discord.zuplo.com) and we will work with you to find a
+[contact us](https://discord.zuplo.com) and we will work with you to find a
 solution. </Callout>
