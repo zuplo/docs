@@ -51,10 +51,10 @@ The Zuplo `StripeMonetizationPlugin` enables your Zuplo API to listen to Stripe
 Webhook subscription events. This plugin adds an endpoint that is used when
 configuring the Stripe Webhook.
 
-1. To start, navigate to the **Code** section of the Zuplo Portal. On the
+1. To start, navigate to the **Code** section of your Zuplo project. On the
    `modules` folder click the **+** button and select **Runtime Extension**.
 
-:::tip
+:::Note
 
 The `zuplo.runtime.ts` file is where you can
 [register global plugins](https://zuplo.com/docs/articles/runtime-extensions#plugin-and-handler-extensions)
@@ -87,7 +87,8 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 ```
 
 The plugin is using two environment variables. The `STRIPE_SECRET_KEY` is the
-same value that was added in the Step 1 of this tutorial. The
+same value that was added in the
+[Step 1](/docs/articles/monetization-dev-portal-setup.md) of this tutorial. The
 `STRIPE_WEBHOOK_SIGNING_SECRET` is a value that you will get after you set up a
 new Webhook in Stripe.
 
@@ -97,8 +98,9 @@ new Webhook in Stripe.
    [Webhooks section](https://dashboard.stripe.com/test/webhooks) and click **+
    Add Endpoint** to register a new webhook.
 
-2. In the **Endpoint URL** input enter
-   `<https://your-api-url.dev>/__plugins/stripe/webhooks`.
+2. Add `<https://your-api-url.dev>/__plugins/stripe/webhooks` in **Endpoint
+   URL**. This URL is your Zuplo API's endpoint to process Stripe Webhook
+   events.
 
 3. Click the **+ Select events** button and select the following events:
 
@@ -106,11 +108,11 @@ new Webhook in Stripe.
    - `customer.subscription.updated`
    - `customer.subscription.deleted`
 
-   Click **Add events** to finish selecting the events.
+   Click **Add events** when done.
 
-4. Click **Add endpoint** to register your webhook.
+4. Click **Add endpoint** to register your Webhook.
 
-5. With the webhook created, find the section called **Signing secret** and
+5. With the Webhook created, find the section called **Signing secret** and
    click the **Reveal** link. Copy this value.
 
 ![alt text](../../public/media/monetization-webhook-setup/image-2.png)
@@ -137,18 +139,18 @@ to end subscription experience.
 
 :::tip
 
-The test Stripe credit card number is `4242 4242 4242 4242` with any future date
-as the expiration and any three digits as the CVC.
+In test mode, use Stripe test credit card number `4242 4242 4242 4242`. Set any
+future date as the expiration and any three digits as the CVC.
 
 :::
 
-4. Once you have completed the checkout, you will be returned to your Developer
-   Portal. After a few seconds, you should see your subscription page with your
-   API Key.
+4. Once you have completed the checkout, you will be redirected to your
+   Developer Portal. After a few seconds, you should see your subscription page
+   with your API Key.
 
 ![Successful subscription](../../public/media/monetization-webhook-setup/image-3.png)
 
-5. Return to the Zuplo Portal and open the **Logs** tab. Notice the logs that
+5. Return to your Zuplo project and open the **Logs** tab. Notice the logs that
    show information about the incoming webhook.
 
 :::tip
@@ -156,11 +158,11 @@ as the expiration and any three digits as the CVC.
 If you are having trouble diagnosing issues with your Webhooks, the logs are a
 good place to see what is going on. You can also open the
 [**Webhooks**](https://dashboard.stripe.com/webhooks) page in Stripe and see the
-history of webhook events and their responses.
+history of webhook events sent and their responses.
 
 :::
 
-You now have an API Subscription and are almost ready to start monetizing your
-API. In the next section you will see how to add policies to your routes,
-enforce quotas and ensure that users are only allowed to use your API according
-to their plan.
+You've successfully subscribed to one of the Plans in your API. You're one step
+away from monetizing your API. In the next section you will add policies to your
+API, enforce quotas and ensure that users are only allowed to use your API
+according to the plan they subscribe to.
