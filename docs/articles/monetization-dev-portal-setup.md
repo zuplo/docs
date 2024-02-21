@@ -65,7 +65,7 @@ API Key as an environment variable.
 
 ## 3/ Configure Dev Portal Monetization
 
-Next, you will enable the monetization pages in your developer portal.
+Next, you will enable the monetization pages in your Developer Portal.
 
 1. Open the **Code** tab in the Zuplo Portal and select the file
    `dev-portal.json`.
@@ -95,7 +95,10 @@ to find the URL of your Developer Portal.
 
 ![Dev Portal Link](../../public/media/monetization-dev-portal-setup/image-3a.png)
 
-Open the **Pricing** page in your developer portal to see the pricing table.
+Once you open your Developer Portal, you will find a link to the **Pricing**
+page on the top left of the screen. Open the **Pricing** page in your developer
+portal to see the pricing table that you have configured as the **Pricing Table
+ID** in the previous step.
 
 :::caution
 
