@@ -1,6 +1,6 @@
 ---
 title: Step 1 - Set Up Developer Portal
-sidebar_label: Step 1 - Set Up Dev Portal
+sidebar_label: Step 1 - Set Up Developer Portal
 ---
 
 This guide will walk you through the steps required to set up your Zuplo API's
