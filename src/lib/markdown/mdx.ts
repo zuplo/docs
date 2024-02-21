@@ -6,6 +6,7 @@ import { Element } from "hast";
 import { h } from "hastscript";
 import { Root } from "mdast";
 import { compileMDX } from "next-mdx-remote/rsc";
+import path from "node:path";
 import rehypeAutolinkHeadings, {
   Options as RehypeAutolinkHeadingsOptions,
 } from "rehype-autolink-headings";
@@ -17,8 +18,7 @@ import { Plugin } from "unified";
 import { visit } from "unist-util-visit";
 import { VFile } from "vfile";
 import components from "../../components/markdown";
-import remarkStaticImage from "./static-images";
-import path from "node:path";
+import rehypeStaticImages from "./static-images";
 export interface SerializeOptions {
   /**
    * Pass-through variables for use in the MDX content
@@ -119,11 +119,12 @@ function getOptions(headings: Element[] = []): SerializeOptions {
   return {
     parseFrontmatter: true,
     mdxOptions: {
-      remarkPlugins: [remarkTransformLink as any, remarkStaticImage, remarkGfm],
+      remarkPlugins: [remarkTransformLink as any, remarkGfm],
       rehypePlugins: [
         rehypeGetRawCode,
         [rehypeCode as any, rehypeCodeOptions],
         rehypeAddRawCode,
+        rehypeStaticImages,
         rehypeSlug,
         [rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions],
         [rehypeRewrite as any, rehypeRewriteOptions],

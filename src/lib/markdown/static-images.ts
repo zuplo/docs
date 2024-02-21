@@ -1,26 +1,38 @@
-import type { Image } from "mdast";
 import path from "path";
 import { Parent } from "unist";
 import { visit } from "unist-util-visit";
 import type { VFile } from "vfile";
+
 /**
  * Copies images from the /static folder to /public if they are referenced by a
  * @returns
  */
-export default function remarkStaticImage() {
+export default function rehypeStaticImages() {
   return async (root: Parent, vfile: VFile) => {
     const promises: Promise<void>[] = [];
-    visit(root, "image", (node: Image, index, parent) => {
+    visit(root, ["element"], (node: any, index, parent) => {
       promises.push(
         (async () => {
-          if (!node.url.startsWith("http")) {
-            const publicDir = path.join(process.cwd(), "public");
-            let url = path.resolve(path.dirname(vfile.path), node.url);
-            const relativePath = url.replace(publicDir, "");
-            if (process.env.USE_IMAGE_CDN) {
-              node.url = `https://cdn.zuplo.com/docs${relativePath}`;
-            } else {
-              node.url = `/docs${relativePath}`;
+          if (node.type === "element" && node.tagName === "img") {
+            if (!node.properties.src.startsWith("http")) {
+              const publicDir = path.join(process.cwd(), "public");
+              let url = path.resolve(
+                path.dirname(vfile.path),
+                node.properties.src,
+              );
+              const relativePath = url.replace(publicDir, "");
+              if (process.env.USE_IMAGE_CDN) {
+                node.properties.src = `https://cdn.zuplo.com/docs${relativePath}`;
+                node.properties.srcSet = [
+                  `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=320/docs${relativePath}   320w`,
+                  `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=640/docs${relativePath}   640w`,
+                  `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=960/docs${relativePath}   960w`,
+                  `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=1280/docs${relativePath} 1280w`,
+                  `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=2560/docs${relativePath} 2560w`,
+                ].join(", ");
+              } else {
+                node.properties.src = `/docs${relativePath}`;
+              }
             }
           }
         })(),
