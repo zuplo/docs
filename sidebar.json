@@ -38,6 +38,31 @@
   },
   {
     "type": "category",
+    "label": "Monetization",
+    "items": [
+      "articles/monetization",
+      {
+        "type": "category",
+        "label": "Quick Start",
+        "items": [
+          "articles/monetization-dev-portal-setup",
+          "articles/monetization-webhook-setup",
+          "articles/monetization-policy-setup"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Reference",
+        "items": [
+          "articles/monetization-glossary",
+          "articles/monetization-programmatic-quotas",
+          "articles/stripe-monetization-plugin"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "category",
     "label": "Getting to Production",
     "items": [
       "articles/environments",

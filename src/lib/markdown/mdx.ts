@@ -18,7 +18,7 @@ import { visit } from "unist-util-visit";
 import { VFile } from "vfile";
 import components from "../../components/markdown";
 import remarkStaticImage from "./static-images";
-import path from 'node:path';
+import path from "node:path";
 export interface SerializeOptions {
   /**
    * Pass-through variables for use in the MDX content
@@ -188,10 +188,10 @@ function buildTableOfContents(nodes: (Element & { tagName: "h2" | "h3" })[]) {
       }
     })
     .filter((h) => typeof h !== "undefined") as {
-      id: string;
-      title: string;
-      level: 2 | 3;
-    }[];
+    id: string;
+    title: string;
+    level: 2 | 3;
+  }[];
 
   const toc: Section[] = [];
   let previous: Section;

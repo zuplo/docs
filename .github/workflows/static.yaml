@@ -1,9 +1,6 @@
 name: Static Assets
 on:
   push:
-    branches:
-      - main
-      - nextjs_v2
 
 jobs:
   policies:

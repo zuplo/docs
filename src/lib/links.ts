@@ -108,4 +108,4 @@ export const featuresLinks: Array<LinkData> = [
 export const docsRepoBaseEditLink: LinkData = {
   href: "https://github.com/zuplo/docs/edit/main",
   name: "Zuplo Documentation",
-}
+};

@@ -1,13 +1,14 @@
 import {
   CogIcon,
+  CopyIcon as CopyIconLucide,
   EyeIcon,
   FileTextIcon,
   LayoutTemplateIcon,
+  ListEnd,
   ListIcon,
   PresentationIcon,
   RssIcon,
   ZapIcon,
-  CopyIcon as CopyIconLucide,
 } from "lucide-react";
 import { FC, PropsWithChildren } from "react";
 
@@ -71,6 +72,12 @@ export const ShowIcon: FC = () => (
   <SvgWrapper>
     <EyeIcon />
   </SvgWrapper>
+);
+
+export const EnvironmentVariablePicker: FC = () => (
+  <span className="inline-flex h-[19px] w-[19px] align-text-bottom">
+    <ListEnd />
+  </span>
 );
 
 export const GitHubIcon: FC = () => (
