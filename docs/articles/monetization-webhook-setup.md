@@ -1,6 +1,6 @@
 ---
-title: Step 2 - Connect Stripe Webhook
-sidebar_label: Step 2 - Connect Stripe Webhook
+title: Step 2 - Configure Subscription Events
+sidebar_label: Step 2 - Configure Subscription Events
 ---
 
 In the previous step, you configured the developer portal to enable your

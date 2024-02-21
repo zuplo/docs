@@ -1,6 +1,6 @@
 ---
-title: Step 3 - Monetization Policy
-sidebar_label: Step 3 - Monetization Policy
+title: Step 3 - Configure Monetization Policy
+sidebar_label: Step 3 - Configure Monetization Policy
 ---
 
 In the previous steps you learned how to set up Stripe and configure your
