@@ -27,11 +27,11 @@ tutorial using Stripe's test mode.
 :::
 
 Your API customers will subscribe to "Plans". Plans are associated with
-[Stripe Products](https://docs.stripe.com/products-prices/overview). The Stripe
-Product is what determines the price your customers will pay for access to your
-API. The "Plan" in Zuplo is where you will define the limits of each plan, for
-example the "Basic" plan might be limited to 10,000 requests per month and the
-"Premium" plan is limited to 1,000,000 requests per month.
+[Stripe Products](https://docs.stripe.com/products-prices/getting-started). The
+Stripe Product is what determines the price your customers will pay for access
+to your API. The "Plan" in Zuplo is where you will define the limits of each
+plan, for example the "Basic" plan might be limited to 10,000 requests per month
+and the "Premium" plan is limited to 1,000,000 requests per month.
 
 When you create your products in Stripe set each product as **Recurring** on a
 **Monthly** billing cycle.
@@ -56,7 +56,7 @@ Stripe API Key as an environment variable.
 4. Set this variable as a **secret** and paste the Stripe API Key as the value.
    Click **Save**.
 
-![Save Environment Variable](../../public/media/monetization-dev-portal-setup/image-1.png)
+![Save Environment Variable](../../public/media/monetization-dev-portal-setup/image-1a.png)
 
 ## 3/ Configure Dev Portal Monetization
 
@@ -74,7 +74,7 @@ Next, you will enable the monetization pages in your developer portal.
 5. Copy the value for `publishable-key` (it starts with `pk_test_` or `pk_`) and
    set it as the value for **Publishable Key** in the form in the Zuplo Portal.
 
-![Pricing Table](../../public/media/monetization-dev-portal-setup/image-2.png)
+![Pricing Table](../../public/media/monetization-dev-portal-setup/image-2a.png)
 
 6. Finally, click the <EnvironmentVariablePicker/> icon next to the **Secret
    Key** field and select the environment variable `STRIPE_SECRET_KEY` you
@@ -88,7 +88,7 @@ Now that your Developer Portal is configured for monetization you can open it up
 and view the pricing page. Click the toolbar on the bottom of the Zuplo portal
 to find the URL of your Developer Portal.
 
-![Dev Portal Link](../../public/media/monetization-dev-portal-setup/image-3.png)
+![Dev Portal Link](../../public/media/monetization-dev-portal-setup/image-3a.png)
 
 Open the **Pricing** page in your developer portal to see the pricing table.
 
