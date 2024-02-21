@@ -41,34 +41,27 @@ const rehypeAutolinkHeadingsOptions: RehypeAutolinkHeadingsOptions = {
     class:
       "no-underline pl-1 mb-3 cursor-pointer opacity-0 hover:!opacity-100 group-hover:!opacity-100",
   },
-  // group(node) {
-  //   return h("a");
-  // },
   content(node) {
     return h("span", "#");
   },
 };
 
-const rehypeRewriteOptions: RehypeRewriteOptions = {
-  rewrite: (node, i, parent) => {
-    if (
-      node.type === "element" &&
-      node.properties &&
-      ["h2", "h3", "h4", "h5", "h6"].includes(node.tagName)
-    ) {
-      // node.properties.className =
-      //   "group scroll-mt-20 text-[26px] lg:text-[32px] md:scroll-mt-32";
-      node.properties.className = "group scroll-mt-20 md:scroll-mt-32";
-    }
-    if (
-      node.type === "element" &&
-      node.properties &&
-      ["p", "li"].includes(node.tagName)
-    ) {
-      node.properties.className = "text-xl";
-    }
-  },
-};
+const rehypeRewriteHeadingGroupLinks: Plugin<[], Root, Root> =
+  () => async (root, vfile: VFile) => {
+    const promises: Promise<void>[] = [];
+    visit(root, ["element"], (node: any, index, parent) => {
+      promises.push(
+        (async () => {
+          if (
+            node.type === "element" &&
+            ["h2", "h3", "h4", "h5", "h6"].includes(node.tagName)
+          ) {
+            node.properties.className = "group scroll-mt-20 md:scroll-mt-32";
+          }
+        })(),
+      );
+    });
+  };
 
 const rehypeCodeOptions: CodeOptions = {
   theme: "github-dark",
@@ -127,7 +120,7 @@ function getOptions(headings: Element[] = []): SerializeOptions {
         rehypeStaticImages,
         rehypeSlug,
         [rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions],
-        [rehypeRewrite as any, rehypeRewriteOptions],
+        rehypeRewriteHeadingGroupLinks,
         [rehypeRewrite, getHeaderRewriteOptions(headings)],
       ],
     },
