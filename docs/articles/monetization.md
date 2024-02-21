@@ -13,7 +13,7 @@ A pricing page is automatically generated for you with your Zuplo
 can easily see the different plans and sign up for them directly on your API
 documentation.
 
-![](https://cdn.zuplo.com/assets/ed61dd91-a28e-4460-a97c-dc7f87599887.png)
+![Pricing Table](../../public/media/monetization-dev-portal-setup/image.png)
 
 You can also see all your API analytics to understand how your customers are
 using your API.
