@@ -3,8 +3,8 @@ title: Step 3 - Monetization Policy
 sidebar_label: Step 3 - Monetization Policy
 ---
 
-In the previous steps you learned how to setup Stripe and configure your
-Developer Portal for monetization. In this section, you will configure the your
+In the previous steps you learned how to set up Stripe and configure your
+Developer Portal for monetization. In this section, you will configure your
 API's routes with authentication and the
 [Monetization Inbound Policy](/docs/policies/monetization-inbound).
 
@@ -44,7 +44,7 @@ endpoint.
 With the user identified via the API Key Authentication policy, next you will
 enforce that they are calling the API within the limits of their plan.
 
-1. Open the **Policies** section of the same route and click **+ Add Policy**.
+1. Open the **Policies** section of the same route and click **Add Policy**.
 
 2. Type `Monetization` in the search and select **Monetization**.
 
@@ -52,7 +52,7 @@ The configuration of this policy is where you specify the meters that are
 required in order to call this API. For now, leave the configuration as is, you
 can always change it later.
 
-3. Be sure to Save your changes.
+3. Be sure to save your changes.
 
 ## 3/ Test the API
 
@@ -80,7 +80,7 @@ header.
 
 5. Close the API Playground and click the **Subscription** link in the Dev
    Portal header. Notice the Analytics section now shows that you have consumed
-   some of your Request quota from your plan.
+   some of your request quota from your plan.
 
 6. Return to the API Playground and click **Test** until you receive an error
    response telling you that you have exhausted your quota.
