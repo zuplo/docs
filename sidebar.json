@@ -41,9 +41,23 @@
     "label": "Monetization",
     "items": [
       "articles/monetization",
-      "articles/monetization-dev-portal-setup",
-      "articles/monetization-webhook-setup",
-      "articles/monetization-policy-setup"
+      {
+        "type": "category",
+        "label": "Quick Start",
+        "items": [
+          "articles/monetization-dev-portal-setup",
+          "articles/monetization-webhook-setup",
+          "articles/monetization-policy-setup"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Reference",
+        "items": [
+          "articles/monetization-glossary",
+          "articles/monetization-programmatic-quotas"
+        ]
+      }
     ]
   },
   {
