@@ -87,7 +87,7 @@ The `options.msDelay` parameter is required and must be a valid non-zero number.
 ```ts
 const backgroundDispatcher = new BackgroundDispatcher<TestEntry>(
   dispatchFunction,
-  { msDelay: 100 }
+  { msDelay: 100 },
 );
 ```
 

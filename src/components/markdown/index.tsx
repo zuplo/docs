@@ -1,34 +1,12 @@
 import Pre from "@/components/Pre";
 import GithubButton from "@/components/markdown/GithubButton";
 import { MDXProvider } from "@mdx-js/react";
-import { ChevronLeftIcon } from "lucide-react";
 import Callout from "./Callout";
 import ZupIt from "./ZupIt";
-import {
-  ApiTestConsoleTabIcon,
-  BuildStatusTabIcon,
-  CodeEditorTabIcon,
-  CopyIcon,
-  DashboardTabIcon,
-  DeveloperPortalIcon,
-  GitHubIcon,
-  LiveLogsTabIcon,
-  SettingsTabIcon,
-  ShowIcon,
-} from "./ui-icons";
+import * as UIIcons from "./ui-icons";
 
 const components: React.ComponentProps<typeof MDXProvider>["components"] = {
-  ChevronLeftIcon,
-  CodeEditorTabIcon,
-  ApiTestConsoleTabIcon,
-  LiveLogsTabIcon,
-  DashboardTabIcon,
-  BuildStatusTabIcon,
-  SettingsTabIcon,
-  DeveloperPortalIcon,
-  CopyIcon,
-  ShowIcon,
-  GitHubIcon,
+  ...UIIcons,
   GithubButton,
   Callout,
   ZupIt,

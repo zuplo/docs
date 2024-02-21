@@ -27,8 +27,8 @@ export default async function (
 
   // Check that the user has one of the allowed roles
   if (
-    !options.allowedRoles.some(
-      (allowedRole) => request.user?.data.roles.includes(allowedRole),
+    !options.allowedRoles.some((allowedRole) =>
+      request.user?.data.roles.includes(allowedRole),
     )
   ) {
     context.log.error(
