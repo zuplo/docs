@@ -35,7 +35,10 @@ API will have multiple plans with different limits.
 ## Payments
 
 Zuplo uses [Stripe](https://stripe.com) as the billing and payments processor.
-You will need to create a Stripe account to use Zuplo's monetization features.
+You will need to create a Stripe account to use Zuplo's monetization features. If Stripe does
+not support your country or currency, please
+[contact us](https://discord.zuplo.com) and we will work with you to find a
+solution.
 
 :::note
 
@@ -43,8 +46,3 @@ We exclusively support monthly subscription plans. Please contact us if you need
 a different pricing model.
 
 :::
-
-<Callout type="caution" title="Countries and currencies support" >If Stripe does
-not support your country or currency, please
-[contact us](https://discord.zuplo.com) and we will work with you to find a
-solution. </Callout>
