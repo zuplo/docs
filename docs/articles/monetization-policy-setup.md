@@ -54,6 +54,8 @@ can always change it later.
 
 3. Be sure to save your changes.
 
+![Policy pipeline](../../public/media/monetization-policy-setup/image.png)
+
 ## 3/ Test the API
 
 With both policies added to the route, you can now call the API with your
