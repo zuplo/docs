@@ -24,7 +24,7 @@ API will have multiple plans with different limits.
 
 The guide is divided into the following sections:
 
-- [Step 1 - Setup Dev Portal](/docs/articles/monetization-dev-portal-setup.md)
+- [Step 1 - Set Up Dev Portal](/docs/articles/monetization-dev-portal-setup.md)
 - [Step 2 - Connect Stripe Webhook](/docs/articles/monetization-webhook-setup.md)
 - [Step 3 - Monetization Policy](/docs/articles/monetization-policy-setup.md)
 

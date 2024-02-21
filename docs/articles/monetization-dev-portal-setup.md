@@ -1,6 +1,6 @@
 ---
-title: Step 1 - Setup Developer Portal Monetization
-sidebar_label: Step 1 - Setup Dev Portal
+title: Step 1 - Set Up Developer Portal Monetization
+sidebar_label: Step 1 - Set Up Dev Portal
 ---
 
 This tutorial will walk through the steps required to monetize your Zuplo
