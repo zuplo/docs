@@ -162,6 +162,6 @@ history of webhook events sent and their responses.
 :::
 
 You've successfully subscribed to one of the Plans in your API. You're one step
-away from monetizing your API. In the next section you will add policies to your
+away from monetizing your API. In the next step you will add policies to your
 API, enforce quotas and ensure that users are only allowed to use your API
 according to the plan they subscribe to.

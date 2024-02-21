@@ -4,8 +4,12 @@ sidebar_label: Step 3 - Configure Monetization Policy
 ---
 
 In the previous steps you learned how to set up Stripe and configure your
-Developer Portal for monetization. In this section, you will configure your
-API's routes with authentication and the
+Developer Portal for monetization. In this step, you will configure your Zuplo
+API to ensure that users are allowed to use your API according to the plan they
+subscribe to.
+
+We will configure this using Zuplo's
+[API Key Authentication Policy](/docs/policies/api-key-inbound) and the
 [Monetization Inbound Policy](/docs/policies/monetization-inbound).
 
 The Monetization Inbound Policy is what ensures that customers are only able to
