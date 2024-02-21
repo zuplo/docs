@@ -24,11 +24,11 @@ export default function rehypeStaticImages() {
               if (process.env.USE_IMAGE_CDN) {
                 node.properties.src = `https://cdn.zuplo.com/docs${relativePath}`;
                 node.properties.srcSet = [
-                  `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=320/docs${relativePath}   320w`,
-                  `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=640/docs${relativePath}   640w`,
-                  `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=960/docs${relativePath}   960w`,
-                  `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=1280/docs${relativePath} 1280w`,
-                  `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=2560/docs${relativePath} 2560w`,
+                  `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=320,format=auto/docs${relativePath}   320w`,
+                  `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=640,format=auto/docs${relativePath}   640w`,
+                  `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=960,format=auto/docs${relativePath}   960w`,
+                  `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=1280,format=auto/docs${relativePath} 1280w`,
+                  `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=2560,format=auto/docs${relativePath} 2560w`,
                 ].join(", ");
               } else {
                 node.properties.src = `/docs${relativePath}`;
