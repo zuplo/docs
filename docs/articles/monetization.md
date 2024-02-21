@@ -7,8 +7,8 @@ while maintaining a flexible implementation to suit your needs. It enables you
 to create plans with different limits and features for your API.
 
 A pricing page is created with your
-[Zuplo Developer Portal](/docs/articles/developer-portal.md). Customers can see
-and sign up to the plans you've configured for your API.
+[Zuplo Developer Portal](/docs/articles/developer-portal.md). Allowing customers
+to see and sign up to the plans you've configured for your API.
 
 ![Pricing Table](../../public/media/monetization-dev-portal-setup/image.png)
 
