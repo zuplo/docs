@@ -5,17 +5,14 @@ sidebar_label: Step 1 - Set Up Dev Portal
 
 This guide will walk you through the steps required to set up your Zuplo API's
 Developer Portal. This is where your customers will see and subscribe to your
-API's plans.
+API plans.
 
 If you don't already have a Zuplo API, you can create a new project using the
 "ToDo" sample or following step 1 of the
 [Getting Started quickstart](./step-1-setup-basic-gateway.md).
 
-You'll also need a Stripe account. If you don't already
-[have a Stripe account](https://dashboard.stripe.com/register) you'll need to
-create one.
-
-Once you have a working Zuplo API and a Stripe account, we can move forward!
+You'll also need a Stripe account. If you don't already have one, you'll need to
+[register](https://dashboard.stripe.com/register) for one.
 
 ::: tip
 
@@ -26,6 +23,8 @@ allow you to test creating subscriptions with different plans without using real
 money.
 
 :::
+
+Once you have a working Zuplo API and a Stripe account, we can move forward!
 
 ## 1/ Set Up in Stripe
 
@@ -77,10 +76,10 @@ API Key as an environment variable.
 
 Next, you will enable the monetization pages in your Developer Portal.
 
-1. In Zuplo Portal, open your project, go to the **Code** tab and select the
-   file `dev-portal.json`.
-2. Scroll to the bottom of the form and select the checkbox **Enable
-   Monetization**.
+1. In your Zuplo project, go to the **Code** tab and select the file
+   `dev-portal.json`.
+2. Scroll to the **Monetization Settings** section and select the checkbox
+   **Enable Monetization**.
 3. The values for the fields **Pricing Table ID** and **Publishable Key** can be
    found by opening the pricing table in the Stripe Dashboard
    [Pricing Table](https://dashboard.stripe.com/pricing-tables) section.
@@ -97,7 +96,7 @@ Next, you will enable the monetization pages in your Developer Portal.
    `$env(STRIPE_SECRET_KEY)`.
 7. Click save to publish your changes.
 
-## 4/ Preview Your Developer Portal
+## 3/ Preview Your Developer Portal
 
 Now that your Developer Portal is configured for monetization you can open it
 and view the pricing page. Click the toolbar on the bottom of the Zuplo Portal
@@ -106,9 +105,11 @@ to find the URL of your Developer Portal.
 ![Dev Portal Link](../../public/media/monetization-dev-portal-setup/image-3a.png)
 
 Once you open your Developer Portal, you will find a link to the **Pricing**
-page on the top left of the screen. Open the **Pricing** page in your Developer
+page on the top right menu section. Open the **Pricing** page in your Developer
 Portal to see the pricing table that you have configured as the **Pricing Table
 ID** in the previous step.
+
+![Pricing Table](../../public/media/monetization-dev-portal-setup/image.png)
 
 :::caution
 
@@ -117,5 +118,3 @@ we will configure the Stripe Webhook that will tell your API that a subscription
 was created.
 
 :::
-
-![Pricing Table](../../public/media/monetization-dev-portal-setup/image.png)
