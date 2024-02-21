@@ -42,7 +42,8 @@
     "items": [
       "articles/monetization",
       "articles/monetization-dev-portal-setup",
-      "articles/monetization-webhook-setup"
+      "articles/monetization-webhook-setup",
+      "articles/monetization-policy-setup"
     ]
   },
   {
