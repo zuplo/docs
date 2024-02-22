@@ -19,6 +19,7 @@ import { visit } from "unist-util-visit";
 import { VFile } from "vfile";
 import components from "../../components/markdown";
 import rehypeStaticImages from "./static-images";
+
 export interface SerializeOptions {
   /**
    * Pass-through variables for use in the MDX content
@@ -57,6 +58,26 @@ const rehypeRewriteHeadingGroupLinks: Plugin<[], Root, Root> =
             ["h2", "h3", "h4", "h5", "h6"].includes(node.tagName)
           ) {
             node.properties.className = "group scroll-mt-20 md:scroll-mt-32";
+          }
+        })(),
+      );
+    });
+  };
+
+const rehypeLinkAttributes: Plugin<[], Root, Root> =
+  () => async (root, vfile: VFile) => {
+    const promises: Promise<void>[] = [];
+    visit(root, ["element"], (node: any, index, parent) => {
+      promises.push(
+        (async () => {
+          if (node.type === "element" && node.tagName === "a") {
+            if (URL.canParse(node.properties.href)) {
+              const url = new URL(node.properties.href);
+              if (!url.hostname.includes("zuplo.com")) {
+                node.properties.target = "_blank";
+                node.properties.rel = "noopener noreferrer";
+              }
+            }
           }
         })(),
       );
@@ -117,6 +138,7 @@ function getOptions(headings: Element[] = []): SerializeOptions {
         rehypeGetRawCode,
         [rehypeCode as any, rehypeCodeOptions],
         rehypeAddRawCode,
+        rehypeLinkAttributes,
         rehypeStaticImages,
         rehypeSlug,
         [rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions],
