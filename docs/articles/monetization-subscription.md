@@ -62,6 +62,8 @@ This would log the following structure
 
 ```
 
+If no subscription is available, `getSubscription` will return `undefined`.
+
 Note how you can see details about the subscriber (e-mail and JWT 'sub' from the dev-portal sign-in) and the current consumption level of the meters specified on their plan. 
 
 This information is only available in the pipeline _after_ the MonetizationInboundPolicy has executed (this loads the subscription data).
