@@ -43,5 +43,27 @@ March 14, 2023. See
 [Cloudflare's documentation](https://developers.cloudflare.com/workers/platform/compatibility-dates/)
 for a list of changes.
 
-Future non-backward compatible changes to the Zuplo runtime will be documented
-here as well as in the [changelog](https://zuplo.com/changelog).
+## 01-15-2024
+
+This compatibility date includes a number of minor breaking changes to improve
+the overall behavior of Zuplo APIs. This compatibility date is the default for
+any projects created after Feb. 23rd, 2024.
+
+### Outbound Handlers on all Response Statuses
+
+Previously, outbound handlers would only run on response status ranging from
+200-299. Now outbound handlers will always run, regardless of the response code.
+
+### No Hooks on System Routes
+
+Previously runtime hooks such as `OnRequest` or `OnResponseSending` would run on
+system routes. For example, if you are using our Developer Portal and have it
+running on `/docs`, before this change you could write a hook that modified the
+output of the Developer Portal.
+
+### Remove Cloudflare Location Headers
+
+Previously, some Cloudflare location headers (i.e. `cf-ipregion`) could be
+passed through your Zuplo gateway. Now these headers are always removed from the
+outbound request if they have been set. If you need access to geo-location data
+use [`context.incomingRequestProperties`](./zuplo-context.md) instead.
