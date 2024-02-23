@@ -56,7 +56,8 @@
         "items": [
           "articles/monetization-glossary",
           "articles/monetization-programmatic-quotas",
-          "articles/stripe-monetization-plugin"
+          "articles/stripe-monetization-plugin",
+          "articles/monetization-subscription"
         ]
       }
     ]
