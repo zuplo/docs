@@ -18,7 +18,7 @@
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
     "@headlessui/react": "^1.7.13",
-    "@inkeep/widgets": "^0.2.252",
+    "@inkeep/widgets": "^0.2.260",
     "@tailwindcss/typography": "^0.5.7",
     "@types/json-schema": "^7.0.15",
     "@types/mdast": "^4.0.3",
