@@ -3,8 +3,8 @@ title: Step 3 - Configure Monetization Policy
 sidebar_label: Step 3 - Configure Monetization Policy
 ---
 
-In the previous steps you learned how to set up Stripe and configure your
-Developer Portal for monetization. In this step, you will configure your Zuplo
+In the previous steps, you learned how to [set up Stripe](./monetization-webhook-setup.md) and [configure your
+Developer Portal for monetization](./monetization-dev-portal-setup.md). In this step, you will configure your Zuplo
 API to ensure that users are allowed to use your API according to the plan they
 subscribe to.
 
@@ -14,10 +14,10 @@ We will configure this using Zuplo's
 
 ## 1/ Add API Key Authentication
 
-In order to identify customers calling your API, you'll add the
+To identify customers calling your API, you'll add the
 [API Key Authentication Policy](/docs/policies/api-key-inbound). This policy
-validates the API Key sent to your API and identifies the user in order to
-associate them with the plan which they have subscribed.
+validates the API Key sent to your API and identifies the user to
+associate them with the plan to which they have subscribed.
 
 :::tip
 
@@ -52,7 +52,7 @@ enables us to do that.
 2. Type `Monetization` in the search and select **Monetization**.
 
 The configuration of this policy is where you specify the meters that are
-required in order to call this API. For now, leave the configuration as is, you
+required to call this API. For now, leave the configuration as is, you
 can always change it later.
 
 3. Be sure to save your changes.
