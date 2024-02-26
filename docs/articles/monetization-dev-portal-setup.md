@@ -118,3 +118,5 @@ we will configure the Stripe Webhook that will tell your API that a subscription
 was created.
 
 :::
+
+[Next - Step 2](./monetization-webhook-setup.md)
