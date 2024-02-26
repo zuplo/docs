@@ -13,7 +13,7 @@ of the file is `1`.
 {
   "version": 1,
   "project": "my-project",
-  "compatibilityDate": "2023-03-14",
+  "compatibilityDate": "01-15-2024",
 }
 ```
 
