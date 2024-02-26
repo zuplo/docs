@@ -59,7 +59,7 @@ The Stripe Monetization Plugin has the following configuration options. As shown
 above, you have to set the `webhooks.signingSecret` and `stripeSecretKey`
 values.
 
-```
+```ts
 {
   /**
    * Stripe Webhook settings
