@@ -52,3 +52,38 @@ Dashboard to view the webhooks that were send and their status. You can also
 resend a webhook event.
 
 ![Stripe Webhooks](../../public/media/stripe-monetization-plugin/image.png)
+
+## Configuration
+
+The Stripe Monetization Plugin has the following configuration options. As shown
+above, you have to set the `webhooks.signingSecret` and `stripeSecretKey`
+values.
+
+```
+{
+  /**
+   * Stripe Webhook settings
+   */
+  webhooks: {
+    signingSecret: string;
+  };
+
+  /**
+   * The primary region where data is stored. Among other things, the choice of * location impacts latency. Defaults to `us-central1`
+   */
+  primaryDataRegion?: string;
+
+  /**
+   * The Stripe account's secret key
+   */
+  stripeSecretKey: string;
+
+}
+```
+
+In addition, you can also set the following values:
+
+- `primaryDataRegion` - The primary region where data is stored. We advise to
+  set it to the closest region where most of your customers will be subscribing
+  from. The options are: us-central1 (Iowa, US), us-east1 (South Carolina, US),
+  and europe-west4 (Netherlands). Defaults to `us-central1` if not set.
