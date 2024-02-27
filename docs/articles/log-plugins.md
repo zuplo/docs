@@ -102,22 +102,8 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 
 ### Google Cloud Logging
 
-```ts
-import {
-  RuntimeExtensions,
-  GoogleCloudLoggingPlugin,
-  environment,
-} from "@zuplo/runtime";
-
-export function runtimeInit(runtime: RuntimeExtensions) {
-  runtime.addPlugin(
-    new GoogleCloudLoggingPlugin({
-      logName: "projects/my-project/logs/my-api",
-      serviceAccountJson: environment.GCP_SERVICE_ACCOUNT,
-    }),
-  );
-}
-```
+The Google Cloud Logging plugin enables pushing logs to your GCP project. See
+[the document](./log-plugin-gcp-logging.md) on this plugin for more information.
 
 ### Loki
 
