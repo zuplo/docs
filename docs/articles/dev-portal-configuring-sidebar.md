@@ -49,8 +49,7 @@ interface APIDocConfig {
   type: "api-ref";
   label: string;
   /**
-   * defaultSpec allows you to specify the spec navigated to upon loading the
-   * developer portal
+   * defaultSpec allows you to specify the ID of the spec navigated to upon loading the developer portal. The spec's ID is the filename without the extension (ex. For routes.oas.json, use "routes")
    */
   defaultSpec: string;
 }
@@ -81,6 +80,9 @@ interface DocConfig {
    * Label Must be unique across doc and category items within this array only
    */
   label: string;
+  /**
+   * The OpenAPI Spec IDs (filename without the .oas.json extension) you wish to limit this doc to. If set, this page will only be surfaced in the sidebar of listed specs.
+   */
   specs?: string[];
   /**
    * When set to true, this page will be navigated to upon loading the developer
