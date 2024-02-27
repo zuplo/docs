@@ -1,10 +1,10 @@
 ---
-title: Zuplo Project Config (zuplo.json)
+title: Zuplo Project Config (zuplo.jsonc)
 ---
 
 Certain advanced project-level settings can be configured using the
-`zuplo.jsonc` file at the root of a project. The `zuplo.json` file is created by
-default for new projects and contains the default configuration.
+`zuplo.jsonc` file at the root of a project. The `zuplo.jsonc` file is created
+by default for new projects and contains the default configuration.
 
 The default `zuplo.jsonc` file is shown below. The only current valid `version`
 of the file is `1`.
@@ -13,7 +13,7 @@ of the file is `1`.
 {
   "version": 1,
   "project": "my-project",
-  "compatibilityDate": "01-15-2024",
+  "compatibilityDate": "2024-01-15",
 }
 ```
 
