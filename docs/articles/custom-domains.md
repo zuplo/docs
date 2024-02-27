@@ -102,8 +102,24 @@ At this time, to use a wildcard domain or other complex custom domain for your
 environment you will need to contact
 [support@zuplo.com](mailto:support@zuplo.com).
 
-## Vercel DNS Customers
+## CAA Records
 
-If you are using Vercel DNS, you may encounter an issue with the SSL certificate
-created with your domain name. If this happens, please contact support@zuplo.com
-and mention that you are using Vercel DNS.
+:::info
+
+In most cases this isn't required. You only need to modify CAA records if you
+already have them set on your DNS.
+
+:::
+
+If you have a CAA DNS record set on your domain, you must add either Google
+Trust Services or Let's Encrypt as an authorized certificate authority.
+
+You don't need to add both of these, just add one. The Google Trust Services
+(pki.goog) is the recommended Authority as it has slightly better compatibility
+with clients. Zuplo will use Google Trust Services by default unless only the
+Let's Encrypt record is set.
+
+```txt
+CAA 0 issue "pki.goog"
+CAA 0 issue "letsencrypt.org"
+```
