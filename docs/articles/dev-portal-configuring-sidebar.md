@@ -81,7 +81,7 @@ interface DocConfig {
    */
   label: string;
   /**
-   * The OpenAPI Spec IDs (filename without the .oas.json extension) you wish to limit this doc to. If set, this page will not be surface in the sidebar of unlisted specs.
+   * The OpenAPI Spec IDs (filename without the .oas.json extension) you wish to limit this doc to. If set, this page will only be surfaced in the sidebar of listed specs.
    */
   specs?: string[];
   /**
