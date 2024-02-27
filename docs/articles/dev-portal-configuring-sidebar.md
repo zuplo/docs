@@ -80,6 +80,9 @@ interface DocConfig {
    * Label Must be unique across doc and category items within this array only
    */
   label: string;
+  /**
+   * The OpenAPI Spec IDs (filename without the .oas.json extension) you wish to limit this doc to. If set, this page will not be surface in the sidebar of unlisted specs.
+   */
   specs?: string[];
   /**
    * When set to true, this page will be navigated to upon loading the developer
