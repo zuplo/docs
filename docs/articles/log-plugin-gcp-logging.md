@@ -8,8 +8,8 @@ The GCP Log plugin enables pushing logs to your GCP project.
 
 Before you can use this plugin, you will need to create a GCP Service account
 that grants your Zuplo API to write logs. Create a new GCP Service account and
-give it the Logs Writer (roles/logging.logWriter) permission. Create a key for
-the service account in JSON format.
+give it the **Logs Writer (roles/logging.logWriter)** permission. Create a key
+for the service account in JSON format.
 
 After you have downloaded the JSON formatted service account, save it as a
 secret environment variable in your Zuplo project.
