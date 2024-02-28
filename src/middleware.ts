@@ -14,7 +14,8 @@ export function middleware(request: NextRequest) {
     url.protocol = requestedProto || url.protocol;
     url.port = requestedPort || url.port;
 
-    return NextResponse.redirect(url);
+    console.log({ requestedHost });
+    // return NextResponse.redirect(url);
   }
 
   return NextResponse.next();
