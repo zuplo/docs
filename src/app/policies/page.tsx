@@ -6,6 +6,9 @@ import { DocsLayout } from "../../components/DocsLayout";
 
 export const metadata: Metadata = {
   title: "Policies",
+  alternates: {
+    canonical: "/policies",
+  },
 };
 
 export default async function Page() {

@@ -1,4 +1,5 @@
 import { DocsLayout } from "@/components/DocsLayout";
+import { Metadata } from "next";
 import Link from "next/link";
 import {
   CustomTOCList,
@@ -6,6 +7,13 @@ import {
   CustomTOCListHead,
   CustomTOCListSection,
 } from "../components/CustomTOCList";
+
+export const metadata: Metadata = {
+  title: "Zuplo Docs",
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default async function Page() {
   return (

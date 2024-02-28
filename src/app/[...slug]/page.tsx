@@ -26,6 +26,9 @@ export async function generateMetadata({
   const { data } = result;
   return {
     title: data.title,
+    alternates: {
+      canonical: `/${params.slug.join("/")}`,
+    },
   };
 }
 

@@ -31,6 +31,7 @@ export const metadata: Metadata = {
     template: "%s - Zuplo Docs",
     default: "Zuplo Docs",
   },
+  metadataBase: new URL("https://zuplo.com/docs"),
 };
 
 export default function RootLayout({
