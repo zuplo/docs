@@ -3,6 +3,9 @@ import { DocsLayout } from "@/components/DocsLayout";
 
 export const metadata = {
   title: "Node Modules",
+  alternates: {
+    canonical: `/articles/node-modules`,
+  },
 };
 
 export default async function Page() {

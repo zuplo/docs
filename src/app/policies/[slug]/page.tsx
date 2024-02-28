@@ -184,6 +184,9 @@ export async function generateMetadata({
   const { schema } = policy;
   return {
     title: schema.title,
+    alternates: {
+      canonical: `/policies/${params.slug}`,
+    },
   };
 }
 
