@@ -228,6 +228,7 @@
             "label": "Async & Archival",
             "items": [
               "policies/archive-request-azure-storage-inbound",
+              "policies/archive-request-gcp-storage-inbound",
               "policies/archive-request-aws-s3-inbound",
               "policies/archive-response-azure-storage-outbound",
               "policies/archive-response-aws-s3-outbound"
