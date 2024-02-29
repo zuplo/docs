@@ -267,7 +267,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       sections={sections}
     >
       {schema.isCustom ? (
-        <CustomPolicyNotice name="${schema.title}" id="${policyId}" />
+        <CustomPolicyNotice name={schema.title!} id={policyId} />
       ) : null}
       {schema.isDeprecated ? (
         <pre>This policy is deprecated. ${schema.deprecatedMessage ?? ""}</pre>
