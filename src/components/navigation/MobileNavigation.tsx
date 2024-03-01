@@ -1,31 +1,30 @@
 "use client";
 
-import { Suspense, useCallback, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
 import { Dialog } from "@headlessui/react";
 
 import { Logomark } from "@/components/Logo";
 import { Navigation } from "@/components/navigation/Navigation";
 import { MenuIcon, XIcon } from "lucide-react";
 
-function CloseOnNavigation({ close }: { close: () => void }) {
-  let pathname = usePathname();
-  let searchParams = useSearchParams();
+const MobileNavigationContext = createContext<{
+  isOpen: boolean;
+  close: () => void;
+}>({
+  isOpen: false,
+  // default is close function is a noop (for non-mobile)
+  close: () => {},
+});
 
-  useEffect(() => {
-    close();
-  }, [pathname, searchParams, close]);
-
-  return null;
-}
+export const useMobileNavigation = () => useContext(MobileNavigationContext);
 
 export function MobileNavigation() {
   let [isOpen, setIsOpen] = useState(false);
   let close = useCallback(() => setIsOpen(false), [setIsOpen]);
 
   return (
-    <>
+    <MobileNavigationContext.Provider value={{ isOpen, close }}>
       <button
         type="button"
         onClick={() => setIsOpen(true)}
@@ -34,9 +33,6 @@ export function MobileNavigation() {
       >
         <MenuIcon className="h-6 w-6 stroke-gray-500" />
       </button>
-      <Suspense fallback={null}>
-        <CloseOnNavigation close={close} />
-      </Suspense>
       <Dialog
         open={isOpen}
         onClose={() => close()}
@@ -59,6 +55,6 @@ export function MobileNavigation() {
           <Navigation className="mt-5 px-1" />
         </Dialog.Panel>
       </Dialog>
-    </>
+    </MobileNavigationContext.Provider>
   );
 }

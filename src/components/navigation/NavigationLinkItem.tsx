@@ -3,6 +3,7 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { useMobileNavigation } from "./MobileNavigation";
 
 type Props = {
   link: NavItem;
@@ -13,6 +14,7 @@ export function NavigationLinkItem({ link }: Props) {
   const isActive = link.href === pathname;
   const ranOnce = useRef(false);
   const liRef = useRef<HTMLLIElement>(null);
+  const { close } = useMobileNavigation();
 
   useEffect(() => {
     if (ranOnce.current || !liRef.current) return;
@@ -31,6 +33,7 @@ export function NavigationLinkItem({ link }: Props) {
     >
       <Link
         href={link.href!}
+        onClick={close}
         className={clsx(
           "block w-full",
           isActive
