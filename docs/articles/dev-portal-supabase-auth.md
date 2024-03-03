@@ -1,5 +1,6 @@
 ---
-title: Supabase Auth
+title: Dev Portal Supabase Setup
+sidebar_label: Supabase Setup
 ---
 
 Do you want to share your API documentation and keys with your Supabase users?

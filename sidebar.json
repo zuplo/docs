@@ -272,8 +272,16 @@
           "articles/developer-portal",
           "articles/dev-portal-setup",
           "articles/dev-portal-configuration",
-          "articles/dev-portal-auth",
-          "articles/dev-portal-supabase-auth",
+          {
+            "type": "category",
+            "label": "Authentication",
+            "items": [
+              "articles/dev-portal-auth",
+              "articles/dev-portal-auth0-auth",
+              "articles/dev-portal-clerk-auth",
+              "articles/dev-portal-supabase-auth"
+            ]
+          },
           "articles/dev-portal-theme",
           "articles/dev-portal-adding-pages",
           "articles/dev-portal-configuring-sidebar",
