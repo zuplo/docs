@@ -34,10 +34,10 @@ The response of this request will return a JSON object that will contain the
 values for `client_id` and `client_secret`. Inside of the Zuplo Portal create
 two environment variables:
 
-Create a new environment variable named `CLERK_CLIENT_ID` and set the value to
-the `client_id` value in the API response. Create a new environment variable,
-this one needs to be a secret, named `CLERK_CLIENT_SECRET` and set it to the
-value of the `client_secret` value in the API response.
+Create a new environment variable named `ZUPLO_PUBLIC_CLERK_CLIENT_ID` and set
+the value to the `client_id` value in the API response. Create a new environment
+variable, this one needs to be a secret, named `CLERK_CLIENT_SECRET` and set it
+to the value of the `client_secret` value in the API response.
 
 ### 2/ Configure the Developer Portal
 
@@ -54,7 +54,7 @@ edit the file to look like the following.
   "authentication": {
     "provider": "clerk",
     "issuer": "https://your-url.clerk.accounts.dev",
-    "clientId": "$env(CLERK_CLIENT_ID)",
+    "clientId": "$env(ZUPLO_PUBLIC_CLERK_CLIENT_ID)",
     "clientSecret": "$env(CLERK_CLIENT_SECRET)",
     "scope": "profile email"
   }
