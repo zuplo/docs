@@ -27,6 +27,7 @@ type PolicySchema = JSONSchema7 & {
   isDeprecated?: boolean;
   isInternal?: boolean;
   isPaidAddOn?: boolean;
+  isHidden?: boolean;
   isCustom?: boolean;
   deprecatedMessage?: string;
 };
@@ -263,6 +264,11 @@ export async function run() {
     // RefParser uses cwd to resolve refs
     process.chdir(policyDir);
     const schema = (await dereference(rawSchema)) as PolicySchema;
+
+    // Hidden policies don't even get added to the list, portal never sees them.
+    if (schema.isHidden) {
+      return;
+    }
 
     await processProperties(schema.properties);
 

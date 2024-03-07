@@ -12,9 +12,10 @@ export interface Policy {
   schema: JSONSchema7 & {
     isBeta?: boolean;
     isCustom?: boolean;
-    isDeprecated?: false;
-    isPaidAddOn?: false;
-    isInternal?: false;
+    isDeprecated?: boolean;
+    isPaidAddOn?: boolean;
+    isHidden?: boolean;
+    isInternal?: boolean;
     deprecatedMessage?: string;
   };
   icon: string;
