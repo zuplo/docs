@@ -27,3 +27,23 @@ Developer Portal is equipped to handle this - allowing users to navigate between
 documentation for each OpenAPI spec. You can even
 [customize the content](./dev-portal-configuring-sidebar.md#customizing-individual-openapi-specs)
 displayed on each OpenAPI spec.
+
+## Providing Examples
+
+The Developer Portal allows you to configure the displayed examples for
+properties like parameters, request bodies, and responses. There are several
+different ways to specify an example in OpenAPI, so here's the order of
+precedence we use:
+
+1. The `example` property, found on
+   [Media Type Object](https://spec.openapis.org/oas/v3.1.0#media-type-object)(ex.
+   request and response bodies) and
+   [Parameter Object](https://spec.openapis.org/oas/v3.1.0#parameter-object)(ex.
+   Params and response headers).
+2. The first `examples` entry, found on the Media Type Object and Parameters
+   Object.
+3. If a schema is specified, the first entry in the schema's `examples`.
+4. The `example` property on the schema.
+5. The `default` property on the schema.
+6. If none of the above are present, and `generateExamples` is `true` in
+   `dev-portal.json`, then we will generate an example using the provided schema
