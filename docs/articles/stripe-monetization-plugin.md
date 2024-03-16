@@ -1,7 +1,15 @@
 ---
 title: Stripe Monetization Plugin
-sidebar_label: Stripe Monetization Plugin
+sidebar_label: Stripe Plugin
 ---
+
+:::warning
+
+The monetization feature is currently in beta and is subject to change. There
+may be bugs and issues that are not yet resolved. Use with caution and please
+report any issues to support.
+
+:::
 
 The Stripe Monetization Plugin makes it easy to register a Stripe Webhook in
 your Zuplo API that will handle Stripe subscription events.
