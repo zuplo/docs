@@ -3,6 +3,12 @@ title: Step 1 - Set Up Developer Portal
 sidebar_label: Step 1 - Set Up Developer Portal
 ---
 
+:::warning
+
+The monetization feature is currently in beta and is subject to change.
+
+:::
+
 This guide will walk you through the steps required to set up your Zuplo API's
 Developer Portal. This is where your customers will see and subscribe to your
 API plans.
