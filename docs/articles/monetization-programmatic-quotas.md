@@ -5,7 +5,9 @@ sidebar_label: Programmatic Quotas
 
 :::warning
 
-The monetization feature is currently in beta and is subject to change.
+The monetization feature is currently in beta and is subject to change. There
+may be bugs and issues that are not yet resolved. Use with caution and please
+report any issues to support.
 
 :::
 
