@@ -3,9 +3,16 @@ title: Step 2 - Configure Subscription Events
 sidebar_label: Step 2 - Configure Subscription Events
 ---
 
-In the [previous step](./monetization-dev-portal-setup.md), you configured the Developer Portal to enable your
-customers to subscribe to your Zuplo API. In this step, you will configure
-Stripe and your Zuplo API to handle a customer subscribing to your API Plans.
+:::warning
+
+The monetization feature is currently in beta and is subject to change.
+
+:::
+
+In the [previous step](./monetization-dev-portal-setup.md), you configured the
+Developer Portal to enable your customers to subscribe to your Zuplo API. In
+this step, you will configure Stripe and your Zuplo API to handle a customer
+subscribing to your API Plans.
 
 ## 1/ Configure Plans
 
@@ -14,8 +21,8 @@ subscribes to your API Plans. Your Zuplo API will use those events to connect
 the Stripe Subscriptions with the Plans in your Zuplo API. For this to work,
 you'll need to create Plans in your Zuplo Metering Service.
 
-1. In the Zuplo Portal, go to your project, select the **Services** tab, and click
-   **Configure** on your "Metering Service".
+1. In the Zuplo Portal, go to your project, select the **Services** tab, and
+   click **Configure** on your "Metering Service".
 
 ![Metering Service](../../public/media/monetization-webhook-setup/image.png)
 
@@ -86,8 +93,8 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 }
 ```
 
-The plugin uses two environment variables. The `STRIPE_SECRET_KEY` is the
-same value that was added to the
+The plugin uses two environment variables. The `STRIPE_SECRET_KEY` is the same
+value that was added to the
 [Step 1](/docs/articles/monetization-dev-portal-setup.md) of this tutorial. The
 `STRIPE_WEBHOOK_SIGNING_SECRET` is a value that you will get after you set up a
 new Webhook in Stripe.

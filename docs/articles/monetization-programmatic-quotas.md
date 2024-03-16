@@ -3,6 +3,12 @@ title: Monetization Programmatic Quotas
 sidebar_label: Programmatic Quotas
 ---
 
+:::warning
+
+The monetization feature is currently in beta and is subject to change.
+
+:::
+
 When adding monetization to your API, you would usually set the number of meters
 a request will consume in the settings of the
 [Monetization Policy](https://zuplo.com/docs/policies/monetization-inbound). For
@@ -67,7 +73,7 @@ export default async function (
   request: ZuploRequest,
   context: ZuploContext,
   options: any,
-  policyName: string
+  policyName: string,
 ) {
   const headerValue = response.headers.get("compute-units");
   let computeUnitsValue;

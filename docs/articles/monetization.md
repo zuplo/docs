@@ -2,6 +2,12 @@
 title: Introduction
 ---
 
+:::warning
+
+The monetization feature is currently in beta and is subject to change.
+
+:::
+
 Zuplo enables you, as an _API provider_, to effortlessly monetize your APIs. It
 provides a compelling set of defaults, while also allowing customizations to
 suit your company's unique business needs. You can easily create separate plans
@@ -35,8 +41,8 @@ API will have multiple plans with different limits.
 ## Payments
 
 Zuplo uses [Stripe](https://stripe.com) as the billing and payments processor.
-You will need to create a Stripe account to use Zuplo's monetization features. If Stripe does
-not support your country or currency, please
+You will need to create a Stripe account to use Zuplo's monetization features.
+If Stripe does not support your country or currency, please
 [contact us](https://discord.zuplo.com) and we will work with you to find a
 solution.
 
