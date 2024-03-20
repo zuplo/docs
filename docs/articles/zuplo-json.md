@@ -67,3 +67,48 @@ Previously, some Cloudflare location headers (i.e. `cf-ipregion`) could be
 passed through your Zuplo gateway. Now these headers are always removed from the
 outbound request if they have been set. If you need access to geo-location data
 use [`context.incomingRequestProperties`](./zuplo-context.md) instead.
+
+## 2024-01-15
+
+This compatibility date includes a several breaking changes to improve the
+overall behavior of Zuplo APIs. This compatibility date is the default for any
+projects created after Jan. 15th, 2024.
+
+### Run Outbound Policies on All Responses
+
+Previously, outbound policies would only run on response status ranging from
+200-299. Now outbound policies will always run, regardless of the response code.
+
+### No Hooks on System Routes
+
+Previously runtime hooks such as `OnRequest` or `OnResponseSending` would run on
+system routes. For example, if you are using our Developer Portal and have it
+running on `/docs`, before this change you could write a hook that modified the
+output of the Developer Portal. This could result in unexpected behavior and is
+now disallowed.
+
+### Remove Cloudflare Location Headers
+
+Zuplo routes all requests through Cloudflare. Cloudflare adds a number of
+headers to requests. Previously, some Cloudflare location headers (i.e.
+`cf-ipregion`) could be passed through your Zuplo gateway. Now these headers are
+always removed from the outbound request if they have been set. If you need
+access to geo-location data use
+[`context.incomingRequestProperties`](./zuplo-context.md) instead.
+
+## 2024-03-14
+
+This compatibility date does not include any breaking changes. However, Zuplo
+made a number of changes to the runtime build process. These changes will allow
+a number of future improvements. Out of an abundance of caution, these changes
+are only enabled for projects that have set their compatibility date to
+`2024-03-14`. This compatibility date is the default for any projects created
+after March 14th, 2024.
+
+Over time, the build changes will be enabled by default on all future
+deployments regardless of compatibility date. Existing customers are encouraged
+to update their compatibility date to `2024-03-14` and test their projects to
+ensure that they continue to operate as expected.
+
+We expect that this new build process will roll out to all customers (regardless
+of compatibility date) by the end of April 2024.
