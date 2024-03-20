@@ -74,7 +74,7 @@ tab, and click 'REGISTER EXISTING API'.
 
 When prompted for the component URL, enter the github URL of your
 `catalog-info.yaml` file (ex.
-<https://github.com/AdrianMachado/adrian-api/blob/main/catalog-info.yaml>).
+https://github.com/AdrianMachado/adrian-api/blob/main/catalog-info.yaml).
 
 ![alt text](../../public/media/add-api-to-backstage/image-4.png)
 
