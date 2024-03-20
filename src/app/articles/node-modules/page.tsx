@@ -12,11 +12,18 @@ export default async function Page() {
   return (
     <DocsLayout frontmatter={{ title: metadata.title }} sections={[]}>
       <p>
-        Zuplo generally supports node modules, but to ensure the security and
+        Zuplo supports certain node modules, but to ensure the security and
         performance of each API Gateway we must approve each module. This
         process only takes a few hours so if you need something new please reach
-        out to use on twitter <a href="https://twitter.com/zuplo">@zuplo</a> or
-        through email <a href="mailto:whatzup@zuplo.com">whatzup@zuplo.com</a>.
+        out support by emailing
+        <a href="mailto:support@zuplo.com">support@zuplo.com</a>.
+      </p>
+      <p>
+        Additionally, you can also bundle custom modules inside of your own
+        project. This process is fairly simple and allows you to use any module
+        or version of the module. To learn how to bundle your own modules, see
+        the sample [Custom Modules on
+        Github](https://github.com/zuplo/zuplo/tree/main/examples/custom-module).
       </p>
       <p>Below are the currently installed modules.</p>
       <BundlesTable />
