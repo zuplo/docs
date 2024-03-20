@@ -139,3 +139,10 @@ auth:
             - resolver: emailMatchingUserEntityProfileEmail
             - resolver: usernameMatchingUserEntityName
 ```
+
+### How can I keep my OpenAPI file in sync?
+
+Base Backstage doesn't support continuous syncing with an OpenAPI file. Hosted
+platforms like
+[Roadie.io](https://roadie.io/docs/getting-started/openapi-specs/) seem to have
+support for this. We do not guarantee support for these platforms.
