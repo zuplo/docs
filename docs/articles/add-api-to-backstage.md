@@ -16,7 +16,7 @@ Backstage allows you to document
 using an OpenAPI file. Although Zuplo is OpenAPI based, you cannot directly use
 your `routes.oas.json` file, as it is missing details about your API. Instead,
 you will need to use the public-ready version of your spec, by adding an
-[OpenAPI Spec Handler](https://zuplo.com/docs/handlers/openapi).
+[OpenAPI Spec Handler](../handlers/openapi.md).
 
 Add a new route with the path `/openapi`, and select the `OpenAPI Spec Handler`
 from the Request Handler selector. Save your changes and commit them to your
