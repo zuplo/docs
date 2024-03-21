@@ -1,42 +1,29 @@
 ---
-title: Setup Azure Active Directory SSO
+title: Setup Okta SSO
 ---
 
 Zuplo uses Auth0 to enable SSO for enterprise accounts who have purchased
-single-sign-on. Below you will find instructions on how to setup a new Azure AD
-client to be used with Zuplo.
+single-sign-on. Below you will find instructions on how to setup Okta to be used
+with Zuplo.
 
-1. Register a new Application in Azure Active Directory. For instructions on
-   this process, see
-   [Microsoft's quickstart](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
-   Record the client ID value to share with Zuplo.
+1. First, you will need to
+   [create a new application in Okta](https://developer.okta.com/docs/guides/sign-into-web-app/aspnet/create-okta-application/).
+   Record the client ID and client secret values to share with Zuplo.
 
-   - The application type should be "web".
+   - The application type should be "Web application".
    - The **Redirect URI** value should be set to
      `https://auth.zuplo.com/login/callback`
+   - The trusted origin should be set to `https://auth.zuplo.com`
    - No special permissions are needed. Zuplo only requires basic profile
      information (name and email).
 
-2. Create a client secret for you application. To create a client secret, see
-   Microsoft's Quickstart:
-   [Configure a client application to access web APIs - Add Credentials to your web application](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app#add-credentials).
-   Record this value. You will need to share this securely with Zuplo.
-
-   :::tip
-
-   If you configure an expiring secret, make sure to record the expiration date;
-   you will need to renew the key before that day to avoid a service
-   interruption.
-
-   :::
-
-3. Securely share the following values with Zuplo.
+2. Securely share the following values with Zuplo.
 
 | Field                     | Description                                                                                                                                                              |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Client ID                 | Unique identifier for your registered Azure AD application.                                                                                                              |
-| Client Secret             | String used to gain access to your registered Azure AD application.                                                                                                      |
-| Azure AD Domain           | Your Azure AD domain name. You can find this on your Azure AD directory's overview page in the Microsoft Azure portal.                                                   |
+| Client ID                 | Unique identifier for your registered Okta application.                                                                                                                  |
+| Client Secret             | String used to gain access to your registered Okta application.                                                                                                          |
+| Okta Domain               | Okta's domain name for your organization.                                                                                                                                |
 | Identity Provider Domains | A list of the domains that can be authenticated in the Identify Provider. For most companies this will be a single domain, but some companies may have multiple domains. |
 
 A few options for securely sharing secrets with Zuplo:
