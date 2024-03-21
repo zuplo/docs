@@ -33,7 +33,11 @@ const rehypeStaticImages: Plugin<[], Root, Root> =
               }
             }
 
-            if (node.properties.src.startsWith("https://cdn.zuplo.com/")) {
+            if (
+              node.properties.src.startsWith("https://cdn.zuplo.com/") &&
+              !node.properties.src.endsWith(".svg") &&
+              !node.properties.src.endsWith(".gif")
+            ) {
               const url = new URL(node.properties.src);
               node.properties.srcSet = [
                 `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=640,format=auto${url.pathname}   640w`,
