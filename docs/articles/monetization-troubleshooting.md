@@ -3,7 +3,7 @@ title: Monetization Troubleshooting
 sidebar_label: Troubleshooting
 ---
 
-:::warning
+:::warning Beta Feature
 
 The monetization feature is currently in beta and is subject to change. There
 may be bugs and issues that are not yet resolved. Use with caution and please

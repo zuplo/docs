@@ -3,7 +3,7 @@ title: Step 3 - Configure Monetization Policy
 sidebar_label: Step 3 - Configure Monetization Policy
 ---
 
-:::warning
+:::warning Beta Feature
 
 The monetization feature is currently in beta and is subject to change. There
 may be bugs and issues that are not yet resolved. Use with caution and please
