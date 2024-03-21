@@ -71,7 +71,7 @@ endpoints (ex. `https://nextjs-with-supabase-xi-seven.vercel.app/login`). Your
 developer portal will navigate to these pages to create and end sessions. Your
 Authentication Settings should look like this once you are done:
 
-![img](../../public/media/supabase-auth/dev-portal.png)
+![img](../../public/media/supabase-auth/dev-portal-updated.png)
 
 Or in the JSON file:
 
@@ -96,7 +96,7 @@ key is used to securely connect your Supabase Auth App with the Developer
 Portal. From the side nav, go to your Project Settings and then click on Zuplo
 API Keys. Copy your API key.
 
-![img](../../public/media/supabase-auth/copy-key.png)
+![img](../../public/media/supabase-auth/copy-key-updated.png)
 
 ## 5/ Connecting Your Supabase Auth App to the Dev Portal
 
@@ -141,7 +141,7 @@ Auth App codebase from earlier.
      formAction={`/auth/sign-up${
        typeof searchParams?.["session-create-url"] === "string"
          ? `?session-create-url=${encodeURIComponent(
-             searchParams["session-create-url"],
+             searchParams["session-create-url"]
            )}`
          : ""
      }`}
@@ -201,7 +201,7 @@ Auth App codebase from earlier.
            `${requestUrl.origin}/login?error=Could not authenticate user`,
            {
              status: 301,
-           },
+           }
          );
        }
 
@@ -230,7 +230,7 @@ Auth App codebase from earlier.
              `${requestUrl.origin}/login?error=Could not authenticate user`,
              {
                status: 301,
-             },
+             }
            );
          }
 
@@ -329,7 +329,7 @@ to sign into your Supabase project via the Developer Portal
          {
            // a 301 status is required to redirect from a POST to a GET route
            status: 301,
-         },
+         }
        );
      }
 
@@ -360,7 +360,7 @@ to sign into your Supabase project via the Developer Portal
            `${requestUrl.origin}/login?error=Could not authenticate user`,
            {
              status: 301,
-           },
+           }
          );
        }
 
