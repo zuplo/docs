@@ -3,7 +3,7 @@ title: Step 2 - Configure Subscription Events
 sidebar_label: Step 2 - Configure Subscription Events
 ---
 
-:::warning
+:::warning Beta Feature
 
 The monetization feature is currently in beta and is subject to change. There
 may be bugs and issues that are not yet resolved. Use with caution and please
