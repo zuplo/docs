@@ -32,6 +32,8 @@ const searchSettings: InkeepSearchSettings = {
 };
 
 const aiChatSettings: InkeepAIChatSettings = {
+  shareChatUrlBasePath: `${process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://zuplo.com"}/docs/ask`,
+  isChatSharingEnabled: true,
   quickQuestions: [
     "How do I create a custom policy?",
     "What is the difference between production and preview environments?",
