@@ -1,0 +1,37 @@
+#inkeep-widget-root {
+  --ai-chat-radius: 0.25rem;
+  --ai-chat-light-background: #f9fafb;
+}
+
+.ikp-ai-chat__header-toolbar {
+  display: none;
+}
+
+.ikp-ai-chat__scrollable-page-content {
+  border-top-left-radius: var(--ai-chat-radius);
+  border-top-right-radius: var(--ai-chat-radius);
+}
+
+.ikp-ai-chat-footer__content-wrapper {
+  border-bottom-left-radius: var(--ai-chat-radius);
+  border-bottom-right-radius: var(--ai-chat-radius);
+}
+
+[data-theme="light"] .ikp-ai-chat__scrollable-page-content {
+  background: var(--ai-chat-light-background);
+}
+
+[data-theme="light"] .ikp-ai-chat-footer__content-wrapper {
+  background: var(--ai-chat-light-background);
+}
+
+[data-theme="light"] .ikp-ai-chat__message-box {
+  box-shadow: none;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+}
+
+/* Remove weird blur effect on footer */
+.ikp-ai-chat-footer__content-wrapper::before {
+  display: none;
+}

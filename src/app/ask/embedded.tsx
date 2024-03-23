@@ -1,6 +1,7 @@
 "use client";
-import { InkeepEmbeddedChatProps } from "@inkeep/widgets";
 import dynamic from "next/dynamic";
+import { useTheme } from "next-themes";
+
 import { aiChatSettings, baseSettings } from "../../lib/search";
 
 const EmbeddedChat = dynamic(
@@ -12,12 +13,20 @@ const EmbeddedChat = dynamic(
 );
 
 function InkeepEmbeddedChat() {
-  const embeddedChatProps: InkeepEmbeddedChatProps = {
-    baseSettings,
-    aiChatSettings,
-  };
+  const { resolvedTheme } = useTheme();
 
-  return <EmbeddedChat {...embeddedChatProps} />;
+  return (
+    <EmbeddedChat
+      stylesheetUrls={["/docs/styles/inkeep.css"]}
+      baseSettings={{
+        ...baseSettings,
+        colorMode: {
+          forcedColorMode: resolvedTheme,
+        },
+      }}
+      aiChatSettings={aiChatSettings}
+    />
+  );
 }
 
 export default InkeepEmbeddedChat;
