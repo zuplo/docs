@@ -203,7 +203,7 @@ async function render(markdown: string): Promise<RenderResult> {
     .use(remarkGfm)
     .use(remarkHeadings)
     .use(remarkRehype)
-    .use(rehypePrettyCode)
+    .use(rehypePrettyCode as any)
     .use(rehypeSlug)
     .use(rehypeAutolinkHeadings)
     .use(rehypeStringify)
