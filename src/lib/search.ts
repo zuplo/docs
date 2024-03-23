@@ -13,6 +13,12 @@ const baseSettings: InkeepWidgetBaseSettings = {
   organizationDisplayName: "Zuplo",
   theme: {
     components: {
+      AIChatPageWrapper: {
+        defaultProps: {
+          size: "shrink-vertically",
+          variant: "no-shadow",
+        },
+      },
       SearchBarTrigger: {
         defaultProps: {
           size: "expand",
