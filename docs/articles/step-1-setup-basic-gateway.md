@@ -24,7 +24,7 @@ Zuplo also supports building and running your API locally. To learn more
 Inside your new project, choose the `routes.oas.json` file and click **Add
 Route**.
 
-![ADd Route](https://cdn.zuplo.com/assets/8cfa5b7b-6ead-4dd0-9339-dbcdc21b6299.png)
+![Add Route](../../public/media/step-1-setup-basic-gateway/image.png)
 
 Using the Route Designer, let's configure our first route to handle the
 `GET /todos` route.
@@ -34,7 +34,7 @@ Using the Route Designer, let's configure our first route to handle the
 - Path: `/todos`
 - [URL Forward](/docs/handlers/url-forward): `https://todos.zuplo.io`
 
-![Get all todos](https://cdn.zuplo.com/assets/f2bcc7ad-027f-4f5e-8764-c802079dacdb.png)
+![Get all todos](../../public/media/step-1-setup-basic-gateway/image-1.png)
 
 Save your changes (you can click the disk icon next to `routes.oas.json` or
 press CMD+S).
@@ -43,7 +43,7 @@ You can quickly test this route by clicking the **Test** button next to the
 **Path** field. You can use the built in test tool or click the URL to open in a
 new tab.
 
-![](https://cdn.zuplo.com/assets/ef3005b5-2e69-4704-bcfe-12b2db62e0b4.png)
+![Test the API](../../public/media/step-1-setup-basic-gateway/image-2.png)
 
 You should receive a 401 Unauthorized that says something similar to
 
@@ -68,37 +68,37 @@ Copy the required `api-key` value from that error message to your clipboard
 Open the policies section in your route and click **Add Policy** to the request
 pipeline.
 
-![Add policy](https://cdn.zuplo.com/assets/8eab7f3e-3d24-411d-8a4f-7cde11fe6ccf.png)
+![Add policy](../../public/media/step-1-setup-basic-gateway/image-3.png)
 
 Find the **Add or Set Request Header**
 
-![Find policy](https://cdn.zuplo.com/assets/67937c50-598d-433a-945a-17787841f036.png)
+![Find set requests headerpolicy](../../public/media/step-1-setup-basic-gateway/image-4.png)
 
 Configure the policy JSON to set header name to `api-key` and the value to
 `$env(API_KEY)`. This tells the policy to read the value from our secure vault
 used for [Environment Variables](/docs/articles/environment-variables.md).
 
-![Policy Configuration](https://cdn.zuplo.com/assets/e29a3c79-aeee-48e9-8c40-d1131c10f33a.png)
+![Policy Configuration](../../public/media/step-1-setup-basic-gateway/image-10.png)
 
 Save your changes to `routes.oas.json`.
 
 Head over to the Environment Variables screen in settings and click **Add new
 variable**.
 
-![Add new Environment Variable](https://cdn.zuplo.com/assets/e9119f6a-e3e0-4d71-8739-62155e23d2da.png)
+![Add new Environment Variable](../../public/media/step-1-setup-basic-gateway/image-5.png)
 
 Set the name to `API_KEY` and select **is Secret** (the demo API key is not
 really secret but if you use an API key to access your backend, that _is_ an
 important secret).
 
-![New environment variable](https://cdn.zuplo.com/assets/70fdd686-641a-4792-8a55-dafb952c0178.png)
+![New environment variable](../../public/media/step-1-setup-basic-gateway/image-6.png)
 
 ## 3/ Test your API
 
 Go back to your route in the Route Designer and click the **Test** button next
 to the **Path** field. Click the **Test** button in the dialog that opens.
 
-![](https://cdn.zuplo.com/assets/c1753ead-6bd3-4b6f-99d2-ef4c964d7b32.png)
+![Test API](../../public/media/step-1-setup-basic-gateway/image-7.png)
 
 Congratulations, your gateway is working 👏👏👏
 
@@ -112,12 +112,12 @@ Change the **URL Forward** value to read the base URL from the
 [Environment Variables](/docs/articles/environment-variables) system by setting
 the value to `${env.BASE_URL}`.
 
-![BASE_URL from Environment](https://cdn.zuplo.com/assets/b52a04bd-b4d2-4e70-88e7-b32b1a7cba7d.png)
+![BASE_URL from Environment](../../public/media/step-1-setup-basic-gateway/image-8.png)
 
 Add another Environment Variable called BASE_URL. This is typically not a
 secret, there's no need to hide this from your colleagues.
 
-![BASE_URL Env Variable](https://cdn.zuplo.com/assets/068841d1-6554-448b-a869-62aa4076c85d.png)
+![BASE_URL Env Variable](../../public/media/step-1-setup-basic-gateway/image-9.png)
 
 Save all your changes and test your route again.
 
