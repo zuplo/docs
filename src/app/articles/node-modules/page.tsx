@@ -22,8 +22,11 @@ export default async function Page() {
         Additionally, you can also bundle custom modules inside of your own
         project. This process is fairly simple and allows you to use any module
         or version of the module. To learn how to bundle your own modules, see
-        the sample [Custom Modules on
-        Github](https://github.com/zuplo/zuplo/tree/main/examples/custom-module).
+        the sample{" "}
+        <a href="https://github.com/zuplo/zuplo/tree/main/examples/custom-module">
+          Custom Modules on Github
+        </a>
+        .
       </p>
       <p>Below are the currently installed modules.</p>
       <BundlesTable />
