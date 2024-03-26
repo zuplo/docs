@@ -74,6 +74,11 @@ export const featuresLinks: Array<LinkData> = [
     shortDescription: "Beautiful API documentation.",
   },
   {
+    href: `${wwwLink.href}/features/api-monetization`,
+    name: "Monetization",
+    shortDescription: "Build businesses with your APIs.",
+  },
+  {
     href: `${wwwLink.href}/features/multi-cloud`,
     name: "Multi-cloud",
     shortDescription: "Route to any backend",
