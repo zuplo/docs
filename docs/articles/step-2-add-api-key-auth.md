@@ -16,12 +16,12 @@ authentication methods.
 Navigate to your route in the **Route Designer** and open the **Policies**
 section.
 
-![Add policy](https://cdn.zuplo.com/assets/14b608c1-d95c-4b98-9ae8-16affad90eca.png)
+![Add policy](../../public/media/step-2-add-api-key-auth/image.png)
 
 Add the API key authentication policy and click OK to accept the default policy
 JSON.
 
-![Add API Key Authentication](https://cdn.zuplo.com/assets/811a8152-9648-4377-a070-be6ec539a4d6.png).
+![Add API Key Authentication](../../public/media/step-2-add-api-key-auth/image-1.png)
 
 :::tip
 
@@ -47,7 +47,7 @@ If you test your route, you should get a 401 Unauthorized response
 In order to call your API, you need to configure an API consumer. Go to
 Settings > API Consumers. Click **Add New Consumer**
 
-![API Key Consumers](https://cdn.zuplo.com/assets/a716aeeb-4355-45ff-a8ed-4c20d6644424.png)
+![API Key Consumers](../../public/media/step-2-add-api-key-auth/image-2.png)
 
 Create a name for your identity - this will be the subject (or sub) that
 identifies the user when calling Zuplo. Add your own e-mail address to the **Key
@@ -55,14 +55,14 @@ managers** field and add some JSON metadata - this is freeform (but must be
 valid JSON). This metadata will be made available to the runtime when a key is
 used to authenticate.
 
-![New Consumer](https://cdn.zuplo.com/assets/71bee20e-eac7-4067-b1a3-50bc8267b330.png)
+![New Consumer](../../public/media/step-2-add-api-key-auth/image-3.png)
 
 ## 3/ Copy Your API Key
 
 After your API Key consumer is created, click the button to copy your new API
 Key.
 
-![New Key](https://cdn.zuplo.com/assets/aa2561ec-f6b8-4a72-8005-95dfa1ff1970.png)
+![New Key](../../public/media/step-2-add-api-key-auth/image-4.png)
 
 ## 4/ Test out your new key
 
@@ -73,7 +73,7 @@ for this part.
 Next to the path of your route in Route Designer click the **Test** button. Set
 the **path** to `/todos` and hit **Test**.
 
-![](https://cdn.zuplo.com/assets/c2db1247-eb72-474d-bfed-8b14b3b62b5e.png)
+![Failed unauthorized error](../../public/media/step-2-add-api-key-auth/image-5.png)
 
 You should get a 401 Unauthorized response. Add an new `authorization` header
 with the value `Bearer YOUR_API_KEY` and insert the API Key you got from the
@@ -81,7 +81,7 @@ developer portal.
 
 You should now get a 200 OK.
 
-![](https://cdn.zuplo.com/assets/87c03fc4-4525-43dd-8eb7-15808b545fef.png)
+![successful response](../../public/media/step-2-add-api-key-auth/image-6.png)
 
 :::note
 
