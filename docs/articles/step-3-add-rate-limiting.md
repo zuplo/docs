@@ -21,11 +21,11 @@ promise is that using Zuplo is cheaper and faster than doing this yourself.
 Navigate to your route in the **Route Designer** and click **Add Policy** on the
 request pipeline.
 
-![Add policy](https://cdn.zuplo.com/assets/d2ba60f0-c8ea-4795-b219-ad26835da3d8.png)
+![Add policy](../../public/media/step-3-add-rate-limiting/image.png)
 
 Search for the rate limiting policy
 
-![Add rate-limiting policy](https://cdn.zuplo.com/assets/97c17fe4-a11f-45c3-815a-0f6620bc995c.png)
+![Add rate-limiting policy](../../public/media/step-3-add-rate-limiting/image-1.png)
 
 Assuming you followed [step 2](./step-2-add-api-key-auth.md) and setup API Key
 Authentication, set the policy to `rateLimitBy` `user` and allow 1 request every
@@ -57,12 +57,12 @@ This time, we will make the rate-limiting policy more dynamic, based on
 properties of the customer. Update the metadata of your two API Key consumers to
 have a property `customerType`. Set one to `free` and another to `premium`.
 
-![Customer Metadata](https://cdn.zuplo.com/assets/259b5845-cbe4-47f8-986a-a9a469c30be6.png)
+![Customer Metadata](../../public/media/step-3-add-rate-limiting/image-2.png)
 
 Now add a new module to the files section by clicking on the `+` next to the
 **Modules** folder and choose new empty module.
 
-![New module](https://cdn.zuplo.com/assets/1f6b403a-67b9-43ac-8fb4-e2b813376911.png)
+![New module](../../public/media/step-3-add-rate-limiting/image-3.png)
 
 Add the following code to your module.
 
@@ -102,7 +102,7 @@ export function rateLimit(request: ZuploRequest, context: ZuploContext) {
 Now we'll reconfigure the rate-limit policy to wire up our custom function. Find
 the policy in the **Route Designer** and click edit.
 
-![Edit Policy](https://cdn.zuplo.com/assets/acfa7e19-1b6c-4633-ad5c-56af4734f717.png)
+![Edit Policy](../../public/media/step-3-add-rate-limiting/image-4.png)
 
 Update the configuration
 
