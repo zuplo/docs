@@ -299,6 +299,8 @@
           "articles/zuplo-context",
           "articles/context-data",
           "articles/route-raw",
+          "articles/background-loader",
+          "articles/background-dispatcher",
           "articles/web-standard-apis",
           "articles/web-crypto-apis",
           {
