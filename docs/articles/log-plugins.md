@@ -107,23 +107,9 @@ The Google Cloud Logging plugin enables pushing logs to your GCP project. See
 
 ### Loki
 
-```ts
-import {
-  RuntimeExtensions,
-  LokiLoggingPlugin,
-  environment,
-} from "@zuplo/runtime";
-
-export function runtimeInit(runtime: RuntimeExtensions) {
-  runtime.addPlugin(
-    new LokiLoggingPlugin({
-      url: "https://logs-prod-us-central1.grafana.net/loki/api/v1/push",
-      username: "my-username",
-      password: environment.LOKI_PASSWORD,
-    }),
-  );
-}
-```
+The Loki plugin enables pushing logs to your Loki server. See
+[the document](./log-plugin-loki-logging.md) on this plugin for more
+information.
 
 ### Sumo Logic
 
