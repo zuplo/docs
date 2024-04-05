@@ -141,8 +141,9 @@ repository, see our [troubleshooting guide](#troubleshooting).
 
 ### 3/ Link the API to a component
 
-Your API is now tracked in Backstage. You will still need to link your API to an
-existing entity, as show below
+You should now be able to see your API under the APIs tab in Backstage. If your
+API is associated with a another entity, you will need to link to that entity as
+follows:
 
 ```yaml
 apiVersion: backstage.io/v1alpha1
@@ -163,8 +164,6 @@ spec:
   system: examples
   providesApis: [<YOUR_API_NAME>] # This must match the metadata.name from step 1
 ```
-
-You should now be able to see your API under the APIs tab in Backstage.
 
 ## Troubleshooting
 
