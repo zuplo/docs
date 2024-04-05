@@ -1,13 +1,9 @@
 ---
-title: Add API to Backstage
+title: Add Your Zuplo API to Backstage
 ---
 
 In this guide, we'll walk you through the steps to add a your Zuplo API to
 [Backstage](https://backstage.io/).
-
-Support for Backstage is currently limited to manual synchronization. If you
-require additional support for Backstage, please
-[let us know](mailto:support@zuplo.com?subject=Improved%20Support%20for%20Backstage&body=I%20would%20like%20to%20see%20improved%20support%20for%20backstage.io%20%5BINSERT%20DETAILS%20HERE%5D)
 
 ## 1/ Add the OpenAPI Spec Handler
 
@@ -20,55 +16,117 @@ you will need to use the public-ready version of your spec, by adding an
 
 Add a new route with the path `/openapi`, and select the `OpenAPI Spec Handler`
 from the Request Handler selector. Save your changes and commit them to your
-production branch. You should now get back your public-ready OpenAPI file by
-hitting `https://<your-prod-zuplo-api-domain>/openapi`.
+production branch. If you haven't already connected your Zuplo API to a GitHub
+repository, you can follow
+[these instructions](./step-4-deploying-to-the-edge.md) to do so. Once your
+Zuplo API is redeployed, you should now be able to retrieve your public-ready
+OpenAPI file by hitting `https://<your-prod-zuplo-api-domain>/openapi`.
 
 ![alt text](../../public/media/add-api-to-backstage/image-3.png)
 
-## 2/ Add the catalog-info.yaml file
+## 2/ Add Zuplo to your `reading.allowed` list
 
-In your API's repository, add a new file `catalog-info.yaml` to the root.
-Prefill it with the following
+Navigate to the `app-config.yaml` file in your backstage repository. You will
+need to allow backstage to call Zuplo's domain to fetch the OpenAPI file. Add
+the following code:
+
+```yaml
+backend:
+  reading:
+    allow:
+      - host: "*.zuplo.dev"
+      - host: "*.zuplo.app"
+```
+
+If you are using a [custom domain](./custom-domains.md) on your Zuplo API - you
+will need to add that domain in the list above.
+
+## 3/ Add your Zuplo API to your Backstage Catalog
+
+The most direct way to add your Zuplo API to backstage is by adding an entry to
+your backstage service's `entities.yaml` file.
 
 ```yaml
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: # Your API name
+  name: backstage-sample-api # Your API name
   annotations:
-    github.com/project-slug: # Your github project slug Ex. org/repo-name
+    # Your github project slug Ex. org/repo-name
+    github.com/project-slug: zuplo-samples/backstage-sample-api
 spec:
   type: openapi
-  lifecycle: experimental # Change to match your project
-  owner: guests # Change to match your project
-  system: examples # Change to match your project
-  definition: | # Continue reading to learn how this gets generated
+  lifecycle: experimental # Change to match your backstage project
+  owner: guests # Change to match your backstage project
+  system: examples # Change to match your backstage project
+  definition:
+    # Change to match your Zuplo API
+    $text: https://backstage-sample-api-main-821019a.zuplo.app/openapi
 ```
 
-Unfortunately, Backstage only supports yaml for an API `definition`. You can
-grab your public-ready OpenAPI spec from step 1, and then run it through a JSON
-to YAML converter like [this one](https://www.json2yaml.com/). Add the converted
-OpenAPI to the definition section.
+Once you've added the API component, you must link it to an existing component.
+For example, if your website provides APIs, you would add the following
 
 ```yaml
-definition: |
-  openapi: 3.1.0
-    info:
-      description: 'This is a sample server Petstore server.  You can find out more about
-        Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For
-        this sample, you can use the api key `special-key` to test the authorization filters.'
-      version: 1.0.0
-    ...
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: example-website
+spec:
+  type: website
+  lifecycle: experimental
+  owner: guests
+  system: examples
+  providesApis: [backstage-sample-api] # This must match the metadata.name of the entity
+---
 ```
 
-Commit this file to your production branch.
+You should now be able to see your API under the APIs tab in Backstage. If you
+navigate to your API and click the 'DEFINITION' tab - you can even preview your
+OpenAPI spec.
 
-## 3/ Add your API Component to Backstage
+![alt text](../../public/media/add-api-to-backstage/image-6.png)
 
-Using the
-[API Documentation](https://github.com/backstage/backstage/blob/master/plugins/api-docs/README.md)
-plugin, you can register APIs in your Backstage portal. Navigate to the APIs
-tab, and click 'REGISTER EXISTING API'.
+Congratulations! You've successfully added your Zuplo API to Backstage. You can
+repeat the steps above for all of your OpenAPI files.
+
+## Optional: Reusing your API across Backstage catalogs
+
+If you do not wish to directly add your Zuplo API to your backstage
+`entities.yaml`, you can instead add the entity definition to your Zuplo
+repository directly, and sync it with backstage using their github integration.
+You will still need to follow steps 1 & 2 from the guide above.
+
+### 1/ Add `catalog-info.yaml` to your Zuplo Repository
+
+In your Zuplo repository, add a file named `catalog-info.yaml` and fill it with
+the following
+
+```yaml
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: backstage-sample-api # Your API name
+  annotations:
+    # Your github project slug Ex. org/repo-name
+    github.com/project-slug: zuplo-samples/backstage-sample-api
+spec:
+  type: openapi
+  lifecycle: experimental # Change to match your backstage project
+  owner: guests # Change to match your backstage project
+  system: examples # Change to match your backstage project
+  definition:
+    # Change to match your Zuplo API
+    $text: https://backstage-sample-api-main-821019a.zuplo.app/openapi
+```
+
+Save and commit this file.
+
+### 2/ Add your API Component to Backstage
+
+You can register existing APIs in your catalog directly from Backstage. Navigate
+to the APIs tab, and click 'REGISTER EXISTING API'.
 
 ![alt text](../../public/media/add-api-to-backstage/image-5.png)
 
@@ -78,13 +136,14 @@ https://github.com/AdrianMachado/adrian-api/blob/main/catalog-info.yaml).
 
 ![alt text](../../public/media/add-api-to-backstage/image-4.png)
 
-Complete registration of your API.
+Complete registration of your API. If you run into issues connecting your
+repository, see our [troubleshooting guide](#troubleshooting).
 
-## 4/ Link the API to a component
+### 3/ Link the API to a component
 
-Your API is now tracked in Backstage. If you are using the Backstage getting
-started template, go to your `entities.yaml` file and add your API to the
-`example-website` component.
+You should now be able to see your API under the APIs tab in Backstage. If your
+API is associated with a another entity, you will need to link to that entity as
+follows:
 
 ```yaml
 apiVersion: backstage.io/v1alpha1
@@ -103,17 +162,8 @@ spec:
   lifecycle: experimental
   owner: guests
   system: examples
-  providesApis: [<YOUR_API_NAME>] # This must match the metadata.name from step 2
+  providesApis: [<YOUR_API_NAME>] # This must match the metadata.name from step 1
 ```
-
-You should now be able to see your API under the APIs tab in Backstage. If you
-navigate to your API and click the 'DEFINITION' tab - you can even preview your
-OpenAPI spec.
-
-![alt text](../../public/media/add-api-to-backstage/image-6.png)
-
-Congratulations! You've successfully added your Zuplo API to Backstage. You can
-repeat the steps above for all of your OpenAPI files.
 
 ## Troubleshooting
 
@@ -121,9 +171,9 @@ repeat the steps above for all of your OpenAPI files.
 
 If your repository is not public and you haven't already configured Github
 authentication - follow the guide
-[here](https://backstage.io/docs/getting-started/config/authentication). For
-sign in support, you will likely want to add sign-in support as well as a part
-of your Backstage setup.
+[here](https://backstage.io/docs/getting-started/config/authentication). You
+will likely want to add sign-in support as a part of your Backstage setup, to
+authenticate your users. In your `app-config.yaml` add:
 
 ```yaml
 auth:
@@ -132,17 +182,27 @@ auth:
   providers:
     github:
       development:
-        clientId: <YOUR_CLIENT_ID>
-        clientSecret: <YOUR_CLIENT_SECRET
+        clientId: ${GITHUB_CLIENT_ID}
+        clientSecret: ${GITHUB_CLIENT_SECRET}
         signIn:
           resolvers:
             - resolver: emailMatchingUserEntityProfileEmail
             - resolver: usernameMatchingUserEntityName
 ```
 
-### How can I keep my OpenAPI file in sync?
+Additionally, in your `index.ts` file, add the following line before calling
+`backend.start()`
 
-Base Backstage doesn't support continuous syncing with an OpenAPI file. Hosted
-platforms like
-[Roadie.io](https://roadie.io/docs/getting-started/openapi-specs/) seem to have
-support for this. We do not guarantee support for these platforms.
+```typescript
+backend.add(import("@backstage/plugin-auth-backend-module-github-provider"));
+```
+
+This is not well documented by Backstage - any issues should be directed
+[to them](https://github.com/backstage/backstage/issues).
+
+### Backstage hosted on Roadie.io
+
+If you are using a managed version of Backstage from services like Roadie.io -
+you will need to follow their
+[official docs](https://roadie.io/docs/getting-started/openapi-specs/) for
+OpenAPI. We do not guarantee support for these platforms.
