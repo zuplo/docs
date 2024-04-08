@@ -1,6 +1,6 @@
 ---
 title: Ensuring the integrity of your gateway with proactive monitoring
-sidebar_label: Pro-active monitoring
+sidebar_label: Proactive monitoring
 ---
 
 Reliability and performance of your gateway are paramount. Zuplo's commitment to
