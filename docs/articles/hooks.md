@@ -60,7 +60,7 @@ export async function tracingPlugin(
 
 ## Hook: OnResponseSendingFinal
 
-The `OnResponseSendingFinal` hook on `ZuploContext` fires immediately after the
+The `OnResponseSendingFinal` hook on `ZuploContext` fires immediately before the
 response is sent to the client. The `Response` in this hook is immutable and the
 body has been used. This hook is useful for custom performing various tasks like
 logging or analytics.
@@ -77,10 +77,12 @@ export async function pluginWithHook(
   context.addResponseSendingFinalHook(
     async (response, latestRequest, context) => {
       const body = await cloned.text();
-      await fetch("https://example.com", {
+      const promise = fetch("https://example.com", {
         method: "GET",
         body,
       });
+      // Don't block the response while waiting for the fetch
+      context.waitUntil(promise);
     },
   );
 
