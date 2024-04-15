@@ -65,8 +65,8 @@
     "eslint-config-next": "^13.5.4",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
-    "prettier": "^3.2.2",
-    "prettier-plugin-tailwindcss": "^0.5.11"
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.13"
   },
   "overrides": {
     "@types/mdast": "^4.0.3",
