@@ -103,3 +103,23 @@ interpolation.
 ```txt
 https://${env.API_URL}/path/to/call
 ```
+
+## System Environment Variables
+
+The following variables are automatically set by the system and are available to
+use in your code:
+
+- `ZUPLO_ENVIRONMENT_TYPE` - The current environment type the API is running.
+  Values are `edge`, `local`.
+- `ZUPLO_ENVIRONMENT_STAGE` - The stage of the environment. Values are
+  `production`, `preview`, `working-copy`, and `local`.
+- `ZUPLO_ENVIRONMENT_NAME` - The name of the environment. This is a globally
+  unique name for the environment. This is the same name that is used in the URL
+  of the environment. For example, `my-project-main-1235.zuplo.app`. Setting a
+  custom domain on the environment will not change this value.
+- `ZUPLO_ACCOUNT_NAME` - The name of the Zuplo account where the environment is
+  deployed.
+- `ZUPLO_PROJECT_NAME` - The name of the project where the environment is
+  deployed.
+- `ZUPLO_BUILD_ID` - The build ID of the environment. This is a unique ID for
+  each build of the environment. This is a UUID.
