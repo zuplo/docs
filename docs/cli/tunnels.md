@@ -41,9 +41,9 @@ for assistance.
 - [Deploying Docker containers on AWS ECS](https://docs.aws.amazon.com/AmazonECS/latest/userguide/getting-started.html)
 - [Deploying container images to GCP](https://cloud.google.com/compute/docs/containers/deploying-containers)
 
-Your running container needs a single environment variable named
-`TUNNEL_TOKEN``. You should store the value as a secret using the recommended
-means of secret storage and environment variable injection for your platform.
+Your running container needs a single environment variable named `TUNNEL_TOKEN`.
+You should store the value as a secret using the recommended means of secret
+storage and environment variable injection for your platform.
 
 ## Configuring services
 
