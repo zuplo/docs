@@ -34,8 +34,10 @@ import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
 import { BackgroundLoader } from "@zuplo/runtime";
 
 const loaderFunction = async (key: string) => {
+  // TODO - consider stronger error handling and checking here
   const result = await fetch(`https://example-config-service.com/${key}`);
-  return result;
+  const data = await result.json();
+  return data;
 };
 
 // create an instance of the component at the module level
@@ -52,3 +54,10 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 
 The BackgroundLoader will ensure that only one request per 'key' is active at
 any one time to avoid overloading your destination services.
+
+:::warning 
+You cannot return a `Response` created by the BackgroundLoader as a response from 
+a policy or handler. Responses cannot be re-used in this way - they are associated 
+with the originating request and results from the BackgroundLoader can be shared 
+across requests. 
+:::
