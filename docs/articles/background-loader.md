@@ -42,7 +42,9 @@ const loaderFunction = async (key: string) => {
 
 // create an instance of the component at the module level
 // here with a cache expiry of 60s.
-const backgroundLoader = new BackgroundLoader(loaderFunction, 60);
+const bg = new BackgroundLoader(loaderFunction, {
+  ttlSeconds: 60,
+});
 
 export default async function (request: ZuploRequest, context: ZuploContext) {
   // once an entry is cached this will return immediately. It will only block
@@ -55,9 +57,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 The BackgroundLoader will ensure that only one request per 'key' is active at
 any one time to avoid overloading your destination services.
 
-:::warning 
-You cannot return a `Response` created by the BackgroundLoader as a response from 
-a policy or handler. Responses cannot be re-used in this way - they are associated 
-with the originating request and results from the BackgroundLoader can be shared 
-across requests. 
-:::
+:::warning You cannot return a `Response` created by the BackgroundLoader as a
+response from a policy or handler. Responses cannot be re-used in this way -
+they are associated with the originating request and results from the
+BackgroundLoader can be shared across requests. :::
