@@ -28,6 +28,43 @@ documentation for each OpenAPI spec. You can even
 [customize the content](./dev-portal-configuring-sidebar.md#customizing-individual-openapi-specs)
 displayed on each OpenAPI spec.
 
+## JSON Schemas
+
+You can embed your JSON Schemas directly into your OpenAPI document on each endpoint, or if you want
+to share them within, you can put them in the `components` section and use a reference, example:
+
+```json
+"responses": {
+   "200": {
+      "description": "A list of todos",
+         "content": {
+            "application/json": {
+               "schema": {
+               "$ref": "#/components/schemas/TodoListObject"
+            }
+         }
+      }
+   }
+},
+```
+
+You can also reference an external schema (you might store this in the `schemas` folder 
+of your project, e.g. 
+
+```json
+"400": {
+   "description": "Schema validation error",
+      "content": {
+         "application/json": {
+            "schema": {
+            "$ref": "../schemas/schema-validation-error.json"
+         }
+      }
+   }
+}
+
+```
+
 ## Providing Examples
 
 The Developer Portal allows you to configure the displayed examples for
