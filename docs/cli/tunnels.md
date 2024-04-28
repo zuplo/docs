@@ -31,6 +31,24 @@ zup tunnel create --tunnel-name my-tunnel
 zup tunnel list
 ```
 
+## Deleting a tunnel
+
+```bash
+# For brevity, the commands assume that you have exported your API key as an environment variable,
+# export ZUPLO_API_KEY=zpka_d67b7e241bb948758f415b79aa8exxxx_2efbxxxx
+
+zup tunnel delete --tunnel-id tnl_xxxxxxxxxxx
+```
+
+## Get Tunnel Info
+
+```bash
+# For brevity, the commands assume that you have exported your API key as an environment variable,
+# export ZUPLO_API_KEY=zpka_d67b7e241bb948758f415b79aa8exxxx_2efbxxxx
+
+zup tunnel describe --tunnel-id tnl_xxxxxxxxxxx
+```
+
 ## Running the tunnel
 
 To run the Docker container on your own infrastructure, refer to instructions
