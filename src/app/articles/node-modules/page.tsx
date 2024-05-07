@@ -15,7 +15,7 @@ export default async function Page() {
         Zuplo supports certain node modules, but to ensure the security and
         performance of each API Gateway we must approve each module. This
         process only takes a few hours so if you need something new please reach
-        out support by emailing
+        out support by emailing{" "}
         <a href="mailto:support@zuplo.com">support@zuplo.com</a>.
       </p>
       <p>
