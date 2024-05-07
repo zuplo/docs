@@ -6,7 +6,7 @@ interface BundlesFile {
     types: string;
     files: string[];
     description: string;
-    public: boolean;
+    isPublic: boolean;
   }[];
 }
 export default async function BundlesTable() {
@@ -27,7 +27,7 @@ export default async function BundlesTable() {
         <td>Description</td>
       </tr>
       {data.bundles
-        .filter((bundle) => bundle.public)
+        .filter((bundle) => bundle.isPublic)
         .map((bundle, i) => (
           <tr key={i}>
             <td>
