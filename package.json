@@ -30,6 +30,7 @@
     "@vercel/speed-insights": "^1.0.10",
     "autoprefixer": "^10.4.12",
     "clsx": "^1.2.1",
+    "cookies-next": "^4.1.1",
     "glob": "^10.3.10",
     "gray-matter": "^4.0.3",
     "hastscript": "^7.2.0",
