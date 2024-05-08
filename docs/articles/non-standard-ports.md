@@ -61,3 +61,5 @@ can rewrite `https://my-api.example.com` to `https://my-api.example.com:8443`.
 
 For detailed instructions on how to configure Origin Rules, refer to the
 [Cloudflare documentation](https://developers.cloudflare.com/rules/origin-rules/features/#destination-port).
+
+![Cloudflare Origin Rules](../../public/media/non-standard-ports/image.png)
