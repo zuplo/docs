@@ -6,10 +6,15 @@ import { usePathname, useSearchParams } from "next/navigation";
 import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 import { PropsWithChildren, useEffect } from "react";
+import { getCookie } from "cookies-next";
 
 if (typeof window !== "undefined" && POSTHOG_KEY) {
+  const cookie = getCookie("zp-uid");
   posthog.init(POSTHOG_KEY, {
     api_host: process.env.NODE_ENV === "production" ? POSTHOG_URL : undefined,
+    bootstrap: {
+      distinctID: cookie ?? crypto.randomUUID(),
+    },
     disable_session_recording: true,
     capture_pageview: false, // Disable automatic pageview capture, as we capture manually
   });

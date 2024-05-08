@@ -38,9 +38,15 @@ export interface LinkData {
   name: string;
   href: string;
   shortDescription?: string;
+  event?: EventName;
 }
 
 export interface LinksCategory {
   name: string;
   links: Array<LinkData>;
 }
+
+export type EventName =
+  | "sign-in-clicked"
+  | "start-free-cta-clicked"
+  | "pricing-clicked";
