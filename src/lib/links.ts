@@ -13,6 +13,7 @@ export const wwwLink: LinkData = {
 export const pricingLink: LinkData = {
   href: `${wwwLink.href}/pricing`,
   name: "Pricing",
+  event: "pricing-clicked",
 };
 
 export const blogLink: LinkData = {
@@ -23,6 +24,13 @@ export const blogLink: LinkData = {
 export const signInLink: LinkData = {
   href: "https://portal.zuplo.com/",
   name: "Sign In",
+  event: "sign-in-clicked",
+};
+
+export const signUpLink: LinkData = {
+  href: "https://portal.zuplo.com/",
+  name: "Start for Free",
+  event: "start-free-cta-clicked",
 };
 
 export const customStories: LinkData = {
