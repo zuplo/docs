@@ -11,7 +11,8 @@ import { Search } from "@/components/Search";
 import { ThemeSelector } from "@/components/ThemeSelector";
 import { MenuPopoverItem } from "./MenuPopoverItem";
 import { data } from "./data";
-
+import { trackEvent } from "@/lib/utils/analytics";
+import { signUpLink } from "@/lib/links";
 export default function Header() {
   const currentPath = usePathname();
   let [isScrolled, setIsScrolled] = useState(false);
@@ -63,6 +64,14 @@ export default function Header() {
                   item.href === "/" ? "text-pink" : " text-white"
                 }`}
                 aria-current={item.href === currentPath ? "page" : undefined}
+                onClick={() => {
+                  if (item.event) {
+                    trackEvent({
+                      eventName: item.event,
+                      eventData: { placement: "docs-header" },
+                    });
+                  }
+                }}
               >
                 {item.name}
               </Link>
@@ -71,9 +80,15 @@ export default function Header() {
           <ThemeSelector className="relative z-10" />
           <Link
             href="https://portal.zuplo.com/signup"
+            onClick={() => {
+              trackEvent({
+                eventName: signUpLink.event ?? "start-free-cta-clicked",
+                eventData: { placement: "docs-header" },
+              });
+            }}
             className="btn btn-primary-dark font-sans bg-pink block hidden whitespace-nowrap rounded-lg px-5 py-3 text-center text-sm font-semibold tracking-wider text-white no-underline transition-colors hover:bg-white hover:text-black md:inline-block"
           >
-            Start free
+            {signUpLink.name}
           </Link>
         </div>
       </div>
