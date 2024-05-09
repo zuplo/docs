@@ -3,14 +3,6 @@ title: Monetization Subscriptions
 sidebar_label: Subscriptions
 ---
 
-:::warning Beta Feature
-
-The monetization feature is currently in beta and is subject to change. There
-may be bugs and issues that are not yet resolved. Use with caution and please
-report any issues to support.
-
-:::
-
 You can programmatically access details of your users subscription when using
 Zuplo monetization. Here's an example inbound policy that logs the subscription
 details.
