@@ -3,14 +3,6 @@ title: Monetization Programmatic Quotas
 sidebar_label: Programmatic Quotas
 ---
 
-:::warning Beta Feature
-
-The monetization feature is currently in beta and is subject to change. There
-may be bugs and issues that are not yet resolved. Use with caution and please
-report any issues to support.
-
-:::
-
 When adding monetization to your API, you would usually set the number of meters
 a request will consume in the settings of the
 [Monetization Policy](https://zuplo.com/docs/policies/monetization-inbound). For

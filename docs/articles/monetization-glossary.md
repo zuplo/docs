@@ -3,14 +3,6 @@ title: Monetization Glossary
 sidebar_label: Glossary
 ---
 
-:::warning Beta Feature
-
-The monetization feature is currently in beta and is subject to change. There
-may be bugs and issues that are not yet resolved. Use with caution and please
-report any issues to support.
-
-:::
-
 This document contains a list of concepts and terms that are useful to
 understand regarding Zuplo's monetization product.
 

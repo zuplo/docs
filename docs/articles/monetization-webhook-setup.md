@@ -3,14 +3,6 @@ title: Step 2 - Configure Subscription Events
 sidebar_label: Step 2 - Configure Subscription Events
 ---
 
-:::warning Beta Feature
-
-The monetization feature is currently in beta and is subject to change. There
-may be bugs and issues that are not yet resolved. Use with caution and please
-report any issues to support.
-
-:::
-
 In the [previous step](./monetization-dev-portal-setup.md), you configured the
 Developer Portal to enable your customers to subscribe to your Zuplo API. In
 this step, you will configure Stripe and your Zuplo API to handle a customer
