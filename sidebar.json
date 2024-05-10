@@ -74,6 +74,7 @@
       "articles/zuplo-in-your-stack",
       "articles/log-plugins",
       "articles/metrics-plugins",
+      "articles/opentelemetry",
       "articles/monitoring-your-gateway"
     ]
   },
