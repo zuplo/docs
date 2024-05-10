@@ -28,7 +28,7 @@ well as spans for plugins, handlers, and policies. The OpenTelemetry plugin
 supports trace propagation (W3C headers by default) so you can trace requests
 all the way from the client to your backend.
 
-![Trace visualization](../../public/media/opentelemetry/image.png)
+![Trace visualization](../../public/media/opentelemetry/image-1.png)
 
 ### What is Traced?
 
