@@ -20,7 +20,7 @@ export default async function Page() {
       </p>
       <p>
         Additionally, you can also bundle custom modules inside of your own
-        project. This process is does require some knowledge of node and npm,
+        project. This process does require some knowledge of node and npm,
         but it allows you to use any module or version of the module. To learn
         how to bundle your own modules, see the sample{" "}
         <a href="https://github.com/zuplo/zuplo/tree/main/examples/custom-module">
