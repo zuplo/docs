@@ -25,13 +25,10 @@ authentication to the [Developer Portal](../articles/developer-portal).
   "requireAuthentication": false,
   "generateExamples": true,
   "authentication": {
-    "authority": "https://dev-123566.okta.com/oauth2/ausXXXXXXXXXXXX",
-    "jwksUrl": "https://dev-123566.okta.com/oauth2/ausXXXXXXXXXXXX/v1/keys",
+    "issuer": "https://dev-123566.okta.com/oauth2/ausXXXXXXXXXXXX",
     "provider": "okta",
-    "devPortalClient": {
-      "clientId": "XXXXXXXXXXXX",
-      "audience": "api://my-api"
-    }
+    "clientId": "XXXXXXXXXXXX",
+    "audience": "api://my-api"
   }
 }
 ```
@@ -67,19 +64,15 @@ authentication to the [Developer Portal](../articles/developer-portal).
     Note, we provide you with a demonstration identity provider - this is fine
     for learning how Zuplo works but should not be used in production or on real
     APIs.
-  - **authority** - The full URL of the authorization server (e.g.
+  - **issuer** - The full URL of the authorization server (e.g.
     https://customer-auth.zuplo.dev/). Note it must be a fully valid https URL
     and should end with a /.
-  - **jwksUrl** - The URL to the identity provider's
-    [JSON Web Key Set](https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-key-sets)
-    URL.
-  - **devPortalClient**
-    - **clientId** - The OAuth
-      [Client ID](https://auth0.com/docs/glossary#A:~:text=about%20an%20entity.-,Client%20ID,-Identification%20value%20assigned)
-      used by the Developer Portal for the
-      [Authorization Code OAuth flow](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-proof-key-for-code-exchange-pkce)
-    - **audience** - The
-      [audience](https://auth0.com/docs/glossary#A:~:text=.-,Audience,-Unique%20identifier%20of)
+  - **clientId** - The OAuth
+    [Client ID](https://auth0.com/docs/glossary#A:~:text=about%20an%20entity.-,Client%20ID,-Identification%20value%20assigned)
+    used by the Developer Portal for the
+    [Authorization Code OAuth flow](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-proof-key-for-code-exchange-pkce)
+  - **audience** - The
+    [audience](https://auth0.com/docs/glossary#A:~:text=.-,Audience,-Unique%20identifier%20of)
       of you Zuplo API
 
 ## Mapping environment variables to settings
@@ -103,13 +96,10 @@ environment variables.
 {
   "enableAuthentication": true,
   "authentication": {
-    "authority": "$env(ZUPLO_PUBLIC_OKTA_DEV_PORTAL_AUTHORITY)",
-    "jwksUrl": "$env(ZUPLO_PUBLIC_OKTA_DEV_PORTAL_JWKS_URL)",
+    "issuer": "$env(ZUPLO_PUBLIC_OKTA_ISSUER)",
     "provider": "okta",
-    "devPortalClient": {
-      "clientId": "$env(ZUPLO_PUBLIC_OKTA_DEV_PORTAL_CLIENT_ID",
-      "audience": "api://my-api"
-    }
+    "clientId": "$env(ZUPLO_PUBLIC_OKTA_CLIENT_ID",
+    "audience": "api://my-api"
   }
 }
 ```
