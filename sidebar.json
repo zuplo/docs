@@ -98,6 +98,7 @@
     "items": [
       "articles/open-api",
       "articles/custom-ci-cd",
+      "articles/versioning-on-zuplo",
       "articles/rename-or-move-project",
       "articles/add-project-collaborators",
       "articles/multiple-auth-policies",
