@@ -276,6 +276,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <PolicyStatus
         isBeta={schema.isBeta ?? false}
         isPaidAddOn={schema.isPaidAddOn ?? false}
+        isEnterprise={schema.isEnterprise ?? false}
       />
       {schema.isCustom && files.policyTs ? (
         <Fence language="typescript">{files.policyTs}</Fence>

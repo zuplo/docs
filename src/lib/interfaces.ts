@@ -14,6 +14,7 @@ export interface Policy {
     isCustom?: boolean;
     isDeprecated?: boolean;
     isPaidAddOn?: boolean;
+    isEnterprise?: boolean;
     isHidden?: boolean;
     isInternal?: boolean;
     deprecatedMessage?: string;

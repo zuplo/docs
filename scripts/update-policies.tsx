@@ -27,6 +27,7 @@ type PolicySchema = JSONSchema7 & {
   isDeprecated?: boolean;
   isInternal?: boolean;
   isPaidAddOn?: boolean;
+  isEnterprise?: boolean;
   isHidden?: boolean;
   isCustom?: boolean;
   deprecatedMessage?: string;
@@ -279,6 +280,7 @@ export async function run() {
     meta.name = schema.title;
     meta.isBeta = !!schema.isBeta;
     meta.isPaidAddOn = !!schema.isPaidAddOn;
+    meta.isEnterprise = !!schema.isEnterprise;
     meta.isCustom = !!schema.isCustom;
     meta.isDeprecated = !!schema.isDeprecated;
     meta.isInternal = !!schema.isInternal;
