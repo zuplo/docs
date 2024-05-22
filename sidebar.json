@@ -36,6 +36,23 @@
       "articles/local-development-troubleshooting"
     ]
   },
+
+  {
+    "type": "category",
+    "label": "Getting to Production",
+    "items": [
+      "articles/environments",
+      "articles/source-control",
+      "articles/securing-your-backend",
+      "articles/custom-domains",
+      "articles/testing",
+      "articles/zuplo-in-your-stack",
+      "articles/log-plugins",
+      "articles/metrics-plugins",
+      "articles/opentelemetry",
+      "articles/monitoring-your-gateway"
+    ]
+  },
   {
     "type": "category",
     "label": "Monetization",
@@ -64,22 +81,6 @@
   },
   {
     "type": "category",
-    "label": "Getting to Production",
-    "items": [
-      "articles/environments",
-      "articles/source-control",
-      "articles/securing-your-backend",
-      "articles/custom-domains",
-      "articles/testing",
-      "articles/zuplo-in-your-stack",
-      "articles/log-plugins",
-      "articles/metrics-plugins",
-      "articles/opentelemetry",
-      "articles/monitoring-your-gateway"
-    ]
-  },
-  {
-    "type": "category",
     "label": "API Keys",
     "items": [
       "articles/api-key-management",
@@ -90,6 +91,194 @@
       "articles/api-key-leak-detection",
       "articles/api-key-service-limits",
       "articles/api-key-buckets"
+    ]
+  },
+  {
+    "type": "category",
+    "label": "Developer Portal",
+    "items": [
+      "articles/developer-portal",
+      "articles/dev-portal-setup",
+      "articles/dev-portal-configuration",
+      {
+        "type": "category",
+        "label": "Authentication",
+        "items": [
+          "articles/dev-portal-auth",
+          "articles/dev-portal-auth0-auth",
+          "articles/dev-portal-clerk-auth",
+          "articles/dev-portal-keycloak-auth",
+          "articles/dev-portal-supabase-auth"
+        ]
+      },
+      "articles/dev-portal-theme",
+      "articles/dev-portal-adding-pages",
+      "articles/dev-portal-configuring-sidebar",
+      "articles/dev-portal-json",
+      "articles/dev-portal-create-consumer-on-auth"
+    ]
+  },
+  {
+    "type": "category",
+    "label": "Policies",
+    "link": {
+      "type": "doc",
+      "id": "policies/index"
+    },
+    "items": [
+      {
+        "type": "category",
+        "label": "Authentication",
+        "items": [
+          "policies/api-key-inbound",
+          "policies/auth0-jwt-auth-inbound",
+          "policies/clerk-jwt-auth-inbound",
+          "policies/cognito-jwt-auth-inbound",
+          "policies/firebase-jwt-inbound",
+          "policies/okta-jwt-auth-inbound",
+          "policies/open-id-jwt-auth-inbound",
+          "policies/propel-auth-jwt-inbound",
+          "policies/supabase-jwt-auth-inbound",
+          "policies/curity-phantom-token-inbound",
+          "policies/basic-auth-inbound",
+          "policies/mtls-auth-inbound",
+          "policies/ldap-auth-inbound",
+          "policies/hmac-auth-inbound"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Authorization",
+        "items": [
+          "policies/axiomatics-authz-inbound",
+          "policies/jwt-scopes-inbound",
+          "policies/acl-policy-inbound",
+          "policies/rbac-policy-inbound",
+          "policies/geo-filter-inbound",
+          "policies/ip-restriction-inbound"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Security & Validation",
+        "items": [
+          "policies/rate-limit-inbound",
+          "policies/complex-rate-limit-inbound",
+          "policies/audit-log-inbound",
+          "policies/request-validation-inbound",
+          "policies/bot-detection-inbound",
+          "policies/require-origin-inbound",
+          "policies/request-size-limit-inbound",
+          "policies/stripe-webhook-verification-inbound"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Metrics, Billing & Quotas",
+        "items": [
+          "policies/quota-inbound",
+          "policies/moesif-inbound",
+          "policies/monetization-inbound",
+          "policies/amberflo-metering-inbound",
+          "policies/readme-metrics-inbound"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Testing",
+        "items": [
+          "policies/ab-test-inbound",
+          "policies/mock-api-inbound",
+          "policies/sleep-inbound"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Request Modification",
+        "items": [
+          "policies/transform-body-inbound",
+          "policies/remove-headers-inbound",
+          "policies/clear-headers-inbound",
+          "policies/change-method-inbound",
+          "policies/formdata-to-json-inbound",
+          "policies/remove-query-params-inbound",
+          "policies/set-headers-inbound",
+          "policies/set-body-inbound",
+          "policies/set-query-params-inbound"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Response Modification",
+        "items": [
+          "policies/transform-body-outbound",
+          "policies/remove-headers-outbound",
+          "policies/clear-headers-outbound",
+          "policies/set-headers-outbound",
+          "policies/set-status-outbound",
+          "policies/xml-to-json-outbound",
+          "policies/replace-string-outbound"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Upstream Authentication",
+        "items": [
+          "policies/upstream-azure-ad-service-auth-inbound",
+          "policies/upstream-gcp-service-auth-inbound",
+          "policies/upstream-gcp-jwt-inbound",
+          "policies/upstream-firebase-admin-auth-inbound",
+          "policies/upstream-firebase-user-auth-inbound"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Async & Archival",
+        "items": [
+          "policies/archive-request-azure-storage-inbound",
+          "policies/archive-request-gcp-storage-inbound",
+          "policies/archive-request-aws-s3-inbound",
+          "policies/archive-response-azure-storage-outbound",
+          "policies/archive-response-aws-s3-outbound"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "GraphQL",
+        "items": [
+          "policies/graphql-disable-introspection-inbound",
+          "policies/graphql-complexity-limit-inbound"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Other",
+        "items": [
+          "policies/composite-inbound",
+          "policies/brownout-inbound",
+          "policies/caching-inbound",
+          "policies/custom-code-inbound",
+          "policies/custom-code-outbound"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "category",
+    "label": "Handlers",
+    "link": {
+      "type": "doc",
+      "id": "handlers/index"
+    },
+    "items": [
+      "handlers/url-forward",
+      "handlers/url-rewrite",
+      "handlers/custom-handler",
+      "handlers/aws-lambda",
+      "handlers/redirect",
+      "handlers/openapi",
+      "handlers/system-handlers",
+      "handlers/websocket-handler"
     ]
   },
   {
@@ -119,231 +308,52 @@
   },
   {
     "type": "category",
-    "label": "Reference",
+    "label": "Programming API",
     "items": [
+      "articles/zuplo-request",
+      "articles/environment-variables",
+      "articles/zuplo-context",
+      "articles/context-data",
+      "articles/route-raw",
+      "articles/background-loader",
+      "articles/background-dispatcher",
+      "articles/web-standard-apis",
+      "articles/web-crypto-apis",
       {
-        "type": "category",
-        "label": "Policies",
-        "link": {
-          "type": "doc",
-          "id": "policies/index"
-        },
-        "items": [
-          {
-            "type": "category",
-            "label": "Authentication",
-            "items": [
-              "policies/api-key-inbound",
-              "policies/auth0-jwt-auth-inbound",
-              "policies/clerk-jwt-auth-inbound",
-              "policies/cognito-jwt-auth-inbound",
-              "policies/firebase-jwt-inbound",
-              "policies/okta-jwt-auth-inbound",
-              "policies/open-id-jwt-auth-inbound",
-              "policies/propel-auth-jwt-inbound",
-              "policies/supabase-jwt-auth-inbound",
-              "policies/curity-phantom-token-inbound",
-              "policies/basic-auth-inbound",
-              "policies/mtls-auth-inbound",
-              "policies/ldap-auth-inbound",
-              "policies/hmac-auth-inbound"
-            ]
-          },
-          {
-            "type": "category",
-            "label": "Authorization",
-            "items": [
-              "policies/acl-policy-inbound",
-              "policies/rbac-policy-inbound",
-              "policies/geo-filter-inbound",
-              "policies/ip-restriction-inbound"
-            ]
-          },
-          {
-            "type": "category",
-            "label": "Security & Validation",
-            "items": [
-              "policies/rate-limit-inbound",
-              "policies/audit-log-inbound",
-              "policies/request-validation-inbound",
-              "policies/bot-detection-inbound",
-              "policies/require-origin-inbound",
-              "policies/request-size-limit-inbound"
-            ]
-          },
-          {
-            "type": "category",
-            "label": "Metrics, Billing & Quotas",
-            "items": [
-              "policies/quota-inbound",
-              "policies/moesif-inbound",
-              "policies/amberflo-metering-inbound",
-              "policies/readme-metrics-inbound"
-            ]
-          },
-          {
-            "type": "category",
-            "label": "Testing",
-            "items": [
-              "policies/ab-test-inbound",
-              "policies/mock-api-inbound",
-              "policies/sleep-inbound"
-            ]
-          },
-          {
-            "type": "category",
-            "label": "Request Modification",
-            "items": [
-              "policies/transform-body-inbound",
-              "policies/remove-headers-inbound",
-              "policies/clear-headers-inbound",
-              "policies/change-method-inbound",
-              "policies/formdata-to-json-inbound",
-              "policies/remove-query-params-inbound",
-              "policies/set-headers-inbound",
-              "policies/set-body-inbound",
-              "policies/set-query-params-inbound"
-            ]
-          },
-          {
-            "type": "category",
-            "label": "Response Modification",
-            "items": [
-              "policies/transform-body-outbound",
-              "policies/remove-headers-outbound",
-              "policies/clear-headers-outbound",
-              "policies/set-headers-outbound",
-              "policies/set-status-outbound"
-            ]
-          },
-          {
-            "type": "category",
-            "label": "Upstream Authentication",
-            "items": [
-              "policies/upstream-azure-ad-service-auth-inbound",
-              "policies/upstream-gcp-service-auth-inbound",
-              "policies/upstream-gcp-jwt-inbound",
-              "policies/upstream-firebase-admin-auth-inbound",
-              "policies/upstream-firebase-user-auth-inbound"
-            ]
-          },
-          {
-            "type": "category",
-            "label": "Async & Archival",
-            "items": [
-              "policies/archive-request-azure-storage-inbound",
-              "policies/archive-request-gcp-storage-inbound",
-              "policies/archive-request-aws-s3-inbound",
-              "policies/archive-response-azure-storage-outbound",
-              "policies/archive-response-aws-s3-outbound"
-            ]
-          },
-          {
-            "type": "category",
-            "label": "Other",
-            "items": [
-              "policies/composite-inbound",
-              "policies/brownout-inbound",
-              "policies/caching-inbound",
-              "policies/custom-code-inbound",
-              "policies/custom-code-outbound"
-            ]
-          }
-        ]
+        "type": "link",
+        "label": "Node Modules",
+        "href": "/articles/node-modules"
       },
-      {
-        "type": "category",
-        "label": "Handlers",
-        "link": {
-          "type": "doc",
-          "id": "handlers/index"
-        },
-        "items": [
-          "handlers/url-forward",
-          "handlers/url-rewrite",
-          "handlers/custom-handler",
-          "handlers/aws-lambda",
-          "handlers/redirect",
-          "handlers/openapi",
-          "handlers/system-handlers",
-          "handlers/websocket-handler"
-        ]
-      },
-      {
-        "type": "category",
-        "label": "Developer Portal",
-        "items": [
-          "articles/developer-portal",
-          "articles/dev-portal-setup",
-          "articles/dev-portal-configuration",
-          {
-            "type": "category",
-            "label": "Authentication",
-            "items": [
-              "articles/dev-portal-auth",
-              "articles/dev-portal-auth0-auth",
-              "articles/dev-portal-clerk-auth",
-              "articles/dev-portal-keycloak-auth",
-              "articles/dev-portal-supabase-auth"
-            ]
-          },
-          "articles/dev-portal-theme",
-          "articles/dev-portal-adding-pages",
-          "articles/dev-portal-configuring-sidebar",
-          "articles/dev-portal-json",
-          "articles/dev-portal-create-consumer-on-auth"
-        ]
-      },
-      {
-        "type": "category",
-        "label": "Programming API",
-        "items": [
-          "articles/zuplo-request",
-          "articles/environment-variables",
-          "articles/zuplo-context",
-          "articles/context-data",
-          "articles/route-raw",
-          "articles/background-loader",
-          "articles/background-dispatcher",
-          "articles/web-standard-apis",
-          "articles/web-crypto-apis",
-          {
-            "type": "link",
-            "label": "Node Modules",
-            "href": "/articles/node-modules"
-          },
-          "articles/http-problems",
-          "articles/reusing-code",
-          "articles/zone-cache",
-          "articles/safely-clone-a-request-or-response",
-          "articles/runtime-behaviors",
-          "articles/zp-body-removed",
-          "articles/audit-log",
-          "articles/hooks",
-          "articles/runtime-extensions",
-          "articles/not-found-handler"
-        ]
-      },
-      {
-        "type": "category",
-        "label": "Zuplo CLI",
-        "link": {
-          "type": "doc",
-          "id": "cli/index"
-        },
-        "items": [
-          "cli/installation",
-          "cli/analytics",
-          "cli/authentication",
-          "cli/convert",
-          "cli/deployments",
-          "cli/project",
-          "cli/test",
-          "cli/tunnels",
-          "cli/variables",
-          "cli/local-development"
-        ]
-      }
+      "articles/http-problems",
+      "articles/reusing-code",
+      "articles/zone-cache",
+      "articles/safely-clone-a-request-or-response",
+      "articles/runtime-behaviors",
+      "articles/zp-body-removed",
+      "articles/audit-log",
+      "articles/hooks",
+      "articles/runtime-extensions",
+      "articles/not-found-handler"
+    ]
+  },
+  {
+    "type": "category",
+    "label": "Zuplo CLI",
+    "link": {
+      "type": "doc",
+      "id": "cli/index"
+    },
+    "items": [
+      "cli/installation",
+      "cli/analytics",
+      "cli/authentication",
+      "cli/convert",
+      "cli/deployments",
+      "cli/project",
+      "cli/test",
+      "cli/tunnels",
+      "cli/variables",
+      "cli/local-development"
     ]
   },
   {

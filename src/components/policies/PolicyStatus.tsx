@@ -9,8 +9,9 @@ export default function PolicyStatus({
   isPaidAddOn: boolean;
   isEnterprise: boolean;
 }) {
+  const components = [];
   if (isBeta) {
-    return (
+    components.push(
       <div>
         <Callout type="caution" title="Beta">
           <p>
@@ -18,13 +19,13 @@ export default function PolicyStatus({
             non-backward compatible ways before the final release.
           </p>
         </Callout>
-      </div>
+      </div>,
     );
   }
   if (isEnterprise) {
-    return (
+    components.push(
       <div>
-        <Callout type="info" title="Paid Add On">
+        <Callout type="info" title="Enterprise Feature">
           <p>
             This policy is only available as as part of our enterprise plans. It
             is free to try only any plan for development only purposes. If you
@@ -32,22 +33,22 @@ export default function PolicyStatus({
             <a href="mailto:sales@zuplo.com">sales@zuplo.com</a>
           </p>
         </Callout>
-      </div>
+      </div>,
     );
   }
   if (isPaidAddOn) {
-    return (
+    components.push(
       <div>
-        <Callout type="info" title="Paid Add On">
+        <Callout type="info" title="Enterprise Feature">
           <p>
-            This policy is only available as a paid add-on. If you would like to
-            try this please reach out to us:{" "}
+            This policy is only available as as part of our enterprise plans. If
+            you would like to use this in production reach out to us:{" "}
             <a href="mailto:sales@zuplo.com">sales@zuplo.com</a>
           </p>
         </Callout>
-      </div>
+      </div>,
     );
   }
 
-  return null;
+  return <>{components}</>;
 }
