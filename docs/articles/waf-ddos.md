@@ -68,7 +68,8 @@ don’t disclose this, we suspect that in many cases they are often in the same
 physical colo data centers) there will be virtually no additional latency using
 the two products together.
 
-[Fastly Edge Locations](https://www.fastly.com/network-map/)
+- [Configuring Zuplo + Fastly](./waf-ddos-fastly.md)
+- [Fastly Edge Locations](https://www.fastly.com/network-map/)
 
 ## AWS Shield + AWS WAF + Cloudfront
 
