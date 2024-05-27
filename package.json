@@ -45,7 +45,7 @@
     "react-dom": "18.2.0",
     "rehype-autolink-headings": "^6.1.1",
     "rehype-pretty-code": "^0.13.0",
-    "rehype-rewrite": "^3.0.6",
+    "rehype-rewrite": "^4.0.2",
     "rehype-slug": "^5.1.0",
     "rehype-stringify": "^9.0.4",
     "remark-gfm": "^3.0.1",
