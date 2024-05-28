@@ -231,7 +231,7 @@ To verify the JWT header in Zuplo, you can utilize the JWT Auth Inbound policy.
 }
 ```
 
-## mTLS Authentication
+### mTLS Authentication
 
 Fastly supports mTLS authentication for backend services. This is a good way to
 ensure that only Fastly can access your API Gateway. For documentation on
