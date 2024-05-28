@@ -5,6 +5,9 @@ title: Configuring Zuplo with Fastly Next-Gen WAF
 Fastly Next-Gen WAF runs at Fastly edge locations. Zuplo can be configured to
 run as a host behind Fastly.
 
+Refer to Zuplo's documentation on
+[how to configure Zuplo as a Fastly host](./fastly-zuplo-host-setup.md).
+
 ## Securing Zuplo from Direct Access
 
 With any WAF product, you will want to ensure that network traffic cannot bypass
