@@ -186,6 +186,15 @@ checked by your API Gateway. This provides an additional layer of security on
 top of IP address restrictions and prevents any unauthorized traffic from
 hitting your API Gateway - regardless of the source.
 
+:::tip
+
+This demo shows using a shared secret for generating and verifying the JWT.
+However, you could also use public/private keys for this purpose. Additionally,
+you could use a third-party identity provider (Auth0, Cognito) to issue machine
+to machine tokens.
+
+:::
+
 In Fastly, you will need to create a VCL snippet that adds a JWT header as shown
 below. This example uses the `shared_secret` value stored in an
 [Edge Dictionary](https://www.fastly.com/documentation/guides/concepts/edge-state/dynamic-config/#edge-dictionaries).
