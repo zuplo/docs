@@ -6,8 +6,8 @@ This document outlines how to use Zuplo as a host (i.e. origin) for Fastly.
 While this is not a necessary setup for most people as Zuplo already runs at the
 edge and can be used for CDN like caching. However, there are some scenarios
 where you may want to put Zuplo behind Fastly. For example, if you are using
-Fastly's WAF or DDoS protection and want to ensure that all traffic goes through
-Fastly before hitting your Zuplo API Gateway.
+Fastly's [WAF or DDoS protection](./waf-ddos-fastly.md) and want to ensure that
+all traffic goes through Fastly before hitting your Zuplo API Gateway.
 
 ## Configuring Zuplo as a Fastly Host
 
