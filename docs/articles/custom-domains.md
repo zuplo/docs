@@ -177,3 +177,30 @@ enabled. If you wish to upgrade to a higher TLS version, please contact
 [support@zuplo.com](mailto:support@zuplo.com).
 
 :::
+
+## Validation Error
+
+If you receive a notification or email that your domain has a validation error
+the likely causes of the issue listed below. If you are unable to resolve the
+issue or have any questions, please contact
+[support@zuplo.com](mailto:support@zuplo.com).
+
+### No DNS Record or Invalid Record
+
+Your DNS is not configured correctly. Ensure that your domain is configured with
+a `CNAME` record pointing to `cname.zuplo.app`.
+
+```txt
+CNAME   api.example.com     cname.zuplo.app
+```
+
+### CAA Record Error
+
+Your DNS has been configured with CAA records that do not authorize Google Trust
+Services to issue certificates for your domain. To resolve add the following DNS
+records:
+
+```txt
+0 issue "pki.goog; cansignhttpexchanges=yes"
+0 issuewild "pki.goog; cansignhttpexchanges=yes"
+```
