@@ -123,3 +123,57 @@ Let's Encrypt record is set.
 CAA 0 issue "pki.goog"
 CAA 0 issue "letsencrypt.org"
 ```
+
+## Managed SSL Certificates
+
+By default Zuplo will automatically manage SSL certificates for your custom
+domain. If you prefer to manage your own SSL certificates, please contact
+[support@zuplo.com](mailto:support@zuplo.com).
+
+Certificates are issued by either Google Trust Services or Let's Encrypt. If you
+have a preference, please let us know, but we recommend (and default to) Google
+Trust Services as it has slightly better compatibility with clients.
+
+Certificates are issued for 90 days and are automatically renewed aproximately
+30 days before they expire. No action is required on your part.
+
+:::warning Certificate Pinning
+
+Certificate pinning is not recommended for Zuplo APIs as the certificates are
+issued for short periods of time and renewed automatically. If you or your end
+clients require certificate pinning, it is recommended you use a custom,
+long-lived SSL certificate. (Although this is
+[not recommended](https://scotthelme.co.uk/why-we-need-to-do-more-to-reduce-certificate-lifetimes/)
+for most use cases.)
+
+:::
+
+For alternatives to certificate pinning, consider using
+[HSTS headers](https://https.cio.gov/hsts/) or adding CAA records to your DNS.
+The CAA records required for Zuplo are shown below (depending on what authority
+your domain is configured to use)
+
+```txt
+# CAA records added by Let's Encrypt
+0 issue "letsencrypt.org"
+0 issuewild "letsencrypt.org"
+
+# CAA records added by Google Trust Services
+0 issue "pki.goog; cansignhttpexchanges=yes"
+0 issuewild "pki.goog; cansignhttpexchanges=yes"
+```
+
+## TLS Versions
+
+Zuplo supports issuing certificates with TLS versions 1.0, 1.1, 1.2 and 1.3. By
+default certificates are issues with versions 1.2 and 1.3 enabled. If you
+require a specific version, please contact
+[support@zuplo.com](mailto:support@zuplo.com).
+
+:::note Legacy TLS Versions
+
+Early Zuplo customers may have certificates issued with TLS 1.0 and greater
+enabled. If you wish to upgrade to a higher TLS version, please contact
+[support@zuplo.com](mailto:support@zuplo.com).
+
+:::
