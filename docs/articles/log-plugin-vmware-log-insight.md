@@ -2,6 +2,14 @@
 title: VMWare Log Insight Log Plugin
 ---
 
+:::caution Enterprise Feature
+
+Custom logging is limited to Enterprise plans. If you want to test custom
+logging, contact [sales@zuplo.com](mailto:sales@zuplo.com) to have an enterprise
+trial enabled.
+
+:::
+
 ## Setup
 
 The VMWare Log Insight plugin enables pushing logs to your VMWare Log Insights
