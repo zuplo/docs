@@ -56,7 +56,7 @@ edit the file to look like the following.
     "issuer": "https://your-url.clerk.accounts.dev",
     "clientId": "$env(ZUPLO_PUBLIC_CLERK_CLIENT_ID)",
     "clientSecret": "$env(CLERK_CLIENT_SECRET)",
-    "scope": "profile email"
+    "scope": "openid profile email"
   }
 }
 ```
