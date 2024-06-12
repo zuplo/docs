@@ -4,9 +4,8 @@ title: Limitations
 
 Zuplo strives to deliver the most complete, flexible, and intuitive API
 monetization system. Given the multitude of different pricing models and their
-various configurations - we unfortunately have limited support for certain
-features you may want for your monetization model. If the current offering does
-not currently suit your needs, please
+various configurations, if the current offering does not currently suit your
+needs, please
 [reach out](mailto:support@zuplo.com?subject=Monetization%20Inquiry) and we can
 expedite work on it.
 
