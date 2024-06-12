@@ -40,9 +40,8 @@ If Stripe does not support your country or currency, please
 [contact us](https://discord.zuplo.com) and we will work with you to find a
 solution.
 
-:::note
+## Limitations
 
-We exclusively support monthly subscription plans. Please contact us if you need
-a different pricing model.
-
-:::
+We are actively developing new features for our monetization product. If a
+feature or configuration you need is not currently documented, please check out
+[our limitations list](./monetization-limitations.md).
