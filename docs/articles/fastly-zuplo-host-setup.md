@@ -33,6 +33,8 @@ your domain is stable regardless of your Zuplo configuration.
    to `zuplo.app`.
 7. Set the **SNI hostname** to your custom domain or full `zuplo.app` domain
    (i.e. `my-project-main-021839d.zuplo.app`)
+8. Set the **Override Host** to your custom domain or full `zuplo.app` domain
+   (i.e. `my-project-main-021839d.zuplo.app`)
 
 Additional settings like mTLS are also supported. Please refer to the Fastly
 documentation for more information.
