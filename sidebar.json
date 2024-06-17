@@ -31,7 +31,8 @@
       "articles/local-development",
       "articles/local-development-routes-designer",
       "articles/local-development-installing-packages",
-      "articles/local-development-api-keys",
+      "articles/local-development-services",
+      "articles/local-development-debugging",
       "articles/local-development-env-variables",
       "articles/local-development-troubleshooting"
     ]
