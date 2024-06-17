@@ -5,6 +5,11 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/docs/articles/local-development-api-keys",
+      "destination": "/docs/articles/local-development-services",
+      "permanent": true
+    },
+    {
       "source": "/docs/articles/local-development-preview",
       "destination": "/docs/articles/local-development",
       "permanent": true
