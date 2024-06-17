@@ -4,8 +4,8 @@ sidebar_label: Debugging
 ---
 
 You can debug your local gateway through VS Code using its TypeScript debugger.
-Features such as breakpoints, steping through the code, variable inspection, etc
-will work.
+Features such as breakpoints, stepping through the code, variable inspection,
+etc will be available to help you debug your gateway.
 
 1. Create a `.vscode/launch.json` file with the following content. If you
    already have an older/existing `.vscode/launch.json` file, you can add the
@@ -38,7 +38,9 @@ npx @zuplo/cli dev --debug-port 9229
 
 ## Limitations
 
-Currently the debugger doesn't automatically re-attach to the local gateway
-after you have made changes.
-
-Click on the green triangle to re-attach the debugger in VS Code.
+- Currently the debugger doesn't automatically re-attach to the local gateway
+  after you have made changes. Click on the green triangle to re-attach the
+  debugger in VS Code.
+- We only support stepping through your own module code. System code provided by
+  Zuplo are minified and stripped of source maps, so you won't be able to step
+  through them.
