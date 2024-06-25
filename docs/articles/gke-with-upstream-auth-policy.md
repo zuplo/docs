@@ -43,18 +43,7 @@ to this process are:
 1. Authorized requests are forwarded on through your GKE ingress to your
    backend.
 
-```mermaid
-flowchart LR
-    c((Client))-- API Key -->z[Zuplo]
-    z-- GCP Service Account -->ip[Public IP Address]
-    subgraph gcp[Google Cloud Network]
-    ip-->iap{GCP Identity\n Aware Proxy}
-    iap-- Not Authorized -->reject[Response: 401 Unauthorized]
-    iap-- Authorized -->lb[GCP Load Balancer]
-    lb --> gke[GKE Ingress]
-    gke --> Backend
-    end
-```
+![](../../public/media/gke-with-upstream-auth-policy/diagram.svg)
 
 ## Zuplo Gateway Identity
 
