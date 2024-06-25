@@ -48,3 +48,14 @@ jobs:
           headers: |-
             cache-control: max-age=31536000
             content-type: image/gif
+
+      - name: Upload Media (svg)
+        uses: "google-github-actions/upload-cloud-storage@v2"
+        with:
+          path: public/media/
+          glob: "**/*.svg"
+          destination: cdn.zuplo.com/docs
+          process_gcloudignore: false
+          headers: |-
+            cache-control: max-age=31536000
+            content-type: image/svg+xml
