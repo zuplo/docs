@@ -17,8 +17,6 @@ by following these steps:
 2. Select the project that you want to work on.
 3. Click on the "Settings" tab and navigate to the "Zuplo API Keys" section.
 
-![Zuplo API Keys](../../public/media/api-keys/zuplo-api-keys.png)
-
 All commands take an `--api-key` argument. For example, to list your zups, run:
 
 ```bash
