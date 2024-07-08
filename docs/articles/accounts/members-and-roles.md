@@ -13,8 +13,8 @@ resources.
 
 **Additional Resources**
 
-- [Role Permissions](./roles-permissions.md) - Details on the roles available at
-  the account and project levels.
+- [Role Permissions](./roles-and-permissions.md) - Details on the roles
+  available at the account and project levels.
 - [Managing Account Members](./managing-account-members.md) - How to add,
   remove, and set roles for account members.
 - [Managing Project Members](./managing-project-members.md) - How to add,
