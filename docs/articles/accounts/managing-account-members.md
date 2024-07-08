@@ -6,6 +6,8 @@ sidebar_label: Account Members
 Accounts can be shared with many users. This document explains how to add and
 manage users in your account.
 
+## Add Account Member
+
 To start, navigate to the account settings page by clicking on your user icon in
 the top right corner of the screen and selecting "Settings" from the dropdown
 menu.
@@ -27,8 +29,7 @@ members.
 
 ![Invited User](../../../public/media/managing-account-members/image-2.png)
 
-Once a user has accepted the invitation, you can change their role by selecting
-the role from the drop down.
+## Change Member Role
 
 :::info Paid Add-on
 
@@ -37,6 +38,9 @@ without this feature, users are always set to the "Admin" role. For more
 information contact [sales@zuplo.com](mailto:sales@zuplo.com).
 
 :::
+
+Once a user has accepted the invitation, you can change their role by selecting
+the role from the drop down.
 
 ![Change Role](../../../public/media/managing-account-members/image-3.png)
 

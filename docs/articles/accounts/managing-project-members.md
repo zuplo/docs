@@ -7,6 +7,8 @@ Projects can have multiple members with different roles. Some account level
 roles allow access to project resources as well. Users can also be assigned
 project level roles in order to grant them access to specific project resources.
 
+## Add Project Member
+
 To manage project members, navigate to the project settings page and click on
 the "Members" tab. Here you can see a list of all members in the project and
 their roles.
@@ -16,12 +18,7 @@ their roles.
 This list will display all account members - even those who have no access to
 the project.
 
-Account admins will always have access to all projects. If you try to change the
-role of an account admin, you will see a warning message that this user is an
-account admin and cannot be changed.
-
-For users who are not account admins, you can change their role by selecting the
-desired role from the dropdown.
+## Change Member Role
 
 :::info Paid Add-on
 
@@ -30,6 +27,13 @@ without this feature, all account members will have access to all projects. For
 more information contact [sales@zuplo.com](mailto:sales@zuplo.com).
 
 :::
+
+Account admins will always have access to all projects. If you try to change the
+role of an account admin, you will see a warning message that this user is an
+account admin and cannot be changed.
+
+For users who are not account admins, you can change their role by selecting the
+desired role from the dropdown.
 
 ![Member Role](../../../public/media/managing-project-members/image-2.png)
 
