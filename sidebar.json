@@ -291,7 +291,6 @@
       "articles/custom-ci-cd",
       "articles/versioning-on-zuplo",
       "articles/rename-or-move-project",
-      "articles/add-project-collaborators",
       "articles/multiple-auth-policies",
       "articles/archiving-requests-to-storage",
       "articles/per-user-rate-limits-using-db",
@@ -361,8 +360,26 @@
   },
   {
     "type": "category",
-    "label": "Product",
+    "label": "Resources",
     "items": [
+      {
+        "type": "category",
+        "label": "Members & Roles",
+        "items": [
+          "articles/accounts/members-and-roles",
+          "articles/accounts/roles-and-permissions",
+          "articles/accounts/managing-account-members",
+          "articles/accounts/managing-project-members"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Account Settings",
+        "items": [
+          "articles/accounts/zuplo-api-keys",
+          "articles/accounts/billing"
+        ]
+      },
       {
         "type": "doc",
         "id": "articles/security"
