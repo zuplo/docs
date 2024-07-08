@@ -1,5 +1,6 @@
 ---
 title: Managing Account Members
+sidebar_label: Account Members
 ---
 
 Accounts can be shared with many users. This document explains how to add and
