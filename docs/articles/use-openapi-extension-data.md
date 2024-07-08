@@ -61,7 +61,7 @@ an object that contains all of the values in the operation.
 import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
 
 export default async function (request: ZuploRequest, context: ZuploContext) {
-  const routeData = context.route.raw<{ "x-my-custom-config": number }>();
+  const routeData = context.route.raw<any>();
   const myCustomConfig = routeData["x-my-custom-config"];
 
   // Logs "Customer config, 10"
@@ -71,6 +71,6 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 }
 ```
 
-This example uses the Typescript generic `{ "x-my-custom-config": number }` to
-add code completion and type safety, but you can also just use
-`context.route.raw<any>()` to simplify thing.
+This example uses the Typescript `any` object. However if you want custom types
+you can `context.route.raw<{ "x-my-custom-config": number }>()` to add code
+completion and type safety.
