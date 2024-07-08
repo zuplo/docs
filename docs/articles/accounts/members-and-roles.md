@@ -18,11 +18,11 @@ account level roles allow access to project resources as well. Users can also be
 assigned project level roles in order to grant them access to specific project
 resources.
 
-See the
+**Additional Resources**
 
-Additional Resources:
-
-- [Role Permissions](./roles-permissions.md) for details on the roles available
-  at the account and project levels.
-- [Managing Account Members](./managing-account-members.md)
-- [Managing Project Members](./managing-project-members.md)
+- [Role Permissions](./roles-permissions.md) - Details on the roles available at
+  the account and project levels.
+- [Managing Account Members](./managing-account-members.md) - How to add,
+  remove, and set roles for account members.
+- [Managing Project Members](./managing-project-members.md) - How to add,
+  remove, and set roles for project members.
