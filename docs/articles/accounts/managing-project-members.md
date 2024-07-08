@@ -1,5 +1,6 @@
 ---
 title: Managing Project Members
+sidebar_label: Project Members
 ---
 
 Projects can have multiple members with different roles. Some account level
