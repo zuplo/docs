@@ -52,13 +52,6 @@ using Fastify on your backend, you could use the
 [JWKS verification method](https://github.com/fastify/fastify-jwt?tab=readme-ov-file#verifying-with-jwks)
 and checking the `account`, `project`, or other claims.
 
-fastify.addHook("onRequest", async (request, reply) => { try { await
-request.jwtVerify(); } catch (err) { reply.send(err); } });
-
-fastify.listen({ port: 3000 });
-
-````
-
 ## Verifying the Token Using a Library
 
 To verify the JWT token on your own service, you can use any standard JWT
@@ -92,4 +85,4 @@ if (
 ) {
   throw new Error("Not my account or project");
 }
-````
+```
