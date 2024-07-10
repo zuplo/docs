@@ -10,65 +10,57 @@ dedicated environment, deployed for no additional cost in under 20s.
 
 ## Environment Types
 
-There are two distinct types of environment:
+There are three types of environments on Zuplo - Production, Preview, and
+Development (called Working Copy). Each environment has a unique URL and every
+environment is deployed to 300+ edge locations around the world.
 
-- **working-copy** - this is your development environment. You can think of this
-  as your personal cloud laptop. To deploy to this environment you just need to
-  save a change in portal.zuplo.com, that will automatically trigger a build and
-  deploy of your working-copy. A working-copy environment typically ends in a
-  `.dev` URL. These are _not_ deployed to the edge and run in a data-center.
-  There are some subtle differences in behavior between edge deployments and
-  working-copies, so it is important to test both before going to production.
-  Note, every developer using Zuplo gets a private working-copy. These are not
-  shared with anybody else. If you share a project with another person, they
-  will have their own working-copy environment.
+### Development (Working Copy)
 
-:::warning
+This is your development environment. You can think of this as your personal
+cloud laptop. To deploy to this environment you just need to save a change in
+portal.zuplo.com, that will automatically trigger a build and deploy of your
+working-copy. A working-copy environment ends in a `.dev` URL. While these
+environments are deployed to the edge in 300+ data centers around the world,
+they are optimized for development purposes. There are some minor differences
+with production and preview environments with caching and other features.
 
-Never use a working-copy environment in a production setting. They offer no SLA,
-and will often sleep after inactivity leading to slower cold-start times. There
-can be occasional downtime of a few seconds for upgrades.
+### Preview
 
-:::
+These are are environments that are deployed using the
+[GitHub integration](/docs/articles/source-control) or building a
+[custom CI/CD pipeline](/docs/articles/custom-ci-cd). Preview environments are
+deployed from from any branch that is not set as your default (i.e. production
+branch). Preview environments are deployed to the edge and have the same
+behavior as production environments, but are typically used for staging, testing
+pull requests, etc.
 
-- **edge deployment** - these are real deployments that are deployed to the edge
-  at 100s of data-centers around the world. They have 0ms startup time and offer
-  very high availability due to their headless, distributed nature. You can
-  deploy edge environments using our
-  [GitHub integration](/docs/articles/source-control) or building a
-  [custom CI/CD pipeline](/docs/articles/custom-ci-cd).
+### Production
 
-Edge deployments typically have a domain ending with `.app` but you can also
-configure [custom vanity domains](/docs/articles/custom-domains).
-
-Edge deployments cannot be directly edited in portal.zuplo.com but they can be
-viewed - so you can see the source code currently deployed to an environment.
+These are are environments that are deployed using the
+[GitHub integration](/docs/articles/source-control) or building a
+[custom CI/CD pipeline](/docs/articles/custom-ci-cd). Each project has only one
+Production environment and is deployed from the git branch that is set as your
+production branch in your source control settings.
 
 ## Navigating Environments
 
-At the top left corner of portal.zuplo.com you will see your
-**project/environment** selector. This consists of two selectors separated by a
-`/`.
+On the bottom toolbar of the Zuplo portal you will see a selector for the
+current environment. You can switch between environments by clicking on the name
+of the current environment and then selecting another environment.
 
-On the left is the current project - you can change project by clicking on the
-project name (or create a new project).
+![Environments](../../public/media/environments/image.png)
 
-One the right is the current **environment**. By default you will be looking at
-**working-copy** which is your private, editable, instance of the current
-project you are working on.
+Your development (working copy) environment will be listed at the top in a
+separate section. Your git deployed environments will be listed next with the
+production environment on top.
 
-![Environments](../../public/media/environments.png)
+For users using [source control integration](/docs/articles/source-control) the
+name of the deployment matches the branch name (yes - creating a new environment
+is literally as easy as creating a new branch).
 
-If you have other any **edge-deployments** you will see them listed alongside
-your working-copy. In this case we have two edge-deployments called
-`development` and `prod (main)`.
-
-For users using [GitHub integration](/docs/articles/source-control) the name of
-the deployment matches the branch name (yes - creating a new environment is
-literally as easy as creating a new branch).
-
-You can't edit the code of an edge-deployment in portal.zuplo.com but you can
-switch into those environments to perform a number of functions, such as:
+You can't edit the code of an production or preview environment in
+portal.zuplo.com but you can switch into those environments to perform a number
+of functions, such as:
 
 - edit API consumers for this environment
 - view analytics for this environment

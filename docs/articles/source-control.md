@@ -27,18 +27,17 @@ For full instructions on setting up github see
 ## Connecting Existing Repositories
 
 If you have an existing GitHub repository that contains a Zuplo project, you can
-connect to that repository when you create a new project. Select **Advanced**
-then select your GitHub organization and repository.
+connect to that repository when you create a new project. Select **Import
+existing project** then select your GitHub organization and repository.
 
-![](https://cdn.zuplo.com/assets/f09aa7ac-abc0-4f20-9e41-df42b7761748.png)
+![alt text](../../public/media/source-control/image-1.png)
 
 ## Limitations
 
 **Renaming or moving projects in GitHub**
 
-The Zuplo GitHub integration does not yet handle moving or renaming
-repositories. As a workaround, you can first disconnect your project from GitHub
-and recreate it in another org or with another name. To do so, go to
-**Settings** > **Source Control** and then click **Disconnect** to disconnect
-your project from GitHub. Then follow the above instructions to reconnect your
-project to GitHub.
+The Zuplo GitHub integration does not handle moving or renaming repositories. As
+a workaround, you can first disconnect your project from GitHub and recreate it
+in another org or with another name. To do so, go to **Settings** > **Source
+Control** and then click **Disconnect** to disconnect your project from GitHub.
+Then follow the above instructions to reconnect your project to GitHub.
