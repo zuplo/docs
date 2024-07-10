@@ -8,14 +8,14 @@ specification standard as the core way to configure the gateway.
 When you create a new project you will see a `routes.oas.json` file. This is
 your default OpenAPI routing file (oas = 'open api specification').
 
-![routes.oas.json](https://cdn.zuplo.com/assets/ac1b4a8a-7e5b-49de-be58-7c1edcd26701.png)
+![routes.oas.json](../../public/media/open-api/image.png)
 
 You can use the Route Designer to build your routes, which will be creating an
 OpenAPI document in the background for you (check it out in the **JSON View**).
 
 You can also **import an OpenAPI** document by clicking on the **Open API** tab.
 
-![Import OpenAPI](https://cdn.zuplo.com/assets/73ad9166-9d53-464e-ae66-831b709f861e.png)
+![Import Open API](../../public/media/open-api/image-1.png)
 
 This will merge your imported file with any routes you already have in your
 .oas.json file. By default, operations will be merged by path & method - but you

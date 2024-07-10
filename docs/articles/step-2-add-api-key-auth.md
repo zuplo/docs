@@ -45,9 +45,13 @@ If you test your route, you should get a 401 Unauthorized response
 ## 2/ Set up an API Key
 
 In order to call your API, you need to configure an API consumer. Go to
-Settings > API Consumers. Click **Add New Consumer**
+Services, then click "Configure" on the "API Key Service".
 
-![API Key Consumers](../../public/media/step-2-add-api-key-auth/image-2.png)
+![API Key Service](../../public/media/step-2-add-api-key-auth/image-7.png)
+
+Then click **Create Consumer**.
+
+![Create Consumer](../../public/media/step-2-add-api-key-auth/image-8.png)
 
 Create a name for your identity - this will be the subject (or sub) that
 identifies the user when calling Zuplo. Add your own e-mail address to the **Key
@@ -62,7 +66,7 @@ used to authenticate.
 After your API Key consumer is created, click the button to copy your new API
 Key.
 
-![New Key](../../public/media/step-2-add-api-key-auth/image-4.png)
+![New Key](../../public/media/step-2-add-api-key-auth/image-9.png)
 
 ## 4/ Test out your new key
 
