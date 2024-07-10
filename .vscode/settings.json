@@ -10,7 +10,7 @@
     "**/.next": true
   },
   "[markdown]": {
-    "editor.wordWrap": "bounded",
+    "editor.wordWrap": "off",
     "editor.wordWrapColumn": 80
   },
   "markdown.validate.enabled": true,
