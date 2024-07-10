@@ -122,40 +122,6 @@ const PolicyOptions = ({
   isObjectSchema(handlerExport);
   return (
     <div>
-      <h3 id="policy-configuration">Policy Configuration</h3>
-      <ul>
-        <li>
-          <code>name</code> <span className="text-green-600">{"<string>"}</span>{" "}
-          - The name of your policy instance. This is used as a reference in
-          your routes.
-        </li>
-        <li>
-          <code>policyType</code>{" "}
-          <span className="text-green-600">{"<string>"}</span> - The identifier
-          of the policy. This is used by the Zuplo UI. Value should be{" "}
-          <code>{policyId}</code>.
-        </li>
-        <li>
-          <code>handler.export</code>{" "}
-          <span className="text-green-600">{"<string>"}</span> - The name of the
-          exported type. Value should be{" "}
-          <code>{handlerExport.const!.toString()}</code>.
-        </li>
-        <li>
-          <code>handler.module</code>{" "}
-          <span className="text-green-600">{"<string>"}</span> - The module
-          containing the policy. Value should be{" "}
-          <code>{handlerModule.const!.toString()}</code>.
-        </li>
-        {options && Object.keys(options).length > 0 ? (
-          <li>
-            <code>handler.options</code>{" "}
-            <span className="text-green-600">{"<object>"}</span> - The options
-            for this policy. <a href="#policy-options">See Policy Options</a>{" "}
-            below.
-          </li>
-        ) : null}
-      </ul>
       {options && Object.keys(options).length > 0 ? (
         <>
           <h3 id="policy-options">Policy Options</h3>
@@ -229,12 +195,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
       id: "configuration",
       level: 2,
       children: [
-        {
-          title: "Policy Configuration",
-          id: "policy-configuration",
-          level: 3,
-          children: [],
-        },
         {
           title: "Policy Options",
           id: "policy-options",

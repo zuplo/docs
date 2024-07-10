@@ -42,7 +42,24 @@ The issued JWT token contains the following claims.
 | iat              | `1720470928`                                                         | The epoch time the token was issued.                                                                                                             |
 | exp              | `1720506928`                                                         | The epoch time the token expires. The default expiration for Zuplo Identity Tokens is 10 hours.                                                  |
 
-## Verifying the Token
+## Securing Your Backend
+
+The Zuplo ID Token can be used as a means of securing your backend API so that
+only Zuplo can call the API. This can be done by restricting the incoming
+requests using a standard OAuth middleware on your API. For example, if you were
+using Fastify on your backend, you could use the
+[Fastify JWT Middlware](https://github.com/fastify/fastify-jwt) using the
+[JWKS verification method](https://github.com/fastify/fastify-jwt?tab=readme-ov-file#verifying-with-jwks)
+and checking the `account`, `project`, or other claims.
+
+fastify.addHook("onRequest", async (request, reply) => { try { await
+request.jwtVerify(); } catch (err) { reply.send(err); } });
+
+fastify.listen({ port: 3000 });
+
+````
+
+## Verifying the Token Using a Library
 
 To verify the JWT token on your own service, you can use any standard JWT
 library. The verification method will use the JWKS hosted at
@@ -75,4 +92,4 @@ if (
 ) {
   throw new Error("Not my account or project");
 }
-```
+````

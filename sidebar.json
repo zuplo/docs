@@ -228,6 +228,7 @@
         "items": [
           "policies/upstream-azure-ad-service-auth-inbound",
           "policies/upstream-gcp-service-auth-inbound",
+          "policies/upstream-gcp-federated-auth-inbound",
           "policies/upstream-gcp-jwt-inbound",
           "policies/upstream-firebase-admin-auth-inbound",
           "policies/upstream-firebase-user-auth-inbound"
@@ -329,6 +330,7 @@
       "articles/http-problems",
       "articles/reusing-code",
       "articles/zone-cache",
+      "articles/zuplo-id-token",
       "articles/safely-clone-a-request-or-response",
       "articles/runtime-behaviors",
       "articles/zp-body-removed",
