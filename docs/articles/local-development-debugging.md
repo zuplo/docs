@@ -19,6 +19,7 @@ etc will be available to help you debug your gateway.
       "name": "Zuplo Gateway",
       "type": "node",
       "request": "attach",
+      "restart": true,
       "port": 9229
     }
   ]
@@ -38,9 +39,6 @@ npx @zuplo/cli dev --debug-port 9229
 
 ## Limitations
 
-- Currently the debugger doesn't automatically re-attach to the local gateway
-  after you have made changes. Click on the green triangle to re-attach the
-  debugger in VS Code.
 - We only support stepping through your own module code. System code provided by
   Zuplo are minified and stripped of source maps, so you won't be able to step
   through them.
