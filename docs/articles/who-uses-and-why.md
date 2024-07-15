@@ -12,6 +12,12 @@ There are a number of reasons people decide to use Zuplo:
 
 ## Enterprise Customers
 
+> "The move to Zuplo from our existing API Management vendor was easy, taking
+> just over 2 months to switch mission critical systems, and we’re saving over
+> 70% on costs. What’s more, our engineers absolutely love working with Zuplo
+> and we find it a much easier solution to maintain and operate." -
+> [Ryan Waites, Senior Director @ Blockdaemon](https://www.linkedin.com/in/ryan-waites-020313180/)
+
 We have many enterprise customers using Zuplo to manage multiple APIs, some
 examples include
 
@@ -25,6 +31,11 @@ examples include
   [▶️ Why Imburse Payments chose Zuplo as their API Gateway](https://youtu.be/z94pRJE2zfs)
 
 ## Startup Customers
+
+> "Zuplo saved weeks of engineering and headache getting our customer-facing API
+> off the ground. Deployments are lightning quick, and Zuplo’s great developer
+> experience lets us spend more time on our core product." -
+> [Devon Copeland, Co-Founder & CTO @ Serial](https://www.linkedin.com/in/devonkcopeland/)
 
 We also have many smaller businesses using Zuplo, launching a delightful
 Stripe-quality experience in record time. Examples include:
@@ -45,6 +56,10 @@ Stripe-quality experience in record time. Examples include:
   contracts as clear and programmable as APIs, built on open-source standards.
   See our 🎥 video interview with the iTicket team here:
   [▶️ How Common Paper shipped their API _fast_](https://youtu.be/1rAxJFVXU84)
+
+_Are you a YC startup looking to build an enterprise-grade API quickly_?
+[Inquire](mailto:sales@zuplo.com) about our special YCombinator discount
+pricing!
 
 ## Launching a new API
 
