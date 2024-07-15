@@ -4,7 +4,14 @@
   // language - current active spelling language
   "language": "en",
   // words - list of words to be always considered correct
-  "words": ["Kubernetes", "Linkerd", "Quickstart", "quickstarts", "Zuplo"],
+  "words": [
+    "Kubernetes",
+    "Linkerd",
+    "proxying",
+    "Quickstart",
+    "quickstarts",
+    "Zuplo"
+  ],
   // flagWords - list of words to be always considered incorrect
   // This is useful for offensive words and common spelling errors.
   // For example "hte" should be "the"

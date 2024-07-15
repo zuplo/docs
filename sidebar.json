@@ -6,11 +6,7 @@
       "type": "doc",
       "id": "intro"
     },
-    "items": [
-      "articles/what-is-zuplo",
-      "articles/who-uses-and-why",
-      "articles/zuplo-in-your-stack"
-    ],
+    "items": ["articles/what-is-zuplo", "articles/who-uses-and-why"],
     "isExpandedByDefault": true
   },
   {
@@ -47,7 +43,6 @@
       "articles/securing-your-backend",
       "articles/custom-domains",
       "articles/testing",
-      "articles/zuplo-in-your-stack",
       "articles/log-plugins",
       "articles/metrics-plugins",
       "articles/opentelemetry",

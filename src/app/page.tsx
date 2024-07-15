@@ -30,9 +30,6 @@ export default async function Page() {
             <Link href="/articles/who-uses-and-why">
               Who uses Zuplo, and why?
             </Link>
-            <Link href="/articles/zuplo-in-your-stack">
-              Zuplo in your stack
-            </Link>
           </CustomTOCListContent>
         </CustomTOCListSection>
         <CustomTOCListSection>
