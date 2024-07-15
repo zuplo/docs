@@ -49,17 +49,17 @@ Stripe-quality experience in record time. Examples include:
 ## Launching a new API
 
 Most of our startup customers are looking to launch an API and want to achieve a
-'Stripe-quality' API experience for their customers quickly.
+'Stripe-quality' API experience for their customers quickly. This mean a highly
+performant and secure API with beautiful and up-to-date documentation and usage
+analytics.
 
-They also want to save time, money and engineering effort and avoid building out
-common features like API key authentication, rate-limiting, quotas, request
-validation and developer documentation.
+Zuplo makes this achievable for small teams, saving you time, money and
+engineering effort. Using Zuplo allows you to avoid building out common features
+like API key authentication, rate-limiting, quotas, request validation,
+monetization, and developer documentation.
 
-API Key authentication is non-trivial to implement and requires writing security
-critical code to safely store keys and help customer's self-serve.
-
-Our promise is that Zuplo should be cheaper and faster - than building these
-features yourself, while future-proofing your architecture.
+Our promise is that Zuplo should be **cheaper** and **faster** than building
+these features yourself, while future-proofing your architecture.
 
 ## Managing multiple APIs
 
