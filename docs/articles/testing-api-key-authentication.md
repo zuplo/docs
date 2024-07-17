@@ -10,7 +10,8 @@ authentication both locally and in deployed environments.
 
 When running API key Authentication locally, if you
 [link](/docs/cli/local-development) the project to an project the same API Key
-Bucket used in working copy will also be used for local development.
+The same bucket will be shared by both your development (working copy)
+environment and local development.
 
 ## Setting the API Key Bucket Name
 

@@ -2,10 +2,6 @@
   {
     "type": "category",
     "label": "Introduction",
-    "link": {
-      "type": "doc",
-      "id": "intro"
-    },
     "items": ["articles/what-is-zuplo", "articles/who-uses-and-why"],
     "isExpandedByDefault": true
   },
@@ -22,6 +18,67 @@
   },
   {
     "type": "category",
+    "label": "Projects",
+    "items": [
+      "articles/environment-variables",
+      {
+        "type": "category",
+        "label": "Custom Domains",
+        "link": "articles/custom-domains",
+        "items": ["articles/fastly-zuplo-host-setup"]
+      }
+    ]
+  },
+  {
+    "type": "category",
+    "label": "Deployments",
+    "items": [
+      "articles/environments",
+      {
+        "type": "category",
+        "label": "Source Control",
+        "link": "articles/source-control",
+        "items": [
+          "articles/source-control-setup-github",
+          "articles/source-control-setup-bitbucket",
+          "articles/source-control-setup-gitlab",
+          "articles/rename-or-move-project"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Continuous Deployment",
+        "items": [
+          "articles/custom-ci-cd",
+          "articles/update-zup-in-github-action"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Observability",
+        "items": [
+          "articles/metrics-plugins",
+          "articles/opentelemetry",
+          "articles/monitoring-your-gateway"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Logging",
+        "items": [
+          "articles/log-plugins",
+          "articles/log-plugin-vmware-log-insight",
+          "articles/log-plugin-loki-logging",
+          "articles/log-plugin-gcp-logging",
+          "articles/custom-logging-example",
+          "articles/log-export"
+        ]
+      },
+      "articles/testing"
+    ]
+  },
+  {
+    "type": "category",
     "label": "Local Development",
     "items": [
       "articles/local-development",
@@ -33,27 +90,45 @@
       "articles/local-development-troubleshooting"
     ]
   },
+  {
+    "label": "Networking & Infrastructure",
+    "type": "category",
+    "items": [
+      {
+        "type": "category",
+        "label": "Securing Your Backend",
+        "link": "articles/securing-your-backend",
+        "items": [
+          "articles/gke-with-upstream-auth-policy",
+          {
+            "type": "category",
+            "label": "Secure Tunnel",
+            "link": "articles/secure-tunnel",
+            "items": [
+              "articles/tunnel-setup",
+              "articles/tunnel-troubleshooting"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Web Application Firewalls",
+        "link": "articles/waf-ddos",
+        "items": [
+          "articles/waf-ddos-fastly",
+          "articles/waf-ddos-aws-waf-shield"
+        ]
+      },
+      "articles/cloudflare-settings"
+    ]
+  },
 
   {
     "type": "category",
-    "label": "Getting to Production",
-    "items": [
-      "articles/environments",
-      "articles/source-control",
-      "articles/securing-your-backend",
-      "articles/custom-domains",
-      "articles/testing",
-      "articles/log-plugins",
-      "articles/metrics-plugins",
-      "articles/opentelemetry",
-      "articles/monitoring-your-gateway"
-    ]
-  },
-  {
-    "type": "category",
     "label": "Monetization",
+    "link": "articles/monetization",
     "items": [
-      "articles/monetization",
       {
         "type": "category",
         "label": "Quick Start",
@@ -79,8 +154,9 @@
   {
     "type": "category",
     "label": "API Keys",
+    "link": "articles/api-key-management",
     "items": [
-      "articles/api-key-management",
+      "articles/api-key-administration",
       "articles/api-key-authentication",
       "articles/api-key-end-users",
       "articles/api-key-api",
@@ -93,15 +169,18 @@
   {
     "type": "category",
     "label": "Developer Portal",
+    "link": {
+      "type": "doc",
+      "id": "articles/developer-portal"
+    },
     "items": [
-      "articles/developer-portal",
       "articles/dev-portal-setup",
       "articles/dev-portal-configuration",
       {
         "type": "category",
         "label": "Authentication",
+        "link": "articles/dev-portal-auth",
         "items": [
-          "articles/dev-portal-auth",
           "articles/dev-portal-auth0-auth",
           "articles/dev-portal-clerk-auth",
           "articles/dev-portal-keycloak-auth",
@@ -120,7 +199,7 @@
     "label": "Policies",
     "link": {
       "type": "doc",
-      "id": "policies/index"
+      "id": "articles/policies"
     },
     "items": [
       {
@@ -147,6 +226,8 @@
         "type": "category",
         "label": "Authorization",
         "items": [
+          "policies/okta-fga-authz-inbound",
+          "policies/openfga-authz-inbound",
           "policies/axiomatics-authz-inbound",
           "policies/jwt-scopes-inbound",
           "policies/acl-policy-inbound",
@@ -264,10 +345,7 @@
   {
     "type": "category",
     "label": "Handlers",
-    "link": {
-      "type": "doc",
-      "id": "handlers/index"
-    },
+
     "items": [
       "handlers/url-forward",
       "handlers/url-rewrite",
@@ -284,25 +362,21 @@
     "label": "How to Guides",
     "items": [
       "articles/open-api",
-      "articles/custom-ci-cd",
+
       "articles/versioning-on-zuplo",
-      "articles/rename-or-move-project",
       "articles/multiple-auth-policies",
       "articles/archiving-requests-to-storage",
       "articles/per-user-rate-limits-using-db",
       "articles/rick-and-morty-api-developer-portal-example",
       "articles/check-ip-address",
-      "articles/custom-logging-example",
-      "articles/custom-log-level",
       "articles/advanced-path-matching",
       "articles/lazy-load-configuration-into-cache",
       "articles/handling-form-data",
       "articles/testing-graphql",
-      "articles/gke-with-upstream-auth-policy",
+
       "articles/graphql-security",
       "articles/add-api-to-backstage",
-      "articles/use-openapi-extension-data",
-      "articles/update-zup-in-github-action"
+      "articles/use-openapi-extension-data"
     ]
   },
   {
@@ -310,7 +384,6 @@
     "label": "Programming API",
     "items": [
       "articles/zuplo-request",
-      "articles/environment-variables",
       "articles/zuplo-context",
       "articles/context-data",
       "articles/route-raw",
@@ -318,6 +391,7 @@
       "articles/background-dispatcher",
       "articles/web-standard-apis",
       "articles/web-crypto-apis",
+      "articles/cache",
       {
         "type": "link",
         "label": "Node Modules",
@@ -333,7 +407,8 @@
       "articles/audit-log",
       "articles/hooks",
       "articles/runtime-extensions",
-      "articles/not-found-handler"
+      "articles/not-found-handler",
+      "articles/zuplo-json"
     ]
   },
   {
@@ -363,8 +438,11 @@
       {
         "type": "category",
         "label": "Members & Roles",
+        "link": {
+          "type": "doc",
+          "id": "articles/accounts/members-and-roles"
+        },
         "items": [
-          "articles/accounts/members-and-roles",
           "articles/accounts/roles-and-permissions",
           "articles/accounts/managing-account-members",
           "articles/accounts/managing-project-members"
@@ -376,6 +454,19 @@
         "items": [
           "articles/accounts/zuplo-api-keys",
           "articles/accounts/billing"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Single Sign On",
+        "link": {
+          "type": "doc",
+          "id": "articles/sso"
+        },
+        "items": [
+          "articles/sso-okta",
+          "articles/sso-faq",
+          "articles/sso-azure-ad"
         ]
       },
       {

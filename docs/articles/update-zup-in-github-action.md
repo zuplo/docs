@@ -1,5 +1,6 @@
 ---
 title: Automate Zuplo API Updates with GitHub Actions
+sidebar_label: Update API in GitHub Action
 ---
 
 Because Zuplo is OpenAPI native, you can automate the process of udating your

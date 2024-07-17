@@ -5,6 +5,7 @@ import withPolicies from "./src/build/policies.mjs";
 const nextConfig = {
   basePath: "/docs",
   pageExtensions: ["js", "jsx", "md", "ts", "tsx"],
+  transpilePackages: ["lucide-react"],
   swcMinify: true,
   reactStrictMode: true,
   images: {

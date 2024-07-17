@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { FC, PropsWithChildren } from "react";
 
-function SvgWrapper({ children }: PropsWithChildren) {
+export function SvgWrapper({ children }: PropsWithChildren) {
   return (
     <span className="inline-flex h-[19px] w-[19px] align-text-top">
       {children}

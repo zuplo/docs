@@ -6,10 +6,9 @@ function hasActiveNavLinkItemHelper(
 ): boolean {
   return (
     (navItem.href && navItem.href === pathnameWithoutAnchor) ||
-    (!!navItem?.items &&
-      navItem.items.some((innerItem) =>
-        hasActiveNavLinkItemHelper(innerItem, pathnameWithoutAnchor),
-      ))
+    !!navItem?.items?.some((innerItem) =>
+      hasActiveNavLinkItemHelper(innerItem, pathnameWithoutAnchor),
+    )
   );
 }
 
@@ -18,6 +17,5 @@ export function hasActiveNavLinkItem(
   pathname: string,
 ): boolean {
   const pathnameWithoutAnchor = pathname.split("#")[0];
-
   return hasActiveNavLinkItemHelper(navItem, pathnameWithoutAnchor);
 }

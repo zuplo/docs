@@ -1,14 +1,9 @@
 ---
 title: Loki Logging Plugin
+sidebar_label: Loki Logging
 ---
 
-:::caution Enterprise Feature
-
-Custom logging is limited to Enterprise plans. If you want to test custom
-logging, contact [sales@zuplo.com](mailto:sales@zuplo.com) to have an enterprise
-trial enabled.
-
-:::
+<EnterpriseFeature name="Custom logging" />
 
 ## Setup
 
@@ -64,7 +59,7 @@ Log trace fields are:
 - `requestId` - The UUID of the request (the value of the `zp-rid` header)
 - `atomicCounter` - An atomic number that is used to order logs that have the
   same timestamp
-- `rayId` - The Cloudflare RayID of the request (for edge deployed environments)
+- `rayId` - The Cloudflare RayID of the request
 
 Note, log trace fields are only included if the `version` option is set to `2`
 or later.

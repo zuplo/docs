@@ -1,5 +1,6 @@
 ---
 title: Step 2 - API Key Authentication
+sidebar_label: "Step 2 - API Key Auth"
 ---
 
 In this guide we'll add API Key authentication to a route. You can do this for

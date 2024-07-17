@@ -2,14 +2,21 @@ import Pre from "@/components/Pre";
 import GithubButton from "@/components/markdown/GithubButton";
 import { MDXProvider } from "@mdx-js/react";
 import Callout from "./Callout";
+import { Card, CardGroup } from "./Card";
+import Icon from "./Icon";
+import { EnterpriseFeature } from "./Plans";
 import ZupIt from "./ZupIt";
 import * as UIIcons from "./ui-icons";
 
 const components: React.ComponentProps<typeof MDXProvider>["components"] = {
   ...UIIcons,
+  Icon,
+  EnterpriseFeature,
   GithubButton,
   Callout,
   ZupIt,
+  Card,
+  CardGroup,
   pre: Pre,
   // pre: Fence as any,
   img: (props) => (

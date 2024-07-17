@@ -2,13 +2,7 @@
 title: Tunnel Setup & Use
 ---
 
-:::note
-
-The secure tunnel connection option is available only to customers on a Zuplo
-enterprise plan. For more information contact
-[sales@zuplo.com](mailto:sales@zuplo.com).
-
-:::
+<EnterpriseFeature name="Secure tunneling" />
 
 ## Exposing Services using Tunnels
 

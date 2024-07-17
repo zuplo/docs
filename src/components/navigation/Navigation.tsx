@@ -10,7 +10,7 @@ type Props = {
 
 export function Navigation({ className }: Props) {
   return (
-    <nav className={clsx("text-base lg:text-sm", className)}>
+    <nav className={clsx("text-base lg:text-sm align-middle", className)}>
       <ul role="list">
         {navigation.map((section) => (
           <NavigationCategory key={section.label} navItem={section} isRoot />

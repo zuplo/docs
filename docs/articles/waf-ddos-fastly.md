@@ -1,5 +1,6 @@
 ---
 title: Configuring Zuplo with Fastly Next-Gen WAF
+sidebar_label: Fastly Next-Gen WAF
 ---
 
 Fastly Next-Gen WAF runs at Fastly edge locations. Zuplo can be configured to

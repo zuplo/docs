@@ -1,14 +1,9 @@
 ---
 title: VMWare Log Insight Log Plugin
+sidebar_label: VMWare Log Insight
 ---
 
-:::caution Enterprise Feature
-
-Custom logging is limited to Enterprise plans. If you want to test custom
-logging, contact [sales@zuplo.com](mailto:sales@zuplo.com) to have an enterprise
-trial enabled.
-
-:::
+<EnterpriseFeature name="Custom logging" />
 
 ## Setup
 
@@ -55,8 +50,7 @@ Default fields are:
 - `atomic_counter` - An atomic number that is used to order logs that have the
   same timestamp
 - `environment` - The environment name of the Zuplo API
-- `request_ray_id` - The Cloudflare RayID of the request (for edge deployed
-  environments)
+- `request_ray_id` - The Cloudflare RayID of the request
 
 ## Log Format
 

@@ -25,10 +25,10 @@ export default function PolicyStatus({
   if (isEnterprise) {
     components.push(
       <div>
-        <Callout type="info" title="Enterprise Feature">
+        <Callout type="caution" title="Enterprise Feature">
           <p>
             This policy is only available as as part of our enterprise plans. It
-            is free to try only any plan for development only purposes. If you
+            is free to try on any plan for development only purposes. If you
             would like to use this in production reach out to us:{" "}
             <a href="mailto:sales@zuplo.com">sales@zuplo.com</a>
           </p>
@@ -39,7 +39,7 @@ export default function PolicyStatus({
   if (isPaidAddOn) {
     components.push(
       <div>
-        <Callout type="info" title="Enterprise Feature">
+        <Callout type="caution" title="Enterprise Feature">
           <p>
             This policy is only available as as part of our enterprise plans. If
             you would like to use this in production reach out to us:{" "}

@@ -1,5 +1,6 @@
 ---
 title: Using Zuplo as a Fastly Host
+sidebar_label: Fastly Setup
 ---
 
 This document outlines how to use Zuplo as a host (i.e. origin) for Fastly.

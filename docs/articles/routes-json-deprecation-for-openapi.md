@@ -48,10 +48,10 @@ npx @zuplo/cli@latest convert
 
 This will generate a new `routes.oas.json` and `policies.json` file in your
 `/config` folder based on your `routes.json` file. Use git to add these to your
-repo and do a **Pull Hard** to sync these changes with your working copy (in
-[portal.zuplo.com](https://portal.zuplo.com)). Once your ready and confident
-everything is working, you can delete the `routes.json` file and sync via
-git/GitHub again.
+repo and do a **Pull Hard** to sync these changes with your development (i.e.
+working copy) environment (in [portal.zuplo.com](https://portal.zuplo.com)).
+Once your ready and confident everything is working, you can delete the
+`routes.json` file and sync via git/GitHub again.
 
 You're now on the OpenAPI train 🚂 (choo choo).
 

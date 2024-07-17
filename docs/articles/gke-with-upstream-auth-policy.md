@@ -1,5 +1,6 @@
 ---
 title: Secure a GCP Backend with Zuplo Upstream Auth
+sidebar_label: GCP Backend with Upstream Auth
 ---
 
 When using any API gateway as your API's entry point, it is critical that only

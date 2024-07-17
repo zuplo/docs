@@ -2,13 +2,12 @@
 title: Role Permissions
 ---
 
-:::info Paid Add-on
+<EnterpriseFeature name="Role Based Access Control" />
 
-Roles are available as a paid add-on as part of enterprise plans. For more
-information contact [sales@zuplo.com](mailto:sales@zuplo.com).
+:::info Beta
 
-_The specific permissions of each role are currently in beta and may change
-without notice._
+The specific permissions of each role are currently in beta and may change
+without notice.
 
 :::
 

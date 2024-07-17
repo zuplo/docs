@@ -1,5 +1,6 @@
 ---
 title: Step 1 - Setup a Basic Gateway
+sidebar_label: "Step 1 - Setup Your Gateway"
 ---
 
 In this tutorial we'll setup a simple gateway. We'll use a demo API at
