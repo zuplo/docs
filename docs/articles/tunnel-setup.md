@@ -4,7 +4,7 @@ title: Tunnel Setup & Use
 
 <EnterpriseFeature name="Secure tunneling" />
 
-## Exposing Services using Tunnels
+## Setting up Tunnels
 
 A tunnel is a way to expose your _internal services_ to the Zuplo gateway
 without exposing it to the public internet. Your Zuplo Gateway accesses those
@@ -37,7 +37,7 @@ Your running container needs a single environment variable named `TUNNEL_TOKEN`.
 You should store the value as a secret using the recommended means of secret
 storage and environment variable injection for your platform.
 
-## Exposing Services using Tunnels
+## Configuring Services using Tunnels
 
 Now that you have your tunnel set up, refer to
 [configuring services](../cli/tunnels#configuring-services) through the CLI for
