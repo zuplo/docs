@@ -3,10 +3,10 @@ title: "Routes Designer"
 ---
 
 The Routes Designer is a visual tool that allows you to create and edit routes,
-as well as adding [policies](../policies), for your Zuplo Gateway without having
-to manually edit the OpenAPI `routes.oas.json` file manually.
+as well as add [policies](../policies), for your Zuplo Gateway without having to
+manually edit the OpenAPI `routes.oas.json` file manually.
 
-When you run `npm run dev`, the Routes Designer is automatically started in
+When you run `npm run dev`, the Routes Designer is automatically started on
 port 9100. You can access it by visiting http://localhost:9100 in your browser.
 
 ```sh

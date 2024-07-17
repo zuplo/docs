@@ -3,8 +3,8 @@ title: Running your Zuplo Gateway locally
 sidebar_label: Quickstart
 ---
 
-You Zuplo API gateway can be configured and run on your machine for development
-purposes, at the convenience of your code editor.
+You can configure and run your Zuplo Gateway locally on your machine for
+development purposes using your favorite code editor.
 
 ## Requirements
 
@@ -37,7 +37,7 @@ npm run dev
 If you have been using Zuplo using the _Zuplo Web Portal_, you can import your
 project into your local machine.
 
-1. Connect your project to Github from the _Zuplo Web Portal_.
+1. Connect your project to a Git repository from the _Zuplo Web Portal_.
 
 ![](https://cdn.zuplo.com/assets/3bd6b736-20d7-4ac4-805c-d7fd810dea28.png)
 
@@ -72,7 +72,6 @@ running your Zuplo Gateway locally:
 
 - Analytics
 - Developer Portal
-- Tunnels
 
 ## Next steps
 
