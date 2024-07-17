@@ -24,4 +24,16 @@ committed to your version system. Consider adding .env to your .gitignore file.
 4. You can run `npm run dev` as normal. The Zuplo CLI will automatically pick up
    the relevant services from the `.env.zuplo` file.
 5. If you want to switch environments (e.g., from development to preview), run
-   `npx zup link` again and select the new environment.
+   `npx zup link` again and select the new environment. You can see which
+   environment you are connected to by looking at the .env.zuplo file.
+
+```bash title="Contents of .env.zuplo "
+# This file is auto-generated from zup link. Please do not edit it manually.
+# It will be auto-generated afresh the next time you run zup link.
+# If you wish to add your own environment variables, create a separate .env file.
+
+ZUPLO_ACCOUNT_NAME=your-account-name
+ZUPLO_PROJECT_NAME=your-project-name
+ZUPLO_ENVIRONMENT_TYPE=your-environment
+
+```
