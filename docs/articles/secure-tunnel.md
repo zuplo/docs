@@ -25,7 +25,7 @@ build in virtually any format (i.e. an Azure VM, etc.). The tunnel itself is a
 lightweight service that when started makes an outbound connection to the Zuplo
 network and then through to your Zuplo Gateway.
 
-When the tunnel service connects to the Zuplo network traffic from your gateway
+When the tunnel service connects to the Zuplo network, traffic from your gateway
 can be routed to internal services running in your network or VPC. For example,
 if your API is running on the internal DNS address `external-api.local`, the
 tunnel will route traffic from the Zuplo API Gateway to your internal service
@@ -77,10 +77,8 @@ solution that meets your scale requirements.
 You should run your tunnel with an IAM role or other network policies that only
 allow the tunnel to make requests to the network services that you want your
 Gateway to access. This can be done in a variety of ways depending on your
-setup. IAM roles and internal service meshes are common means of controlling
-which services the tunnel can access. For example, at Zuplo we use
-[Linkerd](https://linkerd.io/) in our Kubernetes clusters as one mechanism for
-controlling what services are accessible to our tunnel deployment.
+setup. IAM roles, network segregation, and internal service meshes are common
+means of controlling which services the tunnel can access.
 
 For details on how to configure a tunnel on your network see
 [the setup guide](tunnel-setup.md).

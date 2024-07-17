@@ -3,7 +3,7 @@ title: Tunnel Commands
 ---
 
 ```bash
-[I] ➜ zup tunnel --help
+zup tunnel --help
 zup tunnel
 
 Tunnel commands
