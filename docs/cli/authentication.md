@@ -14,10 +14,12 @@ The Zuplo CLI, `zup`, uses API Keys to authenticate. You can find your API Key
 by following these steps:
 
 1. Navigate to [portal.zuplo.com](https://portal.zuplo.com) and log in.
-2. Select the project that you want to work on.
-3. Click on the "Settings" tab and navigate to the "Zuplo API Keys" section.
+2. Select the account that you want to work on.
+3. Click on the "Settings" tab and navigate to the "API Keys" section. Select an
+   existing API Key or create a new one to use with the CLI.
 
-All commands take an `--api-key` argument. For example, to list your zups, run:
+Most commands take an `--api-key` argument. For example, to list your available
+Zuplo API Gateways, run:
 
 ```bash
 zup list --api-key zpka_d67b7e241bb948758f415b79aa8exxxx_2efbxxxx
