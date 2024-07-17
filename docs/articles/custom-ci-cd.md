@@ -5,10 +5,10 @@ sidebar_label: Custom CI/CD
 
 Zuplo provides the Zuplo deployer, a GitHub app that can be used to
 automatically deploy your APIs from your GitHub repository to the Zuplo
-platform. However, we realized that sometimes you might not be using GitHub as
-your version control system. Or, that you might want to exercise more control
-over your CI/CD pipeline. For these cases, we provide a CLI that can be used to
-deploy your APIs to the Zuplo platform.
+platform. However, sometimes you might not be using GitHub as your version
+control provider. Or, that you might want to exercise more control over your
+CI/CD pipeline. For these cases, we provide a CLI that can be used to deploy
+your APIs to the Zuplo platform.
 
 ## Getting Started
 
@@ -20,13 +20,13 @@ sure to select the right one.
 
 :::
 
-The Zuplo CLI, `zup`, which you be using in you custom CI/CD script, uses API
-Keys to authenticate. You can find your API Key by following these steps:
+The Zuplo CLI, [`zup`](../cli/installation.md), which you be using in you custom
+CI/CD script, uses API Keys to authenticate. You can find your API Key by
+following these steps:
 
 1. Navigate to [portal.zuplo.com](https://portal.zuplo.com) and log in.
-2. Select the project that you want to work on.
-3. Click on the "Settings" tab and navigate to the "Zuplo API Keys" section.
-
+2. Select the account that you want to work on.
+3. Click on the "Settings" tab and navigate to the "API Keys" section.
 4. Write some tests for your API. We provide a rich set of test helpers and
    utils based on BDD. You can see examples of tests at
    [samples](https://github.com/zuplo/zup-cli-example-project/tree/main/tests).
@@ -232,7 +232,7 @@ steps:
 2. Create a secret for your Azure Pipelines and be sure to set `ZUPLO_API_KEY`
    to the API key you generated in the previous step.
 
-## Setting up a custom workflow with GitLab Pipelines
+## Setting up a custom workflow with Gitlab Pipelines
 
 The full example is available at
 https://github.com/zuplo/zup-cli-example-project/blob/main/.gitlab-ci.yml
