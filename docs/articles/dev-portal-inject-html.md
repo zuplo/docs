@@ -3,13 +3,7 @@ title: Dev Portal Inject Custom Html
 sidebar_label: Inject Custom Html
 ---
 
-:::info Enterprise Feature
-
-This feature is only available as as part of our enterprise plans. It is free to
-try only any plan for development only purposes. If you would like to use this
-in production reach out to us: [sales@zuplo.com](mailto:sales@zuplo.com)
-
-:::
+<EnterpriseFeature />
 
 The Zuplo Developer Portal allows you to inject custom HTML into the portal.
 This is typically used to inject custom analytics scripts.

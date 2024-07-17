@@ -2,12 +2,7 @@
 title: Log Export
 ---
 
-:::note
-
-The log export option is available only to customers on a Zuplo enterprise plan.
-For more information contact [sales@zuplo.com](mailto:sales@zuplo.com).
-
-:::
+<EnterpriseFeature />
 
 In addition to viewing logs in the the portal, it may be useful to have logs
 pushed to you so that they can be used in your monitoring, alerting, and

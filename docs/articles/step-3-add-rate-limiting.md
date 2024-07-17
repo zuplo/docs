@@ -1,5 +1,6 @@
 ---
 title: Step 3 - Rate Limiting
+sidebar_label: "Step 3 - Rate Limiting"
 ---
 
 In this guide we'll add Rate Limiting to a route. You can do this for any Zuplo

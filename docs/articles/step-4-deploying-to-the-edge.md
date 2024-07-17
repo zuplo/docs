@@ -1,5 +1,6 @@
 ---
 title: Step 4 - Deploying to the Edge
+sidebar_label: "Step 4 - Deploy"
 ---
 
 In this guide we'll show you how to deploy your gateway to the edge, at over 200

@@ -20,13 +20,7 @@ the project.
 
 ## Change Member Role
 
-:::info Paid Add-on
-
-Roles are available as a paid add-on as part of enterprise plans. For plans
-without this feature, all account members will have access to all projects. For
-more information contact [sales@zuplo.com](mailto:sales@zuplo.com).
-
-:::
+<EnterpriseFeature name="Role Based Access Control" />
 
 Account admins will always have access to all projects. If you try to change the
 role of an account admin, you will see a warning message that this user is an

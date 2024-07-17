@@ -44,14 +44,3 @@ deployed to Zuplo are configured on Cloudflare to respect existing cache
 headers. The means that if you want content cached, simply set the
 [appropriate headers](https://developers.cloudflare.com/cache/about/cache-control/)
 and Cloudflare's global CDN will cache responses at the edge.
-
-## Developer Environments
-
-Generally, developer environments (i.e. any API running on the domain
-`zuplo.dev`) has similar security configurations as "production" environments
-(i.e. any API running on the domain `zuplo.app` or your own custom domain).
-There are some exceptions where we have slightly more security measures in place
-to prevent abuse of developer resources. If you see any issues or have requests
-blocked to your developer instance please contact
-[support@zuplo.com](mailto:support@zuplo.com) and we can assist with adjusting
-rules to ensure you can test your API as needed.

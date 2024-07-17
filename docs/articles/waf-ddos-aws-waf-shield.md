@@ -1,5 +1,6 @@
 ---
 title: Configuring Zuplo with AWS WAF + Shield
+sidebar_label: AWS WAF + Shield
 ---
 
 AWS WAF + Shield run at AWS Cloudfront edge locations. Zuplo can be configured

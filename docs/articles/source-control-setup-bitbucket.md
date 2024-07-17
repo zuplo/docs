@@ -1,5 +1,6 @@
 ---
 title: "Source Control: Setup BitBucket"
+sidebar_label: BitBucket Integration
 ---
 
 ## BitBucket.org

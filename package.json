@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "nodemon --exec next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -66,6 +66,7 @@
     "eslint-config-next": "^13.5.4",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
+    "nodemon": "^3.1.4",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14"
   },

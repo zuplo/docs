@@ -1,18 +1,37 @@
 ---
-title: API Key Administration
+title: Managing API Keys in the Portal
+sidebar_label: Managing Keys
 ---
 
-## Managing Consumers in the Zuplo Portal
+API Key Consumers can be managed in the Zuplo Portal's **Services** section.
+Each project is created with three API Key Buckets - one for production, one
+shared by preview environments, and one for development (working copy)
+environments.
 
-API Key Consumers can be managed in the Zuplo Portal's **API Key Consumers**
-section under the <SettingsTabIcon /> **Settings** tab.
+![Services](../../public/media/api-key-administration/image.png)
 
-![](https://cdn.zuplo.com/assets/4c43a1c7-8d9b-4659-9ab0-2129a0aa7e8e.png)
+You can view the buckets for each environment or for all environments using the
+drop down.
 
-To add a new API Key Consumer click the **Add new consumer** button and complete
+![Environment Selection](../../public/media/api-key-administration/image-1.png)
+
+To open the API Key Bucket for an environment, click the **Configure** button.
+
+![Configure](../../public/media/api-key-administration/image-2.png)
+
+When you first open the API Key Bucket, you will not have any API Keys created.
+
+![Empty API Key Bucket](../../public/media/api-key-administration/image-3.png)
+
+To add a new API Key Consumer click the **Create Consumer** button and complete
 the form.
 
-![New API Key Consumer](../../public/media/new-api-key-consumer.png)
+![New API Key Consumer](../../public/media/api-key-administration/image-4.png)
+
+Once a consumer is created, you can view or copy the API Key by clicking the
+icons shown.
+
+![Copy or View](../../public/media/api-key-administration/image-5.png)
 
 If you're using the Zuplo [Developer Portal](./developer-portal.md), we have an
 integration with the API Key API that allows developers to access their API

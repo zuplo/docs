@@ -1,5 +1,6 @@
 ---
 title: "SSO: Frequently Asked Questions"
+sidebar_label: "FAQ"
 ---
 
 This document explains some common questions about Zuplo's Enterprise Single

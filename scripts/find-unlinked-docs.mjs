@@ -21,6 +21,17 @@ function listDocs(items) {
     } else if ("items" in item && typeof item.items === "object") {
       listDocs(item.items);
     }
+    if (typeof item === "object" && "link" in item) {
+      if (typeof item.link === "string") {
+        allDocs.push(item.link);
+      } else if (
+        "link" in item &&
+        "type" in item.link &&
+        item.link.type === "doc"
+      ) {
+        allDocs.push(item.link.id);
+      }
+    }
   }
 }
 

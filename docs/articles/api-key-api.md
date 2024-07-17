@@ -65,7 +65,7 @@ erDiagram
 Buckets are the top level group for this service. A bucket could be used with a
 single Zuplo environment or shared among multiple environments or projects. By
 default a Zuplo API Gateway project will be created with several buckets that
-map to production, preview, and working copy environments.
+map to production, preview, and development (working copy) environments.
 
 Enterprise plan customers run complex configurations where buckets are shared
 across gateway projects or even accounts. This can allow your end-users to

@@ -1,5 +1,6 @@
 ---
 title: Setup Azure Active Directory SSO
+sidebar_label: Azure AD Setup
 ---
 
 Zuplo uses Auth0 to enable SSO for enterprise accounts who have purchased

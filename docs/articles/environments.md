@@ -4,9 +4,9 @@ title: Environments
 
 One of the things that makes Zuplo different from most API gateways, and API
 management platforms is that you can rapidly deploy many environments. Some of
-our customers have as many as 250 concurrently deployed edge environments! This
-facilitates collaboration, where teams can collaborate on new features with a
-dedicated environment, deployed for no additional cost in under 20s.
+our customers have hundreds of deployed environments! This facilitates
+collaboration, where teams can collaborate on new features with a dedicated
+environment, deployed for no additional cost in under 20 seconds.
 
 ## Environment Types
 

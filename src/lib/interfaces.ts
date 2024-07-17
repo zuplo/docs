@@ -3,6 +3,7 @@ import { JSONSchema7 } from "json-schema";
 export type NavItem = {
   label: string;
   href?: string;
+  hideItems?: boolean;
   items?: Array<NavItem>;
   isExpandedByDefault?: boolean;
 };

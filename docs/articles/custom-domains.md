@@ -10,10 +10,8 @@ project. Custom Domains are available on
 
 :::note
 
-Custom domains can only be added to edge deployed environments. You can tell if
-an environment is edge deployed if the domain ends with `zuplo.app`.
-Environments with domains ending with `zuplo.dev` are for development only and
-do not support custom domains.
+Custom domains cannot be added to development environments. You can tell if an
+environment is development if the domain ends with `zuplo.dev`.
 
 :::
 
@@ -33,8 +31,8 @@ modal.
 
 ### 2. Add your domain
 
-Then, pick the edge deployed environment you want to assign the domain to and
-enter your apex domain (e.g. example.com) or subdomain (e.g. api.example.com)
+Then, pick the environment you want to assign the domain to and enter your apex
+domain (e.g. example.com) or subdomain (e.g. api.example.com)
 
 ![Add New Domain](../../public/media/custom-domains/image-1.png)
 

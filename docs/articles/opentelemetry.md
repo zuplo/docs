@@ -7,12 +7,7 @@ Zuplo ships with an OpenTelemetry plugin that allows you to collect and export
 telemetry data from your Zuplo API. Currently, the OpenTelemetry plugin
 implements tracing. Metrics and logging support are planned for future releases.
 
-:::note Enterprise Feature
-
-OpenTelemetry is an enterprise feature. Please contact your account manager or
-email sales@zuplo.com for information and pricing.
-
-:::
+<EnterpriseFeature name="OpenTelemetry" />
 
 ## Tracing
 

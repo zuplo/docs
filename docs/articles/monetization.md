@@ -1,5 +1,5 @@
 ---
-title: Introduction
+title: Zuplo API Monetization
 ---
 
 Zuplo enables you, as an _API provider_, to effortlessly monetize your APIs. It

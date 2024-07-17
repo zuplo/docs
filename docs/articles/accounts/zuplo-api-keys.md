@@ -29,13 +29,7 @@ only view their own API keys. Members do not have access to API keys.
 Select the "Create API Key" button to create a new API key. You can enter a
 label, expiration, and select the permissions for your new API key.
 
-:::info Paid Add-on
-
-Fine-grain API keys are only available as a paid add-on as part of enterprise
-plans. For plans without this feature, API Keys will have all permissions. For
-more information contact [sales@zuplo.com](mailto:sales@zuplo.com).
-
-:::
+<EnterpriseFeature name="Fine-grained API Key Management" />
 
 ![Create API Key](../../../public/media/zuplo-api-keys/image-1.png)
 
@@ -54,13 +48,7 @@ bottom of the page.
 
 ## API Key Permissions
 
-:::info Paid Add-on
-
-Fine-grain API keys are only available as a paid add-on as part of enterprise
-plans. For plans without this feature, API Keys will have all permissions. For
-more information contact [sales@zuplo.com](mailto:sales@zuplo.com).
-
-:::
+<EnterpriseFeature name="Fine-grained API Key Management" />
 
 The following table outlines the permissions available to each API key.
 

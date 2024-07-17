@@ -175,7 +175,7 @@ If a feature only implements the operation partially, details are listed.
 
 :::caution
 
-There can occasionally be differences in which alorithms are supported in
+There can occasionally be differences in which algorithms are supported in
 development (working copy) environments. The table below lists support for the
 production edge runtime. If you find an issue with your development environment
 contact support@zuplo.com and we can help resolve the issue.

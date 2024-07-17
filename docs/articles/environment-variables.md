@@ -32,11 +32,11 @@ like the value to be a secret or a regular value.
 Environment variables can be applied to one or many different environments. You
 can select one or more environments in which to apply the variable.
 
-| Environment  | Description                                                                                                                                                                                |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Prod         | The environment that is deployed from your **default** branch in source control. This is usually called `main`.                                                                            |
-| Preview      | Any environment that is deployed from source control that is **not the default** branch. (i.e. `staging` or `preview`). This also includes any branch that is created from a pull request. |
-| Working Copy | Any environment that is deployed while developing with the portal. Each developer gets their own working copy. Working copies are always deployed to `zuplo.dev`                           |
+| Environment                | Description                                                                                                                                                                                |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Prod                       | The environment that is deployed from your **default** branch in source control. This is usually called `main`.                                                                            |
+| Preview                    | Any environment that is deployed from source control that is **not the default** branch. (i.e. `staging` or `preview`). This also includes any branch that is created from a pull request. |
+| Development (Working Copy) | Any environment that is deployed while developing with the portal. Each developer gets their own development environment. These environments are always deployed to `zuplo.dev`            |
 
 For the **Preview** environment option, a specific named environment can be
 selected. For example, if you want a variable set only for the environment

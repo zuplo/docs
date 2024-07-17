@@ -9,6 +9,8 @@ will reset with each build. When running in production mode at the edge the
 cache will support edge distribution - it can take up to ~1 minute for writes to
 sync across all nodes globally (though is usually much quicker).
 
+<EnterpriseFeature />
+
 ## Example
 
 ```ts

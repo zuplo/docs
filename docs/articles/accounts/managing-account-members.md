@@ -31,13 +31,7 @@ members.
 
 ## Change Member Role
 
-:::info Paid Add-on
-
-Roles are available as a paid add-on as part of enterprise plans. For plans
-without this feature, users are always set to the "Admin" role. For more
-information contact [sales@zuplo.com](mailto:sales@zuplo.com).
-
-:::
+<EnterpriseFeature name="Role Based Access Control" />
 
 Once a user has accepted the invitation, you can change their role by selecting
 the role from the drop down.
