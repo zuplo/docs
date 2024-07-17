@@ -301,7 +301,8 @@
       "articles/gke-with-upstream-auth-policy",
       "articles/graphql-security",
       "articles/add-api-to-backstage",
-      "articles/use-openapi-extension-data"
+      "articles/use-openapi-extension-data",
+      "articles/update-zup-in-github-action"
     ]
   },
   {
