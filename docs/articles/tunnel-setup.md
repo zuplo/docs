@@ -82,9 +82,9 @@ one for staging.
 
 ## Using Services Exposed through Tunnels in Config
 
-Services can also be used in config such as with the URL Rewrite handler. To
-call a tunnel service simply use it as part of the rewrite url as shown in the
-image below.
+Services can also be used in routes.oas.json file such as with the URL Rewrite
+handler. To call a tunnel service simply use it as part of the rewrite url as
+shown in the image below.
 
 ![](https://cdn.zuplo.com/assets/0c91be91-a591-4cef-ac29-d266e8a3181e.png)
 
