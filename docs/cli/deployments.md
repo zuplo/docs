@@ -29,6 +29,7 @@ an argument or through the `ZUPLO_API_KEY` environment variable.
 
 ```bash
 # The following will use the current Git branch as the name of the environment
+
 git checkout -b my-new-branch
 zup deploy
 ```
@@ -36,13 +37,14 @@ zup deploy
 ```bash
 # If you do not wish to use the current Git branch as the name of the
 # environment, you can specify one using --environment
+
 zup deploy --environment my-env-name
 ```
 
 ```bash
 # If you have configured your remote origin differently from portal.zuplo.com,
-# you can still force it to deploy. Be aware that this could make merging changes impossible if the remote do not share a common ancestor.
-git remote -v
+# you can still force it to deploy. Be aware that this could make merging
+# changes impossible if the remote do not share a common ancestor.
 
 zup deploy --no-verify-remote
 ```

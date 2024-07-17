@@ -53,7 +53,7 @@ You can find more sample tests
 Once you have written your tests, you can run them using the `test` command.
 
 ```bash
-zup test --endpoint https:/your-zup.example.com
+zup test --endpoint https://your-zup.example.com
 ```
 
 ## Environment Variables
@@ -108,5 +108,4 @@ time you run the tests.
 
 ## Tips for writing tests
 
-Look for more testing tips
-[here](../articles/testing.md#tips-for-writing-tests).
+Look for more testing tips [here](../articles/testing#tips-for-writing-tests).
