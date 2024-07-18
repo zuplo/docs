@@ -406,6 +406,7 @@
       "articles/zp-body-removed",
       "articles/audit-log",
       "articles/hooks",
+      "articles/custom-cors-policy",
       "articles/runtime-extensions",
       "articles/not-found-handler",
       "articles/zuplo-json"
