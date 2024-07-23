@@ -10,7 +10,7 @@ import "@/styles/styles.css";
 import "@/styles/tailwind.css";
 import Script from "next/script";
 import { Suspense } from "react";
-import { KOALA_URL, ZARAZ_URL } from "../lib/env";
+import { GOOGLE_TAG_MANAGER_ID, KOALA_URL, ZARAZ_URL } from "../lib/env";
 
 const inter = Inter({
   weight: ["300", "400", "500", "600", "700"],
@@ -52,6 +52,22 @@ export default function RootLayout({
           type="image/x-icon"
           href="https://cdn.zuplo.com/www/favicon.png"
         />
+        {GOOGLE_TAG_MANAGER_ID && (
+          <>
+            <Script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_TAG_MANAGER_ID}`}
+            />
+            <Script
+              id="gtm"
+              strategy="afterInteractive"
+              async
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', '${GOOGLE_TAG_MANAGER_ID}');`,
+              }}
+            />
+          </>
+        )}
         {ZARAZ_URL && (
           <Script
             id="zaraz"
