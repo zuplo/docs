@@ -1,9 +1,13 @@
 import withNavigation from "./src/build/navigation.mjs";
 import withPolicies from "./src/build/policies.mjs";
 
+const isProd = process.env.NODE_ENV === "production";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   basePath: "/docs",
+
+  assetPrefix: isProd ? "https://docs.zuplo.site" : undefined,
   pageExtensions: ["js", "jsx", "md", "ts", "tsx"],
   transpilePackages: ["lucide-react"],
   swcMinify: true,
