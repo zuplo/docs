@@ -87,7 +87,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <Providers>
           <Layout>{children}</Layout>
         </Providers>
-        <SpeedInsights endpoint="https://docs.zuplo.site/_vercel/speed-insights/vitals" />
+        <SpeedInsights endpoint="https://docs.zuplopreview.net/_vercel/speed-insights/vitals" />
       </body>
     </html>
   );
