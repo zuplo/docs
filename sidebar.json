@@ -417,7 +417,7 @@
     "label": "Zuplo CLI",
     "link": {
       "type": "doc",
-      "id": "cli/index"
+      "id": "cli/overview"
     },
     "items": [
       "cli/installation",
