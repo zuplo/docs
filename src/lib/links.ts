@@ -112,7 +112,7 @@ export const featuresLinks: Array<LinkData> = [
     shortDescription: "Deploy in seconds from git",
   },
   {
-    href: "/policies",
+    href: `${wwwLink.href}/policies`,
     name: "Policies",
     shortDescription: "Add policies to your APIs.",
   },
