@@ -721,7 +721,12 @@
     },
     {
       "source": "/docs/articles/cli{/}?",
-      "destination": "/docs/cli",
+      "destination": "/docs/cli/overview",
+      "permanent": true
+    },
+    {
+      "source": "/docs/cli{/}?",
+      "destination": "/docs/cli/overview",
       "permanent": true
     },
     {
