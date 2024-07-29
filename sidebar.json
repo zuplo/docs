@@ -472,6 +472,10 @@
       },
       {
         "type": "doc",
+        "id": "articles/limits"
+      },
+      {
+        "type": "doc",
         "id": "articles/security"
       },
       {
