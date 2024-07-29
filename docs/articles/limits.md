@@ -30,8 +30,8 @@ sales to discuss pricing plans.
 Our general guidelines for what constitutes fair use are as follows:
 
 - Free Plan: 500 consumers
-- Builder Plan: 10,000 consumers
-- Business Plan: 100,000 consumers
+- Builder Plan: 1,000 consumers
+- Business Plan: 10,000 consumers
 - Enterprise Plan: Custom
 
 ### Consumer Metadata and Tags
