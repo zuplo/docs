@@ -10,9 +10,9 @@ status in routes.oas.json.
 ## Setup via Portal
 
 The Redirect Handler can be added to any route using the Route Designer. Open
-the **Route Designer** by navigating to the <CodeEditorTabIcon /> **Code
-Editor** tab then click **routes.oas.json**. Inside any route, select
-**Redirect** from the **Request Handlers** drop-down.
+the **Route Designer** by navigating to the **Code Editor** tab then click
+**routes.oas.json**. Inside any route, select **Redirect** from the **Request
+Handlers** drop-down.
 
 In the text box enter the URL location for the redirect.
 

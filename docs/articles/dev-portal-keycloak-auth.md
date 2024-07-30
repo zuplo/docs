@@ -46,11 +46,11 @@ Dev Portal.
 
 ### 3/ Configure the Developer Portal
 
-Inside of the Zuplo Developer portal navigate to the <CodeEditorTabIcon />
-**Code Editor** tab and open the `dev-portal.json` file. Under the
-"Authentication" section, set the "Provider" to "OpenID Connect". Set the
-"Authority" value to the `issuer` value you copied from the JSON file in the
-previous step. Set the "Client ID" value to the value you set in step 1 (in our
-example this is `zuplo-dev-portal`). Click "Save".
+Inside of the Zuplo Developer portal navigate to the **Code Editor** tab and
+open the `dev-portal.json` file. Under the "Authentication" section, set the
+"Provider" to "OpenID Connect". Set the "Authority" value to the `issuer` value
+you copied from the JSON file in the previous step. Set the "Client ID" value to
+the value you set in step 1 (in our example this is `zuplo-dev-portal`). Click
+"Save".
 
 ![alt text](../../public/media/dev-portal-keycloak-auth/image-6.png)

@@ -10,8 +10,8 @@ Zuplo provides several options depending on the level of customization required.
 
 For development and testing, the easiest way to obtain an API key is right in
 the [Zuplo Management Portal](https://portal.zuplo.com). From inside the **API
-Key Consumers** section in the <SettingsTabIcon /> **Settings** tab you can
-create and manage consumers and their keys.
+Key Consumers** section in the **Settings** tab you can create and manage
+consumers and their keys.
 
 For quick access the newest, non-expired API key is shown in this section.
 

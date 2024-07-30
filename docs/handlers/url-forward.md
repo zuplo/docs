@@ -20,9 +20,9 @@ forward any search parameters.
 ## Setup via Portal
 
 The Forward Handler can be added to any route using the Route Designer. Open the
-**Route Designer** by navigating to the <CodeEditorTabIcon /> **Files** tab then
-click **routes.oas.json**. Inside any route, select **URL Forward** from the
-**Request Handlers** drop-down.
+**Route Designer** by navigating to the **Files** tab then click
+**routes.oas.json**. Inside any route, select **URL Forward** from the **Request
+Handlers** drop-down.
 
 In the text box enter the URL to rewrite the request. Values can be mixed into
 the URL string using Javascript string interpolation syntax. For example:
