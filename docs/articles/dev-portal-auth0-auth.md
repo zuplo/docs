@@ -65,8 +65,8 @@ different URLs.
 
 ### 4/ Configure the Developer Portal
 
-Inside of the Zuplo Developer portal navigate to the <CodeEditorTabIcon />
-**Code Editor** tab and open the `dev-portal.json` file. You can
+Inside of the Zuplo Developer portal navigate to the **Code Editor** tab and
+open the `dev-portal.json` file. You can
 [edit the JSON manually](./dev-portal-json.md), but in this tutorial we will use
 the UI editor.
 

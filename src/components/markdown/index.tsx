@@ -6,10 +6,8 @@ import { Card, CardGroup } from "./Card";
 import Icon from "./Icon";
 import { EnterpriseFeature } from "./Plans";
 import ZupIt from "./ZupIt";
-import * as UIIcons from "./ui-icons";
 
 const components: React.ComponentProps<typeof MDXProvider>["components"] = {
-  ...UIIcons,
   Icon,
   EnterpriseFeature,
   GithubButton,

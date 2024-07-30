@@ -90,10 +90,9 @@ Next, you will enable the monetization pages in your Developer Portal.
 
 ![Pricing Table](../../public/media/monetization-dev-portal-setup/image-2a.png)
 
-6. Finally, click the <EnvironmentVariablePicker/> icon next to the **Secret
-   Key** field and select the environment variable `STRIPE_SECRET_KEY` you
-   created earlier. This will prefill the form with the value
-   `$env(STRIPE_SECRET_KEY)`.
+6. Finally, click the icon next to the **Secret Key** field and select the
+   environment variable `STRIPE_SECRET_KEY` you created earlier. This will
+   prefill the form with the value `$env(STRIPE_SECRET_KEY)`.
 7. Click save to publish your changes.
 
 ## 3/ Preview Your Developer Portal

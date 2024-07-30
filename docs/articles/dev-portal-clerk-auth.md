@@ -41,9 +41,9 @@ to the value of the `client_secret` value in the API response.
 
 ### 2/ Configure the Developer Portal
 
-Inside of the Zuplo Developer portal navigate to the <CodeEditorTabIcon />
-**Code Editor** tab and open the `dev-portal.json` file. Open the JSON tab and
-edit the file to look like the following.
+Inside of the Zuplo Developer portal navigate to the **Code Editor** tab and
+open the `dev-portal.json` file. Open the JSON tab and edit the file to look
+like the following.
 
 ```json
 {

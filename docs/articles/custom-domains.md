@@ -22,10 +22,9 @@ for your Zuplo project.
 
 ### 1. Navigate to your project's Custom Domain Settings
 
-Go to your project in the Zuplo portal and open to the <SettingsTabIcon />
-**Settings** tab (1), then select **Custom Domain** (2) and click on the
-`Add New Custom Domain` button to open the `New Custom Domain` configuration
-modal.
+Go to your project in the Zuplo portal and open to the **Settings** tab (1),
+then select **Custom Domain** (2) and click on the `Add New Custom Domain`
+button to open the `New Custom Domain` configuration modal.
 
 ![Custom Domain](../../public/media/custom-domains/image.png)
 

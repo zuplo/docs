@@ -14,8 +14,8 @@ spec.
 ## Setup via Portal
 
 The Forward Handler can be added to any route using the Route Designer. Open the
-**Route Designer** by navigating to the <CodeEditorTabIcon /> **Files** tab then
-click **routes.oas.json**. Inside any route, select **OpenAPI Spec** from the
+**Route Designer** by navigating to the **Files** tab then click
+**routes.oas.json**. Inside any route, select **OpenAPI Spec** from the
 **Request Handlers** drop-down.
 
 The handler should be defaulted to the OpenAPI file you currently have open, but

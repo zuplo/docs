@@ -17,8 +17,8 @@ write-only, meaning the value cannot be retrieved once it is set.
 
 ## Environment Variable Editor
 
-To set environment variables in your project, open the <SettingsTabIcon />
-**Settings** tab and then select the **Environment Variables** section.
+To set environment variables in your project, open the **Settings** tab and then
+select the **Environment Variables** section.
 
 To create a new variable, click **Add new variable**.
 

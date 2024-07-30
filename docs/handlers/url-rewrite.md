@@ -13,9 +13,9 @@ virtually any aspect of your request.
 ## Setup via Portal
 
 The Rewrite Handler can be added to any route using the Route Designer. Open the
-**Route Designer** by navigating to the <CodeEditorTabIcon /> **Files** tab then
-click **routes.oas.json**. Inside any route, select **URL Rewrite** from the
-**Request Handlers** drop-down.
+**Route Designer** by navigating to the **Files** tab then click
+**routes.oas.json**. Inside any route, select **URL Rewrite** from the **Request
+Handlers** drop-down.
 
 ![Url Rewrite Handler selection](../../public/media/url-rewrite-handler-selection.png)
 
