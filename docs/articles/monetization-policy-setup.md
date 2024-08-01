@@ -23,7 +23,7 @@ with the plan to which they have subscribed.
 :::tip
 
 For a full tutorial on the API Key Auth Policy see the
-[Getting Started guide](/docs/articles/step-2-add-api-key-auth).
+[Getting Started guide](/docs/articles/step-3-add-api-key-auth).
 
 :::
 

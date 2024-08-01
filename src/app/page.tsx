@@ -38,11 +38,11 @@ export default async function Page() {
             <Link href="/articles/step-1-setup-basic-gateway">
               Step 1 - Setup Basic Gateway
             </Link>
-            <Link href="/articles/step-2-add-api-key-auth">
-              Step 2 - API Key Auth
+            <Link href="/articles/step-2-add-rate-limiting">
+              Step 2 - Rate Limiting
             </Link>
-            <Link href="/articles/step-3-add-rate-limiting">
-              Step 3 - Rate Limiting
+            <Link href="/articles/step-3-add-api-key-auth">
+              Step 3 - API Key Auth
             </Link>
             <Link href="/articles/step-4-deploying-to-the-edge">
               Step 4 - Deploying to the Edge

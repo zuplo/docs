@@ -17,8 +17,8 @@ To follow this tutorial you'll need
 
 - a GitHub account (it's free, sign up at [github.com](https://github.com)).
 - a zuplo project - complete [Step 1](./step-1-setup-basic-gateway.md),
-  [Step 2](./step-2-add-api-key-auth.md) and
-  [Step 3](./step-3-add-rate-limiting.md) for a great start!
+  [Step 2](./step-2-add-rate-limiting.md) and
+  [Step 3](./step-3-add-api-key-auth.md) for a great start!
 - to install the
   [Zuplo GitHub deployer](https://github.com/apps/zuplo/installations/new) to
   GitHub - you can do that
@@ -109,7 +109,7 @@ that is the link to your new environment.
 
 ![](https://cdn.zuplo.com/assets/26fa58b6-7a5a-4627-bd9f-246972639f12.png)
 
-## 3/ Deploy another environment
+## 3/ Deploy another Environment
 
 Zuplo makes it easy for teams to collaborate by allowing teams to create many
 preview environments. To create a new environment, simple go to your repo in
@@ -122,7 +122,7 @@ Let's create a branch called `development`
 Wait about 20s and head back to Zuplo - you should see a new entry in the
 environment dropdown called `development`.
 
-## 4/ Push a change to 'development'
+## 4/ Push a Change to 'development'
 
 Let's make a simple change to our `working-copy` environment. Let's do something
 simple like capitalize the **Summary** field from 'Get all todos' to 'Get All

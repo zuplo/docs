@@ -4,11 +4,7 @@ sidebar_label: "Step 1 - Setup Your Gateway"
 ---
 
 In this tutorial we'll setup a simple gateway. We'll use a demo API at
-[todos.zuplo.io](https://todos.zuplo.io/todos) that acts as a todolist API.
-
-This demo API is protected by an API key (sometimes called a shared secret) that
-must be provided in an `api-key` header. Good news - given this is a demo API -
-the key is provided in the unauthenticated error message.
+[getting-started.zuplo.io](https://getting-started.zuplo.io).
 
 To get started, sign in to [portal.zuplo.com](https://portal.zuplo.com) and
 create a free account. Create a new **empty** project. Then...
@@ -20,90 +16,71 @@ Zuplo also supports building and running your API locally. To learn more
 
 :::
 
-## 1/ Add a route
+## 1/ Add a Route
 
 Inside your new project, choose the `routes.oas.json` file and click **Add
 Route**.
 
-![Add Route](../../public/media/step-1-setup-basic-gateway/image.png)
+![Add Route](../../public/media/step-1-setup-basic-gateway/image-11.png)
 
-Using the Route Designer, let's configure our first route to handle the
-`GET /todos` route.
+Your API's first route will appear, with many configurable fields. Here's a
+quick overview of them:
 
-- Summary: `Get all todos`
-- Method: `GET`
-- Path: `/todos`
-- [URL Forward](/docs/handlers/url-forward): `https://todos.zuplo.io`
+- **Summary**: A summary of what the route does, which will be used in Step 4
+  for documenting your API
+- **Method** and **Path**: The associated method and path for your endpoint.
+  This is what other services will use to call your API.
+- **CORS**: The [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
+  configuration for your path.
+- **Request Handler**: This is the piece of functionality that will be invoked
+  when a request comes through to your endpoint. By default, we are using the
+  [URL Forward Handler](../handlers/url-forward.md) which proxies requests to
+  the "Forward to" URL. In this case, https://getting-started.zuplo.io
 
-![Get all todos](../../public/media/step-1-setup-basic-gateway/image-1.png)
+![Your First Route](../../public/media/step-1-setup-basic-gateway/image-14.png)
 
-Save your changes (you can click the disk icon next to `routes.oas.json` or
-press CMD+S).
+Save your new route (you can click the three-dot menu next to `routes.oas.json`
+and then click Save, or press CMD+S).
 
 You can quickly test this route by clicking the **Test** button next to the
 **Path** field. You can use the built in test tool or click the URL to open in a
 new tab.
 
-![Test the API](../../public/media/step-1-setup-basic-gateway/image-2.png)
+![Test your API](../../public/media/step-1-setup-basic-gateway/image-15.png)
 
-You should receive a 401 Unauthorized that says something similar to
+You should receive a 200 OK that says something similar to
 
 ```txt
-{
-  "status": 401,
-  "title": "Unauthorized",
-  "detail": "No key or invalid key provided",
-  "type": "https://httpproblems.com/http-status/401",
-  "instance": "/todos",
-  "hint": "This is a demo API that requires authentication. You must add a header 'api-key' with a value '4f0aeaf7-d17f-4b2b-9b71-5177bd194759'"
-  ...
-}
+"Congratulations - You've successfully proxied my API endpoint. Want to know a
+secret? Try changing your Route's path to /policies-test/secret and test your
+route again after saving. The secret will be in the response."
 ```
 
-This is expected because you have not provided the required `api-key` header.
-Copy the required `api-key` value from that error message to your clipboard
-(e.g. `4f0aeaf7-d17f-4b2b-9b71-5177bd194759`).
+A secret? Let's try and find out what this API is hiding!
 
-## 2/ Set the secret header
+## 2/ Editing your Route
 
-Open the policies section in your route and click **Add Policy** to the request
-pipeline.
+Exit the test console and change your route's Path from `/path-0` to
+`/policies-test/secret`. Make sure to save your changes. Your calls will now be
+forwarded to `https://getting-started.zuplo.io/policies-test/secret`
 
-![Add policy](../../public/media/step-1-setup-basic-gateway/image-3.png)
+![Change the Path](../../public/media/step-1-setup-basic-gateway/image-16.png)
 
-Find the **Add or Set Request Header**
+Check out the new response when you fire a request at your route via the test
+console.
 
-![Find set requests headerpolicy](../../public/media/step-1-setup-basic-gateway/image-4.png)
+```txt
+"You're now proxying my /policies-test/secret endpoint! My secret is that my
+endpoints don't have rate limiting 😳. Keep following the tutorial to learn how
+to add the rate limiting policy."
+```
 
-Configure the policy JSON to set header name to `api-key` and the value to
-`$env(API_KEY)`. This tells the policy to read the value from our secure vault
-used for [Environment Variables](/docs/articles/environment-variables.md).
+Looks like it's clear what we need to do next.
 
-![Policy Configuration](../../public/media/step-1-setup-basic-gateway/image-10.png)
+**NEXT** Try
+[Step 2 - Add Rate Limiting to your API](./step-2-add-rate-limiting.md).
 
-Save your changes to `routes.oas.json`.
-
-Head over to the Environment Variables screen in settings and click **Add new
-variable**.
-
-![Add new Environment Variable](../../public/media/step-1-setup-basic-gateway/image-5.png)
-
-Set the name to `API_KEY` and select **is Secret** (the demo API key is not
-really secret but if you use an API key to access your backend, that _is_ an
-important secret).
-
-![New environment variable](../../public/media/step-1-setup-basic-gateway/image-6.png)
-
-## 3/ Test your API
-
-Go back to your route in the Route Designer and click the **Test** button next
-to the **Path** field. Click the **Test** button in the dialog that opens.
-
-![Test API](../../public/media/step-1-setup-basic-gateway/image-7.png)
-
-Congratulations, your gateway is working 👏👏👏
-
-## 4/ BONUS - put the base URL in an environment variable
+## BONUS - Put the base URL in an Environment Variable
 
 When working with Zuplo, you'll eventually want each
 [environment](/docs/articles/environments) to use a different backend (e.g. QA,
@@ -111,16 +88,25 @@ staging, preview, production etc).
 
 Change the **URL Forward** value to read the base URL from the
 [Environment Variables](/docs/articles/environment-variables) system by setting
-the value to `${env.BASE_URL}`.
+the value to `${env.BASE_URL}`. We will set the value for `BASE_URL` next.
 
 ![BASE_URL from Environment](../../public/media/step-1-setup-basic-gateway/image-8.png)
 
-Add another Environment Variable called BASE_URL. This is typically not a
-secret, there's no need to hide this from your colleagues.
+Navigate to your project's **Settings** tab via the navigation bar. Next, click
+**Environment Variables** under Project Settings.
+![Click Settings](../../public/media/step-1-setup-basic-gateway/image-17.png)
 
-![BASE_URL Env Variable](../../public/media/step-1-setup-basic-gateway/image-9.png)
+![Click Environment Variables](../../public/media/step-1-setup-basic-gateway/image-18.png)
 
-Save all your changes and test your route again.
+Add an Environment Variable called `BASE_URL`. Leave the "Secret" checkbox
+unchecked. This is typically not a secret, so there's no need to hide this from
+your colleagues.
+
+![BASE_URL Environment Variable](../../public/media/step-1-setup-basic-gateway/image-20.png)
+
+Save the environment variable, head back to the **Code** tab, click
+`routes.oas.json`, and test your route again. You should get back the same
+response from Step 2.
 
 **NEXT** Try
-[step 2 - add API key authentication to your API](./step-2-add-api-key-auth.md).
+[Step 2 - Add Rate Limiting to your API](./step-2-add-rate-limiting.md).
