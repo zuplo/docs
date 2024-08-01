@@ -6,8 +6,8 @@ Zuplo is a light-weight, fully-managed API Management platform, built for
 developers (GitOps, fast deployment, unlimited preview environments, etc.).
 Hobbyist developers and Engineering leaders alike use Zuplo to quickly:
 
-- [Add auth and access management](./step-2-add-api-key-auth.md)
-- [Add rate limiting](./step-3-add-rate-limiting.md)
+- [Add auth and access management](./step-3-add-api-key-auth.md)
+- [Add rate limiting](./step-2-add-rate-limiting.md)
 - Implement a programmable layer of abstraction between an API and its consumers
   (you can write code that executes inside the Gateway)
 - Generate a [rich developer documentation experience](./developer-portal.md)
