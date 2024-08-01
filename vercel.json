@@ -461,12 +461,17 @@
     },
     {
       "source": "/docs/quickstarts/add-api-key-auth{/}?",
-      "destination": "/docs/articles/step-2-add-api-key-auth",
+      "destination": "/docs/articles/step-3-add-api-key-auth",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/step-2-add-api-key-auth{/}?",
+      "destination": "/docs/articles/step-3-add-api-key-auth",
       "permanent": true
     },
     {
       "source": "/docs/quickstarts/per-customer-rate-limits{/}?",
-      "destination": "/docs/articles/step-3-add-rate-limiting",
+      "destination": "/docs/articles/step-2-add-rate-limiting",
       "permanent": true
     },
     {
@@ -626,17 +631,22 @@
     },
     {
       "source": "/docs/quickstarts/configure-rate-limiting{/}?",
-      "destination": "/docs/articles/step-3-add-rate-limiting",
+      "destination": "/docs/articles/step-2-add-rate-limiting",
       "permanent": true
     },
     {
       "source": "/docs/quickstarts/per-customer-rate-limits{/}?",
-      "destination": "/docs/articles/step-3-add-rate-limiting",
+      "destination": "/docs/articles/step-2-add-rate-limiting",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/step-3-add-rate-limiting{/}?",
+      "destination": "/docs/articles/step-2-add-rate-limiting",
       "permanent": true
     },
     {
       "source": "/docs/quickstarts/use-api-key-authentication{/}?",
-      "destination": "/docs/articles/step-2-add-api-key-auth",
+      "destination": "/docs/articles/step-3-add-api-key-auth",
       "permanent": true
     },
     {

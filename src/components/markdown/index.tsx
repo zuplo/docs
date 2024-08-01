@@ -1,5 +1,4 @@
 import Pre from "@/components/Pre";
-import GithubButton from "@/components/markdown/GithubButton";
 import { MDXProvider } from "@mdx-js/react";
 import Callout from "./Callout";
 import { Card, CardGroup } from "./Card";
@@ -10,7 +9,6 @@ import ZupIt from "./ZupIt";
 const components: React.ComponentProps<typeof MDXProvider>["components"] = {
   Icon,
   EnterpriseFeature,
-  GithubButton,
   Callout,
   ZupIt,
   Card,

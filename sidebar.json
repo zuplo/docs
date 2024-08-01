@@ -10,9 +10,10 @@
     "label": "Getting Started",
     "items": [
       "articles/step-1-setup-basic-gateway",
-      "articles/step-2-add-api-key-auth",
-      "articles/step-3-add-rate-limiting",
-      "articles/step-4-deploying-to-the-edge"
+      "articles/step-2-add-rate-limiting",
+      "articles/step-3-add-api-key-auth",
+      "articles/step-4-deploying-to-the-edge",
+      "articles/bonus-dynamic-rate-limiting"
     ],
     "isExpandedByDefault": true
   },
