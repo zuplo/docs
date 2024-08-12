@@ -71,9 +71,8 @@ Or add the `baseUrl` and `paths` setting to your `tsconfig.json` file:
 ```json
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
-      "modules/*": ["modules/*"]
+      "modules/*": ["./modules/*"]
     }
   }
 }
