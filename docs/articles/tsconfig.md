@@ -42,11 +42,30 @@ The recommended `tsconfig.json` file is shown below.
 }
 ```
 
+## Updating the `tsconfig.json` File
+
+The `tsconfig.json` file is not shown in the Zuplo Portal. If you need to update
+it you can do so connecting your project to
+[Source Control](./source-control.md) and editing the file in your source
+control provider or locally.
+
 ## Troubleshooting
 
 This section contains common issues that you may encounter if you have used
 unsupported settings in the `tsconfig.json` file and are migrating to the
 recommended configuration.
+
+### Build Warning: This project's tsconfig.json was not set to the recommended settings. Custom settings may cause build issues.
+
+This warning is shown when the `tsconfig.json` file is not set to the
+recommended settings. If you see this warning, but your build is successful,
+then you aren't required to do anything. However, we still encourage you to
+update your `tsconfig.json` file to the recommended settings. This will ensure
+that your build continues to work in the future and that you do not encounter
+any issues.
+
+Non-recommended settings are unsupported so they should be used at your own risk
+and with caution.
 
 ### Build Error: Could not resolve "modules/my-module"
 
