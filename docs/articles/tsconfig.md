@@ -25,8 +25,8 @@ The recommended `tsconfig.json` file is shown below.
   "include": ["modules/**/*", ".zuplo/**/*", "tests/**/*"],
   "exclude": ["./node_modules", "./dist"],
   "compilerOptions": {
-    "module": "ES2022",
-    "target": "ESNext",
+    "module": "ESNext",
+    "target": "ES2022",
     "lib": ["ESNext", "WebWorker", "Webworker.Iterable"],
     "preserveConstEnums": true,
     "moduleResolution": "Bundler",
