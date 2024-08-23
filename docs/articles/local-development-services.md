@@ -7,17 +7,18 @@ To use Zuplo services such as API keys and rate limiting locally, you must have
 a Zuplo account and an existing project. You will be using the connections from
 your remote gateway.
 
-1. Run `npx zup login` to log into your account in your browser.
-2. Run `npx zup link` to bring in relevant information from your Zuplo account
-   and project. Follow the prompt to select the right environment.
-3. At this point, you will see a file called `.env.zuplo` containing some
+1. Run `npx zup link` to bring in relevant information from your Zuplo account
+   and project. Follow the prompt to select the right environment. For local
+   development, we recommend selecting the development environment.
+2. At this point, you will see a file called `.env.zuplo` containing some
    information about the account, project, and environment that your local
    gateway is linked to.
 
 :::warning
 
 As the .env.zuplo file could contain sensitive information, it should not be
-committed to your version system. Consider adding .env to your .gitignore file.
+committed to your version system. Consider adding .env.zuplo to your .gitignore
+file.
 
 :::
 
