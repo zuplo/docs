@@ -60,7 +60,7 @@ OpenAPI spec the custom page will be displayed on through the `specs` property.
 
 By default, a custom page will display on all OpenAPI specs unless the `specs`
 field is specified. Learn more
-[here](./dev-portal-configuring-sidebar.md#customizing-individual-openapi-specs).
+[here](./dev-portal-configuring-sidebar#customizing-individual-openapi-specs).
 
 ## Congratulations, you have added a custom page!
 
