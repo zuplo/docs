@@ -1,4 +1,6 @@
-# Zuplo Developer API
+---
+title: Zuplo Developer API
+---
 
 The [Zuplo Developer API](https://dev.zuplo.com/docs) enables developers to
 write their own integrations for Zuplo.
