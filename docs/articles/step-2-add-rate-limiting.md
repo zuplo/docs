@@ -16,7 +16,7 @@ accidentally DDoS your API. Usually with a rogue `useEffect` call in React code.
 Policies are modules that can intercept and transform an incoming request or
 outgoing response. You can learn more about policies [here](./policies.md).
 Zuplo offers a wide range of policies built-in (including rate limiting) to save
-you time. You can find the full list [here](../../policies/index.md)
+you time. You can find the full list [here](../policies.md)
 
 :::
 
