@@ -484,6 +484,10 @@
         "id": "articles/support"
       },
       {
+        "type": "doc",
+        "id": "articles/developer-api"
+      },
+      {
         "type": "link",
         "label": "Trust & Compliance",
         "href": "https://trust.zuplo.com"
