@@ -4,5 +4,5 @@ sidebar_label: Gitlab Integration
 ---
 
 If you would like to use Gitlab as your source control provider, please contact
-[mailto:support@zuplo.com](support@zuplo.com) and we can help get your account
+[support@zuplo.com](mailto:support@zuplo.com) and we can help get your account
 setup.

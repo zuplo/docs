@@ -104,7 +104,7 @@ And another inside the operation, below the method:
 ```
 
 `x-zuplo-route` is where all of your route settings are configured, including
-[policies](/docs/policies), [handlers](/docs/handlers/),
+[policies](/docs/policies), [handlers](/docs/handlers/openapi.md),
 [CORS](/docs/articles/custom-cors-policy.md) and more.
 
 ## Other Supported Extensions

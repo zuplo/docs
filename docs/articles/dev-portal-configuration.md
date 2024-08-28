@@ -25,13 +25,14 @@ are multiple solutions to convert your OpenAPI 2.x document - including
 Your project may utilize multiple OpenAPI files to power your gateway. The
 Developer Portal is equipped to handle this - allowing users to navigate between
 documentation for each OpenAPI spec. You can even
-[customize the content](./dev-portal-configuring-sidebar.md#customizing-individual-openapi-specs)
+[customize the content](./dev-portal-configuring-sidebar#customizing-individual-openapi-specs)
 displayed on each OpenAPI spec.
 
 ## JSON Schemas
 
-You can embed your JSON Schemas directly into your OpenAPI document on each endpoint, or if you want
-to share them within, you can put them in the `components` section and use a reference, example:
+You can embed your JSON Schemas directly into your OpenAPI document on each
+endpoint, or if you want to share them within, you can put them in the
+`components` section and use a reference, example:
 
 ```json
 "responses": {
@@ -48,8 +49,8 @@ to share them within, you can put them in the `components` section and use a ref
 },
 ```
 
-You can also reference an external schema (you might store this in the `schemas` folder 
-of your project, e.g. 
+You can also reference an external schema (you might store this in the `schemas`
+folder of your project, e.g.
 
 ```json
 "400": {

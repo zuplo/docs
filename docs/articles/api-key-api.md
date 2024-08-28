@@ -24,7 +24,7 @@ in the Zuplo Portal. [More information](https://dev.zuplo.com/docs/routes/index)
 
 The service contains three primary object: **Buckets**, **Consumers**, and **API
 Keys**. For an conceptual overview of these objects see
-[Key Concepts](./api-key-management.md#key-concepts). Below is an ER diagram
+[Key Concepts](./api-key-management#key-concepts). Below is an ER diagram
 showing the relationships of the three primary objects and their most important
 fields.
 
