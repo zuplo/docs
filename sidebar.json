@@ -374,7 +374,7 @@
       "articles/lazy-load-configuration-into-cache",
       "articles/handling-form-data",
       "articles/testing-graphql",
-
+      "articles/bypass-policy-for-testing",
       "articles/graphql-security",
       "articles/add-api-to-backstage",
       "articles/use-openapi-extension-data"
