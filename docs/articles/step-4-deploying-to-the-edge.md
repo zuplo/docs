@@ -21,8 +21,8 @@ To follow this tutorial you'll need
   [Step 3](./step-3-add-api-key-auth.md) for a great start!
 - to install the
   [Zuplo GitHub deployer](https://github.com/apps/zuplo/installations/new) to
-  GitHub - you can do that
-  [here](https://github.com/apps/zuplo/installations/new)
+  GitHub - you can
+  [follow these instructions](https://github.com/apps/zuplo/installations/new)
 
 ## 1/ Authorize to GitHub
 
@@ -172,15 +172,15 @@ flows through your environments using Pull Requests and protected branches.
 I don't see my repository listed in Zuplo project settings.
 
 - Make sure you've granted access to the project with the Zuplo GitHub App, you
-  can check that configuration
-  [here](https://github.com/apps/zuplo/installations/new)
+  can
+  [check that configuration here](https://github.com/apps/zuplo/installations/new)
 
 I've connected my Zuplo project to a GitHub repository but get access errors
 when running commits, pulls or try to open a pull request.
 
 - If you are the owner of the project, make sure you've granted access to the
-  project with the Zuplo GitHub App, you can check that configuration
-  [here](https://github.com/apps/zuplo/installations/new)
+  project with the Zuplo GitHub App, you can
+  [check that configuration here](https://github.com/apps/zuplo/installations/new)
 - If this Zuplo project was shared with you, make sure you are a GitHub
   collaborator. This can be verified by going to the GitHub repository >
   Settings > Collaborators section. You'll need admin permissions to the

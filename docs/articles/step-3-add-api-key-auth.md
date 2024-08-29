@@ -14,10 +14,10 @@ authentication methods.
 
 :::info What's a Policy?
 
-Policies are modules that can intercept and transform an incoming request or
-outgoing response. You can learn more about policies [here](./policies.md).
-Zuplo offers a wide range of policies built-in (including rate limiting) to save
-you time. You can find the full list [here](../policies.md)
+[Policies](./policies.md) are modules that can intercept and transform an
+incoming request or outgoing response. Zuplo offers a wide range of policies
+built-in (including api key authentication) to save you time. You can check out
+[the full list](../policies.md).
 
 :::
 
@@ -127,8 +127,8 @@ policy's `Authorization` header has been documented for you.
 
 Additionally, a new Authentication section has been added to your developer
 portal. Users of your API can sign in, view & manage their API keys, test your
-endpoints, track API usage, and much more! You can learn more about that
-[here](./dev-portal-auth.md).
+endpoints, track API usage, and much more! You can learn more about that in
+[our developer portal auth docs](./dev-portal-auth.md).
 
 **NEXT** Try
 [Step 4 - Connect Source Control and Deploy to the Edge](./step-4-deploying-to-the-edge.md).
