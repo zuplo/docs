@@ -30,7 +30,7 @@ Create the custom policy configuration in the `policies.json` file.
 
 ```json title="config/policies.json"
 {
-    "policies": {
+    "policies": [{
     {
       "name": "monetization-with-bypass-inbound",
       "policyType": "custom-code-inbound",
@@ -43,18 +43,20 @@ Create the custom policy configuration in the `policies.json` file.
         }
       },
     }
-  }
+  }]
 }
 ```
 
 Create a new module for the policy code.
 
 ```ts title="modules/monetization-with-bypass.ts"
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
 export default async function policy(
   request: ZuploRequest,
   context: ZuploContext,
 ) {
-  if (request.user.data.testApiKey) {
+  if (request.user.data.testApiKey === true) {
     context.log.info("Bypassing monetization-inbound policy for testing.");
     return request;
   }
