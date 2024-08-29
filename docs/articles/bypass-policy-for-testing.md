@@ -54,7 +54,7 @@ export default async function policy(
   request: ZuploRequest,
   context: ZuploContext,
 ) {
-  if (request.user.data.testApiKey) {
+  if (request.user.data.testApiKey === true) {
     context.log.info("Bypassing monetization-inbound policy for testing.");
     return request;
   }
