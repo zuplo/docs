@@ -5,7 +5,7 @@ import Link from "next/link";
 import { DocsLayout } from "../../components/DocsLayout";
 
 export const metadata: Metadata = {
-  title: "Policies",
+  title: "Policies Catalog",
   alternates: {
     canonical: "/policies",
   },
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   return (
-    <DocsLayout frontmatter={{ title: `Policies` }} sections={[]}>
+    <DocsLayout frontmatter={{ title: `Policies Catalog` }} sections={[]}>
       <p>
         Zuplo includes policies for any solution you need for securing and
         sharing your API. See the{" "}
