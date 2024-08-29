@@ -3,7 +3,7 @@ title: Zuplo API Keys
 sidebar_label: API Keys
 ---
 
-The Zuplo Developer API (https://dev.zuplo.com) allows you to programmatically
+The [Zuplo Developer API](https://dev.zuplo.com) allows you to programmatically
 interact with Zuplo. To access the API, you need to create an API key.
 
 API keys are used to authenticate requests to the Zuplo API. They are unique to
