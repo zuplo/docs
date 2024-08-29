@@ -476,6 +476,11 @@
         "id": "articles/limits"
       },
       {
+        "type": "link",
+        "label": "Errors",
+        "href": "/errors"
+      },
+      {
         "type": "doc",
         "id": "articles/security"
       },
