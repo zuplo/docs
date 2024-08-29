@@ -170,10 +170,10 @@ spec:
 ### I can't connect to Github
 
 If your repository is not public and you haven't already configured Github
-authentication - follow the guide
-[here](https://backstage.io/docs/getting-started/config/authentication). You
-will likely want to add sign-in support as a part of your Backstage setup, to
-authenticate your users. In your `app-config.yaml` add:
+authentication -
+[follow the Github auth guide](https://backstage.io/docs/getting-started/config/authentication).
+You will likely want to add sign-in support as a part of your Backstage setup,
+to authenticate your users. In your `app-config.yaml` add:
 
 ```yaml
 auth:

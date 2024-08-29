@@ -17,8 +17,8 @@ that your API Gateway is only accessible through the WAF.
 
 The information below is a summary of Fastly's own recommendations for securing
 your backend - regardless of whether you are using Zuplo, another API Gateway,
-or Fastly origins. You can find the Fastly documentation
-[here](https://www.fastly.com/documentation/guides/integrations/backends/).
+or Fastly origins. You can reference the
+[Fastly documentation](https://www.fastly.com/documentation/guides/integrations/backends/).
 
 ### IP Address Restrictions
 
@@ -245,7 +245,7 @@ To verify the JWT header in Zuplo, you can utilize the JWT Auth Inbound policy.
 
 Fastly supports mTLS authentication for backend services. This is a good way to
 ensure that only Fastly can access your API Gateway. For documentation on
-configuring Fastly with mTLS, see the Fastly documentation
-[here](https://docs.fastly.com/en/guides/working-with-hosts#advanced-tls-options).
+configuring Fastly with mTLS, see the
+[Fastly documentation](https://docs.fastly.com/en/guides/working-with-hosts#advanced-tls-options).
 To configure Zuplo to accept mTLS connections, see the
 [Zuplo mTLS Policy documentation](/docs/policies/mtls-auth-inbound).

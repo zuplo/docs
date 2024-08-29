@@ -81,8 +81,9 @@ describe("API", () => {
 });
 ```
 
-You can find more sample tests
-[here](https://github.com/zuplo/zup-cli-example-project/tree/main/tests).
+Check out our
+[other sample tests](https://github.com/zuplo/zup-cli-example-project/tree/main/tests)
+to find one that matches your use-case.
 
 :::tip
 
@@ -94,8 +95,9 @@ be picked up by the Zuplo CLI.
 ## Tips for writing tests
 
 This section highlights some of the features of the Zuplo CLI that can help you
-write and structure your tests. You can find more sample tests
-[here](https://github.com/zuplo/zup-cli-example-project/tree/main/tests).
+write and structure your tests. Check out our
+[other sample tests](https://github.com/zuplo/zup-cli-example-project/tree/main/tests)
+to find one that matches your use-case.
 
 ### Ignoring tests
 

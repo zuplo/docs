@@ -65,8 +65,9 @@ recommend enabling/disabling via an
 errors, this can allow you to capture the full details of the request typically
 making for an easier repro.
 
-Ask support@zuplo.com about our available Audit Log plugins. You can also build
-your own as outlined [here](./custom-logging-example).
+Ask [support@zuplo.com](mailto:support@zuplo.com) about our available Audit Log
+plugins. You can also build your own as outlined in
+[our custom logging example](./custom-logging-example).
 
 ## Health Checks
 

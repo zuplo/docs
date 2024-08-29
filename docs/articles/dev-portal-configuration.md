@@ -9,8 +9,8 @@ generate stripe-quality API Reference documentation. By enriching your OpenAPI
 file with additional properties, you directly enable more content show up in the
 Developer Portal.
 
-Read more about OpenAPI and all the possibilities
-[here](https://github.com/OAI/OpenAPI-Specification).
+Read more about
+[OpenAPI and all the possibilities](https://github.com/OAI/OpenAPI-Specification).
 
 ## Supported OpenAPI Versions
 

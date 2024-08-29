@@ -14,8 +14,9 @@ to ensure that your API Gateway is only accessible through the WAF.
 
 The information below is a summary of Amazon's own recommendations for securing
 your backend - regardless of whether you are using Zuplo, another API Gateway,
-or AWS origins. You can find the AWS documentation
-[here](https://docs.aws.amazon.com/whitepapers/latest/secure-content-delivery-amazon-cloudfront/custom-origin-with-cloudfront.html).
+or AWS origins. You can also reference
+[the AWS documentation](https://docs.aws.amazon.com/whitepapers/latest/secure-content-delivery-amazon-cloudfront/custom-origin-with-cloudfront.html)
+directly.
 
 ### IP Address Restrictions
 

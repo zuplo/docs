@@ -40,9 +40,9 @@ as a gateway including:
 - within 50ms of everybody on earth (amazing cache performance)
 
 For this reason we consider the platform to be multi-cloud and have customers
-with backends in AWS, Azure, GCP and private data-centers. We have multiple
-options for securing connectivity between Zuplo and your backend API documented
-[here](./securing-your-backend).
+with backends in AWS, Azure, GCP and private data-centers. We have
+[multiple options for securing connectivity](./securing-your-backend) between
+Zuplo and your backend API.
 
 Zuplo typically sits between your clients and your backend (or origin) API. Your
 clients could be other servers, mobile devices, browsers running websites or IoT

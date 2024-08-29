@@ -45,8 +45,9 @@ describe("API", () => {
 });
 ```
 
-You can find more sample tests
-[here](https://github.com/zuplo/zup-cli-example-project/tree/main/tests).
+Checkout our
+[other sample tests](https://github.com/zuplo/zup-cli-example-project/tree/main/tests)
+to find one that matches your use-case.
 
 ## Running your tests
 
@@ -108,4 +109,5 @@ time you run the tests.
 
 ## Tips for writing tests
 
-Look for more testing tips [here](../articles/testing#tips-for-writing-tests).
+Take a look at our other
+[testing tips](../articles/testing#tips-for-writing-tests).

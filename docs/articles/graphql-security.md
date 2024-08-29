@@ -79,8 +79,9 @@ create the configuration for the three policies "graphql-depth-limit",
 
 ### a. GraphQL Depth Limit
 
-This policy limits how deep a query can be nested. You can find the detailed
-documentation [here](/docs/policies/graphql-complexity-limit-inbound)
+This policy limits how deep a query can be nested. Check our our
+[detailed policy documentation](/docs/policies/graphql-complexity-limit-inbound)
+for more information.
 
 Add this into your `config/policies.json`
 

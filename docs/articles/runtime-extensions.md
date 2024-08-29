@@ -89,7 +89,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 
 Hooks allow code to be run as part of the request/response pipeline. Hooks can
 be created at the API level in `zuplo.runtime.ts` as shown below or can be added
-via a plugin as [documented here](./hooks.md).
+[via a plugin](./hooks.md).
 
 :::tip
 
