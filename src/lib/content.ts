@@ -75,3 +75,39 @@ export async function getAllContent<Data = Record<string, any>>(options?: {
 
   return results;
 }
+
+export async function getContentFromDir<Data = Record<string, any>>(
+  dir: string,
+  options?: {
+    limit?: number;
+  },
+): Promise<Content<Data>[]> {
+  const contentFiles = await glob(`docs/${dir}/**/*.md`);
+  const results = await Promise.all(
+    contentFiles
+      .filter((f) => f.endsWith(".md"))
+      .sort()
+      .reverse()
+      .map(async (filepath) => {
+        const source = await fs.readFile(filepath);
+
+        const { data, content } = matter(source);
+
+        const result: Content<Data> = {
+          filepath,
+          source: content,
+          data: data as Data,
+          href: filepath.substring(5).replace(".md", ""),
+          // Remove the /docs
+          slug: filepath.substring(5).replace(".md", "").split("/"),
+        };
+        return result;
+      }),
+  );
+
+  if (options?.limit) {
+    return results.splice(0, options.limit);
+  }
+
+  return results;
+}
