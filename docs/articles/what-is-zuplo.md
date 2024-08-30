@@ -26,7 +26,7 @@ Management and is backed by the founders of some of the most exciting
 developer-centric solutions like Auth0, Snyk, and BigID.
 
 Sound interesting to you? You can
-[see Zuplo in action](https://book.zuplo.com/meeting?utm_source=blog) or
+[see Zuplo in action](https://zuplo.com/meeting?utm_source=blog) or
 [get started with Zuplo](https://portal.zuplo.com/signup?utm_source=blog) for
 free.
 
