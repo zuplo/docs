@@ -204,5 +204,5 @@ This is not well documented by Backstage - any issues should be directed
 
 If you are using a managed version of Backstage from services like Roadie.io -
 you will need to follow their
-[official docs](https://roadie.io/docs/getting-started/openapi-specs/) for
-OpenAPI. We do not guarantee support for these platforms.
+[official docs](https://roadie.io/docs/details/openapi-specs/) for OpenAPI. We
+do not guarantee support for these platforms.
