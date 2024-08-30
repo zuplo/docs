@@ -9,7 +9,7 @@ import {
 } from "../components/CustomTOCList";
 
 export const metadata: Metadata = {
-  title: "Zuplo Docs",
+  title: "Zuplo Docs - Learn how to use Zuplo",
   alternates: {
     canonical: "/",
   },
