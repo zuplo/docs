@@ -16,7 +16,7 @@ troubleshoot issues in your Zuplo API. The OpenTelemetry plugin automatically
 instruments your API to collect trace data. You can send trace data any
 OpenTelemetry service such as [Honeycomb](https://honeycomb.io),
 [Dynatrace](https://dynatrace.com), [Jaeger](https://www.jaegertracing.io/), and
-[more](https://opentelemetry.io/ecosystem/).
+[many more](https://opentelemetry.io/ecosystem/).
 
 With tracing enabled on your Zuplo API you will see timings for each request as
 well as spans for plugins, handlers, and policies. The OpenTelemetry plugin

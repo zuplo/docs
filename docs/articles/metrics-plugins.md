@@ -49,8 +49,8 @@ being sent. Refer to
 [counting custom metrics](https://docs.datadoghq.com/account_management/billing/custom_metrics/?tab=countrate#counting-custom-metrics)
 for more information. In general, try to avoid high-dimensionality/cardinality
 tags since those are counted as separate metrics. This
-[article](https://www.datadoghq.com/blog/the-power-of-tagged-metrics/) by
-Datadog has some good guidelines.
+[article by Datadog](https://www.datadoghq.com/blog/the-power-of-tagged-metrics/)
+has some good guidelines.
 
 As of October 2023, we are in the process of becoming an official integration
 with Datadog, which would reduce the way some of our metrics are counted.

@@ -9,7 +9,7 @@ authentication both locally and in deployed environments.
 ## Testing Locally
 
 When running API key Authentication locally, if you
-[link](/docs/cli/local-development) the project to an project the same API Key
+[link the project](/docs/cli/local-development) to an project the same API Key
 The same bucket will be shared by both your development (working copy)
 environment and local development.
 
@@ -20,7 +20,7 @@ Either locally or in CI/CD you can specify any API Key Bucket on the
 `bucketName` property. This allows using a consistent API Key Bucket that is
 setup with consumers, etc. as required for testing. You can use the
 [Zuplo Developer API](https://dev.zuplo.com) to
-[create](/docs/articles/api-key-management) and manage buckets, consumers, keys,
+[create and manage buckets](/docs/articles/api-key-management), consumers, keys,
 etc.
 
 ## Selectively Disabling
