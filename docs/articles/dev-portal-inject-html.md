@@ -1,5 +1,5 @@
 ---
-title: Dev Portal Inject Custom Html
+title: Developer Portal Inject Custom Html
 sidebar_label: Inject Custom Html
 ---
 

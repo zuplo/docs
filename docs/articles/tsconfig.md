@@ -42,7 +42,7 @@ The recommended `tsconfig.json` file is shown below.
 }
 ```
 
-## Updating the `tsconfig.json` File
+## Updating the tsconfig.json File
 
 The `tsconfig.json` file is not shown in the Zuplo Portal. If you need to update
 it you can do so connecting your project to
