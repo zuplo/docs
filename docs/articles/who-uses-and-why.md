@@ -74,7 +74,9 @@ like API key authentication, rate-limiting, quotas, request validation,
 monetization, and developer documentation.
 
 Our promise is that Zuplo should be **cheaper** and **faster** than building
-these features yourself, while future-proofing your architecture.
+these features yourself, while future-proofing your architecture. Check out our
+[Build vs Buy Guide](https://zuplo.com/build-vs-buy-api-management-tools) to
+learn more.
 
 ## Managing multiple APIs
 
