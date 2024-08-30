@@ -88,6 +88,7 @@
       "articles/local-development-services",
       "articles/local-development-debugging",
       "articles/local-development-env-variables",
+      "articles/tsconfig",
       "articles/local-development-troubleshooting"
     ]
   },
@@ -192,7 +193,8 @@
       "articles/dev-portal-adding-pages",
       "articles/dev-portal-configuring-sidebar",
       "articles/dev-portal-json",
-      "articles/dev-portal-create-consumer-on-auth"
+      "articles/dev-portal-create-consumer-on-auth",
+      "articles/dev-portal-inject-html"
     ]
   },
   {
@@ -338,7 +340,8 @@
           "policies/brownout-inbound",
           "policies/caching-inbound",
           "policies/custom-code-inbound",
-          "policies/custom-code-outbound"
+          "policies/custom-code-outbound",
+          "articles/custom-audit-log-policy"
         ]
       }
     ]
@@ -377,7 +380,9 @@
       "articles/bypass-policy-for-testing",
       "articles/graphql-security",
       "articles/add-api-to-backstage",
-      "articles/use-openapi-extension-data"
+      "articles/use-openapi-extension-data",
+      "articles/non-standard-ports",
+      "articles/convert-urls-to-openapi"
     ]
   },
   {
@@ -401,6 +406,7 @@
       "articles/http-problems",
       "articles/reusing-code",
       "articles/zone-cache",
+      "articles/key-value-store",
       "articles/zuplo-id-token",
       "articles/safely-clone-a-request-or-response",
       "articles/runtime-behaviors",
