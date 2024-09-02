@@ -19,7 +19,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.13",
     "@inkeep/widgets": "^0.2.286",
-    "@tailwindcss/typography": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.15",
     "@types/json-schema": "^7.0.15",
     "@types/mdast": "^4.0.3",
     "@types/node": "20.4.9",
