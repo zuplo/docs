@@ -8,7 +8,7 @@ development purposes using your favorite code editor.
 
 ## Requirements
 
-- [Node.js](https://nodejs.org/en/download) 18.0.0 or higher
+- [Node.js](https://nodejs.org/en/download) 20.0.0 or higher
 - Linux, Mac OS X, or Windows Subsystem for Linux (WSL)
 
 ## Getting Started
