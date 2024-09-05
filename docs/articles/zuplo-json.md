@@ -112,3 +112,8 @@ ensure that they continue to operate as expected.
 
 We expect that this new build process will roll out to all customers (regardless
 of compatibility date) by the end of April 2024.
+
+## 2024-09-02
+
+The compatibility date allows the ability to call `fetch` to hosts with custom
+ports. Previously only the standard ports (80, 443) were allowed.
