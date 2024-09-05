@@ -6,6 +6,8 @@ import { DocsLayout } from "../../components/DocsLayout";
 
 export const metadata: Metadata = {
   title: "Policies Catalog",
+  description:
+    "Zuplo includes many policies for securing, scaling, and monitoring your API.",
   alternates: {
     canonical: "/policies",
   },

@@ -4,6 +4,8 @@ import Callout from "../../../components/markdown/Callout";
 
 export const metadata = {
   title: "Node Modules",
+  description:
+    "List of Node Modules supported by Zuplo. To ensure the security and performance, we must approve each module.",
   alternates: {
     canonical: `/articles/node-modules`,
   },
