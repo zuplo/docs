@@ -1,5 +1,6 @@
 import { DocsLayout } from "@/components/DocsLayout";
 import { Fence } from "@/components/Fence";
+import Callout from "@/components/markdown/Callout";
 import CustomPolicyNotice from "@/components/policies/CustomPolicyNotice";
 import PolicyStatus from "@/components/policies/PolicyStatus";
 import { Section } from "@/lib/interfaces";
@@ -230,7 +231,18 @@ export default async function Page({ params }: { params: { slug: string } }) {
         <CustomPolicyNotice name={schema.title!} id={policyId} />
       ) : null}
       {schema.isDeprecated ? (
-        <pre>This policy is deprecated. ${schema.deprecatedMessage ?? ""}</pre>
+        <Callout type="caution" title="This policy is deprecated">
+          {/* FIXME: This is a hack to avoid parsing the markdown or rendering it dynamically with a dependency. */}
+          <p
+            dangerouslySetInnerHTML={{
+              __html:
+                schema.deprecatedMessage?.replace(
+                  /\[([^\]]+)\]\(([^\)]+)\)/,
+                  '<a href="$2">$1</a>',
+                ) ?? "",
+            }}
+          />
+        </Callout>
       ) : null}
       {intro}
       <PolicyStatus
