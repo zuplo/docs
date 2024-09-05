@@ -5,6 +5,8 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Zuplo Errors",
+  description:
+    "Detailed error messages to help you diagnose and fix the problem.",
   alternates: {
     canonical: "/errors",
   },

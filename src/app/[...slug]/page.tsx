@@ -23,9 +23,12 @@ export async function generateMetadata({
     return {};
   }
 
-  const { data } = result;
+  const { data, source } = result;
   return {
     title: data.title,
+    // Take the first sentence as description, its typically the summary or
+    // introduction
+    description: source.split(".")[0],
     alternates: {
       canonical: `/${params.slug.join("/")}`,
     },
