@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     "api monetization",
   ],
   alternates: {
-    canonical: "/",
+    canonical: "https://zuplo.com/docs",
   },
 };
 
