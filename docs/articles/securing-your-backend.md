@@ -18,9 +18,9 @@ Firebase, and Stripe to secure their own APIs. In this solution the backend
 requires a secret that is known only by the gateway. This is usually an opaque
 key sent as a header on every request to the origin. Zuplo adds this to the
 request - the client is never aware of the secret. An example of how to set this
-up, including using [Environment Variables](./environment-variables.md) to store
-the secret is included in
-[Step 1 - Setup a Basic Gateway](./step-1-setup-basic-gateway.md).
+up, is show in the
+[Securing your Backend with a Shared Secret](./securing-backend-shared-secret.md)
+article.
 
 ## 2/ Federated Authentication
 

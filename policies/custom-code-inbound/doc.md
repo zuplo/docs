@@ -78,7 +78,7 @@ Here's how we could wire up our new auth route:
   "policies": [
     {
       "name": "my-first-policy",
-      "policyType": "custom-code",
+      "policyType": "custom-code-inbound",
       "handler": {
         "export": "default",
         "module": "$import(./modules/my-first-policy)"
