@@ -11,7 +11,7 @@ The Zuplo Developer API uses API Keys for authorization. To generate an API Key
 for your account go to the [Zuplo Portal](https://portal.zuplo.com/). In the
 main account page click the gear icon and the navigate to **API Keys**.
 
-![](https://cdn.zuplo.com/assets/b2cd0a7b-64f0-4e5d-90eb-c9efcf97d34a.png)
+![Zuplo API key](https://cdn.zuplo.com/assets/b2cd0a7b-64f0-4e5d-90eb-c9efcf97d34a.png)
 
 ## Calling the API
 

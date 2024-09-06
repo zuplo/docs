@@ -59,7 +59,7 @@ selector as shown below.
 Add this policy to any of the routes in your API that are calling your secure
 backend.
 
-# 3/ Verify the Secret on your Backend
+## 3/ Verify the Secret on your Backend
 
 Finally, you need to verify the secret on your backend. The way you implement
 this depends on the framework and language you are using, but the typical

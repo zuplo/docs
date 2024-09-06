@@ -36,7 +36,7 @@ with [Stripe Products](https://docs.stripe.com/products-prices/getting-started).
 The Stripe Product is what determines the price your customers will pay to use
 your API.
 
-![](https://cdn.zuplo.com/assets/aa34975a-2906-4869-9dd6-bd13e5b0dcda.png)
+![Zuplo to Stripe mapping](https://cdn.zuplo.com/assets/aa34975a-2906-4869-9dd6-bd13e5b0dcda.png)
 
 The "Plan" in Zuplo is where you will define the limits of each plan. For
 example, the "Basic" plan might be limited to 10,000 requests per month while
@@ -47,7 +47,7 @@ the "Premium" plan may be limited to 1,000,000 requests per month.
 When you create your products in Stripe, set each product as **Recurring** on a
 **Monthly** billing cycle.
 
-![](https://cdn.zuplo.com/assets/0b7bc4e5-9e92-4b24-a4d5-16fe389bec8f.png)
+![Creating Stripe product](https://cdn.zuplo.com/assets/0b7bc4e5-9e92-4b24-a4d5-16fe389bec8f.png)
 
 ### Creating a Stripe Pricing Table
 

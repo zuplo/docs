@@ -29,7 +29,7 @@ role. This role can be scoped to only the specific Lambda functions required.
 To setup the AWS Lambda handler in the portal UI, select the AWS Lambda handler
 on any route.
 
-![](https://cdn.zuplo.com/assets/aa9dc09d-6636-4a8b-94bc-ee28bb779fc8.png)
+![AWS handler configuration](https://cdn.zuplo.com/assets/aa9dc09d-6636-4a8b-94bc-ee28bb779fc8.png)
 
 Configure the properties for your AWS Lambda function.
 
