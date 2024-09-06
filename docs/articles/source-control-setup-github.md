@@ -16,7 +16,7 @@ work with.
 Next, a dialog will open asking you to authorize Zuplo. Click the **Authorize
 Zuplo** button.
 
-![](https://cdn.zuplo.com/assets/d6194a80-b6d6-429e-85a6-ae1cb4a3375e.png)
+![Zuplo github permission](https://cdn.zuplo.com/assets/d6194a80-b6d6-429e-85a6-ae1cb4a3375e.png)
 
 <Callout type="tip" title="GitHub Permissions" >
 
@@ -35,13 +35,13 @@ edit a repository. If this is your first time connecting Zuplo, you will be
 immediately asked to select a GitHub Org to install Zuplo. Select the org you
 want to use.
 
-![](https://cdn.zuplo.com/assets/eef76bd7-4d26-4f86-96e8-89ebede03beb.png)
+![Installing Zuplo app](https://cdn.zuplo.com/assets/eef76bd7-4d26-4f86-96e8-89ebede03beb.png)
 
 Next, you will be asked to select the repositories that you want Zuplo to
 access. The easiest thing is to just select **All Repositories**, but if you
 want fine-grain control, you can select a specific repo.
 
-![](https://cdn.zuplo.com/assets/ff482269-9aa2-44c3-8266-b2682b3d6ea5.png)
+![Giving Zuplo repository access](https://cdn.zuplo.com/assets/ff482269-9aa2-44c3-8266-b2682b3d6ea5.png)
 
 <Callout type="caution" title="Existing Installation" >
 
@@ -81,9 +81,9 @@ Click the link to return to GitHub. You should see a green check next to the
 commit hash (1). When you hover your mouse over that you'll see the Zuplo
 deployment was successful. Click **Details** (2) to open the deployment info.
 
-![](https://cdn.zuplo.com/assets/0a9932eb-7c16-49cf-9720-0beb450724eb.png)
+![Zuplo deployer running](https://cdn.zuplo.com/assets/0a9932eb-7c16-49cf-9720-0beb450724eb.png)
 
 On the deployment page, you will see **Deployment has Completed!!** and below
 that is the link to your new environment.
 
-![](https://cdn.zuplo.com/assets/26fa58b6-7a5a-4627-bd9f-246972639f12.png)
+![Zuplo deployer result](https://cdn.zuplo.com/assets/26fa58b6-7a5a-4627-bd9f-246972639f12.png)

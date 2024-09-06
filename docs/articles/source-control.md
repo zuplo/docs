@@ -30,7 +30,7 @@ If you have an existing GitHub repository that contains a Zuplo project, you can
 connect to that repository when you create a new project. Select **Import
 existing project** then select your GitHub organization and repository.
 
-![alt text](../../public/media/source-control/image-1.png)
+![Import existing project to Zuplo](../../public/media/source-control/image-1.png)
 
 ## Limitations
 

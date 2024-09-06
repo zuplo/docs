@@ -39,7 +39,7 @@ project into your local machine.
 
 1. Connect your project to a Git repository from the _Zuplo Web Portal_.
 
-![](https://cdn.zuplo.com/assets/3bd6b736-20d7-4ac4-805c-d7fd810dea28.png)
+![Connect repository](https://cdn.zuplo.com/assets/3bd6b736-20d7-4ac4-805c-d7fd810dea28.png)
 
 2. Clone your project from your Git provider to your local machine.
 

@@ -53,4 +53,4 @@ you copied from the JSON file in the previous step. Set the "Client ID" value to
 the value you set in step 1 (in our example this is `zuplo-dev-portal`). Click
 "Save".
 
-![alt text](../../public/media/dev-portal-keycloak-auth/image-6.png)
+![developer portal settings](../../public/media/dev-portal-keycloak-auth/image-6.png)

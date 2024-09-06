@@ -64,7 +64,7 @@ that to be removed contact support and we can disable it for you.
 If you use Cloudflare as your DNS provider, you MUST enable Cloudflare Proxy on
 your custom domain.
 
-![](https://cdn.zuplo.com/assets/a40beef2-9eed-44fd-a41e-3f337afbaee2.png)
+![Cloudflare proxy status](https://cdn.zuplo.com/assets/a40beef2-9eed-44fd-a41e-3f337afbaee2.png)
 
 :::
 

@@ -116,7 +116,7 @@ new Webhook in Stripe.
 5. With the Webhook created, find the section called **Signing secret** and
    click the **Reveal** link. Copy this value.
 
-![alt text](../../public/media/monetization-webhook-setup/image-2.png)
+![Stripe webhook signing secret](../../public/media/monetization-webhook-setup/image-2.png)
 
 6. Return to the Zuplo Portal, open your project, and go to the **Environment
    Variables** section under the **Settings** tab.
