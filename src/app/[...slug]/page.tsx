@@ -28,7 +28,11 @@ export async function generateMetadata({
     title: data.title,
     // Take the first sentence as description, its typically the summary or
     // introduction
-    description: source.split(".")[0],
+    description: source
+      .replace(/(?<=\[.+\])\(.+\)/, "") // Remove [link](url) from description
+      .replace("[", "") // Remove [ from start
+      .replace("]", "") // Remove ] from end
+      .split(".")[0], // Grab the first sentence
     alternates: {
       canonical: `/${params.slug.join("/")}`,
     },
