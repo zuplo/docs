@@ -3,7 +3,7 @@ title: Setup Okta SSO
 sidebar_label: Okta Setup
 ---
 
-Zuplo uses Auth0 to enable SSO for enterprise accounts who have purchased
+Zuplo uses Auth0 to enable Okta SSO for enterprise accounts who have purchased
 single-sign-on. Below you will find instructions on how to setup Okta to be used
 with Zuplo.
 
