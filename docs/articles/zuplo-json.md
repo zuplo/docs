@@ -43,7 +43,7 @@ March 14, 2023. See
 [Cloudflare's documentation](https://developers.cloudflare.com/workers/platform/compatibility-dates/)
 for a list of changes.
 
-## 01-15-2024
+## 2024-01-15
 
 This compatibility date includes a number of minor breaking changes to improve
 the overall behavior of Zuplo APIs. This compatibility date is the default for
