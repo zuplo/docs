@@ -111,8 +111,8 @@ enterprise support code that has been provided to you.
 
 :::warning
 
-Calling this number will alert our on-call team at any hour. Please do call 
-for urgent, business-critical issues only
+Calling this number will alert our on-call team at any hour. Please call 
+for urgent and business-critical issues only.
 
 :::
 
