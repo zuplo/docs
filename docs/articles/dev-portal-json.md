@@ -97,7 +97,7 @@ environment variables.
   "authentication": {
     "issuer": "$env(ZUPLO_PUBLIC_OKTA_ISSUER)",
     "provider": "okta",
-    "clientId": "$env(ZUPLO_PUBLIC_OKTA_CLIENT_ID",
+    "clientId": "$env(ZUPLO_PUBLIC_OKTA_CLIENT_ID)",
     "audience": "api://my-api"
   }
 }
