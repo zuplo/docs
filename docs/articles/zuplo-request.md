@@ -53,3 +53,20 @@ const newRequest = new ZuploRequest("http://new-host.com/", {
   body: "test",
 });
 ```
+
+## Request Query
+
+The `request.query` property is a helper that takes your QueryString and converts
+it into a JavaScript dictionary (e.g. `Record<string, string>` in TypeScript). 
+This helper property does not support multiple values for the same key on a 
+QueryString, e.g.
+
+`?foo=bar&foo=wibble`
+
+To access the array of values in this case you can instead use the URL type and searchParams:
+
+```ts
+const url = new URL(request.url);
+const foo = url.searchParams.get("foo");
+// foo will be an array here
+```
