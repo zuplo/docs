@@ -23,7 +23,7 @@ export function Search() {
 function ClientSideSearch() {
   const searchParams = useSearchParams();
 
-  const search = searchParams.get("search");
+  const search = searchParams!.get("search");
 
   return <SearchInner prefilledQuery={search} />;
 }
