@@ -10,7 +10,7 @@ export function DocsHeader({ title }: { title?: string }) {
 
   const findLink = (link: NavItem): boolean => {
     if (link.href) {
-      return link.href === pathname.split("#")[0];
+      return link.href === pathname!.split("#")[0];
     } else {
       return !!link.items?.some(findLink);
     }

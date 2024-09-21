@@ -34,12 +34,12 @@ export function NavigationCategory({ navItem, isRoot }: Props) {
   const ranOnce = useRef(false);
   const liRef = useRef<HTMLLIElement>(null);
   const [isCollapsed, setIsCollapsed] = useState(
-    !isCategoryExpanded(navItem, pathname),
+    !isCategoryExpanded(navItem, pathname!),
   );
   const categoryHref = getItemHref(navItem);
 
   const isActive =
-    navItem.href === pathname || hasActiveNavLinkItem(navItem, pathname);
+    navItem.href === pathname || hasActiveNavLinkItem(navItem, pathname!);
 
   useEffect(() => {
     if (ranOnce.current || !liRef.current) return;
