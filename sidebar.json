@@ -2,7 +2,11 @@
   {
     "type": "category",
     "label": "Introduction",
-    "items": ["articles/what-is-zuplo", "articles/who-uses-and-why"],
+    "items": [
+      "articles/what-is-zuplo",
+      "articles/who-uses-and-why",
+      "articles/hosting-options"
+    ],
     "isExpandedByDefault": true
   },
   {
