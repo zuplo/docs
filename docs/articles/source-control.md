@@ -1,10 +1,16 @@
 ---
-title: Source Control
+title: Source Control / Native GitOps
 ---
+
+Zuplo is designed to natively support Infrastructure-as-Code (IaC) via gitops and 
+integrates seamlessly with GitHub, BitBucket, GitLab and Azure DevOps. Deploying
+to 300 datacenters around the world takes under 20s with Zuplo, just via a simple 
+commit. You get unlimited environments too - just commit to a new branch and we'll
+set you up with a new environment just as quick - at no charge to you.
 
 :::info
 
-Gitlab and Bitbucket Support
+** GitLab and Bitbucket Support ** 
 
 Zuplo can integrate with Source Control providers like GitHub, BitBucket and
 GitLab. GitHub is our primary option - BitBucket and GitLab (including private
