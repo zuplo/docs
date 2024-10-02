@@ -22,7 +22,7 @@ To configure you logging, you need to create a `zuplo.runtime.ts` file in the
 `modules`. The examples below show the content of the file with each of the
 different logging plugins.
 
-<EnterpriseFeature name="Custom logging" />
+<EnterpriseFeature name="Logging Plugins" />
 
 ## Plugins
 
