@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   },
 };
 
+const POLICIES_TO_EXCLUDE = ["api-key-auth-inbound"];
+
 export default async function Page() {
   return (
     <DocsLayout frontmatter={{ title: `Policies Catalog` }} sections={[]}>
@@ -43,15 +45,17 @@ export default async function Page() {
         className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
         data-testid="policies-grid"
       >
-        {Object.values(policies).map((item) => (
-          <Card
-            key={item.policyId}
-            name={item.schema.title!}
-            href={`/policies/${item.policyId}`}
-            icon={item.icon!}
-            testID="policy-card"
-          />
-        ))}
+        {Object.values(policies)
+          .filter((item) => !POLICIES_TO_EXCLUDE.includes(item.policyId))
+          .map((item) => (
+            <Card
+              key={item.policyId}
+              name={item.schema.title!}
+              href={`/policies/${item.policyId}`}
+              icon={item.icon!}
+              testID="policy-card"
+            />
+          ))}
       </div>
     </DocsLayout>
   );
