@@ -2,5 +2,5 @@
 module.exports = {
   siteUrl: "https://zuplo.com/docs",
   generateRobotsTxt: false,
-  exclude: ["/sitemap-*.xml"],
+  exclude: ["/sitemap-*.xml", "/docs/policies/api-key-auth-inbound"],
 };
