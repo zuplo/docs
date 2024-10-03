@@ -31,8 +31,8 @@ data-center. Available as a hybrid option with the use of shared services for
 rate-limiting or full self-host. You can deploy Zuplo to any management or
 hosting environment such as Kubernetes, Nomad, VMs, Containers etc.
 
-To learn more about self-hosting [book a meeting](htts://book.zuplo.com) with
-us.
+To learn more about self-hosting [book a meeting](https://zuplo.com/meeting)
+with us.
 
 ## Certified
 
