@@ -8,7 +8,7 @@ sidebar_label: Keycloak Setup
 This guide will walk you through setting up Keycloak as the authentication
 provider for your Zuplo hosted developer portal.
 
-### 1. Create OAuth Application
+### 1/ Create OAuth Application
 
 Navigate to your admin console and create a new client. The Client ID can be
 anything you want, but for this example, we will use `zuplo-dev-portal`.
