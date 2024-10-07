@@ -13,7 +13,7 @@ your default OpenAPI routing file (oas = 'open api specification').
 You can use the Route Designer to build your routes, which will be creating an
 OpenAPI document in the background for you (check it out in the **JSON View**).
 
-You can also **import an OpenAPI** document by clicking on the **Open API** tab.
+You can also **import an OpenAPI** document by clicking the **Open API** tab.
 
 ![Import Open API](../../public/media/open-api/image-1.png)
 
