@@ -44,7 +44,7 @@ Dev Portal.
 
 ![JSON file](../../public/media/dev-portal-keycloak-auth/image-5.png)
 
-### 5. Configure the Developer Portal
+### 5/ Configure the Developer Portal
 
 Inside of the Zuplo Developer portal navigate to the **Code Editor** tab and
 open the `dev-portal.json` file. Under the "Authentication" section, set the
