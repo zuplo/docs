@@ -17,7 +17,7 @@ click "Next".
 
 ![Keycloak Client](../../public/media/dev-portal-keycloak-auth/image.png)
 
-### 2. Set the Client Capabilities
+### 2/ Set the Client Capabilities
 
 In the Authentication flow section, enable the "Standard flow" and disable
 "Direct access grants". Leave "Client authentication" and "Authorization" set to
@@ -25,7 +25,7 @@ In the Authentication flow section, enable the "Standard flow" and disable
 
 ![Client Capabilities](../../public/media/dev-portal-keycloak-auth/image-1.png)
 
-### 3. Set the Login Settings
+### 3/ Set the Login Settings
 
 In the "Valid Redirect URIs" field, enter the URL of your Zuplo Dev Portal with
 the base path (this defaults to `/docs/`). Make sure you have the trailing slash
@@ -33,7 +33,7 @@ set. Click **Save**.
 
 ![Login settings](../../public/media/dev-portal-keycloak-auth/image-3.png)
 
-### 4. Find the Issuer URL
+### 4/ Find the Issuer URL
 
 Open the "Realm settings" tab in your Keycloak admin console. And click the link
 to "OpenID Endpoint Configuration". This will open a JSON document. Find the
