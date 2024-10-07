@@ -50,7 +50,7 @@ information to rate limit them differently.
 ## 2/ Add a Custom Code Module
 
 Navigate back to the Code tab. Now add a new module to the files section by
-clicking on the `+` next to the **modules** folder and choose new empty module.
+clicking the `+` next to the **modules** folder and choose new empty module.
 Name the module `rate-limit.ts`.
 
 ![New module](../../public/media/step-3-add-rate-limiting/image-3.png)
@@ -102,7 +102,7 @@ export function rateLimit(request: ZuploRequest, context: ZuploContext) {
 ## 3/ Update your Policy
 
 Now we'll reconfigure the rate-limiting policy to wire up our custom function.
-Find the policy in the **Route Designer** and click edit.
+Find the policy in the **Route Designer** and click **Edit**.
 
 ![Edit Policy](../../public/media/step-3-add-rate-limiting/image-4.png)
 

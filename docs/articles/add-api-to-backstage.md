@@ -83,7 +83,7 @@ spec:
 ```
 
 You should now be able to see your API under the APIs tab in Backstage. If you
-navigate to your API and click the 'DEFINITION' tab - you can even preview your
+navigate to your API and click the **DEFINITION** tab - you can even preview your
 OpenAPI spec.
 
 ![OpenAPI spec](../../public/media/add-api-to-backstage/image-6.png)
@@ -126,7 +126,7 @@ Save and commit this file.
 ### 2/ Add your API Component to Backstage
 
 You can register existing APIs in your catalog directly from Backstage. Navigate
-to the APIs tab, and click 'REGISTER EXISTING API'.
+to the APIs tab, and click **REGISTER EXISTING API**.
 
 ![APIs list](../../public/media/add-api-to-backstage/image-5.png)
 

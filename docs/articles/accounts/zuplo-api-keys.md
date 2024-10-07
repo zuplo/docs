@@ -12,9 +12,9 @@ accessible areas such as GitHub repositories.
 
 ## Creating an API Key
 
-To start, navigate to the account settings page by clicking on your user icon in
+To start, navigate to the account settings page by clicking your user icon in
 the top right corner of the screen and selecting "Settings" from the dropdown
-menu. Click the "API Keys" tab to view the API keys in your account that you
+menu. Click the **API Keys** tab to view the API keys in your account that you
 have access to.
 
 ![API Keys](../../../public/media/zuplo-api-keys/image.png)
@@ -41,7 +41,7 @@ will need to create a new API key.
 ## Deleting an API Key
 
 API Keys can be deleted by selecting the delete button on the list page or by
-opening the details page for the key and clicking the "Delete" button at the
+opening the details page for the key and clicking the **Delete** button at the
 bottom of the page.
 
 ![Delete API Key](../../../public/media/zuplo-api-keys/image-2.png)
