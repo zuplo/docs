@@ -28,6 +28,7 @@ const mdxComponents = {
 };
 
 const config: ZudokuConfig = {
+  basePath: "/docs",
   page: {
     pageTitle: "Zuplo Docs",
     logoUrl: "https://cdn.zuplo.com/www/favicon.png",
