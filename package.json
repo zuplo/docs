@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@inkeep/widgets": "0.2.289",
+    "next": "^14.1.1",
     "posthog-js": "^1.139.3",
     "react": "18.3.1",
     "react-dom": "18.3.1",
