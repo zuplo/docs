@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="204px" height="204px" viewBox="0 0 204 204" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>firebase_icon</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="firebase_icon">
+            <rect id="Rectangle" x="0" y="0" width="204" height="204"></rect>
+            <path d="M42.2,128.9 L59.6,17.4 C60.2,13.6 65.3,12.7 67.1,16.1 L85.8,51.1 L42.2,128.9 Z M165.9,156 L149.3,53.3 C148.8,50.1 144.8,48.8 142.5,51.1 L37.9,156 L95.8,188.5 C99.4,190.5 103.9,190.5 107.5,188.5 L165.9,156 Z M118.9,66.4 L105.5,40.9 C104,38 99.9,38 98.4,40.9 L39.5,145.9 L118.9,66.4 Z" id="icon_1_" fill="#000000" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>
