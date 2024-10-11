@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="109px" height="112px" viewBox="0 0 109 112" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>supabase-logo-icon</title>
+    <defs>
+        <linearGradient x1="20.8617445%" y1="20.6868812%" x2="63.4256086%" y2="44.0710077%" id="linearGradient-1">
+            <stop stop-color="#000000" offset="0%"></stop>
+            <stop stop-color="#8C8C8C" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="1.99116498%" y1="-13.1584008%" x2="21.4025077%" y2="34.708062%" id="linearGradient-2">
+            <stop stop-color="#000000" offset="0%"></stop>
+            <stop stop-color="#000000" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="supabase-logo-icon" transform="translate(0.000000, 0.000000)" fill-rule="nonzero">
+            <path d="M63.6829412,110.072819 C60.8234412,113.673819 55.0255412,111.700819 54.9566412,107.102819 L53.9491412,39.8515191 L99.1688412,39.8515191 C107.359341,39.8515191 111.927341,49.3116191 106.834341,55.7262191 L63.6829412,110.072819 Z" id="Path" fill="url(#linearGradient-1)"></path>
+            <path d="M63.6829412,110.072819 C60.8234412,113.673819 55.0255412,111.700819 54.9566412,107.102819 L53.9491412,39.8515191 L99.1688412,39.8515191 C107.359341,39.8515191 111.927341,49.3116191 106.834341,55.7262191 L63.6829412,110.072819 Z" id="Path" fill-opacity="0.2" fill="url(#linearGradient-2)"></path>
+            <path d="M45.2923412,1.85984905 C48.1518412,-1.74155095 53.9498412,0.231756053 54.0187412,4.82981905 L54.4602412,72.0810191 L9.80647123,72.0810191 C1.61572123,72.0810191 -2.95240877,62.6209191 2.14084123,56.2063191 L45.2923412,1.85984905 Z" id="Path" fill="#000000"></path>
+        </g>
+    </g>
+</svg>

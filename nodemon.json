@@ -1,3 +1,0 @@
-{
-  "watch": ["sidebar.json", "src/build/**/*.mjs"]
-}
