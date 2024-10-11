@@ -82,10 +82,6 @@ const config: ZudokuConfig = {
   mdx: {
     components: mdxComponents,
   },
-  apiKeys: {
-    enabled: true,
-    endpoint: "https://zudoku-customer-main-b36fa2f.d2.zuplo.dev",
-  },
   apis: {
     type: "url",
     input: "https://developer-api-main-5b4bb7c.d2.zuplo.dev/openapi",
