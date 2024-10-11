@@ -104,10 +104,11 @@ for the consumer. This will create a new key and revoke the old key.
 export ACCOUNT_NAME="your-account-name"
 export BUCKET_NAME="your-bucket-name"
 export CONSUMER_NAME="your-consumer-name"
+export ZUPLO_API_KEY="your-zuplo-api-key"
 
 curl --request POST \
   --url https://dev.zuplo.com/v1/accounts/$ACCOUNT_NAME/key-buckets/$BUCKET_NAME/consumers/$CONSUMER_NAME/roll-key \
-  --header 'Authorization: Bearer YOUR_KEY_HERE' \
+  --header 'Authorization: Bearer $ZUPLO_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '
 {
