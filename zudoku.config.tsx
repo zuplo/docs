@@ -54,7 +54,7 @@ const config: ZudokuConfig = {
       border: "220 13.04% 90.98%",
     },
   },
-  slotlets: {
+  UNSAFE_slotlets: {
     "head-navigation-start": HeadNavigation,
   },
   search: {
