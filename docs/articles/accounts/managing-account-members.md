@@ -8,7 +8,7 @@ manage users in your account.
 
 ## Add Account Member
 
-To start, navigate to the account settings page by clicking on your user icon in
+To start, navigate to the account settings page by clicking your user icon in
 the top right corner of the screen and selecting "Settings" from the dropdown
 menu.
 
@@ -40,6 +40,6 @@ the role from the drop down.
 
 ## Removing a Member
 
-To remove a user from the account, click on the remove icon next to the user.
+To remove a user from the account, click the remove icon next to the user.
 
 ![Remove Member](../../../public/media/managing-account-members/image-4.png)

@@ -40,7 +40,7 @@ quick overview of them:
 ![Your First Route](../../public/media/step-1-setup-basic-gateway/image-14.png)
 
 Save your new route (you can click the three-dot menu next to `routes.oas.json`
-and then click Save, or press CMD+S).
+and then click **Save**, or press **CMD+S**).
 
 You can quickly test this route by clicking the **Test** button next to the
 **Path** field. You can use the built in test tool or click the URL to open in a

@@ -21,7 +21,7 @@ to get started. You can also create a new docs page via the new file button.
 ## Previewing Your Changes
 
 You can preview what your page will look like in the developer portal by
-clicking the 'Markdown Preview' tab above the editor.
+clicking the **Markdown Preview** tab above the editor.
 
 ![Markdown Preview](../../public/media/developer-portal/adding-pages/style-preview.png)
 
