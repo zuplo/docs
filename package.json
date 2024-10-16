@@ -47,7 +47,7 @@
     "rehype-pretty-code": "^0.13.0",
     "rehype-rewrite": "^3.0.6",
     "rehype-slug": "^5.1.0",
-    "rehype-stringify": "^9.0.4",
+    "rehype-stringify": "^10.0.0",
     "remark-gfm": "^3.0.1",
     "remark-rehype": "^10.1.0",
     "sharp": "^0.33.2",
