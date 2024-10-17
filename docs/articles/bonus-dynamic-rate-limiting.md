@@ -42,7 +42,7 @@ Step 3 to
 }
 ```
 
-![Customer Metadata](../../public/media/step-3-add-rate-limiting/image-2.png)
+![Customer Metadata](/media/step-3-add-rate-limiting/image-2.png)
 
 Now that we have users with different `customerType`, we can utilize this
 information to rate limit them differently.
@@ -53,7 +53,7 @@ Navigate back to the Code tab. Now add a new module to the files section by
 clicking on the `+` next to the **modules** folder and choose new empty module.
 Name the module `rate-limit.ts`.
 
-![New module](../../public/media/step-3-add-rate-limiting/image-3.png)
+![New module](/media/step-3-add-rate-limiting/image-3.png)
 
 :::info{title="What's a Module?"}
 
@@ -104,7 +104,7 @@ export function rateLimit(request: ZuploRequest, context: ZuploContext) {
 Now we'll reconfigure the rate-limiting policy to wire up our custom function.
 Find the policy in the **Route Designer** and click edit.
 
-![Edit Policy](../../public/media/step-3-add-rate-limiting/image-4.png)
+![Edit Policy](/media/step-3-add-rate-limiting/image-4.png)
 
 Update the configuration to
 
