@@ -66,7 +66,7 @@ update your `tsconfig.json` file to the recommended settings. This will ensure
 that your build continues to work in the future and that you do not encounter
 any issues.
 
-:::info Note
+:::info{title="Note"}
 
 Depending on when your project was created, you might see this warning even if
 you never edited the `tsconfig.json` file. Older project templates used various

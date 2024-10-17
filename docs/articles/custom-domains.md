@@ -134,7 +134,7 @@ Trust Services as it has slightly better compatibility with clients.
 Certificates are issued for 90 days and are automatically renewed aproximately
 30 days before they expire. No action is required on your part.
 
-:::warning Certificate Pinning
+:::warning{title="Certificate Pinning"}
 
 Certificate pinning is not recommended for Zuplo APIs as the certificates are
 issued for short periods of time and renewed automatically. If you or your end
@@ -167,7 +167,7 @@ default certificates are issues with versions 1.2 and 1.3 enabled. If you
 require a specific version, please contact
 [support@zuplo.com](mailto:support@zuplo.com).
 
-:::note Legacy TLS Versions
+:::note{title="Legacy TLS Versions"}
 
 Early Zuplo customers may have certificates issued with TLS 1.0 and greater
 enabled. If you wish to upgrade to a higher TLS version, please contact

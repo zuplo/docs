@@ -11,7 +11,7 @@ To follow this tutorial you'll need to have completed
 [Step 3](./step-3-add-api-key-auth.md) to add API key authentication to that
 same route.
 
-:::info What's Dynamic Rate Limiting?
+:::info{title="What's Dynamic Rate Limiting?"}
 
 Traditionally, rate limits are static and the same for everyone. This approach
 does not let you tailor your rate limiting to your API user - you might want to
@@ -55,7 +55,7 @@ Name the module `rate-limit.ts`.
 
 ![New module](../../public/media/step-3-add-rate-limiting/image-3.png)
 
-:::info What's a Module?
+:::info{title="What's a Module?"}
 
 Modules are Typescript functions that you can execute within Zuplo. They are
 typically used to add custom code within the request/response pipeline (ex.

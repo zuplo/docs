@@ -4,7 +4,7 @@ title: Role Permissions
 
 <EnterpriseFeature name="Role Based Access Control" />
 
-:::info Beta
+:::info{title="Beta"}
 
 The specific permissions of each role are currently in beta and may change
 without notice.
