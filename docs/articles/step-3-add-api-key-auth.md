@@ -12,7 +12,7 @@ this authentication method is considered one of the easiest to use by developers
 but hard for API developers to get right. We also support JWT tokens and other
 authentication methods.
 
-:::info{title="What's a Policy?}
+:::info{title="What's a Policy?"}
 
 [Policies](./policies.md) are modules that can intercept and transform an
 incoming request or outgoing response. Zuplo offers a wide range of policies

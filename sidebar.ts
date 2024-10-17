@@ -1,6 +1,4 @@
-import type { Sidebar } from "zudoku";
-
-type SidebarEntry = Sidebar[keyof Sidebar];
+import type { SidebarEntry } from "zudoku";
 
 export const sidebar: SidebarEntry = [
   {
