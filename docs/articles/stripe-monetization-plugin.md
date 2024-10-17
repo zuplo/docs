@@ -51,7 +51,7 @@ Additionally, you can use the Stripe
 Dashboard to view the webhooks that were send and their status. You can also
 resend a webhook event.
 
-![Stripe Webhooks](../../public/media/stripe-monetization-plugin/image.png)
+![Stripe Webhooks](/media/stripe-monetization-plugin/image.png)
 
 ## Configuration
 

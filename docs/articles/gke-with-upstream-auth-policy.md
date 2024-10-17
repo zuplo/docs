@@ -44,7 +44,7 @@ to this process are:
 1. Authorized requests are forwarded on through your GKE ingress to your
    backend.
 
-![GKE diagram](../../public/media/gke-with-upstream-auth-policy/diagram.svg)
+![GKE diagram](/media/gke-with-upstream-auth-policy/diagram.svg)
 
 ## Zuplo Gateway Identity
 

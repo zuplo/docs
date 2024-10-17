@@ -26,7 +26,7 @@ the portal.
 When API Key Managers log into the Developer Portal they can copy, manage, or
 create new API Keys.
 
-![API Keys in Developer Portal](../../public/media/api-key-dev-portal.png)
+![API Keys in Developer Portal](/media/api-key-dev-portal.png)
 
 ## React Component and API
 
