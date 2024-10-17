@@ -19,7 +19,7 @@ have access to.
 
 ![API Keys](../../../public/media/zuplo-api-keys/image.png)
 
-::: note Required Role
+:::note{title="Required Role"}
 
 Account admins can view and manage all API keys in the account. Developers can
 only view their own API keys. Members do not have access to API keys.
@@ -59,7 +59,7 @@ Selecting All Projects will also grant all project level permissions to that
 key. If you want to customize the project level permissions, scope the key to
 one or more projects.
 
-![Project Access](../../../public/media/zuplo-api-keys/image-3.png)
+![Project Access](/media/zuplo-api-keys/image-3.png)
 
 ### Environment Access
 

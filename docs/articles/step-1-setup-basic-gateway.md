@@ -9,7 +9,7 @@ In this tutorial we'll setup a simple gateway. We'll use a demo API at
 To get started, sign in to [portal.zuplo.com](https://portal.zuplo.com) and
 create a free account. Create a new **empty** project. Then...
 
-:::tip Local Development
+:::tip{title="Local Development"}
 
 Zuplo also supports building and running your API locally. To learn more
 [see the documentation](./local-development.md).

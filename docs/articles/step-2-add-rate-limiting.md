@@ -11,7 +11,7 @@ Rate Limiting is one of our most popular **policies** - you should never ship an
 API without rate limiting because your customers or internal developers **will**
 accidentally DDoS your API. Usually with a rogue `useEffect` call in React code.
 
-:::info What's a Policy?
+:::info{title="What's a Policy?"}
 
 [Policies](./policies.md) are modules that can intercept and transform an
 incoming request or outgoing response. Zuplo offers a wide range of policies

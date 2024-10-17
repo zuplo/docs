@@ -218,7 +218,7 @@ Sometimes you will want to create a new key and expire the current keys. Instead
 of calling the API for each key and manually creating a new key, you can simply
 call the roll key endpoint.
 
-:::tip Tags for Request Authorization
+:::tip{title="Tags for Request Authorization"}
 
 One useful feature of the API Key service is that most requests can have `tags`
 added to the query parameter even if they aren't get requests. This is useful

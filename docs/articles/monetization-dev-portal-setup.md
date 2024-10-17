@@ -14,7 +14,7 @@ If you don't already have a Zuplo API, you can create a new project using the
 You'll also need a Stripe account. If you don't already have one, you'll need to
 [register](https://dashboard.stripe.com/register) for one.
 
-::: tip
+:::tip
 
 You don't need to go through the full set up process in Stripe. You can follow
 this tutorial using Stripe's test mode. We recommend using
