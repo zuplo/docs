@@ -9,10 +9,9 @@
   "scripts": {
     "dev": "zudoku dev",
     "build": "zudoku build",
-    "build:scripts": "node ./scripts/build.mjs",
     "format": "prettier --write .",
     "typecheck": "tsc",
-    "postinstall": "pnpm policies:get && pnpm policies:generate",
+    "postinstall": "npm run policies:get && npm run policies:generate",
     "policies:get": "sh ./scripts/get-policies.sh",
     "policies:generate": "tsx scripts/generate-policies.ts",
     "policies:ci": "node ./scripts/build.mjs && node --enable-source-maps ./scripts/update-policies.main.mjs"
@@ -24,7 +23,7 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "typescript": "5.6.3",
-    "zudoku": "0.0.0-d99ad45"
+    "zudoku": "0.0.0-740d272"
   },
   "devDependencies": {
     "@types/json-schema": "7.0.15",

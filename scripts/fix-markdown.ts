@@ -1,13 +1,15 @@
 export const fixMarkdown = (content: string) =>
   content
-    .replaceAll(/\.mdx?(#.*?)?\)/gm, "$1)") // replace paths like `../../public` without the `public` prefix
+    .replaceAll(/\.mdx?(#.*?)?\)/gm, "$1)")
+    // replace paths like `../../public` without the `public` prefix
     .replaceAll(/\((\.\.\/)+public/gm, "(")
-    // replace local gifs and pngs with webm and webp
-    .replaceAll(/(]\(\.*\/.+?)(\.gif\))/gm, "$1.webm)")
-    .replaceAll(/(]\(\.*\/.+?)(\.png\))/gm, "$1.webp)")
     // replace outdated directives with correct syntax
     .replaceAll(/:::\s([^\n]+)/gm, ":::$1")
+    // /^(.*?)\s*{#([\w-]+)}$
+    // replace custom slug ids:
+    .replaceAll(/^(#+.*?)\s*{#([\w-]+)}/gm, "$1")
     .replaceAll(
       /:::(tip|info|note|caution|warning|danger)\s([^\n]+)/gm,
       ':::$1{title="$2"}',
-    );
+    )
+    .replaceAll(/:::\w+{title="[^"]*"}/g, (m) => m.replaceAll(/\n/g, ""));
