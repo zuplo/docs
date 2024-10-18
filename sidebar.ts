@@ -206,7 +206,12 @@ export const sidebar: SidebarEntry = [
       id: "articles/policies",
     },
     items: [
-      "policies/index",
+      {
+        type: "doc",
+        // this file is auto-generated, see generate-policies.ts
+        id: "policies/index",
+        label: "All Policies List",
+      },
       {
         type: "category",
         label: "Authentication",
@@ -500,6 +505,7 @@ export const sidebar: SidebarEntry = [
         type: "doc",
         id: "articles/developer-api",
       },
+      "ask",
       {
         type: "link",
         label: "Trust & Compliance",

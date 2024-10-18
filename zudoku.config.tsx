@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { CogIcon, CopyIcon, FileTextIcon, ListEndIcon } from "zudoku/icons";
 import type { ZudokuConfig } from "zudoku";
 import { EnterpriseFeature } from "./src/EnterpriseFeature";
@@ -9,6 +9,8 @@ import { HeadNavigation } from "./src/HeadNavigation";
 import { sidebar } from "./sidebar.js";
 
 const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
+
+const EmbeddedChat = lazy(() => import("./src/EmbeddedChat"));
 
 const mdxComponents = {
   Screenshot: (props: any) => <img {...props} />,
@@ -25,6 +27,15 @@ const mdxComponents = {
   ),
   PolicyOverview,
   EnterpriseFeature,
+  EmbeddedChat: () => {
+    if (typeof window === "undefined") return null;
+
+    return (
+      <Suspense fallback={<div>Loading…</div>}>
+        <EmbeddedChat />
+      </Suspense>
+    );
+  },
 };
 
 const config: ZudokuConfig = {
@@ -35,6 +46,8 @@ const config: ZudokuConfig = {
   },
   metadata: {
     title: "%s - Zuplo Docs",
+    description: "Zuplo Documentation",
+    generator: "Zudoku",
   },
   redirects: [
     {
