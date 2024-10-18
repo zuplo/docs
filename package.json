@@ -14,8 +14,7 @@
     "postinstall": "npm run policies:get && npm run policies:generate && npm run errors:generate",
     "policies:get": "sh ./scripts/get-policies.sh",
     "policies:generate": "tsx scripts/generate-policies.ts",
-    "policies:ci": "node ./scripts/build.mjs && node --enable-source-maps ./scripts/update-policies.main.mjs"
-    "errors:generate": "tsx scripts/generate-errors.ts",
+    "errors:generate": "tsx scripts/generate-errors.ts"
   },
   "dependencies": {
     "@inkeep/widgets": "0.2.289",
