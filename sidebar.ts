@@ -1,4 +1,5 @@
 import type { SidebarEntry } from "zudoku";
+import { errors } from "./generated/errors";
 
 export const sidebar: SidebarEntry = [
   {
@@ -489,10 +490,16 @@ export const sidebar: SidebarEntry = [
         id: "articles/limits",
       },
       {
-        type: "link",
+        type: "category",
+        link: "errors",
         label: "Errors",
-        href: "/errors",
+        items: errors.map((error) => ({
+          type: "doc",
+          id: `errors/${error.id}`,
+          label: error.title.split("(").slice(0, 1).join(""),
+        })),
       },
+
       {
         type: "doc",
         id: "articles/security",
