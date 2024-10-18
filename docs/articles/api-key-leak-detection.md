@@ -82,3 +82,37 @@ The payload is sent as a POST in the following format:
   }
 }
 ```
+
+## Recommended Actions
+
+If you receive an alert that an API Key has been leaked, we recommend taking one
+of the following actions immediately.
+
+### Notify Your Customer
+
+Notify your customer and ask them to login to your Zuplo powered developer
+portal and instruct them to roll the API Key. This way the old key is revoked
+and they get a new key.
+
+### Roll the API Key
+
+You can use the
+[Zuplo API to roll the API Key](https://dev.zuplo.com/docs/routes#roll-consumer-keys)
+for the consumer. This will create a new key and revoke the old key.
+
+```bash
+export ACCOUNT_NAME="your-account-name"
+export BUCKET_NAME="your-bucket-name"
+export CONSUMER_NAME="your-consumer-name"
+export ZUPLO_API_KEY="your-zuplo-api-key"
+
+curl --request POST \
+  --url https://dev.zuplo.com/v1/accounts/$ACCOUNT_NAME/key-buckets/$BUCKET_NAME/consumers/$CONSUMER_NAME/roll-key \
+  --header 'Authorization: Bearer $ZUPLO_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '
+{
+  "expiresOn": "2024-01-01T00:00:00.000Z"
+}
+'
+```

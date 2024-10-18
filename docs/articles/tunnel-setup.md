@@ -22,9 +22,11 @@ basic requirements for deploying a secure tunnel with Docker are:
 1. The ability for the tunnel service to make a request to your internal API by
    a DNS address. (i.e. `https://my-service.local/api`).
 
-To run the Docker container on your own infrastructure, refer to instructions
+The tunnel can run anywhere you can deploy a Docker container. Where you deploy depends on your specific setup. To run the Docker container on your own infrastructure, refer to instructions
 from your cloud provider or contact [Zuplo support](mailto:support@zuplo.com)
 for assistance.
+
+Below are a few option for deploying the tunnel.
 
 - [Deploying Docker containers on Azure](https://docs.microsoft.com/en-us/learn/modules/run-docker-with-azure-container-instances/)
 - [Deploying Docker containers on AWS ECS](https://docs.aws.amazon.com/AmazonECS/latest/userguide/getting-started.html)
