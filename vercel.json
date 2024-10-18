@@ -1,8 +1,12 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "nextjs",
+  "framework": null,
   "cleanUrls": true,
   "trailingSlash": false,
+  "devCommand": "npm run dev",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "outputDirectory": "dist",
   "redirects": [
     {
       "source": "/docs/articles/local-development-api-keys",

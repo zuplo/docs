@@ -17,7 +17,7 @@ When you navigate to the "Upgrade & Billing" page, you will see a link to manage
 your existing subscription. Clicking this link will take you to the Stripe
 checkout page where you can update your payment method.
 
-::: note Enterprise Plans
+:::note{title="Enterprise Plans"}
 
 Enterprise plans are setup with custom billing and cannot be managed through the
 portal. Contact your account representative for questions or assistance.

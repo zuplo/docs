@@ -11,7 +11,7 @@ auth sources like [Supabase](https://supabase.com).
 
 Below are instructions on how to configure some of the common providers.
 
-:::caution Production Authentication
+:::caution{title="Production Authentication"}
 
 Production Developer Portals must setup custom authentication.
 
