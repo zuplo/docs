@@ -9,8 +9,8 @@ project level roles in order to grant them access to specific project resources.
 
 ## Add Project Member
 
-To manage project members, navigate to the project settings page and click on
-the "Members" tab. Here you can see a list of all members in the project and
+To manage project members, navigate to the project settings page and click 
+the **Members** tab, which shows a list of all members in the project and
 their roles.
 
 ![Project Members](../../../public/media/managing-project-members/image-1.png)
