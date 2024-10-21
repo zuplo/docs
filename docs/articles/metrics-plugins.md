@@ -81,7 +81,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
       // Be mindful of what other information you wish to include since it will incur costs on your cardinality
       include: {
         country: false,
-        method: false,
+        httpMethod: false,
         statusCode: false,
       },
     }),
