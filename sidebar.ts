@@ -406,15 +406,7 @@ export const sidebar: SidebarEntry = [
       "articles/web-standard-apis",
       "articles/web-crypto-apis",
       "articles/cache",
-<<<<<<< HEAD:sidebar.ts
-      {
-        type: "link",
-        label: "Node Modules",
-        href: "/articles/node-modules",
-      },
-=======
       "articles/node-modules",
->>>>>>> c327246 (node modules):sidebar.json
       "articles/http-problems",
       "articles/reusing-code",
       "articles/zone-cache",
