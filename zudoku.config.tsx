@@ -6,6 +6,7 @@ import { GithubButton } from "./src/GithubButton";
 import { PolicyOverview } from "./src/PolicyOverview";
 import ZupIt from "./src/ZupIt.js";
 import { HeadNavigation } from "./src/HeadNavigation";
+import { BundlesTable } from './src/BundlesTable'
 import { sidebar } from "./sidebar.js";
 
 const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
@@ -36,6 +37,7 @@ const mdxComponents = {
       </Suspense>
     );
   },
+  BundlesTables: () => <BundlesTable />,
 };
 
 const config: ZudokuConfig = {
@@ -91,7 +93,6 @@ const config: ZudokuConfig = {
   sidebar: {
     docs: sidebar,
   },
-
   mdx: {
     components: mdxComponents,
   },
