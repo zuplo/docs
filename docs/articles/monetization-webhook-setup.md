@@ -18,7 +18,7 @@ you'll need to create Plans in your Zuplo Metering Service.
 1. In the Zuplo Portal, go to your project, select the **Services** tab, and
    click **Configure** on your "Metering Service".
 
-![Metering Service](../../public/media/monetization-webhook-setup/image.png)
+![Metering Service](/media/monetization-webhook-setup/image.png)
 
 > You'll complete the next steps for each Stripe Product you added to your
 > Pricing Table.
@@ -31,7 +31,7 @@ you'll need to create Plans in your Zuplo Metering Service.
    [Product Catalog](https://dashboard.stripe.com/products). The value will
    start with `prod_`.
 
-![Plan](../../public/media/monetization-webhook-setup/image-1.png)
+![Plan](/media/monetization-webhook-setup/image-1.png)
 
 4. Next, set a Meter for the plan. To start, create a single meter called
    `Requests`.
@@ -116,7 +116,7 @@ new Webhook in Stripe.
 5. With the Webhook created, find the section called **Signing secret** and
    click the **Reveal** link. Copy this value.
 
-![Stripe webhook signing secret](../../public/media/monetization-webhook-setup/image-2.png)
+![Stripe webhook signing secret](/media/monetization-webhook-setup/image-2.png)
 
 6. Return to the Zuplo Portal, open your project, and go to the **Environment
    Variables** section under the **Settings** tab.
@@ -149,7 +149,7 @@ any future date as the expiration and any three digits as the CVC.
    Developer Portal. After a few seconds, you should see your subscription page
    with your API Key.
 
-![Successful subscription](../../public/media/monetization-webhook-setup/image-3.png)
+![Successful subscription](/media/monetization-webhook-setup/image-3.png)
 
 5. Return to your Zuplo project and open the **Logs** tab. Notice the logs that
    show information about the incoming webhook.

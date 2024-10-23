@@ -26,14 +26,14 @@ Go to your project in the Zuplo portal and open to the **Settings** tab (1),
 then select **Custom Domain** (2) and click on the `Add New Custom Domain`
 button to open the `New Custom Domain` configuration modal.
 
-![Custom Domain](../../public/media/custom-domains/image.png)
+![Custom Domain](/media/custom-domains/image.png)
 
 ### 2. Add your domain
 
 Then, pick the environment you want to assign the domain to and enter your apex
 domain (e.g. example.com) or subdomain (e.g. api.example.com)
 
-![Add New Domain](../../public/media/custom-domains/image-1.png)
+![Add New Domain](/media/custom-domains/image-1.png)
 
 Once saved, you will be provided with a `CNAME` configuration that will look
 something like the one below that you'll use in the next step.
@@ -134,7 +134,7 @@ Trust Services as it has slightly better compatibility with clients.
 Certificates are issued for 90 days and are automatically renewed aproximately
 30 days before they expire. No action is required on your part.
 
-:::warning Certificate Pinning
+:::warning{title="Certificate Pinning"}
 
 Certificate pinning is not recommended for Zuplo APIs as the certificates are
 issued for short periods of time and renewed automatically. If you or your end
@@ -167,7 +167,7 @@ default certificates are issues with versions 1.2 and 1.3 enabled. If you
 require a specific version, please contact
 [support@zuplo.com](mailto:support@zuplo.com).
 
-:::note Legacy TLS Versions
+:::note{title="Legacy TLS Versions"}
 
 Early Zuplo customers may have certificates issued with TLS 1.0 and greater
 enabled. If you wish to upgrade to a higher TLS version, please contact
