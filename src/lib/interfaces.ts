@@ -51,4 +51,5 @@ export interface LinksCategory {
 export type EventName =
   | "sign-in-clicked"
   | "start-free-cta-clicked"
-  | "pricing-clicked";
+  | "pricing-clicked"
+  | "book-demo-cta-clicked";
