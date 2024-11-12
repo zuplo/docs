@@ -12,7 +12,7 @@ import { ThemeSelector } from "@/components/ThemeSelector";
 import { MenuPopoverItem } from "./MenuPopoverItem";
 import { data } from "./data";
 import { trackEvent } from "@/lib/utils/analytics";
-import { signUpLink } from "@/lib/links";
+import { bookDemoLink, signUpLink } from "@/lib/links";
 export default function Header() {
   const currentPath = usePathname();
   let [isScrolled, setIsScrolled] = useState(false);
@@ -79,16 +79,16 @@ export default function Header() {
           </div>
           <ThemeSelector className="relative z-10" />
           <Link
-            href="https://portal.zuplo.com/signup"
+            href="https://book.zuplo.com"
             onClick={() => {
               trackEvent({
-                eventName: signUpLink.event ?? "start-free-cta-clicked",
+                eventName: bookDemoLink.event ?? "book-demo-cta-clicked",
                 eventData: { placement: "docs-header" },
               });
             }}
             className="btn btn-primary-dark font-sans bg-pink block hidden whitespace-nowrap rounded-lg px-5 py-3 text-center text-sm font-semibold tracking-wider text-white no-underline transition-colors hover:bg-white hover:text-black md:inline-block"
           >
-            {signUpLink.name}
+            {bookDemoLink.name}
           </Link>
         </div>
       </div>

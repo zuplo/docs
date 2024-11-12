@@ -27,6 +27,12 @@ export const signInLink: LinkData = {
   event: "sign-in-clicked",
 };
 
+export const bookDemoLink: LinkData = {
+  href: "https://book.zuplo.com/",
+  name: "Book Demo",
+  event: "book-demo-cta-clicked",
+};
+
 export const signUpLink: LinkData = {
   href: "https://portal.zuplo.com/",
   name: "Start for Free",
