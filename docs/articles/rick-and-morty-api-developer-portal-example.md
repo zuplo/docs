@@ -9,8 +9,7 @@ gateway configuration. for the Rick and Morty API.
 The Rick and Morty API is a REST(ish) API based on the television show Rick and
 Morty. It provides access to about hundreds of characters, images, locations and
 episodes. The Rick and Morty API is filled with canonical information as seen on
-the TV show. Full credit to the original and upstream API, which is available at
-[rickandmortyapi.com](https://rickandmortyapi.com).
+the TV show. Full credit to the original and upstream API, which is available at rickandmortyapi.com.
 
 > "I'm A Scientist; Because I Invent, Transform, Create, And Destroy For A
 > Living, And When I Don't Like Something About The World, I Change It."
