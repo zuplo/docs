@@ -75,6 +75,7 @@
           "articles/log-plugin-vmware-log-insight",
           "articles/log-plugin-loki-logging",
           "articles/log-plugin-gcp-logging",
+          "articles/log-plugin-azure-csv",
           "articles/custom-logging-example",
           "articles/log-export"
         ]
