@@ -1,6 +1,6 @@
 ---
-title: Azure Blob CSV Plugin
-sidebar_label: Azure CSV Blob
+title: Azure Blob Plugin
+sidebar_label: Azure Blob
 ---
 
 <EnterpriseFeature name="Custom logging" />
@@ -19,8 +19,8 @@ file `zuplo.runtime.ts`:
 ```ts
 
 // The interface that describes the rows
-// in the CSV
-interface AzureCsvLogEntry {
+// in the output
+interface AzureBlobLogEntry {
   timestamp: string;
   method: string;
   url: string;
@@ -32,7 +32,7 @@ interface AzureCsvLogEntry {
 
 // The function that creates an entry
 async function generateLogEntry(response: Response, request: ZuploRequest)
-  const entry: AzureCsvLogEntry = {
+  const entry: AzureBlobLogEntry = {
     timestamp: new Date().toISOString(),
     url: request.url,
     method: request.method,
@@ -46,7 +46,7 @@ async function generateLogEntry(response: Response, request: ZuploRequest)
 
 // Add the plugin - use a SAS URL
 runtime.addPlugin(
-  new AzureBlobCsvLogsPlugin<AzureCsvLogEntry>({
+  new AzureBlobPlugin<AzureLogEntry>({
     sasUrl: "https://YOUR_ACCOUNT.blob.core.windows.net/YOUR_CONTAINER?sv=2022-11-02&ss=b&srt=co&sp=wactfx&se=2045-11-17T13:50:53Z&st=2024-11-17T05:50:53Z&spr=https&sig=YOUR_SIG",
     batchPeriodSeconds: 1,
     generateLogEntry,
