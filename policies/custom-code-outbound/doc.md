@@ -64,6 +64,7 @@ We will write an outbound policy that does two things
 Here's the code:
 
 ```ts
+// /modules/my-first-policy.ts
 export default async function (
   response: Response,
   request: ZuploRequest,
@@ -104,7 +105,107 @@ that same instance you must first `clone()` to avoid runtime errors such as
 
 :::
 
-### Adding headers
+## Wiring up the policy on routes
+
+Policies are activated by specifying them on routes in the route.oas.json file.
+Here's how we could wire up our new route:
+
+```json
+// /config/policies.json
+{
+  "policies": [
+    {
+      "name": "my-first-policy",
+      "policyType": "custom-code-outbound",
+      "handler": {
+        "export": "default",
+        "module": "$import(./modules/my-first-policy)"
+      }
+    }
+  ]
+}
+```
+
+```json
+// /config/routes.oas.json
+{
+  ...
+  "paths": {
+  "x-zuplo-path": {
+    "pathMode": "open-api"
+  },
+  "get": {
+    "summary": "New Route",
+    "description": "",
+    "x-zuplo-route": {
+      "corsPolicy": "none",
+      "handler": {
+        "export": "urlForwardHandler",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "baseUrl": "https://getting-started.zuplo.io"
+        }
+      },
+      "policies": {
+        "inbound": [],
+        "outbound": [
+          "my-first-policy",
+        ]
+      }
+    },
+}
+
+}
+```
+
+### Policy Options
+
+In your policy configuration, you can specify additional information to
+configure your policy on the options property. In the example below we set an
+example object with some properties of type string and number. Note these
+objects can be as complicated as you like.
+
+```json
+{
+  "name": "my-first-policy",
+  "policyType": "custom-code-outbound",
+  "handler": {
+    "export": "default",
+    "module": "$import(./modules/my-first-policy)",
+    "options": {
+      "you": "can",
+      "specify": "anything",
+      "here": 0
+    }
+  }
+}
+```
+
+The value of this property will be passed to your policy's handler as the
+`options` parameter. Sometimes it's useful to create a type as shown below.
+
+```ts
+type MyPolicyOptionsType = {
+  you: string;
+  specify: string;
+  here: number;
+};
+export default async function (
+  response: Response,
+  request: ZuploRequest,
+  context: ZuploContext,
+  options: MyPolicyOptionsType,
+  policyName: string,
+) {
+  // your policy code goes here, and can use the options to perform any
+  // configuration
+  context.log.info(options.you);
+}
+```
+
+You can also use the `any` type if you prefer not to create a type.
+
+## Adding headers
 
 Note if you just need to add headers, it more efficient not read the body stream
 and reuse it, e.g.

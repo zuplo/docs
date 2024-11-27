@@ -129,7 +129,7 @@ objects can be as complicated as you like.
 ```json
 {
   "name": "my-first-policy",
-  "policyType": "custom-code",
+  "policyType": "custom-code-inbound",
   "handler": {
     "export": "default",
     "module": "$import(./modules/my-first-policy)",
@@ -183,7 +183,7 @@ we'll create a dictionary of API keys to `sub` ids.
 "policies": [
     {
       "name": "my-first-policy",
-      "policyType": "custom-code",
+      "policyType": "custom-code-inbound",
       "handler": {
         "export": "default",
         "module": "$import(./modules/my-first-policy)",
