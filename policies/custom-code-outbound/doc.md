@@ -158,7 +158,7 @@ Here's how we could wire up our new route:
 }
 ```
 
-### Policy Options
+### Custom Policy Options
 
 In your policy configuration, you can specify additional information to
 configure your policy on the options property. In the example below we set an
