@@ -12,6 +12,11 @@ provider to control who can access the portal.
 This article explains how to use Auth0 actions to automatically create an API
 Key Consumer for your users when they sign into your developer portal.
 
+:::tip
+You don't need to set this up if using the built-in Zuplo monetization feature.
+We do this all for you in that flow. 
+:::
+
 Before you begin, you will need to
 [setup custom authentication](./dev-portal-auth.md) for the developer portal -
 you can't use the built-in "demo" provider for this tutorial.
