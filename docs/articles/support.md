@@ -7,13 +7,13 @@ severities, and response times provided by Zuplo support. The following features
 are provided with every support plan:
 
 - Answer questions concerning usage issues related to Zuplo platform-specific
-  features, options and configurations.
+  features, options, and configurations.
 - Provide initial and high-level suggestions regarding the appropriate usage,
   features, or solution configurations for the particular type of reporting,
   analysis, or functionality.
 - Isolate, document, and find alternative solutions for reported defects.
 - Work with Zuplo Operations, Product, Software Development, and QA staff to
-  submit change requests, enhancement requests, and provide fixes for the Zuplo
+  submit change or enhancement requests, and provide fixes for the Zuplo
   platform as necessary.
 - Address your concerns with online or printed documentation, providing
   additional examples or explanations for concepts requiring clarification.
@@ -55,7 +55,7 @@ As part of premium support, Zuplo can also offer:
 
 - Assistance migrating or onboarding to Zuplo
 - Guidance implementing custom policies
-- Advice on best-practices designing your Zuplo API
+- Advice on best practices for designing your Zuplo API
 - Troubleshooting
 
 Contact sales to explore adding these options to your agreement.
@@ -106,32 +106,33 @@ phone support.
 ### Emergency Phone Support
 
 Customers with emergency phone support can call +1 833-681-6018 to open an
-emergency support ticket. After dialing the number, you will need to enter your
-enterprise support code. This is a five digit number that has been provided to
-you.
-
-After entering your support code a ticket will be opened and our on call support
-team will reach out to you within a few minutes. We suggest you sign in to
-discord as well so we can chat in real time.
+emergency support ticket. After dialing the number, enter the five-digit 
+enterprise support code that has been provided to you.
 
 :::warning
 
-Calling this number will alert our on call team at any hour. Please only use
-this number for urgent, business critical issues.
+Calling this number will alert our on-call team at any hour. Please call 
+for urgent and business-critical issues only.
 
 :::
+
+We will open a ticket and our on-call support team will reach out to you 
+within a few minutes. 
+
+We also suggest you sign in to Discord so we can start a real-time chat.
 
 ## Response Times
 
 For premium support plans, Zuplo offers SLAs on response times based on the
-severity of issues and the level of the plan. Zuplo uses four categories to
-define a technical issue as explained below.
+severity of issues and the level of the plan. 
+
+Zuplo uses four categories to define a technical issue:
 
 | Severity |                                                                                                                                                                                       | Premium           | Premium Plus       | Premium Custom   |
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | ------------------ | ---------------- |
-| Level 0  | Zuplo's services are down resulting in a critical and immediate impact on the Customer's production environment with major business impact.                                           | 2 business hours  | 2 hour (24x7x365)  | Custom agreement |
+| Level 0  | Zuplo's services are down resulting in a critical and immediate impact on the Customer's production environment with a major business impact.                                         | 2 business hours  | 2 hour (24x7x365)  | Custom agreement |
 | Level 1  | Zuplo's services are impaired resulting in a severe impact on the Customer's production environment with a partial business impact.                                                   | 4 business hours  | 4 hours (24x7x365) | Custom agreement |
-| Level 2  | Zuplo's services are operational, but have minor functional issues resulting in partial impact on the Customer's production or staging environment with a low impact business impact. | 8 business hours  | 4 business hours   | Custom agreement |
+| Level 2  | Zuplo's services are operational but have minor functional issues resulting in a partial impact on the Customer's production or staging environment with a low impact business impact. | 8 business hours  | 4 business hours   | Custom agreement |
 | Level 3  | Issues or questions related to development and testing.                                                                                                                               | 16 business hours | 8 business hours   | Custom agreement |
 
 **Business Hours** means 8:00am Eastern Time (UTC−05:00) to 8:00pm Eastern Time
@@ -140,4 +141,4 @@ holidays.
 
 **Response Time** means the time required for a support engineer to respond
 confirming receipt of the support notification and informing the customer if
-additional information is needed to proceed with analysis.
+additional information is needed to proceed with the analysis.
