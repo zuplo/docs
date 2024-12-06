@@ -150,7 +150,7 @@ environment we want to update first). Click **Create pull request**.
 
 ![GitHub PR](https://cdn.zuplo.com/assets/875b164d-b7ef-4f46-9cdb-8d59354b5b93.png)
 
-When ready, click **Merge pull request**
+When ready, click **Merge pull request**.
 
 ![Merge PR](https://cdn.zuplo.com/assets/e8c68072-35dc-462a-8161-7a44e40fa1df.png)
 
