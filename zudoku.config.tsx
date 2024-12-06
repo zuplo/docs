@@ -1,13 +1,13 @@
-import React, { lazy, Suspense } from "react";
-import { CogIcon, CopyIcon, FileTextIcon, ListEndIcon } from "zudoku/icons";
+import { lazy, Suspense } from "react";
 import type { ZudokuConfig } from "zudoku";
+import { CogIcon, CopyIcon, FileTextIcon, ListEndIcon } from "zudoku/icons";
+import { policies, sidebar } from "./sidebar.js";
+import { BundlesTable } from "./src/BundlesTable";
 import { EnterpriseFeature } from "./src/EnterpriseFeature";
 import { GithubButton } from "./src/GithubButton";
+import { HeadNavigation } from "./src/HeadNavigation";
 import { PolicyOverview } from "./src/PolicyOverview";
 import ZupIt from "./src/ZupIt.js";
-import { HeadNavigation } from "./src/HeadNavigation";
-import { BundlesTable } from './src/BundlesTable'
-import { sidebar } from "./sidebar.js";
 
 const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
 
@@ -44,7 +44,7 @@ const config: ZudokuConfig = {
   basePath: "/docs",
   page: {
     pageTitle: "Zuplo Docs",
-    logoUrl: "https://cdn.zuplo.com/www/favicon.png",
+    logoUrl: "https://portal.zuplo.com/zuplo.svg",
   },
   metadata: {
     title: "%s - Zuplo Docs",
@@ -86,12 +86,17 @@ const config: ZudokuConfig = {
       label: "Documentation",
     },
     {
+      id: "policies",
+      label: "Policies & Handlers",
+    },
+    {
       id: "api",
       label: "API Reference",
     },
   ],
   sidebar: {
     docs: sidebar,
+    policies: policies,
   },
   mdx: {
     components: mdxComponents,
