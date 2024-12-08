@@ -17,9 +17,9 @@ the top right corner of the screen and selecting "Settings" from the dropdown
 menu. Click the "API Keys" tab to view the API keys in your account that you
 have access to.
 
-![API Keys](../../../public/media/zuplo-api-keys/image.png)
+![API Keys](/media/zuplo-api-keys/image.png)
 
-::: note Required Role
+:::note{title="Required Role"}
 
 Account admins can view and manage all API keys in the account. Developers can
 only view their own API keys. Members do not have access to API keys.
@@ -31,7 +31,7 @@ label, expiration, and select the permissions for your new API key.
 
 <EnterpriseFeature name="Fine-grained API Key Management" />
 
-![Create API Key](../../../public/media/zuplo-api-keys/image-1.png)
+![Create API Key](/media/zuplo-api-keys/image-1.png)
 
 ## Editing an API Key
 
@@ -44,7 +44,7 @@ API Keys can be deleted by selecting the delete button on the list page or by
 opening the details page for the key and clicking the "Delete" button at the
 bottom of the page.
 
-![Delete API Key](../../../public/media/zuplo-api-keys/image-2.png)
+![Delete API Key](/media/zuplo-api-keys/image-2.png)
 
 ## API Key Permissions
 
@@ -59,7 +59,7 @@ Selecting All Projects will also grant all project level permissions to that
 key. If you want to customize the project level permissions, scope the key to
 one or more projects.
 
-![Project Access](../../../public/media/zuplo-api-keys/image-3.png)
+![Project Access](/media/zuplo-api-keys/image-3.png)
 
 ### Environment Access
 
@@ -69,7 +69,7 @@ example, if you want to restrict a key to only have access to only access
 preview and development environments, you can select only those two
 environments.
 
-![Environment Access](../../../public/media/zuplo-api-keys/image-4.png)
+![Environment Access](/media/zuplo-api-keys/image-4.png)
 
 ### Project permissions
 
@@ -77,7 +77,7 @@ When API Keys are scoped to specific projects, you can select the permissions
 the key has in that project. For each permission select the level of access
 desired from the drop down.
 
-![Project permissions](../../../public/media/zuplo-api-keys/image-5.png)
+![Project permissions](/media/zuplo-api-keys/image-5.png)
 
 ### Account permissions
 
@@ -85,7 +85,7 @@ API Keys can be granted account level permissions. These permissions are for
 account level resources like custom domains, tunnels, etc. For each permission
 select the level of access desired from the drop down.
 
-![Account permissions](../../../public/media/zuplo-api-keys/image-6.png)
+![Account permissions](/media/zuplo-api-keys/image-6.png)
 
 When selecting permissions for API Key Buckets or Monetization Buckets, the
 environment type scope is also applied. For example, if your key has access to

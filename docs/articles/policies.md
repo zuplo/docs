@@ -1,5 +1,5 @@
 ---
-title: Policies
+title: Policy Fundamentals
 ---
 
 Policies are modules that can intercept an incoming request. You can have

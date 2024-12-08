@@ -117,7 +117,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 By default, we send all metrics to Dynatrace. However, you have the option below
 to configure which metrics you want to send.
 
-:::warning Strict format
+:::warning{title="Strict format"}
 
 Dynatrace has a strict format for its payload, which has some _surprising_
 requirements.
