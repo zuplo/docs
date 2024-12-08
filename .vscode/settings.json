@@ -19,5 +19,8 @@
     "/docs/*/*/*": "../../../public/media/${documentBaseName}/image.${fileExtName}",
     "/docs/*/*/*/*": "../../../../public/media/${documentBaseName}/image.${fileExtName}"
   },
+  "files.associations": {
+    "*.mdx": "markdown"
+  },
   "cSpell.words": ["Amberflo", "asns", "Moesif", "overridable", "Supabase"]
 }

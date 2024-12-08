@@ -13,7 +13,7 @@ customers visit the Developer Portal, they are presented with a list of plans
 that you have created. They can sign up for a plan and start using your API
 instantly.
 
-![Pricing Table](../../public/media/monetization-dev-portal-setup/image.png)
+![Pricing Table](/media/monetization-dev-portal-setup/image.png)
 
 Zuplo also provides powerful analytics for you as an API Provider. You can
 easily track the overall usage of your API, or drill down to see the usage of a

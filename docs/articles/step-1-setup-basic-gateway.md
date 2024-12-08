@@ -9,7 +9,7 @@ In this tutorial we'll setup a simple gateway. We'll use a demo API at
 To get started, sign in to [portal.zuplo.com](https://portal.zuplo.com) and
 create a free account. Create a new **empty** project. Then...
 
-:::tip Local Development
+:::tip{title="Local Development"}
 
 Zuplo also supports building and running your API locally. To learn more
 [see the documentation](./local-development.md).
@@ -21,7 +21,7 @@ Zuplo also supports building and running your API locally. To learn more
 Inside your new project, choose the `routes.oas.json` file and click **Add
 Route**.
 
-![Add Route](../../public/media/step-1-setup-basic-gateway/image-11.png)
+![Add Route](/media/step-1-setup-basic-gateway/image-11.png)
 
 Your API's first route will appear, with many configurable fields. Here's a
 quick overview of them:
@@ -37,7 +37,7 @@ quick overview of them:
   [URL Forward Handler](../handlers/url-forward.md) which proxies requests to
   the "Forward to" URL. In this case, https://getting-started.zuplo.io
 
-![Your First Route](../../public/media/step-1-setup-basic-gateway/image-14.png)
+![Your First Route](/media/step-1-setup-basic-gateway/image-14.png)
 
 Save your new route (you can click the three-dot menu next to `routes.oas.json`
 and then click Save, or press CMD+S).
@@ -46,7 +46,7 @@ You can quickly test this route by clicking the **Test** button next to the
 **Path** field. You can use the built in test tool or click the URL to open in a
 new tab.
 
-![Test your API](../../public/media/step-1-setup-basic-gateway/image-15.png)
+![Test your API](/media/step-1-setup-basic-gateway/image-15.png)
 
 You should receive a 200 OK that says something similar to
 
@@ -64,7 +64,7 @@ Exit the test console and change your route's Path from `/path-0` to
 `/policies-test/secret`. Make sure to save your changes. Your calls will now be
 forwarded to `https://getting-started.zuplo.io/policies-test/secret`
 
-![Change the Path](../../public/media/step-1-setup-basic-gateway/image-16.png)
+![Change the Path](/media/step-1-setup-basic-gateway/image-16.png)
 
 Check out the new response when you fire a request at your route via the test
 console.
@@ -90,19 +90,19 @@ Change the **URL Forward** value to read the base URL from the
 [Environment Variables](/docs/articles/environment-variables) system by setting
 the value to `${env.BASE_URL}`. We will set the value for `BASE_URL` next.
 
-![BASE_URL from Environment](../../public/media/step-1-setup-basic-gateway/image-8.png)
+![BASE_URL from Environment](/media/step-1-setup-basic-gateway/image-8.png)
 
 Navigate to your project's **Settings** tab via the navigation bar. Next, click
 **Environment Variables** under Project Settings.
-![Click Settings](../../public/media/step-1-setup-basic-gateway/image-17.png)
+![Click Settings](/media/step-1-setup-basic-gateway/image-17.png)
 
-![Click Environment Variables](../../public/media/step-1-setup-basic-gateway/image-18.png)
+![Click Environment Variables](/media/step-1-setup-basic-gateway/image-18.png)
 
 Add an Environment Variable called `BASE_URL`. Leave the "Secret" checkbox
 unchecked. This is typically not a secret, so there's no need to hide this from
 your colleagues.
 
-![BASE_URL Environment Variable](../../public/media/step-1-setup-basic-gateway/image-20.png)
+![BASE_URL Environment Variable](/media/step-1-setup-basic-gateway/image-20.png)
 
 Save the environment variable, head back to the **Code** tab, click
 `routes.oas.json`, and test your route again. You should get back the same
