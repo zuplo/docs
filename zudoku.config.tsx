@@ -115,6 +115,9 @@ const config: ZudokuConfig = {
     { files: "/docs/**/*.{md,mdx}" },
     { files: "/generated/**/*.{md,mdx}" },
   ],
+  sitemap: {
+    siteUrl: "https://zuplo.com/docs",
+  },
 };
 
 export default config;
