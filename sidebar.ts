@@ -1,7 +1,7 @@
 import type { SidebarEntry } from "zudoku";
 import { errors } from "./generated/errors";
 
-export const sidebar: SidebarEntry = [
+export const docs: SidebarEntry = [
   {
     type: "category",
     label: "Introduction",
@@ -225,36 +225,6 @@ export const sidebar: SidebarEntry = [
   },
   {
     type: "category",
-    label: "Programming API",
-    items: [
-      "articles/zuplo-request",
-      "articles/zuplo-context",
-      "articles/context-data",
-      "articles/route-raw",
-      "articles/background-loader",
-      "articles/background-dispatcher",
-      "articles/web-standard-apis",
-      "articles/web-crypto-apis",
-      "articles/cache",
-      "articles/node-modules",
-      "articles/http-problems",
-      "articles/reusing-code",
-      "articles/zone-cache",
-      "articles/key-value-store",
-      "articles/zuplo-id-token",
-      "articles/safely-clone-a-request-or-response",
-      "articles/runtime-behaviors",
-      "articles/zp-body-removed",
-      "articles/audit-log",
-      "articles/hooks",
-      "articles/custom-cors-policy",
-      "articles/runtime-extensions",
-      "articles/not-found-handler",
-      "articles/zuplo-json",
-    ],
-  },
-  {
-    type: "category",
     label: "Zuplo CLI",
     link: {
       type: "doc",
@@ -335,11 +305,6 @@ export const sidebar: SidebarEntry = [
         id: "articles/support",
       },
       {
-        type: "doc",
-        id: "articles/developer-api",
-      },
-      "ask",
-      {
         type: "link",
         label: "Trust & Compliance",
         href: "https://trust.zuplo.com",
@@ -353,12 +318,60 @@ export const sidebar: SidebarEntry = [
   },
 ];
 
+export const programming: SidebarEntry = [
+  {
+    type: "category",
+    label: "Core Concepts",
+    items: [
+      "articles/zuplo-request",
+      "articles/zuplo-context",
+      "articles/web-standard-apis",
+      "articles/web-crypto-apis",
+      "articles/node-modules",
+
+      "articles/context-data",
+      "articles/route-raw",
+
+      "articles/reusing-code",
+
+      "articles/zuplo-id-token",
+      "articles/safely-clone-a-request-or-response",
+      "articles/runtime-behaviors",
+      "articles/zp-body-removed",
+      "articles/audit-log",
+
+      "articles/custom-cors-policy",
+
+      "articles/zuplo-json",
+    ],
+  },
+  {
+    type: "category",
+    label: "Error Handling",
+    items: ["articles/http-problems", "articles/not-found-handler"],
+  },
+  {
+    type: "category",
+    label: "Extensions & Hooks",
+    items: ["articles/hooks", "articles/runtime-extensions"],
+  },
+  {
+    type: "category",
+    label: "Cache & Data Loading",
+    items: [
+      "articles/cache",
+      "articles/zone-cache",
+      "articles/background-loader",
+      "articles/background-dispatcher",
+    ],
+  },
+];
+
 export const policies: SidebarEntry = [
   {
-    type: "doc",
-    // this file is auto-generated, see generate-policies.ts
-    id: "policies/index",
+    type: "category",
     label: "Overview",
+    items: ["policies/index", "articles/policies"],
   },
   {
     type: "category",

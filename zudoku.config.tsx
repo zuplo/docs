@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import type { ZudokuConfig } from "zudoku";
 import { CogIcon, CopyIcon, FileTextIcon, ListEndIcon } from "zudoku/icons";
-import { policies, sidebar } from "./sidebar.js";
+import { docs, policies, programming } from "./sidebar.js";
 import { BundlesTable } from "./src/BundlesTable";
 import { EnterpriseFeature } from "./src/EnterpriseFeature";
 import { GithubButton } from "./src/GithubButton";
@@ -37,7 +37,7 @@ const mdxComponents = {
       </Suspense>
     );
   },
-  BundlesTables: () => <BundlesTable />,
+  BundlesTable: () => <BundlesTable />,
 };
 
 const config: ZudokuConfig = {
@@ -90,20 +90,25 @@ const config: ZudokuConfig = {
       label: "Policies & Handlers",
     },
     {
+      id: "programming",
+      label: "Programming API",
+    },
+    {
       id: "api",
-      label: "API Reference",
+      label: "REST API",
     },
   ],
   sidebar: {
-    docs: sidebar,
-    policies: policies,
+    docs,
+    policies,
+    programming,
   },
   mdx: {
     components: mdxComponents,
   },
   apis: {
-    type: "url",
-    input: "https://developer-api-main-5b4bb7c.d2.zuplo.dev/openapi",
+    type: "file",
+    input: "./api.json",
     navigationId: "api",
   },
   docs: [

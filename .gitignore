@@ -45,3 +45,4 @@ yarn.lock
 public/robots.txt
 public/sitemap.xml
 public/sitemap-*.xml
+api.json

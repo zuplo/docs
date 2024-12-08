@@ -14,9 +14,10 @@
     "build": "zudoku build",
     "format": "prettier --write .",
     "typecheck": "tsc",
-    "postinstall": "npm run policies:get && npm run policies:generate && npm run errors:generate",
+    "postinstall": "npm run policies:get && npm run policies:generate && npm run errors:generate && npm run api:get",
     "policies:get": "sh ./scripts/get-policies.sh",
     "policies:generate": "tsx scripts/generate-policies.ts",
+    "api:get": "curl -o ./api.json https://dev.zuplo.com/openapi",
     "errors:generate": "tsx scripts/generate-errors.ts"
   },
   "dependencies": {
