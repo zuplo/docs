@@ -809,6 +809,12 @@
       "permanent": true
     }
   ],
+  "rewrites": [
+    {
+      "source": "/docs/media/:path*",
+      "destination": "https://cdn.zuplo.com/docs/media/:path*"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
