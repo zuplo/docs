@@ -50,6 +50,7 @@ const config: ZudokuConfig = {
     title: "%s - Zuplo Docs",
     description: "Zuplo Documentation",
     generator: "Zudoku",
+    favicon: "https://cdn.zuplo.com/www/favicon.svg",
   },
   redirects: [
     {
