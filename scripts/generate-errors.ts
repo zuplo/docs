@@ -8,7 +8,7 @@ const errorMds = await glob("docs/errors/*.{md,mdx}", {
   cwd: projectDir,
 });
 
-const errorDocs = [];
+const errorDocs: { id: string; title: string }[] = [];
 
 for (const errorMd of errorMds) {
   const content = await readFile(path.join(projectDir, errorMd), "utf-8");
