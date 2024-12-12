@@ -47,6 +47,8 @@ const policyFiles = ["intro.md", "doc.md", "icon.svg", "policy.ts"] as const;
 const allPolicies: {
   policyId: string;
   title: string | undefined;
+  isDeprecated?: boolean;
+  isHidden?: boolean;
   icon: string | undefined;
 }[] = [];
 
@@ -59,6 +61,13 @@ for (const schemaPath of policySchemas) {
     path.join(currentDir, "schema.json")
   )) as PolicySchema;
 
+  // NOTE: We don't skip 'hidden' policies because they are just hidden in the
+  // navigation, but they are still accessible via direct link.
+  // For 'deprecated' policies, there's no point surfacing them in the
+  // navigation - but they are still accessible via direct link for people still
+  // using them.
+  // 'internal' policies are skipped entirely as they are not ready for the
+  // public.
   if (schema.isInternal) continue;
 
   const [intro, doc, icon, tsPolicy] = await Promise.all(
@@ -71,7 +80,13 @@ for (const schemaPath of policySchemas) {
     }),
   );
 
-  allPolicies.push({ policyId, title: schema.title, icon });
+  allPolicies.push({
+    policyId,
+    title: schema.title,
+    icon,
+    isDeprecated: schema.isDeprecated,
+    isHidden: schema.isHidden,
+  });
 
   const handler = schema.properties?.handler;
 

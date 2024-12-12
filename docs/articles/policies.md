@@ -2,18 +2,21 @@
 title: Policy Fundamentals
 ---
 
-Policies are modules that can intercept an incoming request. You can have
-multiple policies and apply them to multiple routes. There are built-in policies
-but of course, being a developer-focused platform you can easily create custom
-policies.
+Policies are modules that can intercept an incoming request or outgoing
+response. You can have multiple policies and apply them to multiple routes.
+There are built-in policies but of course, being a developer-focused platform
+you can easily create custom policies.
 
 ## How policies work
 
 ![How Policies Work](https://cdn.zuplo.com/assets/103f37f8-9801-4f37-8962-d516b9e12fbd.png)
 
-A policy can intercept a request and modify the request before it reaches the
-request handler (and the next policy). It can also short-circuit the whole
-request lifecycle and immediately respond to the client.
+An `inbound` policy can intercept a request and modify the request before it
+reaches the request handler (or the next policy). It can also short-circuit the
+whole request lifecycle and immediately respond to the client.
+
+An `outbound` policy intercepts the response from your request handler, allowing
+you to transform your response, or return a new one entirely.
 
 ## Built-In Policies
 
