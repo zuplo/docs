@@ -7,7 +7,7 @@ We hope you don't run into any errors, but if you do, Zuplo provides detailed er
 <ul>
   {errors.map(({ title, id }) => (
     <li key={id}>
-      <a href={id}>{title}</a>
+      <a href={`./errors/${id}`}>{title}</a>
     </li>
   ))}
 </ul>
