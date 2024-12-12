@@ -3,6 +3,9 @@ title: Custom Audit Logging Policy
 sidebar_label: Audit Logging
 ---
 
+This guide explains how to add custom audit logging beyond the scope of the
+`AuditLogsInboundPolicy`.
+
 Audit logging is an important part of API security that plays a critical role in
 detecting and correcting issues such as unauthorized access or permission
 elevations within your system. Audit logging is also a requirement for many
