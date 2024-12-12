@@ -1,5 +1,6 @@
-import { type CSSProperties } from "react";
-import { Link } from "zudoku/components";
+import { type CSSProperties, useState } from "react";
+import { Button, Link } from "zudoku/components";
+import { XCircleIcon } from "zudoku/icons";
 
 export const PolicyOverview = ({
   policies,
@@ -12,34 +13,70 @@ export const PolicyOverview = ({
     isHidden?: boolean;
   }>;
 }) => {
+  const [input, setInput] = useState("");
+
   const filteredPolicies = policies
     .sort((a, b) => a.title.localeCompare(b.title))
     .filter((policy) => !policy.isDeprecated && !policy.isHidden);
-  const inboundPolicies = filteredPolicies.filter((policy) =>
-    policy.policyId.includes("inbound"),
+  const inboundPolicies = filteredPolicies.filter(
+    (policy) =>
+      policy.policyId.includes("inbound") &&
+      policy.title.toLowerCase().includes(input.toLowerCase()),
   );
-  const outboundPolicies = filteredPolicies.filter((policy) =>
-    policy.policyId.includes("outbound"),
+  const outboundPolicies = filteredPolicies.filter(
+    (policy) =>
+      policy.policyId.includes("outbound") &&
+      policy.title.toLowerCase().includes(input.toLowerCase()),
   );
+
   return (
     <div className="flex flex-col">
+      <div className="relative flex">
+        <input
+          placeholder="Search policies…"
+          className="w-full bg-secondary/10 border rounded-lg p-4"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        {input.length > 0 && (
+          <Button
+            variant="ghost"
+            onClick={() => setInput("")}
+            className="absolute right-4 top-0 bottom-0 self-center"
+          >
+            <XCircleIcon size={20} />
+          </Button>
+        )}
+      </div>
       <h2 className="text-2xl font-bold">Inbound Policies</h2>
       <div
         role="list"
         className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
       >
-        {inboundPolicies.map((policy) => (
-          <PolicyCard key={policy.policyId} {...policy} />
-        ))}
+        {inboundPolicies.length > 0 ? (
+          inboundPolicies.map((policy) => (
+            <PolicyCard key={policy.policyId} {...policy} />
+          ))
+        ) : (
+          <div className="text-lg text-muted-foreground col-span-full">
+            No inbound policies found
+          </div>
+        )}
       </div>
       <h2 className="text-2xl font-bold">Outbound Policies</h2>
       <div
         role="list"
         className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
       >
-        {outboundPolicies.map((policy) => (
-          <PolicyCard key={policy.policyId} {...policy} />
-        ))}
+        {outboundPolicies.length > 0 ? (
+          outboundPolicies.map((policy) => (
+            <PolicyCard key={policy.policyId} {...policy} />
+          ))
+        ) : (
+          <div className="text-lg text-muted-foreground col-span-full">
+            No outbound policies found
+          </div>
+        )}
       </div>
     </div>
   );
