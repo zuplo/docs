@@ -9,6 +9,11 @@
   "outputDirectory": "dist",
   "redirects": [
     {
+      "source": "/docs{/}?",
+      "destination": "/docs/articles/what-is-zuplo",
+      "permanent": true
+    },
+    {
       "source": "/docs/articles/local-development-api-keys",
       "destination": "/docs/articles/local-development-services",
       "permanent": true
