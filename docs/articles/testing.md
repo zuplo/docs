@@ -202,3 +202,20 @@ describe("myFunction", () => {
   });
 });
 ```
+
+### Polyfills
+
+If you are running unit tests in a Node.js environment, you may need to polyfill
+some globals. Zuplo itself does not run on Node.js, but because Zuplo is built
+on standard API, testing in Node.js is possible.
+
+If you are running on Node.js 20 or later, you can use the `webcrypto` module to
+polyfill the `crypto` global. You must register this polyfill before any Zuplo
+code runs.
+
+```js
+import { webcrypto } from "node:crypto";
+if (typeof crypto === "undefined") {
+  globalThis.crypto = webcrypto;
+}
+```
