@@ -28,7 +28,7 @@
     "react-dom": "18.3.1",
     "safe-marked": "16.0.0",
     "typescript": "5.6.3",
-    "zudoku": "0.18.8"
+    "zudoku": "^0.20.0"
   },
   "devDependencies": {
     "@types/json-schema": "7.0.15",
