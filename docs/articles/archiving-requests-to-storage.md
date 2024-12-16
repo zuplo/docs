@@ -10,8 +10,8 @@ requests to Azure Blob Storage. We also have a post on
 
 First, let's set up Azure. You'll need a container in Azure storage
 ([docs](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal)).
-Once you have your container you'll need the URL - you can get it on the
-`properties` tab of your container as shown below.
+Once you have your container you'll need the URL - click the
+**Properties** tab of your container as shown below.
 
 > **Note** - this sample is available as a Zup It on GitHub - just click ZupIt!
 > to deploy to your Zuplo account:

@@ -15,7 +15,7 @@ by following these steps:
 
 1. Navigate to [portal.zuplo.com](https://portal.zuplo.com) and log in.
 2. Select the account that you want to work on.
-3. Click on the "Settings" tab and navigate to the "API Keys" section. Select an
+3. Click the **Settings** tab and navigate to the "API Keys" section. Select an
    existing API Key or create a new one to use with the CLI.
 
 Most commands take an `--api-key` argument. For example, to list your available
