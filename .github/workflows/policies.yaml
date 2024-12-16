@@ -35,7 +35,7 @@ jobs:
           access_token_lifetime: "300s"
 
       - run: npm install
-      - run: npm run ci:policies
+      - run: npm run policies:generate
 
       - name: Upload the Policies
         uses: "google-github-actions/upload-cloud-storage@v2"
