@@ -57,7 +57,7 @@ recommended configuration.
 
 ### Build Warning: This project's tsconfig.json was not set to the recommended settings. Custom settings may cause build issues.
 
-![Build Warning](../../public/media/tsconfig/image.png)
+![Build Warning](/media/tsconfig/image.png)
 
 This warning is shown when the `tsconfig.json` file is not set to the
 recommended settings. If you see this warning, but your build is successful,
@@ -66,7 +66,7 @@ update your `tsconfig.json` file to the recommended settings. This will ensure
 that your build continues to work in the future and that you do not encounter
 any issues.
 
-:::info Note
+:::info{title="Note"}
 
 Depending on when your project was created, you might see this warning even if
 you never edited the `tsconfig.json` file. Older project templates used various

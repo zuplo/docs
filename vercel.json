@@ -1,9 +1,18 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "nextjs",
+  "framework": null,
   "cleanUrls": true,
   "trailingSlash": false,
+  "devCommand": "npm run dev",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "outputDirectory": "dist",
   "redirects": [
+    {
+      "source": "/docs{/}?",
+      "destination": "/docs/articles/what-is-zuplo",
+      "permanent": true
+    },
     {
       "source": "/docs/articles/local-development-api-keys",
       "destination": "/docs/articles/local-development-services",
@@ -803,6 +812,12 @@
       "source": "/docs/articles/add-project-collaborators{/}?",
       "destination": "/docs/articles/accounts/managing-account-members",
       "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/docs/media/:path*",
+      "destination": "https://cdn.zuplo.com/docs/media/:path*"
     }
   ],
   "headers": [

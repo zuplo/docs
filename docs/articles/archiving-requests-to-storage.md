@@ -17,7 +17,7 @@ Once you have your container you'll need the URL - click the
 > to deploy to your Zuplo account:
 > https://github.com/zuplo/samples-req-archive-filestorage
 
-![Azure](../../public/media/guides/archiving-requests-to-storage/Untitled.png)
+![Azure](/media/guides/archiving-requests-to-storage/Untitled.png)
 
 This URL will be the `blobPath` in our policy options.
 
@@ -29,13 +29,13 @@ permission. Choose a sensible start and expiration time for your token. Note, we
 do not recommend restricting IP addresses because Zuplo runs at the edge in over
 200 data-centers world-wide.
 
-![shared access tokens](../../public/media/guides/archiving-requests-to-storage/Untitled_1.png)
+![shared access tokens](/media/guides/archiving-requests-to-storage/Untitled_1.png)
 
 Then generate your SAS token - copy the token (not the URL) to the clipboard and
 enter it into a new environment variable in your zup called `BLOB_CREATE_SAS`.
 You'll need another environment variable called `BLOB_CONTAINER_PATH`.
 
-![Zuplo portal](../../public/media/guides/archiving-requests-to-storage/Untitled_2.png)
+![Zuplo portal](/media/guides/archiving-requests-to-storage/Untitled_2.png)
 
 > Note - production customers should talk to a Zuplo representative to get help
 > managing their secure keys.
@@ -113,4 +113,4 @@ property of your routes.
 
 Here's the policy in action:
 
-![Archive request policy in action](../../public/media/guides/archiving-requests-to-storage/2021-11-21_22.51.33.gif)
+![Archive request policy in action](/media/guides/archiving-requests-to-storage/2021-11-21_22.51.33.gif)

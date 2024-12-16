@@ -122,7 +122,7 @@ We would then configure the policy as follows
     "export": "default",
     "module": "$import(./modules/custom-logging)",
     "options": {
-      "endpoint": "https://YOUR_REQUESTBIN_URL_HERE"
+      "endpoint": "https://YOUR_MOCKIN_URL_HERE"
     }
   }
 }
@@ -133,9 +133,7 @@ be the very first inbound policy to see the incoming request, unmodified by
 other policies (or blocked by auth, rate-limiting etc).
 
 You'll then see live entries with details of the requests and responses for your
-test calls:
+test calls/
 
-![Pipedream output](../../public/media/pipedream.png)
-
-You can create a free requestbin at [requestbin.com](https://requestbin.com) -
-to get started quickly look for the link to create a `public bin`.
+You can create a free Mockbin at [mockbin.io](https://mockbin.io) -
+to get started quickly look for the link to create a new bin (not OpenAPI bin).

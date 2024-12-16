@@ -44,7 +44,7 @@ to this process are:
 1. Authorized requests are forwarded on through your GKE ingress to your
    backend.
 
-![GKE diagram](../../public/media/gke-with-upstream-auth-policy/diagram.svg)
+![GKE diagram](/media/gke-with-upstream-auth-policy/diagram.svg)
 
 ## Zuplo Gateway Identity
 
@@ -60,7 +60,7 @@ Zuplo as a their own identity. This means all request logs can be identified by
 their source - i.e. your Zuplo Gateway, another system also using a GCP Service
 account, a developer testing an internal system, etc.
 
-:::tip Multiple Service Account
+:::tip{title="Multiple Service Account"}
 
 While not normally needed, it is possible to configure multiple Upstream GCP
 Service Auth Inbound policies in order to provide fine-grain authorization to
@@ -83,7 +83,7 @@ common backends.
 - [Enabling IAP for GKE](https://cloud.google.com/iap/docs/enabling-kubernetes-howto)
 - [Enabling IAP for Cloud Run](https://cloud.google.com/iap/docs/enabling-cloud-run)
 
-:::tip Cloud Run
+:::tip{title="Cloud Run"}
 
 Cloud Run doesn't need to use IAP in all cases. It is possible to restrict Cloud
 Run to
@@ -144,7 +144,7 @@ Version: 1.0.0
 Hostname: web-58756b54cc-7hdcw
 ```
 
-:::tip Checkpoint
+:::tip{title="Checkpoint"}
 
 At this point, your backend on GKE is exposed on the public internet via a GCP
 HTTP Load Balancer via HTTP and HTTPS. For this demo, we won't go through the

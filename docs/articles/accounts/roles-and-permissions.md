@@ -4,7 +4,7 @@ title: Role Permissions
 
 <EnterpriseFeature name="Role Based Access Control" />
 
-:::info Beta
+:::info{title="Beta"}
 
 The specific permissions of each role are currently in beta and may change
 without notice.
@@ -105,11 +105,11 @@ The following table outlines the permissions available to each project role.
 |                       |             | View   | ✅    | ✅        | ✅     |
 |                       | Preview     | Edit   | ✅    | ✅        | ❌     |
 |                       |             | View   | ✅    | ✅        | ✅     |
-|                       | Development | Edit   | ✅    | ✅        | ❌     |
-|                       |             | View   | ✅    | ❌        | ✅     |
+|                       | Development | Edit   | ✅    | ❌        | ❌     |
+|                       |             | View   | ✅    | ✅       | ✅     |
 | Monetization Buckets  | Production  | Edit   | ✅    | ❌        | ❌     |
 |                       |             | View   | ✅    | ✅        | ✅     |
 |                       | Preview     | Edit   | ✅    | ✅        | ❌     |
 |                       |             | View   | ✅    | ✅        | ✅     |
-|                       | Development | Edit   | ✅    | ✅        | ❌     |
-|                       |             | View   | ✅    | ❌        | ✅     |
+|                       | Development | Edit   | ✅    | ❌        | ❌     |
+|                       |             | View   | ✅    | ✅        | ✅     |

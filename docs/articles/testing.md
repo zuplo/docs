@@ -146,7 +146,7 @@ describe("[#labelA #labelB] Addition", () => {
 
 ## Unit Tests & Mocking
 
-:::caution Advanced
+:::caution{title="Advanced"}
 
 Custom testing can be complicated and is best used only to test your own logic
 rather than trying to mock large portions of your API Gateway.
@@ -158,3 +158,47 @@ It is usually possible to use test frameworks like
 mocking tools like [Sinon](https://sinonjs.org/) to unit tests handlers,
 policies, or other modules. To see an example of how that works see this sample
 on Github: https://github.com/zuplo/zuplo/tree/main/examples/test-mocks
+
+Do note though that not everything in the Zuplo runtime can be mocked.
+Additionally, internal implimenation changes might cause mocking behavior to
+change or break without notice. Unlike our public API we don't guarantee that
+mocking will remain stable between versions.
+
+Generally speaking, if you must write unit tests, it is best to test your logic
+separately from the Zuplo runtime. For example, write modules and functions that
+take all the arguments as input and return a result, but do not depend on any
+Zuplo runtime code.
+
+For example, if you have a function that uses an environment variable and want
+to unit test it.
+
+Don't do this:
+
+```ts
+import { environment } from "@zuplo/runtime";
+
+export function myFunction() {
+  const myVar = environment.MY_ENV_VAR;
+  return `Hello ${myVar}`;
+}
+```
+
+Instead do this:
+
+```ts
+export function myFunction(myVar: string) {
+  return `Hello ${myVar}`;
+}
+```
+
+Then write your test like this:
+
+```ts
+import { myFunction } from "./myFunction";
+
+describe("myFunction", () => {
+  it("should return Hello World", () => {
+    expect(myFunction("World")).to.equal("Hello World");
+  });
+});
+```

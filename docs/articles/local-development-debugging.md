@@ -35,7 +35,7 @@ npx @zuplo/cli dev --debug-port 9229
 3. Switch to the View > Run and Debug in VS Code. You can now attach the
    debugger by selecting **Zuplo Gateway** and clicking the green triangle.
 
-![VS code debugging](../../public/media/local-development-debugging/image.png)
+![VS code debugging](/media/local-development-debugging/image.png)
 
 ## Limitations
 

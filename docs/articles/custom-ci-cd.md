@@ -243,9 +243,7 @@ https://github.com/zuplo/zup-cli-example-project/blob/main/.gitlab-ci.yml
 image: node:latest
 workflow:
   rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      when: always
-    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "push"
       when: always
 
 npm_install:
@@ -268,23 +266,13 @@ zup_test:
   script:
     - npx @zuplo/cli test --endpoint $(cat ./DEPLOYMENT_STDOUT |  sed -E
       's/Deployed to (.*)/\1/')
-
-zup_delete:
-  stage: deploy
-  needs: [zup_deploy, zup_test]
-  only:
-    - merge_requests
-  script:
-    - npx @zuplo/cli delete --url $(cat ./DEPLOYMENT_STDOUT |  sed -E
-      's/Deployed to (.*)/\1/') --apiKey "$ZUPLO_API_KEY" --wait
-
-# This is not necessary but it showcases how you can list your zups
-zup_list:
-  stage: deploy
-  needs: [zup_test]
-  script:
-    - npx @zuplo/cli list --apiKey "$ZUPLO_API_KEY"
 ```
+
+:::note
+
+GitLab CI/CD does not have a built-in way to delete deployments. You can use the Zuplo UI to delete old environments.
+
+:::
 
 2. [Create a variable](https://docs.gitlab.com/ee/ci/variables/#for-a-project)
    for `ZUPLO_API_KEY` on your GitLab project. Set it to the API key you
