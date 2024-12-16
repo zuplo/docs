@@ -48,3 +48,5 @@ public/sitemap-*.xml
 api.json
 build/
 .next/
+# Sentry Config File
+.env.sentry-build-plugin
