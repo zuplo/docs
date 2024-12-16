@@ -4,7 +4,9 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import prettier from "prettier";
 import { fixMarkdown } from "./fix-markdown.js";
+import { createMarkdown } from "safe-marked";
 
+const renderMd = createMarkdown();
 const projectDir = path.join(import.meta.dirname, "..");
 const policyDir = path.join(projectDir, "generated/policies");
 
@@ -14,6 +16,12 @@ const policySchemas = await glob("{policies,temp}/*/schema.json", {
 
 const printIf = (condition: unknown, render?: string) =>
   condition ? (render ?? condition) : "";
+
+function invariant(condition: unknown, message: string): asserts condition {
+  if (condition) return;
+
+  throw new Error(message);
+}
 
 type PolicySchema = JSONSchema7 & {
   isBeta?: boolean;
@@ -51,6 +59,71 @@ const allPolicies: {
   isHidden?: boolean;
   icon: string | undefined;
 }[] = [];
+
+const getExampleHtml = async (
+  policyId: string,
+  schema: PolicySchema,
+  intro?: string,
+) => {
+  const introOrDescription = intro ?? schema.description;
+
+  invariant(
+    introOrDescription,
+    `No intro or description found for policy ${policyId}`,
+  );
+
+  const introHtml = renderMd(introOrDescription);
+
+  invariant(
+    schema.properties?.handler,
+    `No handler found for policy ${policyId}`,
+  );
+
+  const { properties } = schema.properties.handler;
+  const options = properties?.options;
+
+  invariant(properties, `No handler properties found for policy ${policyId}`);
+
+  let deprecatedHtml = "";
+
+  if (schema.isDeprecated) {
+    let deprecatedInnerHtml = "**This policy is deprecated.**";
+    if (schema.deprecatedMessage) {
+      const html = renderMd(schema.deprecatedMessage);
+      deprecatedHtml = `<p>${deprecatedInnerHtml} ${html}</p>`;
+    }
+  }
+
+  if (options && Object.keys(options).length === 0) {
+    console.warn(
+      `The policy ${policyId} does not have any options set in the schema.`,
+    );
+  }
+
+  // TODO: Move the deprecated message into custom UI in the portal
+  const html = `${deprecatedHtml.trim()}
+<div>${introHtml.trim()}</div>
+${
+  options && Object.keys(options).length > 0
+    ? `<h3>Options</h3>
+<p>
+  The options for this policy are specified below. All properties are
+  optional unless specifically marked as required.
+</p>
+${renderMd(generateOptions(options))}`
+    : ""
+}
+  `.trim();
+
+  return html;
+};
+
+const policyDataV3: any = {
+  config: await import(path.join(projectDir, "policies/config.json")).then(
+    (m) => m.default,
+  ),
+  policies: [],
+};
 
 for (const schemaPath of policySchemas) {
   const schemaDirName = path.dirname(schemaPath);
@@ -94,8 +167,51 @@ for (const schemaPath of policySchemas) {
     throw new Error("Handler module and export are required");
   }
 
-  let code;
+  const meta: any = {
+    name: schema.title,
+    isBeta: Boolean(schema.isBeta),
+    isPaidAddOn: Boolean(schema.isPaidAddOn),
+    isEnterprise: Boolean(schema.isEnterprise),
+    isCustom: Boolean(schema.isCustom),
+    isDeprecated: Boolean(schema.isDeprecated),
+    isInternal: Boolean(schema.isInternal),
+    deprecationMessage: schema.deprecatedMessage,
+    documentationUrl: `https://zuplo.com/docs/policies/${policyId}`,
+    id: policyId,
+  };
+
   const { examples } = handler;
+  if (schema.isCustom) {
+    meta.defaultHandler = {
+      export: "default",
+      module: `$import(./modules/${policyId})`,
+    };
+  } else if (examples && examples.length > 0) {
+    const example = { ...examples[0] };
+    delete (example as any)._name;
+    meta.defaultHandler = example;
+  } else {
+    meta.defaultHandler = {
+      export: (handler.properties.export as JSONSchema7).const,
+      module: (handler.properties.module as JSONSchema7).const,
+      options: {},
+    };
+  }
+
+  meta.exampleHtml = await getExampleHtml(policyId, schema, intro);
+
+  if (icon) {
+    meta.icon = `data:image/svg+xml;base64,${btoa(icon)}`;
+  }
+
+  if (schema.isCustom && tsPolicy) {
+    meta.customPolicyTemplate = tsPolicy;
+  }
+
+  policyDataV3.policies.push(meta);
+
+  let code;
+
   if (examples && examples.length > 0) {
     code = {
       name: `my-${policyId}-policy`,
@@ -231,6 +347,11 @@ await fs.mkdir(policyDir, { recursive: true });
 await fs.writeFile(
   path.join(policyDir, "index.mdx"),
   await prettier.format(policyIndex, { parser: "mdx" }),
+);
+
+await fs.writeFile(
+  path.join(projectDir, "policies.v3.json"),
+  JSON.stringify(policyDataV3, null, 2),
 );
 
 function generateOptions(schema?: JSONSchema7) {
