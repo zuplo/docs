@@ -26,7 +26,7 @@ following these steps:
 
 1. Navigate to [portal.zuplo.com](https://portal.zuplo.com) and log in.
 2. Select the account that you want to work on.
-3. Click on the "Settings" tab and navigate to the "API Keys" section.
+3. Click the **Settings** tab and navigate to the **API Keys** section.
 4. Write some tests for your API. We provide a rich set of test helpers and
    utils based on BDD. You can see examples of tests at
    [samples](https://github.com/zuplo/zup-cli-example-project/tree/main/tests).

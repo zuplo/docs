@@ -16,7 +16,7 @@ API Test Console.
 3. Convert your GraphQL Query and GraphQL Variables into a JSON body. You can
    use [this tool](https://datafetcher.com/graphql-json-body-converter) to do so
    easily
-4. Paste the JSON Body into the test's Body field and click the Test button
+4. Paste the JSON Body into the test's Body field and click the **Test** button
 
 ![Docs Folder](/media/guides/testing-graphql/test-request.png)
 

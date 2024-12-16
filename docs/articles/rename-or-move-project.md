@@ -26,7 +26,7 @@ correct name. Choose the `Advanced` option on the new project dialog.
 ![Import existing project](/media/source-control/image-1.png)
 
 You should see a list of Orgs and Repos - pick the source repo you wanted to
-move and click Create Project from Repository.
+move and click **Create Project from Repository**.
 
 Your new project will now be connected to this repo and ready to go.
 
