@@ -10,7 +10,7 @@ Node.js 20.0.0.
 1. Install the Zuplo CLI globally by running the following command:
 
    ```bash
-   npm install -g @zuplo/cli
+   npm install -g zuplo
    ```
 
 1. After installing the CLI, you can use the `zup` command to interact with

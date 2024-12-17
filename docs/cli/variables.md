@@ -3,14 +3,14 @@ title: Environment Variables Commands
 ---
 
 ```bash
-zup variable --help
-zup variable
+zuplo variable --help
+zuplo variable
 
 Variable commands
 
 Commands:
-  zup variable create  Creates a new variable for a branch
-  zup variable update  Updates an existing variable for a branch
+  zuplo variable create  Creates a new variable for a branch
+  zuplo variable update  Updates an existing variable for a branch
 ```
 
 Use these commands to help manage your

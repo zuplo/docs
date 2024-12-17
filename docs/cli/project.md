@@ -3,14 +3,14 @@ title: Project Commands
 ---
 
 ```bash
-zup project --help
-zup project
+zuplo project --help
+zuplo project
 
 Project commands
 
 Commands:
-  zup project update          Updates your project structure to the latest conventions
-  zup project import-openapi  Imports an OpenAPI file into your Zuplo Project
+  zuplo project update          Updates your project structure to the latest conventions
+  zuplo project import-openapi  Imports an OpenAPI file into your Zuplo Project
 
 ```
 
@@ -22,8 +22,8 @@ We support importing both JSON and YAML. We will infer the format from the file
 extension.
 
 ```bash
-zup project import-openapi --source /path/to/openapi.json
-zup project import-openapi --source /path/to/openapi.yaml
+zuplo project import-openapi --source /path/to/openapi.json
+zuplo project import-openapi --source /path/to/openapi.yaml
 ```
 
 If you have a remote file that you wish to import, you can also use the
@@ -31,12 +31,12 @@ If you have a remote file that you wish to import, you can also use the
 it. The `--source` option infers if this is a remote file by checking the URL.
 
 ```bash
-zup project import-openapi --source https://example.com/path/to/openapi.json
+zuplo project import-openapi --source https://example.com/path/to/openapi.json
 ```
 
 Lastly, if you wish to rename the destination file, you can use the
 `--destination` option.
 
 ```bash
-zup project import-openapi --source https://example.com/path/to/openapi.json --destination new-name
+zuplo project import-openapi --source https://example.com/path/to/openapi.json --destination new-name
 ```

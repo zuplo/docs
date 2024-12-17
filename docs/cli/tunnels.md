@@ -3,18 +3,18 @@ title: Tunnel Commands
 ---
 
 ```bash
-zup tunnel --help
-zup tunnel
+zuplo tunnel --help
+zuplo tunnel
 
 Tunnel commands
 
 Commands:
-  zup tunnel create        Creates a new tunnel in your account
-  zup tunnel delete        Deletes a tunnel in your account
-  zup tunnel describe      Describes a tunnel in your account
-  zup tunnel list          Lists the tunnels in your account
-  zup tunnel rotate-token  Rotates the token for a tunnel in your account
-  zup tunnel services      Tunnel services commands
+  zuplo tunnel create        Creates a new tunnel in your account
+  zuplo tunnel delete        Deletes a tunnel in your account
+  zuplo tunnel describe      Describes a tunnel in your account
+  zuplo tunnel list          Lists the tunnels in your account
+  zuplo tunnel rotate-token  Rotates the token for a tunnel in your account
+  zuplo tunnel services      Tunnel services commands
 ```
 
 Use these commands to help your manage your
@@ -27,8 +27,8 @@ Zuplo project.
 # For brevity, the commands assume that you have exported your API key as an environment variable,
 # export ZUPLO_API_KEY=zpka_d67b7e241bb948758f415b79aa8exxxx_2efbxxxx
 
-zup tunnel create --tunnel-name my-tunnel
-zup tunnel list
+zuplo tunnel create --tunnel-name my-tunnel
+zuplo tunnel list
 ```
 
 ## Deleting a tunnel
@@ -37,7 +37,7 @@ zup tunnel list
 # For brevity, the commands assume that you have exported your API key as an environment variable,
 # export ZUPLO_API_KEY=zpka_d67b7e241bb948758f415b79aa8exxxx_2efbxxxx
 
-zup tunnel delete --tunnel-id tnl_xxxxxxxxxxx
+zuplo tunnel delete --tunnel-id tnl_xxxxxxxxxxx
 ```
 
 ## Get Tunnel Info
@@ -46,7 +46,7 @@ zup tunnel delete --tunnel-id tnl_xxxxxxxxxxx
 # For brevity, the commands assume that you have exported your API key as an environment variable,
 # export ZUPLO_API_KEY=zpka_d67b7e241bb948758f415b79aa8exxxx_2efbxxxx
 
-zup tunnel describe --tunnel-id tnl_xxxxxxxxxxx
+zuplo tunnel describe --tunnel-id tnl_xxxxxxxxxxx
 ```
 
 ## Running the tunnel
@@ -116,7 +116,7 @@ The properties in the `services` objects are explained below.
 ```
 
 ```bash
-zup tunnel services update \
+zuplo tunnel services update \
 --configuration-file <path-to-your-configuration-file> \
 --tunnel-id <your-tunnel-id>
 ```
