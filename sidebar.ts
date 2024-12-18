@@ -127,7 +127,12 @@ export const docs: SidebarEntry = [
       "articles/cloudflare-settings",
     ],
   },
-
+  {
+    type: "category",
+    label: "Managed Dedicated",
+    link: "dedicated/overview",
+    items: ["dedicated/getting-started", "dedicated/networking"],
+  },
   {
     type: "category",
     label: "Monetization",

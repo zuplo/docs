@@ -62,47 +62,38 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
-      # This explicitly tells action to use the latest version of Zuplo from the public NPM registry
       - uses: actions/setup-node@v4
         with:
-          node-version-file: ".nvmrc"
-          registry-url: "https://registry.npmjs.com"
-          scope: "@zuplo"
+          node-version: 20
 
-      - name: Checkout the actual branch for the pull request
-        if: ${{ github.event_name == 'pull_request' }}
-        run: |
-          git checkout -b ${{ github.head_ref }}
-
-      - name: NPM Install
-        run: npm install
+      - run: npm install
 
       # shell: bash is required so that pipefail is set.
       # See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#exit-codes-and-error-action-preference
       # This way if the deploy fails, we fail before piping to tee.
-      # Note that you are not required to use tee. We are using it in this example so that the output is available to the terminal and written to the file.
-      - name: Zup Deploy
+      # Note that you are not required to use tee. We are using it in this example
+      # so that the output is available to the terminal and written to the file.
+      - name: Zuplo Deploy
         shell: bash
         run: |
-          npx @zuplo/cli deploy --apiKey "$ZUPLO_API_KEY" | tee ./DEPLOYMENT_STDOUT
+          npx zuplo deploy --apiKey "$ZUPLO_API_KEY" | tee ./DEPLOYMENT_STDOUT
 
-      - name: Zup Test
+      - name: Zuplo Test
         shell: bash
         run: |
-          npx @zuplo/cli test --endpoint $(cat ./DEPLOYMENT_STDOUT |  sed -E 's/Deployed to (.*)/\1/')
+          npx zuplo test --endpoint $(cat ./DEPLOYMENT_STDOUT |  sed -E 's/Deployed to (.*)/\1/')
 
-      - name: Zup Delete
+      - name: Zuplo Delete
         if: ${{ github.event_name == 'pull_request' }}
         shell: bash
         run: |
-          npx @zuplo/cli delete --url $(cat ./DEPLOYMENT_STDOUT |  sed -E 's/Deployed to (.*)/\1/') --apiKey "$ZUPLO_API_KEY" --wait
+          npx zuplo delete --url $(cat ./DEPLOYMENT_STDOUT |  sed -E 's/Deployed to (.*)/\1/') --apiKey "$ZUPLO_API_KEY" --wait
 
       # This is not necessary but it showcases how you can list your zups
-      - name: Zup List
+      - name: Zuplo List
         shell: bash
         run: |
-          npx @zuplo/cli list --apiKey "$ZUPLO_API_KEY"
+          npx zuplo list --apiKey "$ZUPLO_API_KEY"
 ```
 
 2. Create a secret for your GitHub Action and be sure to set `ZUPLO_API_KEY` to
@@ -127,20 +118,20 @@ pipelines:
           script:
             - npm install
       - step:
-          name: Zup Deploy
+          name: Zuplo Deploy
           # set -o pipefail
           # This way if the deploy fails, we fail before piping to tee.
           # Note that you are not required to use tee. We are using it in this example so that the output is available to the terminal and written to the file.
           script:
             - set -o pipefail
-            - npx @zuplo/cli deploy --apiKey "$ZUPLO_API_KEY" | tee
+            - npx zuplo deploy --apiKey "$ZUPLO_API_KEY" | tee
               ./DEPLOYMENT_STDOUT
           artifacts:
             - DEPLOYMENT_STDOUT
       - step:
-          name: Zup Test
+          name: Zuplo Test
           script:
-            - npx @zuplo/cli test --endpoint $(cat ./DEPLOYMENT_STDOUT |  sed -E
+            - npx zuplo test --endpoint $(cat ./DEPLOYMENT_STDOUT |  sed -E
               's/Deployed to (.*)/\1/')
   pull-requests:
     "**":
@@ -149,33 +140,33 @@ pipelines:
           script:
             - npm install
       - step:
-          name: Zup Deploy
+          name: Zuplo Deploy
           # set -o pipefail
           # This way if the deploy fails, we fail before piping to tee.
           # Note that you are not required to use tee. We are using it in this example so that the output is available to the terminal and written to the file.
           script:
             - set -o pipefail
-            - npx @zuplo/cli deploy --apiKey "$ZUPLO_API_KEY" | tee
+            - npx zuplo deploy --apiKey "$ZUPLO_API_KEY" | tee
               ./DEPLOYMENT_STDOUT
           artifacts:
             - DEPLOYMENT_STDOUT
       - step:
-          name: Zup Test
+          name: Zuplo Test
           script:
-            - npx @zuplo/cli test --endpoint $(cat ./DEPLOYMENT_STDOUT |  sed -E
+            - npx zuplo test --endpoint $(cat ./DEPLOYMENT_STDOUT |  sed -E
               's/Deployed to (.*)/\1/')
       - step:
-          name: Zup Delete (if necessary)
+          name: Zuplo Delete (if necessary)
           script:
             - echo $BITBUCKET_PR_ID
-            - if [[ -n "$BITBUCKET_PR_ID" ]]; then npx @zuplo/cli delete --url
-              $(cat ./DEPLOYMENT_STDOUT |  sed -E 's/Deployed to (.*)/\1/')
-              --apiKey "$ZUPLO_API_KEY" --wait; exit; fi
+            - if [[ -n "$BITBUCKET_PR_ID" ]]; then npx zuplo delete --url $(cat
+              ./DEPLOYMENT_STDOUT |  sed -E 's/Deployed to (.*)/\1/') --apiKey
+              "$ZUPLO_API_KEY" --wait; exit; fi
       # This is not necessary but it showcases how you can list your zups
       - step:
-          name: Zup List
+          name: Zuplo List
           script:
-            - npx @zuplo/cli list --apiKey "$ZUPLO_API_KEY"
+            - npx zuplo list --apiKey "$ZUPLO_API_KEY"
 ```
 
 2. Create a secret repository variable for your BitBucket Pipelines and be sure
@@ -210,23 +201,23 @@ steps:
   # Note that you are not required to use tee. We are using it in this example so that the output is available to the terminal and written to the file.
   - script: |
       set -o pipefail 
-      npx @zuplo/cli deploy --api-key $(ZUPLO_API_KEY) | tee ./DEPLOYMENT_STDOUT
-    displayName: "Zup Deploy"
+      npx zuplo deploy --api-key $(ZUPLO_API_KEY) | tee ./DEPLOYMENT_STDOUT
+    displayName: "Zuplo Deploy"
 
   - script: |
-      npx @zuplo/cli test --endpoint $(cat ./DEPLOYMENT_STDOUT |  sed -E 's/Deployed to (.*)/\1/')
-    displayName: "Zup Test"
+      npx zuplo test --endpoint $(cat ./DEPLOYMENT_STDOUT |  sed -E 's/Deployed to (.*)/\1/')
+    displayName: "Zuplo Test"
 
   - script: |
-      npx @zuplo/cli delete --url $(cat ./DEPLOYMENT_STDOUT |  sed -E 's/Deployed to (.*)/\1/') --api-key $(ZUPLO_API_KEY) --wait
-    displayName: "Zup Delete"
+      npx zuplo delete --url $(cat ./DEPLOYMENT_STDOUT |  sed -E 's/Deployed to (.*)/\1/') --api-key $(ZUPLO_API_KEY) --wait
+    displayName: "Zuplo Delete"
     # Only run this step if the build is a pull request
     condition: eq(variables['Build.Reason'], 'PullRequest')
 
   # This is not necessary but it showcases how you can list your zups
   - script: |
-      npx @zuplo/cli list --api-key $(ZUPLO_API_KEY)
-    displayName: "Zup List"
+      npx zuplo list --api-key $(ZUPLO_API_KEY)
+    displayName: "Zuplo List"
 ```
 
 2. Create a secret for your Azure Pipelines and be sure to set `ZUPLO_API_KEY`
@@ -254,7 +245,7 @@ npm_install:
 zup_deploy:
   stage: deploy
   script:
-    - npx @zuplo/cli deploy --apiKey "$ZUPLO_API_KEY" | tee ./DEPLOYMENT_STDOUT
+    - npx zuplo deploy --apiKey "$ZUPLO_API_KEY" | tee ./DEPLOYMENT_STDOUT
   artifacts:
     expire_in: 30 minutes
     paths:
@@ -264,13 +255,14 @@ zup_test:
   stage: deploy
   needs: [zup_deploy]
   script:
-    - npx @zuplo/cli test --endpoint $(cat ./DEPLOYMENT_STDOUT |  sed -E
-      's/Deployed to (.*)/\1/')
+    - npx zuplo test --endpoint $(cat ./DEPLOYMENT_STDOUT |  sed -E 's/Deployed
+      to (.*)/\1/')
 ```
 
 :::note
 
-GitLab CI/CD does not have a built-in way to delete deployments. You can use the Zuplo UI to delete old environments.
+GitLab CI/CD does not have a built-in way to delete deployments. You can use the
+Zuplo UI to delete old environments.
 
 :::
 
@@ -341,16 +333,16 @@ And here's how you would deploy it using the CLI
 ```bash
 # Let's deploy the first project
 cd zup-cli-nested-project1
-npx @zuplo/cli deploy --api-key $YOUR_API_KEY_FOR_THE_ACCOUNT_THAT_CONTAINS_PROJECT1 --no-verify-remote
+npx zuplo deploy --api-key $YOUR_API_KEY_FOR_THE_ACCOUNT_THAT_CONTAINS_PROJECT1 --no-verify-remote
 
 
 # Let's deploy the second project
 cd ..
 cd zup-cli-nested-project2
-npx @zuplo/cli deploy --api-key $YOUR_API_KEY_FOR_THE_ACCOUNT_THAT_CONTAINS_PROJECT2 --no-verify-remote
+npx zuplo deploy --api-key $YOUR_API_KEY_FOR_THE_ACCOUNT_THAT_CONTAINS_PROJECT2 --no-verify-remote
 ```
 
-The `npx @zuplo/cli deploy` command takes the current Git branch that you are on
-into consideration when deploying. If you are on your `main` branch, it will
-deploy to your production. If you are on any other branch, it will deploy to a
-staging environment with the name of your branch.
+The `npx zuplo deploy` command takes the current Git branch that you are on into
+consideration when deploying. If you are on your `main` branch, it will deploy
+to your production. If you are on any other branch, it will deploy to a staging
+environment with the name of your branch.

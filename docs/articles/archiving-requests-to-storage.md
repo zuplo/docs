@@ -10,12 +10,8 @@ requests to Azure Blob Storage. We also have a post on
 
 First, let's set up Azure. You'll need a container in Azure storage
 ([docs](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal)).
-Once you have your container you'll need the URL - click the
-**Properties** tab of your container as shown below.
-
-> **Note** - this sample is available as a Zup It on GitHub - just click ZupIt!
-> to deploy to your Zuplo account:
-> https://github.com/zuplo/samples-req-archive-filestorage
+Once you have your container you'll need the URL - click the **Properties** tab
+of your container as shown below.
 
 ![Azure](/media/guides/archiving-requests-to-storage/Untitled.png)
 
@@ -32,7 +28,7 @@ do not recommend restricting IP addresses because Zuplo runs at the edge in over
 ![shared access tokens](/media/guides/archiving-requests-to-storage/Untitled_1.png)
 
 Then generate your SAS token - copy the token (not the URL) to the clipboard and
-enter it into a new environment variable in your zup called `BLOB_CREATE_SAS`.
+enter it into a new environment variable in your API called `BLOB_CREATE_SAS`.
 You'll need another environment variable called `BLOB_CONTAINER_PATH`.
 
 ![Zuplo portal](/media/guides/archiving-requests-to-storage/Untitled_2.png)

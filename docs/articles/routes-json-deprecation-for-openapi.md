@@ -43,7 +43,7 @@ Simply execute the following cmd in your root Zuplo folder (at the level of the
 `/config` and `/module` folders):
 
 ```bash
-npx @zuplo/cli@latest convert
+npx zuplo@latest convert
 ```
 
 This will generate a new `routes.oas.json` and `policies.json` file in your

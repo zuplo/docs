@@ -46,7 +46,7 @@ project into your local machine.
 3. Convert your project to use the Zuplo CLI
 
 ```bash
-npx @zuplo/cli project update
+npx zuplo project update
 ```
 
 4. Install the necessary dependencies:

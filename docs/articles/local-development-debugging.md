@@ -29,7 +29,7 @@ etc will be available to help you debug your gateway.
 2. Start the gateway in debug mode using the port that you specified above.
 
 ```bash
-npx @zuplo/cli dev --debug-port 9229
+npx zuplo dev --debug-port 9229
 ```
 
 3. Switch to the View > Run and Debug in VS Code. You can now attach the
