@@ -10,8 +10,8 @@ sure to select the right one.
 
 :::
 
-The Zuplo CLI, `zup`, uses API Keys to authenticate. You can find your API Key
-by following these steps:
+The Zuplo CLI uses API Keys to authenticate. You can find your API Key by
+following these steps:
 
 1. Navigate to [portal.zuplo.com](https://portal.zuplo.com) and log in.
 2. Select the account that you want to work on.
