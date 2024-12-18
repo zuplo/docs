@@ -2,8 +2,8 @@
 title: Installing the Zuplo CLI
 ---
 
-The Zuplo CLI, `zup`, is built using Node.js. It requires a minimum version of
-Node.js 20.0.0.
+The Zuplo CLI is built using Node.js. It requires a minimum version of Node.js
+20.0.0.
 
 1. Install Node.js 20.0.0 or later. You can download it from
    [nodejs.org](https://nodejs.org/en/download/).
@@ -13,5 +13,5 @@ Node.js 20.0.0.
    npm install -g zuplo
    ```
 
-1. After installing the CLI, you can use the `zup` command to interact with
+1. After installing the CLI, you can use the `zuplo` command to interact with
    Zuplo.
