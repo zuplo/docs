@@ -23,8 +23,8 @@ for your Zuplo project.
 ### 1. Navigate to your project's Custom Domain Settings
 
 Go to your project in the Zuplo portal and open to the **Settings** tab (1),
-then select **Custom Domain** (2) and click the **Add New Custom Domain**
-button to open the `New Custom Domain` configuration modal.
+then select **Custom Domain** (2) and click the **Add New Custom Domain** button
+to open the `New Custom Domain` configuration modal.
 
 ![Custom Domain](/media/custom-domains/image.png)
 
@@ -51,7 +51,7 @@ Using the CNAME configuration provided at the end of the previous step, you will
 create that record on your DNS registrar. Cloudflare will then query your domain
 [periodically](https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/start/hostname-verification-backoff-schedule/)
 until it can verify everything. If everything is configured correctly, it should
-take a few minutes for your production Zup to start responding to traffic on
+take a few minutes for your production API to start responding to traffic on
 your custom domain. On the other hand, if a misconfiguration (typo) occurs and
 you need to make changes, Cloudflare could take up to 4 hours to retry the
 verification. Please be patient if this happens.

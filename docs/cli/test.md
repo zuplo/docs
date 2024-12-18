@@ -3,20 +3,20 @@ title: Test Command
 ---
 
 ```bash
-zup test --help
-zup test
+zuplo test --help
+zuplo test
 
 Runs the tests under /tests against an endpoint
 
 Options:
   --version   Show version number                                      [boolean]
   --help      Show help                                                [boolean]
-  --endpoint  The URL of the zup to test against                        [string]
+  --endpoint  The URL of the environment to test against                        [string]
   --filter    A filter to run a subset of tests (e.g., --filter 'test name' or
               --filter '/test-name-regex/')                             [string]
 ```
 
-Use the test command to help you test your zup by running integration tests
+Use the test command to help you test your API by running integration tests
 against it.
 
 ## Writing Tests
@@ -54,7 +54,7 @@ to find one that matches your use-case.
 Once you have written your tests, you can run them using the `test` command.
 
 ```bash
-zup test --endpoint https://your-zup.example.com
+zuplo test --endpoint https://your-zup.example.com
 ```
 
 ## Environment Variables
@@ -68,7 +68,7 @@ the root of your project.
 For example, to set a value inline run the test command as shown.
 
 ```bash
-MY_VAR=example zup test --endpoint https:/your-zup.example.com
+MY_VAR=example zuplo test --endpoint https:/your-zup.example.com
 ```
 
 Alternatively, create an `.env` file and set a value as shown.

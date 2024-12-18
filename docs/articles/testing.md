@@ -47,7 +47,7 @@ jobs:
         # Useful properties 'environment', 'state', and 'environment_url'
         run:
           API_URL=${{ toJson(github.event.deployment_status.environment_url) }}
-          npx @zuplo/cli test --endpoint $API_URL
+          npx zuplo test --endpoint $API_URL
 ```
 
 [GitHub Branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches)
