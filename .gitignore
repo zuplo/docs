@@ -48,5 +48,7 @@ public/sitemap-*.xml
 api.json
 build/
 .next/
+docs/dev-portal/zudoku/
 # Sentry Config File
 .env.sentry-build-plugin
+
