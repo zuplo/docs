@@ -3,6 +3,14 @@ title: Dev Portal Migration Guide
 sidebar_label: Migration Guide
 ---
 
+:::warning
+
+This documentation is for the preview version of the Dev Portal. If you are not
+part of the preview program, please refer to the
+[current Dev Portal docs](/docs/articles/developer-portal).
+
+:::
+
 This guide is intended to help you migrate your existing documentation from the
 current Dev Portal to the new Dev Portal powered by Zudoku.
 
@@ -89,11 +97,11 @@ const config: ZudokuConfig = {
       {
         type: "category",
         label: "Overview",
-        items: ["example", "other-example"],
+        items: ["introduction", "other-example"],
       },
     ],
   },
-  redirects: [{ from: "/", to: "/documentation" }],
+  redirects: [{ from: "/", to: "/introduction" }],
   apis: {
     type: "file",
     input: "../config/routes.oas.json",
@@ -122,8 +130,9 @@ subdirectories under this as needed.
 You will need to create a `tsconfig.json` and `package.json` file in the `docs`
 folder. You can copy these two files below.
 
+**`tsconfig.json`**
+
 ```json
-// tsconfig.json
 {
   "compilerOptions": {
     "target": "ES2022",
@@ -136,13 +145,15 @@ folder. You can copy these two files below.
     "resolveJsonModule": true,
     "isolatedModules": true,
     "useUnknownInCatchVariables": false,
+    "types": ["zudoku/client"],
     "jsx": "react-jsx"
   }
 }
 ```
 
+**`package.json`**
+
 ```json
-// package.json
 {
   "name": "docs",
   "version": "0.1.0",
@@ -165,3 +176,18 @@ folder. You can copy these two files below.
   }
 }
 ```
+
+### Theme
+
+For instructions on theming the dev portal, see
+[customizing](./zudoku/configuration/customization.md).
+
+Additional theming is possible. More documentation is coming soon.
+
+## Cleanup
+
+Make sure to delete the following files after you are done with the migration:
+
+- `/config/dev-portal.json`
+- `/docs/sidebar.json`
+- `/docs/theme.css`
