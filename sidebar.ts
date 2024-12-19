@@ -534,3 +534,54 @@ export const policies: SidebarEntry = [
     ],
   },
 ];
+
+export const devPortal: SidebarEntry = [
+  {
+    type: "category",
+    label: "Getting started",
+    icon: "sparkles",
+    items: ["dev-portal/introduction", "dev-portal/migration"],
+  },
+  {
+    type: "category",
+    label: "Configuration",
+    icon: "cog",
+    link: "dev-portal/zudoku/configuration/overview",
+    items: [
+      "dev-portal/zudoku/configuration/api-reference",
+      "dev-portal/zudoku/configuration/navigation",
+      "dev-portal/zudoku/configuration/search",
+      "dev-portal/zudoku/configuration/authentication",
+      "dev-portal/zudoku/configuration/customization",
+      "dev-portal/zudoku/configuration/sentry",
+      "dev-portal/zudoku/configuration/vite-config",
+    ],
+  },
+  {
+    type: "category",
+    label: "Markdown",
+    icon: "book-open-text",
+    link: "markdown/overview",
+    items: [
+      "dev-portal/zudoku/markdown/mdx",
+      "dev-portal/zudoku/markdown/admonitions",
+      "dev-portal/zudoku/markdown/code-blocks",
+    ],
+  },
+  {
+    type: "category",
+    label: "Guide",
+    icon: "monitor-check",
+    items: [
+      "dev-portal/zudoku/environment-variables",
+      "dev-portal/zudoku/custom-pages",
+      "dev-portal/zudoku/using-multiple-apis",
+    ],
+  },
+  {
+    type: "category",
+    label: "Extending",
+    icon: "blocks",
+    items: ["dev-portal/zudoku/custom-plugins", "dev-portal/zudoku/api-keys"],
+  },
+];

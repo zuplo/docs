@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import type { ZudokuConfig } from "zudoku";
 import { CogIcon, CopyIcon, FileTextIcon, ListEndIcon } from "zudoku/icons";
-import { docs, policies, programming } from "./sidebar.js";
+import { devPortal, docs, policies, programming } from "./sidebar.js";
 import { BundlesTable } from "./src/BundlesTable";
 import { EnterpriseFeature } from "./src/EnterpriseFeature";
 import { GithubButton } from "./src/GithubButton";
@@ -103,6 +103,7 @@ const config: ZudokuConfig = {
     docs,
     policies,
     programming,
+    devPortal,
   },
   mdx: {
     components: mdxComponents,
