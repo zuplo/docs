@@ -2,6 +2,14 @@
 title: Introduction
 ---
 
+:::warning
+
+This documentation is for the preview version of the Dev Portal. If you are not
+part of the preview program, please refer to the
+[current Dev Portal docs](/docs/articles/developer-portal).
+
+:::
+
 Welcome to the preview release of Zuplo's new Developer Portal powered by
 [Zudoku](https://zudoku.dev)!
 
