@@ -1,5 +1,4 @@
 import { Root } from "mdast";
-import path from "path";
 import { Plugin } from "unified";
 import { visit } from "unist-util-visit";
 import type { VFile } from "vfile";
@@ -20,10 +19,7 @@ const rehypeStaticImages: Plugin<[], Root, Root> =
             node.properties
           ) {
             if (!node.properties.src.startsWith("http")) {
-              let url = path.resolve(
-                path.dirname(vfile.path),
-                node.properties.src,
-              );
+              let url = new URL(node.properties.src, vfile.path).pathname;
               const relativePath = url.startsWith("/public/")
                 ? url.substring("/public/".length)
                 : url;
