@@ -19,7 +19,7 @@ const rehypeStaticImages: Plugin<[], Root, Root> =
             node.properties
           ) {
             if (!node.properties.src.startsWith("http")) {
-              let url = new URL(node.properties.src, vfile.path).pathname;
+              let url = node.properties.src;
               const relativePath = url.startsWith("/public/")
                 ? url.substring("/public/".length)
                 : url;
