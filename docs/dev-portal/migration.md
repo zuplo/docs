@@ -82,6 +82,13 @@ also have a `sidebar.json` file in the `docs` directory.
 Migrated to the new format of configuration, this file would look like the
 following.
 
+:::tip
+
+Note that the environment variables are referenced by simply using
+`process.env`. See [environment variables](./zudoku/environment-variables.md)
+
+:::
+
 ```ts
 import type { ZudokuConfig } from "zudoku";
 import withZuplo from "zudoku/with-zuplo";
