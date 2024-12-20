@@ -27,7 +27,7 @@ const rehypeStaticImages: Plugin<[], Root, Root> =
               );
               const relativePath = url.replace(publicDir, "");
               if (process.env.USE_IMAGE_CDN) {
-                node.properties.src = `https://cdn.zuplo.com/docs${relativePath}`;
+                node.properties.src = `https://cdn.zuplo.com${relativePath}`;
               } else {
                 node.properties.src = relativePath;
               }
