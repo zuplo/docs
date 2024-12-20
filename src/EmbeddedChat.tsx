@@ -3,7 +3,6 @@ import {
   InkeepEmbeddedChat,
   type InkeepWidgetBaseSettings,
 } from "@inkeep/widgets";
-import React from "react";
 
 const baseSettings: InkeepWidgetBaseSettings = {
   apiKey: "499c156cf7a9798343949c8bb5665ac95e48132c6d68c42e",

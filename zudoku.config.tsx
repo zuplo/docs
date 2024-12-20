@@ -3,11 +3,13 @@ import type { ZudokuConfig } from "zudoku";
 import { CogIcon, CopyIcon, FileTextIcon, ListEndIcon } from "zudoku/icons";
 import { devPortal, docs, policies, programming } from "./sidebar.js";
 import { BundlesTable } from "./src/BundlesTable";
+import { DocusaurusDocsLicense } from "./src/DocusaurusDocsLicense";
 import { EnterpriseFeature } from "./src/EnterpriseFeature";
 import { GithubButton } from "./src/GithubButton";
 import { HeadNavigation } from "./src/HeadNavigation";
 import { PolicyOverview } from "./src/PolicyOverview";
 import ZupIt from "./src/ZupIt.js";
+import rehypeStaticImages from "./src/mdx/static-images.js";
 
 const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
 
@@ -15,6 +17,7 @@ const EmbeddedChat = lazy(() => import("./src/EmbeddedChat"));
 
 const mdxComponents = {
   Screenshot: (props: any) => <img {...props} />,
+  DocusaurusDocsLicense,
   GithubButton,
   ZupIt: (props: any) => <ZupIt {...props} />,
   CodeEditorTabIcon: () => <FileTextIcon style={iconStyle} size={18} />,
@@ -119,6 +122,9 @@ const config: ZudokuConfig = {
   ],
   sitemap: {
     siteUrl: "https://zuplo.com/docs",
+  },
+  build: {
+    rehypePlugins: [rehypeStaticImages],
   },
 };
 
