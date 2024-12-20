@@ -31,7 +31,7 @@ the form.
 Once a consumer is created, you can view or copy the API Key by clicking the
 icons shown.
 
-![Copy or View](/media/api-key-administration/image-5.png)
+![Copy or View](../../public/media/api-key-administration/image-5.png)
 
 If you're using the Zuplo [Developer Portal](./developer-portal.md), we have an
 integration with the API Key API that allows developers to access their API
