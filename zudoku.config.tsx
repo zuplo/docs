@@ -8,6 +8,7 @@ import { GithubButton } from "./src/GithubButton";
 import { HeadNavigation } from "./src/HeadNavigation";
 import { PolicyOverview } from "./src/PolicyOverview";
 import ZupIt from "./src/ZupIt.js";
+import rehypeStaticImages from "./src/mdx/static-images.js";
 
 const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
 
@@ -119,6 +120,9 @@ const config: ZudokuConfig = {
   ],
   sitemap: {
     siteUrl: "https://zuplo.com/docs",
+  },
+  build: {
+    rehypePlugins: [rehypeStaticImages],
   },
 };
 
