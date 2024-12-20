@@ -561,7 +561,7 @@ export const devPortal: SidebarEntry = [
     type: "category",
     label: "Markdown",
     icon: "book-open-text",
-    link: "markdown/overview",
+    link: "dev-portal/zudoku/markdown/overview",
     items: [
       "dev-portal/zudoku/markdown/mdx",
       "dev-portal/zudoku/markdown/admonitions",
