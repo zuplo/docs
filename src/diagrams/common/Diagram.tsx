@@ -42,6 +42,7 @@ const defaultEdgeOptions = {
     type: MarkerType.ArrowClosed,
     color: "#b1b1b7",
   },
+  reconnectable: false,
   pathOptions: { offset: 5 },
 };
 
@@ -85,7 +86,7 @@ function DiagramInner({
             borderWidth: "1px",
           }}
         >
-          <Controls showInteractive={true} />
+          <Controls showInteractive={false} />
           <Background color="#ccc" variant={BackgroundVariant.Dots} gap={10} />
         </ReactFlow>
       </div>
