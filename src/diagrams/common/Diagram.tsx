@@ -63,7 +63,12 @@ function DiagramInner({
 
   return (
     <>
-      <link rel="stylesheet" href="/styles/diagrams.css" />
+      <link
+        rel="stylesheet"
+        href={
+          process.env.CI ? "/docs/styles/diagrams.css" : "/styles/diagrams.css"
+        }
+      />
 
       <div className={className}>
         <ReactFlow
