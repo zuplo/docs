@@ -18,3 +18,25 @@ Common configurations include:
   regions to provide high availability and disaster recovery.
 
 To discuss your networking requirements, please contact your account manager.
+
+## Example: Zuplo Ingress to Customer VPC
+
+The default setup for dedicated managed Zuplo is to use your Zuplo API Gateway
+as the public ingress to your API. This is the simplest setup and allows Zuplo
+to manage things like SSL certificates on your behalf.
+
+In this setup your VPC is not exposed to the public internet at all. Instead,
+your Zuplo API Gateway will use a network connection such as AWS Transit
+Gateway, PrivateLink, or VPC Peering to connect to your backend services.
+
+<ZuploIngressWithManagedDedicated />
+
+## Example: Customer VPC Ingress to Zuplo API Gateway
+
+If you have custom networking requirements, such as using a static IP address
+you already own, or if you want to run services such as WAFs, IDS/IPS, or other
+security products in front of your API Gateway, Zuplo can be configured to
+accept traffic from your VPC then route it to your backend. Your backend could
+be in the same VPC as your ingress or in another VPC.
+
+<CustomerIngressWithManagedDedicated />

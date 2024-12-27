@@ -1,47 +1,8 @@
-import { lazy, Suspense } from "react";
 import type { ZudokuConfig } from "zudoku";
-import { CogIcon, CopyIcon, FileTextIcon, ListEndIcon } from "zudoku/icons";
 import { devPortal, docs, policies, programming } from "./sidebar.js";
-import { BundlesTable } from "./src/BundlesTable";
-import { DocusaurusDocsLicense } from "./src/DocusaurusDocsLicense";
-import { EnterpriseFeature } from "./src/EnterpriseFeature";
-import { GithubButton } from "./src/GithubButton";
 import { HeadNavigation } from "./src/HeadNavigation";
-import { PolicyOverview } from "./src/PolicyOverview";
-import ZupIt from "./src/ZupIt.js";
+import { mdxComponents } from "./src/mdx.js";
 import rehypeStaticImages from "./src/mdx/static-images.js";
-
-const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
-
-const EmbeddedChat = lazy(() => import("./src/EmbeddedChat"));
-
-const mdxComponents = {
-  Screenshot: (props: any) => <img {...props} />,
-  DocusaurusDocsLicense,
-  GithubButton,
-  ZupIt: (props: any) => <ZupIt {...props} />,
-  CodeEditorTabIcon: () => <FileTextIcon style={iconStyle} size={18} />,
-  SettingsTabIcon: () => <CogIcon style={iconStyle} size={18} />,
-  CopyIcon: () => <CopyIcon style={iconStyle} size={18} />,
-  EnvironmentVariablePicker: () => (
-    <ListEndIcon
-      style={{ display: "inline", verticalAlign: "-0.125em" }}
-      size={18}
-    />
-  ),
-  PolicyOverview,
-  EnterpriseFeature,
-  EmbeddedChat: () => {
-    if (typeof window === "undefined") return null;
-
-    return (
-      <Suspense fallback={<div>Loading…</div>}>
-        <EmbeddedChat />
-      </Suspense>
-    );
-  },
-  BundlesTable: () => <BundlesTable />,
-};
 
 const config: ZudokuConfig = {
   basePath: "/docs",
