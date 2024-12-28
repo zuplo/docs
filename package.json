@@ -23,25 +23,22 @@
   },
   "dependencies": {
     "@dagrejs/dagre": "^1.1.4",
-    "@inkeep/widgets": "0.2.289",
     "@sentry/react": "^8.46.0",
     "@sentry/vite-plugin": "^2.22.7",
     "@xyflow/react": "^12.3.6",
     "d3-hierarchy": "^3.1.2",
     "elkjs": "^0.9.3",
     "posthog-js": "^1.139.3",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "safe-marked": "16.0.0",
-    "typescript": "5.6.3",
-    "zudoku": "^0.22.0"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "zudoku": "^0.23.0"
   },
   "devDependencies": {
     "@types/d3-hierarchy": "^3.1.7",
     "@types/json-schema": "7.0.15",
     "@types/node": "22.7.5",
-    "@types/react": "18.3.11",
-    "@types/react-dom": "18.3.0",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
     "@typescript-eslint/parser": "^6.19.0",
     "eslint": "^8.51.0",
     "eslint-config-prettier": "^9.0.0",
@@ -49,7 +46,9 @@
     "glob": "11.0.0",
     "gray-matter": "4.0.3",
     "prettier": "3.3.3",
+    "safe-marked": "16.0.0",
     "tsx": "4.19.1",
+    "typescript": "5.6.3",
     "unified": "^11.0.5",
     "vfile": "^6.0.3"
   }

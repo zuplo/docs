@@ -4,6 +4,7 @@ import { diagramPlugin } from "./src/diagrams/common/plugin.js";
 import { HeadNavigation } from "./src/HeadNavigation";
 import { mdxComponents } from "./src/mdx.js";
 import rehypeStaticImages from "./src/mdx/static-images.js";
+
 const config: ZudokuConfig = {
   basePath: "/docs",
   page: {
