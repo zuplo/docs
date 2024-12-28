@@ -1,9 +1,9 @@
 import type { ZudokuConfig } from "zudoku";
 import { devPortal, docs, policies, programming } from "./sidebar.js";
+import { diagramPlugin } from "./src/diagrams/common/plugin.js";
 import { HeadNavigation } from "./src/HeadNavigation";
 import { mdxComponents } from "./src/mdx.js";
 import rehypeStaticImages from "./src/mdx/static-images.js";
-
 const config: ZudokuConfig = {
   basePath: "/docs",
   page: {
@@ -34,6 +34,8 @@ const config: ZudokuConfig = {
       border: "220 13.04% 90.98%",
     },
   },
+  // Temporary hack to inject CSS: https://github.com/zuplo/zudoku/issues/473
+  plugins: [diagramPlugin()],
   UNSAFE_slotlets: {
     "head-navigation-start": HeadNavigation,
   },

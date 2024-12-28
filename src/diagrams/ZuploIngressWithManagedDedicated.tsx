@@ -53,8 +53,6 @@ export default function ZuploIngressWithManagedDedicated() {
       nodes={initialNodes}
       edges={initialEdges}
       className="w-full h-[300px]"
-      direction="BT"
-      algorithm="d3-hierarchy"
     />
   );
 }
