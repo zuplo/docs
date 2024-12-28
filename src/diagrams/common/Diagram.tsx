@@ -7,9 +7,11 @@ import {
   MarkerType,
   Node,
   ReactFlow,
+  ReactFlowInstance,
   ReactFlowProps,
 } from "@xyflow/react";
-import React from "react";
+
+import React, { useCallback } from "react";
 import { CustomHandleProps, CustomNode } from "./CustomNode";
 import { LabeledGroupNode } from "./LabeledGroup";
 import { ZuploApiNode } from "./ZuploApiNode";
@@ -53,9 +55,25 @@ const proOptions = {
 };
 
 export default function Diagram({ className, nodes, edges }: DiagramProps) {
+  const onInit = useCallback((instance: ReactFlowInstance<Node, Edge>) => {
+    const handleResize = () => {
+      console.log("resize", !!instance);
+      instance?.fitView({
+        padding: 0.3,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className={className}>
       <ReactFlow
+        onInit={onInit}
+        autoFocus={true}
         nodes={nodes}
         edges={edges}
         nodeTypes={nodeTypes}
@@ -66,13 +84,16 @@ export default function Diagram({ className, nodes, edges }: DiagramProps) {
         zoomOnScroll={false}
         contentEditable={false}
         fitView
-        fitViewOptions={{ padding: 0.4 }}
+        fitViewOptions={{
+          padding: 0.3,
+        }}
         attributionPosition="top-right"
         className="rounded-md"
         style={{
           backgroundColor: "#F7F9FB",
           fontWeight: 400,
           borderWidth: "1px",
+          margin: "1rem",
         }}
       >
         <Controls showInteractive={false} />
