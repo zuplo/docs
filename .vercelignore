@@ -9,3 +9,5 @@ checkly.config.ts
 CONTRIBUTING.md
 prettier.config.js
 __checks__
+
+dist/docs/server/*

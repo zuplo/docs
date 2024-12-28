@@ -52,7 +52,7 @@ const proOptions = {
   hideAttribution: true,
 };
 
-function Diagram({ className, nodes, edges }: DiagramProps) {
+export default function Diagram({ className, nodes, edges }: DiagramProps) {
   return (
     <div className={className}>
       <ReactFlow
@@ -81,5 +81,3 @@ function Diagram({ className, nodes, edges }: DiagramProps) {
     </div>
   );
 }
-
-export default Diagram;

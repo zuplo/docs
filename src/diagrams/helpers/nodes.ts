@@ -1,6 +1,6 @@
 import { Position, XYPosition } from "@xyflow/react";
-import { CustomHandleProps } from "./common/CustomNode.js";
-import { DiagramNode } from "./common/Diagram.js";
+import { CustomHandleProps } from "../common/CustomNode.js";
+import { DiagramNode } from "../common/Diagram.js";
 
 export const createClient = ({
   position,

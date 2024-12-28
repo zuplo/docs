@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import { CogIcon, CopyIcon, FileTextIcon, ListEndIcon } from "zudoku/icons";
 import { BundlesTable } from "./BundlesTable";
 import { DocusaurusDocsLicense } from "./DocusaurusDocsLicense";
@@ -6,6 +6,8 @@ import { EnterpriseFeature } from "./EnterpriseFeature";
 import { GithubButton } from "./GithubButton";
 import { PolicyOverview } from "./PolicyOverview";
 import ZupIt from "./ZupIt.js";
+
+type _react = typeof React;
 
 const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
 
@@ -28,8 +30,6 @@ export const mdxComponents = {
   PolicyOverview,
   EnterpriseFeature,
   EmbeddedChat: () => {
-    if (typeof window === "undefined") return null;
-
     return (
       <Suspense fallback={<div>Loading…</div>}>
         <EmbeddedChat />

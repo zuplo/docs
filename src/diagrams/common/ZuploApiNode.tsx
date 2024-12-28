@@ -1,10 +1,8 @@
 import { Handle, HandleProps } from "@xyflow/react";
-import React, { memo } from "react";
+import React from "react";
 import { BaseNode } from "./BaseNode";
 
-type _react = typeof React;
-
-export const ZuploApiNode = memo(
+export const ZuploApiNode = React.memo(
   ({ data }: { data: { handles?: Pick<HandleProps, "position">[] } }) => {
     return (
       <BaseNode title="Zuplo API Gateway" className="bg-[#ff00bd]">
