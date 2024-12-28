@@ -15,7 +15,7 @@ export const CustomNode = memo(
             key={i}
             {...handle}
             isConnectable={false}
-            className="w-16 !bg-gray-300"
+            className="!bg-gray-300"
           />
         ))}
       </BaseNode>
