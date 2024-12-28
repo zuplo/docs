@@ -61,7 +61,7 @@ export default function ZuploIngressWithManagedDedicated() {
     <Diagram
       nodes={initialNodes}
       edges={initialEdges}
-      className="w-full h-[300px]"
+      className="h-52 lg-h-72"
     />
   );
 }
