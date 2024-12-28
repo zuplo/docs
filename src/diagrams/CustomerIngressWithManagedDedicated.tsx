@@ -1,14 +1,14 @@
 import { Position } from "@xyflow/react";
 import React from "react";
 import Diagram, { DiagramNode, Edge } from "./common/Diagram.js";
-import { createIngressEdgressEdge } from "./edges.js";
+import { createIngressEdgressEdge } from "./helpers/edges.js";
 import {
   createBackend,
   createClient,
   createCustomNode,
   createVpcGroupNode,
   createZuploApiNode,
-} from "./nodes.js";
+} from "./helpers/nodes.js";
 
 type _react = typeof React;
 

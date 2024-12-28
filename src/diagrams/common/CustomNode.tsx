@@ -1,11 +1,10 @@
 import { Handle, HandleProps } from "@xyflow/react";
-import React, { memo } from "react";
+import React from "react";
 import { BaseNode } from "./BaseNode";
-type _react = typeof React;
 
 export type CustomHandleProps = Pick<HandleProps, "position" | "type" | "id">;
 
-export const CustomNode = memo(
+export const CustomNode = React.memo(
   ({ data }: { data: { label: string; handles?: CustomHandleProps[] } }) => {
     return (
       <BaseNode title={data.label}>

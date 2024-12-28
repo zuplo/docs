@@ -2,13 +2,13 @@ import Diagram, { DiagramNode, Edge } from "./common/Diagram.js";
 
 import { Position } from "@xyflow/react";
 import React from "react";
-import { createIngressEdgressEdge } from "./edges.js";
+import { createIngressEdgressEdge } from "./helpers/edges.js";
 import {
   createBackend,
   createClient,
   createVpcGroupNode,
   createZuploApiNode,
-} from "./nodes.js";
+} from "./helpers/nodes.js";
 type _react = typeof React;
 
 const clientNode = createClient({ position: { x: 10, y: 90 } });

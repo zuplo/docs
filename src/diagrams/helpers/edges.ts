@@ -1,4 +1,4 @@
-import { DiagramNode, Edge } from "./common/Diagram.js";
+import { DiagramNode, Edge } from "../common/Diagram.js";
 
 export const createIngressEdgressEdge = ({
   egress,
