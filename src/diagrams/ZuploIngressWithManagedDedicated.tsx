@@ -48,5 +48,5 @@ const initialEdges: Edge[] = [
 ];
 
 export default function ZuploIngressWithManagedDedicated() {
-  return <Diagram nodes={initialNodes} edges={initialEdges} className="h-52" />;
+  return <Diagram nodes={initialNodes} edges={initialEdges} className="h-40" />;
 }

@@ -22,11 +22,9 @@
     "errors:generate": "tsx scripts/generate-errors.ts"
   },
   "dependencies": {
-    "@dagrejs/dagre": "^1.1.4",
     "@sentry/react": "^8.46.0",
     "@sentry/vite-plugin": "^2.22.7",
     "@xyflow/react": "^12.3.6",
-    "d3-hierarchy": "^3.1.2",
     "elkjs": "^0.9.3",
     "posthog-js": "^1.139.3",
     "react": "^19.0.0",
@@ -34,7 +32,6 @@
     "zudoku": "^0.23.3"
   },
   "devDependencies": {
-    "@types/d3-hierarchy": "^3.1.7",
     "@types/json-schema": "7.0.15",
     "@types/node": "^22.10.2",
     "@types/react": "^19.0.2",
