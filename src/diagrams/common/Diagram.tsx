@@ -69,7 +69,7 @@ const elkOptions = {
   "elk.algorithm": "layered",
   "elk.layered.spacing.nodeNodeBetweenLayers": "100",
   "elk.spacing.nodeNode": "80",
-  // "elk.direction": direction,
+  "elk.direction": "RIGHT",
 };
 
 const elk = new ELK();
@@ -87,8 +87,7 @@ export default function Diagram({
 
   const onInit = useCallback((instance: ReactFlowInstance<Node, Edge>) => {
     if (layout) {
-      const options: LayoutOptions = { ...elkOptions };
-
+      const options: LayoutOptions = { ...elkOptions, ...layout };
       const isHorizontal = options["elk.direction"] === "RIGHT";
       const graph: ElkNode = {
         id: "root",
@@ -97,27 +96,24 @@ export default function Diagram({
           ...node,
           // Adjust the target and source handle positions based on the layout
           // direction.
+          position: node.position,
           targetPosition: isHorizontal ? "left" : "top",
           sourcePosition: isHorizontal ? "right" : "bottom",
-
-          // Hardcode a width and height for elk to use when layouting.
-          width: 150,
-          height: 50,
+          width: node.measured?.width ?? node.width ?? 100,
+          height: node.measured?.height ?? node.height ?? 100,
         })),
         edges: initialEdges as unknown as ElkExtendedEdge[],
       };
 
       elk
         .layout(graph)
-        .then((layoutedGraph) => {
-          const nodes = layoutedGraph.children?.map((node) => ({
+        .then(({ children }) => {
+          console.log({ children });
+          const nodes = children!.map((node) => ({
             ...node,
-            // React Flow expects a position property on the node instead of `x`
-            // and `y` fields.
             position: { x: node.x, y: node.y },
           }));
           instance.setNodes(nodes as unknown as Node[]);
-          instance.setEdges(layoutedGraph.edges as unknown as Edge[]);
         })
         .catch(console.error);
 
