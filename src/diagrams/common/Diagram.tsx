@@ -10,6 +10,8 @@ import {
   ReactFlow,
   ReactFlowInstance,
   ReactFlowProps,
+  useEdgesState,
+  useNodesState,
 } from "@xyflow/react";
 import ELK, {
   ElkExtendedEdge,
@@ -60,26 +62,56 @@ const proOptions = {
   hideAttribution: true,
 };
 
+const elk = new ELK();
+
 // Elk has a *huge* amount of options to configure. To see everything you can
 // tweak check out:
 //
 // - https://www.eclipse.org/elk/reference/algorithms.html
 // - https://www.eclipse.org/elk/reference/options.html
-const elkOptions = {
+const defaultOptions = {
   "elk.algorithm": "layered",
   "elk.layered.spacing.nodeNodeBetweenLayers": "100",
   "elk.spacing.nodeNode": "80",
-  "elk.direction": "RIGHT",
 };
 
-const elk = new ELK();
-
-export default function Diagram({
+export default function DiagramInner({
   className,
   nodes: initialNodes,
   edges: initialEdges,
   layout,
 }: DiagramProps) {
+  const [nodes, , onNodesChange] = useNodesState(initialNodes);
+  const [edges, , onEdgesChange] = useEdgesState(initialEdges);
+
+  const layoutElements = useCallback(
+    (instance: ReactFlowInstance<Node, Edge>, options: LayoutOptions) => {
+      const layoutOptions = { ...defaultOptions, ...options };
+      const graph: ElkNode = {
+        id: "root",
+        layoutOptions: layoutOptions,
+        children: instance.getNodes().map((node) => ({
+          ...node,
+          width: node.measured?.width ?? node.width ?? 100,
+          height: node.measured?.height ?? node.height ?? 100,
+        })),
+        edges: instance.getEdges() as unknown as ElkExtendedEdge[],
+      };
+
+      elk.layout(graph).then(({ children }) => {
+        children!.forEach((node: any) => {
+          node.position = { x: node.x, y: node.y };
+        });
+
+        instance.setNodes(children as Node[]);
+        window.requestAnimationFrame(() => {
+          instance.fitView();
+        });
+      });
+    },
+    [],
+  );
+
   const fitViewOptions = useMemo(
     () => ({ padding: 0.3 }) satisfies FitViewOptions,
     [],
@@ -87,37 +119,7 @@ export default function Diagram({
 
   const onInit = useCallback((instance: ReactFlowInstance<Node, Edge>) => {
     if (layout) {
-      const options: LayoutOptions = { ...elkOptions, ...layout };
-      const isHorizontal = options["elk.direction"] === "RIGHT";
-      const graph: ElkNode = {
-        id: "root",
-        layoutOptions: options,
-        children: initialNodes.map((node) => ({
-          ...node,
-          // Adjust the target and source handle positions based on the layout
-          // direction.
-          position: node.position,
-          targetPosition: isHorizontal ? "left" : "top",
-          sourcePosition: isHorizontal ? "right" : "bottom",
-          width: node.measured?.width ?? node.width ?? 100,
-          height: node.measured?.height ?? node.height ?? 100,
-        })),
-        edges: initialEdges as unknown as ElkExtendedEdge[],
-      };
-
-      elk
-        .layout(graph)
-        .then(({ children }) => {
-          console.log({ children });
-          const nodes = children!.map((node) => ({
-            ...node,
-            position: { x: node.x, y: node.y },
-          }));
-          instance.setNodes(nodes as unknown as Node[]);
-        })
-        .catch(console.error);
-
-      window.requestAnimationFrame(() => instance.fitView(fitViewOptions));
+      layoutElements(instance, layout);
     }
 
     const handleResize = () => {
@@ -136,8 +138,10 @@ export default function Diagram({
         onInit={onInit}
         autoFocus={true}
         nodeTypes={nodeTypes}
-        nodes={initialNodes}
-        edges={initialEdges}
+        nodes={nodes}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
         defaultEdgeOptions={defaultEdgeOptions}
         connectionLineType={ConnectionLineType.SmoothStep}
         proOptions={proOptions}
