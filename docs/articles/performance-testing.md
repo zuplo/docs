@@ -6,7 +6,7 @@ Performance testing is an important part of building a reliable, scalable, and
 performant API. This document outlines how to performance test your API behind
 Zuplo, some best practices, and how to interpret the results.
 
-:::note Serverless Zuplo
+:::note{title="Serverless Zuplo"}
 
 This document applies only to Zuplo's serverless edge-based deployment. If you
 are running a managed dedicated instance of Zuplo, this document does not apply

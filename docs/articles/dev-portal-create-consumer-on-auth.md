@@ -13,8 +13,10 @@ This article explains how to use Auth0 actions to automatically create an API
 Key Consumer for your users when they sign into your developer portal.
 
 :::tip
+
 You don't need to set this up if using the built-in Zuplo monetization feature.
-We do this all for you in that flow. 
+We do this all for you in that flow.
+
 :::
 
 Before you begin, you will need to
