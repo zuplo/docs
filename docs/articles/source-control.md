@@ -9,9 +9,7 @@ via a simple commit. You get unlimited environments too - just commit to a new
 branch and we'll set you up with a new environment just as quick - at no charge
 to you.
 
-:::info
-
-** GitLab and Bitbucket Support **
+:::info{title="GitLab and Bitbucket Support"}
 
 Zuplo can integrate with Source Control providers like GitHub, BitBucket and
 GitLab. GitHub is our primary option - BitBucket and GitLab (including private
