@@ -22,7 +22,9 @@ We can support private networking options like AWS PrivateLink, Azure Private
 Link, GCP Private Service Connect; available for both inbound and outbound
 connections.
 
-To learn more about Managed Dedicated [talk to us](https://book.zuplo.com).
+For more information about Zuplo's managed dedicated offerings see
+[the documentation](../dedicated/overview.md) or schedule some time to
+[talk with us](https://book.zuplo.com).
 
 ## 3. Self-hosted (AKA on-prem)
 
