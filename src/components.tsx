@@ -52,4 +52,7 @@ export const mdxComponents = {
   ManagedDedicatedMultiRegionArchitecture: lazy(
     () => import("./diagrams/ManagedDedicatedMultiRegionArchitecture.js"),
   ),
+  ManagedDedicatedEnvironmentsArchitecture: lazy(
+    () => import("./diagrams/ManagedDedicatedEnvironmentsArchitecture.js"),
+  ),
 };

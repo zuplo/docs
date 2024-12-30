@@ -121,3 +121,28 @@ access to your APIs for end-users around the world. The load balancer is also
 configured to handle failover in case of an outage in one region.
 
 <ManagedDedicatedMultiRegionArchitecture />
+
+### Environments
+
+Customers running managed dedicated Zuplo typically have multiple instances of
+Zuplo deployed. The most common case is to have a production instance(s) and a
+non-production instance. The non-production instance is used to deploy and test
+changes to your API Gateway before deploying them to production.
+
+Each instance is isolated and runs in its own VPC or network.
+
+It is possible to have multiple instances depending on your requirements. For
+example, some customers have seperate instances for production, staging, and
+development. For most customer though, a single production and a single
+development instance is sufficient.
+
+When you onboard to Zuplo, you will work with your account manager to determine
+the configuration that best meets your requirements. When your project is
+created it will be pre-configured with the agreed upon number of instances and
+setup with rules that determine where each environment gets deployed.
+
+The most common setup is where your `main` branch is deployed to production and
+all other branches are deployed to a non-production environment, but this is
+fully customizable.
+
+<ManagedDedicatedEnvironmentsArchitecture />

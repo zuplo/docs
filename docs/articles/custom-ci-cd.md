@@ -38,7 +38,12 @@ be picked up by the Zuplo CLI.
 
 :::
 
-## Setting up a custom workflow with GitHub Actions
+## Provider Instructions
+
+Below you will find examples of how to set up a custom CI/CD pipeline with
+various providers.
+
+### GitHub Actions
 
 The full example is available at
 https://github.com/zuplo/zup-cli-example-project/blob/main/.github/workflows/ci.yml
@@ -99,7 +104,7 @@ jobs:
 2. Create a secret for your GitHub Action and be sure to set `ZUPLO_API_KEY` to
    the API key you generated in the previous step.
 
-## Setting up a custom workflow with Bitbucket Pipelines
+### Bitbucket Pipelines
 
 The full example is available at
 https://github.com/zuplo/zup-cli-example-project/blob/main/bitbucket-pipelines.yml
@@ -172,7 +177,7 @@ pipelines:
 2. Create a secret repository variable for your BitBucket Pipelines and be sure
    to set `ZUPLO_API_KEY` to the API key you generated in the previous step.
 
-## Setting up a custom workflow with Azure Pipelines
+### Azure Pipelines
 
 The full example is available at
 https://github.com/zuplo/zup-cli-example-project/blob/main/azure-pipelines.yml
@@ -223,7 +228,7 @@ steps:
 2. Create a secret for your Azure Pipelines and be sure to set `ZUPLO_API_KEY`
    to the API key you generated in the previous step.
 
-## Setting up a custom workflow with Gitlab Pipelines
+### Gitlab Pipelines
 
 The full example is available at
 https://github.com/zuplo/zup-cli-example-project/blob/main/.gitlab-ci.yml
@@ -278,7 +283,7 @@ The above samples showcase the most common use case for our customers. However,
 you might have more advanced use cases that require more control. The following
 sections describe some other parameters that you can control.
 
-### You have multiple sub-folders in your repository
+### Multiple Projects
 
 You might end up with this structure because you are using git submodules to
 connect multiple repositories together. Or, you might have multiple projects in
