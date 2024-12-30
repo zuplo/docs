@@ -10,8 +10,6 @@ import {
   ReactFlow,
   ReactFlowInstance,
   ReactFlowProps,
-  useEdgesState,
-  useNodesState,
 } from "@xyflow/react";
 import ELK, {
   ElkExtendedEdge,
@@ -19,21 +17,14 @@ import ELK, {
   LayoutOptions,
 } from "elkjs/lib/elk.bundled.js";
 import React, { useCallback, useMemo } from "react";
-import { CustomHandleProps, CustomNode } from "./CustomNode";
+import { AnimatedSVGEdge } from "./AnimatedSVGEdge";
+import { CustomNode } from "./CustomNode";
 import { LabeledGroupNode } from "./LabeledGroup";
-import { ZuploApiNode } from "./ZuploApiNode";
 export { LabeledGroupNode } from "./LabeledGroup";
 
 // import "@xyflow/react/dist/style.css";
 
 type _react = typeof React;
-
-export type DiagramNode = Node & {
-  data: {
-    label: string;
-    handles?: CustomHandleProps[];
-  };
-};
 
 export type { Edge };
 export type DiagramProps = Required<Pick<ReactFlowProps, "nodes" | "edges">> & {
@@ -41,10 +32,17 @@ export type DiagramProps = Required<Pick<ReactFlowProps, "nodes" | "edges">> & {
   layout?: LayoutOptions;
 };
 
+export type NodeType = keyof typeof nodeTypes;
+
 const nodeTypes = {
-  zuplo: ZuploApiNode,
   custom: CustomNode,
   labeledGroup: LabeledGroupNode,
+};
+
+export type EdgeType = keyof typeof edgeTypes;
+
+const edgeTypes = {
+  animatedSvg: AnimatedSVGEdge,
 };
 
 const defaultEdgeOptions = {
@@ -77,13 +75,10 @@ const defaultOptions = {
 
 export default function DiagramInner({
   className,
-  nodes: initialNodes,
-  edges: initialEdges,
+  nodes,
+  edges,
   layout,
 }: DiagramProps) {
-  const [nodes, , onNodesChange] = useNodesState(initialNodes);
-  const [edges, , onEdgesChange] = useEdgesState(initialEdges);
-
   const layoutElements = useCallback(
     (instance: ReactFlowInstance<Node, Edge>, options: LayoutOptions) => {
       const layoutOptions = { ...defaultOptions, ...options };
@@ -138,10 +133,9 @@ export default function DiagramInner({
         onInit={onInit}
         autoFocus={true}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         nodes={nodes}
         edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
         defaultEdgeOptions={defaultEdgeOptions}
         connectionLineType={ConnectionLineType.SmoothStep}
         proOptions={proOptions}

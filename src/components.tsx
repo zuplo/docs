@@ -1,17 +1,17 @@
 import React, { lazy, Suspense } from "react";
 import { CogIcon, CopyIcon, FileTextIcon, ListEndIcon } from "zudoku/icons";
-import { BundlesTable } from "./BundlesTable";
-import { DocusaurusDocsLicense } from "./DocusaurusDocsLicense";
-import { EnterpriseFeature } from "./EnterpriseFeature";
-import { GithubButton } from "./GithubButton";
-import { PolicyOverview } from "./PolicyOverview";
+import { BundlesTable } from "./BundlesTable.js";
+import { DocusaurusDocsLicense } from "./DocusaurusDocsLicense.js";
+import { EnterpriseFeature } from "./EnterpriseFeature.js";
+import { GithubButton } from "./GithubButton.js";
+import { PolicyOverview } from "./PolicyOverview.js";
 import ZupIt from "./ZupIt.js";
 
 type _react = typeof React;
 
 const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
 
-const EmbeddedChat = lazy(() => import("./EmbeddedChat"));
+const EmbeddedChat = lazy(() => import("./EmbeddedChat.js"));
 
 export const mdxComponents = {
   Screenshot: (props: any) => <img {...props} />,
@@ -42,5 +42,14 @@ export const mdxComponents = {
   ),
   CustomerIngressWithManagedDedicated: lazy(
     () => import("./diagrams/CustomerIngressWithManagedDedicated.js"),
+  ),
+  ManagedDedicatedArchitecture: lazy(
+    () => import("./diagrams/ManagedDedicatedArchitecture.js"),
+  ),
+  ManagedDedicatedDeploymentArchitecture: lazy(
+    () => import("./diagrams/ManagedDedicatedDeploymentArchitecture.js"),
+  ),
+  ManagedDedicatedMultiRegionArchitecture: lazy(
+    () => import("./diagrams/ManagedDedicatedMultiRegionArchitecture.js"),
   ),
 };
