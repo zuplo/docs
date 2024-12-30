@@ -65,3 +65,14 @@ This is a more complex setup and is only available on our
 To discuss security and connectivity options, our
 [discord channel](https://discord.zuplo.com) is a great community, with active
 participation from the Zuplo team.
+
+## 6/ Custom Networking (Managed Dedicated Only)
+
+For customers on our managed dedicated plan, we can provide custom networking to
+connect your backend to Zuplo. This can include using VPC connectivity
+capabilities from your cloud provider (i.e. AWS, Azure, GCP, etc.) such as AWS
+Transit Gateway, PrivateLink, or VPC Peering to connect to your backend
+services.
+
+For more details on networking options for managed dedicated customers, see our
+[Networking documentation](../dedicated/networking.md).
