@@ -131,7 +131,12 @@ export const docs: SidebarEntry = [
     type: "category",
     label: "Managed Dedicated",
     link: "dedicated/overview",
-    items: ["dedicated/getting-started", "dedicated/networking"],
+    items: [
+      "dedicated/getting-started",
+      "dedicated/architecture",
+      "dedicated/networking",
+      "dedicated/custom-domains",
+    ],
   },
   {
     type: "category",

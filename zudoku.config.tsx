@@ -1,8 +1,8 @@
 import type { ZudokuConfig } from "zudoku";
 import { devPortal, docs, policies, programming } from "./sidebar.js";
+import { mdxComponents } from "./src/components.js";
 import { diagramPlugin } from "./src/diagrams/common/plugin.js";
 import { HeadNavigation } from "./src/HeadNavigation";
-import { mdxComponents } from "./src/mdx.js";
 import rehypeStaticImages from "./src/mdx/static-images.js";
 
 const config: ZudokuConfig = {
