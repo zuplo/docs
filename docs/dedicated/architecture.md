@@ -5,16 +5,15 @@ sidebar_label: Architecture
 
 Zuplo's managed dedicated instances are designed to be highly available,
 scalable, and secure. With a managed dedicated instance of Zuplo, your API
-Gateway is isolated to its own instance(s) and when running in on a cloud
-provider that supports it, a dedicated VPC as well. This document outlines the
-components and architecture of a managed dedicated instance of a Zuplo API
-Gateway.
+Gateway is isolated to its own instances and when running in on a cloud provider
+that supports it, a dedicated VPC as well. This document outlines the components
+and architecture of a managed dedicated instance of a Zuplo API Gateway.
 
 ## Components
 
 A managed dedicated instance of Zuplo consists of the following components:
 
-- **API Gateway**: The API Gateway is the core component of Zuplo. It is the
+- **API Gateway**: The API Gateway is the core component of Zuplo. It's the
   component that receives incoming requests, routes them to the appropriate
   backend, and returns the response to the client. The API Gateway is
   responsible for authentication, authorization, rate limiting, and other
@@ -25,7 +24,7 @@ A managed dedicated instance of Zuplo consists of the following components:
   [API Key Authentication](../articles/api-key-management.md), and
   [Monetization](../articles/monetization.md).
 - **Control Plane**: The Control Plane is the component that manages the
-  configuration of the API Gateway. It is responsible for deploying new
+  configuration of the API Gateway. It's responsible for deploying new
   configurations, managing the lifecycle of the API Gateway, and monitoring the
   health of the API Gateway.
 - **Analytics and Logging**: Zuplo can provide analytics and logging for your
@@ -35,29 +34,29 @@ A managed dedicated instance of Zuplo consists of the following components:
   allows developers to interact with your API. It provides documentation,
   testing tools, and other features to help developers integrate with your API.
 
-## Custom Requirements
+## Custom requirements
 
 A managed dedicated instance of Zuplo can be customized to meet your specific
 requirements. Examples of custom requirements include:
 
-- **Regions & Availibility Zones** - Zuplo can deploy to multiple regions,
+- **Regions & Availability Zones** - Zuplo can deploy to multiple regions,
   availability zones, or data centers to provide high availability and low
   latency.
 - **Developer Portal Hosting** - The developer portal is typically hosted from a
   CDN managed by Zuplo. Our default configuration serves the developer portal's
-  static assest from a global CDN, but we can configure your developer portal to
+  static assets from a global CDN, but we can configure your developer portal to
   use only regional CDN locations if required.
 - **Networking** - Zuplo can be deployed with a variety of network
   configurations. To learn more see [Networking](./networking.md).
-- **Disabling Features** - Zuplo can disable features that are not needed for
+- **Disabling Features** - Zuplo can disable features that aren't needed for
   your use case or that don't meet your security or compliance requirements. For
   example, if you don't want to use the built-in API analytics and instead want
   to use your own analytics, we can disable the built-in analytics. When our
-  built-in analytics is disabled, we do not collect or store analytics data for
+  built-in analytics is disabled, we don't collect or store analytics data for
   your APIs.
 - **Custom Logging & Monitoring** - Zuplo can integrate with your existing
   logging and monitoring systems. Logs and other data are sent directly from the
-  API Gateway to your logging provider. Zuplo does not collect or store this
+  API Gateway to your logging provider. Zuplo doesn't collect or store this
   data.
 
 ## Security
@@ -108,31 +107,31 @@ be customized to meet your specific requirements.
 
 <ManagedDedicatedDeploymentArchitecture />
 
-### Multiple Regions
+### Multiple regions
 
-It is common practice to deploy your API Gateway to multiple regions to provide
-higher availible, lower latency, and to meet regulatory requirements. Zuplo can
+It's common practice to deploy your API Gateway to multiple regions to provide
+higher available, lower latency, and to meet regulatory requirements. Zuplo can
 deploy your API Gateway to multiple regions and manage the deployment to each
 region without any downtime.
 
 When your API Gateway is deployed to multiple regions, Zuplo uses a global load
 balancer to route traffic to the closest region. This provides low latency
 access to your APIs for end-users around the world. The load balancer is also
-configured to handle failover in case of an outage in one region.
+configured to handle fail over in case of an outage in one region.
 
 <ManagedDedicatedMultiRegionArchitecture />
 
 ### Environments
 
 Customers running managed dedicated Zuplo typically have multiple instances of
-Zuplo deployed. The most common case is to have a production instance(s) and a
+Zuplo deployed. The most common case is to have a production instances and a
 non-production instance. The non-production instance is used to deploy and test
 changes to your API Gateway before deploying them to production.
 
 Each instance is isolated and runs in its own VPC or network.
 
-It is possible to have multiple instances depending on your requirements. For
-example, some customers have seperate instances for production, staging, and
+It's possible to have multiple instances depending on your requirements. For
+example, some customers have separate instances for production, staging, and
 development. For most customer though, a single production and a single
 development instance is sufficient.
 
