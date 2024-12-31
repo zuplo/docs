@@ -10,7 +10,7 @@ project. Custom Domains are available on
 
 :::note
 
-Custom domains cannot be added to development environments. You can tell if an
+Custom domains can't be added to development environments. You can tell if an
 environment is development if the domain ends with `zuplo.dev`.
 
 :::
@@ -71,7 +71,7 @@ your custom domain.
 ### 4. Redeploy
 
 Some changes, like the domain set in your developer portal, only get picked up
-on the deployment. After you set a custom domain it is a good idea to redeploy
+on the deployment. After you set a custom domain it's a good idea to redeploy
 your environment to ensure everything is applied correctly.
 
 ## Cloudflare Customers
@@ -80,8 +80,8 @@ Zuplo uses Cloudflare for routing custom domain traffic to our servers. If you
 use Cloudflare on your domain, there are a few limitations to be aware of. In
 general, these shouldn't be a problem as we handle all the complexities for you.
 
-For host names managed by Zuplo, you cannot control some Cloudflare settings for
-your Zuplo subdomain (i.e. `api.example.com`). Examples include:
+For host names managed by Zuplo, you can't control some Cloudflare settings for
+your Zuplo subdomain (for example `api.example.com`). Examples include:
 
 - Wildcard DNS
 - Spectrum
@@ -131,14 +131,14 @@ Certificates are issued by either Google Trust Services or Let's Encrypt. If you
 have a preference, please let us know, but we recommend (and default to) Google
 Trust Services as it has slightly better compatibility with clients.
 
-Certificates are issued for 90 days and are automatically renewed aproximately
+Certificates are issued for 90 days and are automatically renewed approximately
 30 days before they expire. No action is required on your part.
 
 :::warning{title="Certificate Pinning"}
 
-Certificate pinning is not recommended for Zuplo APIs as the certificates are
+Certificate pinning isn't recommended for Zuplo APIs as the certificates are
 issued for short periods of time and renewed automatically. If you or your end
-clients require certificate pinning, it is recommended you use a custom,
+clients require certificate pinning, it's recommended you use a custom,
 long-lived SSL certificate. (Although this is
 [not recommended](https://scotthelme.co.uk/why-we-need-to-do-more-to-reduce-certificate-lifetimes/)
 for most use cases.)
@@ -184,7 +184,7 @@ issue or have any questions, please contact
 
 ### No DNS Record or Invalid Record
 
-Your DNS is not configured correctly. Ensure that your domain is configured with
+Your DNS isn't configured correctly. Ensure that your domain is configured with
 a `CNAME` record pointing to `cname.zuplo.app`.
 
 ```txt
@@ -193,7 +193,7 @@ CNAME   api.example.com     cname.zuplo.app
 
 ### CAA Record Error
 
-Your DNS has been configured with CAA records that do not authorize Google Trust
+Your DNS has been configured with CAA records that don't authorize Google Trust
 Services to issue certificates for your domain. To resolve add the following DNS
 records:
 

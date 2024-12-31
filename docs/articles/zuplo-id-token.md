@@ -29,18 +29,18 @@ identifying the service you are calling.
 
 The issued JWT token contains the following claims.
 
-| Claim            | Example Value                                                        | Description                                                                                                                                      |
-| ---------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| alg              | `RS256`                                                              | The signing algorithm. Always `RS256`                                                                                                            |
-| kid              | `atky_8gLGDfmHkNEZNvy7PDnmr2gF`                                      | The signing key used to generate the JWT                                                                                                         |
-| account          | `my-account`                                                         | The name of your Zuplo account                                                                                                                   |
-| project          | `my-project`                                                         | The name of your Zuplo project                                                                                                                   |
-| deployment       | `copper-bedbug-main-53c4947`                                         | The name of your Zuplo deployment. Each environment will have its own name (i.e.production, preview branch `test`, etc. will all be different.). |
-| environment_type | `production`                                                         | The type of environment this deployment is. Values can be `production`, `preview`, or `development`                                              |
-| iss              | `https://dev.zuplo.com/v1/client-auth/auth_o8PUdhKxSTOiB794GWPwLQCD` | This is the issuer URL of the Zuplo identity provider. This value will always be the same.                                                       |
-| sub              | `atcl_8GLgIDYRw38Jqg0tHR8tiZfh`                                      | The unique identity of the OAuth Client. This can be used to uniquely identify your deployment.                                                  |
-| iat              | `1720470928`                                                         | The epoch time the token was issued.                                                                                                             |
-| exp              | `1720506928`                                                         | The epoch time the token expires. The default expiration for Zuplo Identity Tokens is 10 hours.                                                  |
+| Claim              | Example Value                                                        | Description                                                                                                                                             |
+| ------------------ | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `alg`              | `RS256`                                                              | The signing algorithm. Always `RS256`                                                                                                                   |
+| `kid`              | `atky_8gLGDfmHkNEZNvy7PDnmr2gF`                                      | The signing key used to generate the JWT                                                                                                                |
+| `account`          | `my-account`                                                         | The name of your Zuplo account                                                                                                                          |
+| `project`          | `my-project`                                                         | The name of your Zuplo project                                                                                                                          |
+| `deployment`       | `copper-bedbug-main-53c4947`                                         | The name of your Zuplo deployment. Each environment will have its own name (for exampleproduction, preview branch `test`, etc. will all be different.). |
+| `environment_type` | `production`                                                         | The type of environment this deployment is. Values can be `production`, `preview`, or `development`                                                     |
+| `iss`              | `https://dev.zuplo.com/v1/client-auth/auth_o8PUdhKxSTOiB794GWPwLQCD` | This is the issuer URL of the Zuplo identity provider. This value will always be the same.                                                              |
+| `sub`              | `atcl_8GLgIDYRw38Jqg0tHR8tiZfh`                                      | The unique identity of the OAuth Client. This can be used to uniquely identify your deployment.                                                         |
+| `iat`              | `1720470928`                                                         | The epoch time the token was issued.                                                                                                                    |
+| `exp`              | `1720506928`                                                         | The epoch time the token expires. The default expiration for Zuplo Identity Tokens is 10 hours.                                                         |
 
 ## Securing Your Backend
 
@@ -48,7 +48,7 @@ The Zuplo ID Token can be used as a means of securing your backend API so that
 only Zuplo can call the API. This can be done by restricting the incoming
 requests using a standard OAuth middleware on your API. For example, if you were
 using Fastify on your backend, you could use the
-[Fastify JWT Middlware](https://github.com/fastify/fastify-jwt) using the
+[Fastify JWT Middleware](https://github.com/fastify/fastify-jwt) using the
 [JWKS verification method](https://github.com/fastify/fastify-jwt?tab=readme-ov-file#verifying-with-jwks)
 and checking the `account`, `project`, or other claims.
 
@@ -60,7 +60,7 @@ library. The verification method will use the JWKS hosted at
 You can also use OAuth tools that handle automatic discovery.
 
 Below is an example of how to verify the token using the
-[jose](https://www.npmjs.com/package/jose) Javascript library.
+[jose](https://www.npmjs.com/package/jose) JavaScript library.
 
 ```ts
 import jose from "jose";

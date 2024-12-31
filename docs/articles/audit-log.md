@@ -25,7 +25,7 @@ enterprise deployment. [Pricing](https://zuplo.com/pricing)
 
 ## Configuring Audit Log
 
-Audit Logging is enabled via a plugin that is registered in the
+Audit Logging is enabled via a plugin that's registered in the
 `zuplo.runtime.ts` runtime extensions module;
 [learn more about runtime extensions](./runtime-extensions.md). Here we show an
 example configuring Audit Log to write to a DataStax Astra DB collection.

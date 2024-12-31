@@ -5,7 +5,7 @@ sidebar_label: Web Standard APIs
 
 Zuplo's runtime supports the standards
 [Web Workers API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API).
-This means that you can rely on the same set of Javascript APIs you would find
+This means that you can rely on the same set of JavaScript APIs you would find
 in a browser environment.
 
 ## Built-In Objects
@@ -15,9 +15,9 @@ All of the
 supported by the current Google Chrome stable release are supported, with a few
 notable exceptions:
 
-- `eval()` is not allowed for security reasons.
-- `new Function` is not allowed for security reasons.
-- `Date.now()` returns the time of the last I/O; it does not advance during code
+- `eval()` isn't allowed for security reasons.
+- `new Function` isn't allowed for security reasons.
+- `Date.now()` returns the time of the last I/O; it doesn't advance during code
   execution.
 
 ## ​​Compression Streams

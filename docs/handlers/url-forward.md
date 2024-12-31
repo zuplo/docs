@@ -7,11 +7,11 @@ The URL Forward handler can be used to proxy requests to a different API without
 writing any code. It simply appends the incoming `path` section of the URL onto
 the specified `baseUrl` property. For example:
 
-If you have an incoming request with url
+If you have an incoming request with URL
 
 `https://my-gateway.com/pizza/cheese/size/large`
 
-And you have a URL forward handler with a baseUrl of
+And you have a URL forward handler with a `baseUrl` of
 `https://my-backend.com/folder` - the gateway will make a request to
 
 `https://my-backend.com/folder/pizza/cheese/size/large`. By default it will
@@ -25,7 +25,7 @@ The Forward Handler can be added to any route using the Route Designer. Open the
 Handlers** drop-down.
 
 In the text box enter the URL to rewrite the request. Values can be mixed into
-the URL string using Javascript string interpolation syntax. For example:
+the URL string using JavaScript string interpolation syntax. For example:
 
 ```txt
 https://${env.BASE_HOST_NAME}/${method}/${params.productId}
@@ -127,15 +127,15 @@ use-cases.
 
 - `baseUrl` - the base URL the incoming pathname will be appended to.
 - `forwardSearch` - The query string will be automatically included in the
-  rewritten url.
+  rewritten URL.
 - `followRedirects` - Determines if redirects should be followed when fetching
-  the rewrite url . When set to `false` or not specified, redirects will not be
+  the rewrite URL. When set to `false` or not specified, redirects won't be
   followed - the status and `location` header will be returned as received.
 
 ## Different Backends per Environment
 
 It's common to want a different backend for your production, staging and preview
-environments. This can be easily achieved by using
+environments. This can be achieved by using
 [environment variables](../articles/environment-variables.md) to specify the
 origin of the backend.
 
@@ -145,7 +145,7 @@ For example,
 ${env.BASE_PATH}
 ```
 
-A url rewrite like this will combine the `BASE_PATH` environment variable, say
+A URL rewrite like this will combine the `BASE_PATH` environment variable, say
 `https://example.com`
 
 ```txt

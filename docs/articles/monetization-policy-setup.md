@@ -44,7 +44,7 @@ endpoint.
 ## 2/ Add the Monetization Policy
 
 With the user identified via the API Key Authentication policy, next you will
-enforce that they are calling the API within the limits of their plan. The
+enforce that they're calling the API within the limits of their plan. The
 [Monetization Inbound Policy](/docs/policies/monetization-inbound) is what
 enables us to do that.
 

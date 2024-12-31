@@ -9,9 +9,9 @@ project level roles in order to grant them access to specific project resources.
 
 ## Add Project Member
 
-To manage project members, navigate to the project settings page and click 
-the **Members** tab, which shows a list of all members in the project and
-their roles.
+To manage project members, navigate to the project settings page and click the
+**Members** tab, which shows a list of all members in the project and their
+roles.
 
 ![Project Members](/media/managing-project-members/image-1.png)
 
@@ -24,9 +24,9 @@ the project.
 
 Account admins will always have access to all projects. If you try to change the
 role of an account admin, you will see a warning message that this user is an
-account admin and cannot be changed.
+account admin and can't be changed.
 
-For users who are not account admins, you can change their role by selecting the
+For users who aren't account admins, you can change their role by selecting the
 desired role from the dropdown.
 
 ![Member Role](/media/managing-project-members/image-2.png)

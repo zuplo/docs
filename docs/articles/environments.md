@@ -29,17 +29,17 @@ with production and preview environments with caching and other features.
 These are are environments that are deployed using the
 [GitHub integration](/docs/articles/source-control) or building a
 [custom CI/CD pipeline](/docs/articles/custom-ci-cd). Preview environments are
-deployed from from any branch that is not set as your default (i.e. production
-branch). Preview environments are deployed to the edge and have the same
-behavior as production environments, but are typically used for staging, testing
-pull requests, etc.
+deployed from from any branch that isn't set as your default (for example
+production branch). Preview environments are deployed to the edge and have the
+same behavior as production environments, but are typically used for staging,
+testing pull requests, etc.
 
 ### Production
 
 These are are environments that are deployed using the
 [GitHub integration](/docs/articles/source-control) or building a
 [custom CI/CD pipeline](/docs/articles/custom-ci-cd). Each project has only one
-Production environment and is deployed from the git branch that is set as your
+Production environment and is deployed from the git branch that's set as your
 production branch in your source control settings.
 
 ## Navigating Environments

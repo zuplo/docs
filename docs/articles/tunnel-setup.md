@@ -13,18 +13,19 @@ services through the `service://` protocol.
 The easiest way to deploy your tunnel is using a Docker container. The three
 basic requirements for deploying a secure tunnel with Docker are:
 
-1. A tunnel secret that is provided to the Docker container as an environment
+1. A tunnel secret that's provided to the Docker container as an environment
    variable named `TUNNEL_TOKEN` (the secret is provided by the Zuplo CLI when
    you create the tunnel. See
    [creating a tunnel](../cli/tunnels#creating-a-tunnel))
 1. The ability for the tunnel service to make an outbound connection to the
    public internet to establish the secure tunnel.
 1. The ability for the tunnel service to make a request to your internal API by
-   a DNS address. (i.e. `https://my-service.local/api`).
+   a DNS address. (for example `https://my-service.local/api`).
 
-The tunnel can run anywhere you can deploy a Docker container. Where you deploy depends on your specific setup. To run the Docker container on your own infrastructure, refer to instructions
-from your cloud provider or contact [Zuplo support](mailto:support@zuplo.com)
-for assistance.
+The tunnel can run anywhere you can deploy a Docker container. Where you deploy
+depends on your specific setup. To run the Docker container on your own
+infrastructure, refer to instructions from your cloud provider or contact
+[Zuplo support](mailto:support@zuplo.com) for assistance.
 
 Below are a few option for deploying the tunnel.
 
@@ -68,25 +69,25 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 }
 ```
 
-It is common to have multiple services for each of your internal environments.
-Each service can be restricted so that it is only accessible by specific Zuplo
+It's common to have multiple services for each of your internal environments.
+Each service can be restricted so that it's only accessible by specific Zuplo
 environments. For example, you might have two services one for production and
 one for staging.
 
 - `service://my-awesome-service-prod` (Production)
 - `service://my-awesome-service-staging` (Staging)
 
-## Using Services Exposed through Tunnels in Config
+## Using Services Exposed through Tunnels in Configuration
 
 Services can also be used in routes.oas.json file such as with the URL Rewrite
-handler. To call a tunnel service simply use it as part of the rewrite url as
+handler. To call a tunnel service simply use it as part of the rewrite URL as
 shown in the image below.
 
 ![Zuplo route handling](https://cdn.zuplo.com/assets/0c91be91-a591-4cef-ac29-d266e8a3181e.png)
 
 ## Service Environment Variables
 
-When using these services in your code or configuration, it is often useful to
+When using these services in your code or configuration, it's often useful to
 store the values as an environment variable. This way you can change which
 environment calls which tunnel without changing code or configuration.
 
@@ -134,7 +135,7 @@ recent version of the Docker Image is always tagged with the `latest` tag. We
 recommend periodically checking and upgrading the tunnel to the latest release
 to ensure you have the latest security and performance updates.
 
-We recommend testing each release of the tunning in a staging environment before
+We recommend testing each release of the tunnel in a staging environment before
 rolling out to production.
 
 ## Troubleshooting

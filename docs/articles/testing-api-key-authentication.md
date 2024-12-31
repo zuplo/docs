@@ -17,7 +17,7 @@ environment and local development.
 
 Either locally or in CI/CD you can specify any API Key Bucket on the
 [API Key Authentication](/docs/policies/api-key-inbound) policy by setting the
-`bucketName` property. This allows using a consistent API Key Bucket that is
+`bucketName` property. This allows using a consistent API Key Bucket that's
 setup with consumers, etc. as required for testing. You can use the
 [Zuplo Developer API](https://dev.zuplo.com) to
 [create and manage buckets](/docs/articles/api-key-management), consumers, keys,

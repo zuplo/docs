@@ -24,8 +24,8 @@ cross-origin requests (both the simple type and pre-flight request).
 
 :::warning
 
-Make sure to not have a trailing `/` on your allowedOrigins. e.g.
-`https://example.com` is valid, `https://example.com/` will not work.
+Make sure to not have a trailing `/` on your `allowedOrigins`. e.g.
+`https://example.com` is valid, `https://example.com/` won't work.
 
 :::
 
@@ -50,7 +50,7 @@ Make sure to not have a trailing `/` on your allowedOrigins. e.g.
 
 You can specify a list of supported domains. Zuplo will ensure the pre-flight
 request is compatible with browsers by filtering the list to match the incoming
-origin, provided it is in your list of origins.
+origin, provided it's in your list of origins.
 
 :::
 

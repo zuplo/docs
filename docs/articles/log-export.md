@@ -50,7 +50,7 @@ You will need to provide us with the following information:
 
 1. The credentials to your storage account - typically something like an access
    key and secret.
-2. The url of the storage account
+2. The URL of the storage account
 
 Note, the storage account that you provide to us only needs permission to write
 files. We don't need to list or delete buckets or objects. If you would like to

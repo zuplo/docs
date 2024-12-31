@@ -8,12 +8,12 @@ without impacting latency.
 
 The fastest place to store such information is in memory, but there can be
 thousands of processes on Zuplo when you're at scale and sometimes those
-processes are not long lived.
+processes aren't long lived.
 
 The next fastest place is in [ZoneCache](/docs/articles/zone-cache) which is a
-cache located in each datacenter. This requires an async connection but is
-usually much faster than going back to your configuration data store (often in a
-single location worldwide).
+cache located in each data center. This requires an asynchronous connection but
+is usually much faster than going back to your configuration data store (often
+in a single location worldwide).
 
 The MemoryZoneReadthroughCache offers the best of both worlds - it uses memory
 and zone cache in combination to afford the lowest possible latency.

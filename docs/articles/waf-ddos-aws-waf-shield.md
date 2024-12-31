@@ -8,7 +8,7 @@ to run as a custom backend behind Cloudfront.
 
 ## Securing Zuplo from Direct Access
 
-With any WAF product, you will want to ensure that network traffic cannot bypass
+With any WAF product, you will want to ensure that network traffic can't bypass
 your WAF and hit your API Gateway directly. AWS WAF + Shield offer several ways
 to ensure that your API Gateway is only accessible through the WAF.
 
@@ -23,7 +23,7 @@ directly.
 Amazon maintains a list of Cloudfront IP addresses (separate from other AWS
 uses) that you can use to restrict access to your API Gateway. This is a good
 way to ensure that only Cloudfront can access your API Gateway. However, as
-Cloudfront is available to any AWS customer, this method is not sufficient to
+Cloudfront is available to any AWS customer, this method isn't sufficient to
 protect unauthorized traffic from hitting your API Gateway.
 
 In Zuplo, you can utilize the IP Address Restriction policy to limit traffic to
@@ -78,7 +78,7 @@ secret value will be allowed to hit your Zuplo API Gateway.
 
 ### Identity Based Options
 
-Unfortunately, AWS WAF + Shield do not offer identity-based options like IAM or
+Unfortunately, AWS WAF + Shield don't offer identity-based options like IAM or
 network based options for securing your API Gateway. This is true for
 [both AWS](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/restrict-access-to-load-balancer.html)
 and non-AWS API Gateway products. If you require these options, you will need to

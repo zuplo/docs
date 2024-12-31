@@ -70,12 +70,13 @@ expose using a configuration file. Below is a sample configuration file.
 
 The properties in the `services` objects are explained below.
 
-- `name` - This is the name of the service that you will use from your zup
+- `name` - This is the name of the service that you will use from your Zuplo
+  project
 - `endpoint` - This is the local endpoint of your service that you tunnel can
   connect to
 - `configurations` - This object specifies which projects and which environments
   can access this service.
-  - `project` - The name of the zuplo project
+  - `project` - The name of the Zuplo project
   - `accessibleBy` - The environments which can use the tunnel. Valid values are
     `production`, `preview`, and `working-copy`.
 

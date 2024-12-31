@@ -25,7 +25,7 @@ all the way from the client to your backend.
 
 ![Trace visualization](/media/opentelemetry/image-1.png)
 
-### What is Traced?
+### What's Traced?
 
 By default, when the OpenTelemetry plugin is enabled, the following is traced:
 
@@ -45,8 +45,7 @@ One important limitation to keep in mind is that the clock will only increment
 when performing I/O operations (for example when calling `fetch`, using the
 Cache APIs, etc.). This is a limitation imposed as a security measure due
 Zuplo's serverless, multi-tenant architecture. In practice this shouldn't impact
-your ability to trace as virtually any code that isn't I/O bound is extremely
-fast.
+your ability to trace as virtually any code that isn't I/O bound is fast.
 
 ### Custom Tracing
 
@@ -98,8 +97,7 @@ Adding OpenTelemetry tracing to your Zuplo API is done by adding the
 `OpenTelemetryPlugin` in the `zuplo.runtime.ts` file as shown below.
 
 For most providers you will set values for `exporter.url` and
-`exporter.headers`. It is common for providers to use a header for
-authorization.
+`exporter.headers`. It's common for providers to use a header for authorization.
 
 ```ts title="zuplo.runtime.ts"
 import { OpenTelemetryPlugin } from "@zuplo/otel";

@@ -11,10 +11,10 @@ help so don't hesitate to contact us if you have any questions.
 ## Observability
 
 One of the most critical things to have ready before going live is
-observability. Of course, Zuplo can help with this and we have observability
-integrations for Datadog, GCP Cloud Logging, AWS, Loki Grafana and more
+observability. Of course, Zuplo can help with this and we've observability
+integrations for DataDog, GCP Cloud Logging, AWS, Loki Grafana and more
 ([just ask](mailto:support@zuplo.com)) available as part of our enterprise
-offerings. Additionally, we have advanced analytics in Zuplo - this is available
+offerings. Additionally, we've advanced analytics in Zuplo - this is available
 for all tiers in working-copy and for as part of an enterprise agreement for
 edge deployments.
 
@@ -35,20 +35,20 @@ analytics report to identify any changes in status code mix that are unexpected.
 ## Rollback Happens
 
 For large, hot-swap deployments where you already have a high volume of API
-traffic that you will be switching to move through Zuplo it is difficult for
+traffic that you will be switching to move through Zuplo it's difficult for
 teams to have a perfect test setup that models every shape of request. This
 means that, on occasion, you might see a spike in errors after going live that
 could be due to a bug (often in custom policies or handlers) that weren't
 triggered in your test environment.
 
-For this reason, it is important to have an effective and easy rollback strategy
+For this reason, it's important to have an effective and easy rollback strategy
 in place. This is often easy to accomplish and most customers use a simple
 Virtual IP (VIP) swap that allows an easy configuration change. For instance,
 you could keep the DNS entry for your API pointing to your existing
 infrastructure and then use a VIP swap to switch traffic over to Zuplo. This
 allows you to quickly rollback by simply reverting the VIP swap.
 
-This is adequate for most situations. It is possible to also perform flighting
+This is adequate for most situations. It's possible to also perform flighting
 (sometimes referred to as canary testing, or gradual rollouts), using a traffic
 router to slowly shift the % of traffic going through your existing path over to
 Zuplo. How to shift traffic could be based on several factors including IP

@@ -3,17 +3,17 @@ title: "Managed Dedicated: Getting Started"
 sidebar_label: "Getting Started"
 ---
 
-Developing a project that is deployed to a Zuplo Dedicated Managed instance is
+Developing a project that's deployed to a Zuplo Dedicated Managed instance is
 largely the same as developing for any other Zuplo deployment model. As you
-build your API, all of the same features and policies are available to you. The
+build your API, all the same features and policies are available to you. The
 primary differences with a Zuplo Dedicated Managed instance are:
 
 1. You have a dedicated instance of Zuplo running on the cloud provider of your
    choice.
 2. You have the ability to customize networking - for example, your API Gateway
-   may be configured to not be accessable to the public internet.
-3. Dedicated managed instances of Zuplo do not have Working Copy environments.
-   So instead of developing your API inside of the Zuplo portal, you will use
+   may be configured to not be accessible to the public internet.
+3. Dedicated managed instances of Zuplo don't have Working Copy environments. So
+   instead of developing your API inside of the Zuplo portal, you will use
    Zuplo's [local development experience](/docs/articles/local-development).
 
 ## Prerequisites
@@ -35,7 +35,7 @@ do this by running the `create-zuplo-api` command in your terminal:
 npx create-zuplo-api
 ```
 
-This command will prompt you to enter a project name as well as options for your
+This command will prompt you to enter a project name and options for your
 project.
 
 ## Configure Your Project
@@ -53,14 +53,14 @@ project.
 }
 ```
 
-## Build Your API
+## Build your API
 
 Once you have created your project, you can open it in your favorite code editor
 and begin editing your API and Developer Portal. For more information on local
 development, see the
 [local development guide](/docs/articles/local-development).
 
-## Deploy Your Project
+## Deploy your project
 
 When you are ready to deploy your project to your Zuplo Dedicated Managed
 instance, you can run the following command inside your project directory:

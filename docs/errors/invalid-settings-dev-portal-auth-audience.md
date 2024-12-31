@@ -4,7 +4,7 @@ title:
   (INVALID_SETTINGS_DEV_PORTAL_AUTH_AUDIENCE)
 ---
 
-We were unable to generate documentation because your 'devPortalClient' does not
+We were unable to generate documentation because your 'devPortalClient' doesn't
 contain a valid auth configuration.
 
 Ensure that the configuration for `authentication.devPortalClient` is set

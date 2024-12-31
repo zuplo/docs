@@ -38,11 +38,10 @@ attackers in production.
 
 ### Setup POST endpoint
 
-If you did not already do so, you need to setup a POST endpoint in your API.
-This endpoint will be used to send the GraphQL queries to your API. We'll use
-the urlRewriteHandler to rewrite the request to your GraphQL API. For this
-example let's assume your GraphQL API is hosted at
-`https://api.example.com/graphql`.
+If you didn't already do so, you need to setup a POST endpoint in your API. This
+endpoint will be used to send the GraphQL queries to your API. We'll use the
+urlRewriteHandler to rewrite the request to your GraphQL API. For this example
+let's assume your GraphQL API is hosted at `https://api.example.com/graphql`.
 
 To do so, add the following to your `config/routes.oas.json`
 
@@ -74,12 +73,12 @@ To do so, add the following to your `config/routes.oas.json`
 
 For all the risks mentioned above, Zuplo offers policies that can be configured
 to protect your GraphQL API. These policies can be configured for Zuplo. We'll
-create the configuration for the three policies "graphql-depth-limit",
-"graphql-complexity-points" and "graphql-disable-introspection-policy" next.
+create the configuration for the three policies `graphql-depth-limit`,
+`graphql-complexity-points` and `graphql-disable-introspection-policy` next.
 
 ### a. GraphQL Depth Limit
 
-This policy limits how deep a query can be nested. Check our our
+This policy limits how deep a query can be nested. Check our
 [detailed policy documentation](/docs/policies/graphql-complexity-limit-inbound)
 for more information.
 
@@ -139,8 +138,8 @@ your GraphQL API.
 }
 ```
 
-The complexity limit ensures that a potential attacker cannot overload the
-system by sending overly complicated queries.
+The complexity limit ensures that a potential attacker can't overload the system
+by sending overly complicated queries.
 
 ### c. GraphQL Disable Introspection
 

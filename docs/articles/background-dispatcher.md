@@ -70,7 +70,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 
 The dispatcher will invoke the dispatch function with a batch of records at most
 ever 'n' milliseconds (as set in the options) if there are items enqueued. If
-items are not enqueued the function will not be invoked.
+items aren't enqueued the function won't be invoked.
 
 Note, there are no automatic retries for failed dispatch functions, but you can
 implement this yourself in the dispatch function.

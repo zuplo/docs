@@ -10,7 +10,7 @@ configurations or have strict security or compliance requirements.
 
 Dedicated Managed hosting might be the right choice for you if you need:
 
-- To run you API Gateway on the Cloud Provider of your choice.
+- To run you API Gateway on the cloud provider of your choice.
 - To customize networking configurations, such as restricting access to the
   public internet.
 - Have geographical deployment requirements where the

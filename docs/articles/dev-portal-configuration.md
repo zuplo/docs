@@ -16,8 +16,8 @@ Read more about
 
 Zuplo has full support for features within OpenAPI 3.1. If you are still on
 OpenAPI 3.0, then most features will still be supported within the Developer
-Portal. OpenAPI 2.x / Swagger or earlier is not supported at this time. There
-are multiple solutions to convert your OpenAPI 2.x document - including
+Portal. OpenAPI 2.x / Swagger or earlier isn't supported at this time. There are
+multiple solutions to convert your OpenAPI 2.x document - including
 [CLI, and API](https://stackoverflow.com/questions/59749513/how-to-convert-openapi-2-0-to-openapi-3-0).
 
 ## Handling Multiple OpenAPI Files

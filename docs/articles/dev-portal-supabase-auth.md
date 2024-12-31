@@ -243,7 +243,7 @@ Auth App codebase from earlier.
        }
      }
 
-     // If the sign up does not originate from the Dev Portal, redirect back to the
+     // If the sign up doesn't originate from the Dev Portal, redirect back to the
      // homepage
      return NextResponse.redirect(requestUrl.origin);
    }
@@ -372,7 +372,7 @@ to sign into your Supabase project via the Developer Portal
        });
      }
 
-     // If the login does not originate from the Dev Portal, redirect back to the
+     // If the login doesn't originate from the Dev Portal, redirect back to the
      // homepage
      return NextResponse.redirect(requestUrl.origin, {
        status: 301,
@@ -492,7 +492,8 @@ need to have completed the Sign Up Support section above first**
 
 4. Deploy your code and navigate to your Dev Portal. Then click the **Sign In**
    button
-5. You should be redirected to your Supabase Auth App. Click the **GitHub** button
+5. You should be redirected to your Supabase Auth App. Click the **GitHub**
+   button
 6. You will be redirected to the GitHub OAuth flow. Sign into GitHub if you
    aren’t already, and navigate through the flow
 7. You will be redirected back to the Dev portal and be signed into your GitHub

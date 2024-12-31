@@ -3,18 +3,18 @@ title: ContextData - Sharing Request Data
 sidebar_label: ContextData
 ---
 
-It is often useful to store data throughout the life of a single request. This
+It's often useful to store data throughout the life of a single request. This
 data could be used on multiple policies, handlers, or for logging. However,
-because the Zuplo runtime is asynchronous, you cannot simply create global
-variables and reference them in other modules if the value is unique accross
+because the Zuplo runtime is asynchronous, you can't simply create global
+variables and reference them in other modules if the value is unique across
 requests. Additionally, using a traditional data structure like a `Map` is also
 not recommended as it can build up memory over time.
 
 ## ContextData
 
-The `ContextData` utility allows safely storing data that is tied to a specific
-request. Additionally, this utility ensures that data stored is properly garbage
-collected (removed from memory) when the request is complete.
+The `ContextData` utility store data that's tied to a specific request.
+Additionally, this utility ensures that data stored is garbage collected
+(removed from memory) when the request is complete.
 
 **`ContextData.set`**
 
@@ -58,13 +58,13 @@ Below are a few examples of how **NOT** to share data in your API.
 
 :::danger
 
-Do NOT write code like this in your API. It will not work reliably. These are
+Don't write code like this in your API. It won't work reliably. These are
 examples of what NOT to do. See the next section for best practices.
 
 :::
 
 The first example uses a simple shared global variable called `currentRequestId`
-to store the current requestId. On the surface this looks straightforward.
+to store the current `requestId`. On the surface this looks straightforward.
 However, because the gateway is being shared among many requests who are all
 running at the same time, the value of `currentRequestId` is completely
 unpredictable when your API is under load.

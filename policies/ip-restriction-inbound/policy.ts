@@ -27,7 +27,7 @@ export default async function (
   }
 
   // If the blocked IP addresses are set, then the incoming IP
-  // cannot be in that list
+  // can't be in that list
   if (options.blockedIpAddresses) {
     const blocked = ipRangeCheck(ip, options.allowedIpAddresses);
     if (blocked) {

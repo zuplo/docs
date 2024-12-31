@@ -21,9 +21,9 @@ private API. The benefits of a secure tunnel are:
 
 The Zuplo tunnel can run on virtually any infrastructure. The most common way
 users install the tunnel is as a Docker container, but we can provide you a
-build in virtually any format (i.e. an Azure VM, etc.). The tunnel itself is a
-lightweight service that when started makes an outbound connection to the Zuplo
-network and then through to your Zuplo Gateway.
+build in virtually any format (for example an Azure VM, etc.). The tunnel itself
+is a lightweight service that when started makes an outbound connection to the
+Zuplo network and then through to your Zuplo Gateway.
 
 When the tunnel service connects to the Zuplo network, traffic from your gateway
 can be routed to internal services running in your network or VPC. For example,
@@ -66,8 +66,8 @@ service of your choice.
 Most customers are fine running two instances of the tunnel service for
 redundancy in the event one pod/service fails. Each tunnel is able to handle
 millions of requests per minute. For customers that require additional scale,
-simply increase the number of tunnel instances you are running or configure
-auto-scaling on your deployment. It is unlikely that the tunnel will become the
+simply increase the number of tunnel instances you are running or configure auto
+scaling on your deployment. It's unlikely that the tunnel will become the
 bottleneck in your traffic before other factors, but if you do run into any
 issues [contact support](mailto:support@zuplo.com) and we will work out a
 solution that meets your scale requirements.

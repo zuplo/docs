@@ -8,7 +8,7 @@ to your own logging service, you can enable one of Zuplo's logging plugins.
 Currently, Zuplo supports logging to the following sources:
 
 - AWS CloudWatch
-- Datadog
+- DataDog
 - Dynatrace
 - Google Cloud Logging
 - Loki
@@ -50,7 +50,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 }
 ```
 
-### Datadog
+### DataDog
 
 ```ts
 import {
@@ -110,7 +110,7 @@ information.
 The Sumo Logic logger uses the
 [HTTP Source](https://help.sumologic.com/docs/send-data/hosted-collectors/http-source/logs-metrics/)
 to send logs. Create a hosted HTTP Collector and Set the HTTP Source Address
-valud to the url property on the plugin.
+value to the URL property on the plugin.
 
 When creating the HTTP Collector, leave the default settings for parsing the
 logs.
@@ -139,7 +139,7 @@ plugin for more information.
 
 ## Log Fields
 
-Below is a list of the default fields that are sent with log messages. Do note,
+Below is a list of the default fields that are sent with log messages. don'te,
 that the names of these fields may differ depending on your logger as we follow
 the conventions of each log service. So `environmentType` may be
 `environmentType`, `environment_type`, or `environment-type`. See the specific
@@ -150,14 +150,14 @@ log plugin for details.
 - `requestId`: The value of the `zp-rid` header. This is used for tracing issues
   across Zuplo systems.
 - `atomicCounter`: This is a counter that indicates log ordering. Because of the
-  shared nature of the edge environments the clock does not incriment unless an
+  shared nature of the edge environments the clock doesn't incriment unless an
   I/O operation is performed. As such, you may notice that you have several
   messages with the same timestamp. You can use the value of this counter to
   determine order. This value will be an integer between 0 and the max integer
-  value. It will cycle back to 0 when the maximum is reached. This number is not
+  value. It will cycle back to 0 when the maximum is reached. This number isn't
   persistent across restarts or shared across environments.
 - `environment`: This is the name of your Zuplo environment. This will be the
-  same as your Zuplo subdomain. i.e. if your Zuplo URL is
+  same as your Zuplo subdomain. for example if your Zuplo URL is
   `https://silver-lemming-main-b0cef33.zuplo.app`, the environment is
   `silver-lemming-main-b0cef33`
 - `environmentType`: This indicates where your environment is running. Possible
@@ -181,6 +181,6 @@ log plugin for details.
 - `logSource`: Whether the log originated from Zuplo system code (`system`) or
   from customer code (`user`)
 - `requestRayId`: The value of the Cloudflare Ray ID. This value is used
-  internally to coordinate log event in Zuplo to log events in Cloudflare. It is
-  provided in your logs for potential troubleshooting. Normally, it is
+  internally to coordinate log event in Zuplo to log events in Cloudflare. it's
+  provided in your logs for potential troubleshooting. Normally, it's
   recommended to rely on the `requestId` for tracing.

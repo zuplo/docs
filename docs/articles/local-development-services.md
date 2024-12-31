@@ -16,7 +16,7 @@ your remote gateway.
 
 :::warning
 
-As the .env.zuplo file could contain sensitive information, it should not be
+As the .env.zuplo file could contain sensitive information, it shouldn't be
 committed to your version system. Consider adding .env.zuplo to your .gitignore
 file.
 
@@ -29,7 +29,7 @@ file.
    environment you are connected to by looking at the .env.zuplo file.
 
 ```bash title="Contents of .env.zuplo "
-# This file is auto-generated from zuplo link. Please do not edit it manually.
+# This file is auto-generated from zuplo link. Please don't edit it manually.
 # It will be auto-generated afresh the next time you run zuplo link.
 # If you wish to add your own environment variables, create a separate .env file.
 

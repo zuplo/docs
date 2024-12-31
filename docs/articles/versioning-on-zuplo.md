@@ -45,10 +45,10 @@ own document and allow users to pick. This is currently presented in a dropdown:
 
 ## Using Zuplo as a versioning layer
 
-Because Zuplo is a programmable gateway it is a powerful tool in your versioning
+Because Zuplo is a programmable gateway it's a powerful tool in your versioning
 arsenal. For example, let's imagine you want to make a breaking change between
-v1 and v2 of your `todos` API where the `todoItems` in v2 will not include a
-piece of information in the previous version.
+v1 and v2 of your `todos` API where the `todoItems` in v2 won't include a piece
+of information in the previous version.
 
 This can be entirely achieved in Zuplo by adding a v2 OpenAPI file and adding an
 identical route from v1 but changing the path:

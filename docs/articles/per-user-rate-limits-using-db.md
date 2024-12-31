@@ -7,7 +7,7 @@ In this example we show a more advanced implementation of
 database lookup to get the customer details and combines that with the ZoneCache
 to improve performance, reduce latency and lower the load on the database.
 
-In this example we use [supabase](https://supabase.com) as the database but you
+In this example we use [Supabase](https://supabase.com) as the database but you
 could use your own API, [Xata](https://xata.io),
 [Firebase](https://firebase.com) etc. The implementation will be similar for
 all.

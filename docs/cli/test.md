@@ -28,7 +28,7 @@ be picked up by the Zuplo CLI.
 
 :::
 
-Using Node.js 18 and the Zuplo CLI, it is very easy to write tests that make
+Using Node.js 18 and the Zuplo CLI, it's very easy to write tests that make
 requests to your API using `fetch` and then validate expectations with `expect`
 from [chai](https://www.chaijs.com/api/bdd/).
 

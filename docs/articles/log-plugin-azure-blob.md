@@ -63,7 +63,7 @@ appropriate permissions.
 
 Writing the full request or response body can be expensive but is supported.
 Alternatively, you may want to parse the body for a particular property to log,
-in this case it is important that the request or response is cloned so that the
+in this case it's important that the request or response is cloned so that the
 stream is available for the response.
 
 Also, note that the `generateLogEntry` function will be called **after** the

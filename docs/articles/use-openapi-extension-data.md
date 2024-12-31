@@ -18,8 +18,8 @@ code.
 ## Custom Data in the OpenAPI File
 
 To add custom data to your OpenAPI file, you can use the `x-` prefix followed by
-the name of the extension. Add this extension to the operation (i.e. the `get`,
-`post`, etc. section). For example, to add a custom field called
+the name of the extension. Add this extension to the operation (for example the
+`get`, `post`, etc. section). For example, to add a custom field called
 `my-custom-config` to the OpenAPI file, you would use the following syntax:
 
 ```json title="config/routes.oas.json"

@@ -23,7 +23,7 @@ The following roles are available at the account level:
   the account. They also have wide access to resources such as tunnels, custom
   domains, API key buckets, etc. Developers can edit preview and development
   resources, but not production resources.
-- **Member**: Members of an account do not have any account level or project
+- **Member**: Members of an account don't have any account level or project
   level permissions. Members can be granted project level permissions by an
   admin.
 
@@ -36,8 +36,8 @@ The following roles are available at the project level:
 - **Admin**: Admins have full access to the project and can manage all aspects
   of the project, including environment variables, secrets, and members.
 - **Developer**: Developers have access to all preview and development resources
-  in a project. They cannot modify production resources.
-- **Member**: Members of a project can view resources in the project but cannot
+  in a project. They can't modify production resources.
+- **Member**: Members of a project can view resources in the project but can't
   modify them.
 
 ## Account Role Permissions
@@ -106,7 +106,7 @@ The following table outlines the permissions available to each project role.
 |                       | Preview     | Edit   | ✅    | ✅        | ❌     |
 |                       |             | View   | ✅    | ✅        | ✅     |
 |                       | Development | Edit   | ✅    | ❌        | ❌     |
-|                       |             | View   | ✅    | ✅       | ✅     |
+|                       |             | View   | ✅    | ✅        | ✅     |
 | Monetization Buckets  | Production  | Edit   | ✅    | ❌        | ❌     |
 |                       |             | View   | ✅    | ✅        | ✅     |
 |                       | Preview     | Edit   | ✅    | ✅        | ❌     |

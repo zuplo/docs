@@ -19,8 +19,8 @@ In the text box enter the URL location for the redirect.
 ## Setup in routes.oas.json
 
 You can also configure the Redirect Handler directly in the **routes.oas.json**
-file, e.g. as in the route below (which is redirecting requests at the root of
-your domain to your docs page at /docs).
+file, for example, as in the route below (which is redirecting requests at the
+root of your domain to your docs page at /docs).
 
 ```json
 "paths": {

@@ -8,7 +8,7 @@ sending metrics to a variety of services. If you want your logs to be sent to
 your metrics service, you can enable one of Zuplo's logging plugins. Currently,
 Zuplo supports logging to the following sources:
 
-- Datadog (Beta)
+- DataDog (Beta)
 - Dynatrace (Beta)
 
 If you would like to log to a different source, reach out to support@zuplo.com
@@ -25,35 +25,35 @@ different logging plugins.
 Zuplo supports the following metrics:
 
 - request latency
-  - This measures the the total time (in milliseconds) that a request takes once
-    it has entered the API Gateway. It includes any outbounds calls from the
+  - This measures the total time (in milliseconds) that a request takes once it
+    has entered the API Gateway. It includes any outbound calls from the
     gateway.
 - request content length
   - The content length of the request as reported by the content-length header.
-    May be omitted if the content-length header is not present.
+    May be omitted if the content-length header isn't present.
 - response content length.
   - The content length of the response as reported by the content-length header.
-    May be omitted if the content-length header is not present.
+    May be omitted if the content-length header isn't present.
 
 ## Plugins
 
 Below, you will find details on each metrics plugin.
 
-### Datadog (Beta)
+### DataDog (Beta)
 
-By default, we send all metrics to Datadog. However, you have the option below
+By default, we send all metrics to DataDog. However, you have the option below
 to configure which metrics you want to send.
 
-Due to the pricing model of Datadog, we recommend being thrifty with what is
+Due to the pricing model of DataDog, we recommend being thrifty with what's
 being sent. Refer to
 [counting custom metrics](https://docs.datadoghq.com/account_management/billing/custom_metrics/?tab=countrate#counting-custom-metrics)
 for more information. In general, try to avoid high-dimensionality/cardinality
 tags since those are counted as separate metrics. This
-[article by Datadog](https://www.datadoghq.com/blog/the-power-of-tagged-metrics/)
+[article by DataDog](https://www.datadoghq.com/blog/the-power-of-tagged-metrics/)
 has some good guidelines.
 
-As of October 2023, we are in the process of becoming an official integration
-with Datadog, which would reduce the way some of our metrics are counted.
+As of October 2023, we're in the process of becoming an official integration
+with DataDog, which would reduce the way some of our metrics are counted.
 
 ```ts
 import {
@@ -89,7 +89,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 }
 ```
 
-The above configuration applies globally for all metrics send to Datadog. If you
+The above configuration applies globally for all metrics send to DataDog. If you
 wish to dynamically configure information for a particular ZuploContext, you can
 use the `DataDogMetricsPlugin` in your code. Currently, the only configuration
 you can set is the tags. The values you set here will be appended to those set
@@ -126,7 +126,7 @@ From
 https://docs.dynatrace.com/docs/extend-dynatrace/extend-metrics/reference/metric-ingestion-protocol#dimension
 
 > Allowed characters for the key are lowercase letters, numbers, hyphens (-),
-> periods (.), and underscores (\_). Special letters (like ö) are not allowed.
+> periods (.), and underscores (\_). Special letters (like ö) aren't allowed.
 
 The _surprising_ part is that uppercase characters are **not** allowed.
 

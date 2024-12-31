@@ -9,7 +9,7 @@ sidebar_label: VMWare Log Insight
 
 The VMWare Log Insight plugin enables pushing logs to your VMWare Log Insights
 via the REST API. Simply set the `url` option to the value of your Log Insights
-host (i.e. `https://loginsight.example.com`).
+host (for example `https://loginsight.example.com`).
 
 Optionally, you can configure additional fields that will be sent with your
 logs, for example if you want to include an `appname` field that indicates the
@@ -42,12 +42,12 @@ text object is an JSON encoded array of messages sent in that log entry.
 
 Default fields are:
 
-- `severity` - The level of the log, i.e. `ERROR`, `INFO`, etc.
+- `severity` - The level of the log, for example `ERROR`, `INFO`, etc.
 - `request_id` - The UUID of the request (the value of the `zp-rid` header)
 - `environment_type` - Where the Zuplo API is running. Values are `edge`,
   `working-copy`, or `local`
 - `log_source` - The source of the log. Either `user` or `system`
-- `atomic_counter` - An atomic number that is used to order logs that have the
+- `atomic_counter` - An atomic number that's used to order logs that have the
   same timestamp
 - `environment` - The environment name of the Zuplo API
 - `request_ray_id` - The Cloudflare RayID of the request

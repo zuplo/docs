@@ -63,7 +63,7 @@ backend.
 
 Finally, you need to verify the secret on your backend. The way you implement
 this depends on the framework and language you are using, but the typical
-pattern is to use a middleware to check the header value. If the header does not
+pattern is to use a middleware to check the header value. If the header doesn't
 match the secret, you would typically return a 401 Unauthorized response.
 
 An example of this using a Node.js connect middleware is shown below.

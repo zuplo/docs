@@ -35,7 +35,7 @@ Zuplo offers the following support plans:
 ### Community support
 
 Customers with Zuplo's free subscription plan can seek support through the Zuplo
-Community. Response times may vary and are not guaranteed.
+Community. Response times may vary and aren't guaranteed.
 
 ### Standard support
 
@@ -97,46 +97,46 @@ for more info.
 
 :::caution
 
-Private channels should not be used for urgent/business critical support
-requests as the team may not be immediately notified. For urgent requests use
-phone support.
+Private channels shouldn't be used for urgent/business critical support requests
+as the team may not be immediately notified. For urgent requests use phone
+support.
 
 :::
 
 ### Emergency Phone Support
 
 Customers with emergency phone support can call +1 833-681-6018 to open an
-emergency support ticket. After dialing the number, enter the five-digit 
+emergency support ticket. After dialing the number, enter the five-digit
 enterprise support code that has been provided to you.
 
 :::warning
 
-Calling this number will alert our on-call team at any hour. Please call 
-for urgent and business-critical issues only.
+Calling this number will alert our on-call team at any hour. Please call for
+urgent and business-critical issues only.
 
 :::
 
-We will open a ticket and our on-call support team will reach out to you 
-within a few minutes. 
+We will open a ticket and our on-call support team will reach out to you within
+a few minutes.
 
 We also suggest you sign in to Discord so we can start a real-time chat.
 
 ## Response Times
 
 For premium support plans, Zuplo offers SLAs on response times based on the
-severity of issues and the level of the plan. 
+severity of issues and the level of the plan.
 
 Zuplo uses four categories to define a technical issue:
 
-| Severity |                                                                                                                                                                                       | Premium           | Premium Plus       | Premium Custom   |
-| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | ------------------ | ---------------- |
-| Level 0  | Zuplo's services are down resulting in a critical and immediate impact on the Customer's production environment with a major business impact.                                         | 2 business hours  | 2 hour (24x7x365)  | Custom agreement |
-| Level 1  | Zuplo's services are impaired resulting in a severe impact on the Customer's production environment with a partial business impact.                                                   | 4 business hours  | 4 hours (24x7x365) | Custom agreement |
+| Severity |                                                                                                                                                                                        | Premium           | Premium Plus       | Premium Custom   |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | ------------------ | ---------------- |
+| Level 0  | Zuplo's services are down resulting in a critical and immediate impact on the Customer's production environment with a major business impact.                                          | 2 business hours  | 2 hour (24x7x365)  | Custom agreement |
+| Level 1  | Zuplo's services are impaired resulting in a severe impact on the Customer's production environment with a partial business impact.                                                    | 4 business hours  | 4 hours (24x7x365) | Custom agreement |
 | Level 2  | Zuplo's services are operational but have minor functional issues resulting in a partial impact on the Customer's production or staging environment with a low impact business impact. | 8 business hours  | 4 business hours   | Custom agreement |
-| Level 3  | Issues or questions related to development and testing.                                                                                                                               | 16 business hours | 8 business hours   | Custom agreement |
+| Level 3  | Issues or questions related to development and testing.                                                                                                                                | 16 business hours | 8 business hours   | Custom agreement |
 
-**Business Hours** means 8:00am Eastern Time (UTC−05:00) to 8:00pm Eastern Time
-(UTC−05:00), Monday through Friday, excluding local, state, and federal
+**Business Hours** means 8:00 AM Eastern Time (UTC−05:00) to 8:00 PM Eastern
+Time (UTC−05:00), Monday through Friday, excluding local, state, and federal
 holidays.
 
 **Response Time** means the time required for a support engineer to respond

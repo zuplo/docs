@@ -3,12 +3,12 @@ title: Using Zuplo as a Fastly Host
 sidebar_label: Fastly Setup
 ---
 
-This document outlines how to use Zuplo as a host (i.e. origin) for Fastly.
-While this is not a necessary setup for most people as Zuplo already runs at the
-edge and can be used for CDN like caching. However, there are some scenarios
-where you may want to put Zuplo behind Fastly. For example, if you are using
-Fastly's [WAF or DDoS protection](./waf-ddos-fastly.md) and want to ensure that
-all traffic goes through Fastly before hitting your Zuplo API Gateway.
+This document outlines how to use Zuplo as a host for Fastly. While this isn't a
+necessary setup for most people as Zuplo already runs at the edge and can be
+used for CDN like caching. However, there are some scenarios where you may want
+to put Zuplo behind Fastly. For example, if you are using Fastly's
+[WAF or DDoS protection](./waf-ddos-fastly.md) and want to ensure that all
+traffic goes through Fastly before hitting your Zuplo API Gateway.
 
 ## Configuring Zuplo as a Fastly Host
 
@@ -16,9 +16,9 @@ The following settings will allow you to run Zuplo as a host behind Fastly.
 
 ### Zuplo Configuration
 
-It is recommended that you use a custom domain for your Zuplo API Gateway. This
-will allow you to more easily configure your Fastly host as well as ensure that
-your domain is stable regardless of your Zuplo configuration.
+It's recommended that you use a custom domain for your Zuplo API Gateway. This
+will allow you to more configure your Fastly host as well as ensure that your
+domain is stable regardless of your Zuplo configuration.
 
 ### Fastly Configuration
 
@@ -33,9 +33,9 @@ your domain is stable regardless of your Zuplo configuration.
    domain. If using a `zuplo.app` domain, set the set the _Certificate Hostname_
    to `zuplo.app`.
 7. Set the **SNI hostname** to your custom domain or full `zuplo.app` domain
-   (i.e. `my-project-main-021839d.zuplo.app`)
+   (for example, `my-project-main-021839d.zuplo.app`)
 8. Set the **Override Host** to your custom domain or full `zuplo.app` domain
-   (i.e. `my-project-main-021839d.zuplo.app`)
+   (for example, `my-project-main-021839d.zuplo.app`)
 
 Additional settings like mTLS are also supported. Please refer to the Fastly
 documentation for more information.
