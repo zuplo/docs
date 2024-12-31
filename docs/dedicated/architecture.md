@@ -55,25 +55,6 @@ requirements. Examples include:
   logging and monitoring systems. Logs and other data go directly from the API
   Gateway to your logging provider. Zuplo doesn't collect or store this data.
 
-## Security
-
-Security is a top priority for Zuplo. A managed dedicated instance of Zuplo is
-isolated from other customers and is secure by default. Some security features
-of a managed dedicated instance of Zuplo include:
-
-- **Isolation**: Each dedicated managed instance of Zuplo runs on its own VPC or
-  network. This isolates it from other customers and ensures that your data is
-  secure.
-- **Encryption**: Zuplo encrypts data both in transit and at rest. TLS secures
-  all data sent to or from the API Gateway. Zuplo encrypts stored data at rest.
-- **Access Control**: Zuplo provides robust authentication and access control
-  mechanisms. You control who has access to your API Gateway management
-  capabilities, what they can do, and what data they can access.
-- **Audit Logs**: Zuplo provides detailed audit logs of all management
-  operations. You can see who did what, when they did it, and what data they
-  accessed. Additionally, Zuplo maintains internal audit logs of all activity
-  performed by the Zuplo team.
-
 ## Architecture
 
 The architecture of a managed dedicated instance of Zuplo provides you with all
@@ -81,7 +62,7 @@ the benefits of a SaaS platform while giving you the control and isolation of a
 dedicated instance. The architecture is highly available, scalable, and secure.
 
 The following diagram shows the high-level architecture of a managed dedicated
-instance of Zuplo.
+instance of Zuplo and how the components interact with each other.
 
 <ManagedDedicatedArchitecture />
 
