@@ -9,13 +9,14 @@ have the ability to customize limits to meet their needs.
 
 ## General
 
-| Feature                   | Description                                        | Limit                                                                                                                                                                |
-| ------------------------- | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Environment Variables     | The number of environment variables you can create | Free/Builder Plans: 50 variables per environment, Other Plans: 100 per environment                                                                                   |
-| Environment Variable size | The size of an environment variable                | ~5kb per variable                                                                                                                                                    |
-| Request Duration          | The maximum time a request can take to complete    | Free/Builder Plans: 30 seconds, Other Plans: No Limit                                                                                                                |
-| Requests per second       | The maximum number of requests per second          | No Limit outside of plan monthly limit                                                                                                                               |
-| Log Size                  | The size of a log entry                            | Zuplo Portal live logs are limited to ~10kB. Excess will be truncated. For third-party logging providers, the value depends on the provider. Zuplo imposes no limit. |
+| Feature                   | Description                                            | Limit                                                                                                                                                                |
+| ------------------------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Environment Variables     | The number of environment variables you can create     | Free/Builder Plans: 50 variables per environment, Other Plans: 100 per environment                                                                                   |
+| Environment Variable size | The size of an environment variable                    | ~5kb per variable                                                                                                                                                    |
+| Request Duration          | The maximum time a request can take to complete        | Free/Builder Plans: 30 seconds, Other Plans: No Limit                                                                                                                |
+| Memory                    | The maximum memory available when processing a request | Free/Builder Plans: 128mb, Enterprise Plans: Custom                                                                                                                  |
+| Requests per second       | The maximum number of requests per second              | No Limit outside of plan monthly limit                                                                                                                               |
+| Log Size                  | The size of a log entry                                | Zuplo Portal live logs are limited to ~10kB. Excess will be truncated. For third-party logging providers, the value depends on the provider. Zuplo imposes no limit. |
 
 ## API Keys
 
