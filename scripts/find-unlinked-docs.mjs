@@ -50,7 +50,7 @@ const uniqueDocs = [...new Set(docs), ...new Set(policies)].filter(
 const unlinkedDocs = uniqueDocs.filter((doc) => !allDocs.includes(doc));
 
 console.group();
-console.log("The following docs are not linked to in the sidebar:");
+console.log("The following docs aren't linked to in the sidebar:");
 console.group();
 for (const doc of unlinkedDocs) {
   console.log(doc);
@@ -58,5 +58,5 @@ for (const doc of unlinkedDocs) {
 console.groupEnd();
 
 console.warn(
-  `There are ${unlinkedDocs.length} that are not linked to in the sidebar.`,
+  `There are ${unlinkedDocs.length} that aren't linked to in the sidebar.`,
 );

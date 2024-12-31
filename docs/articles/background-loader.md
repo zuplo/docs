@@ -4,7 +4,7 @@ sidebar_label: BackgroundLoader
 ---
 
 The BackgroundLoader class is used to asynchronous load information in the
-background while minimizing gateway latency using this information. It is ideal
+background while minimizing gateway latency using this information. It's ideal
 to use for critical configuration that might be powering your gateway for smart
 routing or similar.
 
@@ -15,19 +15,20 @@ team if you encounter any issues.
 
 :::
 
-Obviously, you don't want to incur the cost of an async cost load on every
-request so it's important to cache any config you load into your gateway.
-However, sometimes this information is critical to keep very up to date so a
-traditional approach of awaiting cache expiry isn't sufficient. The
+Obviously, you don't want to incur the cost of an asynchronous cost load on
+every request so it's important to cache any configuration you load into your
+gateway. However, sometimes this information is critical to keep very up to date
+so a traditional approach of awaiting cache expiry isn't sufficient. The
 BackgroundLoader will immediately return a cache entry if available, but also
-asynchronously load the config in the background to keep the cache up to date.
+asynchronously load the configuration in the background to keep the cache up to
+date.
 
-If the cache has not been refreshed and the current entry exceeds the TTL (Time
+If the cache hasn't been refreshed and the current entry exceeds the TTL (Time
 to Live) specified in the constructor the `get` invocation will block while the
 data is loaded.
 
-You get to specify the loading function, which is just a simple async function
-that can use `fetch`.
+You get to specify the loading function, which is just a simple asynchronous
+function that can use `fetch`.
 
 ```ts
 import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
@@ -60,7 +61,7 @@ The BackgroundLoader will ensure that only one request per 'key' is active at
 any one time to avoid overloading your destination services.
 
 The BackgroundLoader has the following options. In the above example, we set
-ttlSeconds:
+`ttlSeconds`:
 
 ```ts
 interface BackgroundLoaderOptions {
@@ -73,9 +74,9 @@ interface BackgroundLoaderOptions {
 
 :::warning
 
-You cannot return a `Response` created by the BackgroundLoader as a response
-from a policy or handler. Responses cannot be re-used in this way - they are
-associated with the originating request and results from the BackgroundLoader
-can be shared across requests.
+You can't return a `Response` created by the BackgroundLoader as a response from
+a policy or handler. Responses can't be re-used in this way - they're associated
+with the originating request and results from the BackgroundLoader can be shared
+across requests.
 
 :::

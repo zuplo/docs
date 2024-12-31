@@ -7,7 +7,7 @@ can accommodate even virtually any scale required. However, by default the
 service is set with limits to ensure that each Zuplo customer has a performant
 and reliable experience.
 
-For customers who need limits beyond what is set in this document, react out to
+For customers who need limits beyond what's set in this document, react out to
 our sales team and we'll be happy to design a plan that fits your needs. Email
 [sales@zuplo.com](mailto:sales@zuplo.com).
 

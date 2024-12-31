@@ -81,8 +81,8 @@ you're done.
 
 ## 3/ Copy your API Key
 
-After your API Key consumer is created, copy your new API Key by clicking the copy button (next to the eye
-icon).
+After your API Key consumer is created, copy your new API Key by clicking the
+copy button (next to the eye icon).
 
 ![Copy Key](/media/step-3-add-api-key-auth/image-4.png)
 
@@ -93,7 +93,7 @@ of your route, click the **Test** button and fire off a request.
 
 ![Failed unauthorized error](/media/step-3-add-api-key-auth/image-5.png)
 
-You should get a 401 Unauthorized response - as we haven't supplied the API key
+You should get a 401 Unauthorized response - as we'ven't supplied the API key
 yet. Add an new `authorization` header with the value `Bearer <YOUR_API_KEY>`
 and insert the API Key you got from the developer portal.
 

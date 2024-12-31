@@ -17,10 +17,10 @@ The Rewrite Handler can be added to any route using the Route Designer. Open the
 **routes.oas.json**. Inside any route, select **URL Rewrite** from the **Request
 Handlers** drop-down.
 
-![Url Rewrite Handler selection](/media/url-rewrite-handler-selection.png)
+![URL Rewrite Handler selection](/media/url-rewrite-handler-selection.png)
 
 In the text box enter the URL to rewrite the request. Values can be mixed into
-the URL string using Javascript string interpolation syntax. For example:
+the URL string using JavaScript string interpolation syntax. For example:
 
 ```txt
 https://echo.zuplo.io/${method}/${params.productId}
@@ -123,15 +123,15 @@ The URL Rewrite handler can be configured via `options` to support common
 use-cases.
 
 - `forwardSearch` - The query string will be automatically included in the
-  rewritten url.
+  rewritten URL.
 - `followRedirects` - Determines if redirects should be followed when fetching
-  the rewrite url . When set to `false` or not specified, redirects will not be
+  the rewrite URL. When set to `false` or not specified, redirects won't be
   followed - the status and `location` header will be returned as received.
 
 ## Different Backends per Environment
 
 It's common to want a different backend for your production, staging and preview
-environments. This can be easily achieved by using
+environments. This can be achieved by using
 [environment variables](../articles/environment-variables.md) to specify the
 origin of the backend.
 
@@ -141,9 +141,9 @@ For example,
 ${env.BASE_PATH}${pathname}
 ```
 
-A url rewrite like this will combine the `BASE_PATH` environment variable, say
-`https://example.com` with the incoming path, e.g. `/foo/bar` to create a
-re-written URL:
+A URL rewrite like this will combine the `BASE_PATH` environment variable, say
+`https://example.com` with the incoming path, for example, `/foo/bar` to create
+a re-written URL:
 
 ```json
 https://example.com/foo/bar

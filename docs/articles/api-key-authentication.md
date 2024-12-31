@@ -4,7 +4,7 @@ sidebar_label: Authentication
 ---
 
 With the [API Key Authentication Policy](../policies/api-key-inbound.md)
-configured on your API route(s) you can build additional policies that run after
+configured on your API routes you can build additional policies that run after
 the API Key Authentication policy to perform additional checks or authorization
 on the consumer.
 
@@ -60,7 +60,7 @@ context.log.debug(request.user);
 :::note
 
 One question you might have is why is the `request.user` object not the same
-shape as the API Key Consumer object. i.e. why doesn't it has
+shape as the API Key Consumer object. for example why doesn't it has
 `request.user.name` and `request.user.metadata` properties.
 
 The reason is because the `request.user` object is reused by many different
@@ -71,7 +71,7 @@ kinds of authentication policies and they all conform to the same interface with
 
 ## Using Consumer Data in Code
 
-It is possible to write additional policies that run after the API Key
+It's possible to write additional policies that run after the API Key
 Authentication policy that perform further gating or authorization of the
 request based on the data set in the consumer.
 

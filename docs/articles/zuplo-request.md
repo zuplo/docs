@@ -16,8 +16,8 @@ In addition to the standard properties, the following are added for convenience.
 ## Properties
 
 - `params` - if you use tokens in your route’s URL, we automatically parse them
-  into properties on the params property of your request. For example, imagine a
-  route with path `/products/:productId/vendors/:vendorId`. A match on this
+  into properties on the `params` property of your request. For example, imagine
+  a route with path `/products/:productId/vendors/:vendorId`. A match on this
   would yield values as follows:
 
 ```ts
@@ -27,10 +27,10 @@ const vendorId = request.params.vendorId;
 
 - `user` - an optional object identifying a ‘user’. If `undefined` this
   typically means the request is anonymous. If present, the user object will
-  have a `sub` property that is a unique identifier for that user. There is also
-  an optional `data` property that is of `any` type that typically contains
-  other information about the user. When using JWT tokens you’ll usually find
-  all the claims here.
+  have a `sub` property that's a unique identifier for that user. There is also
+  an optional `data` property that's of `any` type that typically contains other
+  information about the user. When using JWT tokens you’ll usually find all the
+  claims here.
 - `query` - a dictionary of query-string values. For example, a URL with a query
   string like `https://example.com?foo=bar` would present as follows:
 
@@ -56,14 +56,15 @@ const newRequest = new ZuploRequest("http://new-host.com/", {
 
 ## Request Query
 
-The `request.query` property is a helper that takes your QueryString and converts
-it into a JavaScript dictionary (e.g. `Record<string, string>` in TypeScript). 
-This helper property does not support multiple values for the same key on a 
-QueryString, e.g.
+The `request.query` property is a helper that takes your QueryString and
+converts it into a JavaScript dictionary (for example `Record<string, string>`
+in TypeScript). This helper property doesn't support multiple values for the
+same key on a QueryString, for example:
 
 `?foo=bar&foo=wibble`
 
-To access the array of values in this case you can instead use the URL type and searchParams:
+To access the array of values in this case you can instead use the URL type and
+`searchParams`:
 
 ```ts
 const url = new URL(request.url);

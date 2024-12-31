@@ -6,8 +6,8 @@ sidebar_label: API Keys
 The [Zuplo Developer API](https://dev.zuplo.com) allows you to programmatically
 interact with Zuplo. To access the API, you need to create an API key.
 
-API keys are used to authenticate requests to the Zuplo API. They are unique to
-your account and should be kept secret. Do not share your API key in publicly
+API keys are used to authenticate requests to the Zuplo API. They're unique to
+your account and should be kept secret. Don't share your API key in publicly
 accessible areas such as GitHub repositories.
 
 ## Creating an API Key
@@ -22,7 +22,7 @@ have access to.
 :::note{title="Required Role"}
 
 Account admins can view and manage all API keys in the account. Developers can
-only view their own API keys. Members do not have access to API keys.
+only view their own API keys. Members don't have access to API keys.
 
 :::
 
@@ -91,4 +91,4 @@ When selecting permissions for API Key Buckets or Monetization Buckets, the
 environment type scope is also applied. For example, if your key has access to
 preview environments and has Read and Write access to API Key buckets, that key
 can only read and write to API Key buckets in the preview environments - it
-cannot modify buckets used in production environments.
+can't modify buckets used in production environments.

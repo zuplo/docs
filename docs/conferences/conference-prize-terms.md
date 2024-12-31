@@ -10,9 +10,9 @@ title: Conference Prize Terms
 
 3. The prize draw is open to entrants over 18 years of age and who are
    registered and attending the conference in-person on the standard
-   presentation days (i.e. excluding and days of workshops, etc.). Ticketed
-   attendees and speakers are eligible to enter. Exhibitors, sponsors, and
-   conference staff are **not** eligible.
+   presentation days (for example, excluding and days of workshops, etc.).
+   Ticketed attendees and speakers are eligible to enter. Exhibitors, sponsors,
+   and conference staff are **not** eligible.
 4. In entering the prize draw, you confirm that you are eligible to do so and
    eligible to claim any prize you may win.
 5. A maximum of one entry per individual per day is permitted. Limit of one
@@ -21,18 +21,18 @@ title: Conference Prize Terms
 
 ## How to enter
 
-7. The prize draw will include those attendees who complete the project that is
+7. The prize draw will include those attendees who complete the project that's
    shared at the booth and return to the Zuplo booth to show the completed
    quickstart to the booth staff. Entries must be received 15 minutes before the
-   scheduled drawing. Entries after that time and date will not be included in
-   the draw.
-8. Zuplo will not accept responsibility if contact details provided are
-   incomplete or inaccurate.
+   scheduled drawing. Entries after that time and date won't be included in the
+   draw.
+8. Zuplo won't accept responsibility if contact details provided are incomplete
+   or inaccurate.
 
 ## The prize
 
 10. The prize will be a Lego kit (one of those on display at the booth).
-11. Zuplo's use of particular brands as prizes does not imply any affiliation
+11. Zuplo's use of particular brands as prizes doesn't imply any affiliation
     with or endorsement of such brands.
 12. The winner will be drawn at random.
 13. The prize is non-exchangeable, non-transferable and no cash alternatives
@@ -44,8 +44,8 @@ title: Conference Prize Terms
 
 ## Winner announcement
 
-16. The winner for each day will be announced at the end of the day (6pm on
-    Wednesday, 4:05pm on Thursday)
+16. The winner for each day will be announced at the end of the day (6:00 PM on
+    Wednesday, 4:05 PM on Thursday)
 17. The winner must be present at the time of the announcement to receive the
     prize or another winner will be selected.
 
@@ -65,14 +65,14 @@ title: Conference Prize Terms
 
 ## Limitation of Liability
 
-23. Zuplo does not accept any liability for any damage, loss, injury or
+23. Zuplo doesn't accept any liability for any damage, loss, injury or
     disappointment suffered by any entrants as a result of either participating
-    in the prize draw or being selected for a prize, save that Zuplo does not
+    in the prize draw or being selected for a prize, save that Zuplo doesn't
     exclude its liability for death or personal injury as a result of its own
     negligence.
-24. Zuplo does not provide any form of practical or IT support for this prize.
-    On receipt, all responsibilities relating to warranty and the product are
-    that of the prize winner.
+24. Zuplo doesn't provide any form of practical or IT support for this prize. On
+    receipt, all responsibilities relating to warranty and the product are that
+    of the prize winner.
 
 ## General
 

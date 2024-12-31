@@ -19,7 +19,7 @@ and methods that are supported and known limitations.
 
 The `CacheStorage` is exposed as the `caches` global object. This object allows
 you to open instances of a `Cache`. When calling `caches.open` if the named
-cache does not exist it will be created, otherwise the existing cache will be
+cache doesn't exist it will be created, otherwise the existing cache will be
 returned.
 
 **Definition**
@@ -72,8 +72,9 @@ interface CacheQueryOptions {
 :::warning
 
 At this time, the `options` parameter will be ignored entirely when running on
-in a developer environment (i.e. working copy). In non-developer environments,
-the `ignoreMethod` property is supported. All other properties will be ignored.
+in a developer environment (for example working copy). In non-developer
+environments, the `ignoreMethod` property is supported. All other properties
+will be ignored.
 
 :::
 

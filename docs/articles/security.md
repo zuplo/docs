@@ -45,9 +45,9 @@ infrastructure remain secure.
 
 - Our infrastructure runs on Google Cloud Platform and Cloudflare.
 - Zuplo only exposes traffic directly to the internet through Cloudflare.
-  Internal infrastructure and services do not have public IP addresses and
+  Internal infrastructure and services don't have public IP addresses and
   instead are connected to Cloudflare using outbound secure tunnels.
-- Each service that is exposed is protected by DDoS, Firewall, WAF, and other
+- Each service that's exposed is protected by DDoS, Firewall, WAF, and other
   security measures.
 - Internal and external APIs are protected by Zuplo API Gateway.
 - Internal services can only be connected to by Zuplo employees using an
@@ -76,7 +76,7 @@ software.
 
 ### Disaster Recovery
 
-We understand that if we go down, our customers' APIs go down too. While we have
+We understand that if we go down, our customers' APIs go down too. While we've
 an excellent track record of uptime serving billions and billions of requests
 with zero downtime we also plan for the worst. We maintain a variety of measures
 to ensure we can quickly recover from any type of disaster.
@@ -84,7 +84,7 @@ to ensure we can quickly recover from any type of disaster.
 - Full data backups occur on regular schedules (usually every 6 hours)
 - Incremental backups occur frequently (usually every hour)
 - Event-based backups occur for customer APIs - for example, we save each
-  production Gateway build/configuration so we have everything needed to recover
+  production Gateway build/configuration so we've everything needed to recover
   our customer's services to a particular point in time.
 - Data recovery is tested regularly with full disaster recovery testing done
   every year.

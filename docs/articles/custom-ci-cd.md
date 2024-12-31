@@ -3,12 +3,11 @@ title: Setting up a Custom CI/CD Pipeline
 sidebar_label: Custom CI/CD
 ---
 
-Zuplo provides the Zuplo deployer, a GitHub app that can be used to
-automatically deploy your APIs from your GitHub repository to the Zuplo
-platform. However, sometimes you might not be using GitHub as your version
-control provider. Or, that you might want to exercise more control over your
-CI/CD pipeline. For these cases, we provide a CLI that can be used to deploy
-your APIs to the Zuplo platform.
+Zuplo provides a GitHub app that can be used to automatically deploy your APIs
+from your GitHub repository to the Zuplo platform. However, sometimes you might
+not be using GitHub as your version control provider. Or, that you might want to
+exercise more control over your CI/CD pipeline. For these cases, we provide a
+CLI that can be used to deploy your APIs to the Zuplo platform.
 
 ## Getting Started
 
@@ -28,7 +27,7 @@ these steps:
 2. Select the account that you want to work on.
 3. Click the **Settings** tab and navigate to the **API Keys** section.
 4. Write some tests for your API. We provide a rich set of test helpers and
-   utils based on BDD. You can see examples of tests at
+   utilities based on BDD. You can see examples of tests at
    [samples](https://github.com/zuplo/zup-cli-example-project/tree/main/tests).
 
 :::tip
@@ -76,7 +75,7 @@ jobs:
       # shell: bash is required so that pipefail is set.
       # See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#exit-codes-and-error-action-preference
       # This way if the deploy fails, we fail before piping to tee.
-      # Note that you are not required to use tee. We are using it in this example
+      # Note that you aren't required to use tee. We are using it in this example
       # so that the output is available to the terminal and written to the file.
       - name: Zuplo Deploy
         shell: bash
@@ -94,7 +93,7 @@ jobs:
         run: |
           npx zuplo delete --url $(cat ./DEPLOYMENT_STDOUT |  sed -E 's/Deployed to (.*)/\1/') --apiKey "$ZUPLO_API_KEY" --wait
 
-      # This is not necessary but it showcases how you can list your zups
+      # This isn't necessary but it showcases how you can list your Zuplo deployments
       - name: Zuplo List
         shell: bash
         run: |
@@ -116,7 +115,7 @@ image: node:18
 
 pipelines:
   branches:
-    # If your default branch is not main, change this to match
+    # If your default branch isn't main, change this to match
     main:
       - step:
           name: NPM Install
@@ -126,7 +125,7 @@ pipelines:
           name: Zuplo Deploy
           # set -o pipefail
           # This way if the deploy fails, we fail before piping to tee.
-          # Note that you are not required to use tee. We are using it in this example so that the output is available to the terminal and written to the file.
+          # Note that you aren't required to use tee. We are using it in this example so that the output is available to the terminal and written to the file.
           script:
             - set -o pipefail
             - npx zuplo deploy --apiKey "$ZUPLO_API_KEY" | tee
@@ -148,7 +147,7 @@ pipelines:
           name: Zuplo Deploy
           # set -o pipefail
           # This way if the deploy fails, we fail before piping to tee.
-          # Note that you are not required to use tee. We are using it in this example so that the output is available to the terminal and written to the file.
+          # Note that you aren't required to use tee. We are using it in this example so that the output is available to the terminal and written to the file.
           script:
             - set -o pipefail
             - npx zuplo deploy --apiKey "$ZUPLO_API_KEY" | tee
@@ -167,7 +166,7 @@ pipelines:
             - if [[ -n "$BITBUCKET_PR_ID" ]]; then npx zuplo delete --url $(cat
               ./DEPLOYMENT_STDOUT |  sed -E 's/Deployed to (.*)/\1/') --apiKey
               "$ZUPLO_API_KEY" --wait; exit; fi
-      # This is not necessary but it showcases how you can list your zups
+      # This isn't necessary but it showcases how you can list your Zuplo environments
       - step:
           name: Zuplo List
           script:
@@ -203,7 +202,7 @@ steps:
 
   # set -o pipefail
   # This way if the deploy fails, we fail before piping to tee.
-  # Note that you are not required to use tee. We are using it in this example so that the output is available to the terminal and written to the file.
+  # Note that you aren't required to use tee. We are using it in this example so that the output is available to the terminal and written to the file.
   - script: |
       set -o pipefail 
       npx zuplo deploy --api-key $(ZUPLO_API_KEY) | tee ./DEPLOYMENT_STDOUT
@@ -219,7 +218,7 @@ steps:
     # Only run this step if the build is a pull request
     condition: eq(variables['Build.Reason'], 'PullRequest')
 
-  # This is not necessary but it showcases how you can list your zups
+  # This isn't necessary but it showcases how you can list your Zuplo projects
   - script: |
       npx zuplo list --api-key $(ZUPLO_API_KEY)
     displayName: "Zuplo List"
@@ -228,7 +227,7 @@ steps:
 2. Create a secret for your Azure Pipelines and be sure to set `ZUPLO_API_KEY`
    to the API key you generated in the previous step.
 
-### Gitlab Pipelines
+### GitLab Pipelines
 
 The full example is available at
 https://github.com/zuplo/zup-cli-example-project/blob/main/.gitlab-ci.yml
@@ -266,7 +265,7 @@ zup_test:
 
 :::note
 
-GitLab CI/CD does not have a built-in way to delete deployments. You can use the
+GitLab CI/CD doesn't have a built-in way to delete deployments. You can use the
 Zuplo UI to delete old environments.
 
 :::
@@ -275,7 +274,7 @@ Zuplo UI to delete old environments.
    for `ZUPLO_API_KEY` on your GitLab project. Set it to the API key you
    generated in the previous step. You can choose to
    [mask](https://docs.gitlab.com/ee/ci/variables/#mask-a-cicd-variable) the
-   variable so it does not display in job logs.
+   variable so it doesn't display in job logs.
 
 ## Advanced Use Cases
 
@@ -297,7 +296,7 @@ different Zuplo project, you can deploy each one separately.
 2. Ensure that you have the project name configured in the zuplo.jsonc file in
    the subfolder. This tells the Zuplo CLI which project to deploy to.
 3. You might need to use the --no-verify-remote flag to bypass verification. By
-   default, the CLI checks that the repository matches what is configured on the
+   default, the CLI checks that the repository matches what's configured on the
    server. If you have moved or renamed your repository, you must bypass the
    verification.
 

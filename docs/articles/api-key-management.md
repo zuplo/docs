@@ -50,7 +50,8 @@ Adding API Key authentication using Zuplo takes only a few minutes.
 
 An API Key Consumer is the identity that can invoke your API - typically people,
 customers, partners or services. A consumer can have multiple API Keys
-associated with it - but each key authorizes the same consumer (i.e. identity)
+associated with it - but each key authorizes the same consumer (for example
+identity)
 
 ### Consumer Metadata
 
@@ -58,8 +59,8 @@ Each consumer can be assigned metadata. This information (a
 [small JSON object](./api-key-service-limits.md)) is made available to the
 runtime when a user access your API using that key.
 
-For example, a Consumer might have metadata that specifies the company they are
-a member of and the plan for the account.
+For example, a Consumer might have metadata that specifies the company they're a
+member of and the plan for the account.
 
 ```json
 {
@@ -71,8 +72,8 @@ a member of and the plan for the account.
 ### Consumer Tags
 
 Consumers can also have tags associated with them. Tags are simple key value
-pairs. Tags are used for management purposes only (i.e. querying consumers
-through the Zuplo API). Tags do not get sent to the runtime as part of
+pairs. Tags are used for management purposes only (for example querying
+consumers through the Zuplo API). Tags don't get sent to the runtime as part of
 authorization.
 
 For example, a Consumer might be tagged in order to track the customer
@@ -88,8 +89,8 @@ You can see more on how to use tags in the document on
 ### API Keys
 
 API Keys are the actual string value used to authenticate with an API. Unlike
-some other forms of bearer tokens, API Keys do not contain any actual data
-within the key itself.
+some other forms of bearer tokens, API Keys don't contain any actual data within
+the key itself.
 
 Zuplo API Keys are prefixed with the string `zpka_` followed by
 cryptographically random characters and a signature. While Zuplo's API Key

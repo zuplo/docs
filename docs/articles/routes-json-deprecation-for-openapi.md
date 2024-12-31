@@ -13,7 +13,7 @@ This will change in the new version with policies being defined in a separate
 New projects will automatically get a `routes.oas.json` and `policies.json`
 file.
 
-You can still use the old `routes.json` format until it is formally deprecated.
+You can still use the old `routes.json` format until it's formally deprecated.
 
 We identify new project simply by the presence of `*.oas.json` files, so if your
 project has both a `routes.json` file and OpenAPI files the `routes.json` will
@@ -36,11 +36,11 @@ question or concerns you have.
 ## Migrating from `routes.json`
 
 It's easy to convert your project from the old `routes.json` format to use our
-new OpenAPI support. We have provided a CLI tool that can be invoked via
+new OpenAPI support. We've provided a CLI tool that can be invoked via
 [`npx`](https://www.npmjs.com/package/npx).
 
-Simply execute the following cmd in your root Zuplo folder (at the level of the
-`/config` and `/module` folders):
+Simply execute the following command in your root Zuplo folder (at the level of
+the `/config` and `/module` folders):
 
 ```bash
 npx zuplo@latest convert
@@ -48,10 +48,11 @@ npx zuplo@latest convert
 
 This will generate a new `routes.oas.json` and `policies.json` file in your
 `/config` folder based on your `routes.json` file. Use git to add these to your
-repo and do a **Pull Hard** to sync these changes with your development (i.e.
-working copy) environment (in [portal.zuplo.com](https://portal.zuplo.com)).
-Once your ready and confident everything is working, you can delete the
-`routes.json` file and sync via git/GitHub again.
+repository and do a **Pull Hard** to sync these changes with your development
+(for example working copy) environment (in
+[portal.zuplo.com](https://portal.zuplo.com)). Once your ready and confident
+everything is working, you can delete the `routes.json` file and sync via
+git/GitHub again.
 
 You're now on the OpenAPI train 🚂 (choo choo).
 

@@ -19,7 +19,7 @@ can generate one of these on the `Shared access tokens` tab.
 
 Note, you should minimize the permissions - and select only the `Create`
 permission. Choose a sensible start and expiration time for your token. Note, we
-do not recommend restricting IP addresses because Zuplo runs at the edge in over
+don't recommend restricting IP addresses because Zuplo runs at the edge in over
 200 data-centers world-wide.
 
 ![Permissions](../public/media/guides/archiving-requests-to-storage/Untitled_1.png)

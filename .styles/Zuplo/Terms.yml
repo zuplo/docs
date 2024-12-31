@@ -1,0 +1,11 @@
+extends: substitution
+message: "Prefer '%s' over '%s'."
+# term preference should be based on microsoft style guide, such as
+link: https://learn.microsoft.com/en-us/style-guide/a-z-word-list-term-collections/a/adapter
+level: warning
+ignorecase: true
+action:
+  name: replace
+swap:
+  zup: Zuplo Project
+  zups: Zuplo projects

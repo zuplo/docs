@@ -2,7 +2,7 @@
 title: "Troubleshooting"
 ---
 
-## Changing the port number(s)
+## Changing the port numbers
 
 By default the Zuplo local server runs on port 9000 and route designer runs on
 port 9100. To change the port number, you can call

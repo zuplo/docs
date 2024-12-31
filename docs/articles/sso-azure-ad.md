@@ -53,6 +53,6 @@ https://keys.openpgp.org/vks/v1/by-fingerprint/53A66C757B3F88908D395F9E0237A8212
 
 :::
 
-3. Once you have shared the required information with Zuplo, we will configure
-   your account to use Okta for SSO. We will notify you once the configuration
-   is complete.
+3. Once you have shared the required information with Zuplo, we'll configure
+   your account to use Okta for SSO. We'll notify you once the configuration is
+   complete.

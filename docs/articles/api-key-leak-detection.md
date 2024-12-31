@@ -20,8 +20,8 @@ organizations both large and small.
 
 Zuplo participates in
 [GitHub's Secret Scanning](https://docs.github.com/en/code-security/secret-scanning/about-secret-scanning)
-program to detect if your or your customer's API Keys are accidentally checked
-into source control on GitHub.
+program to detect if your or your customer's API Keys are checked into source
+control on GitHub.
 
 If an API Key for your Zuplo API Gateway is compromised by checking it into a
 public or private GitHub repository, Zuplo will be notified and can take action
@@ -52,7 +52,7 @@ about the leaked key, the project, etc.
 ### Email
 
 Zuplo can email you in the event of an API Key leak. We recommend setting up an
-alias email that is then sent to the relevant people. Contact support@zuplo.com
+alias email that's then sent to the relevant people. Contact support@zuplo.com
 to enable email notifications.
 
 The notification emails will come from `support@zuplo.com` and contain details
@@ -62,7 +62,7 @@ about the leaked key, the project, etc.
 
 Zuplo can send a webhook to the public endpoint of your choice (like your own
 Zuplo Gateway!) to notify you of leaked API Keys. Simply contact
-support@zuplo.com with your webhook url.
+support@zuplo.com with your webhook URL.
 
 The payload is sent as a POST in the following format:
 

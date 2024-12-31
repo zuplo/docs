@@ -2,9 +2,9 @@
 title: Source Control / Native GitOps
 ---
 
-Zuplo is designed to natively support Infrastructure-as-Code (IaC) via gitops
+Zuplo is designed to natively support Infrastructure-as-Code (IaC) via GitOps
 and integrates seamlessly with GitHub, BitBucket, GitLab and Azure DevOps.
-Deploying to 300 datacenters around the world takes under 20s with Zuplo, just
+Deploying to 300 data centers around the world takes under 20s with Zuplo, just
 via a simple commit. You get unlimited environments too - just commit to a new
 branch and we'll set you up with a new environment just as quick - at no charge
 to you.
@@ -26,7 +26,7 @@ benefits, including:
 - ability to deploy an [edge-deployment](../articles/environments.md) just by
   adding a branch or making a commit.
 
-For full instructions on setting up github see
+For full instructions on setting up GitHub see
 [the quickstart tutorial](../articles/step-4-deploying-to-the-edge.md).
 
 ## Connecting Existing Repositories
@@ -41,7 +41,7 @@ existing project** then select your GitHub organization and repository.
 
 **Renaming or moving projects in GitHub**
 
-The Zuplo GitHub integration does not handle moving or renaming repositories. As
+The Zuplo GitHub integration doesn't handle moving or renaming repositories. As
 a workaround, you can first disconnect your project from GitHub and recreate it
 in another org or with another name. To do so, go to **Settings** > **Source
 Control** and then click **Disconnect** to disconnect your project from GitHub.

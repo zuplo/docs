@@ -169,7 +169,7 @@ You can also use the `any` type if you prefer not to create a type.
 
 When building a policy it's common to modify the request object in some way
 before passing control downstream. The `ZuploRequest` type has a `user` property
-that is not set for unauthenticated requests. Authenticated requests should have
+that isn't set for unauthenticated requests. Authenticated requests should have
 a valid `user` property. Since this is an authentication policy, we should set
 that property before passing control to the next in line.
 

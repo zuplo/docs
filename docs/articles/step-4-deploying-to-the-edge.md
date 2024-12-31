@@ -20,7 +20,7 @@ To follow this tutorial you'll need
   [Step 2](./step-2-add-rate-limiting.md) and
   [Step 3](./step-3-add-api-key-auth.md) for a great start!
 - to install the
-  [Zuplo GitHub deployer](https://github.com/apps/zuplo/installations/new) to
+  [Zuplo GitHub deployment](https://github.com/apps/zuplo/installations/new) to
   GitHub - you can
   [follow these instructions](https://github.com/apps/zuplo/installations/new)
 
@@ -32,12 +32,12 @@ to GitHub click the **Connect to GitHub** button and follow the auth flow.
 You'll need to grant permissions for any GitHub organizations you want to work
 with.
 
-![Connect Github](/media/step-4-deploying-to-the-edge/image-1.png)
+![Connect GitHub](/media/step-4-deploying-to-the-edge/image-1.png)
 
 Next, a dialog will open asking you to authorize Zuplo. Click the **Authorize
 Zuplo** button.
 
-![Zuplo github connection](https://cdn.zuplo.com/assets/d6194a80-b6d6-429e-85a6-ae1cb4a3375e.png)
+![Zuplo GitHub connection](https://cdn.zuplo.com/assets/d6194a80-b6d6-429e-85a6-ae1cb4a3375e.png)
 
 <Callout type="tip" title="GitHub Permissions" >
 
@@ -60,7 +60,7 @@ want to use.
 
 Next, you will be asked to select the repositories that you want Zuplo to
 access. The easiest thing is to just select **All Repositories**, but if you
-want fine-grain control, you can select a specific repo.
+want fine-grain control, you can select a specific repository.
 
 ![Choosing repository to install](https://cdn.zuplo.com/assets/ff482269-9aa2-44c3-8266-b2682b3d6ea5.png)
 
@@ -71,9 +71,9 @@ need to add another organization.
 
 </Callout>
 
-If you weren't prompted to select a GitHub org, it is likely that you are
-already a member of an an account that has authorized Zuplo. To add Zuplo to a
-new organization click **Add GitHub Account** in the org picker list.
+If you weren't prompted to select a GitHub org, it's likely that you are already
+a member of an account that has authorized Zuplo. To add Zuplo to a new
+organization click **Add GitHub Account** in the org picker list.
 
 ![Connect Org](/media/step-4-deploying-to-the-edge/image-2.png)
 
@@ -82,11 +82,11 @@ new organization click **Add GitHub Account** in the org picker list.
 With your GitHub App configured, you can now return to the Zuplo portal. In the
 **Source Control** settings you should now see a list of GitHub repositories.
 Create a new repository by clicking the **Create new repository** button. You
-will be prompted that this will open Github. Click to continue.
+will be prompted that this will open GitHub. Click to continue.
 
-![Create Repo](/media/step-4-deploying-to-the-edge/image-3.png)
+![Create Repository](/media/step-4-deploying-to-the-edge/image-3.png)
 
-In the Github UI, you can rename your repository if you want. Click the **Create
+In the GitHub UI, you can rename your repository if you want. Click the **Create
 repository** button at the bottom of the page and return to the Zuplo Portal.
 
 The portal will reload and you will see your new repository listed. Click
@@ -102,18 +102,18 @@ Click the link to return to GitHub. You should see a green check next to the
 commit hash (1). When you hover your mouse over that you'll see the Zuplo
 deployment was successful. Click **Details** (2) to open the deployment info.
 
-![Zuplo deployer run](https://cdn.zuplo.com/assets/0a9932eb-7c16-49cf-9720-0beb450724eb.png)
+![Zuplo deployment run](https://cdn.zuplo.com/assets/0a9932eb-7c16-49cf-9720-0beb450724eb.png)
 
 On the deployment page, you will see **Deployment has Completed!!** and below
-that is the link to your new environment.
+that's the link to your new environment.
 
-![Zuplo deployer run result](https://cdn.zuplo.com/assets/26fa58b6-7a5a-4627-bd9f-246972639f12.png)
+![Zuplo deployment run result](https://cdn.zuplo.com/assets/26fa58b6-7a5a-4627-bd9f-246972639f12.png)
 
 ## 3/ Deploy another Environment
 
 Zuplo makes it easy for teams to collaborate by allowing teams to create many
-preview environments. To create a new environment, simple go to your repo in
-GitHub and create a new branch.
+preview environments. To create a new environment, simple go to your repository
+in GitHub and create a new branch.
 
 Let's create a branch called `development`
 
@@ -145,7 +145,7 @@ Click **Commit & Push** will create a new temporary branch in GitHub with a name
 ![Create PR](/media/step-4-deploying-to-the-edge/image-9.png)
 
 This will navigate you to the screen in GitHub that allows you to create a Pull
-Request. Change the **base** branch to `development` (since that is the
+Request. Change the **base** branch to `development` (since that's the
 environment we want to update first). Click **Create pull request**.
 
 ![GitHub PR](https://cdn.zuplo.com/assets/875b164d-b7ef-4f46-9cdb-8d59354b5b93.png)
@@ -160,7 +160,7 @@ Once merged, you'll want to delete that temporary branch.
 
 The successful merge will trigger a rebuild and deployment of `development` with
 your change. You can check this by choosing the environment `development` in
-Zuplo and navigating to the **readonly** Route Designer.
+Zuplo and navigating to the **read only** Route Designer.
 
 ![Navigating Environments](/media/step-4-deploying-to-the-edge/image.png)
 

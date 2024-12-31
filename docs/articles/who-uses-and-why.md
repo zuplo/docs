@@ -4,7 +4,7 @@ title: Who uses Zuplo, and why?
 
 We have customers ranging in size from 1-person startups to mature, large
 enterprises with many 1000s of employees. All enjoy Zuplo's developer
-experience, gitops workflow, support for near unlimited deployments and ease of
+experience, GitOps workflow, support for near unlimited deployments and ease of
 extensibility. They also enjoy the built-in analytics and abstraction a gateway
 provides as a clean layer of separation in their architecture.
 
@@ -21,7 +21,7 @@ There are a number of reasons people decide to use Zuplo:
 We have many enterprise customers using Zuplo to manage multiple APIs, some
 examples include
 
-- [BlockDaemon](https://blockdaemon.com) - the leading infrastructure provider
+- [Blockdaemon](https://blockdaemon.com) - the leading infrastructure provider
   for blockchain with an incredible customer list including Goldman Sachs,
   Microsoft, Plaid and many more.
 - [Imburse Payments](https://imbursepayments.com) part of
@@ -95,8 +95,8 @@ staging, production) with a clean CI/CD integrated workflow.
 ## Microservices Gateway
 
 Many customers are looking to Zuplo to augment or replace their traditional
-microservices gateway as an easier to use, fully-managed solution with built-in
-serverless auto-scale. Zuplo might be used to create a single API, with a
+microservices gateway as an easier to use, fully managed solution with built-in
+serverless auto scale. Zuplo might be used to create a single API, with a
 programmable orchestration layer hosted on Zuplo.
 
 Some of our customers use Zuplo as a smart-routing layer, with each request
@@ -107,6 +107,6 @@ metadata. This is covered in this
 ## API over BaaS
 
 Some of our smaller customers are choosing to use Backend-as-a-Service (BaaS)
-solutions like supabase, firebase etc and want to use Zuplo as programmable
+solutions like Supabase, Firebase etc and want to use Zuplo as programmable
 API-first presentation of their backend. More on this scenario in this
 [video guide](https://www.youtube.com/watch?v=GJSkbxMnWxE).

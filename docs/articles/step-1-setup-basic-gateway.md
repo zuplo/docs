@@ -33,7 +33,7 @@ quick overview of them:
 - **CORS**: The [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
   configuration for your path.
 - **Request Handler**: This is the piece of functionality that will be invoked
-  when a request comes through to your endpoint. By default, we are using the
+  when a request comes through to your endpoint. By default, we're using the
   [URL Forward Handler](../handlers/url-forward.md) which proxies requests to
   the "Forward to" URL. In this case, https://getting-started.zuplo.io
 

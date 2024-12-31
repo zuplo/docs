@@ -9,7 +9,7 @@ to the downwind service or back to the client respectively.
 ![Lifecycle](https://cdn.zuplo.com/assets/f70d62c0-8bdd-4476-9fd6-fe2dad7ae3a2.png)
 
 When we do this inside the Zuplo gateway in a
-[Request Handler](../handlers/custom-handler.md) we have to be careful to clone
+[Request Handler](../handlers/custom-handler.md) we've to be careful to clone
 the request or response to avoid causing a `body-used` exception.
 
 A `body-used` exception occurs when a `.body` property of a request or response,

@@ -3,7 +3,7 @@ title: Secure a GCP Backend with Zuplo Upstream Auth
 sidebar_label: GCP Backend with Upstream Auth
 ---
 
-When using any API gateway as your API's entry point, it is critical that only
+When using any API gateway as your API's entry point, it's critical that only
 traffic that originates from the Gateway is allowed to call your backend. There
 are [many way to to this](./securing-your-backend.md) depending on your
 requirements and how your backend is hosted. This article will explain how to
@@ -16,7 +16,7 @@ utilizes Googles core IAM system known as
 address from unauthorized access. When correctly configured, this will ensure
 that no unauthorized access makes it to your application.
 
-While it is also possible to enforce authorization within your application
+While it's also possible to enforce authorization within your application
 itself - for example using JWT Authentication. The key difference is that by
 using your Cloud providers identity and authorization system, you are ensuring
 that unauthorized requests are blocked before they even touch your backend. This
@@ -34,7 +34,7 @@ The diagram below shows how the end-to-end system interacts. The important steps
 to this process are:
 
 1. The client makes a request to your Zuplo API Gateway
-1. The Zuplo API Gateway enforces any policies (i.e. authentication,
+1. The Zuplo API Gateway enforces any policies (for example authentication,
    authorization, rate limiting)
 1. The Zuplo API Gateway proxies the request to the public IP address of your
    GCP Load Balancer. Zuplo adds authorization information to the request that
@@ -57,12 +57,12 @@ Identity Aware Proxy uses to determine if the request is authorized or not.
 
 Using this system means that you can uniquely identify requests that come from
 Zuplo as a their own identity. This means all request logs can be identified by
-their source - i.e. your Zuplo Gateway, another system also using a GCP Service
-account, a developer testing an internal system, etc.
+their source - for example your Zuplo Gateway, another system also using a GCP
+Service account, a developer testing an internal system, etc.
 
 :::tip{title="Multiple Service Account"}
 
-While not normally needed, it is possible to configure multiple Upstream GCP
+While not normally needed, it's possible to configure multiple Upstream GCP
 Service Auth Inbound policies in order to provide fine-grain authorization to
 your internal resources by Service Account. For example, if you had two Zuplo
 projects - one for external users and one for internal users - each could use
@@ -85,7 +85,7 @@ common backends.
 
 :::tip{title="Cloud Run"}
 
-Cloud Run doesn't need to use IAP in all cases. It is possible to restrict Cloud
+Cloud Run doesn't need to use IAP in all cases. It's possible to restrict Cloud
 Run to
 [require IAM authentication in order to invoke the service](https://cloud.google.com/run/docs/securing/managing-access).
 
@@ -148,7 +148,7 @@ Hostname: web-58756b54cc-7hdcw
 
 At this point, your backend on GKE is exposed on the public internet via a GCP
 HTTP Load Balancer via HTTP and HTTPS. For this demo, we won't go through the
-changes, but in production you should not expose an HTTP endpoint on your API.
+changes, but in production you shouldn't expose an HTTP endpoint on your API.
 
 :::
 
@@ -161,7 +161,7 @@ After you have enabled IAP, if you try to open your example API in the browser
 you will now be prompted to authenticate using your Google Account. If you do so
 you be shown a screen that blocks access to the application.
 
-![You do not have access](https://cdn.zuplo.com/assets/a2ee889a-54c1-4e00-953b-1053c619ce52.png)
+![You don't have access](https://cdn.zuplo.com/assets/a2ee889a-54c1-4e00-953b-1053c619ce52.png)
 
 Your API is now completely inaccessible to unauthorized requests.
 

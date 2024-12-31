@@ -11,7 +11,7 @@ Refer to Zuplo's documentation on
 
 ## Securing Zuplo from Direct Access
 
-With any WAF product, you will want to ensure that network traffic cannot bypass
+With any WAF product, you will want to ensure that network traffic can't bypass
 your WAF and hit your API Gateway directly. Fastly offers several ways to ensure
 that your API Gateway is only accessible through the WAF.
 
@@ -24,7 +24,7 @@ or Fastly origins. You can reference the
 
 Fastly maintains a list of IP addresses that you can use to restrict access to
 your API Gateway. This is a good way to ensure that only Fastly can access your
-API Gateway. However, as Fastly is a multi-tenant service, this method is not
+API Gateway. However, as Fastly is a multi-tenant service, this method isn't
 sufficient to protect unauthorized traffic from hitting your API Gateway.
 
 In Zuplo, you can utilize the IP Address Restriction policy to limit traffic to

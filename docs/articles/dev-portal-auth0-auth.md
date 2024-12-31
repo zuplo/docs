@@ -21,14 +21,14 @@ Web Applications"
 
 You must set the following fields in the Auth0 application:
 
-**Application URIs**
+**Application URLs**
 
-- **Allowed Callback URLs**: Add your docs site url (i.e.
+- **Allowed Callback URLs**: Add your docs site URL (for example
   `https://my-app.zuplo.app/docs/`). Note, you should include the trailing
   slash.
-- **Allowed Logout URLs**: Add your docs site url (i.e.
+- **Allowed Logout URLs**: Add your docs site URL (for example
   `https://my-app.zuplo.app/docs/`). Not you should include the trailing slash.
-- **Allowed Web Origins**: Add your docs site url without the path (i.e.
+- **Allowed Web Origins**: Add your docs site URL without the path (for example
   `https://my-app.zuplo.app`)
 
 **Refresh Token Rotation**
@@ -55,8 +55,8 @@ in the Auth0 portal. Set the **Identifier** to something like
 :::note
 
 The identifier is commonly a URI, but it doesn't have to be, nor does the URI
-have to match where your API is hosted. It is common practice to use the same
-identifier for all different environments of your API even if they are on
+have to match where your API is hosted. It's common practice to use the same
+identifier for all different environments of your API even if they're on
 different URLs.
 
 :::
@@ -74,11 +74,11 @@ Set the following settings:
 
 - **Enable Authentication**: Checked
 - **Provider**: `auth0`
-- **Authority**: This is your Auth0 domain (i.e. `my-company.us.auth0.com`) in
-  URL format like `https://my-company.us.auth0.com/`. _The trailing slash is
-  required._
+- **Authority**: This is your Auth0 domain (for example
+  `my-company.us.auth0.com`) in URL format like
+  `https://my-company.us.auth0.com/`. _The trailing slash is required._
 - **Client ID**: The client ID of the Auth0 application that was created in the
-  earlier steps. This is a string of letters an numbers. _The Client ID is not a
+  earlier steps. This is a string of letters an numbers. _The Client ID isn't a
   secret value._
 - **Audience**: This is the value for `identifier` that you set when creating
   the Auth0 API earlier.

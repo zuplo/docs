@@ -5,7 +5,7 @@ sidebar_label: Migration Guide
 
 :::warning
 
-This documentation is for the preview version of the Dev Portal. If you are not
+This documentation is for the preview version of the Dev Portal. If you aren't
 part of the preview program, please refer to the
 [current Dev Portal docs](/docs/articles/developer-portal).
 
@@ -31,7 +31,7 @@ There are a few changes to the project structure that you should be aware of:
    directory to build the documentation.
 
 Below is an example of the new project structure. The steps below will explain
-what is needed for each file.
+what's needed for each file.
 
 ```txt
 my-api/

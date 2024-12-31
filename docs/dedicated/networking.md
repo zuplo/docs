@@ -25,7 +25,7 @@ The default setup for dedicated managed Zuplo is to use your Zuplo API Gateway
 as the public ingress to your API. This is the simplest setup and allows Zuplo
 to manage things like SSL certificates on your behalf.
 
-In this setup your VPC is not exposed to the public internet at all. Instead,
+In this setup your VPC isn't exposed to the public internet at all. Instead,
 your Zuplo API Gateway will use a network connection such as AWS Transit
 Gateway, PrivateLink, or VPC Peering to connect to your backend services.
 

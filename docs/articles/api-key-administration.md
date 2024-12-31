@@ -19,7 +19,7 @@ To open the API Key Bucket for an environment, click the **Configure** button.
 
 ![Configure](/media/api-key-administration/image-2.png)
 
-When you first open the API Key Bucket, you will not have any API Keys created.
+When you first open the API Key Bucket, you won't have any API Keys created.
 
 ![Empty API Key Bucket](/media/api-key-administration/image-3.png)
 
@@ -33,11 +33,11 @@ icons shown.
 
 ![Copy or View](../../public/media/api-key-administration/image-5.png)
 
-If you're using the Zuplo [Developer Portal](./developer-portal.md), we have an
+If you're using the Zuplo [Developer Portal](./developer-portal.md), we've an
 integration with the API Key API that allows developers to access their API
 keys, create new ones and delete them. To enable this, you must assign one or
 more managers, via e-mail, to be a manager for your API Key Consumer. This is
-optional if you are not using the [Developer Portal](./developer-portal.md).
+optional if you aren't using the [Developer Portal](./developer-portal.md).
 
 You can assign managers in the Zuplo Portal (portal.zuplo.com) or via the API.
 

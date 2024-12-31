@@ -3,7 +3,7 @@ title: Automate Zuplo API Updates with GitHub Actions
 sidebar_label: GitHub Action Automation
 ---
 
-Because Zuplo is OpenAPI native, you can automate the process of udating your
+Because Zuplo is OpenAPI native, you can automate the process of updating your
 Zuplo API when a downstream OpenAPI file changes. For example, if you have an
 API built in Go that uses [Huma](https://github.com/danielgtaylor/huma) you can
 easily generate an OpenAPI file for your API. Then using that generated OpenAPI
@@ -11,9 +11,9 @@ file, you can write a script that updates your Zuplo API based on changes in
 your generated file.
 
 This example shows a GitHub Action that updates a Zuplo API from an OpenAPI file
-that is generated in your API.
+that's generated in your API.
 
-You would run this Github Action in the repository that contains your downstream
+You would run this GitHub Action in the repository that contains your downstream
 API. When you push changes to your API, the action will run, generate the
 OpenAPI file. Then it will clone the Zuplo API repository, update the Zuplo
 OpenAPI file, commit and push the changes to a new branch, and open a pull
@@ -44,7 +44,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           # Override the default token because the built
-          # in token cannot trigger other workflows
+          # in token can't trigger other workflows
           # https://github.community/t/github-actions-workflow-not-triggering-with-tag-push/17053/2
           token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
 

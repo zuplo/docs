@@ -9,8 +9,8 @@ In this guide, we'll walk you through the steps to add a your Zuplo API to
 
 Backstage allows you to document
 [API entities](https://backstage.io/docs/features/software-catalog/descriptor-format/#kind-api)
-using an OpenAPI file. Although Zuplo is OpenAPI based, you cannot directly use
-your `routes.oas.json` file, as it is missing details about your API. Instead,
+using an OpenAPI file. Although Zuplo is OpenAPI based, you can't directly use
+your `routes.oas.json` file, as it's missing details about your API. Instead,
 you will need to use the public-ready version of your spec, by adding an
 [OpenAPI Spec Handler](../handlers/openapi.md).
 
@@ -83,8 +83,8 @@ spec:
 ```
 
 You should now be able to see your API under the APIs tab in Backstage. If you
-navigate to your API and click the **DEFINITION** tab - you can even preview your
-OpenAPI spec.
+navigate to your API and click the **DEFINITION** tab - you can even preview
+your OpenAPI spec.
 
 ![OpenAPI spec](/media/add-api-to-backstage/image-6.png)
 
@@ -93,9 +93,9 @@ repeat the steps above for all of your OpenAPI files.
 
 ## Optional: Reusing your API across Backstage catalogs
 
-If you do not wish to directly add your Zuplo API to your backstage
+If you don't wish to directly add your Zuplo API to your backstage
 `entities.yaml`, you can instead add the entity definition to your Zuplo
-repository directly, and sync it with backstage using their github integration.
+repository directly, and sync it with backstage using their GitHub integration.
 You will still need to follow steps 1 & 2 from the guide above.
 
 ### 1/ Add `catalog-info.yaml` to your Zuplo Repository
@@ -130,14 +130,14 @@ to the APIs tab, and click **REGISTER EXISTING API**.
 
 ![APIs list](/media/add-api-to-backstage/image-5.png)
 
-When prompted for the component URL, enter the github URL of your
+When prompted for the component URL, enter the GitHub URL of your
 `catalog-info.yaml` file (ex.
 https://github.com/AdrianMachado/adrian-api/blob/main/catalog-info.yaml).
 
-![Adding the github URL](/media/add-api-to-backstage/image-4.png)
+![Adding the GitHub URL](/media/add-api-to-backstage/image-4.png)
 
 Complete registration of your API. If you run into issues connecting your
-repository, see our [troubleshooting guide](#troubleshooting).
+repository, see the [troubleshooting guide](#troubleshooting).
 
 ### 3/ Link the API to a component
 
@@ -167,11 +167,11 @@ spec:
 
 ## Troubleshooting
 
-### I can't connect to Github
+### Can't connect to GitHub
 
-If your repository is not public and you haven't already configured Github
+If your repository isn't public and you haven't already configured GitHub
 authentication -
-[follow the Github auth guide](https://backstage.io/docs/getting-started/config/authentication).
+[follow the GitHub auth guide](https://backstage.io/docs/getting-started/config/authentication).
 You will likely want to add sign-in support as a part of your Backstage setup,
 to authenticate your users. In your `app-config.yaml` add:
 
@@ -197,7 +197,7 @@ Additionally, in your `index.ts` file, add the following line before calling
 backend.add(import("@backstage/plugin-auth-backend-module-github-provider"));
 ```
 
-This is not well documented by Backstage - any issues should be directed
+This isn't well documented by Backstage - any issues should be directed
 [to them](https://github.com/backstage/backstage/issues).
 
 ### Backstage hosted on Roadie.io
@@ -205,4 +205,4 @@ This is not well documented by Backstage - any issues should be directed
 If you are using a managed version of Backstage from services like Roadie.io -
 you will need to follow their
 [official docs](https://roadie.io/docs/details/openapi-specs/) for OpenAPI. We
-do not guarantee support for these platforms.
+don't guarantee support for these platforms.

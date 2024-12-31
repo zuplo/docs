@@ -5,7 +5,7 @@ title: Zuplo + WAF/DDoS Services
 A common setup for customers using Zuplo (or any API Gateway) is how to setup a
 WAF and DDoS protection in front of their API Gateway. Because Zuplo is deployed
 to the edge (meaning lots of different locations all around the world close to
-your customers), it is important that your WAF/DDoS services also support
+your customers), it's important that your WAF/DDoS services also support
 edge-based deployments. Configuring a legacy WAF solution that runs in one or
 only a few data centers in front of Zuplo will result in increased latency and
 suboptimal experiences for your end users. This document outlines the various
@@ -17,7 +17,7 @@ consider the following:
 - What level of customization do you require for your WAF + DDoS? If common
   configurations are enough, consider Zuplo Managed WAF + DDoS.
 - Is your WAF/DDoS service also deployed at the edge?
-- How can you ensure that requests cannot bypass your WAF/DDoS and make requests
+- How can you ensure that requests can't bypass your WAF/DDoS and make requests
   directly to your API Gateway?
 
 ## Zuplo Managed WAF + DDoS

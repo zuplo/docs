@@ -129,11 +129,11 @@ We would then configure the policy as follows
 ```
 
 And don't forget to register your new custom policy on your routes! This should
-be the very first inbound policy to see the incoming request, unmodified by
-other policies (or blocked by auth, rate-limiting etc).
+be the first inbound policy to see the incoming request, unmodified by other
+policies (or blocked by auth, rate-limiting etc).
 
 You'll then see live entries with details of the requests and responses for your
 test calls/
 
-You can create a free Mockbin at [mockbin.io](https://mockbin.io) -
-to get started quickly look for the link to create a new bin (not OpenAPI bin).
+You can create a free Mockbin at [mockbin.io](https://mockbin.io) - to get
+started quickly look for the link to create a new bin (not OpenAPI bin).

@@ -36,7 +36,7 @@ await cache.put("key", data, 60);
 ```
 
 When writing to the cache the `data` parameters will be JSON serialized. If your
-data does not serialize cleanly to JSON (like the `Headers` object does not) you
+data doesn't serialize cleanly to JSON (like the `Headers` object doesn't) you
 won't be able to read your data back/
 
 ## Deleting from the Cache

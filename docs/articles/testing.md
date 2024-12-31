@@ -5,18 +5,18 @@ title: Testing
 :::tip
 
 These instructions assume that you are using custom GitHub Action workflow, in
-conjunction with the Zuplo deployer. If you prefer setting up your own CI/CD for
-more fine-grained control, please take a look at
+conjunction with the Zuplo Git Integration. If you prefer setting up your own
+CI/CD for more fine-grained control, please take a look at
 [running your own CI/CD](../articles/custom-ci-cd.md).
 
 :::
 
 Using the Zuplo GitHub integration, tests can be run after a deployment with the
-Zuplo deployer and used to block pull requests from being merged. This can help
-ensure that changes to your Zuplo gateway won't break your production
+Zuplo Git Integration and used to block pull requests from being merged. This
+can help ensure that changes to your Zuplo gateway won't break your production
 environment.
 
-The Zuplo deployer sets
+The Zuplo Git Integration sets
 [Deployments](https://docs.github.com/en/rest/deployments/deployments) and
 [Deployment Statuses](https://docs.github.com/en/rest/deployments/statuses) for
 any push to a GitHub branch.
@@ -58,13 +58,13 @@ status that must pass.
 ![Require status checks](https://cdn.zuplo.com/assets/a1d7c322-125d-4d80-add0-fbfb65ccfea1.png)
 
 When a developer tries to merge their pull request, they will see that the tests
-haven't passed and the pull request cannot be merged.
+haven't passed and the pull request can't be merged.
 
 ![Test failure](https://cdn.zuplo.com/assets/3f3292a3-075c-4568-afb2-00c24e704f03.png)
 
 ## Writing Tests
 
-Using Node.js 18 and the Zuplo CLI, it is very easy to write tests that make
+Using Node.js 18 and the Zuplo CLI, it's very easy to write tests that make
 requests to your API using `fetch` and then validate expectations with `expect`
 from [chai](https://www.chaijs.com/api/bdd/).
 
@@ -134,8 +134,8 @@ import { expect } from "chai";
 
 /**
  * This example shows how to filter the test by the name in the describe() function.
- * You can run `zup test --filter '#labelA'`
- * If you want to use regex, you can do `zup test --filter '/#label[Aa]/'`
+ * You can run `zuplo test --filter '#labelA'`
+ * If you want to use regex, you can do `zuplo test --filter '/#label[Aa]/'`
  */
 describe("[#labelA #labelB] Addition", () => {
   it("should add positive numbers", () => {
@@ -153,20 +153,20 @@ rather than trying to mock large portions of your API Gateway.
 
 :::
 
-It is usually possible to use test frameworks like
+It's usually possible to use test frameworks like
 [Mocha](https://github.com/zuplo/zuplo/tree/main/examples/test-mocks) and
 mocking tools like [Sinon](https://sinonjs.org/) to unit tests handlers,
 policies, or other modules. To see an example of how that works see this sample
-on Github: https://github.com/zuplo/zuplo/tree/main/examples/test-mocks
+on GitHub: https://github.com/zuplo/zuplo/tree/main/examples/test-mocks
 
 Do note though that not everything in the Zuplo runtime can be mocked.
-Additionally, internal implimenation changes might cause mocking behavior to
+Additionally, internal implementation changes might cause mocking behavior to
 change or break without notice. Unlike our public API we don't guarantee that
 mocking will remain stable between versions.
 
-Generally speaking, if you must write unit tests, it is best to test your logic
+Generally speaking, if you must write unit tests, it's best to test your logic
 separately from the Zuplo runtime. For example, write modules and functions that
-take all the arguments as input and return a result, but do not depend on any
+take all the arguments as input and return a result, but don't depend on any
 Zuplo runtime code.
 
 For example, if you have a function that uses an environment variable and want
@@ -206,8 +206,8 @@ describe("myFunction", () => {
 ### Polyfills
 
 If you are running unit tests in a Node.js environment, you may need to polyfill
-some globals. Zuplo itself does not run on Node.js, but because Zuplo is built
-on standard API, testing in Node.js is possible.
+some globals. Zuplo itself doesn't run on Node.js, but because Zuplo is built on
+standard API, testing in Node.js is possible.
 
 If you are running on Node.js 20 or later, you can use the `webcrypto` module to
 polyfill the `crypto` global. You must register this polyfill before any Zuplo

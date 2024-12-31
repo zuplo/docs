@@ -3,9 +3,9 @@ title: Custom Request Handlers
 sidebar_label: Custom Handler
 ---
 
-As an API gateway, the Request Handler is the most important part of a zup. A
-request handler is a module with an export that fulfills the following type
-definition (typescript):
+As an API gateway, the Request Handler is the most important part of a Zuplo
+project. A request handler is a module with an export that fulfills the
+following type definition (typescript):
 
 ```ts
 export type RequestHandler = (
@@ -28,8 +28,8 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 This is a request handler that receives a request (of type `ZuploRequest` - more
 on [this interface here](../articles/zuplo-request.md)) and returns a response
 of type `string`. You can return any type from a Request Handler and Zuplo will
-auto-serialize the response to JSON and add a `content-type` header to your
-response of `application/json`. This makes it very easy to build simple JSON
+automatically serialize the response to JSON and add a `content-type` header to
+your response of `application/json`. This makes it easy to build simple JSON
 APIs.
 
 ## Parameters & Query strings
@@ -78,7 +78,7 @@ If you want to read the body you have two options:
 
 - `await request.text()` - this method reads the full body into a string.
 - `await request.json()` - this method reads the body and performs a
-  JSON.parse() to read the body into an object in memory. Use only if you’re
+  `JSON.parse()` to read the body into an object in memory. Use only if you’re
   confident the body is well-formed JSON (consider pre-validation with the
   [Validation Policy](../policies/request-validation-inbound.md)).
 

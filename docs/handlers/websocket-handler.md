@@ -19,7 +19,7 @@ environments.
 This handler is currently in beta and only configurable via the JSON View on a
 project's Route Designer or directly in your project's `*.oas.json` file.
 
-## Setup in routes.oas.json
+## Setup in `routes.oas.json`
 
 Configuration of the WebSocket Handler is similar to other available handlers.
 Set the name of the path that your WebSocket API route will use, set the use of
@@ -62,7 +62,7 @@ following configuration properties
 
 - `rewritePattern` - the URL the incoming pathname will be appended to.
 
-Similar to other handlers using `rewritePattern`, it supports Javascript string
+Similar to other handlers using `rewritePattern`, it supports JavaScript string
 interpolation syntax and can be used to shape the URL based on data from the
 incoming request and environment variables defined in the project.
 
@@ -131,7 +131,7 @@ A few examples of the values of various substitutions.
 ## Different Backends per Environment
 
 It's common to want to use different backends for your production, staging and
-preview environments. This can be easily achieved by using
+preview environments. This can be achieved by using
 [environment variables](../articles/environment-variables.md) to specify the
 origin of the backend.
 

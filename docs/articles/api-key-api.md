@@ -31,35 +31,6 @@ fields.
 The Consumer is the most important object. Each consumer is in a bucket.
 Consumers can contain one or more API Keys.
 
-```mermaid
-erDiagram
-    Consumer ||--|{ ApiKey : has
-    Consumer ||--|{ Manager : has
-    Consumer }|--|| Bucket   : in
-
-    Bucket {
-        string id
-        string name
-        string accountName
-        map(string) tags
-    }
-    Consumer {
-        string id
-        string name
-        string description
-        json metadata
-        map(string) tags
-    }
-    ApiKey {
-        string id
-        string key
-        string expiresOn
-    }
-    Manager {
-      string email
-    }
-```
-
 ### Buckets
 
 Buckets are the top level group for this service. A bucket could be used with a
@@ -81,8 +52,8 @@ Key Authentication policy.
 ### API Keys
 
 A Consumer can have any number of API keys associated with it. Each API Key
-shares the same identity (i.e. Consumer) when authenticating with this service.
-Expired keys will not be permitted to authenticate after their expiration.
+shares the same identity (for example Consumer) when authenticating with this
+service. Expired keys won't be permitted to authenticate after their expiration.
 
 :::tip
 
@@ -111,11 +82,11 @@ export ZAPI_KEY=zpka_YOUR_API_KEY
 
 ### Creating a Consumer with a Key
 
-// typically you would store some useful metadata // like the organizationId,
+// typically you would store some useful metadata // like the `organizationId`,
 etc.
 
-// Tags are used for querying the consumers later. // It is often useful to
-store some external identifier // that links this consumer to your internal data
+// Tags are used for querying the consumers later. // It's often useful to store
+some external identifier // that links this consumer to your internal data
 
 ```shell
 curl \
@@ -166,7 +137,7 @@ The response will look like this:
 }
 ```
 
-You can use this API Key to call your Zuplo API Gateway that is protected by the
+You can use this API Key to call your Zuplo API Gateway that's protected by the
 [API Key Authentication](/docs/policies/api-key-inbound) policy.
 
 ### Query Consumers with API Keys By Tags
