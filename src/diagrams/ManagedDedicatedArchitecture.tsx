@@ -22,7 +22,7 @@ export default function ManagedDedicatedArchitecture() {
       },
       {
         position: { x: 210, y: y + 80 },
-        label: "API Services",
+        label: "Gateway Services",
         variant: "zuplo",
       },
       {
@@ -56,7 +56,7 @@ export default function ManagedDedicatedArchitecture() {
     );
     builder.connect(
       { label: "Zuplo API Gateway", position: Position.Bottom },
-      { label: "API Services", position: Position.Top },
+      { label: "Gateway Services", position: Position.Top },
       { animate: false },
     );
     builder.connect(
