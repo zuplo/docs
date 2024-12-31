@@ -55,6 +55,25 @@ requirements. Examples include:
   logging and monitoring systems. Logs and other data go directly from the API
   Gateway to your logging provider. Zuplo doesn't collect or store this data.
 
+## Security
+
+All deployment models of Zuplo are secure and provide isolation between each
+customer and environment. Managed dedicated instances of Zuplo add the ability
+for you to customize the networking and connectivity to meet your specific
+security requirements.
+
+- **IAM Authorization**: Managed dedicated instances of Zuplo can use the IAM
+  capabilities to control traffic between the API Gateway and other services.
+- **Encryption**: Zuplo encrypts data both in transit and at rest. TLS secures
+  all data sent to or from the API Gateway. Zuplo encrypts stored data at rest.
+- **Access Control**: Zuplo provides robust authentication and access control
+  mechanisms. You control who has access to your API Gateway management
+  capabilities, what they can do, and what data they can access.
+- **Audit Logs**: Zuplo provides detailed audit logs of all management
+  operations. You can see who did what, when they did it, and what data they
+  accessed. Additionally, Zuplo maintains internal audit logs of all activity
+  performed by the Zuplo team.
+
 ## Architecture
 
 The architecture of a managed dedicated instance of Zuplo provides you with all
@@ -96,12 +115,16 @@ handles failover in case of an outage in one region.
 
 <ManagedDedicatedMultiRegionArchitecture />
 
-### Environments
+### Instances
 
 Customers running managed dedicated Zuplo typically have multiple instances of
 Zuplo deployed. The most common case is to have a production instance and a
 non-production instance. The non-production instance is used to deploy and test
-changes to your API Gateway before deploying them to production.
+changes to your API Gateway before deploying them to production. Each instance
+can run many different deployments. A typical setup, the production instance
+hosts only the production deployment, while the non-production instance hosts
+many other deployments (for example staging, development, QA, or any feature
+branch deployments).
 
 Each instance operates in isolation and runs within its own VPC or network.
 
