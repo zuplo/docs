@@ -11,8 +11,8 @@ have the ability to customize limits to meet their needs.
 
 | Feature                   | Description                                        | Limit                                                                                                                                                                |
 | ------------------------- | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Environment Variables     | The number of environment variables you can create | Free/Builder Plans: 50 variables per environment, Other Plans: 100 per environment                                                                                                                    |
-| Environment Variable size | The size of an environment variable                | ~5kb per variable                                                                                                                                                                 |
+| Environment Variables     | The number of environment variables you can create | Free/Builder Plans: 50 variables per environment, Other Plans: 100 per environment                                                                                   |
+| Environment Variable size | The size of an environment variable                | ~5kb per variable                                                                                                                                                    |
 | Request Duration          | The maximum time a request can take to complete    | Free/Builder Plans: 30 seconds, Other Plans: No Limit                                                                                                                |
 | Requests per second       | The maximum number of requests per second          | No Limit outside of plan monthly limit                                                                                                                               |
 | Log Size                  | The size of a log entry                            | Zuplo Portal live logs are limited to ~10kB. Excess will be truncated. For third-party logging providers, the value depends on the provider. Zuplo imposes no limit. |
@@ -21,7 +21,7 @@ have the ability to customize limits to meet their needs.
 
 ### Consumers & Keys
 
-Zuplo does not impose a hard cap on the number of consumers or keys you can
+Zuplo doesn't impose a hard cap on the number of consumers or keys you can
 create. However, usage of the service is subject to "fair use" policies meaning
 if your usage is deemed excessive we may limit usage. If you require specific
 limits please contact sales to discuss pricing plans.
@@ -35,7 +35,7 @@ Our general guidelines for what constitutes fair use are as follows:
 
 ### Consumer Metadata and Tags
 
-- Consumer `metadata` - The JSON encoded object cannot be larger than 1kb.
+- Consumer `metadata` - The JSON encoded object can't be larger than 1kb.
 - Consumer `tags` - Each consumer is limited to 5 key value pair tags.
 
 ### API Key Management Operations
@@ -45,5 +45,5 @@ Requests to API Key Management operations on the Zuplo Developer API
 
 ### API Key Authorizations
 
-API Key authorizations are not limited directly. The limit is equal to one
+API Key authorizations aren't limited directly. The limit's equal to one
 authorization per request allowed in your plan.

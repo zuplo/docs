@@ -91,7 +91,7 @@ The logo of the portal is set via the CSS class `.theme-logo`.
 
 :::danger
 
-Custom styles and CSS variables beyond what is documented above are not
+Custom styles and CSS variables beyond what is documented above aren't
 officially supported and may break with future releases. Use custom CSS with
 caution.
 

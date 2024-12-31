@@ -16,7 +16,7 @@ the Stripe Subscriptions with the Plans in your Zuplo API. For this to work,
 you'll need to create Plans in your Zuplo Metering Service.
 
 1. In the Zuplo Portal, go to your project, select the **Services** tab, and
-   click **Configure** on your "Metering Service".
+   click **Configure** on your Metering Service.
 
 ![Metering Service](/media/monetization-webhook-setup/image.png)
 
@@ -24,7 +24,8 @@ you'll need to create Plans in your Zuplo Metering Service.
 > Pricing Table.
 
 2. Click **Create Plan** to create your first Plan. Enter the name of your plan
-   (i.e. Basic). The name typically will match the name of your Stripe Product.
+   (for example Basic). The name typically will match the name of your Stripe
+   Product.
 
 3. The value of **External ID** is the ID of the Stripe Product. This value is
    found in the Stripe Dashboard in the
@@ -50,7 +51,7 @@ During the test phase, set the value of the **Max Value** to a low number like
 The Zuplo
 [`StripeMonetizationPlugin`](/docs/articles/stripe-monetization-plugin.md)
 enables your Zuplo API to listen to Stripe Webhook subscription events. This
-plugin adds an endpoint that is used when configuring the Stripe Webhook.
+plugin adds an endpoint that's used when configuring the Stripe Webhook.
 
 1. To start, navigate to the **Code** section of your Zuplo project. On the
    `modules` folder click the **+** button and select **Runtime Extension**.
@@ -132,7 +133,7 @@ to end subscription experience.
 
 1. Navigate to the **Pricing** page in your Developer Portal.
 
-2. Select a Plan and click **Subscribe**. If you are not already logged into the
+2. Select a Plan and click **Subscribe**. If you aren't already logged into the
    portal, you will be asked to do so first.
 
 3. The Stripe checkout page will open. If you are using test mode, you can enter
@@ -157,7 +158,7 @@ any future date as the expiration and any three digits as the CVC.
 :::tip
 
 If you are having trouble diagnosing issues with your Webhooks, the logs are a
-good place to see what is going on. You can also open the
+good place to see what's going on. You can also open the
 [**Webhooks**](https://dashboard.stripe.com/webhooks) page in Stripe and see the
 history of webhook events sent and their responses.
 

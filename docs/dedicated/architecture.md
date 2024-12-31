@@ -29,7 +29,7 @@ A managed dedicated instance of Zuplo consists of the following components:
   Gateway. This includes request/response logging, error logging, and analytics
   on request volume, latency, and other metrics.
 - **Developer Portal**: The Developer Portal is a web-based interface that
-  allows developers to interact with your API. It provides documentation,
+  enables developers to interact with your API. It provides documentation,
   testing tools, and other features to help developers integrate with your API.
 
 ## Custom requirements
@@ -40,22 +40,20 @@ requirements. Examples include:
 - **Regions & Availability Zones** - Zuplo can deploy to multiple regions,
   availability zones, or data centers to provide high availability and low
   latency.
-- **Developer Portal Hosting** - The developer portal typically hosts from a CDN
-  managed by Zuplo. Our default configuration serves the developer portal's
-  static assets from a global CDN, but we can configure your developer portal to
-  use only regional CDN locations if required.
+- **Developer Portal Hosting** - Zuplo manages the developer portal hosting from
+  a CDN. By default, the developer portal's static assets serve from a global
+  CDN. However, you can configure it to use only regional CDN locations if
+  required.
 - **Networking** - Zuplo can deploy with a variety of network configurations. To
   learn more, see [Networking](./networking.md).
-- **Disabling Features** - Zuplo can disable features that aren't needed for
-  your use case or that don't meet your security or compliance requirements. For
-  example, if you don't want to use the built-in API analytics and instead want
-  to use your own analytics, we can disable the built-in analytics. When we
-  disable our built-in analytics, we don't collect or store analytics data for
-  your APIs.
+- **Disabling Features** - Zuplo can disable unnecessary features for specific
+  use cases or those that don't meet security or compliance requirements. For
+  example, if you prefer custom analytics over the built-in API analytics, you
+  can disable the built-in analytics. When disabled, Zuplo stops collecting or
+  storing analytics data for the APIs.
 - **Custom Logging & Monitoring** - Zuplo can integrate with your existing
-  logging and monitoring systems. Logs and other data are sent directly from the
-  API Gateway to your logging provider. Zuplo doesn't collect or store this
-  data.
+  logging and monitoring systems. Logs and other data go directly from the API
+  Gateway to your logging provider. Zuplo doesn't collect or store this data.
 
 ## Security
 
@@ -66,9 +64,8 @@ of a managed dedicated instance of Zuplo include:
 - **Isolation**: Each dedicated managed instance of Zuplo runs on its own VPC or
   network. This isolates it from other customers and ensures that your data is
   secure.
-- **Encryption**: Zuplo encrypts data in transit and at rest. All data sent to
-  or from the API Gateway is encrypted using TLS. Data stored by Zuplo is
-  encrypted at rest.
+- **Encryption**: Zuplo encrypts data both in transit and at rest. TLS secures
+  all data sent to or from the API Gateway. Zuplo encrypts stored data at rest.
 - **Access Control**: Zuplo provides robust authentication and access control
   mechanisms. You control who has access to your API Gateway management
   capabilities, what they can do, and what data they can access.
@@ -113,8 +110,8 @@ region without any downtime.
 
 When you deploy your API Gateway to multiple regions, Zuplo uses a global load
 balancer to route traffic to the closest region. This provides low latency
-access to your API's for end-users around the world. The load balancer also
-handles fail over in case of an outage in one region.
+access to your APIs for end-users around the world. The load balancer also
+handles failover in case of an outage in one region.
 
 <ManagedDedicatedMultiRegionArchitecture />
 
@@ -125,17 +122,17 @@ Zuplo deployed. The most common case is to have a production instance and a
 non-production instance. The non-production instance is used to deploy and test
 changes to your API Gateway before deploying them to production.
 
-Each instance is isolated and runs in its own VPC or network.
+Each instance operates in isolation and runs within its own VPC or network.
 
 It's possible to have multiple instances depending on your requirements. For
 example, some customers have separate instances for production, staging, and
 development. For most customers, though, a single production and a single
 development instance are sufficient.
 
-When you onboard to Zuplo, you will work with your account manager to determine
-the configuration that best meets your requirements. When we create your
-project, we pre-configure it with the agreed-upon number of instances and set up
-rules that determine where each environment gets deployed.
+During the onboarding process to Zuplo, an account manager will assist in
+determining the configuration that best meets the requirements. The project will
+be pre-configured with the agreed-upon number of instances, and rules will be
+set up to determine where each environment gets deployed.
 
 The most common setup is where your `main` branch deploys to production and all
 other branches deploy to a non-production environment, but this is fully

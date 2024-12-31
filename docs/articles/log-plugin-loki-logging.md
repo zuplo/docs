@@ -48,7 +48,7 @@ the `jsonPayload` contains the text or objects passed into the log.
 Steam fields are:
 
 - `job` - The name of the log stream job. Defaults to `zuplo`.
-- `level` - The level of the log, i.e. `ERROR`, `INFO`, etc.
+- `level` - The level of the log, for example `ERROR`, `INFO`, etc.
 - `environmentType` - Where the Zuplo API is running. Values are `edge`,
   `working-copy`, or `local`
 - `environmentStage` - If the environment is `working-copy`, `preview`, or
@@ -57,7 +57,7 @@ Steam fields are:
 Log trace fields are:
 
 - `requestId` - The UUID of the request (the value of the `zp-rid` header)
-- `atomicCounter` - An atomic number that is used to order logs that have the
+- `atomicCounter` - An atomic number that's used to order logs that have the
   same timestamp
 - `rayId` - The Cloudflare RayID of the request
 

@@ -86,11 +86,12 @@ export async function pluginWithHook(
 }
 ```
 
-Note that the call can block the response, so if you wish to run an activity asynchronously
-and not block the response you should not await inside the hook and use `context.waitUntil` 
-to ensure your async activity is not terminated prematurely - this is shown in the example
-below. This example shows details of the request and final response being sent to an imaginary
-logging service.
+Note that the call can block the response, so if you wish to run an activity
+asynchronously and not block the response you shouldn't await inside the hook
+and use `context.waitUntil` to ensure your asynchronous activity isn't
+terminated prematurely - this is shown in the example below. This example shows
+details of the request and final response being sent to an imaginary logging
+service.
 
 ```ts
 import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
@@ -101,7 +102,7 @@ export async function pluginWithHook(
   policyName: string,
 ) {
 
-  // Note we must clone the request here, before it is used by the handler
+  // Note we must clone the request here, before it's used by the handler
   const requestClone = request.clone();
 
   context.addResponseSendingFinalHook(
@@ -123,7 +124,7 @@ export async function pluginWithHook(
       }
 
       const promise = asyncInnerFunction();
-      
+
       // Don't block the response while waiting for the fetch
       context.waitUntil(promise);
     });

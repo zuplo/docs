@@ -205,14 +205,14 @@ If a feature only implements the operation partially, details are listed.
     is non-standard, note the following while using it:
 
     - Use `NODE-ED25519` as the algorithm and `namedCurve` parameters.
-    - Unlike NodeJS, Cloudflare will not support raw import of private keys.
-    - The algorithm implementation may change over time. While Cloudflare cannot
+    - Unlike NodeJS, Cloudflare won't support raw import of private keys.
+    - The algorithm implementation may change over time. While Cloudflare can't
       guarantee it at this time, Cloudflare will strive to maintain backward
       compatibility and compatibility with NodeJS's behavior. Any notable
       compatibility notes will be communicated in release notes and via this
       developer documentation.
 
-3.  <a name="footnote-3"></a> MD5 is not part of the WebCrypto standard but is
+3.  <a name="footnote-3"></a> MD5 isn't part of the WebCrypto standard but is
     supported in Cloudflare Workers for interacting with legacy systems that
-    require MD5. MD5 is considered a weak algorithm. Do not rely upon MD5 for
+    require MD5. MD5 is considered a weak algorithm. Don't rely upon MD5 for
     security.

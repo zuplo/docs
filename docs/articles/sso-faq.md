@@ -23,7 +23,7 @@ identity and new SSO identity use the same email address see the question below.
 
 ## What if my new SSO Account uses the same Email as my old Account?
 
-In the event you have setup SSO on an existing Zuplo account it is possible you
+In the event you have setup SSO on an existing Zuplo account it's possible you
 might now have two user identities with the same email address. For example, if
 you previously logged into Zuplo with a username/password identity with the
 username `nate@example.com`, but then your Zuplo account was enabled for SSO

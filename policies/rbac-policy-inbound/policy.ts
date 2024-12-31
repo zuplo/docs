@@ -14,14 +14,14 @@ export default async function (
   // NOTE: This policy requires an authentication policy to run before
   if (!request.user) {
     context.log.error(
-      "User is not authenticated. A authorization policy must come before the RBAC policy.",
+      "User isn't authenticated. A authorization policy must come before the RBAC policy.",
     );
     return HttpProblems.unauthorized(request, context);
   }
 
   // Check that the user has roles
   if (!request.user.data.roles) {
-    context.log.error("The user is not assigned any roles.");
+    context.log.error("The user isn't assigned any roles.");
     return HttpProblems.unauthorized(request, context);
   }
 
@@ -32,7 +32,7 @@ export default async function (
     )
   ) {
     context.log.error(
-      `The user '${request.user.sub}' is not authorized to perform this action.`,
+      `The user '${request.user.sub}' isn't authorized to perform this action.`,
     );
     return HttpProblems.forbidden(request, context);
   }

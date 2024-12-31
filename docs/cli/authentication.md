@@ -22,13 +22,13 @@ Most commands take an `--api-key` argument. For example, to list your available
 Zuplo API Gateways, run:
 
 ```bash
-zup list --api-key zpka_d67b7e241bb948758f415b79aa8exxxx_2efbxxxx
+zuplo list --api-key zpka_d67b7e241bb948758f415b79aa8exxxx_2efbxxxx
 ```
 
-If you do not wish to pass your API Key to every command, you can set it as an
+If you don't wish to pass your API Key to every command, you can set it as an
 environment variable:
 
 ```bash
 export ZUPLO_API_KEY=zpka_d67b7e241bb948758f415b79aa8exxxx_2efbxxxx
-zup list --api-key
+zuplo list --api-key
 ```

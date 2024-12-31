@@ -3,8 +3,8 @@ import type { JSONSchema7, JSONSchema7Definition } from "json-schema";
 import fs from "node:fs/promises";
 import path from "node:path";
 import prettier from "prettier";
-import { fixMarkdown } from "./fix-markdown.js";
 import { createMarkdown } from "safe-marked";
+import { fixMarkdown } from "./fix-markdown.js";
 
 const renderMd = createMarkdown();
 const projectDir = path.join(import.meta.dirname, "..");
@@ -96,7 +96,7 @@ const getExampleHtml = async (
 
   if (options && Object.keys(options).length === 0) {
     console.warn(
-      `The policy ${policyId} does not have any options set in the schema.`,
+      `The policy ${policyId} doesn't have any options set in the schema.`,
     );
   }
 
@@ -139,7 +139,7 @@ for (const schemaPath of policySchemas) {
   // For 'deprecated' policies, there's no point surfacing them in the
   // navigation - but they are still accessible via direct link for people still
   // using them.
-  // 'internal' policies are skipped entirely as they are not ready for the
+  // 'internal' policies are skipped entirely as they aren't ready for the
   // public.
   if (schema.isInternal) continue;
 
@@ -245,7 +245,7 @@ ${printIf(
   `
 :::tip{title="Custom Policy Example"}
 
-Zuplo is extensible, so we don't have a built-in policy for ${schema.title}, instead we have a template here that shows you how you can use your superpower (code) to achieve your goals. To learn more about custom policies [see the documentation](/policies/custom-code-${policyId.endsWith("-inbound") ? "inbound" : "outbound"}).
+Zuplo is extensible, so we don't have a built-in policy for ${schema.title}, instead we've a template here that shows you how you can use your superpower (code) to achieve your goals. To learn more about custom policies [see the documentation](/policies/custom-code-${policyId.endsWith("-inbound") ? "inbound" : "outbound"}).
 
 :::`,
 )}
@@ -266,7 +266,7 @@ ${printIf(
   `
 :::info{title="Enterprise Feature"}
 
-This policy is only available as part of our enterprise plans. It is free to try only any plan for development only purposes. If you would like to use this in production reach out to us: [sales@zuplo.com](mailto:sales@zuplo.com)
+This policy is only available as part of our enterprise plans. It's free to try only any plan for development only purposes. If you would like to use this in production reach out to us: [sales@zuplo.com](mailto:sales@zuplo.com)
 
 :::`,
 )}

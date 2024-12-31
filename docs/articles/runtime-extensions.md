@@ -136,7 +136,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 
 ### Hooks: OnResponseSendingFinal
 
-Runs before a response is sent. The response cannot be modified.
+Runs before a response is sent. The response can't be modified.
 [More details.](/docs/articles/hooks#hook-onresponsesendingfinal)
 
 ```ts
@@ -153,7 +153,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 
 Built-in and custom plugins and handlers can expose their own extensibility. For
 example, [AWS Lambda handler](../handlers/aws-lambda.md) exposes the ability to
-customize the event that is sent when invoking the Lambda function.
+customize the event that's sent when invoking the Lambda function.
 
 The example below shows how to use a route's custom property to set the path on
 the outgoing event to a custom value.

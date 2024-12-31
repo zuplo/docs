@@ -9,8 +9,8 @@ customizing the developer portal, its a good idea to understand the structure
 and files that are used to generate the site.
 
 Every Zuplo project includes the following directories and files that are used
-to generate the developer portal. Note, files that are not directly part of this
-tutorial have been deliberately left out.
+to generate the developer portal. Note, files that aren't directly part of this
+tutorial have been left out.
 
 ```txt
 my-project/

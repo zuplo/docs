@@ -6,10 +6,10 @@ Your place or ours; Zuplo has a variety of hosting options to suit your needs.
 
 ## 1. Managed Edge
 
-Here we run your Zuplo projects serverlessly at the edge (300+ datacenters
-worldwide). This is our most popular option, if you use our self-serve product
-and pay with your credit card this is the option you are choosing. This option
-is also popular with Enterprise clients where we handle many Billions of
+Here run your Zuplo projects in a serverless environment at the edge (300+ data
+centers worldwide). This is our most popular option, if you use our self-serve
+product and pay with your credit card this is the option you are choosing. This
+option is also popular with Enterprise clients where we handle many Billions of
 requests per month and scale up to 100,000s of requests per second effortlessly.
 
 ## 2. Managed Dedicated

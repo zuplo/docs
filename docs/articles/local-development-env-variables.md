@@ -3,7 +3,7 @@ title: "Configuring Environment Variables"
 sidebar_label: Environment variables
 ---
 
-For security reasons, your local development does not have access to the
+For security reasons, your local development doesn't have access to the
 environment variables that you have configured on the Zuplo Portal. Instead,
 your local Zuplo API Gateway will load environment variables from a .env file.
 
@@ -12,7 +12,7 @@ your local Zuplo API Gateway will load environment variables from a .env file.
 
 :::warning
 
-As the `.env` file could contain sensitive information, it should not be
+As the `.env` file could contain sensitive information, it shouldn't be
 committed to your version system. Consider adding .env to your .gitignore file.
 
 :::

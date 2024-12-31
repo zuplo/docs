@@ -15,18 +15,18 @@ APIs (origin). There are several options to do this securely.
 
 This is the most popular option and is used by companies like Supabase,
 Firebase, and Stripe to secure their own APIs. In this solution the backend
-requires a secret that is known only by the gateway. This is usually an opaque
+requires a secret that's known only by the gateway. This is usually an opaque
 key sent as a header on every request to the origin. Zuplo adds this to the
 request - the client is never aware of the secret. An example of how to set this
 up, is show in the
-[Securing your Backend with a Shared Secret](./securing-backend-shared-secret.md)
+[Securing your backend with a Shared Secret](./securing-backend-shared-secret.md)
 article.
 
 ## 2/ Federated Authentication
 
-This is a new option where you can configure your cloud service (e.g. GCP or
-AWS) to trust a JWT token created by the Zuplo runtime. If you're interested in
-using this option please contact us at `support@zuplo.com`.
+This is a new option where you can configure your cloud service (for example,
+GCP or AWS) to trust a JWT token created by the Zuplo runtime. If you're
+interested in using this option please contact us at `support@zuplo.com`.
 
 ## 3/ Upstream Service Authentication
 
@@ -41,7 +41,7 @@ and allow only authorized service principals access to your service.
 - For GCP users, you can use our
   [Upstream GCP Service AUth](../policies/upstream-gcp-service-auth-inbound.md)
   or [Upstream GCP JWT](../policies/upstream-gcp-jwt-inbound.md) policies. These
-  use a service.json credential to create or issue JWT tokens that Zuplo will
+  use a `service.json` credential to create or issue JWT tokens that Zuplo will
   send to requests to GCP.
 
 ## 4/ mTLS Authentication
@@ -55,11 +55,11 @@ If you're interested in using this option please contact us at
 
 Used by some of our larger customers, our [secure tunnels](./secure-tunnel.md)
 allow you to create a WireGuard based tunnel from your VPC or private
-data-center that connects directly to your Zuplo gateway. This option is
-generally useful when running workloads in a non-cloud provider (i.e. bare
-metal, on premises, etc.) that do not have IAM or mTLS capabilities. In this
-solution, your backend API does not need to be exposed to the internet at all.
-This is a more complex setup and is only available on our
+data-center that connects directly to your Zuplo gateway. This option is useful
+when running workloads in a non-cloud provider (for example, bare metal, on
+premises, etc.) that don't have IAM or mTLS capabilities. In this solution, your
+backend API doesn't need to be exposed to the internet at all. This is a more
+complex setup and is only available on our
 [enterprise plan](https://zuplo.com/pricing).
 
 To discuss security and connectivity options, our
@@ -70,8 +70,8 @@ participation from the Zuplo team.
 
 For customers on our managed dedicated plan, we can provide custom networking to
 connect your backend to Zuplo. This can include using VPC connectivity
-capabilities from your cloud provider (i.e. AWS, Azure, GCP, etc.) such as AWS
-Transit Gateway, PrivateLink, or VPC Peering to connect to your backend
+capabilities from your cloud provider (for example AWS, Azure, GCP, etc.) such
+as AWS Transit Gateway, PrivateLink, or VPC Peering to connect to your backend
 services.
 
 For more details on networking options for managed dedicated customers, see our

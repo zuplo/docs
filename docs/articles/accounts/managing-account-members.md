@@ -9,7 +9,7 @@ manage users in your account.
 ## Add Account Member
 
 To start, navigate to the account settings page by clicking your user icon in
-the top right corner of the screen and selecting "Settings" from the dropdown
+the top right corner of the screen and selecting **Settings** from the dropdown
 menu.
 
 The view will display the users that are currently members of the account and
@@ -19,8 +19,8 @@ their roles.
 
 On the top of the page, you can enter an email address of the user you want to
 invite. For accounts with the enterprise role feature, users are added to the
-account with the role of "Member", for all other accounts users are added with
-the role of "Admin".
+account with the role of **Member**, for all other accounts users are added with
+the role of **Admin**.
 
 ![Invite User](/media/managing-account-members/image-1.png)
 

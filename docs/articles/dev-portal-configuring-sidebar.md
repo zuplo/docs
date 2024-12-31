@@ -20,7 +20,7 @@ Not including the `specs` array will automatically include the item in all of
 your OpenAPI specs. The entries to `specs` must match the `specId` of the
 OpenAPI file (portion of filename preceding `.oas.json`) found in your project's
 `config` folder. For `category` types, adding `specs` to an `item` will result
-in the page only displaying if it is also found in the `category` item's `specs`
+in the page only displaying if it's also found in the `category` item's `specs`
 array.
 
 ### Sidebar Labels
@@ -146,7 +146,7 @@ interface DocLink {
 
 A `category` item can act like a `doc` if a `link` property is provided. When
 clicked the user will be navigated to the page referenced in the `link`. If no
-`link` is provided, then the `category` will not be clickable.
+`link` is provided, then the `category` won't be clickable.
 
 Example:
 

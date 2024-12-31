@@ -61,7 +61,7 @@ nearest data-center.
 ## Protocols
 
 Zuplo can proxy any HTTP traffic and works well with REST, GraphQL, WebSockets
-and other HTTP protocols (we have customers proxying SOAP over HTTP too). HTTP 2
+and other HTTP protocols (we've customers proxying SOAP over HTTP too). HTTP 2
 is supported.
 
 ## Languages
@@ -73,7 +73,7 @@ communicates via HTTP, Zuplo is a great choice.
 
 ## Integrations
 
-We have support for integrations with Datadog (for monitoring, logging), GCP
+We have support for integrations with DataDog (for monitoring, logging), GCP
 Cloud Logging and are adding new integrations on demand for customers quickly.
 Contact us if you need an integration that you don't see.
 
@@ -97,7 +97,7 @@ and are discussed in depth on platform like
 
 All Zuplo runtimes and customer code execution is safely isolated (each project,
 even within the same customer account is fully isolated). Edge deployments run
-on web worker technology (on the cloudflare network by default) which provides
+on web worker technology (on the Cloudflare network by default) which provides
 high isolation guarantees.
 
 ## Performance and latency
@@ -114,5 +114,5 @@ latency and are adjustable to optimize for different scenarios.
 
 Many zuplo customers connect with services in Azure, AWS, GCP and even running
 on raw metal in colo locations. Our unique edge deployment profile means we work
-great with your API wherever it is and have a selection of options for
+great with your API wherever it's and have a selection of options for
 [securely connecting to your backend](./securing-your-backend.md).

@@ -10,8 +10,8 @@ longer support SSL certificates issued by Let’s Encrypt.
 :::tip
 
 This change will only impact a very small number of clients. Across all Zuplo
-APIs, less than than 1 request per several billion in the past 30 days have been
-made by clients that may be impacted by this change.
+APIs, less than 1 request per several billion in the past 30 days have been made
+by clients that may be impacted by this change.
 
 :::
 

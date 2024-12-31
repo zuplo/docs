@@ -12,8 +12,8 @@ To see a demo of the component visit https://api-key-manager.com.
 
 ## Getting Started
 
-This component can be used with any React framework. It is compatible with
-Tailwind CSS, but Tailwind is not required.
+This component can be used with any React framework. It's compatible with
+Tailwind CSS, but Tailwind isn't required.
 
 :::tip
 
@@ -46,8 +46,8 @@ theme.
 
 ### Without Tailwind
 
-Import the component's stylesheet into your root component (i.e. `App.jsx`),
-typically below your other stylesheets.
+Import the component's stylesheet into your root component (for example,
+`App.jsx`), typically below your other stylesheets.
 
 ```jsx
 import "./styles/globals.css";
@@ -56,7 +56,7 @@ import "@zuplo/react-api-key-manager/index.css";
 
 ### Custom Styles
 
-The the component's css can be completely customized by copying either the
+The component's CSS can be completely customized by copying either the
 `tailwind.css` or `index.css` files from
 `node_modules/@zuplo/react-api-key-manager/dist/` and modifying the styles to
 suite your needs.

@@ -19,9 +19,9 @@ of the file is `1`.
 
 :::warning
 
-The `zuplo.jsonc` file is not currently shown or editable in the Zuplo portal.
+The `zuplo.jsonc` file isn't currently shown or editable in the Zuplo portal.
 Connect your project to source control and edit inside your source control
-provider or by pushing a local change with git. If your project does not have a
+provider or by pushing a local change with git. If your project doesn't have a
 `zuplo.jsonc` it can be added using source control
 
 :::
@@ -29,14 +29,14 @@ provider or by pushing a local change with git. If your project does not have a
 ## Compatibility Date
 
 Zuplo is constantly shipping updates to the underlying runtime of projects.
-Occasionally, these updates are not backwards compatible. Additionally, Zuplo
+Occasionally, these updates aren't backwards compatible. Additionally, Zuplo
 deploys portions of projects to Cloudflare Workers who also occasionally make
 non-backward compatible changes. In order to ensure that your project continues
 to build, deploy and operate as you expect it you can set a compatibility date
 to lock in the behavior and APIs of the runtime.
 
 Current valid settings for the compatibility date are to not have it set or to
-set it to `2023-03-14`. When not set, the Zuplo runtime does not set a
+set it to `2023-03-14`. When not set, the Zuplo runtime doesn't set a
 compatibility date on Cloudflare Workers. When the value is set to `2023-03-14`,
 the value is also set on the Cloudflare Worker which enables all changes up to
 March 14, 2023. See
@@ -63,10 +63,10 @@ output of the Developer Portal.
 
 ### Remove Cloudflare Location Headers
 
-Previously, some Cloudflare location headers (i.e. `cf-ipregion`) could be
-passed through your Zuplo gateway. Now these headers are always removed from the
-outbound request if they have been set. If you need access to geo-location data
-use [`context.incomingRequestProperties`](./zuplo-context.md) instead.
+Previously, some Cloudflare location headers (for example `cf-ipregion`) could
+be passed through your Zuplo gateway. Now these headers are always removed from
+the outbound request if they have been set. If you need access to geo-location
+data use [`context.incomingRequestProperties`](./zuplo-context.md) instead.
 
 ## 2024-01-15
 
@@ -90,7 +90,7 @@ now disallowed.
 ### Remove Cloudflare Location Headers
 
 Zuplo routes all requests through Cloudflare. Cloudflare adds a number of
-headers to requests. Previously, some Cloudflare location headers (i.e.
+headers to requests. Previously, some Cloudflare location headers (for example
 `cf-ipregion`) could be passed through your Zuplo gateway. Now these headers are
 always removed from the outbound request if they have been set. If you need
 access to geo-location data use
@@ -98,7 +98,7 @@ access to geo-location data use
 
 ## 2024-03-14
 
-This compatibility date does not include any breaking changes. However, Zuplo
+This compatibility date doesn't include any breaking changes. However, Zuplo
 made a number of changes to the runtime build process. These changes will allow
 a number of future improvements. Out of an abundance of caution, these changes
 are only enabled for projects that have set their compatibility date to

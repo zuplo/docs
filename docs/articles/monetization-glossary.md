@@ -23,7 +23,7 @@ Stripe match with API Plans.
 
 An API Plan is where you specify the quotas that will be enforced for a
 particular user that has purchased access to your API. Plans contain a field
-(`External ID`) that is used to reference a Strip Product.
+(`External ID`) that's used to reference a Strip Product.
 
 ## Metering Service
 

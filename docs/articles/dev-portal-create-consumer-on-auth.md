@@ -31,7 +31,7 @@ Select Node.js version 16 or greater.
 
 ![Create an action](https://cdn.zuplo.com/assets/a46eabb3-4c22-476b-acc3-c5ab330d451e.png)
 
-Next, add the Node module [undici](https://www.npmjs.com/package/undici) as a
+Next, add the Node module [`undici`](https://www.npmjs.com/package/undici) as a
 package to the custom action. To open the module editor click the box icon on
 the side bar, then click **Add Dependency** Enter the name `undici` and aa
 specific version of the module, in this case `5.22.1`. Click **Create** when

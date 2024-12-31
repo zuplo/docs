@@ -4,13 +4,13 @@ sidebar_label: Problem Details Helper
 ---
 
 Zuplo encourages developers to build APIs with standard and actionable error
-messages. While any error format is easily supported, we default and encorage
+messages. While any error format is supported, we default and encourage
 developers to adopt the
 [Problem Details for HTTP APIs](https://httpproblems.com/) proposed standard
 format.
 
-Developers can use the built-in `HttpProblems` helper that is included with
-Zuplo to easily build standard error messages in custom policies.
+Developers can use the built-in `HttpProblems` helper that's included with Zuplo
+to build standard error messages in custom policies.
 
 For example, using the helper to return an unauthorized error on a custom
 authentication policy can be done as follows.

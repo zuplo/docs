@@ -5,7 +5,7 @@ sidebar_label: Multiple Auth Policies
 
 Sometimes multiple types of authentication are needed on an API. For example, an
 API could support JWT Authentication and API Key authentication or two different
-OAuth providers (i.e. Azure AD for employees and Auth0 for partners).
+OAuth providers (for example Azure AD for employees and Auth0 for partners).
 Configuring multiple policies in Zuplo can be done in several ways.
 
 ## JWT and API Key Authentication
@@ -42,8 +42,8 @@ rate limits could be set higher for authenticated users.
 :::
 
 In the route that handles multiple authentication policies, add the API Key
-Authentication policy and the JWT Authentication policy of your choice (i.e.
-Auth0, Okta, Cognito, etc.). For both policies, set the option
+Authentication policy and the JWT Authentication policy of your choice (for
+example Auth0, Okta, Cognito, etc.). For both policies, set the option
 `allowUnauthenticatedRequests` to `true`.
 
 Configure the other options as usual.

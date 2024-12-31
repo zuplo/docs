@@ -14,7 +14,7 @@ same route.
 :::info{title="What's Dynamic Rate Limiting?"}
 
 Traditionally, rate limits are static and the same for everyone. This approach
-does not let you tailor your rate limiting to your API user - you might want to
+doesn't let you tailor your rate limiting to your API user - you might want to
 offer higher rate limits for customers that pay more. Dynamic rate limiting
 allows you to determine an appropriate rate limit at request time.
 
@@ -44,7 +44,7 @@ Step 3 to
 
 ![Customer Metadata](/media/step-3-add-rate-limiting/image-2.png)
 
-Now that we have users with different `customerType`, we can utilize this
+Now that we've users with different `customerType`, we can utilize this
 information to rate limit them differently.
 
 ## 2/ Add a Custom Code Module
@@ -57,7 +57,7 @@ Name the module `rate-limit.ts`.
 
 :::info{title="What's a Module?"}
 
-Modules are Typescript functions that you can execute within Zuplo. They are
+Modules are Typescript functions that you can execute within Zuplo. They're
 typically used to add custom code within the request/response pipeline (ex.
 custom policies or request handlers). You can even perform network requests and
 use libraries within these modules.
@@ -139,7 +139,7 @@ out the other key and observe the difference in rate limits.
 
 ## Wrapping up
 
-Congratulations - you've just successfully built an API that is:
+Congratulations - you've just successfully built an API that's:
 
 - Protected by API key Authentication
 - Dynamically Rate Limited

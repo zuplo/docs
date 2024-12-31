@@ -13,7 +13,7 @@ order for the updated value to take effect.
 
 Environment variables can be configuration or secrets. While all values are
 stored encrypted at rest, only non-secret values can be read. Secrets are
-write-only, meaning the value cannot be retrieved once it is set.
+write-only, meaning the value can't be retrieved once it's set.
 
 ## Environment Variable Editor
 
@@ -32,11 +32,11 @@ like the value to be a secret or a regular value.
 Environment variables can be applied to one or many different environments. You
 can select one or more environments in which to apply the variable.
 
-| Environment                | Description                                                                                                                                                                                |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Prod                       | The environment that is deployed from your **default** branch in source control. This is usually called `main`.                                                                            |
-| Preview                    | Any environment that is deployed from source control that is **not the default** branch. (i.e. `staging` or `preview`). This also includes any branch that is created from a pull request. |
-| Development (Working Copy) | Any environment that is deployed while developing with the portal. Each developer gets their own development environment. These environments are always deployed to `zuplo.dev`            |
+| Environment                | Description                                                                                                                                                                                    |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Prod                       | The environment that's deployed from your **default** branch in source control. This is usually called `main`.                                                                                 |
+| Preview                    | Any environment that's deployed from source control that's **not the default** branch. (for example `staging` or `preview`). This also includes any branch that's created from a pull request. |
+| Development (Working Copy) | Any environment that's deployed while developing with the portal. Each developer gets their own development environment. These environments are always deployed to `zuplo.dev`                 |
 
 For the **Preview** environment option, a specific named environment can be
 selected. For example, if you want a variable set only for the environment
@@ -47,15 +47,15 @@ value **ONLY** applies to the developer who set the value.
 
 :::info
 
-A single environment variable name cannot overlap environments. For example, if
+A single environment variable name can't overlap environments. For example, if
 you set a variable named `MY_VAR` and select all the environments a second
-variable named `MY_VAR` cannot be set on say the **Production** environments.
+variable named `MY_VAR` can't be set on say the **Production** environments.
 
 :::
 
 ## Reserved Environment Variables
 
-Environment variables cannot start with `ZUPLO` or `__ZUPLO`.
+Environment variables can't start with `ZUPLO` or `__ZUPLO`.
 
 ## Using Environment Variables
 
@@ -97,7 +97,7 @@ on a policy option.
 ### Rewrite & Forwarding Handler
 
 When referencing environment variables inside of the URL Rewrite handler and the
-URL Forward handler, variables are substituted using Javascript style string
+URL Forward handler, variables are substituted using JavaScript style string
 interpolation.
 
 ```txt
@@ -114,9 +114,9 @@ use in your code:
 - `ZUPLO_ENVIRONMENT_STAGE` - The stage of the environment. Values are
   `production`, `preview`, `working-copy`, and `local`.
 - `ZUPLO_ENVIRONMENT_NAME` - The name of the environment. This is a globally
-  unique name for the environment. This is the same name that is used in the URL
+  unique name for the environment. This is the same name that's used in the URL
   of the environment. For example, `my-project-main-1235.zuplo.app`. Setting a
-  custom domain on the environment will not change this value.
+  custom domain on the environment won't change this value.
 - `ZUPLO_ACCOUNT_NAME` - The name of the Zuplo account where the environment is
   deployed.
 - `ZUPLO_PROJECT_NAME` - The name of the project where the environment is

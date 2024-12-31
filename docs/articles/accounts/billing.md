@@ -19,7 +19,7 @@ checkout page where you can update your payment method.
 
 :::note{title="Enterprise Plans"}
 
-Enterprise plans are setup with custom billing and cannot be managed through the
+Enterprise plans are setup with custom billing and can't be managed through the
 portal. Contact your account representative for questions or assistance.
 
 :::

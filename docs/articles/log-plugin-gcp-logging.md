@@ -41,13 +41,13 @@ the `jsonPayload` contains the text or objects passed into the log.
 
 Default fields are:
 
-- `severity` - The level of the log, i.e. `ERROR`, `INFO`, etc.
+- `severity` - The level of the log, for example `ERROR`, `INFO`, etc.
 - `requestId` - The UUID of the request (the value of the `zp-rid` header)
 - `environmentType` - Where the Zuplo API is running. Values are `edge`,
   `working-copy`, or `local`
 - `environmentStage` - If the environment is `working-copy`, `preview`, or
   `production`
-- `atomic_counter` - An atomic number that is used to order logs that have the
+- `atomic_counter` - An atomic number that's used to order logs that have the
   same timestamp
 - `environment` - The environment name of the Zuplo API
 - `rayId` - The Cloudflare RayID of the request

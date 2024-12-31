@@ -41,7 +41,7 @@ The built-in policies will validate the incoming JWT on the Authorization
 header. By default, the Authorization header will be left on the request and
 forwarded on to your backend.
 
-It is not recommended to validate the Access Token on both the gateway and the
+It isn't recommended to validate the Access Token on both the gateway and the
 backend. However, by forwarding the header to the backend you can transition
 your API from doing authentication on your backend to authorizing at the
 Gateway. See

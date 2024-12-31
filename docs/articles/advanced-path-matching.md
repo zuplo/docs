@@ -22,8 +22,8 @@ browser.
 
 ## Trailing Slashes
 
-In URLPattern, trailing slashes are not accepted unless explicitly specified.
-For example:
+In URLPattern, trailing slashes aren't accepted unless explicitly specified. For
+example:
 
 - `/cars/:manufacturer`
 
@@ -41,7 +41,7 @@ parts of the URL. For example:
 
 Path: `/products/:productId/sizes/:size` will match the following paths
 
-`/products/pizza/size/small` and set the params object on `request` to:
+`/products/pizza/size/small` and set the `params` object on `request` to:
 
 ```json
 {
@@ -52,7 +52,7 @@ Path: `/products/:productId/sizes/:size` will match the following paths
 
 :::tip
 
-Query-strings (or search parameters) will not affect path matching.
+Query-strings (or search parameters) won't affect path matching.
 
 :::
 

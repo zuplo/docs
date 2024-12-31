@@ -9,14 +9,14 @@ Zuplo, some best practices, and how to interpret the results.
 :::note{title="Serverless Zuplo"}
 
 This document applies only to Zuplo's serverless edge-based deployment. If you
-are running a managed dedicated instance of Zuplo, this document does not apply
+are running a managed dedicated instance of Zuplo, this document doesn't apply
 as the scaling characteristics are different.
 
 :::
 
 ## Cold Starts
 
-One thing to keep in mind with Zuplo is that it is a "serverless" platform. This
+One thing to keep in mind with Zuplo is that it's a "serverless" platform. This
 means that we automatically scale your API to handle any load. This makes Zuplo
 cost effective and scalable for APIs that have almost no traffic, APIs that have
 billions of requests per month, and API that have unpredictable traffic. Zuplo

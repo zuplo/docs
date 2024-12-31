@@ -16,7 +16,7 @@ Below are instructions on how to configure some of the common providers.
 Production Developer Portals must setup custom authentication.
 
 Out of the box, authentication to your developer portal uses Zuplo's test Auth0
-account. The test Auth0 account cannot be used in production (it will fail on
+account. The test Auth0 account can't be used in production (it will fail on
 custom domains) and is limited to a small number of users per month per project.
 
 :::
