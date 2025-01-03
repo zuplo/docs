@@ -460,12 +460,7 @@
     },
     {
       "source": "/docs/overview/policies{/}?",
-      "destination": "/docs/policies",
-      "permanent": true
-    },
-    {
-      "source": "/docs/policies/index",
-      "destination": "/docs/policies",
+      "destination": "/docs/policies/index",
       "permanent": true
     },
     {
