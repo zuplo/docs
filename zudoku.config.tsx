@@ -22,6 +22,10 @@ const config: ZudokuConfig = {
       from: "/",
       to: "/articles/what-is-zuplo",
     },
+    {
+      from: "/policies/index",
+      to: "/policies",
+    },
   ],
   theme: {
     dark: {
@@ -86,7 +90,7 @@ const config: ZudokuConfig = {
   ],
   sitemap: {
     siteUrl: "https://zuplo.com/docs",
-    exclude: ["/", "/policies/index"],
+    exclude: ["/", "/policies/index", "/policies"],
   },
   build: {
     rehypePlugins: [rehypeStaticImages],
