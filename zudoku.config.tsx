@@ -86,6 +86,7 @@ const config: ZudokuConfig = {
   ],
   sitemap: {
     siteUrl: "https://zuplo.com/docs",
+    exclude: ["/", ""],
   },
   build: {
     rehypePlugins: [rehypeStaticImages],
