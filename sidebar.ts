@@ -381,7 +381,7 @@ export const policies: SidebarEntry = [
   {
     type: "category",
     label: "Overview",
-    items: ["policies", "articles/policies"],
+    items: ["policies/index", "articles/policies"],
   },
   {
     type: "category",
