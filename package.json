@@ -27,7 +27,7 @@
     "@xyflow/react": "^12.3.6",
     "elkjs": "^0.9.3",
     "lucide-react": "^0.469.0",
-    "posthog-js": "^1.139.3",
+    "posthog-js": "^1.203.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "zudoku": "^0.23.3"
