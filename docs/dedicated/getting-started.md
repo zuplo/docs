@@ -32,26 +32,11 @@ To begin developing your API, you will need to create a local project. You can
 do this by running the `create-zuplo-api` command in your terminal:
 
 ```bash
-npx create-zuplo-api
+npx create-zuplo-api@latest
 ```
 
 This command will prompt you to enter a project name and options for your
 project.
-
-## Configure Your Project
-
-Next, you must configure your `zuplo.jsonc` file to point to the Zuplo Dedicated
-Managed project. You can do this by editing the `zuplo.jsonc` file in the root
-of your project directory. Set the `project` property equal to the name of your
-project.
-
-```json
-{
-  "version": 1,
-  "project": "your-project-name",
-  "compatibilityDate": "2024-09-02"
-}
-```
 
 ## Build your API
 
@@ -66,7 +51,7 @@ When you are ready to deploy your project to your Zuplo Dedicated Managed
 instance, you can run the following command inside your project directory:
 
 ```bash
-npx zuplo deploy --api-key $ZUPLO_API_KEY
+npx zuplo deploy --api-key $ZUPLO_API_KEY --project your-project-name --environment my-env
 ```
 
 :::tip
