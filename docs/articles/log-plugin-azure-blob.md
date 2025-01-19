@@ -31,7 +31,7 @@ interface AzureBlobLogEntry {
 }
 
 // The function that creates an entry
-async function generateLogEntry(response: Response, request: ZuploRequest)
+async function generateLogEntry(response: Response, request: ZuploRequest) {
   const entry: AzureBlobLogEntry = {
     timestamp: new Date().toISOString(),
     url: request.url,
@@ -46,7 +46,7 @@ async function generateLogEntry(response: Response, request: ZuploRequest)
 
 // Add the plugin - use a SAS URL
 runtime.addPlugin(
-  new AzureBlobPlugin<AzureLogEntry>({
+  new AzureBlobPlugin<AzureBlobLogEntry>({
     sasUrl: "https://YOUR_ACCOUNT.blob.core.windows.net/YOUR_CONTAINER?sv=2022-11-02&ss=b&srt=co&sp=wactfx&se=2045-11-17T13:50:53Z&st=2024-11-17T05:50:53Z&spr=https&sig=YOUR_SIG",
     batchPeriodSeconds: 1,
     generateLogEntry,
