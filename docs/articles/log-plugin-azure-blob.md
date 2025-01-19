@@ -31,7 +31,7 @@ interface AzureBlobLogEntry {
 }
 
 // The function that creates an entry
-async function generateLogEntry(response: Response, request: ZuploRequest) {
+async function generateLogEntry(response: Response, request: ZuploRequest, context: ZuploContext) {
   const entry: AzureBlobLogEntry = {
     timestamp: new Date().toISOString(),
     url: request.url,
