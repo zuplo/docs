@@ -28,7 +28,7 @@ const config: ZudokuConfig = {
       primary: "315.53 100% 50%",
       primaryForeground: "#ffffff",
       background: "0 0% 0%",
-      border: "216 28.74% 17.06",
+      border: "0 0% 7%",
     },
     light: {
       primary: "316 91% 45%",
