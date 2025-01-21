@@ -11,8 +11,8 @@ const config: ZudokuConfig = {
     logo: {
       alt: "Zuplo",
       src: {
-        light: "/zuplo-light.svg",
-        dark: "/zuplo-dark.svg",
+        light: "/docs/zuplo-light.svg",
+        dark: "/docs/zuplo-dark.svg",
       },
       width: "140px",
     },
