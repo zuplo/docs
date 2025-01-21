@@ -26,7 +26,7 @@
     "@sentry/vite-plugin": "^2.22.7",
     "@xyflow/react": "^12.3.6",
     "elkjs": "^0.9.3",
-    "lucide-react": "^0.469.0",
+    "lucide-react": "^0.473.0",
     "posthog-js": "^1.205.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -34,8 +34,8 @@
   },
   "devDependencies": {
     "@types/json-schema": "7.0.15",
-    "@types/node": "^22.10.2",
-    "@types/react": "^19.0.2",
+    "@types/node": "^22.10.7",
+    "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.2",
     "@typescript-eslint/parser": "^6.19.0",
     "eslint": "^8.51.0",
@@ -45,8 +45,8 @@
     "gray-matter": "4.0.3",
     "prettier": "3.4.2",
     "safe-marked": "16.0.0",
-    "tsx": "4.19.1",
-    "typescript": "5.7.2",
+    "tsx": "4.19.2",
+    "typescript": "5.7.3",
     "unified": "^11.0.5",
     "vfile": "^6.0.3"
   }
