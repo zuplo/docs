@@ -24,13 +24,13 @@
   "dependencies": {
     "@sentry/react": "^8.46.0",
     "@sentry/vite-plugin": "^2.22.7",
-    "@xyflow/react": "^12.3.6",
+    "@xyflow/react": "^12.4.2",
     "elkjs": "^0.9.3",
     "lucide-react": "^0.473.0",
     "posthog-js": "^1.205.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "zudoku": "^0.25.0"
+    "zudoku": "^0.25.3"
   },
   "devDependencies": {
     "@types/json-schema": "7.0.15",
