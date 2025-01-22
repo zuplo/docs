@@ -4,7 +4,7 @@ on:
 
 jobs:
   release:
-    name: Release
+    name: Update Zudoku
     runs-on: ubuntu-latest
     permissions:
       contents: write
