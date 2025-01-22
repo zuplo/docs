@@ -30,11 +30,7 @@ jobs:
       - run: git config --global user.email "zudoku-bot@zuplo.com"
       - run: git config --global user.name "Zudoku Bot"
 
-      - run: git add -A
-
-      - name: Commit Version Bump
+      - name: Commit and push if there are changes
         run: |
-          git commit -m "Updated Zudoku Package"
-
-      - name: Push Changes
-        run: git push origin main
+          git add -A
+          git diff --staged --quiet || (git commit -m "Updated Zudoku Package" && git push origin main)
