@@ -8,8 +8,14 @@ import rehypeStaticImages from "./src/mdx/static-images.js";
 const config: ZudokuConfig = {
   basePath: "/docs",
   page: {
-    pageTitle: "Zuplo Docs",
-    logoUrl: "https://portal.zuplo.com/zuplo.svg",
+    logo: {
+      alt: "Zuplo",
+      src: {
+        light: "/docs/zuplo-light.svg",
+        dark: "/docs/zuplo-dark.svg",
+      },
+      width: "140px",
+    },
   },
   metadata: {
     title: "%s - Zuplo Docs",
