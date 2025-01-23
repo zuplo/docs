@@ -2,6 +2,8 @@
 title: Zuplo API Monetization
 ---
 
+<EnterpriseFeature name="Monetization" />
+
 Zuplo enables you, as an _API provider_, to effortlessly monetize your APIs. It
 provides a compelling set of defaults, while also allowing customizations to
 suit your company's unique business needs. You can create separate plans for

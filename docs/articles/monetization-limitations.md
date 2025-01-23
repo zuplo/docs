@@ -2,6 +2,8 @@
 title: Limitations
 ---
 
+<EnterpriseFeature name="Monetization" />
+
 Zuplo strives to deliver the most complete, flexible, and intuitive API
 monetization system. Given the multitude of different pricing models and their
 various configurations, if the current offering doesn't currently suit your
