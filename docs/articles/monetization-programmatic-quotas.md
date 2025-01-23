@@ -3,6 +3,8 @@ title: Monetization Programmatic Quotas
 sidebar_label: Programmatic Quotas
 ---
 
+<EnterpriseFeature name="Monetization" />
+
 When adding monetization to your API, you would usually set the number of meters
 a request will consume in the settings of the
 [Monetization Policy](https://zuplo.com/docs/policies/monetization-inbound). For

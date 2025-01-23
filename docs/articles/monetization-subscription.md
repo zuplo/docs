@@ -3,6 +3,8 @@ title: Monetization Subscriptions
 sidebar_label: Subscriptions
 ---
 
+<EnterpriseFeature name="Monetization" />
+
 You can programmatically access details of your users subscription when using
 Zuplo monetization. Here's an example inbound policy that logs the subscription
 details.
