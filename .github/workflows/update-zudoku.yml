@@ -16,7 +16,7 @@ jobs:
         id: generate-token
         uses: actions/create-github-app-token@v1
         with:
-          app-id: "1124747"
+          app-id: ${{ vars.INTEGRATIONS_APP_ID }}
           private-key: ${{ secrets.INTEGRATIONS_APP_PRIVATE_KEY }}
 
       - uses: actions/checkout@v4
@@ -39,8 +39,8 @@ jobs:
       - run: git config --global user.name "Zudoku Bot"
 
       - name: Commit and push if there are changes
-        env:
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
         run: |
           git add -A
           git diff --staged --quiet || (git commit -m "Updated Zudoku Package" && git push origin main)
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
