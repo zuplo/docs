@@ -11,14 +11,17 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     steps:
-      - uses: actions/checkout@v4
-
+      # Must create the token first as the checkout step needs to use this token
       - name: Generate a token
         id: generate-token
         uses: actions/create-github-app-token@v1
         with:
           app-id: "1124747"
           private-key: ${{ secrets.INTEGRATIONS_APP_PRIVATE_KEY }}
+
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
 
       - name: Install Node.js
         uses: actions/setup-node@v4
@@ -36,8 +39,6 @@ jobs:
       - run: git config --global user.name "Zudoku Bot"
 
       - name: Commit and push if there are changes
-        env:
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
         run: |
           git add -A
           git diff --staged --quiet || (git commit -m "Updated Zudoku Package" && git push origin main)
