@@ -6,8 +6,6 @@ jobs:
   update:
     name: Update
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     # This can only be triggered from main
     if: github.ref == 'refs/heads/main'
@@ -28,7 +26,6 @@ jobs:
           node-version: "22"
           registry-url: "https://registry.npmjs.org"
           cache: "npm"
-          token: ${{ steps.generate-token.outputs.token }}
 
       - name: Install dependencies
         run: npm install
@@ -39,6 +36,8 @@ jobs:
       - run: git config --global user.name "Zudoku Bot"
 
       - name: Commit and push if there are changes
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
         run: |
           git add -A
           git diff --staged --quiet || (git commit -m "Updated Zudoku Package" && git push origin main)
