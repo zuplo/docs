@@ -39,6 +39,8 @@ jobs:
       - run: git config --global user.name "Zudoku Bot"
 
       - name: Commit and push if there are changes
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
         run: |
           git add -A
           git diff --staged --quiet || (git commit -m "Updated Zudoku Package" && git push origin main)
