@@ -20,8 +20,8 @@ const rehypeStaticImages: Plugin<[], Root, Root> =
           ) {
             if (!node.properties.src.startsWith("http")) {
               let url = node.properties.src;
-              const relativePath = url.startsWith("/public/")
-                ? `/docs${url.substring("/public".length)}`
+              const relativePath = url.startsWith("/")
+                ? `/docs/${url.replace(/^\//, "")}`
                 : url;
               if (process.env.USE_IMAGE_CDN) {
                 node.properties.src = `https://cdn.zuplo.com${relativePath}`;
