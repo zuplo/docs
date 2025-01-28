@@ -6,6 +6,8 @@ import prettier from "prettier";
 import { createMarkdown } from "safe-marked";
 import { fixMarkdown } from "./fix-markdown.js";
 
+const EXCLUDED_POLICIES = ["api-key-auth-inbound"];
+
 const renderMd = createMarkdown();
 const projectDir = path.join(import.meta.dirname, "..");
 const policyDir = path.join(projectDir, "generated/policies");
@@ -129,6 +131,8 @@ for (const schemaPath of policySchemas) {
   const schemaDirName = path.dirname(schemaPath);
   const policyId = schemaDirName.split("/").pop()!;
   const currentDir = path.join(projectDir, schemaDirName);
+
+  if (EXCLUDED_POLICIES.includes(policyId)) continue;
 
   const schema = (await import(
     path.join(currentDir, "schema.json")
