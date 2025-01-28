@@ -548,7 +548,7 @@ export const devPortal: SidebarEntry = [
     items: [
       "dev-portal/introduction",
       "dev-portal/migration",
-      "dev-portal/upgrading",
+      "dev-portal/updating",
     ],
   },
   {
