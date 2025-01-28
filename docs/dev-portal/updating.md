@@ -1,0 +1,25 @@
+---
+title: Updating Versions
+---
+
+When developing your Dev Portal locally, you likely want to keep your version of
+the Dev Portal up-to-date with the latest changes. This guide will walk you
+through the process of installing the latest version of the Dev Portal.
+
+Inside of your project directory, run the following command to update the Dev
+Portal's dependencies:
+
+```bash
+npm install zudoku@latest
+```
+
+Occasionally, there may be peer dependencies such as `react` that need to be
+updated. If you encounter any messages that indicate that peer dependencies need
+to be updated, run the following command:
+
+```bash
+npm install react@latest react-dom@latest
+```
+
+Updates that require more than just updating the dependencies will be noted in
+the changelog.

@@ -545,7 +545,11 @@ export const devPortal: SidebarEntry = [
     type: "category",
     label: "Getting started",
     icon: "sparkles",
-    items: ["dev-portal/introduction", "dev-portal/migration"],
+    items: [
+      "dev-portal/introduction",
+      "dev-portal/migration",
+      "dev-portal/upgrading",
+    ],
   },
   {
     type: "category",
