@@ -22,7 +22,7 @@ repository, you can follow
 Zuplo API is redeployed, you should now be able to retrieve your public-ready
 OpenAPI file by hitting `https://<your-prod-zuplo-api-domain>/openapi`.
 
-![Zuplo route](/media/add-api-to-backstage/image-3.png)
+![Zuplo route](../../public/media/add-api-to-backstage/image-3.png)
 
 ## 2/ Add Zuplo to your `reading.allowed` list
 
@@ -86,7 +86,7 @@ You should now be able to see your API under the APIs tab in Backstage. If you
 navigate to your API and click the **DEFINITION** tab - you can even preview
 your OpenAPI spec.
 
-![OpenAPI spec](/media/add-api-to-backstage/image-6.png)
+![OpenAPI spec](../../public/media/add-api-to-backstage/image-6.png)
 
 Congratulations! You've successfully added your Zuplo API to Backstage. You can
 repeat the steps above for all of your OpenAPI files.
@@ -128,13 +128,13 @@ Save and commit this file.
 You can register existing APIs in your catalog directly from Backstage. Navigate
 to the APIs tab, and click **REGISTER EXISTING API**.
 
-![APIs list](/media/add-api-to-backstage/image-5.png)
+![APIs list](../../public/media/add-api-to-backstage/image-5.png)
 
 When prompted for the component URL, enter the GitHub URL of your
 `catalog-info.yaml` file (ex.
 https://github.com/AdrianMachado/adrian-api/blob/main/catalog-info.yaml).
 
-![Adding the GitHub URL](/media/add-api-to-backstage/image-4.png)
+![Adding the GitHub URL](../../public/media/add-api-to-backstage/image-4.png)
 
 Complete registration of your API. If you run into issues connecting your
 repository, see the [troubleshooting guide](#troubleshooting).

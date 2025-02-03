@@ -26,14 +26,14 @@ Go to your project in the Zuplo portal and open to the **Settings** tab (1),
 then select **Custom Domain** (2) and click the **Add New Custom Domain** button
 to open the `New Custom Domain` configuration modal.
 
-![Custom Domain](/media/custom-domains/image.png)
+![Custom Domain](../../public/media/custom-domains/image.png)
 
 ### 2. Add your domain
 
 Then, pick the environment you want to assign the domain to and enter your apex
 domain (e.g. example.com) or subdomain (e.g. api.example.com)
 
-![Add New Domain](/media/custom-domains/image-1.png)
+![Add New Domain](../../public/media/custom-domains/image-1.png)
 
 Once saved, you will be provided with a `CNAME` configuration that will look
 something like the one below that you'll use in the next step.

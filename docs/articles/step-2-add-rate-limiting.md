@@ -32,18 +32,18 @@ Navigate to your route in the **Route Designer** (**Code** > `routes.oas.json`),
 click the **Policies** dropdown, then click **Add Policy** on the request
 pipeline.
 
-![Add policy](/media/step-2-add-rate-limiting/image.png)
+![Add policy](../../public/media/step-2-add-rate-limiting/image.png)
 
 Search for the rate limiting policy (not the "Complex" one) and click it.
 
-![Add rate-limiting policy](/media/step-2-add-rate-limiting/image-2.png)
+![Add rate-limiting policy](../../public/media/step-2-add-rate-limiting/image-2.png)
 
 By default, the policy will rate limit based on the caller's IP address (as
 indicated by the `rateLimitBy` field). It will allow 2 requests
 (`requestsAllowed`) every 1 minute (`timeWindowMinutes`). You can explore the
 rest of the policy's documentation and configuration in the right panel.
 
-![Rate limiting policy](/media/step-2-add-rate-limiting/image-3.png)
+![Rate limiting policy](../../public/media/step-2-add-rate-limiting/image-3.png)
 
 To apply the policy, click **OK**. Then, save your changes to redeploy.
 
@@ -52,7 +52,7 @@ To apply the policy, click **OK**. Then, save your changes to redeploy.
 Now try firing some requests against your API. You should receive a **429 Too
 many requests** on your 3rd request.
 
-![429 response](/media/step-2-add-rate-limiting/image-4.png)
+![429 response](../../public/media/step-2-add-rate-limiting/image-4.png)
 
 Your rate limiting policy is now intercepting excess requests, protecting the
 `getting-started` API.
@@ -64,11 +64,11 @@ your [auto generated developer documentation portal](./developer-portal.md).
 
 To access your API's developer portal, click the **Gateway deployed** button in
 your toolbar and click the link under Developer Portal.
-![Developer portal menu](/media/step-2-add-rate-limiting/image-5.png) You can
-also find this link in the Getting Started section of the portal, every time you
-navigate to your project.
+![Developer portal menu](../../public/media/step-2-add-rate-limiting/image-5.png)
+You can also find this link in the Getting Started section of the portal, every
+time you navigate to your project.
 
-![Developer Portal Endpoint](/media/step-2-add-rate-limiting/image-7.png)
+![Developer Portal Endpoint](../../public/media/step-2-add-rate-limiting/image-7.png)
 
 When you use certain policies like rate limiting, Zuplo will document the
 responses and headers associated with that policy. As you can see on the right,

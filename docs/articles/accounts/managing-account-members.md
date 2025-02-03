@@ -15,19 +15,19 @@ menu.
 The view will display the users that are currently members of the account and
 their roles.
 
-![Members](/media/managing-account-members/image.png)
+![Members](../../public/media/managing-account-members/image.png)
 
 On the top of the page, you can enter an email address of the user you want to
 invite. For accounts with the enterprise role feature, users are added to the
 account with the role of **Member**, for all other accounts users are added with
 the role of **Admin**.
 
-![Invite User](/media/managing-account-members/image-1.png)
+![Invite User](../../public/media/managing-account-members/image-1.png)
 
 After inviting a user, you will see the invited user in the list with the
 members.
 
-![Invited User](/media/managing-account-members/image-2.png)
+![Invited User](../../public/media/managing-account-members/image-2.png)
 
 ## Change Member Role
 
@@ -36,10 +36,10 @@ members.
 Once a user has accepted the invitation, you can change their role by selecting
 the role from the drop down.
 
-![Change Role](/media/managing-account-members/image-3.png)
+![Change Role](../../public/media/managing-account-members/image-3.png)
 
 ## Removing a Member
 
 To remove a user from the account, click the remove icon next to the user.
 
-![Remove Member](/media/managing-account-members/image-4.png)
+![Remove Member](../../public/media/managing-account-members/image-4.png)

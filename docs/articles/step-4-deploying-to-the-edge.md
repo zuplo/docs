@@ -32,7 +32,7 @@ to GitHub click the **Connect to GitHub** button and follow the auth flow.
 You'll need to grant permissions for any GitHub organizations you want to work
 with.
 
-![Connect GitHub](/media/step-4-deploying-to-the-edge/image-1.png)
+![Connect GitHub](../../public/media/step-4-deploying-to-the-edge/image-1.png)
 
 Next, a dialog will open asking you to authorize Zuplo. Click the **Authorize
 Zuplo** button.
@@ -75,7 +75,7 @@ If you weren't prompted to select a GitHub org, it's likely that you are already
 a member of an account that has authorized Zuplo. To add Zuplo to a new
 organization click **Add GitHub Account** in the org picker list.
 
-![Connect Org](/media/step-4-deploying-to-the-edge/image-2.png)
+![Connect Org](../../public/media/step-4-deploying-to-the-edge/image-2.png)
 
 ## 2/ Connect GitHub to your Project
 
@@ -84,7 +84,7 @@ With your GitHub App configured, you can now return to the Zuplo portal. In the
 Create a new repository by clicking the **Create new repository** button. You
 will be prompted that this will open GitHub. Click to continue.
 
-![Create Repository](/media/step-4-deploying-to-the-edge/image-3.png)
+![Create Repository](../../public/media/step-4-deploying-to-the-edge/image-3.png)
 
 In the GitHub UI, you can rename your repository if you want. Click the **Create
 repository** button at the bottom of the page and return to the Zuplo Portal.
@@ -92,11 +92,11 @@ repository** button at the bottom of the page and return to the Zuplo Portal.
 The portal will reload and you will see your new repository listed. Click
 **Connect** to connect Zuplo to that repository.
 
-![Connect](/media/step-4-deploying-to-the-edge/image-4.png)
+![Connect](../../public/media/step-4-deploying-to-the-edge/image-4.png)
 
 After the connection succeeds you will see a link to your GitHub repository.
 
-![Connected Repository](/media/step-4-deploying-to-the-edge/image-5.png)
+![Connected Repository](../../public/media/step-4-deploying-to-the-edge/image-5.png)
 
 Click the link to return to GitHub. You should see a green check next to the
 commit hash (1). When you hover your mouse over that you'll see the Zuplo
@@ -128,21 +128,21 @@ Let's make a simple change to our `working-copy` environment. Let's do something
 simple like capitalize the **Summary** field from 'Get all todos' to 'Get All
 Todos'. It doesn't really matter what the change is.
 
-![Changes Summary](/media/step-4-deploying-to-the-edge/image-6.png)
+![Changes Summary](../../public/media/step-4-deploying-to-the-edge/image-6.png)
 
 Save your changes. Click the GitHub button at bottom left and choose **Commit &
 Push**.
 
-![Commit & Push](/media/step-4-deploying-to-the-edge/image-7.png)
+![Commit & Push](../../public/media/step-4-deploying-to-the-edge/image-7.png)
 
 Enter a description of your change in the dialog that pops up:
 
-![Change Summary](/media/step-4-deploying-to-the-edge/image-8.png)
+![Change Summary](../../public/media/step-4-deploying-to-the-edge/image-8.png)
 
 Click **Commit & Push** will create a new temporary branch in GitHub with a name
 `zup-...`. On the next dialog, click **Create Pull Request**.
 
-![Create PR](/media/step-4-deploying-to-the-edge/image-9.png)
+![Create PR](../../public/media/step-4-deploying-to-the-edge/image-9.png)
 
 This will navigate you to the screen in GitHub that allows you to create a Pull
 Request. Change the **base** branch to `development` (since that's the
@@ -162,7 +162,7 @@ The successful merge will trigger a rebuild and deployment of `development` with
 your change. You can check this by choosing the environment `development` in
 Zuplo and navigating to the **read only** Route Designer.
 
-![Navigating Environments](/media/step-4-deploying-to-the-edge/image.png)
+![Navigating Environments](../../public/media/step-4-deploying-to-the-edge/image.png)
 
 This shows how you can use widely recognized GitOps practices to manage how code
 flows through your environments using Pull Requests and protected branches.
