@@ -48,7 +48,7 @@ On the bottom toolbar of the Zuplo portal you will see a selector for the
 current environment. You can switch between environments by clicking on the name
 of the current environment and then selecting another environment.
 
-![Environments](/media/environments/image.png)
+![Environments](../../public/media/environments/image.png)
 
 Your development (working copy) environment will be listed at the top in a
 separate section. Your git deployed environments will be listed next with the

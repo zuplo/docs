@@ -91,7 +91,7 @@ the API Key Bucket you want to use and click **Create Consumer**. Enter a name
 for the consumer. Set the metadata to include the `testApiKey` flag as shown
 below.
 
-![Test API Key](/media/bypass-policy-for-testing/image.png)
+![Test API Key](../../public/media/bypass-policy-for-testing/image.png)
 
 Now when you call the API with the test API Key, the `monetization-inbound`
 policy will be bypassed.

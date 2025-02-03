@@ -60,7 +60,7 @@ always change it later.
 
 3. Be sure to save your changes.
 
-![Policy pipeline](/media/monetization-policy-setup/image.png)
+![Policy pipeline](../../public/media/monetization-policy-setup/image.png)
 
 ## 3/ Test the API
 
@@ -84,13 +84,13 @@ header.
 4. Edit the API Request if needed and click **Test**. You should see a
    successful response. Click **Test** a few more times.
 
-![Successful response](/media/monetization-policy-setup/image-1.png)
+![Successful response](../../public/media/monetization-policy-setup/image-1.png)
 
 5. Close the API Playground and click the **Subscription** link in the Developer
    Portal header. Notice the Usage section shows that you have consumed some of
    your request quota from your plan.
 
-![Max quota status](/media/monetization-policy-setup/image-2.png)
+![Max quota status](../../public/media/monetization-policy-setup/image-2.png)
 
 6. Return to the API Playground and click **Test** until you receive an error
    response telling you that you have exhausted your quota.

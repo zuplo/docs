@@ -18,7 +18,7 @@ API Test Console.
    easily
 4. Paste the JSON Body into the test's Body field and click the **Test** button
 
-![Docs Folder](/media/guides/testing-graphql/test-request.png)
+![Docs Folder](../../public/media/guides/testing-graphql/test-request.png)
 
 ## 2/ Using a Third-Party Request Tool
 

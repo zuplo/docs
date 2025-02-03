@@ -24,7 +24,12 @@ const rehypeStaticImages: Plugin<[], Root, Root> =
                 ? `/docs/${url.replace(/^\//, "")}`
                 : url;
               if (process.env.USE_IMAGE_CDN) {
-                node.properties.src = `https://cdn.zuplo.com${relativePath}`;
+                node.properties.src = new URL(
+                  relativePath,
+                  "https://cdn.zuplo.com",
+                )
+                  .toString()
+                  .replace("/public/media/", "/media/");
               } else {
                 node.properties.src = relativePath;
               }

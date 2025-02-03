@@ -21,7 +21,7 @@ Open the _Settings_ section of your project and select _Environment Variables_.
 Create a new variable and name it `BACKEND_SECRET`. Set the value to a secure,
 random value. Ensure that the value is marked as a secret.
 
-![Set Environment Variable](/media/securing-backend-shared-secret/image.png)
+![Set Environment Variable](../../public/media/securing-backend-shared-secret/image.png)
 
 ## 2/ Create a Set Header Policy
 
@@ -32,7 +32,7 @@ runs before the request is sent to your backend.
 Navigate to the route you want to secure and add a new policy. Select the **Add
 or Set Request Headers** policy type and configure it as follows:
 
-![Set Header Policy](/media/securing-backend-shared-secret/image-1.png)
+![Set Header Policy](../../public/media/securing-backend-shared-secret/image-1.png)
 
 The configuration uses the environment variable via the `$env(BACKEND_SECRET)`
 selector as shown below.
