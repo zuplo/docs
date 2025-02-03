@@ -12,38 +12,40 @@ monthly active users.
 ### 1/ Create OAuth Application
 
 Create a
-[new OAuth application](https://clerk.com/docs/advanced-usage/clerk-idp) using
-the Clerk API.
+[new OAuth application](https://clerk.com/docs/advanced-usage/clerk-idp). This
+is done in their portal in the **OAuth applications** section.
 
-The API request can be called using the curl command below. You will need to
-retrieve the Clerk secret key from the Dashboard.
+Create the application with the following settings:
 
-The `callback_url` value must be set to the url of your Zuplo Dev Portal with
-the base path (this defaults to `/docs/`). Make sure you have the trailing slash
-set.
+- **Name**: This can be anything you like
+- **Scopes**: Select the `openid`, `profile`, and `email` scopes
+- **Redirect URI**: This should be the URL of your Zuplo Developer Portal. This
+  is the URL that you use to access the Developer Portal. For example,
+  `https://your-url.dev.zuplo.com/docs/`. It's IMPORTANT that the URL ends with
+  the trailing `/`.
+- **Public** - Enable this option so that your Clerk OAuth application supports
+  Authorization Code with PKCE (Proof Key for Code Exchange) flow.
 
-```bash
-curl
- -X POST https://api.clerk.com/v1/oauth_applications \
- -H "Authorization: Bearer <CLERK_SECRET_KEY>"  \
- -H "Content-Type: application/json" \
- -d {"callback_url":"https://my-dev-portal.zuplo.app/docs/", "name": "zuplo_dev_portal", "scopes": "profile email"}
-```
-
-The response of this request will return a JSON object that will contain the
-values for `client_id` and `client_secret`. Inside of the Zuplo Portal create
-two environment variables:
+After creating the application, you will receive a Client ID. You will also see
+a list of Application configuration URLs. You will use these values to create an
+environment variable in Zuplo.
 
 Create a new environment variable named `ZUPLO_PUBLIC_CLERK_CLIENT_ID` and set
-the value to the `client_id` value in the API response. Create a new environment
-variable, this one needs to be a secret, named `CLERK_CLIENT_SECRET` and set it
-to the value of the `client_secret` value in the API response.
+the value to the **Client ID** value in the portal. Create another variable
+named `ZUPLO_PUBLIC_CLERK_ISSUER` and set the value to the Clerk domain. Note,
+the issuer isn't explicitly shown in the portal. It's the domain of any of the
+values shown in the **Application configuration URLs**. So, if your **Discovery
+URL** is
+`https://sensible-skunk-49.clerk.accounts.dev/.well-known/openid-configuration`,
+then the issuer is `https://sensible-skunk-49.clerk.accounts.dev`.
+
+![Application Urls](../../public/media/dev-portal-clerk-auth/image.png)
 
 ### 2/ Configure the Developer Portal
 
 Inside of the Zuplo Developer portal navigate to the **Code Editor** tab and
-open the `dev-portal.json` file. Open the JSON tab and edit the file to look
-like the following.
+open the `dev-portal.json` file. You can set the values in the form or open the
+JSON tab and edit the file to look like the following.
 
 ```json
 {
@@ -52,11 +54,9 @@ like the following.
   "enableAuthentication": true,
   "requireAuthentication": false,
   "authentication": {
-    "provider": "clerk",
-    "issuer": "https://your-url.clerk.accounts.dev",
-    "clientId": "$env(ZUPLO_PUBLIC_CLERK_CLIENT_ID)",
-    "clientSecret": "$env(CLERK_CLIENT_SECRET)",
-    "scope": "openid profile email"
+    "provider": "oidc",
+    "issuer": "$env(ZUPLO_PUBLIC_CLERK_ISSUER)",
+    "clientId": "$env(ZUPLO_PUBLIC_CLERK_CLIENT_ID)"
   }
 }
 ```
