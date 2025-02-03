@@ -18,13 +18,14 @@ const rehypeStaticImages: Plugin<[], Root, Root> =
             node.tagName === "img" &&
             node.properties
           ) {
-            console.log(node.properties.src);
             if (!node.properties.src.startsWith("http")) {
               let url = node.properties.src;
               let relativePath = url;
+              // Ex. Direct /media references
               if (url.startsWith("/")) {
                 relativePath = `/docs${url}`;
               } else if (url.startsWith("../../public/")) {
+                // Ex. relative navigation to the public/media folder
                 relativePath = url.replace("../../public/", "/docs/");
               }
               if (process.env.USE_IMAGE_CDN) {
