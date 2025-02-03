@@ -558,6 +558,7 @@ export const devPortal: SidebarEntry = [
     link: "dev-portal/zudoku/configuration/overview",
     items: [
       "dev-portal/zudoku/configuration/api-reference",
+      "dev-portal/zudoku/configuration/api-catalog",
       "dev-portal/zudoku/configuration/navigation",
       "dev-portal/zudoku/configuration/search",
       "dev-portal/zudoku/configuration/authentication",
@@ -582,6 +583,7 @@ export const devPortal: SidebarEntry = [
     label: "Guide",
     icon: "monitor-check",
     items: [
+      "dev-portal/zudoku/static-files",
       "dev-portal/zudoku/environment-variables",
       "dev-portal/zudoku/custom-pages",
       "dev-portal/zudoku/using-multiple-apis",

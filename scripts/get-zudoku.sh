@@ -32,7 +32,7 @@ mkdir -p "$DOWNLOAD_DIR/extracted"
 tar -xzf "$TAR_FILE" -C "$DOWNLOAD_DIR/extracted"
 
 # Find the docs folder in the extracted contents
-EXTRACTED_DIR=$(find "$DOWNLOAD_DIR/extracted" -mindepth 1 -maxdepth 1 -type d | head -n 1)
+export EXTRACTED_DIR=$(find "$DOWNLOAD_DIR/extracted" -mindepth 1 -maxdepth 1 -type d | head -n 1)
 
 if [ -z "$EXTRACTED_DIR" ]; then
     log "Error: Unable to find extracted directory."
@@ -49,6 +49,8 @@ else
     log "Error: 'pages' folder not found in the extracted contents."
     exit 1
 fi
+
+# npx tsx ./scripts/update-zudoku-sidebar.mts
 
 # Clean up
 log "Cleaning up temporary files..."
