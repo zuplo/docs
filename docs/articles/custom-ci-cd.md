@@ -77,17 +77,17 @@ jobs:
       # This way if the deploy fails, we fail before piping to tee.
       # Note that you aren't required to use tee. We are using it in this example
       # so that the output is available to the terminal and written to the file.
-      - name: Zuplo Deploy
+      - name: Zup Deploy
         shell: bash
         run: |
-          npx zuplo deploy --apiKey "$ZUPLO_API_KEY" | tee ./DEPLOYMENT_STDOUT
+          npx zuplo deploy --apiKey "$ZUPLO_API_KEY" 2>&1 | tee ./DEPLOYMENT_STDOUT
 
-      - name: Zuplo Test
+      - name: Zup Test
         shell: bash
         run: |
-          npx zuplo test --endpoint $(cat ./DEPLOYMENT_STDOUT |  sed -E 's/Deployed to (.*)/\1/')
+          npx zuplo test --endpoint $(cat ./DEPLOYMENT_STDOUT | grep "Deployed to" | sed -n -E 's/.*Deployed to (https:\/\/[^ ]+).*/\1/p')
 
-      - name: Zuplo Delete
+      - name: Zup Delete
         if: ${{ github.event_name == 'pull_request' }}
         shell: bash
         run: |
@@ -122,21 +122,28 @@ pipelines:
           script:
             - npm install
       - step:
-          name: Zuplo Deploy
+          name: Zup Deploy
           # set -o pipefail
           # This way if the deploy fails, we fail before piping to tee.
-          # Note that you aren't required to use tee. We are using it in this example so that the output is available to the terminal and written to the file.
+          # Note that you are not required to use tee. We are using it in this example so that the output is available to the terminal and written to the file.
           script:
             - set -o pipefail
-            - npx zuplo deploy --apiKey "$ZUPLO_API_KEY" | tee
+            - npx zuplo deploy --apiKey "$ZUPLO_API_KEY" 2>&1 | tee
               ./DEPLOYMENT_STDOUT
           artifacts:
             - DEPLOYMENT_STDOUT
       - step:
-          name: Zuplo Test
+          name: Zup Test
           script:
-            - npx zuplo test --endpoint $(cat ./DEPLOYMENT_STDOUT |  sed -E
-              's/Deployed to (.*)/\1/')
+            - npx zuplo test --endpoint $(cat ./DEPLOYMENT_STDOUT |  sed -n -E
+              's/.*Deployed to (https:\/\/[^ ]+).*/\1/p')
+      - step:
+          name: Zup Delete (if necessary)
+          script:
+            - echo $BITBUCKET_PR_ID
+            - if [[ -n "$BITBUCKET_PR_ID" ]]; then npx zuplo delete --url $(cat
+              ./DEPLOYMENT_STDOUT |  sed -n -E 's/.*Deployed to (https:\/\/[^
+              ]+).*/\1/p') --apiKey "$ZUPLO_API_KEY" --wait; exit; fi
   pull-requests:
     "**":
       - step:
@@ -202,19 +209,19 @@ steps:
 
   # set -o pipefail
   # This way if the deploy fails, we fail before piping to tee.
-  # Note that you aren't required to use tee. We are using it in this example so that the output is available to the terminal and written to the file.
+  # Note that you are not required to use tee. We are using it in this example so that the output is available to the terminal and written to the file.
   - script: |
       set -o pipefail 
-      npx zuplo deploy --api-key $(ZUPLO_API_KEY) | tee ./DEPLOYMENT_STDOUT
-    displayName: "Zuplo Deploy"
+      FORCE_COLOR=0 npx zuplo deploy --api-key $(ZUPLO_API_KEY) 2>&1 | tee ./DEPLOYMENT_STDOUT
+    displayName: "Zup Deploy"
 
   - script: |
-      npx zuplo test --endpoint $(cat ./DEPLOYMENT_STDOUT |  sed -E 's/Deployed to (.*)/\1/')
-    displayName: "Zuplo Test"
+      npx zuplo test --endpoint $(cat ./DEPLOYMENT_STDOUT |  sed -n -E 's/.*Deployed to (https:\/\/[^ ]+).*/\1/p')
+    displayName: "Zup Test"
 
   - script: |
-      npx zuplo delete --url $(cat ./DEPLOYMENT_STDOUT |  sed -E 's/Deployed to (.*)/\1/') --api-key $(ZUPLO_API_KEY) --wait
-    displayName: "Zuplo Delete"
+      npx zuplo delete --url $(cat ./DEPLOYMENT_STDOUT |  sed -n -E 's/.*Deployed to (https:\/\/[^ ]+).*/\1/p') --api-key $(ZUPLO_API_KEY) --wait
+    displayName: "Zup Delete"
     # Only run this step if the build is a pull request
     condition: eq(variables['Build.Reason'], 'PullRequest')
 
