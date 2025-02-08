@@ -61,7 +61,7 @@ const config: ZudokuConfig = {
       label: "Documentation",
     },
     {
-      id: "dev-portal",
+      id: "devPortal",
       label: "Developer Portal",
     },
     {
