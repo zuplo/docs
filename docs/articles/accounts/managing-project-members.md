@@ -13,7 +13,7 @@ To manage project members, navigate to the project settings page and click the
 **Members** tab, which shows a list of all members in the project and their
 roles.
 
-![Project Members](../../public/media/managing-project-members/image-1.png)
+![Project Members](../../../public/media/managing-project-members/image-1.png)
 
 This list will display all account members - even those who have no access to
 the project.
@@ -29,7 +29,7 @@ account admin and can't be changed.
 For users who aren't account admins, you can change their role by selecting the
 desired role from the dropdown.
 
-![Member Role](../../public/media/managing-project-members/image-2.png)
+![Member Role](../../../public/media/managing-project-members/image-2.png)
 
 ## Remove Project Member
 
