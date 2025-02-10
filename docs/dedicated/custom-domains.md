@@ -17,3 +17,15 @@ as the ingress, you can even use your own IP addresses.
 
 For the full details on how to configure custom domains with your managed
 dedicated instance of Zuplo, please contact your account manager.
+
+## Preview environments
+
+By default, preview environments are deployed to a wildcard subdomain managed by
+Zuplo. For example, if your account name is `acme`, the preview environment urls
+are hosted at `*.acme.zuplo.work`, so each environment will have a URL like
+`https://my-environment-123.acme.zuplo.work`.
+
+Some customer want to use their own domain for preview environments. For
+example, `*.dev.acme.com`. This is supported with Zuplo Managed Dedicated
+instances. Depending on your cloud provider, this may require you to create a
+wildcard certificate for your domain.
