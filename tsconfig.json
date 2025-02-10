@@ -16,6 +16,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": ["src/**/*.{ts,tsx}", "sidebar.ts", "zudoku.config.tsx"],
+  "include": [
+    "src/**/*.{ts,tsx}",
+    "sidebar.ts",
+    "zudoku.config.tsx",
+    "src/zudoku-env.d.ts"
+  ],
   "exclude": ["node_modules", "policies", "temp", "dist"]
 }
