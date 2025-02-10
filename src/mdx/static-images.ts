@@ -28,9 +28,7 @@ const rehypeStaticImages: Plugin<[], Root, Root> =
 
             // Normalize the path
             let relativePath = originalSrc;
-            if (originalSrc.startsWith("/")) {
-              relativePath = `/docs${originalSrc}`;
-            } else {
+            if (!originalSrc.startsWith("/")) {
               // Extract the /media/... portion of the path
               const mediaMatch = originalSrc.match(/\/media\/.*$/);
               if (mediaMatch) {
@@ -45,9 +43,10 @@ const rehypeStaticImages: Plugin<[], Root, Root> =
 
             // Set the source based on CDN usage
             if (process.env.USE_IMAGE_CDN === "true") {
-              const cdnUrl = new URL(relativePath, "https://cdn.zuplo.com")
-                .toString()
-                .replace("/public/media/", "/media/");
+              const cdnUrl = new URL(
+                `/docs${relativePath}`,
+                "https://cdn.zuplo.com",
+              ).toString();
 
               node.properties.src = cdnUrl;
 
