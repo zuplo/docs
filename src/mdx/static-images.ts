@@ -16,42 +16,53 @@ const rehypeStaticImages: Plugin<[], Root, Root> =
           if (
             node.type === "element" &&
             node.tagName === "img" &&
-            node.properties
+            node.properties &&
+            node.properties.src
           ) {
-            if (!node.properties.src.startsWith("http")) {
-              let url = node.properties.src;
-              let relativePath = url;
-              // Ex. Direct /media references
-              if (url.startsWith("/")) {
-                relativePath = `/docs${url}`;
-              } else if (url.startsWith("../../public/")) {
-                // Ex. relative navigation to the public/media folder
-                relativePath = url.replace("../../public/", "/docs/");
-              }
-              if (process.env.USE_IMAGE_CDN) {
-                node.properties.src = new URL(
-                  relativePath,
-                  "https://cdn.zuplo.com",
-                )
-                  .toString()
-                  .replace("/public/media/", "/media/");
+            const originalSrc = node.properties.src;
+
+            // Skip external URLs
+            if (originalSrc.startsWith("http")) {
+              return;
+            }
+
+            // Normalize the path
+            let relativePath = originalSrc;
+            if (originalSrc.startsWith("/")) {
+              relativePath = `/docs${originalSrc}`;
+            } else {
+              // Extract the /media/... portion of the path
+              const mediaMatch = originalSrc.match(/\/media\/.*$/);
+              if (mediaMatch) {
+                relativePath = mediaMatch[0];
               } else {
-                node.properties.src = relativePath;
+                const fullPath = new URL(originalSrc, `file://${vfile.path}`)
+                  .pathname;
+                const mediaPathMatch = fullPath.match(/\/media\/.*$/);
+                relativePath = mediaPathMatch ? mediaPathMatch[0] : fullPath;
               }
             }
 
-            if (
-              node.properties.src.startsWith("https://cdn.zuplo.com/") &&
-              !node.properties.src.endsWith(".svg") &&
-              !node.properties.src.endsWith(".gif")
-            ) {
-              const url = new URL(node.properties.src);
-              node.properties.srcSet = [
-                `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=640,format=auto${url.pathname}   640w`,
-                `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=960,format=auto${url.pathname}   960w`,
-                `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=1280,format=auto${url.pathname} 1280w`,
-                `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=2560,format=auto${url.pathname} 2560w`,
-              ].join(", ");
+            // Set the source based on CDN usage
+            if (process.env.USE_IMAGE_CDN === "true") {
+              const cdnUrl = new URL(relativePath, "https://cdn.zuplo.com")
+                .toString()
+                .replace("/public/media/", "/media/");
+
+              node.properties.src = cdnUrl;
+
+              // Add srcSet for non-vector images
+              if (!cdnUrl.endsWith(".svg") && !cdnUrl.endsWith(".gif")) {
+                const cdnPathname = new URL(cdnUrl).pathname;
+                node.properties.srcSet = [
+                  `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=640,format=auto${cdnPathname}   640w`,
+                  `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=960,format=auto${cdnPathname}   960w`,
+                  `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=1280,format=auto${cdnPathname} 1280w`,
+                  `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=2560,format=auto${cdnPathname} 2560w`,
+                ].join(", ");
+              }
+            } else {
+              node.properties.src = relativePath;
             }
           }
         })(),
@@ -59,4 +70,5 @@ const rehypeStaticImages: Plugin<[], Root, Root> =
     });
     await Promise.all(promises);
   };
+
 export default rehypeStaticImages;
