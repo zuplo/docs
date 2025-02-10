@@ -71,7 +71,7 @@ endpoints (ex. `https://nextjs-with-supabase-xi-seven.vercel.app/login`). Your
 developer portal will navigate to these pages to create and end sessions. Your
 Authentication Settings should look like this once you are done:
 
-![img](../../public/media/supabase-auth/dev-portal-updated.png)
+![](../../public/media/supabase-auth/dev-portal-updated.png)
 
 Or in the JSON file:
 
