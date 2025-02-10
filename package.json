@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@sentry/react": "^8.51.0",
-    "@sentry/vite-plugin": "^2.22.7",
+    "@sentry/vite-plugin": "^3.1.2",
     "@xyflow/react": "^12.4.2",
     "elkjs": "^0.9.3",
     "lucide-react": "^0.473.0",
