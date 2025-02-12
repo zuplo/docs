@@ -7,8 +7,6 @@ import { GithubButton } from "./GithubButton.js";
 import { PolicyOverview } from "./PolicyOverview.js";
 import ZupIt from "./ZupIt.js";
 
-type _react = typeof React;
-
 const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
 
 const EmbeddedChat = lazy(() => import("./EmbeddedChat.js"));
@@ -27,6 +25,24 @@ export const mdxComponents = {
       size={18}
     />
   ),
+  img: (props: any) => {
+    if (
+      props.src &&
+      !props.srcSet &&
+      !props.src.endsWith(".svg") &&
+      !props.src.endsWith(".gif")
+    ) {
+      const path = new URL(props.src).pathname;
+      props.srcSet = [
+        `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=640,format=auto${path}   640w`,
+        `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=960,format=auto${path}   960w`,
+        `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=1280,format=auto${path} 1280w`,
+        `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=2560,format=auto${path} 2560w`,
+      ].join(", ");
+    }
+
+    return <img {...props} />;
+  },
   PolicyOverview,
   EnterpriseFeature,
   EmbeddedChat: () => {

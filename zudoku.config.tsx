@@ -3,10 +3,13 @@ import { devPortal, docs, policies, programming } from "./sidebar.js";
 import { mdxComponents } from "./src/components.js";
 import { diagramPlugin } from "./src/diagrams/common/plugin.js";
 import { HeadNavigation } from "./src/HeadNavigation";
-import rehypeStaticImages from "./src/mdx/static-images.js";
+// import rehypeStaticImages from "./src/mdx/static-images.js";
 
 const config: ZudokuConfig = {
   basePath: "/docs",
+  cdnUrl: {
+    media: "https://cdn.zuplo.com/docs",
+  },
   page: {
     logo: {
       alt: "Zuplo",
@@ -31,14 +34,10 @@ const config: ZudokuConfig = {
   ],
   theme: {
     dark: {
-      primary: "315.53 100% 50%",
-      primaryForeground: "#ffffff",
-      background: "0 0% 0%",
-      border: "0 0% 7%",
+      primary: "316 91% 45%",
     },
     light: {
       primary: "316 91% 45%",
-      background: "0 0 100%",
       border: "220 13.04% 90.98%",
     },
   },
@@ -96,7 +95,7 @@ const config: ZudokuConfig = {
     exclude: ["/", ""],
   },
   build: {
-    rehypePlugins: [rehypeStaticImages],
+    // rehypePlugins: [rehypeStaticImages],
   },
 };
 
