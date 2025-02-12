@@ -3,7 +3,6 @@ import { devPortal, docs, policies, programming } from "./sidebar.js";
 import { mdxComponents } from "./src/components.js";
 import { diagramPlugin } from "./src/diagrams/common/plugin.js";
 import { HeadNavigation } from "./src/HeadNavigation";
-// import rehypeStaticImages from "./src/mdx/static-images.js";
 
 const config: ZudokuConfig = {
   basePath: "/docs",
@@ -93,9 +92,6 @@ const config: ZudokuConfig = {
   sitemap: {
     siteUrl: "https://zuplo.com/docs",
     exclude: ["/", ""],
-  },
-  build: {
-    // rehypePlugins: [rehypeStaticImages],
   },
 };
 
