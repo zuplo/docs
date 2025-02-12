@@ -30,7 +30,7 @@
     "posthog-js": "^1.205.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "zudoku": "0.0.0-643eecc"
+    "zudoku": "0.0.0-3b1f4f4"
   },
   "devDependencies": {
     "@types/json-schema": "7.0.15",
