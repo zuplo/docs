@@ -17,7 +17,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+      - run: npm ci
+      - run: npm run build
       - id: "auth"
         name: "Authenticate to Google Cloud"
         uses: "google-github-actions/auth@v2"
@@ -30,7 +35,7 @@ jobs:
       - name: Upload Media (png)
         uses: "google-github-actions/upload-cloud-storage@v2"
         with:
-          path: public/media/
+          path: dist/docs/assets/
           glob: "**/*.png"
           destination: cdn.zuplo.com/docs
           process_gcloudignore: false
@@ -41,7 +46,7 @@ jobs:
       - name: Upload Media (gif)
         uses: "google-github-actions/upload-cloud-storage@v2"
         with:
-          path: public/media/
+          path: dist/docs/assets/
           glob: "**/*.gif"
           destination: cdn.zuplo.com/docs
           process_gcloudignore: false
@@ -52,7 +57,7 @@ jobs:
       - name: Upload Media (svg)
         uses: "google-github-actions/upload-cloud-storage@v2"
         with:
-          path: public/media/
+          path: dist/docs/assets/
           glob: "**/*.svg"
           destination: cdn.zuplo.com/docs
           process_gcloudignore: false
