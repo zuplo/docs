@@ -1,3 +1,4 @@
+import React from "react";
 import { Callout } from "zudoku/components";
 
 export function EnterpriseFeature({ name }: { name?: string }) {
