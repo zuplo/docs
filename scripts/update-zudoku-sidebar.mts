@@ -8,7 +8,7 @@ if (!extractedDir) {
 }
 
 const zudokuConfigPath = resolve(extractedDir, "./docs/sidebar.ts");
-const outfile = resolve("./dist/zudoku.sidebar.js");
+const outfile = resolve("./node_modules/.zuplo-docs/zudoku.sidebar.js");
 await esbuild.build({
   entryPoints: [zudokuConfigPath],
   outfile,

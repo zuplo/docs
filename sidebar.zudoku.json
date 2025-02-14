@@ -42,7 +42,10 @@
     "type": "category",
     "label": "Extending",
     "icon": "blocks",
-    "items": ["dev-portal/zudoku/custom-plugins", "dev-portal/zudoku/api-keys"]
+    "items": [
+      "dev-portal/zudoku/custom-plugins",
+      "dev-portal/zudoku/api-keys"
+    ]
   },
   {
     "icon": "component",

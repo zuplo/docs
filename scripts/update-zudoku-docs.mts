@@ -30,10 +30,25 @@ async function updateDocs(dir: string) {
         // Insert text after frontmatter
         const frontmatterEndIndex = content.indexOf("---", 3) + 3;
         if (frontmatterEndIndex > 2) {
-          content =
-            content.slice(0, frontmatterEndIndex) +
-            warningNote +
-            content.slice(frontmatterEndIndex);
+          // If we have a title, then just add the warning note after the frontmatter
+          if (
+            content.indexOf("title: ") >= 0 &&
+            content.indexOf("title: ") < frontmatterEndIndex
+          ) {
+            content =
+              content.slice(0, frontmatterEndIndex) +
+              warningNote +
+              content.slice(frontmatterEndIndex);
+          } else if (content.indexOf("# ")) {
+            const titleEndIndex = content.indexOf("\n", content.indexOf("# "));
+            content =
+              content.slice(0, titleEndIndex) +
+              "\n" +
+              warningNote +
+              content.slice(titleEndIndex);
+          }
+        } else {
+          content = warningNote + content;
         }
 
         await fs.writeFile(filePath, content, "utf8");
