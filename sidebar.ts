@@ -136,6 +136,11 @@ export const docs: SidebarEntry = [
       "dedicated/architecture",
       "dedicated/networking",
       "dedicated/custom-domains",
+      {
+        type: "category",
+        label: "Akamai",
+        items: ["dedicated/akamai/cdn"],
+      },
     ],
   },
   {
