@@ -588,10 +588,10 @@ export const devPortal: SidebarEntry = [
     label: "Guide",
     icon: "monitor-check",
     items: [
-      "dev-portal/zudoku/static-files",
-      "dev-portal/zudoku/environment-variables",
-      "dev-portal/zudoku/custom-pages",
-      "dev-portal/zudoku/using-multiple-apis",
+      "dev-portal/zudoku/guides/static-files",
+      "dev-portal/zudoku/guides/environment-variables",
+      "dev-portal/zudoku/guides/custom-pages",
+      "dev-portal/zudoku/guides/using-multiple-apis",
     ],
   },
   {
