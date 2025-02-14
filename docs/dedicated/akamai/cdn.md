@@ -35,7 +35,8 @@ Gateway CDN. See the Akamai docs on
 Make the following behavior changes:
 
 1. Configure the Origin URL to point to the URL given to you by Zuplo for your
-   API gateway. This would look something similar to below:
+   API gateway. Ensure that the Forward Host Header is configured to be the
+   Origin Hostname. This would look something similar to below:
    ![api_gateway_origin_url](../../../public/media/managed-dedicated-akamai/api_gateway_origin_url.png)
 
 2. Turn on Content Targeting (Edgescape) in the Geolocation rule in the Property
@@ -62,19 +63,17 @@ Under the Default Rule page, add the following behaviors:
 
 2.  Modify Incoming Request Header behavior, with the following fields: Action:
     Add, Select Header Name: Other, Custom Header Name: X-Forwarded-Host, Header
-    Value: \{\{builtin.AK_HOST\}\}.
+    Value: \{\{builtin.AK_HOST\}\}. This should look like the picture below:
 
-These behaviors should look like the picture below:
+    ![dev_portal_cdn_base_path_and_incoming_header_behaviors](../../../public/media/managed-dedicated-akamai/default_rule_dev_portal_config.png)
 
-![dev_portal_cdn_base_path_and_incoming_header_behaviors](../../../public/media/managed-dedicated-akamai/default_rule_dev_portal_config.png)
+3.  Caching, which should have the following configurations: Caching Option
+    should be set to "Honor origin Cache-Control and Expires", Force Validation
+    of stale objects should be set to "Always revalidate with origin", Default
+    Maxage should be set to 0 seconds, and all the Cache-Control header
+    directives should be enabled. This will look like below:
 
-3. Caching, which should have the following configurations: Caching Option
-   should be set to "Honor origin Cache-Control and Expires", Force Validation
-   of stale objects should be set to "Always revalidate with origin", Default
-   Maxage should be set to 0 seconds, and all the Cache-Control header
-   directives should be enabled. This will look like below:
-
-![dev_portal_caching_behavior](../../../public/media/managed-dedicated-akamai/dev_portal_cdn_caching_behavior.png)
+    ![dev_portal_caching_behavior](../../../public/media/managed-dedicated-akamai/dev_portal_cdn_caching_behavior.png)
 
 Congratulations, you've set up your Akamai CDNs to serve your API Gateway and
 Developer Portal! At this point, you should be able to test that these things
