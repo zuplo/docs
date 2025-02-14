@@ -1,8 +1,6 @@
 export const fixMarkdown = (content: string) =>
   content
     .replaceAll(/\.mdx?(#.*?)?\)/gm, "$1)")
-    // replace paths like `../../public` without the `public` prefix
-    .replaceAll(/\((\.\.\/)+public/gm, "(")
     // replace outdated directives with correct syntax
     .replaceAll(/:::\s([^\n]+)/gm, ":::$1")
     // /^(.*?)\s*{#([\w-]+)}$
