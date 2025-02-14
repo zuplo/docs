@@ -3,8 +3,8 @@ title: Setting up Akamai CDNs
 sidebar_label: Akamai CDN
 ---
 
-When running managed dedicated on the Akamai Cloud, you need to set up 2 CDNs,
-one for your API endpoint deployments, and one for your developer portal.
+When running managed dedicated on the Akamai Cloud, you will configure the
+Akamai CDN to serve your API Gateway and Developer Portal.
 
 This document outlines the configurations you need to add to your Akamai CDNs to
 set them up to access your API gateway and developer portal.
@@ -14,7 +14,29 @@ the
 [Akamai docs](https://techdocs.akamai.com/property-mgr/docs/know-your-around)
 for more details.
 
-### Prerequisites
+## Domains
+
+Before you configure the CDN for your API Gateway and Developer Portal, you will
+to decide how you would like your domains to be setup. Generally, you will
+provision two types of domains - a static domain for production and wildcard
+domains for preview environments.
+
+For preview environments, you will use wildcard domains so that each environment
+(i.e. each Git branch) will have its own subdomain. For example, you might use
+`*.api.example.com` for the API gateway and `*.dev.example.com` for the
+developer portal. This will allow you to have URLs for each environment like
+`https://my-environment-123.api.example.com` and
+`https://my-environment-123.dev.example.com`.
+
+For production, you will want to use friendly domains like `api.example.com` and
+`developers.example.com`. Some customers also choose to host environments list
+staging on custom domains as well. This is up to you, just let your Zuplo
+account manager know how you would like to set up your domains.
+
+The setup for both configurations is the same, but the domain name and
+certificates will be different.
+
+## Prerequisites
 
 1. Provision the domains that you would like these CDNs to have and certificates
    for those domains. You will need a domain for the API gateway, as well as a
