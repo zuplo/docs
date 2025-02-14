@@ -18,10 +18,10 @@ for more details.
 
 1. Provision the domains that you would like these CDNs to have and certificates
    for those domains. You will need a domain for the API gateway, as well as a
-   domain for the CDN.
+   domain for the dev portal.
 2. Request the Origin URLs for your API gateway and developer portal from your
-   Zuplo contact.
-3. Let your Zuplo point of contact know what hostnames/domains you will be using
+   Zuplo account manager.
+3. Let your Zuplo account manager know what hostnames/domains you will be using
    in your CDNs.
 
 ## API Gateway CDN
