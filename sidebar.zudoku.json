@@ -1,0 +1,58 @@
+[
+  {
+    "type": "category",
+    "label": "Configuration",
+    "icon": "cog",
+    "link": "dev-portal/zudoku/configuration/overview",
+    "items": [
+      "dev-portal/zudoku/configuration/api-reference",
+      "dev-portal/zudoku/configuration/api-catalog",
+      "dev-portal/zudoku/configuration/navigation",
+      "dev-portal/zudoku/configuration/search",
+      "dev-portal/zudoku/configuration/authentication",
+      "dev-portal/zudoku/configuration/customization",
+      "dev-portal/zudoku/configuration/sentry",
+      "dev-portal/zudoku/configuration/vite-config"
+    ]
+  },
+  {
+    "type": "category",
+    "label": "Markdown",
+    "icon": "book-open-text",
+    "link": "dev-portal/zudoku/markdown/overview",
+    "items": [
+      "dev-portal/zudoku/markdown/mdx",
+      "dev-portal/zudoku/markdown/admonitions",
+      "dev-portal/zudoku/markdown/code-blocks"
+    ]
+  },
+  {
+    "type": "category",
+    "label": "Guides",
+    "icon": "monitor-check",
+    "items": [
+      "dev-portal/zudoku/guides/static-files",
+      "dev-portal/zudoku/guides/environment-variables",
+      "dev-portal/zudoku/guides/custom-pages",
+      "dev-portal/zudoku/guides/using-multiple-apis",
+      "dev-portal/zudoku/guides/managing-api-keys-and-identities"
+    ]
+  },
+  {
+    "type": "category",
+    "label": "Extending",
+    "icon": "blocks",
+    "items": ["dev-portal/zudoku/custom-plugins", "dev-portal/zudoku/api-keys"]
+  },
+  {
+    "icon": "component",
+    "type": "category",
+    "label": "Components",
+    "items": [
+      "dev-portal/zudoku/components/callout",
+      "dev-portal/zudoku/components/icons",
+      "dev-portal/zudoku/components/shadcn",
+      "dev-portal/zudoku/components/playground"
+    ]
+  }
+]

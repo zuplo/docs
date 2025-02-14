@@ -1,4 +1,5 @@
-import { cp } from "fs/promises";
+import esbuild from "esbuild";
+import { writeFile } from "fs/promises";
 import { resolve } from "path";
 
 const extractedDir = process.env.EXTRACTED_DIR;
@@ -7,14 +8,41 @@ if (!extractedDir) {
 }
 
 const zudokuConfigPath = resolve(extractedDir, "./docs/sidebar.ts");
+const outfile = resolve("./dist/zudoku.sidebar.js");
+await esbuild.build({
+  entryPoints: [zudokuConfigPath],
+  outfile,
+  external: ["zudoku"],
+  bundle: true,
+  format: "esm",
+});
 
-const tempConfigPath = new URL("../zudoku.sidebar.ts", import.meta.url)
-  .pathname;
+const { components, docs } = await import(outfile);
 
-await cp(zudokuConfigPath, tempConfigPath);
+const categoriesToRemove = ["Getting started", "Deployment"];
+const combined = [...docs, ...components].filter(
+  (item) => !categoriesToRemove.includes(item.label),
+);
 
-console.log({ extractedDir, zudokuConfigPath });
+function updatePaths(item) {
+  if (typeof item === "string") {
+    item = `dev-portal/zudoku/${item}`;
+  } else if (typeof item === "object") {
+    if (item.link) {
+      item.link = `dev-portal/zudoku/${item.link}`;
+    }
 
-const zudokuConfig = await import(tempConfigPath);
+    if (Array.isArray(item)) {
+      item = item.map(updatePaths);
+    } else if (item.type === "category") {
+      item.items = item.items.map(updatePaths);
+    } else if (item.type === "doc") {
+      item.path = item.path.replace(/^\/docs/, "");
+    }
+  }
+  return item;
+}
 
-console.log({ zudokuConfig });
+const sidebar = updatePaths(combined);
+
+await writeFile("./sidebar.zudoku.json", JSON.stringify(sidebar, null, 2));

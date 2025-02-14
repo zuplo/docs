@@ -1,5 +1,6 @@
 import type { SidebarEntry } from "zudoku";
 import { errors } from "./generated/errors";
+import zudokuSidebar from "./sidebar.zudoku.json";
 
 export const docs: SidebarEntry = [
   {
@@ -556,48 +557,5 @@ export const devPortal: SidebarEntry = [
       "dev-portal/updating",
     ],
   },
-  {
-    type: "category",
-    label: "Configuration",
-    icon: "cog",
-    link: "dev-portal/zudoku/configuration/overview",
-    items: [
-      "dev-portal/zudoku/configuration/api-reference",
-      "dev-portal/zudoku/configuration/api-catalog",
-      "dev-portal/zudoku/configuration/navigation",
-      "dev-portal/zudoku/configuration/search",
-      "dev-portal/zudoku/configuration/authentication",
-      "dev-portal/zudoku/configuration/customization",
-      "dev-portal/zudoku/configuration/sentry",
-      "dev-portal/zudoku/configuration/vite-config",
-    ],
-  },
-  {
-    type: "category",
-    label: "Markdown",
-    icon: "book-open-text",
-    link: "dev-portal/zudoku/markdown/overview",
-    items: [
-      "dev-portal/zudoku/markdown/mdx",
-      "dev-portal/zudoku/markdown/admonitions",
-      "dev-portal/zudoku/markdown/code-blocks",
-    ],
-  },
-  {
-    type: "category",
-    label: "Guide",
-    icon: "monitor-check",
-    items: [
-      "dev-portal/zudoku/guides/static-files",
-      "dev-portal/zudoku/guides/environment-variables",
-      "dev-portal/zudoku/guides/custom-pages",
-      "dev-portal/zudoku/guides/using-multiple-apis",
-    ],
-  },
-  {
-    type: "category",
-    label: "Extending",
-    icon: "blocks",
-    items: ["dev-portal/zudoku/custom-plugins", "dev-portal/zudoku/api-keys"],
-  },
+  ...(zudokuSidebar as SidebarEntry),
 ];

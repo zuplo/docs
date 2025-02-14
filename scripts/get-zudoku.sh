@@ -50,7 +50,7 @@ else
     exit 1
 fi
 
-# npx tsx ./scripts/update-zudoku-sidebar.mts
+npx tsx ./scripts/update-zudoku-sidebar.mts
 
 # Clean up
 log "Cleaning up temporary files..."
