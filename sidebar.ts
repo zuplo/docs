@@ -139,7 +139,6 @@ export const docs: SidebarEntry = [
       {
         type: "category",
         label: "Akamai",
-        // link: "dedicated/akamai",
         items: ["dedicated/akamai/cdn"],
       },
     ],
