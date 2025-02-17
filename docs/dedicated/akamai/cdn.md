@@ -59,7 +59,7 @@ preview environment and your production environment is below.
 ![configure_multiple_hostnames](../../../public/media/managed-dedicated-akamai/multiple_hostname_domains.png)
 
 In this example, the preview environment domain is the wildcard domain
-"\*.zuplo.apidemo.org", and the production domain is "ftest.zuplo.apidemo.org".
+`*.zuplo.apidemo.org`, and the production domain is `ftest.zuplo.apidemo.org`.
 
 After configuring the CDN domains, make the following behavior changes:
 
@@ -91,7 +91,7 @@ preview environment and your production environment is below.
 ![configure_multiple_hostnames](../../../public/media/managed-dedicated-akamai/multiple_hostname_domains.png)
 
 In this example, the preview environment domain is the wildcard domain
-"\*.zuplo.apidemo.org", and the production domain is "ftest.zuplo.apidemo.org".
+`*.zuplo.apidemo.org`, and the production domain is `ftest.zuplo.apidemo.org`.
 
 Under the Default Rule page, add the following behaviors:
 
