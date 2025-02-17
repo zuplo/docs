@@ -14,11 +14,32 @@ the
 [Akamai docs](https://techdocs.akamai.com/property-mgr/docs/know-your-around)
 for more details.
 
+### Domains
+
+Before you configure the CDN for your API Gateway and Developer Portal, you will
+to decide how you would like your domains to be setup. Generally, you will
+provision two types of domains - a static domain for production and wildcard
+domains for preview environments.
+
+For preview environments, you will use wildcard domains so that each environment
+(i.e. each Git branch) will have its own subdomain. For example, you might use
+`*.api.example.com` for the API gateway and `*.dev.example.com` for the
+developer portal. This will allow you to have URLs for each environment like
+`https://my-environment-123.api.example.com` and
+`https://my-environment-123.dev.example.com`.
+
+For production, you will want to use friendly domains like `api.example.com` and
+`developers.example.com`. Some customers also choose to host environments like
+staging on custom domains as well. This is up to you, just let your Zuplo
+account manager know how you would like to set up your domains.
+
+The setup for both configurations is the same, but the domain name and
+certificates will be different.
+
 ### Prerequisites
 
 1. Provision the domains that you would like these CDNs to have and certificates
-   for those domains. You will need a domain for the API gateway, as well as a
-   domain for the dev portal.
+   for those domains, according to the domain section.
 2. Request the Origin URLs for your API gateway and developer portal from your
    Zuplo account manager.
 3. Let your Zuplo account manager know what hostnames/domains you will be using
@@ -28,11 +49,19 @@ for more details.
 
 This section guides you on how to configure your API Gateway CDN.
 
-Add the API gateway domain you provisioned to the Property Hostname for the API
-Gateway CDN. See the Akamai docs on
+Add the API gateway domain(s) you provisioned to the Property Hostname for the
+API Gateway CDN. See the Akamai docs on
 [configuring HTTPS hostnames](https://techdocs.akamai.com/property-mgr/docs/serve-content-over-https).
 
-Make the following behavior changes:
+An example of how you might configure your API Gateway CDN domains for your
+preview environment and your production environment is below.
+
+![configure_multiple_hostnames](../../../public/media/managed-dedicated-akamai/multiple_hostname_domains.png)
+
+In this example, the preview environment domain is the wildcard domain
+"\*.zuplo.apidemo.org", and the production domain is "ftest.zuplo.apidemo.org".
+
+After configuring the CDN domains, make the following behavior changes:
 
 1. Configure the Origin URL to point to the URL given to you by Zuplo for your
    API gateway. Ensure that the Forward Host Header is configured to be the
@@ -50,16 +79,26 @@ Make the following behavior changes:
 
 This section guides you on how to set up the Developer Portal CDN.
 
-Add a property hostname with a wildcard to your Developer Portal CDN, similar to
-below:
+Add the Developer Portal gateway domain(s) you provisioned to the Property
+Hostname for the API Gateway CDN. See the Akamai docs on
+[configuring HTTPS hostnames](https://techdocs.akamai.com/property-mgr/docs/serve-content-over-https).
+This is done similarly to your API gateway CDN hostname configuration, but with
+the domains you provisioned for your Developer Portal.
 
-![wildcard_domain](../../../public/media/managed-dedicated-akamai/dev_portal_cdn_wildcard_hostname.png)
+An example of how you might configure your Developer Portal CDN domains for your
+preview environment and your production environment is below.
+
+![configure_multiple_hostnames](../../../public/media/managed-dedicated-akamai/multiple_hostname_domains.png)
+
+In this example, the preview environment domain is the wildcard domain
+"\*.zuplo.apidemo.org", and the production domain is "ftest.zuplo.apidemo.org".
 
 Under the Default Rule page, add the following behaviors:
 
 1.  Configure the origin URL to be the URL given to be the one given to you by
     Zuplo for your Developer Portal. This will look similarly to how you
-    configured it for your API Gateway CDN.
+    configured it for your API Gateway CDN. Take note that the Forward Host
+    header should also be set as the Origin Hostname.
 
 2.  Modify Incoming Request Header behavior, with the following fields: Action:
     Add, Select Header Name: Other, Custom Header Name: X-Forwarded-Host, Header
