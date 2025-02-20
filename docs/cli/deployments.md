@@ -22,7 +22,7 @@ See concrete end-to-end examples of how to use this in your CI/CD job at
 
 ## Common Use Cases
 
-The following examples assume that you are passing in your --api-key either as
+The following examples assume that you are passing in your `--api-key` either as
 an argument or through the `ZUPLO_API_KEY` environment variable.
 
 ### Deploying your Gateway
@@ -31,22 +31,14 @@ an argument or through the `ZUPLO_API_KEY` environment variable.
 # The following will use the current Git branch as the name of the environment
 
 git checkout -b my-new-branch
-zuplo deploy
+zuplo deploy --project my-project
 ```
 
 ```bash
 # If you don't wish to use the current Git branch as the name of the
 # environment, you can specify one using --environment
 
-zuplo deploy --environment my-env-name
-```
-
-```bash
-# If you have configured your remote origin differently from portal.zuplo.com,
-# you can still force it to deploy. Be aware that this could make merging
-# changes impossible if the remote don't share a common ancestor.
-
-zuplo deploy --no-verify-remote
+zuplo deploy --project my-project --environment my-env-name
 ```
 
 ## Polling Timeout
