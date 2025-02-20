@@ -48,3 +48,23 @@ zuplo deploy --environment my-env-name
 
 zuplo deploy --no-verify-remote
 ```
+
+## Polling Timeout
+
+By default, the deploy command will poll the status of the deployment every
+second for 150 seconds. For most deployments this is enough time for the build
+and deploy process to complete. However, if you have a large project, this may
+not be enough time. You can increase the timeout by setting the following
+environment variables.
+
+- `POLL_INTERVAL` - The interval in seconds between each poll. Default is 1
+  second.
+- `MAX_POLL_RETRIES` - The maximum number of retries before the command times
+  out. Default is 150.
+
+```bash
+POLL_INTERVAL=5000 MAX_POLL_RETRIES=300 zuplo deploy
+```
+
+Note, that even if the CLI times out, the deployment will continue. You can
+check the status of the deployment in the Zuplo portal.
