@@ -355,10 +355,9 @@ export const programming: SidebarEntry = [
       "articles/runtime-behaviors",
       "articles/zp-body-removed",
       "articles/audit-log",
-
       "articles/custom-cors-policy",
-
       "articles/zuplo-json",
+      "articles/compatibility-dates",
     ],
   },
   {
