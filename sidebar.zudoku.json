@@ -17,6 +17,14 @@
   },
   {
     "type": "category",
+    "label": "Customization",
+    "icon": "palette",
+    "items": [
+      "dev-portal/zudoku/customization/available-variables"
+    ]
+  },
+  {
+    "type": "category",
     "label": "Markdown",
     "icon": "book-open-text",
     "link": "dev-portal/zudoku/markdown/overview",
@@ -55,7 +63,8 @@
       "dev-portal/zudoku/components/callout",
       "dev-portal/zudoku/components/icons",
       "dev-portal/zudoku/components/shadcn",
-      "dev-portal/zudoku/components/playground"
+      "dev-portal/zudoku/components/playground",
+      "dev-portal/zudoku/components/syntax-highlight"
     ]
   }
 ]
