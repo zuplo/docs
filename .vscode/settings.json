@@ -22,5 +22,12 @@
   "files.associations": {
     "*.mdx": "markdown"
   },
-  "cSpell.words": ["Amberflo", "asns", "Moesif", "overridable", "Supabase"]
+  "cSpell.words": [
+    "Amberflo",
+    "asns",
+    "Hydrolix",
+    "Moesif",
+    "overridable",
+    "Supabase"
+  ]
 }

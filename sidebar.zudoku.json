@@ -10,9 +10,17 @@
       "dev-portal/zudoku/configuration/navigation",
       "dev-portal/zudoku/configuration/search",
       "dev-portal/zudoku/configuration/authentication",
-      "dev-portal/zudoku/configuration/customization",
       "dev-portal/zudoku/configuration/sentry",
       "dev-portal/zudoku/configuration/vite-config"
+    ]
+  },
+  {
+    "type": "category",
+    "label": "Customization",
+    "icon": "palette",
+    "items": [
+      "dev-portal/zudoku/customization/colors-theme",
+      "dev-portal/zudoku/customization/fonts"
     ]
   },
   {
@@ -55,7 +63,8 @@
       "dev-portal/zudoku/components/callout",
       "dev-portal/zudoku/components/icons",
       "dev-portal/zudoku/components/shadcn",
-      "dev-portal/zudoku/components/playground"
+      "dev-portal/zudoku/components/playground",
+      "dev-portal/zudoku/components/syntax-highlight"
     ]
   }
 ]
