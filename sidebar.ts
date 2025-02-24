@@ -73,13 +73,16 @@ export const docs: SidebarEntry = [
       },
       {
         type: "category",
-        label: "Logging",
+        label: "Plugins and Logging",
         items: [
           "articles/log-plugins",
+          "articles/log-plugin-akamai-api-security",
+          "articles/log-plugin-azure-event-hubs",
+          "articles/log-plugin-hydrolix-traffic-peak",
+          "articles/log-plugin-azure-blob",
           "articles/log-plugin-vmware-log-insight",
           "articles/log-plugin-loki-logging",
           "articles/log-plugin-gcp-logging",
-          "articles/log-plugin-azure-blob",
           "articles/custom-logging-example",
           "articles/log-export",
         ],
