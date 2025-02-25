@@ -29,7 +29,7 @@ export const mdxComponents = {
     let srcSet;
 
     if (
-      import.meta.env.PROD &&
+      process.env.NODE_ENV === "production" &&
       props.src &&
       !props.srcSet &&
       !props.src.endsWith(".svg") &&
