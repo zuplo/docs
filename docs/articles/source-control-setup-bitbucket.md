@@ -18,7 +18,7 @@ In order to setup source control for self-hosted BitBucket, you will need to
 and then provide Zuplo support with the following values:
 
 - **BitBucket Server URL** - This would be something like
-  `https://bitbucekt.example.com`
+  `https://bitbucket.example.com`
 - **Client ID** - This is the value of the client ID of the BitBucket app you
   created.
 - **Client Secret** - This is the value of the client secret of the BitBucket
