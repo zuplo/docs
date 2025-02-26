@@ -52,7 +52,7 @@
     "icon": "blocks",
     "items": [
       "dev-portal/zudoku/custom-plugins",
-      "dev-portal/zudoku/api-keys"
+      "dev-portal/zudoku/extending/events"
     ]
   },
   {
@@ -62,9 +62,10 @@
     "items": [
       "dev-portal/zudoku/components/callout",
       "dev-portal/zudoku/components/icons",
-      "dev-portal/zudoku/components/shadcn",
+      "dev-portal/zudoku/components/stepper",
+      "dev-portal/zudoku/components/syntax-highlight",
       "dev-portal/zudoku/components/playground",
-      "dev-portal/zudoku/components/syntax-highlight"
+      "dev-portal/zudoku/components/shadcn"
     ]
   }
 ]
