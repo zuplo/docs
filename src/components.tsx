@@ -26,7 +26,10 @@ export const mdxComponents = {
     />
   ),
   img: (props: any) => {
+    let srcSet;
+
     if (
+      process.env.NODE_ENV === "production" &&
       props.src &&
       !props.srcSet &&
       !props.src.endsWith(".svg") &&
@@ -37,7 +40,7 @@ export const mdxComponents = {
           ? new URL(props.src).pathname
           : props.src;
 
-        props.srcSet = [
+        srcSet = [
           `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=640,format=auto${path}   640w`,
           `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=960,format=auto${path}   960w`,
           `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=1280,format=auto${path} 1280w`,
@@ -48,7 +51,7 @@ export const mdxComponents = {
       }
     }
 
-    return <img {...props} />;
+    return <img {...props} srcSet={srcSet} />;
   },
   PolicyOverview,
   EnterpriseFeature,
