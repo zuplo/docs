@@ -42,7 +42,7 @@
     "eslint": "^9.19.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.0.0",
-    "glob": "11.0.0",
+    "glob": "11.0.1",
     "gray-matter": "4.0.3",
     "prettier": "3.4.2",
     "safe-marked": "16.0.0",
