@@ -351,7 +351,7 @@ In addition to the built-in policies, Zuplo is [fully programmable](/docs/polici
 
 await fs.mkdir(policyDir, { recursive: true });
 await fs.writeFile(
-  path.join(policyDir, "index.mdx"),
+  path.join(policyDir, "overview.mdx"),
   await prettier.format(policyIndex, { parser: "mdx" }),
 );
 
