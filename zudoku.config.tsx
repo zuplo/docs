@@ -30,10 +30,8 @@ const config: ZudokuConfig = {
       from: "/",
       to: "/articles/what-is-zuplo",
     },
-    {
-      from: "/policies/index",
-      to: "/policies/overview",
-    },
+    { from: "/policies/index", to: "/policies/overview" },
+    { from: "/policies", to: "/policies/overview" },
   ],
   theme: {
     dark: {
