@@ -17,7 +17,6 @@ The plugin is configured in the [Runtime Extensions](./runtime-extensions.md)
 file `zuplo.runtime.ts`:
 
 ```ts
-
 // The interface that describes the rows
 // in the output
 interface AzureBlobLogEntry {
@@ -31,7 +30,11 @@ interface AzureBlobLogEntry {
 }
 
 // The function that creates an entry
-async function generateLogEntry(response: Response, request: ZuploRequest, context: ZuploContext) {
+async function generateLogEntry(
+  response: Response,
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
   const entry: AzureBlobLogEntry = {
     timestamp: new Date().toISOString(),
     url: request.url,
@@ -39,7 +42,7 @@ async function generateLogEntry(response: Response, request: ZuploRequest, conte
     status: response.status,
     statusText: response.statusText,
     sub: request.user?.sub ?? null,
-    contentLength: request.headers.get("content-length")
+    contentLength: request.headers.get("content-length"),
   };
   return entry;
 }
@@ -47,12 +50,12 @@ async function generateLogEntry(response: Response, request: ZuploRequest, conte
 // Add the plugin - use a SAS URL
 runtime.addPlugin(
   new AzureBlobPlugin<AzureBlobLogEntry>({
-    sasUrl: "https://YOUR_ACCOUNT.blob.core.windows.net/YOUR_CONTAINER?sv=2022-11-02&ss=b&srt=co&sp=wactfx&se=2045-11-17T13:50:53Z&st=2024-11-17T05:50:53Z&spr=https&sig=YOUR_SIG",
+    sasUrl:
+      "https://YOUR_ACCOUNT.blob.core.windows.net/YOUR_CONTAINER?sv=2022-11-02&ss=b&srt=co&sp=wactfx&se=2045-11-17T13:50:53Z&st=2024-11-17T05:50:53Z&spr=https&sig=YOUR_SIG",
     batchPeriodSeconds: 1,
     generateLogEntry,
-  })
+  }),
 );
-
 ```
 
 The plugin writes Block Blobs using SAS signatures. Ensure that your SAS URL has

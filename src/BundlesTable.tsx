@@ -10,13 +10,13 @@ type BundlesFile = {
     description: string;
     isPublic: boolean;
   }[];
-}
+};
 
 export const BundlesTable = () => {
   const [data, setData] = useState<BundlesFile | null>(null);
 
   useEffect(() => {
-    const response =  fetch(
+    const response = fetch(
       "https://cdn.zuplo.com/types/@zuplo/bundled/bundles.v2.json",
     );
     response.then((res) => res.json()).then(setData);
@@ -48,4 +48,4 @@ export const BundlesTable = () => {
         ))}
     </table>
   );
-}
+};
