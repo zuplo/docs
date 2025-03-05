@@ -3,7 +3,7 @@ title: Zuplo and Cloudflare Settings
 sidebar_label: Cloudflare Settings
 ---
 
-Most fully managed Zuplo environemnts are deployed behind Cloudflare's Web
+Zuplo environments are mostly deployed behind Cloudflare's Web
 Application Firewall, DDoS protection, Bot Detection, and SSL termination. The
 combination of Cloudflare's network infrastructure and Zuplo's API Gateway help
 provide critical security and performance capabilities to your API all with zero
