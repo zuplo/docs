@@ -39,6 +39,10 @@ my-project/
 - **docs/dev-portal.json** - This is the primary configuration for your
   developer portal with customization for the favicon, authentication settings,
   etc. [Documentation](./dev-portal-json.md)
+- **ZUPLO_LOG_LEVEL** - This environment variable configures the log level in
+  your Zuplo portal to control which logs are displayed. To show only errors or
+  warnings, set ZUPLO_LOG_LEVEL to error or warn in the Settings tab under the
+  Environment Variables section.
 
 :::caution
 
