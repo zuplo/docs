@@ -15,54 +15,56 @@ development purposes using your favorite code editor.
 
 ### Create a new project from scratch
 
+<Stepper>
+
 1. Create a new project using
 
-```bash
-npm create zuplo-api@latest
-```
+   ```bash
+   npm create zuplo-api@latest
+   ```
 
-```bash title="Expected output: "
-cd <your-new-project-directory>
-npm install
-npm run dev
-```
+   ```bash title="Expected output: "
+   cd <your-new-project-directory>
+   npm install
+   npm run dev
+   ```
 
-3. Start your local gateway using `npm run dev`.
-
-4. Use the [local Route Designer](./local-development-routes-designer.md) to
+1. Start your local gateway using `npm run dev`.
+1. Use the [local Route Designer](./local-development-routes-designer.md) to
    create your first route.
+
+</Stepper>
 
 ### Import your existing project
 
 If you have been using Zuplo using the _Zuplo Web Portal_, you can import your
 project into your local machine.
 
+<Stepper>
+
 1. Connect your project to a Git repository from the _Zuplo Web Portal_.
+   ![Connect repository](https://cdn.zuplo.com/assets/3bd6b736-20d7-4ac4-805c-d7fd810dea28.png)
+1. Clone your project from your Git provider to your local machine.
+1. Convert your project to use the Zuplo CLI
+   ```bash
+   npx zuplo project update
+   ```
+1. Install the necessary dependencies:
 
-![Connect repository](https://cdn.zuplo.com/assets/3bd6b736-20d7-4ac4-805c-d7fd810dea28.png)
+   ```sh
+   npm install
+   ```
 
-2. Clone your project from your Git provider to your local machine.
+1. Start your Zuplo Gateway locally;
 
-3. Convert your project to use the Zuplo CLI
+   ```sh
+   npm run dev
+   ```
 
-```bash
-npx zuplo project update
-```
-
-4. Install the necessary dependencies:
-
-```sh
-npm install
-```
-
-5. Start your Zuplo Gateway locally;
-
-```sh
-npm run dev
-```
-
-6. Use the [local Route Designer](./local-development-routes-designer.md) to
+1. Use the [local Route Designer](./local-development-routes-designer.md) to
    create your first route.
+
+</Stepper>
 
 ## Limitations
 
