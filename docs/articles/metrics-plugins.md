@@ -52,8 +52,16 @@ tags since those are counted as separate metrics. This
 [article by DataDog](https://www.datadoghq.com/blog/the-power-of-tagged-metrics/)
 has some good guidelines.
 
-As of October 2023, we're in the process of becoming an official integration
-with DataDog, which would reduce the way some of our metrics are counted.
+:::warning{title="Metrics Aggregation"}
+
+Your Zuplo API can be deployed to many edge locations. Each location will send
+metrics to DataDog independantly. For low volume APIs this may be okay, but
+typically you will want to aggregate metrics before sending to DataDog. You can
+use a tool like the
+[OpenTelemetry Collector](https://opentelemetry.io/docs/collector/) for the
+aggregation.
+
+:::
 
 ```ts
 import {
