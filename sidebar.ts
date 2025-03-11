@@ -137,6 +137,7 @@ export const docs: SidebarEntry = [
     link: "dedicated/overview",
     items: [
       "dedicated/getting-started",
+      "dedicated/source-control",
       "dedicated/architecture",
       "dedicated/networking",
       "dedicated/custom-domains",
