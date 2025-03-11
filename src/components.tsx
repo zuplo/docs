@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { CogIcon, CopyIcon, FileTextIcon, ListEndIcon } from "zudoku/icons";
 import { BundlesTable } from "./BundlesTable.js";
 import { DocusaurusDocsLicense } from "./DocusaurusDocsLicense.js";
@@ -12,7 +12,16 @@ const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
 const EmbeddedChat = lazy(() => import("./EmbeddedChat.js"));
 
 export const mdxComponents = {
-  Screenshot: (props: any) => <img {...props} />,
+  Framed: (props: { margin: number | undefined }) => (
+    <div
+      className="[&>p]:m-0 [&>p]:p-0 [&>p>img]:m-0 [&>p>img]:p-0 my-[32px]"
+      style={{
+        marginRight: props.margin ? `${props.margin}rem` : "auto",
+        marginLeft: props.margin ? `${props.margin}rem` : "auto",
+      }}
+      {...props}
+    />
+  ),
   DocusaurusDocsLicense,
   GithubButton,
   ZupIt: (props: any) => <ZupIt {...props} />,
@@ -51,7 +60,13 @@ export const mdxComponents = {
       }
     }
 
-    return <img {...props} srcSet={srcSet} />;
+    return (
+      <img
+        className="border border-[#eaecef] overflow-hidden rounded-sm"
+        {...props}
+        srcSet={srcSet}
+      />
+    );
   },
   PolicyOverview,
   EnterpriseFeature,

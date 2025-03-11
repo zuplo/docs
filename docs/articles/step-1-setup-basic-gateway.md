@@ -102,7 +102,11 @@ Add an Environment Variable called `BASE_URL`. Leave the "Secret" checkbox
 unchecked. This is typically not a secret, so there's no need to hide this from
 your colleagues.
 
+<Framed margin={4}>
+
 ![BASE_URL Environment Variable](../../public/media/step-1-setup-basic-gateway/image-20.png)
+
+</Framed>
 
 Save the environment variable, head back to the **Code** tab, click
 `routes.oas.json`, and test your route again. You should get back the same
