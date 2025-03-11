@@ -99,6 +99,16 @@ Adding OpenTelemetry tracing to your Zuplo API is done by adding the
 For most providers you will set values for `exporter.url` and
 `exporter.headers`. It's common for providers to use a header for authorization.
 
+:::warning{title="OpenTelemetry Protocol"}
+
+The Zuplo OpenTelemetry plugin only supports sending data in JSON format. Not
+all OpenTelemetry services support the JSON format. If you are using a service
+that does not support JSON, you will need to use a tool like the
+[OpenTelemetry Collector](https://opentelemetry.io/docs/collector/) that can
+convert the JSON format to the format required by your service.
+
+:::
+
 ```ts title="zuplo.runtime.ts"
 import { OpenTelemetryPlugin } from "@zuplo/otel";
 import { RuntimeExtensions, environment } from "@zuplo/runtime";
