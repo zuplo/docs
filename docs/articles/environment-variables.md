@@ -22,7 +22,7 @@ select the **Environment Variables** section.
 
 To create a new variable, click **Add new variable**.
 
-![Adding a new environment variable](https://cdn.zuplo.com/assets/bec84962-0139-4371-b3fd-a30e70860169.png)
+![Adding a new environment variable](../../public/media/environment-variables/bec84962-0139-4371-b3fd-a30e70860169.png)
 
 Enter the name and value of your environment variable and select if you would
 like the value to be a secret or a regular value.

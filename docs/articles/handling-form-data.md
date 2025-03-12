@@ -9,7 +9,7 @@ into memory for use in the Zuplo runtime.
 In this case, we upload a JSON file as a multipart/form-data entry using
 Insomnia, with a key `foo`
 
-![Insomnia multipart/form-data](https://cdn.zuplo.com/assets/2d372851-af24-429b-8eeb-cb880589f30d.png)
+![Insomnia multipart/form-data](../../public/media/handling-form-data/2d372851-af24-429b-8eeb-cb880589f30d.png)
 
 We can then handle this programmatically inside Zuplo using a function handler.
 We also modify the JSON before forwarding on to the target backend server.

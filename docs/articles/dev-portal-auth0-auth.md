@@ -15,7 +15,7 @@ monthly active users.
 in the Auth0 dashboard. When creating the application select type "Single Page
 Web Applications"
 
-![Create Auth0 app](https://cdn.zuplo.com/assets/0aaa56b6-37c4-4c87-ac62-d86bc52047e3.png)
+![Create Auth0 app](../../public/media/dev-portal-auth0-auth/0aaa56b6-37c4-4c87-ac62-d86bc52047e3.png)
 
 ### 2/ Configure Auth0 Application
 
@@ -36,7 +36,7 @@ You must set the following fields in the Auth0 application:
 - **Rotation**: Enabled
 - **Reuse Interval**: Leave at `0`
 
-![Refresh token rotation](https://cdn.zuplo.com/assets/359f4a6c-4dd9-48c9-b8a3-27e70aa459c0.png)
+![Refresh token rotation](../../public/media/dev-portal-auth0-auth/359f4a6c-4dd9-48c9-b8a3-27e70aa459c0.png)
 
 **Refresh Token Expiration**
 
@@ -61,7 +61,7 @@ different URLs.
 
 :::
 
-![New API](https://cdn.zuplo.com/assets/d91471bd-5897-463e-805c-35abba294616.png)
+![New API](../../public/media/dev-portal-auth0-auth/d91471bd-5897-463e-805c-35abba294616.png)
 
 ### 4/ Configure the Developer Portal
 
@@ -83,7 +83,7 @@ Set the following settings:
 - **Audience**: This is the value for `identifier` that you set when creating
   the Auth0 API earlier.
 
-![Developer portal configuration](https://cdn.zuplo.com/assets/16c9b4a0-db9b-4b8c-a16f-00ce5e08071e.png)
+![Developer portal configuration](../../public/media/dev-portal-auth0-auth/16c9b4a0-db9b-4b8c-a16f-00ce5e08071e.png)
 
 ## External Auth Setup
 

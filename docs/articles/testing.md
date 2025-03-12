@@ -55,12 +55,12 @@ can be set in order to enforce policies on when a Pull Request can be merged.
 The example below sets the "Zuplo Deployment" and "Test API Gateway" as required
 status that must pass.
 
-![Require status checks](https://cdn.zuplo.com/assets/a1d7c322-125d-4d80-add0-fbfb65ccfea1.png)
+![Require status checks](../../public/media/testing/a1d7c322-125d-4d80-add0-fbfb65ccfea1.png)
 
 When a developer tries to merge their pull request, they will see that the tests
 haven't passed and the pull request can't be merged.
 
-![Test failure](https://cdn.zuplo.com/assets/3f3292a3-075c-4568-afb2-00c24e704f03.png)
+![Test failure](../../public/media/testing/3f3292a3-075c-4568-afb2-00c24e704f03.png)
 
 ## Writing Tests
 
