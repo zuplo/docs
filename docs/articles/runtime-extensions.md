@@ -100,6 +100,25 @@ asynchronous simply add the `async` keyword on the function.
 
 The following hooks can be set globally in the `zuplo.runtime.ts`:
 
+### Hook: OnPreRouting
+
+Runs before the request is matched to a route. This is useful if you want to
+customize the routing behaviour. Example use cases include:
+
+- Routing to a different url based on a header value
+- Normalizing urls to be all lowercase
+
+```ts
+import { RuntimeExtensions } from "@zuplo/runtime";
+
+export function runtimeInit(runtime: RuntimeExtensions) {
+  runtime.addPreRoutingHook(async (request) => {
+    const nr = new Request(request.url.toLowerCase(), request);
+    return nr;
+  });
+}
+```
+
 ### Hook: OnRequest
 
 Runs when a request is received, before any plugins or handlers.
