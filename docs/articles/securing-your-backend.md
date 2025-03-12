@@ -6,7 +6,7 @@ When using a gateway, it's important to ensure that your backend API is only
 receiving traffic via the gateway to be confident that your policies are being
 correctly applied to all traffic.
 
-![Zuplo as an API gateway](https://cdn.zuplo.com/assets/b7290dd1-43fa-49f8-8629-6b4899e2e9f3.png)
+![Zuplo as an API gateway](../../public/media/securing-your-backend/b7290dd1-43fa-49f8-8629-6b4899e2e9f3.png)
 
 To do this, we need to secure the communication between Zuplo and your backend
 APIs (origin). There are several options to do this securely.

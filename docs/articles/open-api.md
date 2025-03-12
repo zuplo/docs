@@ -37,7 +37,7 @@ document and will keep your Zuplo settings intact, while overwriting everything
 else from your imported OpenAPI docs. This creates a great workflow, whatever
 toolset you use.
 
-![Import OpenAPI dialog](https://cdn.zuplo.com/assets/28512107-8c41-4974-8319-c9ec50734331.png)
+![Import OpenAPI dialog](../../public/media/open-api/28512107-8c41-4974-8319-c9ec50734331.png)
 
 What's more, you can now have more confidence that your OpenAPI represents the
 truth of your API implementation - because it now drives the configuration of

@@ -16,7 +16,7 @@ API. Fortunately, a single project in Zuplo can have as many OpenAPI routing
 files as you like. The default one we create for you `routes.oas.json` can be
 renamed, as shown here:
 
-![Multiple OpenAPI files](https://cdn.zuplo.com/uploads/multiple-openapi-files.png)
+![Multiple OpenAPI files](../../public/media/versioning-on-zuplo/multiple-openapi-files.png)
 
 Note you can create a new OpenAPI file by clicking the '+' icon shown.
 
@@ -41,7 +41,7 @@ your developer portal:
 When Zuplo generates your developer-portal we put each OpenAPI version into it's
 own document and allow users to pick. This is currently presented in a dropdown:
 
-![Multiple APIs in docs](https://cdn.zuplo.com/uploads/multiple-apis-in-docs.png)
+![Multiple APIs in docs](../../public/media/versioning-on-zuplo/multiple-apis-in-docs.png)
 
 ## Using Zuplo as a versioning layer
 

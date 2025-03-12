@@ -37,7 +37,7 @@ this configuration. This is a completely private VPC. The tunnel makes an
 outbound connection to the Zuplo Gateway and then uses internal DNS to route
 requests to the Private API.
 
-![System diagram](https://cdn.zuplo.com/assets/fefdc7fb-f3b6-4908-8485-3d20cb769cfd.png)
+![System diagram](../../public/media/secure-tunnel/fefdc7fb-f3b6-4908-8485-3d20cb769cfd.png)
 
 ## Is this Secure?
 

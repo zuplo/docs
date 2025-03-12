@@ -50,13 +50,13 @@ devices. The traffic is proxied through the Zuplo gateway where you can enforce
 protections like rate-limiting and authentication, validate requests before they
 hit your backend and much more.
 
-![Zuplo Architecture](https://cdn.zuplo.com/assets/9a9a490a-9bda-46f6-bcc8-c2e67809c0af.png)
+![Zuplo Architecture](../../public/media/what-is-zuplo/9a9a490a-9bda-46f6-bcc8-c2e67809c0af.png)
 
 We also have customers that have globally distributed backends (hosted by
 multiple clouds). In this case, customers have deployed Zuplo and route to the
 nearest data-center.
 
-![Global distribution with Zuplo](https://cdn.zuplo.com/assets/9ef54160-c412-4126-a275-4c2ccd3935ff.png)
+![Global distribution with Zuplo](../../public/media/what-is-zuplo/9ef54160-c412-4126-a275-4c2ccd3935ff.png)
 
 ## Protocols
 
