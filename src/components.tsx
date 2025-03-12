@@ -12,6 +12,10 @@ const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
 const EmbeddedChat = lazy(() => import("./EmbeddedChat.js"));
 
 export const mdxComponents = {
+  /**
+   * This is used in some of the policies
+   */
+  Screenshot: (props: any) => <img {...props} />,
   Framed: (props: { margin: number | undefined }) => (
     <div
       className="[&>p]:m-0 [&>p]:p-0 [&>p>img]:m-0 [&>p>img]:p-0 my-[32px]"
