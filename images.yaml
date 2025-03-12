@@ -1,0 +1,5 @@
+- output: ./public/media/step-1-setup-basic-gateway/image-11.png
+  url: https://portal.zuplo.com/acme-corp/my-api/~working-copy/edit?path=%2Fconfig%2Froutes.oas.json
+  wait: 4000
+  width: 1920
+  height: 1080

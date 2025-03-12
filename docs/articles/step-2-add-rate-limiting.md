@@ -36,14 +36,14 @@ pipeline.
 
 Search for the rate limiting policy (not the "Complex" one) and click it.
 
-![Add rate-limiting policy](../../public/media/step-2-add-rate-limiting/image-2.png)
+![Add rate-limiting policy](../../public/media/step-2-add-rate-limiting/choose-rate-limiter.png)
 
 By default, the policy will rate limit based on the caller's IP address (as
 indicated by the `rateLimitBy` field). It will allow 2 requests
 (`requestsAllowed`) every 1 minute (`timeWindowMinutes`). You can explore the
 rest of the policy's documentation and configuration in the right panel.
 
-![Rate limiting policy](../../public/media/step-2-add-rate-limiting/image-3.png)
+![Rate limiting policy](../../public/media/step-2-add-rate-limiting/create-policy.png)
 
 To apply the policy, click **OK**. Then, save your changes to redeploy.
 
@@ -52,7 +52,7 @@ To apply the policy, click **OK**. Then, save your changes to redeploy.
 Now try firing some requests against your API. You should receive a **429 Too
 many requests** on your 3rd request.
 
-![429 response](../../public/media/step-2-add-rate-limiting/image-4.png)
+![429 response](../../public/media/step-2-add-rate-limiting/test-api.png)
 
 Your rate limiting policy is now intercepting excess requests, protecting the
 `getting-started` API.
