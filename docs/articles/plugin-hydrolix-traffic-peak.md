@@ -18,58 +18,50 @@ file `zuplo.runtime.ts`:
 
 This logger includes a default type and function that logs the following fields:
 
-- **deploymentName** <code className="text-green-600">&lt;string&gt;</code> -
-  The name of the deployment.
-- **timestamp** <code className="text-green-600">&lt;string&gt;</code> - The
-  time the log was created.
-- **requestId** <code className="text-green-600">&lt;string&gt;</code> - The
-  UUID of the request (the value of the `zp-rid` header).
-- **routePath** <code className="text-green-600">&lt;string&gt;</code> - The
-  path of the route.
-- **operationId** <code className="text-green-600">&lt;string |
-  undefined&gt;</code> - The operation ID.
-- **url** <code className="text-green-600">&lt;string | undefined&gt;</code> -
-  The URL of the request.
-- **statusCode** <code className="text-green-600">&lt;number |
-  undefined&gt;</code> - The status code of the response.
-- **durationMs** <code className="text-green-600">&lt;number |
-  undefined&gt;</code> - The duration of the request in milliseconds.
-- **method** <code className="text-green-600">&lt;string&gt;</code> - The HTTP
-  method of the request.
-- **userSub** <code className="text-green-600">&lt;string |
-  undefined&gt;</code> - The user sub.
-- **instanceId** <code className="text-green-600">&lt;string |
-  undefined&gt;</code> - The instance ID.
-- **colo** <code className="text-green-600">&lt;string | undefined&gt;</code> -
-  The colo (datacenter) of the request.
-- **city** <code className="text-green-600">&lt;string | undefined&gt;</code> -
-  The city the request origin.
-- **country** <code className="text-green-600">&lt;string |
-  undefined&gt;</code> - The country the request origin.
-- **continent** <code className="text-green-600">&lt;string |
-  undefined&gt;</code> - The continent the request origin.
-- **latitude** <code className="text-green-600">&lt;string |
-  undefined&gt;</code> - The latitude of the request origin.
-- **longitude** <code className="text-green-600">&lt;string |
-  undefined&gt;</code> - The longitude of the request origin.
-- **postalCode** <code className="text-green-600">&lt;string |
-  undefined&gt;</code> - The postal code of the request origin.
-- **metroCode** <code className="text-green-600">&lt;string |
-  undefined&gt;</code> - The metro code of the request origin.
-- **region** <code className="text-green-600">&lt;string |
-  undefined&gt;</code> - The region of the request origin.
-- **regionCode** <code className="text-green-600">&lt;string |
-  undefined&gt;</code> - The region code of the request origin.
-- **timezone** <code className="text-green-600">&lt;string |
-  undefined&gt;</code> - The timezone of the request origin.
-- **asn** <code className="text-green-600">&lt;string | undefined&gt;</code> -
-  The ASN of the request origin.
-- **asOrganization** <code className="text-green-600">&lt;string |
-  undefined&gt;</code> - The AS organization of the request origin.
-- **clientIP** <code className="text-green-600">&lt;string |
-  undefined&gt;</code> - The client IP of the requestor.
-- **zuploUserAgent** <code className="text-green-600">&lt;string |
-  undefined&gt;</code> - The Zuplo user agent.
+- **deploymentName** <CodeType>string</CodeType> - The name of the deployment.
+- **timestamp** <CodeType>string</CodeType> - The time the log was created.
+- **requestId** <CodeType>string</CodeType> - The UUID of the request (the value
+  of the `zp-rid` header).
+- **routePath** <CodeType>string</CodeType> - The path of the route.
+- **operationId** <CodeType>string | undefined</CodeType> - The operation ID.
+- **url** <CodeType>string | undefined</CodeType> - The URL of the request.
+- **statusCode** <CodeType>number | undefined</CodeType> - The status code of
+  the response.
+- **durationMs** <CodeType>number | undefined</CodeType> - The duration of the
+  request in milliseconds.
+- **method** <CodeType>string</CodeType> - The HTTP method of the request.
+- **userSub** <CodeType>string | undefined</CodeType> - The user sub.
+- **instanceId** <CodeType>string | undefined</CodeType> - The instance ID.
+- **colo** <CodeType>string | undefined</CodeType> - The colo (datacenter) of
+  the request.
+- **city** <CodeType>string | undefined</CodeType> - The city the request
+  origin.
+- **country** <CodeType>string | undefined</CodeType> - The country the request
+  origin.
+- **continent** <CodeType>string | undefined</CodeType> - The continent the
+  request origin.
+- **latitude** <CodeType>string | undefined</CodeType> - The latitude of the
+  request origin.
+- **longitude** <CodeType>string | undefined</CodeType> - The longitude of the
+  request origin.
+- **postalCode** <CodeType>string | undefined</CodeType> - The postal code of
+  the request origin.
+- **metroCode** <CodeType>string | undefined</CodeType> - The metro code of the
+  request origin.
+- **region** <CodeType>string | undefined</CodeType> - The region of the request
+  origin.
+- **regionCode** <CodeType>string | undefined</CodeType> - The region code of
+  the request origin.
+- **timezone** <CodeType>string | undefined</CodeType> - The timezone of the
+  request origin.
+- **asn** <CodeType>string | undefined</CodeType> - The ASN of the request
+  origin.
+- **asOrganization** <CodeType>string | undefined</CodeType> - The AS
+  organization of the request origin.
+- **clientIP** <CodeType>string | undefined</CodeType> - The client IP of the
+  requestor.
+- **zuploUserAgent** <CodeType>string | undefined</CodeType> - The Zuplo user
+  agent.
 
 To use this default setup add the following code to your `zuplo.runtime.ts`
 file:
