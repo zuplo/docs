@@ -416,6 +416,7 @@ export const policies: SidebarEntry = [
     type: "category",
     label: "Authorization",
     items: [
+      "policies/aserto-authz-inbound",
       "policies/okta-fga-authz-inbound",
       "policies/openfga-authz-inbound",
       "policies/axiomatics-authz-inbound",
