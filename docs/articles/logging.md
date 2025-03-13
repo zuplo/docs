@@ -1,23 +1,19 @@
 ---
-title: Log Plugins
+title: Logging
 ---
 
 Zuplo provides real-time logging out of the box. If you would like your logs to
 be sent to your own logging service, you can enable one of Zuplo's logging
 plugins.
 
-If you would like to log to a different source, reach out to support@zuplo.com
-and we'd be happy to work with you to add a new logging plugin.
-
 To configure you logging, you need to create a `zuplo.runtime.ts` file in the
 `modules`. The examples below show the content of the file with each of the
 different logging plugins.
 
-<EnterpriseFeature name="Logging Plugins" />
+## Log Integrations
 
-## Plugins
-
-The following logging plugins are available:
+Zuplo offers out-of-the box integrations with many common logging vendors. For
+instructions on how to configure logging, see the documentation for each plugin:
 
 - [AWS CloudWatch](./log-plugin-aws-cloudwatch.md)
 - [DataDog](./log-plugin-datadog.md)
@@ -26,6 +22,20 @@ The following logging plugins are available:
 - [Loki](./log-plugin-loki.md)
 - [Sumo Logic](./log-plugin-sumo.md)
 - [VMWare Log Insight](./log-plugin-vmware-log-insight.md)
+
+:::warning
+
+Not seeing the logging plugin you need? Reach out to
+[support@zuplo.com](mailto:support@zuplo.com) and we'd be happy to work with you
+to add a new logging plugin.
+
+:::
+
+## Custom Logging
+
+In addition to the logging plugins, you can also create your own custom logging
+plugin. For more information, see the
+[Custom Logging Plugin](./custom-logging-example.md) documentation.
 
 ## Log Fields
 

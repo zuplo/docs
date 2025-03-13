@@ -73,7 +73,7 @@ export const docs: SidebarEntry = [
       {
         type: "category",
         label: "Logging",
-        link: "articles/log-plugins",
+        link: "articles/logging",
         items: [
           "articles/log-plugin-gcp",
           "articles/log-plugin-loki",

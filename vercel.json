@@ -847,6 +847,11 @@
       "source": "/docs/articles/log-plugin-loki-logging{/}?",
       "destination": "/docs/articles/log-plugin-loki",
       "permanent": true
+    },
+    {
+      "source": "/docs/articles/log-plugins{/}?",
+      "destination": "/docs/articles/logging",
+      "permanent": true
     }
   ],
   "rewrites": [
