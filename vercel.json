@@ -817,6 +817,36 @@
       "source": "/docs/articles/add-project-collaborators{/}?",
       "destination": "/docs/articles/accounts/managing-account-members",
       "permanent": true
+    },
+    {
+      "source": "/docs/articles/log-plugin-akamai-api-security{/}?",
+      "destination": "/docs/articles/plugin-akamai-api-security",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/log-plugin-azure-blob{/}?",
+      "destination": "/docs/articles/plugin-azure-blob",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/log-plugin-azure-event-hubs{/}?",
+      "destination": "/docs/articles/plugin-azure-event-hubs",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/log-plugin-gcp-logging{/}?",
+      "destination": "/docs/articles/log-plugin-gcp",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/log-plugin-hydrolix-traffic-peak{/}?",
+      "destination": "/docs/articles/plugin-hydrolix-traffic",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/log-plugin-loki-logging{/}?",
+      "destination": "/docs/articles/log-plugin-loki",
+      "permanent": true
     }
   ],
   "rewrites": [

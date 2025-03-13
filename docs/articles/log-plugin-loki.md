@@ -3,11 +3,11 @@ title: Loki Logging Plugin
 sidebar_label: Loki Logging
 ---
 
+The Loki Log plugin enables pushing logs to your Loki server.
+
 <EnterpriseFeature name="Custom logging" />
 
 ## Setup
-
-The Loki Log plugin enables pushing logs to your Loki server.
 
 To add the Loki logging plugin to your Zuplo project, add the following code to
 your `zuplo.runtime.ts` file. Replace `my-username` with your Grafana username
@@ -16,6 +16,9 @@ of your Loki host.
 
 Optionally, you can set the `job` value to set the name of your log stream job.
 This defaults to `zuplo` if not set.
+
+Any custom fields you want to include in the log entry can be added to the
+`fields` property. These values will be appended to every log entry.
 
 Setting the `version` option to `2` changes the log stream to not include the
 `requestId` value in the stream, but rather include it as a log value.
@@ -35,6 +38,10 @@ export function runtimeInit(runtime: RuntimeExtensions) {
       job: "my-api",
       password: environment.LOKI_PASSWORD,
       version: 2,
+      fields: {
+        field1: "value1",
+        field2: "value2",
+      },
     }),
   );
 }
@@ -45,7 +52,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 Every log entry will have a `timestamp` and a `jsonPayload` object. The value of
 the `jsonPayload` contains the text or objects passed into the log.
 
-Steam fields are:
+Stream fields are:
 
 - `job` - The name of the log stream job. Defaults to `zuplo`.
 - `level` - The level of the log, for example `ERROR`, `INFO`, etc.
@@ -59,7 +66,8 @@ Log trace fields are:
 - `requestId` - The UUID of the request (the value of the `zp-rid` header)
 - `atomicCounter` - An atomic number that's used to order logs that have the
   same timestamp
-- `rayId` - The Cloudflare RayID of the request
+- `rayId` - The network provider identifier (i.e. Cloudflare RayID) of the
+  request
 
 Note, log trace fields are only included if the `version` option is set to `2`
 or later.
