@@ -840,7 +840,7 @@
     },
     {
       "source": "/docs/articles/log-plugin-hydrolix-traffic-peak{/}?",
-      "destination": "/docs/articles/plugin-hydrolix-traffic",
+      "destination": "/docs/articles/plugin-hydrolix-traffic-peak",
       "permanent": true
     },
     {
