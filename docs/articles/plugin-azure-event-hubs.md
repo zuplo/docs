@@ -18,7 +18,7 @@ in TypeScript and a function to extract the field data from the `Response`,
 The plugin is configured in the [Runtime Extensions](./runtime-extensions.md)
 file `zuplo.runtime.ts`: git sta
 
-```ts
+```ts title="modules/zuplo.runtime.ts"
 // The interface that describes the rows
 // in the output
 interface LogEntry {

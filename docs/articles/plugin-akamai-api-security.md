@@ -27,7 +27,7 @@ Un Zuplo you configure the plugin in the
 [Runtime Extensions](./runtime-extensions.md) file `zuplo.runtime.ts`, as
 follows:
 
-```ts
+```ts title="modules/zuplo.runtime.ts"
 import { environment, AkamaiApiSecurityPlugin } from "@zuplo/runtime";
 
 runtime.addPlugin(
