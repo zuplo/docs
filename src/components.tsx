@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, PropsWithChildren, Suspense } from "react";
 import { CogIcon, CopyIcon, FileTextIcon, ListEndIcon } from "zudoku/icons";
 import { BundlesTable } from "./BundlesTable.js";
 import { DocusaurusDocsLicense } from "./DocusaurusDocsLicense.js";
@@ -25,6 +25,9 @@ export const mdxComponents = {
       }}
       {...props}
     />
+  ),
+  CodeType: (props: PropsWithChildren) => (
+    <code className="text-green-600">&lt;{props.children}&gt;</code>
   ),
   DocusaurusDocsLicense,
   GithubButton,
