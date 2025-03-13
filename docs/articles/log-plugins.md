@@ -2,18 +2,9 @@
 title: Log Plugins
 ---
 
-Zuplo provides live logging for development environments out of the box as well
-as limited error logging in production. If you would like your logs to be sent
-to your own logging service, you can enable one of Zuplo's logging plugins.
-Currently, Zuplo supports logging to the following sources:
-
-- AWS CloudWatch
-- DataDog
-- Dynatrace
-- Google Cloud Logging
-- Loki
-- Sumo Logic
-- VMWare Log Insight
+Zuplo provides real-time logging out of the box. If you would like your logs to
+be sent to your own logging service, you can enable one of Zuplo's logging
+plugins.
 
 If you would like to log to a different source, reach out to support@zuplo.com
 and we'd be happy to work with you to add a new logging plugin.
@@ -26,124 +17,23 @@ different logging plugins.
 
 ## Plugins
 
-Below you will find details on each logger.
+The following logging plugins are available:
 
-### AWS CloudWatch
-
-```ts
-import {
-  RuntimeExtensions,
-  AWSLoggingPlugin,
-  environment,
-} from "@zuplo/runtime";
-
-export function runtimeInit(runtime: RuntimeExtensions) {
-  runtime.addPlugin(
-    new AWSLoggingPlugin({
-      region: environment.AWS_REGION,
-      accessKeyId: environment.AWS_ACCESS_KEY_ID,
-      secretAccessKey: environment.AWS_SECRET_ACCESS_KEY,
-      logGroupName: "zuplo",
-      logStreamName: "my-stream",
-    }),
-  );
-}
-```
-
-### DataDog
-
-```ts
-import {
-  RuntimeExtensions,
-  DataDogLoggingPlugin,
-  environment,
-} from "@zuplo/runtime";
-
-export function runtimeInit(runtime: RuntimeExtensions) {
-  runtime.addPlugin(
-    new DataDogLoggingPlugin({
-      url: "https://http-intake.logs.datadoghq.com/api/v2/logs",
-      apiKey: environment.DATADOG_API_KEY,
-    }),
-  );
-}
-```
-
-### Dynatrace
-
-To setup Dynatrace logging, you'll need to set the URL to your Dynatrace
-instance's
-[ingest API endpoint](https://www.dynatrace.com/support/help/dynatrace-api/environment-api/events-v2/post-event).
-
-You'll need to create an API Token with `events.ingest` scope.
-
-```ts
-import {
-  RuntimeExtensions,
-  DynaTraceLoggingPlugin,
-  environment,
-} from "@zuplo/runtime";
-
-export function runtimeInit(runtime: RuntimeExtensions) {
-  runtime.addPlugin(
-    new DynaTraceLoggingPlugin({
-      url: "https://xxxxxxx.live.dynatrace.com/api/v2/logs/ingest",
-      apiToken: environment.DYNATRACE_API_TOKEN,
-    }),
-  );
-}
-```
-
-### Google Cloud Logging
-
-The Google Cloud Logging plugin enables pushing logs to your GCP project. See
-[the document](./log-plugin-gcp-logging.md) on this plugin for more information.
-
-### Loki
-
-The Loki plugin enables pushing logs to your Loki server. See
-[the document](./log-plugin-loki-logging.md) on this plugin for more
-information.
-
-### Sumo Logic
-
-The Sumo Logic logger uses the
-[HTTP Source](https://help.sumologic.com/docs/send-data/hosted-collectors/http-source/logs-metrics/)
-to send logs. Create a hosted HTTP Collector and Set the HTTP Source Address
-value to the URL property on the plugin.
-
-When creating the HTTP Collector, leave the default settings for parsing the
-logs.
-
-```ts
-import {
-  RuntimeExtensions,
-  SumoLogicLoggingPlugin,
-  environment,
-} from "@zuplo/runtime";
-
-export function runtimeInit(runtime: RuntimeExtensions) {
-  runtime.addPlugin(
-    new SumoLogicLoggingPlugin({
-      url: "https://endpoint4.collection.sumologic.com/receiver/v1/http/XXXXXX",
-    }),
-  );
-}
-```
-
-### VMWare Log Insight
-
-The VMWare Log Insight plugin enables pushing logs to your VMWare Log Insights
-via the REST API. See [the document](./log-plugin-vmware-log-insight.md) on this
-plugin for more information.
+- [AWS CloudWatch](./log-plugin-aws-cloudwatch.md)
+- [DataDog](./log-plugin-datadog.md)
+- [Dynatrace](./log-plugin-dynatrace.md)
+- [Google Cloud Logging](./log-plugin-gcp.md)
+- [Loki](./log-plugin-loki.md)
+- [Sumo Logic](./log-plugin-sumo.md)
+- [VMWare Log Insight](./log-plugin-vmware-log-insight.md)
 
 ## Log Fields
 
-Below is a list of the default fields that are sent with log messages. don'te,
-that the names of these fields may differ depending on your logger as we follow
-the conventions of each log service. So `environmentType` may be
-`environmentType`, `environment_type`, or `environment-type`. See the specific
-log plugin for details.
+Below is a list of the default fields that are sent with log messages. Note that
+the names of these fields may differ depending on your logger as we follow the
+conventions of each log service. So `environmentType` may be `environmentType`,
+`environment_type`, or `environment-type`. See the specific log plugin for
+details.
 
 - `severity`: The log level of the message. Values are `debug`, `info`, `warn`,
   `error`
@@ -178,9 +68,10 @@ log plugin for details.
   in future releases.
 - `buildId`: A UUID representing the unique build of your API. This value
   changes every time a new version of your API is built and deployed.
-- `logSource`: Whether the log originated from Zuplo system code (`system`) or
-  from customer code (`user`)
-- `requestRayId`: The value of the Cloudflare Ray ID. This value is used
-  internally to coordinate log event in Zuplo to log events in Cloudflare. it's
-  provided in your logs for potential troubleshooting. Normally, it's
-  recommended to rely on the `requestId` for tracing.
+- `logSource`: Whether the log originated from a request (`request`) or from
+  outside of a request (`runtime`)
+- `rayId`: The value of the network provider request ID (i.e. Cloudflare Ray
+  ID). This value is used internally to coordinate log event in Zuplo to log
+  events in the environment where your API runs. It's provided in your logs for
+  potential troubleshooting. Normally, it's recommended to rely on the
+  `requestId` for tracing.

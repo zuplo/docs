@@ -1,6 +1,6 @@
 ---
-title: Zuplo OpenTelemetry Plugin
-sidebar_label: OpenTelemetry Plugin
+title: Zuplo OpenTelemetry
+sidebar_label: OpenTelemetry
 ---
 
 Zuplo ships with an OpenTelemetry plugin that allows you to collect and export

@@ -3,11 +3,11 @@ title: Hydrolix / Akamai Traffic Peak Plugin
 sidebar_label: Hydrolix / Traffic Peak
 ---
 
+This plugin pushes request/response logs to Hydrolix AKA Akamai Traffic Peak.
+
 <EnterpriseFeature name="Custom logging" />
 
 ## Setup
-
-This plugin pushes request/response logs to Hydrolix AKA Akamai Traffic Peak.
 
 You can define the fields created in the JSON object by creating a custom type
 in TypeScript and a function to extract the field data from the `Response`,
@@ -73,7 +73,6 @@ If you want to customize the data written to Hydrolix, you can define the fields
 and entry generation function yourself as follows:
 
 ```ts
-
 // The interface that describes the rows
 // in the output
 interface LogEntry {
@@ -86,33 +85,27 @@ interface LogEntry {
   contentLength: string | null;
 }
 
-// The function that creates an entry
-async function generateLogEntry(response: Response, request: ZuploRequest)
-  const entry: LogEntry = {
-    timestamp: new Date().toISOString(),
-    url: request.url,
-    method: request.method,
-    status: response.status,
-    statusText: response.statusText,
-    sub: request.user?.sub ?? null,
-    contentLength: request.headers.get("content-length")
-  };
-  return entry;
-}
-
 runtime.addPlugin(
-    new HydrolixRequestLoggerPlugin<LogEntry>({
-      hostname: "your-hydrolix-hostname.com",
-      username: "your-hydrolix-username",
-      password: environment.HYDROLIX_PASSWORD,
-      token: environment.HYDROLIX_TOKEN,
-      table: "your-table.name",
-      transform: "your-transform-name",
-      generateLogEntry: generateLogEntry,
-      batchPeriodSeconds: 0.1,
-    })
-  );
-
+  new HydrolixRequestLoggerPlugin<LogEntry>({
+    hostname: "your-hydrolix-hostname.com",
+    username: "your-hydrolix-username",
+    password: environment.HYDROLIX_PASSWORD,
+    token: environment.HYDROLIX_TOKEN,
+    table: "your-table.name",
+    transform: "your-transform-name",
+    batchPeriodSeconds: 0.1,
+    generateLogEntry: (response: Response, request: ZuploRequest) => ({
+      // You can customize the log entry here by adding new fields
+      timestamp: new Date().toISOString(),
+      url: request.url,
+      method: request.method,
+      status: response.status,
+      statusText: response.statusText,
+      sub: request.user?.sub ?? null,
+      contentLength: request.headers.get("content-length"),
+    }),
+  }),
+);
 ```
 
 Entries will be batched and sent as an array, they will be sent every

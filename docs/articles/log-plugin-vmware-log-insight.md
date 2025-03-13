@@ -3,13 +3,15 @@ title: VMWare Log Insight Log Plugin
 sidebar_label: VMWare Log Insight
 ---
 
+The VMWare Log Insight plugin enables pushing logs to your VMWare Log Insights
+via the REST API.
+
 <EnterpriseFeature name="Custom logging" />
 
 ## Setup
 
-The VMWare Log Insight plugin enables pushing logs to your VMWare Log Insights
-via the REST API. Simply set the `url` option to the value of your Log Insights
-host (for example `https://loginsight.example.com`).
+Simply set the `url` option to the value of your Log Insights host (for example
+`https://loginsight.example.com`).
 
 Optionally, you can configure additional fields that will be sent with your
 logs, for example if you want to include an `appname` field that indicates the
@@ -50,7 +52,8 @@ Default fields are:
 - `atomic_counter` - An atomic number that's used to order logs that have the
   same timestamp
 - `environment` - The environment name of the Zuplo API
-- `request_ray_id` - The Cloudflare RayID of the request
+- `request_ray_id` - The network provider identifier (i.e. Cloudflare RayID) of
+  the request
 
 ## Log Format
 
