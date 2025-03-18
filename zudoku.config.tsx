@@ -36,6 +36,7 @@ const config: ZudokuConfig = {
   theme: {
     dark: {
       primary: "316 91% 45%",
+      primaryForeground: "#FFFFFF",
     },
     light: {
       primary: "316 91% 45%",
