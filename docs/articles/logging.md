@@ -18,6 +18,7 @@ instructions on how to configure logging, see the documentation for each plugin:
 - [AWS CloudWatch](./log-plugin-aws-cloudwatch.md)
 - [DataDog](./log-plugin-datadog.md)
 - [Dynatrace](./log-plugin-dynatrace.md)
+- [New Relic](./log-plugin-new-relic.md)
 - [Google Cloud Logging](./log-plugin-gcp.md)
 - [Loki](./log-plugin-loki.md)
 - [Sumo Logic](./log-plugin-sumo.md)
