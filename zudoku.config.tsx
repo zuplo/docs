@@ -87,6 +87,9 @@ const config: ZudokuConfig = {
     type: "file",
     input: "./api.json",
     navigationId: "api",
+    options: {
+      loadTags: true,
+    },
   },
   docs: [
     { files: "/docs/**/*.{md,mdx}" },
