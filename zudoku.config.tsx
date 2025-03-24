@@ -88,7 +88,7 @@ const config: ZudokuConfig = {
     input: "./api.json",
     navigationId: "api",
     options: {
-      loadTags: true,
+      expandAllTags: true,
     },
   },
   docs: [
