@@ -208,7 +208,10 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 By default, we send all metrics to New Relic. However, you have the option below
 to configure which metrics you want to send.
 
-New Relic's Metric API provides a powerful way to monitor your API's performance. The metrics are sent to New Relic's Metric API endpoint (https://metric-api.newrelic.com/metric/v1) by default, but you can customize this if needed.
+New Relic's Metric API provides a powerful way to monitor your API's
+performance. The metrics are sent to New Relic's Metric API endpoint
+(https://metric-api.newrelic.com/metric/v1) by default, but you can customize
+this if needed.
 
 ```ts
 import {
@@ -245,11 +248,11 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 }
 ```
 
-The above configuration applies globally for all metrics sent to New Relic. If you
-wish to dynamically configure information for a particular ZuploContext, you can
-use the `NewRelicMetricsPlugin` in your code. Currently, the only configuration
-you can set is the attributes. The values you set here will be appended to those set
-globally in the `zuplo.runtime.ts` file.
+The above configuration applies globally for all metrics sent to New Relic. If
+you wish to dynamically configure information for a particular ZuploContext, you
+can use the `NewRelicMetricsPlugin` in your code. Currently, the only
+configuration you can set is the attributes. The values you set here will be
+appended to those set globally in the `zuplo.runtime.ts` file.
 
 ```ts
 import {
@@ -266,4 +269,15 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 
   return "What zup?";
 }
-``` 
+```
+
+:::warning{title="Metrics Aggregation"}
+
+Your Zuplo API can be deployed to many edge locations. Each location will send
+metrics to New Relic independently. For low volume APIs this may be okay, but
+typically you will want to aggregate metrics before sending to New Relic. You
+can use a tool like the
+[OpenTelemetry Collector](https://opentelemetry.io/docs/collector/) for the
+aggregation.
+
+:::
