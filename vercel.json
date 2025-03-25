@@ -878,8 +878,9 @@
       "source": "/(.*)",
       "has": [
         {
-          "type": "host",
-          "value": "(.*\\.)?zuplo\\.site"
+          "type": "header",
+          "key": "x-forwarded-host",
+          "value": "zuplo\\.com"
         }
       ],
       "headers": [
