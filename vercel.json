@@ -871,7 +871,18 @@
         {
           "key": "X-Frame-Options",
           "value": "DENY"
-        },
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "zuplo.com"
+        }
+      ],
+      "headers": [
         {
           "key": "X-Robots-Tag",
           "value": "all"
