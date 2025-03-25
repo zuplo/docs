@@ -879,7 +879,7 @@
       "has": [
         {
           "type": "host",
-          "value": "(.*\\.)?zuplo\\.com"
+          "value": "(.*\\.)?zuplo\\.site"
         }
       ],
       "headers": [
