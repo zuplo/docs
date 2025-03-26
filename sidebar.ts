@@ -82,6 +82,7 @@ export const docs: SidebarEntry = [
           "articles/log-plugin-datadog",
           "articles/log-plugin-dynatrace",
           "articles/log-plugin-new-relic",
+          "articles/log-plugin-splunk",
           "articles/log-plugin-sumo",
           "articles/custom-logging-example",
           "articles/log-export",
