@@ -21,6 +21,7 @@ instructions on how to configure logging, see the documentation for each plugin:
 - [New Relic](./log-plugin-new-relic.md)
 - [Google Cloud Logging](./log-plugin-gcp.md)
 - [Loki](./log-plugin-loki.md)
+- [Splunk](./log-plugin-splunk.md)
 - [Sumo Logic](./log-plugin-sumo.md)
 - [VMWare Log Insight](./log-plugin-vmware-log-insight.md)
 
