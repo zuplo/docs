@@ -36,8 +36,6 @@ export function runtimeInit(runtime: RuntimeExtensions) {
       index: "main",
       sourcetype: "json",
       host: "zuplo-api",
-      // Skip SSL certificate validation for self-signed certificates
-      skipCertValidation: true,
       fields: {
         environment: "production",
         application: "my-api",
