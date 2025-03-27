@@ -18,7 +18,7 @@
     "zudoku:get": "sh ./scripts/get-zudoku.sh",
     "policies:get": "sh ./scripts/get-policies.sh",
     "policies:generate": "tsx scripts/generate-policies.ts",
-    "api:get": "curl -o ./api.json https://dev.zuplo.com/openapi",
+    "api:get": "node ./scripts/update-api.mjs",
     "errors:generate": "tsx scripts/generate-errors.ts"
   },
   "dependencies": {

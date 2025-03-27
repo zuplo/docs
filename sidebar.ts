@@ -274,6 +274,7 @@ export const docs: SidebarEntry = [
       "cli/tunnels",
       "cli/variables",
       "cli/local-development",
+      "cli/connectivity",
     ],
   },
   {
