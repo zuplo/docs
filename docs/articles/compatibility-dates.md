@@ -81,3 +81,80 @@ of compatibility date) by the end of April 2024.
 
 The compatibility date allows the ability to call `fetch` to hosts with custom
 ports. Previously only the standard ports (80, 443) were allowed.
+
+## 2025-02-06
+
+This compatibility date introduces a number of breaking changes to improve the
+overall behavior of Zuplo APIs. This compatibility date is the default for any
+projects created after 2025-03-27.
+
+### Special Characters in OpenAPI Format URLs
+
+Previously, special characters that were included in URLs that used the
+`open-api` formatted URLs were not escaped. This allowed an unintended behavior
+where the URL could include Regex patterns even though the OpenAPI format urls
+do not allow regex. This has been fixed and now all special characters are
+escaped. This allows URLs with formats like:
+
+```
+/accounts/open({id})
+/accounts/:action
+```
+
+### Removed legacy Log Initialization
+
+Previously, several of the Zuplo log plugins could be enabled by setting
+undocumented environment variables. This was a legacy feature that was added
+before the current plugin system existed. This feature has been removed. Log
+plugins should be enabled using the [documented plugin system](./logging.md).
+
+If you are setting any of the following environment variables, you should
+migrate to the log plugin initialization.
+
+```txt
+GCP_USER_LOG_NAME
+GCP_USER_LOG_SVC_ACCT_JSON
+ZUPLO_USER_LOGGER_DATA_DOG_URL
+```
+
+### Removed legacy Log Context
+
+Previously, several log plugins used special properties on `context.custom` to
+set global attributes on logs. This was a legacy feature that was added before
+the current plugin system existed. This feature has been removed. Log plugins
+should be enabled using the [documented plugin system](./logging.md).
+
+If you are using setting any of the following in your code, you should migrate
+to the plugin configuration instead.
+
+```ts
+context.custom["__ddtags"]; // Sets tags
+context.custom["__ddattr"]; // Sets fields
+```
+
+Migrate to the following:
+
+```ts
+export function runtimeInit(runtime: RuntimeExtensions) {
+  runtime.addPlugin(
+    new DataDogLoggingPlugin({
+      url: "https://http-intake.logs.datadoghq.com/api/v2/logs",
+      apiKey: environment.DATADOG_API_KEY,
+      source: "MyAPI", // Optional, defaults to "Zuplo"
+      tags: {
+        tag: "hello",
+      },
+      fields: {
+        field1: "value1",
+        field2: "value2",
+      },
+    }),
+  );
+}
+```
+
+### Improved Node.js Compatibility
+
+The Zuplo runtime does not run Node.js, but is compatible with a number of
+Node.js APIs. This compatibility date adds some additional support for Node.js
+specific APIs.
