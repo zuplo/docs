@@ -12,8 +12,7 @@ of the file is `1`.
 ```jsonc
 {
   "version": 1,
-  "project": "my-project",
-  "compatibilityDate": "2024-01-15",
+  "compatibilityDate": "2025-02-06",
 }
 ```
 
