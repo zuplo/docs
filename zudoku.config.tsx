@@ -6,6 +6,7 @@ import { HeadNavigation } from "./src/HeadNavigation";
 
 const config: ZudokuConfig = {
   basePath: "/docs",
+  canonicalUrlOrigin: "https://zuplo.com/docs",
   cdnUrl: {
     media: "https://cdn.zuplo.com/docs",
   },
