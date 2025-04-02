@@ -110,7 +110,7 @@ Paths don't need to be defined using common REST principles. You are free to
 structure your paths however you prefer. For example, `/users/get({userId})` is
 a valid OpenAPI path and would still match the `userId` parameter.
 
-:::caution Special Characters
+:::caution{title="Special Characters"}
 
 The handling of special characters in the path has changed with
 [Compatibility Date 2025-02-06](./compatibility-dates.md#special-characters-in-openapi-format-urls)
