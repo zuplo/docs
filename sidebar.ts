@@ -314,8 +314,8 @@ export const docs: SidebarEntry = [
         },
         items: [
           "articles/sso-okta",
-          "articles/sso-faq",
           "articles/sso-azure-ad",
+          "articles/sso-faq",
         ],
       },
       {
