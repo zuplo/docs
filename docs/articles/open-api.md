@@ -1,5 +1,6 @@
 ---
-title: OpenAPI support in Zuplo
+title: OpenAPI Support in Zuplo
+sidebar_label: OpenAPI
 ---
 
 Zuplo natively supports the OpenAPI 3.1 (and is compatible with 3.0)
@@ -43,14 +44,6 @@ What's more, you can now have more confidence that your OpenAPI represents the
 truth of your API implementation - because it now drives the configuration of
 your gateway.
 
-:::info
-
-We will soon be shipping support for OpenAPI validation and linting in Zuplo. If
-you're interested in being an early customer of these features, let us know at
-[support@zuplo.com](mailto:support@zuplo.com).
-
-:::
-
 ## Zuplo extensions
 
 Zuplo extends the OpenAPI spec using **vendor extensions**. You will see two
@@ -58,7 +51,15 @@ vendor extensions:
 
 ### x-zuplo-path
 
-One below the **path** property:
+`x-zuplo-path` is used to specify the type of [path matching mode](./routing.md)
+you want to use; **open-api** is the default and uses the standard OpenAPI slugs
+for tokens (e.g. `/pizza/{size}`). You can change the pathMode to `url-pattern`
+to use the web standards
+[URLPattern](https://developer.mozilla.org/en-US/docs/Web/API/URLPattern)
+approach to path matching which is much more powerful and supports regular
+expressions.
+
+This extension is defined below the **path** property:
 
 ```json
 "paths": {
@@ -70,17 +71,13 @@ One below the **path** property:
 }
 ```
 
-`x-zuplo-path` is used to specify the type of path matching you want to use;
-**open-api** is the default and uses the standard OpenAPI slugs for tokens (e.g.
-`/pizza/{size}`). You can change the pathMode to `url-pattern` to use the web
-standards
-[URLPattern](https://developer.mozilla.org/en-US/docs/Web/API/URLPattern)
-approach to path matching which is much more powerful and supports regular
-expressions.
-
 ### x-zuplo-route
 
-And another inside the operation, below the method:
+`x-zuplo-route` is where all of your route settings are configured, including
+[policies](/docs/policies), [handlers](/docs/handlers/openapi.md),
+[CORS](/docs/articles/custom-cors-policy.md) and more.
+
+This extension is defined inside the operation, below the method:
 
 ```json
 "get": {
@@ -102,10 +99,6 @@ And another inside the operation, below the method:
     "operationId": "e73d0713-b894-494d-8796-2c50b8634d47"
 }
 ```
-
-`x-zuplo-route` is where all of your route settings are configured, including
-[policies](/docs/policies), [handlers](/docs/handlers/openapi.md),
-[CORS](/docs/articles/custom-cors-policy.md) and more.
 
 ## Other Supported Extensions
 
@@ -132,6 +125,5 @@ internal routes won't be present in the generated OpenAPI file.
 
 You can have multiple `.oas.json` files if you wish to break up your route
 definitions. Note that routes will be executed in document order, based on the
-`.oas.json` files being sorted alphabetically.
-
-Join the conversation on our [Discord](https://discord.zuplo.com).
+`.oas.json` files being sorted alphabetically. For more details see
+[routing](./routing.md).
