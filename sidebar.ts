@@ -27,6 +27,11 @@ export const docs: SidebarEntry = [
   },
   {
     type: "category",
+    label: "Core Concepts",
+    items: ["articles/routing", "articles/open-api"],
+  },
+  {
+    type: "category",
     label: "Projects",
     items: [
       "articles/environment-variables",
@@ -236,8 +241,6 @@ export const docs: SidebarEntry = [
     type: "category",
     label: "How to Guides",
     items: [
-      "articles/open-api",
-
       "articles/versioning-on-zuplo",
       "articles/multiple-auth-policies",
       "articles/archiving-requests-to-storage",
