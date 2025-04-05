@@ -852,6 +852,11 @@
       "source": "/docs/articles/log-plugins{/}?",
       "destination": "/docs/articles/logging",
       "permanent": true
+    },
+    {
+      "source": "/docs/dev-portal{/}?",
+      "destination": "/docs/dev-portal/introduction",
+      "permanent": false
     }
   ],
   "rewrites": [
