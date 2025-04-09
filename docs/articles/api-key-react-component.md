@@ -6,7 +6,7 @@ sidebar_label: React Component
 Zuplo provides an open source react component that can be used on your own UI to
 provider users with self-serve access to API Keys for your Zuplo powered API.
 
-![Component Screenshot](https://cdn.zuplo.com/assets/cedd8ad0-9433-4433-80f6-86545ba0d41a.png)
+![Component Screenshot](../../public/media/api-key-react-component/cedd8ad0-9433-4433-80f6-86545ba0d41a.png)
 
 To see a demo of the component visit https://api-key-manager.com.
 

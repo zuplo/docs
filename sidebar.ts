@@ -1,5 +1,6 @@
 import type { SidebarEntry } from "zudoku";
 import { errors } from "./generated/errors";
+import zudokuSidebar from "./sidebar.zudoku.json";
 
 export const docs: SidebarEntry = [
   {
@@ -23,6 +24,11 @@ export const docs: SidebarEntry = [
       "articles/bonus-dynamic-rate-limiting",
     ],
     collapsed: false,
+  },
+  {
+    type: "category",
+    label: "Core Concepts",
+    items: ["articles/routing", "articles/open-api"],
   },
   {
     type: "category",
@@ -61,29 +67,45 @@ export const docs: SidebarEntry = [
           "articles/update-zup-in-github-action",
         ],
       },
-      {
-        type: "category",
-        label: "Observability",
-        items: [
-          "articles/metrics-plugins",
-          "articles/opentelemetry",
-          "articles/monitoring-your-gateway",
-        ],
-      },
+
+      "articles/testing",
+    ],
+  },
+  {
+    type: "category",
+    label: "Observability",
+    items: [
       {
         type: "category",
         label: "Logging",
+        link: "articles/logging",
         items: [
-          "articles/log-plugins",
+          "articles/log-plugin-gcp",
+          "articles/log-plugin-loki",
           "articles/log-plugin-vmware-log-insight",
-          "articles/log-plugin-loki-logging",
-          "articles/log-plugin-gcp-logging",
-          "articles/log-plugin-azure-blob",
+          "articles/log-plugin-aws-cloudwatch",
+          "articles/log-plugin-datadog",
+          "articles/log-plugin-dynatrace",
+          "articles/log-plugin-new-relic",
+          "articles/log-plugin-splunk",
+          "articles/log-plugin-sumo",
           "articles/custom-logging-example",
           "articles/log-export",
         ],
       },
-      "articles/testing",
+      {
+        type: "category",
+        label: "Data & Security",
+        items: [
+          "articles/plugin-akamai-api-security",
+          "articles/plugin-azure-blob",
+          "articles/plugin-azure-event-hubs",
+          "articles/plugin-hydrolix-traffic-peak",
+        ],
+      },
+      "articles/metrics-plugins",
+      "articles/opentelemetry",
+      "articles/monitoring-your-gateway",
     ],
   },
   {
@@ -133,6 +155,7 @@ export const docs: SidebarEntry = [
     link: "dedicated/overview",
     items: [
       "dedicated/getting-started",
+      "dedicated/source-control",
       "dedicated/architecture",
       "dedicated/networking",
       "dedicated/custom-domains",
@@ -218,8 +241,6 @@ export const docs: SidebarEntry = [
     type: "category",
     label: "How to Guides",
     items: [
-      "articles/open-api",
-
       "articles/versioning-on-zuplo",
       "articles/multiple-auth-policies",
       "articles/archiving-requests-to-storage",
@@ -256,6 +277,7 @@ export const docs: SidebarEntry = [
       "cli/tunnels",
       "cli/variables",
       "cli/local-development",
+      "cli/connectivity",
     ],
   },
   {
@@ -292,8 +314,8 @@ export const docs: SidebarEntry = [
         },
         items: [
           "articles/sso-okta",
-          "articles/sso-faq",
           "articles/sso-azure-ad",
+          "articles/sso-faq",
         ],
       },
       {
@@ -354,10 +376,9 @@ export const programming: SidebarEntry = [
       "articles/runtime-behaviors",
       "articles/zp-body-removed",
       "articles/audit-log",
-
       "articles/custom-cors-policy",
-
       "articles/zuplo-json",
+      "articles/compatibility-dates",
     ],
   },
   {
@@ -386,7 +407,7 @@ export const policies: SidebarEntry = [
   {
     type: "category",
     label: "Overview",
-    items: ["policies/index", "articles/policies"],
+    items: ["policies/overview", "articles/policies"],
   },
   {
     type: "category",
@@ -412,6 +433,8 @@ export const policies: SidebarEntry = [
     type: "category",
     label: "Authorization",
     items: [
+      "policies/aserto-authz-inbound",
+      "policies/authzen-inbound",
       "policies/okta-fga-authz-inbound",
       "policies/openfga-authz-inbound",
       "policies/axiomatics-authz-inbound",
@@ -556,48 +579,5 @@ export const devPortal: SidebarEntry = [
       "dev-portal/updating",
     ],
   },
-  {
-    type: "category",
-    label: "Configuration",
-    icon: "cog",
-    link: "dev-portal/zudoku/configuration/overview",
-    items: [
-      "dev-portal/zudoku/configuration/api-reference",
-      "dev-portal/zudoku/configuration/api-catalog",
-      "dev-portal/zudoku/configuration/navigation",
-      "dev-portal/zudoku/configuration/search",
-      "dev-portal/zudoku/configuration/authentication",
-      "dev-portal/zudoku/configuration/customization",
-      "dev-portal/zudoku/configuration/sentry",
-      "dev-portal/zudoku/configuration/vite-config",
-    ],
-  },
-  {
-    type: "category",
-    label: "Markdown",
-    icon: "book-open-text",
-    link: "dev-portal/zudoku/markdown/overview",
-    items: [
-      "dev-portal/zudoku/markdown/mdx",
-      "dev-portal/zudoku/markdown/admonitions",
-      "dev-portal/zudoku/markdown/code-blocks",
-    ],
-  },
-  {
-    type: "category",
-    label: "Guide",
-    icon: "monitor-check",
-    items: [
-      "dev-portal/zudoku/guides/static-files",
-      "dev-portal/zudoku/guides/environment-variables",
-      "dev-portal/zudoku/guides/custom-pages",
-      "dev-portal/zudoku/guides/using-multiple-apis",
-    ],
-  },
-  {
-    type: "category",
-    label: "Extending",
-    icon: "blocks",
-    items: ["dev-portal/zudoku/custom-plugins", "dev-portal/zudoku/api-keys"],
-  },
+  ...(zudokuSidebar as SidebarEntry),
 ];

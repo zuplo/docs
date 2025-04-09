@@ -15,7 +15,7 @@ consumers and their keys.
 
 For quick access the newest, non-expired API key is shown in this section.
 
-![API key section](https://cdn.zuplo.com/assets/98a3d62f-1b61-4f41-8bac-665e0b02309e.png)
+![API key section](../../public/media/api-key-end-users/98a3d62f-1b61-4f41-8bac-665e0b02309e.png)
 
 ## Zuplo Developer Portal
 

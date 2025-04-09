@@ -21,7 +21,7 @@ Zuplo also supports building and running your API locally. To learn more
 Inside your new project, choose the `routes.oas.json` file and click **Add
 Route**.
 
-![Add Route](../../public/media/step-1-setup-basic-gateway/image-11.png)
+![Add Route](../../public/media/step-1-setup-basic-gateway/add-route.png)
 
 Your API's first route will appear, with many configurable fields. Here's a
 quick overview of them:
@@ -102,7 +102,10 @@ Add an Environment Variable called `BASE_URL`. Leave the "Secret" checkbox
 unchecked. This is typically not a secret, so there's no need to hide this from
 your colleagues.
 
-![BASE_URL Environment Variable](../../public/media/step-1-setup-basic-gateway/image-20.png)
+<Framed margin={4}>
+
+![BASE_URL Environment Variable](../../public/media/step-1-setup-basic-gateway/env-var.png)
+</Framed>
 
 Save the environment variable, head back to the **Code** tab, click
 `routes.oas.json`, and test your route again. You should get back the same

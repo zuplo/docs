@@ -36,7 +36,7 @@ configuration. For example, if you have 3 backends and 2 tunnels we would
 recommend having 3 health-check endpoints on Zuplo with each going through the
 same combination of network hops that your gateway routes will need to leverage.
 
-![Health Checks](https://cdn.zuplo.com/uploads/health-checks.png)
+![Health Checks](../../public/media/monitoring-your-gateway/health-checks.png)
 
 Some customers choose to go further, and have their backend health-check only
 return 'OK' if it also verifies other critical dependencies, like a database

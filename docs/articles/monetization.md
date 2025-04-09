@@ -21,7 +21,7 @@ Zuplo also provides powerful analytics for you as an API Provider. You can track
 the overall usage of your API, or drill down to see the usage of a particular
 customer.
 
-![Analytics](https://cdn.zuplo.com/assets/353fb3d5-f019-443b-92d6-a4127814b1f0.png)
+![Analytics](../../public/media/monetization/353fb3d5-f019-443b-92d6-a4127814b1f0.png)
 
 ## About This Guide
 

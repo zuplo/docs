@@ -114,22 +114,22 @@ traffic over an SSL connection. Navigate to the GCP portal to manage your
 and select the load balancer that was created previously. Click, **Edit** on the
 load balancer.
 
-![Edit load balancer](https://cdn.zuplo.com/assets/770db332-ad94-41c6-a6f8-1498578fb78c.png)
+![Edit load balancer](../../public/media/gke-with-upstream-auth-policy/770db332-ad94-41c6-a6f8-1498578fb78c.png)
 
 Next, click **ADD FRONTEND IP AND PORT**. Enter the name and select **HTTPS** as
 the protocol.
 
-![Add new frontend IP and port](https://cdn.zuplo.com/assets/cd0b20d3-c109-4775-9fa0-1b3e391bcb84.png)
+![Add new frontend IP and port](../../public/media/gke-with-upstream-auth-policy/cd0b20d3-c109-4775-9fa0-1b3e391bcb84.png)
 
 Then click **Add a Certificate**. Select Google-managed Certificate and enter
 your domain name.
 
-![Add a certificate](https://cdn.zuplo.com/assets/49760fbb-6eb4-46f9-a638-ac078fe85aab.png)
+![Add a certificate](../../public/media/gke-with-upstream-auth-policy/49760fbb-6eb4-46f9-a638-ac078fe85aab.png)
 
 Next, select **Host and path rules** and enter the domain and associate it with
 the backend.
 
-![Host and path rules configuration](https://cdn.zuplo.com/assets/307e9026-d77e-4efd-9fc1-4c45ead963f1.png)
+![Host and path rules configuration](../../public/media/gke-with-upstream-auth-policy/307e9026-d77e-4efd-9fc1-4c45ead963f1.png)
 
 Click **Done** and then **Update** to update your Load Balancer. It will take a
 few minutes to issue the SSL certificate for the domain.
@@ -161,7 +161,7 @@ After you have enabled IAP, if you try to open your example API in the browser
 you will now be prompted to authenticate using your Google Account. If you do so
 you be shown a screen that blocks access to the application.
 
-![You don't have access](https://cdn.zuplo.com/assets/a2ee889a-54c1-4e00-953b-1053c619ce52.png)
+![You don't have access](../../public/media/gke-with-upstream-auth-policy/a2ee889a-54c1-4e00-953b-1053c619ce52.png)
 
 Your API is now completely inaccessible to unauthorized requests.
 
@@ -169,7 +169,7 @@ In order to allow your Zuplo Gateway access you need to
 [grant it's service account permission](https://cloud.google.com/iap/docs/managing-access)
 to call the IAP protected API.
 
-![Add principals](https://cdn.zuplo.com/assets/ecadec32-753b-4716-afb5-fafa69c91499.png)
+![Add principals](../../public/media/gke-with-upstream-auth-policy/ecadec32-753b-4716-afb5-fafa69c91499.png)
 
 ### Authorize Zuplo to Call the API
 

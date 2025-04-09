@@ -12,7 +12,7 @@ and schemas to your Open API specification - the more you add the more complete
 your developer portal will be and the better experience your customers will have
 learning and using your API.
 
-![Zuplo developer portal](https://cdn.zuplo.com/assets/6453cd75-6d0c-4e7f-8a6c-5852a06b8c3b.png)
+![Zuplo developer portal](../../public/media/developer-portal/6453cd75-6d0c-4e7f-8a6c-5852a06b8c3b.png)
 
 ## Next Steps
 

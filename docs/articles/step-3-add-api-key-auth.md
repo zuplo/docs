@@ -31,7 +31,7 @@ and open the **Policies** section. Then click **Add Policy**.
 Search for the API key authentication policy, click on it, and then click OK to
 accept the default policy JSON.
 
-![Add API Key Authentication](../../public/media/step-3-add-api-key-auth/image-1.png)
+![Add API Key Authentication](../../public/media/step-3-add-api-key-auth/choose-policy.png)
 
 :::tip
 
@@ -91,7 +91,7 @@ copy button (next to the eye icon).
 Navigate back to the **Route Designer**, and select your route. Next to the path
 of your route, click the **Test** button and fire off a request.
 
-![Failed unauthorized error](../../public/media/step-3-add-api-key-auth/image-5.png)
+![Failed unauthorized error](../../public/media/step-3-add-api-key-auth/test-policy.png)
 
 You should get a 401 Unauthorized response - as we'ven't supplied the API key
 yet. Add an new `authorization` header with the value `Bearer <YOUR_API_KEY>`

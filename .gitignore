@@ -65,3 +65,7 @@ docs/dev-portal/zudoku/
 
 .styles/config/vocabularies/*
 !.styles/config/vocabularies/Base
+
+
+# Screenshots 
+auth.json

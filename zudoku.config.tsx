@@ -6,6 +6,7 @@ import { HeadNavigation } from "./src/HeadNavigation";
 
 const config: ZudokuConfig = {
   basePath: "/docs",
+  canonicalUrlOrigin: "https://zuplo.com",
   cdnUrl: {
     media: "https://cdn.zuplo.com/docs",
   },
@@ -30,10 +31,13 @@ const config: ZudokuConfig = {
       from: "/",
       to: "/articles/what-is-zuplo",
     },
+    { from: "/policies/index", to: "/policies/overview" },
+    { from: "/policies", to: "/policies/overview" },
   ],
   theme: {
     dark: {
       primary: "316 91% 45%",
+      primaryForeground: "#FFFFFF",
     },
     light: {
       primary: "316 91% 45%",
@@ -84,6 +88,9 @@ const config: ZudokuConfig = {
     type: "file",
     input: "./api.json",
     navigationId: "api",
+    options: {
+      expandAllTags: true,
+    },
   },
   docs: [
     { files: "/docs/**/*.{md,mdx}" },

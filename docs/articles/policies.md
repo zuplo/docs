@@ -9,7 +9,7 @@ you can easily create custom policies.
 
 ## How policies work
 
-![How Policies Work](https://cdn.zuplo.com/assets/103f37f8-9801-4f37-8962-d516b9e12fbd.png)
+![How Policies Work](../../public/media/policies/103f37f8-9801-4f37-8962-d516b9e12fbd.png)
 
 An `inbound` policy can intercept a request and modify the request before it
 reaches the request handler (or the next policy). It can also short-circuit the

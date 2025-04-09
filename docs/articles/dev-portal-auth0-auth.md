@@ -15,7 +15,7 @@ monthly active users.
 in the Auth0 dashboard. When creating the application select type "Single Page
 Web Applications"
 
-![Create Auth0 app](https://cdn.zuplo.com/assets/0aaa56b6-37c4-4c87-ac62-d86bc52047e3.png)
+![Create Auth0 app](../../public/media/dev-portal-auth0-auth/0aaa56b6-37c4-4c87-ac62-d86bc52047e3.png)
 
 ### 2/ Configure Auth0 Application
 
@@ -36,9 +36,16 @@ You must set the following fields in the Auth0 application:
 - **Rotation**: Enabled
 - **Reuse Interval**: Leave at `0`
 
-![Refresh token rotation](https://cdn.zuplo.com/assets/359f4a6c-4dd9-48c9-b8a3-27e70aa459c0.png)
+![Refresh token rotation](../../public/media/dev-portal-auth0-auth/359f4a6c-4dd9-48c9-b8a3-27e70aa459c0.png)
 
 **Refresh Token Expiration**
+
+You can keep the defaults, which look like this:
+
+![Refresh token expiration](../../public/media/dev-portal-auth0-auth/image.png)
+
+If you have an older Auth0 app (options don't match the screenshot above) that
+you're reusing, you'll want to set the following options:
 
 - **Absolute Expiration**: Enabled
 - **Absolute Lifetime**: Can be whatever time you want, default is `2592000`
@@ -50,7 +57,7 @@ You must set the following fields in the Auth0 application:
 [Create an API](https://auth0.com/docs/get-started/auth0-overview/set-up-apis)
 in the Auth0 portal. Set the **Identifier** to something like
 `https://api.my-domain.com/`. You will enter this value into Zuplo as the
-**Audience** in the next step.
+**Audience** in the next step. Don't forget the trailing slash!
 
 :::note
 
@@ -61,7 +68,7 @@ different URLs.
 
 :::
 
-![New API](https://cdn.zuplo.com/assets/d91471bd-5897-463e-805c-35abba294616.png)
+![New API](../../public/media/dev-portal-auth0-auth/d91471bd-5897-463e-805c-35abba294616.png)
 
 ### 4/ Configure the Developer Portal
 
@@ -74,16 +81,20 @@ Set the following settings:
 
 - **Enable Authentication**: Checked
 - **Provider**: `auth0`
-- **Authority**: This is your Auth0 domain (for example
-  `my-company.us.auth0.com`) in URL format like
-  `https://my-company.us.auth0.com/`. _The trailing slash is required._
-- **Client ID**: The client ID of the Auth0 application that was created in the
-  earlier steps. This is a string of letters an numbers. _The Client ID isn't a
-  secret value._
+- **Issuer**: This is your Auth0 domain (for example `my-company.us.auth0.com`)
+  in URL format like `https://my-company.us.auth0.com/`. You can find this in
+  the "Basic Information" tab under your Single Page Application. _The trailing
+  slash is required._
+- **Client ID**: The client ID of the Auth0 Single Page Application that was
+  created in the earlier steps. This is a string of letters an numbers. _The
+  Client ID isn't a secret value._
 - **Audience**: This is the value for `identifier` that you set when creating
-  the Auth0 API earlier.
+  the Auth0 API in the previous step.
 
-![Developer portal configuration](https://cdn.zuplo.com/assets/16c9b4a0-db9b-4b8c-a16f-00ce5e08071e.png)
+![Developer Portal Configuration](../../public/media/dev-portal-auth0-auth/image-1.png)
+
+Once you save your changes, navigate to your developer portal and click "Sign
+in".
 
 ## External Auth Setup
 

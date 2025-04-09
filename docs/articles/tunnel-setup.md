@@ -83,7 +83,7 @@ Services can also be used in routes.oas.json file such as with the URL Rewrite
 handler. To call a tunnel service simply use it as part of the rewrite URL as
 shown in the image below.
 
-![Zuplo route handling](https://cdn.zuplo.com/assets/0c91be91-a591-4cef-ac29-d266e8a3181e.png)
+![Zuplo route handling](../../public/media/tunnel-setup/0c91be91-a591-4cef-ac29-d266e8a3181e.png)
 
 ## Service Environment Variables
 
@@ -125,7 +125,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 Environment variables can also be used in configuration, such as the URL Rewrite
 handler as shown below.
 
-![Zuplo environment variables](https://cdn.zuplo.com/assets/16b93099-511d-435b-af85-167fab5814b2.png)
+![Zuplo environment variables](../../public/media/tunnel-setup/16b93099-511d-435b-af85-167fab5814b2.png)
 
 ## Tunnel Upgrades
 

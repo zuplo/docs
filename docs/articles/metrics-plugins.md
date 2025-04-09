@@ -10,6 +10,7 @@ Zuplo supports logging to the following sources:
 
 - DataDog (Beta)
 - Dynatrace (Beta)
+- New Relic (Beta)
 
 If you would like to log to a different source, reach out to support@zuplo.com
 and we'd be happy to work with you to add a new logging plugin.
@@ -52,8 +53,16 @@ tags since those are counted as separate metrics. This
 [article by DataDog](https://www.datadoghq.com/blog/the-power-of-tagged-metrics/)
 has some good guidelines.
 
-As of October 2023, we're in the process of becoming an official integration
-with DataDog, which would reduce the way some of our metrics are counted.
+:::warning{title="Metrics Aggregation"}
+
+Your Zuplo API can be deployed to many edge locations. Each location will send
+metrics to DataDog independantly. For low volume APIs this may be okay, but
+typically you will want to aggregate metrics before sending to DataDog. You can
+use a tool like the
+[OpenTelemetry Collector](https://opentelemetry.io/docs/collector/) for the
+aggregation.
+
+:::
 
 ```ts
 import {
@@ -193,3 +202,82 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
   return "What zup?";
 }
 ```
+
+### New Relic (Beta)
+
+By default, we send all metrics to New Relic. However, you have the option below
+to configure which metrics you want to send.
+
+New Relic's Metric API provides a powerful way to monitor your API's
+performance. The metrics are sent to New Relic's Metric API endpoint
+(https://metric-api.newrelic.com/metric/v1) by default, but you can customize
+this if needed.
+
+```ts
+import {
+  RuntimeExtensions,
+  NewRelicMetricsPlugin,
+  environment,
+} from "@zuplo/runtime";
+
+export function runtimeInit(runtime: RuntimeExtensions) {
+  runtime.addPlugin(
+    new NewRelicMetricsPlugin({
+      apiKey: environment.NEW_RELIC_API_KEY,
+      // Optional: customize the URL if needed
+      // url: "https://metric-api.newrelic.com/metric/v1",
+      // You can add custom attributes to all metrics
+      attributes: {
+        service: "my-service-name",
+        environment: environment.ENVIRONMENT ?? "DEVELOPMENT",
+      },
+      metrics: {
+        latency: true,
+        requestContentLength: true,
+        responseContentLength: true,
+      },
+      // You can also choose to add additional attributes to include in the metrics
+      include: {
+        country: false,
+        httpMethod: false,
+        statusCode: false,
+        path: false,
+      },
+    }),
+  );
+}
+```
+
+The above configuration applies globally for all metrics sent to New Relic. If
+you wish to dynamically configure information for a particular ZuploContext, you
+can use the `NewRelicMetricsPlugin` in your code. Currently, the only
+configuration you can set is the attributes. The values you set here will be
+appended to those set globally in the `zuplo.runtime.ts` file.
+
+```ts
+import {
+  ZuploContext,
+  ZuploRequest,
+  NewRelicMetricsPlugin,
+} from "@zuplo/runtime";
+
+export default async function (request: ZuploRequest, context: ZuploContext) {
+  const someValue = "hello";
+  NewRelicMetricsPlugin.setContext(context, {
+    attributes: { "my-custom-attribute": someValue },
+  });
+
+  return "What zup?";
+}
+```
+
+:::warning{title="Metrics Aggregation"}
+
+Your Zuplo API can be deployed to many edge locations. Each location will send
+metrics to New Relic independently. For low volume APIs this may be okay, but
+typically you will want to aggregate metrics before sending to New Relic. You
+can use a tool like the
+[OpenTelemetry Collector](https://opentelemetry.io/docs/collector/) for the
+aggregation.
+
+:::

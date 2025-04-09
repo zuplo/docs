@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import { lazy, PropsWithChildren, Suspense } from "react";
 import { CogIcon, CopyIcon, FileTextIcon, ListEndIcon } from "zudoku/icons";
 import { BundlesTable } from "./BundlesTable.js";
 import { DocusaurusDocsLicense } from "./DocusaurusDocsLicense.js";
@@ -12,7 +12,23 @@ const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
 const EmbeddedChat = lazy(() => import("./EmbeddedChat.js"));
 
 export const mdxComponents = {
+  /**
+   * This is used in some of the policies
+   */
   Screenshot: (props: any) => <img {...props} />,
+  Framed: (props: { margin: number | undefined }) => (
+    <div
+      className="[&>p]:m-0 [&>p]:p-0 [&>p>img]:m-0 [&>p>img]:p-0 my-[32px]"
+      style={{
+        marginRight: props.margin ? `${props.margin}rem` : "auto",
+        marginLeft: props.margin ? `${props.margin}rem` : "auto",
+      }}
+      {...props}
+    />
+  ),
+  CodeType: (props: PropsWithChildren) => (
+    <code className="text-green-600">&lt;{props.children}&gt;</code>
+  ),
   DocusaurusDocsLicense,
   GithubButton,
   ZupIt: (props: any) => <ZupIt {...props} />,
@@ -26,7 +42,10 @@ export const mdxComponents = {
     />
   ),
   img: (props: any) => {
+    let srcSet;
+
     if (
+      process.env.NODE_ENV === "production" &&
       props.src &&
       !props.srcSet &&
       !props.src.endsWith(".svg") &&
@@ -37,7 +56,7 @@ export const mdxComponents = {
           ? new URL(props.src).pathname
           : props.src;
 
-        props.srcSet = [
+        srcSet = [
           `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=640,format=auto${path}   640w`,
           `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=960,format=auto${path}   960w`,
           `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=1280,format=auto${path} 1280w`,
@@ -48,7 +67,13 @@ export const mdxComponents = {
       }
     }
 
-    return <img {...props} />;
+    return (
+      <img
+        className="border border-[#eaecef] overflow-hidden rounded-sm"
+        {...props}
+        srcSet={srcSet}
+      />
+    );
   },
   PolicyOverview,
   EnterpriseFeature,

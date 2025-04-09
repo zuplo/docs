@@ -30,6 +30,14 @@ There are a few changes to the project structure that you should be aware of:
 3. There needs to be a `tsconfig.json` and `package.json` file in the `docs`
    directory to build the documentation.
 
+:::caution
+
+It is critical that you delete the `config/dev-portal.json` file after you
+complete the migration. If that file is not deleted, the Zuplo build system will
+use the legacy dev portal.
+
+:::
+
 Below is an example of the new project structure. The steps below will explain
 what's needed for each file.
 
@@ -94,7 +102,6 @@ import type { ZudokuConfig } from "zudoku";
 import withZuplo from "zudoku/with-zuplo";
 
 const config: ZudokuConfig = {
-  basePath: "/docs",
   topNavigation: [
     { id: "documentation", label: "Documentation" },
     { id: "api", label: "API Reference" },
@@ -171,15 +178,39 @@ folder. You can copy these two files below.
     "build": "zudoku build"
   },
   "dependencies": {
-    "react": ">18.0.0",
-    "react-dom": ">18.0.0",
-    "zudoku": "^0.20"
+    "react": ">19.0.0",
+    "react-dom": ">19.0.0",
+    "zudoku": "^0.39"
   },
   "devDependencies": {
     "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18"
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19"
+  }
+}
+```
+
+### Root `package.json`
+
+You will also need to add a `workspace` configuration to your root
+`package.json` in order to install the dependencies for the new dev portal.
+
+You also might want add a `docs` script to your root `package.json` to run the
+dev portal in development mode. This will allow you to run the dev portal in
+development mode from the root of your project.
+
+```json
+{
+  "name": "my-api",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "zuplo dev",
+    "test": "zuplo test",
+    "docs": "npm run dev --workspace docs"
+  },
+  "workspaces": {
+    "packages": ["docs"]
   }
 }
 ```

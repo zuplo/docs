@@ -460,7 +460,12 @@
     },
     {
       "source": "/docs/overview/policies{/}?",
-      "destination": "/docs/policies/index",
+      "destination": "/docs/policies/overview",
+      "permanent": true
+    },
+    {
+      "source": "/docs/policies/index{/}?",
+      "destination": "/docs/policies/overview",
       "permanent": true
     },
     {
@@ -812,6 +817,46 @@
       "source": "/docs/articles/add-project-collaborators{/}?",
       "destination": "/docs/articles/accounts/managing-account-members",
       "permanent": true
+    },
+    {
+      "source": "/docs/articles/log-plugin-akamai-api-security{/}?",
+      "destination": "/docs/articles/plugin-akamai-api-security",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/log-plugin-azure-blob{/}?",
+      "destination": "/docs/articles/plugin-azure-blob",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/log-plugin-azure-event-hubs{/}?",
+      "destination": "/docs/articles/plugin-azure-event-hubs",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/log-plugin-gcp-logging{/}?",
+      "destination": "/docs/articles/log-plugin-gcp",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/log-plugin-hydrolix-traffic-peak{/}?",
+      "destination": "/docs/articles/plugin-hydrolix-traffic-peak",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/log-plugin-loki-logging{/}?",
+      "destination": "/docs/articles/log-plugin-loki",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/log-plugins{/}?",
+      "destination": "/docs/articles/logging",
+      "permanent": true
+    },
+    {
+      "source": "/docs/dev-portal{/}?",
+      "destination": "/docs/dev-portal/introduction",
+      "permanent": false
     }
   ],
   "rewrites": [
@@ -831,7 +876,18 @@
         {
           "key": "X-Frame-Options",
           "value": "DENY"
-        },
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "docs.zuplopreview\\.net"
+        }
+      ],
+      "headers": [
         {
           "key": "X-Robots-Tag",
           "value": "all"
