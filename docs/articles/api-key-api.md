@@ -11,12 +11,12 @@ Management of API Keys and consumers
 [can be performed in the Zuplo Portal](./api-key-management.md) and for
 end-users in the Zuplo Developer Portal. However, all management operations
 regarding API Keys can also be performed using the
-[Zuplo Developer API](https://dev.zuplo.com).
+[Zuplo Developer API](https://zuplo.com/docs/api/api-keys-keys).
 
 :::info
 
 In order to obtain an API Key for the Developer API, go to your account settings
-in the Zuplo Portal. [More information](https://dev.zuplo.com/docs/routes/index)
+in the Zuplo Portal. [More information](./accounts/zuplo-api-keys)
 
 :::
 
@@ -82,11 +82,9 @@ export ZAPI_KEY=zpka_YOUR_API_KEY
 
 ### Creating a Consumer with a Key
 
-// typically you would store some useful metadata // like the `organizationId`,
-etc.
+When creating a new Consumer, it's a good idea to include some useful metadata like the `organizationId` or a particular `plan` that is associated with that user.
 
-// Tags are used for querying the consumers later. // It's often useful to store
-some external identifier // that links this consumer to your internal data
+Tags are used for querying the consumers later. It's often useful to store some external identifier that links this consumer to your internal data as a tag.
 
 ```shell
 curl \
