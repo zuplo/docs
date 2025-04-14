@@ -42,9 +42,10 @@ etc. you should ensure you have completed the following steps.
    want to add additional instructions to your API docs.
 
 1. **[Configure a Custom Domain](./custom-domains.md)** - If you are on one of
-   our paid plans, you will want to host your gateway on something like
-   `api.example.com` so that your customers can access your docs at
-   `https://api.example.com/docs`.
+   our paid plans, you will want to host your gateway and developer portal on
+   custom domains. For example, you can host your API at `api.example.com` and
+   your developer portal at `docs.example.com`. Note that custom domains for the
+   developer portal require using our latest version.
 
 1. **[Create Consumers on Login](./dev-portal-create-consumer-on-auth.md)** -
    Use Auth0 actions to automatically create consumers when they login to your

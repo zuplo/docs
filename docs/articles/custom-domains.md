@@ -2,10 +2,10 @@
 title: Custom Domains
 ---
 
-This guide will walk you through the process of setting up a custom domain for
-your project's edge deployment environment. You can manage all domain settings
-related to a project in the Custom Domains section of the Settings tab of your
-project. Custom Domains are available on
+This guide will walk you through the process of setting up custom domains for
+your project's edge deployment environment and developer portal. You can manage
+all domain settings related to a project in the Custom Domains section of the
+Settings tab of your project. Custom Domains are available on
 [Builder plans and above](https://zuplo.com/pricing).
 
 :::note
@@ -30,10 +30,19 @@ to open the `New Custom Domain` configuration modal.
 
 ### 2. Add your domain
 
-Then, pick the environment you want to assign the domain to and enter your apex
-domain (e.g. example.com) or subdomain (e.g. api.example.com)
+Then, pick the environment you want to assign the domain to and choose whether
+to assign the domain to your Gateway or Developer Portal. Enter your apex domain
+(e.g. example.com) or subdomain (e.g. api.example.com)
 
 ![Add New Domain](../../public/media/custom-domains/image-1.png)
+
+:::note{title="Developer Portal Custom Domains"}
+
+Custom domains for the developer portal are only available after migrating to
+our latest version. If you haven't migrated yet, you'll see a notice about this
+when attempting to add a custom domain for the dev portal.
+
+:::
 
 Once saved, you will be provided with a `CNAME` configuration that will look
 something like the one below that you'll use in the next step.
