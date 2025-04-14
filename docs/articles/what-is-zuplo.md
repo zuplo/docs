@@ -20,11 +20,6 @@ Zuplo embraces shift-left and infrastructure as code - the gateway definition is
 all stored in text files that can be source controlled. We can deploy a new
 environment, to the edge, in under 20s with a simple git commit.
 
-We're doing over 4.5 billion API requests per month, supporting API-first
-engineering teams of 5-50. Zuplo was created by the founder of Azure API
-Management and is backed by the founders of some of the most exciting
-developer-centric solutions like Auth0, Snyk, and BigID.
-
 Sound interesting to you? You can
 [see Zuplo in action](https://zuplo.com/meeting?utm_source=blog) or
 [get started with Zuplo](https://portal.zuplo.com/signup?utm_source=blog) for
@@ -92,13 +87,6 @@ browser scripting and well documented on platforms like MDN (e.g.
 [Response Web API](https://developer.mozilla.org/en-US/docs/Web/API/Response))
 and are discussed in depth on platform like
 [stackoverflow](https://stackoverflow.com/).
-
-## Isolation
-
-All Zuplo runtimes and customer code execution is safely isolated (each project,
-even within the same customer account is fully isolated). Edge deployments run
-on web worker technology (on the Cloudflare network by default) which provides
-high isolation guarantees.
 
 ## Performance and latency
 
