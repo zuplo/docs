@@ -11,6 +11,7 @@
       "dev-portal/zudoku/configuration/search",
       "dev-portal/zudoku/configuration/footer",
       "dev-portal/zudoku/configuration/authentication",
+      "dev-portal/zudoku/configuration/build-configuration",
       "dev-portal/zudoku/configuration/sentry",
       "dev-portal/zudoku/configuration/vite-config"
     ]
@@ -45,7 +46,8 @@
       "dev-portal/zudoku/guides/custom-pages",
       "dev-portal/zudoku/guides/using-multiple-apis",
       "dev-portal/zudoku/guides/managing-api-keys-and-identities",
-      "dev-portal/zudoku/guides/transforming-examples"
+      "dev-portal/zudoku/guides/transforming-examples",
+      "dev-portal/zudoku/guides/processors"
     ]
   },
   {
