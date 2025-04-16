@@ -14,8 +14,6 @@ part of the preview program, please refer to the
 This guide is intended to help you migrate your existing documentation from the
 current Dev Portal to the new Dev Portal powered by Zudoku.
 
-## Before You Begin
-
 ## Setup
 
 The migration to the new Developer Portal powered by Zudoku is currently a
