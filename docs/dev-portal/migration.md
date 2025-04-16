@@ -14,34 +14,15 @@ part of the preview program, please refer to the
 This guide is intended to help you migrate your existing documentation from the
 current Dev Portal to the new Dev Portal powered by Zudoku.
 
-## Migration Checklist
-
-Here's a quick overview of the steps you'll complete as part of this guide:
-
-1. Clone your Zuplo project locally
-2. Create the new `docs` directory structure
-3. Create the required config files (`zudoku.config.ts`, `tsconfig.json`,
-   `package.json`)
-4. Migrate your markdown files to the new location
-5. Configure the root `package.json` for workspaces
-6. Test the migration locally
-7. Delete legacy files
-8. Deploy the updated project
-
 ## Before You Begin
-
-### Prerequisites
-
-- Git access to your Zuplo project repository
-- Node.js 22 installed locally
-- Basic familiarity with TypeScript or JavaScript
-- Existing dev portal content to migrate
 
 ## Setup
 
 The migration to the new Developer Portal powered by Zudoku is currently a
 manual process. You will need to clone your existing Zuplo project locally to
 perform these steps.
+
+We recommend you try this in a branch and deploy to a preview environment first.
 
 :::caution
 
@@ -379,17 +360,6 @@ Make sure to delete the following files after you are done with the migration:
 - **Environment variables not working**: The format for accessing environment
   variables has changed. Use `process.env.VARIABLE_NAME` instead of
   `$env(VARIABLE_NAME)`.
-
-### Fallback Options
-
-If you encounter critical issues with your migration, you can temporarily revert
-to the legacy dev portal by:
-
-1. Recreating the `config/dev-portal.json` file
-2. Removing the `docs/zudoku.config.ts` file
-3. Deploying the changes
-
-This should restore the legacy dev portal while you troubleshoot the issues.
 
 ## Post-Migration Verification
 
