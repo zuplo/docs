@@ -67,6 +67,8 @@ To use this default setup add the following code to your `zuplo.runtime.ts`
 file:
 
 ```ts title="modules/zuplo.runtime.ts"
+import { ZuploRequest, HydrolixRequestLoggerPlugin, HydrolixDefaultEntry, environment } from "@zuplo/runtime"
+
 import {
   environment,
   HydrolixRequestLoggerPlugin,
@@ -74,23 +76,30 @@ import {
   defaultGenerateHydrolixEntry,
 } from "@zuplo/runtime";
 
-runtime.addPlugin(
-  new HydrolixRequestLoggerPlugin<HydrolixDefaultEntry>({
-    hostname: "your-hydrolix-hostname.com",
-    username: "your-hydrolix-username",
-    password: environment.HYDROLIX_PASSWORD,
-    token: environment.HYDROLIX_TOKEN,
-    table: "your-table.name",
-    transform: "your-transform-name",
-    generateLogEntry: defaultGenerateHydrolixEntry,
-  }),
-);
+export function runtimeInit(runtime: RuntimeExtensions) {
+
+  runtime.addPlugin(
+    new HydrolixRequestLoggerPlugin<HydrolixDefaultEntry>({
+      hostname: "your-hydrolix-hostname.com",
+      username: "your-hydrolix-username",
+      password: environment.HYDROLIX_PASSWORD,
+      token: environment.HYDROLIX_TOKEN,
+      table: "your-table.name",
+      transform: "your-transform-name",
+      generateLogEntry: defaultGenerateHydrolixEntry,
+    }),
+  );
+
+}
 ```
 
 If you want to customize the data written to Hydrolix, you can define the fields
 and entry generation function yourself as follows:
 
 ```ts title="modules/zuplo.runtime.ts"
+
+import { ZuploRequest, HydrolixRequestLoggerPlugin, environment } from "@zuplo/runtime"
+
 // The interface that describes the rows
 // in the output
 interface LogEntry {
@@ -103,27 +112,31 @@ interface LogEntry {
   contentLength: string | null;
 }
 
-runtime.addPlugin(
-  new HydrolixRequestLoggerPlugin<LogEntry>({
-    hostname: "your-hydrolix-hostname.com",
-    username: "your-hydrolix-username",
-    password: environment.HYDROLIX_PASSWORD,
-    token: environment.HYDROLIX_TOKEN,
-    table: "your-table.name",
-    transform: "your-transform-name",
-    batchPeriodSeconds: 0.1,
-    generateLogEntry: (response: Response, request: ZuploRequest) => ({
-      // You can customize the log entry here by adding new fields
-      timestamp: new Date().toISOString(),
-      url: request.url,
-      method: request.method,
-      status: response.status,
-      statusText: response.statusText,
-      sub: request.user?.sub ?? null,
-      contentLength: request.headers.get("content-length"),
+export function runtimeInit(runtime: RuntimeExtensions) {
+
+  runtime.addPlugin(
+    new HydrolixRequestLoggerPlugin<LogEntry>({
+      hostname: "your-hydrolix-hostname.com",
+      username: "your-hydrolix-username",
+      password: environment.HYDROLIX_PASSWORD,
+      token: environment.HYDROLIX_TOKEN,
+      table: "your-table.name",
+      transform: "your-transform-name",
+      batchPeriodSeconds: 0.1,
+      generateLogEntry: (response: Response, request: ZuploRequest) => ({
+        // You can customize the log entry here by adding new fields
+        timestamp: new Date().toISOString(),
+        url: request.url,
+        method: request.method,
+        status: response.status,
+        statusText: response.statusText,
+        sub: request.user?.sub ?? null,
+        contentLength: request.headers.get("content-length"),
+      }),
     }),
-  }),
-);
+  );
+  
+}
 ```
 
 Entries will be batched and sent as an array, they will be sent every
