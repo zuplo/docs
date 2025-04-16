@@ -68,7 +68,7 @@ my-api/
 ├─ README.md
 ```
 
-### `zudoku.config.ts`
+### Migrate Configuration
 
 The `dev-portal.json` file in the `config` directory will be replaced with the
 new `zudoku.config.ts` file in the `docs` directory. This file will contain the
@@ -226,17 +226,8 @@ description: Introduction to our API
 2. Update image references in your markdown files to point to the new location
 3. Use relative paths for images in your markdown files
 
-Old format:
-
-```md
-![My Image](/images/my-image.png)
-```
-
-New format:
-
-```md
-![My Image](/public/images/my-image.png)
-```
+For more information, see the
+[guide on static assets](./zudoku/guides/static-files.md)
 
 ### `tsconfig.json` and `package.json`
 
