@@ -16,7 +16,7 @@ current Dev Portal to the new Dev Portal powered by Zudoku.
 
 ## Migration Checklist
 
-Here's a quick overview of the steps you'll need to complete:
+Here's a quick overview of the steps you'll complete as part of this guide:
 
 1. Clone your Zuplo project locally
 2. Create the new `docs` directory structure
@@ -123,13 +123,13 @@ also have a `sidebar.json` file in the `docs` directory.
 Here's how the fields from the old configuration map to the new format:
 
 | Old (`dev-portal.json`)    | New (`zudoku.config.ts`)                         | Notes                                                               |
-| -------------------------- | ------------------------------------------------ | ------------------------------------------------------------------- | --- |
+| -------------------------- | ------------------------------------------------ | ------------------------------------------------------------------- |
 | `pageTitle`                | `site.title`                                     | Now under the `site` object                                         |
 | `faviconUrl`               | `site.favicon`                                   | Now under the `site` object                                         |
 | `enableAuthentication`     | Implied by presence of `authentication` property | No explicit toggle, just configure or remove                        |
 | `authentication.provider`  | `authentication.type`                            | Different naming convention                                         |
 | `authentication.authority` | Provider-specific properties                     | See [authentication docs](./zudoku/configuration/authentication.md) |
-| (from sidebar.json)        | `sidebar`                                        | New hierarchical format                                             |     |
+| (from sidebar.json)        | `sidebar`                                        | New hierarchical format                                             |
 
 Migrated to the new format of configuration, this file would look like the
 following.
