@@ -11,352 +11,335 @@ part of the preview program, please refer to the
 
 :::
 
-This guide is intended to help you migrate your existing documentation from the
-current Dev Portal to the new Dev Portal powered by Zudoku.
+This guide walks you through migrating your existing documentation from the
+current Dev Portal to the new Dev Portal powered by Zudoku. Follow these steps
+sequentially for a smooth transition.
 
-## Setup
+## Migration Process
 
-The migration to the new Developer Portal powered by Zudoku is currently a
-manual process. You will need to clone your existing Zuplo project locally to
-perform these steps.
+<Stepper>
 
-We recommend you try this in a branch and deploy to a preview environment first.
+1. **Prepare Your Environment**
 
-:::caution
+   Clone your existing Zuplo project locally. We recommend trying this in a
+   branch and deploying to a preview environment first.
 
-Currently, this migration must be done locally. It cannot be done in the Zuplo
-Portal at this time.
+   :::caution
 
-:::
+   Currently, this migration must be done locally. It cannot be done in the
+   Zuplo Portal.
 
-### Project Structure
+   :::
 
-There are a few changes to the project structure that you should be aware of:
+1. **Understand Project Structure Changes**
 
-1. The `dev-portal.json` file in the `config` directory will go away and you
-   will migrate to use the new `zudoku.config.ts` file in the `docs` directory.
-2. Markdown files are now located in the `docs/pages` directory.
-3. There needs to be a `tsconfig.json` and `package.json` file in the `docs`
-   directory to build the documentation.
+   The new project structure includes these key differences:
 
-:::caution
+   - `config/dev-portal.json` will be replaced by `docs/zudoku.config.ts`
+   - Markdown files will move to the `docs/pages` directory
+   - New `tsconfig.json` and `package.json` files will be needed in the `docs`
+     directory
 
-It is critical that you delete the `config/dev-portal.json` file after you
-complete the migration. If that file is not deleted, the Zuplo build system will
-use the legacy dev portal.
+1. **Create Directory Structure**
 
-:::
+   Set up your new directory structure by creating the following files and
+   folders:
 
-Below is an example of the new project structure. The steps below will explain
-what's needed for each file.
+   - Create `docs/zudoku.config.ts` as an empty file, the contents will be added
+     later.
+   - Create `docs/package.json` as an empty file, the contents will be added
+     later.
+   - Create `docs/tsconfig.json` as an empty file, the contents will be added
+     later.
+   - Create a directory `docs/pages` for your markdown files
+   - Create a directory `docs/public` for images and other static assets
 
-```txt
-my-api/
-├─ config/
-│  ├─ routes.oas.json
-│  ├─ policies.json
-├─ docs/
-│  ├─ zudoku.config.ts
-│  ├─ package.json
-│  ├─ tsconfig.json
-│  ├─ pages/
-│  │  ├─ doc.md # <- Your existing markdown files
-│  ├─ public/ # <- Your images and other static assets
-├─ .gitignore
-├─ package.json
-├─ tsconfig.json
-├─ README.md
-```
+   Once these files are created your directory structure should look like this.
+   Note, that the old dev portal files are still in place. You will delete them
+   later.
 
-### Migrate Configuration
+   ```txt
+   my-api/
+   ├─ config/
+   │  ├─ dev-portal.json # <- Your existing dev-portal.json
+   │  ├─ routes.oas.json
+   │  ├─ policies.json
+   ├─ docs/
+   │  ├─ sidebar.json # <- Your existing sidebar.json
+   │  ├─ theme.css # <- Your existing theme.css
+   │  ├─ zudoku.config.ts
+   │  ├─ package.json
+   │  ├─ tsconfig.json
+   │  ├─ pages/
+   │  │  ├─ doc.md # <- Your existing markdown files
+   │  ├─ public/ # <- Your images and other static assets
+   ├─ .gitignore
+   ├─ package.json
+   ├─ tsconfig.json
+   ├─ README.md
+   ```
 
-The `dev-portal.json` file in the `config` directory will be replaced with the
-new `zudoku.config.ts` file in the `docs` directory. This file will contain the
-configuration for the new Dev Portal powered by Zudoku. You can find more
-information about the configuration in the
-[Dev Portal Configuration](./zudoku/configuration/overview.md) documentation.
+1. **Update Typescript Configuration File**
 
-Your existing `dev-portal.json` file will look something like this. You will
-also have a `sidebar.json` file in the `docs` directory.
+   If you haven't already, create a `tsconfig.json` file in the `docs` folder
+   and update the file with the following content.
 
-```json
-{
-  "pageTitle": "My API",
-  "faviconUrl": "https://www.example.org/favicon.ico",
-  "enableAuthentication": true,
-  "authentication": {
-    "provider": "auth0",
-    "authority": "$env(ZUPLO_PUBLIC_AUTH0_AUTHORITY_URL)",
-    "jwksUrl": "$env(ZUPLO_PUBLIC_AUTH0_AUTHORITY_URL).well-known/jwks.json",
-    "devPortalClient": {
-      "clientId": "$env(ZUPLO_PUBLIC_AUTH0_CLIENT_ID)",
-      "audience": "$env(ZUPLO_PUBLIC_AUTH0_AUDIENCE_URL)"
-    }
-  },
-  "generateExamples": true
-}
-```
+   ```json{title="docs/tsconfig.json"}
+   {
+     "compilerOptions": {
+       "target": "ES2022",
+       "lib": ["ESNext", "DOM", "DOM.Iterable", "WebWorker"],
+       "module": "ESNext",
+       "moduleResolution": "Bundler",
+       "useDefineForClassFields": true,
+       "skipLibCheck": true,
+       "skipDefaultLibCheck": true,
+       "resolveJsonModule": true,
+       "isolatedModules": true,
+       "useUnknownInCatchVariables": false,
+       "types": ["zudoku/client"],
+       "jsx": "react-jsx"
+     }
+   }
+   ```
 
-#### Configuration Mapping
+1. Update `package.json`File
 
-Here's how the fields from the old configuration map to the new format:
+   If you haven't already, create a `package.json` file in the `docs` folder and
+   update the file with the following content.
 
-| Old (`dev-portal.json`)    | New (`zudoku.config.ts`)                         | Notes                                                               |
-| -------------------------- | ------------------------------------------------ | ------------------------------------------------------------------- |
-| `pageTitle`                | `site.title`                                     | Now under the `site` object                                         |
-| `faviconUrl`               | `site.favicon`                                   | Now under the `site` object                                         |
-| `enableAuthentication`     | Implied by presence of `authentication` property | No explicit toggle, just configure or remove                        |
-| `authentication.provider`  | `authentication.type`                            | Different naming convention                                         |
-| `authentication.authority` | Provider-specific properties                     | See [authentication docs](./zudoku/configuration/authentication.md) |
-| (from sidebar.json)        | `sidebar`                                        | New hierarchical format                                             |
+   ```json{title="docs/package.json"}
+   {
+     "name": "docs",
+     "version": "0.1.0",
+     "type": "module",
+     "private": true,
+     "scripts": {
+       "dev": "zudoku dev --zuplo",
+       "build": "zudoku build --zuplo"
+     },
+     "dependencies": {
+       "react": ">19.0.0",
+       "react-dom": ">19.0.0",
+       "zudoku": "^0.39"
+     },
+     "devDependencies": {
+       "typescript": "^5",
+       "@types/node": "^22",
+       "@types/react": "^19",
+       "@types/react-dom": "^19"
+     }
+   }
+   ```
 
-Migrated to the new format of configuration, this file would look like the
-following.
+1. **Update Root Package.json**
 
-:::tip
+   Add the `workspaces` configuration to your root `package.json` file.
+   Optionally, add a new script `docs` to run the dev portal.
 
-Note that the environment variables are referenced by simply using
-`process.env`. See
-[environment variables](./zudoku/guides/environment-variables.md)
+   ```json
+   {
+     "name": "my-api",
+     "version": "0.1.0",
+     "scripts": {
+       "dev": "zuplo dev",
+       "test": "zuplo test",
+       "docs": "npm run dev --workspace docs"
+     },
+     "workspaces": {
+       "packages": ["docs"]
+     }
+   }
+   ```
 
-:::
+1. **Migrate Dev Portal Configuration**
 
-```ts
-import type { ZudokuConfig } from "zudoku";
+   If you haven't already done so, create a new `zudoku.config.ts` file in the
+   `docs` directory to replace your existing `dev-portal.json`.
 
-const config: ZudokuConfig = {
-  site: {
-    title: "My API", // Was pageTitle in the old format
-    favicon: "https://www.example.org/favicon.ico", // Was faviconUrl
-  },
-  topNavigation: [
-    { id: "documentation", label: "Documentation" },
-    { id: "api", label: "API Reference" },
-  ],
-  sidebar: {
-    documentation: [
-      {
-        type: "category",
-        label: "Overview",
-        items: ["introduction", "other-example"],
-      },
-    ],
-  },
-  redirects: [{ from: "/", to: "/introduction" }],
-  apis: {
-    type: "file",
-    input: "../config/routes.oas.json",
-    navigationId: "api",
-  },
-  docs: {
-    files: "/pages/**/*.{md,mdx}",
-  },
-  authentication: {
-    type: "auth0", // Was provider in the old format
-    domain: process.env.ZUPLO_PUBLIC_AUTH0_DOMAIN,
-    clientId: process.env.ZUPLO_PUBLIC_AUTH0_CLIENT_ID,
-  },
-};
+   Here's how several fields map from old to new format. See the
+   [configuration](./zudoku/configuration/overview.md) documentation for a
+   complete list of options.
 
-export default config;
-```
+   | Old (`dev-portal.json`)    | New (`zudoku.config.ts`)                         |
+   | -------------------------- | ------------------------------------------------ |
+   | `pageTitle`                | `site.title`                                     |
+   | `faviconUrl`               | `site.favicon`                                   |
+   | `enableAuthentication`     | Implied by presence of `authentication` property |
+   | `authentication.provider`  | `authentication.type`                            |
+   | `authentication.authority` | Provider-specific properties                     |
+   | (from sidebar.json)        | `sidebar`                                        |
 
-### Sidebar Configuration
+   Example configuration:
 
-Your existing `sidebar.json` file will need to be migrated to the new format in
-`zudoku.config.ts`. The new format is more flexible and supports multiple
-navigation sections.
+   ```ts
+   import type { ZudokuConfig } from "zudoku";
 
-**Old format (`sidebar.json`):**
+   const config: ZudokuConfig = {
+     site: {
+       title: "My API", // Was pageTitle in the old format
+       favicon: "https://www.example.org/favicon.ico", // Was faviconUrl
+     },
+     topNavigation: [
+       { id: "documentation", label: "Documentation" },
+       { id: "api", label: "API Reference" },
+     ],
+     sidebar: {
+       documentation: [
+         {
+           type: "category",
+           label: "Overview",
+           items: ["introduction", "other-example"],
+         },
+       ],
+     },
+     redirects: [{ from: "/", to: "/introduction" }],
+     apis: {
+       type: "file",
+       input: "../config/routes.oas.json",
+       navigationId: "api",
+     },
+     docs: {
+       files: "/pages/**/*.{md,mdx}",
+     },
+     authentication: {
+       type: "auth0", // Was provider in the old format
+       domain: process.env.ZUPLO_PUBLIC_AUTH0_DOMAIN,
+       clientId: process.env.ZUPLO_PUBLIC_AUTH0_CLIENT_ID,
+     },
+   };
 
-```json
-[
-  {
-    "type": "category",
-    "label": "Getting Started",
-    "items": ["introduction", "quickstart"]
-  },
-  {
-    "type": "doc",
-    "id": "api-reference"
-  }
-]
-```
+   export default config;
+   ```
 
-**New format (in `zudoku.config.ts`):**
+   :::tip
 
-```ts
-sidebar: {
-  documentation: [
-    {
-      type: "category",
-      label: "Getting Started",
-      items: ["introduction", "quickstart"]
-    },
-    {
-      type: "doc",
-      id: "api-reference"
-    }
-  ],
-  // You can add additional sidebar sections here
-}
-```
+   Environment variables are now referenced using `process.env` instead of
+   `$env()`.
 
-### Markdown Files
+   :::
 
-Markdown files should be moved to the `docs/pages` directory. You can use
-subdirectories under this as needed.
+1. **Migrate Sidebar Configuration**
 
-#### Front Matter Changes
+   Move your [sidebar configuration](./zudoku/configuration/navigation.mdx) from
+   `sidebar.json` to the `sidebar` property in `zudoku.config.ts`:
 
-The front matter format remains largely the same, but there are some new options
-available:
+   **Old format (`sidebar.json`):**
 
-```md
----
-title: Introduction
-sidebar_label: Intro
-description: Introduction to our API
----
-```
+   ```json
+   [
+     {
+       "type": "category",
+       "label": "Getting Started",
+       "items": ["introduction", "quickstart"]
+     },
+     {
+       "type": "doc",
+       "id": "api-reference"
+     }
+   ]
+   ```
 
-#### Handling Images and Assets
+   **New format (in `zudoku.config.ts`):**
 
-1. Create a `docs/public` directory for your images and other static assets
-2. Update image references in your markdown files to point to the new location
-3. Use relative paths for images in your markdown files
+   ```ts
+   sidebar: {
+     documentation: [
+       {
+         type: "category",
+         label: "Getting Started",
+         items: ["introduction", "quickstart"]
+       },
+       {
+         type: "doc",
+         id: "api-reference"
+       }
+     ],
+     // You can add additional sidebar sections here
+   }
+   ```
 
-For more information, see the
-[guide on static assets](./zudoku/guides/static-files.md)
+1. **Move Markdown Files**
 
-### `tsconfig.json` and `package.json`
+   Move your markdown files to the `docs/pages` directory. The front matter
+   format remains largely the same:
 
-You will need to create a `tsconfig.json` and `package.json` file in the `docs`
-folder. You can copy these two files below.
+   ```md
+   ---
+   title: Introduction
+   sidebar_label: Intro
+   description: Introduction to our API
+   ---
+   ```
 
-**`tsconfig.json`**
+1. **Set Up Images and Assets**
 
-```json
-{
-  "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["ESNext", "DOM", "DOM.Iterable", "WebWorker"],
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "useDefineForClassFields": true,
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "useUnknownInCatchVariables": false,
-    "types": ["zudoku/client"],
-    "jsx": "react-jsx"
-  }
-}
-```
+   Create a `docs/public` directory for your images and other static assets. See
+   the [documenation](./zudoku/guides/static-files.md) for more information on
+   how to use static files in the new dev portal.
 
-**`package.json`**
+1. **Install Dependencies**
 
-```json
-{
-  "name": "docs",
-  "version": "0.1.0",
-  "type": "module",
-  "private": true,
-  "scripts": {
-    "dev": "ZUPLO=1 zudoku dev",
-    "build": "ZUPLO=1 zudoku build"
-  },
-  "dependencies": {
-    "react": ">19.0.0",
-    "react-dom": ">19.0.0",
-    "zudoku": "^0.39"
-  },
-  "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^22",
-    "@types/react": "^19",
-    "@types/react-dom": "^19"
-  }
-}
-```
+   Run `npm install` from your project root to install all dependencies for both
+   your API and documentation.
 
-### Root `package.json`
+1. **Test Locally**
 
-You will also need to add a `workspace` configuration to your root
-`package.json` in order to install the dependencies for the new dev portal.
+   Start the dev portal locally with `npm run docs` and verify that:
 
-You also might want add a `docs` script to your root `package.json` to run the
-dev portal in development mode. This will allow you to run the dev portal in
-development mode from the root of your project.
+   - All pages load correctly
+   - Authentication works (if using it)
+   - All links between pages work
+   - API reference section loads your OpenAPI definitions
+   - Images and assets display properly
 
-```json
-{
-  "name": "my-api",
-  "version": "0.1.0",
-  "scripts": {
-    "dev": "zuplo dev",
-    "test": "zuplo test",
-    "docs": "npm run dev --workspace docs"
-  },
-  "workspaces": {
-    "packages": ["docs"]
-  }
-}
-```
+1. **Delete Legacy Files**
 
-### Theme
+   After confirming everything works, delete these files:
+
+   - `/config/dev-portal.json`
+   - `/docs/sidebar.json`
+   - `/docs/theme.css`
+
+   :::caution
+
+   It is critical that you delete the `config/dev-portal.json` file after
+   completing the migration. If that file is not deleted, the Zuplo build system
+   will use the legacy dev portal.
+
+   :::
+
+1. **Deploy and Verify**
+
+   Deploy your changes by either pushing to a git branch or by running
+   [`npx zuplo deploy`](../cli/deployments.md). After the deployment has
+   completed, perform these final checks:
+
+   - Test all site navigation paths
+   - Verify authentication flows work correctly
+   - Check API reference documentation renders properly
+   - Test across different browsers and devices
+   - Verify custom styling and theming is applied correctly
+
+</Stepper>
+
+## Theming
 
 For instructions on theming the dev portal, see
 [Colors & Theme](./zudoku/customization/colors-theme.md) and
 [Fonts](./zudoku/customization/fonts.md).
 
-Additional theming is possible. More documentation is coming soon.
-
-## Testing Your Migration
-
-Before finalizing your migration, it's important to test your new dev portal
-locally:
-
-1. Install dependencies: `npm install` (from your project root)
-2. Start the dev portal locally: `npm run docs` (using the script we added
-   earlier)
-3. Verify all pages load correctly
-4. Check that authentication works if you're using it
-5. Confirm all links work between pages
-6. Test the API reference section to ensure it loads your OpenAPI definitions
-
-## Cleanup
-
-Make sure to delete the following files after you are done with the migration:
-
-- `/config/dev-portal.json`
-- `/docs/sidebar.json`
-- `/docs/theme.css`
-
 ## Troubleshooting
 
-### Common Migration Issues
+If you encounter issues during migration, check these common problems:
 
-- **Missing dependencies**: If you see errors about missing dependencies, make
-  sure you've run `npm install` from the project root.
-- **Authentication not working**: Check your environment variables are correctly
-  set and that you've properly configured the authentication in the new format.
-- **Sidebar not showing**: Ensure your sidebar configuration in
-  `zudoku.config.ts` is correct and that the file IDs match your markdown files.
-- **Images not loading**: Verify your image paths have been updated to point to
-  the new location.
-- **Environment variables not working**: The format for accessing environment
-  variables has changed. Use `process.env.VARIABLE_NAME` instead of
-  `$env(VARIABLE_NAME)`.
-
-## Post-Migration Verification
-
-After deploying your migrated dev portal, perform these verification steps:
-
-1. Test all site navigation paths
-2. Verify authentication flows work correctly
-3. Check API reference documentation renders properly
-4. Test across different browsers and devices
-5. Verify custom styling and theming is applied correctly
-6. Ensure any custom components function as expected
+- **Missing dependencies**: Ensure you've run `npm install` from the project
+  root.
+- **Authentication issues**: Verify your environment variables are correctly set
+  and authentication is properly configured.
+- **Sidebar not showing**: Check your sidebar configuration in
+  `zudoku.config.ts` and make sure file IDs match your markdown files.
+- **Images not loading**: Confirm image paths have been updated to point to the
+  new location.
+- **Environment variables not working**: Use `process.env.VARIABLE_NAME` instead
+  of `$env(VARIABLE_NAME)`.
