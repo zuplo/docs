@@ -24,21 +24,18 @@ sequentially for a smooth transition.
    Clone your existing Zuplo project locally. We recommend trying this in a
    branch and deploying to a preview environment first.
 
+   ```bash
+   git clone https://github.com/my-org/my-api
+   cd my-api
+   git checkout -b dev-portal-migration
+   ```
+
    :::caution
 
    Currently, this migration must be done locally. It cannot be done in the
    Zuplo Portal.
 
    :::
-
-1. **Understand Project Structure Changes**
-
-   The new project structure includes these key differences:
-
-   - `config/dev-portal.json` will be replaced by `docs/zudoku.config.ts`
-   - Markdown files will move to the `docs/pages` directory
-   - New `tsconfig.json` and `package.json` files will be needed in the `docs`
-     directory
 
 1. **Create Directory Structure**
 
@@ -84,7 +81,7 @@ sequentially for a smooth transition.
    If you haven't already, create a `tsconfig.json` file in the `docs` folder
    and update the file with the following content.
 
-   ```json{title="docs/tsconfig.json"}
+   ```json title="docs/tsconfig.json"
    {
      "compilerOptions": {
        "target": "ES2022",
@@ -108,7 +105,7 @@ sequentially for a smooth transition.
    If you haven't already, create a `package.json` file in the `docs` folder and
    update the file with the following content.
 
-   ```json{title="docs/package.json"}
+   ```json title="docs/package.json"
    {
      "name": "docs",
      "version": "0.1.0",
@@ -137,7 +134,7 @@ sequentially for a smooth transition.
    Add the `workspaces` configuration to your root `package.json` file.
    Optionally, add a new script `docs` to run the dev portal.
 
-   ```json
+   ```json title="package.json"
    {
      "name": "my-api",
      "version": "0.1.0",
@@ -172,7 +169,7 @@ sequentially for a smooth transition.
 
    Example configuration:
 
-   ```ts
+   ```ts title="docs/zudoku.config.ts"
    import type { ZudokuConfig } from "zudoku";
 
    const config: ZudokuConfig = {
