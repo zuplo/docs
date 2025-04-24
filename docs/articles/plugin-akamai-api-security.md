@@ -46,9 +46,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 }
 ```
 
-We recommend storing your key in an [Environment Variable](./environment-variables.md) as shown in the example above `AKAMAI_API_SECURITY_KEY`.
-
-As shown, we recommend storing your Key in an environment variable. If you want
+It is recommended to store your key in an [Environment Variable](./environment-variables.md)  shown in the example above `AKAMAI_API_SECURITY_KEY`. If you want
 the active protection feature enabled, set `enableProtection` to `true`.
 
 The plugin also supports an optional `shouldLog` parameter which is a function that returns true or false and, if false, stops the request/response from logging to Akamai API Security. 
