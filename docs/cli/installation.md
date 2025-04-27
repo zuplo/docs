@@ -8,7 +8,7 @@ The Zuplo CLI is built using Node.js. It requires a minimum version of Node.js
 :::warning{title="Windows Users"}
 
 The Zuplo CLI is not currently supported on Windows. Instead, run the CLI on
-[Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/).
+[Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/).
 
 :::
 

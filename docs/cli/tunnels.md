@@ -55,7 +55,7 @@ To run the Docker container on your own infrastructure, refer to instructions
 from your cloud provider or contact [Zuplo support](mailto:support@zuplo.com)
 for assistance.
 
-- [Deploying Docker containers on Azure](https://docs.microsoft.com/en-us/learn/modules/run-docker-with-azure-container-instances/)
+- [Deploying Docker containers on Azure](https://learn.microsoft.com/en-us/learn/modules/run-docker-with-azure-container-instances/)
 - [Deploying Docker containers on AWS ECS](https://docs.aws.amazon.com/AmazonECS/latest/userguide/getting-started.html)
 - [Deploying container images to GCP](https://cloud.google.com/compute/docs/containers/deploying-containers)
 

@@ -9,7 +9,7 @@ requests to Azure Blob Storage. We also have a post on
 [Archiving to AWS S3 Storage](https://zuplo.com/blog/2022/03/22/custom-policies-in-code-archiving-requests-to-s3).
 
 First, let's set up Azure. You'll need a container in Azure storage
-([docs](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal)).
+([docs](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal)).
 Once you have your container you'll need the URL - click the **Properties** tab
 of your container as shown below.
 

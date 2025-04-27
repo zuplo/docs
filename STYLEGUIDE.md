@@ -2,7 +2,7 @@
 
 - Use American English.
 - Follow
-  [Microsoft's Writing Style Guide](https://docs.microsoft.com/en-us/style-guide/welcome/)
+  [Microsoft's Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/)
   for consistency.
 - Avoid passive voice and first-person pronouns.
 - Write in the present tense.

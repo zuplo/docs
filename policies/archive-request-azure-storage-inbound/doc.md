@@ -6,7 +6,7 @@ instructions on how to do that below.
 ### Setup Azure
 
 First, let's set up Azure. You'll need a container in Azure storage
-([docs](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal)).
+([docs](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal)).
 Once you have your container you'll need the URL - you can get it on the
 `properties` tab of your container as shown below.
 
