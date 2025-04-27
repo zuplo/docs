@@ -43,7 +43,7 @@ project.
 Once you have created your project, you can open it in your favorite code editor
 and begin editing your API and Developer Portal. For more information on local
 development, see the
-[local development guide](/docs/articles/local-development).
+[local development guide](/docs/articles/local-development.mdx).
 
 ## Deploy your project
 
