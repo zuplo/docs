@@ -2,117 +2,80 @@
 title: What is Zuplo?
 ---
 
-Zuplo is a light-weight, fully-managed API Management platform, built for
-developers (GitOps, fast deployment, unlimited preview environments, etc.).
-Hobbyist developers and Engineering leaders alike use Zuplo to quickly:
+Zuplo is a fully-managed, lightweight API management platform designed for developers. It offers fast deployment, GitOps-friendly workflows, and unlimited preview environments. Whether you're an individual developer or part of an engineering team, Zuplo makes it easy to:
 
-- [Add auth and access management](./step-3-add-api-key-auth.md)
-- [Add rate limiting](./step-2-add-rate-limiting.md)
-- Implement a programmable layer of abstraction between an API and its consumers
-  (you can write code that executes inside the Gateway)
-- Generate a [rich developer documentation experience](./developer-portal.md)
-  with self-serve auth management and monetization
+- [Add authentication and access control](./step-3-add-api-key-auth.md)
+- [Implement rate limiting](./step-2-add-rate-limiting.md)
+- Write custom logic to run at the gateway layer
+- Build a [rich developer portal](./developer-portal.md) with self-serve tools for auth and monetization
 
-Zuplo doesn't come with the crazy costs, training courses, etc. of a traditional
-API Management platforms, like Apigee or Azure APIM.
+Zuplo delivers the core benefits of API management without the overhead of legacy platforms. That means no expensive licensing, training requirements, or complex setup.
 
-Zuplo embraces shift-left and infrastructure as code - the gateway definition is
-all stored in text files that can be source controlled. We can deploy a new
-environment, to the edge, in under 20s with a simple git commit.
+Everything in Zuplo is defined through code and stored in source control. Deployments are handled through Git-based workflows and go live globally in under 20 seconds.
 
-We're doing over 4.5 billion API requests per month, supporting API-first
-engineering teams of 5-50. Zuplo was created by the founder of Azure API
-Management and is backed by the founders of some of the most exciting
-developer-centric solutions like Auth0, Snyk, and BigID.
-
-Sound interesting to you? You can
-[see Zuplo in action](https://zuplo.com/meeting?utm_source=blog) or
-[get started with Zuplo](https://portal.zuplo.com/signup?utm_source=blog) for
-free.
+Explore more by [booking a demo](https://zuplo.com/meeting?utm_source=docs) or [signing up](https://portal.zuplo.com/signup?utm_source=docs) for free.
 
 ## Zuplo in your stack
 
-Zuplo's core offering is a fully-managed, serverless gateway that runs at the
-edge, in over 200 data-centers around the world. This has a number of advantages
-as a gateway including:
+Zuplo is a serverless gateway that runs at the edge in over 300 data centers worldwide. This edge-first architecture provides:
 
-- extreme redundancy and high availability built-in
-- within 50ms of everybody on earth (amazing cache performance)
+- Built-in redundancy and high availability
+- Low-latency performance—typically within 50ms of most users
 
-For this reason we consider the platform to be multi-cloud and have customers
-with backends in AWS, Azure, GCP and private data-centers. We have
-[multiple options for securing connectivity](./securing-your-backend) between
-Zuplo and your backend API.
+Zuplo is cloud-agnostic. It integrates with backends running on AWS, Azure, GCP, or private infrastructure. Multiple [secure connectivity options](./securing-your-backend) are available.
 
-Zuplo typically sits between your clients and your backend (or origin) API. Your
-clients could be other servers, mobile devices, browsers running websites or IoT
-devices. The traffic is proxied through the Zuplo gateway where you can enforce
-protections like rate-limiting and authentication, validate requests before they
-hit your backend and much more.
+In most setups, Zuplo sits between clients and your backend API—whether those clients are servers, browsers, mobile apps, or IoT devices. Traffic is routed through Zuplo, where you can enforce policies like rate limiting and authentication, validate requests, and apply transformations before requests reach your backend.
 
 ![Zuplo Architecture](../../public/media/what-is-zuplo/9a9a490a-9bda-46f6-bcc8-c2e67809c0af.png)
 
-We also have customers that have globally distributed backends (hosted by
-multiple clouds). In this case, customers have deployed Zuplo and route to the
-nearest data-center.
+Zuplo also supports global traffic management. Customers with distributed backends use Zuplo to route requests to the nearest data center, optimizing for speed and reliability.
 
 ![Global distribution with Zuplo](../../public/media/what-is-zuplo/9ef54160-c412-4126-a275-4c2ccd3935ff.png)
 
 ## Protocols
 
-Zuplo can proxy any HTTP traffic and works well with REST, GraphQL, WebSockets
-and other HTTP protocols (we've customers proxying SOAP over HTTP too). HTTP 2
-is supported.
+Zuplo can proxy any HTTP traffic. It supports REST, GraphQL, WebSockets, and other HTTP-based protocols (including legacy systems proxying SOAP over HTTP!). HTTP/2 is fully supported.
 
 ## Languages
 
-Zuplo is configured using JSON configuration files and can be easily extended
-using TypeScript / JavaScript. Your backend can be written in any language - we
-have customers with backends coded in Go, C, Node, .Net, etc. As long as it
-communicates via HTTP, Zuplo is a great choice.
+Zuplo is configured via JSON and extended using TypeScript or JavaScript. Your backend can be written in any language that speaks HTTP, such as Go, Node.js, .NET, Java, C, and more.
 
 ## Integrations
 
-We have support for integrations with DataDog (for monitoring, logging), GCP
-Cloud Logging and are adding new integrations on demand for customers quickly.
-Contact us if you need an integration that you don't see.
+Zuplo integrates with platforms like DataDog, New Relic and GCP Cloud Logging for monitoring and observability. We continuously add new integrations based on customer needs, so [reach out](https://zuplo.com/contact) if you need support for a specific tool.
 
 ## Runtime
 
-The Zuplo runtime is built on Web Worker technology - this is a server runtime
-based on web standards that supports JavaScript and WASM code, and is used by
-other services like Deno Deploy, Fastly, CloudFlare Workers and Vercel Edge
-Functions.
+The Zuplo runtime is based on Web Worker technology, supporting JavaScript and WebAssembly. It's the same foundational tech used by platforms like Deno Deploy, Fastly, Vercel Edge Functions and Cloudflare Workers.
 
-This has several advantages including close to 0ms startup time for new nodes
-increasing both API performance, throughput and scalability.
+This architecture offers key benefits:
 
-This makes Zuplo's extensibility easy to use as the concepts are the same as
-browser scripting and well documented on platforms like MDN (e.g.
-[Response Web API](https://developer.mozilla.org/en-US/docs/Web/API/Response))
-and are discussed in depth on platform like
-[stackoverflow](https://stackoverflow.com/).
-
-## Isolation
-
-All Zuplo runtimes and customer code execution is safely isolated (each project,
-even within the same customer account is fully isolated). Edge deployments run
-on web worker technology (on the Cloudflare network by default) which provides
-high isolation guarantees.
+- Near-zero cold start time
+- High throughput
+- Strong developer ergonomics—built on familiar browser APIs like [Response Web API](https://developer.mozilla.org/en-US/docs/Web/API/Response)
 
 ## Performance and latency
 
-Zuplo handles billions of request every month for our customers and has been
-load tested to comfortably exceed 10,000 requests per second (including API key
-security, rate-limiting and other policies).
+Zuplo processes billions of requests monthly and has been tested to handle over 10,000 requests per second, even with policies like API key validation and rate limiting enabled.
 
-Zuplo adds minimal latency to your backend - typically milliseconds, depending
-on the complexity of your gateway. Our policies are highly tuned to reduce
-latency and are adjustable to optimize for different scenarios.
+Typical added latency is in the low milliseconds. Policies are highly optimized and can be tuned to meet specific performance goals.
 
 ## Multi-cloud
 
-Many zuplo customers connect with services in Azure, AWS, GCP and even running
-on raw metal in colo locations. Our unique edge deployment profile means we work
-great with your API wherever it's and have a selection of options for
-[securely connecting to your backend](./securing-your-backend.md).
+Zuplo is designed to work seamlessly with services across cloud providers including AWS, Azure, GCP, and on-premise environments. 
+
+Our distributed architecture and [connectivity options](./securing-your-backend.md) ensure secure, performant connections to your backend, wherever it runs.
+
+## Security and Compliance
+
+Zuplo is built with a security-first architecture and offers robust tools for securing APIs in production environments:
+
+- Support for API key auth, OAuth2, mTLS, IP allowlisting, and custom authentication logic
+- Fine-grained access control and rate limiting applied at the edge
+- Token validation and request enforcement before hitting your backend
+
+Zuplo is SOC 2 Type II compliant and operates in a multi-tenant, zero-trust model. All data in transit is encrypted using TLS 1.2+, and backend secrets are managed securely.
+
+Deployments are Git-based and fully auditable. All gateway configurations are defined as code, making it easy to enforce policy-as-code and maintain traceability.
+
+For teams with strict compliance or data residency requirements Zuplo offers customizable deployment options, including managed dedicated instances and tailored configurations. [Book a demo]([https://zuplo.com/contact](https://calendly.com/zuplo-api/api-discussion)) to discuss your needs.
