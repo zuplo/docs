@@ -26,11 +26,11 @@ Zuplo is cloud-agnostic. It integrates with backends running on AWS, Azure, GCP,
 
 In most setups, Zuplo sits between clients and your backend API—whether those clients are servers, browsers, mobile apps, or IoT devices. Traffic is routed through Zuplo, where you can enforce policies like rate limiting and authentication, validate requests, and apply transformations before requests reach your backend.
 
-![Zuplo Architecture](../../public/media/what-is-zuplo/9a9a490a-9bda-46f6-bcc8-c2e67809c0af.png)
+![Zuplo Architecture](../../public/media/what-is-zuplo/zuplo-connect-light.png)
 
 Zuplo also supports global traffic management. Customers with distributed backends use Zuplo to route requests to the nearest data center, optimizing for speed and reliability.
 
-![Global distribution with Zuplo](../../public/media/what-is-zuplo/9ef54160-c412-4126-a275-4c2ccd3935ff.png)
+![Global distribution with Zuplo](../../public/media/what-is-zuplo/zuplo-distributed-light.png)
 
 ## Protocols
 
