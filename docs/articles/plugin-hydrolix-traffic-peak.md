@@ -93,6 +93,8 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 }
 ```
 
+Note, the `token` (HYDROLIX_TOKEN above) is a [Streaming Auth Token](https://docs.hydrolix.io/docs/stream-authentication).
+
 If you want to customize the data written to Hydrolix, you can define the fields
 and entry generation function yourself as follows:
 
