@@ -78,4 +78,4 @@ Zuplo is SOC 2 Type II compliant and operates in a multi-tenant, zero-trust mode
 
 Deployments are Git-based and fully auditable. All gateway configurations are defined as code, making it easy to enforce policy-as-code and maintain traceability.
 
-For teams with strict compliance or data residency requirements Zuplo offers customizable deployment options, including managed dedicated instances and tailored configurations. [Book a demo]([https://zuplo.com/contact](https://calendly.com/zuplo-api/api-discussion)) to discuss your needs.
+For teams with strict compliance or data residency requirements Zuplo offers customizable deployment options, including managed dedicated instances and tailored configurations. [Book a demo](https://calendly.com/zuplo-api/api-discussion) to discuss your needs.
