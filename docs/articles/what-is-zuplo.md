@@ -26,11 +26,11 @@ Zuplo is cloud-agnostic. It integrates with backends running on AWS, Azure, GCP,
 
 In most setups, Zuplo sits between clients and your backend API—whether those clients are servers, browsers, mobile apps, or IoT devices. Traffic is routed through Zuplo, where you can enforce policies like rate limiting and authentication, validate requests, and apply transformations before requests reach your backend.
 
-![Zuplo Architecture](../../public/media/what-is-zuplo/9a9a490a-9bda-46f6-bcc8-c2e67809c0af.png)
+![Zuplo Architecture](../../public/media/what-is-zuplo/zuplo-connect-light.png)
 
 Zuplo also supports global traffic management. Customers with distributed backends use Zuplo to route requests to the nearest data center, optimizing for speed and reliability.
 
-![Global distribution with Zuplo](../../public/media/what-is-zuplo/9ef54160-c412-4126-a275-4c2ccd3935ff.png)
+![Global distribution with Zuplo](../../public/media/what-is-zuplo/zuplo-distributed-light.png)
 
 ## Protocols
 
@@ -42,7 +42,7 @@ Zuplo is configured via JSON and extended using TypeScript or JavaScript. Your b
 
 ## Integrations
 
-Zuplo integrates with platforms like DataDog, New Relic and GCP Cloud Logging for monitoring and observability. We continuously add new integrations based on customer needs, so [reach out](https://zuplo.com/contact) if you need support for a specific tool.
+Zuplo integrates with platforms like DataDog, New Relic and GCP Cloud Logging for monitoring and observability. We continuously add new integrations based on customer needs, so [reach out](https://zuplo.com/docs/articles/support) if you need support for a specific tool.
 
 ## Runtime
 
@@ -78,4 +78,4 @@ Zuplo is SOC 2 Type II compliant and operates in a multi-tenant, zero-trust mode
 
 Deployments are Git-based and fully auditable. All gateway configurations are defined as code, making it easy to enforce policy-as-code and maintain traceability.
 
-For teams with strict compliance or data residency requirements Zuplo offers customizable deployment options, including managed dedicated instances and tailored configurations. [Book a demo]([https://zuplo.com/contact](https://calendly.com/zuplo-api/api-discussion)) to discuss your needs.
+For teams with strict compliance or data residency requirements Zuplo offers customizable deployment options, including managed dedicated instances and tailored configurations. [Book a demo](https://calendly.com/zuplo-api/api-discussion) to discuss your needs.
