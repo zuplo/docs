@@ -42,7 +42,7 @@ Zuplo is configured via JSON and extended using TypeScript or JavaScript. Your b
 
 ## Integrations
 
-Zuplo integrates with platforms like DataDog, New Relic and GCP Cloud Logging for monitoring and observability. We continuously add new integrations based on customer needs, so [reach out](https://zuplo.com/contact) if you need support for a specific tool.
+Zuplo integrates with platforms like DataDog, New Relic and GCP Cloud Logging for monitoring and observability. We continuously add new integrations based on customer needs, so [reach out](https://zuplo.com/docs/articles/support) if you need support for a specific tool.
 
 ## Runtime
 
