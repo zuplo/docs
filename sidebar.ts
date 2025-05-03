@@ -303,6 +303,7 @@ export const docs: SidebarEntry = [
         items: [
           "articles/accounts/zuplo-api-keys",
           "articles/accounts/billing",
+          "articles/accounts/delete-account",
         ],
       },
       {
