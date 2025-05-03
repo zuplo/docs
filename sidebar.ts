@@ -308,6 +308,14 @@ export const docs: SidebarEntry = [
       },
       {
         type: "category",
+        label: "User Settings",
+        items: [
+          "articles/users/profile",
+          "articles/users/multifactor-authentication",
+        ],
+      },
+      {
+        type: "category",
         label: "Single Sign On",
         link: {
           type: "doc",
