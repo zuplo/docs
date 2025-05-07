@@ -26,4 +26,16 @@ the module locally to enable code completion and type checking.
 
 Below are the currently installed modules.
 
+:::caution{title="Test Carefully"}
+
+It is important to test your use of any node module carefully. Zuplo does not
+run Node.js, it runs a custom JavaScript engine that is designed to be fast and
+secure. This means that these moodules may not work as you expect or certain
+functionality in these modules may not work at all.
+
+We recommend using Node.js modules only as a last resort. In many cases it is
+better to use `fetch` to call APIs directly.
+
+:::
+
 <BundlesTable />
