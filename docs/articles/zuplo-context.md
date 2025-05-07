@@ -44,6 +44,7 @@ context.log.error({ "Oh" : "my!"}
     data center that the request hit, for example, "DFW".
   - `postalCode` [string] - Postal code of the incoming request, for example,
     "78701".
+  - `httpProtocol` [string] - The HTTP protocol of the incoming request.
   - `metroCode` [string] - Metro code (DMA) of the incoming request, for
     example, "635".
   - `region` [string] - If known, the
