@@ -9,6 +9,7 @@
       "dev-portal/zudoku/configuration/api-catalog",
       "dev-portal/zudoku/configuration/navigation",
       "dev-portal/zudoku/configuration/search",
+      "dev-portal/zudoku/configuration/page",
       "dev-portal/zudoku/configuration/footer",
       "dev-portal/zudoku/configuration/authentication",
       "dev-portal/zudoku/configuration/build-configuration",
