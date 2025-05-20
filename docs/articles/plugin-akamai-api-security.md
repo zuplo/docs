@@ -8,13 +8,6 @@ as "NONAME" API Security. It can also pull data from Akamai API Security to
 actively block traffic based on the blocklist rules provided by Akamai API
 Security; known as "Protection".
 
-:::info
-
-This plugin is currently in private beta. Please contact us to request access to
-this preview at support@zuplo.com.
-
-:::
-
 <EnterpriseFeature name="Custom logging" />
 
 ## Setup
@@ -23,7 +16,7 @@ To get started, you'll need to configure the Zuplo Integration in Akamai API
 Security. Once this step is completed you'll have a 'key' to allow us to connect
 to Akamai API Security on your behalf.
 
-Un Zuplo you configure the plugin in the
+In Zuplo you configure the plugin in the
 [Runtime Extensions](./runtime-extensions.md) file `zuplo.runtime.ts`, as
 follows:
 
