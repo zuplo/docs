@@ -13,3 +13,4 @@ exceptions:
   - WAF
   - API
   - VPC
+  - MCP
