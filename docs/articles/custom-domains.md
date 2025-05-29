@@ -175,6 +175,25 @@ enabled. If you wish to upgrade to a higher TLS version, please contact
 
 :::
 
+## Alias Domains
+
+<EnterpriseFeature name="Alias Domains" />
+
+Sometimes your API Gateway might be running behind another service such as a
+CDN, WAF or load balancer. In this case, your API Gateway's domain may not be
+the same as the domain your clients use to access your API. In this case, you
+can add an alias domain to your Zuplo project. An alias domain will configure
+your API and documentation to use the alias domain for any public facing URLs
+such as those in your OpenAPI files or developer portal.
+
+To add an alias domain, simply add a new custom domain per the instructions
+above, but select **Alias Domain** option when creating the domain.
+
+Do note that domains cannot be "converted" from a custom domain to an alias
+domain or vice versa. If you need to change a domain from one type to another,
+you will need to delete the existing domain and create a new one with the
+desired type.
+
 ## Validation Error
 
 If you receive a notification or email that your domain has a validation error
