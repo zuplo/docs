@@ -11,6 +11,7 @@
       "dev-portal/zudoku/configuration/search",
       "dev-portal/zudoku/configuration/page",
       "dev-portal/zudoku/configuration/footer",
+      "dev-portal/zudoku/configuration/slots",
       "dev-portal/zudoku/configuration/authentication",
       "dev-portal/zudoku/configuration/build-configuration",
       "dev-portal/zudoku/configuration/sentry",
@@ -67,6 +68,7 @@
     "items": [
       "dev-portal/zudoku/components/callout",
       "dev-portal/zudoku/components/icons",
+      "dev-portal/zudoku/components/slot",
       "dev-portal/zudoku/components/stepper",
       "dev-portal/zudoku/components/syntax-highlight",
       "dev-portal/zudoku/components/playground",
