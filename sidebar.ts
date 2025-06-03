@@ -587,6 +587,7 @@ export const devPortal: SidebarEntry = [
       "dev-portal/introduction",
       "dev-portal/migration",
       "dev-portal/updating",
+      "dev-portal/node-modules",
     ],
   },
   ...(zudokuSidebar as SidebarEntry),
