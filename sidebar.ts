@@ -442,7 +442,6 @@ export const policies: SidebarEntry = [
     type: "category",
     label: "Authorization",
     items: [
-      "policies/aserto-authz-inbound",
       "policies/authzen-inbound",
       "policies/okta-fga-authz-inbound",
       "policies/openfga-authz-inbound",
@@ -569,6 +568,7 @@ export const policies: SidebarEntry = [
       "handlers/url-rewrite",
       "handlers/custom-handler",
       "handlers/aws-lambda",
+      "handlers/mcp-server",
       "handlers/redirect",
       "handlers/openapi",
       "handlers/system-handlers",
