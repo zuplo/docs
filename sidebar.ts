@@ -569,6 +569,7 @@ export const policies: SidebarEntry = [
       "handlers/url-rewrite",
       "handlers/custom-handler",
       "handlers/aws-lambda",
+      "handlers/mcp-server",
       "handlers/redirect",
       "handlers/openapi",
       "handlers/system-handlers",
