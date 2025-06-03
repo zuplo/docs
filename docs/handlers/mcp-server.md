@@ -3,14 +3,14 @@ title: MCP Server Handler
 sidebar_label: MCP Server
 ---
 
-The MCP (Model Context Protocol) Server handler allows you to run a lite-weight, stateless MCP server on your gateway
+The MCP (Model Context Protocol) Server handler allows you to run a lightweight, stateless MCP server on your gateway
 that automatically transforms your API routes into MCP tools.
+
 This enables your API gateway to seamlessly service external AI tools and agents
 through [Model Context Protocol](https://modelcontextprotocol.io/introduction) interactions.
-By using your existing APIs, you won't have to rebuild functionality or business logic for MCP
-clients into your backend!
+By using your existing APIs, without needing to duplicate functionality or rebuild business logic in your backend.
 
-An MCP Server Handler is made to have a 1:1 relationship with a route. One route can have one server.
+Each MCP Server handler has a 1:1 relationship with a route. That means one route can host one server.
 
 A single MCP server may have _many_ tools where each tool interfaces with a route on your API in your gateway.
 You can compose multiple MCP servers on different routes to tailor MCP tools for each server's specific purpose.
@@ -28,7 +28,7 @@ Configure the handler with the following required options:
   version whey they initialize with the server and _may_ make autonomous decision
   based on the versioning of your MCP server.
 
-Then, configure the OpenAPI file or individual routes you wish transformed into MCP tools.
+Next, configure your OpenAPI file or the specific routes that you want transformed into MCP tools.
 
 ## Setup via routes.oas.json
 
@@ -86,9 +86,7 @@ Transform entire OpenAPI files into MCP tools by specifying `openApiFilePaths` i
 ],
 ```
 
-Each route method becomes an MCP tool. Tool names use the route's `operationId`
-(or a generated name as fallback). Tool descriptions use the route's description,
-then summary, then a generated description as fallback.
+Each route method is exposed as an MCP tool. Tool names are taken from the route’s operationId, or fall back to a generated name if none is provided. Descriptions are pulled from the route’s description, then summary, and finally a generated description if neither is available.
 
 ### Option 2: Individual Routes
 
@@ -110,6 +108,5 @@ Specify **either** `path` or `operationID` plus the required `method`:
 ]
 ```
 
-The `name` and `description` fields are optional but highly encouraged: these should be LLM specific
-instructions that will be read by MCP clients (and the underlying LLM systems) to
+The `name` and `description` fields are optional but strongly recommended. These should contain LLM specific instructions that will be read by MCP clients (and the underlying LLM systems) to
 understand exactly _what_ the tools on your MCP server do.
