@@ -28,6 +28,8 @@ Configure the handler with the following required options:
   version whey they initialize with the server and _may_ make autonomous decision
   based on the versioning of your MCP server.
 
+![MCP Server Handler Portal](../../public/media/mcp/portal-handler.png)
+
 Next, configure your OpenAPI file or the specific routes that you want transformed into MCP tools.
 
 ## Setup via routes.oas.json
