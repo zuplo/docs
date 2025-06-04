@@ -21,8 +21,13 @@ In Zuplo you configure the plugin in the
 follows:
 
 ```ts title="modules/zuplo.runtime.ts"
-import { environment, AkamaiApiSecurityPlugin, RuntimeExtensions, ZuploContext, ZuploRequest } from "@zuplo/runtime";
-
+import {
+  environment,
+  AkamaiApiSecurityPlugin,
+  RuntimeExtensions,
+  ZuploContext,
+  ZuploRequest,
+} from "@zuplo/runtime";
 
 export function runtimeInit(runtime: RuntimeExtensions) {
   runtime.addPlugin(
@@ -33,35 +38,39 @@ export function runtimeInit(runtime: RuntimeExtensions) {
       // Key provided by Akamai API Security
       key: environment.AKAMAI_API_SECURITY_KEY,
       // Enable the active prevention/protection feature
-      enableProtection: true
+      enableProtection: true,
     }),
   );
 }
 ```
 
-It is recommended to store your key in an [Environment Variable](./environment-variables.md)  shown in the example above `AKAMAI_API_SECURITY_KEY`. If you want
-the active protection feature enabled, set `enableProtection` to `true`.
+It is recommended to store your key in an
+[Environment Variable](./environment-variables.md) shown in the example above
+`AKAMAI_API_SECURITY_KEY`. If you want the active protection feature enabled,
+set `enableProtection` to `true`.
 
-The plugin also supports an optional `shouldLog` parameter which is a function that returns true or false and, if false, stops the request/response from logging to Akamai API Security. 
+The plugin also supports an optional `shouldLog` parameter which is a function
+that returns true or false and, if false, stops the request/response from
+logging to Akamai API Security.
 
 ```ts
 runtime.addPlugin(
-    new AkamaiApiSecurityPlugin({
-      hostname: "your-akamai-api-security-hostname.com",
-      // index, provided by Akamai API Security
-      index: 1,
-      // Key provided by Akamai API Security
-      key: environment.AKAMAI_API_SECURITY_KEY,
-      // Enable the active prevention/protection feature
-      enableProtection: true,
-      // optional filter function to exclude requests
-      shouldLog: async (request: ZuploRequest, context: ZuploContext) => {
-        if (request.headers.get("content-type") !== "application/json") {
-          return false;
-        }
+  new AkamaiApiSecurityPlugin({
+    hostname: "your-akamai-api-security-hostname.com",
+    // index, provided by Akamai API Security
+    index: 1,
+    // Key provided by Akamai API Security
+    key: environment.AKAMAI_API_SECURITY_KEY,
+    // Enable the active prevention/protection feature
+    enableProtection: true,
+    // optional filter function to exclude requests
+    shouldLog: async (request: ZuploRequest, context: ZuploContext) => {
+      if (request.headers.get("content-type") !== "application/json") {
+        return false;
+      }
 
-        return true;
-      },
-    }),
-  );
-  ```
+      return true;
+    },
+  }),
+);
+```

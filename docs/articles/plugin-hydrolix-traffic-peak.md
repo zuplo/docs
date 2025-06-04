@@ -67,7 +67,12 @@ To use this default setup add the following code to your `zuplo.runtime.ts`
 file:
 
 ```ts title="modules/zuplo.runtime.ts"
-import { ZuploRequest, HydrolixRequestLoggerPlugin, HydrolixDefaultEntry, environment } from "@zuplo/runtime"
+import {
+  ZuploRequest,
+  HydrolixRequestLoggerPlugin,
+  HydrolixDefaultEntry,
+  environment,
+} from "@zuplo/runtime";
 
 import {
   environment,
@@ -77,7 +82,6 @@ import {
 } from "@zuplo/runtime";
 
 export function runtimeInit(runtime: RuntimeExtensions) {
-
   runtime.addPlugin(
     new HydrolixRequestLoggerPlugin<HydrolixDefaultEntry>({
       hostname: "your-hydrolix-hostname.com",
@@ -89,18 +93,21 @@ export function runtimeInit(runtime: RuntimeExtensions) {
       generateLogEntry: defaultGenerateHydrolixEntry,
     }),
   );
-
 }
 ```
 
-Note, the `token` (HYDROLIX_TOKEN above) is a [Streaming Auth Token](https://docs.hydrolix.io/docs/stream-authentication).
+Note, the `token` (HYDROLIX_TOKEN above) is a
+[Streaming Auth Token](https://docs.hydrolix.io/docs/stream-authentication).
 
 If you want to customize the data written to Hydrolix, you can define the fields
 and entry generation function yourself as follows:
 
 ```ts title="modules/zuplo.runtime.ts"
-
-import { ZuploRequest, HydrolixRequestLoggerPlugin, environment } from "@zuplo/runtime"
+import {
+  ZuploRequest,
+  HydrolixRequestLoggerPlugin,
+  environment,
+} from "@zuplo/runtime";
 
 // The interface that describes the rows
 // in the output
@@ -115,7 +122,6 @@ interface LogEntry {
 }
 
 export function runtimeInit(runtime: RuntimeExtensions) {
-
   runtime.addPlugin(
     new HydrolixRequestLoggerPlugin<LogEntry>({
       hostname: "your-hydrolix-hostname.com",
@@ -137,7 +143,6 @@ export function runtimeInit(runtime: RuntimeExtensions) {
       }),
     }),
   );
-  
 }
 ```
 
