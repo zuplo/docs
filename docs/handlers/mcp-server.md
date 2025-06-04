@@ -49,7 +49,7 @@ with the following route configuration:
     "x-zuplo-path": {
       "pathMode": "open-api"
     },
-    "get": {
+    "post": {
       "summary": "MCP Server",
       "x-zuplo-route": {
         "corsPolicy": "none",
@@ -104,7 +104,7 @@ a generated description if neither is available.
 ### Option 2: Individual Routes
 
 Add specific MCP tools using the `openApiTools` array. Specify **either** `path`
-or `operationID` plus the required `method`:
+or `operationId` plus the required `method`:
 
 ```json
 "openApiTools": [
@@ -115,7 +115,7 @@ or `operationID` plus the required `method`:
       "description": "Gets todos from the backend"
     },
     {
-      "operationID": "e855b869-9c4c-485b-94c5-41b865b0f199",
+      "operationId": "e855b869-9c4c-485b-94c5-41b865b0f199",
       "method": "GET"
     }
 ]
