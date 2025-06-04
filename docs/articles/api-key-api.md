@@ -82,9 +82,12 @@ export ZAPI_KEY=zpka_YOUR_API_KEY
 
 ### Creating a Consumer with a Key
 
-When creating a new Consumer, it's a good idea to include some useful metadata like the `organizationId` or a particular `plan` that is associated with that user.
+When creating a new Consumer, it's a good idea to include some useful metadata
+like the `organizationId` or a particular `plan` that is associated with that
+user.
 
-Tags are used for querying the consumers later. It's often useful to store some external identifier that links this consumer to your internal data as a tag.
+Tags are used for querying the consumers later. It's often useful to store some
+external identifier that links this consumer to your internal data as a tag.
 
 ```shell
 curl \
