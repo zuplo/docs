@@ -43,7 +43,7 @@ with the following route configuration:
     "x-zuplo-path": {
       "pathMode": "open-api"
     },
-    "get": {
+    "post": {
       "summary": "MCP Server",
       "x-zuplo-route": {
         "corsPolicy": "none",
@@ -88,12 +88,13 @@ Transform entire OpenAPI files into MCP tools by specifying `openApiFilePaths` i
 ],
 ```
 
-Each route method is exposed as an MCP tool. Tool names are taken from the route’s operationId, or fall back to a generated name if none is provided. Descriptions are pulled from the route’s description, then summary, and finally a generated description if neither is available.
+Each route method is exposed as an MCP tool. Tool names are taken from the route’s operationId, or fall back to a generated name if none is provided.
+Descriptions are pulled from the route’s description, then summary, and finally a generated description if neither is available.
 
 ### Option 2: Individual Routes
 
 Add specific MCP tools using the `openApiTools` array.
-Specify **either** `path` or `operationID` plus the required `method`:
+Specify **either** `path` or `operationId` plus the required `method`:
 
 ```json
 "openApiTools": [
@@ -104,7 +105,7 @@ Specify **either** `path` or `operationID` plus the required `method`:
       "description": "Gets todos from the backend"
     },
     {
-      "operationID": "e855b869-9c4c-485b-94c5-41b865b0f199",
+      "operationId": "e855b869-9c4c-485b-94c5-41b865b0f199",
       "method": "GET"
     }
 ]
