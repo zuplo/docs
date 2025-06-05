@@ -19,8 +19,8 @@ and external resources such as:
 - Custom business backends and workflows
 
 The protocol ensures that AI interactions with external systems are:
-- **Auditable**: Full visibility into what tools are accessed and how via a simple
-  JSON RPC 2.0 flow.
+- **Auditable**: Full visibility into what tools are accessed and how they're used via a simple
+  [JSON-RPC 2.0](https://www.jsonrpc.org/specification) message flow.
 - **Standardized**: Consistent interface across different tools, servers, clients, languages, and services.
 
 ## How Zuplo Enables MCP

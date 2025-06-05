@@ -77,7 +77,6 @@ export const docs: SidebarEntry = [
     items: [
       "ai/mcp",
     ],
-    collapsed: false,
   },
   {
     type: "category",
