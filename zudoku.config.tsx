@@ -1,8 +1,8 @@
 import type { ZudokuConfig } from "zudoku";
 import { devPortal, docs, policies, programming } from "./sidebar.js";
 import { mdxComponents } from "./src/components.js";
-import { diagramPlugin } from "./src/diagrams/common/plugin.js";
 import { HeadNavigation } from "./src/HeadNavigation";
+import "./src/diagrams.css";
 
 const config: ZudokuConfig = {
   basePath: "/docs",
@@ -44,9 +44,7 @@ const config: ZudokuConfig = {
       border: "220 13.04% 90.98%",
     },
   },
-  // Temporary hack to inject CSS: https://github.com/zuplo/zudoku/issues/473
   plugins: [
-    diagramPlugin(),
     {
       getHead: () => (
         <script>
