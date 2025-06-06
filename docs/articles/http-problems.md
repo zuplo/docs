@@ -30,7 +30,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 }
 ```
 
-This will produce and error response in the standard format. Notice that trace
+This will produce an error response in the standard format. Notice that trace
 information is included automatically. This makes it easy for users to report
 problems that can be searched in logs.
 
@@ -116,7 +116,7 @@ GET /widgets?take=hello
 HttpProblems.badRequest(request, context, {
   title: "Invalid value for query parameter 'take'",
   detail:
-    "The take parameter must a number less than 100. The provided value was 'hello'",
+    "The take parameter must be a number less than 100. The provided value was 'hello'",
 });
 ```
 
@@ -128,7 +128,7 @@ still provide the same `title`.
 It can sometimes be helpful to specify additional properties on the problem
 response. The problem specification requires a few specific fields, but allows
 for any additions as needed. For example, if we wanted to return an error to a
-user who was above their quote on creating widgets the error might look like
+user who was above their quota on creating widgets the error might look like
 this.
 
 ```ts
