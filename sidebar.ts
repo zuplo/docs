@@ -302,6 +302,7 @@ export const docs: SidebarEntry = [
         label: "Account Settings",
         items: [
           "articles/accounts/zuplo-api-keys",
+          "articles/accounts/default-api-key",
           "articles/accounts/billing",
           "articles/accounts/delete-account",
         ],

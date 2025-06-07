@@ -857,6 +857,11 @@
       "source": "/docs/dev-portal{/}?",
       "destination": "/docs/dev-portal/introduction",
       "permanent": false
+    },
+    {
+      "source": "/docs/default-api-keys{/}?",
+      "destination": "/docs/articles/accounts/default-api-key",
+      "permanent": true
     }
   ],
   "rewrites": [
