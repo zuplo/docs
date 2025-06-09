@@ -125,3 +125,82 @@ The `name` and `description` fields are optional but strongly recommended. These
 should contain LLM specific instructions that will be read by MCP clients (and
 the underlying LLM systems) to understand exactly _what_ the tools on your MCP
 server do.
+
+## Authentication
+
+### API Key Auth
+
+An MCP server on Zuplo can be configured to use an API key from a query parameter
+using the [Query Parameter to Header Policy](../../policies/query-param-to-header-inbound).
+
+:::warning
+Currently, API keys are not supported directly by MCP.
+But using an API key via query params transformed through your Zuplo gateway is
+a great way to get up and running quickly with an MCP server.
+:::
+
+Configure the policy to expect a query param and inject it as an Auth header:
+
+```json
+{
+  "policies": [
+    {
+      "name": "mcp-query-param-to-header-inbound",
+      "policyType": "query-param-to-header-inbound",
+      "handler": {
+        "export": "QueryParamToHeaderInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "queryParam": "apiKey",
+          "headerName": "Authorization",
+          "headerValue": "Bearer {value}"
+        }
+      }
+    },
+
+    // etc. etc. other policies, your API key policy
+  ]
+}
+```
+
+Then, to secure your MCP endpoint, add the "query param to header" policy **_before_**
+your API key policy:
+
+```json
+{
+  "paths": {
+    "/mcp": {
+      "post": {
+        "x-zuplo-route": {
+
+          // etc. etc.
+          // other properties and route handlers for MCP
+
+          "policies": {
+            "inbound": [
+                "mcp-query-param-to-header-inbound",
+                "api-key-auth-inbound"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Will will effectively transform the query param into a `Authorization: Bearer` header
+and pass those through to other routes on your gateway.
+
+Then, when using MCP clients, simply add your API key as a query param!
+For example, in Cursor:
+
+```json
+{
+  "mcpServers": {
+    "my-zuplo-mcp-server": {
+      "url": "https://my-server.zuplo.com/mcp?apiKey=123abc"
+    }
+  }
+}
+```
