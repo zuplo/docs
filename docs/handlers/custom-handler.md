@@ -1,11 +1,15 @@
 ---
-title: Custom Request Handlers
-sidebar_label: Custom Handler
+title: Function Handler (Customer Handler)
+sidebar_label: Function Handler
 ---
 
 As an API gateway, the Request Handler is the most important part of a Zuplo
-project. A request handler is a module with an export that fulfills the
-following type definition (typescript):
+project. This document shows how you can build a custom handler - this is often used
+by developers building BFF (backend-for-frontend), doing orchestration or custom traffic
+management.
+
+A request handler is a module with an export that fulfills the
+following type definition (typescript). 
 
 ```ts
 export type RequestHandler = (
