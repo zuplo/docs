@@ -73,6 +73,13 @@ export const docs: SidebarEntry = [
   },
   {
     type: "category",
+    label: "AI",
+    items: [
+      "ai/mcp",
+    ],
+  },
+  {
+    type: "category",
     label: "Observability",
     items: [
       {
