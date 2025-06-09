@@ -1,5 +1,5 @@
 ---
-title: Function Handler (Customer Handler)
+title: Function Handler (Custom Handler)
 sidebar_label: Function Handler
 ---
 
