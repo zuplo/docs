@@ -7,36 +7,35 @@ The MCP (Model Context Protocol) Server handler allows you to run a lightweight,
 stateless MCP server on your gateway that automatically transforms your API
 routes into MCP tools.
 
-This enables your API gateway to seamlessly service external AI tools and agents
+This enables your API gateway to seamlessly serve external AI tools and agents
 through [Model Context Protocol](https://modelcontextprotocol.io/introduction)
-interactions. By using your existing APIs, without needing to duplicate
+interactions by using your existing APIs, without needing to duplicate
 functionality or rebuild business logic in your backend.
 
 Each MCP Server handler has a 1:1 relationship with a route. That means one
 route can host one server.
 
-A single MCP server may have _many_ tools where each tool interfaces with a
-route on your API in your gateway. You can compose multiple MCP servers on
-different routes to tailor MCP tools for each server's specific purpose.
+A single MCP server may have many tools, where each tool interfaces with an API route in your gateway.
+You can compose multiple MCP servers on different routes to tailor MCP tools for each server's specific purpose.
 
 ## Setup via Portal
 
-Open the **Route Designer** by navigating to the **Files** tab then click
-**routes.oas.json**. Inside any route, select **MCP Server** from the **Request
-Handlers** drop-down.
+Open the **Route Designer** by navigating to the **Files** tab, then click
+**routes.oas.json**. For any route definition, select **MCP Server** from the **Request
+Handlers** drop-down. Set the method to **POST**.
 
 Configure the handler with the following required options:
 
-- **Server Name** - The name of the MCP server: AI MCP clients will read this
+- **Server Name** - The name of the MCP server. AI MCP clients will read this
   name when they initialize with the server.
-- **Server Version** - The version of your MCP server: AI MCP clients read this
-  version whey they initialize with the server and _may_ make autonomous
-  decision based on the versioning of your MCP server.
+- **Server Version** - The version of your MCP server. AI MCP clients read this
+  version when they initialize with the server and may make autonomous
+  decisions based on the versioning of your MCP server and the instructions they've been given.
 
 ![MCP Server Handler Portal](../../public/media/mcp/portal-handler.png)
 
-Next, configure your OpenAPI file or the specific routes that you want
-transformed into MCP tools.
+Next, configure your routes to be transformed into MCP tools (see Configuration
+section below).
 
 ## Setup via routes.oas.json
 
@@ -54,6 +53,10 @@ with the following route configuration:
       "x-zuplo-route": {
         "corsPolicy": "none",
         "handler": {
+
+          // The MCP Server Handler handler
+          // and required options
+
           "export": "mcpServerHandler",
           "module": "$import(@zuplo/runtime)",
           "options": {
@@ -70,61 +73,130 @@ with the following route configuration:
 }
 ```
 
-## Options
+## Configuration
 
 The MCP Server handler requires the following configurations:
 
-- `name` - The name identifier of the MCP server to connect to.
-- `version` - The version of the MCP server protocol to use.
+- `name` - The name identifier of the MCP server
+- `version` - The version of the MCP server protocol to use
 
-There are several options for configuring your APIs to be transformed into MCP
-tools.
+### OpenAPI Routes to MCP Tools
 
-### Option 1: OpenAPI File Paths
+There are two options for configuring which API routes become MCP tools:
 
-Transform entire OpenAPI files into MCP tools by specifying `openApiFilePaths`
-in the options:
+#### Option 1: Transform Entire OpenAPI Files
 
-```json
-"openApiFilePaths": [
-  {
-    "filePath": "./config/weather.oas.json"
-  },
-  {
-    "filePath": "./config/todos.oas.json"
-  }
-],
-```
-
-Each route method is exposed as an MCP tool. Tool names are taken from the
-route’s operationId, or fall back to a generated name if none is provided.
-Descriptions are pulled from the route’s description, then summary, and finally
-a generated description if neither is available.
-
-### Option 2: Individual Routes
-
-Add specific MCP tools using the `openApiTools` array. Specify **either** `path`
-or `operationId` plus the required `method`:
+Transform all routes from OpenAPI files into MCP tools by specifying `openApiFilePaths`:
 
 ```json
-"openApiTools": [
-    {
-      "path": "/todos",
-      "method": "GET",
-      "name": "get_todos",
-      "description": "Gets todos from the backend"
-    },
-    {
-      "operationId": "e855b869-9c4c-485b-94c5-41b865b0f199",
-      "method": "GET"
+"paths": {
+  "/mcp": {
+    "post": {
+      "x-zuplo-route": {
+        "handler": {
+
+          // etc. etc. Zuplo MCP handler and route options
+
+          "options": {
+            "openApiFilePaths": [
+              {
+                "filePath": "./config/weather.oas.json"
+              },
+              {
+                "filePath": "./config/todos.oas.json"
+              }
+            ]
+          }
+        }
+      }
     }
-]
+  }
+}
 ```
 
-The `name` and `description` fields are optional but strongly recommended. These
-should contain LLM specific instructions that will be read by MCP clients (and
-the underlying LLM systems) to understand exactly _what_ the tools on your MCP
-server do.
+* `filePath`: Path to an OpenAPI JSON spec file (relative to the project root)
+
+To exclude specific routes when using this option,
+add `x-zuplo-route.mcp.enabled: false` to those routes (see OpenAPI Configuration section).
+
+#### Option 2: Transform Individual Routes
+
+Add specific routes as MCP tools using the `openApiTools` array. Specify **either** `path`
+or `operationId`, plus the required `method`:
+
+```json
+"paths": {
+  "/mcp": {
+    "post": {
+      "x-zuplo-route": {
+        "handler": {
+
+          // etc. etc. Zuplo MCP handler and route options
+
+          "openApiTools": [
+            {
+              "path": "/todos",
+              "method": "GET",
+              "name": "get_todos",
+              "description": "Gets todos from the backend"
+            },
+            {
+              "operationId": "get_todos_by_priority",
+              "method": "GET"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+* `path`: The route path to convert to an MCP tool
+* `operationId`: Alternative to `path` - uses the route's globally unique OpenAPI `operationId`
+* `method`: The HTTP method (`GET`, `POST`, etc.)
+* `name` (optional): Manually overrides the tool's name
+* `description` (optional): Manually overrides the tool's description
+
+### Tool names and descriptions
+
+Regardless of which option you use, MCP tools are configured as follows:
+
+* **Tool names**: Uses the route's `operationId` if available, otherwise falls back to a generated `METHOD_ROUTE` format (e.g., `GET_todos`)
+* **Tool descriptions**: Derived from (in order of priority):
+  1. The route's `description` field
+  2. The route's `summary` field
+  3. A generated description if neither is available
+
+**Best Practice**: Always set meaningful `operationId`s 
+(like `get_users`, `create_new_deployment`, or `update_shopping_cart`)
+and descriptions as these help LLMs understand exactly _what_ each tool does.
+
+:::tip
+Read more about authoring usable tools and good prompt engineering practices
+with [Anthropic's Prompt engineering overview](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview).
+:::
+
+## OpenAPI Route Configuration
+
+Control MCP behavior for individual routes using the `x-zuplo-route` extension and the `mcp` options:
+
+```json
+"paths": {
+  "/internal-endpoint": {
+    "get": {
+      "x-zuplo-route": {
+        "mcp": {
+          "enabled": false
+        }
+      }
+    }
+  }
+}
+```
+
+* `enabled` (default: `true`) - Whether the route should be available as an MCP tool.
+  Useful for excluding routes when using `openApiFilePaths`.
 
 ## Authentication
 
