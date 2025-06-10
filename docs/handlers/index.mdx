@@ -2,10 +2,180 @@
 title: Handlers
 ---
 
-Handlers are the core of the Zuplo API gateway. Handlers are responsible for streaming a response from your downstream API or a place where you can write custom code for any scenario.
+Zuplo provides several built-in handlers for common API gateway scenarios. These
+handlers can be used directly in your route configuration without writing custom
+code.
 
-Handlers are in the middle of the request lifecycle of Zuplo between inbound and outbound [policies](/docs/policies).
+## Available Handlers
 
-Zuplo comes with several built-in handlers as well as the ability to write your own with a custom module.
+### Request Handlers
 
-TODO: List handlers
+- [awsLambdaHandler](./aws-lambda-handler.md) - Invoke AWS Lambda functions
+- [mcpServerHandler](./mcp-server-handler.md) - Model Context Protocol server
+  handler
+- [openApiSpecHandler](./openapi-spec-handler.md) - Serve OpenAPI specifications
+- [redirectHandler](./redirect-handler.md) - HTTP redirects
+- [urlForwardHandler](./url-forward-handler.md) - Forward requests to another
+  URL
+- [urlRewriteHandler](./url-rewrite-handler.md) - Rewrite request URLs
+- [webSocketHandler](./websocket-handler.md) - WebSocket connections
+- [webSocketPipelineHandler](./websocket-pipeline-handler.md) - WebSocket with
+  pipeline support
+
+## Usage in Routes
+
+Handlers are configured in your route definition:
+
+```json
+{
+  "routes": [
+    {
+      "path": "/lambda/*",
+      "methods": ["GET", "POST"],
+      "handler": {
+        "export": "awsLambdaHandler",
+        "module": "@zuplo/runtime"
+      }
+    },
+    {
+      "path": "/old-path",
+      "methods": ["GET"],
+      "handler": {
+        "export": "redirectHandler",
+        "module": "@zuplo/runtime",
+        "options": {
+          "location": "/new-path",
+          "status": 301
+        }
+      }
+    }
+  ]
+}
+```
+
+## Handler Types
+
+### 1. Proxy Handlers
+
+These handlers forward requests to other services:
+
+- `urlForwardHandler` - Simple URL forwarding
+- `urlRewriteHandler` - URL rewriting with pattern matching
+- `awsLambdaHandler` - AWS Lambda integration
+
+### 2. Response Handlers
+
+These handlers generate responses directly:
+
+- `redirectHandler` - HTTP redirects
+- `openApiSpecHandler` - OpenAPI documentation
+- `mcpServerHandler` - MCP protocol responses
+
+### 3. Protocol Handlers
+
+These handlers support specific protocols:
+
+- `webSocketHandler` - Basic WebSocket support
+- `webSocketPipelineHandler` - WebSocket with policy pipeline
+
+## Common Patterns
+
+### Dynamic URL Forwarding
+
+```json
+{
+  "path": "/api/:service/*",
+  "handler": {
+    "export": "urlRewriteHandler",
+    "module": "@zuplo/runtime",
+    "options": {
+      "pattern": "^/api/([^/]+)/(.*)$",
+      "rewrite": "https://$1.internal.example.com/$2"
+    }
+  }
+}
+```
+
+### Conditional Redirects
+
+```json
+{
+  "path": "/docs",
+  "handler": {
+    "export": "redirectHandler",
+    "module": "@zuplo/runtime",
+    "options": {
+      "location": "https://docs.example.com",
+      "status": 302
+    }
+  }
+}
+```
+
+### Lambda Integration
+
+```json
+{
+  "path": "/functions/:functionName",
+  "handler": {
+    "export": "awsLambdaHandler",
+    "module": "@zuplo/runtime"
+  },
+  "policies": {
+    "inbound": ["api-key-auth", "rate-limit"]
+  }
+}
+```
+
+## Custom Handler Implementation
+
+If built-in handlers don't meet your needs, you can create custom handlers:
+
+```ts
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export default async function customHandler(
+  request: ZuploRequest,
+  context: ZuploContext,
+): Promise<Response> {
+  // Your custom logic here
+  return new Response("Hello from custom handler!");
+}
+```
+
+## Handler Options
+
+Most handlers accept options to configure their behavior:
+
+```json
+{
+  "handler": {
+    "export": "handlerName",
+    "module": "@zuplo/runtime",
+    "options": {
+      // Handler-specific options
+    }
+  }
+}
+```
+
+## Error Handling
+
+Built-in handlers follow standard error handling patterns:
+
+1. Network errors return 502 Bad Gateway
+2. Invalid configurations return 500 Internal Server Error
+3. Client errors are passed through from upstream services
+
+## Performance Considerations
+
+- Built-in handlers are optimized for performance
+- Handlers run at the edge for low latency
+- Connection pooling is handled automatically
+- Automatic retries for transient failures (where appropriate)
+
+## See Also
+
+- [Custom Handlers](../articles/custom-handlers) - Building custom handlers
+- [Route Configuration](../articles/routing) - Configuring routes
+- [Policies](../policies) - Adding policies to handlers

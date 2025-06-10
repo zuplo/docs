@@ -69,3 +69,7 @@ docs/dev-portal/zudoku/
 
 # Screenshots 
 auth.json
+
+# docs generation
+runtime.api.json
+runtime.api.md

@@ -123,6 +123,89 @@ HttpProblems.badRequest(request, context, {
 You can see how each of these cases help the user understand the problem, but
 still provide the same `title`.
 
+## Complete Method List
+
+The `HttpProblems` class provides static methods for all standard HTTP status
+codes:
+
+### 1xx Informational
+
+- `continue()` - 100 Continue
+- `switchingProtocols()` - 101 Switching Protocols
+- `processing()` - 102 Processing (deprecated)
+- `earlyHints()` - 103 Early Hints
+
+### 2xx Success
+
+- `ok()` - 200 OK
+- `created()` - 201 Created
+- `accepted()` - 202 Accepted
+- `nonAuthoritativeInformation()` - 203 Non-Authoritative Information
+- `noContent()` - 204 No Content
+- `resetContent()` - 205 Reset Content
+- `partialContent()` - 206 Partial Content
+- `multiStatus()` - 207 Multi-Status
+- `alreadyReported()` - 208 Already Reported
+- `imUsed()` - 226 IM Used
+
+### 3xx Redirection
+
+- `multipleChoices()` - 300 Multiple Choices
+- `movedPermanently()` - 301 Moved Permanently
+- `found()` - 302 Found
+- `seeOther()` - 303 See Other
+- `notModified()` - 304 Not Modified
+- `useProxy()` - 305 Use Proxy
+- `switchProxy()` - 306 Switch Proxy (deprecated)
+- `temporaryRedirect()` - 307 Temporary Redirect
+- `permanentRedirect()` - 308 Permanent Redirect
+
+### 4xx Client Errors
+
+- `badRequest()` - 400 Bad Request
+- `unauthorized()` - 401 Unauthorized
+- `paymentRequired()` - 402 Payment Required
+- `forbidden()` - 403 Forbidden
+- `notFound()` - 404 Not Found
+- `methodNotAllowed()` - 405 Method Not Allowed
+- `notAcceptable()` - 406 Not Acceptable
+- `proxyAuthenticationRequired()` - 407 Proxy Authentication Required
+- `requestTimeout()` - 408 Request Timeout
+- `conflict()` - 409 Conflict
+- `gone()` - 410 Gone
+- `lengthRequired()` - 411 Length Required
+- `preconditionFailed()` - 412 Precondition Failed
+- `contentTooLarge()` - 413 Content Too Large
+- `uriTooLong()` - 414 URI Too Long
+- `unsupportedMediaType()` - 415 Unsupported Media Type
+- `rangeNotSatisfiable()` - 416 Range Not Satisfiable
+- `expectationFailed()` - 417 Expectation Failed
+- `imATeapot()` - 418 I'm a teapot
+- `misdirectedRequest()` - 421 Misdirected Request
+- `unprocessableContent()` - 422 Unprocessable Content
+- `locked()` - 423 Locked
+- `failedDependency()` - 424 Failed Dependency
+- `tooEarly()` - 425 Too Early
+- `upgradeRequired()` - 426 Upgrade Required
+- `preconditionRequired()` - 428 Precondition Required
+- `tooManyRequests()` - 429 Too Many Requests
+- `requestHeaderFieldsTooLarge()` - 431 Request Header Fields Too Large
+- `unavailableForLegalReasons()` - 451 Unavailable For Legal Reasons
+
+### 5xx Server Errors
+
+- `internalServerError()` - 500 Internal Server Error
+- `notImplemented()` - 501 Not Implemented
+- `badGateway()` - 502 Bad Gateway
+- `serviceUnavailable()` - 503 Service Unavailable
+- `gatewayTimeout()` - 504 Gateway Timeout
+- `httpVersionNotSupported()` - 505 HTTP Version Not Supported
+- `variantAlsoNegotiates()` - 506 Variant Also Negotiates
+- `insufficientStorage()` - 507 Insufficient Storage
+- `loopDetected()` - 508 Loop Detected
+- `notExtended()` - 510 Not Extended
+- `networkAuthenticationRequired()` - 511 Network Authentication Required
+
 ## Additional Properties
 
 It can sometimes be helpful to specify additional properties on the problem
@@ -170,3 +253,34 @@ HttpProblems.badRequest(request, context, undefined, {
   "my-error-code": "230",
 });
 ```
+
+## HttpStatusCode Enum
+
+For type-safe status code handling, use the `HttpStatusCode` enum:
+
+```ts
+import { HttpStatusCode } from "@zuplo/runtime";
+
+// Use in responses
+return new Response("Not Found", {
+  status: HttpStatusCode.NOT_FOUND,
+});
+
+// Use in conditionals
+if (response.status === HttpStatusCode.UNAUTHORIZED) {
+  // Handle unauthorized
+}
+
+// Available values include:
+HttpStatusCode.OK; // 200
+HttpStatusCode.CREATED; // 201
+HttpStatusCode.BAD_REQUEST; // 400
+HttpStatusCode.UNAUTHORIZED; // 401
+HttpStatusCode.FORBIDDEN; // 403
+HttpStatusCode.NOT_FOUND; // 404
+HttpStatusCode.INTERNAL_SERVER_ERROR; // 500
+// ... and all other standard HTTP status codes
+```
+
+The enum provides constants for all standard HTTP status codes, making your code
+more readable and less prone to typos.

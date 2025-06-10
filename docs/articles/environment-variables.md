@@ -124,4 +124,4 @@ use in your code:
 - `ZUPLO_BUILD_ID` - The build ID of the environment. This is a unique ID for
   each build of the environment. This is a UUID.
 - `ZUPLO_COMPATIBILITY_DATE` - The
-  [compatibility date](./compatibility-dates.md) of runtime environment.
+  [compatibility date](../programmable-api/compatibility-dates.md) of runtime environment.

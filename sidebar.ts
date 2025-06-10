@@ -372,51 +372,87 @@ export const docs: SidebarEntry = [
 
 export const programming: SidebarEntry = [
   {
+    type: "doc",
+    id: "programmable-api/index",
+    label: "Overview",
+  },
+  {
+    type: "doc",
+    id: "programmable-api/compatibility-dates",
+    label: "Compatibility Dates",
+  },
+  {
     type: "category",
-    label: "Core Concepts",
+    label: "Core APIs",
     items: [
       "programmable-api/zuplo-request",
       "programmable-api/zuplo-context",
-      "programmable-api/web-standard-apis",
-      "programmable-api/web-crypto-apis",
-      "programmable-api/node-modules",
-
-      "programmable-api/context-data",
-      "programmable-api/route-raw",
-
-      "programmable-api/reusing-code",
-
-      "programmable-api/zuplo-id-token",
-      "programmable-api/safely-clone-a-request-or-response",
-      "programmable-api/runtime-behaviors",
-      "programmable-api/zp-body-removed",
-      "programmable-api/audit-log",
-      "programmable-api/custom-cors-policy",
-      "programmable-api/zuplo-json",
-      "programmable-api/compatibility-dates",
+      "programmable-api/http-problems",
+      "programmable-api/environment",
     ],
   },
   {
     type: "category",
-    label: "Error Handling",
+    label: "Caching APIs",
     items: [
-      "programmable-api/http-problems",
-      "programmable-api/not-found-handler",
+      "programmable-api/zone-cache",
+      "programmable-api/memory-zone-read-through-cache",
+      "programmable-api/streaming-zone-cache",
+      "programmable-api/cache",
+    ],
+  },
+  {
+    type: "category",
+    label: "Data Management",
+    items: [
+      "programmable-api/context-data",
+      "programmable-api/background-loader",
+      "programmable-api/background-dispatcher",
     ],
   },
   {
     type: "category",
     label: "Extensions & Hooks",
-    items: ["programmable-api/hooks", "programmable-api/runtime-extensions"],
+    items: [
+      "programmable-api/runtime-extensions",
+      "programmable-api/hooks",
+      "programmable-api/runtime-errors",
+    ],
   },
   {
     type: "category",
-    label: "Cache & Data Loading",
+    label: "Logging & Observability",
+    items: ["programmable-api/logger", "programmable-api/audit-log"],
+  },
+  {
+    type: "category",
+    label: "Types and Interfaces",
     items: [
-      "programmable-api/cache",
-      "programmable-api/zone-cache",
-      "programmable-api/background-loader",
-      "programmable-api/background-dispatcher",
+      "programmable-api/request-user",
+      "programmable-api/custom-cors-policy",
+    ],
+  },
+  {
+    type: "category",
+    label: "Web Standards",
+    items: [
+      "programmable-api/web-standard-apis",
+      "programmable-api/web-crypto-apis",
+    ],
+  },
+  {
+    type: "category",
+    label: "Advanced Topics",
+    items: [
+      "programmable-api/node-modules",
+      "programmable-api/reusing-code",
+      "programmable-api/route-raw",
+      "programmable-api/safely-clone-a-request-or-response",
+      "programmable-api/runtime-behaviors",
+      "programmable-api/zp-body-removed",
+      "programmable-api/zuplo-json",
+      "programmable-api/not-found-handler",
+      "programmable-api/zuplo-id-token",
     ],
   },
 ];

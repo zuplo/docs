@@ -24,3 +24,10 @@ code in this repository.
 - Error pages should be created in `./docs/errors/`
 - Write clear, concise documentation
 - Use ES modules (type: "module" in package.json)
+
+## Additional Guidelines
+
+- Run as much in parallel as possible. If you have multiple tasks, run them in
+  parallel to save time. Do not wait for one task to finish before starting the
+  next one.
+- Optimize to complete tasks quickly and correctly.

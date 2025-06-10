@@ -113,7 +113,7 @@ a valid OpenAPI path and would still match the `userId` parameter.
 :::caution{title="Special Characters"}
 
 The handling of special characters in the path has changed with
-[Compatibility Date 2025-02-06](./compatibility-dates.md#special-characters-in-openapi-format-urls)
+[Compatibility Date 2025-02-06](../programmable-api/compatibility-dates.md#special-characters-in-openapi-format-urls)
 
 :::
 

@@ -25,28 +25,32 @@ const escapeMdxCurlyBraces = (content: string) => {
   // First, split by code blocks (triple backticks)
   const codeBlockRegex = /(```[\s\S]*?```)/g;
   const parts = content.split(codeBlockRegex);
-  
-  return parts.map((part, index) => {
-    // Odd indices are code blocks - don't touch them
-    if (index % 2 === 1) {
-      return part;
-    }
-    
-    // For non-code-block parts, split by inline code (single backticks)
-    const inlineCodeRegex = /(`[^`]*`)/g;
-    const subParts = part.split(inlineCodeRegex);
-    
-    return subParts.map((subPart, subIndex) => {
-      // Odd indices are inline code - don't touch them
-      if (subIndex % 2 === 1) {
-        return subPart;
+
+  return parts
+    .map((part, index) => {
+      // Odd indices are code blocks - don't touch them
+      if (index % 2 === 1) {
+        return part;
       }
-      
-      // For regular text, escape {value} patterns by wrapping in backticks
-      // This regex matches {word} patterns that could be mistaken for JSX
-      return subPart.replace(/\{(\w+)\}/g, '`{$1}`');
-    }).join('');
-  }).join('');
+
+      // For non-code-block parts, split by inline code (single backticks)
+      const inlineCodeRegex = /(`[^`]*`)/g;
+      const subParts = part.split(inlineCodeRegex);
+
+      return subParts
+        .map((subPart, subIndex) => {
+          // Odd indices are inline code - don't touch them
+          if (subIndex % 2 === 1) {
+            return subPart;
+          }
+
+          // For regular text, escape {value} patterns by wrapping in backticks
+          // This regex matches {word} patterns that could be mistaken for JSX
+          return subPart.replace(/\{(\w+)\}/g, "`{$1}`");
+        })
+        .join("");
+    })
+    .join("");
 };
 
 function invariant(condition: unknown, message: string): asserts condition {

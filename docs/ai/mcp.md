@@ -1,17 +1,17 @@
 # Model Context Protocol (MCP) with Zuplo
 
-[Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction)
-is an open protocol that enables controlled
-interactions between AI systems and agents. It enables external tools and data sources
-to be utilized and read by AI agents that implement the protocol.
+[Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) is
+an open protocol that enables controlled interactions between AI systems and
+agents. It enables external tools and data sources to be utilized and read by AI
+agents that implement the protocol.
 
-Developed by Anthropic, MCP standardizes how AI applications can connect to
-a robust number of services while maintaining user control.
+Developed by Anthropic, MCP standardizes how AI applications can connect to a
+robust number of services while maintaining user control.
 
 ## What is MCP?
 
-MCP acts as a bridge between AI systems (like Cursor, Claude Desktop, ChatGPT, or other LLMs)
-and external resources such as:
+MCP acts as a bridge between AI systems (like Cursor, Claude Desktop, ChatGPT,
+or other LLMs) and external resources such as:
 
 - APIs and databases
 - File systems and cloud storage
@@ -19,21 +19,30 @@ and external resources such as:
 - Custom business backends and workflows
 
 The protocol ensures that AI interactions with external systems are:
-- **Auditable**: Full visibility into what tools are accessed and how they're used via a simple
-  [JSON-RPC 2.0](https://www.jsonrpc.org/specification) message flow.
-- **Standardized**: Consistent interface across different tools, servers, clients, languages, and services.
+
+- **Auditable**: Full visibility into what tools are accessed and how they're
+  used via a simple [JSON-RPC 2.0](https://www.jsonrpc.org/specification)
+  message flow.
+- **Standardized**: Consistent interface across different tools, servers,
+  clients, languages, and services.
 
 ## How Zuplo Enables MCP
 
-Zuplo's MCP Server Handler provides a perfect foundation for MCP implementations by:
+Zuplo's MCP Server Handler provides a perfect foundation for MCP implementations
+by:
 
-1. **Unified API Interface**: Transform any backend API service into a standardized MCP-compatible server
-2. **Security & Control**: Built-in authentication, rate limiting, and access controls
-3. **Monitoring & Analytics**: Full observability into AI tool usage and performance
-4. **Developer Experience**: Easy configuration and deployment using your existing OpenAPI specifications
+1. **Unified API Interface**: Transform any backend API service into a
+   standardized MCP-compatible server
+2. **Security & Control**: Built-in authentication, rate limiting, and access
+   controls
+3. **Monitoring & Analytics**: Full observability into AI tool usage and
+   performance
+4. **Developer Experience**: Easy configuration and deployment using your
+   existing OpenAPI specifications
 
-The MCP Server Handler transforms your existing Zuplo API gateway into a powerful
-toolset that AI systems can discover, understand, and invoke - bringing AI capabilities directly into your business workflows!
+The MCP Server Handler transforms your existing Zuplo API gateway into a
+powerful toolset that AI systems can discover, understand, and invoke - bringing
+AI capabilities directly into your business workflows!
 
 ## MCP Server Handler: Transform Routes into AI Tools
 
@@ -44,10 +53,14 @@ your API gateway routes into MCP tools that AI systems can discover and use.
 
 The MCP Server Handler:
 
-1. **Route Discovery**: Automatically exposes your Zuplo routes as discoverable MCP tools
-2. **OpenAPI Integration**: Uses your existing OpenAPI specifications to provide tool descriptions
-3. **Secure Access**: Leverages Zuplo's authentication and authorization policies
-4. **Real-time Execution**: AI systems can invoke your routes as tools in real-time
+1. **Route Discovery**: Automatically exposes your Zuplo routes as discoverable
+   MCP tools
+2. **OpenAPI Integration**: Uses your existing OpenAPI specifications to provide
+   tool descriptions
+3. **Secure Access**: Leverages Zuplo's authentication and authorization
+   policies
+4. **Real-time Execution**: AI systems can invoke your routes as tools in
+   real-time
 
 ### Example Use Cases
 
@@ -57,7 +70,7 @@ Transform your customer management APIs into AI tools:
 
 ```
 - GET /customers/{id} → "Get customer information for user 123"
-- POST /tickets → "Create a support ticket with the following ..." 
+- POST /tickets → "Create a support ticket with the following ..."
 - PUT /customers/{id}/status → "Update customer 123 status ..."
 ```
 
@@ -85,10 +98,12 @@ Make your infrastructure APIs available to AI:
 
 When exposing routes as MCP tools:
 
-1. **Apply appropriate authentication policies** to ensure only authorized AI systems can access your tools
+1. **Apply appropriate authentication policies** to ensure only authorized AI
+   systems can access your tools
 2. **Use rate limiting** to prevent abuse and control usage costs
 3. **Implement audit logging** to track tool usage and maintain compliance
-4. **Scope permissions carefully** - only expose routes and OpenAPI specs that should be accessible to AI systems
+4. **Scope permissions carefully** - only expose routes and OpenAPI specs that
+   should be accessible to AI systems
 
 ### Getting Started
 
