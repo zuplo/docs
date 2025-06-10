@@ -18,6 +18,36 @@ const policySchemas = await glob("{policies,temp}/*/schema.json", {
 
 const printIf = (condition: unknown, render?: string) =>
   condition ? (render ?? condition) : "";
+// Function to escape curly braces in MDX content
+// We specifically target {value} patterns that would be interpreted as JSX
+const escapeMdxCurlyBraces = (content: string) => {
+  // Only escape {value} and similar patterns that aren't already in code blocks
+  // First, split by code blocks (triple backticks)
+  const codeBlockRegex = /(```[\s\S]*?```)/g;
+  const parts = content.split(codeBlockRegex);
+  
+  return parts.map((part, index) => {
+    // Odd indices are code blocks - don't touch them
+    if (index % 2 === 1) {
+      return part;
+    }
+    
+    // For non-code-block parts, split by inline code (single backticks)
+    const inlineCodeRegex = /(`[^`]*`)/g;
+    const subParts = part.split(inlineCodeRegex);
+    
+    return subParts.map((subPart, subIndex) => {
+      // Odd indices are inline code - don't touch them
+      if (subIndex % 2 === 1) {
+        return subPart;
+      }
+      
+      // For regular text, escape {value} patterns by wrapping in backticks
+      // This regex matches {word} patterns that could be mistaken for JSX
+      return subPart.replace(/\{(\w+)\}/g, '`{$1}`');
+    }).join('');
+  }).join('');
+};
 
 function invariant(condition: unknown, message: string): asserts condition {
   if (condition) return;
@@ -255,7 +285,7 @@ Zuplo is extensible, so we don't have a built-in policy for ${schema.title}, ins
 )}
 
 ${printIf(schema.isDeprecated, `<pre>This policy is deprecated. ${printIf(schema.deprecatedMessage)}</pre>`)}
-${printIf(fixMarkdown(intro ?? schema.description ?? ""))}
+${printIf(escapeMdxCurlyBraces(fixMarkdown(intro ?? schema.description ?? "")))}
 ${printIf(
   schema.isBeta,
   `
@@ -314,7 +344,7 @@ ${generateOptions(handler.properties.options)}
 
 ## Using the Policy
 
-${printIf(fixMarkdown(doc ?? ""))}
+${printIf(escapeMdxCurlyBraces(fixMarkdown(doc ?? "")))}
 
 Read more about [how policies work](/articles/policies)
 `;
@@ -383,7 +413,10 @@ function generateOptions(schema?: JSONSchema7) {
           ? ` Allowed values are ${value.enum.map((v) => `\`${v}\``).join(", ")}.`
           : "";
 
-        return `${indent}- \`${key}\`${isRequired} <code className="text-green-600">&lt;${propertyType}&gt;</code> - ${description}${enumValues}${defaultValue}${renderOption(value, depth + 1)}`;
+        // Escape curly braces in description to prevent React from interpreting them as variables
+        const escapedDescription = escapeMdxCurlyBraces(description);
+
+        return `${indent}- \`${key}\`${isRequired} <code className="text-green-600">&lt;${propertyType}&gt;</code> - ${escapedDescription}${enumValues}${defaultValue}${renderOption(value, depth + 1)}`;
       })
       .join("\n");
   };
