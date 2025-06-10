@@ -276,3 +276,103 @@ For example, in Cursor:
   }
 }
 ```
+
+## Testing
+
+### MCP Inspector
+
+Use the [MCP Inspector](https://github.com/modelcontextprotocol/inspector),
+a developer focused tool for building MCP servers, to quickly and easily test out your MCP server:
+
+```sh
+npx @modelcontextprotocol/inspector
+```
+
+By default, this will start a local MCP proxy and web app that you can use on `localhost` to
+connect to your server, list tools, call tools, view message history, and more.
+
+To connect to your remote Zuplo MCP server in the Inspector UI:
+
+1. Set the **Transport Type** to "Streamable HTTP"
+2. Set the **URL** to your Zuplo gateway with the route used by the MCP Server Handler (i.e., `https://my-gateway.zuplo.dev/mcp`)
+3. Hit **Connect**
+
+### Curl
+
+For more fine grained debugging, utilize [MCP JSON RPC 2.0 messages](https://modelcontextprotocol.io/specification/2025-03-26/basic) directly with curl.
+There are lots of different interactions and message flows supported by MCP,
+but some useful ones include:
+
+#### Ping
+
+To send a [simple "ping" message](https://modelcontextprotocol.io/specification/2025-03-26/basic/utilities/ping),
+which can be useful for testing availability of your MCP server:
+
+```sh
+curl https://my-gateway.zuplo.dev/mcp \
+    -X POST \
+    -H 'accept: application/json, text/event-stream' \
+    -d '{
+  "jsonrpc": "2.0",
+  "id": "0",
+  "method": "ping"
+}'
+```
+
+#### List tools
+
+To see [what tools a server has registered](https://modelcontextprotocol.io/specification/2025-03-26/server/tools#listing-tools):
+
+```sh
+curl https://my-gateway.zuplo.dev/mcp \
+    -X POST \
+    -H 'accept: application/json, text/event-stream' \
+    -d '{
+  "jsonrpc": "2.0",
+  "id": "0",
+  "method": "tools/list"
+}'
+```
+
+#### Call tool
+
+To [manually invoke a tool by name](https://modelcontextprotocol.io/specification/2025-03-26/server/tools#calling-tools):
+
+```sh
+curl https://my-gateway.zuplo.dev/mcp \
+    -X POST \
+    -H 'accept: application/json, text/event-stream' \
+    -d '{
+  "jsonrpc": "2.0",
+  "id": "1",
+  "method": "tools/call",
+  "params": {
+    "name": "my_tool",
+    "arguments": {}
+  }
+}'
+```
+
+For more complex tools, you'll need to provide the schema compliant `arguments`.
+Note the `inputSchema` for the tool from `tools/list` to appropriately craft the `arguments`.
+
+:::tip
+Read more about how calling tools works in [the Model Context Protocol server specification](https://modelcontextprotocol.io/specification/2025-03-26/server/tools).
+:::
+
+### MCP Client
+
+By connecting to an LLM enabled MCP Client, you can test the true end to end experience.
+
+Many clients (like OpenAI, Claude Desktop, or Cursor) let you define the remote server URL and the name.
+For example, [in Cursor](https://docs.cursor.com/context/model-context-protocol), you can add your MCP server like so:
+
+```json
+{
+  "mcpServers": {
+    "my-custom-mcp-server": {
+      "url": "https://my-gateway.zuplo.dev/mcp"
+    }
+  }
+}
+```
