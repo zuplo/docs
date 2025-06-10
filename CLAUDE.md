@@ -25,6 +25,14 @@ code in this repository.
 - Write clear, concise documentation
 - Use ES modules (type: "module" in package.json)
 
+## Admonitions
+
+- Use `:::note`, `:::tip`, `:::warning`, `:::caution`, and `:::danger` for
+  admonitions
+- Use `:::caution{title="Title"}` for titles
+- Always include a line below and above the ::: blocks to ensure proper
+  formatting when running through prettier
+
 ## Additional Guidelines
 
 - Run as much in parallel as possible. If you have multiple tasks, run them in

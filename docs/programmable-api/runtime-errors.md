@@ -15,18 +15,30 @@ responses.
 
 ```ts
 new RuntimeError(message: string, options?: ErrorOptions)
-new RuntimeError(info: { message: string; extensionMembers?: Record<string, unknown> }, options?: ErrorOptions)
+new RuntimeError(
+  info: {
+    message: string;
+    extensionMembers?: Record<string, unknown>
+  },
+  options?: ErrorOptions
+)
 ```
 
-### Parameters
+Creates a new runtime error with optional extension data.
 
 - `message` - The error message
-- `info` - An object containing the error message and optional extension members
+- `info` - Object containing message and optional extension members
 - `options` - Standard error options (e.g., `cause`)
 
 ### Properties
 
-- `extensionMembers` - Additional data to include with the error
+**`extensionMembers`**
+
+Additional data included with the error for context and debugging.
+
+```ts
+extensionMembers?: Record<string, unknown>
+```
 
 ### Example
 
@@ -69,7 +81,7 @@ designed for configuration-related errors.
 new ConfigurationError(message: string, options?: ErrorOptions)
 ```
 
-### Parameters
+Creates a new configuration error.
 
 - `message` - The error message describing the configuration issue
 - `options` - Standard error options

@@ -1,5 +1,6 @@
 ---
 title: MemoryZoneReadThroughCache
+sidebar_label: MemoryZoneReadThroughCache
 ---
 
 The `MemoryZoneReadThroughCache` class provides an in-memory caching solution
@@ -12,42 +13,37 @@ fast access and automatically handles cache misses.
 new MemoryZoneReadThroughCache<T = unknown>(name: string, context: ZuploContext)
 ```
 
-### Parameters
+Creates a new instance of the memory cache with read-through capabilities.
 
 - `name` - A unique identifier for the cache instance
 - `context` - The [ZuploContext](./zuplo-context.md) object
-
-### Type Parameters
-
 - `T` - The type of data stored in the cache (defaults to `unknown`)
 
 ## Methods
 
-### `get(key: string): Promise<T | undefined>`
+**`get`**
 
-Retrieves a value from the cache by its key.
+Retrieves a value from the cache by its key. Returns `undefined` if not found.
 
-- **Parameters:**
-  - `key` - The key to look up in the cache
-- **Returns:** A promise that resolves to the cached value or `undefined` if not
-  found
+```ts
+get(key: string): Promise<T | undefined>
+```
 
-### `put(key: string, data: T, ttlSeconds: number): void`
+**`put`**
 
-Stores a value in the cache with a time-to-live (TTL).
+Stores a value in the cache with a time-to-live (TTL) in seconds.
 
-- **Parameters:**
-  - `key` - The key to store the value under
-  - `data` - The value to cache
-  - `ttlSeconds` - Time-to-live in seconds before the cached value expires
+```ts
+put(key: string, data: T, ttlSeconds: number): void
+```
 
-### `delete(key: string): Promise<void>`
+**`delete`**
 
 Removes a value from the cache.
 
-- **Parameters:**
-  - `key` - The key of the value to remove
-- **Returns:** A promise that resolves when the deletion is complete
+```ts
+delete(key: string): Promise<void>
+```
 
 ## Example
 

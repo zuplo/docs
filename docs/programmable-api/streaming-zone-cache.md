@@ -1,5 +1,6 @@
 ---
 title: StreamingZoneCache
+sidebar_label: StreamingZoneCache
 ---
 
 The `StreamingZoneCache` class provides a distributed caching solution optimized
@@ -13,7 +14,7 @@ new StreamingZoneCache(name: string, context: ZuploContext)
 new StreamingZoneCache(name: string, options: CacheOptions)
 ```
 
-### Parameters
+Creates a new streaming cache instance.
 
 - `name` - A unique identifier for the cache instance
 - `context` - The [ZuploContext](./zuplo-context.md) object
@@ -21,32 +22,29 @@ new StreamingZoneCache(name: string, options: CacheOptions)
 
 ## Methods
 
-### `get(key: string): Promise<ReadableStream<Uint8Array> | undefined>`
+**`get`**
 
-Retrieves a stream from the cache by its key.
+Retrieves a stream from the cache. Returns `undefined` if not found.
 
-- **Parameters:**
-  - `key` - The key to look up in the cache
-- **Returns:** A promise that resolves to the cached stream or `undefined` if
-  not found
+```ts
+get(key: string): Promise<ReadableStream<Uint8Array> | undefined>
+```
 
-### `put(key: string, stream: ReadableStream<Uint8Array>, ttlSeconds: number): Promise<void>`
+**`put`**
 
-Stores a stream in the cache with a time-to-live (TTL).
+Stores a stream in the cache with a time-to-live (TTL) in seconds.
 
-- **Parameters:**
-  - `key` - The key to store the stream under
-  - `stream` - The readable stream to cache
-  - `ttlSeconds` - Time-to-live in seconds before the cached stream expires
-- **Returns:** A promise that resolves when the stream is cached
+```ts
+put(key: string, stream: ReadableStream<Uint8Array>, ttlSeconds: number): Promise<void>
+```
 
-### `delete(key: string): Promise<void>`
+**`delete`**
 
 Removes a stream from the cache.
 
-- **Parameters:**
-  - `key` - The key of the stream to remove
-- **Returns:** A promise that resolves when the deletion is complete
+```ts
+delete(key: string): Promise<void>
+```
 
 ## Example
 

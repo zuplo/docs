@@ -1,9 +1,18 @@
 ---
-title: Environment Variables
+title: Environment Variables API
+sidebar_label: Environment Variables
 ---
 
 The `environment` object provides access to environment variables in your Zuplo
 API gateway. It returns a record of environment variable names to their values.
+
+:::info{title="Configuration Guide"}
+
+For information on how to set and manage environment variables in the Zuplo
+Portal, see
+[Configuring Environment Variables](../articles/environment-variables.md).
+
+:::
 
 ## Interface
 
@@ -322,5 +331,5 @@ releases.
   environment variables
 - [ConfigurationError](./runtime-errors.md#configurationerror) - Error handling
   for configuration issues
-- [Going to Production](../articles/going-live.md) - Production
-  configuration best practices
+- [Going to Production](../articles/going-live.md) - Production configuration
+  best practices

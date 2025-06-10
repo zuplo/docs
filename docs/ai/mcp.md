@@ -1,4 +1,7 @@
-# Model Context Protocol (MCP) with Zuplo
+---
+title: Model Context Protocol (MCP)
+sidebar_label: Model Context Protocol (MCP)
+---
 
 [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) is
 an open protocol that enables controlled interactions between AI systems and

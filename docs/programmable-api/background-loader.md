@@ -3,32 +3,61 @@ title: BackgroundLoader
 sidebar_label: BackgroundLoader
 ---
 
-The BackgroundLoader class is used to asynchronous load information in the
-background while minimizing gateway latency using this information. It's ideal
-to use for critical configuration that might be powering your gateway for smart
-routing or similar.
+The BackgroundLoader class provides asynchronous loading of configuration data
+while minimizing gateway latency. It's ideal for critical configuration that
+powers your gateway for smart routing or similar use cases.
 
-:::note
+:::note{title="Beta Feature"}
 
 This component is in Beta - please use with care and provide feedback to the
 team if you encounter any issues.
 
 :::
 
-Obviously, you don't want to incur the cost of an asynchronous cost load on
-every request so it's important to cache any configuration you load into your
-gateway. However, sometimes this information is critical to keep very up to date
-so a traditional approach of awaiting cache expiry isn't sufficient. The
-BackgroundLoader will immediately return a cache entry if available, but also
-asynchronously load the configuration in the background to keep the cache up to
-date.
+The BackgroundLoader optimizes performance by:
 
-If the cache hasn't been refreshed and the current entry exceeds the TTL (Time
-to Live) specified in the constructor the `get` invocation will block while the
-data is loaded.
+- Immediately returning cached data when available
+- Asynchronously refreshing data in the background
+- Only blocking when cache is empty or expired
 
-You get to specify the loading function, which is just a simple asynchronous
-function that can use `fetch`.
+## Constructor
+
+```ts
+new BackgroundLoader<T>(
+  loader: (key: string) => Promise<T>,
+  options: BackgroundLoaderOptions
+)
+```
+
+Creates a new background loader instance.
+
+- `loader` - Async function that loads data for a given key
+- `options` - Configuration options including TTL and timeout
+- `T` - The type of data being loaded
+
+## Options
+
+```ts
+interface BackgroundLoaderOptions {
+  // (Required) Time to live for cache entries in seconds
+  ttlSeconds: number;
+  // (Optional) Timeout for the loader function in seconds
+  loaderTimeoutSeconds?: number;
+}
+```
+
+## Methods
+
+**`get`**
+
+Retrieves data for the specified key. Returns immediately if cached, otherwise
+blocks while loading.
+
+```ts
+get(key: string): Promise<T>
+```
+
+## Example
 
 ```ts
 import { ZuploContext, ZuploRequest } from "@zuplo/runtime";

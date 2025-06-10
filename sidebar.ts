@@ -376,18 +376,18 @@ export const programming: SidebarEntry = [
     id: "programmable-api/index",
     label: "Overview",
   },
+
   {
-    type: "doc",
-    id: "programmable-api/compatibility-dates",
-    label: "Compatibility Dates",
+    type: "category",
+    label: "Request & Context",
+    items: ["programmable-api/zuplo-request", "programmable-api/zuplo-context"],
   },
   {
     type: "category",
-    label: "Core APIs",
+    label: "Configuration",
     items: [
-      "programmable-api/zuplo-request",
-      "programmable-api/zuplo-context",
-      "programmable-api/http-problems",
+      "programmable-api/zuplo-json",
+      "programmable-api/compatibility-dates",
       "programmable-api/environment",
     ],
   },
@@ -413,10 +413,15 @@ export const programming: SidebarEntry = [
   {
     type: "category",
     label: "Extensions & Hooks",
+    items: ["programmable-api/runtime-extensions", "programmable-api/hooks"],
+  },
+  {
+    type: "category",
+    label: "Error Handling",
     items: [
-      "programmable-api/runtime-extensions",
-      "programmable-api/hooks",
       "programmable-api/runtime-errors",
+      "programmable-api/not-found-handler",
+      "programmable-api/http-problems",
     ],
   },
   {
@@ -450,8 +455,6 @@ export const programming: SidebarEntry = [
       "programmable-api/safely-clone-a-request-or-response",
       "programmable-api/runtime-behaviors",
       "programmable-api/zp-body-removed",
-      "programmable-api/zuplo-json",
-      "programmable-api/not-found-handler",
       "programmable-api/zuplo-id-token",
     ],
   },

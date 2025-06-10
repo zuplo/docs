@@ -1,5 +1,6 @@
 ---
 title: Zuplo Project Config (zuplo.jsonc)
+sidebar_label: Project Config
 ---
 
 Certain advanced project-level settings can be configured using the

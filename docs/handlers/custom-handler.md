@@ -30,11 +30,11 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 ```
 
 This is a request handler that receives a request (of type `ZuploRequest` - more
-on [this interface here](../programmable-api/zuplo-request.md)) and returns a response
-of type `string`. You can return any type from a Request Handler and Zuplo will
-automatically serialize the response to JSON and add a `content-type` header to
-your response of `application/json`. This makes it easy to build simple JSON
-APIs.
+on [this interface here](../programmable-api/zuplo-request.md)) and returns a
+response of type `string`. You can return any type from a Request Handler and
+Zuplo will automatically serialize the response to JSON and add a `content-type`
+header to your response of `application/json`. This makes it easy to build
+simple JSON APIs.
 
 ## Parameters & Query strings
 

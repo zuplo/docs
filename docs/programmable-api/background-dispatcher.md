@@ -3,20 +3,44 @@ title: BackgroundDispatcher
 sidebar_label: BackgroundDispatcher
 ---
 
-The BackgroundDispatcher class is used to group outbound transmission into
-batches. This is useful for logging and analytics calls to external services
-were you don't need or want to send information 1:1 with requests arriving into
-the gateway. The BackgroundDispatcher will group entries and invoke a callback,
-specified by you, with a batch of entries every 'n' milliseconds.
+The BackgroundDispatcher class batches outbound transmissions for efficient
+processing. It's ideal for logging and analytics calls to external services
+where you don't need 1:1 transmission with incoming requests. The dispatcher
+groups entries and invokes your callback with batches at regular intervals.
 
-:::note
+:::note{title="Beta Feature"}
 
 This component is in Beta - please use with care and provide feedback to the
 team if you encounter any issues.
 
 :::
 
-Below is an example usage
+## Constructor
+
+```ts
+new BackgroundDispatcher<T>(
+  dispatchFunction: (entries: T[]) => Promise<void>,
+  options: { msDelay: number }
+)
+```
+
+Creates a new background dispatcher instance.
+
+- `dispatchFunction` - Async function called with batched entries
+- `options.msDelay` - Milliseconds between dispatch calls (required, non-zero)
+- `T` - The type of entries being batched
+
+## Methods
+
+**`enqueue`**
+
+Adds an entry to the batch queue for later dispatch.
+
+```ts
+enqueue(entry: T, context: ZuploContext): void
+```
+
+## Example
 
 ```ts
 
@@ -68,30 +92,31 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 
 ```
 
-The dispatcher will invoke the dispatch function with a batch of records at most
-ever 'n' milliseconds (as set in the options) if there are items enqueued. If
-items aren't enqueued the function won't be invoked.
+The dispatcher invokes the dispatch function with batched records at most every
+'n' milliseconds (as configured) when items are enqueued. If no items are
+enqueued, the function won't be invoked.
 
-Note, there are no automatic retries for failed dispatch functions, but you can
-implement this yourself in the dispatch function.
+:::tip There are no automatic retries for failed dispatch functions. Implement
+retry logic in your dispatch function if needed. :::
 
-## Constructing the BackgroundDispatcher
+## Best Practices
 
-The dispatcher is only useful if used by multiple request, thus it must be
-placed somewhere in code that can be reached from multiple requests. We
-recommend doing this at the module level. You can also create a Set to store
-multiple at the module level keyed by name if necessary.
+### Module-Level Initialization
 
-The `options.msDelay` parameter is required and must be a valid non-zero number.
+Initialize the dispatcher at the module level so it can be shared across
+multiple requests:
 
 ```ts
-const backgroundDispatcher = new BackgroundDispatcher<TestEntry>(
-  dispatchFunction,
-  { msDelay: 100 },
-);
+// Create at module level
+const dispatcher = new BackgroundDispatcher<LogEntry>(dispatchFunction, {
+  msDelay: 100,
+});
+
+// Or use a Map for multiple dispatchers
+const dispatchers = new Map<string, BackgroundDispatcher<any>>();
 ```
 
-## Setting the delay
+### Choosing the Right Delay
 
 The longer the delay, the larger your batches will get and the less frequently
 you'll send batched information. However, on a busy server this could build up a

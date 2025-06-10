@@ -18,24 +18,32 @@ Additionally, this utility ensures that data stored is garbage collected
 
 **`ContextData.set`**
 
+Static method to store data in the context.
+
 ```ts
 ContextData.set(context, "my-data", { prop1: "hello world" });
 ```
 
 **`ContextData.get`**
 
+Static method to retrieve data from the context.
+
 ```ts
 const data = ContextData.get(context, "my-data");
 ```
 
-**`set` (instance function)**
+**`set` (instance method)**
+
+Stores data in the context using an instance.
 
 ```ts
 const myData = new ContextData("my-data");
 myData.set(context, { prop1: "hello world" });
 ```
 
-**`get` (instance function)**
+**`get` (instance method)**
+
+Retrieves data from the context using an instance.
 
 ```ts
 const myData = new ContextData("my-data");

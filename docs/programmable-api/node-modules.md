@@ -34,9 +34,10 @@ module has a red underline in your code editor. Some modules aren't typed or
 their types can't be bundled to use with the Zuplo Portal.
 
 You can ignore these errors as they won't affect the functionality of the
-module. Alternatively, if you use{" "}
-<a href="/docs/articles/local-development">local development</a> you can install
-the module locally to enable code completion and type checking.
+module. Alternatively, if you use
+[local development](../articles/local-development.mdx) you can
+[install the module locally](../articles/local-development-installing-packages.md)
+to enable code completion and type checking.
 
 ## Node Modules
 

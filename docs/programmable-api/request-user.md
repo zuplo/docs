@@ -17,8 +17,21 @@ interface RequestUser<TUserData> {
 
 ## Properties
 
-- `sub` - The subject identifier (unique user ID) from the authentication token
-- `data` - Additional user data of generic type `TUserData`
+**`sub`**
+
+The subject identifier (unique user ID) from the authentication token.
+
+```ts
+sub: string;
+```
+
+**`data`**
+
+Additional user data of generic type `TUserData`.
+
+```ts
+data: TUserData;
+```
 
 ## Usage
 

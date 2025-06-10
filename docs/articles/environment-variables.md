@@ -1,5 +1,6 @@
 ---
-title: Environment Variables
+title: Configuring Environment Variables
+sidebar_label: Environment Variables
 ---
 
 Environment variables are key-value pairs that are stored outside of source
@@ -14,6 +15,10 @@ order for the updated value to take effect.
 Environment variables can be configuration or secrets. While all values are
 stored encrypted at rest, only non-secret values can be read. Secrets are
 write-only, meaning the value can't be retrieved once it's set.
+
+:::tip API Reference For detailed information about accessing environment
+variables in code, see the
+[Environment Variables API Reference](../programmable-api/environment.md). :::
 
 ## Environment Variable Editor
 
@@ -59,19 +64,16 @@ Environment variables can't start with `ZUPLO` or `__ZUPLO`.
 
 ## Using Environment Variables
 
-There are several places in Zuplo you can access environment variables.
+Environment variables can be used in several places within your Zuplo project:
 
-### Code
+### In Code
 
-Variables can be accessed in code by importing `@zuplo/runtime`.
+Variables are accessed through the `environment` object from `@zuplo/runtime`.
+See the
+[Environment Variables API Reference](../programmable-api/environment.md) for
+detailed usage examples and patterns.
 
-```ts
-import { environment } from "@zuplo/runtime";
-
-const myVar = environment.MY_VAR;
-```
-
-### Configuration Files
+### In Configuration Files
 
 Inside some configuration files, environment variables can be referenced with
 the pattern `$env(MY_VAR)`.
@@ -124,4 +126,5 @@ use in your code:
 - `ZUPLO_BUILD_ID` - The build ID of the environment. This is a unique ID for
   each build of the environment. This is a UUID.
 - `ZUPLO_COMPATIBILITY_DATE` - The
-  [compatibility date](../programmable-api/compatibility-dates.md) of runtime environment.
+  [compatibility date](../programmable-api/compatibility-dates.md) of runtime
+  environment.

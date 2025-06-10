@@ -66,7 +66,7 @@ The Fetch API includes standard objects like
 [`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request), and
 [`Response`](https://developer.mozilla.org/en-US/docs/Web/API/Response).
 
-See Also: [`ZuploRequest`](../articles/zuplo-request.md)
+See Also: [`ZuploRequest`](./zuplo-request.md)
 
 ## Streams API
 

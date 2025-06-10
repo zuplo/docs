@@ -3,8 +3,8 @@ title: ZuploRequest
 ---
 
 The ZuploRequest object is the main parameter passed to both
-[RequestHandlers](../articles/zuplo-request.md) and [Policies](../policies). It
-represents the incoming request.
+[Request Handlers](../handlers/custom-handler.md) and [Policies](../policies).
+It represents the incoming request.
 
 ZuploRequest inherits from the web standard `Request` class used with `fetch` -
 you can read more about this on MDN including an explanation of how all of its

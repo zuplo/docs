@@ -13,43 +13,92 @@ There's an demonstration of ZoneCache use in the
 [Per User Rate Limits Using a Database](/docs/articles/per-user-rate-limits-using-db)
 example.
 
-## Constructing the Cache
+## Constructor
 
 ```ts
-// create a new cache by specifying a name and
-// passing current ZuploContext
-const cache = new ZoneCache("name-of-your-cache", context);
+new ZoneCache<T = unknown>(name: string, context: ZuploContext)
 ```
 
-## Reading from the Cache
+Creates a new cache instance for the specified zone.
+
+- `name` - A unique identifier for the cache
+- `context` - The [ZuploContext](./zuplo-context.md) object
+- `T` - The type of data stored in the cache (defaults to `unknown`)
+
+## Methods
+
+**`get`**
+
+Retrieves a value from the cache. Returns `undefined` if the key doesn't exist
+or has expired.
 
 ```ts
-// read from the cache using the key
-const data = await cache.get("key");
+get(key: string): Promise<T | undefined>
 ```
 
-## Writing to the Cache
+**`put`**
+
+Stores a value in the cache with a time-to-live (TTL) in seconds. The data will
+be JSON serialized.
 
 ```ts
-// write to the cache - and keep for 60 seconds
-await cache.put("key", data, 60);
+put(key: string, data: T, ttlSeconds: number): Promise<void>
 ```
 
-When writing to the cache the `data` parameters will be JSON serialized. If your
-data doesn't serialize cleanly to JSON (like the `Headers` object doesn't) you
-won't be able to read your data back/
+:::note Objects that don't serialize cleanly to JSON (like the `Headers` object)
+won't be readable after storage. :::
 
-## Deleting from the Cache
+**`delete`**
+
+Removes a value from the cache.
 
 ```ts
-await cache.delete("key");
+delete(key: string): Promise<void>
 ```
 
-**TIP** On some code paths you may not want to `await` the cache to wait for the
-operation to complete. For example, when writing data you may choose to write
-asynchronously. However, we recommend catching errors if you do this, for
-example:
+## Example
 
 ```ts
+import { ZoneCache, ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+interface UserData {
+  id: string;
+  name: string;
+  email: string;
+}
+
+export default async function handler(
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  const cache = new ZoneCache<UserData>("user-cache", context);
+
+  // Try to get user from cache
+  const userId = request.params.userId;
+  let userData = await cache.get(userId);
+
+  if (!userData) {
+    // Not in cache, fetch from API
+    const response = await fetch(`https://api.example.com/users/${userId}`);
+    userData = await response.json();
+
+    // Cache for 5 minutes
+    await cache.put(userId, userData, 300);
+  }
+
+  return new Response(JSON.stringify(userData));
+}
+```
+
+## Performance Tips
+
+When writing to the cache, you may not want to `await` the operation to
+complete. This can improve response times:
+
+```ts
+// Fire and forget pattern - don't wait for cache write
 cache.put("key", data, 60).catch((err) => context.log.error(err));
 ```
+
+Always catch errors when using the fire-and-forget pattern to avoid unhandled
+promise rejections.
