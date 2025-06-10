@@ -60,7 +60,7 @@
     },
     {
       "source": "/docs/guides/node-modules{/}?",
-      "destination": "/docs/articles/node-modules",
+      "destination": "/docs/programmable-api/node-modules",
       "permanent": true
     },
     {
@@ -75,12 +75,12 @@
     },
     {
       "source": "/docs/guides/reusing-code{/}?",
-      "destination": "/docs/articles/reusing-code",
+      "destination": "/docs/programmable-api/reusing-code",
       "permanent": true
     },
     {
       "source": "/docs/guides/safely-clone-a-request-or-response{/}?",
-      "destination": "/docs/articles/safely-clone-a-request-or-response",
+      "destination": "/docs/programmable-api/safely-clone-a-request-or-response",
       "permanent": true
     },
     {
@@ -95,7 +95,7 @@
     },
     {
       "source": "/docs/guides/web-standard-apis{/}?",
-      "destination": "/docs/articles/web-standard-apis",
+      "destination": "/docs/programmable-api/web-standard-apis",
       "permanent": true
     },
     {
@@ -105,12 +105,12 @@
     },
     {
       "source": "/docs/guides/zuplo-context{/}?",
-      "destination": "/docs/articles/zuplo-context",
+      "destination": "/docs/programmable-api/zuplo-context",
       "permanent": true
     },
     {
       "source": "/docs/guides/zuplo-request{/}?",
-      "destination": "/docs/articles/zuplo-request",
+      "destination": "/docs/programmable-api/zuplo-request",
       "permanent": true
     },
     {
@@ -210,7 +210,7 @@
     },
     {
       "source": "/docs/runtime/globals{/}?",
-      "destination": "/docs/articles/web-standard-apis",
+      "destination": "/docs/programmable-api/web-standard-apis",
       "permanent": true
     },
     {
@@ -220,7 +220,7 @@
     },
     {
       "source": "/docs/runtime/node-modules{/}?",
-      "destination": "/docs/articles/node-modules",
+      "destination": "/docs/programmable-api/node-modules",
       "permanent": true
     },
     {
@@ -230,12 +230,12 @@
     },
     {
       "source": "/docs/runtime/reusing-code{/}?",
-      "destination": "/docs/articles/reusing-code",
+      "destination": "/docs/programmable-api/reusing-code",
       "permanent": true
     },
     {
       "source": "/docs/runtime/safely-clone-a-request-or-response{/}?",
-      "destination": "/docs/articles/safely-clone-a-request-or-response",
+      "destination": "/docs/programmable-api/safely-clone-a-request-or-response",
       "permanent": true
     },
     {
@@ -255,17 +255,17 @@
     },
     {
       "source": "/docs/runtime/web-standard-apis{/}?",
-      "destination": "/docs/articles/web-standard-apis",
+      "destination": "/docs/programmable-api/web-standard-apis",
       "permanent": true
     },
     {
       "source": "/docs/runtime/zuplo-context{/}?",
-      "destination": "/docs/articles/zuplo-context",
+      "destination": "/docs/programmable-api/zuplo-context",
       "permanent": true
     },
     {
       "source": "/docs/runtime/zuplo-request{/}?",
-      "destination": "/docs/articles/zuplo-request",
+      "destination": "/docs/programmable-api/zuplo-request",
       "permanent": true
     },
     {
@@ -375,7 +375,7 @@
     },
     {
       "source": "/docs/guides/custom-cors-policies{/}?",
-      "destination": "/docs/articles/custom-cors-policy",
+      "destination": "/docs/programmable-api/custom-cors-policy",
       "permanent": true
     },
     {
@@ -510,7 +510,7 @@
     },
     {
       "source": "/docs/reference/cache{/}?",
-      "destination": "/docs/articles/zone-cache",
+      "destination": "/docs/programmable-api/zone-cache",
       "permanent": true
     },
     {
@@ -525,42 +525,42 @@
     },
     {
       "source": "/docs/reference/node-modules{/}?",
-      "destination": "/docs/articles/node-modules",
+      "destination": "/docs/programmable-api/node-modules",
       "permanent": true
     },
     {
       "source": "/docs/reference/reusing-code{/}?",
-      "destination": "/docs/articles/reusing-code",
+      "destination": "/docs/programmable-api/reusing-code",
       "permanent": true
     },
     {
       "source": "/docs/reference/runtime-behaviors{/}?",
-      "destination": "/docs/articles/runtime-behaviors",
+      "destination": "/docs/programmable-api/runtime-behaviors",
       "permanent": true
     },
     {
       "source": "/docs/reference/safely-clone-a-request-or-response{/}?",
-      "destination": "/docs/articles/safely-clone-a-request-or-response",
+      "destination": "/docs/programmable-api/safely-clone-a-request-or-response",
       "permanent": true
     },
     {
       "source": "/docs/reference/web-standard-apis{/}?",
-      "destination": "/docs/articles/web-standard-apis",
+      "destination": "/docs/programmable-api/web-standard-apis",
       "permanent": true
     },
     {
       "source": "/docs/reference/zone-cache{/}?",
-      "destination": "/docs/articles/zone-cache",
+      "destination": "/docs/programmable-api/zone-cache",
       "permanent": true
     },
     {
       "source": "/docs/reference/zuplo-context{/}?",
-      "destination": "/docs/articles/zuplo-context",
+      "destination": "/docs/programmable-api/zuplo-context",
       "permanent": true
     },
     {
       "source": "/docs/reference/zuplo-request{/}?",
-      "destination": "/docs/articles/zuplo-request",
+      "destination": "/docs/programmable-api/zuplo-request",
       "permanent": true
     },
     {
@@ -605,7 +605,7 @@
     },
     {
       "source": "/docs/guides/custom-cors-policy{/}?",
-      "destination": "/docs/articles/custom-cors-policy",
+      "destination": "/docs/programmable-api/custom-cors-policy",
       "permanent": true
     },
     {
@@ -695,7 +695,7 @@
     },
     {
       "source": "/docs/runtime/globals{/}?",
-      "destination": "/docs/articles/web-standard-apis",
+      "destination": "/docs/programmable-api/web-standard-apis",
       "permanent": true
     },
     {
@@ -861,6 +861,126 @@
     {
       "source": "/docs/default-api-keys{/}?",
       "destination": "/docs/articles/accounts/default-api-key",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/zuplo-request{/}?",
+      "destination": "/docs/programmable-api/zuplo-request",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/zuplo-context{/}?",
+      "destination": "/docs/programmable-api/zuplo-context",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/web-standard-apis{/}?",
+      "destination": "/docs/programmable-api/web-standard-apis",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/web-crypto-apis{/}?",
+      "destination": "/docs/programmable-api/web-crypto-apis",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/node-modules{/}?",
+      "destination": "/docs/programmable-api/node-modules",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/context-data{/}?",
+      "destination": "/docs/programmable-api/context-data",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/route-raw{/}?",
+      "destination": "/docs/programmable-api/route-raw",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/reusing-code{/}?",
+      "destination": "/docs/programmable-api/reusing-code",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/zuplo-id-token{/}?",
+      "destination": "/docs/programmable-api/zuplo-id-token",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/safely-clone-a-request-or-response{/}?",
+      "destination": "/docs/programmable-api/safely-clone-a-request-or-response",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/runtime-behaviors{/}?",
+      "destination": "/docs/programmable-api/runtime-behaviors",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/zp-body-removed{/}?",
+      "destination": "/docs/programmable-api/zp-body-removed",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/audit-log{/}?",
+      "destination": "/docs/programmable-api/audit-log",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/custom-cors-policy{/}?",
+      "destination": "/docs/programmable-api/custom-cors-policy",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/zuplo-json{/}?",
+      "destination": "/docs/programmable-api/zuplo-json",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/compatibility-dates{/}?",
+      "destination": "/docs/programmable-api/compatibility-dates",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/http-problems{/}?",
+      "destination": "/docs/programmable-api/http-problems",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/not-found-handler{/}?",
+      "destination": "/docs/programmable-api/not-found-handler",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/hooks{/}?",
+      "destination": "/docs/programmable-api/hooks",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/runtime-extensions{/}?",
+      "destination": "/docs/programmable-api/runtime-extensions",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/cache{/}?",
+      "destination": "/docs/programmable-api/cache",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/zone-cache{/}?",
+      "destination": "/docs/programmable-api/zone-cache",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/background-loader{/}?",
+      "destination": "/docs/programmable-api/background-loader",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/background-dispatcher{/}?",
+      "destination": "/docs/programmable-api/background-dispatcher",
       "permanent": true
     }
   ],
