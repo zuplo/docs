@@ -6,14 +6,11 @@ conceptual guides while maintaining cross-references.
 
 ## Steps
 
-1. I have used API Extractor to create a report of the @zuplo/runtime package.
-   You can find that report at:
-   /Users/ntotten/zuplo/core2/packages/runtime/etc/runtime.api.md
+1. Download this file to the root of this project:
+   https://cdn.zuplo.com/types/@zuplo/runtime/latest/api.md
 
-2. Before you start analyzing, copy the above file to the current working
-   directory, then read the contents.
-
-3. Update the documentation following these guidelines:
+2. Analyze the API Extractor report (`api.md`) and update the documentation
+   following these guidelines:
 
    ### Document Organization
 
@@ -82,9 +79,9 @@ conceptual guides while maintaining cross-references.
    - `programmable-api/environment.md` - Environment variables API reference
    - `articles/environment-variables.md` - Configuration guide for env vars
 
-4. Update sidebar.ts to include all new documentation in appropriate sections
+3. Update sidebar.ts to include all new documentation in appropriate sections
 
-5. Fix broken links:
+4. Fix broken links:
 
    - Update references to moved files (e.g., `./compatibility-dates.md` →
      `../programmable-api/compatibility-dates.md`)
@@ -92,7 +89,7 @@ conceptual guides while maintaining cross-references.
    - Remove references to non-existent articles
    - Ensure all cross-references use correct relative paths
 
-6. Handle duplicated content:
+5. Handle duplicated content:
 
    - If content is duplicated between programmable-api and articles:
      - Keep technical API details in programmable-api
@@ -103,9 +100,9 @@ conceptual guides while maintaining cross-references.
      - Logging (logger.md vs logging.md)
      - Caching (cache/zone-cache vs caching articles)
 
-7. Format all documentation using `npm run format`
+6. Format all documentation using `npm run format`
 
-8. Important notes:
+7. Important notes:
    - Handlers are already documented in `/docs/handlers` - augment if needed
    - Link to handlers using paths like `../handlers/custom-handler.md`
    - The runtime API index should exclude all policy documentation

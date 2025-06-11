@@ -71,5 +71,5 @@ docs/dev-portal/zudoku/
 auth.json
 
 # docs generation
-runtime.api.json
-runtime.api.md
+api.json
+api.md
