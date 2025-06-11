@@ -31,7 +31,8 @@ escaped. This allows URLs with formats like:
 Previously, several of the Zuplo log plugins could be enabled by setting
 undocumented environment variables. This was a legacy feature that was added
 before the current plugin system existed. This feature has been removed. Log
-plugins should be enabled using the [documented plugin system](./logging.md).
+plugins should be enabled using the
+[documented plugin system](../articles/logging.md).
 
 If you are setting any of the following environment variables, you should
 migrate to the log plugin initialization.
