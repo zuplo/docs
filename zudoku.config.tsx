@@ -66,45 +66,42 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
     primaryBrandColor: "#ff00bd",
     organizationDisplayName: "Zuplo",
   },
-  topNavigation: [
+  navigation: [
     {
-      id: "docs",
+      type: "category",
       label: "Documentation",
+      items: docs,
     },
     {
-      id: "policies",
+      type: "category",
       label: "Policies & Handlers",
+      items: policies,
     },
     {
-      id: "programming",
+      type: "category",
       label: "Programming API",
+      items: programming,
     },
     {
-      id: "api",
+      type: "link",
       label: "REST API",
+      to: "/api",
     },
   ],
-  sidebar: {
-    docs,
-    policies,
-    programming,
-    devPortal,
-  },
   mdx: {
     components: mdxComponents,
   },
   apis: {
     type: "file",
     input: "./api.json",
-    navigationId: "api",
+    path: "api",
     options: {
       expandAllTags: true,
     },
   },
-  docs: [
-    { files: "/docs/**/*.{md,mdx}" },
-    { files: "/generated/**/*.{md,mdx}" },
-  ],
+  docs: {
+    files: ["/docs/**/*.{md,mdx}", "/generated/**/*.{md,mdx}"],
+  },
   sitemap: {
     siteUrl: "https://zuplo.com/docs",
     exclude: ["/", ""],
