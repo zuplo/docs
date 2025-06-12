@@ -4,6 +4,7 @@ import type { JSX } from "react/jsx-runtime";
 type NodeModuleIssue = {
   name: string;
   notes: JSX.Element;
+  status: "Unknown" | "Working" | "Issues";
 };
 
 /**
@@ -12,6 +13,7 @@ type NodeModuleIssue = {
  */
 export const nodeModuleIssues: NodeModuleIssue[] = [
   {
+    status: "Issues",
     name: "@aws-sdk/client-lambda",
     notes: (
       <>

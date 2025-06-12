@@ -93,6 +93,14 @@ the portal and in your integrated log solution (e.g. DataDog). Pre-production
 environments are typically set to **Info** log level, while production is set to
 **Error**.
 
+:::tip
+
+As an alternative to using the `log` property, you can also use `console.log`,
+`console.error`, etc. to log messages. See the
+[documentation](./console-logging.md) for more details.
+
+:::
+
 ```ts
 context.log.debug({ some: "debug-info" });
 context.log.info("info level stuff");
@@ -118,16 +126,11 @@ if (context.parentContext) {
 
 A UUID for every request. This is used in logging and can be handy to tie events
 together. The `requestId` is automatically logged with every use of the logger.
+The request ID is also included in the `zp-rid` header of the responses from
+your API for diagnostic and tracing purposes.
 
 ```ts
 context.log.info(`Processing request ${context.requestId}`);
-
-// Pass to upstream services for distributed tracing
-const response = await fetch(upstreamUrl, {
-  headers: {
-    "X-Request-ID": context.requestId,
-  },
-});
 ```
 
 ### `route`

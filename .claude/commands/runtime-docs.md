@@ -7,19 +7,19 @@ conceptual guides while maintaining cross-references.
 ## Steps
 
 1. Download this file to the root of this project:
-   https://cdn.zuplo.com/types/@zuplo/runtime/latest/api.md
+   https://cdn.zuplo.com/types/@zuplo/runtime/latest/out/types/index.d.ts
 
-2. Analyze the API Extractor report (`api.md`) and update the documentation
+2. Analyze the typescript file (`index.d.ts`) and update the documentation
    following these guidelines:
 
    ### Document Organization
 
    - Runtime API documentation goes in `docs/programmable-api/`
    - Handler documentation goes in `docs/handlers/`
-   - DO NOT document Policies - they are documented separately via automation
-   - Each class, interface, or major API should have its own file
    - Create an index.md file in programmable-api that provides an overview
-   - Do not document the following exports: `ContentTypes`, `apiServices`,
+   - DO NOT!!! document Policies - they are documented separately via automation
+   - Each class, interface, or major API should have its own file
+   - DO NOT!!! document the following exports: `ContentTypes`, `apiServices`,
      `ApiAuthKeyInboundPolicy`, `ValidateJsonSchemaInbound`,
      `SchemaBasedRequestValidation`, `CryptoBeta`
 
@@ -60,24 +60,26 @@ conceptual guides while maintaining cross-references.
    - Include "See Also" sections where appropriate
    - Do NOT use `process.env` - use `environment` from "@zuplo/runtime"
    - Do NOT reference `NODE_ENV` - Zuplo is not Node.js
+   - It is also important you follow the guidelines in the CLAUDE.md file (i.e.
+     admonitions, etc.)
 
-   ### Content Separation
+### Content Separation
 
-   - Keep API reference documentation in `docs/programmable-api/`
-   - Keep conceptual/how-to guides in `docs/articles/`
-   - Avoid duplicating content between the two locations
-   - Add cross-references between related API docs and articles
-   - API docs should focus on technical details, signatures, and code examples
-   - Articles should focus on configuration, best practices, and concepts
+- Keep API reference documentation in `docs/programmable-api/`
+- Keep conceptual/how-to guides in `docs/articles/`
+- Avoid duplicating content between the two locations
+- Add cross-references between related API docs and articles
+- API docs should focus on technical details, signatures, and code examples
+- Articles should focus on configuration, best practices, and concepts
 
-   ### Special Files to Maintain/Update
+### Special Files to Maintain/Update
 
-   - `programmable-api/index.md` - Comprehensive index of all runtime APIs
-   - `programmable-api/content-types.md` - ContentTypes constant documentation
-   - `programmable-api/http-problems.md` - Should include complete method list
-     and HttpStatusCode enum
-   - `programmable-api/environment.md` - Environment variables API reference
-   - `articles/environment-variables.md` - Configuration guide for env vars
+- `programmable-api/index.md` - Comprehensive index of all runtime APIs
+- `programmable-api/content-types.md` - ContentTypes constant documentation
+- `programmable-api/http-problems.md` - Should include complete method list and
+  HttpStatusCode enum
+- `programmable-api/environment.md` - Environment variables API reference
+- `articles/environment-variables.md` - Configuration guide for env vars
 
 3. Update sidebar.ts to include all new documentation in appropriate sections
 

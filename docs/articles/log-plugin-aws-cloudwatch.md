@@ -1,22 +1,16 @@
 ---
-title: AWS Cloudwatch Plugin
-sidebar_label: AWS Cloudwatch Logging
+title: AWS CloudWatch Plugin
+sidebar_label: AWS CloudWatch Logging
 ---
 
-The AWS Cloudwatch Log plugin enables pushing logs to AWS Cloudwatch.
+The AWS CloudWatch Log plugin enables pushing logs to AWS CloudWatch.
 
 <EnterpriseFeature name="Custom logging" />
 
 ## Setup
 
-To add the AWS Cloudwatch logging plugin to your Zuplo project, add the
-following code to your `zuplo.runtime.ts` file. Set the `AWS_REGION`,
-`AWS_ACCESS _KEY_ID`, and `AWS_SECRET_ACCESS_KEY` environment variables to the
-values of your AWS credentials. You can also customize the `logGroupName` and
-the `logStreamName` as you see fit.
-
-Any custom fields you want to include in the log entry can be added to the
-`fields` property. These values will be appended to every log entry.
+To add the AWS CloudWatch logging plugin to your Zuplo project, add the
+following code to your `zuplo.runtime.ts` file.
 
 ```ts title="modules/zuplo.runtime.ts"
 import {
@@ -31,30 +25,52 @@ export function runtimeInit(runtime: RuntimeExtensions) {
       region: environment.AWS_REGION,
       accessKeyId: environment.AWS_ACCESS_KEY_ID,
       secretAccessKey: environment.AWS_SECRET_ACCESS_KEY,
-      logGroupName: "zuplo",
-      logStreamName: "my-stream",
-      fields: {
-        field1: "value1",
-        field2: "value2",
-      },
+      logGroupName: "/aws/zuplo/api",
+      logStreamName: "production",
     }),
   );
 }
 ```
 
-## Standard Fields
+## Configuration Options
 
-Every log entry will include the following fields:
+The `AWSLoggingPlugin` constructor accepts an options object with the following properties:
 
-- `timestamp` - The time the log was created
-- `severity` - The level of the log, for example `ERROR`, `INFO`, etc.
-- `data` - The log message and data.
-- `environmentType` - Where the Zuplo API is running. Values are `edge`,
-  `working-copy`, or `local`
-- `environmentStage` - If the environment is `working-copy`, `preview`, or
-  `production`
+- `region` - (required) AWS region where your CloudWatch logs are stored (e.g., "us-east-1")
+- `accessKeyId` - (required) AWS access key ID for authentication
+- `secretAccessKey` - (required) AWS secret access key for authentication
+- `logGroupName` - (required) CloudWatch log group name
+- `logStreamName` - (required) CloudWatch log stream name
+- `fields` - (optional) Custom fields to include in each log entry. Can contain string, number, or boolean values
+
+### Custom Fields
+
+Any custom fields you want to include in the log entry can be added to the
+`fields` property. These values will be appended to every log entry.
+
+```ts
+new AWSLoggingPlugin({
+  region: environment.AWS_REGION,
+  accessKeyId: environment.AWS_ACCESS_KEY_ID,
+  secretAccessKey: environment.AWS_SECRET_ACCESS_KEY,
+  logGroupName: "/aws/zuplo/api",
+  logStreamName: "production",
+  fields: {
+    field1: "value1",
+    field2: "value2",
+  },
+});
+```
+
+## Default Fields
+
+Every log entry will include the following fields (in camelCase format):
+
+- `timestamp` - The time the log was created (ISO 8601 format)
+- `severity` - The log level (e.g., `ERROR`, `INFO`, `DEBUG`, `WARN`)
+- `data` - The log message and any additional data
+- `environmentType` - Where the Zuplo API is running. Values are `edge`, `working-copy`, or `local`
+- `environmentStage` - The deployment stage: `working-copy`, `preview`, or `production`
 - `requestId` - The UUID of the request (the value of the `zp-rid` header)
-- `atomicCounter` - An atomic number that's used to order logs that have the
-  same timestamp
-- `rayId` - The network provider identifier (i.e. Cloudflare RayID) of the
-  request
+- `atomicCounter` - An atomic counter used to order logs with identical timestamps
+- `rayId` - The network provider identifier (e.g., Cloudflare Ray ID) of the request

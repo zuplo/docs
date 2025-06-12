@@ -49,6 +49,98 @@ problems that can be searched in logs.
 }
 ```
 
+## Available Methods
+
+The `HttpProblems` class provides static methods for all standard HTTP status
+codes. Each method has the same signature:
+
+```typescript
+static statusName(
+  request: ZuploRequest,
+  context: ZuploContext,
+  overrides?: Partial<ProblemDetails>,
+  additionalHeaders?: HeadersInit
+): Promise<Response>
+```
+
+### Example Methods
+
+Every status code has a corresponding method in the `HttpProblems` class, so you
+can use any HTTP status code as needed. Examples include:
+
+- `ok()` - 200 OK
+- `badRequest()` - 400 Bad Request
+- `unauthorized()` - 401 Unauthorized
+- `notFound()` - 404 Not Found
+
+## Method Parameters
+
+All methods accept the same parameters:
+
+- **request**: `ZuploRequest` - The incoming request object
+- **context**: `ZuploContext` - The Zuplo context object
+- **overrides**: `Partial<ProblemDetails>` (optional) - Custom values to
+  override default problem details
+- **additionalHeaders**: `HeadersInit` (optional) - Additional headers to
+  include in the response
+
+## Customizing Responses
+
+You can customize the problem details by providing overrides:
+
+```typescript
+return HttpProblems.badRequest(request, context, {
+  detail: "The 'email' field must be a valid email address",
+  title: "Validation Error",
+  extensions: {
+    field: "email",
+    value: request.body.email,
+  },
+});
+```
+
+## Adding Custom Headers
+
+You can add custom headers to the response:
+
+```typescript
+return HttpProblems.unauthorized(
+  request,
+  context,
+  {
+    detail: "Invalid API key",
+  },
+  {
+    "WWW-Authenticate": 'Bearer realm="api"',
+    "X-Rate-Limit-Remaining": "0",
+  },
+);
+```
+
+## HttpStatusCode Enum
+
+The `HttpStatusCode` enum provides numeric constants for all HTTP status codes:
+
+```typescript
+import { HttpStatusCode } from "@zuplo/runtime";
+
+// Use in responses
+return new Response("Created", {
+  status: HttpStatusCode.Created, // 201
+});
+
+// Use in comparisons
+if (response.status === HttpStatusCode.NotFound) {
+  // Handle 404
+}
+```
+
+## See Also
+
+- [ProblemResponseFormatter](./problem-response-formatter.md)
+- [Runtime Errors](./runtime-errors.md) - Error handling with RuntimeError and
+  ConfigurationError
+
 The `HttpProblems` helper supports most every
 [HTTP status code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).
 Some additional examples are shown.

@@ -95,7 +95,6 @@ export const docs: Navigation = [
           "articles/log-plugin-splunk",
           "articles/log-plugin-sumo",
           "articles/custom-logging-example",
-          "articles/log-export",
         ],
       },
       {
@@ -422,12 +421,17 @@ export const programming: Navigation = [
       "programmable-api/runtime-errors",
       "programmable-api/not-found-handler",
       "programmable-api/http-problems",
+      "programmable-api/problem-response-formatter",
     ],
   },
   {
     type: "category",
     label: "Logging & Observability",
-    items: ["programmable-api/logger", "programmable-api/audit-log"],
+    items: [
+      "programmable-api/logger",
+      "programmable-api/console-logging",
+      "programmable-api/audit-log",
+    ],
   },
   {
     type: "category",

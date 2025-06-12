@@ -47,8 +47,10 @@ Below are the currently installed modules.
 
 It is important to test your use of any node module carefully. Zuplo does not
 run Node.js, it runs a custom JavaScript engine that is designed to be fast and
-secure. This means that these moodules may not work as you expect or certain
-functionality in these modules may not work at all.
+secure. This means that these modules may not work as you expect or certain
+functionality in these modules may not work at all. Even when we say a module is
+"Working", that doesn't guarantee it will work in your specific use case. Test
+your code thoroughly before deploying it to production.
 
 :::
 

@@ -128,13 +128,12 @@ For API key authentication, user data might include consumer information:
 ```ts
 // After API key validation
 request.user = {
+  // The subject of the consumer
   sub: "consumer-id-123",
   data: {
-    name: "Mobile App Client",
-    metadata: {
-      appVersion: "2.0.1",
-      platform: "iOS",
-    },
+    // The metadata you set when creating the consumer
+    customerId: "123",
+    plan: "premium",
   },
 };
 ```

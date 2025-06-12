@@ -34,6 +34,14 @@ Zuplo runtime. The APIs are organized by category for easy reference.
 - **Status**: Documented ([HttpProblems](./http-problems.md))
 - **Description**: Enum containing all standard HTTP status codes
 
+### ProblemResponseFormatter
+
+- **Status**: Documented
+  ([ProblemResponseFormatter](./problem-response-formatter.md))
+- **Description**: Utility class for formatting RFC 7807 compliant problem
+  responses
+- **Methods**: `format` - Formats problem details into standard responses
+
 ## Handlers
 
 See the [Handlers documentation](/docs/handlers) for information about built-in

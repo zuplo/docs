@@ -15,22 +15,24 @@ functionality or rebuild business logic in your backend.
 Each MCP Server handler has a 1:1 relationship with a route. That means one
 route can host one server.
 
-A single MCP server may have many tools, where each tool interfaces with an API route in your gateway.
-You can compose multiple MCP servers on different routes to tailor MCP tools for each server's specific purpose.
+A single MCP server may have many tools, where each tool interfaces with an API
+route in your gateway. You can compose multiple MCP servers on different routes
+to tailor MCP tools for each server's specific purpose.
 
 ## Setup via Portal
 
 Open the **Route Designer** by navigating to the **Files** tab, then click
-**routes.oas.json**. For any route definition, select **MCP Server** from the **Request
-Handlers** drop-down. Set the method to **POST**.
+**routes.oas.json**. For any route definition, select **MCP Server** from the
+**Request Handlers** drop-down. Set the method to **POST**.
 
 Configure the handler with the following required options:
 
 - **Server Name** - The name of the MCP server. AI MCP clients will read this
   name when they initialize with the server.
 - **Server Version** - The version of your MCP server. AI MCP clients read this
-  version when they initialize with the server and may make autonomous
-  decisions based on the versioning of your MCP server and the instructions they've been given.
+  version when they initialize with the server and may make autonomous decisions
+  based on the versioning of your MCP server and the instructions they've been
+  given.
 
 ![MCP Server Handler Portal](../../public/media/mcp/portal-handler.png)
 
@@ -86,7 +88,8 @@ There are two options for configuring which API routes become MCP tools:
 
 #### Option 1: Transform Entire OpenAPI Files
 
-Transform all routes from OpenAPI files into MCP tools by specifying `openApiFilePaths`:
+Transform all routes from OpenAPI files into MCP tools by specifying
+`openApiFilePaths`:
 
 ```json
 "paths": {
@@ -114,15 +117,16 @@ Transform all routes from OpenAPI files into MCP tools by specifying `openApiFil
 }
 ```
 
-* `filePath`: Path to an OpenAPI JSON spec file (relative to the project root)
+- `filePath`: Path to an OpenAPI JSON spec file (relative to the project root)
 
-To exclude specific routes when using this option,
-add `x-zuplo-route.mcp.enabled: false` to those routes (see OpenAPI Configuration section).
+To exclude specific routes when using this option, add
+`x-zuplo-route.mcp.enabled: false` to those routes (see OpenAPI Configuration
+section).
 
 #### Option 2: Transform Individual Routes
 
-Add specific routes as MCP tools using the `openApiTools` array. Specify **either** `path`
-or `operationId`, plus the required `method`:
+Add specific routes as MCP tools using the `openApiTools` array. Specify
+**either** `path` or `operationId`, plus the required `method`:
 
 ```json
 "paths": {
@@ -152,34 +156,37 @@ or `operationId`, plus the required `method`:
 }
 ```
 
-* `path`: The route path to convert to an MCP tool
-* `operationId`: Alternative to `path` - uses the route's globally unique OpenAPI `operationId`
-* `method`: The HTTP method (`GET`, `POST`, etc.)
-* `name` (optional): Manually overrides the tool's name
-* `description` (optional): Manually overrides the tool's description
+- `path`: The route path to convert to an MCP tool
+- `operationId`: Alternative to `path` - uses the route's globally unique
+  OpenAPI `operationId`
+- `method`: The HTTP method (`GET`, `POST`, etc.)
+- `name` (optional): Manually overrides the tool's name
+- `description` (optional): Manually overrides the tool's description
 
 ### Tool names and descriptions
 
 Regardless of which option you use, MCP tools are configured as follows:
 
-* **Tool names**: Uses the route's `operationId` if available, otherwise falls back to a generated `METHOD_ROUTE` format (e.g., `GET_todos`)
-* **Tool descriptions**: Derived from (in order of priority):
+- **Tool names**: Uses the route's `operationId` if available, otherwise falls
+  back to a generated `METHOD_ROUTE` format (e.g., `GET_todos`)
+- **Tool descriptions**: Derived from (in order of priority):
   1. The route's `description` field
   2. The route's `summary` field
   3. A generated description if neither is available
 
-**Best Practice**: Always set meaningful `operationId`s 
-(like `get_users`, `create_new_deployment`, or `update_shopping_cart`)
-and descriptions as these help LLMs understand exactly _what_ each tool does.
+**Best Practice**: Always set meaningful `operationId`s (like `get_users`,
+`create_new_deployment`, or `update_shopping_cart`) and descriptions as these
+help LLMs understand exactly _what_ each tool does.
 
-:::tip
-Read more about authoring usable tools and good prompt engineering practices
-with [Anthropic's Prompt engineering overview](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview).
+:::tip Read more about authoring usable tools and good prompt engineering
+practices with
+[Anthropic's Prompt engineering overview](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview).
 :::
 
 ## OpenAPI Route Configuration
 
-Control MCP behavior for individual routes using the `x-zuplo-route` extension and the `mcp` options:
+Control MCP behavior for individual routes using the `x-zuplo-route` extension
+and the `mcp` options:
 
 ```json
 "paths": {
@@ -195,21 +202,20 @@ Control MCP behavior for individual routes using the `x-zuplo-route` extension a
 }
 ```
 
-* `enabled` (default: `true`) - Whether the route should be available as an MCP tool.
-  Useful for excluding routes when using `openApiFilePaths`.
+- `enabled` (default: `true`) - Whether the route should be available as an MCP
+  tool. Useful for excluding routes when using `openApiFilePaths`.
 
 ## Authentication
 
 ### API Key Auth
 
-An MCP server on Zuplo can be configured to use an API key from a query parameter
-using the [Query Parameter to Header Policy](../../policies/query-param-to-header-inbound).
+An MCP server on Zuplo can be configured to use an API key from a query
+parameter using the
+[Query Parameter to Header Policy](../../policies/query-param-to-header-inbound).
 
-:::warning
-Currently, API keys are not supported directly by MCP.
-But using an API key via query params transformed through your Zuplo gateway is
-a great way to get up and running quickly with an MCP server.
-:::
+:::warning Currently, API keys are not supported directly by MCP. But using an
+API key via query params transformed through your Zuplo gateway is a great way
+to get up and running quickly with an MCP server. :::
 
 Configure the policy to expect a query param and inject it as an Auth header:
 
@@ -228,15 +234,15 @@ Configure the policy to expect a query param and inject it as an Auth header:
           "headerValue": "Bearer {value}"
         }
       }
-    },
+    }
 
     // etc. etc. other policies, your API key policy
   ]
 }
 ```
 
-Then, to secure your MCP endpoint, add the "query param to header" policy **_before_**
-your API key policy:
+Then, to secure your MCP endpoint, add the "query param to header" policy
+**_before_** your API key policy:
 
 ```json
 {
@@ -244,14 +250,13 @@ your API key policy:
     "/mcp": {
       "post": {
         "x-zuplo-route": {
-
           // etc. etc.
           // other properties and route handlers for MCP
 
           "policies": {
             "inbound": [
-                "mcp-query-param-to-header-inbound",
-                "api-key-auth-inbound"
+              "mcp-query-param-to-header-inbound",
+              "api-key-auth-inbound"
             ]
           }
         }
@@ -261,11 +266,11 @@ your API key policy:
 }
 ```
 
-Will will effectively transform the query param into a `Authorization: Bearer` header
-and pass those through to other routes on your gateway.
+Will will effectively transform the query param into a `Authorization: Bearer`
+header and pass those through to other routes on your gateway.
 
-Then, when using MCP clients, simply add your API key as a query param!
-For example, in Cursor:
+Then, when using MCP clients, simply add your API key as a query param! For
+example, in Cursor:
 
 ```json
 {
@@ -281,31 +286,36 @@ For example, in Cursor:
 
 ### MCP Inspector
 
-Use the [MCP Inspector](https://github.com/modelcontextprotocol/inspector),
-a developer focused tool for building MCP servers, to quickly and easily test out your MCP server:
+Use the [MCP Inspector](https://github.com/modelcontextprotocol/inspector), a
+developer focused tool for building MCP servers, to quickly and easily test out
+your MCP server:
 
 ```sh
 npx @modelcontextprotocol/inspector
 ```
 
-By default, this will start a local MCP proxy and web app that you can use on `localhost` to
-connect to your server, list tools, call tools, view message history, and more.
+By default, this will start a local MCP proxy and web app that you can use on
+`localhost` to connect to your server, list tools, call tools, view message
+history, and more.
 
 To connect to your remote Zuplo MCP server in the Inspector UI:
 
 1. Set the **Transport Type** to "Streamable HTTP"
-2. Set the **URL** to your Zuplo gateway with the route used by the MCP Server Handler (i.e., `https://my-gateway.zuplo.dev/mcp`)
+2. Set the **URL** to your Zuplo gateway with the route used by the MCP Server
+   Handler (i.e., `https://my-gateway.zuplo.dev/mcp`)
 3. Hit **Connect**
 
 ### Curl
 
-For more fine grained debugging, utilize [MCP JSON RPC 2.0 messages](https://modelcontextprotocol.io/specification/2025-03-26/basic) directly with curl.
-There are lots of different interactions and message flows supported by MCP,
-but some useful ones include:
+For more fine grained debugging, utilize
+[MCP JSON RPC 2.0 messages](https://modelcontextprotocol.io/specification/2025-03-26/basic)
+directly with curl. There are lots of different interactions and message flows
+supported by MCP, but some useful ones include:
 
 #### Ping
 
-To send a [simple "ping" message](https://modelcontextprotocol.io/specification/2025-03-26/basic/utilities/ping),
+To send a
+[simple "ping" message](https://modelcontextprotocol.io/specification/2025-03-26/basic/utilities/ping),
 which can be useful for testing availability of your MCP server:
 
 ```sh
@@ -321,7 +331,8 @@ curl https://my-gateway.zuplo.dev/mcp \
 
 #### List tools
 
-To see [what tools a server has registered](https://modelcontextprotocol.io/specification/2025-03-26/server/tools#listing-tools):
+To see
+[what tools a server has registered](https://modelcontextprotocol.io/specification/2025-03-26/server/tools#listing-tools):
 
 ```sh
 curl https://my-gateway.zuplo.dev/mcp \
@@ -336,7 +347,8 @@ curl https://my-gateway.zuplo.dev/mcp \
 
 #### Call tool
 
-To [manually invoke a tool by name](https://modelcontextprotocol.io/specification/2025-03-26/server/tools#calling-tools):
+To
+[manually invoke a tool by name](https://modelcontextprotocol.io/specification/2025-03-26/server/tools#calling-tools):
 
 ```sh
 curl https://my-gateway.zuplo.dev/mcp \
@@ -354,18 +366,22 @@ curl https://my-gateway.zuplo.dev/mcp \
 ```
 
 For more complex tools, you'll need to provide the schema compliant `arguments`.
-Note the `inputSchema` for the tool from `tools/list` to appropriately craft the `arguments`.
+Note the `inputSchema` for the tool from `tools/list` to appropriately craft the
+`arguments`.
 
-:::tip
-Read more about how calling tools works in [the Model Context Protocol server specification](https://modelcontextprotocol.io/specification/2025-03-26/server/tools).
+:::tip Read more about how calling tools works in
+[the Model Context Protocol server specification](https://modelcontextprotocol.io/specification/2025-03-26/server/tools).
 :::
 
 ### MCP Client
 
-By connecting to an LLM enabled MCP Client, you can test the true end to end experience.
+By connecting to an LLM enabled MCP Client, you can test the true end to end
+experience.
 
-Many clients (like OpenAI, Claude Desktop, or Cursor) let you define the remote server URL and the name.
-For example, [in Cursor](https://docs.cursor.com/context/model-context-protocol), you can add your MCP server like so:
+Many clients (like OpenAI, Claude Desktop, or Cursor) let you define the remote
+server URL and the name. For example,
+[in Cursor](https://docs.cursor.com/context/model-context-protocol), you can add
+your MCP server like so:
 
 ```json
 {

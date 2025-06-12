@@ -10,18 +10,7 @@ The Loki Log plugin enables pushing logs to your Loki server.
 ## Setup
 
 To add the Loki logging plugin to your Zuplo project, add the following code to
-your `zuplo.runtime.ts` file. Replace `my-username` with your Grafana username
-and `my-password` with your Grafana password. Set the `url` option to the value
-of your Loki host.
-
-Optionally, you can set the `job` value to set the name of your log stream job.
-This defaults to `zuplo` if not set.
-
-Any custom fields you want to include in the log entry can be added to the
-`fields` property. These values will be appended to every log entry.
-
-Setting the `version` option to `2` changes the log stream to not include the
-`requestId` value in the stream, but rather include it as a log value.
+your `zuplo.runtime.ts` file.
 
 ```ts title="modules/zuplo.runtime.ts"
 import {
@@ -33,6 +22,7 @@ import {
 export function runtimeInit(runtime: RuntimeExtensions) {
   runtime.addPlugin(
     new LokiLoggingPlugin({
+      // This is the URL of your Loki server
       url: "https://logs-prod-us-central1.grafana.net/loki/api/v1/push",
       username: "my-username",
       job: "my-api",
@@ -47,30 +37,63 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 }
 ```
 
-## Standard Fields
+## Configuration Options
 
-Every log entry will have a `timestamp` and a `jsonPayload` object. The value of
-the `jsonPayload` contains the text or objects passed into the log.
+The `LokiLoggingPlugin` constructor accepts an options object with the following
+properties:
 
-Stream fields are:
+- `url` - (required) The URL of the Loki server (e.g.,
+  `https://logs-prod-us-central1.grafana.net/loki/api/v1/push`)
+- `username` - (required) Username for authentication
+- `password` - (required) Password for authentication
+- `version` - (optional) The version of the Loki transport to use. Version 2
+  includes tracing information in log values
+- `job` - (optional) Job name to include in the log stream. Defaults to "zuplo"
+- `fields` - (optional) Custom fields to include in each log entry. Can contain
+  string, number, or boolean values
 
-- `job` - The name of the log stream job. Defaults to `zuplo`.
-- `level` - The level of the log, for example `ERROR`, `INFO`, etc.
+### Custom Fields
+
+Any custom fields you want to include in the log entry can be added to the
+`fields` property. These values will be appended to every log entry.
+
+### Version Configuration
+
+Setting the `version` option to `2` changes the log stream to not include the
+`requestId` value in the stream, but rather include it as a log value with other
+tracing information.
+
+## Default Fields
+
+Every log entry will have a timestamp and structured data. The structure varies
+based on the version configuration.
+
+### Stream Labels (all versions)
+
+- `job` - The name of the log stream job. Defaults to "zuplo"
+- `level` - The log level (e.g., `ERROR`, `INFO`, `DEBUG`, `WARN`)
 - `environmentType` - Where the Zuplo API is running. Values are `edge`,
   `working-copy`, or `local`
-- `environmentStage` - If the environment is `working-copy`, `preview`, or
+- `environmentStage` - The deployment stage: `working-copy`, `preview`, or
   `production`
 
-Log trace fields are:
+### Log Fields (version 2+)
+
+When using version 2 or later, the following fields are included in the log
+values:
 
 - `requestId` - The UUID of the request (the value of the `zp-rid` header)
-- `atomicCounter` - An atomic number that's used to order logs that have the
-  same timestamp
-- `rayId` - The network provider identifier (i.e. Cloudflare RayID) of the
+- `atomicCounter` - An atomic counter used to order logs with identical
+  timestamps
+- `rayId` - The network provider identifier (e.g., Cloudflare Ray ID) of the
   request
 
-Note, log trace fields are only included if the `version` option is set to `2`
-or later.
+:::note
+
+Log trace fields are only included in the log values when the `version` option
+is set to `2` or later. In version 1, `requestId` is included as a stream label.
+
+:::
 
 ## Log Format
 

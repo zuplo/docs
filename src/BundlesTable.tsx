@@ -34,19 +34,28 @@ export const BundlesTable = () => {
           Module
         </th>
         <th className="px-3 py-2 text-left font-medium text-gray-600">
-          Version
+          Status
         </th>
         <th className="px-3 py-2 text-left font-medium text-gray-600">
-          Status
+          Version
         </th>{" "}
         <th className="px-3 py-2 text-left font-medium text-gray-600">Notes</th>
       </tr>
       {data?.bundles
         .filter((bundle) => bundle.isPublic)
         .map((bundle, i) => {
-          const notes = nodeModuleIssues.find(
+          const issue = nodeModuleIssues.find(
             (issue) => issue.name === bundle.name,
-          )?.notes;
+          );
+
+          let notes = issue?.notes;
+          let status = issue?.status ?? "Unknown";
+
+          const statusClass = {
+            Unknown: "bg-gray-200 text-gray-700",
+            Issues: "bg-red-100 text-red-800",
+            Working: "bg-green-200 text-green-800",
+          };
 
           return (
             <tr className="border-b hover:bg-gray-50" key={i}>
@@ -61,15 +70,11 @@ export const BundlesTable = () => {
                 </a>
               </td>
               <td className="px-3 py-2 align-top">
-                {notes ? (
-                  <span className="inline-block px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                    Issues
-                  </span>
-                ) : (
-                  <span className="inline-block px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                    Unknown
-                  </span>
-                )}
+                <span
+                  className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${statusClass[status]}`}
+                >
+                  {status}
+                </span>
               </td>
               <td className="px-3 py-2 align-top font-mono text-xs">
                 {bundle.version}

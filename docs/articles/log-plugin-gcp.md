@@ -17,9 +17,6 @@ for the service account in JSON format.
 After you have downloaded the JSON formatted service account, save it as a
 secret environment variable in your Zuplo project.
 
-Any custom fields you want to include in the log entry can be added to the
-`fields` property. These values will be appended to every log entry.
-
 ```ts title="modules/zuplo.runtime.ts"
 import {
   RuntimeExtensions,
@@ -41,21 +38,38 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 }
 ```
 
-## Standard Fields
+## Configuration Options
+
+The `GoogleCloudLoggingPlugin` constructor accepts an options object with the
+following properties:
+
+- `serviceAccountJson` - (required) The JSON content of your Google Cloud
+  service account key
+- `logName` - (required) The name of the log in Google Cloud Logging (e.g.,
+  `projects/my-project/logs/my-api`)
+- `fields` - (optional) Custom fields to include in each log entry. Can contain
+  string, number, or boolean values
+
+### Custom Fields
+
+Any custom fields you want to include in the log entry can be added to the
+`fields` property. These values will be appended to every log entry.
+
+## Default Fields
 
 Every log entry will have a `timestamp` and a `jsonPayload` object. The value of
 the `jsonPayload` contains the text or objects passed into the log.
 
-Default fields are:
+Default fields in the `jsonPayload` are:
 
-- `severity` - The level of the log, for example `ERROR`, `INFO`, etc.
+- `severity` - The log level (e.g., `ERROR`, `INFO`, `DEBUG`, `WARN`)
 - `requestId` - The UUID of the request (the value of the `zp-rid` header)
 - `environmentType` - Where the Zuplo API is running. Values are `edge`,
   `working-copy`, or `local`
-- `environmentStage` - If the environment is `working-copy`, `preview`, or
+- `environmentStage` - The environment stage: `working-copy`, `preview`, or
   `production`
-- `atomic_counter` - An atomic number that's used to order logs that have the
-  same timestamp
+- `atomicCounter` - An atomic counter used to order logs with identical
+  timestamps
 - `environment` - The environment name of the Zuplo API
-- `rayId` - The network provider identifier (i.e. Cloudflare RayID) of the
+- `rayId` - The network provider identifier (e.g., Cloudflare Ray ID) of the
   request

@@ -30,8 +30,16 @@ code in this repository.
 - Use `:::note`, `:::tip`, `:::warning`, `:::caution`, and `:::danger` for
   admonitions
 - Use `:::caution{title="Title"}` for titles
-- Always include a line below and above the ::: blocks to ensure proper
-  formatting when running through prettier
+- IMPORTANT!!! Make sure to include a line break after and before the inside of
+  the admonition block so that it formats correctly with prettier. For example:
+
+  ```
+  :::note
+
+  This is a note admonition.
+
+  :::
+  ```
 
 ## Additional Guidelines
 
