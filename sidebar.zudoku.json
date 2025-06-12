@@ -2,29 +2,32 @@
   {
     "type": "category",
     "label": "Configuration",
-    "icon": "cog",
+    "icon": "settings",
     "link": "dev-portal/zudoku/configuration/overview",
     "items": [
-      "dev-portal/zudoku/configuration/api-reference",
-      "dev-portal/zudoku/configuration/api-catalog",
+      "dev-portal/zudoku/customization/colors-theme",
+      "dev-portal/zudoku/customization/fonts",
       "dev-portal/zudoku/configuration/navigation",
       "dev-portal/zudoku/configuration/search",
       "dev-portal/zudoku/configuration/page",
-      "dev-portal/zudoku/configuration/footer",
-      "dev-portal/zudoku/configuration/slots",
-      "dev-portal/zudoku/configuration/authentication",
-      "dev-portal/zudoku/configuration/build-configuration",
-      "dev-portal/zudoku/configuration/sentry",
-      "dev-portal/zudoku/configuration/vite-config"
+      "dev-portal/zudoku/configuration/footer"
     ]
   },
   {
     "type": "category",
-    "label": "Customization",
-    "icon": "palette",
+    "label": "OpenAPI",
+    "icon": "globe",
     "items": [
-      "dev-portal/zudoku/customization/colors-theme",
-      "dev-portal/zudoku/customization/fonts"
+      "dev-portal/zudoku/configuration/api-reference",
+      "dev-portal/zudoku/configuration/api-catalog"
+    ]
+  },
+  {
+    "type": "category",
+    "label": "Authentication",
+    "icon": "lock",
+    "items": [
+      "dev-portal/zudoku/configuration/authentication"
     ]
   },
   {
@@ -36,6 +39,14 @@
       "dev-portal/zudoku/markdown/mdx",
       "dev-portal/zudoku/markdown/admonitions",
       "dev-portal/zudoku/markdown/code-blocks"
+    ]
+  },
+  {
+    "type": "category",
+    "label": "Integrations",
+    "icon": "blocks",
+    "items": [
+      "dev-portal/zudoku/configuration/sentry"
     ]
   },
   {
@@ -58,6 +69,9 @@
     "label": "Extending",
     "icon": "blocks",
     "items": [
+      "dev-portal/zudoku/configuration/build-configuration",
+      "dev-portal/zudoku/configuration/vite-config",
+      "dev-portal/zudoku/configuration/slots",
       "dev-portal/zudoku/custom-plugins",
       "dev-portal/zudoku/extending/events"
     ]
