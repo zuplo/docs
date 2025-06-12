@@ -1,8 +1,8 @@
-import type { SidebarEntry } from "zudoku";
+import type { Navigation } from "zudoku";
 import { errors } from "./generated/errors";
 import zudokuSidebar from "./sidebar.zudoku.json";
 
-export const docs: SidebarEntry = [
+export const docs: Navigation = [
   {
     type: "category",
     label: "Introduction",
@@ -218,7 +218,7 @@ export const docs: SidebarEntry = [
     label: "Developer Portal",
     link: {
       type: "doc",
-      id: "articles/developer-portal",
+      file: "articles/developer-portal",
     },
     items: [
       "articles/dev-portal-setup",
@@ -269,7 +269,7 @@ export const docs: SidebarEntry = [
     label: "Zuplo CLI",
     link: {
       type: "doc",
-      id: "cli/overview",
+      file: "cli/overview",
     },
     items: [
       "cli/installation",
@@ -294,7 +294,7 @@ export const docs: SidebarEntry = [
         label: "Members & Roles",
         link: {
           type: "doc",
-          id: "articles/accounts/members-and-roles",
+          file: "articles/accounts/members-and-roles",
         },
         items: [
           "articles/accounts/roles-and-permissions",
@@ -325,7 +325,7 @@ export const docs: SidebarEntry = [
         label: "Single Sign On",
         link: {
           type: "doc",
-          id: "articles/sso",
+          file: "articles/sso",
         },
         items: [
           "articles/sso-okta",
@@ -335,7 +335,7 @@ export const docs: SidebarEntry = [
       },
       {
         type: "doc",
-        id: "articles/limits",
+        file: "articles/limits",
       },
       {
         type: "category",
@@ -343,37 +343,37 @@ export const docs: SidebarEntry = [
         label: "Errors",
         items: errors.map((error) => ({
           type: "doc",
-          id: `errors/${error.id}`,
+          file: `errors/${error.id}`,
           label: error.title.split("(").slice(0, 1).join(""),
         })),
       },
 
       {
         type: "doc",
-        id: "articles/security",
+        file: "articles/security",
       },
       {
         type: "doc",
-        id: "articles/support",
+        file: "articles/support",
       },
       {
         type: "link",
         label: "Trust & Compliance",
-        href: "https://trust.zuplo.com",
+        to: "https://trust.zuplo.com",
       },
       {
         type: "link",
         label: "Changelog",
-        href: "https://zuplo.com/changelog",
+        to: "https://zuplo.com/changelog",
       },
     ],
   },
 ];
 
-export const programming: SidebarEntry = [
+export const programming: Navigation = [
   {
     type: "doc",
-    id: "programmable-api/index",
+    file: "programmable-api/index",
     label: "Overview",
   },
 
@@ -460,7 +460,7 @@ export const programming: SidebarEntry = [
   },
 ];
 
-export const policies: SidebarEntry = [
+export const policies: Navigation = [
   {
     type: "category",
     label: "Overview",
@@ -626,7 +626,7 @@ export const policies: SidebarEntry = [
   },
 ];
 
-export const devPortal: SidebarEntry = [
+export const devPortal: Navigation = [
   {
     type: "category",
     label: "Getting started",
@@ -638,5 +638,5 @@ export const devPortal: SidebarEntry = [
       "dev-portal/node-modules",
     ],
   },
-  ...(zudokuSidebar as SidebarEntry),
+  ...(zudokuSidebar as Navigation),
 ];
