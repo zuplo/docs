@@ -46,6 +46,7 @@
       "dev-portal/zudoku/guides/static-files",
       "dev-portal/zudoku/guides/environment-variables",
       "dev-portal/zudoku/guides/custom-pages",
+      "dev-portal/zudoku/guides/navigation-migration",
       "dev-portal/zudoku/guides/using-multiple-apis",
       "dev-portal/zudoku/guides/managing-api-keys-and-identities",
       "dev-portal/zudoku/guides/transforming-examples",
