@@ -609,6 +609,7 @@ export const policies: Navigation = [
       "policies/composite-inbound",
       "policies/brownout-inbound",
       "policies/caching-inbound",
+      "policies/semantic-cache-inbound",
       "policies/custom-code-inbound",
       "policies/custom-code-outbound",
       "articles/custom-audit-log-policy",
