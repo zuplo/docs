@@ -163,6 +163,7 @@ export const docs: Navigation = [
       "dedicated/architecture",
       "dedicated/networking",
       "dedicated/custom-domains",
+      "dedicated/federated-gateways",
       {
         type: "category",
         label: "Akamai",
