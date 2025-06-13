@@ -87,6 +87,12 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
       label: "REST API",
       to: "/api",
     },
+    {
+      type: "category",
+      label: "Developer Portal",
+      display: "hide",
+      items: devPortal,
+    },
   ],
   mdx: {
     components: mdxComponents,
