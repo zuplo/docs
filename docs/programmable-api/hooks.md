@@ -16,12 +16,56 @@ asynchronous, simply add the `async` keyword to the function.
 
 ## Available Hooks
 
-Zuplo provides two main hooks for the response pipeline:
+Zuplo provides several hooks for different stages of the request/response
+pipeline:
+
+### Request Pipeline Hooks
+
+- **`addPreRoutingHook`** - Executes before route matching, can modify the
+  request URL or headers
+- **`addRequestHook`** - Executes after route matching but before handlers, can
+  return early responses
+
+### Response Pipeline Hooks
 
 - **`addResponseSendingHook`** - Executes before the response is sent and can
   modify it
 - **`addResponseSendingFinalHook`** - Executes after all processing but cannot
   modify the response
+
+### Hook Types
+
+```ts
+// Pre-routing hook (available globally via runtime.addPreRoutingHook)
+interface PreRoutingHook {
+  (request: Request): Promise<Request> | Request;
+}
+
+// Request hook (available globally and per-context)
+interface OnRequestHook {
+  (
+    request: ZuploRequest,
+    context: ZuploContext,
+  ): Promise<ZuploRequest | Response> | (ZuploRequest | Response);
+}
+
+// Response hooks (available globally and per-context)
+interface OnResponseSendingHook {
+  (
+    response: Response,
+    request: ZuploRequest,
+    context: ZuploContext,
+  ): Promise<Response> | Response;
+}
+
+interface OnResponseSendingFinalHook {
+  (
+    response: Response,
+    request: ZuploRequest,
+    context: ZuploContext,
+  ): Promise<void> | void;
+}
+```
 
 ## Hook: OnResponseSending
 
@@ -261,6 +305,259 @@ Hooks can be registered in two ways:
 
 2. **Globally via Runtime Extensions** - Register hooks that apply to all
    requests using [Runtime Extensions](./runtime-extensions.md)
+
+## Complete Hook Pipeline Example
+
+This example demonstrates how all hooks work together in a request/response
+lifecycle:
+
+```ts
+// In zuplo.runtime.ts - Global hooks
+import { RuntimeExtensions } from "@zuplo/runtime";
+
+export function runtimeInit(runtime: RuntimeExtensions) {
+  // 1. Pre-routing hook - runs before route matching
+  runtime.addPreRoutingHook((request) => {
+    console.log("Pre-routing: Processing request", request.url);
+
+    // Normalize URL to lowercase
+    const url = new URL(request.url);
+    if (url.pathname !== url.pathname.toLowerCase()) {
+      url.pathname = url.pathname.toLowerCase();
+      return new Request(url.toString(), request);
+    }
+    return request;
+  });
+
+  // 2. Request hook - runs after routing but before handlers
+  runtime.addRequestHook(async (request, context) => {
+    console.log("Request hook: Adding correlation ID");
+
+    const correlationId = crypto.randomUUID();
+    context.custom.startTime = Date.now();
+    context.custom.correlationId = correlationId;
+
+    const headers = new Headers(request.headers);
+    headers.set("X-Correlation-ID", correlationId);
+
+    return new ZuploRequest(request, { headers });
+  });
+
+  // 3. Response sending hook - can modify response
+  runtime.addResponseSendingHook((response, request, context) => {
+    console.log("Response sending: Adding security headers");
+
+    const headers = new Headers(response.headers);
+    headers.set("X-Content-Type-Options", "nosniff");
+    headers.set("X-Frame-Options", "DENY");
+    headers.set("X-Correlation-ID", context.custom.correlationId);
+
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers,
+    });
+  });
+
+  // 4. Response sending final hook - for logging/analytics only
+  runtime.addResponseSendingFinalHook(async (response, request, context) => {
+    const duration = Date.now() - context.custom.startTime;
+    console.log(
+      `Request completed in ${duration}ms with status ${response.status}`,
+    );
+
+    // Non-blocking analytics
+    const sendAnalytics = async () => {
+      await fetch("https://analytics.example.com/track", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          correlationId: context.custom.correlationId,
+          method: request.method,
+          path: new URL(request.url).pathname,
+          status: response.status,
+          duration,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+    };
+
+    context.waitUntil(sendAnalytics());
+  });
+}
+```
+
+```ts
+// In a handler - Local hooks that augment global ones
+export default async function handler(
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  // Handler-specific response hook
+  context.addResponseSendingHook(async (response, request, context) => {
+    // Add handler-specific headers
+    const headers = new Headers(response.headers);
+    headers.set("X-Handler", "custom-api");
+    headers.set("X-Processing-Node", process.env.REGION || "unknown");
+
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers,
+    });
+  });
+
+  // Your handler logic
+  const result = await processApiRequest(request);
+  return new Response(JSON.stringify(result), {
+    headers: { "Content-Type": "application/json" },
+  });
+}
+```
+
+### Hook Execution Order
+
+1. **Pre-routing hooks** (global only) - before route matching
+2. **Request hooks** (global first, then handler-specific) - after route
+   matching
+3. Handler execution
+4. **Response sending hooks** (global first, then handler-specific) - can modify
+   response
+5. **Response sending final hooks** (global first, then handler-specific) -
+   read-only
+
+## Creating Custom Plugins with Hooks
+
+You can create reusable plugins that register hooks automatically:
+
+```ts
+// In modules/custom-observability-plugin.ts
+import {
+  SystemRuntimePlugin,
+  RuntimeExtensions,
+  ZuploRequest,
+  ZuploContext,
+} from "@zuplo/runtime";
+
+interface ObservabilityOptions {
+  metricsEndpoint: string;
+  apiKey: string;
+  enableTracing?: boolean;
+}
+
+export class CustomObservabilityPlugin extends SystemRuntimePlugin {
+  constructor(private options: ObservabilityOptions) {
+    super();
+  }
+
+  async initialize(runtime: RuntimeExtensions): Promise<void> {
+    // Add correlation ID to all requests
+    runtime.addRequestHook(this.addCorrelationId.bind(this));
+
+    // Add trace headers to responses
+    if (this.options.enableTracing) {
+      runtime.addResponseSendingHook(this.addTraceHeaders.bind(this));
+    }
+
+    // Send metrics after each request
+    runtime.addResponseSendingFinalHook(this.sendMetrics.bind(this));
+  }
+
+  private addCorrelationId(request: ZuploRequest, context: ZuploContext) {
+    const correlationId =
+      request.headers.get("x-correlation-id") || crypto.randomUUID();
+
+    context.custom.correlationId = correlationId;
+    context.custom.startTime = Date.now();
+
+    if (!request.headers.get("x-correlation-id")) {
+      const headers = new Headers(request.headers);
+      headers.set("x-correlation-id", correlationId);
+      return new ZuploRequest(request, { headers });
+    }
+
+    return request;
+  }
+
+  private addTraceHeaders(
+    response: Response,
+    request: ZuploRequest,
+    context: ZuploContext,
+  ) {
+    const headers = new Headers(response.headers);
+    headers.set("x-correlation-id", context.custom.correlationId);
+    headers.set("x-trace-id", context.requestId);
+
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers,
+    });
+  }
+
+  private async sendMetrics(
+    response: Response,
+    request: ZuploRequest,
+    context: ZuploContext,
+  ) {
+    const duration = Date.now() - context.custom.startTime;
+
+    const metrics = {
+      timestamp: new Date().toISOString(),
+      correlationId: context.custom.correlationId,
+      method: request.method,
+      path: new URL(request.url).pathname,
+      status: response.status,
+      duration,
+      userAgent: request.headers.get("user-agent"),
+      contentLength: response.headers.get("content-length"),
+    };
+
+    // Send asynchronously to avoid blocking response
+    const sendToMetrics = async () => {
+      try {
+        await fetch(this.options.metricsEndpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${this.options.apiKey}`,
+          },
+          body: JSON.stringify(metrics),
+        });
+      } catch (error) {
+        context.log.error("Failed to send metrics", error);
+      }
+    };
+
+    context.waitUntil(sendToMetrics());
+  }
+}
+```
+
+```ts
+// In zuplo.runtime.ts - Register the plugin
+import { RuntimeExtensions } from "@zuplo/runtime";
+import { CustomObservabilityPlugin } from "./modules/custom-observability-plugin";
+
+export function runtimeInit(runtime: RuntimeExtensions) {
+  const observabilityPlugin = new CustomObservabilityPlugin({
+    metricsEndpoint: "https://metrics.example.com/api/events",
+    apiKey: process.env.METRICS_API_KEY!,
+    enableTracing: true,
+  });
+
+  runtime.addPlugin(observabilityPlugin);
+}
+```
+
+This plugin demonstrates:
+
+- **Reusable functionality** encapsulated in a plugin class
+- **Multiple hook types** working together (request, response sending, response
+  final)
+- **Configurable behavior** through constructor options
+- **Error handling** and **non-blocking operations** with `waitUntil`
+- **Context data sharing** between hooks
 
 ## See Also
 

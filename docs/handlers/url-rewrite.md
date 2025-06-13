@@ -3,12 +3,17 @@ title: URL Rewrite Handler
 sidebar_label: URL Rewrite
 ---
 
-The URL Rewrite handler can be used to proxy and rewrite requests to a different
-API without writing any code. The handler allows mapping request data and
-parameters to a URL on another host. You can also combine the URL rewrite
-handler with policies such as the
-[Change Method Inbound](../policies/change-method-inbound.md) policy to modify
+The URL Rewrite handler proxies and rewrites requests to different APIs without
+writing any code. It provides powerful URL transformation capabilities, allowing
+you to map request data and parameters to custom URL patterns on other hosts.
+
+:::note
+
+Handler Composition Combine the URL Rewrite handler with policies such as the
+[Change Method Inbound](/docs/policies/change-method-inbound) policy to modify
 virtually any aspect of your request.
+
+:::
 
 ## Setup via Portal
 
@@ -123,11 +128,70 @@ file with the following route configuration.
 The URL Rewrite handler can be configured via `options` to support common
 use-cases.
 
-- `forwardSearch` - The query string will be automatically included in the
-  rewritten URL.
-- `followRedirects` - Determines if redirects should be followed when fetching
-  the rewrite URL. When set to `false` or not specified, redirects won't be
-  followed - the status and `location` header will be returned as received.
+- **`rewritePattern`** (required): The URL pattern template for rewriting
+  requests
+
+  - Type: `string`
+  - Supports JavaScript template interpolation with request context
+  - Available variables: `env`, `request`, `context`, `params`, `query`,
+    `headers`, `url`, `host`, `hostname`, `pathname`, `port`, `search`
+  - Example: `"https://api-${params.version}.example.com/users/${params.id}"`
+
+- **`forwardSearch`** (optional): Controls whether query parameters are
+  forwarded
+
+  - Type: `boolean`
+  - Default: `true`
+  - When `true`, query string is automatically included in rewritten URL
+
+- **`followRedirects`** (optional): Controls redirect handling behavior
+  - Type: `boolean`
+  - Default: `false`
+  - When `false`, redirects aren't followed - status and `location` header are
+    returned as received
+  - When `true`, redirects are automatically followed
+
+### Examples
+
+```json
+// Version-based routing with parameters
+{
+  "handler": {
+    "export": "urlRewriteHandler",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "rewritePattern": "https://api-${params.version}.example.com${pathname}",
+      "forwardSearch": true,
+      "followRedirects": false
+    }
+  }
+}
+
+// Environment-based backend selection
+{
+  "handler": {
+    "export": "urlRewriteHandler",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "rewritePattern": "${env.BACKEND_URL}/api${pathname}${search}",
+      "forwardSearch": false,
+      "followRedirects": true
+    }
+  }
+}
+
+// Complex parameter mapping with encoding
+{
+  "handler": {
+    "export": "urlRewriteHandler",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "rewritePattern": "https://backend.com/v2/users/${encodeURIComponent(params.userId)}/data?type=${query.format}",
+      "forwardSearch": false
+    }
+  }
+}
+```
 
 ## Different Backends per Environment
 
@@ -149,3 +213,17 @@ a re-written URL:
 ```json
 https://example.com/foo/bar
 ```
+
+## Related Documentation
+
+- [URL Forward Handler](./url-forward.md) - Simple URL forwarding without
+  transformation
+- [Custom Handler](./custom-handler.md) - Building custom request handlers
+- [Change Method Inbound](../policies/change-method-inbound.md) - Modify request
+  methods
+- [Environment Variables](../articles/environment-variables.md) - Configuration
+  management
+- [ZuploRequest](../programmable-api/zuplo-request.md) - Request object
+  reference
+- [ZuploContext](../programmable-api/zuplo-context.md) - Context object
+  reference

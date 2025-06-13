@@ -3,19 +3,25 @@ title: URL Forward Handler
 sidebar_label: URL Forward
 ---
 
-The URL Forward handler can be used to proxy requests to a different API without
-writing any code. It simply appends the incoming `path` section of the URL onto
-the specified `baseUrl` property. For example:
+The URL Forward handler proxies requests to a different API without writing any
+code. It appends the incoming path section of the URL onto the specified
+`baseUrl` property, making it ideal for creating API gateways and backend
+proxying.
 
-If you have an incoming request with URL
+:::tip Type-Safe Configuration Use TypeScript for enhanced development
+experience with full type checking and IntelliSense support when configuring
+handlers. :::
 
+## How It Works
+
+If you have an incoming request with URL:
 `https://my-gateway.com/pizza/cheese/size/large`
 
-And you have a URL forward handler with a `baseUrl` of
-`https://my-backend.com/folder` - the gateway will make a request to
+And a URL forward handler with `baseUrl` of `https://my-backend.com/folder`, the
+gateway makes a request to:
+`https://my-backend.com/folder/pizza/cheese/size/large`
 
-`https://my-backend.com/folder/pizza/cheese/size/large`. By default it will
-forward any search parameters.
+By default, query parameters are forwarded automatically.
 
 ## Setup via Portal
 
@@ -123,15 +129,46 @@ file with the following route configuration.
 
 ## Options
 
-The URL Rewrite handler can be configured via `options` to support common
-use-cases.
+The URL Forward handler accepts the following options:
 
-- `baseUrl` - the base URL the incoming pathname will be appended to.
-- `forwardSearch` - The query string will be automatically included in the
-  rewritten URL.
-- `followRedirects` - Determines if redirects should be followed when fetching
-  the rewrite URL. When set to `false` or not specified, redirects won't be
-  followed - the status and `location` header will be returned as received.
+- **`baseUrl`** (required): The base URL where the incoming pathname will be
+  appended
+
+  - Type: `string`
+  - Supports template interpolation with environment variables and request
+    properties
+  - Example: `"https://api.example.com"` or `"${env.BACKEND_URL}"`
+
+- **`forwardSearch`** (optional): Controls whether query parameters are
+  forwarded
+
+  - Type: `boolean`
+  - Default: `true`
+  - When `true`, query string is automatically included in forwarded URL
+
+- **`followRedirects`** (optional): Controls redirect handling behavior
+  - Type: `boolean`
+  - Default: `false`
+  - When `false`, redirects aren't followed - status and `location` header are
+    returned as received
+  - When `true`, redirects are automatically followed
+
+### Complete Example
+
+```json
+// routes.oas.json handler configuration
+{
+  "handler": {
+    "export": "urlForwardHandler",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "baseUrl": "${env.BACKEND_URL}",
+      "forwardSearch": true,
+      "followRedirects": false
+    }
+  }
+}
+```
 
 ## Different Backends per Environment
 
@@ -152,3 +189,14 @@ A URL rewrite like this will combine the `BASE_PATH` environment variable, say
 ```txt
 https://example.com/foo/bar
 ```
+
+## Related Documentation
+
+- [URL Rewrite Handler](./url-rewrite.md) - For more complex URL transformations
+- [Custom Handler](./custom-handler.md) - Building custom request handlers
+- [Environment Variables](../articles/environment-variables.md) - Configuration
+  management
+- [ZuploRequest](../programmable-api/zuplo-request.md) - Request object
+  reference
+- [ZuploContext](../programmable-api/zuplo-context.md) - Context object
+  reference

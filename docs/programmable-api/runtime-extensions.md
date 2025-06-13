@@ -31,8 +31,6 @@ function signature.
 
 :::
 
-The following configurations are available.
-
 ## Custom Problem (Error) Response Formatter
 
 Zuplo includes built-in error handling that returns errors in the format of the
@@ -107,64 +105,210 @@ customize the routing behaviour. Example use cases include:
 
 - Routing to a different url based on a header value
 - Normalizing urls to be all lowercase
+- Request preprocessing before route matching
+
+**Type Definition:**
+
+```ts
+interface PreRoutingHook {
+  (request: Request): Promise<Request> | Request;
+}
+```
+
+**Example:**
 
 ```ts
 import { RuntimeExtensions } from "@zuplo/runtime";
 
 export function runtimeInit(runtime: RuntimeExtensions) {
   runtime.addPreRoutingHook(async (request) => {
+    // Normalize URL to lowercase
     const nr = new Request(request.url.toLowerCase(), request);
     return nr;
+  });
+
+  // Header-based routing
+  runtime.addPreRoutingHook((request) => {
+    const version = request.headers.get("API-Version");
+    if (version === "v2") {
+      const url = new URL(request.url);
+      url.pathname = `/v2${url.pathname}`;
+      return new Request(url.toString(), request);
+    }
+    return request;
   });
 }
 ```
 
 ### Hook: OnRequest
 
-Runs when a request is received, before any plugins or handlers.
+Runs when a request is received, before any plugins or handlers. This hook can
+modify the request or return a response to short-circuit the pipeline.
+
+**Type Definition:**
+
+```ts
+interface OnRequestHook {
+  (
+    request: ZuploRequest,
+    context: ZuploContext,
+  ): Promise<ZuploRequest | Response> | (ZuploRequest | Response);
+}
+```
+
+**Example:**
 
 ```ts
 import { RuntimeExtensions } from "@zuplo/runtime";
 
 export function runtimeInit(runtime: RuntimeExtensions) {
-  runtime.addRequestHook((request, context) => {
-    // Code here
+  runtime.addRequestHook(async (request, context) => {
+    // Add correlation ID
+    const correlationId = crypto.randomUUID();
+    context.custom.correlationId = correlationId;
+
+    const headers = new Headers(request.headers);
+    headers.set("X-Correlation-ID", correlationId);
 
     // Can return a request or a response. If a response is returned the
     // pipeline stops and the response is returned.
+    return new ZuploRequest(request, { headers });
+  });
+
+  // Example: Early response for maintenance mode
+  runtime.addRequestHook((request, context) => {
+    if (process.env.MAINTENANCE_MODE === "true") {
+      return new Response("Service temporarily unavailable", {
+        status: 503,
+        headers: { "Retry-After": "3600" },
+      });
+    }
     return request;
   });
 }
 ```
 
-### Hooks: OnResponseSending
+### Hook: OnResponseSending
 
-Runs before a response is sent. Response can be modified.
-[More details.](/docs/articles/hooks#hook-onresponsesending)
+Runs before a response is sent. Response can be modified. Multiple hooks execute
+in the order they were added.
+[More details.](/docs/programmable-api/hooks#hook-onresponsesending)
+
+**Type Definition:**
+
+```ts
+interface OnResponseSendingHook {
+  (
+    response: Response,
+    request: ZuploRequest,
+    context: ZuploContext,
+  ): Promise<Response> | Response;
+}
+```
+
+**Example:**
 
 ```ts
 import { RuntimeExtensions } from "@zuplo/runtime";
 
 export function runtimeInit(runtime: RuntimeExtensions) {
   runtime.addResponseSendingHook((response, request, context) => {
-    // Code here
-    return response;
+    // Add security headers
+    const headers = new Headers(response.headers);
+    headers.set("X-Content-Type-Options", "nosniff");
+    headers.set("X-Frame-Options", "DENY");
+    headers.set("X-XSS-Protection", "1; mode=block");
+
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers,
+    });
   });
 }
 ```
 
-### Hooks: OnResponseSendingFinal
+### Hook: OnResponseSendingFinal
 
-Runs before a response is sent. The response can't be modified.
-[More details.](/docs/articles/hooks#hook-onresponsesendingfinal)
+Runs before a response is sent. The response can't be modified. Ideal for
+logging, analytics, and monitoring.
+[More details.](/docs/programmable-api/hooks#hook-onresponsesendingfinal)
+
+**Type Definition:**
+
+```ts
+interface OnResponseSendingFinalHook {
+  (
+    response: Response,
+    request: ZuploRequest,
+    context: ZuploContext,
+  ): Promise<void> | void;
+}
+```
+
+**Example:**
 
 ```ts
 import { RuntimeExtensions } from "@zuplo/runtime";
 
 export function runtimeInit(runtime: RuntimeExtensions) {
-  runtime.addResponseSendingFinalHook((response, request, context) => {
-    // Code here
+  runtime.addResponseSendingFinalHook(async (response, request, context) => {
+    // Log response metrics
+    const processingTime = Date.now() - context.custom.startTime;
+
+    context.log.info("Request completed", {
+      method: request.method,
+      url: request.url,
+      status: response.status,
+      processingTime,
+      correlationId: context.custom.correlationId,
+    });
+
+    // Send metrics to external service (non-blocking)
+    const sendMetrics = async () => {
+      await fetch("https://metrics.example.com/api/log", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          timestamp: new Date().toISOString(),
+          method: request.method,
+          status: response.status,
+          processingTime,
+        }),
+      });
+    };
+
+    context.waitUntil(sendMetrics());
   });
+}
+```
+
+## Custom Not Found Handler
+
+You can customize how Zuplo handles requests that don't match any route by
+setting a custom `notFoundHandler`:
+
+```ts
+import { RuntimeExtensions } from "@zuplo/runtime";
+
+export function runtimeInit(runtime: RuntimeExtensions) {
+  runtime.notFoundHandler = async (request, context, notFoundOptions) => {
+    // Custom 404 handling
+    const customResponse = {
+      error: "Route not found",
+      message: `The requested path '${new URL(request.url).pathname}' was not found`,
+      timestamp: new Date().toISOString(),
+      requestId: context.requestId,
+    };
+
+    return new Response(JSON.stringify(customResponse, null, 2), {
+      status: 404,
+      headers: {
+        "Content-Type": "application/json",
+        "X-Custom-Handler": "true",
+      },
+    });
+  };
 }
 ```
 
