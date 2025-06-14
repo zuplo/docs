@@ -36,6 +36,7 @@
     "icon": "book-open-text",
     "link": "dev-portal/zudoku/markdown/overview",
     "items": [
+      "dev-portal/zudoku/markdown/frontmatter",
       "dev-portal/zudoku/markdown/mdx",
       "dev-portal/zudoku/markdown/admonitions",
       "dev-portal/zudoku/markdown/code-blocks"
