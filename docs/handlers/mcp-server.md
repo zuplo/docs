@@ -178,7 +178,8 @@ Regardless of which option you use, MCP tools are configured as follows:
 `create_new_deployment`, or `update_shopping_cart`) and descriptions as these
 help LLMs understand exactly _what_ each tool does.
 
-:::tip Read more about authoring usable tools and good prompt engineering
+:::tip
+Read more about authoring usable tools and good prompt engineering
 practices with
 [Anthropic's Prompt engineering overview](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview).
 :::
@@ -213,9 +214,11 @@ An MCP server on Zuplo can be configured to use an API key from a query
 parameter using the
 [Query Parameter to Header Policy](../../policies/query-param-to-header-inbound).
 
-:::warning Currently, API keys are not supported directly by MCP. But using an
+:::warning
+Currently, API keys are not supported directly by MCP. But using a
 API key via query params transformed through your Zuplo gateway is a great way
-to get up and running quickly with an MCP server. :::
+to get up and running quickly with an MCP server.
+:::
 
 Configure the policy to expect a query param and inject it as an Auth header:
 
@@ -369,7 +372,8 @@ For more complex tools, you'll need to provide the schema compliant `arguments`.
 Note the `inputSchema` for the tool from `tools/list` to appropriately craft the
 `arguments`.
 
-:::tip Read more about how calling tools works in
+:::tip
+Read more about how calling tools works in
 [the Model Context Protocol server specification](https://modelcontextprotocol.io/specification/2025-03-26/server/tools).
 :::
 
