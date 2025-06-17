@@ -326,6 +326,73 @@ For instructions on theming the dev portal, see
 [Colors & Theme](./zudoku/customization/colors-theme.md) and
 [Fonts](./zudoku/customization/fonts.md).
 
+## Redirect Legacy URLs
+
+The previous Dev Portal was hosted on a path on the same domains your Zuplo API
+(i.e. `https://api.example.com/docs`). The new Dev Portal is hosted on its own
+domain and can have its own custom domain (i.e. `https://docs.example.com`).
+
+If you were using the previous Dev Portal, you can redirect all requests from
+the legacy path to the new domain using a Zuplo route. This allows you to
+maintain backwards compatibility for users who may have bookmarked or linked to
+the old Dev Portal URL.
+
+## Setup Instructions
+
+1. **Create a New Routes File**: In your Zuplo project, create a new OpenAPI
+   file called `legacy.oas.json` (or any name you prefer).
+
+2. **Add a Route**: Inside this file, add a route that matches the legacy path
+   and redirects to the new Dev Portal domain. You must set the path to the path
+   used by the previous Dev Portal, such as `/docs(.*)`. It is important not to
+   make the route `/docs(.*)` not `/docs/(.*)` in order to also match the root
+   path `/docs`.
+
+   For example:
+
+   ```json
+   {
+     "openapi": "3.1.0",
+     "info": {
+       "version": "1.0.0",
+       "title": "Dev Portal Redirect"
+     },
+     "paths": {
+       "/docs(.*)": {
+         "x-zuplo-path": {
+           "pathMode": "url-pattern"
+         },
+         "get": {
+           "summary": "Redirect",
+           "description": "Redirect to the new Dev Portal domain",
+           "x-zuplo-route": {
+             "corsPolicy": "none",
+             "handler": {
+               "export": "redirectLegacyDevPortal",
+               "module": "$import(@zuplo/runtime)"
+             },
+             "policies": {
+               "inbound": []
+             }
+           },
+           "operationId": "dev-portal-redirect"
+         }
+       }
+     }
+   }
+   ```
+
+After you redeploy you Zuplo project, whenever the user navigates to the legacy
+developer portal paths, they will be redirected to the new Dev Portal domain.
+
+### Additional Redirects
+
+Your new developer portal may also change other paths. To create redirects for
+specific docs or other path in your new Dev Portal, we recommend using the
+`redirects` configuration in the `zudoku.config.tsx` file. This allows you to
+specify multiple redirects easily. For more information, see the
+[Redirects section in the configuration docs](/docs/dev-portal/zudoku/configuration/overview#redirects)
+
 ## Troubleshooting
 
 If you encounter issues during migration, check these common problems:
