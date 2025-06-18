@@ -15,7 +15,7 @@ believe every API should have beautiful and powerful API documentation. The new
 Developer Portal is what is powering this documentation site and is now
 available as a beta for anyone to try.
 
-![Zuplo Dev Portal](../../public/media/introduction/image.png)
+![Zuplo Dev Portal](../../public/media/introduction/image-1.png)
 
 ## What is the Dev Portal?
 
