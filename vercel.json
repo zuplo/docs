@@ -1048,7 +1048,6 @@
       "destination": "/docs/legacy/dev-portal/dev-portal-theme",
       "permanent": true
     },
-    ,
     {
       "source": "/docs/articles/developer-portal{/}?",
       "destination": "/docs/dev-portal/introduction",
