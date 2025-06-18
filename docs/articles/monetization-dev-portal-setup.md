@@ -28,6 +28,15 @@ money.
 
 Once you have a working Zuplo API and a Stripe account, we can move forward!
 
+:::danger
+
+API Monetization is not yet supported in the new Developer Portal. If you are
+using API Monetization with the developer portal, you will need to use the
+legacy developer portal. You can find the
+[documentation for the legacy developer portal here](/docs/legacy/dev-portal/overview).
+
+:::
+
 ## 1/ Set Up in Stripe
 
 You need to have a couple things set up in Stripe before enabling Zuplo

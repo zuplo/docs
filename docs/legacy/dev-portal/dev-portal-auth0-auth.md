@@ -3,11 +3,11 @@ title: Dev Portal Auth0 Setup
 sidebar_label: Auth0 Setup
 ---
 
-:::warning
+:::danger
 
 This documentation is for the legacy version of the Dev Portal. If you are
 looking for the new preview developer portal, please refer to the
-[docs](/docs/dev-portal).
+[docs](/docs/dev-portal/introduction).
 
 :::
 
@@ -99,7 +99,7 @@ Set the following settings:
 - **Audience**: This is the value for `identifier` that you set when creating
   the Auth0 API in the previous step.
 
-![Developer Portal Configuration](../../public/media/dev-portal-auth0-auth/image-1.png)
+![Developer Portal Configuration](../../../public/media/dev-portal-auth0-auth/image-1.png)
 
 Once you save your changes, navigate to your developer portal and click "Sign
 in".

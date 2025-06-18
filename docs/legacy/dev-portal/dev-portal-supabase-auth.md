@@ -3,11 +3,11 @@ title: Dev Portal Supabase Setup
 sidebar_label: Supabase Setup
 ---
 
-:::warning
+:::danger
 
 This documentation is for the legacy version of the Dev Portal. If you are
 looking for the new preview developer portal, please refer to the
-[docs](/docs/dev-portal).
+[docs](/docs/dev-portal/introduction).
 
 :::
 
@@ -52,7 +52,7 @@ Unfamiliar with Next JS? Try out the
 
 Once your repo and environment variables are setup, you should see the following
 
-![img](../../public/media/supabase-auth/initial-login.png)
+![img](../../../public/media/supabase-auth/initial-login.png)
 
 Once you are ready, deploy your project to production.
 
@@ -63,7 +63,7 @@ Navigate to Authentication > URL Configuration > Site URL and paste in the full
 URL (ex. https://nextjs-with-supabase-xi-seven.vercel.app) in the Site URL
 field.
 
-![img](../../public/media/supabase-auth/supabase-site-url.png)
+![img](../../../public/media/supabase-auth/supabase-site-url.png)
 
 ## 3/ Configuring Your Developer Portal To Use Supabase Auth
 
@@ -79,7 +79,7 @@ endpoints (ex. `https://nextjs-with-supabase-xi-seven.vercel.app/login`). Your
 developer portal will navigate to these pages to create and end sessions. Your
 Authentication Settings should look like this once you are done:
 
-![](../../public/media/supabase-auth/dev-portal-updated.png)
+![](../../../public/media/supabase-auth/dev-portal-updated.png)
 
 Or in the JSON file:
 
@@ -104,7 +104,7 @@ key is used to securely connect your Supabase Auth App with the Developer
 Portal. From the side nav, go to your Project Settings and then click **Zuplo
 API Keys**. Copy your API key.
 
-![img](../../public/media/supabase-auth/copy-key-updated.png)
+![img](../../../public/media/supabase-auth/copy-key-updated.png)
 
 ## 5/ Connecting Your Supabase Auth App to the Dev Portal
 
@@ -264,21 +264,21 @@ Auth App codebase from earlier.
    of the Developer Portal Settings) and click the “Sign In” button at the top
    right
 
-   ![img](../../public/media/supabase-auth/dev-portal-loaded.png)
+   ![img](../../../public/media/supabase-auth/dev-portal-loaded.png)
 
 9. You should be redirected to your Supabase Auth App. Enter the email and
    password and click “Sign Up”.
 10. A email verification link will be sent to your email. Open the email and
     click the confirmation link
 
-    ![img](../../public/media/supabase-auth/email.png)
+    ![img](../../../public/media/supabase-auth/email.png)
 
 11. You will be redirected back to the Dev portal and be signed into your
     Supabase account!
 
 ### Sign in Support
 
-![img](../../public/media/supabase-auth/supabase-login.gif)
+![img](../../../public/media/supabase-auth/supabase-login.gif)
 
 Now that you have created your first user, follow the guide below to allow them
 to sign into your Supabase project via the Developer Portal

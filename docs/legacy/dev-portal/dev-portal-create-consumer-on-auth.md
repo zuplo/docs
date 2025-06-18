@@ -2,11 +2,11 @@
 title: Create an API Key Consumer on Login
 ---
 
-:::warning
+:::danger
 
 This documentation is for the legacy version of the Dev Portal. If you are
 looking for the new preview developer portal, please refer to the
-[docs](/docs/dev-portal).
+[docs](/docs/dev-portal/introduction).
 
 :::
 
@@ -37,7 +37,7 @@ navigate to **Actions** > **Library**. Then click the button **Build Custom**.
 Set a name for your custom action and select the **Login / Post Login** trigger.
 Select Node.js version 16 or greater.
 
-![Create an action](../../public/media/dev-portal-create-consumer-on-auth/a46eabb3-4c22-476b-acc3-c5ab330d451e.png)
+![Create an action](../../../public/media/dev-portal-create-consumer-on-auth/a46eabb3-4c22-476b-acc3-c5ab330d451e.png)
 
 Next, add the Node module [`undici`](https://www.npmjs.com/package/undici) as a
 package to the custom action. To open the module editor click the box icon on

@@ -2,11 +2,11 @@
 title: Custom Pages
 ---
 
-:::warning
+:::danger
 
 This documentation is for the legacy version of the Dev Portal. If you are
 looking for the new preview developer portal, please refer to the
-[docs](/docs/dev-portal).
+[docs](/docs/dev-portal/introduction).
 
 :::
 
@@ -20,7 +20,7 @@ Within your project in the Zuplo Portal, you will notice a `Docs` directory,
 with an `index.md` and `sidebar.json` file. `index.md` is a custom page we
 created to get you started.
 
-![Docs Folder](../../public/media/developer-portal/adding-pages/docs-folder.png)
+![Docs Folder](../../../public/media/developer-portal/adding-pages/docs-folder.png)
 
 Navigate to `index.md`, and make some changes to the markdown. If you are
 unfamiliar with Markdown, check out [this guide](https://www.markdownguide.org/)
@@ -31,7 +31,7 @@ to get started. You can also create a new docs page via the new file button.
 You can preview what your page will look like in the developer portal by
 clicking the **Markdown Preview** tab above the editor.
 
-![Markdown Preview](../../public/media/developer-portal/adding-pages/style-preview.png)
+![Markdown Preview](../../../public/media/developer-portal/adding-pages/style-preview.png)
 
 ## Configuring the Sidebar
 

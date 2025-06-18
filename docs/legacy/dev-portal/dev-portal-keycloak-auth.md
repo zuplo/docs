@@ -3,11 +3,11 @@ title: Dev Portal Keycloak Setup
 sidebar_label: Keycloak Setup
 ---
 
-:::warning
+:::danger
 
 This documentation is for the legacy version of the Dev Portal. If you are
 looking for the new preview developer portal, please refer to the
-[docs](/docs/dev-portal).
+[docs](/docs/dev-portal/introduction).
 
 :::
 
@@ -39,7 +39,7 @@ In the **Valid Redirect URIs** field, enter the URL of your Zuplo Dev Portal
 with the base path (this defaults to `/docs/`). Make sure you have the trailing
 slash set. Click **Save**.
 
-![Login settings](../../public/media/dev-portal-keycloak-auth/image-3.png)
+![Login settings](../../../public/media/dev-portal-keycloak-auth/image-3.png)
 
 ### 4/ Find the Issuer URL
 
