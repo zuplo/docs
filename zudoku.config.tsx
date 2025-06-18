@@ -79,6 +79,11 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
     },
     {
       type: "category",
+      label: "Developer Portal",
+      items: devPortal,
+    },
+    {
+      type: "category",
       label: "Programming API",
       items: programming,
     },
@@ -86,12 +91,6 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
       type: "link",
       label: "REST API",
       to: "/api",
-    },
-    {
-      type: "category",
-      label: "Developer Portal",
-      display: "hide",
-      items: devPortal,
     },
   ],
   mdx: {

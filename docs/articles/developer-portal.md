@@ -3,6 +3,14 @@ title: Developer Portal
 sidebar_label: Overview
 ---
 
+:::info
+
+This is the documentation for the legacy developer portal. Head over to
+[Developer Portal](/docs/dev-portal/introduction) to find the latest version of
+our developer portal.
+
+:::
+
 Every Zuplo project automatically includes a full featured developer portal that
 renders your OpenAPI specification as a beautiful page complete with examples,
 schemas, and more. You don't need to do anything to enable your developer portal

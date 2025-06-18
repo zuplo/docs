@@ -1,13 +1,13 @@
 ---
-title: Dev Portal Migration Guide
+title: Migration Guide
 sidebar_label: Migration Guide
 ---
 
-:::warning
+:::info
 
-This documentation is for the preview version of the Dev Portal. If you aren't
-part of the preview program, please refer to the
-[current Dev Portal docs](/docs/articles/developer-portal).
+If you're currently using [Monetization](/docs/articles/monetization) in
+production, please ensure you migrate only when all the features you need are
+supported. Check out the [roadmap](#roadmap) for further information.
 
 :::
 
@@ -177,19 +177,23 @@ sequentially for a smooth transition.
        title: "My API", // Was pageTitle in the old format
        favicon: "https://www.example.org/favicon.ico", // Was faviconUrl
      },
-     topNavigation: [
-       { id: "documentation", label: "Documentation" },
-       { id: "api", label: "API Reference" },
+     navigation: [
+       {
+         path: "documentation",
+         label: "Documentation",
+         items: [
+           {
+             type: "category",
+             label: "Overview",
+             items: ["introduction", "other-example"],
+           },
+         ],
+       },
+       {
+         path: "api",
+         label: "API Reference",
+       },
      ],
-     sidebar: {
-       documentation: [
-         {
-           type: "category",
-           label: "Overview",
-           items: ["introduction", "other-example"],
-         },
-       ],
-     },
      redirects: [{ from: "/", to: "/introduction" }],
      apis: {
        type: "file",
@@ -218,8 +222,8 @@ sequentially for a smooth transition.
 
 1. **Migrate Sidebar Configuration**
 
-   Move your [sidebar configuration](./zudoku/configuration/navigation.mdx) from
-   `sidebar.json` to the `sidebar` property in `zudoku.config.ts`:
+   Move your [navigation configuration](./zudoku/configuration/navigation.mdx)
+   from `sidebar.json` to the `navigation` property in `zudoku.config.ts`:
 
    **Old format (`sidebar.json`):**
 
@@ -240,20 +244,23 @@ sequentially for a smooth transition.
    **New format (in `zudoku.config.ts`):**
 
    ```ts
-   sidebar: {
-     documentation: [
-       {
-         type: "category",
-         label: "Getting Started",
-         items: ["introduction", "quickstart"]
-       },
-       {
-         type: "doc",
-         id: "api-reference"
-       }
-     ],
-     // You can add additional sidebar sections here
-   }
+   navigation: [
+     {
+       path: "documentation",
+       label: "Documentation",
+       items: [
+         {
+           type: "category",
+           label: "Overview",
+           items: ["introduction", "other-example"],
+         },
+       ],
+     },
+     {
+       path: "api",
+       label: "API Reference",
+     },
+   ];
    ```
 
 1. **Move Markdown Files**
@@ -300,9 +307,9 @@ sequentially for a smooth transition.
 
    :::caution
 
-   It is critical that you delete the `config/dev-portal.json` file after
-   completing the migration. If that file is not deleted, the Zuplo build system
-   will use the legacy dev portal.
+   It is crucial to delete the `config/dev-portal.json` file after completing
+   the migration. If you do not delete this file, the Zuplo build system will
+   use the legacy dev portal.
 
    :::
 

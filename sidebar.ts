@@ -215,7 +215,7 @@ export const docs: Navigation = [
   },
   {
     type: "category",
-    label: "Developer Portal",
+    label: "Developer Portal (legacy)",
     link: {
       type: "doc",
       file: "articles/developer-portal",
@@ -644,6 +644,7 @@ export const devPortal: Navigation = [
       "dev-portal/migration",
       "dev-portal/updating",
       "dev-portal/node-modules",
+      "dev-portal/roadmap",
     ],
   },
   ...(zudokuSidebar as Navigation),

@@ -2,11 +2,11 @@
 title: Introduction
 ---
 
-:::warning
+:::info
 
-This documentation is for the preview version of the Dev Portal. If you aren't
-part of the preview program, please refer to the
-[current Dev Portal docs](/docs/articles/developer-portal).
+If you are currently using [Monetization](/docs/articles/monetization) in
+production, please ensure you migrate only when all the features you need are
+supported. For further information, check out the [roadmap](#roadmap).
 
 :::
 
@@ -47,9 +47,9 @@ manage your API documentation. Some of the key features include:
 - **Custom Modules**: Install custom modules to extend the functionality of your
   documentation.
 - **API Key Management**: When using Zuplo's API Key management, you can manage
-  your API keys directly from the documentation. (Coming soon)
-- **Build-in Analytics**: End users can see how they are using the API, monitor
-  usage of their API keys, and more right from inside the portal. (Coming soon)
+  your API keys directly from the documentation.
+- **Build-in Analytics (soon)**: End users can see how they are using the API,
+  monitor usage of their API keys, and more right from inside the portal.
 
 ## How to get started?
 
