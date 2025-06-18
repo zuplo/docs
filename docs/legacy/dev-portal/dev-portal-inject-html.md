@@ -3,6 +3,14 @@ title: Developer Portal Inject Custom Html
 sidebar_label: Inject Custom Html
 ---
 
+:::warning
+
+This documentation is for the legacy version of the Dev Portal. If you are
+looking for the new preview developer portal, please refer to the
+[docs](/docs/dev-portal).
+
+:::
+
 <EnterpriseFeature />
 
 The Zuplo Developer Portal allows you to inject custom HTML into the portal.

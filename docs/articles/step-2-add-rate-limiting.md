@@ -60,7 +60,7 @@ Your rate limiting policy is now intercepting excess requests, protecting the
 ## 3/ View your API Documentation
 
 Whenever you deploy a new endpoint on Zuplo, it will automatically be added to
-your [auto generated developer documentation portal](./developer-portal.md).
+your [auto generated developer documentation portal](./developer-portal).
 
 To access your API's developer portal, click the **Gateway deployed** button in
 your toolbar and click the link under Developer Portal.

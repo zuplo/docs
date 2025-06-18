@@ -3,6 +3,14 @@ title: Developer Portal Theme
 sidebar_label: Theming
 ---
 
+:::warning
+
+This documentation is for the legacy version of the Dev Portal. If you are
+looking for the new preview developer portal, please refer to the
+[docs](/docs/dev-portal).
+
+:::
+
 The developer portal supports custom theming by editing the `docs/theme.css`
 file in your project. The following
 [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties)

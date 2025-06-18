@@ -3,6 +3,14 @@ title: Dev Portal Keycloak Setup
 sidebar_label: Keycloak Setup
 ---
 
+:::warning
+
+This documentation is for the legacy version of the Dev Portal. If you are
+looking for the new preview developer portal, please refer to the
+[docs](/docs/dev-portal).
+
+:::
+
 ## Keycloak Setup
 
 This guide will walk you through setting up Keycloak as the authentication
@@ -15,7 +23,7 @@ anything you want, but for this example, we will use `zuplo-dev-portal`.
 Optionally, fill in the name and description. Once you have entered the data,
 click **Next**.
 
-![Keycloak Client](../../public/media/dev-portal-keycloak-auth/image.png)
+![Keycloak Client](../../../public/media/dev-portal-keycloak-auth/image.png)
 
 ### 2/ Set the Client Capabilities
 
@@ -23,7 +31,7 @@ In the Authentication flow section, enable the **Standard flow** and disable
 **Direct access grants**. Leave **Client authentication** and **Authorization**
 set to **off**. Click **Next**.
 
-![Client Capabilities](../../public/media/dev-portal-keycloak-auth/image-1.png)
+![Client Capabilities](../../../public/media/dev-portal-keycloak-auth/image-1.png)
 
 ### 3/ Set the Login Settings
 
@@ -40,9 +48,9 @@ to **OpenID Endpoint Configuration**. This will open a JSON document. Find the
 `issuer` key and copy the value. You will use this value to configure the Zuplo
 Dev Portal.
 
-![Realm settings](../../public/media/dev-portal-keycloak-auth/image-4.png)
+![Realm settings](../../../public/media/dev-portal-keycloak-auth/image-4.png)
 
-![JSON file](../../public/media/dev-portal-keycloak-auth/image-5.png)
+![JSON file](../../../public/media/dev-portal-keycloak-auth/image-5.png)
 
 ### 5/ Configure the Developer Portal
 
@@ -53,4 +61,4 @@ value you copied from the JSON file in the previous step. Set the **Client ID**
 value to the value you set in step 1 (in our example this is
 `zuplo-dev-portal`). Click **Save**.
 
-![developer portal settings](../../public/media/dev-portal-keycloak-auth/image-6.png)
+![developer portal settings](../../../public/media/dev-portal-keycloak-auth/image-6.png)

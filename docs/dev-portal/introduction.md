@@ -4,9 +4,9 @@ title: Introduction
 
 :::warning
 
-This documentation is for the preview version of the Dev Portal. If you aren't
-part of the preview program, please refer to the
-[current Dev Portal docs](/docs/articles/developer-portal).
+This documentation is for the preview version of the Dev Portal. If you are
+using the legacy developer portal, please refer to the
+[docs](/docs/legacy/dev-portal/overview).
 
 :::
 

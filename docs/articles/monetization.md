@@ -10,7 +10,7 @@ suit your company's unique business needs. You can create separate plans for
 different customer segments, and set up pricing and usage limits for each.
 
 With Zuplo, your customers can sign up for a plan, all within the
-[Zuplo Developer Portal](/docs/articles/developer-portal.md). When your
+[Zuplo Developer Portal](./developer-portal). When your
 customers visit the Developer Portal, they're presented with a list of plans
 that you have created. They can sign up for a plan and start using your API
 instantly.

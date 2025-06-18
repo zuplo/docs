@@ -310,7 +310,7 @@
     },
     {
       "source": "/docs/deployments/dev-portal-json{/}?",
-      "destination": "/docs/articles/dev-portal-json",
+      "destination": "/docs/legacy/dev-portal/dev-portal-json",
       "permanent": true
     },
     {
@@ -330,17 +330,17 @@
     },
     {
       "source": "/docs/developer-portal/adding-pages{/}?",
-      "destination": "/docs/articles/dev-portal-adding-pages",
+      "destination": "/docs/legacy/dev-portal/dev-portal-adding-pages",
       "permanent": true
     },
     {
       "source": "/docs/developer-portal/configuration{/}?",
-      "destination": "/docs/articles/dev-portal-configuration",
+      "destination": "/docs/legacy/dev-portal/dev-portal-configuration",
       "permanent": true
     },
     {
       "source": "/docs/developer-portal/configuring-sidebar{/}?",
-      "destination": "/docs/articles/dev-portal-configuring-sidebar",
+      "destination": "/docs/legacy/dev-portal/dev-portal-configuring-sidebar",
       "permanent": true
     },
     {
@@ -350,17 +350,17 @@
     },
     {
       "source": "/docs/developer-portal/setup{/}?",
-      "destination": "/docs/articles/dev-portal-setup",
+      "destination": "/docs/legacy/dev-portal/dev-portal-setup",
       "permanent": true
     },
     {
       "source": "/docs/developer-portal/theme{/}?",
-      "destination": "/docs/articles/dev-portal-theme",
+      "destination": "/docs/legacy/dev-portal/dev-portal-theme",
       "permanent": true
     },
     {
       "source": "/docs/developer-portal/version-management{/}?",
-      "destination": "/docs/articles/dev-portal-version-management",
+      "destination": "/docs/legacy/dev-portal/dev-portal-version-management",
       "permanent": true
     },
     {
@@ -580,7 +580,7 @@
     },
     {
       "source": "/docs/articles/dev-portal-open-api{/}?",
-      "destination": "/docs/articles/dev-portal-configuration",
+      "destination": "/docs/legacy/dev-portal/dev-portal-configuration",
       "permanent": true
     },
     {
@@ -600,7 +600,7 @@
     },
     {
       "source": "/docs/developer-portal/open-api{/}?",
-      "destination": "/docs/articles/dev-portal-configuration",
+      "destination": "/docs/legacy/dev-portal/dev-portal-configuration",
       "permanent": true
     },
     {
@@ -610,7 +610,7 @@
     },
     {
       "source": "/docs/markdown-page{/}?",
-      "destination": "/docs/articles/dev-portal-adding-pages",
+      "destination": "/docs/legacy/dev-portal/dev-portal-adding-pages",
       "permanent": true
     },
     {
@@ -710,12 +710,12 @@
     },
     {
       "source": "/docs/articles/dev-portal-version-management{/}?",
-      "destination": "/docs/articles/dev-portal-configuring-sidebar",
+      "destination": "/docs/legacy/dev-portal/dev-portal-configuring-sidebar",
       "permanent": true
     },
     {
       "source": "/docs/developer-portal/version-management{/}?",
-      "destination": "/docs/articles/dev-portal-configuring-sidebar",
+      "destination": "/docs/legacy/dev-portal/dev-portal-configuring-sidebar",
       "permanent": true
     },
     {
@@ -790,7 +790,7 @@
     },
     {
       "source": "/docs/articles/supabase-auth{/}?",
-      "destination": "/docs/articles/dev-portal-supabase-auth",
+      "destination": "/docs/legacy/dev-portal/dev-portal-supabase-auth",
       "permanent": true
     },
     {
@@ -981,6 +981,77 @@
     {
       "source": "/docs/articles/background-dispatcher{/}?",
       "destination": "/docs/programmable-api/background-dispatcher",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/dev-portal-adding-pages{/}?",
+      "destination": "/docs/legacy/dev-portal/dev-portal-adding-pages",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/dev-portal-auth{/}?",
+      "destination": "/docs/legacy/dev-portal/dev-portal-auth",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/dev-portal-auth0-auth{/}?",
+      "destination": "/docs/legacy/dev-portal/dev-portal-auth0-auth",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/dev-portal-clerk-auth{/}?",
+      "destination": "/docs/legacy/dev-portal/dev-portal-clerk-auth",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/dev-portal-configuration{/}?",
+      "destination": "/docs/legacy/dev-portal/dev-portal-configuration",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/dev-portal-configuring-sidebar{/}?",
+      "destination": "/docs/legacy/dev-portal/dev-portal-configuring-sidebar",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/dev-portal-create-consumer-on-auth{/}?",
+      "destination": "/docs/legacy/dev-portal/dev-portal-create-consumer-on-auth",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/dev-portal-inject-html{/}?",
+      "destination": "/docs/legacy/dev-portal/dev-portal-inject-html",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/dev-portal-json{/}?",
+      "destination": "/docs/legacy/dev-portal/dev-portal-json",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/dev-portal-keycloak-auth{/}?",
+      "destination": "/docs/legacy/dev-portal/dev-portal-keycloak-auth",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/dev-portal-setup{/}?",
+      "destination": "/docs/legacy/dev-portal/dev-portal-setup",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/dev-portal-supabase-auth{/}?",
+      "destination": "/docs/legacy/dev-portal/dev-portal-supabase-auth",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/dev-portal-theme{/}?",
+      "destination": "/docs/legacy/dev-portal/dev-portal-theme",
+      "permanent": true
+    },
+    ,
+    {
+      "source": "/docs/articles/developer-portal{/}?",
+      "destination": "/docs/dev-portal/introduction",
       "permanent": true
     }
   ],

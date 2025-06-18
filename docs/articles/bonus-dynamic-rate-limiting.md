@@ -152,7 +152,7 @@ less than an hour.
 ### Next Steps
 
 - Continue exploring our docs to learn about customizing your
-  [Developer Portal](./developer-portal.md), or explore our various
+  [Developer Portal](./developer-portal), or explore our various
   [Integrations](https://zuplo.com/integrations)
 - [Grab time](https://zuplo.com/meeting) with the Zuplo team to have your
   questions answered

@@ -3,6 +3,14 @@ title: Dev Portal Clerk Setup
 sidebar_label: Clerk Setup
 ---
 
+:::warning
+
+This documentation is for the legacy version of the Dev Portal. If you are
+looking for the new preview developer portal, please refer to the
+[docs](/docs/dev-portal).
+
+:::
+
 ## Clerk Setup
 
 If you don't have an Clerk account, you can sign up for a

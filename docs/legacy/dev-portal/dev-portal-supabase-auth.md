@@ -3,6 +3,14 @@ title: Dev Portal Supabase Setup
 sidebar_label: Supabase Setup
 ---
 
+:::warning
+
+This documentation is for the legacy version of the Dev Portal. If you are
+looking for the new preview developer portal, please refer to the
+[docs](/docs/dev-portal).
+
+:::
+
 Do you want to share your API documentation and keys with your Supabase users?
 Look no further! You can easily connect your existing Supabase authentication
 with your Developer portal by following the guide below.
@@ -420,7 +428,7 @@ how to sign them out.
 
 ### (Optional) Additional Auth Provider Support via Supabase
 
-![img](../../public/media/supabase-auth/supabase-github-login.gif)
+![img](../../../public/media/supabase-auth/supabase-github-login.gif)
 
 Supabase allows you to connect
 [many different Auth Providers](https://supabase.com/docs/guides/auth/social-login).
