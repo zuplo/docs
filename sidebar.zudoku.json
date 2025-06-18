@@ -9,7 +9,7 @@
       "dev-portal/zudoku/customization/fonts",
       "dev-portal/zudoku/configuration/navigation",
       "dev-portal/zudoku/configuration/search",
-      "dev-portal/zudoku/configuration/page",
+      "dev-portal/zudoku/configuration/site",
       "dev-portal/zudoku/configuration/footer"
     ]
   },
