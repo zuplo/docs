@@ -10,7 +10,7 @@ const config: ZudokuConfig = {
   cdnUrl: {
     media: "https://cdn.zuplo.com/docs",
   },
-  page: {
+  site: {
     logo: {
       alt: "Zuplo",
       src: {
