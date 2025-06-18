@@ -1,6 +1,9 @@
 ---
 title: Programmable API
 sidebar_label: Overview
+description:
+  "This section provides a comprehensive index of all public APIs available in
+  the Zuplo runtime. The APIs are organized by category for easy reference."
 ---
 
 This section provides a comprehensive index of all public APIs available in the
