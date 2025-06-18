@@ -48,7 +48,7 @@ ZUPLO_USER_LOGGER_DATA_DOG_URL
 Previously, several log plugins used special properties on `context.custom` to
 set global attributes on logs. This was a legacy feature that was added before
 the current plugin system existed. This feature has been removed. Log plugins
-should be enabled using the [documented plugin system](./logging.md).
+should be enabled using the [documented plugin system](../articles/logging.md).
 
 If you are using setting any of the following in your code, you should migrate
 to the plugin configuration instead.

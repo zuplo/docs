@@ -220,4 +220,4 @@ Logs are automatically forwarded to your configured log management solution
 - [ZuploContext](./zuplo-context.md) - The context object that provides the
   logger
 - [Logging](../articles/logging.md) - General logging documentation
-- [Log Export](../articles/log-export.md) - Exporting logs to external services
+- [Log Export](../articles/logging.md) - Exporting logs to external services

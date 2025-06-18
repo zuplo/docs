@@ -1,5 +1,5 @@
 ---
-title: "Configuring Environment Variables"
+title: "Configuring Environment Variables Locally"
 sidebar_label: Environment variables
 ---
 
