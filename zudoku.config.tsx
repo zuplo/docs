@@ -1,5 +1,5 @@
 import type { ZudokuConfig } from "zudoku";
-import { devPortal, docs, policies, programming } from "./sidebar.js";
+import { devPortal, docs, legacy, policies, programming } from "./sidebar.js";
 import { mdxComponents } from "./src/components.js";
 import { HeadNavigation } from "./src/HeadNavigation";
 import "./src/diagrams.css";
@@ -79,6 +79,11 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
     },
     {
       type: "category",
+      label: "Developer Portal",
+      items: devPortal,
+    },
+    {
+      type: "category",
       label: "Programming API",
       items: programming,
     },
@@ -87,11 +92,12 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
       label: "REST API",
       to: "/api",
     },
+
     {
       type: "category",
-      label: "Developer Portal",
+      label: "Legacy",
       display: "hide",
-      items: devPortal,
+      items: legacy,
     },
   ],
   mdx: {

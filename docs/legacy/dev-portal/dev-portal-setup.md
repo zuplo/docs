@@ -3,6 +3,14 @@ title: Developer Portal Setup
 sidebar_label: Setup
 ---
 
+:::danger
+
+This documentation is for the legacy version of the Dev Portal. If you are
+looking for the new preview developer portal, please refer to the
+[docs](/docs/dev-portal/introduction).
+
+:::
+
 Customization of your developer portal can be done in either the Zuplo Portal or
 by editing source files using your preferred editor. Before you start
 customizing the developer portal, its a good idea to understand the structure

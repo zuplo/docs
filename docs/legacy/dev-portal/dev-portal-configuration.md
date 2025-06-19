@@ -2,6 +2,14 @@
 title: OpenAPI Specifications
 ---
 
+:::danger
+
+This documentation is for the legacy version of the Dev Portal. If you are
+looking for the new preview developer portal, please refer to the
+[docs](/docs/dev-portal/introduction).
+
+:::
+
 Zuplo natively uses the OpenAPI specification to power both the gateway routing
 and Developer Portal documentation. Your OpenAPI file (contained within your
 project's `config` folder and ending in `.oas.json`) is used to automatically

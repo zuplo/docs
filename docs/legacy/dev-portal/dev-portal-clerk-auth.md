@@ -3,6 +3,14 @@ title: Dev Portal Clerk Setup
 sidebar_label: Clerk Setup
 ---
 
+:::danger
+
+This documentation is for the legacy version of the Dev Portal. If you are
+looking for the new preview developer portal, please refer to the
+[docs](/docs/dev-portal/introduction).
+
+:::
+
 ## Clerk Setup
 
 If you don't have an Clerk account, you can sign up for a
@@ -39,7 +47,7 @@ URL** is
 `https://sensible-skunk-49.clerk.accounts.dev/.well-known/openid-configuration`,
 then the issuer is `https://sensible-skunk-49.clerk.accounts.dev`.
 
-![Application Urls](../../public/media/dev-portal-clerk-auth/image.png)
+![Application Urls](../../../public/media/dev-portal-clerk-auth/image.png)
 
 ### 2/ Configure the Developer Portal
 

@@ -1,7 +1,15 @@
 ---
-title: Developer Portal
+title: Developer Portal (Legacy)
 sidebar_label: Overview
 ---
+
+:::danger
+
+This documentation is for the legacy version of the Dev Portal. If you are
+looking for the new preview developer portal, please refer to the
+[docs](/docs/dev-portal/introduction).
+
+:::
 
 Every Zuplo project automatically includes a full featured developer portal that
 renders your OpenAPI specification as a beautiful page complete with examples,
@@ -12,7 +20,7 @@ and schemas to your Open API specification - the more you add the more complete
 your developer portal will be and the better experience your customers will have
 learning and using your API.
 
-![Zuplo developer portal](../../public/media/developer-portal/6453cd75-6d0c-4e7f-8a6c-5852a06b8c3b.png)
+![Zuplo developer portal](../../../public/media/developer-portal/6453cd75-6d0c-4e7f-8a6c-5852a06b8c3b.png)
 
 ## Next Steps
 

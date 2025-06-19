@@ -4,9 +4,9 @@ title: Introduction
 
 :::warning
 
-This documentation is for the preview version of the Dev Portal. If you aren't
-part of the preview program, please refer to the
-[current Dev Portal docs](/docs/articles/developer-portal).
+This documentation is for the preview version of the Dev Portal. If you are
+using the legacy developer portal, please refer to the
+[docs](/docs/legacy/dev-portal/overview).
 
 :::
 
@@ -15,7 +15,7 @@ believe every API should have beautiful and powerful API documentation. The new
 Developer Portal is what is powering this documentation site and is now
 available as a beta for anyone to try.
 
-![Zuplo Dev Portal](../../public/media/introduction/image.png)
+![Zuplo Dev Portal](../../public/media/introduction/image-1.png)
 
 ## What is the Dev Portal?
 

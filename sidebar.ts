@@ -215,35 +215,6 @@ export const docs: Navigation = [
   },
   {
     type: "category",
-    label: "Developer Portal",
-    link: {
-      type: "doc",
-      file: "articles/developer-portal",
-    },
-    items: [
-      "articles/dev-portal-setup",
-      "articles/dev-portal-configuration",
-      {
-        type: "category",
-        label: "Authentication",
-        link: "articles/dev-portal-auth",
-        items: [
-          "articles/dev-portal-auth0-auth",
-          "articles/dev-portal-clerk-auth",
-          "articles/dev-portal-keycloak-auth",
-          "articles/dev-portal-supabase-auth",
-        ],
-      },
-      "articles/dev-portal-theme",
-      "articles/dev-portal-adding-pages",
-      "articles/dev-portal-configuring-sidebar",
-      "articles/dev-portal-json",
-      "articles/dev-portal-create-consumer-on-auth",
-      "articles/dev-portal-inject-html",
-    ],
-  },
-  {
-    type: "category",
     label: "How to Guides",
     items: [
       "articles/versioning-on-zuplo",
@@ -630,6 +601,38 @@ export const policies: Navigation = [
       "handlers/openapi",
       "handlers/system-handlers",
       "handlers/websocket-handler",
+    ],
+  },
+];
+
+export const legacy: Navigation = [
+  {
+    type: "category",
+    label: "Developer Portal (Legacy)",
+    link: {
+      type: "doc",
+      file: "legacy/dev-portal/overview",
+    },
+    items: [
+      "legacy/dev-portal/dev-portal-setup",
+      "legacy/dev-portal/dev-portal-configuration",
+      {
+        type: "category",
+        label: "Authentication",
+        link: "legacy/dev-portal/dev-portal-auth",
+        items: [
+          "legacy/dev-portal/dev-portal-auth0-auth",
+          "legacy/dev-portal/dev-portal-clerk-auth",
+          "legacy/dev-portal/dev-portal-keycloak-auth",
+          "legacy/dev-portal/dev-portal-supabase-auth",
+        ],
+      },
+      "legacy/dev-portal/dev-portal-theme",
+      "legacy/dev-portal/dev-portal-adding-pages",
+      "legacy/dev-portal/dev-portal-configuring-sidebar",
+      "legacy/dev-portal/dev-portal-json",
+      "legacy/dev-portal/dev-portal-create-consumer-on-auth",
+      "legacy/dev-portal/dev-portal-inject-html",
     ],
   },
 ];

@@ -33,14 +33,14 @@ icons shown.
 
 ![Copy or View](../../public/media/api-key-administration/image-5.png)
 
-If you're using the Zuplo [Developer Portal](./developer-portal.md), we've an
+If you're using the Zuplo [Developer Portal](./developer-portal), we've an
 integration with the API Key API that allows developers to access their API
 keys, create new ones and delete them. To enable this, you must assign one or
 more managers, via e-mail, to be a manager for your API Key Consumer. This is
-optional if you aren't using the [Developer Portal](./developer-portal.md).
+optional if you aren't using the [Developer Portal](./developer-portal).
 
 You can assign managers in the Zuplo Portal (portal.zuplo.com) or via the API.
 
 If you want to automatically create an API Key for a customer automatically when
 they sign into your developer portal using Auth0,
-[follow this tutorial](./dev-portal-create-consumer-on-auth.md).
+[follow this tutorial](/docs/legacy/dev-portal/dev-portal-create-consumer-on-auth).

@@ -2,6 +2,14 @@
 title: Sidebar Configuration
 ---
 
+:::danger
+
+This documentation is for the legacy version of the Dev Portal. If you are
+looking for the new preview developer portal, please refer to the
+[docs](/docs/dev-portal/introduction).
+
+:::
+
 You can configure your Developer Portal Sidebar through the `sidebar.json` file.
 This file allows you to determine which pages get displayed, their labels, and
 their order.

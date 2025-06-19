@@ -2,6 +2,14 @@
 title: Create an API Key Consumer on Login
 ---
 
+:::danger
+
+This documentation is for the legacy version of the Dev Portal. If you are
+looking for the new preview developer portal, please refer to the
+[docs](/docs/dev-portal/introduction).
+
+:::
+
 By default, users who log into your Zuplo powered Developer Portal won't have an
 API Consumer. This is by design as it allows you to control who has access to
 your API, what their permissions or quotas are, etc. However, some APIs are open
@@ -29,7 +37,7 @@ navigate to **Actions** > **Library**. Then click the button **Build Custom**.
 Set a name for your custom action and select the **Login / Post Login** trigger.
 Select Node.js version 16 or greater.
 
-![Create an action](../../public/media/dev-portal-create-consumer-on-auth/a46eabb3-4c22-476b-acc3-c5ab330d451e.png)
+![Create an action](../../../public/media/dev-portal-create-consumer-on-auth/a46eabb3-4c22-476b-acc3-c5ab330d451e.png)
 
 Next, add the Node module [`undici`](https://www.npmjs.com/package/undici) as a
 package to the custom action. To open the module editor click the box icon on
@@ -37,7 +45,7 @@ the side bar, then click **Add Dependency** Enter the name `undici` and aa
 specific version of the module, in this case `5.22.1`. Click **Create** when
 finished.
 
-![Add dependency](../../public/media/dev-portal-create-consumer-on-auth/0daf1916-3fac-4bed-b00d-55694236619c.png)
+![Add dependency](../../../public/media/dev-portal-create-consumer-on-auth/0daf1916-3fac-4bed-b00d-55694236619c.png)
 
 In order to authenticate to Zuplo's Developer API, you will need to get your API
 Key. See [this document](./developer-api.md) for instructions on finding your
@@ -45,7 +53,7 @@ API Key. Once you have retrieved your secret, click the key icon on the Auth0
 editor sidebar and click **Add Secret**. Name the secret `API_KEY` and set the
 value.
 
-![Define a secret](../../public/media/dev-portal-create-consumer-on-auth/2cf32602-9716-4b8d-9641-3830500e01c1.png)
+![Define a secret](../../../public/media/dev-portal-create-consumer-on-auth/2cf32602-9716-4b8d-9641-3830500e01c1.png)
 
 :::info
 
@@ -121,7 +129,7 @@ Last, on the Auth0 side navigation bar, open **Actions** > **Flows**, then
 select **Login**. Add the action to the workflow by selecting **Custom** and
 dragging your custom action to the flow and then click **Apply**.
 
-![Applying the action](../../public/media/dev-portal-create-consumer-on-auth/a928c966-1636-47ad-af23-9f265e9eb590.png)
+![Applying the action](../../../public/media/dev-portal-create-consumer-on-auth/a928c966-1636-47ad-af23-9f265e9eb590.png)
 
 Now, login to your developer portal with a new user and you will see a consumer
 has already been created.

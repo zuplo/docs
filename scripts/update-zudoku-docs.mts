@@ -9,7 +9,8 @@ const warningNote = `
 :::warning
 
 This documentation is for the preview version of the Dev Portal. If you are
-not part of the preview program, please refer to the [current Dev Portal docs](/docs/articles/developer-portal).
+using the legacy developer portal, please refer to the
+[docs](/docs/legacy/dev-portal/overview).
 
 :::
 `;

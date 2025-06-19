@@ -2,6 +2,14 @@
 title: Config (dev-portal.json)
 ---
 
+:::danger
+
+This documentation is for the legacy version of the Dev Portal. If you are
+looking for the new preview developer portal, please refer to the
+[docs](/docs/dev-portal/introduction).
+
+:::
+
 The `dev-portal.json` file is the code that drives most of the configuration of
 your Zuplo Gateway. The primary uses of the `dev-portal.json` file are:
 
@@ -17,7 +25,7 @@ Zuplo Portal.
 :::
 
 Below is an example of a `dev-portal.json` file that's used to configure custom
-authentication to the [Developer Portal](../articles/developer-portal).
+authentication to the [Developer Portal](./developer-portal.md).
 
 ```json
 {
