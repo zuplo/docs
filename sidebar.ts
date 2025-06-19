@@ -243,6 +243,7 @@ export const docs: Navigation = [
       file: "cli/overview",
     },
     items: [
+      "cli/create-zuplo-api",
       "cli/installation",
       "cli/analytics",
       "cli/authentication",
