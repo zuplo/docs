@@ -1,6 +1,7 @@
 ---
 title: Developer Portal (Legacy)
 sidebar_label: Overview
+description: Overview of the legacy developer portal.
 ---
 
 :::danger

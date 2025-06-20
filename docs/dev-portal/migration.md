@@ -1,6 +1,8 @@
 ---
 title: Dev Portal Migration Guide
 sidebar_label: Migration Guide
+description:
+  Instruction for migrating from the legacy developer portal to Zudoku.
 ---
 
 :::warning

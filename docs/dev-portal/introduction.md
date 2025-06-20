@@ -1,5 +1,6 @@
 ---
 title: Introduction
+description: Introduction to Zuplo's beautiful, auto-generated developer portal.
 ---
 
 :::warning
