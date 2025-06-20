@@ -1,5 +1,5 @@
 ---
-title: Node Modules
+title: Node Modules & Customization
 ---
 
 :::warning
