@@ -1,6 +1,11 @@
 ---
 title: Developer Portal Theme
 sidebar_label: Theming
+description:
+  Learn how to customize the appearance of your LEGACY Zuplo Developer Portal
+  using supported CSS variables and theming options. This guide covers theme
+  classes, logo configuration, and best practices for safely applying custom
+  styles.
 ---
 
 :::danger

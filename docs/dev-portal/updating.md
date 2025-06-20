@@ -1,5 +1,8 @@
 ---
 title: Updating Versions
+description:
+  How to update Zuplo's developer portal to keep it up to date with the latest
+  changes.
 ---
 
 :::warning

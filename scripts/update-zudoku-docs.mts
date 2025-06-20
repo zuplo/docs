@@ -26,7 +26,10 @@ async function updateDocs(dir: string) {
       if (stat.isFile()) {
         let content = await fs.readFile(filePath, "utf8");
 
-        content = content.replace(new RegExp("Zudoku ", "g"), "Dev Portal ");
+        content = content
+          .replace(new RegExp("Zudoku ", "g"), "Dev Portal ")
+          // Rewrite internal links to start with /dev-portal/zudoku/
+          .replace(/(?<=\]\()\//g, "/dev-portal/zudoku/");
 
         // Insert text after frontmatter
         const frontmatterEndIndex = content.indexOf("---", 3) + 3;

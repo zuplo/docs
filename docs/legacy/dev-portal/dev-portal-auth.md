@@ -1,6 +1,11 @@
 ---
 title: Dev Portal Authentication
 sidebar_label: Overview
+description:
+  Learn how to configure authentication for the LEGACY Zuplo Developer Portal
+  using popular OpenID Connect providers like Auth0, Okta, AWS Cognito, Clerk,
+  and Supabase. This guide covers setup instructions and important
+  considerations for production environments.
 ---
 
 :::danger

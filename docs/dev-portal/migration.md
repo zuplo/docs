@@ -1,6 +1,8 @@
 ---
 title: Dev Portal Migration Guide
 sidebar_label: Migration Guide
+description:
+  Instruction for migrating from the legacy developer portal to Zudoku.
 ---
 
 :::warning
@@ -391,7 +393,7 @@ Your new developer portal may also change other paths. To create redirects for
 specific docs or other path in your new Dev Portal, we recommend using the
 `redirects` configuration in the `zudoku.config.tsx` file. This allows you to
 specify multiple redirects easily. For more information, see the
-[Redirects section in the configuration docs](/docs/dev-portal/introduction/zudoku/configuration/overview#redirects)
+[Redirects section in the configuration docs](/docs/dev-portal/zudoku/configuration/overview#redirects)
 
 ## Troubleshooting
 

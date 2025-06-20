@@ -1,5 +1,10 @@
 ---
 title: OpenAPI Specifications
+description:
+  Learn how Zuplo leverages OpenAPI specifications to power the LEGACY developer
+  portal documentation. Discover supported OpenAPI versions, handling multiple
+  specs, embedding JSON Schemas, and configuring examples for your API
+  documentation.
 ---
 
 :::danger

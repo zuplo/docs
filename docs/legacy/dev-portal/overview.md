@@ -1,6 +1,7 @@
 ---
 title: Developer Portal (Legacy)
 sidebar_label: Overview
+description: Overview of the legacy developer portal.
 ---
 
 :::danger
@@ -49,9 +50,9 @@ etc. you should ensure you have completed the following steps.
 1. **[Add custom documentation](./dev-portal-adding-pages.md)** - Often you will
    want to add additional instructions to your API docs.
 
-1. **[Configure a Custom Domain](./custom-domains.md)** - If you are on one of
-   our paid plans, you will want to host your gateway on something like
-   `api.example.com` so that your customers can access your docs at
+1. **[Configure a Custom Domain](/docs/articles/custom-domains)** - If you are
+   on one of our paid plans, you will want to host your gateway on something
+   like `api.example.com` so that your customers can access your docs at
    `https://api.example.com/docs`.
 
 1. **[Create Consumers on Login](./dev-portal-create-consumer-on-auth.md)** -

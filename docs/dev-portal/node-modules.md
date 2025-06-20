@@ -1,5 +1,7 @@
 ---
-title: Node Modules
+title: Node Modules & Customization
+description:
+  Guide to installing custom node modules in Zuplo's developer portal.
 ---
 
 :::warning

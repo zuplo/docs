@@ -1,6 +1,10 @@
 ---
 title: Dev Portal Clerk Setup
 sidebar_label: Clerk Setup
+description:
+  Learn how to set up Clerk authentication for the LEGACY Zuplo Developer
+  Portal, including creating an OAuth application, configuring environment
+  variables, and updating your portal settings.
 ---
 
 :::danger

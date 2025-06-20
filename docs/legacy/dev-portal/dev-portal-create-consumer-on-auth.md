@@ -1,5 +1,9 @@
 ---
 title: Create an API Key Consumer on Login
+description:
+  Learn how to automatically create an API Key Consumer for users upon login to
+  your LEGACY Developer Portal using Auth0 actions. This guide provides
+  step-by-step instructions for integrating with the legacy Dev Portal.
 ---
 
 :::danger

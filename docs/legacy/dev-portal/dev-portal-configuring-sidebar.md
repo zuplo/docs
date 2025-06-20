@@ -1,5 +1,10 @@
 ---
 title: Sidebar Configuration
+description:
+  Learn how to configure the sidebar of your LEGACY Zuplo Developer Portal using
+  the sidebar.json file. This guide covers sidebar item types, labels, OpenAPI
+  spec customization, and practical examples for effective API documentation
+  navigation.
 ---
 
 :::danger
