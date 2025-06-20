@@ -1,5 +1,9 @@
 ---
 title: Config (dev-portal.json)
+description:
+  Learn how to configure the LEGACY Zuplo Developer Portal using the
+  dev-portal.json file, including enabling features, customizing authentication,
+  and mapping environment variables for secure and flexible API management.
 ---
 
 :::danger

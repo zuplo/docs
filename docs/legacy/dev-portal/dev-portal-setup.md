@@ -1,6 +1,10 @@
 ---
 title: Developer Portal Setup
 sidebar_label: Setup
+description:
+  Learn how to set up and customize your LEGACY Zuplo Developer Portal,
+  including an overview of key configuration files and tips for managing your
+  API documentation effectively.
 ---
 
 :::danger

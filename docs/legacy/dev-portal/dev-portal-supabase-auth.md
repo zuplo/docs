@@ -1,6 +1,11 @@
 ---
 title: Dev Portal Supabase Setup
 sidebar_label: Supabase Setup
+description:
+  Learn how to integrate Supabase authentication with your LEGACY Zuplo
+  Developer Portal, enabling your users to sign up, sign in, and manage API
+  access securely using Supabase Auth. This step-by-step guide covers setup,
+  configuration, and best practices for a seamless developer experience.
 ---
 
 :::danger

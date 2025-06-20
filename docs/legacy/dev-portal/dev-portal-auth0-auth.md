@@ -1,6 +1,10 @@
 ---
 title: Dev Portal Auth0 Setup
 sidebar_label: Auth0 Setup
+description:
+  Learn how to set up Auth0 authentication for the LEGACY Zuplo Developer
+  Portal, including application configuration, API creation, and portal
+  integration steps for secure API access.
 ---
 
 :::danger

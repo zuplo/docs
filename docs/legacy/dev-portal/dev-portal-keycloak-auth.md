@@ -1,6 +1,9 @@
 ---
 title: Dev Portal Keycloak Setup
 sidebar_label: Keycloak Setup
+description:
+  Learn how to configure Keycloak as the authentication provider for your LEGACY
+  Zuplo hosted developer portal with this step-by-step guide.
 ---
 
 :::danger

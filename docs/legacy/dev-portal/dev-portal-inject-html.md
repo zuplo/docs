@@ -1,6 +1,10 @@
 ---
 title: Developer Portal Inject Custom Html
 sidebar_label: Inject Custom Html
+description:
+  Learn how to inject custom HTML and handle authentication events in the LEGACY
+  Zuplo Developer Portal, including practical examples for adding scripts and
+  listening to user identification.
 ---
 
 :::danger
