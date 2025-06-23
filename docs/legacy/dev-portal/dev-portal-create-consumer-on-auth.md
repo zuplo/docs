@@ -52,10 +52,10 @@ finished.
 ![Add dependency](../../../public/media/dev-portal-create-consumer-on-auth/0daf1916-3fac-4bed-b00d-55694236619c.png)
 
 In order to authenticate to Zuplo's Developer API, you will need to get your API
-Key. See [this document](./developer-api.md) for instructions on finding your
-API Key. Once you have retrieved your secret, click the key icon on the Auth0
-editor sidebar and click **Add Secret**. Name the secret `API_KEY` and set the
-value.
+Key. See [this document](../../articles/developer-api.md) for instructions on
+finding your API Key. Once you have retrieved your secret, click the key icon on
+the Auth0 editor sidebar and click **Add Secret**. Name the secret `API_KEY` and
+set the value.
 
 ![Define a secret](../../../public/media/dev-portal-create-consumer-on-auth/2cf32602-9716-4b8d-9641-3830500e01c1.png)
 

@@ -29,7 +29,7 @@ Zuplo Portal.
 :::
 
 Below is an example of a `dev-portal.json` file that's used to configure custom
-authentication to the [Developer Portal](./developer-portal.md).
+authentication to the Developer Portal.
 
 ```json
 {
@@ -88,11 +88,11 @@ authentication to the [Developer Portal](./developer-portal.md).
 
 ## Mapping environment variables to settings
 
-[Environment variables](./environment-variables.md) can be used instead of
-hard-coded settings inside of the `dev-portal.json` file. This is the best
-practice when setting secret values like `apiKey`. Using environment variables
-is also useful when settings change by environment. For example, if you use
-different OAuth Clients depending on environment.
+[Environment variables](../../articles/environment-variables.md) can be used
+instead of hard-coded settings inside of the `dev-portal.json` file. This is the
+best practice when setting secret values like `apiKey`. Using environment
+variables is also useful when settings change by environment. For example, if
+you use different OAuth Clients depending on environment.
 
 Any **whole** value in the `dev-portal.json` file can be substituted for an
 environment variable. Substitution is done by setting the string value to
