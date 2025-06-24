@@ -10,6 +10,7 @@ const config: ZudokuConfig = {
   cdnUrl: {
     media: "https://cdn.zuplo.com/docs",
   },
+  enableStatusPages: true,
   site: {
     logo: {
       alt: "Zuplo",
