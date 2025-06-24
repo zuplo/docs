@@ -1053,7 +1053,6 @@
       "destination": "/docs/dev-portal/introduction",
       "permanent": true
     },
-    ,
     {
       "source": "/docs/articles/open-api{/}?",
       "destination": "/docs/openapi",
