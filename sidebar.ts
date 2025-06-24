@@ -646,6 +646,7 @@ export const devPortal: Navigation = [
     items: [
       "dev-portal/introduction",
       "dev-portal/migration",
+      "dev-portal/local-development",
       "dev-portal/updating",
       "dev-portal/node-modules",
     ],
