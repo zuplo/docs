@@ -82,6 +82,21 @@ The MCP Server handler requires the following configurations:
 - `name` - The name identifier of the MCP server
 - `version` - The version of the MCP server protocol to use
 
+### MCP `2025-06-18` Global Options
+
+:::warning
+These options are part of the new [MCP specification (2025-06-18)](https://modelcontextprotocol.io/specification/2025-06-18).
+Some MCP clients **may not yet support these features**. If you experience compatibility
+issues with your MCP client, set both options to `false`.
+:::
+
+- `includeOutputSchema` (optional, default: `true`) - Whether to include output
+  schema from the route's OpenAPI response schema. When `true`, the schema from
+  successful responses (2xx) will be used as `outputSchema` for MCP tools.
+- `includeStructuredContent` (optional, default: `true`) - Whether to include
+  structured content in responses. When `true`, response JSON will be parsed and
+  included as `structuredContent`. When `false`, only `text` content will be returned.
+
 ### OpenAPI Routes to MCP Tools
 
 There are two options for configuring which API routes become MCP tools:
@@ -162,6 +177,8 @@ Add specific routes as MCP tools using the `openApiTools` array. Specify
 - `method`: The HTTP method (`GET`, `POST`, etc.)
 - `name` (optional): Manually overrides the tool's name
 - `description` (optional): Manually overrides the tool's description
+- `includeOutputSchema` (optional): Override the global `includeOutputSchema` setting for this specific route
+- `includeStructuredContent` (optional): Override the global `includeStructuredContent` setting for this specific route
 
 ### Tool names and descriptions
 
