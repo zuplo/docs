@@ -44,7 +44,7 @@
     "eslint-plugin-prettier": "^5.5.0",
     "glob": "11.0.0",
     "gray-matter": "4.0.3",
-    "prettier": "^3.5.2",
+    "prettier": "^3.6.0",
     "safe-marked": "16.0.0",
     "tsx": "^4.19.3",
     "typescript": "^5.8.3",
