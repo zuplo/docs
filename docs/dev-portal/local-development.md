@@ -21,8 +21,6 @@ get started.
 
 - [Node.js](https://nodejs.org) `>=v22.7.0` (or `>=20.19` will work as well)
 - [Git](https://git-scm.com)
-- [npm](https://www.npmjs.com) or a similar package manager (e.g.
-  [pnpm](https://pnpm.io))
 
 ## Getting Started
 
