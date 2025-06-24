@@ -163,11 +163,11 @@ sequentially for a smooth transition.
    | Old (`dev-portal.json`)    | New (`zudoku.config.ts`)                         |
    | -------------------------- | ------------------------------------------------ |
    | `pageTitle`                | `site.title`                                     |
-   | `faviconUrl`               | `site.favicon`                                   |
+   | `faviconUrl`               | `metadata.favicon`                               |
    | `enableAuthentication`     | Implied by presence of `authentication` property |
    | `authentication.provider`  | `authentication.type`                            |
    | `authentication.authority` | Provider-specific properties                     |
-   | (from sidebar.json)        | `sidebar`                                        |
+   | (from sidebar.json)        | `navigation` array                               |
 
    Example configuration:
 
@@ -177,27 +177,29 @@ sequentially for a smooth transition.
    const config: ZudokuConfig = {
      site: {
        title: "My API", // Was pageTitle in the old format
+     },
+     metadata: {
        favicon: "https://www.example.org/favicon.ico", // Was faviconUrl
      },
-     topNavigation: [
-       { id: "documentation", label: "Documentation" },
-       { id: "api", label: "API Reference" },
+     navigation: [
+       {
+         type: "category",
+         label: "Documentation",
+         items: [
+           "introduction", // Using shorthand for docs
+           "other-example",
+         ],
+       },
+       { type: "link", to: "/api", label: "API Reference" },
      ],
-     sidebar: {
-       documentation: [
-         {
-           type: "category",
-           label: "Overview",
-           items: ["introduction", "other-example"],
-         },
-       ],
-     },
      redirects: [{ from: "/", to: "/introduction" }],
-     apis: {
-       type: "file",
-       input: "../config/routes.oas.json",
-       navigationId: "api",
-     },
+     apis: [
+       {
+         type: "file",
+         input: "../config/routes.oas.json",
+         path: "/api",
+       },
+     ],
      docs: {
        files: "/pages/**/*.{md,mdx}",
      },
@@ -221,7 +223,7 @@ sequentially for a smooth transition.
 1. **Migrate Sidebar Configuration**
 
    Move your [sidebar configuration](./zudoku/configuration/navigation.mdx) from
-   `sidebar.json` to the `sidebar` property in `zudoku.config.ts`:
+   `sidebar.json` to the `navigation` array in `zudoku.config.ts`:
 
    **Old format (`sidebar.json`):**
 
@@ -242,20 +244,34 @@ sequentially for a smooth transition.
    **New format (in `zudoku.config.ts`):**
 
    ```ts
-   sidebar: {
-     documentation: [
-       {
-         type: "category",
-         label: "Getting Started",
-         items: ["introduction", "quickstart"]
-       },
-       {
-         type: "doc",
-         id: "api-reference"
-       }
-     ],
-     // You can add additional sidebar sections here
-   }
+   navigation: [
+     {
+       type: "category",
+       label: "Documentation",
+       items: [
+         {
+           type: "category",
+           label: "Getting Started",
+           items: [
+             {
+               type: "doc",
+               file: "introduction", // Note: no path prefix needed
+             },
+             {
+               type: "doc",
+               file: "quickstart",
+             },
+           ],
+         },
+         "authentication", // Directly reference doc files
+       ],
+     },
+     {
+       type: "link",
+       to: "/api",
+       label: "API Reference",
+     },
+   ];
    ```
 
 1. **Move Markdown Files**
@@ -325,7 +341,7 @@ sequentially for a smooth transition.
 ## Theming
 
 For instructions on theming the dev portal, see
-[Colors & Theme](./zudoku/customization/colors-theme.md) and
+[Colors & Theme](./zudoku/customization/colors-theme.mdx) and
 [Fonts](./zudoku/customization/fonts.md).
 
 ## Redirect Legacy URLs
@@ -391,7 +407,7 @@ developer portal paths, they will be redirected to the new Dev Portal domain.
 
 Your new developer portal may also change other paths. To create redirects for
 specific docs or other path in your new Dev Portal, we recommend using the
-`redirects` configuration in the `zudoku.config.tsx` file. This allows you to
+`redirects` configuration in the `zudoku.config.ts` file. This allows you to
 specify multiple redirects easily. For more information, see the
 [Redirects section in the configuration docs](/docs/dev-portal/zudoku/configuration/overview#redirects)
 

@@ -3,7 +3,7 @@ title: Deleting your Account
 sidebar_label: Delete Account
 ---
 
-Deleting your account is a permanent action that cannot be undone. If you are
+Deleting your account is a permanent action that can't be undone. If you are
 sure you want to delete your account, follow these steps:
 
 <Stepper>
@@ -31,6 +31,6 @@ sure you want to delete your account, follow these steps:
 </Stepper>
 
 Once you have completed these steps, your account will be permanently deleted
-and cannot be recovered. If you have any questions or concerns about deleting
+and can't be recovered. If you have any questions or concerns about deleting
 your account, please contact our support team at
 [support@zuplo.com](mailto:support@zuplo.com).
