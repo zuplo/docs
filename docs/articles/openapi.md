@@ -112,7 +112,7 @@ your existing tooling.
     "summary": "Internal Route",
     "x-internal": true,
     "x-zuplo-route": {
-        ...
+        //...
     },
 }
 ```

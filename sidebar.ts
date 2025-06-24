@@ -28,7 +28,11 @@ export const docs: Navigation = [
   {
     type: "category",
     label: "Core Concepts",
-    items: ["articles/routing", "articles/open-api"],
+    items: [
+      "articles/routing",
+      "articles/openapi",
+      "articles/openapi-server-urls",
+    ],
   },
   {
     type: "category",
@@ -433,6 +437,7 @@ export const programming: Navigation = [
       "programmable-api/runtime-behaviors",
       "programmable-api/zp-body-removed",
       "programmable-api/zuplo-id-token",
+      "programmable-api/jwt-service-plugin",
     ],
   },
 ];

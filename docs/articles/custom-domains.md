@@ -8,6 +8,9 @@ related to a project in the Custom Domains section of the Settings tab of your
 project. Custom Domains are available on
 [Builder plans and above](https://zuplo.com/pricing).
 
+Custom domains can be configured for both the API and the Developer Portal
+separately.
+
 :::note
 
 Custom domains can't be added to development environments. You can tell if an

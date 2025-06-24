@@ -7,6 +7,13 @@ The `StreamingZoneCache` class provides a distributed caching solution optimized
 for streaming data. It allows you to cache `ReadableStream` objects across
 Zuplo's edge network.
 
+:::note{title="Beta Feature"}
+
+This API is in Beta - please use with care and provide feedback to the team if
+you encounter any issues.
+
+:::
+
 ## Constructor
 
 ```ts
@@ -138,10 +145,6 @@ export default async function handler(
 - Set appropriate TTL values based on your content update frequency
 - Consider the size of streams being cached to avoid memory issues
 - The cache is distributed across Zuplo's edge network for optimal performance
-
-## Beta Status
-
-This API is currently in beta and may change in future releases.
 
 ## See Also
 

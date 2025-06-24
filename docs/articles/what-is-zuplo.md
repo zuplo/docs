@@ -10,8 +10,8 @@ engineering team, Zuplo makes it easy to:
 - [Add authentication and access control](./step-3-add-api-key-auth.md)
 - [Implement rate limiting](./step-2-add-rate-limiting.md)
 - Write custom logic to run at the gateway layer
-- Build a [rich developer portal](./developer-portal) with self-serve tools
-  for auth and monetization
+- Build a [rich developer portal](./developer-portal) with self-serve tools for
+  auth and monetization
 
 Zuplo delivers the core benefits of API management without the overhead of
 legacy platforms. That means no expensive licensing, training requirements, or

@@ -8,13 +8,6 @@ processing. It's ideal for logging and analytics calls to external services
 where you don't need 1:1 transmission with incoming requests. The dispatcher
 groups entries and invokes your callback with batches at regular intervals.
 
-:::note{title="Beta Feature"}
-
-This component is in Beta - please use with care and provide feedback to the
-team if you encounter any issues.
-
-:::
-
 ## Constructor
 
 ```ts

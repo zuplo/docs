@@ -34,14 +34,17 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 
 ## Configuration Options
 
-The `AWSLoggingPlugin` constructor accepts an options object with the following properties:
+The `AWSLoggingPlugin` constructor accepts an options object with the following
+properties:
 
-- `region` - (required) AWS region where your CloudWatch logs are stored (e.g., "us-east-1")
+- `region` - (required) AWS region where your CloudWatch logs are stored (e.g.,
+  "us-east-1")
 - `accessKeyId` - (required) AWS access key ID for authentication
 - `secretAccessKey` - (required) AWS secret access key for authentication
 - `logGroupName` - (required) CloudWatch log group name
 - `logStreamName` - (required) CloudWatch log stream name
-- `fields` - (optional) Custom fields to include in each log entry. Can contain string, number, or boolean values
+- `fields` - (optional) Custom fields to include in each log entry. Can contain
+  string, number, or boolean values
 
 ### Custom Fields
 
@@ -69,8 +72,12 @@ Every log entry will include the following fields (in camelCase format):
 - `timestamp` - The time the log was created (ISO 8601 format)
 - `severity` - The log level (e.g., `ERROR`, `INFO`, `DEBUG`, `WARN`)
 - `data` - The log message and any additional data
-- `environmentType` - Where the Zuplo API is running. Values are `edge`, `working-copy`, or `local`
-- `environmentStage` - The deployment stage: `working-copy`, `preview`, or `production`
+- `environmentType` - Where the Zuplo API is running. Values are `edge`,
+  `working-copy`, or `local`
+- `environmentStage` - The deployment stage: `working-copy`, `preview`, or
+  `production`
 - `requestId` - The UUID of the request (the value of the `zp-rid` header)
-- `atomicCounter` - An atomic counter used to order logs with identical timestamps
-- `rayId` - The network provider identifier (e.g., Cloudflare Ray ID) of the request
+- `atomicCounter` - An atomic counter used to order logs with identical
+  timestamps
+- `rayId` - The network provider identifier (e.g., Cloudflare Ray ID) of the
+  request

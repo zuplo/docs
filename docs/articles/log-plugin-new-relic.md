@@ -37,12 +37,16 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 
 ## Configuration Options
 
-The `NewRelicLoggingPlugin` constructor accepts an options object with the following properties:
+The `NewRelicLoggingPlugin` constructor accepts an options object with the
+following properties:
 
 - `apiKey` - (required) Your New Relic API key for authentication
-- `url` - (optional) The New Relic logs API endpoint. Defaults to "https://log-api.newrelic.com/log/v1"
-- `service` - (optional) Service name to identify the source of the logs. Defaults to "Zuplo"
-- `fields` - (optional) Custom fields to include in each log entry. Can contain string, number, or boolean values
+- `url` - (optional) The New Relic logs API endpoint. Defaults to
+  "https://log-api.newrelic.com/log/v1"
+- `service` - (optional) Service name to identify the source of the logs.
+  Defaults to "Zuplo"
+- `fields` - (optional) Custom fields to include in each log entry. Can contain
+  string, number, or boolean values
 
 ### Custom Fields
 
@@ -51,22 +55,29 @@ Any custom fields you want to include in the log entry can be added to the
 
 ## Default Fields
 
-Every log entry will include the following fields (in snake_case format for New Relic):
+Every log entry will include the following fields (in snake_case format for New
+Relic):
 
 - `message` - The complete log message and data
 - `level` - The log level in lowercase (e.g., `error`, `info`, `debug`, `warn`)
 - `timestamp` - The time the log was created (in milliseconds since epoch)
-- `service` - The name of the service (defaults to "Zuplo" or custom value provided)
+- `service` - The name of the service (defaults to "Zuplo" or custom value
+  provided)
 - `environment` - The deployment name of the Zuplo API
-- `environment_type` - Where the Zuplo API is running. Values are `edge`, `working-copy`, or `local`
-- `environment_stage` - The deployment stage: `working-copy`, `preview`, or `production`
+- `environment_type` - Where the Zuplo API is running. Values are `edge`,
+  `working-copy`, or `local`
+- `environment_stage` - The deployment stage: `working-copy`, `preview`, or
+  `production`
 - `request_id` - The UUID of the request (the value of the `zp-rid` header)
-- `atomic_counter` - An atomic counter used to order logs with identical timestamps
-- `ray_id` - The network provider identifier (e.g., Cloudflare Ray ID) of the request
+- `atomic_counter` - An atomic counter used to order logs with identical
+  timestamps
+- `ray_id` - The network provider identifier (e.g., Cloudflare Ray ID) of the
+  request
 - `log_source` - The source of the log entry
 
 :::note
 
-New Relic uses snake_case naming convention for field names and lowercase log levels.
+New Relic uses snake_case naming convention for field names and lowercase log
+levels.
 
 :::

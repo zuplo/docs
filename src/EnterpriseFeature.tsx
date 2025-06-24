@@ -2,7 +2,7 @@ import { Callout } from "zudoku/components";
 
 export function EnterpriseFeature({ name }: { name?: string }) {
   return (
-    <Callout type="caution" title={"Enterprise Feature"}>
+    <Callout type="info" title={"Enterprise Feature"}>
       <p>
         {name ?? "This feature"} is available as an add-on as part of an
         enterprise plan. If you would like to purchase this feature, please

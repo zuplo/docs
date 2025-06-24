@@ -1052,6 +1052,12 @@
       "source": "/docs/articles/developer-portal{/}?",
       "destination": "/docs/dev-portal/introduction",
       "permanent": true
+    },
+    ,
+    {
+      "source": "/docs/articles/open-api{/}?",
+      "destination": "/docs/openapi",
+      "permanent": true
     }
   ],
   "rewrites": [

@@ -2,6 +2,8 @@
 title: Zuplo Identity Token
 ---
 
+<EnterpriseFeature name="Zuplo Identity Token" />
+
 Each deployment of Zuplo is issued a unique OAuth client identity. This identity
 can be used to create ID Tokens that can be used to securely identify requests
 from your Zuplo API that are made to outside services. This is token can also be
