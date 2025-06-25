@@ -200,8 +200,9 @@ sequentially for a smooth transition.
          path: "/api",
        },
      ],
-     docs: {
-       files: "/pages/**/*.{md,mdx}",
+     apiKeys: {
+       // Enable API Key Management, disabled by default
+       enabled: true,
      },
      authentication: {
        type: "auth0", // Was provider in the old format
