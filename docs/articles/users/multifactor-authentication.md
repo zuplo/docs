@@ -33,9 +33,9 @@ To disable multifactor authentication for your account, simply navigate to the
 
 ## Enforcing Multifactor Authentication for Tenant Members
 
-If you are an admin with MFA enabled on your account is part of a tenant, you
-can enforce all members of your tenant to use multifactor authentication. This
-adds an additional layer of security for your entire organization.
+If you have MFA enabled and you are an admin of a tenant account, you can
+enforce all members of that account to use multifactor authentication. This adds
+an additional layer of security for your entire organization.
 
 ### Enabling MFA Enforcement
 
