@@ -177,6 +177,7 @@ export const docs: Navigation = [
   },
   {
     type: "category",
+    display: "hide",
     label: "Monetization",
     link: "articles/monetization",
     items: [
@@ -558,6 +559,7 @@ export const policies: Navigation = [
       "policies/upstream-gcp-jwt-inbound",
       "policies/upstream-firebase-admin-auth-inbound",
       "policies/upstream-firebase-user-auth-inbound",
+      "policies/upstream-zuplo-jwt-auth-inbound",
     ],
   },
   {
