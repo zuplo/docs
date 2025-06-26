@@ -12,9 +12,27 @@ const renderMd = createMarkdown();
 const projectDir = path.join(import.meta.dirname, "..");
 const policyDir = path.join(projectDir, "generated/policies");
 
-const policySchemas = await glob("{policies,temp}/*/schema.json", {
-  cwd: projectDir,
-});
+// Check for environment variable or command line flag to use local core policies
+const useLocalCore =
+  process.env.USE_LOCAL_CORE_POLICIES === "true" ||
+  process.argv.includes("--local-core");
+
+if (useLocalCore) {
+  console.log(
+    "📂 Using local core policies from:",
+    path.join(projectDir, "../core/packages/runtime/src/policies"),
+  );
+} else {
+  console.log("📂 Using policies from: policies/ and temp/");
+}
+
+const policySchemas = useLocalCore
+  ? await glob("*/schema.json", {
+      cwd: path.join(projectDir, "../core/packages/runtime/src/policies"),
+    })
+  : await glob("{policies,temp}/*/schema.json", {
+      cwd: projectDir,
+    });
 
 const printIf = (condition: unknown, render?: string) =>
   condition ? (render ?? condition) : "";
@@ -163,8 +181,12 @@ const policyDataV3: any = {
 
 for (const schemaPath of policySchemas) {
   const schemaDirName = path.dirname(schemaPath);
-  const policyId = schemaDirName.split("/").pop()!;
-  const currentDir = path.join(projectDir, schemaDirName);
+  const policyId = useLocalCore
+    ? schemaDirName
+    : schemaDirName.split("/").pop()!;
+  const currentDir = useLocalCore
+    ? path.join(projectDir, "../core/packages/runtime/src/policies", policyId)
+    : path.join(projectDir, schemaDirName);
 
   if (EXCLUDED_POLICIES.includes(policyId)) continue;
 

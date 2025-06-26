@@ -1,0 +1,13 @@
+{
+  "watch": [
+    "../core/packages/runtime/src/policies",
+    "../core/packages/graphql/src/policies"
+  ],
+  "ext": "json,md,svg,ts",
+  "ignore": [
+    "../core/packages/runtime/src/policies/**/schema.json",
+    "../core/packages/graphql/src/policies/**/schema.json"
+  ],
+  "exec": "cd ../core && nx run-many -t policies:content && cd - && USE_LOCAL_CORE_POLICIES=true tsx scripts/generate-policies.ts",
+  "delay": "1000"
+}
