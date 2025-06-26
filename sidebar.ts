@@ -32,6 +32,7 @@ export const docs: Navigation = [
       "articles/routing",
       "articles/openapi",
       "articles/openapi-server-urls",
+      "articles/terraform",
     ],
   },
   {
