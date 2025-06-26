@@ -1055,7 +1055,7 @@
     },
     {
       "source": "/docs/articles/open-api{/}?",
-      "destination": "/docs/openapi",
+      "destination": "/docs/articles/openapi",
       "permanent": true
     }
   ],
