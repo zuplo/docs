@@ -371,6 +371,11 @@ export const programming: Navigation = [
   },
   {
     type: "category",
+    label: "AI",
+    items: ["programmable-api/mcp-custom-tools"],
+  },
+  {
+    type: "category",
     label: "Caching APIs",
     items: [
       "programmable-api/zone-cache",

@@ -130,6 +130,14 @@ request handlers.
 - **Key Features**: Configurable request/response capture, custom output
   providers
 
+### McpCustomToolsPlugin
+
+- **Status**: Documented
+  ([MCP Custom Tools](/docs/handlers/mcp-custom-tools.md))
+- **Description**: Create programmable MCP tools with custom business logic
+- **Key Features**: Type-safe tool definitions, multi-step workflows, runtime
+  integration
+
 ### Logging Plugins
 
 See [Logging documentation](/docs/articles/logging.md) for details on logging
