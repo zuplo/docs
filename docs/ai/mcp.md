@@ -47,12 +47,16 @@ The MCP Server Handler transforms your existing Zuplo API gateway into a
 powerful toolset that AI systems can discover, understand, and invoke - bringing
 AI capabilities directly into your business workflows!
 
-## MCP Server Handler: Transform Routes into AI Tools
+## MCP Implementation Options
 
-Zuplo's MCP Server Handler is a powerful feature that automatically transforms
-your API gateway routes into MCP tools that AI systems can discover and use.
+Zuplo provides two approaches for implementing MCP servers:
 
-### How It Works
+### 1. MCP Server Handler: Transform Routes into AI Tools
+
+The MCP Server Handler automatically transforms your API gateway routes into MCP
+tools that AI systems can discover and use.
+
+#### How It Works
 
 The MCP Server Handler:
 
@@ -65,9 +69,9 @@ The MCP Server Handler:
 4. **Real-time Execution**: AI systems can invoke your routes as tools in
    real-time
 
-### Example Use Cases
+#### Example Use Cases
 
-#### Customer Service AI Tools
+##### Customer Service AI Tools
 
 Transform your customer management APIs into AI tools:
 
@@ -77,7 +81,7 @@ Transform your customer management APIs into AI tools:
 - PUT /customers/{id}/status → "Update customer 123 status ..."
 ```
 
-#### E-commerce AI Assistant
+##### E-commerce AI Assistant
 
 Expose your e-commerce APIs as shopping tools:
 
@@ -87,7 +91,7 @@ Expose your e-commerce APIs as shopping tools:
 - GET /orders/{id} → "Get order status"
 ```
 
-#### DevOps Automation
+##### DevOps Automation
 
 Make your infrastructure APIs available to AI:
 
@@ -97,7 +101,7 @@ Make your infrastructure APIs available to AI:
 - GET /metrics → "Get system metrics"
 ```
 
-### Security Considerations
+#### Security Considerations
 
 When exposing routes as MCP tools:
 
@@ -108,7 +112,7 @@ When exposing routes as MCP tools:
 4. **Scope permissions carefully** - only expose routes and OpenAPI specs that
    should be accessible to AI systems
 
-### Getting Started
+#### Getting Started
 
 1. Set up your APIs in Zuplo using OpenAPI specifications
 2. Add the MCP Server Handler to a route
@@ -118,8 +122,88 @@ When exposing routes as MCP tools:
 
 [Read the full technical documentation on the MCP Server Handler](/docs/handlers/mcp-server)
 
+### 2. MCP Custom Tools: Programmable AI Tools
+
+For more complex scenarios, use MCP Custom Tools to create sophisticated AI
+tools with custom business logic, multi-step workflows, and programmatic
+control.
+
+#### Key Features
+
+- **Custom Logic**: Implement complex business workflows that go beyond simple
+  API calls to enable powerful AI workloads
+- **Multi-Step Operations**: Chain multiple API calls, data transformations, and
+  conditional logic
+- **Type Safety**: Built-in Zod schema validation for inputs and outputs
+- **Runtime Integration**: Full access to your gateway through
+  `context.invokeRoute()`
+
+#### Example Use Case
+
+The following shows a powerful workflow that can enable an AI agent to interface
+with a process ordering system: instead of an agent calling each of your APIs
+manually, this workflow can be used as a single "aggregate" process to validate
+the provided customer, check that items are in stock, determine pricing, and
+place orders for those items.
+
+```typescript
+const mcpSdk = new McpCustomToolsSDK();
+
+const checkCustomerOrder = mcpSdk.defineTool({
+  // The name of the tool that an MCP client can call
+  name: "process_customer_order",
+
+  // The meaningful description provided to an MCP client's LLM for tool selection
+  description: "Process a customer order with inventory validation and pricing",
+
+  // The schea that is used to validate incoming arguments from MCP client tool calls
+  inputSchema: z.object({
+    customerId: z.string(),
+    orderNum: z.number(),
+  }),
+
+  // The actual code that is invoked when a tool is called and the JSON arguments
+  // are validated. The tool's type-checked arguments and the ZuploContext
+  // are passed through.
+  handler: async (args, context) => {
+    // 1. Validate customer exists and is active
+    const customerRes = await context.invokeRoute(
+      `/customers/${args.customerId}`,
+    );
+    if (!customerRes.ok) {
+      return mcpSdk.errorResponse("Customer not found or inactive");
+    }
+    const customer = await customerRes.json();
+
+    // 2. Check the customers order
+    const orderResponse = await context.invokeRoute(`/orders/${args.orderNum}`);
+
+    if (!orderResponse.ok) {
+      const error = await orderResponse.text();
+      return mcpSdk.errorResponse("Order not found");
+    }
+    const order = await orderResponse.json();
+
+    // 3. Response to MCP client with JSON response
+    return mcpSdk.jsonResponse({
+      orderNum: orderResponse.id,
+      items: orderResponse.items,
+    });
+  },
+});
+```
+
+#### Getting Started with Custom Tools
+
+1. Create custom tool definitions using the SDK
+2. Register tools with the MCP Custom Tools plugin
+3. Deploy and test with MCP clients
+
+[Read the full documentation on MCP Custom Tools](/docs/programmable-api/mcp-custom-tools)
+
 ## Learn More
 
 - [MCP Server Handler Technical Documentation](/docs/handlers/mcp-server)
+- [MCP Custom Tools Documentation](/docs/handlers/mcp-custom-tools)
 - [Model Context Protocol Specification](https://spec.modelcontextprotocol.io/)
 - [OpenAPI Specification](https://swagger.io/specification/)
