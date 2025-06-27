@@ -1059,7 +1059,7 @@
       "permanent": true
     },
     {
-      "source": "/docs/dev-portal/zudoku/theme-playground",
+      "source": "/docs/dev-portal/zudoku/theme-playground{/}?",
       "destination": "https://zudoku.dev/docs/theme-playground",
       "permanent": true
     }
