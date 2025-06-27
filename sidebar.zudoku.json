@@ -39,13 +39,17 @@
     "type": "category",
     "label": "Authentication",
     "icon": "lock",
-    "items": ["dev-portal/zudoku/configuration/authentication"]
+    "items": [
+      "dev-portal/zudoku/configuration/authentication"
+    ]
   },
   {
     "type": "category",
     "label": "Integrations",
     "icon": "blocks",
-    "items": ["dev-portal/zudoku/configuration/sentry"]
+    "items": [
+      "dev-portal/zudoku/configuration/sentry"
+    ]
   },
   {
     "type": "category",
