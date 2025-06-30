@@ -133,7 +133,7 @@ request handlers.
 ### McpCustomToolsPlugin
 
 - **Status**: Documented
-  ([MCP Custom Tools](/docs/handlers/mcp-custom-tools.md))
+  ([MCP Custom Tools](/docs/programmable-api/mcp-custom-tools.md))
 - **Description**: Create programmable MCP tools with custom business logic
 - **Key Features**: Type-safe tool definitions, multi-step workflows, runtime
   integration
