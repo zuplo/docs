@@ -34,6 +34,10 @@ const config: ZudokuConfig = {
     },
     { from: "/policies/index", to: "/policies/overview" },
     { from: "/policies", to: "/policies/overview" },
+    {
+      from: "/dev-portal/zudoku/theme-playground",
+      to: "https://zudoku.dev/docs/theme-playground",
+    },
   ],
   theme: {
     dark: {
