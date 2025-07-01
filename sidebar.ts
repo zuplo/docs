@@ -516,6 +516,7 @@ export const policies: Navigation = [
       "policies/monetization-inbound",
       "policies/amberflo-metering-inbound",
       "policies/readme-metrics-inbound",
+      "policies/openmeter-metering-inbound",
     ],
   },
   {
