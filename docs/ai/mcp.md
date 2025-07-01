@@ -204,6 +204,6 @@ const checkCustomerOrder = mcpSdk.defineTool({
 ## Learn More
 
 - [MCP Server Handler Technical Documentation](/docs/handlers/mcp-server)
-- [MCP Custom Tools Documentation](/docs/handlers/mcp-custom-tools)
+- [MCP Custom Tools Documentation](/docs/programmable-api/mcp-custom-tools)
 - [Model Context Protocol Specification](https://spec.modelcontextprotocol.io/)
 - [OpenAPI Specification](https://swagger.io/specification/)
