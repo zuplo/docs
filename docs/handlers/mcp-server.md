@@ -89,14 +89,15 @@ The MCP Server handler requires the following configurations:
 These options are part of the new
 [MCP specification (2025-06-18)](https://modelcontextprotocol.io/specification/2025-06-18).
 Some MCP clients **may not yet support these features**. If you experience
-compatibility issues with your MCP client, set both options to `false`.
+compatibility issues with your MCP client, ensure your `outputSchema` is a valid `type: object` JSON Schema
+and `structuredContent` is also of `type: object`.
 
 :::
 
-- `includeOutputSchema` (optional, default: `true`) - Whether to include output
+- `includeOutputSchema` (optional, default: `false`) - Whether to include output
   schema from the route's OpenAPI response schema. When `true`, the schema from
   successful responses (2xx) will be used as `outputSchema` for MCP tools.
-- `includeStructuredContent` (optional, default: `true`) - Whether to include
+- `includeStructuredContent` (optional, default: `false`) - Whether to include
   structured content in responses. When `true`, response JSON will be parsed and
   included as `structuredContent`. When `false`, only `text` content will be
   returned.
