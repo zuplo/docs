@@ -10,7 +10,7 @@ implement custom business logic, and provide rich responses to AI systems.
 
 :::tip
 
-This is more powerful than the [MCP Server Handler](./handlers/mcp-server.md)
+This is more powerful than the [MCP Server Handler](../handlers/mcp-server.md)
 which automatically transforms your OpenAPI routes into MCP tools. Custom MCP
 Tools give you full programmatic control over tool behavior.
 
@@ -408,7 +408,7 @@ outputSchema: z.object({
 
 ## Learn More
 
-- [MCP Server Handler](./handler/mcp-server.md) - For simple route-to-tool
+- [MCP Server Handler](../handlers/mcp-server.md) - For simple route-to-tool
   mapping
 - [Model Context Protocol Overview](/docs/ai/mcp) - Understanding MCP concepts
 - [MCP Specification](https://modelcontextprotocol.io/specification/) - Official
