@@ -8,9 +8,13 @@ code. It appends the incoming path section of the URL onto the specified
 `baseUrl` property, making it ideal for creating API gateways and backend
 proxying.
 
-:::tip Type-Safe Configuration Use TypeScript for enhanced development
+:::tip
+
+Type-Safe Configuration Use TypeScript for enhanced development
 experience with full type checking and IntelliSense support when configuring
-handlers. :::
+handlers.
+
+:::
 
 ## How It Works
 
