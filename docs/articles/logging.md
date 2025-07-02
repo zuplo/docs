@@ -25,7 +25,7 @@ instructions on how to configure logging, see the documentation for each plugin:
 - [Sumo Logic](./log-plugin-sumo.md)
 - [VMWare Log Insight](./log-plugin-vmware-log-insight.md)
 
-:::warning
+:::info
 
 Not seeing the logging plugin you need? Reach out to
 [support@zuplo.com](mailto:support@zuplo.com) and we'd be happy to work with you
