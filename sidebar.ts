@@ -541,6 +541,7 @@ export const policies: Navigation = [
       "policies/set-headers-inbound",
       "policies/set-body-inbound",
       "policies/set-query-params-inbound",
+      "policies/query-param-to-header-inbound"
     ],
   },
   {
