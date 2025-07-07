@@ -10,9 +10,8 @@ proxying.
 
 :::tip
 
-Type-Safe Configuration Use TypeScript for enhanced development
-experience with full type checking and IntelliSense support when configuring
-handlers.
+Type-Safe Configuration Use TypeScript for enhanced development experience with
+full type checking and IntelliSense support when configuring handlers.
 
 :::
 

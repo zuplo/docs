@@ -89,8 +89,8 @@ The MCP Server handler requires the following configurations:
 These options are part of the new
 [MCP specification (2025-06-18)](https://modelcontextprotocol.io/specification/2025-06-18).
 Some MCP clients **may not yet support these features**. If you experience
-compatibility issues with your MCP client, ensure your `outputSchema` is a valid `type: object` JSON Schema
-and `structuredContent` is also of `type: object`.
+compatibility issues with your MCP client, ensure your `outputSchema` is a valid
+`type: object` JSON Schema and `structuredContent` is also of `type: object`.
 
 :::
 

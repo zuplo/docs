@@ -47,3 +47,10 @@ code in this repository.
   parallel to save time. Do not wait for one task to finish before starting the
   next one.
 - Optimize to complete tasks quickly and correctly.
+
+## URLs
+
+- When writing urls to internal pages, use relative paths with the .md or .mdx
+  extension.
+- When linking to internal pages, check that the page actually exists before
+  making up a link. ONLY USE REAL LINKS.
