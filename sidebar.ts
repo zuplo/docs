@@ -178,34 +178,6 @@ export const docs: Navigation = [
   },
   {
     type: "category",
-    display: "hide",
-    label: "Monetization",
-    link: "articles/monetization",
-    items: [
-      {
-        type: "category",
-        label: "Quick Start",
-        items: [
-          "articles/monetization-dev-portal-setup",
-          "articles/monetization-webhook-setup",
-          "articles/monetization-policy-setup",
-        ],
-      },
-      {
-        type: "category",
-        label: "Reference",
-        items: [
-          "articles/monetization-glossary",
-          "articles/monetization-programmatic-quotas",
-          "articles/stripe-monetization-plugin",
-          "articles/monetization-subscription",
-          "articles/monetization-limitations",
-        ],
-      },
-    ],
-  },
-  {
-    type: "category",
     label: "API Keys",
     link: "articles/api-key-management",
     items: [
@@ -541,7 +513,7 @@ export const policies: Navigation = [
       "policies/set-headers-inbound",
       "policies/set-body-inbound",
       "policies/set-query-params-inbound",
-      "policies/query-param-to-header-inbound"
+      "policies/query-param-to-header-inbound",
     ],
   },
   {
@@ -649,6 +621,34 @@ export const legacy: Navigation = [
       "legacy/dev-portal/dev-portal-json",
       "legacy/dev-portal/dev-portal-create-consumer-on-auth",
       "legacy/dev-portal/dev-portal-inject-html",
+    ],
+  },
+  {
+    type: "category",
+    display: "hide",
+    label: "Monetization (Legacy)",
+    link: "articles/monetization",
+    items: [
+      {
+        type: "category",
+        label: "Quick Start",
+        items: [
+          "articles/monetization-dev-portal-setup",
+          "articles/monetization-webhook-setup",
+          "articles/monetization-policy-setup",
+        ],
+      },
+      {
+        type: "category",
+        label: "Reference",
+        items: [
+          "articles/monetization-glossary",
+          "articles/monetization-programmatic-quotas",
+          "articles/stripe-monetization-plugin",
+          "articles/monetization-subscription",
+          "articles/monetization-limitations",
+        ],
+      },
     ],
   },
 ];

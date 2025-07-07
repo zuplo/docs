@@ -19,9 +19,8 @@ A managed dedicated instance of Zuplo consists of the following components:
   rate limiting, and other features.
 - **Gateway Services**: Zuplo, being a highly distributed API Gateway, uses
   services to facilitate features such as
-  [Rate Limiting](../articles/step-2-add-rate-limiting.md),
-  [API Key Authentication](../articles/api-key-management.md), and
-  [Monetization](../articles/monetization.md).
+  [Rate Limiting](../articles/step-2-add-rate-limiting.md) and
+  [API Key Authentication](../articles/api-key-management.md).
 - **Control Plane**: The Control Plane manages the configuration of the API
   Gateway. It deploys new configurations, manages the lifecycle of the API
   Gateway, and monitors its health.

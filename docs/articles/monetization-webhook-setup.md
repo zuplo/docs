@@ -3,7 +3,13 @@ title: Step 2 - Configure Subscription Events
 sidebar_label: Step 2 - Configure Subscription Events
 ---
 
-<EnterpriseFeature name="Monetization" />
+:::danger
+
+This documentation is for the legacy version of the Dev Portal and Monetization
+capabilities. If you are looking for the new preview developer portal, please
+refer to the [docs](/docs/dev-portal/introduction).
+
+:::
 
 In the [previous step](./monetization-dev-portal-setup.md), you configured the
 Developer Portal to enable your customers to subscribe to your Zuplo API. In

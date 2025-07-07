@@ -3,7 +3,13 @@ title: Monetization Subscriptions
 sidebar_label: Subscriptions
 ---
 
-<EnterpriseFeature name="Monetization" />
+:::danger
+
+This documentation is for the legacy version of the Dev Portal and Monetization
+capabilities. If you are looking for the new preview developer portal, please
+refer to the [docs](/docs/dev-portal/introduction).
+
+:::
 
 You can programmatically access details of your users subscription when using
 Zuplo monetization. Here's an example inbound policy that logs the subscription

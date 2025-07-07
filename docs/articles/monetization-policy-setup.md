@@ -3,7 +3,13 @@ title: Step 3 - Configure Monetization Policy
 sidebar_label: Step 3 - Configure Monetization Policy
 ---
 
-<EnterpriseFeature name="Monetization" />
+:::danger
+
+This documentation is for the legacy version of the Dev Portal and Monetization
+capabilities. If you are looking for the new preview developer portal, please
+refer to the [docs](/docs/dev-portal/introduction).
+
+:::
 
 In the previous steps, you learned how to
 [set up Stripe](./monetization-webhook-setup.md) and

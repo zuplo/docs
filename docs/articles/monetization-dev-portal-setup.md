@@ -3,7 +3,13 @@ title: Step 1 - Set Up Developer Portal
 sidebar_label: Step 1 - Set Up Developer Portal
 ---
 
-<EnterpriseFeature name="Monetization" />
+:::danger
+
+This documentation is for the legacy version of the Dev Portal and Monetization
+capabilities. If you are looking for the new preview developer portal, please
+refer to the [docs](/docs/dev-portal/introduction).
+
+:::
 
 This guide will walk you through the steps required to set up your Zuplo API's
 Developer Portal. This is where your customers will see and subscribe to your
@@ -27,15 +33,6 @@ money.
 :::
 
 Once you have a working Zuplo API and a Stripe account, we can move forward!
-
-:::danger
-
-API Monetization is not yet supported in the new Developer Portal. If you are
-using API Monetization with the developer portal, you will need to use the
-legacy developer portal. You can find the
-[documentation for the legacy developer portal here](/docs/legacy/dev-portal/overview).
-
-:::
 
 ## 1/ Set Up in Stripe
 

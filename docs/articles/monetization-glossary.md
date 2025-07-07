@@ -3,7 +3,13 @@ title: Monetization Glossary
 sidebar_label: Glossary
 ---
 
-<EnterpriseFeature name="Monetization" />
+:::danger
+
+This documentation is for the legacy version of the Dev Portal and Monetization
+capabilities. If you are looking for the new preview developer portal, please
+refer to the [docs](/docs/dev-portal/introduction).
+
+:::
 
 This document contains a list of concepts and terms that are useful to
 understand regarding Zuplo's monetization product.

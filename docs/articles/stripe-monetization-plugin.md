@@ -3,6 +3,14 @@ title: Stripe Monetization Plugin
 sidebar_label: Stripe Plugin
 ---
 
+:::danger
+
+This documentation is for the legacy version of the Dev Portal and Monetization
+capabilities. If you are looking for the new preview developer portal, please
+refer to the [docs](/docs/dev-portal/introduction).
+
+:::
+
 The Stripe Monetization Plugin makes it easy to register a Stripe Webhook in
 your Zuplo API that will handle Stripe subscription events.
 
