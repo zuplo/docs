@@ -5,14 +5,6 @@ description:
   reloading.
 ---
 
-:::warning
-
-This documentation is for the preview version of the Dev Portal. If you are
-using the legacy developer portal, please refer to the
-[docs](/docs/legacy/dev-portal/overview).
-
-:::
-
 Developing the Dev Portal locally is straightforward and provides a great
 developer experience with live updates and hot reloading. Follow these steps to
 get started.

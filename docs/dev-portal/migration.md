@@ -5,14 +5,6 @@ description:
   Instruction for migrating from the legacy developer portal to Zudoku.
 ---
 
-:::warning
-
-This documentation is for the preview version of the Dev Portal. If you are
-using the legacy developer portal, please refer to the
-[docs](/docs/legacy/dev-portal/overview).
-
-:::
-
 This guide walks you through migrating your existing documentation from the
 current Dev Portal to the new Dev Portal powered by Zudoku. Follow these steps
 sequentially for a smooth transition.

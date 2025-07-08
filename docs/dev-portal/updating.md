@@ -5,14 +5,6 @@ description:
   changes.
 ---
 
-:::warning
-
-This documentation is for the preview version of the Dev Portal. If you are
-using the legacy developer portal, please refer to the
-[docs](/docs/legacy/dev-portal/overview).
-
-:::
-
 When developing your Dev Portal locally, you likely want to keep your version of
 the Dev Portal up-to-date with the latest changes. This guide will walk you
 through the process of installing the latest version of the Dev Portal.

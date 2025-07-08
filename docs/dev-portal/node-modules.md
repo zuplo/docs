@@ -4,14 +4,6 @@ description:
   Guide to installing custom node modules in Zuplo's developer portal.
 ---
 
-:::warning
-
-This documentation is for the preview version of the Dev Portal. If you are
-using the legacy developer portal, please refer to the
-[docs](/docs/legacy/dev-portal/overview).
-
-:::
-
 The Dev Portal supports installing and using custom node modules in your
 documentation. This allows you to extend your documentation with custom React
 components, utilities, or any other npm packages.

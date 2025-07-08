@@ -3,14 +3,6 @@ title: Introduction
 description: Introduction to Zuplo's beautiful, auto-generated developer portal.
 ---
 
-:::warning
-
-This documentation is for the preview version of the Dev Portal. If you are
-using the legacy developer portal, please refer to the
-[docs](/docs/legacy/dev-portal/overview).
-
-:::
-
 Welcome to the preview release of Zuplo's new Developer Portal. At Zuplo we
 believe every API should have beautiful and powerful API documentation. The new
 Developer Portal is what is powering this documentation site and is now
