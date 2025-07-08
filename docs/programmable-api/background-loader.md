@@ -7,13 +7,6 @@ The BackgroundLoader class provides asynchronous loading of configuration data
 while minimizing gateway latency. It's ideal for critical configuration that
 powers your gateway for smart routing or similar use cases.
 
-:::note{title="Beta Feature"}
-
-This component is in Beta - please use with care and provide feedback to the
-team if you encounter any issues.
-
-:::
-
 The BackgroundLoader optimizes performance by:
 
 - Immediately returning cached data when available

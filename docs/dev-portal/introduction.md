@@ -3,10 +3,9 @@ title: Introduction
 description: Introduction to Zuplo's beautiful, auto-generated developer portal.
 ---
 
-Welcome to the preview release of Zuplo's new Developer Portal. At Zuplo we
-believe every API should have beautiful and powerful API documentation. The new
-Developer Portal is what is powering this documentation site and is now
-available as a beta for anyone to try.
+At Zuplo we believe every API should have beautiful and powerful API
+documentation. The new Developer Portal is what is powering this documentation
+site and is now available as a beta for anyone to try.
 
 ![Zuplo Dev Portal](../../public/media/introduction/image-1.png)
 

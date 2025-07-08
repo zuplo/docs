@@ -13,8 +13,7 @@ npx zuplo dev --port <port number> --editor-port <editor port number>
 
 ## Updating the Zuplo CLI
 
-During the preview release, we will be updating the Zuplo CLI frequently. To
-update, please run in your project directory.
+To update the CLI, run the following command in your project directory.
 
 ```bash
    npm install zuplo@latest

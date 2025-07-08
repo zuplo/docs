@@ -320,11 +320,6 @@ Environment variables are set in the Zuplo Portal:
 3. Add variables for each environment (production, preview, development)
 4. Variables are encrypted at rest and in transit
 
-## Beta Status
-
-The `environment` object is currently in beta and the API may change in future
-releases.
-
 ## See Also
 
 - [Environment Variables](../articles/environment-variables.md) - Setting up
