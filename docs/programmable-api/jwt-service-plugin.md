@@ -118,7 +118,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 ## Usage
 
 Once the plugin is registered, you can use it to issue JWTs in custom handlers
-or plugins.
+or policies.
 
 ```ts title="modules/handlers/jwt-issue.ts"
 import { ZuploRequest, ZuploContext, JwtServicePlugin } from "@zuplo/runtime";
@@ -133,7 +133,7 @@ export async function getJwt(request: ZuploRequest, context: ZuploContext) {
 }
 ```
 
-## JWT Issuer and OIDC Configuration
+### JWT Issuer and OIDC Configuration
 
 When the JWT Service Plugin is enabled, your Zuplo API acts as an identity
 provider with the following endpoints:
@@ -149,18 +149,16 @@ The OIDC configuration endpoint returns a standard OpenID Connect discovery
 document that includes the JWKS URI for retrieving the public keys used to
 verify JWTs.
 
-## Using JWTs in Outbound Requests
+### Creating a JWT Authorization Policy
 
-A common pattern is to create a custom plugin that automatically adds JWT tokens
+A common pattern is to create a custom policy that automatically adds JWT tokens
 to outbound requests. This is useful when calling downstream APIs that require
 authentication.
 
-### Creating a JWT Authorization Plugin
+Here's an example of a [custom policy](/docs/policies/custom-code-inbound) that
+adds a JWT to the Authorization header of outbound requests:
 
-Here's an example of a plugin that adds a JWT to the Authorization header of
-outbound requests:
-
-```ts title="modules/plugins/jwt-auth-plugin.ts"
+```ts title="modules/policies/jwt-auth-upstream.ts"
 import {
   ZuploRequest,
   ZuploContext,
@@ -168,79 +166,18 @@ import {
   JwtServicePlugin,
 } from "@zuplo/runtime";
 
-export interface JwtAuthPluginOptions {
-  // Optional: specify which header to use (defaults to Authorization)
-  headerName?: string;
-  // Optional: specify token prefix (defaults to Bearer)
-  tokenPrefix?: string;
-  // Optional: additional claims to include in the JWT
-  additionalClaims?: Record<string, any>;
-  // Optional: JWT expiration time in seconds (defaults to 300)
-  expiresIn?: number;
-}
+export default async function (request: ZuploRequest, context: ZuploContext) {
+  // Generate a JWT with the configured options
+  const jwt = await JwtServicePlugin.signJwt({
+    subject: request.user?.sub || "api-gateway",
+    audience: request.url,
+  });
 
-export class JwtAuthPlugin implements RequestHandlerPlugin {
-  constructor(private options: JwtAuthPluginOptions = {}) {}
+  // Add the JWT to the Authorization header of the request
+  const headers = new Headers(request.headers);
+  headers.set("Authorization", `Bearer ${jwt}`);
 
-  async handler(request: ZuploRequest, context: ZuploContext) {
-    const {
-      headerName = "Authorization",
-      tokenPrefix = "Bearer",
-      additionalClaims = {},
-      expiresIn = 300,
-    } = this.options;
-
-    // Generate a JWT with the configured options
-    const jwt = await JwtServicePlugin.signJwt({
-      subject: request.user?.sub || "api-gateway",
-      audience: request.url,
-      expiresIn,
-      ...additionalClaims,
-    });
-
-    const headerValue = tokenPrefix ? `${tokenPrefix} ${jwt}` : jwt;
-
-    // Clone the request and add the JWT to the specified header
-    const headers = new Headers(request.headers);
-    headers.set(headerName, headerValue);
-
-    return new ZuploRequest(request, { headers });
-  }
-}
-```
-
-### Using the Plugin in Routes
-
-To use the plugin, add it to your route configuration:
-
-```json title="config/routes.oas.json"
-{
-  "paths": {
-    "/api/upstream": {
-      "get": {
-        "x-zuplo-route": {
-          "handler": {
-            "export": "default",
-            "module": "$import(./modules/handlers/proxy)",
-            "options": {
-              "url": "https://upstream-api.example.com"
-            }
-          },
-          "plugins": [
-            {
-              "export": "JwtAuthPlugin",
-              "module": "$import(./modules/plugins/jwt-auth-plugin)",
-              "options": {
-                "additionalClaims": {
-                  "scope": "read:api write:api"
-                }
-              }
-            }
-          ]
-        }
-      }
-    }
-  }
+  return new ZuploRequest(request, { headers });
 }
 ```
 
