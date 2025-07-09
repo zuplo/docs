@@ -7,6 +7,11 @@ Occasionally, these updates aren't backwards compatible. In order to ensure that
 your project continues to build, deploy and operate as you expect it you can set
 a compatibility date to lock in the behavior and APIs of the runtime.
 
+The compatibility date is set in the `zuplo.jsonc` file at the root of
+yourproject. The `zuplo.jsonc` file is created by default for new projects and
+contains the default configuration. For more information on the `zuplo.jsonc`
+file, see the [Zuplo Project Config](./zuplo-json.md) documentation.
+
 ## 2025-02-06
 
 This compatibility date introduces a number of breaking changes to improve the
