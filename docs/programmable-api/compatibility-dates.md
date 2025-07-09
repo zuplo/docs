@@ -85,6 +85,14 @@ The Zuplo runtime does not run Node.js, but is compatible with a number of
 Node.js APIs. This compatibility date adds some additional support for Node.js
 specific APIs.
 
+### Url Forward Handler Redirects
+
+The `UrlForwardHandler` now supports the `followRedirects` option. Previously,
+this option was not supported on the forward handler. However, it was
+erroneously documented as supported. This property is behind a compatibility
+date in order to ensure that if existing projects were using the option that did
+not work as expected, they would not be broken by this change.
+
 ## 2024-09-02
 
 The compatibility date allows the ability to call `fetch` to hosts with custom
