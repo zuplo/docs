@@ -348,7 +348,7 @@ the legacy path to the new domain using a Zuplo route. This allows you to
 maintain backwards compatibility for users who may have bookmarked or linked to
 the old Dev Portal URL.
 
-## Setup Instructions
+### Setup Instructions
 
 1. **Create a New Routes File**: In your Zuplo project, create a new OpenAPI
    file called `legacy.oas.json` (or any name you prefer).
