@@ -21,6 +21,14 @@ if you encounter any issues.
 
 :::
 
+## JWT Token
+
+This service currently issues JWTs using the EdDSA algorithm. This is the
+recommended algorithm for new applications due to its strong security properties
+and performance characteristics. However, it is important to note that not every
+library supports EdDSA, so you should ensure that your
+[client library](https://jwt.io/libraries) can handle this algorithm.
+
 ## Use Cases
 
 Some of the common use cases for the JWT service plugin include:
