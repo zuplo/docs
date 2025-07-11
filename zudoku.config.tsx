@@ -118,6 +118,13 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
   },
   docs: {
     files: ["/docs/**/*.{md,mdx}", "/generated/**/*.{md,mdx}"],
+    defaultOptions: {
+      showLastModified: true,
+      suggestEdit: {
+        text: "Edit this page",
+        url: "https://github.com/zuplo/docs/edit/main/{filePath}",
+      },
+    },
   },
   sitemap: {
     siteUrl: "https://zuplo.com/docs",
