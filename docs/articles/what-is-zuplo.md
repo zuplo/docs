@@ -4,7 +4,7 @@ title: What is Zuplo?
 
 Zuplo is a fully-managed, lightweight API management platform designed for
 developers. It offers fast deployment, GitOps-friendly workflows, and unlimited
-preview environments. Whether you're an individual developer or part of an
+preview and production environments. Whether you're an individual developer or part of an
 engineering team, Zuplo makes it easy to:
 
 - [Add authentication and access control](./step-3-add-api-key-auth.md)
