@@ -42,7 +42,7 @@ These are are environments that are deployed using the
 Production environment and is deployed from the git branch that's set as your
 production branch in your source control settings.
 
-### Preview vs Production Environments
+### Preview vs Production Environments (or multiple Production Environments)
 
 Note, there is no _technical_ difference between a __Preview__ environment and a 
 __Production__ environment and some customers choose to use a specific (or multiple)
