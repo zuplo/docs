@@ -1,5 +1,5 @@
 ---
-title: Custom Pages
+title: Adding Custom Pages
 description:
   Learn how to add and configure custom pages in your LEGACY Zuplo developer
   portal, including editing markdown, previewing changes, and managing sidebar
