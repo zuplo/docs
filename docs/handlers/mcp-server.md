@@ -63,7 +63,8 @@ with the following route configuration:
           "module": "$import(@zuplo/runtime)",
           "options": {
             "name": "example-mcp-server",
-            "version": "1.0.0"
+            "version": "1.0.0",
+            "debugMode": false,
           }
         },
         "policies": {
@@ -81,6 +82,7 @@ The MCP Server handler requires the following configurations:
 
 - `name` - The name identifier of the MCP server
 - `version` - The version of the MCP server protocol to use
+- `debugMode`: Verbose logs on server startup, initialization, tool listing, and tool calls. NOT recommended for production environments.
 
 ### MCP `2025-06-18` Global Options
 
@@ -117,9 +119,8 @@ Transform all routes from OpenAPI files into MCP tools by specifying
     "post": {
       "x-zuplo-route": {
         "handler": {
-
-          // etc. etc. Zuplo MCP handler and route options
-
+          "export": "mcpServerHandler",
+          "module": "$import(@zuplo/runtime)",
           "options": {
             "openApiFilePaths": [
               {
@@ -154,21 +155,22 @@ Add specific routes as MCP tools using the `openApiTools` array. Specify
     "post": {
       "x-zuplo-route": {
         "handler": {
-
-          // etc. etc. Zuplo MCP handler and route options
-
-          "openApiTools": [
-            {
-              "path": "/todos",
-              "method": "GET",
-              "name": "get_todos",
-              "description": "Gets todos from the backend"
-            },
-            {
-              "operationId": "get_todos_by_priority",
-              "method": "GET"
-            }
-          ]
+          "export": "mcpServerHandler",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "openApiTools": [
+              {
+                "path": "/todos",
+                "method": "GET",
+                "name": "get_todos",
+                "description": "Gets todos from the backend"
+              },
+              {
+                "operationId": "get_todos_by_priority",
+                "method": "GET"
+              }
+            ]
+          }
         }
       }
     }
