@@ -3,12 +3,11 @@ title: Who uses Zuplo, and why?
 ---
 
 We have customers ranging in size from 1-person startups to mature, large
-enterprises with many 1000s of employees. All enjoy Zuplo's developer
-experience, GitOps workflow, support for near unlimited deployments and ease of
-extensibility. They also enjoy the built-in analytics and abstraction a gateway
-provides as a clean layer of separation in their architecture.
-
-There are a number of reasons people decide to use Zuplo:
+enterprises with many 1000s of employees. Zuplo is SOC2 Type II certified
+and you can learn more about our best practices at [trust.zuplo.com](https://trust.zuplo.com).
+All of our customers enjoy Zuplo's developer
+experience, GitOps workflow, support for unlimited environments, ease of
+extensibility, and single pane of glass observability. 
 
 ## Enterprise Customers
 
@@ -50,18 +49,15 @@ Stripe-quality experience in record time. Examples include:
   electrification nonprofit, focused on electrifying our homes, businesses, and
   communities. We develop accessible, actionable data and tools, and build
   coalitions and partnerships to make going electric easier for households and
-  communities. See our 🎥 video interview with the Rewiring America team here:
-  [▶️ Tom Carden of Rewiring America on accelerating an API Program with Zuplo](https://youtu.be/wUKLrNIRC_8)
+  communities. [Read more](https://zuplo.com/customers/rewiring-america).
 
 - [iTicket](https://iticket.co.nz) - New Zealand's largest ticketing provider,
   leading a revolution against customers being held to ransom when buying event
-  tickets. See our 🎥 video interview with the iTicket team here:
-  [▶️ Azure API Management alternative - why iTicket chose Zuplo instead](https://youtu.be/ZWS4x4pwyuo)
+  tickets. [Read more](https://zuplo.com/customers/iticket).
 
 - [Common Paper](https://commonpaper.com) - YC-backed startup looking to make
   contracts as clear and programmable as APIs, built on open-source standards.
-  See our 🎥 video interview with the iTicket team here:
-  [▶️ How Common Paper shipped their API _fast_](https://youtu.be/1rAxJFVXU84)
+  [Read more](https://zuplo.com/customers/common-paper).
 
 _Are you a YC startup looking to build an enterprise-grade API quickly_?
 [Inquire](mailto:sales@zuplo.com) about our special YCombinator discount
