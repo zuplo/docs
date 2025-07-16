@@ -21,7 +21,7 @@ There are a number of reasons people decide to use Zuplo:
 We have many enterprise customers using Zuplo to manage multiple APIs, some
 examples include
 
-- [Yext] a publically traded company, Yext are the leading digital presence
+- [Yext](https://www.yext.com/) a publically traded company, Yext are the leading digital presence
   platform whose customers include Samsung, Ochsner Health, IHG Hotels & Resorts,
   FedEx and Five Guys. [Read more about why they chose Zuplo](https://zuplo.com/customers/yext).
 - [Blockdaemon](https://blockdaemon.com) - the leading infrastructure provider
