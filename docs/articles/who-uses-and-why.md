@@ -21,14 +21,20 @@ There are a number of reasons people decide to use Zuplo:
 We have many enterprise customers using Zuplo to manage multiple APIs, some
 examples include
 
+- [Yext] a publically traded company, Yext are the leading digital presence
+  platform whose customers include Samsung, Ochsner Health, IHG Hotels & Resorts,
+  FedEx and Five Guys. [Read more about why they chose Zuplo](https://zuplo.com/customers/yext).
 - [Blockdaemon](https://blockdaemon.com) - the leading infrastructure provider
   for blockchain with an incredible customer list including Goldman Sachs,
-  Microsoft, Plaid and many more.
-- [Imburse Payments](https://imbursepayments.com) part of
-  [Duck Creek Technologies](https://www.duckcreek.com/) - a leading payments
-  platform for Insurance companies. See our 🎥 video interview with the Imburse
-  team here:
-  [▶️ Why Imburse Payments chose Zuplo as their API Gateway](https://youtu.be/z94pRJE2zfs)
+  Microsoft, Plaid and many more. [Read more](https://zuplo.com/customers/blockdaemon).
+- [Duck Creek Technologies](https://www.duckcreek.com/) - a payments platform that 
+  connects large enterprises, particularly in the insurance sector, to the 
+  global payment ecosystem. [Read more](https://zuplo.com/customers/duck-creek).
+- [SmarterX](https://www.smarterx.com/) helps brands and retailers make precise 
+  decisions about regulated consumer products. Their platform, which is built on
+  eight years of retail and CPG data, simplifies navigation of regulations related to waste, storage, 
+  and transportation, while automating supply chain decisions. 
+  [Read more](https://zuplo.com/customers/smarterx).
 
 ## Startup Customers
 
