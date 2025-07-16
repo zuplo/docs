@@ -9,6 +9,12 @@ All of our customers enjoy Zuplo's developer
 experience, GitOps workflow, support for unlimited environments, ease of
 extensibility, and single pane of glass observability. 
 
+## Akamai Strategic Partner
+
+Zuplo is sold directly by Akamai as a strategic technology partner for modern API management.
+After a careful selection process, Akamai selected Zuplo as it's preferred API management vendor 
+to be resold to their enterprise customers. 
+
 ## Enterprise Customers
 
 > "The move to Zuplo from our existing API Management vendor was easy, taking
