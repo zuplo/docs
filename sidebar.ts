@@ -418,6 +418,7 @@ export const programming: Navigation = [
       "programmable-api/zp-body-removed",
       "programmable-api/zuplo-id-token",
       "programmable-api/jwt-service-plugin",
+      "programmable-api/oauth-protected-resource-plugin",
     ],
   },
 ];

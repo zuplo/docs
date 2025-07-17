@@ -237,6 +237,88 @@ and the `mcp` options:
 
 ## Authentication
 
+### OAuth Authentication
+
+The MCP Protocol natively supports OAuth authentication to enable MCP Clients to
+authenticate and authorize themselves when calling tools. For more information,
+see the
+[official MCP Authentication documentation](https://modelcontextprotocol.io/specification/draft/basic/authorization).
+
+Zuplo allows you to configure any of the built-in OAuth policies (like Auth0,
+Okta, etc.) on the MCP Server route to secure it. To enable OAuth
+authentication, you will need to have an OAuth Authorization server configured.
+Specifically, the OAuth Authorization server will need to support the following
+things:
+
+1. (Optional but recommended) OAuth 2.0 Dynamic Client Registration
+2. Authorization Code Grant with PKCE
+3. Refresh Tokens
+
+For an example of a basic configuration of an Authorization Server with Auth0,
+see:
+[Setting up Auth0 as an Authentication Server for MCP OAuth Authentication](../articles/configuring-auth0-for-mcp-auth).
+
+Once you have configured your authorization server, you can do the following to
+enable OAuth authentication on your MCP Server:
+
+1. Create an OAuth policy on your MCP Server route. This policy will need to
+   have the option `"oAuthResourceMetadataEnabled": true`, for example:
+   ```json
+   {
+     "name": "mcp-oauth-inbound",
+     "policyType": "oauth-inbound",
+     "handler": {
+       "export": "Auth0JwtInboundPolicy",
+       "module": "$import(@zuplo/runtime)",
+       "options": {
+         "auth0Domain": "my-auth0-domain.us.auth0.com",
+         "audience": "https://my-mcp-audience",
+         "oAuthResourceMetadataEnabled": true
+       }
+     }
+   }
+   ```
+2. Add the OAuth policy to the MCP Server route. For example:
+
+   ```json
+   "paths": {
+     "/mcp": {
+       "post": {
+         "x-zuplo-route": {
+           // etc. etc.
+           // other properties and route handlers for MCP
+
+           "policies": {
+             "inbound": [
+               "mcp-oauth-inbound"
+             ]
+           }
+         }
+       }
+     }
+   }
+   ```
+
+3. Add the `OAuthProtectedResourcePlugin` to your `runtimeInit` function in the
+   `zuplo.runtime.ts` file:
+
+   ```ts
+   import { OAuthProtectedResourcePlugin } from "@zuplo/runtime";
+
+   export function runtimeInit(runtime: RuntimeExtensions) {
+     runtime.addPlugin(
+       new OAuthProtectedResourcePlugin({
+         authorizationServers: ["https://your-auth0-domain.us.auth0.com"],
+         resourceName: "My MCP OAuth Resource",
+       }),
+     );
+   }
+   ```
+
+   See the
+   [OAuth Protected Resource Plugin docs](../programmable-api/oauth-protected-resource-plugin)
+   for more details.
+
 ### API Key Auth
 
 An MCP server on Zuplo can be configured to use an API key from a query
@@ -315,96 +397,6 @@ example, in Cursor:
   }
 }
 ```
-
-### OAuth Authentication
-
-The MCP Protocol natively supports OAuth authentication to enable MCP Clients to
-authenticate and authorize themselves when calling tools. For more information
-on this, see the
-[official MCP Authentication documentation](https://modelcontextprotocol.io/specification/draft/basic/authorization).
-
-Zuplo allows you to configure any of the built-in OAuth policies (like Auth0,
-Okta, etc.) on the MCP Server route to secure it. To enable OAuth
-authentication, you will need to have an OAuth Authorization server configured.
-Specifically, the OAuth Authorization server will need to support the following
-things:
-
-1. (Optional but recommended) OAuth 2.0 Dynamic Client Registration
-2. Authorization Code Grant with PKCE
-3. Refresh Tokens
-
-Once you have configured your authorization server, you can do the following to
-enable OAuth authentication on your MCP Server:
-
-1. Create an OAuth policy on your MCP Server route. This policy will need to
-   have the option `"oAuthResourceMetadataEnabled": true`, for example:
-   ```json
-   {
-     "name": "mcp-oauth-inbound",
-     "policyType": "oauth-inbound",
-     "handler": {
-       "export": "Auth0JwtInboundPolicy",
-       "module": "$import(@zuplo/runtime)",
-       "options": {
-         "auth0Domain": "my-auth0-domain.us.auth0.com",
-         "audience": "https://my-mcp-audience",
-         "clientId": "my-client-id",
-         "oAuthResourceMetadataEnabled": true
-       }
-     }
-   }
-   ```
-2. Add the OAuth policy to the MCP Server route. For example:
-
-   ```json
-   "paths": {
-     "/mcp": {
-       "post": {
-         "x-zuplo-route": {
-           // etc. etc.
-           // other properties and route handlers for MCP
-
-           "policies": {
-             "inbound": [
-               "mcp-oauth-inbound"
-             ]
-           }
-         }
-       }
-     }
-   }
-   ```
-
-3. Add the `OAuthProtectedResourcePlugin` to your `runtimeInit` function in the
-   `zuplo.runtime.ts` file:
-
-   ```ts
-   import { OAuthProtectedResourcePlugin } from "@zuplo/runtime";
-
-   export function runtimeInit(runtime: RuntimeExtensions) {
-     runtime.addPlugin(
-       new OAuthProtectedResourcePlugin({
-         authorizationServers: ["https://your-auth0-domain.us.auth0.com"],
-         resourceName: "My MCP OAuth Resource",
-       }),
-     );
-   }
-   ```
-
-   As per the MCP OAuth specification, you _must_ use the canonical URL of your
-   authorization server as the `authorizationServers` value. The `resourceName`
-   is a human readable name for the resource.
-
-   This runtime plugin will register the `.well-known/oauth-protected-resource`
-   route on your behalf, as well as return a 401 with a `WWW-Authenticate`
-   header when an MCP Client tries to connect to the MCP Server endpoint without
-   the required `Authorization` header. This header will redirect the MCP client
-   to the `.well-known/oauth-protected-resource/path/to/your/mcp/endpoint`
-   endpoint to learn about the OAuth configuration.
-
-   Note that the `.well-known/oauth-protected-resource` endpoint explicitly has
-   a CORS policy of `anything-goes` since this is a public endpoint that should
-   be accessible to anyone, and needs to be redirectable by the MCP client.
 
 ## Testing
 
@@ -556,9 +548,7 @@ in the MCP Inspector UI to move to the next step.
 
 If you see errors in the flow in steps 2-6, check that you have correctly
 configured your Authorization server to support the OAuth 2.0 Authorization Code
-Grant with PKCE and Refresh Tokens. For an example of a basic configuration of
-an Authorization Server with Auth0, see:
-[Setting up Auth0 as an Authentication Server for MCP OAuth Authentication](../articles/configuring-auth0-for-mcp-auth).
+Grant with PKCE and Refresh Tokens.
 
 ### MCP Client
 
