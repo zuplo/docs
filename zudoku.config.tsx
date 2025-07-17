@@ -45,6 +45,7 @@ const config: ZudokuConfig = {
       to: "/articles/what-is-zuplo",
     },
     { from: "/policies/index", to: "/policies/overview" },
+    { from: "/programmable-api/index", to: "/programmable-api/overview" },
     { from: "/policies", to: "/policies/overview" },
     {
       from: "/dev-portal/zudoku/theme-playground",

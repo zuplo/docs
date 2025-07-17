@@ -323,7 +323,7 @@ export const docs: Navigation = [
 export const programming: Navigation = [
   {
     type: "doc",
-    file: "programmable-api/index",
+    file: "programmable-api/overview",
     label: "Overview",
   },
 
@@ -650,36 +650,6 @@ export const legacy: Navigation = [
         ],
       },
     ],
-  },
-  {
-    type: "doc",
-    display: "hide",
-    file: "articles/going-live",
-  },
-  {
-    type: "doc",
-    display: "hide",
-    file: "articles/testing-api-key-authentication",
-  },
-  {
-    type: "doc",
-    display: "hide",
-    file: "articles/securing-backend-shared-secret",
-  },
-  {
-    type: "doc",
-    display: "hide",
-    file: "articles/oauth-authentication",
-  },
-  {
-    type: "doc",
-    display: "hide",
-    file: "articles/developer-api",
-  },
-  {
-    type: "doc",
-    display: "hide",
-    file: "articles/performance-testing",
   },
 ];
 
