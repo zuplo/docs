@@ -158,6 +158,15 @@ your MCP server:
 npx @modelcontextprotocol/inspector
 ```
 
+To connect to your remote Zuplo MCP server in the Inspector UI:
+
+1. Set the **Transport Type** to "Streamable HTTP"
+2. Set the **URL** to your Zuplo gateway with the route used by the MCP Server
+   Handler (i.e., `https://my-gateway.zuplo.dev/mcp`)
+3. If you have configured OAuth authentication, you will need to login using the
+   OAuth flow using the **Open Auth Settings** button.
+4. Hit **Connect**.
+
 For debugging your OAuth configuration, hit the **Open Auth Settings** button in
 the Inspector UI to start the OAuth flow. When first setting up the OAuth flow,
 it is recommmended to use the **Guided OAuth Flow** which you will see when you

@@ -535,6 +535,7 @@ export const policies: Navigation = [
     type: "category",
     label: "Upstream Authentication",
     items: [
+      "articles/oauth-authentication",
       "policies/upstream-azure-ad-service-auth-inbound",
       "policies/upstream-gcp-service-auth-inbound",
       "policies/upstream-gcp-federated-auth-inbound",

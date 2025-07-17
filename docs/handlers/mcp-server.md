@@ -263,6 +263,7 @@ enable OAuth authentication on your MCP Server:
 
 1. Create an OAuth policy on your MCP Server route. This policy will need to
    have the option `"oAuthResourceMetadataEnabled": true`, for example:
+
    ```json
    {
      "name": "mcp-oauth-inbound",
@@ -278,6 +279,12 @@ enable OAuth authentication on your MCP Server:
      }
    }
    ```
+
+   In this example, the audience should be the identifier of the Auth0 API you
+   want your MCP Server to be protected by. For more information on configuring
+   OAuth JWT policies, see the
+   [OAuth Policy docs](../articles/oauth-authentication.md).
+
 2. Add the OAuth policy to the MCP Server route. For example:
 
    ```json
@@ -421,7 +428,7 @@ To connect to your remote Zuplo MCP server in the Inspector UI:
    Handler (i.e., `https://my-gateway.zuplo.dev/mcp`)
 3. If you have configured OAuth authentication, you will need to login using the
    OAuth flow using the **Open Auth Settings** button.
-4. Hit **Connect**
+4. Hit **Connect**.
 
 ### Curl
 
