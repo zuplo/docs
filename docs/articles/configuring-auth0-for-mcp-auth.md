@@ -73,7 +73,23 @@ Next, you will need to configure an Auth0 Connection for your API.
 ### Configure OAuth on Zuplo
 
 Follow [MCP Server Handler docs](../handlers/mcp-server.md#oauth-authentication)
-to configure OAuth on Zuplo for your MCP server.
+to configure OAuth on Zuplo for your MCP server. The value you will need to use
+for `authorizationServers` is the canonical URL of your Auth0 tenant. For
+example, if your Auth0 tenant is `https://your-auth0-domain.us.auth0.com`, then
+the value would be `[https://your-auth0-domain.us.auth0.com]`, e.g:
+
+```ts
+import { OAuthProtectedResourcePlugin } from "@zuplo/runtime";
+
+export function runtimeInit(runtime: RuntimeExtensions) {
+  runtime.addPlugin(
+    new OAuthProtectedResourcePlugin({
+      authorizationServers: ["https://your-auth0-domain.us.auth0.com"],
+      resourceName: "My MCP OAuth Resource",
+    }),
+  );
+}
+```
 
 ### Testing
 
