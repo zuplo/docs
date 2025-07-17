@@ -324,7 +324,7 @@ export const docs: Navigation = [
 export const programming: Navigation = [
   {
     type: "doc",
-    file: "programmable-api/index",
+    file: "programmable-api/overview",
     label: "Overview",
   },
 

@@ -1,8 +1,20 @@
-import type { ZudokuConfig } from "zudoku";
+import type { ZudokuConfig, ZudokuPlugin } from "zudoku";
 import { devPortal, docs, legacy, policies, programming } from "./sidebar.js";
 import { mdxComponents } from "./src/components.js";
 import { HeadNavigation } from "./src/HeadNavigation";
 import "./src/diagrams.css";
+
+const inkeepMetadataPlugin: ZudokuPlugin = {
+  getHead: ({ location }) => {
+    if (location.pathname.startsWith("/legacy/")) {
+      return (
+        <>
+          <meta name="inkeep:legacy" content="true" />
+        </>
+      );
+    }
+  },
+};
 
 const config: ZudokuConfig = {
   basePath: "/docs",
@@ -33,6 +45,7 @@ const config: ZudokuConfig = {
       to: "/articles/what-is-zuplo",
     },
     { from: "/policies/index", to: "/policies/overview" },
+    { from: "/programmable-api/index", to: "/programmable-api/overview" },
     { from: "/policies", to: "/policies/overview" },
     {
       from: "/dev-portal/zudoku/theme-playground",
@@ -51,6 +64,7 @@ const config: ZudokuConfig = {
     },
   },
   plugins: [
+    inkeepMetadataPlugin,
     {
       getHead: () => (
         <script>
@@ -70,6 +84,11 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
     organizationId: "org_dDOlt2uJlMWM8oIS",
     primaryBrandColor: "#ff00bd",
     organizationDisplayName: "Zuplo",
+    filters: {
+      attributes: {
+        $and: [{ legacy: { $ne: "true" } }],
+      },
+    },
   },
   navigation: [
     {
