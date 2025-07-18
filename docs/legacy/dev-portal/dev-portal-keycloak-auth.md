@@ -6,13 +6,7 @@ description:
   Zuplo hosted developer portal with this step-by-step guide.
 ---
 
-:::danger
-
-This documentation is for the legacy version of the Dev Portal. If you are
-looking for the new preview developer portal, please refer to the
-[docs](/docs/dev-portal/introduction).
-
-:::
+<LegacyDevPortal />
 
 ## Keycloak Setup
 

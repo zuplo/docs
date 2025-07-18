@@ -10,8 +10,8 @@ engineering team, Zuplo makes it easy to:
 - [Add authentication and access control](./step-3-add-api-key-auth.md)
 - [Implement rate limiting](./step-2-add-rate-limiting.md)
 - Write custom logic to run at the gateway layer
-- Build a [rich developer portal](/docs/dev-portal/introduction) with self-serve tools for
-  auth and monetization
+- Build a [rich developer portal](/docs/dev-portal/introduction) with self-serve
+  tools for auth and monetization
 
 Zuplo delivers the core benefits of API management without the overhead of
 legacy platforms. That means no expensive licensing, training requirements, or
@@ -34,7 +34,7 @@ worldwide. This edge-first architecture provides:
 
 Zuplo is cloud-agnostic. It integrates with backends running on AWS, Azure, GCP,
 or private infrastructure. Multiple
-[secure connectivity options](./securing-your-backend) are available.
+[secure connectivity options](./securing-your-backend.md) are available.
 
 In most setups, Zuplo sits between clients and your backend API—whether those
 clients are servers, browsers, mobile apps, or IoT devices. Traffic is routed

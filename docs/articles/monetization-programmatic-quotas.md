@@ -3,13 +3,7 @@ title: Monetization Programmatic Quotas
 sidebar_label: Programmatic Quotas
 ---
 
-:::danger
-
-This documentation is for the legacy version of the Dev Portal and Monetization
-capabilities. If you are looking for the new preview developer portal, please
-refer to the [docs](/docs/dev-portal/introduction).
-
-:::
+<LegacyMonetization />
 
 When adding monetization to your API, you would usually set the number of meters
 a request will consume in the settings of the

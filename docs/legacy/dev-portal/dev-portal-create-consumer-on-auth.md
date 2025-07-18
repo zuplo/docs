@@ -6,13 +6,7 @@ description:
   step-by-step instructions for integrating with the legacy Dev Portal.
 ---
 
-:::danger
-
-This documentation is for the legacy version of the Dev Portal. If you are
-looking for the new preview developer portal, please refer to the
-[docs](/docs/dev-portal/introduction).
-
-:::
+<LegacyDevPortal />
 
 By default, users who log into your Zuplo powered Developer Portal won't have an
 API Consumer. This is by design as it allows you to control who has access to

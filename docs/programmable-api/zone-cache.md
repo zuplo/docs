@@ -45,8 +45,12 @@ be JSON serialized.
 put(key: string, data: T, ttlSeconds: number): Promise<void>
 ```
 
-:::note Objects that don't serialize cleanly to JSON (like the `Headers` object)
-won't be readable after storage. :::
+:::note
+
+Objects that don't serialize cleanly to JSON (like the `Headers` object) won't
+be readable after storage.
+
+:::
 
 **`delete`**
 

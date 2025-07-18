@@ -7,13 +7,7 @@ description:
   API documentation effectively.
 ---
 
-:::danger
-
-This documentation is for the legacy version of the Dev Portal. If you are
-looking for the new preview developer portal, please refer to the
-[docs](/docs/dev-portal/introduction).
-
-:::
+<LegacyDevPortal />
 
 Customization of your developer portal can be done in either the Zuplo Portal or
 by editing source files using your preferred editor. Before you start

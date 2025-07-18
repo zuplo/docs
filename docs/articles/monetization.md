@@ -2,13 +2,7 @@
 title: Zuplo API Monetization
 ---
 
-:::danger
-
-This documentation is for the legacy version of the Dev Portal and Monetization
-capabilities. If you are looking for the new preview developer portal, please
-refer to the [docs](/docs/dev-portal/introduction).
-
-:::
+<LegacyMonetization />
 
 Zuplo enables you, as an _API provider_, to effortlessly monetize your APIs. It
 provides a compelling set of defaults, while also allowing customizations to

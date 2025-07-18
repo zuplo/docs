@@ -8,13 +8,7 @@ description:
   styles.
 ---
 
-:::danger
-
-This documentation is for the legacy version of the Dev Portal. If you are
-looking for the new preview developer portal, please refer to the
-[docs](/docs/dev-portal/introduction).
-
-:::
+<LegacyDevPortal />
 
 The developer portal supports custom theming by editing the `docs/theme.css`
 file in your project. The following

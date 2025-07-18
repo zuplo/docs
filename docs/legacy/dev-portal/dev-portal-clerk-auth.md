@@ -7,13 +7,7 @@ description:
   variables, and updating your portal settings.
 ---
 
-:::danger
-
-This documentation is for the legacy version of the Dev Portal. If you are
-looking for the new preview developer portal, please refer to the
-[docs](/docs/dev-portal/introduction).
-
-:::
+<LegacyDevPortal />
 
 ## Clerk Setup
 
