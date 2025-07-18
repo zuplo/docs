@@ -39,9 +39,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .lycheecache
-          key: lychee-cache-${{ runner.os }}-${{ github.run_id }}
+          key: lychee-cache-${{ hashFiles('.lycheecache') }}
           restore-keys: |
-            lychee-cache-${{ runner.os }}-
+            lychee-cache-
 
       - name: Link Checker (External)
         uses: lycheeverse/lychee-action@v2
