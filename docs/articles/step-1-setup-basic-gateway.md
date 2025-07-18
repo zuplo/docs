@@ -3,62 +3,64 @@ title: Step 1 - Setup a Basic Gateway
 sidebar_label: "Step 1 - Setup Your Gateway"
 ---
 
-In this tutorial we'll setup a simple gateway. We'll use a demo API at
+In this tutorial we'll setup a simple gateway. We'll use a simple origin API at
 [getting-started.zuplo.io](https://getting-started.zuplo.io).
 
-To get started, sign in to [portal.zuplo.com](https://portal.zuplo.com) and
-create a free account. Create a new **empty** project. Then...
-
-:::tip{title="Local Development"}
-
-Zuplo also supports building and running your API locally. To learn more
+Note - Zuplo also supports building and running your API locally. To learn more
 [see the documentation](./local-development.md).
 
-:::
+<Stepper>
 
-## 1/ Add a Route
+1. Sign-in
 
-Inside your new project, choose the `routes.oas.json` file and click **Add
-Route**.
+   Sign in to [portal.zuplo.com](https://portal.zuplo.com) and create a free
+   account. Create a new **empty** project. Then...
 
-![Add Route](../../public/media/step-1-setup-basic-gateway/add-route.png)
+1. Add a Route
 
-Your API's first route will appear, with many configurable fields. Here's a
-quick overview of them:
+   Inside your new project, choose the `routes.oas.json` file and click **Add
+   Route**.
 
-- **Summary**: A summary of what the route does, which will be used in Step 4
-  for documenting your API
-- **Method** and **Path**: The associated method and path for your endpoint.
-  This is what other services will use to call your API.
-- **CORS**: The [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
-  configuration for your path.
-- **Request Handler**: This is the piece of functionality that will be invoked
-  when a request comes through to your endpoint. By default, we're using the
-  [URL Forward Handler](../handlers/url-forward.md) which proxies requests to
-  the "Forward to" URL. In this case, https://getting-started.zuplo.io
+   ![Add Route](../../public/media/step-1-setup-basic-gateway/add-route.png)
 
-![Your First Route](../../public/media/step-1-setup-basic-gateway/image-14.png)
+   Your API's first route will appear, with many configurable fields. Here's a
+   quick overview of them:
 
-Save your new route (you can click the three-dot menu next to `routes.oas.json`
-and then click **Save**, or press **CMD+S**).
+   - **Summary**: A summary of what the route does, which will be used in Step 4
+     for documenting your API
+   - **Method** and **Path**: The associated method and path for your endpoint.
+     This is what other services will use to call your API.
+   - **CORS**: The
+     [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
+     configuration for your path.
+   - **Request Handler**: This is the piece of functionality that will be
+     invoked when a request comes through to your endpoint. By default, we're
+     using the [URL Forward Handler](../handlers/url-forward.md) which proxies
+     requests to the "Forward to" URL. In this case,
+     https://getting-started.zuplo.io
 
-You can quickly test this route by clicking the **Test** button next to the
-**Path** field. You can use the built in test tool or click the URL to open in a
-new tab.
+   ![Your First Route](../../public/media/step-1-setup-basic-gateway/image-14.png)
 
-![Test your API](../../public/media/step-1-setup-basic-gateway/image-15.png)
+   Save your new route (you can click the three-dot menu next to
+   `routes.oas.json` and then click **Save**, or press **CMD+S**).
 
-You should receive a 200 OK that says something similar to
+   You can quickly test this route by clicking the **Test** button next to the
+   **Path** field. You can use the built in test tool or click the URL to open
+   in a new tab.
 
-```txt
-"Congratulations - You've successfully proxied my API endpoint. Want to know a
-secret? Try changing your Route's path to /policies-test/secret and test your
-route again after saving. The secret will be in the response."
-```
+   ![Test your API](../../public/media/step-1-setup-basic-gateway/image-15.png)
 
-A secret? Let's try and find out what this API is hiding!
+   You should receive a 200 OK that says something similar to
 
-## 2/ Editing your Route
+   ```txt
+   "Congratulations - You've successfully proxied my API endpoint. Want to know a
+   secret? Try changing your Route's path to /policies-test/secret and test your
+   route again after saving. The secret will be in the response."
+   ```
+
+   A secret? Let's try and find out what this API is hiding!
+
+1. Editing your Route
 
 Exit the test console and change your route's Path from `/path-0` to
 `/policies-test/secret`. Make sure to save your changes. Your calls will now be
@@ -113,3 +115,5 @@ response from Step 2.
 
 **NEXT** Try
 [Step 2 - Add Rate Limiting to your API](./step-2-add-rate-limiting.md).
+
+</Stepper>
