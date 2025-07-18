@@ -53,7 +53,9 @@
     "type": "category",
     "label": "Integrations",
     "icon": "blocks",
-    "items": ["dev-portal/zudoku/configuration/sentry"]
+    "items": [
+      "dev-portal/zudoku/configuration/sentry"
+    ]
   },
   {
     "type": "category",

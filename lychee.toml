@@ -27,6 +27,19 @@ exclude = [
     "https://app.amberflo.io/ingest",
     "auth0\\.com",
     "example\\.(com|org|net)",
+    "https://zuplo.com/docs/400",
+    "https://zuplo.com/docs/404",
+    "https://zuplo.com/docs/500",
+    "stackoverflow.com",
+    "ecommerce-api.zuplo.io",
+    "ecommerce-legacy.zuplo.io",
+    "techdocs.akamai.com",
+    "metric-api.newrelic.com",
+    "log-api.newrelic.com",
+    "https://openid.net/specs/openid-connect-core-1_0.html#UserInfo",
+    "https://www.fastly.com/documentation/guides/concepts/edge-state/dynamic-config/#edge-dictionaries",
+
+    "cdn.simpleicons.org"
 ]
 
 # Headers to send with requests

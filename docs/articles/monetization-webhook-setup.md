@@ -61,9 +61,9 @@ plugin adds an endpoint that's used when configuring the Stripe Webhook.
 :::note
 
 The **zuplo.runtime.ts** file is where you can
-[register global plugins](https://zuplo.com/docs/articles/runtime-extensions#plugin-and-handler-extensions)
-and [setup hooks](https://zuplo.com/docs/articles/runtime-extensions#hooks)
-within your Zuplo API.
+[register global plugins](../programmable-api/runtime-extensions.md#plugin-and-handler-extensions)
+and [setup hooks](../programmable-api/runtime-extensions.md#hooks) within your
+Zuplo API.
 
 :::
 

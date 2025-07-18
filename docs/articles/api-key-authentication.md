@@ -101,7 +101,7 @@ async function (request: ZuploRequest, context: ZuploContext) {
 
 The `request.user` object can be used in both
 [handlers](../handlers/custom-handler.md) and
-[policies](../policies/custom-code-inbound.md)
+[policies](../policies/custom-code-inbound.mdx)
 
 If you had a simple [function handler](../handlers/custom-handler.md) as
 follows, it would return a `request.user` object to your route if the API Key is

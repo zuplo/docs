@@ -32,23 +32,25 @@ jobs:
           node-version: "22"
           cache: "npm"
       - run: npm ci
-      - name: Install lychee
-        run: |
-          curl -L https://github.com/lycheeverse/lychee/releases/latest/download/lychee-x86_64-unknown-linux-gnu.tar.gz | tar xz
-          sudo mv lychee /usr/local/bin/
-      - name: Start dev server
-        run: |
-          npm run dev &
-          echo $! > dev-server.pid
-          sleep 10
-      - name: Check links
-        run: npm run check:links -- --base http://localhost:5173
-      - name: Stop dev server
-        if: always()
-        run: |
-          if [ -f dev-server.pid ]; then
-            kill $(cat dev-server.pid) || true
-          fi
+
+      - run: npm run build
+
+      - name: Restore lychee cache
+        uses: actions/cache@v4
+        with:
+          path: .lycheecache
+          key: lychee-cache-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            lychee-cache-${{ runner.os }}-
+
+      - name: Link Checker (External)
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --scheme https --scheme http --fallback-extensions html --root-dir $PWD/dist --include-fragments ./dist
+      - name: Link Checker (Internal)
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --fallback-extensions html --root-dir $PWD/dist --include-fragments ./dist
 
   static-assets:
     name: Upload Static Assets

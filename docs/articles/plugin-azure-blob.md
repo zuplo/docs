@@ -15,8 +15,9 @@ You can define the fields created in the CSV by creating a custom type in
 TypeScript and a function to extract the field data from the `Response`,
 `ZuploRequest`, and `ZuploContext`.
 
-The plugin is configured in the [Runtime Extensions](./runtime-extensions.md)
-file `zuplo.runtime.ts`:
+The plugin is configured in the
+[Runtime Extensions](../programmable-api/runtime-extensions.md) file
+`zuplo.runtime.ts`:
 
 ```ts title="modules/zuplo.runtime.ts"
 // The interface that describes the rows
@@ -69,4 +70,4 @@ stream is available for the response.
 Also, note that the `generateLogEntry` function will be called **after** the
 request stream has been read. So if you need to read the request, you will need
 to store the cloned response before it reaches the request handler and store it,
-ideally using [ContextData](./context-data.md).
+ideally using [ContextData](../programmable-api/context-data.md).
