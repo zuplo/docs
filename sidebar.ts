@@ -211,6 +211,7 @@ export const docs: Navigation = [
       "articles/use-openapi-extension-data",
       "articles/non-standard-ports",
       "articles/convert-urls-to-openapi",
+      "articles/configuring-azure-ad-for-mcp-auth",
     ],
   },
   {
