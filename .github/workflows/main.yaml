@@ -19,6 +19,33 @@ jobs:
       - run: npm run format:ci
       - run: npm run lint:admonitions
 
+  check-links:
+    name: Check Links
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: "true"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+      - run: npm ci
+      - name: Start dev server
+        run: |
+          npm run dev &
+          echo $! > dev-server.pid
+          sleep 10
+      - name: Check links
+        run: npm run check:links -- --base http://localhost:5173
+      - name: Stop dev server
+        if: always()
+        run: |
+          if [ -f dev-server.pid ]; then
+            kill $(cat dev-server.pid) || true
+          fi
+
   static-assets:
     name: Upload Static Assets
     runs-on: ubuntu-latest
