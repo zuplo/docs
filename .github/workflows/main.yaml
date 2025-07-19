@@ -19,48 +19,6 @@ jobs:
       - run: npm run format:ci
       - run: npm run lint:admonitions
 
-  check-links:
-    name: Check Links
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          lfs: "true"
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: "npm"
-      - run: npm ci
-
-      - run: npm run build
-
-      - name: Restore lychee cache
-        id: cache-lychee
-        uses: actions/cache/restore@v4
-        with:
-          path: .lycheecache
-          key: lychee-cache-${{ hashFiles('.lycheecache') }}
-          restore-keys: |
-            lychee-cache-
-
-      - name: Link Checker (Internal)
-        uses: lycheeverse/lychee-action@v2
-        with:
-          args: --fallback-extensions html --root-dir $PWD/dist --include-fragments ./dist
-
-      - name: Link Checker (External)
-        uses: lycheeverse/lychee-action@v2
-        with:
-          args: --scheme https --scheme http --fallback-extensions html --root-dir $PWD/dist --include-fragments ./dist
-
-      - name: Save lychee cache
-        if: always()
-        uses: actions/cache/save@v4
-        with:
-          path: .lycheecache
-          key: lychee-cache-${{ hashFiles('.lycheecache') }}
-
   static-assets:
     name: Upload Static Assets
     runs-on: ubuntu-latest
@@ -135,3 +93,46 @@ jobs:
           headers: |-
             cache-control: max-age=31536000
             content-type: image/svg+xml
+
+  check-links:
+    name: Check Links
+    needs: static-assets
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: "true"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Restore lychee cache
+        id: cache-lychee
+        uses: actions/cache/restore@v4
+        with:
+          path: .lycheecache
+          key: lychee-cache-${{ hashFiles('.lycheecache') }}
+          restore-keys: |
+            lychee-cache-
+
+      - name: Link Checker (Internal)
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --fallback-extensions html --root-dir $PWD/dist --include-fragments ./dist
+
+      - name: Link Checker (External)
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --scheme https --scheme http --fallback-extensions html --root-dir $PWD/dist --include-fragments ./dist
+
+      - name: Save lychee cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lycheecache
+          key: lychee-cache-${{ hashFiles('.lycheecache') }}
