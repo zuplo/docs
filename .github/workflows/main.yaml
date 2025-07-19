@@ -92,7 +92,7 @@ jobs:
           process_gcloudignore: false
           headers: |-
             cache-control: max-age=31536000
-            content-type: image/svg+xml
+            content-type: image/webp
 
   check-links:
     name: Check Links
