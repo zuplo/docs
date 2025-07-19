@@ -107,7 +107,6 @@ new Webhook in Stripe.
    events.
 
 3. Click the **+ Select events** button and select the following events:
-
    - `customer.subscription.created`
    - `customer.subscription.updated`
    - `customer.subscription.deleted`
