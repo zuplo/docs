@@ -1067,6 +1067,16 @@
       "source": "/docs/articles/going-live{/}?",
       "destination": "/docs/articles/monitoring-your-gateway",
       "permanent": true
+    },
+    {
+      "source": "/docs/programmable-api{/}?",
+      "destination": "/docs/programmable-api/overview",
+      "permanent": true
+    },
+    {
+      "source": "/docs/programmable-api/index{/}?",
+      "destination": "/docs/programmable-api/overview",
+      "permanent": true
     }
   ],
   "rewrites": [
