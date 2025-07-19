@@ -326,5 +326,3 @@ Environment variables are set in the Zuplo Portal:
   environment variables
 - [ConfigurationError](./runtime-errors.md#configurationerror) - Error handling
   for configuration issues
-- [Going to Production](../articles/going-live.md) - Production configuration
-  best practices

@@ -39,7 +39,9 @@ exclude = [
     "https://openid.net/specs/openid-connect-core-1_0.html#UserInfo",
     "https://www.fastly.com/documentation/guides/concepts/edge-state/dynamic-config/#edge-dictionaries",
 
-    "cdn.simpleicons.org"
+    "cdn.simpleicons.org",
+
+    "https://ui.shadcn.com/docs/components/callout",
 ]
 
 # Headers to send with requests

@@ -49,6 +49,7 @@ export const mdxComponents = {
     if (
       process.env.NODE_ENV === "production" &&
       props.src &&
+      props.src.startsWith("https://cdn.zuplo.com") &&
       !props.srcSet &&
       !props.src.endsWith(".svg") &&
       !props.src.endsWith(".gif")
