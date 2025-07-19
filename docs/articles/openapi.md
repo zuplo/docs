@@ -75,7 +75,7 @@ This extension is defined below the **path** property:
 
 `x-zuplo-route` is where all of your route settings are configured, including
 [policies](/docs/policies), [handlers](/docs/handlers/openapi.md),
-[CORS](/docs/articles/custom-cors-policy.md) and more.
+[CORS](../programmable-api/custom-cors-policy.md) and more.
 
 This extension is defined inside the operation, below the method:
 

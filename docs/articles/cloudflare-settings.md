@@ -23,7 +23,7 @@ specific needs.
 ## DDos Protection
 
 DDoS protection is available for every Zuplo API through
-[Cloudflare's DDoS protection service](https://support.cloudflare.com/hc/en-us/articles/200172676-Understanding-Cloudflare-DDoS-protection).
+[Cloudflare's DDoS protection service](https://developers.cloudflare.com/ddos-protection/about/).
 By default, the **rule sensitivy** setting is set to **Essentially Off** meaning
 almost no requests will be blocked. For paying customers, we offer the ability
 to modify this setting as needed.
@@ -31,7 +31,7 @@ to modify this setting as needed.
 ## Security Level
 
 Cloudflare uses a blanket
-[security protection setting](https://support.cloudflare.com/hc/en-us/articles/200170056-Understanding-the-Cloudflare-Security-Level)
+[security protection setting](https://developers.cloudflare.com/waf/tools/security-level/)
 that uses the IP reputation of a visitor to decide if the request should be
 blocked. By default, Zuplo this security setting is **Off** for all Zuplo APIs.
 For paying customers, this setting can be customized as needed for your API.

@@ -30,4 +30,4 @@ Explore the navigation to see all of the built-in policies.
 The ability to write custom policies that run in-process of your Gateway is at
 the core of what makes Zuplo the Programmable API Gateway. You can write
 policies to handle virtually any task. To learn more about
-[writing custom policies see the documentation](/docs/policies/custom-code-inbound).
+[writing custom policies see the documentation](../policies/custom-code-inbound.mdx).

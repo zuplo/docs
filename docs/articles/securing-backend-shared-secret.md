@@ -11,11 +11,10 @@ via a header.
 
 ## 1/ Set an Environment Variable
 
-The first step is to set an
-[environment variable](https://zuplo.com/docs/articles/environment-variables) in
-your Zuplo project. This variable will be a secret that only your Zuplo project
-and your backend know. This secret will be sent as a header on every request to
-your backend API.
+The first step is to set an [environment variable](./environment-variables.md)
+in your Zuplo project. This variable will be a secret that only your Zuplo
+project and your backend know. This secret will be sent as a header on every
+request to your backend API.
 
 Open the _Settings_ section of your project and select _Environment Variables_.
 Create a new variable and name it `BACKEND_SECRET`. Set the value to a secure,
