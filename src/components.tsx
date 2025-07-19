@@ -6,6 +6,8 @@ import { EnterpriseFeature } from "./EnterpriseFeature.js";
 import { GithubButton } from "./GithubButton.js";
 import { PolicyOverview } from "./PolicyOverview.js";
 import ZupIt from "./ZupIt.js";
+import { LegacyDevPortal } from "./LegacyDevPortal.js";
+import { LegacyMonetization } from "./LegacyMonetization.js";
 
 const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
 
@@ -77,6 +79,8 @@ export const mdxComponents = {
   },
   PolicyOverview,
   EnterpriseFeature,
+  LegacyDevPortal,
+  LegacyMonetization,
   EmbeddedChat: () => {
     return (
       <Suspense fallback={<div>Loading…</div>}>

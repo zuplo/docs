@@ -6,13 +6,7 @@ description:
   and mapping environment variables for secure and flexible API management.
 ---
 
-:::danger
-
-This documentation is for the legacy version of the Dev Portal. If you are
-looking for the new preview developer portal, please refer to the
-[docs](/docs/dev-portal/introduction).
-
-:::
+<LegacyDevPortal />
 
 The `dev-portal.json` file is the code that drives most of the configuration of
 your Zuplo Gateway. The primary uses of the `dev-portal.json` file are:

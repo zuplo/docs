@@ -4,13 +4,7 @@ sidebar_label: Overview
 description: Overview of the legacy developer portal.
 ---
 
-:::danger
-
-This documentation is for the legacy version of the Dev Portal. If you are
-looking for the new preview developer portal, please refer to the
-[docs](/docs/dev-portal/introduction).
-
-:::
+<LegacyDevPortal />
 
 Every Zuplo project automatically includes a full featured developer portal that
 renders your OpenAPI specification as a beautiful page complete with examples,

@@ -33,11 +33,12 @@ icons shown.
 
 ![Copy or View](../../public/media/api-key-administration/image-5.png)
 
-If you're using the Zuplo [Developer Portal](./developer-portal), we've an
-integration with the API Key API that allows developers to access their API
-keys, create new ones and delete them. To enable this, you must assign one or
-more managers, via e-mail, to be a manager for your API Key Consumer. This is
-optional if you aren't using the [Developer Portal](./developer-portal).
+If you're using the Zuplo [Developer Portal](../dev-portal/introduction.md),
+we've an integration with the API Key API that allows developers to access their
+API keys, create new ones and delete them. To enable this, you must assign one
+or more managers, via e-mail, to be a manager for your API Key Consumer. This is
+optional if you aren't using the
+[Developer Portal](../dev-portal/introduction.md).
 
 You can assign managers in the Zuplo Portal (portal.zuplo.com) or via the API.
 

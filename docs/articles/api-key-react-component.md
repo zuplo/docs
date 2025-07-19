@@ -18,8 +18,8 @@ Tailwind CSS, but Tailwind isn't required.
 :::tip
 
 See our blog for an
-[end to end tutorial](https://zuplo.com/blog#tutorial-setup-a-web-app-with-the-newly-release-component)
-on using this React component and the translation API.
+[end to end tutorial](https://zuplo.com/blog/2023/08/08/open-source-release) on
+using this React component and the translation API.
 
 :::
 
@@ -87,5 +87,4 @@ The API Key Manager component interacts with an API that allows authorized users
 to manage their own keys. The easiest way to get started is to use the
 [Auth Translation API](https://github.com/zuplo/sample-auth-translation-api)
 sample and deploy it to [Zuplo](https://zuplo.com). By default this sample
-connects the
-[Zuplo API Key Management Service](https://zuplo.com/docs/articles/api-key-management).
+connects the [Zuplo API Key Management Service](./api-key-management.md).

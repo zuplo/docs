@@ -1,5 +1,5 @@
 import type { Navigation } from "zudoku";
-import { errors } from "./generated/errors";
+import { errors } from "./src/errors";
 import zudokuSidebar from "./sidebar.zudoku.json";
 
 export const docs: Navigation = [

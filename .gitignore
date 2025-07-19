@@ -33,10 +33,11 @@ yarn-error.log*
 .env
 
 /policies.*.json
-/generated
+/docs/policies
+/src/errors.ts
 /temp
-scripts/update-policies.mjs
-scripts/update-policies.mjs.map
+/scripts/update-policies.mjs
+/scripts/update-policies.mjs.map
 
 yarn.lock
 .vercel
@@ -75,3 +76,6 @@ auth.json
 /api.md
 /types.d.ts
 /index.d.ts
+
+
+/.lycheecache

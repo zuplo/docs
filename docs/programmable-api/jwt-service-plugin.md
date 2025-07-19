@@ -163,7 +163,7 @@ A common pattern is to create a custom policy that automatically adds JWT tokens
 to outbound requests. This is useful when calling downstream APIs that require
 authentication.
 
-Here's an example of a [custom policy](/docs/policies/custom-code-inbound) that
+Here's an example of a [custom policy](../policies/custom-code-inbound.mdx) that
 adds a JWT to the Authorization header of outbound requests:
 
 ```ts title="modules/policies/jwt-auth-upstream.ts"

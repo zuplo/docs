@@ -136,7 +136,7 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
     },
   },
   docs: {
-    files: ["/docs/**/*.{md,mdx}", "/generated/**/*.{md,mdx}"],
+    files: ["/docs/**/*.{md,mdx}"],
     defaultOptions: {
       showLastModified: true,
       suggestEdit: {

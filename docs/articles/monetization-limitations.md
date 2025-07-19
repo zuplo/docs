@@ -2,13 +2,7 @@
 title: Limitations
 ---
 
-:::danger
-
-This documentation is for the legacy version of the Dev Portal and Monetization
-capabilities. If you are looking for the new preview developer portal, please
-refer to the [docs](/docs/dev-portal/introduction).
-
-:::
+<LegacyMonetization />
 
 Zuplo strives to deliver the most complete, flexible, and intuitive API
 monetization system. Given the multitude of different pricing models and their

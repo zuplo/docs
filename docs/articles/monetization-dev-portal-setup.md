@@ -3,13 +3,7 @@ title: Step 1 - Set Up Developer Portal
 sidebar_label: Step 1 - Set Up Developer Portal
 ---
 
-:::danger
-
-This documentation is for the legacy version of the Dev Portal and Monetization
-capabilities. If you are looking for the new preview developer portal, please
-refer to the [docs](/docs/dev-portal/introduction).
-
-:::
+<LegacyMonetization />
 
 This guide will walk you through the steps required to set up your Zuplo API's
 Developer Portal. This is where your customers will see and subscribe to your

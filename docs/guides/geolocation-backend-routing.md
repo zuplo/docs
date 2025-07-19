@@ -390,7 +390,7 @@ Always implement a default fallback to ensure requests are handled even when:
 
 ## Next Steps
 
-- Learn about [custom policies](../../generated/policies/custom-code-inbound.mdx)
+- Learn about [custom policies](../policies/custom-code-inbound.mdx)
 - Explore [environment variables](../articles/environment-variables.md)
 - Set up [monitoring and analytics](../articles/logging.md) for your geolocation
   routing

@@ -48,7 +48,6 @@ Most customers use a monitoring service, here are a few examples:
 - [API Context](https://apicontext.com)
 - [DataDog](https://www.datadoghq.com/dg/apm/synthetics/api-test)
 
-In addition, we recommend using our
-[Enterprise Log Plugins](https://zuplo.com/docs/articles/log-plugins#plugins) to
+In addition, we recommend using our [Enterprise Log Plugins](./logging.md) to
 send log events to partners like DataDog and set up volume based alerts from any
 unusually increased error rates from your custom code or dependent services.

@@ -7,9 +7,10 @@ Zuplo uses Auth0 to enable Okta SSO for enterprise accounts who have purchased
 single-sign-on. Below you will find instructions on how to setup Okta to be used
 with Zuplo.
 
-1. First, you will need to
-   [create a new application in Okta](https://developer.okta.com/docs/guides/sign-into-web-app/aspnet/create-okta-application/).
-   Record the client ID and client secret values to share with Zuplo.
+1. Log in to the [Okta Developer Console](https://developer.okta.com/).
+
+2. Go to Create App Integration and choose SAML 2.0 from the options. Record the
+   client ID and client secret values to share with Zuplo.
 
    - The application type should be "Web application".
    - The **Redirect URI** value should be set to
@@ -18,7 +19,7 @@ with Zuplo.
    - No special permissions are needed. Zuplo only requires basic profile
      information (name and email).
 
-2. Securely share the following values with Zuplo.
+3. Securely share the following values with Zuplo.
 
 | Field                     | Description                                                                                                                                                              |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
