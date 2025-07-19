@@ -20,7 +20,7 @@ client to be used with Zuplo.
 
 2. Create a client secret for you application. To create a client secret, see
    Microsoft's Quickstart:
-   [Configure a client application to access web APIs - Add Credentials to your web application](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app#add-credentials).
+   [Configure a client application to access web APIs - Add Credentials to your web application](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
    Record this value. You will need to share this securely with Zuplo.
 
    :::tip

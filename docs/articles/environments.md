@@ -44,11 +44,12 @@ production branch in your source control settings.
 
 ### Preview vs Production Environments (or multiple Production Environments)
 
-Note, there is no _technical_ difference between a __Preview__ environment and a 
-__Production__ environment and some customers choose to use a specific (or multiple)
-Preview environments as 'Production' deployments of their API. By default, Preview 
-environments share a set of [environment variables](/docs/articles/environment-variables)
- and buckets for API keys etc, but these can be overridden for specific environments. 
+Note, there is no _technical_ difference between a **Preview** environment and a
+**Production** environment and some customers choose to use a specific (or
+multiple) Preview environments as 'Production' deployments of their API. By
+default, Preview environments share a set of
+[environment variables](/docs/articles/environment-variables) and buckets for
+API keys etc, but these can be overridden for specific environments.
 
 ## Navigating Environments
 

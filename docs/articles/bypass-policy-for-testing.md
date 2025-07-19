@@ -16,7 +16,7 @@ and a custom policy.
 ### Step 1: Create a Custom Policy
 
 The
-[Custom Code Inbound Policy](/docs/policies/custom-code-inbound#writing-a-policy)
+[Custom Code Inbound Policy](../policies/custom-code-inbound.mdx#writing-a-policy)
 is essentially a wrapper around whatever policy you want to bypass. In this
 example, we will create a custom policy that bypasses the `monetization-inbound`
 policy.

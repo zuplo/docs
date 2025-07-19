@@ -61,8 +61,7 @@ log "Deleting unwanted docs..."
 rm -rf "$DEST_DIR/deploy"
 rm -f "$DEST_DIR/deployment.md"
 rm -f "$DEST_DIR/introduction.md"
-rm -f "$DEST_DIR/app-quickstart.md"
-rm -f "$DEST_DIR/html-quickstart.md"
+rm -f "$DEST_DIR/quickstart.md"
 
 # Run the update script
 log "Running the update script..."

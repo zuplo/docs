@@ -4,8 +4,8 @@ title: Non-Standard Ports
 
 Zuplo supports making requests to non-standard ports when your runtime is
 configured with a
-[compatibility date](https://zuplo.com/docs/articles/zuplo-json#compatibility-date)
-of [2024-09-02](/docs/articles/zuplo-json#2024-09-02) or later.
+[compatibility date](../programmable-api/compatibility-dates.md) of
+[2024-09-02](../programmable-api/compatibility-dates.md#2024-09-02) or later.
 
 ## Making a Request to a Non-Supported Port
 
@@ -19,6 +19,6 @@ const response = await fetch("http://example.com:8080");
 
 ## Older Compatibility Dates
 
-Before [2024-09-02](/docs/articles/zuplo-json#2024-09-02), Zuplo didn't support
-making requests to non-standard ports. If you make a request to a non-standard
-port on an older runtime, the port will be ignored.
+Before [2024-09-02](../programmable-api/#compatibility-date.md#2024-09-02),
+Zuplo didn't support making requests to non-standard ports. If you make a
+request to a non-standard port on an older runtime, the port will be ignored.

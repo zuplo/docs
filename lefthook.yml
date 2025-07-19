@@ -1,0 +1,8 @@
+pre-commit:
+  parallel: true
+  commands:
+    prettier:
+      glob: "*.{js,jsx,ts,tsx,json,css,scss,md,mdx,yml,yaml}"
+      run: |
+        npx prettier --write {staged_files}
+        git add {staged_files}

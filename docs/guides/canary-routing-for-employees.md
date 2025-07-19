@@ -372,7 +372,7 @@ if (context.response.status >= 500 && context.custom.isCanary) {
 
 ## Next Steps
 
-- Learn about [custom policies](../../policies/custom-code-inbound/doc.md)
+- Learn about [custom policies](../policies/custom-code-inbound.mdx)
 - Explore [environment variables](../articles/environment-variables.md)
 - Set up [monitoring and analytics](../articles/logging.md) for canary
   deployments

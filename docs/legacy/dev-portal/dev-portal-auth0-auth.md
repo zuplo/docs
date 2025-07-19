@@ -7,13 +7,7 @@ description:
   integration steps for secure API access.
 ---
 
-:::danger
-
-This documentation is for the legacy version of the Dev Portal. If you are
-looking for the new preview developer portal, please refer to the
-[docs](/docs/dev-portal/introduction).
-
-:::
+<LegacyDevPortal />
 
 ## Auth0 Setup
 

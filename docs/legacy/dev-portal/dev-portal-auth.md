@@ -8,13 +8,7 @@ description:
   considerations for production environments.
 ---
 
-:::danger
-
-This documentation is for the legacy version of the Dev Portal. If you are
-looking for the new preview developer portal, please refer to the
-[docs](/docs/dev-portal/introduction).
-
-:::
+<LegacyDevPortal />
 
 The Zuplo Developer Portal supports authenticating with any standard-compliant
 OpenID Connect identity provider such as [Auth0](https://auth0.com),

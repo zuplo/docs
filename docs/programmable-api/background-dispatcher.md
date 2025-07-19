@@ -89,8 +89,12 @@ The dispatcher invokes the dispatch function with batched records at most every
 'n' milliseconds (as configured) when items are enqueued. If no items are
 enqueued, the function won't be invoked.
 
-:::tip There are no automatic retries for failed dispatch functions. Implement
-retry logic in your dispatch function if needed. :::
+:::tip
+
+There are no automatic retries for failed dispatch functions. Implement retry
+logic in your dispatch function if needed.
+
+:::
 
 ## Best Practices
 

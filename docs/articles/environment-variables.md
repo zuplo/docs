@@ -16,9 +16,13 @@ Environment variables can be configuration or secrets. While all values are
 stored encrypted at rest, only non-secret values can be read. Secrets are
 write-only, meaning the value can't be retrieved once it's set.
 
-:::tip API Reference For detailed information about accessing environment
-variables in code, see the
-[Environment Variables API Reference](../programmable-api/environment.md). :::
+:::tip
+
+API Reference For detailed information about accessing environment variables in
+code, see the
+[Environment Variables API Reference](../programmable-api/environment.md).
+
+:::
 
 ## Environment Variable Editor
 

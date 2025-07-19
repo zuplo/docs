@@ -1,8 +1,38 @@
 # Zuplo Docs
 
+## Prerequisites
+
+- Node.js (v18 or higher)
+- npm
+- Git LFS (Large File Storage)
+
+## Getting Started
+
+### Clone the Repository
+
+This project uses Git LFS for managing large files (images, PDFs, etc.). Make
+sure you have Git LFS installed before cloning:
+
+```bash
+# Install Git LFS (if not already installed)
+# macOS: brew install git-lfs
+# Ubuntu/Debian: apt-get install git-lfs
+# Windows: Download from https://git-lfs.github.com/
+
+# Initialize Git LFS
+git lfs install
+
+# Clone the repository
+git clone https://github.com/zuplo/docs
+cd docs
+
+# Verify LFS files were downloaded
+git lfs ls-files
+```
+
 ### Installation
 
-```
+```bash
 npm install
 ```
 

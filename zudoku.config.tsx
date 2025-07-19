@@ -45,6 +45,7 @@ const config: ZudokuConfig = {
       to: "/articles/what-is-zuplo",
     },
     { from: "/policies/index", to: "/policies/overview" },
+    { from: "/programmable-api/index", to: "/programmable-api/overview" },
     { from: "/policies", to: "/policies/overview" },
     {
       from: "/dev-portal/zudoku/theme-playground",
@@ -135,7 +136,7 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
     },
   },
   docs: {
-    files: ["/docs/**/*.{md,mdx}", "/generated/**/*.{md,mdx}"],
+    files: ["/docs/**/*.{md,mdx}"],
     defaultOptions: {
       showLastModified: true,
       suggestEdit: {

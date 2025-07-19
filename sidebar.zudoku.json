@@ -5,11 +5,12 @@
     "icon": "settings",
     "link": "dev-portal/zudoku/configuration/overview",
     "items": [
+      "dev-portal/zudoku/configuration/docs",
+      "dev-portal/zudoku/configuration/navigation",
+      "dev-portal/zudoku/configuration/site",
       "dev-portal/zudoku/customization/colors-theme",
       "dev-portal/zudoku/customization/fonts",
-      "dev-portal/zudoku/configuration/navigation",
       "dev-portal/zudoku/configuration/search",
-      "dev-portal/zudoku/configuration/site",
       "dev-portal/zudoku/configuration/footer"
     ]
   },
@@ -40,7 +41,12 @@
     "label": "Authentication",
     "icon": "lock",
     "items": [
-      "dev-portal/zudoku/configuration/authentication"
+      "dev-portal/zudoku/configuration/authentication",
+      "dev-portal/zudoku/configuration/authentication-auth0",
+      "dev-portal/zudoku/configuration/authentication-clerk",
+      "dev-portal/zudoku/configuration/authentication-azure-ad",
+      "dev-portal/zudoku/configuration/authentication-pingfederate",
+      "dev-portal/zudoku/configuration/authentication-supabase"
     ]
   },
   {

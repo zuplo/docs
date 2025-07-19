@@ -15,6 +15,8 @@ const directoryPath = new URL("../docs/dev-portal/zudoku", import.meta.url)
 // :::
 // `;
 
+const IGNORE_FILES = ["quickstart.md"];
+
 async function updateDocs(dir: string) {
   try {
     const files = await fs.readdir(dir);

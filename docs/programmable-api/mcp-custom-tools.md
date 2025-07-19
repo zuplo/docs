@@ -410,7 +410,7 @@ outputSchema: z.object({
 
 - [MCP Server Handler](../handlers/mcp-server.md) - For simple route-to-tool
   mapping
-- [Model Context Protocol Overview](/docs/ai/mcp) - Understanding MCP concepts
+- [Model Context Protocol Overview](../ai/mcp.md) - Understanding MCP concepts
 - [MCP Specification](https://modelcontextprotocol.io/specification/) - Official
   protocol documentation
-- [Runtime Extensions](/docs/programmable-api/) - Zuplo's plugin system
+- [Runtime Extensions](./runtime-extensions.md) - Zuplo's plugin system
