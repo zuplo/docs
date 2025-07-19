@@ -8,8 +8,7 @@
   },
   "scripts": {
     "dev": "zudoku dev",
-    "check:links:internal": "lychee --fallback-extensions html --root-dir $PWD/dist --include-fragments ./dist",
-    "check:links:external": "lychee --scheme https --scheme http --fallback-extensions html --root-dir $PWD/dist --include-fragments ./dist",
+    "check:links": "lychee --fallback-extensions html --root-dir $PWD/dist --include-fragments ./dist",
     "build": "zudoku build",
     "format": "prettier --write .",
     "format:ci": "prettier --check .",

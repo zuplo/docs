@@ -120,16 +120,10 @@ jobs:
           restore-keys: |
             lychee-cache-
 
-      - name: Link Checker (Internal)
+      - name: Link Checker
         uses: lycheeverse/lychee-action@v2
         with:
           args: --fallback-extensions html --root-dir $PWD/dist --include-fragments ./dist
-
-      - name: Link Checker (External)
-        uses: lycheeverse/lychee-action@v2
-        with:
-          args: --scheme https --scheme http --fallback-extensions html --root-dir $PWD/dist --include-fragments ./dist
-
       - name: Save lychee cache
         if: always()
         uses: actions/cache/save@v4
