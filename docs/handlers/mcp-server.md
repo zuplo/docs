@@ -494,8 +494,11 @@ For more complex tools, you'll need to provide the schema compliant `arguments`.
 Note the `inputSchema` for the tool from `tools/list` to appropriately craft the
 `arguments`.
 
-:::tip Read more about how calling tools works in
+:::tip
+
+Read more about how calling tools works in
 [the Model Context Protocol server specification](https://modelcontextprotocol.io/specification/2025-03-26/server/tools).
+
 :::
 
 ### OAuth Testing

@@ -8,13 +8,7 @@ description:
   configuration, and best practices for a seamless developer experience.
 ---
 
-:::danger
-
-This documentation is for the legacy version of the Dev Portal. If you are
-looking for the new preview developer portal, please refer to the
-[docs](/docs/dev-portal/introduction).
-
-:::
+<LegacyDevPortal />
 
 Do you want to share your API documentation and keys with your Supabase users?
 Look no further! You can easily connect your existing Supabase authentication

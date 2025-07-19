@@ -15,8 +15,9 @@ You can define the fields created in the JSON object by creating a custom type
 in TypeScript and a function to extract the field data from the `Response`,
 `ZuploRequest`, and `ZuploContext`.
 
-The plugin is configured in the [Runtime Extensions](./runtime-extensions.md)
-file `zuplo.runtime.ts`: git sta
+The plugin is configured in the
+[Runtime Extensions](../programmable-api/runtime-extensions.md) file
+`zuplo.runtime.ts`: git sta
 
 ```ts title="modules/zuplo.runtime.ts"
 // The interface that describes the rows

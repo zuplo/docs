@@ -17,8 +17,8 @@ Security. Once this step is completed you'll have a 'key' to allow us to connect
 to Akamai API Security on your behalf.
 
 In Zuplo you configure the plugin in the
-[Runtime Extensions](./runtime-extensions.md) file `zuplo.runtime.ts`, as
-follows:
+[Runtime Extensions](../programmable-api/runtime-extensions.md) file
+`zuplo.runtime.ts`, as follows:
 
 ```ts title="modules/zuplo.runtime.ts"
 import {

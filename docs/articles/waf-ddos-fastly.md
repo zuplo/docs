@@ -18,7 +18,7 @@ that your API Gateway is only accessible through the WAF.
 The information below is a summary of Fastly's own recommendations for securing
 your backend - regardless of whether you are using Zuplo, another API Gateway,
 or Fastly origins. You can reference the
-[Fastly documentation](https://www.fastly.com/documentation/guides/integrations/backends/).
+[Fastly documentation](https://www.fastly.com/documentation/guides/integrations/non-fastly-services/developer-guide-backends/).
 
 ### IP Address Restrictions
 

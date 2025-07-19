@@ -6,13 +6,7 @@ description:
   navigation for a tailored API documentation experience.
 ---
 
-:::danger
-
-This documentation is for the legacy version of the Dev Portal. If you are
-looking for the new preview developer portal, please refer to the
-[docs](/docs/dev-portal/introduction).
-
-:::
+<LegacyDevPortal />
 
 You can add custom pages to your developer portal to provide more documentation
 to your API users. You are in full control of the content and how users will

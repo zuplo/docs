@@ -3,13 +3,7 @@ title: Step 2 - Configure Subscription Events
 sidebar_label: Step 2 - Configure Subscription Events
 ---
 
-:::danger
-
-This documentation is for the legacy version of the Dev Portal and Monetization
-capabilities. If you are looking for the new preview developer portal, please
-refer to the [docs](/docs/dev-portal/introduction).
-
-:::
+<LegacyMonetization />
 
 In the [previous step](./monetization-dev-portal-setup.md), you configured the
 Developer Portal to enable your customers to subscribe to your Zuplo API. In
@@ -67,9 +61,9 @@ plugin adds an endpoint that's used when configuring the Stripe Webhook.
 :::note
 
 The **zuplo.runtime.ts** file is where you can
-[register global plugins](https://zuplo.com/docs/articles/runtime-extensions#plugin-and-handler-extensions)
-and [setup hooks](https://zuplo.com/docs/articles/runtime-extensions#hooks)
-within your Zuplo API.
+[register global plugins](../programmable-api/runtime-extensions.md#plugin-and-handler-extensions)
+and [setup hooks](../programmable-api/runtime-extensions.md#hooks) within your
+Zuplo API.
 
 :::
 

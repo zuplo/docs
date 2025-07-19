@@ -2,6 +2,7 @@ import { glob } from "glob";
 import path from "node:path";
 import { readFile, writeFile } from "node:fs/promises";
 import matter from "gray-matter";
+import { format } from "prettier";
 
 const projectDir = path.join(import.meta.dirname, "..");
 const errorMds = await glob("docs/errors/*.{md,mdx}", {
@@ -29,12 +30,15 @@ for (const errorMd of errorMds) {
   });
 }
 
-await writeFile(
-  path.join(projectDir, "generated/errors.ts"),
-  `
+let code = `
 /**
   * This file is auto-generated. Do not modify this file manually.
   */
 export const errors = ${JSON.stringify(errorDocs, null, 2)};
-`.trim(),
-);
+`.trim();
+
+code = await format(code, {
+  parser: "typescript",
+});
+
+await writeFile(path.join(projectDir, "src/errors.ts"), code);

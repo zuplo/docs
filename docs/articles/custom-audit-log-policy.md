@@ -21,8 +21,9 @@ as well (for example retrieve a secret key, etc.)
 
 [WorkOS](https://workos.com/) provides various services that help enable
 enterprise features on your service such as SSO and Audit Logs. With Zuplo it's
-easy to create a [custom policy](/docs/policies/custom-code-inbound) that uses
-[runtime hooks](./runtime-extensions.md) to log API calls using their API.
+easy to create a [custom policy](../policies/custom-code-inbound.mdx) that uses
+[runtime hooks](../programmable-api/runtime-extensions.md) to log API calls
+using their API.
 
 ```ts
 import { ZuploContext, ZuploRequest, environment } from "@zuplo/runtime";
