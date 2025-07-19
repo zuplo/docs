@@ -124,3 +124,14 @@ jobs:
           headers: |-
             cache-control: max-age=31536000
             content-type: image/svg+xml
+
+      - name: Upload Media (webp)
+        uses: "google-github-actions/upload-cloud-storage@v2"
+        with:
+          path: dist/docs/assets/
+          glob: "**/*.webp"
+          destination: cdn.zuplo.com/docs
+          process_gcloudignore: false
+          headers: |-
+            cache-control: max-age=31536000
+            content-type: image/svg+xml
