@@ -36,21 +36,30 @@ jobs:
       - run: npm run build
 
       - name: Restore lychee cache
-        uses: actions/cache@v4
+        id: cache-lychee
+        uses: actions/cache/restore@v4
         with:
           path: .lycheecache
           key: lychee-cache-${{ hashFiles('.lycheecache') }}
           restore-keys: |
             lychee-cache-
 
-      - name: Link Checker (External)
-        uses: lycheeverse/lychee-action@v2
-        with:
-          args: --scheme https --scheme http --fallback-extensions html --root-dir $PWD/dist --include-fragments ./dist
       - name: Link Checker (Internal)
         uses: lycheeverse/lychee-action@v2
         with:
           args: --fallback-extensions html --root-dir $PWD/dist --include-fragments ./dist
+
+      - name: Link Checker (External)
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --scheme https --scheme http --fallback-extensions html --root-dir $PWD/dist --include-fragments ./dist
+
+      - name: Save lychee cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lycheecache
+          key: lychee-cache-${{ hashFiles('.lycheecache') }}
 
   static-assets:
     name: Upload Static Assets
