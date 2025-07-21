@@ -108,6 +108,8 @@ jobs:
           cache: "npm"
       - run: npm ci
 
+      - run: npm run build
+
       - name: Start development server
         run: |
           npm run dev &
