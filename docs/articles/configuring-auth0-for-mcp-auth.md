@@ -15,8 +15,8 @@ This guide will assume that you already have a working Auth0 account and tenant.
 First, you will need to create an Auth0 API. This API will be used to represent
 your MCP Server.
 
-1. In the Auth0 dashboard, navigate to the _Applications > APIs_ section and click **Create
-   API**.
+1. In the Auth0 dashboard, navigate to the _Applications > APIs_ section and
+   click **Create API**.
 2. Set the **Name** to something like "MCP Server" and the **Identifier** to the
    canonical URL of your MCP Server. For example, if your MCP Server is hosted
    at `https://my-gateway.zuplo.dev/mcp`, then the identifier would be
@@ -73,10 +73,12 @@ Next, you will need to configure an Auth0 Connection for your API.
    --data '{ "is_domain_connection": true }'
    ```
 
-5. Configure a Default Audience by clicking on Settings > General. Then in the API Authorization Settings, modify the Default Audience. See the Auth0 doc on
+5. Configure a Default Audience by clicking on Settings > General. Then in the
+   API Authorization Settings, modify the Default Audience. See the Auth0 doc on
    [API Authorization Settings](https://auth0.com/docs/get-started/tenant-settings#api-authorization-settings)
-   for more information on how to configure a default audience. The audience should be the identifier of the
-   API you created in [Create an Auth0 API](#create-an-auth0-api).
+   for more information on how to configure a default audience. The audience
+   should be the identifier of the API you created in
+   [Create an Auth0 API](#create-an-auth0-api).
 
 ### Configure OAuth on Zuplo
 
@@ -163,8 +165,8 @@ To connect to your remote Zuplo MCP server in the Inspector UI:
 1. Set the **Transport Type** to "Streamable HTTP"
 2. Set the **URL** to your Zuplo gateway with the route used by the MCP Server
    Handler (i.e., `https://my-gateway.zuplo.dev/mcp`)
-3. You will need to login using the
-   OAuth flow using the **Open Auth Settings** button.
+3. You will need to login using the OAuth flow using the **Open Auth Settings**
+   button.
 4. Hit **Connect**.
 
 For debugging your OAuth configuration, hit the **Open Auth Settings** button in
