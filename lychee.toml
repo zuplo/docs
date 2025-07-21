@@ -43,6 +43,7 @@
         "github.com",
         "localhots:3000",
         "https://ui.shadcn.com/docs/components/callout",
+        "platform.openai.com"
     ]
 
     # Headers to send with requests
