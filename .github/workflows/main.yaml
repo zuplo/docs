@@ -96,7 +96,6 @@ jobs:
 
   check-links:
     name: Check Links
-    needs: static-assets
     runs-on: ubuntu-latest
 
     steps:
@@ -111,6 +110,21 @@ jobs:
 
       - run: npm run build
 
+      - name: Start development server
+        run: |
+          npm run dev &
+          DEV_PID=$!
+          echo "DEV_PID=$DEV_PID" >> $GITHUB_ENV
+          # Wait for server to be ready
+          for i in {1..30}; do
+            if curl -s http://localhost:3000 > /dev/null; then
+              echo "Development server is ready"
+              break
+            fi
+            echo "Waiting for development server to start..."
+            sleep 2
+          done
+
       - name: Restore lychee cache
         id: cache-lychee
         uses: actions/cache/restore@v4
@@ -123,9 +137,17 @@ jobs:
       - name: Link Checker
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --fallback-extensions html --root-dir $PWD/dist --include-fragments ./dist
+          args: --fallback-extensions html --root-dir $PWD/dist --base http://localhost:3000 --include-fragments ./dist
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Kill development server
+        if: always()
+        run: |
+          if [ -n "$DEV_PID" ]; then
+            kill $DEV_PID || true
+          fi
+
       - name: Save lychee cache
         if: always()
         uses: actions/cache/save@v4
