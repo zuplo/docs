@@ -96,7 +96,6 @@ jobs:
 
   check-links:
     name: Check Links
-    needs: static-assets
     runs-on: ubuntu-latest
 
     steps:
