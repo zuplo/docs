@@ -7,7 +7,7 @@ In this tutorial we'll setup a simple gateway. We'll use a simple origin API at
 [getting-started.zuplo.io](https://getting-started.zuplo.io).
 
 Note - Zuplo also supports building and running your API locally. To learn more
-[see the documentation](./local-development.md).
+[see the documentation](./local-development.mdx).
 
 <Stepper>
 
@@ -34,7 +34,7 @@ Note - Zuplo also supports building and running your API locally. To learn more
    - **Request Handler**: We'll use the
      [URL Forward Handler](../handlers/url-forward.md) which proxies requests by
      "Forwarding to" the same path on specified URL. In this case, enter
-     `https://getting-started.zuplo.io`
+     `https://echo.zuplo.io`
 
    ![Your First Route](../../public/media/step-1-setup-basic-gateway/image-14.png)
 
@@ -50,10 +50,22 @@ Note - Zuplo also supports building and running your API locally. To learn more
 
    You should receive a 200 OK that says something similar to
 
-   ```txt
-   "Congratulations - You've successfully proxied my API endpoint. Want to know a
-   secret? Try changing your Route's path to /policies-test/secret and test your
-   route again after saving. The secret will be in the response."
+   ```json
+   {
+     "url": "https://echo.zuplo.io/path-1",
+     "method": "GET",
+     "query": {},
+     "headers": {
+       "accept-encoding": "gzip, br",
+       "connection": "Keep-Alive",
+       "host": "echo.zuplo.io",
+       "true-client-ip": "2a06:98c0:3600::103",
+       "x-forwarded-proto": "https",
+       "x-real-ip": "2a06:98c0:3600::103",
+       "zp-rid": "b9822e0f-af32-4002-a6ba-3a899c7f2669",
+       "zuplo-request-id": "b9822e0f-af32-4002-a6ba-3a899c7f2669"
+     }
+   }
    ```
 
    A secret? Let's try and find out what this API is hiding!
