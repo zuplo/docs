@@ -97,12 +97,10 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 
 - **`tokenExpiration`** (optional): Sets the default expiration time for JWTs.
   Can be either:
-
   - A **number**: Direct value in seconds (e.g., `300` for 5 minutes)
   - A **string**: Time span format (e.g., `"5 minutes"`, `"1 hour"`, `"7 days"`)
 
   Valid time units include:
-
   - Seconds: `"sec"`, `"secs"`, `"second"`, `"seconds"`, `"s"`
   - Minutes: `"minute"`, `"minutes"`, `"min"`, `"mins"`, `"m"`
   - Hours: `"hour"`, `"hours"`, `"hr"`, `"hrs"`, `"h"`

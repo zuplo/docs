@@ -35,7 +35,6 @@ sequentially for a smooth transition.
 
    Set up your new directory structure by creating the following files and
    folders:
-
    - Create `docs/zudoku.config.ts` as an empty file, the contents will be added
      later.
    - Create `docs/package.json` as an empty file, the contents will be added
@@ -294,7 +293,6 @@ sequentially for a smooth transition.
 1. **Test Locally**
 
    Start the dev portal locally with `npm run docs` and verify that:
-
    - All pages load correctly
    - Authentication works (if using it)
    - All links between pages work
@@ -304,7 +302,6 @@ sequentially for a smooth transition.
 1. **Delete Legacy Files**
 
    After confirming everything works, delete these files:
-
    - `/config/dev-portal.json`
    - `/docs/sidebar.json`
    - `/docs/theme.css`
@@ -322,7 +319,6 @@ sequentially for a smooth transition.
    Deploy your changes by either pushing to a git branch or by running
    [`npx zuplo deploy`](../cli/deployments.md). After the deployment has
    completed, perform these final checks:
-
    - Test all site navigation paths
    - Verify authentication flows work correctly
    - Check API reference documentation renders properly

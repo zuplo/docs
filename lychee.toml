@@ -1,48 +1,52 @@
-# Lychee configuration for Zuplo docs
+    # Lychee configuration for Zuplo docs
 
-# Cache settings
-cache = true
-max_cache_age = "1d"
+    # Cache settings
+    cache = true
+    max_cache_age = "1d"
 
-# Network settings
-max_concurrency = 10
-timeout = 20
-max_retries = 2
-retry_wait_time = 2
+    # Network settings
+    max_concurrency = 10
+    timeout = 20
+    max_retries = 2
+    retry_wait_time = 2
 
 
-# Exclude private IPs
-exclude_all_private = true
+    # Exclude private IPs
+    exclude_all_private = true
 
-# Accept these status codes as valid
-accept = [200, 201, 202, 203, 204, 301, 302, 303, 307, 308, 429]
+    # Accept these status codes as valid
+    accept = [200, 201, 202, 203, 204, 301, 302, 303, 307, 308, 429]
 
-# Exclude patterns
-exclude = [    
-    # Exclude Examples
-    "https://my-service-a2ev-uc.a.run.app/",
-    "portal.azure.com",
-    "portal.zuplo.com",
-    "dashboard.clerk.com",
-    "https://app.amberflo.io/ingest",
-    "auth0\\.com",
-    "example\\.(com|org|net)",
-    "https://zuplo.com/docs/400",
-    "https://zuplo.com/docs/404",
-    "https://zuplo.com/docs/500",
-    "stackoverflow.com",
-    "ecommerce-api.zuplo.io",
-    "ecommerce-legacy.zuplo.io",
-    "techdocs.akamai.com",
-    "metric-api.newrelic.com",
-    "log-api.newrelic.com",
-    "https://openid.net/specs/openid-connect-core-1_0.html#UserInfo",
-    "https://www.fastly.com/documentation/guides/concepts/edge-state/dynamic-config/#edge-dictionaries",
+    # Exclude patterns
+    exclude = [    
+        # Exclude Examples
+        "https://my-service-a2ev-uc.a.run.app/",
+        "portal.azure.com",
+        "portal.zuplo.com",
+        "dashboard.clerk.com",
+        "https://app.amberflo.io/ingest",
+        "auth0\\.com",
+        "example\\.(com|org|net)",
+        "https://zuplo.com/docs/400",
+        "https://zuplo.com/docs/404",
+        "https://zuplo.com/docs/500",
+        "stackoverflow.com",
+        "ecommerce-api.zuplo.io",
+        "ecommerce-legacy.zuplo.io",
+        "techdocs.akamai.com",
+        "metric-api.newrelic.com",
+        "log-api.newrelic.com",
+        "https://openid.net/specs/openid-connect-core-1_0.html#UserInfo",
+        "https://www.fastly.com/documentation/guides/concepts/edge-state/dynamic-config/#edge-dictionaries",
 
-    "cdn.simpleicons.org"
-]
+        "cdn.simpleicons.org",
+        "github.com",
+        "localhots:3000",
+        "https://ui.shadcn.com/docs/components/callout",
+        "platform.openai.com"
+    ]
 
-# Headers to send with requests
-[headers]
-user_agent = "Mozilla/5.0 (compatible; lychee/0.19.1)"
-accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+    # Headers to send with requests
+    [headers]
+    user_agent = "Mozilla/5.0 (compatible; lychee/0.19.1)"
+    accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"

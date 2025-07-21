@@ -130,7 +130,6 @@ use-cases.
 
 - **`rewritePattern`** (required): The URL pattern template for rewriting
   requests
-
   - Type: `string`
   - Supports JavaScript template interpolation with request context
   - Available variables: `env`, `request`, `context`, `params`, `query`,
@@ -139,7 +138,6 @@ use-cases.
 
 - **`forwardSearch`** (optional): Controls whether query parameters are
   forwarded
-
   - Type: `boolean`
   - Default: `true`
   - When `true`, query string is automatically included in rewritten URL

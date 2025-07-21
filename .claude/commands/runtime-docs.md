@@ -13,7 +13,6 @@ conceptual guides while maintaining cross-references.
    following these guidelines:
 
    ### Document Organization
-
    - Runtime API documentation goes in `docs/programmable-api/`
    - Handler documentation goes in `docs/handlers/`
    - Create an index.md file in programmable-api that provides an overview
@@ -24,7 +23,6 @@ conceptual guides while maintaining cross-references.
      `SchemaBasedRequestValidation`, `CryptoBeta`
 
    ### What to Document
-
    - All public (@public) and beta (@beta) APIs from the runtime
    - Classes: MemoryZoneReadThroughCache, StreamingZoneCache, ZoneCache,
      BackgroundLoader, BackgroundDispatcher, ContextData, Logger, RuntimeError,
@@ -41,7 +39,6 @@ conceptual guides while maintaining cross-references.
      using fetch.
 
    ### Documentation Strategy
-
    - Preserve existing good content from current docs
    - Augment existing docs with missing information from the API report
    - Create new docs for undocumented APIs
@@ -50,7 +47,6 @@ conceptual guides while maintaining cross-references.
      API report unless the existing docs have important context/examples
 
    ### Documentation Requirements
-
    - Write in markdown format
    - Use American English with present tense
    - Avoid passive voice and first-person pronouns
@@ -84,7 +80,6 @@ conceptual guides while maintaining cross-references.
 3. Update sidebar.ts to include all new documentation in appropriate sections
 
 4. Fix broken links:
-
    - Update references to moved files (e.g., `./compatibility-dates.md` →
      `../programmable-api/compatibility-dates.md`)
    - Update references from handlers to programmable-api docs
@@ -92,7 +87,6 @@ conceptual guides while maintaining cross-references.
    - Ensure all cross-references use correct relative paths
 
 5. Handle duplicated content:
-
    - If content is duplicated between programmable-api and articles:
      - Keep technical API details in programmable-api
      - Keep configuration/setup guides in articles

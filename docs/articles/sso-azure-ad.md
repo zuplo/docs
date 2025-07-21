@@ -11,7 +11,6 @@ client to be used with Zuplo.
    this process, see
    [Microsoft's quickstart](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
    Record the client ID value to share with Zuplo.
-
    - The application type should be "web".
    - The **Redirect URI** value should be set to
      `https://auth.zuplo.com/login/callback`

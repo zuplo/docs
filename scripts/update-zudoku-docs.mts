@@ -26,6 +26,23 @@ async function updateDocs(dir: string) {
       const stat = await fs.stat(filePath);
 
       if (stat.isFile()) {
+        // Skip non-text files to avoid corrupting binary files
+        const textExtensions = [
+          ".md",
+          ".mdx",
+          ".txt",
+          ".json",
+          ".yml",
+          ".yaml",
+        ];
+        const isTextFile = textExtensions.some((ext) =>
+          file.toLowerCase().endsWith(ext),
+        );
+
+        if (!isTextFile) {
+          continue; // Skip binary files like images
+        }
+
         let content = await fs.readFile(filePath, "utf8");
 
         content = content

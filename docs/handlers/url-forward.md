@@ -136,7 +136,6 @@ The URL Forward handler accepts the following options:
 
 - **`baseUrl`** (required): The base URL where the incoming pathname will be
   appended
-
   - Type: `string`
   - Supports template interpolation with environment variables and request
     properties
@@ -144,7 +143,6 @@ The URL Forward handler accepts the following options:
 
 - **`forwardSearch`** (optional): Controls whether query parameters are
   forwarded
-
   - Type: `boolean`
   - Default: `true`
   - When `true`, query string is automatically included in forwarded URL
