@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "zudoku dev",
-    "check:links": "lychee --fallback-extensions html --root-dir $PWD/dist --include-fragments ./dist",
+    "check:links": "lychee --offline --fallback-extensions html --root-dir $PWD/dist --include-fragments ./dist",
     "build": "zudoku build",
     "format": "prettier --write .",
     "format:ci": "prettier --check .",
