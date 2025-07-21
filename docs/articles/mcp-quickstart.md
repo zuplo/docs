@@ -28,7 +28,7 @@ If you're not familiar with Zuplo, it's recommended to go through the
 
    <Framed margin="10">
 
-   ![Complete Import](../../public/media/mcp-quickstart/complete-import.png)
+   ![Complete Import](../../public/media/mcp-quickstart/complete-import2.png)
 
    </Framed>
 
@@ -85,13 +85,13 @@ If you're not familiar with Zuplo, it's recommended to go through the
    Zuplo, clicking on your MCP Server route and then clicking **Test**. At the
    top you'll see a button to copy the URL to your clipboard.
 
-   ![Copy MCP Server URL](../../public/media/mcp-quickstart/copy-mcp-server-url.png)
+   ![Copy MCP Server URL](../../public/media/mcp-quickstart/copy-mcp-server-url2.png)
 
    Back to the OpenAPI playground...
 
    <Framed margin="7">
 
-   ![Connect MCP Server](../../public/media/mcp-quickstart/connect-mcp-server.png)
+   ![Connect MCP Server](../../public/media/mcp-quickstart/connect-mcp-server2.png)
 
    </Framed>
    1. Enter the URL of your MCP Server
