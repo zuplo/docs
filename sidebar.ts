@@ -211,6 +211,7 @@ export const docs: Navigation = [
       "articles/use-openapi-extension-data",
       "articles/non-standard-ports",
       "articles/convert-urls-to-openapi",
+      "articles/configuring-auth0-for-mcp-auth",
     ],
   },
   {
@@ -417,6 +418,7 @@ export const programming: Navigation = [
       "programmable-api/zp-body-removed",
       "programmable-api/zuplo-id-token",
       "programmable-api/jwt-service-plugin",
+      "programmable-api/oauth-protected-resource-plugin",
     ],
   },
 ];
@@ -533,6 +535,7 @@ export const policies: Navigation = [
     type: "category",
     label: "Upstream Authentication",
     items: [
+      "articles/oauth-authentication",
       "policies/upstream-azure-ad-service-auth-inbound",
       "policies/upstream-gcp-service-auth-inbound",
       "policies/upstream-gcp-federated-auth-inbound",

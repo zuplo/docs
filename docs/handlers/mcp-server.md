@@ -237,6 +237,95 @@ and the `mcp` options:
 
 ## Authentication
 
+### OAuth Authentication
+
+The MCP Protocol natively supports OAuth authentication to enable MCP Clients to
+authenticate and authorize themselves when calling tools. For more information,
+see the
+[official MCP Authentication documentation](https://modelcontextprotocol.io/specification/draft/basic/authorization).
+
+Zuplo allows you to configure any of the built-in OAuth policies (like Auth0,
+Okta, etc.) on the MCP Server route to secure it. To enable OAuth
+authentication, you will need to have an OAuth Authorization server configured.
+Specifically, the OAuth Authorization server will need to support the following
+things:
+
+1. (Optional but recommended) OAuth 2.0 Dynamic Client Registration
+2. Authorization Code Grant with PKCE
+3. Refresh Tokens
+
+For an example of a basic configuration of an Authorization Server with Auth0,
+see:
+[Setting up Auth0 as an Authentication Server for MCP OAuth Authentication](../articles/configuring-auth0-for-mcp-auth).
+
+Once you have configured your authorization server, you can do the following to
+enable OAuth authentication on your MCP Server:
+
+1. Create an OAuth policy on your MCP Server route. This policy will need to
+   have the option `"oAuthResourceMetadataEnabled": true`, for example:
+
+   ```json
+   {
+     "name": "mcp-oauth-inbound",
+     "policyType": "oauth-inbound",
+     "handler": {
+       "export": "Auth0JwtInboundPolicy",
+       "module": "$import(@zuplo/runtime)",
+       "options": {
+         "auth0Domain": "my-auth0-domain.us.auth0.com",
+         "audience": "https://my-mcp-audience",
+         "oAuthResourceMetadataEnabled": true
+       }
+     }
+   }
+   ```
+
+   In this example, the audience should be the identifier of the Auth0 API you
+   want your MCP Server to be protected by. For more information on configuring
+   OAuth JWT policies, see the
+   [OAuth Policy docs](../articles/oauth-authentication.md).
+
+2. Add the OAuth policy to the MCP Server route. For example:
+
+   ```json
+   "paths": {
+     "/mcp": {
+       "post": {
+         "x-zuplo-route": {
+           // etc. etc.
+           // other properties and route handlers for MCP
+
+           "policies": {
+             "inbound": [
+               "mcp-oauth-inbound"
+             ]
+           }
+         }
+       }
+     }
+   }
+   ```
+
+3. Add the `OAuthProtectedResourcePlugin` to your `runtimeInit` function in the
+   `zuplo.runtime.ts` file:
+
+   ```ts
+   import { OAuthProtectedResourcePlugin } from "@zuplo/runtime";
+
+   export function runtimeInit(runtime: RuntimeExtensions) {
+     runtime.addPlugin(
+       new OAuthProtectedResourcePlugin({
+         authorizationServers: ["https://your-auth0-domain.us.auth0.com"],
+         resourceName: "My MCP OAuth Resource",
+       }),
+     );
+   }
+   ```
+
+   See the
+   [OAuth Protected Resource Plugin docs](../programmable-api/oauth-protected-resource-plugin)
+   for more details.
+
 ### API Key Auth
 
 An MCP server on Zuplo can be configured to use an API key from a query
@@ -337,7 +426,9 @@ To connect to your remote Zuplo MCP server in the Inspector UI:
 1. Set the **Transport Type** to "Streamable HTTP"
 2. Set the **URL** to your Zuplo gateway with the route used by the MCP Server
    Handler (i.e., `https://my-gateway.zuplo.dev/mcp`)
-3. Hit **Connect**
+3. If you have configured OAuth authentication, you will need to login using the
+   OAuth flow using the **Open Auth Settings** button.
+4. Hit **Connect**.
 
 ### Curl
 
@@ -409,6 +500,65 @@ Read more about how calling tools works in
 [the Model Context Protocol server specification](https://modelcontextprotocol.io/specification/2025-03-26/server/tools).
 
 :::
+
+### OAuth Testing
+
+If you have configured OAuth authentication for your MCP Server, you can use the
+MCP Inspector to test the OAuth flow.
+
+Hit the **Open Auth Settings** button in the Inspector UI to start the OAuth
+flow. When first setting up the OAuth flow, it is recommmended to use the
+**Guided OAuth Flow** which you will see when you open the OAuth settings. This
+will allow you to debug the flow step by step.
+
+The OAuth flow involves the following steps, as shown in the MCP inspector
+guided auth flow. After you've checked each step, click the **Continue** button
+in the MCP Inspector UI to move to the next step.
+
+1. **Metadata Discovery**: The MCP Inspector will make a request to the
+   `.well-known/oauth-protected-resource` endpoint to learn about the OAuth
+   configuration. The MCP Inspector will then make a request to the
+   Authorization server which you configured in the
+   `OAuthProtectedResourcePlugin`, which will return the metadata it needs to
+   continue with the OAuth flow.
+
+   If you see errors in this part, check that you have correctly added the
+   `OAuthProtectedResourcePlugin` to your `zuplo.runtime.ts` file, and that you
+   have correctly configured the `authorizationServers` value to be the
+   canonical URL of your Authorization server, and registered an OAuth policy to
+   the route of your MCP server.
+
+2. **Client Registration**: The MCP Inspector will try to use
+   [Dynamic Client Registration](https://modelcontextprotocol.io/specification/draft/basic/authorization#dynamic-client-registration)
+   to register a new client with the Authorization server. Note that not all MCP
+   Clients require this, however at this time, the MCP Inspector does. You will
+   need to enable Dynamic Client Registration on your Authorization server if
+   you want to test the full flow through the MCP Inspector.
+
+   If you see errors in this step, check that you have enabled Dynamic Client
+   Registration on your Authorization server.
+
+3. **Preparing Authorization**: The MCP Inspector will then redirect the user to
+   the authorization server to login and authorize the MCP Client. Click the
+   redirect link in the Authorization URL section to be prompted to login. After
+   logging in, you will be given a code to copy in to the next step.
+
+4. **Request Authorization and acquire authorization code**: Take the copied
+   code from the last step and paste it in to the MCP Inspector and input it
+   into the box.
+
+5. **Token Request**: The MCP Inspector will do PKCE and make a request to the
+   `token` endpoint of your Authorization server to exchange the authorization
+   code for an access token. This is attached as the Authorization header when
+   calling your MCP server, typically as a Bearer token.
+
+6. **Authentication Complete**: You should now see a success message in the MCP
+   Inspector. You can now hit the **Connect** button to connect to your MCP
+   server.
+
+If you see errors in the flow in steps 2-6, check that you have correctly
+configured your Authorization server to support the OAuth 2.0 Authorization Code
+Grant with PKCE and Refresh Tokens.
 
 ### MCP Client
 
