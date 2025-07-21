@@ -8,7 +8,7 @@ stateless MCP server on your gateway that automatically transforms your API
 routes into MCP tools.
 
 🙋‍♀️ Want to try it out? Check out the
-[MCP Quickstart](/docs/articles/mcp-quickstart.md).
+[MCP Quickstart](../articles/mcp-quickstart.md).
 
 This enables your API gateway to seamlessly serve external AI tools and agents
 through [Model Context Protocol](https://modelcontextprotocol.io/introduction)
