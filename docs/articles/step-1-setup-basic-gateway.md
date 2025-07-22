@@ -3,113 +3,105 @@ title: Step 1 - Setup a Basic Gateway
 sidebar_label: "Step 1 - Setup Your Gateway"
 ---
 
-In this tutorial we'll setup a simple gateway. We'll use a demo API at
+In this tutorial we'll setup a simple gateway. We'll use a simple origin API at
 [getting-started.zuplo.io](https://getting-started.zuplo.io).
 
-To get started, sign in to [portal.zuplo.com](https://portal.zuplo.com) and
-create a free account. Create a new **empty** project. Then...
+Note - Zuplo also supports building and running your API locally. To learn more
+[see the documentation](./local-development.mdx).
 
-:::tip{title="Local Development"}
+<Stepper>
 
-Zuplo also supports building and running your API locally. To learn more
-[see the documentation](./local-development.md).
+1. **Sign-in**
 
-:::
+   Sign in to [portal.zuplo.com](https://portal.zuplo.com) and create a free
+   account. Create a new **empty** project. Then...
 
-## 1/ Add a Route
+1. Add your first **Route**
 
-Inside your new project, choose the `routes.oas.json` file and click **Add
-Route**.
+   Inside your new project, select the **Code** tab (1), choose the
+   `routes.oas.json` file (2) and click **Add Route** (3)
 
-![Add Route](../../public/media/step-1-setup-basic-gateway/add-route.png)
+   ![Add Route](../../public/media/step-1-setup-basic-gateway/add-route.png)
 
-Your API's first route will appear, with many configurable fields. Here's a
-quick overview of them:
+   Your API's first route will appear, with many options. First we'll configure
+   the route to match specific incoming requests to the gateway:
+   - **Summary**: Enter a summary, e.g. `Example Endpoint`.
+   - **Method**: Leave as `GET`.
+   - **Path**: Enter `path-1`.
 
-- **Summary**: A summary of what the route does, which will be used in Step 4
-  for documenting your API
-- **Method** and **Path**: The associated method and path for your endpoint.
-  This is what other services will use to call your API.
-- **CORS**: The [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
-  configuration for your path.
-- **Request Handler**: This is the piece of functionality that will be invoked
-  when a request comes through to your endpoint. By default, we're using the
-  [URL Forward Handler](../handlers/url-forward.md) which proxies requests to
-  the "Forward to" URL. In this case, https://getting-started.zuplo.io
+   Then we'll specify how the route will invoke the backend origin API, using a
+   forward handler:
+   - **Request Handler**: We'll use the
+     [URL Forward Handler](../handlers/url-forward.md) which proxies requests by
+     "Forwarding to" the same path on specified URL. In this case, enter
+     `https://echo.zuplo.io`
 
-![Your First Route](../../public/media/step-1-setup-basic-gateway/image-14.png)
+   ![Your First Route](../../public/media/step-1-setup-basic-gateway/image-14.png)
 
-Save your new route (you can click the three-dot menu next to `routes.oas.json`
-and then click **Save**, or press **CMD+S**).
+   **Save your changes** - click **Save** at the bottom left, or press **CMD+S**
 
-You can quickly test this route by clicking the **Test** button next to the
-**Path** field. You can use the built in test tool or click the URL to open in a
-new tab.
+1. **Test** your route.
 
-![Test your API](../../public/media/step-1-setup-basic-gateway/image-15.png)
+   You can quickly test this route by clicking the **Test** button next to the
+   **Path** field. You can use the built in test tool or click the URL to open
+   in a new tab.
 
-You should receive a 200 OK that says something similar to
+   ![Test your API](../../public/media/step-1-setup-basic-gateway/image-15.png)
 
-```txt
-"Congratulations - You've successfully proxied my API endpoint. Want to know a
-secret? Try changing your Route's path to /policies-test/secret and test your
-route again after saving. The secret will be in the response."
-```
+   You should receive a 200 OK that says something similar to
 
-A secret? Let's try and find out what this API is hiding!
+   ```json
+   {
+     "url": "https://echo.zuplo.io/path-1",
+     "method": "GET",
+     "query": {},
+     "headers": {
+       "accept-encoding": "gzip, br",
+       "connection": "Keep-Alive",
+       "host": "echo.zuplo.io",
+       "true-client-ip": "2a06:98c0:3600::103",
+       "x-forwarded-proto": "https",
+       "x-real-ip": "2a06:98c0:3600::103",
+       "zp-rid": "b9822e0f-af32-4002-a6ba-3a899c7f2669",
+       "zuplo-request-id": "b9822e0f-af32-4002-a6ba-3a899c7f2669"
+     }
+   }
+   ```
 
-## 2/ Editing your Route
+   A secret? Let's try and find out what this API is hiding!
 
-Exit the test console and change your route's Path from `/path-0` to
-`/policies-test/secret`. Make sure to save your changes. Your calls will now be
-forwarded to `https://getting-started.zuplo.io/policies-test/secret`
+1. Put the base URL in an **Environment Variable**
 
-![Change the Path](../../public/media/step-1-setup-basic-gateway/image-16.png)
+   When working with Zuplo, you'll eventually want each
+   [environment](/docs/articles/environments) to use a different backend (e.g.
+   QA, staging, preview, production etc).
 
-Check out the new response when you fire a request at your route via the test
-console.
+   Change the **URL Forward** value to read the base URL from the
+   [Environment Variables](/docs/articles/environment-variables) system by
+   setting the value to `${env.BASE_URL}`. We will set the value for `BASE_URL`
+   next.
 
-```txt
-"You're now proxying my /policies-test/secret endpoint! My secret is that my
-endpoints don't have rate limiting 😳. Keep following the tutorial to learn how
-to add the rate limiting policy."
-```
+   ![BASE_URL from Environment](../../public/media/step-1-setup-basic-gateway/image-8.png)
 
-Looks like it's clear what we need to do next.
+   Navigate to your project's **Settings** tab (1) via the navigation bar. Next,
+   click **Environment Variables** (2) under Project Settings.
 
-**NEXT** Try
-[Step 2 - Add Rate Limiting to your API](./step-2-add-rate-limiting.md).
+   ![Click Environment Variables](../../public/media/step-1-setup-basic-gateway/set-env-var.png)
 
-## BONUS - Put the base URL in an Environment Variable
+   Add an Environment Variable (3) called `BASE_URL`. Leave the "Secret"
+   checkbox unchecked. This is typically not a secret, so there's no need to
+   hide this from your colleagues.
 
-When working with Zuplo, you'll eventually want each
-[environment](/docs/articles/environments) to use a different backend (e.g. QA,
-staging, preview, production etc).
+   <Framed margin={4}>
 
-Change the **URL Forward** value to read the base URL from the
-[Environment Variables](/docs/articles/environment-variables) system by setting
-the value to `${env.BASE_URL}`. We will set the value for `BASE_URL` next.
+   ![BASE_URL Environment Variable](../../public/media/step-1-setup-basic-gateway/env-var.png)
+   </Framed>
 
-![BASE_URL from Environment](../../public/media/step-1-setup-basic-gateway/image-8.png)
+   Save the environment variable, head back to the **Code** tab, click
+   `routes.oas.json`, and test your route again. You should get back the same
+   response from Step 2.
 
-Navigate to your project's **Settings** tab via the navigation bar. Next, click
-**Environment Variables** under Project Settings.
-![Click Settings](../../public/media/step-1-setup-basic-gateway/image-17.png)
-
-![Click Environment Variables](../../public/media/step-1-setup-basic-gateway/image-18.png)
-
-Add an Environment Variable called `BASE_URL`. Leave the "Secret" checkbox
-unchecked. This is typically not a secret, so there's no need to hide this from
-your colleagues.
-
-<Framed margin={4}>
-
-![BASE_URL Environment Variable](../../public/media/step-1-setup-basic-gateway/env-var.png)
-</Framed>
-
-Save the environment variable, head back to the **Code** tab, click
-`routes.oas.json`, and test your route again. You should get back the same
-response from Step 2.
+</Stepper>
 
 **NEXT** Try
 [Step 2 - Add Rate Limiting to your API](./step-2-add-rate-limiting.md).
