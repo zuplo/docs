@@ -17,7 +17,7 @@ other authentication methods.
 [Policies](./policies.md) are modules that can intercept and transform an
 incoming request or outgoing response. Zuplo offers a wide range of policies
 built-in (including api key authentication) to save you time. You can check out
-[the full list](../policies.md).
+[the full list](./policies.md).
 
 :::
 
@@ -36,7 +36,11 @@ Let's get started.
    Search for the API key authentication policy, click on it, and then click OK
    to accept the default policy JSON.
 
+   <ModalScreenshot>
+
    ![Add API Key Authentication](../../public/media/step-3-add-api-key-auth/choose-policy.png)
+
+   </ModalScreenshot>
 
    :::tip
 
@@ -83,7 +87,11 @@ Let's get started.
    Key manager, and leave the metadata empty for now. Click **Save consumer**
    once you're done.
 
+   <ModalScreenshot>
+
    ![New Consumer](../../public/media/step-3-add-api-key-auth/image-3.png)
+
+   </ModalScreenshot>
 
 3. Copy your API Key
 
@@ -97,7 +105,11 @@ Let's get started.
    Navigate back to the **Route Designer**, and select your route. Next to the
    path of your route, click the **Test** button and fire off a request.
 
+   <ModalScreenshot>
+
    ![Failed unauthorized error](../../public/media/step-3-add-api-key-auth/test-policy.png)
+
+   </ModalScreenshot>
 
    You should get a 401 Unauthorized response - as we'ven't supplied the API key
    yet. Add an new `authorization` header with the value `Bearer <YOUR_API_KEY>`
@@ -105,7 +117,11 @@ Let's get started.
 
    You should now get a 200 OK.
 
+   <ModalScreenshot>
+
    ![successful response](../../public/media/step-3-add-api-key-auth/image-6.png)
+
+   </ModalScreenshot>
 
    :::note
 
@@ -141,4 +157,4 @@ Let's get started.
 </Stepper>
 
 **NEXT** Try
-[Step 4 - Connect Source Control and Deploy to the Edge](./step-4-deploying-to-the-edge.md).
+[Step 4 - Connect Source Control and Deploy to the Edge](./step-4-deploying-to-the-edge.mdx).

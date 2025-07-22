@@ -34,11 +34,19 @@ limiter.
         click the **Policies** dropdown, then click **Add Policy** on the request
         pipeline.
 
+        <ModalScreenshot>
+
         ![Add policy](../../public/media/step-2-add-rate-limiting/image.png)
+
+        </ModalScreenshot>
 
         Search for the rate limiting policy (not the "Complex" one) and click it.
 
+        <ModalScreenshot>
+
         ![Add rate-limiting policy](../../public/media/step-2-add-rate-limiting/choose-rate-limiter.png)
+
+        </ModalScreenshot>
 
         By default, the policy will rate limit based on the caller's IP address (as
         indicated by the `rateLimitBy` field). It will allow 2 requests
@@ -54,7 +62,11 @@ limiter.
         Now try firing some requests against your API. You should receive a **429 Too
         many requests** on your 3rd request.
 
+        <ModalScreenshot>
+
         ![429 response](../../public/media/step-2-add-rate-limiting/test-api.png)
+
+        </ModalScreenshot>
 
         Your rate limiting policy is now intercepting excess requests, protecting the
         `getting-started` API.

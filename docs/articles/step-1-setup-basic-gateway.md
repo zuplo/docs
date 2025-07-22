@@ -46,7 +46,11 @@ Note - Zuplo also supports building and running your API locally. To learn more
    **Path** field. You can use the built in test tool or click the URL to open
    in a new tab.
 
+   <ModalScreenshot>
+
    ![Test your API](../../public/media/step-1-setup-basic-gateway/image-15.png)
+
+   </ModalScreenshot>
 
    You should receive a 200 OK that says something similar to
 
@@ -92,10 +96,11 @@ Note - Zuplo also supports building and running your API locally. To learn more
    checkbox unchecked. This is typically not a secret, so there's no need to
    hide this from your colleagues.
 
-   <Framed margin={4}>
+   <ModalScreenshot>
 
    ![BASE_URL Environment Variable](../../public/media/step-1-setup-basic-gateway/env-var.png)
-   </Framed>
+
+   </ModalScreenshot>
 
    Save the environment variable, head back to the **Code** tab, click
    `routes.oas.json`, and test your route again. You should get back the same
