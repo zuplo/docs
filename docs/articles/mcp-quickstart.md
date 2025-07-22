@@ -26,11 +26,11 @@ If you're not familiar with Zuplo, it's recommended to go through the
    Select the **Code** tab (1), then choose the `routes.oas.json` file (2) and
    choose **Import OpenAPI** (3).
 
-   <Framed margin="10">
+   <ModalScreenshot size="sm">
 
-   ![Complete Import](../../public/media/mcp-quickstart/complete-import2.png)
+   ![Complete Import](../../public/media/mcp-quickstart/complete-import.png)
 
-   </Framed>
+   </ModalScreenshot>
 
    Click **Complete Import** to import the routes.
 
@@ -85,15 +85,15 @@ If you're not familiar with Zuplo, it's recommended to go through the
    Zuplo, clicking on your MCP Server route and then clicking **Test**. At the
    top you'll see a button to copy the URL to your clipboard.
 
-   ![Copy MCP Server URL](../../public/media/mcp-quickstart/copy-mcp-server-url2.png)
+   ![Copy MCP Server URL](../../public/media/mcp-quickstart/copy-mcp-server-url.png)
 
    Back to the OpenAPI playground...
 
-   <Framed margin="7">
+   <ModalScreenshot size="sm">
 
-   ![Connect MCP Server](../../public/media/mcp-quickstart/connect-mcp-server2.png)
+   ![Connect MCP Server](../../public/media/mcp-quickstart/connect-mcp-server.png)
 
-   </Framed>
+   </ModalScreenshot>
    1. Enter the URL of your MCP Server
    2. Enter a label, try `todos`
    3. Choose **None** for Authentication as we didn't add auth to our API
@@ -101,11 +101,11 @@ If you're not familiar with Zuplo, it's recommended to go through the
 
    If successfully connected, you'll see your 'tools' listed in the playground.
 
-   <Framed margin="7">
+   <ModalScreenshot size="sm">
 
    ![Add tools](../../public/media/mcp-quickstart/add-tools.png)
 
-   </Framed>
+   </ModalScreenshot>
 
    No need to deselect any tools, let's add them all!
 
