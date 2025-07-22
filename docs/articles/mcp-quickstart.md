@@ -28,7 +28,7 @@ If you're not familiar with Zuplo, it's recommended to go through the
 
    <ModalScreenshot size="sm">
 
-   ![Complete Import](../../public/media/mcp-quickstart/complete-import2.png)
+   ![Complete Import](../../public/media/mcp-quickstart/complete-import.png)
 
    </ModalScreenshot>
 
@@ -103,7 +103,7 @@ If you're not familiar with Zuplo, it's recommended to go through the
 
    <ModalScreenshot size="sm">
 
-   ![Add tools](../../public/media/mcp-quickstart/add-tools1.png)
+   ![Add tools](../../public/media/mcp-quickstart/add-tools.png)
 
    </ModalScreenshot>
 
