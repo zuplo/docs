@@ -29,8 +29,6 @@ const combined = [...docs, ...components].filter(
 
 function updatePaths(item) {
   if (typeof item === "string") {
-    console.log({ item });
-
     item = `dev-portal/zudoku/${item.replace(/^docs\//, "")}`;
   } else if (typeof item === "object") {
     if (item.link) {
