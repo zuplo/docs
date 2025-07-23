@@ -25,24 +25,24 @@
   },
   "dependencies": {
     "@sentry/react": "^9.2.0",
-    "@sentry/vite-plugin": "^3.2.1",
+    "@sentry/vite-plugin": "^4.0.0",
     "@xyflow/react": "^12.4.2",
     "elkjs": "^0.9.3",
     "lucide-react": "^0.516.0",
     "posthog-js": "^1.249.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "zudoku": "^0.55.0"
+    "zudoku": "^0.55.1"
   },
   "devDependencies": {
     "@types/json-schema": "7.0.15",
     "@types/node": "^22.10.7",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.2",
-    "@typescript-eslint/parser": "^8.34.1",
+    "@typescript-eslint/parser": "^8.37.0",
     "concurrently": "^9.2.0",
     "esbuild": "^0.25.0",
-    "eslint": "^9.29.0",
+    "eslint": "^9.31.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.3",
     "glob": "11.0.0",
