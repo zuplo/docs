@@ -41,10 +41,10 @@ fi
 
 log "Extracted directory: $EXTRACTED_DIR"
 
-if [ -d "$EXTRACTED_DIR/docs/pages" ]; then
+if [ -d "$EXTRACTED_DIR/docs/pages/docs" ]; then
     log "Copying 'pages' folder to $DEST_DIR..."
     mkdir -p "$DEST_DIR"
-    cp -r "$EXTRACTED_DIR/docs/pages/"* "$DEST_DIR"
+    cp -r "$EXTRACTED_DIR/docs/pages/docs/"* "$DEST_DIR"
 else
     log "Error: 'pages' folder not found in the extracted contents."
     exit 1
