@@ -12,7 +12,7 @@ API management product.
 
 :::danger
 
-**The monetization service will be fully shut down on October 27th, 2025.**
+**The monetization service will be fully shut down on November 15th, 2025.**
 
 No new projects can be created with the legacy monetization features, effective
 immediately.
@@ -99,7 +99,7 @@ We are committed to supporting our existing monetization customers through this
 transition:
 
 1. **Continued Support**: Existing v1 monetization deployments will continue to
-   function until October 27th, 2025
+   function until November 15th, 2025
 2. **Migration Assistance**: Our team will help you migrate to OpenMeter or
    another supported platform
 3. **Documentation**: Comprehensive guides for migrating from v1 to the new
