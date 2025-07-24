@@ -5,11 +5,10 @@
     "icon": "settings",
     "link": "dev-portal/zudoku/configuration/overview",
     "items": [
+      "dev-portal/zudoku/customization/colors-theme",
       "dev-portal/zudoku/configuration/docs",
       "dev-portal/zudoku/configuration/navigation",
       "dev-portal/zudoku/configuration/site",
-      "dev-portal/zudoku/customization/colors-theme",
-      "dev-portal/zudoku/customization/fonts",
       "dev-portal/zudoku/configuration/search",
       "dev-portal/zudoku/configuration/footer"
     ]

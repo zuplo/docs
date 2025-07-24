@@ -669,6 +669,11 @@
       "permanent": true
     },
     {
+      "source": "/docs/articles/bonus-dynamic-rate-limiting{/}?",
+      "destination": "/docs/articles/step-5-dynamic-rate-limiting",
+      "permanent": true
+    },
+    {
       "source": "/docs/reference/testing-your-api{/}?",
       "destination": "/docs/articles/testing",
       "permanent": true

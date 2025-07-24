@@ -47,8 +47,9 @@ async function updateDocs(dir: string) {
 
         content = content
           .replace(new RegExp("Zudoku ", "g"), "Dev Portal ")
-          // Rewrite internal links to start with /dev-portal/zudoku/
-          .replace(/(?<=\]\()\//g, "/dev-portal/zudoku/");
+          // Rewrite internal links
+          .replace(/(?<=\]\()\/docs/g, "/dev-portal/zudoku") // Replace /docs with /dev-portal/zudoku
+          .replace(/(?<=\]\()\/(?!dev-portal\/zudoku)/g, "/dev-portal/zudoku/"); // Add /dev-portal/zudoku/ to links that don't start with /docs
 
         // // Insert text after frontmatter
         // const frontmatterEndIndex = content.indexOf("---", 3) + 3;
