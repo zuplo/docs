@@ -213,6 +213,7 @@ export const docs: Navigation = [
       "articles/non-standard-ports",
       "articles/convert-urls-to-openapi",
       "articles/configuring-auth0-for-mcp-auth",
+      "articles/monetization-using-openmeter"
     ],
   },
   {
