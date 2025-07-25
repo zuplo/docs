@@ -53,7 +53,7 @@ Create a new OpenMeter Secret Token. You can do this in the
 _[Integrations > API](https://openmeter.cloud/rest-api)_ section of your
 OpenMeter dashboard:
 
-![The OpenMeter Dashboard showing the secret token section for API key creation](/public/media/monetization/openmeter-create-token.png)
+![The OpenMeter Dashboard showing the secret token section for API key creation](../../public/media/monetization/openmeter-create-token.png)
 
 Then edit the `.env` file and add it to the `OPENMETER_API_KEY` variable.
 
@@ -101,7 +101,7 @@ account.
 - `ZUPLO_API_KEY_SERVICE_BUCKET_NAME`: For storing API key data. You can get the
   Bucket Name from the Services section of your Zuplo project
 
-![The Zuplo API Key Service bucket name in the Services section of a Zuplo project](/public/media/monetization/zuplo-api-bucket-name.png)
+![The Zuplo API Key Service bucket name in the Services section of a Zuplo project](../../public/media/monetization/zuplo-api-bucket-name.png)
 
 - `ZUPLO_DEVELOPER_API_KEY`: An
   [API key for working with your Zuplo account](http://localhost:3000/docs/articles/api-key-administration)
@@ -201,7 +201,9 @@ All the setup steps are complete! Now it's time to run the example locally.
 </Stepper>
 
 <ModalScreenshot size="xl">
-![The developer portal API playground showing a 401 unauthorized request](/public/media/monetization/401-unauthorized.png)
+
+![The developer portal API playground showing a 401 unauthorized request](../../public/media/monetization/401-unauthorized.png)
+
 </ModalScreenshot>
 
 ## Creating a user
@@ -236,7 +238,9 @@ directly from within the portal itself.
 </Stepper>
 
 <ModalScreenshot size="sm">
-![Creating an API key in the Zuplo developer portal](/public/media/monetization/api-key.png)
+
+![Creating an API key in the Zuplo developer portal](../../public/media/monetization/api-key.png)
+
 </ModalScreenshot>
 
 Your key will be generated, but there's also some OpenMeter magic that happened
@@ -283,7 +287,9 @@ wisely!).
    todos returned and get a `200 OK` response.
 
 <ModalScreenshot size="xl">
-![A successful API request using a preset API key in the API playground](/public/media/monetization/request-success.png)
+
+![A successful API request using a preset API key in the API playground](../../public/media/monetization/request-success.png)
+
 </ModalScreenshot>
 
 Once you use all your available quota, you will no longer be able to make
