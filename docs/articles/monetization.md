@@ -23,9 +23,9 @@ leading billing and metering platforms to give you:
 
 ### OpenMeter Integration
 
-Our [OpenMeter Metering Policy](../policies/openmeter-metering-inbound.mdx)
-provides production-ready integration with [OpenMeter](https://openmeter.io/), a
-modern usage-based billing platform. Features include:
+Our [OpenMeter Metering Policy](../policies/openmeter-inbound.mdx) provides
+production-ready integration with [OpenMeter](https://openmeter.io/), a modern
+usage-based billing platform. Features include:
 
 - **Real-time usage tracking** - Track API requests and custom metrics as they
   happen
