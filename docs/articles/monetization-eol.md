@@ -1,6 +1,6 @@
 ---
 title: Monetization V1 End of Life
-sidebar_label: End of Life
+sidebar_label: End of Life (Monetization V1)
 ---
 
 We are announcing the end of life for Zuplo's v1 monetization product. This
@@ -85,7 +85,7 @@ A production-ready policy that:
 
 We have created a comprehensive example that demonstrates:
 
-- End-to-end API monetization with Zuplo and OpenMeter
+- Integrating Zuplo and OpenMeter to keep users and customers in sync
 - Developer portal integration for self-service API key creation
 - Automatic customer provisioning and plan assignment
 - Usage tracking and quota enforcement
