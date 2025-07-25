@@ -230,6 +230,7 @@ export const docs: Navigation = [
       "cli/convert",
       "cli/deployments",
       "cli/project",
+      "cli/source",
       "cli/test",
       "cli/tunnels",
       "cli/variables",
