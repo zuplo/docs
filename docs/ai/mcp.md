@@ -196,14 +196,14 @@ const checkCustomerOrder = mcpSdk.defineTool({
 #### Getting Started with Custom Tools
 
 1. Create custom tool definitions using the SDK
-2. Register tools with the MCP Custom Tools plugin
+2. Configure tools in the MCP Server Handler
 3. Deploy and test with MCP clients
 
-[Read the full documentation on MCP Custom Tools](/docs/programmable-api/mcp-custom-tools)
+[Read the full documentation on MCP Custom Tools](/docs/handlers/mcp-server-custom-tools)
 
 ## Learn More
 
 - [MCP Server Handler Technical Documentation](/docs/handlers/mcp-server)
-- [MCP Custom Tools Documentation](/docs/programmable-api/mcp-custom-tools)
+- [MCP Custom Tools Documentation](/docs/handlers/mcp-server-custom-tools)
 - [Model Context Protocol Specification](https://spec.modelcontextprotocol.io/)
 - [OpenAPI Specification](https://swagger.io/specification/)
