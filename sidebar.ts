@@ -184,7 +184,6 @@ export const docs: Navigation = [
       "articles/monetization",
       "articles/monetization-using-openmeter",
       "articles/monetization-enterprise",
-      "articles/monetization-eol",
     ],
   },
   {
