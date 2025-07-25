@@ -344,11 +344,7 @@ export const programming: Navigation = [
       "programmable-api/environment",
     ],
   },
-  {
-    type: "category",
-    label: "AI",
-    items: ["programmable-api/mcp-custom-tools"],
-  },
+
   {
     type: "category",
     label: "Caching APIs",
@@ -589,7 +585,12 @@ export const policies: Navigation = [
       "handlers/url-rewrite",
       "handlers/custom-handler",
       "handlers/aws-lambda",
-      "handlers/mcp-server",
+      {
+        type: "category",
+        label: "MCP Server",
+        link: "handlers/mcp-server",
+        items: ["handlers/mcp-server-custom-tools"],
+      },
       "handlers/redirect",
       "handlers/openapi",
       "handlers/system-handlers",
