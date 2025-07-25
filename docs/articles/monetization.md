@@ -133,7 +133,6 @@ Create [custom inbound](../policies/custom-code-inbound.mdx) and
 [outbound policies](../policies/custom-code-outbound.mdx) to:
 
 - Calculate dynamic pricing based on request/response characteristics
-- Implement complex rate limiting based on customer tiers
 - Track custom metrics and dimensions
 - Integrate with any external billing API
 
@@ -143,7 +142,8 @@ Use Zuplo's [hooks system](/docs/programmable-api/hooks) to:
 
 - Send usage events to your billing system
 - Update customer limits in real-time
-- Trigger workflows based on usage patterns
+- Send metrics to external systems using plugins like the
+  [Azure Event Hubs Plugin](./plugin-azure-event-hubs.md)
 
 ## Resources
 
