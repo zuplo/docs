@@ -3,9 +3,8 @@ title: Monetization using OpenMeter
 sidebar_label: OpenMeter Monetization
 ---
 
-In order to enable a flexible approach to monetizing an API, we recommend using
-[OpenMeter](https://openmeter.io/) to handle metering, customer tracking,
-subscription plans and invoicing.
+Zuplo integrates with [OpenMeter](https://openmeter.io/) to handle metering,
+customer tracking, subscription plans and invoicing.
 
 Our [OpenMeter Metering Policy](../policies/openmeter-metering-inbound) allows
 you to track metered events as well as ensure that customers who are at, or

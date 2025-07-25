@@ -119,7 +119,7 @@ that demonstrates:
 
 - Self-service API key creation
 - Automatic customer provisioning
-- Plan assignment and upgrades
+- Plan assignment on creation of API key
 - Usage tracking and quota enforcement
 
 ## Programmable API Gateway
@@ -151,7 +151,7 @@ Use Zuplo's [hooks system](/docs/programmable-api/hooks) to:
   <div className="border rounded-lg p-6">
     <h3 className="text-lg font-semibold mb-2">Try OpenMeter Integration</h3>
     <p className="mb-4">Get started with usage-based billing in minutes</p>
-    <a href="./monetization-using-openmeter.md" className="text-primary hover:underline">View guide →</a>
+    <a href="./monetization-using-openmeter" className="text-primary hover:underline">View guide →</a>
   </div>
   
   <div className="border rounded-lg p-6">
