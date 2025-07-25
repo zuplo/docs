@@ -9,7 +9,28 @@ This guide walks you through migrating your existing documentation from the
 current Dev Portal to the new Dev Portal powered by Zudoku. Follow these steps
 sequentially for a smooth transition.
 
-## Migration Process
+## Quick Migration with CLI
+
+For most projects, you can use the Zuplo CLI to automate the migration process:
+
+```bash
+npx zuplo source migrate dev-portal
+```
+
+This command will automatically:
+
+- Create the required directory structure
+- Generate necessary configuration files
+- Migrate your existing dev portal configuration
+- Move markdown files to the correct location
+
+See the [Source Commands](../cli/source.md) documentation for more details and
+options.
+
+If you prefer to understand each step or need more control over the migration
+process, continue with the manual migration steps below.
+
+## Manual Migration Process
 
 <Stepper>
 
