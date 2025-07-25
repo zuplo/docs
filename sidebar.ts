@@ -179,6 +179,15 @@ export const docs: Navigation = [
   },
   {
     type: "category",
+    label: "Monetization",
+    items: [
+      "articles/monetization",
+      "articles/monetization-using-openmeter",
+      "articles/monetization-enterprise",
+    ],
+  },
+  {
+    type: "category",
     label: "API Keys",
     link: "articles/api-key-management",
     items: [
@@ -485,7 +494,6 @@ export const policies: Navigation = [
     items: [
       "policies/quota-inbound",
       "policies/moesif-inbound",
-      "policies/monetization-inbound",
       "policies/amberflo-metering-inbound",
       "policies/readme-metrics-inbound",
       "policies/openmeter-metering-inbound",
@@ -627,34 +635,6 @@ export const legacy: Navigation = [
       "legacy/dev-portal/dev-portal-json",
       "legacy/dev-portal/dev-portal-create-consumer-on-auth",
       "legacy/dev-portal/dev-portal-inject-html",
-    ],
-  },
-  {
-    type: "category",
-    display: "hide",
-    label: "Monetization (Legacy)",
-    link: "articles/monetization",
-    items: [
-      {
-        type: "category",
-        label: "Quick Start",
-        items: [
-          "articles/monetization-dev-portal-setup",
-          "articles/monetization-webhook-setup",
-          "articles/monetization-policy-setup",
-        ],
-      },
-      {
-        type: "category",
-        label: "Reference",
-        items: [
-          "articles/monetization-glossary",
-          "articles/monetization-programmatic-quotas",
-          "articles/stripe-monetization-plugin",
-          "articles/monetization-subscription",
-          "articles/monetization-limitations",
-        ],
-      },
     ],
   },
 ];

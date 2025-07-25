@@ -1082,6 +1082,41 @@
       "source": "/docs/programmable-api/index{/}?",
       "destination": "/docs/programmable-api/overview",
       "permanent": true
+    },
+    {
+      "source": "/docs/articles/monetization-dev-portal-setup{/}?",
+      "destination": "/docs/articles/monetization",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/monetization-glossary{/}?",
+      "destination": "/docs/articles/monetization",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/monetization-limitations{/}?",
+      "destination": "/docs/articles/monetization",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/monetization-policy-setup{/}?",
+      "destination": "/docs/articles/monetization",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/monetization-programmatic-quotas{/}?",
+      "destination": "/docs/articles/monetization",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/monetization-subscription{/}?",
+      "destination": "/docs/articles/monetization",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/monetization-webhook-setup{/}?",
+      "destination": "/docs/articles/monetization",
+      "permanent": true
     }
   ],
   "rewrites": [
