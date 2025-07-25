@@ -264,11 +264,15 @@ to keep everything linked together.
 
 You can see the full source code for this in `modules/apiKeys.ts`.
 
-:::info OpenMeter is incredibly flexible, as is the Zuplo Developer Portal, so
-there are many ways that a similar flow could be created for your users at
-various times in their lifecycle, as well as from other places such as your own
-website. This example serves as a guide to the steps that need to be taken, and
-you can adapt them for your own use case. :::
+:::info
+
+OpenMeter is incredibly flexible, as is the Zuplo Developer Portal, so there are
+many ways that a similar flow could be created for your users at various times
+in their lifecycle, as well as from other places such as your own website. This
+example serves as a guide to the steps that need to be taken, and you can adapt
+them for your own use case.
+
+:::
 
 ## Test As a Registered User
 
