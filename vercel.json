@@ -1117,6 +1117,11 @@
       "source": "/docs/articles/monetization-webhook-setup{/}?",
       "destination": "/docs/articles/monetization",
       "permanent": true
+    },
+    {
+      "source": "/docs/policies/openmeter-metering-inbound{/}?",
+      "destination": "/docs/policies/openmeter-inbound",
+      "permanent": true
     }
   ],
   "rewrites": [
