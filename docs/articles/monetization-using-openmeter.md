@@ -7,29 +7,24 @@ In order to enable a flexible approach to monetizing an API, we recommend using
 [OpenMeter](https://openmeter.io/) to handle metering, customer tracking,
 subscription plans and invoicing.
 
-To enable you to create a seamless experience with Zuplo and OpenMeter we have
-an OpenMeter Metering Policy that allows you to store any metered events as well
-as ensure that customers who are at or over the limit of their allowed plans,
-cannot continue to make requests.
+Our [OpenMeter Metering Policy](../policies/openmeter-metering-inbound) allows you to track metered events as well as ensure that customers who are at, or over, the limit of their allowed plans, cannot continue to make requests.
 
-This example demonstrates using our OpenMeter policy to track API requests into
-OpenMeter. Additionally, it includes an integration between the built-in Zuplo
-Dev Portal and OpenMeter that allows users to self-serve sign up, be assigned a
-limited free plan for their API requests, and create API keys.
+This example demonstrates using our OpenMeter policy to:
+
+* Track API requests in OpenMeter
+* Check user access/plan limit to ensure requests are allowed
+* Allow users to self-serve sign up and create API keys
+* Assign a limited free plan to each new user
 
 ## Prerequisites
 
-### OpenMeter Account
+* **OpenMeter Account**: Sign up for OpenMeter's [free cloud based account](https://openmeter.io/pricing), or use the [self-hosted version](https://github.com/openmeterio/openmeter) on infrastructure of your choice (including Docker and Kubernetes).
 
-To work with this example you will need an OpenMeter account. You can sign up
-for their [free cloud based account](https://openmeter.io/pricing), or use the
-[self-hosted version](https://github.com/openmeterio/openmeter) on
-infrastructure of your choice (including Docker and Kubernetes).
+* **Zuplo Account**: If you don't already have a Zuplo account you can [sign up for free](https://portal.zuplo.com/signup).
 
-### Zuplo Account
+## Get the example code
 
-We recommend that you work with this example locally to give you the most
-flexibility. To get a local copy run:
+We recommend that you work with this example locally to give you the most flexibility. You can use the Zuplo CLI to set up a local copy using this example as a template:
 
 ```bash
 npx create-zuplo-api@latest --example https://github.com/zuplo/zuplo/tree/main/examples/metered-monetization
@@ -37,21 +32,19 @@ npx create-zuplo-api@latest --example https://github.com/zuplo/zuplo/tree/main/e
 
 ## Setting up OpenMeter
 
-This project includes an automated setup script that will configure the
-necessary OpenMeter resources for you. Follow these steps:
+The fastest way to run this project is to use the setup script to configure your OpenMeter instance with the expected features. Before you do that, you need to set up a few environment varialbles.
 
-<Stepper>
-
-### 1. Configure Environment Variables
-
-Before running the setup script, you'll need to configure your OpenMeter API
-key. Copy the `env.example` file to create your `.env` file:
+### 1. Copy the `env.example` file to create your `.env` file:
 
 ```bash
 cp env.example .env
 ```
 
-Then edit the `.env` file and set your OpenMeter API key:
+Create a new OpenMeter Secret Token. You can do this in the _[Integrations > API](https://openmeter.cloud/rest-api)_ section of your OpenMeter dashboard:
+
+![The OpenMeter Dashboard showing the secret token section for API key creation](/public/media/monetization/openmeter-create-token.png)
+
+Then edit the `.env` file and add it to the `OPENMETER_API_KEY` variable. 
 
 ```bash
 OPENMETER_API_KEY=your_actual_openmeter_api_key_here
@@ -70,9 +63,7 @@ npm install
 npm run setup
 ```
 
-</Stepper>
-
-This script will:
+The script uses the OpenMeter API to:
 
 - Create a meter with slug `api_requests_total`
 - Create a new feature for `api_requests` that users are given access to
@@ -92,48 +83,48 @@ running this script. Please refer to the OpenMeter documentation for
 
 ## Setup Environment Variables
 
-Once your OpenMeter instance is set up to work with this example, you can
-configure the rest of the environment variables.
+Once your OpenMeter instance is set up to work with this example, configure the rest of the required environment variables with information from your Zuplo account.
 
-- **`OPENMETER_FEATURE_KEY`**: The feature key that defines what you're metering
-  (e.g., "api-requests")
-- **`OPENMETER_SOURCE`**: Source identifier for your metering events (e.g.,
-  "zuplo-api")
-- **`OPENMETER_URL`**: OpenMeter API URL (defaults to `https://openmeter.cloud`
-  for cloud accounts)
-- **`API_KEY_SERVICE_BUCKET_NAME`**: Zuplo bucket name for storing API key data
-- **`ZUPLO_PUBLIC_DEPLOYMENT_NAME`**: Your Zuplo deployment name (used by the
-  docs portal)
-- **`ZUPLO_PUBLIC_SERVER_URL`**: Your Zuplo server URL (used by the docs portal)
+- `ZUPLO_API_KEY_SERVICE_BUCKET_NAME`: For storing API key data. You can get the Bucket Name from the Services section of your Zuplo project
 
-## Gateway Configuration
+![The Zuplo API Key Service bucket name in the Services section of a Zuplo project](/public/media/monetization/zuplo-api-bucket-name.png)
 
-### The API
+- `ZUPLO_DEVELOPER_API_KEY`: An [API key for working with your Zuplo account](http://localhost:3000/docs/articles/api-key-administration)
+- `ZUPLO_ACCOUNT_NAME`: The account name for your Zuplo account (eg. `significant-lemon`)
+
+## Example Project Overview
+
+The example project is made up of an API gateway, and a Developer Portal.
+
+- The API tracks requests into an OpenMeter instance using the OpenMeter Metering Policy
+- The Developer Portal allows user creation, API key generation and management and connects to OpenMeter to allow those users access to the API, and assigns them a specific price plan.
+
+### API Overview
 
 This example uses our Todo List API as a base. It's a simple CRUD API that
 allows users to create, update, and delete Todos and is centered around a mock
 API.
 
-### OpenMeter Metering Policy
+### OpenMeter Overview
 
-This example includes a pre-configured OpenMeter metering policy in
-`config/policies.json`. The policy is already set up to:
+The OpenMeter metering policy is pre-configured in
+`config/policies.json`. This configuration allows the API gateway to:
 
-1. **Track API requests**: Automatically meter each request that passes through
+* **Track API requests**: Automatically meter each request that passes through
    your gateway
-2. **Extract customer information**: Use the API key metadata to identify
+* **Extract customer information**: Use the API key metadata to identify
    customers
-3. **Send metering data**: Forward usage data to OpenMeter for tracking and
+* **Send metering data**: Forward usage data to OpenMeter for tracking and
    billing
 
-The policy runs on the POST and GET routes, but not on DELETE (but you're
+The policy runs on the `POST` and `GET` routes, but not on `DELETE` (but you're
 welcome to add it).
 
-It will check if a user has access and/or balance left on their plan by calling
+The policy will check if a user has access and/or balance left on their plan by calling
 the OpenMeter API, and if they do it will allow the request and meter the event
 in OpenMeter.
 
-The configuration for OpenMeter in `policies.json` looks like this:
+You can see the configuration for the OpenMeter Policy in `config/policies.json`.:
 
 ```json
 {
@@ -154,49 +145,43 @@ The configuration for OpenMeter in `policies.json` looks like this:
 }
 ```
 
-### Identifying Users for Metering
+### How Users Are Identified for Metering
 
-In this example, when a user creates an API key the `openmeter.subjectId` is
-added to the metadata for each API key.
+When a user creates an API key their corresponding `SubjectId` from OpenMeter is added to the metadata for each API key as `openmeter.subjectId`.
 
-This allows the OpenMeter Metering policy to correctly identify the user and
+This allows the OpenMeter policy to correctly identify the user and
 meter against their OpenMeter Subject ID regardless of whether the API key is
 used in the Dev Portal, an HTTP testing tool such as HTTPie, or in another
 application.
 
-This implementation is just an example as there are multiple places that the
-identifier for a subject could be stored and retrieved.
+If the user creates multiple API keys, they will all have the same `subjectId` assigned to them.
 
-## The Setup So Far
+:::info
 
-At this point you have:
+This implementation is just an example to help you understand the concepts of working with Zuplo and OpenMeter. There are multiple places that the `subjectId` could be stored and retrieved depending on your IDP and use cases.
 
-- Setup OpenMeter
-- Added the necessary OpenMeter elements by running `npm run setup`
-- Setup your environment variables
-
-Now it's time to test everything locally.
+:::
 
 ## Running Locally
 
+All the setup steps are complete! Now it's time to run the example locally.
+
 <Stepper>
-1. Start the servers for the API gateway and developer portal by running:
-
-```bash
-npm run dev
-npm run docs
-```
-
-2. Test that everything is set up correctly by loading the developer portal an
+1. Start the servers for the API gateway by running `npm run dev`
+2. Next, start the developer portal server by running `npm run docs`
+3. Test that everything is set up correctly by loading the developer portal an
    opening [http://localhost:3000](http://localhost:3000) in your browser. It
    will load the API reference for the Todo API.
-
-3. Next, use the API playground to test the _Get all todos_ route. It should
+4. Use the API playground to test the _Get all todos_ route. It should
    return `401 Unauthorized`.
 
 </Stepper>
 
-### Creating a user
+<ModalScreenshot size="xl">
+![The developer portal API playground showing a 401 unauthorized request](/public/media/monetization/401-unauthorized.png)
+</ModalScreenshot>
+
+## Creating a user
 
 Conceptually, creating a user via the Developer Portal would be the same as a
 user signing up for your service. In this example, users are created on the
@@ -215,29 +200,32 @@ default.
 ### Create an API Key
 
 The Zuplo Developer Portal supports the creation and management of API keys
-directly from within the portal itself (this is also an example of how that can
-be achieved).
-
-To create a new API key to use with the Todo API:
+directly from within the portal itself.
 
 <Stepper>
 
-1. Click on your name, and then on _API Keys_.
-2. Click on Create API Key
+1. Click on your name, and then on _API Keys_
+2. Click on _Create API Key_
 3. Give your API a name (this will display in the portal)
 4. (Optional) Set a key expiry date
-5. Click Generate Key
+5. Click _Generate Key_
 
 </Stepper>
 
+<ModalScreenshot size="sm">
+![Creating an API key in the Zuplo developer portal](/public/media/monetization/api-key.png)
+</ModalScreenshot>
+
 Your key will be generated, but there's also some OpenMeter magic that happened
-in the background. Let's explore that more so you can understand how this all
+in the background.
+
+Let's explore that more so you can understand how this all
 fits together.
 
-## How API Key Creation & OpenMeter Fit Together
+## How API Key Creation & OpenMeter Are Linked
 
-When an API key is created for the first time by a new user, several other API
-calls are made to the OpenMeter API to:
+When an API key is created for the first time by a new user, several additional API
+calls are made to the OpenMeter API:
 
 - Add the user to OpenMeter as a new `Subject`
 - Give the user an OpenMeter `Entitlement` to access the API in a metered way
@@ -245,16 +233,18 @@ calls are made to the OpenMeter API to:
   plan in this example allows 10 requests)
 
 Additionally, the OpenMeter Subject ID for the user is added to the API key
-metadata that is referenced by the OpenMeter Metering Policy to keep everything
+metadata that is referenced by the OpenMeter Metering Policy in the API gateway to keep everything
 linked together.
 
 You can see the full source code for this in `modules/apiKeys.ts`.
 
-_Note: OpenMeter is incredibly flexible, as is the Zuplo Developer Portal, so
+:::info
+OpenMeter is incredibly flexible, as is the Zuplo Developer Portal, so
 there are many ways that a similar flow could be created for your users at
-various times in their lifecycle, and from other places such as your own
+various times in their lifecycle, as well as from other places such as your own
 website. This example serves as a guide to the steps that need to be taken, and
-you can adapt them however you like._
+you can adapt them for your own use case.
+:::
 
 ## Test As a Registered User
 
@@ -262,20 +252,25 @@ At this point you are considered a registered user of the Todo API, and you've
 been given access to all 10 API requests that the Free plan offers (use them
 wisely!).
 
-Head back to the _API Reference_, and click the _Test_ button to load the API
-Playground once again.
+<Stepper>
 
-You will now see that your API key has become available to select. You can use
+1. Head back to the _API Reference_, and click the _Test_ button to load the API
+Playground once again.
+2. You will see that your API key has become available to select. You can use
 this to make authenticated requests against the API that will be metered against
 the available quota on your free plan.
+3. Select your API key and make the request again, you should see a list of todos returned and get a `200 OK` response.
+
+<ModalScreenshot size="xl">
+![A successful API request using a preset API key in the API playground](/public/media/monetization/request-success.png)
+</ModalScreenshot>
 
 Once you use all your available quota, you will no longer be able to make
 requests.
 
-## Adding Billing & Payment
+</Stepper>
 
-You are welcome to use this example as the basis for your Zuplo project but the
-next steps would be to add billing and payment options.
+## Adding Billing & Payment
 
 All of this can be done directly with OpenMeter, and you can reflect as much or
 as little of that back into your Developer Portal as you'd like. Recommended
