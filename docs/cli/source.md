@@ -29,9 +29,11 @@ Options:
   --force    Force overwrite of existing files        [boolean] [default: false]
 ```
 
-This command automates the migration process from the legacy dev portal to the
-new Zudoku-powered dev portal. It handles the creation of necessary files,
-directory structure, and configuration migration.
+This command automates the migration process from the legacy Developer Portal to
+the new Zudoku-powered [Developer Portal](../dev-portal/introduction).
+
+It handles the creation of necessary files, directory structure, and
+configuration migration.
 
 ### What it does:
 
@@ -81,5 +83,5 @@ post-migration tasks, see the
 
 1. Run `npm install` to install dependencies
 2. Test locally with `npm run docs`
-3. Delete legacy files manually if desired
-4. Deploy your changes
+3. Delete legacy files manually (recommended, to avoid future confusion)
+4. Deploy your changes by running `zuplo deploy`
