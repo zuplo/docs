@@ -149,21 +149,27 @@ You can see the configuration for the OpenMeter Policy in
 ```json
 {
   "name": "openmeter-metering-inbound",
-  "policyType": "openmeter-metering-inbound",
+  "policyType": "openmeter-inbound",
   "handler": {
-    "export": "OpenMeterMeteringInboundPolicy",
+    "export": "OpenMeterInboundPolicy",
     "module": "$import(@zuplo/runtime)",
     "options": {
       "apiKey": "$env(OPENMETER_API_KEY)",
-      "customerIdPropertyPath": ".data.openmeter.subjectId",
-      "eventType": "request",
-      "meterValue": 1,
-      "source": "$env(OPENMETER_SOURCE)",
-      "url": "$env(OPENMETER_URL)/api/v1/events"
+      "subjectPath": ".data.openmeter.subjectId",
+      "eventSource": "$env(OPENMETER_SOURCE)",
+      "apiUrl": "$env(OPENMETER_URL)",
+      "meter": {
+        "type": "request",
+        "value": 1
+      },
+      "requiredEntitlements": ["api_requests"]
     }
   }
 }
 ```
+
+For more information on this configuration, see the
+[OpenMeter Metering Policy documentation](https://zuplo.com/docs/policies/openmeter-inbound#basic-metering).
 
 ### How Users Are Identified for Metering
 
