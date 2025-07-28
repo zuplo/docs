@@ -6,9 +6,9 @@ sidebar_label: OpenMeter Monetization
 Zuplo integrates with [OpenMeter](https://openmeter.io/) to handle metering,
 customer tracking, subscription plans and invoicing.
 
-Our [OpenMeter Metering Policy](../policies/openmeter-inbound.mdx) allows you to
-track metered events as well as ensure that customers who are at, or over, the
-limit of their allowed plans, cannot continue to make requests.
+Our [OpenMeter Policy](../policies/openmeter-inbound.mdx) allows you to track
+metered events as well as ensure that customers who are at, or over, the limit
+of their allowed plans, cannot continue to make requests.
 
 This example demonstrates using our OpenMeter policy to:
 
@@ -126,7 +126,7 @@ API.
 
 ### OpenMeter Overview
 
-The OpenMeter metering policy is pre-configured in `config/policies.json`. This
+The OpenMeter policy is pre-configured in `config/policies.json`. This
 configuration allows the API gateway to:
 
 - **Track API requests**: Automatically meter each request that passes through
@@ -259,8 +259,8 @@ API calls are made to the OpenMeter API:
   plan in this example allows 10 requests)
 
 Additionally, the OpenMeter Subject ID for the user is added to the API key
-metadata that is referenced by the OpenMeter Metering Policy in the API gateway
-to keep everything linked together.
+metadata that is referenced by the OpenMeter Policy in the API gateway to keep
+everything linked together.
 
 You can see the full source code for this in `modules/apiKeys.ts`.
 

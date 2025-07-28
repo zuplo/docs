@@ -72,7 +72,7 @@ samples. This approach gives you:
 Our first focus is on [OpenMeter](https://openmeter.io/), a modern metering and
 billing platform designed for usage-based pricing. We have already built:
 
-### OpenMeter Metering Policy
+### OpenMeter Policy
 
 A production-ready policy that:
 
