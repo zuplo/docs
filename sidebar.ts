@@ -154,7 +154,11 @@ export const docs: Navigation = [
         type: "category",
         label: "Web Application Firewalls",
         link: "articles/waf-ddos",
-        items: ["articles/waf-ddos-fastly", "articles/waf-ddos-aws-waf-shield"],
+        items: [
+          "articles/zuplo-waf",
+          "articles/waf-ddos-fastly",
+          "articles/waf-ddos-aws-waf-shield",
+        ],
       },
       "articles/cloudflare-settings",
     ],

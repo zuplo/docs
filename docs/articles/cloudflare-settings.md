@@ -3,7 +3,7 @@ title: Zuplo and Cloudflare Settings
 sidebar_label: Cloudflare Settings
 ---
 
-Zuplo environments are mostly deployed behind Cloudflare's Web Application
+Zuplo managed edge environments are deployed behind Cloudflare's Web Application
 Firewall, DDoS protection, Bot Detection, and SSL termination. The combination
 of Cloudflare's network infrastructure and Zuplo's API Gateway help provide
 critical security and performance capabilities to your API all with zero custom
@@ -11,8 +11,8 @@ configuration.
 
 ## Web Application Firewall Rules
 
-By default, WAF settings are in log only mode. This means that no request should
-be blocked by the Web Application Firewall.
+By default, Zuplo does not enable any Web Application Firewall rules. This means
+that no request should be blocked by the Web Application Firewall.
 
 You can choose to enable some preconfigured default rulesets to protect your API
 Gateway. Our default rules provide a high level of protection with a low
@@ -25,8 +25,7 @@ specific needs.
 DDoS protection is available for every Zuplo API through
 [Cloudflare's DDoS protection service](https://developers.cloudflare.com/ddos-protection/about/).
 By default, the **rule sensitivy** setting is set to **Essentially Off** meaning
-almost no requests will be blocked. For paying customers, we offer the ability
-to modify this setting as needed.
+almost no requests will be blocked.
 
 ## Security Level
 
