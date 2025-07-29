@@ -18,7 +18,7 @@ Add a new route with the path `/openapi`, and select the `OpenAPI Spec Handler`
 from the Request Handler selector. Save your changes and commit them to your
 production branch. If you haven't already connected your Zuplo API to a GitHub
 repository, you can follow
-[these instructions](./step-4-deploying-to-the-edge.md) to do so. Once your
+[these instructions](./step-4-deploying-to-the-edge.mdx) to do so. Once your
 Zuplo API is redeployed, you should now be able to retrieve your public-ready
 OpenAPI file by hitting `https://<your-prod-zuplo-api-domain>/openapi`.
 

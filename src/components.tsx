@@ -9,6 +9,8 @@ import ZupIt from "./ZupIt.js";
 import { LegacyDevPortal } from "./LegacyDevPortal.js";
 import { LegacyMonetization } from "./LegacyMonetization.js";
 import { ModalScreenshot } from "./ModalScreenshot.js";
+import { TutorialModeSelector, TutorialMode } from "./TutorialModeSelector.js";
+import { QuickstartPicker } from "./QuickstartPicker.js";
 
 const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
 
@@ -110,6 +112,9 @@ export const mdxComponents = {
   LegacyDevPortal,
   LegacyMonetization,
   ModalScreenshot,
+  TutorialModeSelector,
+  TutorialMode,
+  QuickstartPicker,
   EmbeddedChat: () => {
     return (
       <Suspense fallback={<div>Loading…</div>}>
