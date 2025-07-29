@@ -27,7 +27,7 @@ benefits, including:
   adding a branch or making a commit.
 
 For full instructions on setting up GitHub see
-[the quickstart tutorial](../articles/step-4-deploying-to-the-edge.md).
+[the quickstart tutorial](../articles/step-4-deploying-to-the-edge.mdx).
 
 ## Connecting Existing Repositories
 

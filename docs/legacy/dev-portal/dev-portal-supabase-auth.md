@@ -515,5 +515,5 @@ some steps to try next:
   your Supabase Auth App.
   [Get started with our Builder plan today](https://zuplo.com/pricing)!
 - Want to get more out of your Developer Portal? You can setup
-  [API Key Authentication](../../articles/step-3-add-api-key-auth.md) to allow
+  [API Key Authentication](../../articles/step-3-add-api-key-auth.mdx) to allow
   your new users to manage their keys in the Developer Portal directly!

@@ -7,8 +7,8 @@ developers. It offers fast deployment, GitOps-friendly workflows, and unlimited
 preview environments. Whether you're an individual developer or part of an
 engineering team, Zuplo makes it easy to:
 
-- [Add authentication and access control](./step-3-add-api-key-auth.md)
-- [Implement rate limiting](./step-2-add-rate-limiting.md)
+- [Add authentication and access control](./step-3-add-api-key-auth.mdx)
+- [Implement rate limiting](./step-2-add-rate-limiting.mdx)
 - Write custom logic to run at the gateway layer
 - Build a [rich developer portal](/docs/dev-portal/introduction) with self-serve
   tools for auth and monetization

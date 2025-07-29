@@ -15,7 +15,7 @@ minutes. There are several benefits to using Zuplo's API Key solution including
 :::tip
 
 To start using Zuplo API Keys in only a few minutes
-[see the quickstart](../articles/step-3-add-api-key-auth.md).
+[see the quickstart](../articles/step-3-add-api-key-auth.mdx).
 
 :::
 
@@ -42,7 +42,7 @@ Zuplo manages all the complexity of replication, caching, and verifying your API
 keys so you don't have to.
 
 Adding API Key authentication using Zuplo takes only a few minutes.
-[See the quickstart to get started](../articles/step-3-add-api-key-auth.md).
+[See the quickstart to get started](../articles/step-3-add-api-key-auth.mdx).
 
 ## Key Concepts
 

@@ -6,9 +6,9 @@ Fortune favors the bold. In this bonus getting started guide - we'll show you
 how to add dynamic rate limiting to your API.
 
 To follow this tutorial you'll need to have completed
-[Step 1](./step-1-setup-basic-gateway.md) for a Zuplo project,
-[Step 2](./step-2-add-rate-limiting.md) to add rate limiting to that route, and
-[Step 3](./step-3-add-api-key-auth.md) to add API key authentication to that
+[Step 1](./step-1-setup-basic-gateway.mdx) for a Zuplo project,
+[Step 2](./step-2-add-rate-limiting.mdx) to add rate limiting to that route, and
+[Step 3](./step-3-add-api-key-auth.mdx) to add API key authentication to that
 same route.
 
 :::info{title="What is Dynamic Rate Limiting?"}
@@ -27,9 +27,9 @@ Let's get started.
 1. Add Consumer Metadata
 
    Let's make our rate-limiting policy more dynamic, based on properties of the
-   customer. [Create a new consumer](./step-3-add-api-key-auth) (Services -> API
-   Key Service -> Configure -> Create Consumer), and in the Metadata field, set
-   the following:
+   customer. [Create a new consumer](./step-3-add-api-key-auth.mdx) (Services ->
+   API Key Service -> Configure -> Create Consumer), and in the Metadata field,
+   set the following:
 
    ```json
    {
@@ -137,7 +137,7 @@ Let's get started.
 
    Using the Test modal, you can try your dynamic rate limiting. You can grab
    the key for each consumer back in the Services tab where you created them.
-   Like [Step 3](./step-3-add-api-key-auth.md), you can fill in the keys into
+   Like [Step 3](./step-3-add-api-key-auth.mdx), you can fill in the keys into
    the `Authorization` header and start making calls until you hit your rate
    limit. Try out the other key and observe the difference in rate limits.
 

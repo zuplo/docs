@@ -28,6 +28,14 @@
   },
   {
     "type": "category",
+    "label": "Concepts",
+    "icon": "shapes",
+    "items": [
+      "dev-portal/zudoku/concepts/auth-provider-api-identities"
+    ]
+  },
+  {
+    "type": "category",
     "label": "OpenAPI",
     "icon": "globe",
     "items": [
