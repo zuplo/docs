@@ -46,7 +46,7 @@ async function updateDocs(dir: string) {
         let content = await fs.readFile(filePath, "utf8");
 
         content = content
-          .replace(new RegExp("Zudoku ", "g"), "Dev Portal ")
+          .replace(new RegExp(/\bZudoku\s/, "g"), "Dev Portal ")
           // Rewrite internal links
           .replace(/(?<=\]\()\/docs/g, "/dev-portal/zudoku") // Replace /docs with /dev-portal/zudoku
           .replace(/(?<=\]\()\/(?!dev-portal\/zudoku)/g, "/dev-portal/zudoku/"); // Add /dev-portal/zudoku/ to links that don't start with /docs
