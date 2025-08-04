@@ -92,21 +92,48 @@ running this script. Please refer to the OpenMeter documentation for
 [Plans](https://openmeter.io/docs/billing/product-catalog/plan), and
 [Subscriptions](https://openmeter.io/docs/billing/subscription/overview).
 
+## Deploy the project
+
+Next, deploy the project to Zuplo so you can set up the API Key Service and get
+a deployment name for the next steps. To do this run:
+
+```
+zuplo deploy
+```
+
 ## Setup Environment Variables
 
 Once your OpenMeter instance is set up to work with this example, configure the
 rest of the required environment variables with information from your Zuplo
 account.
 
-- `ZUPLO_API_KEY_SERVICE_BUCKET_NAME`: For storing API key data. You can get the
+- `ZP_API_KEY_SERVICE_BUCKET_NAME`: For storing API key data. You can get the
   Bucket Name from the Services section of your Zuplo project
 
 ![The Zuplo API Key Service bucket name in the Services section of a Zuplo project](../../public/media/monetization/zuplo-api-bucket-name.png)
 
-- `ZUPLO_DEVELOPER_API_KEY`: An
+- `ZP_DEVELOPER_API_KEY`: An
   [API key for working with your Zuplo account](http://localhost:3000/docs/articles/api-key-administration)
-- `ZUPLO_ACCOUNT_NAME`: The account name for your Zuplo account (eg.
+- `ZP_ACCOUNT_NAME`: The account name for your Zuplo account (eg.
   `significant-lemon`)
+
+Additionally, there are two client side environment variables that are also
+required. Copy the example from `docs/env.local.example`:
+
+```
+cp docs/env.local.example docs/.env.local
+```
+
+Then add the deployment name for the project you just deployed to Zuplo. You
+will find this in the Zuplo Portal under _Environments_. Choose the Preview
+environment and copy the _Gateway_ URL.
+
+Add it to the `docs/.env.local` file like so:
+
+```
+ZUPLO_PUBLIC_SERVER_URL="http://localhost:9000"
+ZUPLO_PUBLIC_DEPLOYMENT_NAME="metered-monetization-main-445ef4" # Replace this with your deployment name
+```
 
 ## Example Project Overview
 
@@ -149,17 +176,20 @@ You can see the configuration for the OpenMeter Policy in
 ```json
 {
   "name": "openmeter-metering-inbound",
-  "policyType": "openmeter-metering-inbound",
+  "policyType": "openmeter-inbound",
   "handler": {
-    "export": "OpenMeterMeteringInboundPolicy",
+    "export": "OpenMeterInboundPolicy",
     "module": "$import(@zuplo/runtime)",
     "options": {
       "apiKey": "$env(OPENMETER_API_KEY)",
-      "customerIdPropertyPath": ".data.openmeter.subjectId",
-      "eventType": "request",
-      "meterValue": 1,
-      "source": "$env(OPENMETER_SOURCE)",
-      "url": "$env(OPENMETER_URL)/api/v1/events"
+      "subjectPath": ".data.openmeter.subjectId",
+      "eventSource": "$env(OPENMETER_SOURCE)",
+      "apiUrl": "$env(OPENMETER_URL)",
+      "meter": {
+        "type": "request",
+        "value": 1
+      },
+      "requiredEntitlements": ["api_requests"]
     }
   }
 }
