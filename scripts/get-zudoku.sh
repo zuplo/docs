@@ -4,7 +4,6 @@
 set -e
 
 # Variables
-ASSET_URL="https://github.com/zuplo/zudoku/archive/refs/heads/main.tar.gz"
 DOWNLOAD_DIR="/tmp/zudoku_download"
 DEST_DIR="docs/dev-portal/zudoku"
 
@@ -21,10 +20,21 @@ rm -rf "$DOWNLOAD_DIR" "$DEST_DIR"
 log "Creating download directory..."
 mkdir -p "$DOWNLOAD_DIR"
 
+# Get the latest release tarball URL from GitHub API
+log "Fetching latest release information..."
+LATEST_RELEASE_URL=$(curl -s https://api.github.com/repos/zuplo/zudoku/releases/latest | grep -o '"tarball_url": "[^"]*"' | cut -d'"' -f4)
+
+if [ -z "$LATEST_RELEASE_URL" ]; then
+    log "Error: Unable to fetch latest release URL."
+    exit 1
+fi
+
+log "Latest release URL: $LATEST_RELEASE_URL"
+
 # Download the latest tar.gz release
 TAR_FILE="$DOWNLOAD_DIR/zudoku_docs.tar.gz"
 log "Downloading the latest release..."
-curl -L -o "$TAR_FILE" "$ASSET_URL"
+curl -L -o "$TAR_FILE" "$LATEST_RELEASE_URL"
 
 # Extract the tar.gz file
 log "Extracting the contents..."
