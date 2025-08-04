@@ -9,6 +9,16 @@ This guide walks you through migrating your existing documentation from the
 current Dev Portal to the new Dev Portal powered by Zudoku. Follow these steps
 sequentially for a smooth transition.
 
+:::warning
+
+New Dev Portals run on their own dedicated domain instead of a `/docs` path
+under your API. You must create a redirect route on `/docs` to maintain existing
+links. You can use our
+[custom handler](/docs/dev-portal/migration#redirect-legacy-urls.md) to achieve
+this.
+
+:::
+
 ## Quick Migration with CLI
 
 For most projects, you can use the Zuplo CLI to automate the migration process:
