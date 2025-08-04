@@ -9,6 +9,11 @@
   "outputDirectory": "dist",
   "redirects": [
     {
+      "source": "/",
+      "destination": "/docs",
+      "permanent": true
+    },
+    {
       "source": "/docs{/}?",
       "destination": "/docs/articles/what-is-zuplo",
       "permanent": true
