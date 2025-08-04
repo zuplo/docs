@@ -55,16 +55,16 @@ export function TutorialModeSelector({
       )}
 
       {/* Combined tab bar and content */}
-      <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+      <div className="border border-border rounded-lg overflow-hidden">
         {/* Mode selector tabs */}
-        <div className="flex bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <div className="flex bg-gray-50 dark:bg-gray-800 border-b border-border">
           {modes.map((mode, index) => {
             const isActive = mode.active;
 
             return isActive ? (
               <div
                 key={index}
-                className="flex-1 flex items-center justify-center gap-2 h-12 text-sm font-medium bg-white dark:bg-gray-900 text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 -mb-[1px] transition-all"
+                className="flex-1 flex items-center justify-center gap-2 h-12 text-sm font-medium bg-white dark:bg-gray-900 text-primary border-b-2 border-primary -mb-[1px] transition-all"
               >
                 {mode.icon && (
                   <span
@@ -102,7 +102,7 @@ export function TutorialModeSelector({
             <div className="flex items-start gap-3">
               {activeMode.icon && (
                 <span
-                  className="inline-flex shrink-0 text-blue-600 dark:text-blue-400 mt-0.5"
+                  className="inline-flex shrink-0 text-primary mt-0.5"
                   style={{ fontSize: "20px", lineHeight: "1" }}
                 >
                   {activeMode.icon}

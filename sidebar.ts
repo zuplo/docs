@@ -168,6 +168,7 @@ export const docs: Navigation = [
         items: [
           "articles/zuplo-waf",
           "articles/waf-ddos-fastly",
+          "articles/waf-ddos-akamai",
           "articles/waf-ddos-aws-waf-shield",
         ],
       },
