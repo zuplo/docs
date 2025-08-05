@@ -23,11 +23,11 @@
     "*.mdx": "markdown"
   },
   "workbench.colorCustomizations": {
-    "titleBar.activeBackground": "#8a4377",
+    "titleBar.activeBackground": "#0a3aa3",
     "titleBar.activeForeground": "#e7e7e7",
-    "titleBar.inactiveBackground": "#8a4377",
+    "titleBar.inactiveBackground": "#0a3aa3",
     "titleBar.inactiveForeground": "#e7e7e7",
-    "statusBar.background": "#8a4377",
+    "statusBar.background": "#0a3aa3",
     "statusBar.foreground": "#e7e7e7"
   },
   "cSpell.words": [

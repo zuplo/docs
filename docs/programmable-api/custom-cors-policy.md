@@ -35,7 +35,7 @@ Make sure to not have a trailing `/` on your `allowedOrigins`. e.g.
   "corsPolicies": [
     {
       "name": "custom-cors",
-      "allowedOrigins": "https://domain1.com, https://domain2.com",
+      "allowedOrigins": "https://*.domain1.com, https://domain2.com",
       "allowedHeaders": "origin, my-special-incoming-header",
       "allowedMethods": ["GET", "POST"],
       "exposeHeaders": "my-special-response-header",
@@ -51,6 +51,9 @@ Make sure to not have a trailing `/` on your `allowedOrigins`. e.g.
 You can specify a list of supported domains. Zuplo will ensure the pre-flight
 request is compatible with browsers by filtering the list to match the incoming
 origin, provided it's in your list of origins.
+
+You can also use wildcards to match subdomains, for example `*.example.com` will
+match any subdomain of example.com.
 
 :::
 
