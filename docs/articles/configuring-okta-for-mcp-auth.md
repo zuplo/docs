@@ -1,0 +1,199 @@
+---
+title: Setting up Okta as an Authentication Server for MCP OAuth Authentication
+---
+
+In this guide, you'll learn how to configure Okta as an authorization server for
+use with the MCP Server handler. See the
+[MCP Server Handler docs](../handlers/mcp-server.md#oauth-authentication) for
+instructions on how to configure your Zuplo gateway to support OAuth
+authentication for your MCP Server.
+
+This guide will assume that you already have a working Okta account and
+organization.
+
+## Create an Auth Server
+
+First, you will need to create an Okta authorization server. This server will be
+used to authorize requests to your MCP Server per
+[the Model Context Protocol authorization specification.](https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization)
+
+1. In the Okta Admin Console, navigate to **Security > API** in the left
+   sidebar.
+2. Click **Add Authorization Server**.
+3. Set the **Name** to something like "MCP Server Authorization".
+4. Set the **Audience** to the canonical URL of your MCP Server. For example, if
+   your MCP Server is hosted at `https://my-gateway.zuplo.dev/mcp`, then the
+   audience would be `https://my-gateway.zuplo.dev/mcp`. **The trailing slash is
+   not required.**
+5. Add a **Description** and click **Save**.
+
+Note the **Issuer Metadata URI** shown in the authorization server details.
+You'll need this for your Zuplo configuration.
+
+## Configure Scopes
+
+Next, you'll need to configure the scopes for your authorization server.
+
+1. In your authorization server settings, click the **Scopes** tab.
+2. Click **Add Scope**.
+3. Set the **Name** to something like `mcp:access`.
+4. Add a **Display phrase** and **Description** (like "Access to MCP Server
+   tools").
+5. Check **Set as a default scope** and click **Create**.
+
+## Create an OAuth Client Application
+
+Next, you'll need to create an OAuth client application for your MCP server.
+
+:::note
+
+Okta requires an admin API key for to dynamically register clients. This may not
+be well supported by MCP clients. However, MCP clients should also support an
+alternative way to obtain a client ID and client credential. This document
+assumes an MCP client can set these fields without having to dynamically
+register a client.
+
+:::
+
+1. In the Okta Admin Console, navigate to **Applications > Applications** in the
+   left sidebar.
+2. Click **Create App Integration**.
+3. Select **OIDC - OpenID Connect** as the sign-in method.
+4. Select **Web Application** as the application type and click **Next**.
+5. Set the **App integration name** to something like "MCP Client Application".
+6. For **Grant types**, check **Authorization Code** and **Refresh Token**.
+7. For **Sign-in redirect URIs**, leave this empty or set to a placeholder like
+   `http://localhost:3000/callback`.
+8. For **Controlled access**, select **Allow everyone in your organization to
+   access**.
+9. Click **Save**.
+
+After creating the application, note the **Client ID** and **Client Secret**
+from the application's **General** tab. You'll need these for your MCP client
+configuration.
+
+## Create a Default Policy and Rule
+
+You'll need to create an access policy for your authorization server.
+
+1. In your authorization server settings (found in **Security > API**) click the
+   **Access Policies** tab.
+2. Click **Add New Access Policy**.
+3. Set the **Name** to something like "MCP Client Access Policy".
+4. Add a **Description** and assign it to **All clients**.
+5. Click **Create Policy**.
+
+Now create a rule for this policy:
+
+1. Click **Add Rule** within your new policy.
+2. Set the **Rule Name** to something like "Allow MCP Access".
+3. In the **IF AND** section:
+   - **Grant type is**: Select the grant type. For the widest grant for all MCP
+     clients, select **Client Credentials**, **Authorization Code**, and
+     **Device Authorization** (???)
+   - **User is**: Select **Any user assigned the app**
+   - **Scopes requested**: Select **The following scopes** and choose the scope
+     you created for the authorization server (i.e., `mcp:access`)
+4. In the **THEN AND** section:
+   - **Use this inline hook**: None (disabled)
+   - **Access token lifetime is**: Set to desired value (e.g., 1 hour)
+   - **Refresh token lifetime is**: Set to desired value (e.g., 90 days)
+5. Click **Create Rule**.
+
+## Configure OAuth on Zuplo
+
+To set up your gateway to support OAuth authentication for your MCP Server, you
+will need to do the following:
+
+1. Create an Okta JWT Auth inbound policy on your MCP Server route. This policy
+   will need to have the option `"oAuthResourceMetadataEnabled": true` to enable
+   authorization resource metadata discovery.
+
+   ```json
+   {
+     "name": "mcp-okta-oauth-inbound",
+     "policyType": "okta-jwt-auth-inbound",
+     "handler": {
+       "export": "OktaJwtInboundPolicy",
+       "module": "$import(@zuplo/runtime)",
+       "options": {
+         "oAuthResourceMetadataEnabled": true,
+         "audience": "https://my-gateway.zuplo.dev/mcp",
+         "issuer": "https://your-okta-domain.okta.com/oauth2/your-auth-server-id"
+       }
+     }
+   }
+   ```
+
+   - Replace `my-gateway.zuplo.dev/mcp` with the audience you defined in your
+     authorization server.
+   - Replace `your-okta-domain` in the `issuer` field with your actual Okta
+     domain.
+   - Replace `your-auth-server-id` in the `issuer` field with the actual ID of
+     your Okta authorization server.
+
+2. Add the OAuth policy to the MCP Server route. For example:
+
+   ```json
+   "paths": {
+     "/mcp": {
+       "post": {
+         "x-zuplo-route": {
+
+           // etc. etc.
+           // other properties for the MCP server route handler
+
+           "policies": {
+             "inbound": [
+               "mcp-oauth-inbound"
+             ]
+           }
+         }
+       }
+     }
+   }
+   ```
+
+3. Add the `OAuthProtectedResourcePlugin` to your `runtimeInit` function in the
+   `modules/zuplo.runtime.ts` file:
+
+   ```ts
+   import {
+     RuntimeExtensions,
+     OAuthProtectedResourcePlugin,
+   } from "@zuplo/runtime";
+
+   export function runtimeInit(runtime: RuntimeExtensions) {
+     runtime.addPlugin(
+       new OAuthProtectedResourcePlugin({
+         authorizationServers: [
+           "https://your-okta-domain.okta.com/oauth2/your-auth-server-id",
+         ],
+         resourceName: "My MCP OAuth Resource",
+       }),
+     );
+   }
+   ```
+
+   - Replace `your-okta-domain` in the `issuer` field with your actual Okta
+     domain.
+   - Replace `your-auth-server-id` in the `issuer` field with the actual ID of
+     your Okta authorization server.
+
+   This plugin populates the `.well-known` routes for the MCP server auth
+   metadata discover. This enables MCP clients to automatically discover the
+   authorization issuer endpoint. See the
+   [OAuth Protected Resource Plugin docs](../programmable-api/oauth-protected-resource-plugin)
+   for more details on this runtime plugin.
+
+## Testing
+
+The [MCP Inspector](https://github.com/modelcontextprotocol/inspector) doesn't
+currently support setting an initial access token or presenting a UI for setting
+the client ID or secret.
+
+Refer to the [Manual OAuth MCP Testing](./manual-mcp-oauth-testing) guide for
+further instructions on testing your MCP server with `curl`.
+
+If you need more help debugging, see
+[Testing OAuth on Zuplo](../handlers/mcp-server.md#oauth-testing).
