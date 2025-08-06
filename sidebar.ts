@@ -627,5 +627,18 @@ export const devPortal: Navigation = [
       "dev-portal/node-modules",
     ],
   },
-  ...(zudokuSidebar as Navigation),
+  ...(zudokuSidebar as Navigation).map((item) => {
+    if (typeof item === "object" && item.type === "category") {
+      if (item.label === "Guides") {
+        return {
+          ...item,
+          items: [
+            ...item.items,
+            "dev-portal/dev-portal-create-consumer-on-auth",
+          ],
+        };
+      }
+    }
+    return item;
+  }),
 ];
