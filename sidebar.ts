@@ -10,6 +10,7 @@ export const docs: Navigation = [
       "articles/what-is-zuplo",
       "articles/who-uses-and-why",
       "articles/hosting-options",
+      "articles/development-options",
     ],
     collapsed: false,
   },
