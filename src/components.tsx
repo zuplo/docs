@@ -6,7 +6,6 @@ import { EnterpriseFeature } from "./EnterpriseFeature.js";
 import { GithubButton } from "./GithubButton.js";
 import { PolicyOverview } from "./PolicyOverview.js";
 import ZupIt from "./ZupIt.js";
-import { LegacyDevPortal } from "./LegacyDevPortal.js";
 import { LegacyMonetization } from "./LegacyMonetization.js";
 import { ModalScreenshot } from "./ModalScreenshot.js";
 
@@ -107,7 +106,6 @@ export const mdxComponents = {
   img: Image,
   PolicyOverview,
   EnterpriseFeature,
-  LegacyDevPortal,
   LegacyMonetization,
   ModalScreenshot,
   EmbeddedChat: () => {

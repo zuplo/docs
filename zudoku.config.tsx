@@ -116,13 +116,6 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
       label: "REST API",
       to: "/api",
     },
-
-    {
-      type: "category",
-      label: "Legacy",
-      display: "hide",
-      items: legacy,
-    },
   ],
   mdx: {
     components: mdxComponents,

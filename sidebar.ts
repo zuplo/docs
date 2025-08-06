@@ -614,38 +614,6 @@ export const policies: Navigation = [
   },
 ];
 
-export const legacy: Navigation = [
-  {
-    type: "category",
-    label: "Developer Portal (Legacy)",
-    link: {
-      type: "doc",
-      file: "legacy/dev-portal/overview",
-    },
-    items: [
-      "legacy/dev-portal/dev-portal-setup",
-      "legacy/dev-portal/dev-portal-configuration",
-      {
-        type: "category",
-        label: "Authentication",
-        link: "legacy/dev-portal/dev-portal-auth",
-        items: [
-          "legacy/dev-portal/dev-portal-auth0-auth",
-          "legacy/dev-portal/dev-portal-clerk-auth",
-          "legacy/dev-portal/dev-portal-keycloak-auth",
-          "legacy/dev-portal/dev-portal-supabase-auth",
-        ],
-      },
-      "legacy/dev-portal/dev-portal-theme",
-      "legacy/dev-portal/dev-portal-adding-pages",
-      "legacy/dev-portal/dev-portal-configuring-sidebar",
-      "legacy/dev-portal/dev-portal-json",
-      "legacy/dev-portal/dev-portal-create-consumer-on-auth",
-      "legacy/dev-portal/dev-portal-inject-html",
-    ],
-  },
-];
-
 export const devPortal: Navigation = [
   {
     type: "category",
@@ -659,5 +627,18 @@ export const devPortal: Navigation = [
       "dev-portal/node-modules",
     ],
   },
-  ...(zudokuSidebar as Navigation),
+  ...(zudokuSidebar as Navigation).map((item) => {
+    if (typeof item === "object" && item.type === "category") {
+      if (item.label === "Guides") {
+        return {
+          ...item,
+          items: [
+            ...item.items,
+            "dev-portal/dev-portal-create-consumer-on-auth",
+          ],
+        };
+      }
+    }
+    return item;
+  }),
 ];
