@@ -1,6 +1,11 @@
 import { writeFileSync } from "fs";
 
-const response = await fetch("https://dev.zuplo.com/openapi");
+const response = await fetch("https://dev.zuplo.com/openapi", {
+  headers: {
+    Accept: "application/json",
+    "Accept-Encoding": "identity",
+  },
+});
 const data = await response.json();
 
 data.servers[0].url = "https://dev.zuplo.com";
