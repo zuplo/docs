@@ -115,7 +115,9 @@ There are two options for configuring which API routes become MCP tools:
 #### Option 1: Transform Entire OpenAPI Files
 
 Transform all routes from OpenAPI files into MCP tools by specifying
-`openApiFilePaths`:
+`openApiFilePaths`. In this, the default setup, you list the OpenAPI files 
+(*.oas.json) that you want the MCP Server to scan. It will automatically expose
+all endpoints as an MCP tool in those OpenAPI docs:
 
 ```json
 "paths": {
