@@ -31,7 +31,6 @@ Our general guidelines for what constitutes fair use are as follows:
 
 - Free Plan: 500 consumers or keys
 - Builder Plan: 1,000 consumers or keys
-- Business Plan: 10,000 consumers or keys
 - Enterprise Plan: Custom
 
 ### Consumer Metadata and Tags
