@@ -181,7 +181,7 @@ will need to do the following:
      your Okta authorization server.
 
    This plugin populates the `.well-known` routes for the MCP server auth
-   metadata discover. This enables MCP clients to automatically discover the
+   metadata discovery. This enables MCP clients to automatically discover the
    authorization issuer endpoint. See the
    [OAuth Protected Resource Plugin docs](../programmable-api/oauth-protected-resource-plugin)
    for more details on this runtime plugin.
