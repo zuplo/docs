@@ -1,0 +1,49 @@
+---
+title: Development Options
+---
+
+Zuplo offers both a local and web-based development experiences. For most
+customers, we recommend the local developer experience as this is the most
+flexible and fastest way to work with your Zuplo API and Developer Portal.
+
+## Local Development
+
+The [local experience](./local-development.mdx) allows users to run both the API
+Gateway and Dev Portal locally. It also includes a local version of the Route
+Designer that is integrated into the Zuplo Portal (portal.zuplo.com). Local
+development allows customers to use the IDE of their choice and run everything
+locally.
+
+Local development is available for all customers regardless of their deployment
+model. It is designed to be fast and lightweight, allowing developers to quickly
+iterate on their APIs without needing to deploy to the cloud.
+
+Local development is the fastest way to develop and test your APIs as you can
+test changes immediately without waiting for a deployment. Changes to your API
+are automatically loaded into the local API Gateway and Dev Portal.
+
+## Web-Based Development Experience
+
+:::note{title="Managed Dedicated"}
+
+Working copy environments are not available for customers using the
+[managed dedicated deployment model](../dedicated/overview.md).
+
+:::
+
+The web-based development experience on (portal.zuplo.com) allows customers on
+our managed-edge deployment model to make edits to their project right from
+within the browser. This experience is designed to be fast and light-weight. The
+web-based experience provides each developer their own
+[developer environment](./environments.md) (called **working copy**)
+environment.
+
+The working copy environment is a special environment that is unique to each
+developer. It is optimized for development which means it has slightly different
+configurations than the standard environments. For example, it does not cache
+resources as aggressively so changes are reflected more quickly. You can tell if
+an environment is a working copy as it will be deployed to the `zuplo.dev`
+domain. Working copy environments cannot have custom domains.
+
+The working copy environment is not intended for production use and should not
+be used as such. It is designed for development and testing purposes only.
