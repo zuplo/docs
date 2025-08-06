@@ -127,7 +127,7 @@ Last, on the Auth0 side navigation bar, open **Actions** > **Flows**, then
 select **Login**. Add the action to the workflow by selecting **Custom** and
 dragging your custom action to the flow and then click **Apply**.
 
-![Applying the action](../../../public/media/dev-portal-create-consumer-on-auth/a928c966-1636-47ad-af23-9f265e9eb590.png)
+![Applying the action](../../public/media/dev-portal-create-consumer-on-auth/a928c966-1636-47ad-af23-9f265e9eb590.png)
 
 Now, login to your developer portal with a new user and you will see a consumer
 has already been created.
