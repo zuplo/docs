@@ -6,8 +6,6 @@ description:
   step-by-step instructions for integrating with the legacy Dev Portal.
 ---
 
-<LegacyDevPortal />
-
 By default, users who log into your Zuplo powered Developer Portal won't have an
 API Consumer. This is by design as it allows you to control who has access to
 your API, what their permissions or quotas are, etc. However, some APIs are open
@@ -26,8 +24,8 @@ We do this all for you in that flow.
 :::
 
 Before you begin, you will need to
-[setup custom authentication](./dev-portal-auth.md) for the developer portal -
-you can't use the built-in "demo" provider for this tutorial.
+[setup custom authentication](./zudoku/configuration/authentication.md) for the
+developer portal - you can't use the built-in "demo" provider for this tutorial.
 
 To begin, open the [Auth0 management portal](https://manage.auth0.com) and
 navigate to **Actions** > **Library**. Then click the button **Build Custom**.

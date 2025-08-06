@@ -44,4 +44,4 @@ You can assign managers in the Zuplo Portal (portal.zuplo.com) or via the API.
 
 If you want to automatically create an API Key for a customer automatically when
 they sign into your developer portal using Auth0,
-[follow this tutorial](/docs/legacy/dev-portal/dev-portal-create-consumer-on-auth).
+[follow this tutorial](../dev-portal/dev-portal-create-consumer-on-auth.md).

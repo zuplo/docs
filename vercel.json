@@ -1127,6 +1127,76 @@
       "source": "/docs/policies/openmeter-metering-inbound{/}?",
       "destination": "/docs/policies/openmeter-inbound",
       "permanent": true
+    },
+    {
+      "source": "/docs/legacy/dev-portal/dev-portal-create-consumer-on-auth{/}?",
+      "destination": "/docs/dev-portal/dev-portal-create-consumer-on-auth",
+      "permanent": true
+    },
+    {
+      "source": "/docs/legacy/dev-portal/dev-portal-adding-pages{/}?",
+      "destination": "/docs/dev-portal/zudoku/writing",
+      "permanent": true
+    },
+    {
+      "source": "/docs/legacy/dev-portal/dev-portal-auth{/}?",
+      "destination": "/docs/dev-portal/zudoku/configuration/authentication",
+      "permanent": true
+    },
+    {
+      "source": "/docs/legacy/dev-portal/dev-portal-auth0-auth{/}?",
+      "destination": "/docs/dev-portal/zudoku/configuration/authentication-auth0",
+      "permanent": true
+    },
+    {
+      "source": "/docs/legacy/dev-portal/dev-portal-clerk-auth{/}?",
+      "destination": "/docs/dev-portal/zudoku/configuration/authentication-clerk",
+      "permanent": true
+    },
+    {
+      "source": "/docs/legacy/dev-portal/dev-portal-supabase-auth{/}?",
+      "destination": "/docs/dev-portal/zudoku/configuration/authentication-supabase",
+      "permanent": true
+    },
+    {
+      "source": "/docs/legacy/dev-portal/dev-portal-configuration{/}?",
+      "destination": "/docs/dev-portal/zudoku/configuration/overview",
+      "permanent": true
+    },
+    {
+      "source": "/docs/legacy/dev-portal/dev-portal-configuring-sidebar{/}?",
+      "destination": "/docs/dev-portal/zudoku/configuration/navigation",
+      "permanent": true
+    },
+    {
+      "source": "/docs/legacy/dev-portal/dev-portal-inject-html{/}?",
+      "destination": "/docs/dev-portal/zudoku/custom-plugins",
+      "permanent": true
+    },
+    {
+      "source": "/docs/legacy/dev-portal/dev-portal-keycloak-auth{/}?",
+      "destination": "/docs/dev-portal/zudoku/configuration/authentication",
+      "permanent": true
+    },
+    {
+      "source": "/docs/legacy/dev-portal/dev-portal-json{/}?",
+      "destination": "/docs/dev-portal/zudoku/configuration/overview",
+      "permanent": true
+    },
+    {
+      "source": "/docs/legacy/dev-portal/dev-portal-setup{/}?",
+      "destination": "/docs/dev-portal/introduction",
+      "permanent": true
+    },
+    {
+      "source": "/docs/legacy/dev-portal/dev-portal-theme{/}?",
+      "destination": "/docs/dev-portal/zudoku/customization/colors-theme",
+      "permanent": true
+    },
+    {
+      "source": "/docs/legacy/dev-portal/overview{/}?",
+      "destination": "/docs/dev-portal/introduction",
+      "permanent": true
     }
   ],
   "rewrites": [

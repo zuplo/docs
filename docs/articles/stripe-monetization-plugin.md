@@ -3,7 +3,7 @@ title: Stripe Monetization Plugin
 sidebar_label: Stripe Plugin
 ---
 
-<LegacyDevPortal />
+<LegacyMonetization />
 
 The Stripe Monetization Plugin makes it easy to register a Stripe Webhook in
 your Zuplo API that will handle Stripe subscription events.
