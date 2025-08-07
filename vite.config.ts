@@ -7,7 +7,7 @@ export default defineConfig({
     sourcemap: true, // Source map generation must be turned on
   },
   plugins: [
-    microfrontends({ basePath: "/docs" }),
+    microfrontends(),
     // Put the Sentry vite plugin after all other plugins
     process.env.VERCEL &&
       sentryVitePlugin({
