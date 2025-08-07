@@ -92,18 +92,50 @@
     ]
   },
   {
+    "icon": "album",
+    "type": "category",
+    "label": "General",
+    "items": [
+      "dev-portal/zudoku/components/alert",
+      "dev-portal/zudoku/components/callout",
+      "dev-portal/zudoku/components/badge",
+      "dev-portal/zudoku/components/card",
+      "dev-portal/zudoku/components/icons",
+      "dev-portal/zudoku/components/markdown",
+      "dev-portal/zudoku/components/typography"
+    ]
+  },
+  {
     "icon": "component",
     "type": "category",
-    "label": "Components",
+    "label": "Documentation",
     "items": [
-      "dev-portal/zudoku/components/typography",
-      "dev-portal/zudoku/components/callout",
-      "dev-portal/zudoku/components/icons",
-      "dev-portal/zudoku/components/slot",
-      "dev-portal/zudoku/components/stepper",
-      "dev-portal/zudoku/components/syntax-highlight",
       "dev-portal/zudoku/components/playground",
-      "dev-portal/zudoku/components/shadcn"
+      "dev-portal/zudoku/components/secret",
+      "dev-portal/zudoku/components/stepper",
+      "dev-portal/zudoku/components/syntax-highlight"
+    ]
+  },
+  {
+    "icon": "text-cursor-input",
+    "type": "category",
+    "label": "Form",
+    "items": [
+      "dev-portal/zudoku/components/button",
+      "dev-portal/zudoku/components/checkbox",
+      "dev-portal/zudoku/components/slider",
+      "dev-portal/zudoku/components/switch",
+      "dev-portal/zudoku/components/label"
+    ]
+  },
+  {
+    "icon": "hard-hat",
+    "type": "category",
+    "label": "Utility",
+    "items": [
+      "dev-portal/zudoku/components/client-only",
+      "dev-portal/zudoku/components/head",
+      "dev-portal/zudoku/components/slot"
     ]
   }
 ]
