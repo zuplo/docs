@@ -22,5 +22,5 @@
     "zudoku.config.tsx",
     "src/zudoku-env.d.ts"
   ],
-  "exclude": ["node_modules", "policies", "temp", "dist"]
+  "exclude": ["node_modules", "policies", "temp", "dist2"]
 }

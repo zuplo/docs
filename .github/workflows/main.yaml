@@ -53,7 +53,7 @@ jobs:
       - name: Upload Media (png)
         uses: "google-github-actions/upload-cloud-storage@v2"
         with:
-          path: dist/docs/assets/
+          path: dist/docs/vc-ap-e3e2a9/
           glob: "**/*.png"
           destination: cdn.zuplo.com/docs
           process_gcloudignore: false
@@ -64,7 +64,7 @@ jobs:
       - name: Upload Media (gif)
         uses: "google-github-actions/upload-cloud-storage@v2"
         with:
-          path: dist/docs/assets/
+          path: dist/docs/vc-ap-e3e2a9/
           glob: "**/*.gif"
           destination: cdn.zuplo.com/docs
           process_gcloudignore: false
@@ -75,7 +75,7 @@ jobs:
       - name: Upload Media (svg)
         uses: "google-github-actions/upload-cloud-storage@v2"
         with:
-          path: dist/docs/assets/
+          path: dist/docs/vc-ap-e3e2a9/
           glob: "**/*.svg"
           destination: cdn.zuplo.com/docs
           process_gcloudignore: false
@@ -86,7 +86,7 @@ jobs:
       - name: Upload Media (webp)
         uses: "google-github-actions/upload-cloud-storage@v2"
         with:
-          path: dist/docs/assets/
+          path: dist/docs/vc-ap-e3e2a9/
           glob: "**/*.webp"
           destination: cdn.zuplo.com/docs
           process_gcloudignore: false

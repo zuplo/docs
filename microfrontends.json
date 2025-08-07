@@ -1,0 +1,19 @@
+{
+  "$schema": "https://openapi.vercel.sh/microfrontends.json",
+  "applications": {
+    "www": {
+      "packageName": "website",
+      "development": {
+        "fallback": "zuplo.com"
+      }
+    },
+    "docs": {
+      "routing": [
+        {
+          "group": "docs",
+          "paths": ["/docs", "/docs/:path*"]
+        }
+      ]
+    }
+  }
+}
