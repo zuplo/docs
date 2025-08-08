@@ -92,8 +92,8 @@ conceptual guides while maintaining cross-references.
      - Keep configuration/setup guides in articles
      - Add cross-references between them
    - Common duplications to check:
-     - Environment variables (environment.md vs environment-variables.md)
-     - Logging (logger.md vs logging.md)
+     - Environment variables (environment.md vs environment-variables.mdx)
+     - Logging (logger.md vs logging.mdx)
      - Caching (cache/zone-cache vs caching articles)
 
 6. Format all documentation using `npm run format`

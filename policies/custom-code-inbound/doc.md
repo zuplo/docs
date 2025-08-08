@@ -5,7 +5,7 @@ document is about inbound policies that can intercept the request and, if
 required, modify it before passing down the chain.
 
 Policies have a similar but subtly different signature to a
-[request handler](/docs/handlers/custom-handler.md).
+[request handler](/docs/handlers/custom-handler.mdx).
 
 They also accept a `ZuploRequest` parameter but they must return either a
 `ZuploRequest` or a `Response`.
@@ -264,4 +264,4 @@ export default async function (request: ZuploRequest) {
 ```
 
 For a more complex example, check out the
-[custom logging implementation](/docs/articles/custom-logging-example.md).
+[custom logging implementation](/docs/articles/custom-logging-example.mdx).
