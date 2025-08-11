@@ -110,7 +110,7 @@ compatibility issues with your MCP client, ensure your `outputSchema` is a valid
 
 ### OpenAPI Routes to MCP Tools
 
-There are two options for configuring which API routes become MCP tools:
+There are three options for configuring MCP tools:
 
 #### Option 1: Transform Entire OpenAPI Files
 
@@ -192,6 +192,38 @@ Add specific routes as MCP tools using the `openApiTools` array. Specify
   setting for this specific route
 - `includeStructuredContent` (optional): Override the global
   `includeStructuredContent` setting for this specific route
+
+#### Option 3: Custom Tools with OpenAPI Specification
+
+Create custom tools with full programmatic control using a dedicated OpenAPI
+specifications and custom handler functions.
+
+This approach provides maximum flexibility for complex workflows:
+
+```json
+"paths": {
+  "/mcp": {
+    "post": {
+      "x-zuplo-route": {
+        "handler": {
+          "export": "mcpServerHandler",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "name": "Calculator MCP Server",
+            "version": "0.0.0",
+            "openApiSpec": "$import(./calculator-api.json)"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+With this approach, you define tools in a separate OpenAPI specification where
+each endpoint becomes an MCP tool with custom TypeScript handlers. See
+[MCP Server Custom Tools](./mcp-server-custom-tools.mdx) for detailed
+documentation.
 
 ### Tool names and descriptions
 
