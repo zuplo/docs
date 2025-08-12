@@ -125,16 +125,17 @@ When exposing routes as MCP tools:
 ### 2. MCP Custom Tools: Programmable AI Tools
 
 For more complex scenarios, use MCP Custom Tools to create sophisticated AI
-tools with custom business logic, multi-step workflows, and programmatic
-control.
+tools with custom business logic, multi-step workflows, and programmatic control
+using OpenAPI specifications and custom handler functions.
 
 #### Key Features
 
+- **OpenAPI Standard**: Define tools using standard OpenAPI 3.1 specifications
 - **Custom Logic**: Implement complex business workflows that go beyond simple
   API calls to enable powerful AI workloads
 - **Multi-Step Operations**: Chain multiple API calls, data transformations, and
   conditional logic
-- **Type Safety**: Built-in Zod schema validation for inputs and outputs
+- **Type Safety**: Built-in JSON Schema validation for inputs and outputs
 - **Runtime Integration**: Full access to your gateway through
   `context.invokeRoute()`
 
@@ -146,58 +147,89 @@ manually, this workflow can be used as a single "aggregate" process to validate
 the provided customer, check that items are in stock, determine pricing, and
 place orders for those items.
 
+**OpenAPI Tool Definition:**
+
+```json
+{
+  "/process-order": {
+    "post": {
+      "summary": "Process customer order",
+      "description": "Process a customer order with inventory validation and pricing",
+      "operationId": "processCustomerOrder",
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": ["customerId", "orderNum"],
+              "properties": {
+                "customerId": {
+                  "type": "string",
+                  "description": "Unique customer identifier"
+                },
+                "orderNum": {
+                  "type": "number",
+                  "description": "Order number to process"
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-zuplo-route": {
+        "handler": {
+          "export": "default",
+          "module": "$import(./modules/process-order)"
+        }
+      }
+    }
+  }
+}
+```
+
+**Custom Handler Implementation:**
+
 ```typescript
-const mcpSdk = new McpCustomToolsSDK();
+// modules/process-order.ts
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
 
-const checkCustomerOrder = mcpSdk.defineTool({
-  // The name of the tool that an MCP client can call
-  name: "process_customer_order",
+export default async function (request: ZuploRequest, context: ZuploContext) {
+  const args = await request.json();
 
-  // The meaningful description provided to an MCP client's LLM for tool selection
-  description: "Process a customer order with inventory validation and pricing",
+  // 1. Validate customer exists and is active
+  const customerRes = await context.invokeRoute(
+    `/customers/${args.customerId}`,
+  );
+  if (!customerRes.ok) {
+    throw new Error("Customer not found or inactive");
+  }
+  const customer = await customerRes.json();
 
-  // The schea that is used to validate incoming arguments from MCP client tool calls
-  inputSchema: z.object({
-    customerId: z.string(),
-    orderNum: z.number(),
-  }),
+  // 2. Check the customer's order
+  const orderResponse = await context.invokeRoute(`/orders/${args.orderNum}`);
 
-  // The actual code that is invoked when a tool is called and the JSON arguments
-  // are validated. The tool's type-checked arguments and the ZuploContext
-  // are passed through.
-  handler: async (args, context) => {
-    // 1. Validate customer exists and is active
-    const customerRes = await context.invokeRoute(
-      `/customers/${args.customerId}`,
-    );
-    if (!customerRes.ok) {
-      return mcpSdk.errorResponse("Customer not found or inactive");
-    }
-    const customer = await customerRes.json();
+  if (!orderResponse.ok) {
+    throw new Error("Order not found");
+  }
+  const order = await orderResponse.json();
 
-    // 2. Check the customers order
-    const orderResponse = await context.invokeRoute(`/orders/${args.orderNum}`);
-
-    if (!orderResponse.ok) {
-      const error = await orderResponse.text();
-      return mcpSdk.errorResponse("Order not found");
-    }
-    const order = await orderResponse.json();
-
-    // 3. Response to MCP client with JSON response
-    return mcpSdk.jsonResponse({
-      orderNum: orderResponse.id,
-      items: orderResponse.items,
-    });
-  },
-});
+  // 3. Return structured response
+  return {
+    orderNum: order.id,
+    items: order.items,
+    status: "processed",
+    customerId: args.customerId,
+  };
+}
 ```
 
 #### Getting Started with Custom Tools
 
-1. Create custom tool definitions using the SDK
-2. Configure tools in the MCP Server Handler
-3. Deploy and test with MCP clients
+1. Create an OpenAPI specification defining your tools as POST endpoints
+2. Implement custom handler functions for complex business logic
+3. Configure the MCP Server Handler with your OpenAPI specification
+4. Deploy and test with MCP clients
 
 [Read the full documentation on MCP Custom Tools](/docs/handlers/mcp-server-custom-tools)
 
