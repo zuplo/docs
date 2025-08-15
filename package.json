@@ -32,7 +32,7 @@
     "lucide-react": "^0.516.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "zudoku": "^0.60.0"
+    "zudoku": "^0.60.1"
   },
   "devDependencies": {
     "@types/json-schema": "7.0.15",
