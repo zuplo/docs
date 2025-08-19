@@ -8,6 +8,8 @@ import { PolicyOverview } from "./PolicyOverview.js";
 import ZupIt from "./ZupIt.js";
 import { LegacyMonetization } from "./LegacyMonetization.js";
 import { ModalScreenshot } from "./ModalScreenshot.js";
+import { TutorialModeSelector, TutorialMode } from "./TutorialModeSelector.js";
+import { QuickstartPicker } from "./QuickstartPicker.js";
 
 const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
 
@@ -108,6 +110,9 @@ export const mdxComponents = {
   EnterpriseFeature,
   LegacyMonetization,
   ModalScreenshot,
+  TutorialModeSelector,
+  TutorialMode,
+  QuickstartPicker,
   EmbeddedChat: () => {
     return (
       <Suspense fallback={<div>Loading…</div>}>
