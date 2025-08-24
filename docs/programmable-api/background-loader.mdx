@@ -74,7 +74,7 @@ const bg = new BackgroundLoader(loaderFunction, {
 export default async function (request: ZuploRequest, context: ZuploContext) {
   // once an entry is cached this will return immediately. It will only block
   // if the cache is empty or has expired.
-  const data = await backgroundLoader.get(request.params.loaderId);
+  const data = await bg.get(request.params.loaderId);
   return data;
 }
 ```
