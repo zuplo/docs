@@ -15,18 +15,18 @@ export const CopyPrompt = ({ children, src }: CopyPromptProps) => {
     if (src) {
       setLoading(true);
       setError(null);
-      
+
       fetch(src)
-        .then(response => {
+        .then((response) => {
           if (!response.ok) {
             throw new Error(`Failed to fetch: ${response.status}`);
           }
           return response.text();
         })
-        .then(text => {
+        .then((text) => {
           setContent(text);
         })
-        .catch(err => {
+        .catch((err) => {
           setError(err.message);
         })
         .finally(() => {
@@ -34,20 +34,20 @@ export const CopyPrompt = ({ children, src }: CopyPromptProps) => {
         });
     }
   }, [src]);
-  
+
   const copyToClipboard = () => {
     let text = "";
-    
+
     if (src && content) {
       text = content;
-    } else if (typeof children === 'string') {
+    } else if (typeof children === "string") {
       text = children;
     } else if (children) {
-      text = React.Children.toArray(children).join(' ');
+      text = React.Children.toArray(children).join(" ");
     } else {
       text = "Use this pre-built prompt to get started faster.";
     }
-    
+
     navigator.clipboard.writeText(text).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -60,7 +60,7 @@ export const CopyPrompt = ({ children, src }: CopyPromptProps) => {
       if (error) return `Error: ${error}`;
       if (content) return content;
     }
-    
+
     return children || "Use this pre-built prompt to get started faster.";
   };
 

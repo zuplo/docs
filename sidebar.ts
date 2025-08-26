@@ -32,9 +32,8 @@ export const docs: Navigation = [
     label: "Getting Started (Local)",
     items: [
       "articles/step-1-setup-basic-gateway-local",
-      // "articles/step-2-add-rate-limiting-local",
-      // "articles/step-3-add-api-key-auth-local",
-      // "articles/step-4-deploying-to-the-edge-local",
+      "articles/step-2-add-rate-limiting-local",
+      "articles/step-3-add-api-key-auth-local",
     ],
     collapsed: false,
   },

@@ -19,10 +19,10 @@ other authentication methods.
 
 :::info{title="What's a Policy?"}
 
-[Policies](./policies.md) are modules that can intercept and transform an
+[Policies](./policies.mdx) are modules that can intercept and transform an
 incoming request or outgoing response. Zuplo offers a wide range of policies
 built-in (including api key authentication) to save you time. You can check out
-[the full list](./policies.md).
+[the full list](./policies.mdx).
 
 :::
 
@@ -30,136 +30,170 @@ Let's get started.
 
 <Stepper>
 
-1. Add the API Key Authentication Policy
+1.  Link your Local Project
 
-   Navigate to your route in the **Route Designer** (**Code** >
-   `routes.oas.json`) and open the **Policies** section. Then click **Add
-   Policy**.
+    When developing locally with Zuplo, you can "link" your local project to
+    your Zuplo project using the `zuplo link` command. This allows you to test
+    your changes in a real environment.
 
-   ![Add Policy](../../public/media/step-3-add-api-key-auth/image.png)
+    When you run the command you will be prompted to select your Zuplo account,
+    project, and environment. You can pick any environment.
 
-   Search for the API key authentication policy, click on it, and then click OK
-   to accept the default policy JSON.
+    ```bash
+    npx zuplo link
+    ```
 
-   <ModalScreenshot>
+    After your project is linked, environment variables and other configuration
+    from your Zuplo project will be available in your local development
+    environment.
 
-   ![Add API Key Authentication](../../public/media/step-3-add-api-key-auth/choose-policy.png)
+1.  Start your Project
 
-   </ModalScreenshot>
+    You can start your project using the following command:
 
-   :::tip
+    ```bash
+    npx zuplo dev
+    ```
 
-   The API key authentication policy should usually be one of the first policies
-   executed. If you came here from [Step 2](./step-2-add-rate-limiting.mdx) then
-   you will want to drag it above the rate limiting policy.
+    After your project is started, you can open the local route designer at
+    http://localhost:9100.
 
-   :::
+1.  Add the API Key Authentication Policy
 
-   ![reorder policies](../../public/media/step-3-add-api-key-auth/image-1.gif)
+    Open the local **Route Designer** by navigating to http://localhost:9100/.
+    Select your route and click **Add Policy** on the incoming Requeset policies
+    section.
 
-   If you test your route, you should get a 401 Unauthorized response
+    <BrowserScreenshot url="http://localhost:9100/?path=routes.oas.json">
 
-   ```json
-   {
-     "status": 401,
-     "title": "Unauthorized",
-     "type": "https://httpproblems.com/http-status/401"
-   }
-   ```
+    ![Add Policy](../../public/media/step-3-add-api-key-auth-local/image.png)
 
-2. Set up an API Key
+    </BrowserScreenshot>
 
-   In order to call your API, you need to configure an API consumer. Go to
-   **Services**, then click **Configure** on the "API Key Service".
+    Search for the API key authentication policy, click on it, and then click OK
+    to accept the default policy JSON.
 
-   ![API Key Service](../../public/media/step-3-add-api-key-auth/image-2.png)
+    <ModalScreenshot>
 
-   Then click **Create Consumer**.
+    ![Add API Key Authentication](../../public/media/step-3-add-api-key-auth/choose-policy.png)
 
-   ![Create Consumer](../../public/media/step-2-add-api-key-auth/image-8.png)
+    </ModalScreenshot>
 
-   Let's break down the configuration needed.
-   - Subject: Also known as `sub`. This is a unique identifier of the API
-     consumer. This is commonly the name of the user or organization consuming
-     your API
-   - Key managers: The email addresses of those who will be managing this API
-     key.
-   - Metadata: JSON metadata that will be made available to the runtime when a
-     key is used to authenticate. Common properties include the consumer's
-     subscription plan, organization, etc.
+    :::tip
 
-   Go ahead and fill in `test-consumer` for the Subject. Add your own email as a
-   Key manager, and leave the metadata empty for now. Click **Save consumer**
-   once you're done.
+    The API key authentication policy should usually be one of the first
+    policies executed. If you came here from
+    [Step 2](./step-2-add-rate-limiting.mdx) then you will want to drag it above
+    the rate limiting policy.
 
-   <ModalScreenshot>
+    :::
 
-   ![New Consumer](../../public/media/step-3-add-api-key-auth/image-3.png)
+    ![reorder policies](../../public/media/step-3-add-api-key-auth/image-1.gif)
 
-   </ModalScreenshot>
+    If you test your route, you should get a 401 Unauthorized response
 
-3. Copy your API Key
+    ```json
+    {
+      "status": 401,
+      "title": "Unauthorized",
+      "type": "https://httpproblems.com/http-status/401"
+    }
+    ```
 
-   After your API Key consumer is created, copy your new API Key by clicking the
-   copy button (next to the eye icon).
+1.  Set up an API Key
 
-   ![Copy Key](../../public/media/step-3-add-api-key-auth/image-4.png)
+    In order to call your API, you need to configure an API consumer. Go to the
+    [Zuplo Portal](https://portal.zuplo.com), then open the project you are
+    working on, **Services**, then click **Configure** on the "API Key Service".
 
-4. Test out your API Key
+    :::warning
 
-   Navigate back to the **Route Designer**, and select your route. Next to the
-   path of your route, click the **Test** button and fire off a request.
+    Be sure to select the appropriate environment in the dropdown on the top
+    right of the services page. You must select the environment type you linked
+    your local project to. If you only have a single environment, you should
+    select "Production". Later we will create new environments for preview.
 
-   <ModalScreenshot>
+    :::
 
-   ![Failed unauthorized error](../../public/media/step-3-add-api-key-auth/test-policy.png)
+    ![API Key Service](../../public/media/step-3-add-api-key-auth/image-2.png)
 
-   </ModalScreenshot>
+    Then click **Create Consumer**.
 
-   You should get a 401 Unauthorized response - as we'ven't supplied the API key
-   yet. Add an new `authorization` header with the value `Bearer <YOUR_API_KEY>`
-   and insert the API Key you got from the developer portal.
+    ![Create Consumer](../../public/media/step-2-add-api-key-auth/image-8.png)
 
-   You should now get a 200 OK.
+    Let's break down the configuration needed.
+    - Subject: Also known as `sub`. This is a unique identifier of the API
+      consumer. This is commonly the name of the user or organization consuming
+      your API
+    - Key managers: The email addresses of those who will be managing this API
+      key.
+    - Metadata: JSON metadata that will be made available to the runtime when a
+      key is used to authenticate. Common properties include the consumer's
+      subscription plan, organization, etc.
 
-   <ModalScreenshot>
+    Go ahead and fill in `test-consumer` for the Subject. Add your own email as
+    a Key manager, and leave the metadata empty for now. Click **Save consumer**
+    once you're done.
 
-   ![successful response](../../public/media/step-3-add-api-key-auth/image-6.png)
+    <ModalScreenshot>
 
-   </ModalScreenshot>
+    ![New Consumer](../../public/media/step-3-add-api-key-auth/image-3.png)
 
-   :::note
+    </ModalScreenshot>
 
-   We also offer an API for our API key service that allows you to
-   programmatically create consumers and even create your own developer portal
-   or integrate key management into your existing dashboard. See
-   [this document for details](./api-key-api.md).
+1.  Copy your API Key
 
-   :::
+    After your API Key consumer is created, copy your new API Key by clicking
+    the copy button (next to the eye icon).
 
-5. View your API Documentation
+    ![Copy Key](../../public/media/step-3-add-api-key-auth/image-4.png)
 
-   Whenever you deploy a new endpoint on Zuplo, it will automatically be added
-   to your
-   [autogenerated developer documentation portal](../dev-portal/introduction.md).
+1.  Test out your API Key
 
-   To access your API's developer portal, click the **Gateway deployed** button
-   in your toolbar and click the link under Developer Portal.
-   ![Developer portal menu](../../public/media/step-2-add-rate-limiting/image-5.png)
+    Using any HTTP client (like Postman or curl), make a request to your API.
 
-   When you use certain policies like API keys, Zuplo will document properties
-   like headers associated with that policy. As you can see on the right, the
-   API key policy's `Authorization` header has been documented for you.
+    ```bash
+    curl --request GET \
+    --url http://localhost:9000/path-0 \
+    --header 'Authorization: Bearer zpka_d67b7e241bb948758f415b79aa8exxxx_2efbxxxx'
+    ```
 
-   ![Developer Portal Endpoint](../../public/media/step-3-add-api-key-auth/image-7.png)
+    You should get a 401 Unauthorized response - as we'ven't supplied the API
+    key yet. Add an new `authorization` header with the value
+    `Bearer <YOUR_API_KEY>` and insert the API Key you got from the developer
+    portal.
 
-   Additionally, a new Authentication section has been added to your developer
-   portal. Users of your API can sign in, view & manage their API keys, test
-   your endpoints, track API usage, and much more! You can learn more about that
-   in
-   [our developer portal auth docs](/docs/dev-portal/zudoku/configuration/authentication).
+    You should now get a 200 OK.
+
+    ```json
+    {
+      "url": "https://echo.zuplo.io/path-0",
+      "method": "GET",
+      "query": {},
+      "headers": {
+        "accept": "*/*",
+        "accept-encoding": "gzip, br",
+        "connection": "Keep-Alive",
+        "host": "echo.zuplo.io",
+        "true-client-ip": "12.63.237.42",
+        "user-agent": "curl/8.7.1",
+        "x-forwarded-proto": "https",
+        "x-real-ip": "12.63.237.42",
+        "zp-rid": "ecfac0de-f039-4ced-997c-b17c9babc944"
+      }
+    }
+    ```
+
+    :::note
+
+    We also offer an API for our API key service that allows you to
+    programmatically create consumers and even create your own developer portal
+    or integrate key management into your existing dashboard. See
+    [this document for details](./api-key-api.mdx).
+
+    :::
 
 </Stepper>
 
 **NEXT** Try
-[Step 4 - Connect Source Control and Deploy to the Edge](./step-4-deploying-to-the-edge.mdx).
+[Step 4 - Connect Source Control and Deploy to the Edge](./step-4-deploying-to-the-edge-local.mdx).
