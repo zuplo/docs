@@ -9,6 +9,8 @@
     "**/*.code-search": true,
     "**/.next": true
   },
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
   "[markdown]": {
     "editor.wordWrap": "off",
     "editor.wordWrapColumn": 80

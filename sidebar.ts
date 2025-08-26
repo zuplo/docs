@@ -16,7 +16,7 @@ export const docs: Navigation = [
   },
   {
     type: "category",
-    label: "Getting Started",
+    label: "Getting Started (Portal)",
     items: [
       "articles/step-1-setup-basic-gateway",
       "articles/step-2-add-rate-limiting",
@@ -24,6 +24,16 @@ export const docs: Navigation = [
       "articles/step-4-deploying-to-the-edge",
       "articles/step-5-dynamic-rate-limiting",
       "articles/mcp-quickstart",
+    ],
+    collapsed: false,
+  },
+  {
+    type: "category",
+    label: "Getting Started (Local)",
+    items: [
+      "articles/step-1-setup-basic-gateway-local",
+      "articles/step-2-add-rate-limiting-local",
+      "articles/step-3-add-api-key-auth-local",
     ],
     collapsed: false,
   },
@@ -158,6 +168,7 @@ export const docs: Navigation = [
         items: [
           "articles/zuplo-waf",
           "articles/waf-ddos-fastly",
+          "articles/waf-ddos-akamai",
           "articles/waf-ddos-aws-waf-shield",
         ],
       },

@@ -1,6 +1,11 @@
 ---
-title: Step 1 - Setup a Basic Gateway (Local)
+title: Step 1 - Setup a Basic Gateway
 ---
+
+<QuickstartPicker
+  mode="local"
+  alternateLink="/articles/step-1-setup-basic-gateway"
+/>
 
 In this tutorial we'll setup a simple gateway using Zuplo's local development.
 We'll use a simple origin API at [echo.zuplo.io](https://echo.zuplo.io). In
@@ -56,7 +61,7 @@ later steps, we'll setup a Zuplo project and deploy it to the cloud.
    the route to match specific incoming requests to the gateway:
    - **Summary**: Enter a summary, e.g. `Example Endpoint`.
    - **Method**: Leave as `GET`.
-   - **Path**: Enter `path-1`.
+   - **Path**: Enter `path-0`.
 
    Then we'll specify how the route will invoke the backend origin API, using a
    forward handler:
@@ -76,10 +81,10 @@ later steps, we'll setup a Zuplo project and deploy it to the cloud.
    HTTPie, curl, etc).
 
    ```bash
-   curl http://localhost:9000/path-1
+   curl http://localhost:9000/0
 
    {
-     "url": "https://echo.zuplo.io/path-1",
+     "url": "https://echo.zuplo.io/path-0",
      "method": "GET",
      "query": {},
      "headers": {
@@ -122,4 +127,4 @@ later steps, we'll setup a Zuplo project and deploy it to the cloud.
 </Stepper>
 
 **NEXT** Try
-[Step 2 - Add Rate Limiting to your API](./step-2-add-rate-limiting.mdx).
+[Step 2 - Add Rate Limiting to your API](./step-2-add-rate-limiting-local.mdx).

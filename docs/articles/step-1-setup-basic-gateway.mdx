@@ -3,6 +3,11 @@ title: Step 1 - Setup a Basic Gateway
 sidebar_label: "Step 1 - Setup Your Gateway"
 ---
 
+<QuickstartPicker
+  mode="portal"
+  alternateLink="/articles/step-1-setup-basic-gateway-local"
+/>
+
 In this tutorial we'll setup a simple gateway. We'll use a simple origin API at
 [getting-started.zuplo.io](https://getting-started.zuplo.io).
 
@@ -27,7 +32,7 @@ Note - Zuplo also supports building and running your API locally. To learn more
    the route to match specific incoming requests to the gateway:
    - **Summary**: Enter a summary, e.g. `Example Endpoint`.
    - **Method**: Leave as `GET`.
-   - **Path**: Enter `path-1`.
+   - **Path**: Enter `path-0`.
 
    Then we'll specify how the route will invoke the backend origin API, using a
    forward handler:
@@ -56,7 +61,7 @@ Note - Zuplo also supports building and running your API locally. To learn more
 
    ```json
    {
-     "url": "https://echo.zuplo.io/path-1",
+     "url": "https://echo.zuplo.io/path-0",
      "method": "GET",
      "query": {},
      "headers": {
