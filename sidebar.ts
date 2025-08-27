@@ -615,7 +615,10 @@ export const policies: Navigation = [
         type: "category",
         label: "MCP Server",
         link: "handlers/mcp-server",
-        items: ["handlers/mcp-server-custom-tools"],
+        items: [
+          "handlers/mcp-server-custom-tools",
+          "handlers/mcp-server-prompts",
+        ],
       },
       "handlers/redirect",
       "handlers/openapi",

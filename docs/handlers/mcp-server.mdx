@@ -18,9 +18,10 @@ functionality or rebuild business logic in your backend.
 Each MCP Server handler has a 1:1 relationship with a route. That means one
 route can host one server.
 
-A single MCP server may have many tools, where each tool interfaces with an API
-route in your gateway. You can compose multiple MCP servers on different routes
-to tailor MCP tools for each server's specific purpose.
+A single MCP server may have many tools and prompts, where each tool interfaces
+with an API route in your gateway. You can compose multiple MCP servers on
+different routes to tailor MCP tools and prompts for each server's specific
+purpose.
 
 ## Setup via Portal
 
@@ -39,8 +40,8 @@ Configure the handler with the following required options:
 
 ![MCP Server Handler Portal](../../public/media/mcp/portal-handler.png)
 
-Next, configure your routes to be transformed into MCP tools (see Configuration
-section below).
+Next, configure your routes to be transformed into MCP tools or prompts (see
+Configuration section below).
 
 ## Setup via routes.oas.json
 
@@ -224,6 +225,42 @@ With this approach, you define tools in a separate OpenAPI specification where
 each endpoint becomes an MCP tool with custom TypeScript handlers. See
 [MCP Server Custom Tools](./mcp-server-custom-tools.mdx) for detailed
 documentation.
+
+### MCP Prompts
+
+In addition to tools, MCP servers can expose prompts - reusable, parameterized
+prompt templates that AI clients can request and execute. Configure prompts
+using the `prompts` array in your MCP server options:
+
+```json
+"paths": {
+  "/mcp": {
+    "post": {
+      "x-zuplo-route": {
+        "handler": {
+          "export": "mcpServerHandler",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "name": "My MCP Server",
+            "version": "1.0.0",
+            "prompts": [
+              {
+                "path": "./config/routes.oas.json",
+                "operationIds": ["greeting_generator", "content_template"]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Routes configured as MCP prompts may include the `x-zuplo-mcp-prompt` extension
+in their OpenAPI definition in order to provide additional MCP metadata. These
+routes should return structured message arrays from their handlers. See
+[MCP Server Prompts](./mcp-server-prompts.mdx) for detailed documentation.
 
 ### Tool names and descriptions
 
@@ -505,6 +542,21 @@ curl https://my-gateway.zuplo.dev/mcp \
 }'
 ```
 
+#### List prompts
+
+To see what prompts a server has available:
+
+```sh
+curl https://my-gateway.zuplo.dev/mcp \
+    -X POST \
+    -H 'accept: application/json, text/event-stream' \
+    -d '{
+  "jsonrpc": "2.0",
+  "id": "0",
+  "method": "prompts/list"
+}'
+```
+
 #### Call tool
 
 To
@@ -528,6 +580,30 @@ curl https://my-gateway.zuplo.dev/mcp \
 For more complex tools, you'll need to provide the schema compliant `arguments`.
 Note the `inputSchema` for the tool from `tools/list` to appropriately craft the
 `arguments`.
+
+#### Get prompt
+
+To execute a prompt with parameters:
+
+```sh
+curl https://my-gateway.zuplo.dev/mcp \
+    -X POST \
+    -H 'accept: application/json, text/event-stream' \
+    -d '{
+  "jsonrpc": "2.0",
+  "id": "1",
+  "method": "prompts/get",
+  "params": {
+    "name": "my_prompt",
+    "arguments": {
+      "param1": "value1"
+    }
+  }
+}'
+```
+
+For prompts with parameters, provide the required `arguments` object based on
+the prompt's schema from `prompts/list`.
 
 :::tip
 
