@@ -3,9 +3,9 @@ title: Zuplo Project Config (zuplo.jsonc)
 sidebar_label: Project Config
 ---
 
-Certain advanced project-level settings can be configured using the
-`zuplo.jsonc` file at the root of a project. The `zuplo.jsonc` file is created
-by default for new projects and contains the default configuration.
+Certain project-level settings can be configured using the `zuplo.jsonc` file at
+the root of a project. The `zuplo.jsonc` file is created by default for new
+projects and contains the default configuration.
 
 The default `zuplo.jsonc` file is shown below. The only current valid `version`
 of the file is `1`.
@@ -14,6 +14,7 @@ of the file is `1`.
 {
   "version": 1,
   "compatibilityDate": "2025-02-06",
+  "projectType": "managed-edge",
 }
 ```
 
@@ -26,12 +27,65 @@ provider or by pushing a local change with git. If your project doesn't have a
 
 :::
 
-## Compatibility Dates
+## `compatibilityDate`
 
 The `compatibilityDate` field in the `zuplo.jsonc` file allows you to lock in
-the bevaior of the runtime environment for your project. This is useful if you
+the behavior of the runtime environment for your project. This is useful if you
 want to ensure that your project continues to build, deploy and operate as you
 expect it to.
 
 Refer to the [documentation](./compatibility-dates.mdx) for compatibility dates
 and their changes.
+
+```jsonc
+{
+  "version": 1,
+  "compatibilityDate": "2025-02-06",
+}
+```
+
+## `projectType`
+
+The `projectType` field in the `zuplo.jsonc` file allows you to specify the type
+of your project. This value should be set to match the
+[hosting environment](../articles/hosting-options.mdx) the project will be
+deployed. This configuration defaults to `managed-edge`.
+
+- `managed-edge`: (default) Projects that are deployed to Zuplo's managed edge
+  environment.
+- `managed-dedicated`: Projects that are deployed to your managed dedicated
+  environment.
+- `self-hosted`: Projects that are deployed to your own infrastructure.
+
+```jsonc
+{
+  "version": 1,
+  "projectType": "managed-edge",
+}
+```
+
+## `allowDuplicateRoutes`
+
+Allow duplicate routes (same method and path) to be defined. This is not
+recommended as it can lead to unexpected behavior. This configuration defaults
+to `false`.
+
+```jsonc
+{
+  "version": 1,
+  "allowDuplicateRoutes": true,
+}
+```
+
+## `allowHostHeaderOverride`
+
+Allow the Host header to be overridden by the client. This configuration
+defaults to `false`. This is only supported in managed dedicated environments.
+Only enable this setting if you understand the implications.
+
+```jsonc
+{
+  "version": 1,
+  "allowHostHeaderOverride": true,
+}
+```
