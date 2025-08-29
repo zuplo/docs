@@ -11,12 +11,37 @@ port 9100. To change the port number, you can call
 npx zuplo dev --port <port number> --editor-port <editor port number>
 ```
 
+## Certificates Errors
+
+When running Zuplo locally you may want to call a service with a self-signed
+certificate. By default this is not supported - we recommend using
+signed/trusted certicates in deployed environments. However, for local
+development you can ignore certificate errors by adding the
+`--unsafely-ignore-certificate-errors` flag on the `zuplo dev` command.
+
+Run your development server with the following command:
+
+```bash
+npx zuplo dev --unsafely-ignore-certificate-errors
+```
+
+If you want to update your `package.json` to always allow self-signed
+certificates, you can add the following script:
+
+```json
+{
+  "scripts": {
+    "dev": "zuplo dev --unsafely-ignore-certificate-errors"
+  }
+}
+```
+
 ## Updating the Zuplo CLI
 
 To update the CLI, run the following command in your project directory.
 
 ```bash
-   npm install zuplo@latest
+npm install zuplo@latest
 ```
 
 You must include the @latest to ensure you are getting the latest. Otherwise,

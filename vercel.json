@@ -1197,6 +1197,11 @@
       "source": "/docs/legacy/dev-portal/overview{/}?",
       "destination": "/docs/dev-portal/introduction",
       "permanent": true
+    },
+    {
+      "source": "/docs/articles/cloudflare-settings{/}?",
+      "destination": "/docs/articles/zuplo-ddos",
+      "permanent": true
     }
   ],
   "rewrites": [
