@@ -172,7 +172,7 @@ export const docs: Navigation = [
           "articles/waf-ddos-aws-waf-shield",
         ],
       },
-      "articles/cloudflare-settings",
+      "articles/ddos-protection",
     ],
   },
   {

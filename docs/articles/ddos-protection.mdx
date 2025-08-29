@@ -1,0 +1,136 @@
+---
+title: Managed DDoS Protection
+sidebar_label: DDoS Protection
+---
+
+Zuplo provides automatic DDoS (Distributed Denial of Service) protection for all
+APIs deployed on the platform. This service detects and mitigates attacks in
+real-time, ensuring your APIs remain available even under attack.
+
+:::note
+
+Zuplo Managed DDoS is only available for customers using Zuplo's managed edge
+deployment model. Customers using managed dedicated deployments should refer to
+the
+[Managed Dedicated WAF Options](./zuplo-waf.mdx#managed-dedicated-waf-options)
+document.
+
+:::
+
+## What is DDoS?
+
+DDoS attacks attempt to overwhelm your API by flooding it with malicious traffic
+from multiple sources. Zuplo's protection covers both:
+
+- **Network Layer Attacks (Layer 3/4)**: UDP floods, SYN floods, and other
+  network-level attacks
+- **Application Layer Attacks (Layer 7)**: HTTP floods, slowloris, and other
+  application-level attacks
+
+## Key Benefits
+
+- **Always-On**: Protection is automatic from deployment—no configuration needed
+- **Multi-Layer Defense**: Covers both network and application layer attacks
+- **Unmetered Protection**: No bandwidth limits during attacks
+- **Adaptive**: Continuously updated to handle new attack patterns
+- **Minimal False Positives**: Smart detection reduces blocking of legitimate
+  traffic
+- **Avoid Unexpected Costs**: Zuplo never charges for requests that are blocked
+  by DDoS protection protecting you from unexpected overage fees.
+
+## Protection Levels
+
+Zuplo offers different sensitivity levels for DDoS protection, allowing you to
+balance security with accessibility based on your specific needs.
+
+### Working Copy Environments
+
+All Working Copy environments (`.zuplo.dev` domains) are automatically protected
+with **Medium** sensitivity. This provides robust protection while minimizing
+the risk of blocking legitimate traffic during development and testing.
+
+### Preview and Production Environments
+
+Preview and production deployments benefit from advanced DDoS protection
+capabilities:
+
+- **Default Setting**: Medium sensitivity (balanced protection)
+- **Enterprise Customization**: Optional enterprise add-on allowing
+  configuration of protection levels
+
+### Sensitivity Levels Explained
+
+Enterprise customers with the DDoS customization add-on can choose from four
+sensitivity levels:
+
+#### High Sensitivity
+
+- Most aggressive protection with the lowest threshold for triggering mitigation
+- Ideal for APIs that face frequent attacks or handle highly sensitive data
+- May occasionally block legitimate traffic during unusual usage patterns
+
+#### Medium Sensitivity (Default)
+
+- Balanced approach providing strong protection with moderate thresholds
+- Recommended for most production APIs
+- Optimizes for both security and accessibility
+
+#### Low Sensitivity
+
+- Higher threshold for triggering mitigation
+- Suitable for APIs with highly variable traffic patterns
+- Reduces false positives for legitimate traffic spikes
+
+#### Essentially Off
+
+- Minimal protection with the highest threshold
+- Protection still activates for extremely large attacks to maintain network
+  stability
+- Recommended only when you have alternative DDoS protection mechanisms.
+
+## How Protection Works
+
+### Detection
+
+Zuplo's DDoS protection uses sophisticated algorithms to analyze traffic
+patterns in real-time. The system examines multiple factors including:
+
+- Request rates and patterns
+- Source IP reputation
+- Geographic distribution
+- Protocol compliance
+- Behavioral anomalies
+
+### Mitigation
+
+When an attack is detected, the system automatically applies appropriate
+mitigation techniques:
+
+1. **Traffic Filtering**: Malicious traffic is filtered at the edge before
+   reaching your API
+2. **Rate Limiting**: Excessive requests from suspicious sources are throttled
+3. **Connection Management**: Advanced TCP protection handles sophisticated
+   connection-based attacks
+
+### Continuous Improvement
+
+The protection system continuously evolves:
+
+- Managed rulesets are regularly updated
+- New attack patterns are incorporated into detection algorithms
+- Protection mechanisms adapt based on the global threat landscape
+
+## Enterprise Customization
+
+Enterprise customers can enhance their DDoS protection with:
+
+- **Custom Sensitivity Levels**: Adjust protection thresholds per environment
+- **Advanced Analytics**: Detailed attack reports and traffic analysis
+- **Custom Rule Configuration**: Tailor protection to specific traffic patterns
+
+:::tip
+
+Contact your Zuplo account team to learn more about Enterprise DDoS
+customization options.
+
+:::
