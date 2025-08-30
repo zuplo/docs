@@ -1200,7 +1200,7 @@
     },
     {
       "source": "/docs/articles/cloudflare-settings{/}?",
-      "destination": "/docs/articles/zuplo-ddos",
+      "destination": "/docs/articles/ddos-protection",
       "permanent": true
     }
   ],
