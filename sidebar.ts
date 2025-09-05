@@ -196,11 +196,7 @@ export const docs: Navigation = [
   {
     type: "category",
     label: "Monetization",
-    items: [
-      "articles/monetization",
-      "articles/monetization-using-openmeter",
-      "articles/monetization-enterprise",
-    ],
+    items: ["articles/monetization", "articles/monetization-enterprise"],
   },
   {
     type: "category",
