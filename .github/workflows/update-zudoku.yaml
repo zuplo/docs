@@ -19,7 +19,7 @@ jobs:
           app-id: ${{ vars.INTEGRATIONS_APP_ID }}
           private-key: ${{ secrets.INTEGRATIONS_APP_PRIVATE_KEY }}
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           token: ${{ steps.generate-token.outputs.token }}
 
