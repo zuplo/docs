@@ -127,6 +127,7 @@ export const docs: Navigation = [
       "articles/metrics-plugins",
       "articles/opentelemetry",
       "articles/monitoring-your-gateway",
+      "articles/performance-testing",
     ],
   },
   {
