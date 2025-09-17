@@ -4,10 +4,10 @@
   "name": "Node.js",
   "build": {
     "dockerfile": "Dockerfile",
-    // Update 'VARIANT' to pick a Node version: 18, 16, 14.
+    // Update 'VARIANT' to pick a Node version: 22, 18, 16, 14.
     // Append -bullseye or -buster to pin to an OS version.
     // Use -bullseye variants on local arm64/Apple Silicon.
-    "args": { "VARIANT": "18-bullseye" }
+    "args": { "VARIANT": "22-bullseye" }
   },
 
   // Configure tool-specific properties.
@@ -27,7 +27,7 @@
   "forwardPorts": [3001],
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "npm install",
+  "postCreateCommand": "pnpm install",
 
   // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
   "remoteUser": "node"

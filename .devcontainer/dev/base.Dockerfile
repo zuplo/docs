@@ -1,5 +1,5 @@
-# [Choice] Node.js version (use -bullseye variants on local arm64/Apple Silicon): 18-bullseye, 16-bullseye, 14-bullseye, 18-buster, 16-buster, 14-buster
-ARG VARIANT=18-bullseye
+# [Choice] Node.js version (use -bullseye variants on local arm64/Apple Silicon): 22-bullseye, 18-bullseye, 16-bullseye, 14-bullseye, 22-buster, 18-buster, 16-buster, 14-buster
+ARG VARIANT=22-bullseye
 FROM node:${VARIANT}
 
 # [Option] Install zsh
@@ -53,3 +53,6 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 
 # [Optional] Uncomment if you want to install more global node modules
 # RUN su node -c "npm install -g <your-package-list-here>""
+
+# Install pnpm globally
+RUN su ${USERNAME} -c "npm install -g pnpm"
