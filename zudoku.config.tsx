@@ -1,5 +1,5 @@
 import type { ZudokuConfig, ZudokuPlugin } from "zudoku";
-import { devPortal, docs, policies, programming } from "./sidebar.js";
+import { ai, devPortal, docs, policies, programming } from "./sidebar.js";
 import { mdxComponents } from "./src/components.js";
 import { HeadNavigation } from "./src/HeadNavigation";
 import "./src/diagrams.css";
@@ -101,6 +101,11 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
       type: "category",
       label: "Documentation",
       items: docs,
+    },
+    {
+      type: "category",
+      label: "AI",
+      items: ai,
     },
     {
       type: "category",

@@ -90,11 +90,6 @@ export const docs: Navigation = [
   },
   {
     type: "category",
-    label: "AI",
-    items: ["ai/mcp"],
-  },
-  {
-    type: "category",
     label: "Observability",
     items: [
       {
@@ -344,6 +339,69 @@ export const docs: Navigation = [
         to: "https://zuplo.com/changelog",
       },
     ],
+  },
+];
+
+export const ai: Navigation = [
+  {
+    type: "category",
+    label: "Introduction",
+    items: ["ai/overview", "ai/features"],
+    collapsed: false,
+  },
+  {
+    type: "category",
+    label: "AI Gateway",
+    items: [
+      "ai/gateway/overview",
+      "ai/gateway/getting-started",
+      "ai/gateway/universal-api",
+      "ai/gateway/information-architecture",
+      {
+        type: "category",
+        label: "Providers",
+        items: [
+          "ai/gateway/providers",
+          "ai/gateway/provider-openai",
+          "ai/gateway/provider-anthropic",
+          "ai/gateway/provider-google",
+          "ai/gateway/provider-minstral",
+        ],
+      },
+      {
+        type: "category",
+        label: "Teams",
+        items: ["ai/gateway/teams"],
+      },
+      {
+        type: "category",
+        label: "Apps",
+        items: ["ai/gateway/apps"],
+      },
+    ],
+    collapsed: false,
+  },
+  {
+    type: "category",
+    label: "MCP Server",
+    items: [
+      "ai/mcp-server/overview",
+      "ai/mcp-server/getting-started",
+      {
+        type: "link",
+        icon: "square-code",
+        label: "Handler",
+        target: "_self",
+        to: "https://zuplo.com/docs/handlers/mcp-server",
+      },
+    ],
+    collapsed: false,
+  },
+
+  {
+    type: "category",
+    label: "Guardrails",
+    items: ["ai/guardrails"],
   },
 ];
 
