@@ -362,6 +362,7 @@ export const ai: Navigation = [
         label: "Providers",
         items: [
           "ai/gateway/providers",
+          "ai/gateway/managing-providers",
           "ai/gateway/provider-openai",
           "ai/gateway/provider-anthropic",
           "ai/gateway/provider-google",
@@ -371,7 +372,11 @@ export const ai: Navigation = [
       {
         type: "category",
         label: "Teams",
-        items: ["ai/gateway/teams"],
+        items: [
+          "ai/gateway/teams",
+          "ai/gateway/managing-teams",
+          "ai/gateway/usage-limits",
+        ],
       },
       {
         type: "category",
