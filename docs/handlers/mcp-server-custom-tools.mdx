@@ -174,9 +174,10 @@ Configure the MCP Server Handler to use your OpenAPI specification:
             "options": {
               "name": "Calculator MCP Server",
               "version": "0.0.0",
-              "openApiFilePaths": [
+              "files": [
                 {
-                  "filePath": "./config/routes.oas.json"
+                  "path": "./config/calculator-api.oas.json",
+                  "operationIds": ["addNumbers", "multiplyNumbers"]
                 }
               ]
             }
