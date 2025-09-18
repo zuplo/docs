@@ -67,7 +67,9 @@ Each audit log entry contains the following information:
 - **Email**: The email address of the actor (only for user actors)
 - **Type**: The type of actor (`user`, `consumer`, `service`, `anonymous`)
 - **Connection**: The authentication connection used (e.g., `auth0`, `google`)
-- **ActingAs**: Information about impersonated user, if applicable
+- **ActingAs**: Information about impersonated user, if applicable - this is
+  done by authorized Zuplo staff for support or diagnostic purposes only.
+  Contains:
   - Sub: Subject identifier of the impersonated user
   - Email: Email of the impersonated user
 - **Metadata**: Additional actor-specific metadata
