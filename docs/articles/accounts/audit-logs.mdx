@@ -1,0 +1,212 @@
+---
+title: Audit Logs
+sidebar_label: Audit Logs
+---
+
+<EnterpriseFeature name="Audit Logs" />
+
+Audit logs provide a comprehensive record of activities within your Zuplo
+account, helping you track changes and maintain compliance requirements. Every
+change performed in your account is logged with detailed information about who
+performed the change, when it occurred, and what resources were affected.
+
+:::note{title="Beta Feature"}
+
+Audit logs are currently in beta. During the beta period not all events may be
+captured. We are working towards full coverage.
+
+:::
+
+## Overview
+
+Audit logs capture critical events across your Zuplo infrastructure, including:
+
+- Project and environment modifications
+- Configuration changes
+- Team member management
+- API key operations
+- Deployment activities
+- Security-related actions
+
+Each log entry provides complete visibility into the change performed, making it
+easy to investigate issues, track changes, and demonstrate compliance.
+
+## Accessing Audit Logs
+
+Audit logs are available for accounts on the Enterprise plan. To access your
+audit logs:
+
+1. Navigate to your account settings
+2. Click on **Audit Logs** in the left sidebar
+3. View the chronological list of all account activities
+
+:::note
+
+Audit logs are retained for 90 days by default. Contact support if you need
+extended retention periods.
+
+:::
+
+## Understanding Log Entries
+
+Each audit log entry contains the following information:
+
+### Core Fields
+
+- **Timestamp**: When the action occurred (ISO 8601 format)
+- **Action**: The specific operation performed (e.g., `project.create`,
+  `user.invite`, `deployment.promote`)
+- **Request ID**: Unique identifier for tracking the request
+- **Success**: Whether the action completed successfully (true/false/null)
+- **Error**: Error message if the action failed
+- **Metadata**: Additional action-specific metadata
+
+### Actor Information
+
+- **Sub**: The subject identifier of the actor (user ID, API key, etc.)
+- **Email**: The email address of the actor (only for user actors)
+- **Type**: The type of actor (`user`, `consumer`, `service`, `anonymous`)
+- **Connection**: The authentication connection used (e.g., `auth0`, `google`)
+- **ActingAs**: Information about impersonated user, if applicable
+  - Sub: Subject identifier of the impersonated user
+  - Email: Email of the impersonated user
+- **Metadata**: Additional actor-specific metadata
+
+### Resource Information
+
+Actions that affect specific resources include detailed resource information:
+
+- **Type**: The type of resource affected (`account`, `project`, `deployment`,
+  etc.)
+- **ID**: Unique identifier of the resource
+- **Metadata**: Resource-specific metadata and additional details
+
+### Context Information
+
+Each log entry includes detailed context about where and how the action was
+performed:
+
+- **IP Address**: The IP address of the request
+- **User Agent**: The user agent string of the request
+- **Country**: The ISO 3166-1 alpha-2 country code (e.g., 'US', 'GB')
+- **Region**: The region/state code (e.g., 'CA' for California)
+- **City**: The city name from which the request originated
+- **Postal Code**: The postal/ZIP code
+- **Metro Code**: The metro code (DMA code in the US)
+- **AS Org**: The Autonomous System organization (ISP name)
+
+### Route Information
+
+- **Source**: The source system or API that handled the request (e.g., 'api',
+  'gateway')
+- **URL**: The full URL path of the request
+- **Method**: The HTTP method used for the request
+
+## Filtering and Searching
+
+The audit logs interface provides powerful filtering capabilities:
+
+### Available Filters
+
+- **Date Range**: Filter logs within a specific time period
+- **Action**: View specific actions (e.g., all deployment activities)
+- **Actor**: Filter by the user who performed actions
+- **Success/Failure**: View only successful or failed operations
+
+## API Access
+
+Audit logs can be accessed programmatically via the Zuplo API:
+
+```bash
+curl -X GET \
+  "https://dev.zuplo.com/accounts/{accountName}/audit-logs" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+### Query Parameters
+
+- `limit`: Number of results per page (default: 20, max: 100)
+- `offset`: Pagination offset (default: 0)
+- `startDate`: Filter logs after this date (ISO 8601 format)
+- `endDate`: Filter logs before this date (ISO 8601 format)
+- `action`: Filter by specific action (e.g., 'account.create')
+- `actor`: Filter by actor's email address or subject identifier
+- `success`: Filter by success status (true/false)
+
+:::note Date Range Limitation The date range between `startDate` and `endDate`
+cannot exceed 30 days. The start date must be before the end date. :::
+
+### Response Format
+
+```json
+{
+  "data": [
+    {
+      "action": "project.update",
+      "metadata": {
+        /* action-specific metadata */
+      },
+      "actor": {
+        "sub": "auth0|123456",
+        "email": "user@example.com",
+        "type": "user",
+        "connection": "auth0",
+        "actingAs": null,
+        "metadata": {
+          /* additional actor metadata */
+        }
+      },
+      "resources": [
+        {
+          "type": "project",
+          "id": "proj_123",
+          "metadata": {
+            /* resource-specific metadata */
+          }
+        }
+      ],
+      "context": {
+        "ipAddress": "192.168.1.1",
+        "userAgent": "Mozilla/5.0...",
+        "country": "US",
+        "region": "CA",
+        "city": "San Francisco",
+        "postalCode": "94102",
+        "metroCode": "807",
+        "asOrg": "Example ISP"
+      },
+      "route": {
+        "source": "api",
+        "url": "/accounts/my-company/projects/proj_123",
+        "method": "PATCH"
+      },
+      "timestamp": "2024-01-15T10:30:45.123Z",
+      "requestId": "req_abc123",
+      "success": true,
+      "error": null
+    }
+  ],
+  "pagination": {
+    "limit": 20,
+    "offset": 0,
+    "total": 1234,
+    "hasMore": true
+  }
+}
+```
+
+### Retention and Archival
+
+- Understand your compliance requirements for log retention
+- Plan for long-term storage if needed beyond 90 days
+- Consider exporting logs for archival purposes
+- Maintain backup copies of critical audit trails
+
+## Limitations
+
+- Audit logs are retained for 90 days by default
+- Maximum of 100 results per API request
+- Date range queries cannot exceed 30 days
+- Some automated system actions may not generate audit logs
+- Logs are immutable and cannot be modified or deleted
