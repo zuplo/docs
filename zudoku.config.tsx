@@ -1,5 +1,12 @@
 import type { ZudokuConfig, ZudokuPlugin } from "zudoku";
-import { ai, devPortal, docs, policies, programming } from "./sidebar.js";
+import {
+  aiGateway,
+  apiGateway,
+  devPortal,
+  docs,
+  policies,
+  programming,
+} from "./sidebar.js";
 import { mdxComponents } from "./src/components.js";
 import { HeadNavigation } from "./src/HeadNavigation";
 import "./src/diagrams.css";
@@ -104,19 +111,25 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
     },
     {
       type: "category",
-      label: "AI",
-      items: ai,
+      label: "API Management",
+      items: apiGateway,
     },
     {
       type: "category",
-      label: "Policies & Handlers",
-      items: policies,
+      label: "AI Gateway",
+      items: aiGateway,
     },
     {
       type: "category",
       label: "Developer Portal",
       items: devPortal,
     },
+    {
+      type: "category",
+      label: "Policies & Handlers",
+      items: policies,
+    },
+
     {
       type: "category",
       label: "Programming API",

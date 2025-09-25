@@ -14,7 +14,11 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/src/*": ["./src/*"]
+    }
   },
   "include": [
     "src/**/*.{ts,tsx}",

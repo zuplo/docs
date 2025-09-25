@@ -3,15 +3,144 @@ import { errors } from "./src/errors";
 import zudokuSidebar from "./sidebar.zudoku.json";
 
 export const docs: Navigation = [
+  "articles/introduction",
+  "articles/what-is-zuplo",
+  "articles/who-uses-and-why",
+  "articles/hosting-options",
+  {
+    type: "category",
+    label: "Getting Started",
+    collapsed: false,
+    items: [
+      {
+        type: "link",
+        label: "API Management",
+        target: "_self",
+        to: "https://zuplo.com/docs/articles/step-1-setup-basic-gateway",
+      },
+      {
+        type: "link",
+        label: "AI Gateway",
+        target: "_self",
+        to: "https://zuplo.com/docs/ai-gateway/getting-started",
+      },
+      {
+        type: "link",
+        label: "MCP Server",
+        target: "_self",
+        to: "https://zuplo.com/docs/articles/mcp-quickstart",
+      },
+      {
+        type: "link",
+        label: "Developer Portal",
+        target: "_self",
+        to: "https://zuplo.com/docs/dev-portal/introduction",
+      },
+    ],
+  },
+  // {
+  //   type: "category",
+  //   label: "Hosting Options",
+  //   collapsed: false,
+  //   items: [
+  //     "articles/hosting-options",
+  //     {
+  //       type: "doc",
+  //       label: "Managed Dedicated",
+  //       file: "articles/managed-dedicated",
+  //     },
+  //     {
+  //       type: "doc",
+  //       label: "Managed Edge",
+  //       file: "articles/managed-edge",
+  //     },
+  //     {
+  //       type: "doc",
+  //       label: "Self Hosted",
+  //       file: "articles/self-hosted",
+  //     },
+  //   ],
+  // },
+
+  {
+    type: "category",
+    label: "Resources",
+    items: [
+      {
+        type: "category",
+        label: "Members & Roles",
+        link: {
+          type: "doc",
+          file: "articles/accounts/members-and-roles",
+        },
+        items: [
+          "articles/accounts/roles-and-permissions",
+          "articles/accounts/managing-account-members",
+          "articles/accounts/managing-project-members",
+        ],
+      },
+      {
+        type: "category",
+        label: "Account Settings",
+        items: [
+          "articles/accounts/zuplo-api-keys",
+          "articles/accounts/default-api-key",
+          "articles/accounts/billing",
+          "articles/accounts/delete-account",
+        ],
+      },
+      {
+        type: "category",
+        label: "User Settings",
+        items: [
+          "articles/users/profile",
+          "articles/users/multifactor-authentication",
+        ],
+      },
+      {
+        type: "category",
+        label: "Single Sign On",
+        link: {
+          type: "doc",
+          file: "articles/sso",
+        },
+        items: [
+          "articles/sso-okta",
+          "articles/sso-azure-ad",
+          "articles/sso-faq",
+        ],
+      },
+      {
+        type: "doc",
+        file: "articles/limits",
+      },
+    ],
+  },
+  {
+    type: "doc",
+    file: "articles/security",
+  },
+  {
+    type: "doc",
+    file: "articles/support",
+  },
+  {
+    type: "link",
+    label: "Trust & Compliance",
+    to: "https://trust.zuplo.com",
+  },
+  {
+    type: "link",
+    label: "Changelog",
+    to: "https://zuplo.com/changelog",
+  },
+];
+
+export const apiGateway: Navigation = [
   {
     type: "category",
     label: "Introduction",
-    items: [
-      "articles/what-is-zuplo",
-      "articles/who-uses-and-why",
-      "articles/hosting-options",
-      "articles/development-options",
-    ],
+    items: ["api-management/overview", "articles/development-options"],
     collapsed: false,
   },
   {
@@ -87,6 +216,42 @@ export const docs: Navigation = [
 
       "articles/testing",
     ],
+  },
+  {
+    type: "category",
+    label: "MCP Server",
+    items: [
+      "mcp-server/overview",
+      "mcp-server/getting-started",
+      {
+        type: "category",
+        label: "Handler",
+        items: [
+          {
+            type: "link",
+            icon: "square-code",
+            label: "Handler",
+            target: "_self",
+            to: "https://zuplo.com/docs/handlers/mcp-server",
+          },
+          {
+            type: "link",
+            icon: "square-code",
+            label: "Custom Tools",
+            target: "_self",
+            to: "https://zuplo.com/docs/handlers/mcp-server-custom-tools",
+          },
+          {
+            type: "link",
+            icon: "square-code",
+            label: "Server Prompts",
+            target: "_self",
+            to: "https://zuplo.com/docs/handlers/mcp-server-prompts",
+          },
+        ],
+      },
+    ],
+    collapsed: false,
   },
   {
     type: "category",
@@ -174,8 +339,8 @@ export const docs: Navigation = [
   {
     type: "category",
     label: "Managed Dedicated",
-    link: "dedicated/overview",
     items: [
+      "dedicated/overview",
       "dedicated/getting-started",
       "dedicated/source-control",
       "dedicated/architecture",
@@ -257,156 +422,44 @@ export const docs: Navigation = [
       "cli/connectivity",
     ],
   },
-  {
-    type: "category",
-    label: "Resources",
-    items: [
-      {
-        type: "category",
-        label: "Members & Roles",
-        link: {
-          type: "doc",
-          file: "articles/accounts/members-and-roles",
-        },
-        items: [
-          "articles/accounts/roles-and-permissions",
-          "articles/accounts/managing-account-members",
-          "articles/accounts/managing-project-members",
-        ],
-      },
-      {
-        type: "category",
-        label: "Account Settings",
-        items: [
-          "articles/accounts/zuplo-api-keys",
-          "articles/accounts/default-api-key",
-          "articles/accounts/billing",
-          "articles/accounts/delete-account",
-        ],
-      },
-      {
-        type: "category",
-        label: "User Settings",
-        items: [
-          "articles/users/profile",
-          "articles/users/multifactor-authentication",
-        ],
-      },
-      {
-        type: "category",
-        label: "Single Sign On",
-        link: {
-          type: "doc",
-          file: "articles/sso",
-        },
-        items: [
-          "articles/sso-okta",
-          "articles/sso-azure-ad",
-          "articles/sso-faq",
-        ],
-      },
-      {
-        type: "doc",
-        file: "articles/limits",
-      },
-      {
-        type: "category",
-        link: "errors",
-        label: "Errors",
-        items: errors.map((error) => ({
-          type: "doc",
-          file: `errors/${error.id}`,
-          label: error.title.split("(").slice(0, 1).join(""),
-        })),
-      },
-
-      {
-        type: "doc",
-        file: "articles/security",
-      },
-      {
-        type: "doc",
-        file: "articles/support",
-      },
-      {
-        type: "link",
-        label: "Trust & Compliance",
-        to: "https://trust.zuplo.com",
-      },
-      {
-        type: "link",
-        label: "Changelog",
-        to: "https://zuplo.com/changelog",
-      },
-    ],
-  },
 ];
 
-export const ai: Navigation = [
+export const aiGateway: Navigation = [
+  "ai-gateway/overview",
+  "ai-gateway/getting-started",
+  "ai-gateway/universal-api",
+  "ai-gateway/information-architecture",
   {
     type: "category",
-    label: "Introduction",
-    items: ["ai/overview", "ai/features"],
-    collapsed: false,
+    label: "Providers",
+    items: [
+      "ai-gateway/providers",
+      "ai-gateway/managing-providers",
+      "ai-gateway/provider-openai",
+      "ai-gateway/provider-anthropic",
+      "ai-gateway/provider-google",
+      "ai-gateway/provider-minstral",
+    ],
   },
   {
     type: "category",
-    label: "AI Gateway",
+    label: "Teams",
     items: [
-      "ai/gateway/overview",
-      "ai/gateway/getting-started",
-      "ai/gateway/universal-api",
-      "ai/gateway/information-architecture",
-      {
-        type: "category",
-        label: "Providers",
-        items: [
-          "ai/gateway/providers",
-          "ai/gateway/managing-providers",
-          "ai/gateway/provider-openai",
-          "ai/gateway/provider-anthropic",
-          "ai/gateway/provider-google",
-          "ai/gateway/provider-minstral",
-        ],
-      },
-      {
-        type: "category",
-        label: "Teams",
-        items: [
-          "ai/gateway/teams",
-          "ai/gateway/managing-teams",
-          "ai/gateway/usage-limits",
-        ],
-      },
-      {
-        type: "category",
-        label: "Apps",
-        items: ["ai/gateway/apps"],
-      },
+      "ai-gateway/teams",
+      "ai-gateway/managing-teams",
+      "ai-gateway/usage-limits",
     ],
-    collapsed: false,
   },
   {
     type: "category",
-    label: "MCP Server",
-    items: [
-      "ai/mcp-server/overview",
-      "ai/mcp-server/getting-started",
-      {
-        type: "link",
-        icon: "square-code",
-        label: "Handler",
-        target: "_self",
-        to: "https://zuplo.com/docs/handlers/mcp-server",
-      },
-    ],
-    collapsed: false,
+    label: "Apps",
+    items: ["ai-gateway/apps"],
   },
 
   {
     type: "category",
     label: "Guardrails",
-    items: ["ai/guardrails"],
+    items: ["ai-gateway/guardrails"],
   },
 ];
 

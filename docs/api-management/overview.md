@@ -1,4 +1,4 @@
 ---
-title: Zuplo AI
+title: Zuplo API Management
 sidebar_label: Overview
 ---
