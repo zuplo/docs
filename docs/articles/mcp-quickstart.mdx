@@ -49,22 +49,28 @@ If you're not familiar with Zuplo, it's recommended to go through the
 
 1. Create an **MCP Server**
 
-   On your `routes.oas.json` file, choose **Add Route** (3)
+   On your `routes.oas.json` file, choose **Add** and then **MCP Server** (3)
 
    ![Add Route](../../public/media/mcp-quickstart/add-mcp-route.png)
 
-   A new route will appear. Enter the following values
+   A new route will appear. Confirm the following values:
    - **Summary**: enter `MCP Server`
    - **Method**: choose `POST`
    - **Path**: enter `/mcp` (the path can be anything, but /mcp is common)
 
-   Now change the **Request Handler** section, choosing the MCP Server option.
+   Click the **Select Tools** option for your new MCP Server endpoint (1).
 
-   ![MCP Server](../../public/media/mcp-quickstart/configure-mcp-server.png)
+   ![Select Tools](../../public/media/mcp-quickstart/select-mcp-tools.png)
 
-   Save you changes and 💥 ... you just made your first MCP Server.
+   You should see the MCP tools dialog. Check the tools from your `*.oas.json`
+   files, that you want to surface in your MCP Server.
 
-   Let's try it out.
+   ![MCP Server](../../public/media/mcp-quickstart/mcp-tools-dialog.png)
+
+   Click **Update Tools** (1)
+
+   Now click Save at the bottom left. Congratulations, you just published your
+   first MCP Server!
 
 1. Connect your MCP Client
 
