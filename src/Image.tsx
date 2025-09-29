@@ -6,18 +6,21 @@ export const Image = (
 ) => {
   let srcSet;
 
+  if (!props.src) {
+    return <img {...props} />;
+  }
+
+  const url = new URL(props.src);
+
   if (
     process.env.VERCEL &&
-    props.src &&
-    props.src.startsWith("https://cdn.zuplo.com") &&
+    url.hostname === "cdn.zuplo.com" &&
     !props.srcSet &&
     !props.src.endsWith(".svg") &&
     !props.src.endsWith(".gif")
   ) {
     try {
-      const path = /^https?:/.test(props.src)
-        ? new URL(props.src).pathname
-        : props.src;
+      const path = /^https?:/.test(props.src) ? url.pathname : props.src;
 
       srcSet = [
         `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=640,format=auto${path}   640w`,
