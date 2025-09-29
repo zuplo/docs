@@ -7,7 +7,7 @@ export const Image = (
   let srcSet;
 
   if (
-    process.env.NODE_ENV === "production" &&
+    process.env.VERCEL &&
     props.src &&
     props.src.startsWith("https://cdn.zuplo.com") &&
     !props.srcSet &&
