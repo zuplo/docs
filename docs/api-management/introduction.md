@@ -5,8 +5,8 @@ sidebar_label: Introduction
 
 The Zuplo API Gateway is a fully-managed, lightweight API management platform
 designed for developers. It offers fast deployment, GitOps-friendly workflows,
-and unlimited preview environments. Whether you're an individual developer or
-part of an engineering team, Zuplo makes it easy to:
+and unlimited environments. Whether you're an individual developer or part of an
+engineering team, Zuplo makes it easy to:
 
 - [Add authentication and access control](../articles/step-3-add-api-key-auth.mdx)
 - [Implement rate limiting](../articles/step-2-add-rate-limiting.mdx)
