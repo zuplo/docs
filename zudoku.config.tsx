@@ -3,7 +3,7 @@ import { aiGateway, apiGateway, devPortal, resources } from "./sidebar.js";
 import { mdxComponents } from "./src/components.js";
 import { HeadNavigation } from "./src/HeadNavigation";
 import "./src/diagrams.css";
-import { Landingpage } from "./src/Landingpage";
+import { LandingPage } from "./src/LandingPage";
 
 const inkeepMetadataPlugin: ZudokuPlugin = {
   getHead: ({ location }) => {
@@ -97,7 +97,7 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
     {
       type: "custom-page",
       path: "/",
-      element: <Landingpage />,
+      element: <LandingPage />,
     },
     {
       type: "category",

@@ -77,7 +77,7 @@ const products: ProductCardProps[] = [
   },
 ];
 
-export const Landingpage = () => {
+export const LandingPage = () => {
   return (
     <section>
       <Head>

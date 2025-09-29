@@ -534,8 +534,12 @@ export const aiGateway: Navigation = [
 
   {
     type: "category",
-    label: "Guardrails",
-    items: ["ai-gateway/guardrails"],
+    label: "Guardrails & Policies",
+    items: [
+      "ai-gateway/guardrails",
+      "ai-gateway/policies/akamai-ai-firewall",
+      "ai-gateway/policies/comet-opik-tracing",
+    ],
   },
 ];
 
