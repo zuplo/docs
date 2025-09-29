@@ -509,7 +509,7 @@ export const apiGateway: Navigation = [
 
 export const aiGateway: Navigation = [
   "ai-gateway/introduction",
-
+  "ai-gateway/getting-started",
   "ai-gateway/universal-api",
   {
     type: "category",
