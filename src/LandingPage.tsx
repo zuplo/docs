@@ -44,7 +44,7 @@ const ProductCard = ({
 
 const products: ProductCardProps[] = [
   {
-    href: "/docs/articles/what-is-zuplo",
+    href: "/docs/api-management/introduction",
     icon: <PackageIcon size={24} className="text-primary" />,
     title: "API Management",
     description: "Build & Manage high quality APIs",
@@ -52,7 +52,7 @@ const products: ProductCardProps[] = [
       "Build, deploy, and manage APIs at scale with authentication, rate limiting, analytics, and more. Perfect for companies looking to productize their APIs.",
   },
   {
-    href: "/docs/ai-gateway/overview",
+    href: "/docs/ai-gateway/introduction",
     icon: <BrainIcon size={24} className="text-primary" />,
     title: "AI Gateway",
     description: "Visibility and control over your AI",
@@ -60,7 +60,7 @@ const products: ProductCardProps[] = [
       "Manage multiple AI providers through a single API. Add observability, rate limiting, and cost controls to your AI applications with minimal code changes.",
   },
   {
-    href: "/docs/mcp-server/overview",
+    href: "/docs/mcp-server/introduction",
     icon: <MCPIcon size={24} className="text-pink-500" />,
     title: "Model Context Protocol",
     description: "Go from API to MCP in seconds",

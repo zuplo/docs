@@ -283,8 +283,7 @@ export const guides: Navigation = [
 ];
 
 export const apiGateway: Navigation = [
-  "articles/what-is-zuplo",
-
+  "api-management/introduction",
   {
     type: "category",
     label: "Getting Started",
@@ -509,7 +508,7 @@ export const apiGateway: Navigation = [
 ];
 
 export const aiGateway: Navigation = [
-  "ai-gateway/overview",
+  "ai-gateway/introduction",
   "ai-gateway/getting-started",
   "ai-gateway/universal-api",
   {
