@@ -38,8 +38,6 @@ Configure the handler with the following required options:
   based on the versioning of your MCP server and the instructions they've been
   given.
 
-![MCP Server Handler Portal](../../public/media/mcp/portal-handler.png)
-
 Next, configure your routes to be transformed into MCP tools or prompts (see
 Configuration section below).
 
@@ -109,11 +107,60 @@ compatibility issues with your MCP client, ensure your `outputSchema` is a valid
   included as `structuredContent`. When `false`, only `text` content will be
   returned.
 
-### OpenAPI Routes to MCP Tools
+### MCP Tools
 
-There are three options for configuring MCP tools:
+Configure MCP tools using the `files` configuration. Specify OpenAPI files and
+the exact operation IDs you want to expose as MCP tools:
 
-#### Option 1: Transform Entire OpenAPI Files
+```json
+"paths": {
+  "/mcp": {
+    "post": {
+      "x-zuplo-route": {
+        "handler": {
+          "export": "mcpServerHandler",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "name": "My MCP Server",
+            "version": "1.0.0",
+            "files": [
+              {
+                "path": "./config/weather.oas.json",
+                "operationIds": ["getCurrentWeather", "getForecast"]
+              },
+              {
+                "path": "./config/todos.oas.json",
+                "operationIds": ["getTodos", "createTodo", "updateTodo"]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+- `path`: Path to an OpenAPI JSON spec file (relative to the project root)
+- `operationIds`: Array of specific operation IDs to include as MCP tools from
+  the targeted file
+
+This approach provides explicit control over exactly which API operations become
+MCP tools and supports OpenAPI extensions for enhanced configuration (see
+OpenAPI Configuration section below).
+
+#### Deprecated Configurations
+
+:::caution
+
+Both `openApiFilePaths` and `openApiTools` configuration options are
+**deprecated** and will be removed in a future version. Please migrate to the
+`files` configuration option described above.
+
+:::
+
+<details>
+<summary>Option 1: Transform Entire OpenAPI Files (Deprecated)</summary>
 
 Transform all routes from OpenAPI files into MCP tools by specifying
 `openApiFilePaths`:
@@ -149,7 +196,10 @@ To exclude specific routes when using this option, add
 `x-zuplo-route.mcp.enabled: false` to those routes (see OpenAPI Configuration
 section).
 
-#### Option 2: Transform Individual Routes
+</details>
+
+<details>
+<summary>Option 2: Transform Individual Routes (Deprecated)</summary>
 
 Add specific routes as MCP tools using the `openApiTools` array. Specify
 **either** `path` or `operationId`, plus the required `method`:
@@ -194,35 +244,48 @@ Add specific routes as MCP tools using the `openApiTools` array. Specify
 - `includeStructuredContent` (optional): Override the global
   `includeStructuredContent` setting for this specific route
 
-#### Option 3: Custom Tools with OpenAPI Specification
+</details>
 
-Create custom tools with full programmatic control using a dedicated OpenAPI
-specifications and custom handler functions.
+<details>
+<summary>Migration guide</summary>
 
-This approach provides maximum flexibility for complex workflows:
+**Before (deprecated):**
 
 ```json
-"paths": {
-  "/mcp": {
-    "post": {
-      "x-zuplo-route": {
-        "handler": {
-          "export": "mcpServerHandler",
-          "module": "$import(@zuplo/runtime)",
-          "options": {
-            "name": "Calculator MCP Server",
-            "version": "0.0.0",
-            "openApiSpec": "$import(./calculator-api.json)"
-          }
-        }
-      }
-    }
+{
+  "options": {
+    "name": "My MCP Server",
+    "version": "1.0.0",
+    "openApiFilePaths": [{ "filePath": "./config/routes.oas.json" }]
   }
 }
 ```
 
-With this approach, you define tools in a separate OpenAPI specification where
-each endpoint becomes an MCP tool with custom TypeScript handlers. See
+**After (using `files` and individual operation IDs):**
+
+```json
+{
+  "options": {
+    "name": "My MCP Server",
+    "version": "1.0.0",
+    "files": [
+      {
+        "path": "./config/routes.oas.json",
+        "operationIds": ["operation1", "operation2", "operation3"]
+      }
+    ]
+  }
+}
+```
+
+</details>
+
+### Custom MCP Tools
+
+Create custom tools as routes with full programmatic control using dedicated
+OpenAPI specifications and custom handler functions.
+
+This approach provides maximum flexibility for complex workflows. See
 [MCP Server Custom Tools](./mcp-server-custom-tools.mdx) for detailed
 documentation.
 
@@ -245,7 +308,7 @@ using the `prompts` array in your MCP server options:
             "version": "1.0.0",
             "prompts": [
               {
-                "path": "./config/routes.oas.json",
+                "path": "./config/prompts.oas.json",
                 "operationIds": ["greeting_generator", "content_template"]
               }
             ]
@@ -285,27 +348,47 @@ with
 
 :::
 
-## OpenAPI Route Configuration
+### `x-zuplo-mcp-tool` configuration
 
-Control MCP behavior for individual routes using the `x-zuplo-route` extension
-and the `mcp` options:
+You can customize individual tools using the `x-zuplo-mcp-tool` OpenAPI
+extension: this is especially useful if changing the `operationId` or
+`description` on a route isn't possible but you want to provide better context
+to downstream agents.
 
 ```json
 "paths": {
+  "/weather/current": {
+    "get": {
+      "operationId": "getCurrentWeather",
+      "summary": "Get current weather",
+      "x-zuplo-mcp-tool": {
+        "name": "get_current_weather",
+        "description": "Retrieve current weather conditions for a specified location",
+        "enabled": true
+      }
+    }
+  },
   "/internal-endpoint": {
     "get": {
-      "x-zuplo-route": {
-        "mcp": {
-          "enabled": false
-        }
+      "operationId": "internalOperation",
+      "summary": "Internal operation",
+      "x-zuplo-mcp-tool": {
+        "enabled": false
       }
     }
   }
 }
 ```
 
-- `enabled` (default: `true`) - Whether the route should be available as an MCP
-  tool. Useful for excluding routes when using `openApiFilePaths`.
+**x-zuplo-mcp-tool options:**
+
+- `name` (optional): Override the tool name shown to AI systems (defaults to
+  `operationId`)
+- `description` (optional): Override the tool description for AI consumption
+  (falls back to `description` and then `summary` if not set)
+- `enabled` (default: `true`): Whether this operation should be available as an
+  MCP tool in a configured MCP server: useful for debugging or fine grained
+  control.
 
 ## Authentication
 
