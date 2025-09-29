@@ -1202,6 +1202,11 @@
       "source": "/docs/articles/cloudflare-settings{/}?",
       "destination": "/docs/articles/ddos-protection",
       "permanent": true
+    },
+    {
+      "source": "docs/ai/mcp{/}?",
+      "destination": "/docs/mcp-server/introduction",
+      "permanent": true
     }
   ],
   "rewrites": [
