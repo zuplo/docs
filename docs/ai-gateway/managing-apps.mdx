@@ -1,0 +1,32 @@
+---
+title: Managing Apps
+---
+
+Apps in the AI Gateway represent any app or integration that will call the AI
+Gateway. For example, you might have a custom support chatbot on your website -
+that chatbot would be an App in the AI Gateway. Each App has its own API Key so
+that usage is tracked independently. Apps are owned by a specific
+[team](./teams.mdx) and can access the AI Providers assigned to that team.
+
+## Creating an App
+
+<Stepper>
+
+1. Navigate to the **Apps** tab of your AI Gateway project in the
+   [Zuplo Portal](https://portal.zuplo.com).
+
+1. Click on the **Create App** button.
+
+1. Enter the name of your app.
+
+1. Select the team that will own the app.
+
+1. Configure the AI Model that the app will use. You will select the provider,
+   model, and embedding model (if applicable).
+
+1. Optionally, you can set usage limits for the app. If you do not set limits,
+   the app will use the limits for the team.
+
+1. Click **Create**
+
+</Stepper>
