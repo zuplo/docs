@@ -381,7 +381,7 @@ export const apiGateway: Navigation = [
     type: "category",
     label: "MCP Server",
     items: [
-      "mcp-server/overview",
+      "mcp-server/introduction",
       "mcp-server/getting-started",
       "handlers/mcp-server-custom-tools",
       "handlers/mcp-server-prompts",
@@ -509,7 +509,7 @@ export const apiGateway: Navigation = [
 
 export const aiGateway: Navigation = [
   "ai-gateway/introduction",
-  "ai-gateway/getting-started",
+
   "ai-gateway/universal-api",
   {
     type: "category",
@@ -519,11 +519,7 @@ export const aiGateway: Navigation = [
   {
     type: "category",
     label: "Teams",
-    items: [
-      "ai-gateway/teams",
-      "ai-gateway/managing-teams",
-      "ai-gateway/usage-limits",
-    ],
+    items: ["ai-gateway/teams", "ai-gateway/managing-teams"],
   },
   {
     type: "category",
@@ -535,7 +531,6 @@ export const aiGateway: Navigation = [
     type: "category",
     label: "Guardrails & Policies",
     items: [
-      "ai-gateway/guardrails",
       "ai-gateway/policies/akamai-ai-firewall",
       "ai-gateway/policies/comet-opik-tracing",
     ],
