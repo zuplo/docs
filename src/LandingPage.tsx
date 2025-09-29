@@ -72,7 +72,7 @@ const products: ProductCardProps[] = [
   {
     href: "/docs/dev-portal/introduction",
     icon: <BookOpenTextIcon size={24} className="text-primary" />,
-    title: "Developer Portal",
+    title: "Developer Portal & Docs",
     description: "Beautiful API documentation",
     content:
       "Create stunning, interactive API documentation with built-in testing, code examples, and SDK generation. Help developers integrate with your APIs faster.",
