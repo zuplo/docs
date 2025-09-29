@@ -287,6 +287,7 @@ export const docs: Navigation = [
           "articles/accounts/default-api-key",
           "articles/accounts/billing",
           "articles/accounts/delete-account",
+          "articles/accounts/audit-logs",
         ],
       },
       {
