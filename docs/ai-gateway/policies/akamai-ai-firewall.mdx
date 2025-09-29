@@ -1,3 +1,125 @@
 ---
 title: Akamai AI Firewall
+sidebar_label: Akamai AI Firewall
 ---
+
+The Akamai AI Firewall policy integrates
+[Akamai Firewall for AI](https://www.akamai.com/products/firewall-for-ai) with
+the Zuplo AI Gateway, providing enterprise-grade security for AI-powered
+applications, large language models (LLMs), and AI-driven APIs.
+
+The Akamai AI Firewall policy secures both inbound AI queries and outbound AI
+responses, protecting against emerging cyberthreats specific to generative AI
+applications. By analyzing AI interactions in real-time, the policy detects and
+mitigates AI-specific vulnerabilities that traditional security tools cannot
+address.
+
+### Key Security Capabilities
+
+The Akamai AI Firewall provides comprehensive protection against AI-specific
+threats:
+
+- **Prompt injection defense** — Protects against attackers manipulating AI
+  models through deceptive inputs
+- **Data loss prevention (DLP)** — Detects and blocks sensitive data leaks in
+  AI-generated responses and incoming requests
+- **Toxic and harmful content filtering** — Flags hate speech, misinformation,
+  and offensive content before delivery
+- **Adversarial AI security** — Protects against remote code execution, model
+  backdoors, and data poisoning attacks
+- **Denial-of-service mitigation** — Controls excessive query usage and model
+  overload
+
+## Benefits with Zuplo AI Gateway
+
+Integrating Akamai AI Firewall with the Zuplo AI Gateway provides several
+advantages:
+
+### Unified Security Posture
+
+Standardized AI security across your entire infrastructure, whether deployed at
+the edge, in the cloud, hybrid, or on-premises environments.
+
+### Automated Threat Detection
+
+AI-specific protections work automatically without manual rule tuning,
+leveraging Akamai's global threat intelligence to continuously adapt to emerging
+threats.
+
+### Seamless WAAP Integration
+
+Extends web application and API protection (WAAP) capabilities with AI-specific
+defenses, providing comprehensive security for your API gateway.
+
+### Compliance and Governance
+
+Helps meet security and compliance standards including data privacy regulations,
+ethical AI usage requirements, and corporate governance mandates through
+detailed audit logs and real-time security analytics.
+
+### Zero Performance Impact
+
+The policy operates inline with minimal latency, preserving application
+performance while providing enterprise-grade security.
+
+## How It Works
+
+### AI Traffic Analysis
+
+The policy monitors and analyzes AI interactions by inspecting:
+
+1. **Incoming user prompts** — Analyzed before reaching the AI model
+2. **AI-generated outputs** — Inspected before delivery to end users
+
+This dual-layer inspection prevents security risks while maintaining
+performance.
+
+### Risk Scoring
+
+AI interactions are evaluated against multiple security indicators, including:
+
+- Prompt injection attempts
+- Sensitive data exposure
+- Adversarial exploits
+- Toxic content patterns
+- Abnormal query patterns
+
+### Security Enforcement Actions
+
+Based on risk scores and configured policies, the firewall takes one of three
+actions:
+
+- **Monitor** — Logs detected threats for analysis without interfering with AI
+  queries or responses
+- **Modify** — Adjusts AI-generated outputs inline, removing or altering unsafe
+  content while maintaining natural conversation flow
+- **Deny** — Blocks high-risk inputs from reaching the AI model and prevents
+  unsafe responses from being returned to users
+
+## Use Cases
+
+### Protecting Customer-Facing AI Chatbots
+
+Secure AI-powered customer service applications from prompt injection attacks
+and ensure responses don't leak sensitive customer data or generate toxic
+content.
+
+### Safeguarding Internal AI Tools
+
+Protect internal AI assistants and copilots from adversarial exploits while
+preventing unauthorized access to proprietary information.
+
+### Regulatory Compliance
+
+Maintain compliance with data protection regulations (GDPR, CCPA, etc.) by
+automatically detecting and blocking sensitive data leaks in AI interactions.
+
+### API Security for AI Services
+
+Extend your API security posture to cover AI-specific threats that traditional
+API gateways cannot detect.
+
+**Additional Resources**
+
+- [Akamai Firewall for AI Product Page](https://www.akamai.com/products/firewall-for-ai)
+- [Akamai AI Security Solutions](https://www.akamai.com/solutions/security/ai-security)
