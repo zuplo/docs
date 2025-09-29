@@ -1,0 +1,139 @@
+---
+title: Comet Opik Tracing
+sidebar_label: Comet Opik Tracing
+---
+
+The Comet Opik Tracing policy integrates
+[Comet Opik](https://www.comet.com/docs/opik/) with the Zuplo AI Gateway,
+enabling comprehensive observability, tracing, and evaluation of your LLM
+applications in both development and production environments.
+
+Comet Opik is an open-source platform designed to help developers track, view,
+and evaluate Large Language Model (LLM) traces throughout the application
+lifecycle. By integrating Opik with the Zuplo AI Gateway, you gain complete
+visibility into your AI operations, from development debugging to production
+monitoring.
+
+### Key Capabilities
+
+The Comet Opik integration provides powerful observability and evaluation
+features:
+
+- **Comprehensive trace logging** — Automatically capture LLM calls, inputs,
+  outputs, and metadata
+- **Development debugging** — Annotate and label traces through SDK or UI for
+  iterative improvement
+- **LLM evaluation** — Use LLM-as-a-Judge and heuristic evaluators to score
+  trace quality
+- **Production monitoring** — Track feedback scores, trace counts, tokens, and
+  performance metrics at scale
+- **High-volume ingestion** — Support for up to 40 million traces per day
+- **Dataset management** — Store and run evaluations on test datasets
+
+## Benefits with Zuplo AI Gateway
+
+Integrating Comet Opik with the Zuplo AI Gateway provides several advantages:
+
+### Complete Application Observability
+
+Track entire LLM workflows including preprocessing, retrieval steps, model
+calls, and post-processing through your API gateway, providing end-to-end
+visibility.
+
+### Development and Production Parity
+
+Use the same tracing infrastructure in both development and production
+environments, ensuring consistent observability throughout your application
+lifecycle.
+
+### Automatic Trace Capture
+
+The policy automatically logs all AI Gateway requests and responses without
+requiring code changes to your LLM application, simplifying instrumentation.
+
+### Performance Insights
+
+Monitor token usage, latency, error rates, and costs across all your AI
+operations with detailed analytics dashboards.
+
+### Quality Assurance
+
+Evaluate LLM outputs using both automated metrics and LLM-as-a-Judge approaches
+to maintain quality standards as your application evolves.
+
+## How It Works
+
+### Trace Logging
+
+The policy captures comprehensive information about each LLM interaction:
+
+1. **Request data** — User prompts, input parameters, and metadata
+2. **Response data** — Model outputs, token counts, and generation details
+3. **Performance metrics** — Latency, processing time, and resource usage
+4. **Custom metadata** — Tags, conversation IDs, and application-specific data
+
+### Trace Organization
+
+Traces are organized hierarchically to represent complex workflows:
+
+- **Traces** — Top-level records representing complete user interactions
+- **Spans** — Nested operations within a trace (retrieval, generation, etc.)
+- **Thread IDs** — Group related traces by conversation or session
+
+### Evaluation Framework
+
+Opik provides multiple evaluation approaches:
+
+#### Heuristic Metrics
+
+Deterministic evaluation methods including:
+
+- **Exact match** — Verify outputs match expected values
+- **Contains** — Check for presence of specific content
+- **Regex patterns** — Validate output structure and format
+
+#### LLM-as-a-Judge Metrics
+
+AI-powered evaluation for subjective quality assessment:
+
+- **Hallucination detection** — Identify factually incorrect outputs
+- **Relevance scoring** — Measure response appropriateness
+- **Tone and style** — Evaluate alignment with brand guidelines
+- **Safety checks** — Detect harmful or inappropriate content
+
+## Use Cases
+
+### Debugging LLM Applications
+
+Identify and fix issues in LLM applications by examining detailed trace logs,
+including inputs, outputs, and intermediate steps.
+
+### A/B Testing AI Models
+
+Compare performance across different models, prompts, or configurations by
+analyzing traces grouped by experiment variants.
+
+### Cost Optimization
+
+Monitor token usage patterns to identify optimization opportunities and reduce
+AI operation costs.
+
+### Compliance and Auditing
+
+Maintain detailed audit logs of all AI interactions for regulatory compliance
+and security requirements.
+
+### Quality Regression Testing
+
+Track LLM output quality over time using automated evaluations, catching
+degradation before it impacts users.
+
+### Conversation Analytics
+
+Analyze multi-turn conversations using thread IDs to understand user journeys
+and improve conversational AI experiences.
+
+**Additional Resources**
+
+- [Comet Opik Documentation](https://www.comet.com/docs/opik/)
+- [Opik Tracing Guide](https://www.comet.com/docs/opik/tracing/log_traces)

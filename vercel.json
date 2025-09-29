@@ -14,8 +14,8 @@
       "permanent": true
     },
     {
-      "source": "/docs{/}?",
-      "destination": "/docs/articles/what-is-zuplo",
+      "source": "/docs/articles/what-is-zuplo",
+      "destination": "/docs",
       "permanent": true
     },
     {
@@ -1201,6 +1201,11 @@
     {
       "source": "/docs/articles/cloudflare-settings{/}?",
       "destination": "/docs/articles/ddos-protection",
+      "permanent": true
+    },
+    {
+      "source": "docs/ai/mcp{/}?",
+      "destination": "/docs/mcp-server/introduction",
       "permanent": true
     }
   ],

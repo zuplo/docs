@@ -1,0 +1,65 @@
+---
+title: Managing AI Providers
+sidebar_label: Managing Providers
+---
+
+Zuplo's AI Gateway supports integration with various
+[AI providers](./providers.mdx), allowing you to leverage different models and
+services for your AI applications.
+
+## Adding a New AI Provider
+
+To add a new AI provider to your Zuplo AI Gateway, follow these steps:
+
+<Stepper>
+
+1. Navigate to the **Settings** > **AI Providers** section of your AI Gateway
+   project in the [Zuplo Portal](https://portal.zuplo.com).
+
+1. Click on the **Add Provider** button.
+
+1. Select the desired provider from the list of
+   [supported providers](./providers.mdx).
+
+1. Specify a label for the provider instance to easily identify it later. You
+   can change the label later if required.
+
+1. Enter the API Key for the selected provider. For instructions on how to
+   create an API key for each provider see the
+   [provider documentation](./providers.mdx).
+
+1. Select the model or models you want to use with this provider. The available
+   models will depend on the selected provider. This can be changed later.
+
+   :::tip
+
+   Click "Select All" to enable all models.
+
+   :::
+
+1. Click save
+
+</Stepper>
+
+## Editing an AI Provider
+
+Existing providers can be modified by navigating to the **Settings** > **AI
+Providers** section and clicking the **Edit** button next to the provider you
+want to modify.
+
+You can modify the label, API key, and selected models for the provider. After
+making your changes, click **Save** to apply them. Changes are effective
+immediately.
+
+:::caution
+
+Be careful removing models from an provider that is in use as it may break
+existing applications that rely on the provider.
+
+:::
+
+## Deleting an AI Provider
+
+Providers that are no longer used within your project can be deleted. To delete
+a provider, navigate to the **Settings** > **AI Providers** section and click
+the **Delete** button next to the provider you want to remove.

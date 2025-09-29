@@ -1,6 +1,6 @@
 ---
-title: What is Zuplo?
-sidebar_label: Overview
+title: Zuplo API Management
+sidebar_label: Introduction
 ---
 
 The Zuplo API Gateway is a fully-managed, lightweight API management platform

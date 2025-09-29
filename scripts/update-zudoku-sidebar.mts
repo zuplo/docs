@@ -48,4 +48,47 @@ function updatePaths(item) {
 
 const sidebar = updatePaths(combined);
 
-await writeFile("./sidebar.zudoku.json", JSON.stringify(sidebar, null, 2));
+// Group categories with only component items under a "Components" category
+function groupComponentCategories(items) {
+  const componentCategories = [];
+  const otherItems = [];
+
+  for (const item of items) {
+    if (item.type === "category" && item.items) {
+      // Check if all items in this category are components
+      const allAreComponents = item.items.every((subItem) => {
+        const path =
+          typeof subItem === "string" ? subItem : subItem.path || subItem.link;
+        return path && path.startsWith("dev-portal/zudoku/components/");
+      });
+
+      if (allAreComponents) {
+        componentCategories.push(item);
+      } else {
+        otherItems.push(item);
+      }
+    } else {
+      otherItems.push(item);
+    }
+  }
+
+  // If there are component categories, group them under a single "Components" category
+  if (componentCategories.length > 0) {
+    const componentsCategory = {
+      type: "category",
+      label: "Components",
+      icon: "component",
+      items: componentCategories,
+    };
+    return [...otherItems, componentsCategory];
+  }
+
+  return items;
+}
+
+const groupedSidebar = groupComponentCategories(sidebar);
+
+await writeFile(
+  "./sidebar.zudoku.json",
+  JSON.stringify(groupedSidebar, null, 2),
+);
