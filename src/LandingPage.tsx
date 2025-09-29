@@ -13,6 +13,7 @@ import {
   CardTitle,
 } from "zudoku/ui/Card";
 import { Image } from "./Image.js";
+import imgUrl from "../public/media/landing.jpg";
 
 interface ProductCardProps {
   href: string;
@@ -106,7 +107,7 @@ export const LandingPage = () => {
           </div>
         </div>
         <Image
-          src="/media/landing.jpg"
+          src={imgUrl}
           className="max-w-[330px] w-full hidden lg:mt-0 lg:col-span-4 lg:flex rounded-lg drop-shadow-lg dark:drop-shadow-none"
           alt="Zuplo Documentation"
         />
