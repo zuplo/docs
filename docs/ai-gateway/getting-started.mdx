@@ -2,3 +2,214 @@
 title: Zuplo AI Gateway Getting Started
 sidebar_label: Getting Started
 ---
+
+This guide will walk you through setting up your first AI Gateway project, from
+initial configuration to making your first LLM request through Zuplo.
+
+## Prerequisites
+
+- A Zuplo account (sign up free at [zuplo.com](https://zuplo.com))
+- API keys for at least one LLM provider (OpenAI, Anthropic, Google Gemini,
+  etc.)
+- An application that needs to call LLM APIs
+
+## Step 1: Create an AI Gateway Project
+
+1. Log into your Zuplo account
+2. Click **Create New Project**
+3. Select the **AI Gateway** template
+4. Give your project a name (e.g., "MyCompany AI Gateway")
+5. Click **Create Project**
+
+Your AI Gateway project will be created in seconds. You'll notice the interface
+includes Apps, Teams, and a setup guide to help you get started.
+
+## Step 2: Configure Providers
+
+Providers are the LLM services (like OpenAI or Google Gemini) that your
+applications will use. You'll configure these once as an administrator, and your
+team members can use them without needing direct access to provider API keys.
+
+### Adding Your First Provider
+
+1. Click **Add Provider**
+2. Select your AI provider (e.g., **OpenAI**)
+3. Enter a name for this provider configuration
+4. Paste your provider's API key
+5. Select which models you want to make available to your teams
+6. Click **Create**
+
+### Adding Additional Providers
+
+Repeat the process above to add more providers. This allows your teams to switch
+between providers (OpenAI, Gemini, etc.) without changing application code.
+
+**Example providers you might add:**
+
+- OpenAI (for GPT models)
+- Google Gemini (for Gemini models)
+- Additional providers as they become available
+
+## Step 3: Create a Team
+
+Teams allow you to organize users and set hierarchical budget controls. Even if
+you're starting solo, you'll need at least one team.
+
+### Creating Your Root Team
+
+1. Click **Create Team**
+2. Name your team (e.g., "Root" or your company name)
+3. Choose an icon for easy identification
+4. Set organization-wide limits (optional) by clicking on **Settings**:
+   - **Daily Budget**: Maximum spend per day (e.g., $1,000)
+   - **Rate Limits**: Request limits if needed
+5. Click **Create**
+
+### Creating Sub-Teams (Optional)
+
+For larger organizations, create sub-teams with their own budgets:
+
+1. From your root team, click **Create Sub-Team**
+2. Name the team (e.g., "Engineering Team", "Credit Team")
+3. Choose an icon
+4. Set team-specific limits by clicking on **Settings**:
+   - Daily budgets that are equal to or less than the parent team's limit
+   - Example: If root is $1,000/day, a sub-team might be $500/day
+5. Click **Save Changes**
+
+## Step 4: Create Applications
+
+Applications represent individual projects or services that will use the AI
+Gateway. Each app gets its own unique URL and API key.
+
+### Creating Your First App
+
+1. Click **Apps** followed by **Create App**
+2. Configure your app:
+   - **App Name**: Descriptive name (e.g., "Tennis Chat", "Customer Support
+     Bot")
+   - **Team**: Select which team owns this app
+   - **Provider**: Choose your LLM provider (e.g., OpenAI)
+   - **Model**: Select the specific model (e.g., GPT-4o) for completions and/or
+     embeddings
+3. Set application-level budgets:
+   - **Daily Limit**: (e.g., $1/day for a hackathon project)
+   - **Monthly Limit**: (e.g., $10/month)
+4. Enable **Semantic Caching** (optional):
+   - Caches similar prompts to reduce costs and improve performance
+   - Best for applications with repeated queries
+5. Click **Create**
+
+### Access Your App Credentials
+
+After creating your application, you'll see:
+
+- **API Key**: Your Zuplo-managed key. You'll need them to integrate with your
+  application.
+
+## Step 5: Integrate with Your Application
+
+Now you'll update your application to use the Zuplo AI Gateway instead of
+calling LLM providers directly.
+
+### Before: Direct Provider Integration
+
+```javascript
+import OpenAI from "openai";
+
+// Old approach - directly calling OpenAI
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+const completion = await openai.chat.completions.create({
+  model: "gpt-4",
+  messages: [{ role: "user", content: "Hello!" }],
+});
+
+console.log(completion.choices[0].message.content);
+```
+
+### After: Using Zuplo AI Gateway
+
+```javascript
+import OpenAI from "openai";
+
+// New approach - using Zuplo AI Gateway
+const openai = new OpenAI({
+  apiKey: process.env.ZUPLO_API_KEY,
+  baseURL: "https://your-ai-gateway-url.zuplo.app/v1",
+});
+
+const completion = await openai.chat.completions.create({
+  model: "gpt-4",
+  messages: [{ role: "user", content: "Hello!" }],
+});
+
+console.log(completion.choices[0].message.content);
+```
+
+### What Changed?
+
+1. **URL**: Replace your provider's URL with your Zuplo Gateway URL
+2. **API Key**: Use your Zuplo API key instead of the provider's key
+3. **Everything else stays the same**: The request format remains compatible
+   with OpenAI's API
+
+## Verify Your Setup
+
+### Make Your First Request
+
+Send a test request through your gateway:
+
+```bash
+curl https://your-ai-gateway-url.zuplo.app/v1/chat/completions \
+  -H "Authorization: Bearer YOUR_ZUPLO_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gpt-4",
+    "messages": [{"role": "user", "content": "Hello, world!"}]
+  }'
+```
+
+### Check Your Dashboard
+
+1. Return to your AI Gateway project
+2. Click on your app
+3. Click on **Dashboard** to view:
+   - Request count
+   - Token usage
+   - Time to first byte
+   - Current spending
+
+You should see your test request appear with token usage and performance
+metrics.
+
+## Next Steps
+
+Now that your AI Gateway is running, explore additional features:
+
+### Switch Providers Without Code Changes
+
+1. Go to your app settings
+2. Change the **Provider** dropdown (e.g., from OpenAI to Gemini)
+3. Select a new model
+4. Click **Save CHanges**
+
+Your application will now use the new provider without any code changes.
+
+## Common Issues
+
+**Issue**: "Authentication failed" error
+
+- **Solution**: Verify you're using your Zuplo API key, not your provider's key
+
+**Issue**: Budget limit reached immediately
+
+- **Solution**: Check that sub-team limits don't exceed available budget from
+  parent team
+
+**Issue**: Semantic caching not working
+
+- **Solution**: Ensure caching is enabled in your application settings and
+  prompts are similar enough to match
