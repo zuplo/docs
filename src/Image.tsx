@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 export const Image = (
   props: React.DetailedHTMLProps<
     React.ImgHTMLAttributes<HTMLImageElement>,
@@ -10,17 +12,28 @@ export const Image = (
     return <img {...props} />;
   }
 
-  const url = new URL(props.src);
+  const url = useMemo(() => {
+    if (!props.src) {
+      return null;
+    }
+    try {
+      const url = new URL(props.src);
+      return url;
+    } catch (e) {
+      console.error("Error parsing URL", props.src);
+      return null;
+    }
+  }, [props.src]);
 
   if (
     process.env.VERCEL &&
-    url.hostname === "cdn.zuplo.com" &&
+    url?.hostname === "cdn.zuplo.com" &&
     !props.srcSet &&
     !props.src.endsWith(".svg") &&
     !props.src.endsWith(".gif")
   ) {
     try {
-      const path = /^https?:/.test(props.src) ? url.pathname : props.src;
+      const path = /^https?:/.test(props.src) ? url?.pathname : props.src;
 
       srcSet = [
         `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=640,format=auto${path}   640w`,
