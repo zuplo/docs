@@ -1,0 +1,38 @@
+---
+title: AI Gateway Universal API
+sidebar_label: Universal API
+---
+
+Zuplo AI Gateway provides a universal API that standardizes interactions with
+various AI providers. This API follows the
+[OpenAI API specification](https://platform.openai.com/docs/api-reference/introduction),
+making it easy to integrate with existing applications that already use OpenAI's
+API.
+
+## Using the Universal API
+
+The Universal API is automatically enabled for all AI Gateway applications.
+Using this endpoint is as simple as changing your API base URL to point to
+Zuplo. For example, if your Zuplo application is hosted at
+`https://my-ai-gateway.zuplo.app`, you can simply change the base URL in your
+API client to `https://my-ai-gateway.zuplo.app/v1`.
+
+If you are using an SDK or library that supports custom base URLs, you can
+configure it to use your Zuplo application's URL. For example, with the OpenAI
+Node.js SDK, you can set the `baseURL` option:
+
+```ts
+import OpenAI from "openai";
+
+const client = new OpenAI({
+  apiKey: process.env.ZUPLO_API_KEY,
+  baseURL: "https://my-ai-gateway.zuplo.app/v1",
+});
+
+const response = await client.responses.create({
+  model: "gpt-5",
+  input: "Write a one-sentence bedtime story about a unicorn.",
+});
+
+console.log(response.output_text);
+```

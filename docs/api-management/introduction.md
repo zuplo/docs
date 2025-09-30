@@ -1,17 +1,18 @@
 ---
-title: What is Zuplo?
+title: Zuplo API Management
+sidebar_label: Introduction
 ---
 
-Zuplo is a fully-managed, lightweight API management platform designed for
-developers. It offers fast deployment, GitOps-friendly workflows, and unlimited
-preview environments. Whether you're an individual developer or part of an
+The Zuplo API Gateway is a fully-managed, lightweight API management platform
+designed for developers. It offers fast deployment, GitOps-friendly workflows,
+and unlimited environments. Whether you're an individual developer or part of an
 engineering team, Zuplo makes it easy to:
 
-- [Add authentication and access control](./step-3-add-api-key-auth.mdx)
-- [Implement rate limiting](./step-2-add-rate-limiting.mdx)
+- [Add authentication and access control](../articles/step-3-add-api-key-auth.mdx)
+- [Implement rate limiting](../articles/step-2-add-rate-limiting.mdx)
 - Write custom logic to run at the gateway layer
-- Build a [rich developer portal](/docs/dev-portal/introduction) with self-serve
-  tools for auth and monetization
+- Build a [rich developer portal](../dev-portal/introduction.mdx) with
+  self-serve tools for auth and monetization
 
 Zuplo delivers the core benefits of API management without the overhead of
 legacy platforms. That means no expensive licensing, training requirements, or
@@ -34,7 +35,8 @@ worldwide. This edge-first architecture provides:
 
 Zuplo is cloud-agnostic. It integrates with backends running on AWS, Azure, GCP,
 or private infrastructure. Multiple
-[secure connectivity options](./securing-your-backend.mdx) are available.
+[secure connectivity options](../articles/securing-your-backend.mdx) are
+available.
 
 In most setups, Zuplo sits between clients and your backend API—whether those
 clients are servers, browsers, mobile apps, or IoT devices. Traffic is routed
@@ -66,8 +68,8 @@ backend can be written in any language that speaks HTTP, such as Go, Node.js,
 
 Zuplo integrates with platforms like DataDog, New Relic and GCP Cloud Logging
 for monitoring and observability. We continuously add new integrations based on
-customer needs, so [reach out](./support.mdx) if you need support for a specific
-tool.
+customer needs, so [reach out](../articles/support.mdx) if you need support for
+a specific tool.
 
 ## Runtime
 
@@ -97,8 +99,8 @@ Zuplo is designed to work seamlessly with services across cloud providers
 including AWS, Azure, GCP, and on-premise environments.
 
 Our distributed architecture and
-[connectivity options](./securing-your-backend.mdx) ensure secure, performant
-connections to your backend, wherever it runs.
+[connectivity options](../articles/securing-your-backend.mdx) ensure secure,
+performant connections to your backend, wherever it runs.
 
 ## Security and Compliance
 

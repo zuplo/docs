@@ -1,8 +1,9 @@
 import type { ZudokuConfig, ZudokuPlugin } from "zudoku";
-import { devPortal, docs, policies, programming } from "./sidebar.js";
+import { aiGateway, apiGateway, devPortal, resources } from "./sidebar.js";
 import { mdxComponents } from "./src/components.js";
 import { HeadNavigation } from "./src/HeadNavigation";
 import "./src/diagrams.css";
+import { LandingPage } from "./src/LandingPage";
 
 const inkeepMetadataPlugin: ZudokuPlugin = {
   getHead: ({ location }) => {
@@ -40,10 +41,6 @@ const config: ZudokuConfig = {
     favicon: "https://cdn.zuplo.com/www/favicon.svg",
   },
   redirects: [
-    {
-      from: "/",
-      to: "/articles/what-is-zuplo",
-    },
     { from: "/policies/index", to: "/policies/overview" },
     { from: "/programmable-api/index", to: "/programmable-api/overview" },
     { from: "/policies", to: "/policies/overview" },
@@ -98,14 +95,19 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
   },
   navigation: [
     {
-      type: "category",
-      label: "Documentation",
-      items: docs,
+      type: "custom-page",
+      path: "/",
+      element: <LandingPage />,
     },
     {
       type: "category",
-      label: "Policies & Handlers",
-      items: policies,
+      label: "API Management",
+      items: apiGateway,
+    },
+    {
+      type: "category",
+      label: "AI Gateway",
+      items: aiGateway,
     },
     {
       type: "category",
@@ -114,8 +116,8 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
     },
     {
       type: "category",
-      label: "Programming API",
-      items: programming,
+      label: "Resources",
+      items: resources,
     },
     {
       type: "link",

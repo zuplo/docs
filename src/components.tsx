@@ -11,46 +11,11 @@ import { ModalScreenshot } from "./ModalScreenshot.js";
 import { BrowserScreenshot } from "./BrowserScreenshot.js";
 import { TutorialModeSelector, TutorialMode } from "./TutorialModeSelector.js";
 import { QuickstartPicker } from "./QuickstartPicker.js";
+import { Image } from "./Image.js";
 
 const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
 
 const EmbeddedChat = lazy(() => import("./EmbeddedChat.js"));
-
-const Image = (props: any) => {
-  let srcSet;
-
-  if (
-    process.env.NODE_ENV === "production" &&
-    props.src &&
-    props.src.startsWith("https://cdn.zuplo.com") &&
-    !props.srcSet &&
-    !props.src.endsWith(".svg") &&
-    !props.src.endsWith(".gif")
-  ) {
-    try {
-      const path = /^https?:/.test(props.src)
-        ? new URL(props.src).pathname
-        : props.src;
-
-      srcSet = [
-        `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=640,format=auto${path}   640w`,
-        `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=960,format=auto${path}   960w`,
-        `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=1280,format=auto${path} 1280w`,
-        `https://cdn.zuplo.com/cdn-cgi/image/fit=contain,width=2560,format=auto${path} 2560w`,
-      ].join(", ");
-    } catch (e) {
-      console.error("Error parsing URL", props.src);
-    }
-  }
-
-  return (
-    <img
-      className="border border-[#eaecef] overflow-hidden rounded-sm"
-      {...props}
-      srcSet={srcSet}
-    />
-  );
-};
 
 const Framed = ({
   size,
@@ -84,11 +49,19 @@ export const mdxComponents = {
     if (props.size) {
       return (
         <Framed size={props.size}>
-          <Image {...props} />
+          <Image
+            {...props}
+            className="border border-[#eaecef] overflow-hidden rounded-sm"
+          />
         </Framed>
       );
     }
-    return <Image {...props} />;
+    return (
+      <Image
+        {...props}
+        className="border border-[#eaecef] overflow-hidden rounded-sm"
+      />
+    );
   },
   Framed,
   CodeType: (props: PropsWithChildren) => (
