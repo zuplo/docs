@@ -384,6 +384,7 @@ export const apiGateway: Navigation = [
       "mcp-server/introduction",
       "mcp-server/getting-started",
       "handlers/mcp-server-custom-tools",
+      "handlers/mcp-server-graphql",
       "handlers/mcp-server-prompts",
     ],
   },
