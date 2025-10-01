@@ -1,0 +1,25 @@
+---
+title: Dev Portal Legacy Removal Guide
+description:
+  Instruction for disabling the legacy developer portal in your Zuplo project.
+---
+
+If you are not using the legacy developer portal, you can disable it in your
+Zuplo project by making a few quick changes.
+
+To complete these steps you can use either the Zuplo Portal or local
+development.
+
+<Stepper>
+
+1. Delete the `./config/dev-portal.json` file from your project. This file
+   configures the legacy developer portal and removing it will disable the
+   portal.
+
+2. Delete the contents of the `./docs` directory. This directory contains the
+   static content for the legacy developer portal.
+
+</Stepper>
+
+With these files deleted, your Zuplo project will no longer include the legacy
+developer portal.
