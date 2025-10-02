@@ -135,6 +135,7 @@ const policies: Navigation = [
     label: "GraphQL",
     items: [
       "policies/graphql-disable-introspection-inbound",
+      "policies/graphql-introspection-filter-outbound",
       "policies/graphql-complexity-limit-inbound",
     ],
   },
