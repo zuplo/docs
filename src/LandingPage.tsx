@@ -13,7 +13,7 @@ import {
   CardTitle,
 } from "zudoku/ui/Card";
 import { Image } from "./Image.js";
-import imgUrl from "../public/media/landing.jpg";
+import imgUrl from "../public/media/zuplo-docs-landing.svg";
 
 interface ProductCardProps {
   href: string;
@@ -85,32 +85,25 @@ export const LandingPage = () => {
       <Head>
         <title>Home</title>
       </Head>
-      <div className="grid lg:gap-12 pb-8 lg:py-16 lg:grid-cols-12 gap-10 lg:items-start">
-        <div className="mr-auto lg:col-span-8 col-span-full mt-10 lg:mt-0">
+      <div className="grid grid-cols-2 gap-5 md:gap-10 mt-5 md:mt-10">
+        <div className="col-span-full md:col-span-1 flex flex-col justify-center">
           <h1 className="mb-10 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
-            Zuplo Documentation
+            Zuplo Docs:
+            <br />
+            Intelligent API & AI Traffic Management
           </h1>
-          <Typography className="max-w-full">
-            <p>
-              Zuplo offers a suite of products designed to meet the diverse
-              needs of developers and businesses. Whether you're looking to
-              manage APIs, integrate AI capabilities, or deploy in a dedicated
-              environment, Zuplo has you covered. Explore the complete Zuplo
-              platform designed to help you build, manage, and scale APIs with
-              confidence.
-            </p>
+          <Typography className="max-w-full text-xl">
+            Zuplo helps developers and businesses manage APIs, integrate AI, and
+            deploy in dedicated environments. With Zuplo, you can build, manage,
+            and scale APIs with confidence.
           </Typography>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-            {products.map((product, index) => (
-              <ProductCard key={index} {...product} />
-            ))}
-          </div>
         </div>
-        <Image
-          src={imgUrl}
-          className="max-w-[330px] w-full hidden lg:mt-0 lg:col-span-4 lg:flex rounded-lg drop-shadow-lg dark:drop-shadow-none"
-          alt="Zuplo Documentation"
-        />
+        <div className="hidden md:flex items-center justify-center">
+          <Image src={imgUrl} alt="Zuplo Documentation" />
+        </div>
+        {products.map((product, index) => (
+          <ProductCard key={index} {...product} />
+        ))}
       </div>
     </section>
   );
