@@ -13,7 +13,8 @@ import {
   CardTitle,
 } from "zudoku/ui/Card";
 import { Image } from "./Image.js";
-import imgUrl from "../public/media/landing.jpg";
+import imgUrl from "../public/media/zuplo-docs-landing.svg";
+import { cn } from "zudoku/ui/util";
 
 interface ProductCardProps {
   href: string;
@@ -30,16 +31,30 @@ const ProductCard = ({
   description,
   content,
 }: ProductCardProps) => (
-  <a href={href}>
-    <Card className="hover:shadow-lg transition-shadow h-full">
+  <a href={href} className="col-span-2 lg:col-span-1">
+    <Card
+      className={cn(
+        "group transition-shadow h-full transition-colors",
+        "hover:shadow-lg hover:border-primary",
+      )}
+    >
       <CardHeader className="pb-3">
-        <CardTitle className="flex items-center gap-3 text-lg">
-          {icon}
+        <CardTitle className="flex flex-col gap-3 text-xl xl:text-2xl font-bold">
+          <div
+            className={cn(
+              "flex transition-colors rounded-md p-2 w-fit bg-neutral-100 dark:bg-neutral-800",
+              "group-hover:bg-primary/10 group-hover:text-primary group-hover:dark:bg-primary/20",
+            )}
+          >
+            {icon}
+          </div>
           {title}
         </CardTitle>
-        <CardDescription className="mt-1">{description}</CardDescription>
+        <CardDescription className="text-md xl:text-lg">
+          {description}
+        </CardDescription>
       </CardHeader>
-      <CardContent className="pt-0">{content}</CardContent>
+      <CardContent className="lg:mt-2">{content}</CardContent>
     </Card>
   </a>
 );
@@ -47,7 +62,7 @@ const ProductCard = ({
 const products: ProductCardProps[] = [
   {
     href: "/docs/api-management/introduction",
-    icon: <PackageIcon size={24} className="text-primary" />,
+    icon: <PackageIcon size={24} />,
     title: "API Management",
     description: "Build & Manage high quality APIs",
     content:
@@ -55,7 +70,7 @@ const products: ProductCardProps[] = [
   },
   {
     href: "/docs/ai-gateway/introduction",
-    icon: <BrainIcon size={24} className="text-primary" />,
+    icon: <BrainIcon size={24} />,
     title: "AI Gateway",
     description: "Visibility and control over your AI",
     content:
@@ -63,7 +78,7 @@ const products: ProductCardProps[] = [
   },
   {
     href: "/docs/mcp-server/introduction",
-    icon: <MCPIcon size={24} className="text-pink-500" />,
+    icon: <MCPIcon size={24} />,
     title: "Model Context Protocol",
     description: "Go from API to MCP in seconds",
     content:
@@ -71,7 +86,7 @@ const products: ProductCardProps[] = [
   },
   {
     href: "/docs/dev-portal/introduction",
-    icon: <BookOpenTextIcon size={24} className="text-primary" />,
+    icon: <BookOpenTextIcon size={24} />,
     title: "Developer Portal & Docs",
     description: "Beautiful API documentation",
     content:
@@ -85,32 +100,25 @@ export const LandingPage = () => {
       <Head>
         <title>Home</title>
       </Head>
-      <div className="grid lg:gap-12 pb-8 lg:py-16 lg:grid-cols-12 gap-10 lg:items-start">
-        <div className="mr-auto lg:col-span-8 col-span-full mt-10 lg:mt-0">
+      <div className="grid grid-cols-4 gap-5 xl:gap-10 mt-5 md:mt-10">
+        <div className="col-span-full md:col-span-2 flex flex-col justify-center">
           <h1 className="mb-10 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
-            Zuplo Documentation
+            Zuplo Docs:
+            <br />
+            Intelligent API & AI Traffic Management
           </h1>
-          <Typography className="max-w-full">
-            <p>
-              Zuplo offers a suite of products designed to meet the diverse
-              needs of developers and businesses. Whether you're looking to
-              manage APIs, integrate AI capabilities, or deploy in a dedicated
-              environment, Zuplo has you covered. Explore the complete Zuplo
-              platform designed to help you build, manage, and scale APIs with
-              confidence.
-            </p>
+          <Typography className="max-w-full text-xl">
+            Zuplo helps developers and businesses manage APIs, integrate AI, and
+            deploy in dedicated environments. With Zuplo, you can build, manage,
+            and scale APIs with confidence.
           </Typography>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-            {products.map((product, index) => (
-              <ProductCard key={index} {...product} />
-            ))}
-          </div>
         </div>
-        <Image
-          src={imgUrl}
-          className="max-w-[330px] w-full hidden lg:mt-0 lg:col-span-4 lg:flex rounded-lg drop-shadow-lg dark:drop-shadow-none"
-          alt="Zuplo Documentation"
-        />
+        <div className="hidden md:flex col-span-2 items-center justify-center">
+          <Image src={imgUrl} alt="Zuplo Documentation" />
+        </div>
+        {products.map((product, index) => (
+          <ProductCard key={index} {...product} />
+        ))}
       </div>
     </section>
   );
