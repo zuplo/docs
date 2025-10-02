@@ -39,18 +39,20 @@ const ProductCard = ({
       )}
     >
       <CardHeader className="pb-3">
-        <CardTitle className="flex flex-col gap-3 text-2xl font-bold">
+        <CardTitle className="flex flex-col gap-3 text-xl xl:text-2xl font-bold">
           <div
             className={cn(
-              "flex transition-colors rounded-md p-2 w-fit bg-neutral-100",
-              "group-hover:bg-primary/10 group-hover:text-primary",
+              "flex transition-colors rounded-md p-2 w-fit bg-neutral-100 dark:bg-neutral-800",
+              "group-hover:bg-primary/10 group-hover:text-primary group-hover:dark:bg-primary/20",
             )}
           >
             {icon}
           </div>
           {title}
         </CardTitle>
-        <CardDescription className="text-lg">{description}</CardDescription>
+        <CardDescription className="text-md xl:text-lg">
+          {description}
+        </CardDescription>
       </CardHeader>
       <CardContent className="lg:mt-2">{content}</CardContent>
     </Card>
