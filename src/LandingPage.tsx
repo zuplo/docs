@@ -34,7 +34,7 @@ const ProductCard = ({
   <a href={href} className="col-span-2 lg:col-span-1">
     <Card
       className={cn(
-        "group transition-shadow h-full ",
+        "group transition-shadow h-full transition-colors",
         "hover:shadow-lg hover:border-primary",
       )}
     >
