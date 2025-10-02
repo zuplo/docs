@@ -14,6 +14,7 @@ import {
 } from "zudoku/ui/Card";
 import { Image } from "./Image.js";
 import imgUrl from "../public/media/zuplo-docs-landing.svg";
+import { cn } from "zudoku/ui/util";
 
 interface ProductCardProps {
   href: string;
@@ -31,10 +32,22 @@ const ProductCard = ({
   content,
 }: ProductCardProps) => (
   <a href={href}>
-    <Card className="hover:shadow-lg transition-shadow h-full">
+    <Card
+      className={cn(
+        "group transition-shadow h-full",
+        "hover:shadow-lg hover:border-primary",
+      )}
+    >
       <CardHeader className="pb-3">
-        <CardTitle className="flex items-center gap-3 text-lg">
-          {icon}
+        <CardTitle className="flex flex-col gap-3 text-lg">
+          <div
+            className={cn(
+              "flex transition-colors rounded-md p-2 w-fit bg-neutral-100",
+              "group-hover:bg-primary/10 group-hover:text-primary",
+            )}
+          >
+            {icon}
+          </div>
           {title}
         </CardTitle>
         <CardDescription className="mt-1">{description}</CardDescription>
@@ -47,15 +60,16 @@ const ProductCard = ({
 const products: ProductCardProps[] = [
   {
     href: "/docs/api-management/introduction",
-    icon: <PackageIcon size={24} className="text-primary" />,
+    icon: <PackageIcon size={24} />,
     title: "API Management",
     description: "Build & Manage high quality APIs",
     content:
       "Build, deploy, and manage APIs at scale with authentication, rate limiting, analytics, and more. Perfect for companies looking to productize their APIs.",
+    highlight: true,
   },
   {
     href: "/docs/ai-gateway/introduction",
-    icon: <BrainIcon size={24} className="text-primary" />,
+    icon: <BrainIcon size={24} />,
     title: "AI Gateway",
     description: "Visibility and control over your AI",
     content:
@@ -63,7 +77,7 @@ const products: ProductCardProps[] = [
   },
   {
     href: "/docs/mcp-server/introduction",
-    icon: <MCPIcon size={24} className="text-pink-500" />,
+    icon: <MCPIcon size={24} />,
     title: "Model Context Protocol",
     description: "Go from API to MCP in seconds",
     content:
@@ -71,7 +85,7 @@ const products: ProductCardProps[] = [
   },
   {
     href: "/docs/dev-portal/introduction",
-    icon: <BookOpenTextIcon size={24} className="text-primary" />,
+    icon: <BookOpenTextIcon size={24} />,
     title: "Developer Portal & Docs",
     description: "Beautiful API documentation",
     content:
