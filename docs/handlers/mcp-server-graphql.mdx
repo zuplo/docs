@@ -1,0 +1,233 @@
+---
+title: MCP Server GraphQL Endpoints
+sidebar_label: GraphQL Endpoints
+---
+
+The MCP Server Handler supports GraphQL endpoints through the
+`x-zuplo-mcp-graphql` OpenAPI extension. This allows you to expose GraphQL APIs
+as MCP tools with automatic schema introspection and query execution
+capabilities.
+
+When you configure a route with the GraphQL extension, the MCP server
+automatically generates two tools:
+
+1. **Introspection tool** - Fetches the GraphQL schema so AI systems can
+   understand available queries, mutations, and types
+2. **Execute tool** - Executes GraphQL queries against the endpoint
+
+This enables AI systems to dynamically discover and interact with GraphQL APIs
+without requiring manual tool definitions for each query.
+
+:::caution
+
+GraphQL endpoint support for MCP Server is currently in beta. The API may change
+in future releases.
+
+:::
+
+## Quick Start
+
+### 1. Configure a GraphQL Endpoint
+
+Add a route that forwards to your GraphQL endpoint and include the
+`x-zuplo-mcp-graphql` extension:
+
+```json
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/graphql": {
+      "post": {
+        "operationId": "graphql",
+        "summary": "GraphQL API endpoint",
+        "x-zuplo-mcp-graphql": {},
+        "x-zuplo-route": {
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "https://api.example.com",
+              "followRedirects": true
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### 2. Add to Your MCP Server
+
+Include the GraphQL route in your MCP Server configuration:
+
+```json
+{
+  "paths": {
+    "/mcp": {
+      "post": {
+        "summary": "MCP server",
+        "operationId": "mcp-server",
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "mcpServerHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "name": "My MCP Server",
+              "version": "1.0.0",
+              "files": [
+                {
+                  "path": "./config/routes.oas.json",
+                  "operationIds": ["graphql"]
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+This configuration automatically creates:
+
+- `graphql_introspect` - Tool to fetch the GraphQL schema
+- `graphql_execute` - Tool to execute GraphQL queries
+
+## Configuration Options
+
+The `x-zuplo-mcp-graphql` extension supports the following options:
+
+- `enabled` - default `true`: whether the GraphQL MCP capabilities are enabled.
+- `introspectionToolName` - the custom name of the introspection tool.
+- `introspectionToolDescription` - the custom description of the introspection
+  tool.
+- `executeToolName` - the custom name of the query execute tool.
+- `executeToolDescription` - the custom description of the query execute tool.
+
+For example:
+
+```json
+{
+  "paths": {
+    "/graphql": {
+      "post": {
+        "operationId": "github_graphql",
+        "x-zuplo-mcp-graphql": {
+          "introspectionToolName": "github_schema",
+          "introspectionToolDescription": "Fetch the GitHub GraphQL schema",
+          "executeToolName": "github_query",
+          "executeToolDescription": "Execute a query against the GitHub GraphQL API"
+        },
+        "x-zuplo-route": {
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "https://api.github.com"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## Custom GraphQL Tools
+
+For more complex scenarios like bounded mutations or queries with complex logic,
+you can create custom GraphQL tools as endpoints using the Zuplo
+[custom MCP tool patterns](./mcp-server-custom-tools.mdx) and the `graphql`
+library.
+
+Here's a simple example of a custom bounded GraphQL query that expects an `id`
+input from the MCP client:
+
+```json
+{
+  "paths": {
+    "/graphql/ship": {
+      "post": {
+        "summary": "Get details about a specific ship",
+        "operationId": "get_ship",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["id"],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The ID of the ship to query"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-zuplo-route": {
+          "handler": {
+            "export": "default",
+            "module": "$import(./modules/get-ship)"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+In your handler (`modules/get-ship.ts`):
+
+```typescript
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export default async function handler(
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  const { id } = await request.json();
+
+  const query = `
+    query GetShip($id: ID!) {
+      ship(id: $id) {
+        name
+        model
+        manufacturer
+      }
+    }
+  `;
+
+  const response = await fetch("https://api.example.com/graphql", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query,
+      variables: { id },
+    }),
+  });
+
+  return response;
+}
+```
+
+For more complex custom tools with validation, error handling, and multi-step
+workflows, see the [Custom Tools documentation](./mcp-server-custom-tools.mdx).
+
+## See Also
+
+- [MCP Server Handler](./mcp-server.mdx) - Main MCP Server documentation
+- [Custom Tools](./mcp-server-custom-tools.mdx) - Build custom MCP tools with
+  complex logic
+- [GraphQL Best Practices](https://graphql.org/learn/best-practices/) -
+  GraphQL.org recommendations
