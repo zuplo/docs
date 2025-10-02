@@ -31,15 +31,15 @@ const ProductCard = ({
   description,
   content,
 }: ProductCardProps) => (
-  <a href={href}>
+  <a href={href} className="col-span-2 lg:col-span-1">
     <Card
       className={cn(
-        "group transition-shadow h-full",
+        "group transition-shadow h-full ",
         "hover:shadow-lg hover:border-primary",
       )}
     >
       <CardHeader className="pb-3">
-        <CardTitle className="flex flex-col gap-3 text-lg">
+        <CardTitle className="flex flex-col gap-3 text-2xl font-bold">
           <div
             className={cn(
               "flex transition-colors rounded-md p-2 w-fit bg-neutral-100",
@@ -50,9 +50,9 @@ const ProductCard = ({
           </div>
           {title}
         </CardTitle>
-        <CardDescription className="mt-1">{description}</CardDescription>
+        <CardDescription className="text-lg">{description}</CardDescription>
       </CardHeader>
-      <CardContent className="pt-0">{content}</CardContent>
+      <CardContent className="lg:mt-2">{content}</CardContent>
     </Card>
   </a>
 );
@@ -65,7 +65,6 @@ const products: ProductCardProps[] = [
     description: "Build & Manage high quality APIs",
     content:
       "Build, deploy, and manage APIs at scale with authentication, rate limiting, analytics, and more. Perfect for companies looking to productize their APIs.",
-    highlight: true,
   },
   {
     href: "/docs/ai-gateway/introduction",
@@ -99,8 +98,8 @@ export const LandingPage = () => {
       <Head>
         <title>Home</title>
       </Head>
-      <div className="grid grid-cols-2 gap-5 md:gap-10 mt-5 md:mt-10">
-        <div className="col-span-full md:col-span-1 flex flex-col justify-center">
+      <div className="grid grid-cols-4 gap-5 xl:gap-10 mt-5 md:mt-10">
+        <div className="col-span-full md:col-span-2 flex flex-col justify-center">
           <h1 className="mb-10 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
             Zuplo Docs:
             <br />
@@ -112,7 +111,7 @@ export const LandingPage = () => {
             and scale APIs with confidence.
           </Typography>
         </div>
-        <div className="hidden md:flex items-center justify-center">
+        <div className="hidden md:flex col-span-2 items-center justify-center">
           <Image src={imgUrl} alt="Zuplo Documentation" />
         </div>
         {products.map((product, index) => (
