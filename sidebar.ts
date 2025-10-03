@@ -608,6 +608,7 @@ export const resources: Navigation = [
     type: "category",
     label: "Account Settings",
     items: [
+      "articles/accounts/enterprise-sso",
       "articles/accounts/zuplo-api-keys",
       "articles/accounts/default-api-key",
       "articles/accounts/billing",
@@ -621,16 +622,6 @@ export const resources: Navigation = [
     items: [
       "articles/users/profile",
       "articles/users/multifactor-authentication",
-    ],
-  },
-  {
-    type: "category",
-    label: "Single Sign On",
-    items: [
-      "articles/sso",
-      "articles/sso-okta",
-      "articles/sso-azure-ad",
-      "articles/sso-faq",
     ],
   },
   {

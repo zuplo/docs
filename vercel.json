@@ -1207,6 +1207,26 @@
       "source": "/docs/ai/mcp{/}?",
       "destination": "/docs/mcp-server/introduction",
       "permanent": true
+    },
+    {
+      "source": "/docs/articles/sso{/}?",
+      "destination": "/docs/articles/accounts/enterprise-sso",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/sso-faq{/}?",
+      "destination": "/docs/articles/accounts/enterprise-sso",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/sso-okta{/}?",
+      "destination": "/docs/articles/accounts/enterprise-sso",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/sso-azure-ad{/}?",
+      "destination": "/docs/articles/accounts/enterprise-sso",
+      "permanent": true
     }
   ],
   "rewrites": [
