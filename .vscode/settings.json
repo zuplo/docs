@@ -9,6 +9,7 @@
     "**/*.code-search": true,
     "**/.next": true
   },
+  "biome.enabled": false,
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
   "[markdown]": {

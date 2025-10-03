@@ -4,6 +4,7 @@
   "type": "object",
   "title": "A/B Test Inbound",
   "isCustom": true,
+  "products": ["api-gateway"],
   "description": "An A/B test policy is used to handle requests differently based on parameters such as user, ip, etc.",
   "required": ["handler"],
   "properties": {

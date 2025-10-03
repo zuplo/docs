@@ -4,6 +4,7 @@
   "type": "object",
   "title": "Archive Request to GCP Storage",
   "isCustom": true,
+  "products": ["api-gateway"],
   "description": "Archive the incoming request to Google Cloud Storage.",
   "required": ["handler"],
   "properties": {

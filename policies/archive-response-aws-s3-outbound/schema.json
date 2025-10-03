@@ -4,6 +4,7 @@
   "type": "object",
   "title": "Archive Response to AWS S3",
   "isCustom": true,
+  "products": ["api-gateway"],
   "description": "Archive the outgoing response body to AWS S3 storage",
   "required": ["handler"],
   "properties": {

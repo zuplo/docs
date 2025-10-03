@@ -3,6 +3,7 @@
   "$id": "http://zuplo.com/schemas/policies/custom-code-outbound.json",
   "type": "object",
   "title": "Custom Code Outbound",
+  "products": ["api-gateway"],
   "description": "A custom outbound response policy.",
   "required": ["handler"],
   "properties": {

@@ -4,6 +4,7 @@
   "type": "object",
   "title": "Transform Request Body",
   "isCustom": true,
+  "products": ["api-gateway"],
   "description": "Transform the body of an incoming request.",
   "required": ["handler"],
   "properties": {

@@ -4,6 +4,7 @@
   "type": "object",
   "title": "Archive Response to Azure Storage",
   "isCustom": true,
+  "products": ["api-gateway"],
   "description": "Archive the outgoing response to Azure blob storage.",
   "required": ["handler"],
   "properties": {

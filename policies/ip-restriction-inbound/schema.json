@@ -4,6 +4,7 @@
   "type": "object",
   "title": "IP Restriction",
   "isCustom": true,
+  "products": ["api-gateway"],
   "description": "Block or allow requests based on their IP address.",
   "required": ["handler"],
   "properties": {

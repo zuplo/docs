@@ -4,6 +4,7 @@
   "type": "object",
   "title": "RBAC Authorization",
   "isCustom": true,
+  "products": ["api-gateway"],
   "description": "The RBAC authorization inbound policy limits access to resources based on the roles of the authenticated user.",
   "required": ["handler"],
   "properties": {
