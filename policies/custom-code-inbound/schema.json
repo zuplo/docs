@@ -3,6 +3,7 @@
   "$id": "http://zuplo.com/schemas/policies/custom-code-inbound.json",
   "type": "object",
   "title": "Custom Code Inbound",
+  "products": ["api-gateway"],
   "description": "Enables a custom code policy written in TypeScript. Change YOUR_MODULE to the name of your module (without .ts extension)",
   "required": ["handler"],
   "properties": {

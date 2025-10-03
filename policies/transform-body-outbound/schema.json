@@ -4,6 +4,7 @@
   "type": "object",
   "title": "Transform Response Body",
   "isCustom": true,
+  "products": ["api-gateway"],
   "description": "Transform the body of an outgoing response.",
   "required": ["handler"],
   "properties": {

@@ -33,7 +33,8 @@ yarn-error.log*
 .env
 
 /policies.*.json
-/docs/policies
+/docs/policies/*
+!/docs/policies/overview.mdx
 /src/errors.ts
 /temp
 /scripts/update-policies.mjs

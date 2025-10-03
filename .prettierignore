@@ -1,3 +1,4 @@
 _redirects
 sidebar.zudoku.json
-docs/policies/
+docs/policies/*
+!docs/policies/overview.mdx

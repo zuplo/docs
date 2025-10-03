@@ -2,31 +2,42 @@ import { type CSSProperties, useState } from "react";
 import { Button, Link } from "zudoku/components";
 import { XCircleIcon } from "zudoku/icons";
 
+type ProductType = "ai-gateway" | "api-gateway" | "mcp-gateway";
+
 export const PolicyOverview = ({
   policies,
+  product,
 }: {
   policies: Array<{
-    policyId: string;
-    title: string;
+    id: string;
+    name: string;
     icon: string;
     isDeprecated?: boolean;
     isHidden?: boolean;
+    products: ProductType[];
   }>;
+  product: ProductType;
 }) => {
   const [input, setInput] = useState("");
 
   const filteredPolicies = policies
-    .sort((a, b) => a.title.localeCompare(b.title))
-    .filter((policy) => !policy.isDeprecated && !policy.isHidden);
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .filter((policy) => {
+      return (
+        !policy.isDeprecated &&
+        !policy.isHidden &&
+        policy.products.includes(product)
+      );
+    });
   const inboundPolicies = filteredPolicies.filter(
     (policy) =>
-      policy.policyId.includes("inbound") &&
-      policy.title.toLowerCase().includes(input.toLowerCase()),
+      policy.id.includes("inbound") &&
+      policy.name.toLowerCase().includes(input.toLowerCase()),
   );
   const outboundPolicies = filteredPolicies.filter(
     (policy) =>
-      policy.policyId.includes("outbound") &&
-      policy.title.toLowerCase().includes(input.toLowerCase()),
+      policy.id.includes("outbound") &&
+      policy.name.toLowerCase().includes(input.toLowerCase()),
   );
 
   return (
@@ -55,7 +66,7 @@ export const PolicyOverview = ({
       >
         {inboundPolicies.length > 0 ? (
           inboundPolicies.map((policy) => (
-            <PolicyCard key={policy.policyId} {...policy} />
+            <PolicyCard key={policy.id} {...policy} />
           ))
         ) : (
           <div className="text-lg text-muted-foreground col-span-full">
@@ -70,7 +81,7 @@ export const PolicyOverview = ({
       >
         {outboundPolicies.length > 0 ? (
           outboundPolicies.map((policy) => (
-            <PolicyCard key={policy.policyId} {...policy} />
+            <PolicyCard key={policy.id} {...policy} />
           ))
         ) : (
           <div className="text-lg text-muted-foreground col-span-full">
@@ -83,15 +94,15 @@ export const PolicyOverview = ({
 };
 
 const PolicyCard = (policy: {
-  policyId: string;
-  title: string;
+  id: string;
+  name: string;
   icon: string;
   isDeprecated?: boolean;
   isHidden?: boolean;
 }) => (
   <Link
-    to={`/policies/${policy.policyId}`}
-    key={policy.policyId}
+    to={`/policies/${policy.id}`}
+    key={policy.id}
     className="flex items-center gap-4 rounded-lg border border-border shadow-sm p-4 transition-colors hover:bg-accent md:h-36 md:flex-col md:justify-center md:px-5 md:py-6 md:text-center no-underline"
   >
     <div className="rounded-lg bg-primary/10 p-2 flex items-center justify-center">
@@ -108,6 +119,6 @@ const PolicyCard = (policy: {
         }
       />
     </div>
-    <span className="text-sm font-bold">{policy.title}</span>
+    <span className="text-sm font-bold">{policy.name}</span>
   </Link>
 );
