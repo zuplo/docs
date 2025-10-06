@@ -28,7 +28,7 @@
     "@sentry/react": "^9.2.0",
     "@sentry/vite-plugin": "^4.3.0",
     "@vercel/microfrontends": "^2.0.0",
-    "@xyflow/react": "^12.8.2",
+    "@xyflow/react": "^12.8.6",
     "elkjs": "^0.11.0",
     "lucide-react": "^0.516.0",
     "react": "^19.0.0",
