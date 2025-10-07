@@ -64,13 +64,13 @@ const anthropic = createAnthropic({
   baseURL: "https://my-ai-gateway.zuplo.app/v1",
   // Authorization header is also required
   headers: {
-    "Authorization": `Bearer ${process.env.ZUPLO_AI_GATEWAY_API_KEY}`
-  }
+    Authorization: `Bearer ${process.env.ZUPLO_AI_GATEWAY_API_KEY}`,
+  },
 });
 
 const { text } = await generateText({
   model: anthropic("claude-sonnet-4-5-20250929"),
-  messages: [{ role: "user", content: ["Write a one-sentence bedtime story about a unicorn." }]
+  prompt: "Write a one-sentence bedtime story about a unicorn.",
 });
 ```
 
