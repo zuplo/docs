@@ -1,0 +1,65 @@
+---
+title: Claude Code
+sidebar_label: Claude Code
+---
+
+The Zuplo AI Gateway supports the [Anthropic](https://docs.claude.com/en/home)
+`/v1/messages` API endpoint. This means that you can configure
+[Claude Code](https://www.claude.com/product/claude-code) to work seamlessly via
+the AI Gateway.
+
+## Why Route Claude Code Through Zuplo?
+
+Instead of sharing API keys across your team or worrying about budget overruns,
+the Zuplo AI Gateway gives you:
+
+- **Team-Based Access Control** - Create teams with self-serve API key
+  generation, so developers can securely access Claude Code without sharing
+  credentials.
+
+- **Hierarchical Cost Controls** - Set monthly spending limits per application
+  or project to prevent budget surprises during hackathons or development
+  sprints.
+
+- **Complete Visibility** - Monitor request volume, token usage, costs, and
+  performance metrics through a comprehensive dashboard.
+
+- **Security at Scale** - Eliminate API key sprawl and reduce the risk of
+  compromised shared keys.
+
+## Claude Code Setup
+
+<Stepper>
+1. Create a [new provider](/ai-gateway/managing-providers) in the AI Gateway for Anthropic
+
+2. [Set up a new team](/ai-gateway/managing-teams)
+
+3. Create a [new app](/ai-gateway/managing-apps) to use with Claude Code and
+   assign it to the team you created
+
+4. Copy the API Key for the app you created, as well as the Gateway URL
+
+5. Add the API key and Gateway URL to your environment, or Claude Code settings,
+   using either approach below
+   </Stepper>
+
+### Environment
+
+```
+ANTHROPIC_AUTH_TOKEN=<your-ai-gateway-app-api-key>
+ANTHROPIC_BASE_URL=<your-ai-gateway-url>
+```
+
+### Using settings.json
+
+```json
+{
+  "env": {
+    "ANTHROPIC_AUTH_TOKEN": "<your-ai-gateway-app-api-key>",
+    "ANTHROPIC_BASE_URL": "<your-ai-gateway-url>"
+  }
+}
+```
+
+Restart Claude and it will switch to using your new AI Gatway configuration and
+all your Claude Code LLM requests will route through the AI Gateway.
