@@ -36,7 +36,7 @@ point to the Gateway URL of your Zuplo AI Gateway.
 Additionally, you will need to change the value of `apiKey` to the API key of
 the app you have configured in Zuplo.
 
-### Example: OpenAI
+### OpenAI
 
 ```typescript
 import { createOpenAI } from "@ai-sdk/openai";
@@ -53,7 +53,7 @@ const { text } = await generateText({
 });
 ```
 
-### Example: Anthropic
+### Anthropic
 
 ```typescript
 import { createAnthropic } from "@ai-sdk/anthropic";
@@ -61,7 +61,7 @@ import { generateText } from "ai";
 
 const anthropic = createAnthropic({
   apiKey: process.env.ZUPLO_AI_GATEWAY_API_KEY,
-  baseURL: "https://my-ai-gateway.zuplo.app", // Note, no /v1 is required here
+  baseURL: "https://my-ai-gateway.zuplo.app/v1",
 });
 
 const { text } = await generateText({
@@ -70,7 +70,7 @@ const { text } = await generateText({
 });
 ```
 
-### Example: Google
+### Google
 
 ```typescript
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
@@ -78,7 +78,7 @@ import { generateText } from "ai";
 
 const google = createGoogleGenerativeAI({
   apiKey: process.env.ZUPLO_AI_GATEWAY_API_KEY,
-  baseURL: "https://my-ai-gateway.zuplo.app/v1beta",
+  baseURL: "https://my-ai-gateway.zuplo.app/v1",
 });
 
 const { text } = await generateText({
@@ -87,7 +87,7 @@ const { text } = await generateText({
 });
 ```
 
-### Example: Mistral
+### Mistral
 
 ```typescript
 import { createMistral } from "@ai-sdk/mistral";
