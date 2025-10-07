@@ -537,6 +537,18 @@ export const aiGateway: Navigation = [
       "ai-gateway/policies/comet-opik-tracing",
     ],
   },
+  {
+    type: "category",
+    label: "Integrations",
+    items: [
+      "ai-gateway/integrations/ai-sdk",
+      "ai-gateway/integrations/claude-code",
+      "ai-gateway/integrations/codex",
+      "ai-gateway/integrations/goose",
+      "ai-gateway/integrations/langchain",
+      "ai-gateway/integrations/openai",
+    ],
+  },
 ];
 
 export const devPortal: Navigation = [
