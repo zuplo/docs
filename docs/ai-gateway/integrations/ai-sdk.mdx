@@ -61,7 +61,7 @@ import { generateText } from "ai";
 
 const anthropic = createAnthropic({
   apiKey: process.env.ZUPLO_AI_GATEWAY_API_KEY,
-  baseURL: "https://my-ai-gateway.zuplo.app", // Note, no /v1 is required here
+  baseURL: "https://my-ai-gateway.zuplo.app/v1",
 });
 
 const { text } = await generateText({
@@ -78,7 +78,7 @@ import { generateText } from "ai";
 
 const google = createGoogleGenerativeAI({
   apiKey: process.env.ZUPLO_AI_GATEWAY_API_KEY,
-  baseURL: "https://my-ai-gateway.zuplo.app/v1beta",
+  baseURL: "https://my-ai-gateway.zuplo.app/v1",
 });
 
 const { text } = await generateText({
