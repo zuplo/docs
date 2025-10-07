@@ -1,6 +1,100 @@
 ---
 title: goose
-sidebar_label: goose
+sidebar_label: Goose
 ---
 
-Intro
+[goose](https://block.github.io/goose/) is an local AI agent and CLI tool for
+automating engineering tasks. It's completely
+[open-source](https://github.com/block/goose) with no vendor lock-in, supports
+local LLMs, has extensive MCP (Model Context Protocol) support, and offers
+powerful extensibility through recipes.
+
+## Prerequisites
+
+In order to use the AI Gateway with goose you will need to complete these steps
+first:
+
+<Stepper>
+1. Create a [new provider](/ai-gateway/managing-providers) in the AI Gateway for the provider you want to use with goose
+
+2. [Set up a new team](/ai-gateway/managing-teams)
+
+3. Create a [new app](/ai-gateway/managing-apps) to use specifically with goose
+   and assign it to the team you created
+
+4. Copy the API Key for the app you created, as well as the Gateway URL
+   </Stepper>
+
+## Configure goose
+
+Because goose can be run as a standalone desktop app and a CLI there are two
+configuration approaches depending on which version you choose.
+
+### CLI
+
+<Stepper>
+
+1. Run `goose configure`
+
+2. Select **Configure Providers** from the menu
+
+3. Choose **OpenAI** as the provider you want to add (this will work for any
+   OpenAI compatible provider and model)
+
+4. Set the `OPENAI_API_KEY` to the API Key for the app you created for goose in
+   Zuplo
+
+5. Set the `OPENAI_HOST` to the URL of your AI Gateway using the Gateway URL
+   from your project
+
+6. The `OPENAI_BASE_PATH` may already be configured. If it is not, enter
+   `v1/chat/completions` as the value
+
+7. Enter the model you want to use with goose.
+
+</Stepper>
+
+:::note
+
+The provider model you want to use with goose must be selected in the provider
+you created in the Prerequisites step above
+
+:::
+
+After completing the steps, goose will check the configuration. If all is well
+it will save the configuration and you are ready to start working with goose via
+the AI Gateway.
+
+### Desktop App
+
+If you are using the goose desktop application you can add a Custom Provider for
+AI Gateway by following these steps:
+
+<Stepper>
+
+1. Open the goose desktop application
+
+2. Click on **Settings**
+
+3. Click on **Configure Providers** to open the Provider settings
+
+4. Click on **Add Custom Provider**
+
+5. Choose a **Provider Type** (both OpenAI Compatible and Anthropic compatible
+   will work)
+
+6. Enter a **Display Name** (eg. Zuplo AI Gateway)
+
+7. Set the **API URL** to the URL of your Zuplo AI Gateway
+
+8. Set the **API Key** to the API key of the app you created for goose in Zuplo
+
+9. Set the list of **Available Models** to the same list you selected when you
+   set up the provider in the Prerequisites step (eg. gpt-4o, gpt-5, gpt-5-nano)
+
+10. Click on **Create Provider**
+
+</Stepper>
+
+The Zuplo AI Gateway and associated provider and model(s) will now be available
+to use with the goose desktop application.
