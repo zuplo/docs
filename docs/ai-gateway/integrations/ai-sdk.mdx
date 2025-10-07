@@ -48,7 +48,7 @@ const openai = createOpenAI({
 });
 
 const { text } = await generateText({
-  model: openai("gpt-5"),
+  model: openai.chat("gpt-4o"),
   prompt: "Write a one-sentence bedtime story about a unicorn.",
 });
 ```
@@ -62,6 +62,10 @@ import { generateText } from "ai";
 const anthropic = createAnthropic({
   apiKey: process.env.ZUPLO_AI_GATEWAY_API_KEY,
   baseURL: "https://my-ai-gateway.zuplo.app/v1",
+  // Authorization header is also required
+  headers: {
+    Authorization: `Bearer ${process.env.ZUPLO_AI_GATEWAY_API_KEY}`,
+  },
 });
 
 const { text } = await generateText({
