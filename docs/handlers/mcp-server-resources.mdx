@@ -1,0 +1,323 @@
+---
+title: MCP Server Resources
+sidebar_label: MCP Server Resources
+---
+
+The MCP (Model Context Protocol) Server handler supports resources in addition
+to tools and prompts, enabling you to provide read-only access to data or
+documents through the MCP protocol.
+
+MCP resources allow AI clients to request and read structured data or content,
+making it easy to expose documentation, configuration files, or any other
+read-only information that AI systems can consume.
+
+## Overview
+
+Zuplo's MCP resources work by utilizing API routes as resource endpoints that
+return content when requested by an MCP client. Resources are read-only and must
+use the GET HTTP method.
+
+Unlike MCP tools that perform actions or MCP prompts that generate instructions,
+MCP resources provide direct access to content like HTML documents, CSS files,
+JSON data, or any other text-based content.
+
+## Configuration
+
+### Route Configuration
+
+Configure a route in your OpenAPI doc. Resources must use the GET method:
+
+```json
+{
+  "/html": {
+    "get": {
+      "operationId": "html",
+      "description": "Returns the AI applet's HTML",
+      "x-zuplo-route": {
+        "corsPolicy": "none",
+        "handler": {
+          "export": "default",
+          "module": "$import(./modules/html)"
+        }
+      }
+    }
+  }
+}
+```
+
+To provide MCP specific metadata for the resource, use `x-zuplo-mcp-resource`:
+
+```json
+"x-zuplo-mcp-resource": {
+  "name": "html_doc",
+  "description": "The HTML document for the AI applet",
+  "uri": "ui://html",
+  "mimeType": "text/html"
+}
+```
+
+The `x-zuplo-mcp-resource` extension supports:
+
+- `name` (optional) - The identifier for the MCP resource. Defaults to the
+  operation's `operationId`.
+- `description` (optional) - Description of what the resource provides. Falls
+  back to the operation's `description` or `summary`.
+- `uri` (optional) - The URI identifier for the resource (e.g.,
+  `"file:///example.txt"`, `"ui://html"`). Defaults to
+  `"mcp://resources/{name}"`.
+- `mimeType` (optional) - The MIME type of the resource content (e.g.,
+  `"text/html"`, `"text/css"`, `"application/json"`). Falls back to the
+  response's Content-Type header or `"text/plain"`.
+- `enabled` (optional) - Whether this resource is enabled. Defaults to `true`.
+
+Without `x-zuplo-mcp-resource`, the MCP server will use the route's
+`operationId` as the resource name and the `description` or `summary` as the
+resource description, with a default URI of `mcp://resources/{operationId}`.
+
+### MCP Server Handler Configuration
+
+Add resource configuration to your MCP Server handler options:
+
+```json
+{
+  "paths": {
+    "/mcp": {
+      "post": {
+        "x-zuplo-route": {
+          "handler": {
+            "export": "mcpServerHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "name": "example-mcp-server",
+              "version": "1.0.0",
+              "resources": [
+                {
+                  "path": "./config/routes.oas.json",
+                  "operationIds": ["html", "css"]
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+The `resources` array supports:
+
+- `path` - Path to the OpenAPI specification file containing resource routes
+- `operationIds` - Array of operation IDs to include as MCP resources
+
+## Route Handler Implementation
+
+Your route handler should return the content to be exposed as a resource. The
+handler can return various types of content:
+
+### Text Content
+
+```typescript
+export default async function (request: ZuploRequest, context: ZuploContext) {
+  return `<div id="my-ai-applet"></div>`;
+}
+```
+
+### CSS Content
+
+```typescript
+export default async function (request: ZuploRequest, context: ZuploContext) {
+  return `div { color: blue; }`;
+}
+```
+
+### JSON Data
+
+```typescript
+export default async function (request: ZuploRequest, context: ZuploContext) {
+  return {
+    version: "1.0.0",
+    features: ["feature1", "feature2"],
+  };
+}
+```
+
+The content returned by your handler will be automatically converted to text and
+exposed through the MCP resource protocol.
+
+## Resource Requirements
+
+:::warning
+
+Resources must meet the following requirements:
+
+- **HTTP Method**: Resources must use the GET method only. Resources are
+  read-only by design.
+- **Single Method**: Each resource route must define exactly one HTTP method.
+- **Unique Names**: Resource names must be unique across all configured
+  resources in the MCP server.
+
+:::
+
+## Testing MCP Resources
+
+### List Available Resources
+
+Use the MCP `resources/list` method to see available resources:
+
+```bash
+curl https://my-gateway.zuplo.dev/mcp \
+  -X POST \
+  -H 'accept: application/json, text/event-stream' \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": "0",
+    "method": "resources/list"
+  }'
+```
+
+Response:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": "0",
+  "result": {
+    "resources": [
+      {
+        "name": "html",
+        "uri": "mcp://resources/html",
+        "title": "html",
+        "description": "Returns the AI applet's HTML",
+        "mimeType": "text/plain"
+      },
+      {
+        "name": "css_doc",
+        "uri": "ui://css",
+        "title": "css_doc",
+        "description": "The CSS resource",
+        "mimeType": "text/css"
+      }
+    ]
+  }
+}
+```
+
+### Read a Resource
+
+Use the MCP `resources/read` method to read a resource by its URI:
+
+```bash
+curl https://my-gateway.zuplo.dev/mcp \
+  -X POST \
+  -H 'accept: application/json, text/event-stream' \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": "0",
+    "method": "resources/read",
+    "params": {
+      "uri": "mcp://resources/html"
+    }
+  }'
+```
+
+Response:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": "0",
+  "result": {
+    "contents": [
+      {
+        "uri": "mcp://resources/html",
+        "mimeType": "text/plain",
+        "text": "<div id=\"my-ai-applet\"></div>"
+      }
+    ]
+  }
+}
+```
+
+### Read a Resource with Custom URI
+
+```bash
+curl https://my-gateway.zuplo.dev/mcp \
+  -X POST \
+  -H 'accept: application/json, text/event-stream' \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": "0",
+    "method": "resources/read",
+    "params": {
+      "uri": "ui://css"
+    }
+  }'
+```
+
+## Best Practices
+
+### Resource Design
+
+- Expose read-only content that provides useful context to AI systems
+- Use descriptive resource names that clearly indicate what content is available
+- Include meaningful descriptions to help AI systems understand when to use each
+  resource
+- Choose appropriate MIME types that accurately represent your content
+
+### URI Naming
+
+- Use meaningful URI schemes that indicate the type of resource (e.g., `ui://`
+  for UI components, `config://` for configuration)
+- Keep URIs consistent and predictable across related resources
+- Consider using the default `mcp://resources/{name}` format for simple
+  resources
+
+### Content Organization
+
+- Keep resource content focused and purposeful
+- Update resource content dynamically based on current state when appropriate
+- Consider resource size - extremely large resources may impact performance
+- Use appropriate MIME types to help clients understand how to process the
+  content
+
+## Common Use Cases
+
+### Documentation Resources
+
+Expose API documentation or guides:
+
+```json
+"x-zuplo-mcp-resource": {
+  "name": "api_guide",
+  "description": "API usage guide and best practices",
+  "uri": "docs://api-guide",
+  "mimeType": "text/markdown"
+}
+```
+
+### Configuration Resources
+
+Provide access to configuration or schema information:
+
+```json
+"x-zuplo-mcp-resource": {
+  "name": "api_config",
+  "description": "Current API configuration and settings",
+  "uri": "config://api",
+  "mimeType": "application/json"
+}
+```
+
+### UI Component Resources
+
+Share UI components or templates:
+
+```json
+"x-zuplo-mcp-resource": {
+  "name": "component_library",
+  "description": "Available UI components and their usage",
+  "uri": "ui://components",
+  "mimeType": "text/html"
+}
+```

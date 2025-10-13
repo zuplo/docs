@@ -325,6 +325,45 @@ in their OpenAPI definition in order to provide additional MCP metadata. These
 routes should return structured message arrays from their handlers. See
 [MCP Server Prompts](./mcp-server-prompts.mdx) for detailed documentation.
 
+### MCP Resources
+
+MCP servers can also expose resources - static read-only content like
+documentation, configuration files, or any other data an AI system might need.
+Like tools, configure resources using the `resources` array in your MCP server
+options with operation IDs of routes in your gateway:
+
+```json
+"paths": {
+  "/mcp": {
+    "post": {
+      "x-zuplo-route": {
+        "handler": {
+          "export": "mcpServerHandler",
+          "module": "$import(@zuplo/runtime)",
+          "options": {
+            "name": "My MCP Server",
+            "version": "1.0.0",
+            "resources": [
+              {
+                "path": "./config/routes.oas.json",
+                "operationIds": ["html", "css"]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Routes configured as MCP resources must use the GET method and may include the
+`x-zuplo-mcp-resource` extension in their OpenAPI definition to provide
+additional MCP metadata.
+
+See [MCP Server Resources](./mcp-server-resources.mdx) for detailed
+documentation.
+
 ### Tool names and descriptions
 
 Regardless of which option you use, MCP tools are configured as follows:
@@ -640,6 +679,21 @@ curl https://my-gateway.zuplo.dev/mcp \
 }'
 ```
 
+#### List resources
+
+To see what resources a server has available:
+
+```sh
+curl https://my-gateway.zuplo.dev/mcp \
+    -X POST \
+    -H 'accept: application/json, text/event-stream' \
+    -d '{
+  "jsonrpc": "2.0",
+  "id": "0",
+  "method": "resources/list"
+}'
+```
+
 #### Call tool
 
 To
@@ -687,6 +741,26 @@ curl https://my-gateway.zuplo.dev/mcp \
 
 For prompts with parameters, provide the required `arguments` object based on
 the prompt's schema from `prompts/list`.
+
+#### Read resource
+
+To read a resource by its URI:
+
+```sh
+curl https://my-gateway.zuplo.dev/mcp \
+    -X POST \
+    -H 'accept: application/json, text/event-stream' \
+    -d '{
+  "jsonrpc": "2.0",
+  "id": "1",
+  "method": "resources/read",
+  "params": {
+    "uri": "mcp://resources/my_resource"
+  }
+}'
+```
+
+Use the URI from `resources/list` to specify which resource to read.
 
 :::tip
 
