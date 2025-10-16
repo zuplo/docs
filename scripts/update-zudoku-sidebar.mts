@@ -10,7 +10,7 @@ if (!extractedDir) {
   throw new Error("No extracted dir provided");
 }
 
-const zudokuConfigPath = resolve(extractedDir, "./docs/sidebar.tsx");
+const zudokuConfigPath = resolve(extractedDir, "./docs/sidebar.ts");
 const outfile = resolve("./node_modules/.zuplo-docs/zudoku.sidebar.js");
 await esbuild.build({
   entryPoints: [zudokuConfigPath],
