@@ -14,7 +14,8 @@
   "editor.tabSize": 2,
   "[markdown]": {
     "editor.wordWrap": "off",
-    "editor.wordWrapColumn": 80
+    "editor.wordWrapColumn": 80,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "markdown.validate.enabled": true,
   "markdown.copyFiles.destination": {
