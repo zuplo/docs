@@ -279,6 +279,7 @@ export const guides: Navigation = [
       "articles/configuring-auth0-for-mcp-auth",
       "articles/configuring-okta-for-mcp-auth",
       "articles/manual-mcp-oauth-testing",
+      "articles/health-checks",
     ],
   },
 ];
