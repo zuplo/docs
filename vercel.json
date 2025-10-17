@@ -1227,6 +1227,11 @@
       "source": "/docs/articles/sso-azure-ad{/}?",
       "destination": "/docs/articles/accounts/enterprise-sso",
       "permanent": true
+    },
+    {
+      "source": "/docs/cli/installation{/}?",
+      "destination": "/docs/cli/overview",
+      "permanent": true
     }
   ],
   "rewrites": [

@@ -495,7 +495,6 @@ export const apiGateway: Navigation = [
     items: [
       "cli/overview",
       "cli/create-zuplo-api",
-      "cli/installation",
       "cli/analytics",
       "cli/authentication",
       "cli/convert",
