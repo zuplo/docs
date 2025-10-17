@@ -27,7 +27,7 @@ const combined = [...docs, ...components].filter(
     !categoriesToRemove.includes(item.label) && !docsToRemove.includes(item),
 );
 
-function updatePaths(item) {
+function updatePaths(item: any) {
   if (typeof item === "string") {
     item = `dev-portal/zudoku/${item.replace(/^docs\//, "")}`;
   } else if (typeof item === "object") {
@@ -49,14 +49,14 @@ function updatePaths(item) {
 const sidebar = updatePaths(combined);
 
 // Group categories with only component items under a "Components" category
-function groupComponentCategories(items) {
+function groupComponentCategories(items: any) {
   const componentCategories = [];
   const otherItems = [];
 
   for (const item of items) {
     if (item.type === "category" && item.items) {
       // Check if all items in this category are components
-      const allAreComponents = item.items.every((subItem) => {
+      const allAreComponents = item.items.every((subItem: any) => {
         const path =
           typeof subItem === "string" ? subItem : subItem.path || subItem.link;
         return path && path.startsWith("dev-portal/zudoku/components/");

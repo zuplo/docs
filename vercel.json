@@ -1232,6 +1232,36 @@
       "source": "/docs/cli/installation{/}?",
       "destination": "/docs/cli/overview",
       "permanent": true
+    },
+    {
+      "source": "/docs/cli/deployments{/}?",
+      "destination": "/docs/cli/deploy",
+      "permanent": true
+    },
+    {
+      "source": "/docs/cli/project{/}?",
+      "destination": "/docs/cli/project-create",
+      "permanent": true
+    },
+    {
+      "source": "/docs/cli/source{/}?",
+      "destination": "/docs/cli/source-migrate",
+      "permanent": true
+    },
+    {
+      "source": "/docs/cli/analytics{/}?",
+      "destination": "/docs/cli/connectivity",
+      "permanent": true
+    },
+    {
+      "source": "/docs/cli/variables{/}?",
+      "destination": "/docs/cli/variable-create",
+      "permanent": true
+    },
+    {
+      "source": "/docs/cli/local-development{/}?",
+      "destination": "/docs/articles/local-development",
+      "permanent": true
     }
   ],
   "rewrites": [

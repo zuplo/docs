@@ -34,12 +34,25 @@ yarn-error.log*
 
 /policies.*.json
 /cli.json
-/docs/policies/*
-!/docs/policies/overview.mdx
 /src/errors.ts
 /temp
 /scripts/update-policies.mjs
 /scripts/update-policies.mjs.map
+
+# Policies Generated Docs
+/docs/policies/*
+!/docs/policies/overview.mdx
+
+# CLI Generated Docs
+/docs/cli/*
+!/docs/cli/authentication.mdx
+!/docs/cli/connectivity.mdx
+!/docs/cli/convert.mdx
+!/docs/cli/create-zuplo-api.mdx
+!/docs/cli/global-options.mdx
+!/docs/cli/*.partial.mdx
+!/docs/cli/*.partial.md
+
 
 yarn.lock
 .vercel

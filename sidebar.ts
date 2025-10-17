@@ -1,5 +1,6 @@
 import type { Navigation } from "zudoku";
 import zudokuSidebar from "./sidebar.zudoku.json";
+import cliSidebar from "./sidebar.cli.json";
 
 const policies: Navigation = [
   "policies/overview",
@@ -495,17 +496,10 @@ export const apiGateway: Navigation = [
     items: [
       "cli/overview",
       "cli/create-zuplo-api",
-      "cli/analytics",
       "cli/authentication",
-      "cli/convert",
-      "cli/deployments",
-      "cli/project",
-      "cli/source",
-      "cli/test",
-      "cli/tunnels",
-      "cli/variables",
-      "cli/local-development",
+      "cli/global-options",
       "cli/connectivity",
+      ...cliSidebar,
     ],
   },
 ];
