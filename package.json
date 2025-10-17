@@ -14,14 +14,15 @@
     "format:ci": "prettier --check .",
     "typecheck": "tsc",
     "lint:admonitions": "node ./scripts/check-admonitions.mjs",
-    "postinstall": "npm run policies:get && npm run policies:generate && npm run errors:generate && npm run api:get && npm run zudoku:get",
+    "postinstall": "npm run policies:get && npm run policies:generate && npm run errors:generate && npm run cli:generate && npm run api:get && npm run zudoku:get",
     "zudoku:get": "sh ./scripts/get-zudoku.sh",
     "policies:get": "sh ./scripts/get-policies.sh",
     "policies:generate": "tsx scripts/generate-policies.ts",
     "policies:watch": "nodemon",
     "dev:policies": "concurrently \"npm:dev\" \"npm:policies:watch\"",
     "api:get": "node ./scripts/update-api.mjs",
-    "errors:generate": "tsx scripts/generate-errors.ts"
+    "errors:generate": "tsx scripts/generate-errors.ts",
+    "cli:generate": "tsx scripts/generate-cli-docs.ts"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",

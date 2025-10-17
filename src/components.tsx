@@ -12,6 +12,7 @@ import { BrowserScreenshot } from "./BrowserScreenshot.js";
 import { TutorialModeSelector, TutorialMode } from "./TutorialModeSelector.js";
 import { QuickstartPicker } from "./QuickstartPicker.js";
 import { Image } from "./Image.js";
+import { CliCommand, CliCommandGroup, CliIntro, CliDoc } from "./CliCommand.js";
 
 const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
 
@@ -96,6 +97,10 @@ export const mdxComponents = {
     );
   },
   BundlesTable: () => <BundlesTable />,
+  CliCommand,
+  CliCommandGroup,
+  CliIntro,
+  CliDoc,
   ZuploIngressWithManagedDedicated: lazy(
     () => import("./diagrams/ZuploIngressWithManagedDedicated.js"),
   ),
