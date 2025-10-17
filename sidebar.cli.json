@@ -17,7 +17,8 @@
   "cli/tunnel-describe",
   "cli/tunnel-list",
   "cli/tunnel-rotate-token",
-  "cli/tunnel-services",
+  "cli/tunnel-services-describe",
+  "cli/tunnel-services-update",
   "cli/variable-create",
   "cli/variable-update"
 ]

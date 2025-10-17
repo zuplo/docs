@@ -9,8 +9,22 @@ interface CliOption {
   type: string;
   default?: string | number | boolean;
   required: boolean;
-  deprecated: boolean;
+  deprecated: boolean | string;
   hidden: boolean;
+  description?: string;
+  alias?: string[];
+  normalize?: boolean;
+  choices?: string[];
+  envVar?: string;
+  conflicts?: string[];
+}
+
+interface CliPositional {
+  name: string;
+  type: string;
+  description?: string;
+  required?: boolean;
+  normalize?: boolean;
 }
 
 interface CliCommand {
@@ -20,8 +34,35 @@ interface CliCommand {
   options: CliOption[];
   examples?: [string, string][];
   subcommands?: CliCommand[];
-  deprecated?: boolean;
+  deprecated?: boolean | string;
   hidden?: boolean;
+  positionals?: CliPositional[];
+  epilogue?: string;
+}
+
+// Helper to flatten all commands/subcommands recursively
+function flattenCommands(
+  command: CliCommand,
+  results: CliCommand[] = [],
+): CliCommand[] {
+  // Skip hidden or deprecated commands
+  if (command.hidden || command.deprecated) {
+    return results;
+  }
+
+  const hasSubcommands = command.subcommands && command.subcommands.length > 0;
+
+  if (hasSubcommands) {
+    // For commands with subcommands, recursively process each subcommand
+    for (const subcommand of command.subcommands!) {
+      flattenCommands(subcommand, results);
+    }
+  } else {
+    // Leaf command - add to results
+    results.push(command);
+  }
+
+  return results;
 }
 
 interface CliJson {
@@ -34,10 +75,23 @@ const cliJsonPath = path.join(projectDir, "cli.json");
 const docsDir = path.join(projectDir, "docs/cli");
 const sidebarPath = path.join(projectDir, "sidebar.cli.json");
 
+// Download cli.json from CDN
+console.log("📥 Downloading cli.json from CDN...");
+const cliJsonUrl = `https://cdn.zuplo.com/cli/cli.json?t=${Date.now()}`;
+const response = await fetch(cliJsonUrl);
+
+if (!response.ok) {
+  throw new Error(
+    `Failed to download cli.json: ${response.status} ${response.statusText}`,
+  );
+}
+
+const cliJsonData = await response.text();
+await writeFile(cliJsonPath, cliJsonData);
+console.log("✅ Downloaded cli.json successfully\n");
+
 // Read the cli.json file
-const cliJson: CliJson = JSON.parse(
-  await readFile(cliJsonPath, "utf-8"),
-) as CliJson;
+const cliJson: CliJson = JSON.parse(cliJsonData) as CliJson;
 
 console.log(
   `📚 Generating CLI documentation for ${cliJson.commands.length} commands...`,
@@ -111,6 +165,12 @@ async function createCommandPage(
 
   const title = generateTitle(command.command);
 
+  // Filter out global options from the detailed display
+  const globalOptionNames = ["help", "api-key"];
+  const nonGlobalOptions = command.options.filter(
+    (opt) => !globalOptionNames.includes(opt.name),
+  );
+
   // Build component props
   const props: string[] = [
     formatJsxProp("command", command.command),
@@ -121,8 +181,12 @@ async function createCommandPage(
     props.push(formatJsxProp("aliases", command.aliases));
   }
 
-  if (command.options && command.options.length > 0) {
-    props.push(formatJsxProp("options", command.options));
+  if (nonGlobalOptions.length > 0) {
+    props.push(formatJsxProp("options", nonGlobalOptions));
+  }
+
+  if (command.examples && command.examples.length > 0) {
+    props.push(formatJsxProp("examples", command.examples));
   }
 
   // Get custom content from partial files
@@ -163,32 +227,14 @@ ${globalOptionsSection}
   generatedCommands.push(`cli/${fileKey}`);
 }
 
-// Process each top-level command
+// Process each top-level command, recursively flattening all subcommands
 for (const command of cliJson.commands) {
-  // Skip hidden or deprecated commands
-  if (command.hidden || command.deprecated) {
-    continue;
-  }
+  const leafCommands = flattenCommands(command);
 
-  const hasSubcommands = command.subcommands && command.subcommands.length > 0;
-
-  if (hasSubcommands) {
-    // For commands with subcommands, create a page for each subcommand only
-    // Filter out hidden and deprecated subcommands
-    const visibleSubcommands = command.subcommands!.filter(
-      (sub) => !sub.hidden && !sub.deprecated,
-    );
-
-    for (const subcommand of visibleSubcommands) {
-      const fileKey = commandToFileKey(subcommand.command);
-      const sidebarLabel = subcommand.command; // Use full command with space
-      await createCommandPage(subcommand, fileKey, sidebarLabel);
-    }
-  } else {
-    // For commands without subcommands, create a single page
-    const fileKey = command.command;
-    const sidebarLabel = command.command;
-    await createCommandPage(command, fileKey, sidebarLabel);
+  for (const leafCommand of leafCommands) {
+    const fileKey = commandToFileKey(leafCommand.command);
+    const sidebarLabel = leafCommand.command;
+    await createCommandPage(leafCommand, fileKey, sidebarLabel);
   }
 }
 

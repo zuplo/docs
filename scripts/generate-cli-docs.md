@@ -1,36 +1,39 @@
 # CLI Documentation Generation
 
-This system automatically generates CLI documentation from `cli.json` with
-support for custom content via partial files.
+This system automatically generates CLI documentation from the Zuplo CLI
+metadata published to CDN, with support for custom content via partial files.
 
 ## How It Works
 
-### 1. The Component
+### 1. CDN Download
+
+The script downloads the latest `cli.json` from
+`https://cdn.zuplo.com/cli/cli.json` before generating documentation. This
+ensures docs are always in sync with the latest CLI release.
+
+### 2. The Component
 
 The `<CliCommand>` component generates:
 
 - Command help output (bash code blocks)
-- Subcommand sections with their help output
-- Proper formatting for options, defaults, and flags
-- Custom intro and documentation sections
+- Examples section with descriptions and code blocks
+- Individual option sections (Vercel-style) with metadata
+- Global options section with links
+- Filtering of hidden and deprecated items
 
-### 2. Partial Files for Custom Content
+### 3. Partial Files for Custom Content
 
 Create `.partial.mdx` files to add custom content that gets merged into the
-generated docs:
+generated docs. Partial files contain plain markdown (no special components
+needed).
 
 **Example: `docs/cli/deploy.partial.mdx`**
 
 ```mdx
-<CliIntro command="deploy">
-
-Your introductory text here. This appears right after the command help block.
+Your introductory text here. This appears after the help block and before
+examples.
 
 See [Custom CI/CD](../articles/custom-ci-cd.mdx) for examples.
-
-</CliIntro>
-
-<CliDoc command="deploy">
 
 ## Common Use Cases
 
@@ -38,88 +41,167 @@ Add detailed documentation, examples, tips, etc.
 
 ### Deploying your Gateway
 
-\`\`\`bash zuplo deploy --project my-project \`\`\`
-
-</CliDoc>
+The deploy command pushes your changes to production.
 ```
 
-### 3. The Generation Script
+### 4. The Generation Script
 
 Run `npm run cli:generate` to:
 
-- Read `cli.json` and generate MDX files for each command
-- Read `.partial.mdx` files and extract `<CliIntro>` and `<CliDoc>` content
-- Merge partial content into the generated files
-- Update command data while preserving custom content
+1. Download latest `cli.json` from CDN
+2. Save to local `cli.json` file
+3. Flatten nested subcommands recursively
+4. Filter out hidden and deprecated commands
+5. Generate MDX files for each command
+6. Merge partial content if available
+7. Update `sidebar.cli.json` with all commands
 
 ## Generated Structure
 
-The generated file looks like:
+Each command gets its own page with this structure:
 
 ```mdx
 ---
-title: Deploy
+title: "Zuplo CLI: Deploy"
+sidebar_label: deploy
 ---
 
 <CliCommand
   command="deploy"
-  description="..."
+  description="Deploy your API to production"
   options={[...]}
+  examples={[...]}
 >
-  <CliIntro command="deploy">
-    Custom intro content from partial file
-  </CliIntro>
 
-  <CliDoc command="deploy">
-    Custom documentation from partial file
-  </CliDoc>
+Custom markdown content from deploy.partial.mdx appears here
+
 </CliCommand>
+
+## Global Options
+
+The following global options are available for all commands:
+
+- [`--help`](./global-options.mdx#help)
+- [`--api-key`](./global-options.mdx#api-key)
+```
+
+## Features
+
+### Nested Subcommands
+
+The script recursively flattens nested subcommands. For example:
+
+- `tunnel` → `tunnel services` → `tunnel services update`
+- Generates: `docs/cli/tunnel-services-update.mdx`
+- Sidebar label: `tunnel services update`
+
+### Hidden and Deprecated Items
+
+- Commands/options marked as `hidden` or `deprecated` are filtered out
+- `deprecated` can be boolean or string (with deprecation message)
+- Filtering happens at generation time for commands, runtime for options
+
+### Examples Display
+
+When commands have examples in cli.json:
+
+```typescript
+examples: [
+  ["$0 deploy --project my-project", "Deploy to a specific project"],
+  ["$0 deploy --env production", "Deploy to production environment"],
+];
+```
+
+The component renders:
+
+- Description text
+- Bash code block with command
+- `$0` replaced with `zuplo`
+
+### Vercel-Style Options
+
+Each option gets its own section with:
+
+- H3 heading with option name
+- Description
+- Bash code block example
+- Metadata display (type, default, choices, alias, conflicts, envVar, required,
+  deprecated)
+
+### Global Options
+
+The `--help` and `--api-key` options are:
+
+- Filtered from detailed options display on each page
+- Listed in the Global Options section with links to `global-options.mdx`
+
+### Option Properties
+
+All option properties are supported:
+
+- `name` - Option name
+- `type` - string, boolean, or number
+- `description` - Help text
+- `default` - Default value
+- `required` - Whether required
+- `deprecated` - Boolean or string with message
+- `hidden` - Whether to hide from docs
+- `alias` - Short flags (e.g., `-i` for `--input`)
+- `choices` - Valid values for the option
+- `conflicts` - Options that conflict with this one
+- `envVar` - Environment variable name
+- `normalize` - Path normalization flag
+
+## File Naming
+
+### Commands
+
+- Single commands: `docs/cli/deploy.mdx` → sidebar: `deploy`
+- Subcommands: `docs/cli/tunnel-create.mdx` → sidebar: `tunnel create`
+- Nested: `docs/cli/tunnel-services-update.mdx` → sidebar:
+  `tunnel services update`
+
+### Partial Files
+
+- Custom content: `docs/cli/deploy.partial.mdx` (edit this)
+- Main docs: `docs/cli/deploy.mdx` (generated, don't edit)
+- Partial files excluded from site via `zudoku.config.tsx` glob pattern
+
+## Special Cases
+
+### OpenAPI Capitalization
+
+Commands containing "openapi" are capitalized as "OpenAPI" in titles:
+
+- `openapi convert` → title: "Zuplo CLI: OpenAPI Convert"
+
+### Frontmatter Format
+
+```yaml
+---
+title: "Zuplo CLI: Command Name"
+sidebar_label: command name
+---
 ```
 
 ## Workflow
 
-1. **Initial Generation**: Run `npm run cli:generate` to create all MDX files
-2. **Add Custom Content**: Create `.partial.mdx` files with `<CliIntro>` and
-   `<CliDoc>` components
-3. **Regenerate**: Run `npm run cli:generate` again to merge the partial content
-4. **Update**: When `cli.json` changes, just run the script again - custom
-   content is preserved
+1. **Update CLI**: Publish new CLI version to CDN
+2. **Generate Docs**: Run `npm run cli:generate`
+3. **Add Custom Content**: Create/edit `.partial.mdx` files as needed
+4. **Regenerate**: Run `npm run cli:generate` again to merge partial content
+5. **Review**: Check generated files and sidebar
 
-## File Naming
+## File Locations
 
-- Main docs: `docs/cli/deploy.mdx` (generated, don't edit directly)
-- Custom content: `docs/cli/deploy.partial.mdx` (edit this to add custom docs)
-- Partial files are excluded from the site (via glob pattern in
-  zudoku.config.tsx)
-
-## Components
-
-### `<CliIntro command="commandName">`
-
-Appears right after the command help block. Use for:
-
-- Overview and introduction
-- Prerequisites or requirements
-- Links to related documentation
-
-### `<CliDoc command="commandName">`
-
-Appears after the intro section. Use for:
-
-- Detailed documentation
-- Usage examples
-- Common use cases
-- Tips and best practices
-- Troubleshooting
-
-## Example Output
-
-See `docs/cli/deploy.mdx` for a complete example showing:
-
-- Command help block (auto-generated)
-- Intro section (from partial)
-- Detailed docs with examples (from partial)
-- All formatted beautifully
+- **Generation Script**: `scripts/generate-cli-docs.ts`
+- **Component**: `src/CliCommand.tsx`
+- **Component Registry**: `src/components.tsx`
+- **CLI Data**: `cli.json` (downloaded from CDN)
+- **Generated Docs**: `docs/cli/*.mdx`
+- **Partial Content**: `docs/cli/*.partial.mdx`
+- **Sidebar**: `sidebar.cli.json` (auto-generated)
+- **Config**: `zudoku.config.tsx` (excludes partials)
 
 ## Tips
 
@@ -127,5 +209,16 @@ See `docs/cli/deploy.mdx` for a complete example showing:
 - Generated `.mdx` files should not be edited directly (changes will be
   overwritten)
 - Use standard MDX features (code blocks, links, lists, etc.) in partial files
-- The `command` prop must match the filename (e.g., `command="deploy"` in
-  `deploy.partial.mdx`)
+- The script runs automatically in CI when publishing new CLI versions
+- The sidebar is automatically sorted alphabetically
+- Run `npm run cli:generate` locally to preview docs before committing
+
+## Example Output
+
+See any file in `docs/cli/` for complete examples showing:
+
+- Command help block (auto-generated)
+- Examples section (if available)
+- Custom content from partial files
+- Individual option sections with metadata
+- Global options section with links

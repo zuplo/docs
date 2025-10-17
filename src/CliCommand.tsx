@@ -55,16 +55,21 @@ export interface CliOption {
   type: string;
   default?: string | number | boolean;
   required: boolean;
-  deprecated: boolean;
+  deprecated: boolean | string;
   hidden: boolean;
   description?: string;
+  alias?: string[];
+  normalize?: boolean;
+  choices?: string[];
+  envVar?: string;
+  conflicts?: string[];
 }
 
 export interface CliSubcommand {
   command: string;
   description: string;
   options: CliOption[];
-  deprecated?: boolean;
+  deprecated?: boolean | string;
   hidden?: boolean;
 }
 
@@ -74,6 +79,7 @@ interface CliCommandProps {
   aliases?: string[];
   options?: CliOption[];
   subcommands?: CliSubcommand[];
+  examples?: [string, string][];
   children?: React.ReactNode;
 }
 
@@ -105,6 +111,7 @@ export const CliCommand: React.FC<CliCommandProps> = ({
   aliases,
   options = [],
   subcommands = [],
+  examples = [],
   children,
 }) => {
   const visibleOptions = options.filter(
@@ -143,6 +150,21 @@ export const CliCommand: React.FC<CliCommandProps> = ({
       {/* Custom content from partial files */}
       {children && <div className="my-4">{children}</div>}
 
+      {/* Examples */}
+      {examples.length > 0 && (
+        <div className="my-8">
+          <h2 className="text-2xl font-bold mb-6">Examples</h2>
+          {examples.map(([cmd, desc], index) => (
+            <div key={index} className="mb-6">
+              <p className="mb-2 text-gray-700">{desc}</p>
+              <SyntaxHighlight language="bash">
+                {cmd.replace(/\$0/g, "zuplo")}
+              </SyntaxHighlight>
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* Individual Options */}
       {visibleOptions.length > 0 && (
         <div className="my-8">
@@ -177,8 +199,42 @@ export const CliCommand: React.FC<CliCommandProps> = ({
                     </code>
                   </span>
                 )}
+                {option.choices && option.choices.length > 0 && (
+                  <span className="mr-3">
+                    Choices:{" "}
+                    <code className="bg-gray-100 px-1 rounded">
+                      {option.choices.join(", ")}
+                    </code>
+                  </span>
+                )}
+                {option.alias && option.alias.length > 0 && (
+                  <span className="mr-3">
+                    Alias:{" "}
+                    <code className="bg-gray-100 px-1 rounded">
+                      -{option.alias.join(", -")}
+                    </code>
+                  </span>
+                )}
+                {option.envVar && (
+                  <span className="mr-3">
+                    Env:{" "}
+                    <code className="bg-gray-100 px-1 rounded">
+                      {option.envVar}
+                    </code>
+                  </span>
+                )}
+                {option.conflicts && option.conflicts.length > 0 && (
+                  <span className="mr-3">
+                    Conflicts:{" "}
+                    <code className="bg-gray-100 px-1 rounded">
+                      --{option.conflicts.join(", --")}
+                    </code>
+                  </span>
+                )}
                 {option.required && (
-                  <span className="text-red-600 font-medium">Required</span>
+                  <span className="text-red-600 font-medium mr-3">
+                    Required
+                  </span>
                 )}
                 {option.deprecated && (
                   <span className="text-yellow-600 font-medium">
