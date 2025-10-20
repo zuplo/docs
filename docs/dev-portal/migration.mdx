@@ -34,8 +34,8 @@ This command will automatically:
 - Migrate your existing dev portal configuration
 - Move markdown files to the correct location
 
-See the [Source Commands](../cli/source.mdx) documentation for more details and
-options.
+See the [Source Commands](../cli/source-migrate.mdx) documentation for more
+details and options.
 
 If you prefer to understand each step or need more control over the migration
 process, continue with the manual migration steps below.
@@ -348,11 +348,11 @@ process, continue with the manual migration steps below.
 1. **Deploy and Verify**
 
    Deploy your changes by either pushing to a git branch or by running
-   [`npx zuplo deploy`](../cli/deployments.mdx). After the deployment has
-   completed, perform these final checks:
+   [`npx zuplo deploy`](../cli/deploy.mdx). After the deployment has completed,
+   perform these final checks:
    - Test all site navigation paths
    - Verify authentication flows work correctly
-   - Check API reference documentation renders properly
+   - Check API reference documentation renders
    - Test across different browsers and devices
    - Verify custom styling and theming is applied correctly
 
@@ -382,7 +382,7 @@ the old Dev Portal URL.
 
 2. **Add a Route**: Inside this file, add a route that matches the legacy path
    and redirects to the new Dev Portal domain. You must set the path to the path
-   used by the previous Dev Portal, such as `/docs(.*)`. It is important not to
+   used by the previous Dev Portal, such as `/docs(.*)`. It's important not to
    make the route `/docs(.*)` not `/docs/(.*)` in order to also match the root
    path `/docs`.
 
