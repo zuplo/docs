@@ -100,7 +100,7 @@ export const LandingPage = () => {
       <Head>
         <title>Home</title>
       </Head>
-      <div className="grid grid-cols-4 gap-5 xl:gap-10 mt-5 md:mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-5 xl:gap-10 my-5 md:my-10">
         <div className="col-span-full md:col-span-2 flex flex-col justify-center">
           <h1 className="mb-10 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
             Zuplo Docs:
