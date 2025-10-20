@@ -108,6 +108,10 @@ function formatJsxProp(key: string, value: unknown): string {
 // Read all partial files
 const partialFiles = await glob("docs/cli/*.partial.mdx", { cwd: projectDir });
 const partialContent: Record<string, string> = {};
+const partialAdditionalResources: Record<
+  string,
+  Array<{ name: string; href: string }>
+> = {};
 
 for (const partialFile of partialFiles) {
   const fullContent = await readFile(
@@ -122,6 +126,12 @@ for (const partialFile of partialFiles) {
 
   if (content) {
     partialContent[commandName] = content;
+  }
+
+  // Extract additional-resources from frontmatter
+  if (parsed.data["additional-resources"]) {
+    partialAdditionalResources[commandName] =
+      parsed.data["additional-resources"];
   }
 }
 
@@ -195,12 +205,22 @@ async function createCommandPage(
   // Add global options section
   const globalOptions = ["help", "api-key"];
   const globalOptionsSection = `
-## Global Options
+## Global options
 
 The following global options are available for all commands:
 
 ${globalOptions.map((opt) => `- [\`--${opt}\`](./global-options.mdx#${opt})`).join("\n")}
 `;
+
+  // Add additional resources section if available
+  const additionalResources = partialAdditionalResources[fileKey];
+  const additionalResourcesSection = additionalResources
+    ? `
+## Additional resources
+
+${additionalResources.map((resource) => `- [${resource.name}](${resource.href})`).join("\n")}
+`
+    : "";
 
   // Build the MDX content
   const mdxContent = `---
@@ -215,6 +235,7 @@ ${partialContentMd ? `\n${partialContentMd}\n` : ""}
 </CliCommand>
 
 ${globalOptionsSection}
+${additionalResourcesSection}
 `;
 
   // Format with prettier

@@ -77,7 +77,7 @@ Custom markdown content from deploy.partial.mdx appears here
 
 </CliCommand>
 
-## Global Options
+# Global options
 
 The following global options are available for all commands:
 

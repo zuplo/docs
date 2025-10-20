@@ -15,8 +15,7 @@ basic requirements for deploying a secure tunnel with Docker are:
 
 1. A tunnel secret that's provided to the Docker container as an environment
    variable named `TUNNEL_TOKEN` (the secret is provided by the Zuplo CLI when
-   you create the tunnel. See
-   [creating a tunnel](../cli/tunnels#creating-a-tunnel))
+   you create the tunnel. See [creating a tunnel](../cli/tunnel-create.mdx))
 1. The ability for the tunnel service to make an outbound connection to the
    public internet to establish the secure tunnel.
 1. The ability for the tunnel service to make a request to your internal API by
@@ -40,11 +39,64 @@ Your running container needs a single environment variable named `TUNNEL_TOKEN`.
 You should store the value as a secret using the recommended means of secret
 storage and environment variable injection for your platform.
 
-## Configuring Services using Tunnels
+## Configuring services
 
-Now that you have your tunnel set up, refer to
-[configuring services](../cli/tunnels#configuring-services) through the CLI for
-how to expose your services.
+Once you have created a tunnel, you can
+[configure which services](../cli/tunnel-services-update.mdx) it should expose
+using a configuration file. Below is a sample configuration file. The properties
+in the `services` objects are explained below.
+
+- `name` - This is the name of the service that you will use from your Zuplo
+  project
+- `endpoint` - This is the local endpoint of your service that you tunnel can
+  connect to
+- `configurations` - This object specifies which projects and which environments
+  can access this service.
+  - `project` - The name of the Zuplo project
+  - `accessibleBy` - The environments which can use the tunnel. Valid values are
+    `production`, `preview`, and `working-copy`.
+
+```json title="tunnel-config.json"
+{
+  "version": 1,
+  "services": [
+    {
+      "name": "my-awesome-service-prod",
+      "endpoint": "http://localhost:8000",
+      "configurations": [
+        {
+          "project": "my-project",
+          "accessibleBy": ["production"]
+        },
+        {
+          "project": "my-other-project",
+          "accessibleBy": ["production"]
+        }
+      ]
+    },
+    {
+      "name": "my-awesome-service-staging",
+      "endpoint": "http://localhost:9000",
+      "configurations": [
+        {
+          "project": "my-project",
+          "accessibleBy": ["preview", "working-copy"]
+        },
+        {
+          "project": "my-other-project",
+          "accessibleBy": ["preview", "working-copy"]
+        }
+      ]
+    }
+  ]
+}
+```
+
+```bash
+zuplo tunnel services update \
+--configuration-file <path-to-your-configuration-file> \
+--tunnel-id <your-tunnel-id>
+```
 
 ## Using Services Exposed through Tunnels in Code
 
