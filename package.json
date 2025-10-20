@@ -32,14 +32,14 @@
     "@xyflow/react": "^12.9.0",
     "elkjs": "^0.11.0",
     "lucide-react": "^0.516.0",
-    "react": "^19.0.0",
+    "react": "^19.2.0",
     "react-dom": "^19.0.0",
     "zudoku": "^0.61.5"
   },
   "devDependencies": {
     "@types/json-schema": "7.0.15",
     "@types/node": "^22.10.7",
-    "@types/react": "^19.0.7",
+    "@types/react": "^19.2.2",
     "@types/react-dom": "^19.0.2",
     "@typescript-eslint/parser": "^8.46.1",
     "concurrently": "^9.2.1",
