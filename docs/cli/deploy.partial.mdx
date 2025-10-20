@@ -1,16 +1,15 @@
-Use these commands to help your manage your deployed Zuplo projects. They must
-be run from the root of your Zuplo project. And, they assume that you already
-have Git setup for the project.
+---
+additional-resources:
+  - name: Custom CI/CD
+    href: ../articles/custom-ci-cd.mdx
+---
 
-See concrete end-to-end examples of how to use this in your CI/CD job at
-[Custom CI/CD](../articles/custom-ci-cd.mdx).
-
-## Common Use Cases
+## Common use cases
 
 The following examples assume that you are passing in your `--api-key` either as
 an argument or through the `ZUPLO_API_KEY` environment variable.
 
-### Deploying your Gateway
+### Deploying your gateway
 
 ```bash
 # The following will use the current Git branch as the name of the environment
@@ -26,7 +25,7 @@ zuplo deploy --project my-project
 zuplo deploy --project my-project --environment my-env-name
 ```
 
-## Polling Timeout
+## Polling timeout
 
 By default, the deploy command will poll the status of the deployment every
 second for 150 seconds. For most deployments this is enough time for the build
