@@ -177,11 +177,6 @@ export const CliCommand: React.FC<CliCommandProps> = ({
               {option.description && (
                 <p className="mb-3 text-gray-700">{option.description}</p>
               )}
-              <div className="mb-2">
-                <SyntaxHighlight language="bash">
-                  {`zuplo ${command} --${option.name}${option.type === "boolean" ? "" : option.type === "string" ? " <value>" : " <number>"}`}
-                </SyntaxHighlight>
-              </div>
               <div className="text-sm text-gray-600">
                 {option.type && (
                   <span className="mr-3">
