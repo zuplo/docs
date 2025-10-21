@@ -1262,6 +1262,11 @@
       "source": "/docs/cli/local-development{/}?",
       "destination": "/docs/articles/local-development",
       "permanent": true
+    },
+    {
+      "source": "/docs/cli/tunnels{/}?",
+      "destination": "/docs/articles/tunnel-setup",
+      "permanent": true
     }
   ],
   "rewrites": [
