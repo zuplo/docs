@@ -405,7 +405,7 @@ await fs.writeFile(
 );
 
 await fs.writeFile(
-  path.join(projectDir, "policies.v4.json"),
+  path.join(projectDir, "policies.v5.json"),
   JSON.stringify(policyData, null, 2),
 );
 
