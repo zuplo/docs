@@ -1,5 +1,6 @@
 import type { Navigation } from "zudoku";
 import zudokuSidebar from "./sidebar.zudoku.json";
+import cliSidebar from "./sidebar.cli.json";
 
 const policies: Navigation = [
   "policies/overview",
@@ -279,6 +280,7 @@ export const guides: Navigation = [
       "articles/configuring-auth0-for-mcp-auth",
       "articles/configuring-okta-for-mcp-auth",
       "articles/manual-mcp-oauth-testing",
+      "articles/health-checks",
     ],
   },
 ];
@@ -387,6 +389,7 @@ export const apiGateway: Navigation = [
       "handlers/mcp-server-custom-tools",
       "handlers/mcp-server-graphql",
       "handlers/mcp-server-prompts",
+      "handlers/mcp-server-resources",
     ],
   },
   {
@@ -493,18 +496,10 @@ export const apiGateway: Navigation = [
     items: [
       "cli/overview",
       "cli/create-zuplo-api",
-      "cli/installation",
-      "cli/analytics",
       "cli/authentication",
-      "cli/convert",
-      "cli/deployments",
-      "cli/project",
-      "cli/source",
-      "cli/test",
-      "cli/tunnels",
-      "cli/variables",
-      "cli/local-development",
+      "cli/global-options",
       "cli/connectivity",
+      ...cliSidebar,
     ],
   },
 ];
@@ -535,6 +530,18 @@ export const aiGateway: Navigation = [
     items: [
       "ai-gateway/policies/akamai-ai-firewall",
       "ai-gateway/policies/comet-opik-tracing",
+    ],
+  },
+  {
+    type: "category",
+    label: "Integrations",
+    items: [
+      "ai-gateway/integrations/ai-sdk",
+      "ai-gateway/integrations/claude-code",
+      "ai-gateway/integrations/codex",
+      "ai-gateway/integrations/goose",
+      "ai-gateway/integrations/langchain",
+      "ai-gateway/integrations/openai",
     ],
   },
 ];

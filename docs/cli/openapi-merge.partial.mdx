@@ -1,0 +1,27 @@
+## Common use cases
+
+### Importing an existing OpenAPI file
+
+The command supports importing both JSON and YAML formats. The format is
+inferred from the file extension.
+
+```bash
+zuplo openapi merge --source /path/to/openapi.json
+zuplo openapi merge --source /path/to/openapi.yaml
+```
+
+When no `--destination` option is provided, the OpenAPI file is automatically
+merged into `routes.oas.json`.
+
+To import a remote file, use the `--source` option with a URL. The command
+downloads the file to a temporary directory and imports it.
+
+```bash
+zuplo openapi merge --source https://example.com/path/to/openapi.json
+```
+
+To rename the destination file, use the `--destination` option.
+
+```bash
+zuplo openapi merge --source https://example.com/path/to/openapi.json --destination new-name
+```

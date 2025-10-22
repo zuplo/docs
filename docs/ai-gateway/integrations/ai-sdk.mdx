@@ -1,0 +1,109 @@
+---
+title: AI SDK
+sidebar_label: AI SDK
+---
+
+The [AI SDK](https://ai-sdk.dev/) is a free open-source library that gives you
+the tools you need to build AI-powered products. It is compatible with a large
+selection of providers and models, and has a large selection of additional
+community supported providers being added regularly.
+
+## Prerequisites
+
+In order to use the AI Gateway with any AI SDK powered application you will need
+to complete these steps first:
+
+<Stepper>
+
+1. Create a [new provider](/ai-gateway/managing-providers) in the AI Gateway for
+   the provider you want to use with AI SDK
+
+2. [Set up a new team](/ai-gateway/managing-teams)
+
+3. Create a [new app](/ai-gateway/managing-apps) to use specifically with AI SDK
+   and assign it to the team you created
+
+4. Copy the API Key for the app you created, as well as the Gateway URL
+
+</Stepper>
+
+## Configure the AI SDK
+
+To route all AI SDK requests through Zuplo instead of directly to the API of the
+chosen provider, you must set the API `baseUrl` in the SDK configuration to
+point to the Gateway URL of your Zuplo AI Gateway.
+
+Additionally, you will need to change the value of `apiKey` to the API key of
+the app you have configured in Zuplo.
+
+### OpenAI
+
+```typescript
+import { createOpenAI } from "@ai-sdk/openai";
+import { generateText } from "ai";
+
+const openai = createOpenAI({
+  apiKey: process.env.ZUPLO_AI_GATEWAY_API_KEY,
+  baseURL: "https://my-ai-gateway.zuplo.app/v1",
+});
+
+const { text } = await generateText({
+  model: openai.chat("gpt-4o"),
+  prompt: "Write a one-sentence bedtime story about a unicorn.",
+});
+```
+
+### Anthropic
+
+```typescript
+import { createAnthropic } from "@ai-sdk/anthropic";
+import { generateText } from "ai";
+
+const anthropic = createAnthropic({
+  apiKey: process.env.ZUPLO_AI_GATEWAY_API_KEY,
+  baseURL: "https://my-ai-gateway.zuplo.app/v1",
+  // Authorization header is also required
+  headers: {
+    Authorization: `Bearer ${process.env.ZUPLO_AI_GATEWAY_API_KEY}`,
+  },
+});
+
+const { text } = await generateText({
+  model: anthropic("claude-sonnet-4-5-20250929"),
+  prompt: "Write a one-sentence bedtime story about a unicorn.",
+});
+```
+
+### Google
+
+```typescript
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
+import { generateText } from "ai";
+
+const google = createGoogleGenerativeAI({
+  apiKey: process.env.ZUPLO_AI_GATEWAY_API_KEY,
+  baseURL: "https://my-ai-gateway.zuplo.app/v1",
+});
+
+const { text } = await generateText({
+  model: google("gemini-2.5-flash"),
+  prompt: "Write a one-sentence bedtime story about a unicorn.",
+});
+```
+
+### Mistral
+
+```typescript
+import { createMistral } from "@ai-sdk/mistral";
+import { generateText } from "ai";
+
+const mistral = createMistral({
+  apiKey: process.env.ZUPLO_AI_GATEWAY_API_KEY,
+  baseURL: "https://my-ai-gateway.zuplo.app/v1",
+});
+
+const { text } = await generateText({
+  model: mistral("mistral-large-latest"),
+  prompt: "Write a one-sentence bedtime story about a unicorn.",
+});
+```

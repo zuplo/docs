@@ -1,18 +1,23 @@
 ---
-title: Buckets & Environments
+title: Buckets and Environments
 ---
 
-API Keys are stored in 'buckets' - you'll see these mentioned in the
+API keys are stored in "buckets," which organize and isolate authentication
+credentials across different environments. Learn more in the
 [API Key API documentation](https://dev.zuplo.com/docs).
 
-By default we generate three buckets for each project
+## Default bucket configuration
 
-- one for working-copy
-- one for production (your default branch in git)
-- one shared by all other environments
+Zuplo automatically creates three buckets for each project:
 
-However, this behavior is overridable. You can specify the bucket that given API
-Key policy should use in the options:
+- **Working copy**: Stores API keys for the working-copy environment
+- **Production**: Stores API keys for the production environment (your default
+  Git branch)
+- **Shared**: Stores API keys shared across all other environments
+
+## Custom bucket configuration
+
+To use a custom bucket, specify the `bucketName` in your API Key policy options:
 
 ```json
 {
@@ -25,14 +30,17 @@ Key policy should use in the options:
 }
 ```
 
-If no `bucketName` is specified, it uses the default bucket as specified above.
-You can
-[create buckets](https://dev.zuplo.com/docs/routes#apikeybucketsservice_create)
-easily using your Zuplo API key and the
-[API Key management api](https://dev.zuplo.com/docs).
+When no `bucketName` appears in the configuration, the policy uses the default
+bucket for the current environment.
 
-For example to create a bucket for your QA Environment, you might execute the
-following command
+## Creating custom buckets
+
+Create custom buckets using the
+[API Key management API](https://dev.zuplo.com/docs). See the
+[create buckets endpoint](https://dev.zuplo.com/docs/routes#apikeybucketsservice_create)
+for details.
+
+The following example creates a bucket for a QA environment:
 
 ```bash
 curl --request POST \
@@ -41,3 +49,10 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --data '{"name":"contoso-qa-bucket","description":"API Key bucket for QA Environment"}'
 ```
+
+:::note
+
+Replace `YOUR_ACCOUNT_NAME` with your account name and `YOUR_ZAPI_KEY` with your
+Zuplo API key.
+
+:::

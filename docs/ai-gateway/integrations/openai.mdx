@@ -1,0 +1,59 @@
+---
+title: OpenAI SDK
+sidebar_label: OpenAI SDK
+---
+
+The
+[OpenAI Node.js SDK](https://platform.openai.com/docs/libraries/node-js-library)
+is the official SDK for working with LLMs provided by OpenAI as well as other
+OpenAI compatible models from other provider in Node.js.
+
+## Prerequisites
+
+In order to use the AI Gateway with any OpenAI SDK powered application you will
+need to complete these steps first:
+
+<Stepper>
+
+1. Create a [new provider](/ai-gateway/managing-providers) in the AI Gateway for
+   OpenAI
+
+2. [Set up a new team](/ai-gateway/managing-teams)
+
+3. Create a [new app](/ai-gateway/managing-apps) to use specifically with the
+   OpenAI SDK and assign it to the team you created
+
+4. Copy the API Key for the app you created, as well as the Gateway URL
+
+</Stepper>
+
+## Configure the OpenAI SDK
+
+To route all OpenAI SDK requests through Zuplo instead of directly to the OpenAI
+API, you must set the API `baseUrl` in the SDK configuration.
+
+For example, if your Zuplo application is hosted at
+https://my-ai-gateway.zuplo.app, you can change the base URL in your API client
+to https://my-ai-gateway.zuplo.app/v1.
+
+Additionally, change the value of `apiKey` to the API key of the app you have
+configured in Zuplo
+
+```typescript
+import OpenAI from "openai";
+
+const client = new OpenAI({
+  apiKey: process.env.ZUPLO_AI_GATEWAY_API_KEY,
+  baseURL: "https://my-ai-gateway.zuplo.app/v1",
+});
+
+const response = await client.completions.create({
+  model: "gpt-5",
+  input: "Write a one-sentence bedtime story about a unicorn.",
+});
+
+console.log(response.output_text);
+```
+
+When configured in this way, the SDK will switch from using the default OpenAI
+APIs to using Zuplo's AI Gateway for all requests.
