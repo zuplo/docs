@@ -29,7 +29,7 @@ developer portal. This will allow you to have URLs for each environment like
 `https://my-environment-123.dev.example.com`.
 
 For production, you will want to use friendly domains like `api.example.com` and
-`developers.example.com`. Some customers also choose to host environments list
+`developers.example.com`. Some customers also choose to host environments like
 staging on custom domains as well. This is up to you, just let your Zuplo
 account manager know how you would like to set up your domains.
 
