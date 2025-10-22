@@ -233,6 +233,7 @@ for (const schemaPath of policySchemas) {
 
   const meta: any = {
     name: schema.title,
+    description: schema.description,
     isBeta: Boolean(schema.isBeta),
     isPaidAddOn: Boolean(schema.isPaidAddOn),
     isEnterprise: Boolean(schema.isEnterprise),
@@ -400,6 +401,11 @@ await fs.writeFile(
 
 await fs.writeFile(
   path.join(projectDir, "policies.v4.json"),
+  JSON.stringify(policyData, null, 2),
+);
+
+await fs.writeFile(
+  path.join(projectDir, "policies.v5.json"),
   JSON.stringify(policyData, null, 2),
 );
 
