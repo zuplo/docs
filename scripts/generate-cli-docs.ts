@@ -38,6 +38,7 @@ interface CliCommand {
   hidden?: boolean;
   positionals?: CliPositional[];
   epilogue?: string;
+  usage?: string;
 }
 
 // Helper to flatten all commands/subcommands recursively
@@ -197,6 +198,10 @@ async function createCommandPage(
 
   if (command.examples && command.examples.length > 0) {
     props.push(formatJsxProp("examples", command.examples));
+  }
+
+  if (command.usage) {
+    props.push(formatJsxProp("usage", command.usage));
   }
 
   // Get custom content from partial files

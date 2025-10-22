@@ -80,6 +80,7 @@ interface CliCommandProps {
   options?: CliOption[];
   subcommands?: CliSubcommand[];
   examples?: [string, string][];
+  usage?: string;
   children?: React.ReactNode;
 }
 
@@ -112,6 +113,7 @@ export const CliCommand: React.FC<CliCommandProps> = ({
   options = [],
   subcommands = [],
   examples = [],
+  usage,
   children,
 }) => {
   const visibleOptions = options.filter(
@@ -119,7 +121,14 @@ export const CliCommand: React.FC<CliCommandProps> = ({
   );
 
   // Generate main command help output
-  const mainHelpLines = [`zuplo ${command} --help`, `zuplo ${command}`];
+  const mainHelpLines = [];
+
+  // Add usage if available
+  if (usage) {
+    mainHelpLines.push(usage.replace(/\$0/g, "zuplo"));
+  } else {
+    mainHelpLines.push(`zuplo ${command}`);
+  }
 
   if (aliases && aliases.length > 0) {
     mainHelpLines.push("", `Aliases: ${aliases.join(", ")}`);
