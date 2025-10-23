@@ -2,6 +2,28 @@
 title: Authentication
 ---
 
+There are two ways to authenticate with the Zuplo Command Line Interface (CLI):
+using an API Key or via OAuth.
+
+## Using OAuth
+
+The Zuplo CLI supports OAuth authentication. To authenticate using OAuth, run
+the following command:
+
+```bash
+zuplo login
+```
+
+Your browser will open and prompt you to log in to your Zuplo account. After
+logging in, you will be redirected to a page that confirms your authentication.
+You can then return to your terminal, which will now be authenticated.
+
+## Using an API key
+
+API key authentication is useful for CI/CD pipelines or other automated
+workflows where interactive login isn't feasible. See the following instructions
+to obtain and use an API key with the Zuplo CLI.
+
 :::tip
 
 The API key is scoped to your account. So you can use the same one for all
@@ -25,10 +47,10 @@ Zuplo API Gateways, run:
 zuplo list --api-key zpka_d67b7e241bb948758f415b79aa8exxxx_2efbxxxx
 ```
 
-If you don't wish to pass your API Key to every command, you can set it as an
+If you don't want to pass your API Key to every command, you can set it as an
 environment variable:
 
 ```bash
 export ZUPLO_API_KEY=zpka_d67b7e241bb948758f415b79aa8exxxx_2efbxxxx
-zuplo list --api-key
+zuplo list
 ```

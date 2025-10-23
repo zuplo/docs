@@ -13,6 +13,7 @@
     "format": "prettier --write .",
     "format:ci": "prettier --check .",
     "typecheck": "tsc",
+    "lint:docs": "vale --config .vale.ini docs/",
     "lint:admonitions": "node ./scripts/check-admonitions.mjs",
     "postinstall": "npm run policies:get && npm run policies:generate && npm run errors:generate && npm run cli:generate && npm run api:get && npm run zudoku:get",
     "zudoku:get": "sh ./scripts/get-zudoku.sh",
