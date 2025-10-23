@@ -49,7 +49,7 @@ Most changes are reflected live without having to restart the server.
 
 If you are a Zuplo employee, you can run the local development server to live
 reload changes to zuplo policies. You must have the `core` repository cloned in
-the same paraent directory as this repository.
+the same parent directory as this repository.
 
 ```
 npm run dev:policies

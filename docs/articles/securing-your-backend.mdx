@@ -46,10 +46,15 @@ and allow only authorized service principals access to your service.
 
 ## 4/ mTLS Authentication
 
-Mutual Certificate authentication allows the configuration of a trust
-relationship between your Zuplo gateway and your backend API using certificates.
-If you're interested in using this option please contact us at
-`support@zuplo.com`.
+Mutual TLS (mTLS) authentication allows the configuration of a trust
+relationship between your Zuplo gateway and your backend API using client
+certificates. With mTLS, both your gateway and backend authenticate each other,
+providing a "Zero Trust" security model that's popular with enterprise
+customers.
+
+To learn how to set up mTLS with client certificates, see the
+[Securing your Backend with mTLS](./securing-backend-mtls.mdx) article. This is
+an [enterprise feature](https://zuplo.com/pricing).
 
 ## 5/ Secure Tunneling
 

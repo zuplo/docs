@@ -1,0 +1,268 @@
+---
+title: mTLS Authentication
+---
+
+<EnterpriseFeature name="mTLS Client Certificates" />
+
+Mutual TLS (mTLS) authentication establishes a trust relationship between your
+Zuplo API Gateway and your backend services using client certificates. With
+mTLS, both the client (Zuplo Gateway) and the server (your backend) authenticate
+each other, creating a "Zero Trust" security model.
+
+This is particularly useful for enterprise customers who need to ensure that
+both parties in a connection verify each other's identity before exchanging
+data.
+
+## How mTLS Works
+
+When Zuplo makes an outbound request to your backend service:
+
+1. Your backend service presents its SSL/TLS certificate to Zuplo (standard TLS)
+2. Zuplo presents a client certificate to your backend (the mutual part)
+3. Both parties verify each other's certificates against a trusted Certificate
+   Authority (CA)
+4. Only after mutual verification does the secure connection establish
+
+This ensures that your backend only accepts requests from authorized Zuplo
+gateways, and Zuplo can verify it's connecting to the correct backend service.
+
+## Prerequisites
+
+Before you begin, you need:
+
+- A client certificate and private key generated from a Certificate Authority
+  (CA) that your backend trusts
+- Your backend service configured to require and validate client certificates
+- The Zuplo CLI installed (see [CLI documentation](../cli/overview.mdx))
+
+## 1/ Upload Your Certificate
+
+Use the Zuplo CLI to upload your client certificate and private key to your
+project. You can upload multiple certificates, each with a unique name.
+
+```bash
+zuplo mtls-certificate create \
+  --cert cert.pem \
+  --key key.pem \
+  --name my-backend-cert \
+  --account your-account \
+  --project your-project \
+  --environment-type development \
+  --environment-type preview \
+  --environment-type production
+```
+
+:::note
+
+The certificate name must follow JavaScript's variable naming constraints since
+you will use the name later in your code. The CLI will validate these
+constraints when you create the certificate.
+
+:::
+
+**Parameters:**
+
+- `--cert`: Path to your PEM-encoded client certificate file
+- `--key`: Path to your PEM-encoded private key file
+- `--name`: A unique name to identify this certificate in your project
+- `--account`: Your Zuplo account name
+- `--project`: Your Zuplo project name
+- `--environment-type`: Specify which environments can use this certificate (can
+  be specified multiple times)
+
+## 2/ Use the Certificate in Your Code
+
+Once uploaded, you can use the certificate when making outbound requests from
+your Zuplo Gateway.
+
+### Using mTLS in a Request Handler
+
+Reference the certificate by name in the `zuplo` options object when making
+fetch requests:
+
+```ts
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export default async function (request: ZuploRequest, context: ZuploContext) {
+  const response = await fetch("https://secure-backend.example.com/api", {
+    zuplo: {
+      mtlsCertificate: "my-backend-cert",
+    },
+  });
+
+  return response;
+}
+```
+
+### Using mTLS in a Policy
+
+You can also configure mTLS in the URL Forward Handler or URL Rewrite Handler
+that make outbound requests:
+
+```json
+{
+  "export": "UrlForwardHandler",
+  "module": "$import(@zuplo/runtime)",
+  "options": {
+    "baseUrl": "https://secure-backend.example.com",
+    "mtlsCertificate": "my-backend-cert"
+  }
+}
+```
+
+## 3/ Using Environment Variables
+
+For better flexibility across environments, store the certificate name as an
+[environment variable](./environment-variables.mdx):
+
+**Production environment:**
+
+```text
+BACKEND_MTLS_CERT=my-backend-prod-cert
+```
+
+**Staging environment:**
+
+```text
+BACKEND_MTLS_CERT=my-backend-staging-cert
+```
+
+Then reference it in your code:
+
+```ts
+import { ZuploContext, ZuploRequest, environment } from "@zuplo/runtime";
+
+export default async function (request: ZuploRequest, context: ZuploContext) {
+  const response = await fetch("https://secure-backend.example.com/api", {
+    zuplo: {
+      mtlsCertificate: environment.BACKEND_MTLS_CERT,
+    },
+  });
+
+  return response;
+}
+```
+
+Or in your policy configuration:
+
+```json
+{
+  "export": "UrlForwardHandler",
+  "module": "$import(@zuplo/runtime)",
+  "options": {
+    "baseUrl": "https://secure-backend.example.com",
+    "mtlsCertificate": "$env(BACKEND_MTLS_CERT)"
+  }
+}
+```
+
+## Managing Certificates
+
+### Listing Certificates
+
+To view all certificates in your project:
+
+```bash
+zuplo mtls-certificate list \
+  --account your-account \
+  --project your-project
+```
+
+### Deleting Certificates
+
+To remove a certificate:
+
+```bash
+zuplo mtls-certificate delete \
+  --name my-backend-cert \
+  --account your-account \
+  --project your-project
+```
+
+:::caution
+
+You cannot delete a certificate that is referenced by any of your deployments in
+your project. This is to prevent your deployments from failing if the
+certificate that is being referenced is no longer available.
+
+First, disable the certificate by using the CLI with
+`zuplo mtls-certificate disable`. Then redeploy the deployments in your project
+that reference it. Once there are no more references to the certificate, you can
+delete it.
+
+:::
+
+### Certificate Rotation
+
+When your certificates need to be rotated (due to expiration or security
+policies):
+
+1. Upload the new certificate with a different name
+2. Update your environment variables or code to reference the new certificate
+   name
+3. Use the CLI `zuplo mtls-certificate disable` to disable the old certificate.
+4. Deploy your changes to all environments that reference the old certificate.
+5. After verifying the new certificate works, you may delete the old
+   certificate.
+
+The order of operations is important so that your services continue to work as
+you rotate the certificate.
+
+## Local Development
+
+:::warning
+
+mTLS bindings are not currently available in local development environments.
+Your code using mTLS will only work when deployed to Zuplo's edge
+infrastructure.
+
+:::
+
+For local development, consider:
+
+- Using conditional logic to bypass mTLS when running locally
+- Setting up a separate backend endpoint that doesn't require mTLS for
+  development
+- Testing mTLS functionality in a preview environment
+
+## Troubleshooting
+
+### Certificate Validation Errors
+
+If your backend rejects the certificate, verify:
+
+- The certificate is signed by a CA that your backend trusts
+- The certificate hasn't expired
+- The certificate name in your code matches the uploaded certificate name
+
+### Connection Failures
+
+If requests fail to connect:
+
+- Ensure your backend is configured to accept mTLS connections
+- Verify the certificate is uploaded to the correct environment (development,
+  preview, production)
+- Check that your backend's CA certificate is properly configured
+
+### Runtime Errors
+
+If you see errors about missing certificates:
+
+- Confirm the certificate was uploaded successfully using
+  `zuplo mtls-certificate list`
+- Ensure the environment type was specified correctly during upload
+- Verify your code references the correct certificate name
+
+## Additional Resources
+
+For more information on securing your backend, see:
+
+- [Securing your Backend](./securing-your-backend.mdx) - Overview of all backend
+  security options
+- [Securing your Backend with a Shared Secret](./securing-backend-shared-secret.mdx) -
+  Alternative approach using shared secrets
+- [Secure Tunnels](./secure-tunnel.mdx) - Connect to private backends without
+  exposing them to the internet
+
+If you need assistance configuring mTLS for your project, contact us at
+[support@zuplo.com](mailto:support@zuplo.com).
