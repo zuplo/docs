@@ -443,6 +443,7 @@ export const apiGateway: Navigation = [
         label: "Securing Your Backend",
         items: [
           "articles/securing-your-backend",
+          "articles/securing-backend-mtls",
           "articles/gke-with-upstream-auth-policy",
           {
             type: "category",
