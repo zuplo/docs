@@ -174,7 +174,7 @@ To remove a certificate:
 
 ```bash
 zuplo mtls-certificate delete \
-  --name my-backend-cert \
+  --cert-id my-cert-id \
   --account your-account \
   --project your-project
 ```
@@ -200,7 +200,8 @@ policies):
 1. Upload the new certificate with a different name
 2. Update your environment variables or code to reference the new certificate
    name
-3. Use the CLI `zuplo mtls-certificate disable` to disable the old certificate.
+3. Use the CLI `zuplo mtls-certificate disable` command to disable the old
+   certificate.
 4. Deploy your changes to all environments that reference the old certificate.
 5. After verifying the new certificate works, you may delete the old
    certificate.
