@@ -18,6 +18,20 @@ have the ability to customize limits to meet their needs.
 | Requests per second       | The maximum number of requests per second              | Development Environments (Working Copy): 1000 requests per minute. No Limit outside of plan monthly limit                                                            |
 | Log Size                  | The size of a log entry                                | Zuplo Portal live logs are limited to ~10kB. Excess will be truncated. For third-party logging providers, the value depends on the provider. Zuplo imposes no limit. |
 
+## Managed Edge Environment
+
+The following limits apply to Zuplo's managed edge environment. These limits are
+fixed for the managed edge service. For managed dedicated environments
+(enterprise offering), limits are fully customizable to meet your specific
+requirements.
+
+| Feature                       | Description                                                     | Limit  |
+| ----------------------------- | --------------------------------------------------------------- | ------ |
+| Request Body Size             | The maximum size of an incoming request body                    | 500 MB |
+| Response Headers              | The total size of all response headers                          | 128 KB |
+| Subrequests                   | The maximum number of subrequests per request                   | 1,000  |
+| Simultaneous Open Connections | The maximum number of simultaneous open connections per request | 6      |
+
 ## API Keys
 
 ### Consumers & Keys
