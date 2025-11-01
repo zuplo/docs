@@ -9,17 +9,83 @@ This guide walks you through migrating your existing documentation from the
 current Dev Portal to the new Dev Portal powered by Zudoku. Follow these steps
 sequentially for a smooth transition.
 
-:::warning
+## Before you begin
+
+It's important to note that this migration is to a completely new developer
+portal. As such, there could be things that are different or don't map exactly
+to the old developer portal. This new developer portal is more powerful and
+flexible, but it may require some adjustments to your existing content and
+configuration.
+
+A few things to keep in mind before starting the migration:
+
+### Separate domain for Dev Portal
 
 New Dev Portals run on their own dedicated domain instead of a `/docs` path
 under your API. You must create a redirect route on `/docs` to maintain existing
-links. You can use our
-[custom handler](/docs/dev-portal/migration#redirect-legacy-urls.mdx) to achieve
-this.
+links. You can use the
+[dev portal handler](/docs/dev-portal/migration#redirect-legacy-urls.mdx) to
+achieve this.
+
+:::note
+
+Builder plans have been automatically upgraded to include two custom domains
+instead of one. This allows you to have a custom domain for both your API and
+your developer portal.
 
 :::
 
-## Quick Migration with CLI
+### Authentication changes
+
+Not all authentication providers from the old Dev Portal are supported in the
+new Developer Portal. The previous "external" provider isn't supported. If you
+were using that provider, you will need to switch to a supported provider such
+as Auth0 or implement a custom authentication solution.
+
+### Other considerations
+
+- **Theming**: Custom CSS from the old Dev Portal isn't directly supported. You
+  will need to reapply any custom styles using the new theming options in
+  Zudoku.
+- **Navigation**: Navigation in the new developer portal is much more flexible,
+  but this does mean you will likely need to update your navigation structure.
+- **Dark Mode**: The new Dev Portal has built-in support for dark mode, which
+  wasn't available in the old portal. You may want to use a different logo for
+  dark mode.
+
+### Test in a preview environment
+
+Don't perform the migration directly on your production environment. Instead,
+create a preview environment to test the migration. This allows you to verify
+that everything works as expected before making the changes live.
+
+Things to test in the preview environment:
+
+- Navigation between pages
+- Authentication flows
+- API reference rendering
+- API Playground functionality
+- Custom theming and styles
+
+## Migration options
+
+There are three ways to migration your existing Dev Portal to the new version.
+Choose the one that best fits your needs:
+
+- Migrate in the portal (for simple setups)
+- Quick migration with CLI (for most projects)
+- Manual migration process (for full control)
+
+### Migrate in the portal
+
+If you have a simple Dev Portal setup and prefer to migrate directly in the
+Zuplo Portal, you can use the built-in migration tool by opening the
+`config/dev-portal.json` file in the Zuplo Portal and clicking the **Migrate to
+Zudoku** button at the top of the editor. This will automatically create the
+necessary files and move your existing configuration and markdown files to the
+new format.
+
+### Quick migration with CLI
 
 For most projects, you can use the Zuplo CLI to automate the migration process:
 
@@ -40,7 +106,7 @@ details and options.
 If you prefer to understand each step or need more control over the migration
 process, continue with the manual migration steps below.
 
-## Manual Migration Process
+### Manual migration process
 
 <Stepper>
 
@@ -364,7 +430,7 @@ For instructions on theming the dev portal, see
 [Colors & Theme](./zudoku/customization/colors-theme.mdx) and
 [Fonts](./zudoku/customization/fonts.mdx).
 
-## Redirect Legacy URLs
+## Redirect legacy URLs
 
 The previous Dev Portal was hosted on a path on the same domains your Zuplo API
 (i.e. `https://api.example.com/docs`). The new Dev Portal is hosted on its own
@@ -406,8 +472,11 @@ the old Dev Portal URL.
            "x-zuplo-route": {
              "corsPolicy": "none",
              "handler": {
-               "export": "redirectLegacyDevPortal",
-               "module": "$import(@zuplo/runtime)"
+               "export": "legacyDevPortalHandler",
+               "module": "$import(@zuplo/runtime)",
+               "options": {
+                 "mode": "redirect"
+               }
              },
              "policies": {
                "inbound": []
@@ -423,7 +492,12 @@ the old Dev Portal URL.
 After you redeploy you Zuplo project, whenever the user navigates to the legacy
 developer portal paths, they will be redirected to the new Dev Portal domain.
 
-### Additional Redirects
+The `legacyDevPortalHandler` also supports a `proxy` mode if you prefer to keep
+your developer portal on the same domain under a path. This isn't recommended
+for performance and usability reasons, but is available if needed. To use proxy
+mode, change the `mode` option to `proxy` instead of `redirect`.
+
+### Additional redirects
 
 Your new developer portal may also change other paths. To create redirects for
 specific docs or other path in your new Dev Portal, we recommend using the
