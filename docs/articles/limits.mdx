@@ -9,28 +9,22 @@ have the ability to customize limits to meet their needs.
 
 ## General
 
-| Feature                   | Description                                            | Limit                                                                                                                                                                |
-| ------------------------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Environment Variables     | The number of environment variables you can create     | Free/Builder Plans: 50 variables per environment, Other Plans: 100 per environment                                                                                   |
-| Environment Variable size | The size of an environment variable                    | ~5kb per variable                                                                                                                                                    |
-| Request Duration          | The maximum time a request can take to complete        | Free/Builder Plans: 30 seconds, Other Plans: No Limit                                                                                                                |
-| Memory                    | The maximum memory available when processing a request | Free/Builder Plans: 128mb, Enterprise Plans: Custom                                                                                                                  |
-| Requests per second       | The maximum number of requests per second              | Development Environments (Working Copy): 1000 requests per minute. No Limit outside of plan monthly limit                                                            |
-| Log Size                  | The size of a log entry                                | Zuplo Portal live logs are limited to ~10kB. Excess will be truncated. For third-party logging providers, the value depends on the provider. Zuplo imposes no limit. |
+The following limits apply to Zuplo's managed edge environment. For managed
+dedicated environments (enterprise offering), limits are fully customizable to
+meet your specific requirements.
 
-## Managed Edge Environment
-
-The following limits apply to Zuplo's managed edge environment. These limits are
-fixed for the managed edge service. For managed dedicated environments
-(enterprise offering), limits are fully customizable to meet your specific
-requirements.
-
-| Feature                       | Description                                                     | Limit  |
-| ----------------------------- | --------------------------------------------------------------- | ------ |
-| Request Body Size             | The maximum size of an incoming request body                    | 500 MB |
-| Response Headers              | The total size of all response headers                          | 128 KB |
-| Subrequests                   | The maximum number of subrequests per request                   | 1,000  |
-| Simultaneous Open Connections | The maximum number of simultaneous open connections per request | 6      |
+| Feature                       | Description                                                     | Limit                                                                                                                                                                |
+| ----------------------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Environment Variables         | The number of environment variables you can create              | Free/Builder Plans: 50 variables per environment, Other Plans: 100 per environment                                                                                   |
+| Environment Variable size     | The size of an environment variable                             | ~5kb per variable                                                                                                                                                    |
+| Request Duration              | The maximum time a request can take to complete                 | Free/Builder Plans: 30 seconds, Other Plans: No Limit                                                                                                                |
+| Memory                        | The maximum memory available when processing a request          | Free/Builder Plans: 128mb, Enterprise Plans: Custom                                                                                                                  |
+| Requests per second           | The maximum number of requests per second                       | Development Environments (Working Copy): 1000 requests per minute. No Limit outside of plan monthly limit                                                            |
+| Log Size                      | The size of a log entry                                         | Zuplo Portal live logs are limited to ~10kB. Excess will be truncated. For third-party logging providers, the value depends on the provider. Zuplo imposes no limit. |
+| Request Body Size             | The maximum size of an incoming request body                    | 500 MB                                                                                                                                                               |
+| Response Headers              | The total size of all response headers                          | 128 KB                                                                                                                                                               |
+| Subrequests                   | The maximum number of subrequests per request                   | 1,000                                                                                                                                                                |
+| Simultaneous Open Connections | The maximum number of simultaneous open connections per request | 6                                                                                                                                                                    |
 
 ## API Keys
 
@@ -57,7 +51,7 @@ Our general guidelines for what constitutes fair use are as follows:
 Requests to API Key Management operations on the Zuplo Developer API
 (dev.zuplo.com) are limited to 100 requests per second.
 
-### API Key Authorizations
+### API key authorizations
 
-API Key authorizations aren't limited directly. The limit's equal to one
-authorization per request allowed in your plan.
+One API key authorization can be made per request. Enterprise plans can request
+custom limits to allow multiple API key authorizations per request.
