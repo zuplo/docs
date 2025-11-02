@@ -9,8 +9,20 @@ related to a project in the Custom Domains section of the Settings tab of your
 project. Custom Domains are available on
 [Builder plans and above](https://zuplo.com/pricing).
 
-Custom domains can be configured for both the API and the Developer Portal
-separately.
+## Types of Custom Domains
+
+Zuplo supports two types of custom domains that can be configured separately:
+
+1. **API Gateway Custom Domain**: For your API endpoints (e.g.,
+   `api.example.com`). This domain uses the CNAME `cname.zuplo.app`.
+
+2. **Developer Portal Custom Domain**: For your developer documentation site
+   (e.g., `docs.example.com`). This domain uses the CNAME `cname.zuplodocs.com`.
+   Learn more about the Developer Portal in the
+   [Developer Portal documentation](/docs/dev-portal/introduction).
+
+Both types of custom domains can be managed from the same Custom Domains section
+in your project settings and follow a similar configuration process.
 
 :::note
 
@@ -34,16 +46,27 @@ to open the `New Custom Domain` configuration modal.
 
 ### 2. Add your domain
 
-Then, pick the environment you want to assign the domain to and enter your apex
-domain (e.g. example.com) or subdomain (e.g. api.example.com)
+Then, select the type of custom domain (API Gateway or Developer Portal), pick
+the environment you want to assign the domain to, and enter your apex domain
+(e.g. example.com) or subdomain (e.g. api.example.com or docs.example.com).
 
-![Add New Domain](../../public/media/custom-domains/image-1.png)
+<ModalScreenshot size="md">
+  ![Add Domain](../../public/media/custom-domains/image-2.png)
+</ModalScreenshot>
 
-Once saved, you will be provided with a `CNAME` configuration that will look
-something like the one below that you'll use in the next step.
+Once saved, you will be provided with a `CNAME` configuration that you'll use in
+the next step. The CNAME value depends on the domain type:
+
+**For API Gateway domains:**
 
 ```txt
 CNAME   api.example.com                       cname.zuplo.app
+```
+
+**For Developer Portal domains:**
+
+```txt
+CNAME   docs.example.com                      cname.zuplodocs.com
 ```
 
 ### 3. Configure your DNS
@@ -208,10 +231,18 @@ issue or have any questions, please contact
 ### No DNS Record or Invalid Record
 
 Your DNS isn't configured correctly. Ensure that your domain is configured with
-a `CNAME` record pointing to `cname.zuplo.app`.
+a `CNAME` record pointing to the correct target based on your domain type:
+
+**For API Gateway domains:**
 
 ```txt
 CNAME   api.example.com     cname.zuplo.app
+```
+
+**For Developer Portal domains:**
+
+```txt
+CNAME   docs.example.com    cname.zuplodocs.com
 ```
 
 ### CAA Record Error
