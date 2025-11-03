@@ -10,7 +10,8 @@
       "dev-portal/zudoku/configuration/navigation",
       "dev-portal/zudoku/configuration/site",
       "dev-portal/zudoku/configuration/search",
-      "dev-portal/zudoku/configuration/footer"
+      "dev-portal/zudoku/configuration/footer",
+      "dev-portal/zudoku/configuration/llms"
     ]
   },
   {

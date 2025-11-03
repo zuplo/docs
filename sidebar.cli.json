@@ -8,6 +8,7 @@
   "cli/mtls-certificate-create",
   "cli/mtls-certificate-delete",
   "cli/mtls-certificate-describe",
+  "cli/mtls-certificate-disable",
   "cli/mtls-certificate-list",
   "cli/mtls-certificate-update",
   "cli/openapi-convert",
