@@ -149,8 +149,8 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
     llms: {
       llmsTxt: true,
       llmsTxtFull: true,
-      includeProtected: false
-    }
+      includeProtected: false,
+    },
   },
   sitemap: {
     siteUrl: "https://zuplo.com/docs",
