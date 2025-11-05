@@ -145,6 +145,12 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
         url: "https://github.com/zuplo/docs/edit/main/{filePath}",
       },
     },
+    publishMarkdown: true,
+    llms: {
+      llmsTxt: true,
+      llmsTxtFull: true,
+      includeProtected: false,
+    },
   },
   sitemap: {
     siteUrl: "https://zuplo.com/docs",

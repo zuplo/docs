@@ -46,6 +46,10 @@
         "www.linkedin.com"
     ]
 
+    exclude_path = [
+        "\\.(md|txt)$",
+    ]
+
     # Headers to send with requests
     [headers]
     user_agent = "Mozilla/5.0 (compatible; lychee/0.19.1)"
