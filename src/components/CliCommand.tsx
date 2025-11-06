@@ -165,7 +165,7 @@ export const CliCommand: React.FC<CliCommandProps> = ({
           <h2 className="text-2xl font-bold mb-6">Examples</h2>
           {examples.map(([cmd, desc], index) => (
             <div key={index} className="mb-6">
-              <p className="mb-2 text-gray-700">{desc}</p>
+              <p className="mb-2 text-foreground">{desc}</p>
               <SyntaxHighlight language="bash">
                 {cmd.replace(/\$0/g, "zuplo")}
               </SyntaxHighlight>
@@ -184,21 +184,19 @@ export const CliCommand: React.FC<CliCommandProps> = ({
                 <code>--{option.name}</code>
               </h3>
               {option.description && (
-                <p className="mb-3 text-gray-700">{option.description}</p>
+                <p className="mb-3 text-foreground">{option.description}</p>
               )}
-              <div className="text-sm text-gray-600">
+              <div className="text-sm text-muted-foreground">
                 {option.type && (
                   <span className="mr-3">
                     Type:{" "}
-                    <code className="bg-gray-100 px-1 rounded">
-                      {option.type}
-                    </code>
+                    <code className="bg-muted px-1 rounded">{option.type}</code>
                   </span>
                 )}
                 {option.default !== undefined && (
                   <span className="mr-3">
                     Default:{" "}
-                    <code className="bg-gray-100 px-1 rounded">
+                    <code className="bg-muted px-1 rounded">
                       {JSON.stringify(option.default)}
                     </code>
                   </span>
@@ -206,7 +204,7 @@ export const CliCommand: React.FC<CliCommandProps> = ({
                 {option.choices && option.choices.length > 0 && (
                   <span className="mr-3">
                     Choices:{" "}
-                    <code className="bg-gray-100 px-1 rounded">
+                    <code className="bg-muted px-1 rounded">
                       {option.choices.join(", ")}
                     </code>
                   </span>
@@ -214,7 +212,7 @@ export const CliCommand: React.FC<CliCommandProps> = ({
                 {option.alias && option.alias.length > 0 && (
                   <span className="mr-3">
                     Alias:{" "}
-                    <code className="bg-gray-100 px-1 rounded">
+                    <code className="bg-muted px-1 rounded">
                       -{option.alias.join(", -")}
                     </code>
                   </span>
@@ -222,7 +220,7 @@ export const CliCommand: React.FC<CliCommandProps> = ({
                 {option.envVar && (
                   <span className="mr-3">
                     Env:{" "}
-                    <code className="bg-gray-100 px-1 rounded">
+                    <code className="bg-muted px-1 rounded">
                       {option.envVar}
                     </code>
                   </span>
@@ -230,7 +228,7 @@ export const CliCommand: React.FC<CliCommandProps> = ({
                 {option.conflicts && option.conflicts.length > 0 && (
                   <span className="mr-3">
                     Conflicts:{" "}
-                    <code className="bg-gray-100 px-1 rounded">
+                    <code className="bg-muted px-1 rounded">
                       --{option.conflicts.join(", --")}
                     </code>
                   </span>

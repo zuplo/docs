@@ -268,7 +268,8 @@ async function createCommandPage(
   }
 
   if (command.usage) {
-    props.push(formatJsxProp("usage", command.usage));
+    // Wrap long usage commands for better readability
+    props.push(formatJsxProp("usage", wrapCliCommand(command.usage)));
   }
 
   // Get custom content from partial files

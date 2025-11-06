@@ -8,7 +8,7 @@ interface ModeProps {
   link?: string;
 }
 
-export function TutorialMode({ label }: ModeProps) {
+export function TutorialMode(_props: ModeProps) {
   return null; // This component is only used for passing props
 }
 
@@ -42,14 +42,12 @@ export function TutorialModeSelector({
       {(title || description) && (
         <div className="mb-4">
           {title && (
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+            <h2 className="text-xl font-semibold text-foreground mb-2">
               {title}
             </h2>
           )}
           {description && (
-            <p className="text-base text-gray-600 dark:text-gray-400">
-              {description}
-            </p>
+            <p className="text-base text-muted-foreground">{description}</p>
           )}
         </div>
       )}
@@ -57,14 +55,14 @@ export function TutorialModeSelector({
       {/* Combined tab bar and content */}
       <div className="border border-border rounded-lg overflow-hidden">
         {/* Mode selector tabs */}
-        <div className="flex bg-gray-50 dark:bg-gray-800 border-b border-border">
+        <div className="flex bg-secondary border-b border-border">
           {modes.map((mode, index) => {
             const isActive = mode.active;
 
             return isActive ? (
               <div
                 key={index}
-                className="flex-1 flex items-center justify-center gap-2 h-12 text-sm font-medium bg-white dark:bg-gray-900 text-primary border-b-2 border-primary -mb-[1px] transition-all"
+                className="flex-1 flex items-center justify-center gap-2 h-12 text-sm font-medium bg-card text-primary border-b-2 border-primary -mb-[1px] transition-all"
               >
                 {mode.icon && (
                   <span
@@ -80,7 +78,7 @@ export function TutorialModeSelector({
               <Link
                 key={index}
                 to={mode.link!}
-                className="flex-1 flex items-center justify-center gap-2 h-12 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all"
+                className="flex-1 flex items-center justify-center gap-2 h-12 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent transition-all"
               >
                 {mode.icon && (
                   <span
@@ -98,7 +96,7 @@ export function TutorialModeSelector({
 
         {/* Active mode content */}
         {activeMode && (
-          <div className="bg-white dark:bg-gray-900 p-6">
+          <div className="bg-card p-6">
             <div className="flex items-start gap-3">
               {activeMode.icon && (
                 <span
@@ -109,11 +107,11 @@ export function TutorialModeSelector({
                 </span>
               )}
               <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-base text-gray-900 dark:text-gray-100 mb-2">
+                <h3 className="font-semibold text-base text-foreground mb-2">
                   {activeMode.label}
                 </h3>
                 {activeMode.description && (
-                  <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400 m-0">
+                  <p className="text-sm leading-relaxed text-muted-foreground m-0">
                     {activeMode.description}
                   </p>
                 )}

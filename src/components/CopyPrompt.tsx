@@ -65,15 +65,15 @@ export const CopyPrompt = ({ children, src }: CopyPromptProps) => {
   };
 
   return (
-    <div className="relative border border-[#eaecef] rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-800 dark:border-gray-700 my-6">
-      <div className="px-4 py-3 text-sm text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 whitespace-pre-wrap">
+    <div className="relative border border-border rounded-lg overflow-hidden bg-secondary my-6">
+      <div className="px-4 py-3 text-sm text-foreground bg-card whitespace-pre-wrap">
         {displayContent()}
       </div>
-      <div className="px-4 py-2 bg-gray-50 dark:bg-gray-700 border-t border-[#eaecef] dark:border-gray-600 flex justify-end">
+      <div className="px-4 py-2 bg-secondary border-t border-border flex justify-end">
         <button
           onClick={copyToClipboard}
           disabled={loading || !!error}
-          className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white bg-white dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded hover:bg-gray-50 dark:hover:bg-gray-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-card border border-border rounded hover:bg-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <CopyIcon size={14} />
           {copied ? "Copied!" : "Copy prompt"}
