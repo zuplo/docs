@@ -106,6 +106,66 @@ function formatJsxProp(key: string, value: unknown): string {
   return `${key}={${JSON.stringify(value, null, 2)}}`;
 }
 
+// Helper to wrap long CLI commands for better readability
+function wrapCliCommand(command: string, maxLength = 80): string {
+  // If command is short enough, return as-is
+  if (command.length <= maxLength) {
+    return command;
+  }
+
+  // Split the command into base command and arguments
+  const parts = command.split(/\s+/);
+  if (parts.length <= 2) {
+    // Very simple command, no wrapping needed
+    return command;
+  }
+
+  // Find the base command (everything before the first --)
+  let baseCommandEnd = 0;
+  for (let i = 0; i < parts.length; i++) {
+    if (parts[i].startsWith("--")) {
+      baseCommandEnd = i;
+      break;
+    }
+  }
+
+  // If no -- arguments found, return as-is
+  if (baseCommandEnd === 0) {
+    return command;
+  }
+
+  const baseCommand = parts.slice(0, baseCommandEnd).join(" ");
+  const lines: string[] = [baseCommand];
+  let currentLine = "";
+
+  // Process arguments
+  for (let i = baseCommandEnd; i < parts.length; i++) {
+    const part = parts[i];
+
+    if (part.startsWith("--")) {
+      // This is a flag, potentially start a new line
+      if (currentLine) {
+        lines.push(currentLine);
+        currentLine = "";
+      }
+      currentLine = `  ${part}`;
+    } else {
+      // This is a value or continuation of the previous token
+      currentLine += ` ${part}`;
+    }
+  }
+
+  // Add the last line
+  if (currentLine) {
+    lines.push(currentLine);
+  }
+
+  // Join with backslashes (except the last line)
+  return lines
+    .map((line, i) => (i < lines.length - 1 ? `${line} \\` : line))
+    .join("\n");
+}
+
 // Read all partial files
 const partialFiles = await glob("docs/cli/*.partial.mdx", { cwd: projectDir });
 const partialContent: Record<string, string> = {};
@@ -197,7 +257,12 @@ async function createCommandPage(
   }
 
   if (command.examples && command.examples.length > 0) {
-    props.push(formatJsxProp("examples", command.examples));
+    // Wrap long commands for better readability
+    const wrappedExamples = command.examples.map(([cmd, desc]) => [
+      wrapCliCommand(cmd),
+      desc,
+    ]);
+    props.push(formatJsxProp("examples", wrappedExamples));
   }
 
   if (command.usage) {
