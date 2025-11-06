@@ -346,7 +346,7 @@ This policy is only available as part of our enterprise plans. If you would like
 :::`,
 )}
 
-${printIf(schema.isCustom && tsPolicy, ["```ts", tsPolicy, "```"].join("\n"))}
+${printIf(schema.isCustom && tsPolicy, ['```ts title="modules/my-policy.ts"', tsPolicy, "```"].join("\n"))}
 
 ## Configuration
 
@@ -356,7 +356,7 @@ ${
     : `The configuration shows how to configure the policy in the 'policies.json' document.`
 }
 
-\`\`\`json
+\`\`\`json title="config/policies.json"
 ${JSON.stringify(code, null, 2)}
 \`\`\`
 
