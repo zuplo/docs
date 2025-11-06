@@ -42,8 +42,8 @@ const ProductCard = ({
         <CardTitle className="flex flex-col gap-3 text-xl xl:text-2xl font-bold">
           <div
             className={cn(
-              "flex transition-colors rounded-md p-2 w-fit bg-neutral-100 dark:bg-neutral-800",
-              "group-hover:bg-primary/10 group-hover:text-primary group-hover:dark:bg-primary/20",
+              "flex transition-colors rounded-md p-2 w-fit bg-secondary",
+              "group-hover:bg-primary/10 group-hover:text-primary",
             )}
           >
             {icon}

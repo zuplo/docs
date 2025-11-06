@@ -1,12 +1,7 @@
-import type { CSSProperties, PropsWithChildren, ReactElement } from "react";
+import type { PropsWithChildren, ReactElement } from "react";
 
 interface BrowserScreenshotProps {
   url?: string;
-  browserTheme?: "light" | "dark";
-  browserShadow?: string;
-  borderRadius?: number;
-  className?: string;
-  style?: CSSProperties;
   size?: "sm" | "md" | "lg";
 }
 
@@ -19,144 +14,33 @@ const marginClasses = {
 export function BrowserScreenshot({
   children,
   url = "https://example.com",
-  browserTheme = "light",
-  browserShadow = "0 10px 40px rgba(0, 0, 0, 0.08), 0 2px 10px rgba(0, 0, 0, 0.04)",
-  borderRadius = 8,
-  className = "",
-  style,
   size,
 }: PropsWithChildren<BrowserScreenshotProps>): ReactElement {
-  const isDark = browserTheme === "dark";
-
-  const browserWindowStyle: CSSProperties = {
-    borderRadius: `${borderRadius}px`,
-    overflow: "hidden",
-    boxShadow: browserShadow,
-    backgroundColor: isDark ? "#1a1a1a" : "#fafafa",
-    border: `1px solid ${isDark ? "rgba(255, 255, 255, 0.12)" : "rgba(0, 0, 0, 0.12)"}`,
-    margin: "0 auto",
-    maxWidth: "90%",
-    ...style,
-  };
-
-  const browserBarStyle: CSSProperties = {
-    height: "40px",
-    backgroundColor: isDark ? "#262626" : "#f6f6f6",
-    display: "flex",
-    alignItems: "center",
-    padding: "0 16px",
-    gap: "16px",
-    position: "relative" as const,
-  };
-
-  const trafficLightStyle: CSSProperties = {
-    display: "flex",
-    gap: "8px",
-    alignItems: "center",
-  };
-
-  const dotStyle: CSSProperties = {
-    width: "12px",
-    height: "12px",
-    borderRadius: "50%",
-  };
-
-  const navigationStyle: CSSProperties = {
-    display: "flex",
-    gap: "16px",
-    alignItems: "center",
-  };
-
-  const navButtonStyle: CSSProperties = {
-    width: "14px",
-    height: "14px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    cursor: "pointer",
-    opacity: 0.6,
-  };
-
-  const urlBarStyle: CSSProperties = {
-    flex: 1,
-    maxWidth: "320px",
-    height: "28px",
-    backgroundColor: isDark ? "#1a1a1a" : "#fafafa",
-    border: `1px solid ${isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"}`,
-    borderRadius: "20px",
-    padding: "0 12px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: "13px",
-    color: isDark ? "#888888" : "#666666",
-    fontFamily:
-      "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-  };
-
-  const contentStyle: CSSProperties = {
-    backgroundColor: "#ffffff",
-    display: "block",
-  };
-
-  const marginClass = size
-    ? marginClasses[size]
-      ? marginClasses[size]
-      : "mx-auto"
-    : "mx-auto";
+  const marginClass = size ? (marginClasses[size] ?? "mx-auto") : "mx-auto";
 
   return (
     <div
       className={`[&>p]:m-0 [&>p]:p-0 [&>p>img]:m-0 [&>p>img]:p-0 my-8 ${marginClass}`}
     >
-      <div
-        className={`browser-screenshot-wrapper ${className}`}
-        style={browserWindowStyle}
-      >
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-          .browser-screenshot-wrapper img {
-            border: 0 !important;
-            border-radius: 0 !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            display: block !important;
-            max-width: 100% !important;
-            height: auto !important;
-          }
-          .browser-screenshot-wrapper p {
-            margin: 0 !important;
-            padding: 0 !important;
-            line-height: 0 !important;
-          }
-        `,
-          }}
-        />
-        <div style={browserBarStyle}>
-          <div style={trafficLightStyle}>
+      <div className="overflow-hidden mx-auto max-w-[90%] rounded-lg shadow-lg border border-border bg-card [&_img]:!border-0 [&_img]:!rounded-none [&_img]:!p-0 [&_img]:!m-0 [&_img]:!block [&_img]:!max-w-full [&_img]:!h-auto [&_p]:!m-0 [&_p]:!p-0 [&_p]:!leading-[0]">
+        <div className="h-10 flex items-center px-4 gap-4 relative bg-gray-100 dark:bg-gray-900">
+          <div className="flex gap-2 items-center">
             <div
-              style={{
-                ...dotStyle,
-                backgroundColor: "#FE5F57",
-              }}
+              className="w-3 h-3 rounded-full"
+              style={{ backgroundColor: "#FE5F57" }}
             />
             <div
-              style={{
-                ...dotStyle,
-                backgroundColor: "#FEBB2E",
-              }}
+              className="w-3 h-3 rounded-full"
+              style={{ backgroundColor: "#FEBB2E" }}
             />
             <div
-              style={{
-                ...dotStyle,
-                backgroundColor: "#26C941",
-              }}
+              className="w-3 h-3 rounded-full"
+              style={{ backgroundColor: "#26C941" }}
             />
           </div>
-          <div style={navigationStyle}>
-            <div style={navButtonStyle}>
-              <svg viewBox="0 0 16 16" fill={isDark ? "#888888" : "#666666"}>
+          <div className="flex gap-4 items-center">
+            <div className="w-3.5 h-3.5 flex items-center justify-center cursor-pointer opacity-60 text-gray-600 dark:text-gray-400">
+              <svg viewBox="0 0 16 16" fill="currentColor">
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
@@ -164,8 +48,8 @@ export function BrowserScreenshot({
                 />
               </svg>
             </div>
-            <div style={navButtonStyle}>
-              <svg viewBox="0 0 16 16" fill={isDark ? "#888888" : "#666666"}>
+            <div className="w-3.5 h-3.5 flex items-center justify-center cursor-pointer opacity-60 text-gray-600 dark:text-gray-400">
+              <svg viewBox="0 0 16 16" fill="currentColor">
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
@@ -173,8 +57,8 @@ export function BrowserScreenshot({
                 />
               </svg>
             </div>
-            <div style={navButtonStyle}>
-              <svg viewBox="0 0 16 16" fill={isDark ? "#888888" : "#666666"}>
+            <div className="w-3.5 h-3.5 flex items-center justify-center cursor-pointer opacity-60 text-gray-600 dark:text-gray-400">
+              <svg viewBox="0 0 16 16" fill="currentColor">
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
@@ -183,20 +67,13 @@ export function BrowserScreenshot({
               </svg>
             </div>
           </div>
-          <div style={urlBarStyle}>
-            <span
-              style={{
-                fontSize: "13px",
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-              }}
-            >
+          <div className="flex-1 max-w-xs h-7 rounded-full px-3 flex items-center justify-center text-[13px] font-sans bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400">
+            <span className="text-[13px] whitespace-nowrap overflow-hidden text-ellipsis">
               {url}
             </span>
           </div>
         </div>
-        <div style={contentStyle}>{children}</div>
+        <div className="bg-card block">{children}</div>
       </div>
     </div>
   );

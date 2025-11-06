@@ -29,17 +29,19 @@ export const BundlesTable = () => {
 
   return (
     <table className="w-full border-collapse text-sm">
-      <tr className="bg-gray-50 border-b">
-        <th className="px-3 py-2 text-left font-medium text-gray-600">
+      <tr className="bg-secondary border-b">
+        <th className="px-3 py-2 text-left font-medium text-muted-foreground">
           Module
         </th>
-        <th className="px-3 py-2 text-left font-medium text-gray-600">
+        <th className="px-3 py-2 text-left font-medium text-muted-foreground">
           Status
         </th>
-        <th className="px-3 py-2 text-left font-medium text-gray-600">
+        <th className="px-3 py-2 text-left font-medium text-muted-foreground">
           Version
         </th>{" "}
-        <th className="px-3 py-2 text-left font-medium text-gray-600">Notes</th>
+        <th className="px-3 py-2 text-left font-medium text-muted-foreground">
+          Notes
+        </th>
       </tr>
       {data?.bundles
         .filter((bundle) => bundle.isPublic)
@@ -52,16 +54,17 @@ export const BundlesTable = () => {
           let status = issue?.status ?? "Unknown";
 
           const statusClass = {
-            Unknown: "bg-gray-200 text-gray-700",
-            Issues: "bg-red-100 text-red-800",
-            Working: "bg-green-200 text-green-800",
+            Unknown: "bg-secondary text-foreground",
+            Issues: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
+            Working:
+              "bg-green-200 text-green-800 dark:bg-green-900 dark:text-green-200",
           };
 
           return (
-            <tr className="border-b hover:bg-gray-50" key={i}>
+            <tr className="border-b hover:bg-accent" key={i}>
               <td className="px-3 py-2 align-top">
                 <a
-                  className="text-blue-600 hover:underline font-medium"
+                  className="text-primary hover:underline font-medium"
                   href={
                     bundle.url ?? `https://www.npmjs.com/package/${bundle.name}`
                   }
@@ -80,7 +83,7 @@ export const BundlesTable = () => {
                 {bundle.version}
               </td>
 
-              <td className="px-3 py-2 align-top text-gray-700 text-xs">
+              <td className="px-3 py-2 align-top text-foreground text-xs">
                 {notes}
               </td>
             </tr>
