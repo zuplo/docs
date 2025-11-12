@@ -3,15 +3,20 @@ title: Zuplo Platform Limits
 sidebar_label: Platform Limits
 ---
 
-This document describes the limits that apply to your Zuplo account. Some limits
-are fixed while others are specific to your plan. Typically, enterprise plans
-have the ability to customize limits to meet their needs.
+This document describes the limits that apply to your Zuplo account.
+
+:::tip{title="Managed Dedicated Environments"}
+
+The limits in this document are primarily for Zuplo's managed edge environment .
+For managed dedicated environments and enterprise agreements, most limits are
+fully customizable to meet your specific requirements.
+
+:::
 
 ## General
 
-The following limits apply to Zuplo's managed edge environment. For managed
-dedicated environments (enterprise offering), limits are fully customizable to
-meet your specific requirements.
+Below are general limits that apply to deployments on Zuplo's managed edge
+environments.
 
 | Feature                       | Description                                                     | Limit                                                                                                                                                                |
 | ----------------------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -26,9 +31,36 @@ meet your specific requirements.
 | Subrequests                   | The maximum number of subrequests per request                   | 1,000                                                                                                                                                                |
 | Simultaneous Open Connections | The maximum number of simultaneous open connections per request | 6                                                                                                                                                                    |
 
-## API Keys
+## HTTP connections
 
-### Consumers & Keys
+In Zuplo's managed edge environment, HTTP connections have timeouts to ensure
+efficient use of resources. These timeouts apply to both incoming connections
+from clients to Zuplo and outgoing connections from Zuplo to your origin
+servers.
+
+## Between client and Zuplo
+
+| Type                           | Limit (seconds) | HTTP status code at limit |
+| ------------------------------ | --------------- | ------------------------- |
+| Connection Keep-Alive HTTP/1.1 | 400             | TCP connection closed     |
+| Connection Idle HTTP/2         | 400             | TCP connection closed     |
+
+## Between Zuplo and origin server
+
+| Type                    | Limit (seconds) | HTTP status code at limit |
+| ----------------------- | --------------- | ------------------------- |
+| Complete TCP Connection | 19              | 522                       |
+| TCP ACK Timeout         | 90              | 522                       |
+| TCP Keep-Alive Interval | 30              | 520                       |
+| Proxy Idle Timeout      | 900             | 520                       |
+| Proxy Read Timeout      | 180             | 524                       |
+| Proxy Write Timeout     | 30              | 524                       |
+| HTTP/2 Pings to Origin  | Off             | -                         |
+| HTTP/2 Connection Idle  | 900             | No                        |
+
+## API keys
+
+### Consumers & keys
 
 Zuplo doesn't impose a hard cap on the number of consumers or keys you can
 create. However, usage of the service is subject to "fair use" policies meaning
@@ -41,17 +73,26 @@ Our general guidelines for what constitutes fair use are as follows:
 - Builder Plan: 1,000 consumers or keys
 - Enterprise Plan: Custom
 
-### Consumer Metadata and Tags
+### Consumer metadata and tags
 
 - Consumer `metadata` - The JSON encoded object can't be larger than 1kb.
 - Consumer `tags` - Each consumer is limited to 5 key value pair tags.
 
-### API Key Management Operations
+### API key management operations
 
-Requests to API Key Management operations on the Zuplo Developer API
+Requests to API key management operations on the Zuplo Developer API
 (dev.zuplo.com) are limited to 100 requests per second.
 
 ### API key authorizations
 
 One API key authorization can be made per request. Enterprise plans can request
 custom limits to allow multiple API key authorizations per request.
+
+### Cache
+
+The [cache API](../programmable-api/cache.mdx) and abstractions on top of it
+such as [ZoneCache](../programmable-api/zone-cache.mdx) have the following
+limits:
+
+- Maximum size per cached item: 512 MB
+- Maximum cache calls per request: 1000
