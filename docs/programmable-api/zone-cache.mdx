@@ -3,14 +3,17 @@ title: ZoneCache
 sidebar_label: ZoneCache
 ---
 
-The ZoneCache is used to store data in a shared cache, typically local to the
-Zone your gateway is running (for example, the same data center). This can be
-used to store small, simple objects. It's excellent for improving the latency of
-your gateway if you need to access remote data in your policies, such as calling
-another API in a policy.
+The ZoneCache stores data in a shared cache. This cache is in the same zone (the
+same data center or cluster) as your API - it's not globally distributed, but
+rather designed to be low-latency. Common uses include caching configuration,
+session, or other data that needs to be frequently accessed with low latency.
+
+The ZoneCache can store any JSON serializable data. Each cached item has a
+time-to-live (TTL) after which it expires and is removed from the cache. Each
+cached object can be up to 512 MB in size.
 
 There's an demonstration of ZoneCache use in the
-[Per User Rate Limits Using a Database](/docs/articles/per-user-rate-limits-using-db)
+[Per User Rate Limits Using a Database](../articles/per-user-rate-limits-using-db.mdx)
 example.
 
 ## Constructor
@@ -94,7 +97,7 @@ export default async function handler(
 }
 ```
 
-## Performance Tips
+## Performance tips
 
 When writing to the cache, you may not want to `await` the operation to
 complete. This can improve response times:
@@ -106,3 +109,21 @@ cache.put("key", data, 60).catch((err) => context.log.error(err));
 
 Always catch errors when using the fire-and-forget pattern to avoid unhandled
 promise rejections.
+
+## When to use ZoneCache
+
+Use ZoneCache when you need low-latency access to frequently used data that's
+stored in a single zone. It's ideal for caching configuration data, session
+information, or results from external API calls that are expensive or slow to
+retrieve.
+
+Avoid using ZoneCache for large datasets or data that needs to be globally
+distributed, as it's designed for small, simple objects within a single zone.
+
+## Limits
+
+For full Zuplo platform limits see the
+[Zuplo Limits documentation](../articles/limits.mdx).
+
+- Maximum size per cached item: 512 MB
+- Maximum cache calls per request: 1000
