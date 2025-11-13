@@ -118,7 +118,9 @@ information, or results from external API calls that are expensive or slow to
 retrieve.
 
 Avoid using ZoneCache for large datasets or data that needs to be globally
-distributed, as it's designed for small, simple objects within a single zone.
+distributed, as it's designed for small, simple objects within a single zone. It
+is also not suitable to be used as an OLTP to read/write important data, it's
+just a cache - very useful but not a database or key/value store.
 
 ## Limits
 
