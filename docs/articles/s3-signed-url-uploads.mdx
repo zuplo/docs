@@ -1,0 +1,506 @@
+---
+title: Generating S3 Signed URLs for Large File Uploads
+sidebar_label: S3 Signed URL Uploads
+---
+
+Zuplo's managed edge deployment has a 500MB request body size limit. For
+applications that need to handle larger files, you can generate pre-signed S3
+URLs that allow clients to upload directly to Amazon S3, bypassing the gateway
+entirely.
+
+This approach offers several benefits:
+
+- Upload files larger than 500MB
+- Reduce bandwidth costs and latency
+- Offload file transfer from your gateway
+- Maintain security through temporary, scoped upload permissions
+
+## Prerequisites
+
+Before you begin, you need:
+
+- An AWS account with S3 access
+- An S3 bucket configured for your uploads
+- AWS credentials (Access Key ID and Secret Access Key) with S3 write
+  permissions
+- The AWS region where your bucket is located
+
+Store your AWS credentials securely in Zuplo environment variables:
+
+- `AWS_ACCESS_KEY_ID` - Your AWS access key
+- `AWS_SECRET_ACCESS_KEY` - Your AWS secret key
+- `AWS_REGION` - Your S3 bucket region (for example, `us-east-1`)
+- `AWS_S3_BUCKET` - Your S3 bucket name
+
+## Installing Dependencies
+
+If you are developing locally and want code completion, etc in your project,
+install the AWS SDK for S3 to your project. These
+dependencies](../programmable-api/node-modules.mdx) are already available in the
+Zuplo runtime.
+
+```bash
+npm install @aws-sdk/client-s3 @aws-sdk/s3-request-presigner
+```
+
+## Creating the Handler
+
+Create a new module in your Zuplo project that generates pre-signed URLs. This
+handler accepts file metadata and returns a signed URL that clients can use to
+upload directly to S3.
+
+```ts title="modules/s3-signed-url.ts"
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { ZuploContext, ZuploRequest, environment } from "@zuplo/runtime";
+
+interface UploadRequest {
+  fileName: string;
+  contentType: string;
+  // Optional: add custom metadata fields
+  metadata?: Record<string, string>;
+}
+
+interface UploadResponse {
+  uploadUrl: string;
+  key: string;
+  expiresIn: number;
+}
+
+export default async function (
+  request: ZuploRequest,
+  context: ZuploContext,
+): Promise<Response> {
+  // Parse request body
+  const body = (await request.json()) as UploadRequest;
+
+  if (!body.fileName || !body.contentType) {
+    return new Response(
+      JSON.stringify({
+        error: "fileName and contentType are required",
+      }),
+      {
+        status: 400,
+        headers: { "content-type": "application/json" },
+      },
+    );
+  }
+
+  // Configure S3 client
+  const s3Client = new S3Client({
+    region: environment.AWS_REGION,
+    credentials: {
+      accessKeyId: environment.AWS_ACCESS_KEY_ID!,
+      secretAccessKey: environment.AWS_SECRET_ACCESS_KEY!,
+    },
+  });
+
+  // Generate a unique key for the file
+  // Consider adding user ID or other identifiers to organize uploads
+  const timestamp = Date.now();
+  const key = `uploads/${timestamp}-${body.fileName}`;
+
+  // Create the put object command
+  const command = new PutObjectCommand({
+    Bucket: environment.AWS_S3_BUCKET,
+    Key: key,
+    ContentType: body.contentType,
+    Metadata: body.metadata,
+  });
+
+  try {
+    // Generate pre-signed URL that expires in 1 hour
+    const expiresIn = 3600;
+    const uploadUrl = await getSignedUrl(s3Client, command, { expiresIn });
+
+    const response: UploadResponse = {
+      uploadUrl,
+      key,
+      expiresIn,
+    };
+
+    return new Response(JSON.stringify(response), {
+      status: 200,
+      headers: { "content-type": "application/json" },
+    });
+  } catch (error) {
+    context.log.error("Failed to generate signed URL", error);
+
+    return new Response(
+      JSON.stringify({
+        error: "Failed to generate upload URL",
+      }),
+      {
+        status: 500,
+        headers: { "content-type": "application/json" },
+      },
+    );
+  }
+}
+```
+
+## Configuring the Route
+
+Add a route in your `routes.oas.json` file to expose this handler:
+
+```json
+{
+  "paths": {
+    "/uploads/request-url": {
+      "post": {
+        "summary": "Request pre-signed S3 upload URL",
+        "x-zuplo-route": {
+          "handler": {
+            "export": "default",
+            "module": "$import(@/modules/s3-signed-url)"
+          },
+          "corsPolicy": "anything-goes"
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fileName": {
+                    "type": "string"
+                  },
+                  "contentType": {
+                    "type": "string"
+                  },
+                  "metadata": {
+                    "type": "object"
+                  }
+                },
+                "required": ["fileName", "contentType"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Pre-signed upload URL"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+:::note
+
+Consider adding authentication policies to your route to ensure only authorized
+users can request upload URLs.
+
+:::
+
+## Client Implementation
+
+Here's how clients can use the generated signed URL to upload files:
+
+### JavaScript/TypeScript
+
+```ts
+// Step 1: Request the signed URL from your API
+async function requestUploadUrl(
+  fileName: string,
+  contentType: string,
+): Promise<{ uploadUrl: string; key: string }> {
+  const response = await fetch(
+    "https://your-api.zuplo.app/uploads/request-url",
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        // Add authentication headers as needed
+        authorization: "Bearer YOUR_TOKEN",
+      },
+      body: JSON.stringify({
+        fileName,
+        contentType,
+        metadata: {
+          // Optional: add custom metadata
+          userId: "user123",
+        },
+      }),
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to get upload URL");
+  }
+
+  return response.json();
+}
+
+// Step 2: Upload the file directly to S3
+async function uploadFile(file: File): Promise<string> {
+  // Get the signed URL
+  const { uploadUrl, key } = await requestUploadUrl(file.name, file.type);
+
+  // Upload directly to S3
+  const uploadResponse = await fetch(uploadUrl, {
+    method: "PUT",
+    body: file,
+    headers: {
+      "content-type": file.type,
+    },
+  });
+
+  if (!uploadResponse.ok) {
+    throw new Error("Failed to upload file");
+  }
+
+  // Return the S3 key for reference
+  return key;
+}
+
+// Usage
+const fileInput = document.querySelector('input[type="file"]');
+fileInput.addEventListener("change", async (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    try {
+      const s3Key = await uploadFile(file);
+      console.log("File uploaded successfully:", s3Key);
+    } catch (error) {
+      console.error("Upload failed:", error);
+    }
+  }
+});
+```
+
+### React Example
+
+```tsx
+import { useState } from "react";
+
+function FileUploader() {
+  const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  const handleUpload = async (file: File) => {
+    setUploading(true);
+    setProgress(0);
+
+    try {
+      // Request signed URL
+      const response = await fetch(
+        "https://your-api.zuplo.app/uploads/request-url",
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${getAuthToken()}`,
+          },
+          body: JSON.stringify({
+            fileName: file.name,
+            contentType: file.type,
+          }),
+        },
+      );
+
+      const { uploadUrl, key } = await response.json();
+
+      // Upload to S3 with progress tracking
+      const xhr = new XMLHttpRequest();
+
+      xhr.upload.addEventListener("progress", (e) => {
+        if (e.lengthComputable) {
+          setProgress((e.loaded / e.total) * 100);
+        }
+      });
+
+      await new Promise((resolve, reject) => {
+        xhr.addEventListener("load", () => {
+          if (xhr.status === 200) {
+            resolve(key);
+          } else {
+            reject(new Error("Upload failed"));
+          }
+        });
+
+        xhr.addEventListener("error", () => reject(new Error("Upload failed")));
+
+        xhr.open("PUT", uploadUrl);
+        xhr.setRequestHeader("Content-Type", file.type);
+        xhr.send(file);
+      });
+
+      alert("File uploaded successfully!");
+    } catch (error) {
+      console.error("Upload failed:", error);
+      alert("Upload failed. Please try again.");
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  return (
+    <div>
+      <input
+        type="file"
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+          if (file) handleUpload(file);
+        }}
+        disabled={uploading}
+      />
+      {uploading && <progress value={progress} max="100" />}
+    </div>
+  );
+}
+```
+
+## Security Considerations
+
+### Time-Limited URLs
+
+Pre-signed URLs expire after the specified duration (default: 1 hour in the
+example). Adjust the `expiresIn` parameter based on your needs:
+
+```ts
+// Shorter expiration for sensitive uploads
+const expiresIn = 600; // 10 minutes
+
+// Longer expiration for large files
+const expiresIn = 7200; // 2 hours
+```
+
+### File Organization
+
+Consider organizing uploads by user or purpose to simplify management:
+
+```ts
+// Organize by user and date
+const userId = request.user.sub; // From authentication
+const date = new Date().toISOString().split("T")[0];
+const key = `uploads/${userId}/${date}/${timestamp}-${body.fileName}`;
+```
+
+### Content Type Validation
+
+Validate file types before generating signed URLs:
+
+```ts
+const allowedTypes = [
+  "image/jpeg",
+  "image/png",
+  "image/gif",
+  "application/pdf",
+  "video/mp4",
+];
+
+if (!allowedTypes.includes(body.contentType)) {
+  return new Response(
+    JSON.stringify({
+      error: "File type not allowed",
+    }),
+    {
+      status: 400,
+      headers: { "content-type": "application/json" },
+    },
+  );
+}
+```
+
+### File Size Limits
+
+While S3 can handle files up to 5TB, you may want to enforce size limits. Add
+validation on the client side and consider implementing S3 bucket policies to
+enforce maximum object sizes.
+
+## Advanced Features
+
+### Multipart Upload for Very Large Files
+
+For files larger than 5GB, use multipart uploads. This requires generating
+signed URLs for each part:
+
+```ts
+import {
+  CreateMultipartUploadCommand,
+  UploadPartCommand,
+} from "@aws-sdk/client-s3";
+
+// Create multipart upload
+const multipartCommand = new CreateMultipartUploadCommand({
+  Bucket: environment.AWS_S3_BUCKET,
+  Key: key,
+  ContentType: body.contentType,
+});
+
+const multipartUpload = await s3Client.send(multipartCommand);
+const uploadId = multipartUpload.UploadId;
+
+// Generate signed URLs for each part
+// Client uploads each part separately, then completes the upload
+```
+
+### Upload Notifications
+
+Set up S3 event notifications to trigger actions when uploads complete:
+
+1. Configure S3 bucket notifications to send events to SQS, SNS, or Lambda
+2. Process uploaded files asynchronously
+3. Update your database with file metadata
+4. Run virus scanning or other validations
+
+### Pre-signed POST URLs
+
+For browser uploads with additional security, use pre-signed POST URLs instead
+of PUT:
+
+```ts
+import { createPresignedPost } from "@aws-sdk/s3-presigned-post";
+
+const { url, fields } = await createPresignedPost(s3Client, {
+  Bucket: environment.AWS_S3_BUCKET,
+  Key: key,
+  Conditions: [
+    ["content-length-range", 0, 10485760], // 10MB max
+    ["starts-with", "$Content-Type", "image/"],
+  ],
+  Expires: 3600,
+});
+
+// Client submits multipart/form-data with the fields
+```
+
+## Troubleshooting
+
+### CORS Issues
+
+If clients receive CORS errors when uploading to S3, configure CORS on your S3
+bucket:
+
+```json
+[
+  {
+    "AllowedHeaders": ["*"],
+    "AllowedMethods": ["PUT", "POST"],
+    "AllowedOrigins": ["https://your-domain.com"],
+    "ExposeHeaders": ["ETag"],
+    "MaxAgeSeconds": 3000
+  }
+]
+```
+
+### Invalid Signature Errors
+
+Ensure your AWS credentials are correct and have the necessary permissions. The
+IAM user or role needs `s3:PutObject` permission for the bucket.
+
+### Clock Skew
+
+Pre-signed URLs are sensitive to time differences. Ensure your systems have
+accurate time synchronization via NTP.
+
+## Related Resources
+
+- [Custom Handler Documentation](../handlers/custom-handler.mdx)
+- [Environment Variables](./environment-variables.mdx)
+- [AWS S3 Documentation](https://docs.aws.amazon.com/s3/)
+- [AWS SDK for JavaScript v3](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/)

@@ -281,6 +281,7 @@ export const guides: Navigation = [
       "articles/configuring-okta-for-mcp-auth",
       "articles/manual-mcp-oauth-testing",
       "articles/health-checks",
+      "articles/s3-signed-url-uploads",
     ],
   },
 ];
