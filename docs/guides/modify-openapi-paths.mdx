@@ -1,0 +1,370 @@
+---
+title: Modifying OpenAPI Paths with Scripts
+sidebar_label: Path Modification Scripts
+description: >-
+  Learn how to programmatically modify all paths in your OpenAPI specification
+  by adding prefixes, changing base paths, or transforming routes for different
+  deployment scenarios.
+tags:
+  - openapi
+  - deployment
+  - custom-code
+---
+
+There are many scenarios where you need to modify all paths in your OpenAPI
+specification - adding version prefixes, environment-specific paths, API gateway
+base paths, or regional endpoints. Rather than manually editing every route, you
+can write a simple script to transform all paths programmatically.
+
+## Common Use Cases
+
+Path modification scripts are useful for:
+
+- **API Versioning**: Add `/v1`, `/v2`, or `/2024-01` prefixes
+- **Environment Routing**: Add `/staging`, `/dev`, or `/preview` prefixes
+- **Gateway Integration**: Prepend `/api` or `/gateway` base paths
+- **Regional Endpoints**: Add `/us-east`, `/eu-west` regional prefixes
+- **Multi-Tenant**: Add `/{tenantId}` path segments
+- **Legacy Migration**: Transform old path structures to new patterns
+
+## Basic Path Prefix Script
+
+Here's a simple script that adds a prefix to all paths in your OpenAPI document:
+
+```javascript title="add-path-prefix.mjs"
+import { readFile, writeFile } from "fs/promises";
+
+async function addPathPrefix(inputPath, outputPath, prefix) {
+  // Read the OpenAPI document
+  const content = await readFile(inputPath, "utf-8");
+  const openapi = JSON.parse(content);
+
+  // Create new paths object with prefixed paths
+  const newPaths = {};
+
+  for (const [path, pathItem] of Object.entries(openapi.paths)) {
+    // Add the prefix to the path
+    const prefixedPath = `${prefix}${path}`;
+    newPaths[prefixedPath] = pathItem;
+  }
+
+  // Replace the paths in the document
+  openapi.paths = newPaths;
+
+  // Write the modified document
+  await writeFile(outputPath, JSON.stringify(openapi, null, 2));
+  console.log(`✅ Added prefix "${prefix}" to all paths`);
+  console.log(`✅ Output written to: ${outputPath}`);
+}
+
+// Usage
+const prefix = process.argv[2] || "/v1";
+const inputFile = process.argv[3] || "openapi.json";
+const outputFile =
+  process.argv[4] || `openapi-${prefix.replace(/\//g, "")}.json`;
+
+addPathPrefix(inputFile, outputFile, prefix).catch(console.error);
+```
+
+Run the script:
+
+```bash
+# Add /v1 prefix
+node add-path-prefix.mjs /v1 openapi.json openapi-v1.json
+
+# Add /v2 prefix
+node add-path-prefix.mjs /v2 openapi.json openapi-v2.json
+
+# Add /api prefix
+node add-path-prefix.mjs /api openapi.json openapi-api.json
+```
+
+**Example transformation:**
+
+```json title="Before (openapi.json)"
+{
+  "paths": {
+    "/users": { "get": {...} },
+    "/products": { "get": {...} }
+  }
+}
+```
+
+```json title="After (openapi-v1.json)"
+{
+  "paths": {
+    "/v1/users": { "get": {...} },
+    "/v1/products": { "get": {...} }
+  }
+}
+```
+
+## Multiple Versions in Build Pipeline
+
+You can generate multiple versions as part of your build process:
+
+```json title="package.json"
+{
+  "scripts": {
+    "build:api:v1": "npx tsx add-path-prefix.ts /v1 openapi.json dist/openapi-v1.json",
+    "build:api:v2": "npx tsx add-path-prefix.ts /v2 openapi.json dist/openapi-v2.json",
+    "build:api:all": "npm run build:api:v1 && npm run build:api:v2"
+  }
+}
+```
+
+Or create a build script for multiple variants:
+
+```bash title="build-versions.sh"
+#!/bin/bash
+
+# Define prefixes to build
+PREFIXES=("v1" "v2" "api" "staging")
+BASE_FILE="openapi.json"
+OUTPUT_DIR="dist"
+
+mkdir -p $OUTPUT_DIR
+
+for prefix in "${PREFIXES[@]}"; do
+  echo "Building with prefix: /$prefix"
+
+  npx tsx add-path-prefix.ts \
+    "/$prefix" \
+    "$BASE_FILE" \
+    "$OUTPUT_DIR/openapi-$prefix.json"
+
+  echo "✅ Generated $OUTPUT_DIR/openapi-$prefix.json"
+done
+
+echo "🎉 All variants built successfully!"
+```
+
+Make it executable and run:
+
+```bash
+chmod +x build-versions.sh
+./build-versions.sh
+```
+
+## Advanced Use Cases
+
+### Inserting Path Segments
+
+Insert a prefix after an existing base path:
+
+```typescript title="insert-path-segment.ts"
+import { readFile, writeFile } from "fs/promises";
+
+interface OpenAPIDocument {
+  paths: Record<string, any>;
+  [key: string]: any;
+}
+
+async function insertPathSegment(
+  inputPath: string,
+  outputPath: string,
+  basePrefix: string,
+  insertSegment: string,
+) {
+  const content = await readFile(inputPath, "utf-8");
+  const openapi: OpenAPIDocument = JSON.parse(content);
+
+  const newPaths: Record<string, any> = {};
+
+  for (const [path, pathItem] of Object.entries(openapi.paths)) {
+    let newPath: string;
+
+    // If path starts with basePrefix, insert the segment after it
+    if (path.startsWith(basePrefix)) {
+      const remainingPath = path.slice(basePrefix.length);
+      newPath = `${basePrefix}${insertSegment}${remainingPath}`;
+    } else {
+      // Otherwise just prepend the segment
+      newPath = `${insertSegment}${path}`;
+    }
+
+    newPaths[newPath] = pathItem;
+  }
+
+  openapi.paths = newPaths;
+  await writeFile(outputPath, JSON.stringify(openapi, null, 2));
+  console.log(`✅ Inserted "${insertSegment}" into paths`);
+}
+
+const basePrefix = process.argv[2] || "/api";
+const insertSegment = process.argv[3] || "/v1";
+const inputFile = process.argv[4] || "openapi.json";
+const outputFile = process.argv[5] || "openapi-modified.json";
+
+insertPathSegment(basePrefix, insertSegment, inputFile, outputFile).catch(
+  console.error,
+);
+```
+
+```bash
+# Transform /api/users to /api/v1/users
+npx tsx insert-path-segment.ts /api /v1 openapi.json openapi-v1.json
+```
+
+### Path Transformation with Patterns
+
+Transform paths based on patterns:
+
+```typescript title="transform-paths.ts"
+import { readFile, writeFile } from "fs/promises";
+
+interface OpenAPIDocument {
+  paths: Record<string, any>;
+  [key: string]: any;
+}
+
+type PathTransformer = (path: string) => string;
+
+async function transformPaths(
+  inputPath: string,
+  outputPath: string,
+  transformer: PathTransformer,
+) {
+  const content = await readFile(inputPath, "utf-8");
+  const openapi: OpenAPIDocument = JSON.parse(content);
+
+  const newPaths: Record<string, any> = {};
+
+  for (const [path, pathItem] of Object.entries(openapi.paths)) {
+    const transformedPath = transformer(path);
+    newPaths[transformedPath] = pathItem;
+  }
+
+  openapi.paths = newPaths;
+  await writeFile(outputPath, JSON.stringify(openapi, null, 2));
+  console.log(`✅ Transformed paths written to: ${outputPath}`);
+}
+
+// Example transformers
+const transformers = {
+  // Add version prefix
+  addVersion: (path: string) => `/v1${path}`,
+
+  // Add regional prefix
+  addRegion: (path: string) => `/us-east${path}`,
+
+  // Add tenant ID parameter
+  addTenant: (path: string) => `/{tenantId}${path}`,
+
+  // Convert to kebab-case (example)
+  kebabCase: (path: string) => path.replace(/([A-Z])/g, "-$1").toLowerCase(),
+};
+
+// Usage example
+const transformerName =
+  (process.argv[2] as keyof typeof transformers) || "addVersion";
+const transformer = transformers[transformerName];
+
+if (!transformer) {
+  console.error(`Unknown transformer: ${transformerName}`);
+  console.error(`Available: ${Object.keys(transformers).join(", ")}`);
+  process.exit(1);
+}
+
+transformPaths("openapi.json", "openapi-transformed.json", transformer).catch(
+  console.error,
+);
+```
+
+```bash
+# Add version
+npx tsx transform-paths.ts addVersion
+
+# Add region
+npx tsx transform-paths.ts addRegion
+
+# Add tenant ID
+npx tsx transform-paths.ts addTenant
+```
+
+### Environment-Specific Paths
+
+Generate different paths for different environments:
+
+```typescript title="environment-paths.ts"
+import { readFile, writeFile } from "fs/promises";
+
+interface OpenAPIDocument {
+  paths: Record<string, any>;
+  [key: string]: any;
+}
+
+const environments = {
+  development: "/dev",
+  staging: "/staging",
+  preview: "/preview",
+  production: "", // No prefix for production
+};
+
+async function addEnvironmentPrefix(
+  inputPath: string,
+  environment: keyof typeof environments,
+) {
+  const content = await readFile(inputPath, "utf-8");
+  const openapi: OpenAPIDocument = JSON.parse(content);
+
+  const prefix = environments[environment];
+  const newPaths: Record<string, any> = {};
+
+  for (const [path, pathItem] of Object.entries(openapi.paths)) {
+    const newPath = prefix ? `${prefix}${path}` : path;
+    newPaths[newPath] = pathItem;
+  }
+
+  openapi.paths = newPaths;
+
+  const outputPath = `openapi-${environment}.json`;
+  await writeFile(outputPath, JSON.stringify(openapi, null, 2));
+  console.log(`✅ Generated ${environment} variant: ${outputPath}`);
+}
+
+const env = (process.argv[2] as keyof typeof environments) || "development";
+
+if (!environments[env]) {
+  console.error(`Unknown environment: ${env}`);
+  console.error(`Available: ${Object.keys(environments).join(", ")}`);
+  process.exit(1);
+}
+
+addEnvironmentPrefix("openapi.json", env).catch(console.error);
+```
+
+```bash
+# Generate all environment variants
+npx tsx environment-paths.ts development
+npx tsx environment-paths.ts staging
+npx tsx environment-paths.ts production
+```
+
+## Best Practices
+
+1. **Keep Base OpenAPI Clean**: Maintain a version-agnostic base OpenAPI file
+   and use overlays to generate versioned variants
+
+2. **Automate Version Generation**: Use scripts and CI/CD to generate all
+   version variants automatically
+
+3. **Test Generated Files**: Validate generated OpenAPI files with tools like
+   Spectral or OpenAPI validators
+
+4. **Version Your Overlays**: Store overlay generation scripts in version
+   control alongside your OpenAPI files
+
+5. **Document Version Differences**: Use overlay descriptions to document what
+   changes between versions
+
+6. **Use Consistent Patterns**: Stick to one versioning scheme (`/v1`, `/v2` or
+   `/2024-01`, etc.) across your organization
+
+## Next Steps
+
+- Learn about [API versioning strategies](../articles/versioning-on-zuplo.mdx)
+  in Zuplo
+- Explore more [OpenAPI Overlay techniques](../guides/openapi-overlays.mdx)
+- Check out the [OpenAPI Overlay CLI reference](../cli/openapi-overlay.mdx)
+- Read about [OpenAPI best practices](../articles/openapi-server-urls.mdx)
