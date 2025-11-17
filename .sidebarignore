@@ -2,3 +2,10 @@ policies/validate-json-schema-inbound
 policies/api-key-auth-inbound
 sample-apis
 conferences/conference-prize-terms
+# Partial files that are included in other docs
+**/*.partial
+# Error pages are generated separately
+errors
+errors/**
+# Ask page is a special page
+ask

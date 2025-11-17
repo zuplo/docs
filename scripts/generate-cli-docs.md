@@ -87,9 +87,9 @@ The following global options are available for all commands:
 
 ## Features
 
-### Nested Subcommands
+### Nested sub-commands
 
-The script recursively flattens nested subcommands. For example:
+The script recursively flattens nested sub-commands. For example:
 
 - `tunnel` → `tunnel services` → `tunnel services update`
 - Generates: `docs/cli/tunnel-services-update.mdx`

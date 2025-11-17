@@ -4,7 +4,7 @@ import {
   PackageIcon,
   BookOpenTextIcon,
 } from "@phosphor-icons/react/dist/ssr";
-import MCPIcon from "./icons/MCPServer";
+import MCPIcon from "../icons/MCPServer.js";
 import {
   Card,
   CardContent,
@@ -12,8 +12,8 @@ import {
   CardHeader,
   CardTitle,
 } from "zudoku/ui/Card";
-import { Image } from "./Image.js";
-import imgUrl from "../public/media/zuplo-docs-landing.svg";
+import { Image } from "../components/Image.js";
+import imgUrl from "../../public/media/zuplo-docs-landing.svg";
 import { cn } from "zudoku/ui/util";
 
 interface ProductCardProps {
