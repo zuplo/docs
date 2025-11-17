@@ -1,6 +1,6 @@
 ---
 title: Setting up Okta as an Authentication Server for MCP OAuth Authentication
-description: >-
+description:
   Learn how to configure Okta as an authorization server for OAuth
   authentication with MCP Server handler.
 tags:
@@ -8,9 +8,11 @@ tags:
   - integrations
 ---
 
+<!-- vale Vale.Spelling["URIs"] = NO -->
+
 In this guide, you'll learn how to configure Okta as an authorization server for
 use with the MCP Server handler. See the
-[MCP Server Handler docs](../handlers/mcp-server.md#oauth-authentication) for
+[MCP Server Handler docs](../handlers/mcp-server.mdx#oauth-authentication) for
 instructions on how to configure your Zuplo gateway to support OAuth
 authentication for your MCP Server.
 
@@ -99,11 +101,11 @@ Now create a rule for this policy:
      **Device Authorization** (???)
    - **User is**: Select **Any user assigned the app**
    - **Scopes requested**: Select **The following scopes** and choose the scope
-     you created for the authorization server (i.e., `mcp:access`)
+     you created for the authorization server (that is, `mcp:access`)
 4. In the **THEN AND** section:
    - **Use this inline hook**: None (disabled)
-   - **Access token lifetime is**: Set to desired value (e.g., 1 hour)
-   - **Refresh token lifetime is**: Set to desired value (e.g., 90 days)
+   - **Access token lifetime is**: Set to desired value (for example, 1 hour)
+   - **Refresh token lifetime is**: Set to desired value (for example, 90 days)
 5. Click **Create Rule**.
 
 ## Configure OAuth on Zuplo

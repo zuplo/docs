@@ -3,8 +3,8 @@ title: ZuploContext
 ---
 
 The `ZuploContext` object provides information about the current request and
-runtime environment. It is passed as the second parameter to request handlers
-and policies.
+runtime environment. It's passed as the second parameter to request handlers and
+policies.
 
 ```ts
 import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
@@ -89,9 +89,9 @@ context.log.info({
 ### `log`
 
 A logger instance for debugging and monitoring. Logs appear in your log tail in
-the portal and in your integrated log solution (e.g. DataDog). Pre-production
-environments are typically set to **Info** log level, while production is set to
-**Error**.
+the portal and in your integrated log solution (for example Datadog).
+Pre-production environments are typically set to **Info** log level, while
+production is set to **Error**.
 
 :::tip
 
@@ -137,7 +137,7 @@ context.log.info(`Processing request ${context.requestId}`);
 
 A read-only pointer to the configuration for the matched route. Includes the
 label, path, methods supported, name of the version, and names of policies. This
-type is immutable - the routing table cannot be updated at runtime.
+type is immutable - the routing table can't be updated at runtime.
 
 ```ts
 const routePath = context.route.path;
@@ -156,7 +156,7 @@ context.log.info({
 ### `addResponseSendingHook`
 
 Adds a hook that executes before a response is sent to the client. This hook can
-modify the response before it is sent. Multiple hooks can be added and they
+modify the response before it's sent. Multiple hooks can be added and they
 execute in the order they were added.
 
 ```ts
@@ -171,8 +171,8 @@ examples and usage patterns.
 ### `addResponseSendingFinalHook`
 
 Adds a hook that executes after all other response processing is complete but
-before the response is sent. Unlike `addResponseSendingHook`, this hook cannot
-modify the response - it is for monitoring and logging purposes only.
+before the response is sent. Unlike `addResponseSendingHook`, this hook can't
+modify the response - it's for monitoring and logging purposes only.
 
 ```ts
 addResponseSendingFinalHook(
@@ -232,7 +232,7 @@ return fetch(result);
 ### `invokeOutboundPolicy`
 
 Programmatically executes an outbound policy from your policy library. Outbound
-policies process responses before they are sent to the client.
+policies process responses before they're sent to the client.
 
 ```ts
 export default async function (request: ZuploRequest, context: ZuploContext) {

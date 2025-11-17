@@ -1,7 +1,7 @@
 ---
 title: Modifying OpenAPI Paths with Scripts
 sidebar_label: Path Modification Scripts
-description: >-
+description:
   Learn how to programmatically modify all paths in your OpenAPI specification
   by adding prefixes, changing base paths, or transforming routes for different
   deployment scenarios.
@@ -350,7 +350,8 @@ npx tsx environment-paths.ts production
    version variants automatically
 
 3. **Test Generated Files**: Validate generated OpenAPI files with tools like
-   Spectral or OpenAPI validators
+   [Spectral](https://stoplight.io/open-source/spectral) or
+   [Vacuum](https://quobix.com/vacuum/api/getting-started/)
 
 4. **Version Your Overlays**: Store overlay generation scripts in version
    control alongside your OpenAPI files

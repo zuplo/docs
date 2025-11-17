@@ -181,9 +181,9 @@ zuplo mtls-certificate delete \
 
 :::caution
 
-You cannot delete a certificate that is referenced by any of your deployments in
+You can't delete a certificate that's referenced by any of your deployments in
 your project. This is to prevent your deployments from failing if the
-certificate that is being referenced is no longer available.
+certificate that's being referenced is no longer available.
 
 First, disable the certificate by using the CLI with
 `zuplo mtls-certificate disable`. Then redeploy the deployments in your project
@@ -213,9 +213,8 @@ you rotate the certificate.
 
 :::warning
 
-mTLS bindings are not currently available in local development environments.
-Your code using mTLS will only work when deployed to Zuplo's edge
-infrastructure.
+mTLS bindings aren't currently available in local development environments. Your
+code using mTLS will only work when deployed to Zuplo's edge infrastructure.
 
 :::
 

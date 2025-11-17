@@ -42,7 +42,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 The `LokiLoggingPlugin` constructor accepts an options object with the following
 properties:
 
-- `url` - (required) The URL of the Loki server (e.g.,
+- `url` - (required) The URL of the Loki server (for example,
   `https://logs-prod-us-central1.grafana.net/loki/api/v1/push`)
 - `username` - (required) Username for authentication
 - `password` - (required) Password for authentication
@@ -71,7 +71,7 @@ based on the version configuration.
 ### Stream Labels (all versions)
 
 - `job` - The name of the log stream job. Defaults to "zuplo"
-- `level` - The log level (e.g., `ERROR`, `INFO`, `DEBUG`, `WARN`)
+- `level` - The log level (for example, `ERROR`, `INFO`, `DEBUG`, `WARN`)
 - `environmentType` - Where the Zuplo API is running. Values are `edge`,
   `working-copy`, or `local`
 - `environmentStage` - The deployment stage: `working-copy`, `preview`, or
@@ -85,8 +85,8 @@ values:
 - `requestId` - The UUID of the request (the value of the `zp-rid` header)
 - `atomicCounter` - An atomic counter used to order logs with identical
   timestamps
-- `rayId` - The network provider identifier (e.g., Cloudflare Ray ID) of the
-  request
+- `rayId` - The network provider identifier (for example, Cloudflare Ray ID) of
+  the request
 
 :::note
 

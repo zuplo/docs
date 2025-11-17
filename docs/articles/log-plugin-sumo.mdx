@@ -54,7 +54,7 @@ Any custom fields you want to include in the log entry can be added to the
 Every log entry will include the following fields (in camelCase format):
 
 - `timestamp` - The time the log was created (ISO 8601 format)
-- `severity` - The log level (e.g., `ERROR`, `INFO`, `DEBUG`, `WARN`)
+- `severity` - The log level (for example, `ERROR`, `INFO`, `DEBUG`, `WARN`)
 - `data` - The log message and any additional data
 - `environmentType` - Where the Zuplo API is running. Values are `edge`,
   `working-copy`, or `local`
@@ -63,8 +63,8 @@ Every log entry will include the following fields (in camelCase format):
 - `requestId` - The UUID of the request (the value of the `zp-rid` header)
 - `atomicCounter` - An atomic counter used to order logs with identical
   timestamps
-- `rayId` - The network provider identifier (e.g., Cloudflare Ray ID) of the
-  request
+- `rayId` - The network provider identifier (for example, Cloudflare Ray ID) of
+  the request
 
 :::note
 

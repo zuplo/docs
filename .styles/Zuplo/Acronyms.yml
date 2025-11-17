@@ -14,3 +14,14 @@ exceptions:
   - API
   - VPC
   - MCP
+  - GDPR
+  - CORS
+  - CLI
+  - YAML
+  - VPN
+  - JWK
+  - JWT
+  - OIDC
+  - SDK
+  - JWKS
+  - PKCE

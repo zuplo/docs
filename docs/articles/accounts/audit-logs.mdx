@@ -13,7 +13,7 @@ performed the change, when it occurred, and what resources were affected.
 :::note{title="Beta Feature"}
 
 Audit logs are currently in beta. During the beta period not all events may be
-captured. We are working towards full coverage.
+captured. We're working towards full coverage.
 
 :::
 
@@ -54,7 +54,7 @@ Each audit log entry contains the following information:
 ### Core Fields
 
 - **Timestamp**: When the action occurred (ISO 8601 format)
-- **Action**: The specific operation performed (e.g., `project.create`,
+- **Action**: The specific operation performed (for example, `project.create`,
   `user.invite`, `deployment.promote`)
 - **Request ID**: Unique identifier for tracking the request
 - **Success**: Whether the action completed successfully (true/false/null)
@@ -66,7 +66,8 @@ Each audit log entry contains the following information:
 - **Sub**: The subject identifier of the actor (user ID, API key, etc.)
 - **Email**: The email address of the actor (only for user actors)
 - **Type**: The type of actor (`user`, `consumer`, `service`, `anonymous`)
-- **Connection**: The authentication connection used (e.g., `auth0`, `google`)
+- **Connection**: The authentication connection used (for example, `auth0`,
+  `google`)
 - **ActingAs**: Information about impersonated user, if applicable - this is
   done by authorized Zuplo staff for support or diagnostic purposes only.
   Contains:
@@ -90,8 +91,8 @@ performed:
 
 - **IP Address**: The IP address of the request
 - **User Agent**: The user agent string of the request
-- **Country**: The ISO 3166-1 alpha-2 country code (e.g., 'US', 'GB')
-- **Region**: The region/state code (e.g., 'CA' for California)
+- **Country**: The ISO 3166-1 alpha-2 country code (for example, 'US', 'GB')
+- **Region**: The region/state code (for example, 'CA' for California)
 - **City**: The city name from which the request originated
 - **Postal Code**: The postal/ZIP code
 - **Metro Code**: The metro code (DMA code in the US)
@@ -99,8 +100,8 @@ performed:
 
 ### Route Information
 
-- **Source**: The source system or API that handled the request (e.g., 'api',
-  'gateway')
+- **Source**: The source system or API that handled the request (for example,
+  `api`, `gateway`)
 - **URL**: The full URL path of the request
 - **Method**: The HTTP method used for the request
 
@@ -111,7 +112,7 @@ The audit logs interface provides powerful filtering capabilities:
 ### Available Filters
 
 - **Date Range**: Filter logs within a specific time period
-- **Action**: View specific actions (e.g., all deployment activities)
+- **Action**: View specific actions (for example, all deployment activities)
 - **Actor**: Filter by the user who performed actions
 - **Success/Failure**: View only successful or failed operations
 
@@ -132,13 +133,13 @@ curl -X GET \
 - `offset`: Pagination offset (default: 0)
 - `startDate`: Filter logs after this date (ISO 8601 format)
 - `endDate`: Filter logs before this date (ISO 8601 format)
-- `action`: Filter by specific action (e.g., 'account.create')
+- `action`: Filter by specific action (for example, 'account.create')
 - `actor`: Filter by actor's email address or subject identifier
 - `success`: Filter by success status (true/false)
 
 :::note
 
-Date Range Limitation The date range between `startDate` and `endDate` cannot
+Date Range Limitation The date range between `startDate` and `endDate` can't
 exceed 30 days. The start date must be before the end date.
 
 :::
@@ -213,6 +214,6 @@ exceed 30 days. The start date must be before the end date.
 
 - Audit logs are retained for 90 days by default
 - Maximum of 100 results per API request
-- Date range queries cannot exceed 30 days
+- Date range queries can't exceed 30 days
 - Some automated system actions may not generate audit logs
-- Logs are immutable and cannot be modified or deleted
+- Logs are immutable and can't be modified or deleted

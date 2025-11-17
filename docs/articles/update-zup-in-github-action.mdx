@@ -3,6 +3,8 @@ title: Automate Zuplo API Updates with GitHub Actions
 sidebar_label: GitHub Action Automation
 ---
 
+<!-- vale Vale.Spelling["Huma"] = NO -->
+
 Because Zuplo is OpenAPI native, you can automate the process of updating your
 Zuplo API when a downstream OpenAPI file changes. For example, if you have an
 API built in Go that uses [Huma](https://github.com/danielgtaylor/huma) you can
@@ -99,7 +101,7 @@ jobs:
             // Update the Summary
             // You can do a lot more with this, see the core toolkit documentation
             // SEE: https://github.com/actions/toolkit/tree/main/packages/core#populating-job-summary
-            await core.summary.addRaw(`Github Pull Request Opened. [Pull Request](${result.html_url}), true)
+            await core.summary.addRaw(`GitHug Pull Request Opened. [Pull Request](${result.html_url}), true)
 ```
 
 This script is a starting point. You will need to modify it to fit your needs.

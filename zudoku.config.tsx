@@ -1,11 +1,5 @@
 import type { ZudokuConfig, ZudokuPlugin } from "zudoku";
-import {
-  aiGateway,
-  apiGateway,
-  devPortal,
-  guides,
-  resources,
-} from "./sidebar.js";
+import { aiGateway, apiGateway, devPortal, resources } from "./sidebar.js";
 import { mdxComponents } from "./src/components.js";
 import { HeadNavigation } from "./src/components/HeadNavigation.js";
 import "./src/diagrams.css";

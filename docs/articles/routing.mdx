@@ -24,7 +24,7 @@ Zuplo supports two path modes:
   For example, `/users/{userId}` would match any URL that starts with `/users/`
   and has a user ID at the end. This is the recommended mode for most use cases,
   as it provides a clear and standardized way to define your API routes. This is
-  the default mode in both the Zuplo UI and when a mode is not explicitly set in
+  the default mode in both the Zuplo UI and when a mode isn't explicitly set in
   an OpenAPI document.
 - **URL Pattern Mode**: This mode allows you to define routes using the
   web-standard
@@ -42,14 +42,54 @@ the defined routes. The matching process is based on the HTTP method and the
 path of the request. Zuplo will look for a matching route in the OpenAPI
 document and will use the corresponding request handler to process the request.
 
-Routes are matched in the order they are defined in the OpenAPI document and the
+### Route Matching Order
+
+Routes are matched in the order they're defined in the OpenAPI document and the
 alphabetical order the OpenAPI documents are defined in your project. For
-example, if you have two OpenAPI files, `file1.json` and `file2.json`
-`file1.json` will be matched first. This is particularlly important when using
+example, if you have two OpenAPI files, `file1.json` and `file2.json`,
+`file1.json` will be matched first. This is particularly important when using
 advanced matching like RegEx or URL Pattern matching, as the order of the routes
 can affect which route is matched for a given request. If you have two routes
 that could match the same request, the first one defined in the OpenAPI document
 will be used.
+
+### Customizing Route Order
+
+To customize or change the order of route matching within a single OpenAPI file,
+reorder the path entries in the `paths` object. The first path defined in the
+file will be matched first, followed by the second, etc.
+
+For example, if you want `/users/admin` to be matched before `/users/{userId}`,
+place it first in your `routes.oas.json`:
+
+```json
+{
+  "paths": {
+    "/users/admin": {
+      "get": {
+        "operationId": "get-admin-user"
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "operationId": "get-user"
+      }
+    }
+  }
+}
+```
+
+In this example, requests to `/users/admin` will match the first route, while
+requests to `/users/123` will match the second route. If the order were
+reversed, `/users/admin` would incorrectly match the `{userId}` parameter route.
+
+:::tip
+
+When organizing routes, place more specific paths before more general ones to
+ensure correct matching. Wildcard routes and catch-all patterns should typically
+be placed last.
+
+:::
 
 ## Path Parameters
 
@@ -78,10 +118,10 @@ In this example, the `userId` parameter is extracted from the request and used
 to fetch the user from an external data source or API in the `getUserById`
 function.
 
-URLPattern mode also supports path parameters, but they are defined using a
-colon `:` instead of curly braces `{}`. For example, the path `/users/:userId`
-defines a path parameter called `userId`. You can use path parameters in your
-request handlers in the same way as in OpenAPI mode.
+URLPattern mode also supports path parameters, but they're defined using a colon
+`:` instead of curly braces `{}`. For example, the path `/users/:userId` defines
+a path parameter called `userId`. You can use path parameters in your request
+handlers in the same way as in OpenAPI mode.
 
 ## Path Matching Examples
 

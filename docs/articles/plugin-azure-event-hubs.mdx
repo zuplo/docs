@@ -36,7 +36,7 @@ interface LogEntry {
 runtime.addPlugin(
   new AzureEventHubsRequestLoggerPlugin<LogEntry>({
     connectionString: environment.AZURE_EVENT_HUBS_CONNECTION_STRING,
-    // e.g. "Endpoint=sb://your-namespace.servicebus.windows.net/;SharedAccessKeyName=key-name;SharedAccessKey=YOUR_SHARED_ACCESS_KEY"
+    // for example "Endpoint=sb://your-namespace.servicebus.windows.net/;SharedAccessKeyName=key-name;SharedAccessKey=YOUR_SHARED_ACCESS_KEY"
     batchPeriodSeconds: 1,
     entityPath: "your-event-hub-name",
     generateLogEntry: (response: Response, request: ZuploRequest) => ({
@@ -56,9 +56,9 @@ runtime.addPlugin(
 The configuration requires a `connectionString` which you can get from the Azure
 portal "Shared access policies" section in Event Hubs. If the connection string
 contains an EntityPath property the separate `entityPath` option to define the
-event hub's name is not required.
+event hub's name isn't required.
 
 Entries will be batched and sent as an array, they will be sent every
 `batchPeriodSeconds`. If not specified it will be sent very frequently (~every
 10ms) to avoid data loss. Note that `batchPeriodSeconds` can be specified as a
-fraction, e.g. `0.1` for every 100ms.
+fraction, for example `0.1` for every 100ms.

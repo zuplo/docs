@@ -103,8 +103,8 @@ The following hooks can be set globally in the `zuplo.runtime.ts`:
 Runs before the request is matched to a route. This is useful if you want to
 customize the routing behaviour. Example use cases include:
 
-- Routing to a different url based on a header value
-- Normalizing urls to be all lowercase
+- Routing to a different URL based on a header value
+- Normalizing URLs to be all lowercase
 - Request preprocessing before route matching
 
 **Type Definition:**
@@ -296,7 +296,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
     // Custom 404 handling
     const customResponse = {
       error: "Route not found",
-      message: `The requested path '${new URL(request.url).pathname}' was not found`,
+      message: `The requested path '${new URL(request.url).pathname}' wasn't found`,
       timestamp: new Date().toISOString(),
       requestId: context.requestId,
     };

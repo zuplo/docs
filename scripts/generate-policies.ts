@@ -1,10 +1,10 @@
-import { glob } from "glob";
 import type { JSONSchema7, JSONSchema7Definition } from "json-schema";
 import fs from "node:fs/promises";
 import path from "node:path";
 import prettier from "prettier";
 import { createMarkdown } from "safe-marked";
 import { fixMarkdown } from "./fix-markdown.js";
+import { collectGlob } from "./utils.js";
 
 const EXCLUDED_POLICIES = ["api-key-auth-inbound"];
 
@@ -27,10 +27,10 @@ if (useLocalCore) {
 }
 
 const policySchemas = useLocalCore
-  ? await glob("*/schema.json", {
+  ? await collectGlob("*/schema.json", {
       cwd: path.join(projectDir, "../core/packages/runtime/src/policies"),
     })
-  : await glob("{policies,temp}/*/schema.json", {
+  : await collectGlob("{policies,temp}/*/schema.json", {
       cwd: projectDir,
     });
 

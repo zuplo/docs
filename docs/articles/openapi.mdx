@@ -7,7 +7,8 @@ Zuplo natively supports the OpenAPI 3.1 (and is compatible with 3.0)
 specification standard as the core way to configure the gateway.
 
 When you create a new project you will see a `routes.oas.json` file. This is
-your default OpenAPI routing file (oas = 'open api specification').
+your default OpenAPI routing file. The file extension `.oas.json` indicates that
+this is an OpenAPI document used for routing.
 
 ![routes.oas.json](../../public/media/open-api/image.png)
 
@@ -53,8 +54,8 @@ vendor extensions:
 
 `x-zuplo-path` is used to specify the type of
 [path matching mode](./routing.mdx) you want to use; **open-api** is the default
-and uses the standard OpenAPI slugs for tokens (e.g. `/pizza/{size}`). You can
-change the pathMode to `url-pattern` to use the web standards
+and uses the standard OpenAPI slugs for tokens (for example `/pizza/{size}`).
+You can change the `pathMode` to `url-pattern` to use the web standards
 [URLPattern](https://developer.mozilla.org/en-US/docs/Web/API/URLPattern)
 approach to path matching which is much more powerful and supports regular
 expressions.

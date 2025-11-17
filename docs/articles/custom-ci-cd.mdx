@@ -75,7 +75,7 @@ jobs:
       # shell: bash is required so that pipefail is set.
       # See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#exit-codes-and-error-action-preference
       # This way if the deploy fails, we fail before piping to tee.
-      # Note that you aren't required to use tee. We are using it in this example
+      # Note that you aren't required to use tee. We're using it in this example
       # so that the output is available to the terminal and written to the file.
       - name: Zuplo Deploy
         shell: bash
@@ -125,7 +125,7 @@ pipelines:
           name: Zuplo Deploy
           # set -o pipefail
           # This way if the deploy fails, we fail before piping to tee.
-          # Note that you are not required to use tee. We are using it in this example so that the output is available to the terminal and written to the file.
+          # Note that you aren't required to use tee. We're using it in this example so that the output is available to the terminal and written to the file.
           script:
             - set -o pipefail
             - npx zuplo deploy --apiKey "$ZUPLO_API_KEY" 2>&1 | tee
@@ -154,7 +154,7 @@ pipelines:
           name: Zuplo Deploy
           # set -o pipefail
           # This way if the deploy fails, we fail before piping to tee.
-          # Note that you aren't required to use tee. We are using it in this example so that the output is available to the terminal and written to the file.
+          # Note that you aren't required to use tee. We're using it in this example so that the output is available to the terminal and written to the file.
           script:
             - set -o pipefail
             - npx zuplo deploy --apiKey "$ZUPLO_API_KEY" | tee
@@ -209,7 +209,7 @@ steps:
 
   # set -o pipefail
   # This way if the deploy fails, we fail before piping to tee.
-  # Note that you are not required to use tee. We are using it in this example so that the output is available to the terminal and written to the file.
+  # Note that you aren't required to use tee. We're using it in this example so that the output is available to the terminal and written to the file.
   - script: |
       set -o pipefail 
       FORCE_COLOR=0 npx zuplo deploy --api-key $(ZUPLO_API_KEY) 2>&1 | tee ./DEPLOYMENT_STDOUT

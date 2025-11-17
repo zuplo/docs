@@ -1,29 +1,29 @@
 ---
-title: VMWare Log Insight Log Plugin
-sidebar_label: VMWare Log Insight
+title: VMware Log Insight Log Plugin
+sidebar_label: VMware Log Insight
 ---
 
-The VMWare Log Insight plugin enables pushing logs to your VMWare Log Insights
+The VMware Log Insight plugin enables pushing logs to your VMware Log Insights
 via the REST API.
 
 <EnterpriseFeature name="Custom logging" />
 
 ## Setup
 
-To add the VMWare Log Insight logging plugin to your Zuplo project, add the
+To add the VMware Log Insight logging plugin to your Zuplo project, add the
 following code to your `zuplo.runtime.ts` file.
 
 ```ts title="modules/zuplo.runtime.ts"
 import {
   RuntimeExtensions,
-  VMWareLogInsightLoggingPlugin,
+  VMwareLogInsightLoggingPlugin,
   environment,
 } from "@zuplo/runtime";
 
 export function runtimeInit(runtime: RuntimeExtensions) {
   runtime.addPlugin(
-    new VMWareLogInsightLoggingPlugin({
-      // This is the URL of your VMWare Log Insight host
+    new VMwareLogInsightLoggingPlugin({
+      // This is the URL of your VMware Log Insight host
       url: "https://loginsight.example.com",
       fields: {
         appname: "zuplo",
@@ -35,10 +35,10 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 
 ## Configuration Options
 
-The `VMWareLogInsightLoggingPlugin` constructor accepts an options object with
+The `VMwareLogInsightLoggingPlugin` constructor accepts an options object with
 the following properties:
 
-- `url` - (required) The URL of your VMWare Log Insight host (e.g.,
+- `url` - (required) The URL of your VMware Log Insight host (for example,
   `https://loginsight.example.com`)
 - `agentId` - (optional) The unique agent identifier of the logger
 - `fields` - (optional) Custom fields to include in each log entry. Can contain
@@ -65,7 +65,7 @@ contains the log message, which may be JSON encoded for complex data.
 
 Default fields are (in snake_case format):
 
-- `severity` - The log level (e.g., `ERROR`, `INFO`, `DEBUG`, `WARN`)
+- `severity` - The log level (for example, `ERROR`, `INFO`, `DEBUG`, `WARN`)
 - `request_id` - The UUID of the request (the value of the `zp-rid` header)
 - `environment_type` - Where the Zuplo API is running. Values are `edge`,
   `working-copy`, or `local`
@@ -75,12 +75,12 @@ Default fields are (in snake_case format):
 - `atomic_counter` - An atomic counter used to order logs with identical
   timestamps
 - `environment` - The environment name of the Zuplo API
-- `request_ray_id` - The network provider identifier (e.g., Cloudflare Ray ID)
-  of the request
+- `request_ray_id` - The network provider identifier (for example, Cloudflare
+  Ray ID) of the request
 
 :::note
 
-VMWare Log Insight uses snake_case naming convention for field names.
+VMware Log Insight uses snake_case naming convention for field names.
 
 :::
 

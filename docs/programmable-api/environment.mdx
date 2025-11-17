@@ -36,7 +36,7 @@ export default async function handler(
   const apiUrl = environment.API_BASE_URL;
 
   if (!apiKey) {
-    throw new Error("API_KEY environment variable is not set");
+    throw new Error("API_KEY environment variable isn't set");
   }
 
   const response = await fetch(`${apiUrl}/data`, {
@@ -83,7 +83,7 @@ function getRequiredEnv(name: string): string {
   const value = environment[name];
   if (!value) {
     throw new ConfigurationError(
-      `Required environment variable '${name}' is not set`,
+      `Required environment variable '${name}' isn't set`,
     );
   }
   return value;
@@ -244,10 +244,10 @@ validateSecrets();
 
 ## Environment Detection
 
-Zuplo does not provide a built-in `NODE_ENV` variable since it runs on a custom
+Zuplo doesn't provide a built-in `NODE_ENV` variable since it runs on a custom
 V8 runtime, not Node.js. To implement environment-specific logic, define your
-own environment variables (e.g., `ENVIRONMENT`, `STAGE`, or `ENV_TYPE`) and set
-them appropriately for each environment in your project settings.
+own environment variables (for example, `ENVIRONMENT`, `STAGE`, or `ENV_TYPE`)
+and set them appropriately for each environment in your project settings.
 
 ## Best Practices
 

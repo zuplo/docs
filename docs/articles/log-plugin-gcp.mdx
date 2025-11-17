@@ -45,8 +45,8 @@ following properties:
 
 - `serviceAccountJson` - (required) The JSON content of your Google Cloud
   service account key
-- `logName` - (required) The name of the log in Google Cloud Logging (e.g.,
-  `projects/my-project/logs/my-api`)
+- `logName` - (required) The name of the log in Google Cloud Logging (for
+  example, `projects/my-project/logs/my-api`)
 - `fields` - (optional) Custom fields to include in each log entry. Can contain
   string, number, or boolean values
 
@@ -62,7 +62,7 @@ the `jsonPayload` contains the text or objects passed into the log.
 
 Default fields in the `jsonPayload` are:
 
-- `severity` - The log level (e.g., `ERROR`, `INFO`, `DEBUG`, `WARN`)
+- `severity` - The log level (for example, `ERROR`, `INFO`, `DEBUG`, `WARN`)
 - `requestId` - The UUID of the request (the value of the `zp-rid` header)
 - `environmentType` - Where the Zuplo API is running. Values are `edge`,
   `working-copy`, or `local`
@@ -71,5 +71,5 @@ Default fields in the `jsonPayload` are:
 - `atomicCounter` - An atomic counter used to order logs with identical
   timestamps
 - `environment` - The environment name of the Zuplo API
-- `rayId` - The network provider identifier (e.g., Cloudflare Ray ID) of the
-  request
+- `rayId` - The network provider identifier (for example, Cloudflare Ray ID) of
+  the request

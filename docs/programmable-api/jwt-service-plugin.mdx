@@ -10,7 +10,7 @@ you need to issue tokens for authentication, authorization, or other purposes.
 
 The plugin essentially turns your Zuplo API into it's own identity provider that
 can issue JWTs. Your Zuplo API will also serve the standard
-`/.well-known/openid-configuration` endpoint and associated JWKs endpoint which
+`/.well-known/openid-configuration` endpoint and associated JWKS endpoint which
 can be used by clients to discover the public keys used to verify the JWTs
 issued by your API.
 
@@ -25,7 +25,7 @@ if you encounter any issues.
 
 This service currently issues JWTs using the EdDSA algorithm. This is the
 recommended algorithm for new applications due to its strong security properties
-and performance characteristics. However, it is important to note that not every
+and performance characteristics. However, it's important to note that not every
 library supports EdDSA, so you should ensure that your
 [client library](https://jwt.io/libraries) can handle this algorithm.
 
@@ -97,8 +97,9 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 
 - **`tokenExpiration`** (optional): Sets the default expiration time for JWTs.
   Can be either:
-  - A **number**: Direct value in seconds (e.g., `300` for 5 minutes)
-  - A **string**: Time span format (e.g., `"5 minutes"`, `"1 hour"`, `"7 days"`)
+  - A **number**: Direct value in seconds (for example, `300` for 5 minutes)
+  - A **string**: Time span format (for example, `"5 minutes"`, `"1 hour"`,
+    `"7 days"`)
 
   Valid time units include:
   - Seconds: `"sec"`, `"secs"`, `"second"`, `"seconds"`, `"s"`
@@ -314,8 +315,8 @@ the [`oauth4webapi`](https://github.com/panva/oauth4webapi) library.
 :::warning{title="Security Warning"}
 
 This approach is particularly useful when you have multiple Zuplo APIs with
-different issuers or when the issuer URL might change (e.g., between
-environments). It is CRITICAL that you validate the issuer claim in the JWT to
+different issuers or when the issuer URL might change (for example, between
+environments). It's CRITICAL that you validate the issuer claim in the JWT to
 ensure you are only allowing tokens from trusted issuers.
 
 :::
@@ -349,7 +350,7 @@ async function validateJwtDynamic(token) {
 
     // Validate the issuer against allowed issuers
     if (!ALLOWED_ISSUERS.includes(issuer)) {
-      throw new Error(`Issuer ${issuer} is not allowed`);
+      throw new Error(`Issuer ${issuer} isn't allowed`);
     }
 
     // Discover the OIDC configuration
@@ -406,7 +407,7 @@ app.get("/protected", validateJwtMiddleware, (req, res) => {
 This approach is particularly useful when:
 
 - You need to validate JWTs from multiple Zuplo APIs with different issuers
-- The issuer URL might change (e.g., between environments)
+- The issuer URL might change (for example, between environments)
 - You want to leverage automatic OIDC discovery for configuration updates
 
 ### Important Validation Steps
@@ -420,4 +421,4 @@ When validating JWTs from Zuplo:
 5. **Check any custom claims** required by your application
 
 The JWT Service Plugin handles key rotation automatically, so always fetch the
-current public keys from the JWKS endpoint rather than hardcoding them.
+current public keys from the JWKS endpoint rather than hard coding them.

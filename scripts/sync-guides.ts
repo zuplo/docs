@@ -1,14 +1,14 @@
-import { glob } from "glob";
 import path from "node:path";
 import { readFile, writeFile } from "node:fs/promises";
 import { format } from "prettier";
+import { collectGlob } from "./utils.js";
 
 const projectDir = path.join(import.meta.dirname, "..");
 const checkMode = process.argv.includes("--check");
 
 async function main() {
   // Find all guide files in docs/guides
-  const guideFiles = await glob("docs/guides/**/*.{md,mdx}", {
+  const guideFiles = await collectGlob("docs/guides/**/*.{md,mdx}", {
     cwd: projectDir,
   });
 

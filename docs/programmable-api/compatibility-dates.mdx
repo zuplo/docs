@@ -7,10 +7,10 @@ Occasionally, these updates aren't backwards compatible. In order to ensure that
 your project continues to build, deploy and operate as you expect it you can set
 a compatibility date to lock in the behavior and APIs of the runtime.
 
-The compatibility date is set in the `zuplo.jsonc` file at the root of
-yourproject. The `zuplo.jsonc` file is created by default for new projects and
+The compatibility date is set in the `zuplo.jsonc` file at the root of your
+project. The `zuplo.jsonc` file is created by default for new projects and
 contains the default configuration. For more information on the `zuplo.jsonc`
-file, see the [Zuplo Project Config](./zuplo-json.mdx) documentation.
+file, see the [Zuplo Project Configuration](./zuplo-json.mdx) documentation.
 
 ## 2025-02-06
 
@@ -21,9 +21,9 @@ projects created after 2025-03-27.
 ### Special Characters in OpenAPI Format URLs
 
 Previously, special characters that were included in URLs that used the
-`open-api` formatted URLs were not escaped. This allowed an unintended behavior
-where the URL could include Regex patterns even though the OpenAPI format urls
-do not allow regex. This has been fixed and now all special characters are
+`open-api` formatted URLs weren't escaped. This allowed an unintended behavior
+where the URL could include Regex patterns even though the OpenAPI format URLs
+doesn't allow regex. This has been fixed and now all special characters are
 escaped. This allows URLs with formats like:
 
 ```
@@ -86,17 +86,17 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 
 ### Improved Node.js Compatibility
 
-The Zuplo runtime does not run Node.js, but is compatible with a number of
+The Zuplo runtime doesn't run Node.js, but is compatible with a number of
 Node.js APIs. This compatibility date adds some additional support for Node.js
 specific APIs.
 
-### Url Forward Handler Redirects
+### URL Forward Handler Redirects
 
 The `UrlForwardHandler` now supports the `followRedirects` option. Previously,
-this option was not supported on the forward handler. However, it was
-erroneously documented as supported. This property is behind a compatibility
-date in order to ensure that if existing projects were using the option that did
-not work as expected, they would not be broken by this change.
+this option wasn't supported on the forward handler. However, it was erroneously
+documented as supported. This property is behind a compatibility date in order
+to ensure that if existing projects were using the option that didn't work as
+expected, they wouldn't be broken by this change.
 
 ## 2024-09-02
 

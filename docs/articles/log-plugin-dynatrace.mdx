@@ -1,15 +1,15 @@
 ---
-title: DynaTrace Plugin
-sidebar_label: DynaTrace Logging
+title: Dynatrace Plugin
+sidebar_label: Dynatrace Logging
 ---
 
-The DynaTrace Log plugin enables pushing logs to DynaTrace.
+The Dynatrace Log plugin enables pushing logs to Dynatrace.
 
 <EnterpriseFeature name="Custom logging" />
 
 ## Setup
 
-To add the DynaTrace logging plugin to your Zuplo project, add the following
+To add the Dynatrace logging plugin to your Zuplo project, add the following
 code to your `zuplo.runtime.ts` file.
 
 ```ts title="modules/zuplo.runtime.ts"
@@ -22,7 +22,7 @@ import {
 export function runtimeInit(runtime: RuntimeExtensions) {
   runtime.addPlugin(
     new DynaTraceLoggingPlugin({
-      // This is the URL of your DynaTrace logs ingest API
+      // This is the URL of your Dynatrace logs ingest API
       url: "https://xxxxxxx.live.dynatrace.com/api/v2/logs/ingest",
       apiToken: environment.DYNATRACE_API_TOKEN,
       fields: {
@@ -39,7 +39,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 The `DynaTraceLoggingPlugin` constructor accepts an options object with the
 following properties:
 
-- `url` - (required) The Dynatrace logs ingest API URL (e.g.,
+- `url` - (required) The Dynatrace logs ingest API URL (for example,
   `https://xxxxxxx.live.dynatrace.com/api/v2/logs/ingest`)
 - `apiToken` - (required) Your Dynatrace API token. The API token requires the
   `events.ingest` scope
@@ -56,7 +56,7 @@ Any custom fields you want to include in the log entry can be added to the
 Every log entry will include the following fields:
 
 - `timestamp` - The time the log was created (ISO 8601 format)
-- `severity` - The log level (e.g., `ERROR`, `INFO`, `DEBUG`, `WARN`)
+- `severity` - The log level (for example, `ERROR`, `INFO`, `DEBUG`, `WARN`)
 - `content` - The log message and data
 - `custom.environmentType` - Where the Zuplo API is running. Values are `edge`,
   `working-copy`, or `local`
@@ -65,8 +65,8 @@ Every log entry will include the following fields:
 - `requestId` - The UUID of the request (the value of the `zp-rid` header)
 - `custom.atomicCounter` - An atomic counter used to order logs with identical
   timestamps
-- `custom.rayId` - The network provider identifier (e.g., Cloudflare Ray ID) of
-  the request
+- `custom.rayId` - The network provider identifier (for example, Cloudflare Ray
+  ID) of the request
 
 :::note
 

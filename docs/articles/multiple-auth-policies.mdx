@@ -1,7 +1,7 @@
 ---
 title: Handling Multiple Authentication Policies
 sidebar_label: Multiple Auth Policies
-description: >-
+description:
   Learn how to configure multiple authentication methods like JWT and API Key on
   a single API route in Zuplo.
 tags:
@@ -34,7 +34,7 @@ All of the Zuplo built-in authentication policies have an option called
 `allowUnauthenticatedRequests`. This option is `true` by default, meaning for an
 anonymous request, the policy will immediately return a response with a 401:
 Unauthorized status. **In the case of multiple policies, this setting must be
-`false`.** This means that even if the request is NOT authenticated, the policy
+`false`.** This means that even if the request isn't authenticated, the policy
 will still let the request through.
 
 :::tip

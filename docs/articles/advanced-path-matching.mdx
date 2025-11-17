@@ -1,6 +1,6 @@
 ---
 title: Advanced Path Matching
-description: >-
+description:
   Learn how to use URLPattern for advanced path matching with dynamic
   parameters, regular expressions, and wildcards in Zuplo.
 tags:
@@ -8,7 +8,7 @@ tags:
   - custom-code
 ---
 
-By default, path matching in Zuplo uses the OpenAPI slug format, e.g.
+By default, path matching in Zuplo uses the OpenAPI slug format, for example
 `/pizza/{size}` where **size** would be a URL parameter, with the value passed
 into the runtime as `request.params.size` property.
 
@@ -34,9 +34,8 @@ example:
 - `/cars/:manufacturer`
 
 Would match `/cars/ford` but not `/cars/ford/`. If you want to support this you
-must add a little regex to the end of your path, e.g.
-
-- `/cars/:manufacturer{/}?`
+must add a little regex to the end of your path, for example -
+`/cars/:manufacturer{/}?`
 
 Will match both example routes given above.
 
@@ -103,10 +102,9 @@ as follows:
 ```
 
 You can write a [URL Rewrite](../handlers/url-rewrite.mdx) that takes an
-incoming wildcard and appends it to the backend request, e.g.
-
-Path: `/foo/bar:path(/.*)` Incoming URL: `/foo/bar/apple/banana` URL Rewrite
-Pattern: `https://example.com/x${params.path}` Outgoing URL:
+incoming wildcard and appends it to the backend request, for example Path:
+`/foo/bar:path(/.*)` Incoming URL: `/foo/bar/apple/banana` URL Rewrite Pattern:
+`https://example.com/x${params.path}` Outgoing URL:
 `https://example.com/x/apple/banana`
 
 ## Not supported

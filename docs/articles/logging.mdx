@@ -17,14 +17,14 @@ Zuplo offers out-of-the box integrations with many common logging vendors. For
 instructions on how to configure logging, see the documentation for each plugin:
 
 - [AWS CloudWatch](./log-plugin-aws-cloudwatch.mdx)
-- [DataDog](./log-plugin-datadog.mdx)
+- [Datadog](./log-plugin-datadog.mdx)
 - [Dynatrace](./log-plugin-dynatrace.mdx)
 - [New Relic](./log-plugin-new-relic.mdx)
 - [Google Cloud Logging](./log-plugin-gcp.mdx)
 - [Loki](./log-plugin-loki.mdx)
 - [Splunk](./log-plugin-splunk.mdx)
 - [Sumo Logic](./log-plugin-sumo.mdx)
-- [VMWare Log Insight](./log-plugin-vmware-log-insight.mdx)
+- [VMware Log Insight](./log-plugin-vmware-log-insight.mdx)
 
 :::info
 
@@ -83,7 +83,7 @@ details.
   changes every time a new version of your API is built and deployed.
 - `logSource`: Whether the log originated from a request (`request`) or from
   outside of a request (`runtime`)
-- `rayId`: The value of the network provider request ID (i.e. Cloudflare Ray
+- `rayId`: The value of the network provider request ID (that is Cloudflare Ray
   ID). This value is used internally to coordinate log event in Zuplo to log
   events in the environment where your API runs. It's provided in your logs for
   potential troubleshooting. Normally, it's recommended to rely on the

@@ -19,18 +19,18 @@ services, each running on its own Zuplo instance.
 
 Federated gateways are useful for several reasons:
 
-- **Seperation of Product Areas**: Depending on your organizational structure,
+- **Separation of Product Areas**: Depending on your organizational structure,
   you may want to separate different product areas into their own Zuplo
   projects. This allows teams to work independently while still being able to
   route requests through a single gateway. Each team can manage their own
   portion of the API without affecting others. Each team creates its own Zuplo
-  Project with its own git repo, environment variables, etc.
+  Project with its own git repository, environment variables, etc.
 - **Versioning**: You can use federated gateways to manage different versions of
   your API. For example, if you wanted to run a new version of your API
   alongside the old one and route requests to specific versions based on user or
   other context you can keep different versions in separate Zuplo projects.
 - **Risk Minimization**: By separating different parts of your API into
-  different Zuplo projects, you can reduce the risk of causing inadvertant
+  different Zuplo projects, you can reduce the risk of causing inadvertent
   changes to other parts of the API. This can be especially useful if your API
   is particularly large or complex.
 
@@ -38,13 +38,13 @@ Federated gateways are useful for several reasons:
 
 Managed dedicated Zuplo environments can call other Zuplo environments deployed
 in the same instance. To make a call to another Zuplo environment, you simply
-make a normal HTTP request to the other environment using the url protocol
+make a normal HTTP request to the other environment using the URL protocol
 `local` with the environment name. For example, if your environment is named
 `my-api-main-2s93j2`, then you would make a request to
 `local://my-api-main-2s93j2`.
 
 You can use most Zuplo request handlers to make these requests (the Lambda
-handler is not supported).
+handler isn't supported).
 
 For example, to create a federated gateway that forwards requests to another
 Zuplo environment, you can use the URL Forward handler. Here is an example

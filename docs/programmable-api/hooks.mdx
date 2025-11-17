@@ -31,7 +31,7 @@ pipeline:
 
 - **`addResponseSendingHook`** - Executes before the response is sent and can
   modify it
-- **`addResponseSendingFinalHook`** - Executes after all processing but cannot
+- **`addResponseSendingFinalHook`** - Executes after all processing but can't
   modify the response
 
 ### Hook Types
@@ -155,8 +155,8 @@ export async function tracingPlugin(
 
 The `addResponseSendingFinalHook` method adds a hook that fires immediately
 before the response is sent to the client. Unlike `OnResponseSending`, this hook
-cannot modify the response - it's immutable at this point. This hook is ideal
-for logging, analytics, and monitoring tasks.
+can't modify the response - it's immutable at this point. This hook is ideal for
+logging, analytics, and monitoring tasks.
 
 ### Method Signature
 
@@ -265,7 +265,7 @@ const clone = response.clone();
 const body = await clone.text();
 ```
 
-### 3. Use waitUntil for Async Work
+### 3. Use `waitUntil` for Asynchronous Work
 
 For operations that shouldn't block the response:
 
@@ -565,5 +565,5 @@ This plugin demonstrates:
 - [ZuploContext](./zuplo-context.mdx) - The context object that provides hook
   methods
 - [Runtime Extensions](./runtime-extensions.mdx) - Global hook registration
-- [waitUntil](./zuplo-context.md#waituntil) - Extending request lifetime for
-  async operations
+- [waitUntil](./zuplo-context.mdx#waituntil) - Extending request lifetime for
+  asynchronous operations

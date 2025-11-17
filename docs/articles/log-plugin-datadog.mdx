@@ -1,15 +1,15 @@
 ---
-title: DataDog Plugin
-sidebar_label: DataDog Logging
+title: Datadog Plugin
+sidebar_label: Datadog Logging
 ---
 
-The DataDog Log plugin enables pushing logs to DataDog.
+The Datadog Log plugin enables pushing logs to Datadog.
 
 <EnterpriseFeature name="Custom logging" />
 
 ## Setup
 
-To add the DataDog logging plugin to your Zuplo project, add the following code
+To add the Datadog logging plugin to your Zuplo project, add the following code
 to your `zuplo.runtime.ts` file.
 
 ```ts title="modules/zuplo.runtime.ts"
@@ -22,7 +22,7 @@ import {
 export function runtimeInit(runtime: RuntimeExtensions) {
   runtime.addPlugin(
     new DataDogLoggingPlugin({
-      // Optional, defaults to the DataDog logs API endpoint
+      // Optional, defaults to the Datadog logs API endpoint
       url: "https://http-intake.logs.datadoghq.com/api/v2/logs",
       apiKey: environment.DATADOG_API_KEY,
       source: "MyAPI", // Optional, defaults to "Zuplo"
@@ -43,8 +43,8 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 The `DataDogLoggingPlugin` constructor accepts an options object with the
 following properties:
 
-- `apiKey` - (required) Your DataDog API key for authentication
-- `url` - (optional) The DataDog logs intake URL. Defaults to the DataDog logs
+- `apiKey` - (required) Your Datadog API key for authentication
+- `url` - (optional) The Datadog logs intake URL. Defaults to the Datadog logs
   API endpoint
 - `source` - (optional) The source of the logs, typically the name of the
   application or service. Defaults to "Zuplo"
@@ -67,10 +67,10 @@ property. These values will be appended to every log entry.
 ## Default Fields
 
 Every log entry will include the following fields (in snake_case format for
-DataDog):
+Datadog):
 
 - `timestamp` - The time the log was created (ISO 8601 format)
-- `severity` - The log level (e.g., `ERROR`, `INFO`, `DEBUG`, `WARN`)
+- `severity` - The log level (for example, `ERROR`, `INFO`, `DEBUG`, `WARN`)
 - `message` - The complete log message and data
 - `msg` - The first string message extracted from the log entry
 - `environment_type` - Where the Zuplo API is running. Values are `edge`,
@@ -80,5 +80,5 @@ DataDog):
 - `request_id` - The UUID of the request (the value of the `zp-rid` header)
 - `atomic_counter` - An atomic counter used to order logs with identical
   timestamps
-- `ray_id` - The network provider identifier (e.g., Cloudflare Ray ID) of the
-  request
+- `ray_id` - The network provider identifier (for example, Cloudflare Ray ID) of
+  the request

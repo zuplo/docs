@@ -1,11 +1,12 @@
-import { glob } from "glob";
 import path from "node:path";
 import { readFile, writeFile } from "node:fs/promises";
 import matter from "gray-matter";
 import { format } from "prettier";
+import { collectGlob } from "./utils.js";
 
 const projectDir = path.join(import.meta.dirname, "..");
-const errorMds = await glob("docs/errors/*.{md,mdx}", {
+
+const errorMds = await collectGlob("docs/errors/*.{md,mdx}", {
   cwd: projectDir,
 });
 
