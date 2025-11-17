@@ -50,7 +50,7 @@ export const GuidesPage = () => {
         <title>Guides</title>
       </Head>
       <div className="text-center my-10 md:my-16">
-        <h1 className="text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
+        <h1 className="text-3xl font-extrabold tracking-tight leading-none md:text-4xl xl:text-5xl">
           Guides
         </h1>
         <p className="mt-4 text-xl text-muted-foreground max-w-3xl mx-auto">
