@@ -15,7 +15,7 @@
     "typecheck": "tsc",
     "lint:docs": "vale --config .vale.ini docs/",
     "lint:admonitions": "node ./scripts/check-admonitions.mjs",
-    "postinstall": "npm run policies:get && npm run policies:generate && npm run errors:generate && npm run cli:generate && npm run api:get && npm run zudoku:get",
+    "postinstall": "npm run policies:get && npm run policies:generate && npm run errors:generate && npm run cli:generate && npm run api:get && npm run zudoku:get && npm run guides:generate",
     "zudoku:get": "sh ./scripts/get-zudoku.sh",
     "policies:get": "sh ./scripts/get-policies.sh",
     "policies:generate": "tsx scripts/generate-policies.ts",
@@ -23,7 +23,13 @@
     "dev:policies": "concurrently \"npm:dev\" \"npm:policies:watch\"",
     "api:get": "node ./scripts/update-api.mjs",
     "errors:generate": "tsx scripts/generate-errors.ts",
-    "cli:generate": "tsx scripts/generate-cli-docs.ts"
+    "cli:generate": "tsx scripts/generate-cli-docs.ts",
+    "guides:generate": "tsx scripts/generate-guides.ts",
+    "guides:sync": "tsx scripts/sync-guides.ts",
+    "guides:check": "tsx scripts/sync-guides.ts --check",
+    "guides:unused-categories": "tsx scripts/find-unused-categories.ts",
+    "unlinked": "node --import ./scripts/setup-react.mjs --import tsx/esm --loader ./scripts/css-loader.mjs scripts/find-unlinked-docs.ts",
+    "guides:frontmatter": "node --env-file ./.env --import ./scripts/setup-react.mjs --import tsx/esm --loader ./scripts/css-loader.mjs scripts/add-guide-frontmatter.ts"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
@@ -38,6 +44,7 @@
     "zudoku": "^0.64.1"
   },
   "devDependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.1.42",
     "@types/json-schema": "7.0.15",
     "@types/node": "^22.10.7",
     "@types/react": "^19.0.7",

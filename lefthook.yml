@@ -6,3 +6,8 @@ pre-commit:
       run: |
         npx prettier --write {staged_files}
         git add {staged_files}
+    guides-sync:
+      glob: "docs/guides/**/*.{md,mdx}"
+      run: |
+        npm run guides:sync
+        git add sidebar.guides.ts

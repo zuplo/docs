@@ -1,0 +1,54 @@
+import type { Navigation } from "zudoku";
+
+export const categories = [
+  // Core API Design
+  { slug: "openapi", label: "OpenAPI & API Design" },
+  { slug: "authentication", label: "Authentication & Security" },
+
+  // Performance & Reliability
+  { slug: "rate-limiting", label: "Rate Limiting & Quotas" },
+  { slug: "caching", label: "Caching & Performance" },
+
+  // Backend & Integration
+  { slug: "backends", label: "Backend Integration" },
+  { slug: "integrations", label: "Third-Party Integrations" },
+
+  // Development
+  { slug: "custom-code", label: "Custom Policies & Code" },
+  { slug: "request-handling", label: "Request & Response Handling" },
+  { slug: "testing", label: "Testing & Debugging" },
+
+  // Operations
+  { slug: "deployment", label: "Deployment & Networking" },
+  { slug: "observability", label: "Monitoring & Observability" },
+
+  // Documentation
+  { slug: "dev-portal", label: "Developer Portal" },
+];
+
+export const guides: Navigation = [
+  "articles/openapi-server-urls",
+  "articles/versioning-on-zuplo",
+  "articles/multiple-auth-policies",
+  "articles/archiving-requests-to-storage",
+  "articles/per-user-rate-limits-using-db",
+  "articles/rick-and-morty-api-developer-portal-example",
+  "articles/check-ip-address",
+  "articles/advanced-path-matching",
+  "articles/lazy-load-configuration-into-cache",
+  "articles/handling-form-data",
+  "articles/testing-graphql",
+  "articles/bypass-policy-for-testing",
+  "articles/graphql-security",
+  "articles/add-api-to-backstage",
+  "articles/use-openapi-extension-data",
+  "articles/non-standard-ports",
+  "articles/convert-urls-to-openapi",
+  "articles/configuring-auth0-for-mcp-auth",
+  "articles/configuring-okta-for-mcp-auth",
+  "articles/manual-mcp-oauth-testing",
+  "articles/health-checks",
+  "articles/s3-signed-url-uploads",
+  "guides/canary-routing-for-employees",
+  "guides/geolocation-backend-routing",
+];

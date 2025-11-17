@@ -20,29 +20,18 @@ rm -rf "$DOWNLOAD_DIR" "$DEST_DIR"
 log "Creating download directory..."
 mkdir -p "$DOWNLOAD_DIR"
 
-# Get the latest release tarball URL from GitHub API
-log "Fetching latest release information..."
+# Get the main branch tarball URL
+MAIN_BRANCH_URL="https://api.github.com/repos/zuplo/zudoku/tarball/main"
+log "Main branch URL: $MAIN_BRANCH_URL"
+
+# Download the main branch tar.gz
+TAR_FILE="$DOWNLOAD_DIR/zudoku_docs.tar.gz"
+log "Downloading from main branch..."
 if [ -n "$GITHUB_NPM_TOKEN" ]; then
     log "Using GITHUB_NPM_TOKEN for authentication..."
-    LATEST_RELEASE_URL=$(curl -s -H "Authorization: Bearer $GITHUB_NPM_TOKEN" https://api.github.com/repos/zuplo/zudoku/releases/latest | grep -o '"tarball_url": "[^"]*"' | cut -d'"' -f4)
+    curl -L -H "Authorization: token $GITHUB_NPM_TOKEN" -o "$TAR_FILE" "$MAIN_BRANCH_URL"
 else
-    LATEST_RELEASE_URL=$(curl -s https://api.github.com/repos/zuplo/zudoku/releases/latest | grep -o '"tarball_url": "[^"]*"' | cut -d'"' -f4)
-fi
-
-if [ -z "$LATEST_RELEASE_URL" ]; then
-    log "Error: Unable to fetch latest release URL."
-    exit 1
-fi
-
-log "Latest release URL: $LATEST_RELEASE_URL"
-
-# Download the latest tar.gz release
-TAR_FILE="$DOWNLOAD_DIR/zudoku_docs.tar.gz"
-log "Downloading the latest release..."
-if [ -n "$GITHUB_NPM_TOKEN" ]; then
-    curl -L -H "Authorization: token $GITHUB_NPM_TOKEN" -o "$TAR_FILE" "$LATEST_RELEASE_URL"
-else
-    curl -L -o "$TAR_FILE" "$LATEST_RELEASE_URL"
+    curl -L -o "$TAR_FILE" "$MAIN_BRANCH_URL"
 fi
 
 # Extract the tar.gz file

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { nodeModuleIssues } from "./bundles.issues";
+import { nodeModuleIssues } from "../bundles.issues.js";
 
 type BundlesFile = {
   bundles: {

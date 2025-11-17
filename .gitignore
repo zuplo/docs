@@ -35,6 +35,7 @@ yarn-error.log*
 /policies.*.json
 /cli.json
 /src/errors.ts
+/src/guides.ts
 /temp
 /scripts/update-policies.mjs
 /scripts/update-policies.mjs.map

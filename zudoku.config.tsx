@@ -1,9 +1,16 @@
 import type { ZudokuConfig, ZudokuPlugin } from "zudoku";
-import { aiGateway, apiGateway, devPortal, resources } from "./sidebar.js";
+import {
+  aiGateway,
+  apiGateway,
+  devPortal,
+  guides,
+  resources,
+} from "./sidebar.js";
 import { mdxComponents } from "./src/components.js";
-import { HeadNavigation } from "./src/HeadNavigation";
+import { HeadNavigation } from "./src/components/HeadNavigation.js";
 import "./src/diagrams.css";
-import { LandingPage } from "./src/LandingPage";
+import { LandingPage } from "./src/pages/LandingPage.js";
+import { GuidesPage } from "./src/pages/GuidesPage.js";
 
 const inkeepMetadataPlugin: ZudokuPlugin = {
   getHead: ({ location }) => {
@@ -113,6 +120,12 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
       type: "category",
       label: "Developer Portal",
       items: devPortal,
+    },
+    {
+      type: "custom-page",
+      label: "Guides",
+      path: "/guides",
+      element: <GuidesPage />,
     },
     {
       type: "category",
