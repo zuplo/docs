@@ -52,6 +52,6 @@ export const guides: Navigation = [
   "guides/canary-routing-for-employees",
   "guides/geolocation-backend-routing",
   "guides/modify-openapi-paths",
-  "guides/openapi-overlay-versioning",
+  "guides/modify-openapi-paths",
   "guides/openapi-overlays",
 ];
