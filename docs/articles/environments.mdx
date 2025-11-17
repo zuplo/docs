@@ -21,26 +21,26 @@ cloud laptop. To deploy to this environment you just need to save a change in
 portal.zuplo.com, that will automatically trigger a build and deploy of your
 working-copy. A working-copy environment ends in a `.dev` URL. While these
 environments are deployed to the edge in 300+ data centers around the world,
-they are optimized for development purposes. There are some minor differences
+they're optimized for development purposes. There are some minor differences
 with production and preview environments with caching and other features.
 
 ### Preview
 
-These are are environments that are deployed using the
-[GitHub integration](/docs/articles/source-control) or building a
-[custom CI/CD pipeline](/docs/articles/custom-ci-cd). Preview environments are
-deployed from from any branch that isn't set as your default (for example
+These are environments that are deployed using the
+[GitHub integration](/docs/articles/source-control.mdx) or building a
+[custom CI/CD pipeline](/docs/articles/custom-ci-cd.mdx). Preview environments
+are deployed from any branch that isn't set as your default (for example
 production branch). Preview environments are deployed to the edge and have the
 same behavior as production environments, but are typically used for staging,
 testing pull requests, etc.
 
 ### Production
 
-These are are environments that are deployed using the
-[GitHub integration](/docs/articles/source-control) or building a
-[custom CI/CD pipeline](/docs/articles/custom-ci-cd). Each project has only one
-Production environment and is deployed from the git branch that's set as your
-production branch in your source control settings.
+These are environments that are deployed using the
+[GitHub integration](/docs/articles/source-control.mdx) or building a
+[custom CI/CD pipeline](/docs/articles/custom-ci-cd.mdx). Each project has only
+one Production environment and is deployed from the git branch that's set as
+your production branch in your source control settings.
 
 ### Preview vs Production Environments (or multiple Production Environments)
 
@@ -48,8 +48,8 @@ Note, there is no _technical_ difference between a **Preview** environment and a
 **Production** environment and some customers choose to use a specific (or
 multiple) Preview environments as 'Production' deployments of their API. By
 default, Preview environments share a set of
-[environment variables](/docs/articles/environment-variables) and buckets for
-API keys etc, but these can be overridden for specific environments.
+[environment variables](/docs/articles/environment-variables.mdx) and buckets
+for API keys etc, but these can be overridden for specific environments.
 
 ## Navigating Environments
 
@@ -63,9 +63,9 @@ Your development (working copy) environment will be listed at the top in a
 separate section. Your git deployed environments will be listed next with the
 production environment on top.
 
-For users using [source control integration](/docs/articles/source-control) the
-name of the deployment matches the branch name (yes - creating a new environment
-is literally as easy as creating a new branch).
+For users using [source control integration](/docs/articles/source-control.mdx)
+the name of the deployment matches the branch name (yes - creating a new
+environment is literally as easy as creating a new branch).
 
 You can't edit the code of an production or preview environment in
 portal.zuplo.com but you can switch into those environments to perform a number
@@ -90,7 +90,7 @@ ${env.BASE_PATH}${pathname}
 ```
 
 A url rewrite like this will combine the `BASE_PATH` environment variable, say
-`https://example.com` with the incoming path, e.g. `/foo/bar` to create a
+`https://example.com` with the incoming path, for example `/foo/bar` to create a
 re-written URL:
 
 ```json

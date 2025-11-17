@@ -28,7 +28,7 @@ Creates a new runtime error with optional extension data.
 
 - `message` - The error message
 - `info` - Object containing message and optional extension members
-- `options` - Standard error options (e.g., `cause`)
+- `options` - Standard error options (for example `cause`)
 
 ### Properties
 
@@ -104,7 +104,7 @@ export default async function handler(
 
   if (!apiKey) {
     throw new ConfigurationError(
-      "EXTERNAL_API_KEY environment variable is not configured",
+      "EXTERNAL_API_KEY environment variable isn't configured",
     );
   }
 

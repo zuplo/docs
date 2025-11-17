@@ -1,6 +1,6 @@
 ---
 title: Setting up Auth0 as an Authentication Server for MCP OAuth Authentication
-description: >-
+description:
   Learn how to configure Auth0 as an Authorization Server for use with the MCP
   Server handler and OAuth authentication.
 tags:
@@ -26,7 +26,7 @@ your MCP Server.
 2. Set the **Name** to something like "MCP Server" and the **Identifier** to the
    canonical URL of your MCP Server. For example, if your MCP Server is hosted
    at `https://my-gateway.zuplo.dev/mcp`, then the identifier would be
-   `https://my-gateway.zuplo.dev/mcp`. **The trailing slash is not required.**
+   `https://my-gateway.zuplo.dev/mcp`. **The trailing slash isn't required.**
 3. Leave the **Signing Algorithm** as `RS256` and click **Create**.
 
 ### Enable Dynamic Client Registration
@@ -49,10 +49,10 @@ Next, you will need to configure an Auth0 Connection for your API.
 
 2. Click the type of Authentication connection you would like to use. For this
    tutorial, we will use the default Database
-   **Username-Password-Authentication** connection. If you are not using the
+   **Username-Password-Authentication** connection. If you aren't using the
    default database connection, then create a new connection of the type you
    want to use and configure it with your desired settings. Click the **Try
-   Connection** button to make sure that it is working. Note the Identifier of
+   Connection** button to make sure that it's working. Note the Identifier of
    the connection. You will need this in one of the next steps.
 
 3. Promote the connection that you would like to use for your MCP Client
@@ -170,14 +170,14 @@ To connect to your remote Zuplo MCP server in the Inspector UI:
 
 1. Set the **Transport Type** to "Streamable HTTP"
 2. Set the **URL** to your Zuplo gateway with the route used by the MCP Server
-   Handler (i.e., `https://my-gateway.zuplo.dev/mcp`)
+   Handler (that is, `https://my-gateway.zuplo.dev/mcp`)
 3. You will need to login using the OAuth flow using the **Open Auth Settings**
    button.
 4. Hit **Connect**.
 
 For debugging your OAuth configuration, hit the **Open Auth Settings** button in
 the Inspector UI to start the OAuth flow. When first setting up the OAuth flow,
-it is recommmended to use the **Guided OAuth Flow** which you will see when you
+it's recommmended to use the **Guided OAuth Flow** which you will see when you
 open the OAuth settings. This will allow you to debug the flow step by step.
 
 You should be able to hit the **Continue** button in the Inspector UI at each

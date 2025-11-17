@@ -3,6 +3,8 @@ title: Performance Testing Your API Gateway
 sidebar_label: Performance Testing
 ---
 
+<!-- vale Vale.Spelling["Blazemeter","JMeter","wrk"] = NO -->
+
 Performance testing is critical for understanding the real-world performance of
 your API when using an API gateway like Zuplo. This guide helps you create fair
 and accurate performance tests that properly measure latency and throughput.
@@ -133,7 +135,7 @@ Different policies have varying performance impacts:
 ### Medium Impact (3-10ms)
 
 - API key authentication (Varies depending on cache hits/replication)
-- Rate limiting checks (0ms with async mode)
+- Rate limiting checks (0ms with asynchronous mode)
 - Request/response logging
 - Simple transformations
 

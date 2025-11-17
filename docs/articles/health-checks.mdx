@@ -1,7 +1,7 @@
 ---
 title: Health Check Handler
 sidebar_label: Health Checks
-description: >-
+description:
   Learn how to set up health check endpoints to monitor your API Gateway and
   backend services.
 tags:
@@ -10,13 +10,13 @@ tags:
 ---
 
 Part of running a reliable API Gateway is ensuring that the service is healthy
-and available. With Zuplo, it is easy to setup a health check endpoint that can
+and available. With Zuplo, it's easy to setup a health check endpoint that can
 be used to ensure the health of both your Zuplo Gateway and your backend (as
 well as the connectivity between them).
 
-A typical health check endpoint on your API Gateway will excersise some of the
+A typical health check endpoint on your API Gateway will exercise some of the
 most important policies (such as authentication) and then make a simple request
-to your backend to ensure that it is reachable and functioning.
+to your backend to ensure that it's reachable and functioning.
 
 ## Setting up a Health Check Handler
 
@@ -59,7 +59,7 @@ OpenAPI file this would look like:
 
 Next, you'll create a custom handler module that will be used to process the
 health check requests. This module will make a simple request to your backend to
-ensure that it is reachable and functioning. If you have multiple backend
+ensure that it's reachable and functioning. If you have multiple backend
 services you can check each of them.
 
 ```ts title="modules/health.ts"

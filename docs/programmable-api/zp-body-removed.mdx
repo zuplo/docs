@@ -13,11 +13,11 @@ infrastructure and a header `zp-body-removed` is added to the request.
 
 This allows your origin/backend server to know that a body was removed. If you
 want to enforce this and reject such requests it's easy to write a custom policy
-that looks for a `zp-body-removed` header and return a response, e.g.
+that looks for a `zp-body-removed` header and return a response. An example is
+below:
 
 ```ts
 import { HttpProblems, ZuploContext, ZuploRequest } from "@zuplo/runtime";
-
 export default async function (request: ZuploRequest, context: ZuploContext) {
   const bodyRemoved = request.headers.get("zp-body-removed");
 

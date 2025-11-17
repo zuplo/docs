@@ -123,7 +123,7 @@ const policies: Navigation = [
   },
   {
     type: "category",
-    label: "Async & Archival",
+    label: "Archival",
     items: [
       "policies/archive-request-azure-storage-inbound",
       "policies/archive-request-gcp-storage-inbound",

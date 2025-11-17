@@ -19,16 +19,16 @@ monitoring.
 The Comet Opik integration provides powerful observability and evaluation
 features:
 
-- **Comprehensive trace logging** — Automatically capture LLM calls, inputs,
+- **Comprehensive trace logging**: Automatically capture LLM calls, inputs,
   outputs, and metadata
-- **Development debugging** — Annotate and label traces through SDK or UI for
+- **Development debugging**: Annotate and label traces through SDK or UI for
   iterative improvement
-- **LLM evaluation** — Use LLM-as-a-Judge and heuristic evaluators to score
-  trace quality
-- **Production monitoring** — Track feedback scores, trace counts, tokens, and
+- **LLM evaluation**: Use LLM-as-a-Judge and heuristic evaluators to score trace
+  quality
+- **Production monitoring**: Track feedback scores, trace counts, tokens, and
   performance metrics at scale
-- **High-volume ingestion** — Support for up to 40 million traces per day
-- **Dataset management** — Store and run evaluations on test datasets
+- **High-volume ingestion**: Support for up to 40 million traces per day
+- **Dataset management**: Store and run evaluations on test datasets
 
 ## Benefits with Zuplo AI Gateway
 
@@ -67,18 +67,18 @@ to maintain quality standards as your application evolves.
 
 The policy captures comprehensive information about each LLM interaction:
 
-1. **Request data** — User prompts, input parameters, and metadata
-2. **Response data** — Model outputs, token counts, and generation details
-3. **Performance metrics** — Latency, processing time, and resource usage
-4. **Custom metadata** — Tags, conversation IDs, and application-specific data
+1. **Request data**: User prompts, input parameters, and metadata
+2. **Response data**: Model outputs, token counts, and generation details
+3. **Performance metrics**: Latency, processing time, and resource usage
+4. **Custom metadata**: Tags, conversation IDs, and application-specific data
 
 ### Trace Organization
 
 Traces are organized hierarchically to represent complex workflows:
 
-- **Traces** — Top-level records representing complete user interactions
-- **Spans** — Nested operations within a trace (retrieval, generation, etc.)
-- **Thread IDs** — Group related traces by conversation or session
+- **Traces**: Top-level records representing complete user interactions
+- **Spans**: Nested operations within a trace (retrieval, generation, etc.)
+- **Thread IDs**: Group related traces by conversation or session
 
 ### Evaluation Framework
 
@@ -88,18 +88,18 @@ Opik provides multiple evaluation approaches:
 
 Deterministic evaluation methods including:
 
-- **Exact match** — Verify outputs match expected values
-- **Contains** — Check for presence of specific content
-- **Regex patterns** — Validate output structure and format
+- **Exact match**: Verify outputs match expected values
+- **Contains**: Check for presence of specific content
+- **Regex patterns**: Validate output structure and format
 
 #### LLM-as-a-Judge Metrics
 
 AI-powered evaluation for subjective quality assessment:
 
-- **Hallucination detection** — Identify factually incorrect outputs
-- **Relevance scoring** — Measure response appropriateness
-- **Tone and style** — Evaluate alignment with brand guidelines
-- **Safety checks** — Detect harmful or inappropriate content
+- **Hallucination detection**: Identify factually incorrect outputs
+- **Relevance scoring**: Measure response appropriateness
+- **Tone and style**: Evaluate alignment with brand guidelines
+- **Safety checks**: Detect harmful or inappropriate content
 
 ## Use Cases
 

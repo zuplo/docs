@@ -1,7 +1,7 @@
 ---
 title: Route to Different Backends Based on Geolocation
 sidebar_label: Geolocation Backend Routing
-description: >-
+description:
   Learn how to create a Zuplo policy that routes requests to different backend
   URLs based on the user's country.
 tags:
@@ -365,8 +365,7 @@ export default async function policy(
 ### Performance
 
 The geolocation data is determined at the edge, so there's no additional latency
-for IP lookups. All location properties are immediately available in the
-context.
+for IP lookup. All location properties are immediately available in the context.
 
 ### Accuracy
 

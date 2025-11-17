@@ -59,7 +59,8 @@ Every log entry will include the following fields (in snake_case format for New
 Relic):
 
 - `message` - The complete log message and data
-- `level` - The log level in lowercase (e.g., `error`, `info`, `debug`, `warn`)
+- `level` - The log level in lowercase (for example, `error`, `info`, `debug`,
+  `warn`)
 - `timestamp` - The time the log was created (in milliseconds since epoch)
 - `service` - The name of the service (defaults to "Zuplo" or custom value
   provided)
@@ -71,8 +72,8 @@ Relic):
 - `request_id` - The UUID of the request (the value of the `zp-rid` header)
 - `atomic_counter` - An atomic counter used to order logs with identical
   timestamps
-- `ray_id` - The network provider identifier (e.g., Cloudflare Ray ID) of the
-  request
+- `ray_id` - The network provider identifier (for example, Cloudflare Ray ID) of
+  the request
 - `log_source` - The source of the log entry
 
 :::note

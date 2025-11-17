@@ -1,9 +1,9 @@
 import fs from "fs";
-import { glob } from "glob";
 import { minimatch } from "minimatch";
 import config from "../zudoku.config.js";
 import { guides } from "../sidebar.guides.js";
 import { extractDocsFromNavigation } from "./sidebar-utils.js";
+import { collectGlob } from "./utils.js";
 
 // Read ignored docs (supports glob patterns and comments)
 const ignorePatterns = await fs.promises
@@ -26,11 +26,11 @@ function shouldIgnore(doc: string): boolean {
 }
 
 // Find all actual docs
-const docs = (await glob("./docs/**/*.{md,mdx}")).map((file) =>
+const docs = (await collectGlob("./docs/**/*.{md,mdx}")).map((file) =>
   file.replace("docs/", "").replace(/\.mdx?$/, ""),
 );
 
-const policies = (await glob("./temp/**/schema.json")).map((file) =>
+const policies = (await collectGlob("./temp/**/schema.json")).map((file) =>
   file.replace("temp/", "policies/").replace("/schema.json", ""),
 );
 

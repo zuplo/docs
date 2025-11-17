@@ -13,12 +13,12 @@ project. Custom Domains are available on
 
 Zuplo supports two types of custom domains that can be configured separately:
 
-1. **API Gateway Custom Domain**: For your API endpoints (e.g.,
+1. **API Gateway Custom Domain**: For your API endpoints (for example,
    `api.example.com`). This domain uses the CNAME `cname.zuplo.app`.
 
 2. **Developer Portal Custom Domain**: For your developer documentation site
-   (e.g., `docs.example.com`). This domain uses the CNAME `cname.zuplodocs.com`.
-   Learn more about the Developer Portal in the
+   (for example, `docs.example.com`). This domain uses the CNAME
+   `cname.zuplodocs.com`. Learn more about the Developer Portal in the
    [Developer Portal documentation](/docs/dev-portal/introduction).
 
 Both types of custom domains can be managed from the same Custom Domains section
@@ -48,7 +48,8 @@ to open the `New Custom Domain` configuration modal.
 
 Then, select the type of custom domain (API Gateway or Developer Portal), pick
 the environment you want to assign the domain to, and enter your apex domain
-(e.g. example.com) or subdomain (e.g. api.example.com or docs.example.com).
+(for example `example.com`) or subdomain (for example api.example.com or
+docs.example.com).
 
 <ModalScreenshot size="md">
   ![Add Domain](../../public/media/custom-domains/image-2.png)
@@ -216,7 +217,7 @@ such as those in your OpenAPI files or developer portal.
 To add an alias domain, simply add a new custom domain per the instructions
 above, but select **Alias Domain** option when creating the domain.
 
-Do note that domains cannot be "converted" from a custom domain to an alias
+Do note that domains can't be "converted" from a custom domain to an alias
 domain or vice versa. If you need to change a domain from one type to another,
 you will need to delete the existing domain and create a new one with the
 desired type.

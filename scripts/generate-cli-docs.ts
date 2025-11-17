@@ -1,8 +1,8 @@
 import path from "node:path";
 import { readFile, writeFile, access } from "node:fs/promises";
 import { format } from "prettier";
-import { glob } from "glob";
 import matter from "gray-matter";
+import { collectGlob } from "./utils.js";
 
 interface CliOption {
   name: string;
@@ -167,7 +167,9 @@ function wrapCliCommand(command: string, maxLength = 80): string {
 }
 
 // Read all partial files
-const partialFiles = await glob("docs/cli/*.partial.mdx", { cwd: projectDir });
+const partialFiles = await collectGlob("docs/cli/*.partial.mdx", {
+  cwd: projectDir,
+});
 const partialContent: Record<string, string> = {};
 const partialAdditionalResources: Record<
   string,

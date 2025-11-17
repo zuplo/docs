@@ -1,4 +1,3 @@
-import { glob } from "glob";
 import path from "node:path";
 import { readFile, writeFile } from "node:fs/promises";
 import matter from "gray-matter";

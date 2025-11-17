@@ -56,8 +56,8 @@ following properties:
 - `sourcetype` - (optional) The source type of the logs. Defaults to "json"
 - `host` - (optional) The host identifier for the logs. Defaults to "zuplo-api"
 - `channel` - (optional) Channel identifier for Splunk HEC with indexer
-  acknowledgment. If not provided, the X-Splunk-Request-Channel header will not
-  be sent
+  acknowledgment. If not provided, the X-Splunk-Request-Channel header won't be
+  sent
 - `fields` - (optional) Custom fields to include in each log entry. Can contain
   string, number, or boolean values
 
@@ -81,7 +81,8 @@ Every log entry will be sent to Splunk with the following structure:
 ### Event Fields (in the `event` object)
 
 - `message` - The complete log message and data
-- `level` - The log level in lowercase (e.g., `error`, `info`, `debug`, `warn`)
+- `level` - The log level in lowercase (for example, `error`, `info`, `debug`,
+  `warn`)
 - `timestamp` - The time the log was created (in milliseconds since epoch)
 - `service` - The name of the service (defaults to "Zuplo")
 - `environment` - The deployment name of the Zuplo API
@@ -92,8 +93,8 @@ Every log entry will be sent to Splunk with the following structure:
 - `request_id` - The UUID of the request (the value of the `zp-rid` header)
 - `atomic_counter` - An atomic counter used to order logs with identical
   timestamps
-- `ray_id` - The network provider identifier (e.g., Cloudflare Ray ID) of the
-  request
+- `ray_id` - The network provider identifier (for example, Cloudflare Ray ID) of
+  the request
 - `log_source` - The source of the log entry
 
 :::note

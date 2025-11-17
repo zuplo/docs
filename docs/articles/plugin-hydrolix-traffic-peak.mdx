@@ -33,8 +33,8 @@ This logger includes a default type and function that logs the following fields:
 - **method** <CodeType>string</CodeType> - The HTTP method of the request.
 - **userSub** <CodeType>string | undefined</CodeType> - The user sub.
 - **instanceId** <CodeType>string | undefined</CodeType> - The instance ID.
-- **colo** <CodeType>string | undefined</CodeType> - The colo (datacenter) of
-  the request.
+- **colo** <CodeType>string | undefined</CodeType> - The data center of the
+  request.
 - **city** <CodeType>string | undefined</CodeType> - The city the request
   origin.
 - **country** <CodeType>string | undefined</CodeType> - The country the request
@@ -60,7 +60,7 @@ This logger includes a default type and function that logs the following fields:
 - **asOrganization** <CodeType>string | undefined</CodeType> - The AS
   organization of the request origin.
 - **clientIP** <CodeType>string | undefined</CodeType> - The client IP of the
-  requestor.
+  requester.
 - **zuploUserAgent** <CodeType>string | undefined</CodeType> - The Zuplo user
   agent.
 
@@ -150,4 +150,4 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 Entries will be batched and sent as an array, they will be sent every
 `batchPeriodSeconds`. If not specified the will be dispatched very frequently
 (~every 10ms) to avoid data loss. Note that `batchPeriodSeconds` can be
-specified as a fraction, e.g. `0.1` for every 100ms.
+specified as a fraction, for example `0.1` for every 100ms.

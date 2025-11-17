@@ -62,10 +62,10 @@ The `x-zuplo-mcp-resource` extension supports:
   operation's `operationId`.
 - `description` (optional) - Description of what the resource provides. Falls
   back to the operation's `description` or `summary`.
-- `uri` (optional) - The URI identifier for the resource (e.g.,
+- `uri` (optional) - The URI identifier for the resource (for example,
   `"file:///example.txt"`, `"ui://html"`). Defaults to
   `"mcp://resources/{name}"`.
-- `mimeType` (optional) - The MIME type of the resource content (e.g.,
+- `mimeType` (optional) - The MIME type of the resource content (for example,
   `"text/html"`, `"text/css"`, `"application/json"`). Falls back to the
   response's Content-Type header or `"text/plain"`.
 - `enabled` (optional) - Whether this resource is enabled. Defaults to `true`.
@@ -267,8 +267,8 @@ curl https://my-gateway.zuplo.dev/mcp \
 
 ### URI Naming
 
-- Use meaningful URI schemes that indicate the type of resource (e.g., `ui://`
-  for UI components, `config://` for configuration)
+- Use meaningful URI schemes that indicate the type of resource (for example,
+  `ui://` for UI components, `config://` for configuration)
 - Keep URIs consistent and predictable across related resources
 - Consider using the default `mcp://resources/{name}` format for simple
   resources
