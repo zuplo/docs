@@ -1,0 +1,492 @@
+---
+title: Modifying OpenAPI Files with OpenAPI Overlays
+sidebar_label: OpenAPI Overlays
+description: >-
+  Learn how to use the Zuplo CLI's OpenAPI Overlay command to dynamically modify
+  OpenAPI specifications, add parameters, and configure route extensions.
+tags:
+  - openapi
+  - custom-code
+  - deployment
+---
+
+OpenAPI Overlays provide a powerful way to modify OpenAPI specifications without
+directly editing the source files. This is especially useful when you need to:
+
+- Apply consistent changes across multiple API versions
+- Add Zuplo-specific extensions to third-party OpenAPI specs
+- Maintain separation between base API definitions and environment-specific
+  configurations
+- Automate modifications as part of your build or deployment process
+
+## What are OpenAPI Overlays?
+
+OpenAPI Overlays are JSON or YAML documents that describe modifications to be
+applied to an OpenAPI specification. They use a simple, declarative syntax to
+target specific parts of your API definition and apply changes.
+
+The Zuplo CLI provides the
+[`openapi overlay` command](../cli-reference/openapi-overlay.md) to apply these
+overlays to your OpenAPI files.
+
+## Basic Usage
+
+The basic syntax for applying an overlay is:
+
+```bash
+npx zuplo openapi overlay \
+  --input openapi.json \
+  --overlay changes.json \
+  --output result.json
+```
+
+You can also use the `--watch` flag to automatically reapply overlays when files
+change during development:
+
+```bash
+npx zuplo openapi overlay \
+  --input openapi.json \
+  --overlay changes.json \
+  --output result.json \
+  --watch
+```
+
+## Example 1: Modifying Route Summaries and Descriptions
+
+One common use case is updating the summary and description fields of your API
+routes to improve documentation or add context-specific information. Overlays
+can both **modify existing** properties and **add missing** properties.
+
+```json title="openapi.json"
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "My API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/users/{userId}": {
+      "get": {
+        "summary": "Get user",
+        "description": "Retrieves a user",
+        "operationId": "getUser"
+      }
+    },
+    "/products": {
+      "get": {
+        "operationId": "listProducts"
+      }
+    }
+  }
+}
+```
+
+Notice that `/users/{userId}` already has a summary and description (which we'll
+enhance), while `/products` has neither (which we'll add).
+
+```json title="overlay.json"
+{
+  "overlay": "1.0.0",
+  "info": {
+    "title": "Enhanced Documentation Overlay",
+    "version": "1.0.0"
+  },
+  "actions": [
+    {
+      "target": "$.paths['/users/{userId}'].get",
+      "description": "Enhance existing summary and description",
+      "update": {
+        "summary": "Get User by ID",
+        "description": "Retrieves detailed information about a specific user by their unique identifier. This endpoint requires authentication and returns comprehensive user profile data including preferences and account settings."
+      }
+    },
+    {
+      "target": "$.paths['/products'].get",
+      "description": "Add missing summary and description",
+      "update": {
+        "summary": "List All Products",
+        "description": "Returns a paginated list of all products in the catalog. Supports filtering by category, price range, and availability status."
+      }
+    }
+  ]
+}
+```
+
+```bash
+npx zuplo openapi overlay \
+  --input openapi.json \
+  --overlay overlay.json \
+  --output openapi-enhanced.json
+```
+
+## Example 2: Adding Parameter Schemas
+
+Overlays are excellent for adding parameter definitions to your OpenAPI spec,
+especially when working with APIs that have incomplete documentation.
+
+### Adding Path Parameters
+
+```json title="add-path-params.json"
+{
+  "overlay": "1.0.0",
+  "info": {
+    "title": "Add Path Parameters",
+    "version": "1.0.0"
+  },
+  "actions": [
+    {
+      "target": "$.paths['/users/{userId}'].get",
+      "update": {
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the user",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "123e4567-e89b-12d3-a456-426614174000"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "target": "$.paths['/orders/{orderId}/items/{itemId}'].get",
+      "update": {
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "description": "The order identifier",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "example": 12345
+            }
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "description": "The item identifier within the order",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "example": 67890
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+### Adding Query Parameters
+
+```json title="add-query-params.json"
+{
+  "overlay": "1.0.0",
+  "info": {
+    "title": "Add Query Parameters",
+    "version": "1.0.0"
+  },
+  "actions": [
+    {
+      "target": "$.paths['/products'].get",
+      "update": {
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "description": "Filter products by category",
+            "schema": {
+              "type": "string",
+              "enum": ["electronics", "clothing", "home", "sports"],
+              "example": "electronics"
+            }
+          },
+          {
+            "name": "minPrice",
+            "in": "query",
+            "required": false,
+            "description": "Minimum price filter (inclusive)",
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "minimum": 0,
+              "example": 9.99
+            }
+          },
+          {
+            "name": "maxPrice",
+            "in": "query",
+            "required": false,
+            "description": "Maximum price filter (inclusive)",
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "minimum": 0,
+              "example": 99.99
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "description": "Page number for pagination",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "example": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Number of items per page",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "example": 20
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+```bash
+npx zuplo openapi overlay \
+  --input openapi.json \
+  --overlay add-query-params.json \
+  --output openapi-with-params.json
+```
+
+## Example 3: Adding Zuplo Route Extensions
+
+One of the more common uses of overlays is to add the Zuplo-specific extensions
+like `x-zuplo-route` to your OpenAPI files. This allows you to configure
+policies, handlers, and CORS settings without modifying your base OpenAPI
+specification.
+
+```json title="zuplo-routes.json"
+{
+  "overlay": "1.0.0",
+  "info": {
+    "title": "Zuplo Route Extensions",
+    "version": "1.0.0"
+  },
+  "actions": [
+    {
+      "target": "$.paths['/users/{userId}'].get",
+      "update": {
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "default",
+            "module": "$import(./modules/my-handler)",
+            "options": {
+              "someOption": true
+            }
+          },
+          "policies": {
+            "inbound": ["api-key-inbound"]
+          }
+        }
+      }
+    },
+    {
+      "target": "$.paths['/products'].get",
+      "update": {
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "default",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "backend": "backend-1"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound",
+              {
+                "name": "rate-limit-inbound",
+                "policyType": "rate-limit-inbound",
+                "handler": {
+                  "export": "default",
+                  "module": "$import(@zuplo/runtime)",
+                  "options": {
+                    "rateLimitBy": "ip",
+                    "requestsAllowed": 100,
+                    "timeWindowMinutes": 1
+                  }
+                }
+              }
+            ],
+            "outbound": ["log-response-outbound"]
+          }
+        }
+      }
+    },
+    {
+      "target": "$.paths['/admin/settings'].put",
+      "update": {
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "default",
+            "module": "$import(./modules/admin-handler)",
+            "options": {}
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound",
+              {
+                "name": "jwt-auth",
+                "policyType": "jwt-auth-inbound",
+                "handler": {
+                  "export": "JwtInboundPolicy",
+                  "module": "$import(@zuplo/runtime)",
+                  "options": {
+                    "issuer": "https://auth.example.com",
+                    "audience": "api.example.com",
+                    "jwkUrl": "https://auth.example.com/.well-known/jwks.json"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
+```
+
+```bash
+npx zuplo openapi overlay \
+  --input openapi.json \
+  --overlay zuplo-routes.json \
+  --output openapi-zuplo.json
+```
+
+This overlay adds:
+
+- **CORS policies** to control cross-origin requests
+- **Request handlers** that specify how Zuplo should process the request
+- **Inbound policies** like API key authentication, JWT validation, and rate
+  limiting
+- **Outbound policies** for logging and response transformation
+
+## Combining Multiple Overlays
+
+You can apply multiple overlays sequentially to build up complex configurations:
+
+```bash
+# First add parameters
+npx zuplo openapi overlay \
+  --input openapi.json \
+  --overlay add-params.json \
+  --output temp.json
+
+# Then add Zuplo extensions
+npx zuplo openapi overlay \
+  --input temp.json \
+  --overlay zuplo-routes.json \
+  --output final.json
+
+# Clean up temporary file
+rm temp.json
+```
+
+Or create a script that chains the commands:
+
+```bash title="apply-overlays.sh"
+#!/bin/bash
+npx zuplo openapi overlay -i openapi.json -l docs.json -o step1.json && \
+npx zuplo openapi overlay -i step1.json -l params.json -o step2.json && \
+npx zuplo openapi overlay -i step2.json -l zuplo.json -o final.json && \
+rm step1.json step2.json
+```
+
+## Using Overlays in Your Build Process
+
+Integrate overlay application into your CI/CD pipeline by adding it to your
+build scripts:
+
+```json title="package.json"
+{
+  "scripts": {
+    "build:openapi": "npx zuplo openapi overlay -i src/openapi.json -l overlays/production.json -o dist/openapi.json",
+    "build:openapi:dev": "npx zuplo openapi overlay -i src/openapi.json -l overlays/development.json -o dist/openapi.json",
+    "watch:openapi": "npx zuplo openapi overlay -i src/openapi.json -l overlays/development.json -o dist/openapi.json --watch"
+  }
+}
+```
+
+## JSONPath Target Syntax
+
+Overlays use JSONPath syntax to target specific parts of your OpenAPI document.
+Here are common patterns:
+
+```json title="JSONPath examples"
+{
+  "actions": [
+    {
+      "target": "$.paths['/users/{userId}'].get",
+      "description": "Target a specific operation"
+    },
+    {
+      "target": "$.paths['/users/{userId}'].get.parameters[0]",
+      "description": "Target the first parameter"
+    },
+    {
+      "target": "$.paths['/users/*'].get",
+      "description": "Target all GET operations under /users"
+    },
+    {
+      "target": "$.components.schemas['User']",
+      "description": "Target a schema definition"
+    }
+  ]
+}
+```
+
+## Best Practices
+
+1. **Version Control Overlays**: Store overlay files in version control
+   alongside your OpenAPI specs
+
+2. **Use Descriptive Names**: Name overlay files clearly to indicate their
+   purpose (e.g., `add-auth-policies.json`, `staging-config.json`)
+
+3. **Keep Overlays Focused**: Create separate overlay files for different
+   concerns rather than one large overlay
+
+4. **Test Overlay Output**: Always validate the resulting OpenAPI file after
+   applying overlays
+
+5. **Document Your Overlays**: Add comments in the `info.title` and
+   `info.description` fields to explain what each overlay does
+
+6. **Use Watch Mode for Development**: The `--watch` flag makes iterative
+   development faster
+
+## Next Steps
+
+- Learn more about
+  [OpenAPI extensions in Zuplo](../articles/use-openapi-extension-data.mdx)
+- Check out the full
+  [CLI reference for OpenAPI overlay](../cli/openapi-overlay.mdx)
