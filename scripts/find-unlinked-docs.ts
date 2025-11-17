@@ -2,6 +2,7 @@ import fs from "fs";
 import { glob } from "glob";
 import { minimatch } from "minimatch";
 import config from "../zudoku.config.js";
+import { guides } from "../sidebar.guides.js";
 import { extractDocsFromNavigation } from "./sidebar-utils.js";
 
 // Read ignored docs (supports glob patterns and comments)
@@ -33,8 +34,10 @@ const policies = (await glob("./temp/**/schema.json")).map((file) =>
   file.replace("temp/", "policies/").replace("/schema.json", ""),
 );
 
+const navigation = [...(config.navigation ?? []), ...guides];
+
 // Extract all linked docs from navigation
-const allLinkedDocs = extractDocsFromNavigation(config.navigation ?? []);
+const allLinkedDocs = extractDocsFromNavigation(navigation);
 
 // Create unique sets and filter out ignored docs
 const uniqueDocs = [...new Set([...docs, ...policies])].filter(

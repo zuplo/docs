@@ -25,6 +25,9 @@
     "errors:generate": "tsx scripts/generate-errors.ts",
     "cli:generate": "tsx scripts/generate-cli-docs.ts",
     "guides:generate": "tsx scripts/generate-guides.ts",
+    "guides:sync": "tsx scripts/sync-guides.ts",
+    "guides:check": "tsx scripts/sync-guides.ts --check",
+    "guides:unused-categories": "tsx scripts/find-unused-categories.ts",
     "unlinked": "node --import ./scripts/setup-react.mjs --import tsx/esm --loader ./scripts/css-loader.mjs scripts/find-unlinked-docs.ts",
     "guides:frontmatter": "node --env-file ./.env --import ./scripts/setup-react.mjs --import tsx/esm --loader ./scripts/css-loader.mjs scripts/add-guide-frontmatter.ts"
   },

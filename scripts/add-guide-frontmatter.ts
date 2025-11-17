@@ -1,7 +1,7 @@
 import { writeFile } from "node:fs/promises";
 import matter from "gray-matter";
 import { query } from "@anthropic-ai/claude-agent-sdk";
-import { guides } from "../sidebar.js";
+import { guides, categories } from "../sidebar.guides.js";
 import {
   projectDir,
   findMarkdownFile,
@@ -13,32 +13,6 @@ interface FrontmatterUpdate {
   description?: string;
   tags?: string[];
 }
-
-// Available categories for tags
-const availableCategories = [
-  "Account, Projects & Teams",
-  "AI",
-  "Analytics",
-  "API & CLI",
-  "Backends",
-  "BotID",
-  "Build, Deployment & Git",
-  "Databases & CMS",
-  "Domains & DNS",
-  "Edge Network & Caching",
-  "Environment Variables",
-  "Frameworks",
-  "Functions",
-  "Integrations & Logs",
-  "Limits, Usage and Pricing",
-  "Monetization",
-  "Security",
-  "Authentication",
-  "Authorization",
-  "Developer Portal",
-  "Testing",
-  "Observability",
-];
 
 async function generateFrontmatter(
   content: string,
@@ -70,19 +44,19 @@ EXISTING FRONTMATTER:
 ${JSON.stringify(existingFrontmatter, null, 2)}
 
 AVAILABLE CATEGORIES FOR TAGS:
-${availableCategories.join(", ")}
+${categories.map((cat) => `Label: ${cat.label} Slug: ${cat.slug}`).join(", ")}
 
 INSTRUCTIONS:
 Generate the missing frontmatter fields:
 ${missingFields.includes("title") ? "- title: A clear, concise title (max 60 characters)" : ""}
 ${missingFields.includes("description") ? "- description: A brief description of what the article covers (max 160 characters, should start with a verb like 'Learn how to...')" : ""}
-${missingFields.includes("tags") ? "- tags: An array of 1-3 relevant categories from the AVAILABLE CATEGORIES list above" : ""}
+${missingFields.includes("tags") ? "- tags: An array of 1-3 relevant categories from the AVAILABLE CATEGORIES list above - use the slug here" : ""}
 
 Return ONLY a valid JSON object with the missing fields. Example:
 {
   "title": "Example Title",
   "description": "Learn how to implement this feature.",
-  "tags": ["API & CLI", "Functions"]
+  "tags": ["slug-1", "slug-2"]
 }`;
 
   // Use Claude Agent SDK to generate frontmatter

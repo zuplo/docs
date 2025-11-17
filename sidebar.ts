@@ -55,6 +55,7 @@ const policies: Navigation = [
       "policies/request-size-limit-inbound",
       "policies/secret-masking-outbound",
       "policies/stripe-webhook-verification-inbound",
+      "policies/akamai-ai-firewall",
     ],
   },
   {
@@ -145,6 +146,7 @@ const policies: Navigation = [
     label: "Other",
     items: [
       "policies/composite-inbound",
+      "policies/composite-outbound",
       "policies/brownout-inbound",
       "policies/caching-inbound",
       "policies/semantic-cache-inbound",
@@ -253,33 +255,6 @@ const programming: Navigation = [
   },
 ];
 
-export const guides: Navigation = [
-  "articles/monetization",
-  "articles/monetization-enterprise",
-  "articles/openapi-server-urls",
-  "articles/versioning-on-zuplo",
-  "articles/multiple-auth-policies",
-  "articles/archiving-requests-to-storage",
-  "articles/per-user-rate-limits-using-db",
-  "articles/rick-and-morty-api-developer-portal-example",
-  "articles/check-ip-address",
-  "articles/advanced-path-matching",
-  "articles/lazy-load-configuration-into-cache",
-  "articles/handling-form-data",
-  "articles/testing-graphql",
-  "articles/bypass-policy-for-testing",
-  "articles/graphql-security",
-  "articles/add-api-to-backstage",
-  "articles/use-openapi-extension-data",
-  "articles/non-standard-ports",
-  "articles/convert-urls-to-openapi",
-  "articles/configuring-auth0-for-mcp-auth",
-  "articles/configuring-okta-for-mcp-auth",
-  "articles/manual-mcp-oauth-testing",
-  "articles/health-checks",
-  "articles/s3-signed-url-uploads",
-];
-
 export const apiGateway: Navigation = [
   "api-management/introduction",
   {
@@ -374,6 +349,11 @@ export const apiGateway: Navigation = [
       "handlers/system-handlers",
       "handlers/websocket-handler",
     ],
+  },
+  {
+    type: "category",
+    label: "Monetization",
+    items: ["articles/monetization", "articles/monetization-enterprise"],
   },
   {
     type: "category",

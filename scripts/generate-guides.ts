@@ -3,18 +3,21 @@ import path from "node:path";
 import { readFile, writeFile } from "node:fs/promises";
 import matter from "gray-matter";
 import { format } from "prettier";
-import { guides } from "../sidebar.js";
+import { guides, categories } from "../sidebar.guides.js";
 
 interface Guide {
   id: string;
   title: string;
   description: string;
-  categories: string[];
+  categories: string[]; // Array of category slugs
   page: string;
 }
 
 const projectDir = path.join(import.meta.dirname, "..");
 const generatedGuides: Guide[] = [];
+
+// Create slug set for validation
+const validSlugs = new Set(categories.map((cat) => cat.slug));
 
 // Process each guide from the sidebar
 for (const guidePath of guides) {
@@ -70,6 +73,17 @@ for (const guidePath of guides) {
     );
   }
 
+  // Validate that all tags are valid slugs
+  const invalidTags = data.tags.filter((tag: string) => !validSlugs.has(tag));
+  if (invalidTags.length > 0) {
+    throw new Error(
+      `Invalid tags in guide: ${guidePath}\n` +
+        `  Invalid: ${invalidTags.join(", ")}\n` +
+        `  Valid slugs: ${Array.from(validSlugs).join(", ")}\n` +
+        `  Note: Tags must use slugs (lowercase, hyphens), not labels.`,
+    );
+  }
+
   // Generate a unique ID from the path
   const id = guidePath.split("/").pop() || guidePath;
 
@@ -77,7 +91,7 @@ for (const guidePath of guides) {
     id,
     title: data.title,
     description: data.description,
-    categories: data.tags,
+    categories: data.tags, // These are now validated slugs
     page: guidePath,
   });
 }

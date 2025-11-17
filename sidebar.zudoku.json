@@ -50,6 +50,7 @@
     "icon": "lock",
     "items": [
       "dev-portal/zudoku/configuration/authentication",
+      "dev-portal/zudoku/configuration/protected-routes",
       "dev-portal/zudoku/configuration/authentication-auth0",
       "dev-portal/zudoku/configuration/authentication-clerk",
       "dev-portal/zudoku/configuration/authentication-azure-ad",

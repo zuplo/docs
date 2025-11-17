@@ -17,6 +17,7 @@ jobs:
           cache: "npm"
       - run: npm ci
       - run: npm run format:ci
+      - run: npm run guides:check
       - run: npm run lint:admonitions
 
   static-assets:
