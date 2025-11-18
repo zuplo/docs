@@ -51,11 +51,19 @@
     "items": [
       "dev-portal/zudoku/configuration/authentication",
       "dev-portal/zudoku/configuration/protected-routes",
-      "dev-portal/zudoku/configuration/authentication-auth0",
-      "dev-portal/zudoku/configuration/authentication-clerk",
-      "dev-portal/zudoku/configuration/authentication-azure-ad",
-      "dev-portal/zudoku/configuration/authentication-pingfederate",
-      "dev-portal/zudoku/configuration/authentication-supabase"
+      {
+        "type": "category",
+        "label": "Supported Providers",
+        "icon": "plug",
+        "items": [
+          "dev-portal/zudoku/configuration/authentication-auth0",
+          "dev-portal/zudoku/configuration/authentication-clerk",
+          "dev-portal/zudoku/configuration/authentication-azure-ad",
+          "dev-portal/zudoku/configuration/authentication-pingfederate",
+          "dev-portal/zudoku/configuration/authentication-supabase",
+          "dev-portal/zudoku/configuration/authentication-firebase"
+        ]
+      }
     ]
   },
   {
