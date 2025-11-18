@@ -21,6 +21,7 @@ import {
   CliIntro,
   CliDoc,
 } from "./components/CliCommand.js";
+import { YouTubeEmbed } from "./components/YouTubeEmbed.js";
 
 const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
 
@@ -109,6 +110,7 @@ export const mdxComponents = {
   CliCommandGroup,
   CliIntro,
   CliDoc,
+  YouTubeEmbed,
   ZuploIngressWithManagedDedicated: lazy(
     () => import("./diagrams/ZuploIngressWithManagedDedicated.js"),
   ),
