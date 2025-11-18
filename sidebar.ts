@@ -322,6 +322,7 @@ export const apiGateway: Navigation = [
       "articles/source-control-setup-github",
       "articles/source-control-setup-bitbucket",
       "articles/source-control-setup-gitlab",
+      "articles/source-control-setup-azure",
       "articles/rename-or-move-project",
     ],
   },
