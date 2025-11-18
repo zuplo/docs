@@ -62,7 +62,8 @@ later steps, we'll setup a Zuplo project and deploy it to the cloud.
    the route to match specific incoming requests to the gateway:
    - **Summary**: Enter a summary, for example `Example Endpoint`.
    - **Method**: Leave as `GET`.
-   - **Path**: Enter `path-0`.
+   - **Path**: The path will be pre-configured as `path-1`.
+   - **Operation ID**: Pre-configured based on the path name.
 
    Then we'll specify how the route will invoke the backend origin API, using a
    forward handler:
@@ -73,31 +74,36 @@ later steps, we'll setup a Zuplo project and deploy it to the cloud.
 
      ![Your First Route](../../public/media/step-1-setup-basic-gateway-local/image-1.png)
 
-   **Save your changes** - click **Save All** at in the top right, or press
+   **Save your changes** - click **Save** at in the bottom left, or press
    **CMD+S**
 
-1. **Test** your route.
+1. **Test** your route
 
-   You can test this route by using your favorite HTTP client (for example
-   Postman, HTTPie, curl, etc).
+   You can test this route by clicking the **Test Route** button in the route
+   designer.
+
+   ![Testing in the Route Designer](../../public/media/step-1-setup-basic-gateway-local/test.png)
+
+   Alternatively, you can test the route in your favorite HTTP Client (for
+   example Postman, HTTPie, curl, etc).
 
    ```bash
    curl http://localhost:9000/0
 
    {
-     "url": "https://echo.zuplo.io/path-0",
-     "method": "GET",
-     "query": {},
-     "headers": {
-       "accept-encoding": "gzip, br",
-       "connection": "Keep-Alive",
-       "host": "echo.zuplo.io",
-       "true-client-ip": "2a06:98c0:3600::103",
-       "x-forwarded-proto": "https",
-       "x-real-ip": "2a06:98c0:3600::103",
-       "zp-rid": "b9822e0f-af32-4002-a6ba-3a899c7f2669",
-       "zuplo-request-id": "b9822e0f-af32-4002-a6ba-3a899c7f2669"
-     }
+      "url": "https://echo.zuplo.io/path-0",
+      "method": "GET",
+      "query": {},
+      "headers": {
+         "accept-encoding": "gzip, br",
+         "connection": "Keep-Alive",
+         "host": "echo.zuplo.io",
+         "true-client-ip": "2a06:98c0:3600::103",
+         "x-forwarded-proto": "https",
+         "x-real-ip": "2a06:98c0:3600::103",
+         "zp-rid": "b9822e0f-af32-4002-a6ba-3a899c7f2669",
+         "zuplo-request-id": "b9822e0f-af32-4002-a6ba-3a899c7f2669"
+      }
    }
    ```
 
