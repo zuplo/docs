@@ -1,12 +1,11 @@
 ---
 title: MCP Server GraphQL Endpoints
-sidebar_label: GraphQL Endpoints
+sidebar_label: GraphQL
 ---
 
-The MCP Server Handler supports GraphQL endpoints through the
-`x-zuplo-mcp-graphql` OpenAPI extension. This allows you to expose GraphQL APIs
-as MCP tools with automatic schema introspection and query execution
-capabilities.
+The MCP Server Handler supports GraphQL endpoints through the `x-zuplo-route`
+OpenAPI extension. This allows you to expose GraphQL APIs as MCP tools with
+automatic schema introspection and query execution capabilities.
 
 When you configure a route with the GraphQL extension, the MCP server
 automatically generates two tools:
@@ -30,7 +29,7 @@ in future releases.
 ### 1. Configure a GraphQL Endpoint
 
 Add a route that forwards to your GraphQL endpoint and include the
-`x-zuplo-mcp-graphql` extension:
+`x-zuplo-route.mcp` configuration:
 
 ```json
 {
@@ -43,7 +42,6 @@ Add a route that forwards to your GraphQL endpoint and include the
       "post": {
         "operationId": "graphql",
         "summary": "GraphQL API endpoint",
-        "x-zuplo-mcp-graphql": {},
         "x-zuplo-route": {
           "handler": {
             "export": "urlForwardHandler",
@@ -52,6 +50,9 @@ Add a route that forwards to your GraphQL endpoint and include the
               "baseUrl": "https://api.example.com",
               "followRedirects": true
             }
+          },
+          "mcp": {
+            "type": "graphql"
           }
         }
       }
@@ -62,7 +63,8 @@ Add a route that forwards to your GraphQL endpoint and include the
 
 ### 2. Add to Your MCP Server
 
-Include the GraphQL route in your MCP Server configuration:
+Include the GraphQL route in your MCP Server configuration using the
+`operations` array:
 
 ```json
 {
@@ -79,10 +81,10 @@ Include the GraphQL route in your MCP Server configuration:
             "options": {
               "name": "My MCP Server",
               "version": "1.0.0",
-              "files": [
+              "operations": [
                 {
-                  "path": "./config/routes.oas.json",
-                  "operationIds": ["graphql"]
+                  "file": "./config/routes.oas.json",
+                  "id": "graphql"
                 }
               ]
             }
@@ -101,14 +103,17 @@ This configuration automatically creates:
 
 ## Configuration Options
 
-The `x-zuplo-mcp-graphql` extension supports the following options:
+The `x-zuplo-route.mcp` configuration for GraphQL supports the following
+options:
 
-- `enabled` - default `true`: whether the GraphQL MCP capabilities are enabled.
-- `introspectionToolName` - the custom name of the introspection tool.
-- `introspectionToolDescription` - the custom description of the introspection
-  tool.
-- `executeToolName` - the custom name of the query execute tool.
-- `executeToolDescription` - the custom description of the query execute tool.
+- `type`: Must be set to `"graphql"`
+- `enabled`: Whether the GraphQL MCP capabilities are enabled (default: `true`).
+- `introspectionTool`: Configuration for the introspection tool.
+  - `name`: Custom name for the introspection tool.
+  - `description`: Custom description for the introspection tool.
+- `executeTool`: Configuration for the execute tool.
+  - `name`: Custom name for the execute tool.
+  - `description`: Custom description for the execute tool.
 
 For example:
 
@@ -118,18 +123,23 @@ For example:
     "/graphql": {
       "post": {
         "operationId": "github_graphql",
-        "x-zuplo-mcp-graphql": {
-          "introspectionToolName": "github_schema",
-          "introspectionToolDescription": "Fetch the GitHub GraphQL schema",
-          "executeToolName": "github_query",
-          "executeToolDescription": "Execute a query against the GitHub GraphQL API"
-        },
         "x-zuplo-route": {
           "handler": {
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
               "baseUrl": "https://api.github.com"
+            }
+          },
+          "mcp": {
+            "type": "graphql",
+            "introspectionTool": {
+              "name": "github_schema",
+              "description": "Fetch the GitHub GraphQL schema"
+            },
+            "executeTool": {
+              "name": "github_query",
+              "description": "Execute a query against the GitHub GraphQL API"
             }
           }
         }

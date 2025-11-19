@@ -1,0 +1,53 @@
+---
+title: MCP Server Testing
+sidebar_label: Testing
+---
+
+# Testing Tools
+
+## Using MCP Inspector
+
+The [MCP Inspector](https://github.com/modelcontextprotocol/inspector) is ideal
+for testing tools:
+
+```bash
+npx @modelcontextprotocol/inspector
+```
+
+1. Set **Transport Type** to "Streamable HTTP"
+2. Set **URL** to your MCP endpoint (for example,
+   `https://your-gateway.zuplo.dev/mcp`)
+3. Connect and test your tools interactively
+
+## Using cURL
+
+Test individual tools directly:
+
+```bash
+# List available tools
+curl https://your-gateway.zuplo.dev/mcp \
+  -X POST \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": "0",
+    "method": "tools/list"
+  }'
+
+# Call a specific tool
+curl https://your-gateway.zuplo.dev/mcp \
+  -X POST \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": "1",
+    "method": "tools/call",
+    "params": {
+      "name": "addNumbers",
+      "arguments": {
+        "a": 5,
+        "b": 3
+      }
+    }
+  }'
+```

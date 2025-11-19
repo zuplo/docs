@@ -1,15 +1,15 @@
 ---
 title: MCP Server Resources
-sidebar_label: MCP Server Resources
+sidebar_label: Resources
 ---
 
 The MCP (Model Context Protocol) Server handler supports resources in addition
 to tools and prompts, enabling you to provide read-only access to data or
 documents through the MCP protocol.
 
-MCP resources allow AI clients to request and read structured data or content,
-making it easy to expose documentation, configuration files, or any other
-read-only information that AI systems can consume.
+MCP resources allow AI clients to request and read static structured data or
+content, making it easy to expose documentation, configuration files, or any
+other read-only information that AI systems can consume.
 
 ## Overview
 
@@ -25,7 +25,8 @@ JSON data, or any other text-based content.
 
 ### Route Configuration
 
-Configure a route in your OpenAPI doc. Resources must use the GET method:
+Configure a route in your OpenAPI doc. Resources **_must_** use the `GET`
+method:
 
 ```json
 {
@@ -38,6 +39,13 @@ Configure a route in your OpenAPI doc. Resources must use the GET method:
         "handler": {
           "export": "default",
           "module": "$import(./modules/html)"
+        },
+        "mcp": {
+          "type": "resource",
+          "name": "html_doc",
+          "description": "The HTML document for the AI applet",
+          "uri": "ui://html",
+          "mimeType": "text/html"
         }
       }
     }
@@ -45,23 +53,17 @@ Configure a route in your OpenAPI doc. Resources must use the GET method:
 }
 ```
 
-To provide MCP specific metadata for the resource, use `x-zuplo-mcp-resource`:
+To provide MCP specific metadata for the resource, use the `mcp` property within
+`x-zuplo-route`:
 
-```json
-"x-zuplo-mcp-resource": {
-  "name": "html_doc",
-  "description": "The HTML document for the AI applet",
-  "uri": "ui://html",
-  "mimeType": "text/html"
-}
-```
-
-The `x-zuplo-mcp-resource` extension supports:
-
+- `type`: Must be set to `"resource"` otherwise the MCP server handle will
+  default to "tool".
 - `name` (optional) - The identifier for the MCP resource. Defaults to the
-  operation's `operationId`.
+  operation's `operationId`. If no `operationId` is provided, falls back to an
+  auth-generated name.
 - `description` (optional) - Description of what the resource provides. Falls
-  back to the operation's `description` or `summary`.
+  back to the operation's `description` or `summary`. If those fields are not
+  provided, falls back to an auto-generated description.
 - `uri` (optional) - The URI identifier for the resource (for example,
   `"file:///example.txt"`, `"ui://html"`). Defaults to
   `"mcp://resources/{name}"`.
@@ -70,13 +72,14 @@ The `x-zuplo-mcp-resource` extension supports:
   response's Content-Type header or `"text/plain"`.
 - `enabled` (optional) - Whether this resource is enabled. Defaults to `true`.
 
-Without `x-zuplo-mcp-resource`, the MCP server will use the route's
-`operationId` as the resource name and the `description` or `summary` as the
-resource description, with a default URI of `mcp://resources/{operationId}`.
+Without the `mcp` configuration, the MCP server will attempt to register it as a
+tool, or if configured as a resource via legacy methods, use the defaults
+described above.
 
 ### MCP Server Handler Configuration
 
-Add resource configuration to your MCP Server handler options:
+Add resource configuration to your MCP Server handler options using the
+`operations` array:
 
 ```json
 {
@@ -90,10 +93,14 @@ Add resource configuration to your MCP Server handler options:
             "options": {
               "name": "example-mcp-server",
               "version": "1.0.0",
-              "resources": [
+              "operations": [
                 {
-                  "path": "./config/routes.oas.json",
-                  "operationIds": ["html", "css"]
+                  "file": "./config/routes.oas.json",
+                  "id": "html"
+                },
+                {
+                  "file": "./config/routes.oas.json",
+                  "id": "css"
                 }
               ]
             }
@@ -105,10 +112,8 @@ Add resource configuration to your MCP Server handler options:
 }
 ```
 
-The `resources` array supports:
-
-- `path` - Path to the OpenAPI specification file containing resource routes
-- `operationIds` - Array of operation IDs to include as MCP resources
+See further details in the
+[MCP Server Handler documentation](../handlers/mcp-server).
 
 ## Route Handler Implementation
 
@@ -280,44 +285,3 @@ curl https://my-gateway.zuplo.dev/mcp \
 - Consider resource size - extremely large resources may impact performance
 - Use appropriate MIME types to help clients understand how to process the
   content
-
-## Common Use Cases
-
-### Documentation Resources
-
-Expose API documentation or guides:
-
-```json
-"x-zuplo-mcp-resource": {
-  "name": "api_guide",
-  "description": "API usage guide and best practices",
-  "uri": "docs://api-guide",
-  "mimeType": "text/markdown"
-}
-```
-
-### Configuration Resources
-
-Provide access to configuration or schema information:
-
-```json
-"x-zuplo-mcp-resource": {
-  "name": "api_config",
-  "description": "Current API configuration and settings",
-  "uri": "config://api",
-  "mimeType": "application/json"
-}
-```
-
-### UI Component Resources
-
-Share UI components or templates:
-
-```json
-"x-zuplo-mcp-resource": {
-  "name": "component_library",
-  "description": "Available UI components and their usage",
-  "uri": "ui://components",
-  "mimeType": "text/html"
-}
-```
