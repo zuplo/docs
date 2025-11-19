@@ -63,7 +63,7 @@ later steps, we'll setup a Zuplo project and deploy it to the cloud.
    - **Summary**: Enter a summary, for example `Example Endpoint`.
    - **Method**: Leave as `GET`.
    - **Path**: The path will be pre-configured as `path-1`.
-   - **Operation ID**: Pre-configured based on the path name.
+   - **Operation ID**: Pre-configured based on the path summary.
 
    Then we'll specify how the route will invoke the backend origin API, using a
    forward handler:
@@ -91,7 +91,7 @@ later steps, we'll setup a Zuplo project and deploy it to the cloud.
    curl http://localhost:9000/0
 
    {
-      "url": "https://echo.zuplo.io/path-0",
+      "url": "https://echo.zuplo.io/path-1",
       "method": "GET",
       "query": {},
       "headers": {
