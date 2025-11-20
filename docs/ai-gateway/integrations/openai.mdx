@@ -47,7 +47,47 @@ const client = new OpenAI({
   baseURL: "https://my-ai-gateway.zuplo.app/v1",
 });
 
-const response = await client.completions.create({
+const response = await client.chat.completions.create({
+  model: "gpt-4",
+  messages: [
+    {
+      role: "user",
+      content: "Write a one-sentence bedtime story about a unicorn.",
+    },
+  ],
+});
+
+console.log(response.choices[0].message.content);
+```
+
+When configured in this way, the SDK will switch from using the default OpenAI
+APIs to using Zuplo's AI Gateway for all requests.
+
+## Supported Endpoints
+
+The AI Gateway supports all major OpenAI API endpoints through the universal
+API:
+
+- **Chat Completions** (`/v1/chat/completions`) - For conversational AI
+  interactions
+- **Embeddings** (`/v1/embeddings`) - For generating vector embeddings
+- **Responses** (`/v1/responses`) - For OpenAI models that support the responses
+  endpoint (such as GPT-5 and other compatible models)
+
+## Using the Responses Endpoint
+
+For models that support the `/v1/responses` endpoint, you can use the OpenAI
+SDK's `responses` API:
+
+```typescript
+import OpenAI from "openai";
+
+const client = new OpenAI({
+  apiKey: process.env.ZUPLO_AI_GATEWAY_API_KEY,
+  baseURL: "https://my-ai-gateway.zuplo.app/v1",
+});
+
+const response = await client.responses.create({
   model: "gpt-5",
   input: "Write a one-sentence bedtime story about a unicorn.",
 });
@@ -55,5 +95,5 @@ const response = await client.completions.create({
 console.log(response.output_text);
 ```
 
-When configured in this way, the SDK will switch from using the default OpenAI
-APIs to using Zuplo's AI Gateway for all requests.
+The responses endpoint is automatically routed through the AI Gateway, providing
+the same monitoring, cost controls, and security features as other endpoints.
