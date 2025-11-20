@@ -29,10 +29,15 @@ const client = new OpenAI({
   baseURL: "https://my-ai-gateway.zuplo.app/v1",
 });
 
-const response = await client.responses.create({
-  model: "gpt-5",
-  input: "Write a one-sentence bedtime story about a unicorn.",
+const response = await client.chat.completions.create({
+  model: "gpt-4",
+  messages: [
+    {
+      role: "user",
+      content: "Write a one-sentence bedtime story about a unicorn.",
+    },
+  ],
 });
 
-console.log(response.output_text);
+console.log(response.choices[0].message.content);
 ```
