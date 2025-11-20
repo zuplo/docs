@@ -112,7 +112,11 @@ After creating your application, you'll see:
 Now you'll update your application to use the Zuplo AI Gateway instead of
 calling LLM providers directly.
 
-### Before: Direct Provider Integration
+In the examples below, we assume that you are using the official
+[Node.js OpenAI SDK](https://platform.openai.com/docs/libraries/node-js-library)
+and that you have executed `npm install openai`.
+
+### Before: Direct Provider Integration (sample.mjs)
 
 ```javascript
 import OpenAI from "openai";
@@ -130,7 +134,7 @@ const completion = await openai.chat.completions.create({
 console.log(completion.choices[0].message.content);
 ```
 
-### After: Using Zuplo AI Gateway
+### After: Using Zuplo AI Gateway (sample.mjs)
 
 ```javascript
 import OpenAI from "openai";
@@ -148,6 +152,8 @@ const completion = await openai.chat.completions.create({
 
 console.log(completion.choices[0].message.content);
 ```
+
+Run the example with `node sample.mjs`.
 
 ### What Changed?
 
