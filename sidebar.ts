@@ -489,6 +489,7 @@ export const aiGateway: Navigation = [
     items: [
       "ai-gateway/policies/akamai-ai-firewall",
       "ai-gateway/policies/comet-opik-tracing",
+      "ai-gateway/policies/galileo-tracing",
     ],
   },
   {
