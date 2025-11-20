@@ -361,11 +361,12 @@ export const apiGateway: Navigation = [
     label: "MCP Server",
     items: [
       "mcp-server/introduction",
-      "mcp-server/getting-started",
-      "handlers/mcp-server-custom-tools",
-      "handlers/mcp-server-graphql",
-      "handlers/mcp-server-prompts",
-      "handlers/mcp-server-resources",
+      "mcp-server/tools",
+      "mcp-server/prompts",
+      "mcp-server/resources",
+      "mcp-server/testing",
+      "mcp-server/graphql",
+      "mcp-server/custom-tools",
     ],
   },
   {

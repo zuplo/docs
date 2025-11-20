@@ -7,21 +7,27 @@ The MCP (Model Context Protocol) Server handler allows you to run a lightweight,
 stateless MCP server on your gateway that automatically transforms your API
 routes into MCP tools.
 
-🙋‍♀️ Want to try it out? Check out the
-[MCP Quickstart](../articles/mcp-quickstart.mdx).
-
 This enables your API gateway to seamlessly serve external AI tools and agents
 through [Model Context Protocol](https://modelcontextprotocol.io/introduction)
 interactions by using your existing APIs, without needing to duplicate
 functionality or rebuild business logic in your backend.
 
 Each MCP Server handler has a 1:1 relationship with a route. That means one
-route can host one server.
+route can host one server. A gateway may have any number of MCP servers.
 
 A single MCP server may have many tools and prompts, where each tool interfaces
 with an API route in your gateway. You can compose multiple MCP servers on
 different routes to tailor MCP tools and prompts for each server's specific
 purpose.
+
+The MCP Server Handler works by re-invoking configured routes on the gateway. It
+does **_not_** go back out to HTTP: it keeps requests _within_ the gateway while
+still re-invoking the policy pipeline for your routes. This means that if you
+configure an MCP server with policies, routes with policies, and configure those
+routes as tools, the policy pipelines for both will be invoked. First the MCP
+server handler inbound policies, then the inbound policies for the tool's route,
+then the outbound policies for the tool's route, and finally, the outbound
+policies for the MCP server handler.
 
 ## Setup via Portal
 
@@ -82,20 +88,26 @@ with the following route configuration:
 
 The MCP Server handler requires the following configurations:
 
-- `name` - The name identifier of the MCP server
-- `version` - The version of the MCP server protocol to use
-- `debugMode`: Verbose logs on server startup, initialization, tool listing, and
-  tool calls. NOT recommended for production environments.
+- `name` (optional) - The name identifier of the MCP server.
+- `version` (optional) - The version of the MCP server.
+- `debugMode` (optional, default `false`) - Verbose logs on server startup,
+  initialization, tool listing, and tool calls. NOT recommended for production
+  environments.
+- `operations` - An array of operation references to register with the MCP
+  server. Each operation can be a tool, prompt, or resource based on its
+  `x-zuplo-route.mcp` configuration.
 
 ### MCP `2025-06-18` Global Options
 
-:::warning
+:::danger
 
 These options are part of the new
 [MCP specification (2025-06-18)](https://modelcontextprotocol.io/specification/2025-06-18).
-Some MCP clients **may not yet support these features**. If you experience
-compatibility issues with your MCP client, ensure your `outputSchema` is a valid
-`type: object` JSON Schema and `structuredContent` is also of `type: object`.
+Some MCP clients **may not yet support these features** and output schemas may
+not be considered valid by various clients given MCP has not yet adopted an
+exact JSON schema dialect. If you experience compatibility issues with your MCP
+client, ensure your `outputSchema` is a valid `type: object` JSON Schema and
+`structuredContent` is also of `type: object`.
 
 :::
 
@@ -107,10 +119,11 @@ compatibility issues with your MCP client, ensure your `outputSchema` is a valid
   included as `structuredContent`. When `false`, only `text` content will be
   returned.
 
-### MCP Tools
+### Operations
 
-Configure MCP tools using the `files` configuration. Specify OpenAPI files and
-the exact operation IDs you want to expose as MCP tools:
+Configure MCP tools, prompts, and resources using the `operations`
+configuration. Specify OpenAPI files and the exact operation IDs you want to
+expose:
 
 ```json
 "paths": {
@@ -123,14 +136,14 @@ the exact operation IDs you want to expose as MCP tools:
           "options": {
             "name": "My MCP Server",
             "version": "1.0.0",
-            "files": [
+            "operations": [
               {
-                "path": "./config/weather.oas.json",
-                "operationIds": ["getCurrentWeather", "getForecast"]
+                "file": "./config/weather.oas.json",
+                "id": "getCurrentWeather"
               },
               {
-                "path": "./config/todos.oas.json",
-                "operationIds": ["getTodos", "createTodo", "updateTodo"]
+                "file": "./config/todos.oas.json",
+                "id": "createTodo"
               }
             ]
           }
@@ -141,144 +154,75 @@ the exact operation IDs you want to expose as MCP tools:
 }
 ```
 
-- `path`: Path to an OpenAPI JSON spec file (relative to the project root)
-- `operationIds`: Array of specific operation IDs to include as MCP tools from
-  the targeted file
+- `file`: Path to an OpenAPI JSON spec file (relative to the project root)
+- `id`: The specific operation ID to include from the targeted file
 
 This approach provides explicit control over exactly which API operations become
-MCP tools and supports OpenAPI extensions for enhanced configuration (see
-OpenAPI Configuration section below).
+MCP tools, prompts, or resources.
 
-#### Deprecated Configurations
+### Deprecated Configurations
 
 :::caution
 
-Both `openApiFilePaths` and `openApiTools` configuration options are
-**deprecated** and will be removed in a future version. Please migrate to the
-`files` configuration option described above.
+The `files`, `prompts`, and `resources` configuration options are **deprecated**
+and will be removed in a future version. Please migrate to the `operations`
+configuration option described above.
 
 :::
 
 <details>
-<summary>Option 1: Transform Entire OpenAPI Files (Deprecated)</summary>
+<summary>Legacy Configuration Options (Deprecated)</summary>
 
-Transform all routes from OpenAPI files into MCP tools by specifying
-`openApiFilePaths`:
+Prior to `operations`, specific configuration arrays were used:
+
+- `files`: For tools
+- `prompts`: For prompts
+- `resources`: For resources
 
 ```json
-"paths": {
-  "/mcp": {
-    "post": {
-      "x-zuplo-route": {
-        "handler": {
-          "export": "mcpServerHandler",
-          "module": "$import(@zuplo/runtime)",
-          "options": {
-            "openApiFilePaths": [
-              {
-                "filePath": "./config/weather.oas.json"
-              },
-              {
-                "filePath": "./config/todos.oas.json"
-              }
+"post": {
+  "operationId": "mcp-server",
+  "x-zuplo-route": {
+    "handler": {
+      "export": "mcpServerHandler",
+      "module": "$import(@zuplo/runtime)",
+      "options": {
+        "files": [
+          {
+            "path": "./config/weather.oas.json",
+            "operationIds": [
+              "getCurrentWeather"
             ]
           }
-        }
+        ],
+        "prompts": [
+          {
+            "path": "./config/weather.oas.json",
+            "operationIds": [
+              "weatherPrompt"
+            ]
+          }
+        ]
       }
     }
   }
-}
 ```
 
-- `filePath`: Path to an OpenAPI JSON spec file (relative to the project root)
-
-To exclude specific routes when using this option, add
-`x-zuplo-route.mcp.enabled: false` to those routes (see OpenAPI Configuration
-section).
+Please migrate these to the unified `operations` array.
 
 </details>
 
-<details>
-<summary>Option 2: Transform Individual Routes (Deprecated)</summary>
+### MCP Tools
 
-Add specific routes as MCP tools using the `openApiTools` array. Specify
-**either** `path` or `operationId`, plus the required `method`:
+Tools are the main way that AI agents can discover capabilities from MCP
+servers. They are flexible, lite weight ways to execute some functionality,
+query some data, or perform an action on the user's behalf.
 
-```json
-"paths": {
-  "/mcp": {
-    "post": {
-      "x-zuplo-route": {
-        "handler": {
-          "export": "mcpServerHandler",
-          "module": "$import(@zuplo/runtime)",
-          "options": {
-            "openApiTools": [
-              {
-                "path": "/todos",
-                "method": "GET",
-                "name": "get_todos",
-                "description": "Gets todos from the backend"
-              },
-              {
-                "operationId": "get_todos_by_priority",
-                "method": "GET"
-              }
-            ]
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-- `path`: The route path to convert to an MCP tool
-- `operationId`: Alternative to `path` - uses the route's globally unique
-  OpenAPI `operationId`
-- `method`: The HTTP method (`GET`, `POST`, etc.)
-- `name` (optional): Manually overrides the tool's name
-- `description` (optional): Manually overrides the tool's description
-- `includeOutputSchema` (optional): Override the global `includeOutputSchema`
-  setting for this specific route
-- `includeStructuredContent` (optional): Override the global
-  `includeStructuredContent` setting for this specific route
-
-</details>
-
-<details>
-<summary>Migration guide</summary>
-
-**Before (deprecated):**
-
-```json
-{
-  "options": {
-    "name": "My MCP Server",
-    "version": "1.0.0",
-    "openApiFilePaths": [{ "filePath": "./config/routes.oas.json" }]
-  }
-}
-```
-
-**After (using `files` and individual operation IDs):**
-
-```json
-{
-  "options": {
-    "name": "My MCP Server",
-    "version": "1.0.0",
-    "files": [
-      {
-        "path": "./config/routes.oas.json",
-        "operationIds": ["operation1", "operation2", "operation3"]
-      }
-    ]
-  }
-}
-```
-
-</details>
+Routes configured as MCP prompts may include the `x-zuplo-route.mcp` extension
+with `type: "tool"` in their OpenAPI definition. By default, without the
+`x-zuplo-route.mcp` configuration, the MCP server handler will assume the
+provided operation is a "tool". See [MCP Server Tools](../mcp-server/tools.mdx)
+for detailed documentation.
 
 ### Custom MCP Tools
 
@@ -286,113 +230,38 @@ Create custom tools as routes with full programmatic control using dedicated
 OpenAPI specifications and custom handler functions.
 
 This approach provides maximum flexibility for complex workflows. See
-[MCP Server Custom Tools](./mcp-server-custom-tools.mdx) for detailed
+[MCP Server Custom Tools](../mcp-server/custom-tools.mdx) for detailed
 documentation.
 
 ### MCP Prompts
 
 In addition to tools, MCP servers can expose prompts - reusable, parameterized
 prompt templates that AI clients can request and execute. Configure prompts
-using the `prompts` array in your MCP server options:
+using the `operations` array in your MCP server options, just like tools.
 
-```json
-"paths": {
-  "/mcp": {
-    "post": {
-      "x-zuplo-route": {
-        "handler": {
-          "export": "mcpServerHandler",
-          "module": "$import(@zuplo/runtime)",
-          "options": {
-            "name": "My MCP Server",
-            "version": "1.0.0",
-            "prompts": [
-              {
-                "path": "./config/prompts.oas.json",
-                "operationIds": ["greeting_generator", "content_template"]
-              }
-            ]
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-Routes configured as MCP prompts may include the `x-zuplo-mcp-prompt` extension
-in their OpenAPI definition in order to provide additional MCP metadata. These
-routes should return structured message arrays from their handlers. See
-[MCP Server Prompts](./mcp-server-prompts.mdx) for detailed documentation.
+Routes configured as MCP prompts must include the `x-zuplo-route.mcp` extension
+with `type: "prompt"` in their OpenAPI definition. See
+[MCP Server Prompts](../mcp-server/prompts.mdx) for detailed documentation.
 
 ### MCP Resources
 
 MCP servers can also expose resources - static read-only content like
 documentation, configuration files, or any other data an AI system might need.
-Like tools, configure resources using the `resources` array in your MCP server
-options with operation IDs of routes in your gateway:
+Like tools and prompts, configure resources using the `operations` array in your
+MCP server options.
 
-```json
-"paths": {
-  "/mcp": {
-    "post": {
-      "x-zuplo-route": {
-        "handler": {
-          "export": "mcpServerHandler",
-          "module": "$import(@zuplo/runtime)",
-          "options": {
-            "name": "My MCP Server",
-            "version": "1.0.0",
-            "resources": [
-              {
-                "path": "./config/routes.oas.json",
-                "operationIds": ["html", "css"]
-              }
-            ]
-          }
-        }
-      }
-    }
-  }
-}
-```
+Routes configured as MCP resources must use the GET method and must include the
+`x-zuplo-route.mcp` extension with `type: "resource"` in their OpenAPI
+definition.
 
-Routes configured as MCP resources must use the GET method and may include the
-`x-zuplo-mcp-resource` extension in their OpenAPI definition to provide
-additional MCP metadata.
-
-See [MCP Server Resources](./mcp-server-resources.mdx) for detailed
+See [MCP Server Resources](../mcp-server/resources.mdx) for detailed
 documentation.
 
-### Tool names and descriptions
+### Route `x-zuplo-route.mcp` configuration
 
-Regardless of which option you use, MCP tools are configured as follows:
-
-- **Tool names**: Uses the route's `operationId` if available, otherwise falls
-  back to a generated `METHOD_ROUTE` format (for example, `GET_todos`)
-- **Tool descriptions**: Derived from (in order of priority):
-  1. The route's `description` field
-  2. The route's `summary` field
-  3. A generated description if neither is available
-
-**Best Practice**: Always set meaningful `operationId`s (like `get_users`,
-`create_new_deployment`, or `update_shopping_cart`) and descriptions as these
-help LLMs understand exactly _what_ each tool does.
-
-:::tip
-
-Read more about authoring usable tools and good prompt engineering practices
-with
-[Anthropic's Prompt engineering overview](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview).
-
-:::
-
-### `x-zuplo-mcp-tool` configuration
-
-You can customize individual tools using the `x-zuplo-mcp-tool` OpenAPI
-extension: this is especially useful if changing the `operationId` or
-`description` on a route isn't possible but you want to provide better context
-to downstream agents.
+You can customize individual tools, prompts, and resources using the
+`x-zuplo-route.mcp` property in your OpenAPI definition. This allows you to
+define the type of MCP capability and provide specific metadata.
 
 ```json
 "paths": {
@@ -400,34 +269,46 @@ to downstream agents.
     "get": {
       "operationId": "getCurrentWeather",
       "summary": "Get current weather",
-      "x-zuplo-mcp-tool": {
-        "name": "get_current_weather",
-        "description": "Retrieve current weather conditions for a specified location",
-        "enabled": true
+      "x-zuplo-route": {
+        "handler": { ... },
+        "mcp": {
+          "type": "tool",
+          "name": "get_current_weather",
+          "description": "Retrieve current weather conditions for a specified location",
+          "enabled": true
+        }
       }
     }
   },
-  "/internal-endpoint": {
-    "get": {
-      "operationId": "internalOperation",
-      "summary": "Internal operation",
-      "x-zuplo-mcp-tool": {
-        "enabled": false
+  "/prompts/greeting": {
+    "post": {
+      "operationId": "greeting-prompt",
+      "x-zuplo-route": {
+        "handler": { ... },
+        "mcp": {
+          "type": "prompt",
+          "name": "greeting_generator",
+          "description": "Generate a personalized greeting"
+        }
       }
     }
   }
 }
 ```
 
-**x-zuplo-mcp-tool options:**
+**Common options:**
 
-- `name` (optional): Override the tool name shown to AI systems (defaults to
-  `operationId`)
-- `description` (optional): Override the tool description for AI consumption
-  (falls back to `description` and then `summary` if not set)
-- `enabled` (default: `true`): Whether this operation should be available as an
-  MCP tool in a configured MCP server: useful for debugging or fine grained
-  control.
+- `type`: The type of MCP capability (`tool`, `prompt`, `resource`, or
+  `graphql`). Defaults to `tool` if not specified.
+- `name`: Override the name shown to AI systems (defaults to `operationId`)
+- `description`: Override the description for AI consumption (defaults to route
+  description/summary)
+- `enabled`: Whether this operation should be available in the MCP server.
+
+See the respective [tools](../mcp-server/tools.mdx),
+[prompts](../mcp-server/prompts.mdx) and
+[resources](../mcp-server/resources.mdx) documentation for type-specific
+options.
 
 ## Authentication
 

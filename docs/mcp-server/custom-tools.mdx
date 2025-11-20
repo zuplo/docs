@@ -67,6 +67,9 @@ Create an OpenAPI specification that defines your tools:
           "handler": {
             "export": "default",
             "module": "$import(./modules/add)"
+          },
+          "mcp": {
+            "type": "tool"
           }
         }
       }
@@ -91,6 +94,9 @@ Create an OpenAPI specification that defines your tools:
           "handler": {
             "export": "default",
             "module": "$import(./modules/multiply)"
+          },
+          "mcp": {
+            "type": "tool"
           }
         }
       }
@@ -120,17 +126,6 @@ Create an OpenAPI specification that defines your tools:
   }
 }
 ```
-
-:::tip
-
-`POST` routes with a `requestBody` and a defined `schema` are translated into an
-MCP tool's parameters. When invoked, these are validated by the MCP server to
-ensure the tool is being correctly used by the LLM.
-
-Other methods like `GET`, `DELETE`, etc. work in a similar fashion in order to
-support complex tools in the shape of your APIs.
-
-:::
 
 ### 2. Create Custom Handler Functions
 
@@ -175,10 +170,14 @@ Configure the MCP Server Handler to use your OpenAPI specification:
             "options": {
               "name": "Calculator MCP Server",
               "version": "0.0.0",
-              "files": [
+              "operations": [
                 {
-                  "path": "./config/calculator-api.oas.json",
-                  "operationIds": ["addNumbers", "multiplyNumbers"]
+                  "file": "./config/calculator-api.oas.json",
+                  "id": "addNumbers"
+                },
+                {
+                  "file": "./config/calculator-api.oas.json",
+                  "id": "multiplyNumbers"
                 }
               ]
             }
@@ -265,7 +264,22 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 }
 ```
 
-With the corresponding OpenAPI definition:
+This utilizes `context.invokeRoute` to invoke various routes on a gateway. This
+powerful workflow lets you create composite routes and tools that call many
+different routes on your gateway.
+
+:::note
+
+`context.invokeRoute` _will_ utilize the full inbound and outbound policy
+pipeline but does not go back out to HTTP: requests stay within the gateway.
+This means that policies you set on your MCP server route will be invoked
+alongside policies that are associated with any calls made through
+`context.invokeRoute`.
+
+:::
+
+A corresponding OpenAPI definition makes this custom route available on your
+gateway.
 
 ```json
 {
@@ -347,9 +361,39 @@ With the corresponding OpenAPI definition:
 }
 ```
 
+Then, simply add this operation as to an MCP server to make it available as a
+tool:
+
+```json
+{
+  "paths": {
+    "/mcp": {
+      "post": {
+        "x-zuplo-route": {
+          "handler": {
+            "export": "mcpServerHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "operations": [
+                {
+                  "file": "./config/routes.oas.json",
+                  "id": "processOrder"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 ### Error Handling
 
-Handle errors gracefully by throwing standard JavaScript errors:
+Handle errors gracefully by throwing standard JavaScript errors. These then get
+caught by the MCP Server and are served back to the LLM client so it can take
+action:
 
 ```typescript
 // modules/validate-user.ts
@@ -368,7 +412,10 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 
 ### Accessing Request Headers
 
-Access original request headers through the standard request object:
+Access the original request headers through the standard `ZuploRequest` object.
+These headers are piped through the MCP server on your gateway into your route.
+This means you can handle headers from MCP clients like you would on any other
+route:
 
 ```typescript
 // modules/check-headers.ts
@@ -386,110 +433,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 }
 ```
 
-:::note
-
-`context.invokeRoute` _will_ utilize the full inbound and outbound policy
-pipeline. This means that policies you set on your MCP server route will be
-invoked alongside policies that are associated with any calls made through
-`invokeRoute`.
-
-:::
-
-## Testing Custom Tools
-
-### Using MCP Inspector
-
-The [MCP Inspector](https://github.com/modelcontextprotocol/inspector) is ideal
-for testing custom tools:
-
-```bash
-npx @modelcontextprotocol/inspector
-```
-
-1. Set **Transport Type** to "Streamable HTTP"
-2. Set **URL** to your MCP endpoint (for example,
-   `https://your-gateway.zuplo.dev/mcp`)
-3. Connect and test your tools interactively
-
-### Using cURL
-
-Test individual tools directly:
-
-```bash
-# List available tools
-curl https://your-gateway.zuplo.dev/mcp \
-  -X POST \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "jsonrpc": "2.0",
-    "id": "0",
-    "method": "tools/list"
-  }'
-
-# Call a specific tool
-curl https://your-gateway.zuplo.dev/mcp \
-  -X POST \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "jsonrpc": "2.0",
-    "id": "1",
-    "method": "tools/call",
-    "params": {
-      "name": "addNumbers",
-      "arguments": {
-        "a": 5,
-        "b": 3
-      }
-    }
-  }'
-```
-
 ## Best Practices
-
-### Schema Design
-
-Use descriptive and well-structured JSON schemas for your tools. This is used by
-the server to validate MCP client inputs (that is, JSON generated by an LLM).
-Providing descriptive schemas ensures an MCP Client's LLM always has the
-appropriate context on exactly what arguments to provide to tools and can
-dramatically reduce invalid tool usage. This validation is done automatically.
-
-```json
-// Good! Uses descriptive names and specific types with limiters and formats.
-{
-  "type": "object",
-  "required": ["userId"],
-  "properties": {
-    "userId": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Valid UUID for user ID"
-    },
-    "amount": {
-      "type": "number",
-      "minimum": 0,
-      "maximum": 10000,
-      "description": "Amount in cents"
-    }
-  }
-}
-```
-
-```json
-// Bad! Confusing. What's "a"? What's "b"? An LLM won't understand this.
-{
-  "type": "object",
-  "required": ["userId"],
-  "properties": {
-    "a": {
-      "type": "string"
-    },
-    "b": {
-      "type": "number"
-    }
-  }
-}
-```
 
 ### Tool Design
 

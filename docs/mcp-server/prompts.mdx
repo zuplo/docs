@@ -1,6 +1,6 @@
 ---
 title: MCP Server Prompts
-sidebar_label: MCP Server Prompts
+sidebar_label: Prompts
 ---
 
 The MCP (Model Context Protocol) Server handler supports prompts in addition to
@@ -25,7 +25,8 @@ formatted instructions or context that guide AI reasoning and responses.
 
 ### Route Configuration
 
-Configure a route in your OpenAPI doc:
+Configure a route in your OpenAPI doc utilizing the `x-zuplo-route.mcp.type`
+property:
 
 ```json
 {
@@ -56,6 +57,11 @@ Configure a route in your OpenAPI doc:
         "handler": {
           "export": "default",
           "module": "$import(./modules/greeting)"
+        },
+        "mcp": {
+          "type": "prompt",
+          "name": "greeting_generator",
+          "description": "Utilize this prompt to generate a personalized greeting message"
         }
       }
     }
@@ -63,26 +69,20 @@ Configure a route in your OpenAPI doc:
 }
 ```
 
-To provide MCP specific metadata for the prompt, use `x-zuplo-mcp-prompt`:
+The `x-zuplo-route.mcp` configuration for prompts supports:
 
-```json
-"x-zuplo-mcp-prompt": {
-  "name": "greeting_generator",
-  "description": "Utilize this prompt to generate a personalized greeting message"
-},
-```
-
-The `x-zuplo-mcp-prompt` extension supports:
-
-- `name` - The identifier for the MCP prompt
-- `description` - Description of what the prompt generates
-
-Without `x-zuplo-mcp-prompt`, the MCP server will use the route's `operationId`
-as the prompt name and the `summary` as the prompt description.
+- `type`: Must be set to `"prompt"` otherwise this will be registered as a tool.
+- `name` - (optional) The identifier for the MCP prompt. If not provided, falls
+  back to the `operationId` of the route. If no `operationId` is set, falls back
+  to an auto-generated name.
+- `description` - (optional) Description of what the prompt generates. If not
+  provided, falls back to the operation's `description` or `summary` fields. If
+  those are not set, uses an auto-generated description.
 
 ### MCP Server Handler Configuration
 
-Add prompt configuration to your MCP Server handler options:
+Add prompt configuration to your MCP Server handler options using the
+`operations` array:
 
 ```json
 {
@@ -96,10 +96,10 @@ Add prompt configuration to your MCP Server handler options:
             "options": {
               "name": "example-mcp-server",
               "version": "1.0.0",
-              "prompts": [
+              "operations": [
                 {
-                  "path": "./config/routes.oas.json",
-                  "operationIds": ["greeting"]
+                  "file": "./config/routes.oas.json",
+                  "id": "greeting"
                 }
               ]
             }
@@ -111,15 +111,15 @@ Add prompt configuration to your MCP Server handler options:
 }
 ```
 
-The `prompts` array supports:
-
-- `path` - Path to the OpenAPI specification file containing prompt routes
-- `operationIds` - Array of operation IDs to include as MCP prompts
+See further details in the
+[MCP Server Handler documentation](../handlers/mcp-server).
 
 ## Route Handler Implementation
 
 Your route handler must return a structured response with a `messages` array
-containing properly formatted message objects:
+containing properly formatted message objects: these are the message objects
+that will populate the LLM's context and guide it, based on the templatized user
+input, towards the desired result:
 
 ```typescript
 export default async function (request: ZuploRequest, context: ZuploContext) {
@@ -139,17 +139,15 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 }
 ```
 
-### Message Structure
+For more information on the format of messages to return to the LLM,
 
-Each message in the `messages` array should follow this structure:
-
-- `role` - The role of the message (`"assistant"`, `"user"`, or `"system"`)
-- `content` - The content object with:
-  - `type` - Content type (`"text"` for text content)
-  - `text` - The actual text content
+- `role`: Either “user” or “assistant” to indicate the speaker in the message
+  flow.
+- `content`: One of the following content
+  [types defined by the MCP specification](https://modelcontextprotocol.io/specification/2025-06-18/server/prompts#promptmessage).
 
 For more information, review
-[the `PromptMessage` type described in the MCP docs](https://modelcontextprotocol.io/specification/2025-06-18/server/prompts#promptmessage).
+[the `PromptMessage` type and "Data Types" described in the MCP specification](https://modelcontextprotocol.io/specification/2025-06-18/server/prompts#promptmessage).
 
 ### Multiple Messages
 
@@ -159,7 +157,7 @@ You can return multiple messages to create complex and dynamic templates:
 return {
   messages: [
     {
-      role: "system",
+      role: "assistant",
       content: {
         type: "text",
         text: "You are a helpful assistant that generates personalized greetings.",

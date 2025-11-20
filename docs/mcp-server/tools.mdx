@@ -1,0 +1,294 @@
+---
+title: MCP Server Tools
+sidebar_label: Tools
+---
+
+The MCP (Model Context Protocol) Server handler supports tools, enabling you to
+expose your API routes as executable functions that AI clients can call to
+perform actions or retrieve data.
+
+Tools are the core building block of MCP servers, allowing AI systems to
+interact with your services and discover capabilities through your Zuplo
+gateway.
+
+## Overview
+
+Zuplo's MCP tools work by automatically transforming your API routes into MCP
+tool definitions. When an AI client calls a tool, the MCP server invokes the
+corresponding route handler in your gateway.
+
+This means any existing API route can be instantly turned into an MCP tool with
+minimal configuration.
+
+## Configuration
+
+### Route Configuration
+
+Configure a route in your OpenAPI doc:
+
+```json
+{
+  "/weather/current": {
+    "get": {
+      "operationId": "getCurrentWeather",
+      "summary": "Get current weather",
+      "description": "Retrieve current weather conditions for a specified location",
+      "parameters": [
+        {
+          "name": "location",
+          "in": "query",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "x-zuplo-route": {
+        "corsPolicy": "none",
+        "handler": {
+          "export": "default",
+          "module": "$import(./modules/weather)"
+        },
+        "mcp": {
+          "type": "tool",
+          "name": "get_current_weather",
+          "description": "Retrieve current weather conditions for a specified location"
+        }
+      }
+    }
+  }
+}
+```
+
+To provide MCP specific metadata for the tool, use the `mcp` property within
+`x-zuplo-route`:
+
+The `x-zuplo-route.mcp` configuration for tools supports:
+
+- `type` (optional, defaults to "tool") - Set to `"tool"`
+- `name` (optional) - The identifier for the MCP tool. Defaults to the
+  operation's `operationId`. If the `operationId` is not set, falls back to an
+  auto-generated name.
+- `description` (optional) - Description of what the tool does. Falls back to
+  the operation's `description` or `summary`. If the route's `description` or
+  `summary` fields are not set, falls back to an auto-generated description.
+- `enabled` (optional) - Whether this tool is enabled. Defaults to `true`.
+
+The route handler for your tool can be any standard Zuplo request handler like
+[the URL Fowarder](../handlers/url-forward) or
+[the Redirect handler](../handlers/redirect) or a
+[custom function module](../handlers/custom-handler). The route receives the
+request triggered by the MCP tool call within the gateway and returns a response
+that will be passed back through the MCP server to the AI client.
+
+:::tip
+
+`POST` routes with a `requestBody` and a defined `schema` are translated into an
+MCP tool's parameters. When invoked, these are validated by the MCP server to
+ensure the tool is being correctly used by the LLM.
+
+Other methods like `GET`, `DELETE`, etc. work in a similar fashion in order to
+support complex tools in the shape of your APIs.
+
+:::
+
+### MCP Server Handler Configuration
+
+Add tool configuration to your MCP Server handler options using the `operations`
+array:
+
+```json
+{
+  "paths": {
+    "/mcp": {
+      "post": {
+        "x-zuplo-route": {
+          "handler": {
+            "export": "mcpServerHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "name": "example-mcp-server",
+              "version": "1.0.0",
+              "operations": [
+                {
+                  "file": "./config/routes.oas.json",
+                  "id": "getCurrentWeather"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+See further details in the
+[MCP Server Handler documentation](../handlers/mcp-server).
+
+## Testing MCP Tools
+
+### List Available Tools
+
+Use the MCP `tools/list` method to see available tools:
+
+```bash
+curl https://my-gateway.zuplo.dev/mcp \
+  -X POST \
+  -H 'accept: application/json, text/event-stream' \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": "1",
+    "method": "tools/list"
+  }'
+```
+
+Response:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": "1",
+  "result": {
+    "tools": [
+      {
+        "name": "get_current_weather",
+        "description": "Retrieve current weather conditions for a specified location",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string"
+            }
+          },
+          "required": ["location"]
+        }
+      }
+    ]
+  }
+}
+```
+
+### Call a Tool
+
+Use the MCP `tools/call` method to execute a tool:
+
+```bash
+curl https://my-gateway.zuplo.dev/mcp \
+  -X POST \
+  -H 'accept: application/json, text/event-stream' \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": "1",
+    "method": "tools/call",
+    "params": {
+      "name": "get_current_weather",
+      "arguments": {
+        "location": "San Francisco"
+      }
+    }
+  }'
+```
+
+Response:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": "1",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"location\":\"San Francisco\",\"temperature\":72,\"condition\":\"Sunny\"}"
+      }
+    ]
+  }
+}
+```
+
+## Best Practices
+
+### Meaningful Names and Descriptions
+
+Always set meaningful `operationId`s (like `get_users`, `create_new_deployment`,
+or `update_shopping_cart`) and descriptions as these help LLMs understand
+exactly _what_ each tool does.
+
+When you need to provide more meaningful descriptions or names that don't align
+well with the `operationId`, set the metadata in `x-zuplo-route.mcp`.
+
+:::tip
+
+Read more about authoring usable tools and good prompt engineering practices
+with
+[Anthropic's Prompt engineering overview](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview).
+
+:::
+
+AI models rely heavily on tool descriptions to understand when and how to use a
+tool.
+
+- **Be Descriptive**: Explain exactly what the tool does and what inputs it
+  expects.
+- **Use Meaningful Names**: Operation IDs like `create_user` or
+  `search_products` are much better than `op1` or `endpoint`.
+
+### Schema Design
+
+Use descriptive and well-structured JSON schemas for your tools (in your OpenAPI
+`requestBody` and `response`). This is used by the server to validate MCP client
+inputs (that is, JSON generated by an LLM). Providing descriptive schemas
+ensures an MCP Client's LLM always has the appropriate context on exactly what
+arguments to provide to tools and can dramatically reduce invalid tool usage.
+This validation is done automatically.
+
+```json
+// Good! Uses descriptive names and specific types with limiters and formats.
+{
+  "type": "object",
+  "required": ["userId"],
+  "properties": {
+    "userId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Valid UUID for user ID"
+    },
+    "amount": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10000,
+      "description": "Amount in cents"
+    }
+  }
+}
+```
+
+```json
+// Bad! Confusing. What's "a"? What's "b"? An LLM won't understand this.
+{
+  "type": "object",
+  "required": ["userId"],
+  "properties": {
+    "a": {
+      "type": "string"
+    },
+    "b": {
+      "type": "number"
+    }
+  }
+}
+```
+
+Defining clear schemas in your OpenAPI document ensures your handler always
+receives valid data. The MCP server uses these schemas to validate arguments
+provided by the AI client _before_ your handler is ever called. Input validation
+is an important part of MCP, so ensure you have strong validation in your
+OpenAPI JSON schemas!
+
+### Custom Tools
+
+For complex workflows that don't map 1:1 to a single API route, or require
+advanced logic, consider using
+[Custom MCP Tools](../handlers/mcp-server-custom-tools.mdx).

@@ -60,6 +60,7 @@ const config: ZudokuConfig = {
       primary: "316 91% 45%",
       border: "220 13.04% 90.98%",
     },
+    customCss: `.dark svg[id^="mermaid-"] { filter: invert(1); }`,
   },
   plugins: [
     inkeepMetadataPlugin,
