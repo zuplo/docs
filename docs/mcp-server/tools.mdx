@@ -65,14 +65,27 @@ To provide MCP specific metadata for the tool, use the `mcp` property within
 
 The `x-zuplo-route.mcp` configuration for tools supports:
 
-- `type` (optional, defaults to "tool") - Set to `"tool"`
-- `name` (optional) - The identifier for the MCP tool. Defaults to the
+- `type` (`string`: optional, defaults to `tool`) - Set to `"tool"` to denote
+  this operation is an MCP tool.
+- `name` (`string`: optional) - The identifier for the MCP tool. Defaults to the
   operation's `operationId`. If the `operationId` is not set, falls back to an
   auto-generated name.
-- `description` (optional) - Description of what the tool does. Falls back to
-  the operation's `description` or `summary`. If the route's `description` or
-  `summary` fields are not set, falls back to an auto-generated description.
-- `enabled` (optional) - Whether this tool is enabled. Defaults to `true`.
+- `description` (`string`: optional) - Description of what the tool does. Falls
+  back to the operation's `description` or `summary`. If the route's
+  `description` or `summary` fields are not set, falls back to an auto-generated
+  description.
+- `enabled` (`boolean`: optional) - Whether this tool is enabled. Defaults to
+  `true`.
+- `annotations` (`object`: optional) - An object containing tool annotations:
+  - `title` (`string`: optional) - A human-readable title for the tool, often
+    used by clients.
+  - `readOnlyHint` (`boolean`: optional) - Hint that the tool is read-only.
+  - `destructiveHint` (`boolean`: optional) - Hint that the tool has mutating
+    side effects.
+  - `idempotentHint` (`boolean`: optional) - Hint that the tool is idempotent.
+  - `openWorldHint` (`boolean`: optional) - Hint that the tool operates in an
+    open-world context of external entities (like web-search).
+- `_meta` (`object`: optional) - An object containing any arbitrary metadata.
 
 The route handler for your tool can be any standard Zuplo request handler like
 [the URL Fowarder](../handlers/url-forward) or
