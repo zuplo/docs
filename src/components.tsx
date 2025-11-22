@@ -61,7 +61,7 @@ export const mdxComponents = {
         <Framed size={props.size}>
           <Image
             {...props}
-            className="border border-[#eaecef] overflow-hidden rounded-sm"
+            className="border border-border overflow-hidden rounded-sm"
           />
         </Framed>
       );
@@ -69,13 +69,13 @@ export const mdxComponents = {
     return (
       <Image
         {...props}
-        className="border border-[#eaecef] overflow-hidden rounded-sm"
+        className="border border-border overflow-hidden rounded-sm"
       />
     );
   },
   Framed,
   CodeType: (props: PropsWithChildren) => (
-    <code className="text-green-600">&lt;{props.children}&gt;</code>
+    <code className="text-primary">&lt;{props.children}&gt;</code>
   ),
   DocusaurusDocsLicense,
   GithubButton,
