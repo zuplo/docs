@@ -1270,7 +1270,7 @@
     },
     {
       "source": "/docs/mcp-server/mcp-server{/}?",
-      "destination": "/mcp-server/introduction",
+      "destination": "/docs/mcp-server/introduction",
       "permanent": true
     },
     {
@@ -1284,8 +1284,18 @@
       "permanent": true
     },
     {
+      "source": "/docs/handlers/mcp-server-custom-tools{/}?",
+      "destination": "/docs/mcp-server/custom-tools",
+      "permanent": true
+    },
+    {
       "source": "/docs/handlers/mcp-server-resources{/}?",
       "destination": "/docs/mcp-server/resources",
+      "permanent": true
+    },
+    {
+      "source": "/docs/handlers/mcp-server-prompts{/}?",
+      "destination": "/docs/mcp-server/prompts",
       "permanent": true
     }
   ],
