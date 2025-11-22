@@ -1,6 +1,13 @@
 import { removeExtensions } from "zudoku/processors/removeExtensions";
 import type { ZudokuBuildConfig } from "zudoku";
+import type { PluggableList } from "unified";
+import { remarkIf } from "./src/remark-if.js";
+
 const buildConfig: ZudokuBuildConfig = {
+  remarkPlugins: (defaultPlugins: PluggableList) => [
+    ...defaultPlugins,
+    [remarkIf, { mode: "zuplo" }],
+  ],
   processors: [
     // Remove specific extensions
     removeExtensions({
