@@ -1267,6 +1267,26 @@
       "source": "/docs/cli/tunnels{/}?",
       "destination": "/docs/articles/tunnel-setup",
       "permanent": true
+    },
+    {
+      "source": "/docs/mcp-server/mcp-server{/}?",
+      "destination": "/mcp-server/introduction",
+      "permanent": true
+    },
+    {
+      "source": "/docs/mcp-server/graphql{/}?",
+      "destination": "/docs/mcp-server/graphql",
+      "permanent": true
+    },
+    {
+      "source": "/docs/mcp-server/mcp-server-custom-tools{/}?",
+      "destination": "/docs/mcp-server/tools",
+      "permanent": true
+    },
+    {
+      "source": "/docs/handlers/mcp-server-resources{/}?",
+      "destination": "/docs/mcp-server/resources",
+      "permanent": true
     }
   ],
   "rewrites": [
