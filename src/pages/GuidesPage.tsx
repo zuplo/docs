@@ -37,12 +37,24 @@ export const GuidesPage = () => {
     updateCategories(newCategories);
   };
 
-  const filteredGuides =
-    selectedCategories.length === 0
-      ? guides
-      : guides.filter((guide) =>
-          guide.categories.some((cat) => selectedCategories.includes(cat)),
-        );
+  const filteredGuides = (() => {
+    const guidesToFilter =
+      selectedCategories.length === 0
+        ? guides
+        : guides.filter((guide) =>
+            guide.categories.some((cat) => selectedCategories.includes(cat)),
+          );
+
+    // Deduplicate by id to ensure each guide appears only once
+    const seen = new Set<string>();
+    return guidesToFilter.filter((guide) => {
+      if (seen.has(guide.id)) {
+        return false;
+      }
+      seen.add(guide.id);
+      return true;
+    });
+  })();
 
   return (
     <section>

@@ -8,23 +8,73 @@ instances of the Zuplo platform on the hosting provider of your choice. This
 deployment model is ideal for organizations that require custom networking
 configurations or have strict security or compliance requirements.
 
-Dedicated Managed hosting might be the right choice for you if you need:
+Managed Dedicated hosting might be the right choice for you if you need:
 
-- To run you API Gateway on the cloud provider of your choice.
+- To run your API Gateway on the cloud provider of your choice
 - To customize networking configurations, such as restricting access to the
-  public internet.
+  public internet
 - Have geographical deployment requirements where the
-  [Managed Edge](/docs/articles/hosting-options#1-managed-edge) hosting option
-  isn't feasible.
+  [Managed Edge](../articles/hosting-options.mdx#1-managed-edge) hosting option
+  isn't feasible
 - Have regulatory or compliance requirements that necessitate a dedicated
-  instance of Zuplo.
+  instance of Zuplo
+- To meet data sovereignty requirements by choosing specific regions for your
+  service hosting
+
+## Cloud Providers
+
+Zuplo Managed Dedicated can be deployed on a wide range of cloud providers and
+hosting platforms, including:
+
+- **Akamai Connected Cloud** - Leverage Akamai's global network infrastructure
+- **AWS** - Deploy to Amazon Web Services with full VPC integration
+- **Azure** - Run on Microsoft Azure with private networking support
+- **GCP** - Deploy to Google Cloud Platform with custom networking
+- **Equinix** - Use Equinix data centers for colocation and connectivity
+- **TerraSwitch** - Deploy to TerraSwitch infrastructure
+- **Other providers** - Contact us to discuss support for additional providers
+
+You can choose the regions where you want your service hosted to meet any
+sovereignty or data residency concerns.
 
 ## Features
 
-The managed dedicated hosting model provides the same features as other Zuplo
-deployment models. You can use all the same policies, integrations, and features
-as you would with the edge-based deployments.
+The managed dedicated hosting model provides the same core features as other
+Zuplo deployment models. You can use all the same policies, integrations, and
+features as you would with edge-based deployments.
 
-In addition to the standard features, managed dedicated hosting provides the
-ability to customize networking configurations. For example, you can configure
-your API Gateway to only be accessible from specific VPCs or IP ranges.
+### Networking and Security
+
+In addition to the standard features, managed dedicated hosting provides:
+
+- **Custom Networking Configurations** - Configure your API Gateway to only be
+  accessible from specific VPCs or IP ranges
+- **Private Networking Options** - Support for AWS PrivateLink, Azure Private
+  Link, and GCP Private Service Connect for both inbound and outbound
+  connections
+- **Isolated VPC Deployment** - Your gateway runs in a dedicated, isolated VPC
+  for maximum security and isolation
+- **Custom Ingress Options** - Use your own static IP addresses or security
+  appliances (WAFs, IDS/IPS) in front of your API Gateway
+
+### High Availability
+
+- **Multi-Region Deployment** - Deploy multiple dedicated instances across
+  multiple regions for high availability and disaster recovery
+- **Automatic Failover** - Configure automatic failover between regions
+- **Custom Availability Zones** - Choose specific availability zones to meet
+  your redundancy requirements
+
+### Control and Compliance
+
+- **Dedicated Instance** - Your own isolated instance of Zuplo, ensuring no
+  resource sharing with other customers
+- **Full Feature Parity** - Access to all Zuplo policies, integrations, and
+  features
+- **Compliance Support** - Meet regulatory and compliance requirements that
+  necessitate dedicated infrastructure
+
+## Getting Started
+
+To learn more about Zuplo Managed Dedicated or to discuss your specific
+requirements, [schedule some time to talk with us](https://book.zuplo.com).

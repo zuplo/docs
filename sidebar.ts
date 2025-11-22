@@ -536,80 +536,92 @@ export const devPortal: Navigation = [
   }),
 ];
 
-export const resources: Navigation = [
+export const platform: Navigation = [
   // {
   //   type: "category",
-  //   label: "Hosting Options",
+  //   label: "Use Cases",
   //   collapsed: false,
   //   items: [
-  //     "articles/hosting-options",
   //     {
-  //       type: "doc",
-  //       label: "Managed Dedicated",
-  //       file: "articles/managed-dedicated",
-  //     },
-  //     {
-  //       type: "doc",
-  //       label: "Managed Edge",
-  //       file: "articles/managed-edge",
-  //     },
-  //     {
-  //       type: "doc",
-  //       label: "Self Hosted",
-  //       file: "articles/self-hosted",
+  //       type: "link",
+  //       to: "/foo",
+  //       label: "Protect Your API",
   //     },
   //   ],
   // },
-  "articles/who-uses-and-why",
-  "articles/hosting-options",
   {
     type: "category",
-    label: "Members & Roles",
+    label: "Hosting Options",
+    collapsed: false,
     items: [
-      "articles/accounts/members-and-roles",
-      "articles/accounts/roles-and-permissions",
-      "articles/accounts/managing-account-members",
-      "articles/accounts/managing-project-members",
-    ],
-  },
-  {
-    type: "category",
-    label: "Account Settings",
-    items: [
-      "articles/accounts/enterprise-sso",
-      "articles/accounts/zuplo-api-keys",
-      "articles/accounts/default-api-key",
-      "articles/accounts/billing",
-      "articles/accounts/delete-account",
-      "articles/accounts/audit-logs",
-    ],
-  },
-  {
-    type: "category",
-    label: "User Settings",
-    items: [
-      "articles/users/profile",
-      "articles/users/multifactor-authentication",
-    ],
-  },
-  {
-    type: "category",
-    label: "Managed Dedicated",
-    items: [
-      "dedicated/overview",
-      "dedicated/getting-started",
-      "dedicated/source-control",
-      "dedicated/architecture",
-      "dedicated/networking",
-      "dedicated/custom-domains",
-      "dedicated/federated-gateways",
+      "articles/hosting-options",
       {
         type: "category",
-        label: "Akamai",
-        items: ["dedicated/akamai/cdn"],
+        label: "Managed Dedicated",
+        items: [
+          "dedicated/overview",
+          "dedicated/source-control",
+          "dedicated/architecture",
+          "dedicated/networking",
+          "dedicated/custom-domains",
+          "dedicated/federated-gateways",
+          {
+            type: "category",
+            label: "Akamai",
+            items: ["dedicated/akamai/cdn"],
+          },
+        ],
+      },
+      {
+        type: "doc",
+        label: "Managed Edge",
+        file: "managed-edge/overview",
+      },
+      {
+        type: "doc",
+        label: "Self Hosted",
+        file: "self-hosted/overview",
       },
     ],
   },
+  {
+    type: "category",
+    label: "Account Management",
+    collapsed: false,
+    items: [
+      {
+        type: "category",
+        label: "Members & Roles",
+        items: [
+          "articles/accounts/members-and-roles",
+          "articles/accounts/roles-and-permissions",
+          "articles/accounts/managing-account-members",
+          "articles/accounts/managing-project-members",
+        ],
+      },
+      {
+        type: "category",
+        label: "Account Settings",
+        items: [
+          "articles/accounts/enterprise-sso",
+          "articles/accounts/zuplo-api-keys",
+          "articles/accounts/default-api-key",
+          "articles/accounts/billing",
+          "articles/accounts/delete-account",
+          "articles/accounts/audit-logs",
+        ],
+      },
+      {
+        type: "category",
+        label: "User Settings",
+        items: [
+          "articles/users/profile",
+          "articles/users/multifactor-authentication",
+        ],
+      },
+    ],
+  },
+
   {
     type: "category",
     label: "Programming API",

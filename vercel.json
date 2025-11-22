@@ -1292,6 +1292,16 @@
       "source": "/docs/handlers/mcp-server-prompts{/}?",
       "destination": "/docs/mcp-server/prompts",
       "permanent": true
+    },
+    {
+      "source": "/docs/articles/who-uses-and-why{/}?",
+      "destination": "/customers",
+      "permanent": true
+    },
+    {
+      "source": "docs/dedicated/getting-started{/}?",
+      "destination": "/docs/articles/step-1-setup-basic-gateway-local",
+      "permanent": true
     }
   ],
   "rewrites": [
