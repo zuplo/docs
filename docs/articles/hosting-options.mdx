@@ -1,42 +1,70 @@
 ---
 title: Hosting Options
+sidebar_label: Overview
 ---
 
 Your place or ours; Zuplo has a variety of hosting options to suit your needs.
 
 ## 1. Managed Edge
 
-Here run your Zuplo projects in a serverless environment at the edge (300+ data
-centers worldwide). This is our most popular option, if you use our self-serve
-product and pay with your credit card this is the option you are choosing. This
-option is also popular with Enterprise clients where we handle many Billions of
-requests per month and scale up to 100,000s of requests per second effortlessly.
+Run your Zuplo projects in a serverless environment at the edge across 300+ data
+centers worldwide. This is our most popular option and the default choice for
+all Zuplo projects. If you use our self-serve product and pay with your credit
+card, this is the option you are using.
+
+Managed Edge is ideal for organizations that want:
+
+- The simplest deployment experience with zero infrastructure management
+- Global distribution and low-latency performance for users worldwide
+- Automatic scaling to handle traffic spikes and high request volumes
+- Enterprise-grade performance proven at scale (billions of requests per month,
+  millions of requests per second)
+
+For more information, see the
+[Managed Edge documentation](/docs/managed-edge/overview).
 
 ## 2. Managed Dedicated
 
-We run your gateway in a dedicated, isolated VPC on Akamai connected cloud, AWS,
-GCP, Azure, Equinix, TerraSwitch etc. You get to choose the regions you want
-your service hosted to meet any sovereignty or data concerns.
+We run your gateway in a dedicated, isolated VPC on the cloud provider of your
+choice, including Akamai Connected Cloud, AWS, GCP, Azure, Equinix, TerraSwitch,
+and more. You get to choose the regions where you want your service hosted to
+meet any sovereignty or data residency concerns.
 
-We can support private networking options like AWS PrivateLink, Azure Private
-Link, GCP Private Service Connect; available for both inbound and outbound
-connections.
+Managed Dedicated is ideal for organizations that need:
 
-For more information about Zuplo's managed dedicated offerings see
-[the documentation](../dedicated/overview.mdx) or schedule some time to
-[talk with us](https://book.zuplo.com).
+- To run your API Gateway on a specific cloud provider
+- Custom networking configurations, such as restricting access to the public
+  internet
+- Geographical deployment requirements where Managed Edge isn't feasible
+- Regulatory or compliance requirements that necessitate a dedicated instance
+- Private networking options like AWS PrivateLink, Azure Private Link, or GCP
+  Private Service Connect (available for both inbound and outbound connections)
 
-## 3. Self-hosted (AKA on-prem)
+For more information, see the
+[Managed Dedicated documentation](/docs/dedicated/overview.mdx) or
+[schedule some time to talk with us](https://book.zuplo.com).
 
-You get to run Zuplo on your own infrastructure in any cloud or private
-data-center. Available as a hybrid option with the use of shared services for
-rate-limiting or full self-host. You can deploy Zuplo to any management or
-hosting environment such as Kubernetes, Nomad, VMs, Containers etc.
+## 3. Self-Hosted (On-Premises)
 
-To learn more about self-hosting [book a meeting](https://zuplo.com/meeting)
-with us.
+Run Zuplo on your own infrastructure in any cloud or private data center using
+Kubernetes. Zuplo Self-Hosted runs exclusively on Kubernetes and can be deployed
+to any Kubernetes environment. Deployment is simple and uses Helm charts.
 
-## Certified
+Self-Hosted is available in two deployment models:
 
-Zuplo is SOC2 Type 2 Compliant, see more in our
-[Trust Center](https://trust.zuplo.com).
+- **Hybrid Deployment**: Run the Zuplo API Gateway on your Kubernetes cluster
+  while leveraging shared services for features such as rate limiting
+- **Full Self-Hosted**: Run all Zuplo components on your Kubernetes cluster for
+  complete control and isolation
+
+Self-Hosted is ideal for organizations that need:
+
+- Complete control over your infrastructure and deployment environment
+- To run Zuplo in a private data center or on-premises Kubernetes environment
+- To meet strict data sovereignty or regulatory requirements
+- To integrate with existing on-premises systems and networks
+- To customize the deployment architecture to match your specific requirements
+
+For more information, see the
+[Self-Hosted documentation](/docs/self-hosted/overview) or
+[book a meeting](https://zuplo.com/meeting) with us.
