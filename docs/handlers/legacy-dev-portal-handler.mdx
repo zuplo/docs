@@ -72,21 +72,14 @@ Use the path pattern `/docs(.*)` (not `/docs/(.*)`) to match both the root path
 ### Custom Domain
 
 By default, the handler redirects to your project's default Zuplo domain (e.g.,
-`foo-123.zuplo.site`). If you've set up a custom domain for your developer
-portal, you can specify it in the handler options:
+`my-project-1a3ksl3.zuplo.site`). If you've set up a custom domain for your developer
+portal, the handler will automatically use the custom domain instead. 
 
-```json
-{
-  "handler": {
-    "export": "legacyDevPortalHandler",
-    "module": "$import(@zuplo/runtime)",
-    "options": {
-      "mode": "redirect",
-      "customDomain": "docs.example.com"
-    }
-  }
-}
-```
+:::note
+
+You must redeploy your API after setting a custom domain in order to pick up the changes.
+
+:::
 
 Learn more about setting up custom domains in the
 [Custom Domains documentation](/docs/articles/custom-domains).
