@@ -24,7 +24,7 @@ A few things to keep in mind before starting the migration:
 New Dev Portals run on their own dedicated domain instead of a `/docs` path
 under your API. You must create a redirect route on `/docs` to maintain existing
 links. You can use the
-[dev portal handler](/docs/dev-portal/migration#redirect-legacy-urls.mdx) to
+[Legacy Dev Portal Handler](/docs/handlers/legacy-dev-portal-handler) to
 achieve this.
 
 :::note
@@ -441,9 +441,10 @@ Learn more about setting up custom domains in the
 [Custom Domains documentation](/docs/articles/custom-domains).
 
 If you were using the previous Dev Portal, you can redirect all requests from
-the legacy path to the new domain using a Zuplo route. This allows you to
-maintain backwards compatibility for users who may have bookmarked or linked to
-the old Dev Portal URL.
+the legacy path to the new domain using the
+[Legacy Dev Portal Handler](/docs/handlers/legacy-dev-portal-handler). This
+allows you to maintain backwards compatibility for users who may have bookmarked
+or linked to the old Dev Portal URL.
 
 ### Setup Instructions
 
@@ -493,13 +494,13 @@ the old Dev Portal URL.
    }
    ```
 
-After you redeploy you Zuplo project, whenever the user navigates to the legacy
+After you redeploy your Zuplo project, whenever the user navigates to the legacy
 developer portal paths, they will be redirected to the new Dev Portal domain.
 
-The `legacyDevPortalHandler` also supports a `proxy` mode if you prefer to keep
-your developer portal on the same domain under a path. This isn't recommended
-for performance and usability reasons, but is available if needed. To use proxy
-mode, change the `mode` option to `proxy` instead of `redirect`.
+For more detailed information about the handler, including how to configure
+proxy mode to keep your developer portal on the same domain, see the
+[Legacy Dev Portal Handler](/docs/handlers/legacy-dev-portal-handler)
+documentation.
 
 ### Additional redirects
 

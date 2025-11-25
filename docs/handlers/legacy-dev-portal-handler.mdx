@@ -1,0 +1,141 @@
+---
+title: Legacy Dev Portal Handler
+sidebar_label: Legacy Dev Portal Handler
+---
+
+The Legacy Dev Portal Handler helps you maintain compatibility with the legacy
+developer portal after migrating to the new Zudoku-based developer portal. It
+supports two modes of operation: redirect mode and proxy mode.
+
+## What It Does
+
+When you migrate from the legacy developer portal to the new Zudoku-based
+portal, the new portal runs on its own dedicated domain (e.g.,
+`docs.example.com`) instead of under a path on your API domain (e.g.,
+`api.example.com/docs`). The Legacy Dev Portal Handler ensures that users who
+navigate to the old `/docs` path are either redirected to the new domain or can
+continue accessing the portal from the same path.
+
+## Redirect Mode (Recommended)
+
+In redirect mode, the handler redirects all requests from the legacy path (e.g.,
+`/docs*`) to the new developer portal domain. This is the recommended approach
+as it provides better performance and usability.
+
+### Setup
+
+1. **Create a Route**: In your `routes.oas.json` file (or create a new OpenAPI
+   file like `legacy.oas.json`), add a route that matches the legacy path:
+
+```json
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Dev Portal Redirect"
+  },
+  "paths": {
+    "/docs(.*)": {
+      "x-zuplo-path": {
+        "pathMode": "url-pattern"
+      },
+      "get": {
+        "summary": "Redirect to new Dev Portal",
+        "description": "Redirect requests from legacy /docs path to the new Dev Portal domain",
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "legacyDevPortalHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "mode": "redirect"
+            }
+          },
+          "policies": {
+            "inbound": []
+          }
+        },
+        "operationId": "dev-portal-redirect"
+      }
+    }
+  }
+}
+```
+
+:::note
+
+Use the path pattern `/docs(.*)` (not `/docs/(.*)`) to match both the root path
+`/docs` and all subpaths like `/docs/introduction`.
+
+:::
+
+### Custom Domain
+
+By default, the handler redirects to your project's default Zuplo domain (e.g.,
+`foo-123.zuplo.site`). If you've set up a custom domain for your developer
+portal, you can specify it in the handler options:
+
+```json
+{
+  "handler": {
+    "export": "legacyDevPortalHandler",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "mode": "redirect",
+      "customDomain": "docs.example.com"
+    }
+  }
+}
+```
+
+Learn more about setting up custom domains in the
+[Custom Domains documentation](/docs/articles/custom-domains).
+
+## Proxy Mode
+
+In proxy mode, the handler proxies requests from the API domain path (e.g.,
+`/docs*`) to the developer portal, allowing the portal to be served from the
+same domain as your API. This approach is not recommended for performance and
+usability reasons, but is available if you need to keep the developer portal on
+the same domain.
+
+### Setup
+
+1. **Configure the Handler**: Update your route configuration to use proxy mode:
+
+```json
+{
+  "handler": {
+    "export": "legacyDevPortalHandler",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "mode": "proxy"
+    }
+  }
+}
+```
+
+2. **Configure Zudoku Base URL**: In your `docs/zudoku.config.ts` file, set the
+   `baseUrl` to match the path where your portal will be served:
+
+```ts
+import type { ZudokuConfig } from "zudoku";
+
+const config: ZudokuConfig = {
+  basePath: "/docs",
+  site: {
+    title: "My API Documentation",
+  },
+  // ... rest of your configuration
+};
+
+export default config;
+```
+
+With this configuration, your developer portal will continue to be accessible at
+`https://api.example.com/docs` just as it was with the legacy developer portal.
+
+## Migration Guide
+
+For complete instructions on migrating from the legacy developer portal to
+Zudoku, see the [Dev Portal Migration Guide](/docs/dev-portal/migration).
