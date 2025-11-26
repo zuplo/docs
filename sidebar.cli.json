@@ -2,6 +2,7 @@
   "cli/delete",
   "cli/deploy",
   "cli/dev",
+  "cli/docs",
   "cli/editor",
   "cli/link",
   "cli/list",
