@@ -41,7 +41,7 @@
     "lucide-react": "^0.516.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "zudoku": "^0.65.2"
+    "zudoku": "^0.65.3"
   },
   "devDependencies": {
     "@anthropic-ai/claude-agent-sdk": "^0.1.50",
