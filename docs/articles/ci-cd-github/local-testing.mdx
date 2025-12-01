@@ -1,0 +1,102 @@
+---
+title: "GitHub Actions: Local Testing in CI"
+sidebar_label: Local Testing in CI
+---
+
+Run tests against a local Zuplo development server before deploying anywhere.
+Catch issues earlier and avoid deploying broken changes.
+
+```yaml title=".github/workflows/local-test-then-deploy.yaml"
+name: Local Test Then Deploy
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  local-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Start local server and run tests
+        run: |
+          # Start the local dev server in the background
+          npx zuplo dev &
+          DEV_PID=$!
+
+          # Wait for server to be ready
+          echo "Waiting for local server to start..."
+          sleep 10
+
+          # Run tests against local server
+          npx zuplo test --endpoint http://localhost:9000
+
+          # Stop the dev server
+          kill $DEV_PID
+
+  deploy:
+    needs: local-test
+    runs-on: ubuntu-latest
+    # Only deploy on push to main, not on PRs
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    env:
+      ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy to Zuplo
+        run: npx zuplo deploy --api-key "$ZUPLO_API_KEY"
+```
+
+This workflow:
+
+1. Starts a local Zuplo server in the CI environment
+2. Runs your test suite against localhost
+3. Only proceeds to deployment if local tests pass
+4. Deploys to Zuplo (only on pushes to main)
+
+## Why Test Locally First?
+
+- **Faster feedback** — Local tests run without waiting for deployment
+- **Catch syntax errors** — The local server validates your configuration
+- **Test policies** — Verify authentication, rate limiting, and other policies
+  work correctly
+- **No wasted deployments** — Don't deploy changes that will fail tests
+
+## Combining with Remote Tests
+
+For maximum confidence, test both locally and against the deployed environment:
+
+```yaml
+jobs:
+  local-test:
+    # ... local testing job ...
+
+  deploy-and-test:
+    needs: local-test
+    # ... deploy and run tests against live environment ...
+```
+
+## Next Steps
+
+- Add [PR preview environments](./pr-preview-environments.mdx) for review
+- Set up [multi-stage deployment](./multi-stage-deployment.mdx) with staging

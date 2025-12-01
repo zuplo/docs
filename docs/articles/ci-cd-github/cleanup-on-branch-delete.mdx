@@ -1,0 +1,123 @@
+---
+title: "GitHub Actions: Automatic Cleanup"
+sidebar_label: Automatic Cleanup
+---
+
+Delete Zuplo environments automatically when branches are deleted. This keeps
+your environment list clean and avoids accumulating unused preview environments.
+
+```yaml title=".github/workflows/cleanup-on-branch-delete.yaml"
+name: Cleanup on Branch Delete
+
+on:
+  delete:
+
+jobs:
+  cleanup:
+    # Only run for branch deletions, not tag deletions
+    if: github.event.ref_type == 'branch'
+    runs-on: ubuntu-latest
+    env:
+      ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Delete environment
+        run: |
+          # The deleted branch name
+          BRANCH_NAME="${{ github.event.ref }}"
+          # Convert slashes to hyphens
+          ENV_NAME="${BRANCH_NAME//\//-}"
+
+          echo "Deleting environment: $ENV_NAME"
+
+          # Ignore errors if env doesn't exist
+          npx zuplo delete \
+            --environment "$ENV_NAME" \
+            --api-key "$ZUPLO_API_KEY" \
+            --wait || true
+```
+
+This workflow:
+
+1. Triggers when any branch is deleted
+2. Converts the branch name to the environment name format
+3. Deletes the corresponding Zuplo environment
+4. Continues without error if the environment doesn't exist
+
+## Combining with PR Cleanup
+
+Use this as a backup for
+[PR preview environments](./pr-preview-environments.mdx). The PR workflow
+handles cleanup when PRs close, but this catches cases where:
+
+- Someone deletes a branch without closing the PR first
+- A branch was pushed but never had a PR opened
+- The PR cleanup job failed
+
+## Scheduled Cleanup
+
+For additional safety, run periodic cleanup to catch any orphaned environments:
+
+```yaml title=".github/workflows/scheduled-cleanup.yaml"
+name: Scheduled Cleanup
+
+on:
+  schedule:
+    # Run daily at midnight UTC
+    - cron: "0 0 * * *"
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    env:
+      ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all branches
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Cleanup stale environments
+        run: |
+          # Get all remote branches
+          BRANCHES=$(git branch -r | sed 's|origin/||' | tr '/' '-' | tr -d ' ')
+
+          # List Zuplo environments and delete stale ones
+          npx zuplo list --api-key "$ZUPLO_API_KEY" --json > environments.json
+
+          cat environments.json | jq -r '.[] | .name' | while read ENV; do
+            # Skip protected environments
+            if [[ "$ENV" == "main" || "$ENV" == "production" || "$ENV" == "staging" ]]; then
+              continue
+            fi
+
+            # Delete if no matching branch exists
+            if ! echo "$BRANCHES" | grep -q "^$ENV$"; then
+              echo "Deleting stale environment: $ENV"
+              npx zuplo delete --environment "$ENV" --api-key "$ZUPLO_API_KEY" --wait || true
+            fi
+          done
+```
+
+## Next Steps
+
+- Set up [PR preview environments](./pr-preview-environments.mdx) with built-in
+  cleanup
+- Implement [multi-stage deployment](./multi-stage-deployment.mdx) for
+  production

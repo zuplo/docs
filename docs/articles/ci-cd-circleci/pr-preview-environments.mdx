@@ -1,0 +1,47 @@
+---
+title: "CircleCI: PR Preview Environments"
+sidebar_label: PR Preview Environments
+---
+
+Deploy preview environments for pull requests and clean up after tests.
+
+```yaml title=".circleci/config.yml"
+version: 2.1
+
+jobs:
+  deploy-and-test:
+    docker:
+      - image: cimg/node:20.0
+    steps:
+      - checkout
+      - run: npm install
+      - run:
+          name: Deploy to Zuplo
+          command: |
+            set -o pipefail
+            npx zuplo deploy --api-key "$ZUPLO_API_KEY" 2>&1 | tee ./DEPLOYMENT_STDOUT
+            DEPLOYMENT_URL=$(grep -oP 'Deployed to \K(https://[^ ]+)' ./DEPLOYMENT_STDOUT)
+            echo "export DEPLOYMENT_URL=$DEPLOYMENT_URL" >> "$BASH_ENV"
+      - run:
+          name: Run Tests
+          command: npx zuplo test --endpoint "$DEPLOYMENT_URL"
+      - run:
+          name: Cleanup Preview
+          command:
+            npx zuplo delete --url "$DEPLOYMENT_URL" --api-key "$ZUPLO_API_KEY"
+            --wait
+          when: always
+
+workflows:
+  preview:
+    jobs:
+      - deploy-and-test
+```
+
+The cleanup step runs after tests complete (whether they pass or fail), deleting
+the preview environment.
+
+## Next Steps
+
+- Implement [multi-stage deployment](./multi-stage-deployment.mdx) for
+  production

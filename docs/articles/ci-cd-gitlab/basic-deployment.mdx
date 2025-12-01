@@ -1,0 +1,28 @@
+---
+title: "GitLab CI/CD: Basic Deployment"
+sidebar_label: Basic Deployment
+---
+
+The simplest pipeline deploys your API to Zuplo on every push to main.
+
+```yaml title=".gitlab-ci.yml"
+image: node:20
+
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  script:
+    - npm install
+    - npx zuplo deploy --api-key "$ZUPLO_API_KEY"
+  only:
+    - main
+```
+
+Store `ZUPLO_API_KEY` in **Settings** > **CI/CD** > **Variables**.
+
+## Next Steps
+
+- Add [automated testing](./deploy-and-test.mdx) after deployment
+- Set up [MR preview environments](./mr-preview-environments.mdx)

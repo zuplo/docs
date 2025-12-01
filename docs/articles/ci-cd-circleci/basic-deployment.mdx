@@ -1,0 +1,34 @@
+---
+title: "CircleCI: Basic Deployment"
+sidebar_label: Basic Deployment
+---
+
+The simplest workflow deploys your API to Zuplo on every push to main.
+
+```yaml title=".circleci/config.yml"
+version: 2.1
+
+jobs:
+  deploy:
+    docker:
+      - image: cimg/node:20.0
+    steps:
+      - checkout
+      - run: npm install
+      - run: npx zuplo deploy --api-key "$ZUPLO_API_KEY"
+
+workflows:
+  deploy:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only: main
+```
+
+Store `ZUPLO_API_KEY` in **Project Settings** > **Environment Variables**.
+
+## Next Steps
+
+- Add [automated testing](./deploy-and-test.mdx) after deployment
+- Set up [PR preview environments](./pr-preview-environments.mdx)

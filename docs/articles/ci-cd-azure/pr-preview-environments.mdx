@@ -1,0 +1,50 @@
+---
+title: "Azure Pipelines: PR Preview Environments"
+sidebar_label: PR Preview Environments
+---
+
+Deploy preview environments for pull requests and clean up when they close.
+
+```yaml title="azure-pipelines.yml"
+trigger:
+  - main
+
+pr:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "20.x"
+    displayName: "Install Node.js"
+
+  - script: npm install
+    displayName: "Install dependencies"
+
+  - script: |
+      set -o pipefail
+      npx zuplo deploy --api-key $(ZUPLO_API_KEY) 2>&1 | tee ./DEPLOYMENT_STDOUT
+    displayName: "Deploy to Zuplo"
+
+  - script: |
+      DEPLOYMENT_URL=$(grep -oP 'Deployed to \K(https://[^ ]+)' ./DEPLOYMENT_STDOUT)
+      echo "##vso[task.setvariable variable=DEPLOYMENT_URL]$DEPLOYMENT_URL"
+      npx zuplo test --endpoint "$DEPLOYMENT_URL"
+    displayName: "Run tests"
+
+  - script: |
+      npx zuplo delete --url $(DEPLOYMENT_URL) --api-key $(ZUPLO_API_KEY) --wait
+    displayName: "Delete environment"
+    condition: eq(variables['Build.Reason'], 'PullRequest')
+```
+
+The cleanup step only runs for pull requests, deleting the preview environment
+after tests pass.
+
+## Next Steps
+
+- Implement [multi-stage deployment](./multi-stage-deployment.mdx) for
+  production

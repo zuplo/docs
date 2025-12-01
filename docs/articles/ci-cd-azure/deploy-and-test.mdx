@@ -1,0 +1,47 @@
+---
+title: "Azure Pipelines: Deploy and Test"
+sidebar_label: Deploy and Test
+---
+
+Run your test suite against the deployed environment to validate changes.
+
+```yaml title="azure-pipelines.yml"
+trigger:
+  - main
+
+pr:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "20.x"
+    displayName: "Install Node.js"
+
+  - script: npm install
+    displayName: "Install dependencies"
+
+  - script: |
+      set -o pipefail
+      npx zuplo deploy --api-key $(ZUPLO_API_KEY) 2>&1 | tee ./DEPLOYMENT_STDOUT
+    displayName: "Deploy to Zuplo"
+
+  - script: |
+      DEPLOYMENT_URL=$(grep -oP 'Deployed to \K(https://[^ ]+)' ./DEPLOYMENT_STDOUT)
+      npx zuplo test --endpoint "$DEPLOYMENT_URL"
+    displayName: "Run tests"
+```
+
+This pipeline:
+
+1. Deploys to Zuplo and captures the output
+2. Extracts the deployment URL from the output
+3. Runs tests against the deployed environment
+
+## Next Steps
+
+- Add [PR preview environments](./pr-preview-environments.mdx) with cleanup
+- Run [local tests](./local-testing.mdx) before deploying

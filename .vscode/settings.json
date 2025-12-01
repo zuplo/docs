@@ -1,5 +1,5 @@
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "prettier.prettier-vscode",
   "npm.packageManager": "npm",
   "editor.formatOnSave": true,
   "search.exclude": {
@@ -14,8 +14,7 @@
   "editor.tabSize": 2,
   "[markdown]": {
     "editor.wordWrap": "off",
-    "editor.wordWrapColumn": 80,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.wordWrapColumn": 80
   },
   "markdown.validate.enabled": true,
   "markdown.copyFiles.destination": {

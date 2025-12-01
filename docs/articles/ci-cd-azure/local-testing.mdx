@@ -1,0 +1,59 @@
+---
+title: "Azure Pipelines: Local Testing in CI"
+sidebar_label: Local Testing in CI
+---
+
+Test against a local Zuplo server before deploying anywhere.
+
+```yaml title="azure-pipelines.yml"
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+  - stage: LocalTest
+    displayName: "Local Testing"
+    jobs:
+      - job: Test
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: "20.x"
+            displayName: "Install Node.js"
+
+          - script: npm install
+            displayName: "Install dependencies"
+
+          - script: |
+              npx zuplo dev &
+              DEV_PID=$!
+              sleep 10
+              npx zuplo test --endpoint http://localhost:9000
+              kill $DEV_PID
+            displayName: "Start local server and run tests"
+
+  - stage: Deploy
+    displayName: "Deploy to Zuplo"
+    dependsOn: LocalTest
+    condition:
+      and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    jobs:
+      - job: Deploy
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: "20.x"
+
+          - script: npm install
+
+          - script: npx zuplo deploy --api-key $(ZUPLO_API_KEY)
+            displayName: "Deploy to Zuplo"
+```
+
+Local tests run first. Only if they pass does deployment proceed.
+
+## Next Steps
+
+- Add [multi-stage deployment](./multi-stage-deployment.mdx) with staging

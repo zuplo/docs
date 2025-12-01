@@ -1,0 +1,48 @@
+---
+title: "GitHub Actions: Basic Deployment"
+sidebar_label: Basic Deployment
+---
+
+The simplest workflow deploys your API to Zuplo on every push to main.
+
+```yaml title=".github/workflows/deploy.yaml"
+name: Deploy to Zuplo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy to Zuplo
+        run: npx zuplo deploy --api-key "$ZUPLO_API_KEY"
+        env:
+          ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
+```
+
+This workflow:
+
+1. Triggers on pushes to the `main` branch
+2. Checks out your code
+3. Installs dependencies (including the Zuplo CLI)
+4. Deploys to Zuplo using the branch name as the environment name
+
+Since this deploys from `main`, it updates your production environment.
+
+## Next Steps
+
+- Add [testing after deployment](./deploy-and-test.mdx)
+- Set up [PR preview environments](./pr-preview-environments.mdx)
+- Implement [tag-based releases](./tag-based-releases.mdx) for more control

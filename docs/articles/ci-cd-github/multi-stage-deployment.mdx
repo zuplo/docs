@@ -1,0 +1,136 @@
+---
+title: "GitHub Actions: Multi-Stage Deployment"
+sidebar_label: Multi-Stage Deployment
+---
+
+Deploy to staging first, run tests, then promote to production with manual
+approval. This pattern ensures changes are validated before reaching production.
+
+```yaml title=".github/workflows/multi-stage.yaml"
+name: Multi-Stage Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-staging:
+    runs-on: ubuntu-latest
+    env:
+      ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
+    outputs:
+      staging-url: ${{ steps.deploy.outputs.url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy to staging
+        id: deploy
+        shell: bash
+        run: |
+          OUTPUT=$(npx zuplo deploy --api-key "$ZUPLO_API_KEY" --environment staging 2>&1)
+          echo "$OUTPUT"
+          DEPLOYMENT_URL=$(echo "$OUTPUT" | grep -oP 'Deployed to \K(https://[^ ]+)')
+          echo "url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
+
+  test-staging:
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests against staging
+        run:
+          npx zuplo test --endpoint "${{
+          needs.deploy-staging.outputs.staging-url }}"
+
+  deploy-production:
+    needs: test-staging
+    runs-on: ubuntu-latest
+    env:
+      ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
+    # Require manual approval
+    environment: production
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy to production
+        run:
+          npx zuplo deploy --api-key "$ZUPLO_API_KEY" --environment production
+```
+
+This workflow:
+
+1. **Deploy to staging** — Every push to main deploys to staging
+2. **Test staging** — Run your full test suite against staging
+3. **Wait for approval** — The production job waits for manual approval
+4. **Deploy to production** — After approval, deploy to production
+
+## Setting Up Manual Approval
+
+Create a GitHub environment with required reviewers:
+
+1. Go to **Settings** > **Environments** > **New environment**
+2. Name it `production`
+3. Check **Required reviewers** and add approvers
+4. Save the environment
+
+When the workflow reaches the production job, it pauses until an approver clicks
+**Review deployments** in the Actions UI.
+
+## Adding More Stages
+
+Add additional environments like QA or UAT:
+
+```yaml
+jobs:
+  deploy-staging:
+    # ...
+
+  test-staging:
+    # ...
+
+  deploy-qa:
+    needs: test-staging
+    environment: qa
+    # ...
+
+  test-qa:
+    needs: deploy-qa
+    # ...
+
+  deploy-production:
+    needs: test-qa
+    environment: production
+    # ...
+```
+
+## Next Steps
+
+- Combine with [tag-based releases](./tag-based-releases.mdx) for version
+  control
+- Add [local testing](./local-testing.mdx) before any deployment

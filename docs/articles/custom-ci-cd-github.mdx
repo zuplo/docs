@@ -1,0 +1,99 @@
+---
+title: Custom GitHub Actions
+sidebar_label: Custom CI/CD
+---
+
+:::note
+
+Most GitHub users don't need custom CI/CD. The
+[built-in GitHub integration](./source-control-setup-github.mdx) deploys
+automatically on every push. Add
+[deployment testing](./github-deployment-testing.mdx) to run tests after each
+deploy.
+
+Use custom GitHub Actions when you need approval gates, multi-stage deployments,
+or tests that must pass before deploying.
+
+:::
+
+GitHub Actions gives you complete control over when, how, and where your API
+gateway deploys. Instead of automatic deployments on every push, you decide
+exactly what triggers a release — whether that's a pull request approval, a
+tagged release, or a successful test suite.
+
+## Why GitHub Actions with Zuplo?
+
+The Zuplo CLI integrates seamlessly into GitHub Actions workflows, giving you:
+
+**Full pipeline control** — Run linting, security scans, and integration tests
+before any deployment. Gate production releases behind manual approvals. Deploy
+to staging, validate, then promote to production—all automated.
+
+**Environment per pull request** — Every PR gets its own isolated Zuplo
+environment. Reviewers can test changes against a live API before merging.
+Environments clean up automatically when PRs close.
+
+**Test before you ship** — Run your test suite against a local Zuplo development
+server in CI before deploying anywhere. Catch issues before they reach any
+environment.
+
+**Tag-based releases** — Deploy only when you're ready. Tag a release in Git and
+let your pipeline handle the rest. No accidental deployments from work in
+progress.
+
+## How It Works
+
+The Zuplo CLI handles deployment, testing, and environment management. Your
+GitHub Actions workflow orchestrates when these happen:
+
+```bash
+# Deploy to Zuplo (environment name from branch or --environment flag)
+npx zuplo deploy --api-key "$ZUPLO_API_KEY"
+
+# Run tests against any Zuplo environment
+npx zuplo test --endpoint https://your-env.zuplo.dev
+
+# Clean up environments you no longer need
+npx zuplo delete --environment pr-123 --api-key "$ZUPLO_API_KEY"
+
+# Test locally before deploying
+npx zuplo dev  # starts local server on port 9000
+```
+
+Capture the deployment URL from the deploy command output to pass to subsequent
+test steps. The CLI outputs `Deployed to https://...` which you can parse and
+use throughout your workflow.
+
+## Prerequisites
+
+1. **Disconnect the GitHub integration** — Custom CI/CD replaces automatic
+   deployments. Go to **Settings** > **Source Control** and click **Disconnect**
+   to prevent double deployments.
+
+2. **Add your API key** — Store your Zuplo API key as a GitHub secret named
+   `ZUPLO_API_KEY`. Find your key in the Zuplo portal under **Settings** > **API
+   Keys**.
+
+## Examples
+
+Start with the workflow that matches your needs:
+
+- **[Basic Deployment](./ci-cd-github/basic-deployment.mdx)** — Deploy on every
+  push to main
+- **[Deploy and Test](./ci-cd-github/deploy-and-test.mdx)** — Run tests after
+  deployment
+- **[PR Preview Environments](./ci-cd-github/pr-preview-environments.mdx)** —
+  Isolated environments for every pull request
+- **[Local Testing in CI](./ci-cd-github/local-testing.mdx)** — Test with local
+  Zuplo server before deploying
+- **[Tag-Based Releases](./ci-cd-github/tag-based-releases.mdx)** — Deploy only
+  on tagged releases
+- **[Multi-Stage Deployment](./ci-cd-github/multi-stage-deployment.mdx)** —
+  Staging to production with approval gates
+- **[Automatic Cleanup](./ci-cd-github/cleanup-on-branch-delete.mdx)** — Delete
+  environments when branches are deleted
+
+## Complete Example Repository
+
+See all these patterns working together in the
+[Zuplo CLI Example Project](https://github.com/zuplo/zup-cli-example-project).

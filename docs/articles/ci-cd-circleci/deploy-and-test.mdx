@@ -1,0 +1,44 @@
+---
+title: "CircleCI: Deploy and Test"
+sidebar_label: Deploy and Test
+---
+
+Run your test suite against the deployed environment to validate changes.
+
+```yaml title=".circleci/config.yml"
+version: 2.1
+
+jobs:
+  deploy:
+    docker:
+      - image: cimg/node:20.0
+    steps:
+      - checkout
+      - run: npm install
+      - run:
+          name: Deploy to Zuplo
+          command: |
+            set -o pipefail
+            npx zuplo deploy --api-key "$ZUPLO_API_KEY" 2>&1 | tee ./DEPLOYMENT_STDOUT
+            DEPLOYMENT_URL=$(grep -oP 'Deployed to \K(https://[^ ]+)' ./DEPLOYMENT_STDOUT)
+            echo "export DEPLOYMENT_URL=$DEPLOYMENT_URL" >> "$BASH_ENV"
+      - run:
+          name: Run Tests
+          command: npx zuplo test --endpoint "$DEPLOYMENT_URL"
+
+workflows:
+  deploy-and-test:
+    jobs:
+      - deploy
+```
+
+This workflow:
+
+1. Deploys to Zuplo and captures the output
+2. Extracts the deployment URL
+3. Runs tests against the deployed environment
+
+## Next Steps
+
+- Add [PR preview environments](./pr-preview-environments.mdx) with cleanup
+- Run [local tests](./local-testing.mdx) before deploying

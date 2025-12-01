@@ -1302,6 +1302,11 @@
       "source": "docs/dedicated/getting-started{/}?",
       "destination": "/docs/articles/step-1-setup-basic-gateway-local",
       "permanent": true
+    },
+    {
+      "source": "/docs/articles/custom-deployment-strategies{/}?",
+      "destination": "/docs/articles/custom-ci-cd",
+      "permanent": true
     }
   ],
   "rewrites": [

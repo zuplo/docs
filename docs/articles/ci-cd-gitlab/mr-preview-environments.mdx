@@ -1,0 +1,52 @@
+---
+title: "GitLab CI/CD: MR Preview Environments"
+sidebar_label: MR Preview Environments
+---
+
+Deploy preview environments for merge requests and clean up when they close.
+
+```yaml title=".gitlab-ci.yml"
+image: node:20
+
+stages:
+  - deploy
+  - test
+  - cleanup
+
+deploy:
+  stage: deploy
+  script:
+    - npm install
+    - npx zuplo deploy --api-key "$ZUPLO_API_KEY" 2>&1 | tee ./DEPLOYMENT_STDOUT
+    - echo "DEPLOYMENT_URL=$(grep -oP 'Deployed to \K(https://[^ ]+)'
+      ./DEPLOYMENT_STDOUT)" >> deploy.env
+  artifacts:
+    reports:
+      dotenv: deploy.env
+
+test:
+  stage: test
+  needs:
+    - deploy
+  script:
+    - npm install
+    - npx zuplo test --endpoint "$DEPLOYMENT_URL"
+
+cleanup:
+  stage: cleanup
+  needs:
+    - test
+  script:
+    - npm install
+    - npx zuplo delete --url "$DEPLOYMENT_URL" --api-key "$ZUPLO_API_KEY" --wait
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+```
+
+The cleanup job only runs for merge request pipelines, deleting the preview
+environment after tests pass.
+
+## Next Steps
+
+- Implement [multi-stage deployment](./multi-stage-deployment.mdx) for
+  production

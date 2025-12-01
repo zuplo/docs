@@ -1,0 +1,82 @@
+---
+title: "CircleCI: Multi-Stage Deployment"
+sidebar_label: Multi-Stage Deployment
+---
+
+Deploy to staging, test, then promote to production with approval.
+
+```yaml title=".circleci/config.yml"
+version: 2.1
+
+jobs:
+  deploy-staging:
+    docker:
+      - image: cimg/node:20.0
+    steps:
+      - checkout
+      - run: npm install
+      - run:
+          name: Deploy to Staging
+          command: |
+            set -o pipefail
+            npx zuplo deploy --api-key "$ZUPLO_API_KEY" --environment staging 2>&1 | tee ./DEPLOYMENT_STDOUT
+            STAGING_URL=$(grep -oP 'Deployed to \K(https://[^ ]+)' ./DEPLOYMENT_STDOUT)
+            echo "export STAGING_URL=$STAGING_URL" >> "$BASH_ENV"
+            echo "$STAGING_URL" > staging_url.txt
+      - persist_to_workspace:
+          root: .
+          paths:
+            - staging_url.txt
+
+  test-staging:
+    docker:
+      - image: cimg/node:20.0
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run: npm install
+      - run:
+          name: Run Tests
+          command: |
+            STAGING_URL=$(cat staging_url.txt)
+            npx zuplo test --endpoint "$STAGING_URL"
+
+  deploy-production:
+    docker:
+      - image: cimg/node:20.0
+    steps:
+      - checkout
+      - run: npm install
+      - run:
+          npx zuplo deploy --api-key "$ZUPLO_API_KEY" --environment production
+
+workflows:
+  staging-to-production:
+    jobs:
+      - deploy-staging:
+          filters:
+            branches:
+              only: main
+      - test-staging:
+          requires:
+            - deploy-staging
+      - hold-for-approval:
+          type: approval
+          requires:
+            - test-staging
+      - deploy-production:
+          requires:
+            - hold-for-approval
+```
+
+## Setting Up Approval
+
+The `type: approval` job pauses the workflow until someone approves it in the
+CircleCI UI.
+
+For more control:
+
+1. Go to **Project Settings** > **Advanced**
+2. Enable **Only build pull requests** for protected branches
+3. Use CircleCI contexts to restrict who can approve production deployments

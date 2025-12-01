@@ -1,0 +1,34 @@
+---
+title: "Bitbucket Pipelines: Local Testing in CI"
+sidebar_label: Local Testing in CI
+---
+
+Test against a local Zuplo server before deploying anywhere.
+
+```yaml title="bitbucket-pipelines.yml"
+image: node:20
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Local Testing
+          script:
+            - npm install
+            - npx zuplo dev &
+            - sleep 10
+            - npx zuplo test --endpoint http://localhost:9000
+            - kill %1
+
+      - step:
+          name: Deploy to Zuplo
+          script:
+            - npm install
+            - npx zuplo deploy --api-key "$ZUPLO_API_KEY"
+```
+
+Local tests run first. Only if they pass does deployment proceed.
+
+## Next Steps
+
+- Add [multi-stage deployment](./multi-stage-deployment.mdx) with staging

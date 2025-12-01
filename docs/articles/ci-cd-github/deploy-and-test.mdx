@@ -1,0 +1,82 @@
+---
+title: "GitHub Actions: Deploy and Test"
+sidebar_label: Deploy and Test
+---
+
+Run your test suite against the deployed environment to validate changes before
+considering them complete.
+
+```yaml title=".github/workflows/deploy-and-test.yaml"
+name: Deploy and Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  deploy-and-test:
+    runs-on: ubuntu-latest
+    env:
+      ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy to Zuplo
+        id: deploy
+        shell: bash
+        run: |
+          # Capture deployment output
+          OUTPUT=$(npx zuplo deploy --api-key "$ZUPLO_API_KEY" 2>&1)
+          echo "$OUTPUT"
+
+          # Extract the deployment URL
+          DEPLOYMENT_URL=$(echo "$OUTPUT" | grep -oP 'Deployed to \K(https://[^ ]+)')
+          echo "url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
+
+      - name: Run tests
+        run: npx zuplo test --endpoint "${{ steps.deploy.outputs.url }}"
+```
+
+This workflow:
+
+1. Deploys to Zuplo and captures the deployment URL
+2. Runs your test suite against the live deployment
+3. Fails the workflow if any tests fail
+
+## Writing Tests
+
+Place test files in the `tests` folder with the `.test.ts` extension:
+
+```typescript title="tests/api.test.ts"
+import { describe, it, expect } from "@zuplo/test";
+
+describe("API", () => {
+  it("returns 200 for health check", async () => {
+    const response = await fetch(`${ZUPLO_TEST_URL}/health`);
+    expect(response.status).toBe(200);
+  });
+
+  it("requires authentication", async () => {
+    const response = await fetch(`${ZUPLO_TEST_URL}/protected`);
+    expect(response.status).toBe(401);
+  });
+});
+```
+
+The `ZUPLO_TEST_URL` variable is automatically set to the `--endpoint` value.
+
+## Next Steps
+
+- Add [PR preview environments](./pr-preview-environments.mdx) with automatic
+  cleanup
+- Run [local tests](./local-testing.mdx) before deploying

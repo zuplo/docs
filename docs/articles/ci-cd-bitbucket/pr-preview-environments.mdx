@@ -1,0 +1,46 @@
+---
+title: "Bitbucket Pipelines: PR Preview Environments"
+sidebar_label: PR Preview Environments
+---
+
+Deploy preview environments for pull requests and clean up when they close.
+
+```yaml title="bitbucket-pipelines.yml"
+image: node:20
+
+pipelines:
+  pull-requests:
+    "**":
+      - step:
+          name: Deploy Preview
+          script:
+            - npm install
+            - npx zuplo deploy --api-key "$ZUPLO_API_KEY" 2>&1 | tee
+              ./DEPLOYMENT_STDOUT
+            - echo "DEPLOYMENT_URL=$(grep -oP 'Deployed to \K(https://[^ ]+)'
+              ./DEPLOYMENT_STDOUT)" >> deployment.env
+          artifacts:
+            - deployment.env
+
+      - step:
+          name: Run Tests
+          script:
+            - source deployment.env
+            - npm install
+            - npx zuplo test --endpoint "$DEPLOYMENT_URL"
+
+      - step:
+          name: Cleanup Preview
+          script:
+            - source deployment.env
+            - npm install
+            - npx zuplo delete --url "$DEPLOYMENT_URL" --api-key
+              "$ZUPLO_API_KEY" --wait
+```
+
+The cleanup step runs after tests complete, deleting the preview environment.
+
+## Next Steps
+
+- Implement [multi-stage deployment](./multi-stage-deployment.mdx) for
+  production

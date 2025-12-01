@@ -1,0 +1,50 @@
+---
+title: "CircleCI: Local Testing in CI"
+sidebar_label: Local Testing in CI
+---
+
+Test against a local Zuplo server before deploying anywhere.
+
+```yaml title=".circleci/config.yml"
+version: 2.1
+
+jobs:
+  local-test:
+    docker:
+      - image: cimg/node:20.0
+    steps:
+      - checkout
+      - run: npm install
+      - run:
+          name: Start local server and run tests
+          command: |
+            npx zuplo dev &
+            sleep 10
+            npx zuplo test --endpoint http://localhost:9000
+            kill %1
+
+  deploy:
+    docker:
+      - image: cimg/node:20.0
+    steps:
+      - checkout
+      - run: npm install
+      - run: npx zuplo deploy --api-key "$ZUPLO_API_KEY"
+
+workflows:
+  test-and-deploy:
+    jobs:
+      - local-test
+      - deploy:
+          requires:
+            - local-test
+          filters:
+            branches:
+              only: main
+```
+
+Local tests run first. Only if they pass does deployment proceed.
+
+## Next Steps
+
+- Add [multi-stage deployment](./multi-stage-deployment.mdx) with staging

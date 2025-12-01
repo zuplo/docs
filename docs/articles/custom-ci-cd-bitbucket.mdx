@@ -1,0 +1,80 @@
+---
+title: "Bitbucket Pipelines"
+sidebar_label: Bitbucket Pipelines
+---
+
+Bitbucket Pipelines brings CI/CD directly into your Bitbucket workflow. Define
+pipelines in `bitbucket-pipelines.yml` and deploy your Zuplo API gateway
+alongside your code reviews and pull requests.
+
+## Why Bitbucket Pipelines with Zuplo?
+
+The Zuplo CLI integrates naturally with Bitbucket's pipeline model:
+
+**Integrated with Bitbucket** — Pipelines run automatically on pushes and pull
+requests. See deployment status right in your PR. No external CI service to
+manage.
+
+**Branch and PR pipelines** — Define different pipelines for branches and pull
+requests. Deploy preview environments for PRs, production from main.
+
+**Deployment environments** — Track deployments with Bitbucket Deployments. See
+history, compare environments, and manage releases.
+
+**Atlassian ecosystem** — Connect with Jira for deployment tracking. Link
+deployments to issues automatically.
+
+## How It Works
+
+The Zuplo CLI handles deployment and testing. Bitbucket Pipelines orchestrates
+your workflow:
+
+```bash
+# Deploy to Zuplo (environment name from branch or --environment flag)
+npx zuplo deploy --api-key "$ZUPLO_API_KEY"
+
+# Run tests against any Zuplo environment
+npx zuplo test --endpoint https://your-env.zuplo.dev
+
+# Clean up environments you no longer need
+npx zuplo delete --environment pr-123 --api-key "$ZUPLO_API_KEY"
+
+# Test locally before deploying
+npx zuplo dev  # starts local server on port 9000
+```
+
+Use artifacts to pass the deployment URL between steps. Write the URL to a file
+and mark it as an artifact for subsequent steps.
+
+## Prerequisites
+
+1. **Disconnect Git integration** — If you're using Bitbucket Pipelines for
+   deployments, disconnect the native Git integration to avoid duplicate
+   deployments. Go to **Settings** > **Source Control** and click
+   **Disconnect**.
+
+2. **Add your API key** — Store your Zuplo API key as a repository variable. Go
+   to **Repository settings** > **Repository variables** and add
+   `ZUPLO_API_KEY`. Check **Secured** to hide it in logs.
+
+## Examples
+
+Start with the workflow that matches your needs:
+
+- **[Basic Deployment](./ci-cd-bitbucket/basic-deployment.mdx)** — Deploy on
+  every push to main
+- **[Deploy and Test](./ci-cd-bitbucket/deploy-and-test.mdx)** — Run tests after
+  deployment
+- **[PR Preview Environments](./ci-cd-bitbucket/pr-preview-environments.mdx)** —
+  Isolated environments for pull requests
+- **[Local Testing in CI](./ci-cd-bitbucket/local-testing.mdx)** — Test with
+  local Zuplo server before deploying
+- **[Tag-Based Releases](./ci-cd-bitbucket/tag-based-releases.mdx)** — Deploy
+  only on tagged releases
+- **[Multi-Stage Deployment](./ci-cd-bitbucket/multi-stage-deployment.mdx)** —
+  Staging to production with manual triggers
+
+## Complete Example Repository
+
+See all these patterns working together in the
+[Zuplo CLI Example Project](https://github.com/zuplo/zup-cli-example-project).

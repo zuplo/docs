@@ -1,0 +1,27 @@
+---
+title: "Bitbucket Pipelines: Tag-Based Releases"
+sidebar_label: Tag-Based Releases
+---
+
+Deploy only when tags are pushed for controlled releases.
+
+```yaml title="bitbucket-pipelines.yml"
+image: node:20
+
+pipelines:
+  tags:
+    v*:
+      - step:
+          name: Deploy Release
+          script:
+            - npm install
+            - npx zuplo deploy --api-key "$ZUPLO_API_KEY" --environment
+              "$BITBUCKET_TAG"
+```
+
+This pipeline triggers only on tags matching `v*` (like `v1.0.0`) and creates an
+environment named after the tag.
+
+## Next Steps
+
+- Add [multi-stage deployment](./multi-stage-deployment.mdx) with approval

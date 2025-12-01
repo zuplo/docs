@@ -1,49 +1,80 @@
 ---
-title: Source Control / Native GitOps
+title: Source Control & Deployments
 sidebar_label: Overview
 ---
 
-Zuplo is designed to natively support Infrastructure-as-Code (IaC) via GitOps
-and integrates seamlessly with GitHub, BitBucket, GitLab and Azure DevOps.
-Deploying to 300 data centers around the world takes under 20s with Zuplo, just
-via a simple commit. You get unlimited environments too - just commit to a new
-branch and we'll set you up with a new environment just as quick - at no charge
-to you.
+Zuplo integrates with your Git repository for both development and deployments.
+Understanding how these work together helps you choose the right setup for your
+team.
 
-:::info{title="GitLab and Bitbucket Support"}
+## Two Capabilities, One Integration
 
-Zuplo can integrate with Source Control providers like GitHub, BitBucket and
-GitLab. GitHub is our primary option - BitBucket and GitLab (including private
-instances) are available on an [enterprise plan](https://zuplo.com/pricing).
+**Source control integration** gives you push/pull access between the Zuplo
+portal and your repository. Edit in the portal, commit to Git. Pull changes from
+teammates. This works with GitHub, GitLab, Bitbucket, and Azure DevOps.
 
-:::
+**Automatic deployments** trigger a deploy every time you push to your
+repository. Push to `main` and your production environment updates. Push to a
+feature branch and get an isolated preview environment. This is currently
+GitHub-only.
 
-## GitHub Integration
+## Choosing Your Setup
 
-In this article we'll talk about GitHub integration - which has numerous
-benefits, including:
+### GitHub (Recommended)
 
-- source control integration in portal.zuplo.com
-- ability to deploy an [edge-deployment](../articles/environments.mdx) just by
-  adding a branch or making a commit.
+GitHub provides the most complete experience:
 
-For full instructions on setting up GitHub see
-[the quickstart tutorial](../articles/step-4-deploying-to-the-edge.mdx).
+- **Source control** — Push and pull between portal and repository
+- **Automatic deployments** — Every push deploys automatically
+- **Branch environments** — Each branch gets its own environment
+- **Deployment status** — See deploy results directly in GitHub
 
-## Connecting Existing Repositories
+For most teams, the default GitHub integration handles everything. You can add
+[deployment testing](./github-deployment-testing.mdx) to run your test suite
+after each deploy without any custom CI/CD.
 
-If you have an existing GitHub repository that contains a Zuplo project, you can
-connect to that repository when you create a new project. Select **Import
-existing project** then select your GitHub organization and repository.
+If you need approval gates, complex test pipelines, or tag-based releases, see
+[Custom GitHub Actions](./custom-ci-cd-github.mdx).
 
-![Import existing project to Zuplo](../../public/media/source-control/image-1.png)
+**[Set up GitHub →](./source-control-setup-github.mdx)**
 
-## Limitations
+### GitLab, Bitbucket, Azure DevOps (Enterprise)
 
-**Renaming or moving projects in GitHub**
+These providers offer source control integration on
+[enterprise plans](https://zuplo.com/pricing):
 
-The Zuplo GitHub integration doesn't handle moving or renaming repositories. As
-a workaround, you can first disconnect your project from GitHub and recreate it
-in another org or with another name. To do so, go to **Settings** > **Source
-Control** and then click **Disconnect** to disconnect your project from GitHub.
-Then follow the above instructions to reconnect your project to GitHub.
+- **Source control** — Push and pull between portal and repository
+- **No automatic deployments** — Use CI/CD pipelines to deploy
+
+Since these providers don't have automatic deployments, you'll use their native
+CI/CD systems to deploy via the Zuplo CLI.
+
+- **[GitLab setup](./source-control-setup-gitlab.mdx)** and
+  [CI/CD pipelines](./custom-ci-cd-gitlab.mdx)
+- **[Bitbucket setup](./source-control-setup-bitbucket.mdx)** and
+  [CI/CD pipelines](./custom-ci-cd-bitbucket.mdx)
+- **[Azure DevOps setup](./source-control-setup-azure.mdx)** and
+  [CI/CD pipelines](./custom-ci-cd-azure.mdx)
+
+### Other CI/CD Providers
+
+If your code lives elsewhere but you want to use a specific CI/CD system:
+
+- **[CircleCI](./custom-ci-cd-circleci.mdx)** — Flexible workflows with approval
+  jobs
+
+## How Branch-Based Deployments Work
+
+Every Git branch maps to a Zuplo environment. Push to `main` and deploy to your
+main environment. Push to `feature-auth` and get a `feature-auth` environment
+automatically.
+
+This enables powerful workflows like PR preview environments where reviewers can
+test changes against a live API before merging.
+
+Learn more: [Branch-Based Deployments](./branch-based-deployments.mdx)
+
+## Managing Your Project
+
+- [Rename or Move Project](./rename-or-move-project.mdx) — How to handle
+  repository changes

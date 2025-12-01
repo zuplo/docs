@@ -1,0 +1,45 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__docs__search-zuplo-docs",
+      "mcp__docs__ask-question-about-zuplo"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'FILE=$(cat | jq -r \".tool_input.file_path\"); if [[ \"$FILE\" == */docs/*.md ]] || [[ \"$FILE\" == */docs/*.mdx ]]; then vale \"$FILE\" 2>/dev/null || true; fi'",
+            "statusMessage": "Running Vale linter..."
+          },
+          {
+            "type": "agent",
+            "prompt": "Check if the edited file is a documentation file (ends with .md or .mdx in the docs/ directory). If so, review the NEW content for: 1) Spelling errors 2) Grammar issues 3) Passive voice 4) First-person pronouns (we, our, I). Only report issues if found. Input: $ARGUMENTS",
+            "timeout": 30,
+            "statusMessage": "Checking spelling & grammar..."
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'FILE=$(cat | jq -r \".tool_input.file_path\"); if [[ \"$FILE\" == */docs/*.md ]] || [[ \"$FILE\" == */docs/*.mdx ]]; then vale \"$FILE\" 2>/dev/null || true; fi'",
+            "statusMessage": "Running Vale linter..."
+          },
+          {
+            "type": "agent",
+            "prompt": "Check if the written file is a documentation file (ends with .md or .mdx in the docs/ directory). If so, review the content for: 1) Spelling errors 2) Grammar issues 3) Passive voice 4) First-person pronouns (we, our, I). Only report issues if found. Input: $ARGUMENTS",
+            "timeout": 30,
+            "statusMessage": "Checking spelling & grammar..."
+          }
+        ]
+      }
+    ]
+  }
+}
