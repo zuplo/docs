@@ -82,7 +82,7 @@
       "dev-portal/zudoku/guides/static-files",
       "dev-portal/zudoku/guides/environment-variables",
       "dev-portal/zudoku/guides/custom-pages",
-      "dev-portal/zudoku/guides/mermaid",
+      "dev-portal/zudoku/guides/navigation-migration",
       "dev-portal/zudoku/guides/using-multiple-apis",
       "dev-portal/zudoku/guides/managing-api-keys-and-identities",
       "dev-portal/zudoku/guides/transforming-examples",
@@ -125,7 +125,6 @@
         "type": "category",
         "label": "Documentation",
         "items": [
-          "dev-portal/zudoku/components/mermaid",
           "dev-portal/zudoku/components/playground",
           "dev-portal/zudoku/components/secret",
           "dev-portal/zudoku/components/stepper",
