@@ -1,0 +1,139 @@
+---
+title: MCP Server With OpenAI Apps SDK
+sidebar_label: OpenAI Apps SDK
+---
+
+The [OpenAI Apps SDK](https://developers.openai.com/apps-sdk) is an integration
+of MCP that lets you expose applications to ChatGPT. Zuplo's MCP Server provides
+built-in support for the Apps SDK through the `ZuploMcpSdk` class, which allows
+you to access incoming request metadata and set response metadata required for
+ChatGPT widget rendering.
+
+:::warning
+
+The OpenAI Apps SDK and support for it in Zuplo's `mcpServerHandler` is in beta
+and subject to change!
+
+:::
+
+## ZuploMcpSdk
+
+The `ZuploMcpSdk` class in the `@zuplo/runtime` provides methods to interact
+with an MCP request and response metadata, which is essential for building
+ChatGPT Apps that return `structuredContent` and `_meta` payloads _out of band_
+of the typical API response flow.
+
+This means that you can still use your existing APIs as MCP tools for your
+OpenAI Apps SDK application while wrapping them with a custom module with
+`ZuploMcpSdk` in order to propagate `_meta` application state.
+
+### Usage
+
+Import the SDK and create an instance in your custom handler by passing in the
+request context:
+
+```typescript
+import { ZuploContext, ZuploMcpSdk, ZuploRequest } from "@zuplo/runtime";
+
+export default async function handler(
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  const sdk = new ZuploMcpSdk(context);
+
+  // Access the incoming MCP request metadata
+  const mcpRequest = sdk.getRawCallToolRequest();
+  console.log(`Incoming _meta: ${JSON.stringify(mcpRequest?.params._meta)}`);
+
+  // Invoke another route on the gateway and get data for the application
+  const response = await context.invokeRoute("/v1/api/data");
+  const data = await response.json();
+
+  // Set metadata on the response for the ChatGPT widget
+  sdk.setRawCallToolResult({
+    content: [{ type: "text", text: "Data retrieved" }],
+    _meta: {
+      applicationState: data,
+      timestamp: new Date().toISOString(),
+    },
+  });
+
+  return data;
+}
+```
+
+:::note
+
+`context.invokeRoute` keeps the new request within the gateway: it does _not_ go
+back out to HTTP. But it's important to keep in mind that an invoked route on
+the gateway _will_ re-invoke the inbound and outbound policy pipeline for the
+invoked route!
+
+:::
+
+### Methods
+
+#### `getRawCallToolRequest()`
+
+Retrieves the raw MCP `tools/call` request object, including any `_meta` sent by
+ChatGPT. Use this to access client context hints like locale or user agent.
+
+```typescript
+const mcpRequest = sdk.getRawCallToolRequest();
+const locale = mcpRequest?.params._meta?.["openai/locale"];
+```
+
+#### `setRawCallToolResult(result)`
+
+Sets the MCP tool result, including the `_meta` field that is sent to the
+ChatGPT widget but not visible to the model. Use this to pass data that your
+widget needs for rendering.
+
+```typescript
+sdk.setRawCallToolResult({
+  content: [{ type: "text", text: "Operation complete" }],
+  _meta: {
+    detailedData: largeDataObject,
+    lastSyncedAt: new Date().toISOString(),
+  },
+});
+```
+
+## Configuring tool `annotations` and `_meta`
+
+When configuring and describing your tools, you may need to set specific
+`annotations` and static `_meta` for when ChatGPT performs a `tools/list`. For
+example, some applications may want to set a `readOnlyHint` annotation on a tool
+or define that a tool renders a component of your application with a static
+`_meta["openai/outputTemplate"]`.
+
+```json
+"x-zuplo-route": {
+  "corsPolicy": "none",
+  "handler": {
+    "export": "default",
+    "module": "$import(./modules/weather)"
+  },
+  "mcp": {
+    "type": "tool",
+    "name": "get_current_weather",
+    "description": "Retrieve and render application weather component",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_meta": {
+      "openai/toolInvocation/invoking": "Getting weather ...",
+      "openai/toolInvocation/invoked": "Weather ready!"
+    }
+  }
+}
+```
+
+Learn more about this in [the Zuplo MCP Server Tools documentation](./tools) and
+[the OpenAI Apps SDK documentation for defining tools](https://developers.openai.com/apps-sdk/plan/tools).
+
+---
+
+For complete documentation on building ChatGPT Apps, see the
+[OpenAI Apps SDK documentation](https://developers.openai.com/apps-sdk) and
+[the OpenAI Apps SDK guide on setting up your MCP server](https://developers.openai.com/apps-sdk/build/mcp-server)

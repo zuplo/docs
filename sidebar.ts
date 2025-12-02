@@ -456,6 +456,7 @@ export const apiGateway: Navigation = [
       "mcp-server/testing",
       "mcp-server/graphql",
       "mcp-server/custom-tools",
+      "mcp-server/openai-apps-sdk",
     ],
   },
   {

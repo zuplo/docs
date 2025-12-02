@@ -15,9 +15,9 @@ configuration.
 :::tip
 
 Custom tools give you full programmatic control over tool behavior within an
-[MCP Server Handler](./mcp-server.mdx). Define tools using standard OpenAPI
-patterns with custom TypeScript handlers for complex multi-step workflows and
-custom logic.
+[MCP Server Handler](../handlers/mcp-server). Define tools using standard
+OpenAPI patterns with custom TypeScript handlers for complex multi-step
+workflows and custom logic.
 
 :::
 
@@ -471,7 +471,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 ### Debugging Tips
 
 1. **Enable Debug Logging**: Use `context.log.debug()` liberally and turn on
-   [debug mode in your MCP server](./mcp-server.mdx)
+   [debug mode in your MCP server](../handlers/mcp-server)
 2. **Test Components Separately**: Test API routes and business logic
    independently
 3. **Use MCP Inspector**: Interactive testing is invaluable for development
@@ -480,8 +480,9 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 
 ## Learn More
 
-- [MCP Server Handler](./mcp-server.mdx) - For simple route-to-tool mapping
-- [Model Context Protocol Overview](../mcp-server/introduction.mdx) -
-  Understanding MCP concepts
+- [MCP Server Handler](../handlers/mcp-server) - For simple route-to-tool
+  mapping
+- [Model Context Protocol Overview](../mcp-server/introduction) - Understanding
+  MCP concepts
 - [MCP Specification](https://modelcontextprotocol.io/specification/) - Official
   protocol documentation
