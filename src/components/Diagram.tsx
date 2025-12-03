@@ -671,15 +671,12 @@ function parseFlowDiagram(
           : undefined,
         style: { stroke: edgeStyle.stroke, strokeWidth: 1.5 },
         label: props.label,
-        labelStyle: { fontSize: 11, fill: "#374151", fontWeight: 500 },
+        labelStyle: { fontSize: 10, fill: "#6b7280", fontWeight: 400 },
         labelBgStyle: {
-          fill: "#ffffff",
-          stroke: "#e5e7eb",
-          strokeWidth: 1,
-          rx: 4,
-          ry: 4,
+          fill: "#F7F9FB",
+          fillOpacity: 0.9,
         },
-        labelBgPadding: [4, 6] as [number, number],
+        labelBgPadding: [2, 4] as [number, number],
       });
     } else if (type === DiagramGroup || displayName === "DiagramGroup") {
       const props = child.props as DiagramGroupProps;
