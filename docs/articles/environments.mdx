@@ -8,6 +8,13 @@ our customers have hundreds of deployed environments! This facilitates
 collaboration, where teams can collaborate on new features with a dedicated
 environment, deployed for no additional cost in under 20 seconds.
 
+:::tip
+
+For a comprehensive guide to how branches map to environments, see
+[Branch-Based Deployments](./branch-based-deployments.mdx).
+
+:::
+
 ## Environment Types
 
 There are three types of environments on Zuplo - Production, Preview, and
@@ -41,6 +48,28 @@ These are environments that are deployed using the
 [custom CI/CD pipeline](/docs/articles/custom-ci-cd.mdx). Each project has only
 one Production environment and is deployed from the git branch that's set as
 your production branch in your source control settings.
+
+#### Changing the Production Environment
+
+The Production environment is determined by your repository's **default branch**
+setting (configured in your Git provider, not Zuplo). To change which branch
+deploys to Production:
+
+1. Go to your Git repository settings:
+   - **GitHub**: Settings > General > Default branch
+   - **GitLab**: Settings > Repository > Branch defaults
+   - **Bitbucket**: Repository settings > Branching model
+   - **Azure DevOps**: Project settings > Repositories > Default branch
+2. Change the default branch to your desired branch
+3. Zuplo automatically treats the new default branch as Production
+
+:::caution
+
+Changing the default branch affects which environment receives Production
+environment variables and uses the Production API key bucket. Plan this change
+carefully.
+
+:::
 
 ### Preview vs Production Environments (or multiple Production Environments)
 

@@ -1,0 +1,101 @@
+---
+title: Testing GitHub Deployments
+sidebar_label: Testing Deployments
+---
+
+Run your test suite automatically after every Zuplo deployment without replacing
+the built-in GitHub integration. This approach uses GitHub's `deployment_status`
+event to trigger tests after Zuplo finishes deploying.
+
+## Why This Approach?
+
+Zuplo's GitHub integration already handles deployments perfectly — every push
+deploys automatically with status checks in GitHub. Rather than replacing this
+with custom CI/CD, you can extend it by running tests after each deployment
+completes.
+
+This gives you:
+
+- **Automatic deployments** — Keep the built-in integration
+- **Post-deploy testing** — Run tests against the live environment
+- **PR checks** — Tests block merging until they pass
+- **No duplicate deploys** — Tests run after Zuplo deploys, not instead of
+
+## Setup
+
+Create a workflow that triggers on the `deployment_status` event:
+
+```yaml title=".github/workflows/test.yaml"
+name: Test Deployment
+
+on:
+  deployment_status:
+
+jobs:
+  test:
+    # Only run when Zuplo deployment succeeds
+    if: |
+      github.event.deployment_status.state == 'success' &&
+      github.event.deployment_status.environment_url != ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run:
+          npx zuplo test --endpoint ${{
+          github.event.deployment_status.environment_url }}
+```
+
+## How It Works
+
+1. You push code to GitHub
+2. Zuplo's integration deploys automatically
+3. Zuplo reports deployment status back to GitHub
+4. The `deployment_status` event triggers your workflow
+5. Your tests run against the deployed environment URL
+6. Test results appear as a check on the commit/PR
+
+The `environment_url` from the deployment status contains your Zuplo environment
+URL, so tests always run against the correct environment.
+
+## Filtering by Environment
+
+To only test specific environments (like staging or production):
+
+```yaml
+jobs:
+  test:
+    if: |
+      github.event.deployment_status.state == 'success' &&
+      github.event.deployment_status.environment == 'production'
+    # ...
+```
+
+## Adding to PR Checks
+
+GitHub automatically shows deployment status checks on pull requests. Your test
+workflow results appear alongside them, giving reviewers confidence that both
+deployment and tests succeeded.
+
+## When to Use Custom CI/CD Instead
+
+This approach works great when you want to:
+
+- Keep automatic deployments
+- Run tests after deploy
+- Add PR checks
+
+Consider [custom GitHub Actions](./custom-ci-cd-github.mdx) if you need:
+
+- Approval gates before production
+- Multi-stage deployments (staging → production)
+- Tests that must pass before any deployment
+- Tag-based or release-based deployments

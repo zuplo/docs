@@ -1,15 +1,16 @@
 ---
-title: "Source Control: Setup GitHug"
-sidebar_label: GitHub Integration
+title: GitHub Setup
+sidebar_label: Setup
 ---
 
-This guide will walk you through connecting your GitHub account to Zuplo.
+Connect your Zuplo project to GitHub for source control and automatic
+deployments. Every push to your repository deploys automatically — no CI/CD
+configuration required.
 
 To begin, go to your project in the Zuplo portal and open to the **Settings**
-tab, then select **Source Control**. Control. If your project isn't already
-connected to GitHub click the **Connect to GitHub** button and follow the auth
-flow. You'll need to grant permissions for any GitHub organizations you want to
-work with.
+tab, then select **Source Control**. If your project isn't already connected to
+GitHub click the **Connect to GitHub** button and follow the auth flow. You'll
+need to grant permissions for any GitHub organizations you want to work with.
 
 ![Connect GitHub](../../public/media/step-4-deploying-to-the-edge/image-1.png)
 
@@ -99,3 +100,29 @@ On the deployment page, you will see **Deployment has Completed!!** and below
 that's the link to your new environment.
 
 ![Zuplo deployment result](../../public/media/source-control-setup-github/26fa58b6-7a5a-4627-bd9f-246972639f12.png)
+
+## Connecting Existing Repositories
+
+If you have an existing GitHub repository that contains a Zuplo project, you can
+connect to that repository when you create a new project. Select **Import
+existing project** then select your GitHub organization and repository.
+
+![Import existing project to Zuplo](../../public/media/source-control/image-1.png)
+
+## What's Included
+
+With GitHub connected, you get:
+
+- **Automatic deployments** — Every push deploys to Zuplo automatically
+- **Branch environments** — Each branch gets its own isolated environment
+- **Deployment status** — See deploy results as GitHub checks on commits and PRs
+- **Portal sync** — Push and pull changes between the Zuplo portal and GitHub
+
+## Next Steps
+
+- **[Testing Deployments](./github-deployment-testing.mdx)** — Run tests
+  automatically after each deploy
+- **[Custom GitHub Actions](./custom-ci-cd-github.mdx)** — Advanced workflows
+  with approval gates and multi-stage deployments
+- **[Branch-Based Deployments](./branch-based-deployments.mdx)** — How branches
+  map to environments

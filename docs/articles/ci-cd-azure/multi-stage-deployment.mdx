@@ -1,0 +1,88 @@
+---
+title: "Azure Pipelines: Multi-Stage Deployment"
+sidebar_label: Multi-Stage Deployment
+---
+
+Deploy to staging, test, then promote to production with approval.
+
+```yaml title="azure-pipelines.yml"
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+  - stage: DeployStaging
+    displayName: "Deploy to Staging"
+    jobs:
+      - job: Deploy
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: "20.x"
+
+          - script: npm install
+
+          - script: |
+              set -o pipefail
+              npx zuplo deploy --api-key $(ZUPLO_API_KEY) --environment staging 2>&1 | tee ./STAGING_STDOUT
+              STAGING_URL=$(grep -oP 'Deployed to \K(https://[^ ]+)' ./STAGING_STDOUT)
+              echo "##vso[task.setvariable variable=STAGING_URL;isOutput=true]$STAGING_URL"
+            name: deployStep
+            displayName: "Deploy to staging"
+
+  - stage: TestStaging
+    displayName: "Test Staging"
+    dependsOn: DeployStaging
+    variables:
+      STAGING_URL:
+        $[
+        stageDependencies.DeployStaging.Deploy.outputs['deployStep.STAGING_URL']
+        ]
+    jobs:
+      - job: Test
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: "20.x"
+
+          - script: npm install
+
+          - script: npx zuplo test --endpoint $(STAGING_URL)
+            displayName: "Run tests against staging"
+
+  - stage: DeployProduction
+    displayName: "Deploy to Production"
+    dependsOn: TestStaging
+    jobs:
+      - deployment: Deploy
+        environment: production
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+
+                - task: NodeTool@0
+                  inputs:
+                    versionSpec: "20.x"
+
+                - script: npm install
+
+                - script:
+                    npx zuplo deploy --api-key $(ZUPLO_API_KEY) --environment
+                    production
+                  displayName: "Deploy to production"
+```
+
+## Setting Up Approval
+
+Create an environment with approval checks:
+
+1. Go to **Pipelines** > **Environments**
+2. Create an environment named `production`
+3. Add **Approvals and checks**
+4. Add required approvers
+
+The pipeline pauses before production deployment until approved.

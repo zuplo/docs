@@ -1,0 +1,78 @@
+---
+title: "CircleCI"
+sidebar_label: CircleCI
+---
+
+CircleCI offers powerful, flexible CI/CD with advanced workflow capabilities.
+Build complex deployment pipelines with parallel jobs, workspaces, and orbs for
+reusable configuration.
+
+## Why CircleCI with Zuplo?
+
+The Zuplo CLI integrates naturally with CircleCI's workflow model:
+
+**Powerful workflows** — Fan-out/fan-in patterns, conditional jobs, and manual
+approval gates. Build exactly the pipeline you need.
+
+**Workspaces and caching** — Share files between jobs efficiently. Cache
+dependencies for faster builds. Pass deployment URLs through workspaces.
+
+**Reusable configuration** — Create orbs to share deployment patterns across
+projects. Define commands once, use everywhere.
+
+**Parallelism and performance** — Run tests in parallel. Split by timing data
+for optimal speed. Get fast feedback on every change.
+
+## How It Works
+
+The Zuplo CLI handles deployment and testing. CircleCI orchestrates your
+workflow:
+
+```bash
+# Deploy to Zuplo (environment name from branch or --environment flag)
+npx zuplo deploy --api-key "$ZUPLO_API_KEY"
+
+# Run tests against any Zuplo environment
+npx zuplo test --endpoint https://your-env.zuplo.dev
+
+# Clean up environments you no longer need
+npx zuplo delete --environment pr-123 --api-key "$ZUPLO_API_KEY"
+
+# Test locally before deploying
+npx zuplo dev  # starts local server on port 9000
+```
+
+Use workspaces to pass the deployment URL between jobs. Write the URL to a file
+in the deploy job and attach the workspace for the test job.
+
+## Prerequisites
+
+1. **Disconnect Git integration** — If you're using CircleCI for deployments,
+   disconnect the native Git integration to avoid duplicate deployments. Go to
+   **Settings** > **Source Control** and click **Disconnect**.
+
+2. **Add your API key** — Store your Zuplo API key as an environment variable.
+   Go to **Project Settings** > **Environment Variables** and add
+   `ZUPLO_API_KEY`.
+
+## Examples
+
+Start with the workflow that matches your needs:
+
+- **[Basic Deployment](./ci-cd-circleci/basic-deployment.mdx)** — Deploy on
+  every push to main
+- **[Deploy and Test](./ci-cd-circleci/deploy-and-test.mdx)** — Run tests after
+  deployment
+- **[PR Preview Environments](./ci-cd-circleci/pr-preview-environments.mdx)** —
+  Isolated environments for pull requests
+- **[Local Testing in CI](./ci-cd-circleci/local-testing.mdx)** — Test with
+  local Zuplo server before deploying
+- **[Tag-Based Releases](./ci-cd-circleci/tag-based-releases.mdx)** — Deploy
+  only on tagged releases
+- **[Multi-Stage Deployment](./ci-cd-circleci/multi-stage-deployment.mdx)** —
+  Staging to production with approval jobs
+
+## Complete Example Repository
+
+See all these patterns working together in the
+[Zuplo CLI Example Project](https://github.com/zuplo/zup-cli-example-project).

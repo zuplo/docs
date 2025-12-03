@@ -1,0 +1,27 @@
+---
+title: "Bitbucket Pipelines: Basic Deployment"
+sidebar_label: Basic Deployment
+---
+
+The simplest pipeline deploys your API to Zuplo on every push to main.
+
+```yaml title="bitbucket-pipelines.yml"
+image: node:20
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Deploy to Zuplo
+          script:
+            - npm install
+            - npx zuplo deploy --api-key "$ZUPLO_API_KEY"
+```
+
+Store `ZUPLO_API_KEY` in **Repository settings** > **Pipelines** > **Repository
+variables**.
+
+## Next Steps
+
+- Add [automated testing](./deploy-and-test.mdx) after deployment
+- Set up [PR preview environments](./pr-preview-environments.mdx)

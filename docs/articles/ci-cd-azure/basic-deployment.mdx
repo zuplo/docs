@@ -1,0 +1,49 @@
+---
+title: "Azure Pipelines: Basic Deployment"
+sidebar_label: Basic Deployment
+---
+
+The simplest pipeline deploys your API to Zuplo on every push to main.
+
+```yaml title="azure-pipelines.yml"
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "20.x"
+    displayName: "Install Node.js"
+
+  - script: npm install
+    displayName: "Install dependencies"
+
+  - script: npx zuplo deploy --api-key $(ZUPLO_API_KEY)
+    displayName: "Deploy to Zuplo"
+```
+
+This pipeline:
+
+1. Triggers on pushes to the `main` branch
+2. Sets up Node.js 20
+3. Installs dependencies
+4. Deploys to Zuplo using the branch name as the environment name
+
+## Adding the API Key
+
+Add `ZUPLO_API_KEY` as a pipeline variable:
+
+1. Edit your pipeline in Azure DevOps
+2. Click **Variables**
+3. Add `ZUPLO_API_KEY` with your API key
+4. Check **Keep this value secret**
+
+Or use a variable group for sharing across pipelines.
+
+## Next Steps
+
+- Add [testing after deployment](./deploy-and-test.mdx)
+- Set up [PR preview environments](./pr-preview-environments.mdx)

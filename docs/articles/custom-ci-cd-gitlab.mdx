@@ -1,0 +1,79 @@
+---
+title: "GitLab CI/CD"
+sidebar_label: GitLab CI/CD
+---
+
+GitLab CI/CD provides integrated pipelines right where your code lives. No
+external services to configure—define your deployment workflow in
+`.gitlab-ci.yml` and GitLab handles the rest.
+
+## Why GitLab CI/CD with Zuplo?
+
+The Zuplo CLI works seamlessly with GitLab's pipeline model:
+
+**Everything in one place** — Source code, CI/CD, environments, and deployments
+all in GitLab. See deployment history alongside merge requests and issues.
+
+**Built-in environments** — GitLab tracks deployments automatically. Review
+environment history, roll back deployments, and see what's deployed where.
+
+**Merge request pipelines** — Run pipelines on merge requests before merging.
+Deploy preview environments that reviewers can test directly.
+
+**Artifacts between jobs** — Pass deployment URLs between stages using GitLab
+artifacts. Build once, test many times.
+
+## How It Works
+
+The Zuplo CLI handles deployment and testing. GitLab CI/CD orchestrates your
+workflow:
+
+```bash
+# Deploy to Zuplo (environment name from branch or --environment flag)
+npx zuplo deploy --api-key "$ZUPLO_API_KEY"
+
+# Run tests against any Zuplo environment
+npx zuplo test --endpoint https://your-env.zuplo.dev
+
+# Clean up environments you no longer need
+npx zuplo delete --environment pr-123 --api-key "$ZUPLO_API_KEY"
+
+# Test locally before deploying
+npx zuplo dev  # starts local server on port 9000
+```
+
+Use artifacts to pass the deployment URL between jobs. Write the URL to a file
+in the deploy job and retrieve it in the test job.
+
+## Prerequisites
+
+1. **Disconnect Git integration** — If you're using GitLab CI/CD for
+   deployments, disconnect the native Git integration to avoid duplicate
+   deployments. Go to **Settings** > **Source Control** and click
+   **Disconnect**.
+
+2. **Add your API key** — Store your Zuplo API key as a CI/CD variable. Go to
+   **Settings** > **CI/CD** > **Variables** and add `ZUPLO_API_KEY`. Check
+   **Mask variable** to hide it in logs.
+
+## Examples
+
+Start with the workflow that matches your needs:
+
+- **[Basic Deployment](./ci-cd-gitlab/basic-deployment.mdx)** — Deploy on every
+  push to main
+- **[Deploy and Test](./ci-cd-gitlab/deploy-and-test.mdx)** — Run tests after
+  deployment
+- **[MR Preview Environments](./ci-cd-gitlab/mr-preview-environments.mdx)** —
+  Isolated environments for merge requests
+- **[Local Testing in CI](./ci-cd-gitlab/local-testing.mdx)** — Test with local
+  Zuplo server before deploying
+- **[Tag-Based Releases](./ci-cd-gitlab/tag-based-releases.mdx)** — Deploy only
+  on tagged releases
+- **[Multi-Stage Deployment](./ci-cd-gitlab/multi-stage-deployment.mdx)** —
+  Staging to production with manual gates
+
+## Complete Example Repository
+
+See all these patterns working together in the
+[Zuplo CLI Example Project](https://github.com/zuplo/zup-cli-example-project).

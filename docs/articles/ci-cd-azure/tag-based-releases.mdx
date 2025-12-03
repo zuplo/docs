@@ -1,0 +1,37 @@
+---
+title: "Azure Pipelines: Tag-Based Releases"
+sidebar_label: Tag-Based Releases
+---
+
+Deploy only when tags are pushed for controlled releases.
+
+```yaml title="azure-pipelines.yml"
+trigger:
+  tags:
+    include:
+      - v*
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "20.x"
+    displayName: "Install Node.js"
+
+  - script: npm install
+    displayName: "Install dependencies"
+
+  - script: |
+      TAG_NAME=$(echo $(Build.SourceBranch) | sed 's|refs/tags/||')
+      npx zuplo deploy --api-key $(ZUPLO_API_KEY) --environment "$TAG_NAME"
+    displayName: "Deploy with tag name"
+```
+
+This pipeline triggers only on tags matching `v*` (like `v1.0.0`) and creates an
+environment named after the tag.
+
+## Next Steps
+
+- Add [multi-stage deployment](./multi-stage-deployment.mdx) with approval

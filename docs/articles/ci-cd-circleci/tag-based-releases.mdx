@@ -1,0 +1,38 @@
+---
+title: "CircleCI: Tag-Based Releases"
+sidebar_label: Tag-Based Releases
+---
+
+Deploy only when tags are pushed for controlled releases.
+
+```yaml title=".circleci/config.yml"
+version: 2.1
+
+jobs:
+  deploy:
+    docker:
+      - image: cimg/node:20.0
+    steps:
+      - checkout
+      - run: npm install
+      - run:
+          npx zuplo deploy --api-key "$ZUPLO_API_KEY" --environment
+          "$CIRCLE_TAG"
+
+workflows:
+  release:
+    jobs:
+      - deploy:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+```
+
+This workflow triggers only on tags matching `v*` (like `v1.0.0`) and creates an
+environment named after the tag.
+
+## Next Steps
+
+- Add [multi-stage deployment](./multi-stage-deployment.mdx) with approval

@@ -1,0 +1,52 @@
+---
+title: "Bitbucket Pipelines: Multi-Stage Deployment"
+sidebar_label: Multi-Stage Deployment
+---
+
+Deploy to staging, test, then promote to production with approval.
+
+```yaml title="bitbucket-pipelines.yml"
+image: node:20
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Deploy to Staging
+          script:
+            - npm install
+            - npx zuplo deploy --api-key "$ZUPLO_API_KEY" --environment staging
+              2>&1 | tee ./DEPLOYMENT_STDOUT
+            - echo "STAGING_URL=$(grep -oP 'Deployed to \K(https://[^ ]+)'
+              ./DEPLOYMENT_STDOUT)" >> staging.env
+          artifacts:
+            - staging.env
+
+      - step:
+          name: Test Staging
+          script:
+            - source staging.env
+            - npm install
+            - npx zuplo test --endpoint "$STAGING_URL"
+
+      - step:
+          name: Deploy to Production
+          trigger: manual
+          deployment: production
+          script:
+            - npm install
+            - npx zuplo deploy --api-key "$ZUPLO_API_KEY" --environment
+              production
+```
+
+## Setting Up Approval
+
+The `trigger: manual` setting requires someone to click "Run" in the Bitbucket
+UI to trigger production deployment.
+
+For more control, use
+[Deployment permissions](https://support.atlassian.com/bitbucket-cloud/docs/set-up-and-monitor-deployments/):
+
+1. Go to **Repository settings** > **Deployments**
+2. Create a `production` deployment environment
+3. Add required reviewers under **Deployment restrictions**

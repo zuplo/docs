@@ -1,0 +1,81 @@
+---
+title: "Azure Pipelines"
+sidebar_label: Azure Pipelines
+---
+
+Azure Pipelines brings enterprise-grade CI/CD to your Zuplo API gateway. Build
+complex deployment workflows with stages, approvals, and integrations across
+your Azure ecosystem.
+
+## Why Azure Pipelines with Zuplo?
+
+The Zuplo CLI integrates naturally with Azure Pipelines YAML workflows:
+
+**Enterprise pipeline features** — Multi-stage pipelines, deployment jobs,
+environment approvals, and service connections. Build the exact workflow your
+organization requires.
+
+**Azure ecosystem integration** — Deploy alongside your Azure Functions, App
+Services, and Kubernetes workloads. Manage secrets through Azure Key Vault.
+Track deployments in Azure DevOps.
+
+**Variable groups and templates** — Share configuration across pipelines. Define
+deployment templates once and reuse them across projects.
+
+**Compliance and auditing** — Full audit trails, branch policies, and approval
+gates satisfy enterprise compliance requirements.
+
+## How It Works
+
+The Zuplo CLI handles deployment and testing. Azure Pipelines orchestrates your
+workflow:
+
+```bash
+# Deploy to Zuplo (environment name from branch or --environment flag)
+npx zuplo deploy --api-key "$ZUPLO_API_KEY"
+
+# Run tests against any Zuplo environment
+npx zuplo test --endpoint https://your-env.zuplo.dev
+
+# Clean up environments you no longer need
+npx zuplo delete --environment pr-123 --api-key "$ZUPLO_API_KEY"
+
+# Test locally before deploying
+npx zuplo dev  # starts local server on port 9000
+```
+
+Use `tee` to capture deployment output for passing the URL to test stages. The
+CLI outputs `Deployed to https://...` which you can parse with `grep` or `sed`.
+
+## Prerequisites
+
+1. **Disconnect Git integration** — If you're using Azure Pipelines for
+   deployments, disconnect the native Git integration to avoid duplicate
+   deployments. Go to **Settings** > **Source Control** and click
+   **Disconnect**.
+
+2. **Add your API key** — Store your Zuplo API key as a pipeline variable or in
+   a variable group. Go to **Pipelines** > **Library** to create a variable
+   group with `ZUPLO_API_KEY`.
+
+## Examples
+
+Start with the workflow that matches your needs:
+
+- **[Basic Deployment](./ci-cd-azure/basic-deployment.mdx)** — Deploy on every
+  push to main
+- **[Deploy and Test](./ci-cd-azure/deploy-and-test.mdx)** — Run tests after
+  deployment
+- **[PR Preview Environments](./ci-cd-azure/pr-preview-environments.mdx)** —
+  Isolated environments for every pull request
+- **[Local Testing in CI](./ci-cd-azure/local-testing.mdx)** — Test with local
+  Zuplo server before deploying
+- **[Tag-Based Releases](./ci-cd-azure/tag-based-releases.mdx)** — Deploy only
+  on tagged releases
+- **[Multi-Stage Deployment](./ci-cd-azure/multi-stage-deployment.mdx)** —
+  Staging to production with approval gates
+
+## Complete Example Repository
+
+See all these patterns working together in the
+[Zuplo CLI Example Project](https://github.com/zuplo/zup-cli-example-project).
