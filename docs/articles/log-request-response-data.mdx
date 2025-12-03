@@ -1,0 +1,398 @@
+---
+title: Log Custom Request and Response Data
+sidebar_label: Log Request/Response Data
+---
+
+Logging request and response data is useful for debugging API issues, monitoring
+traffic patterns, and auditing API usage. This guide shows how to create custom
+policies that log various parts of requests and responses while redacting
+sensitive information.
+
+## Logging Request Headers
+
+Create an inbound policy to log headers from incoming requests. This policy
+redacts sensitive headers like `Authorization` and `Cookie` to prevent exposing
+credentials in logs.
+
+```ts title="modules/log-request-headers.ts"
+import type { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export default async function policy(
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  const headers: Record<string, string> = {};
+  for (const [key, value] of request.headers.entries()) {
+    const k = key.toLowerCase();
+    headers[key] =
+      k === "authorization" ||
+      k === "cookie" ||
+      k === "set-cookie" ||
+      k === "x-api-key"
+        ? "[REDACTED]"
+        : value;
+  }
+
+  context.log.info({ headers }, "Incoming request headers");
+
+  return request;
+}
+```
+
+## Logging Query Parameters
+
+Log query parameters from the request URL:
+
+```ts title="modules/log-query-params.ts"
+import type { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export default async function policy(
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  const url = new URL(request.url);
+  const queryParams = Object.fromEntries(url.searchParams);
+
+  context.log.info(
+    {
+      path: url.pathname,
+      query: queryParams,
+    },
+    "Request query parameters",
+  );
+
+  return request;
+}
+```
+
+## Logging Request Body
+
+Log the request body for POST, PUT, or PATCH requests. Clone the request first
+to avoid consuming the body stream.
+
+```ts title="modules/log-request-body.ts"
+import type { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export default async function policy(
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  if (["POST", "PUT", "PATCH"].includes(request.method)) {
+    const clone = request.clone();
+    const body = await clone.text();
+
+    // Parse JSON if applicable
+    let parsedBody: unknown;
+    try {
+      parsedBody = JSON.parse(body);
+    } catch {
+      parsedBody = body;
+    }
+
+    context.log.info({ body: parsedBody }, "Request body");
+  }
+
+  return request;
+}
+```
+
+:::warning
+
+Logging request bodies can expose sensitive data like passwords, tokens, or
+personal information. Always sanitize or redact sensitive fields before logging.
+
+:::
+
+## Logging Response Headers and Status
+
+Create an outbound policy to log response information:
+
+```ts title="modules/log-response-headers.ts"
+import type { ZuploContext, ZuploRequest, ZuploResponse } from "@zuplo/runtime";
+
+export default async function outboundPolicy(
+  response: ZuploResponse,
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  const headers: Record<string, string> = {};
+  for (const [key, value] of response.headers.entries()) {
+    const k = key.toLowerCase();
+    headers[key] = k === "set-cookie" ? "[REDACTED]" : value;
+  }
+
+  context.log.info(
+    { status: response.status, headers },
+    "Outgoing response headers",
+  );
+
+  return response;
+}
+```
+
+## Logging Response Body
+
+Log the response body from your backend. Clone the response first to avoid
+consuming the body stream.
+
+```ts title="modules/log-response-body.ts"
+import type { ZuploContext, ZuploRequest, ZuploResponse } from "@zuplo/runtime";
+
+export default async function outboundPolicy(
+  response: ZuploResponse,
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  const clone = response.clone();
+  const body = await clone.text();
+
+  let parsedBody: unknown;
+  try {
+    parsedBody = JSON.parse(body);
+  } catch {
+    parsedBody = body;
+  }
+
+  context.log.info(
+    {
+      status: response.status,
+      body: parsedBody,
+    },
+    "Response body",
+  );
+
+  return response;
+}
+```
+
+## Comprehensive Request Logging
+
+Combine multiple data points into a single log entry:
+
+```ts title="modules/log-request-details.ts"
+import type { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export default async function policy(
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  const url = new URL(request.url);
+
+  context.log.info(
+    {
+      method: request.method,
+      path: url.pathname,
+      query: Object.fromEntries(url.searchParams),
+      headers: sanitizeHeaders(request.headers),
+      userId: request.user?.sub,
+      params: request.params,
+    },
+    "Incoming request",
+  );
+
+  return request;
+}
+
+function sanitizeHeaders(headers: Headers): Record<string, string> {
+  const sensitiveHeaders = [
+    "authorization",
+    "cookie",
+    "set-cookie",
+    "x-api-key",
+  ];
+  const result: Record<string, string> = {};
+
+  for (const [key, value] of headers.entries()) {
+    result[key] = sensitiveHeaders.includes(key.toLowerCase())
+      ? "[REDACTED]"
+      : value;
+  }
+
+  return result;
+}
+```
+
+## Policy Configuration
+
+Configure the policy in your `policies.json`:
+
+```json title="config/policies.json"
+{
+  "name": "log-request-data",
+  "policyType": "custom-code-inbound",
+  "handler": {
+    "export": "default",
+    "module": "$import(./modules/log-request-details)"
+  }
+}
+```
+
+For outbound policies:
+
+```json title="config/policies.json"
+{
+  "name": "log-response-data",
+  "policyType": "custom-code-outbound",
+  "handler": {
+    "export": "default",
+    "module": "$import(./modules/log-response-headers)"
+  }
+}
+```
+
+## Wiring Up the Policies
+
+Add the policies to your routes in `routes.oas.json`:
+
+```json title="config/routes.oas.json"
+{
+  "paths": {
+    "/my-route": {
+      "get": {
+        "x-zuplo-route": {
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "https://api.example.com"
+            }
+          },
+          "policies": {
+            "inbound": ["log-request-data"],
+            "outbound": ["log-response-data"]
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## Configurable Options
+
+Make the logging behavior configurable using policy options:
+
+```ts title="modules/log-request-configurable.ts"
+import type { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+type PolicyOptions = {
+  logHeaders?: boolean;
+  logQuery?: boolean;
+  logBody?: boolean;
+  redactedHeaders?: string[];
+};
+
+const DEFAULT_REDACTED = ["authorization", "cookie", "set-cookie", "x-api-key"];
+
+export default async function policy(
+  request: ZuploRequest,
+  context: ZuploContext,
+  options: PolicyOptions,
+  policyName: string,
+) {
+  const url = new URL(request.url);
+  const logData: Record<string, unknown> = {
+    method: request.method,
+    path: url.pathname,
+  };
+
+  if (options.logQuery !== false) {
+    logData.query = Object.fromEntries(url.searchParams);
+  }
+
+  if (options.logHeaders !== false) {
+    const redacted = (options.redactedHeaders ?? DEFAULT_REDACTED).map((h) =>
+      h.toLowerCase(),
+    );
+    logData.headers = sanitizeHeaders(request.headers, redacted);
+  }
+
+  if (options.logBody && ["POST", "PUT", "PATCH"].includes(request.method)) {
+    const clone = request.clone();
+    const body = await clone.text();
+    try {
+      logData.body = JSON.parse(body);
+    } catch {
+      logData.body = body;
+    }
+  }
+
+  context.log.info(logData, "Incoming request");
+
+  return request;
+}
+
+function sanitizeHeaders(
+  headers: Headers,
+  redacted: string[],
+): Record<string, string> {
+  const result: Record<string, string> = {};
+  for (const [key, value] of headers.entries()) {
+    result[key] = redacted.includes(key.toLowerCase()) ? "[REDACTED]" : value;
+  }
+  return result;
+}
+```
+
+Configure with options:
+
+```json title="config/policies.json"
+{
+  "name": "log-request-data",
+  "policyType": "custom-code-inbound",
+  "handler": {
+    "export": "default",
+    "module": "$import(./modules/log-request-configurable)",
+    "options": {
+      "logHeaders": true,
+      "logQuery": true,
+      "logBody": false,
+      "redactedHeaders": ["authorization", "cookie", "x-api-key", "x-secret"]
+    }
+  }
+}
+```
+
+## Best Practices
+
+:::warning
+
+Always redact sensitive data before logging. Credentials, tokens, passwords, and
+personal information should never appear in logs.
+
+:::
+
+1. **Redact sensitive data** - Always redact `Authorization`, `Cookie`,
+   `Set-Cookie`, API keys, passwords, and any fields containing secrets or
+   personal data.
+
+2. **Use structured logging** - Pass objects to `context.log` instead of string
+   concatenation. This enables better log searching and filtering.
+
+3. **Clone before reading** - Always clone requests and responses before reading
+   their body to avoid consuming the stream.
+
+4. **Consider log volume** - Logging bodies can generate significant log volume
+   and storage costs. Consider enabling body logging only for specific routes or
+   in development environments.
+
+5. **Use appropriate log levels** - Use `debug` for verbose development logging
+   and `info` for production audit trails.
+
+6. **Limit body size** - Consider truncating large bodies to avoid excessive log
+   storage:
+
+   ```ts
+   const body = await clone.text();
+   const truncated = body.length > 1000 ? body.slice(0, 1000) + "..." : body;
+   ```
+
+## See Also
+
+- [Logger](../programmable-api/logger.mdx) - Logger interface documentation
+- [Custom Code Inbound Policy](../policies/custom-code-inbound.mdx) - Writing
+  custom inbound policies
+- [Custom Code Outbound Policy](../policies/custom-code-outbound.mdx) - Writing
+  custom outbound policies
+- [Custom Logging Policy](./custom-logging-example.mdx) - Full request/response
+  logging to external services
