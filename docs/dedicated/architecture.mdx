@@ -82,7 +82,27 @@ dedicated instance. The architecture is highly available, scalable, and secure.
 The following diagram shows the high-level architecture of a managed dedicated
 instance of Zuplo and how the components interact with each other.
 
-<ManagedDedicatedArchitecture />
+<Diagram height="h-64">
+  <DiagramNode id="client">Client</DiagramNode>
+  <DiagramGroup id="dedicated-vpc" label="Dedicated VPC">
+    <DiagramNode id="gateway" variant="zuplo">
+      Zuplo API Gateway
+    </DiagramNode>
+    <DiagramNode id="services" variant="zuplo">
+      Gateway Services
+    </DiagramNode>
+  </DiagramGroup>
+  <DiagramGroup id="customer-vpc" label="Customer VPC">
+    <DiagramNode id="backend">Backend</DiagramNode>
+  </DiagramGroup>
+  <DiagramNode id="control" variant="zuplo">
+    Control Plane
+  </DiagramNode>
+  <DiagramEdge from="client" to="gateway" />
+  <DiagramEdge from="gateway" to="backend" />
+  <DiagramEdge from="gateway" to="services" fromSide="bottom" toSide="top" />
+  <DiagramEdge from="control" to="gateway" />
+</Diagram>
 
 ### Deployments
 
@@ -98,7 +118,21 @@ application that powers the Developer Portal. The Developer Portal hosts on a
 CDN to provide low latency access to end-users. The CDN configuration can be
 customized to meet your specific requirements.
 
-<ManagedDedicatedDeploymentArchitecture />
+<Diagram height="h-56">
+  <DiagramNode id="source">Source Control</DiagramNode>
+  <DiagramNode id="control" variant="zuplo">
+    Control Plane
+  </DiagramNode>
+  <DiagramNode id="gateway" variant="zuplo">
+    Zuplo API Gateway
+  </DiagramNode>
+  <DiagramNode id="portal" variant="zuplo">
+    Dev Portal
+  </DiagramNode>
+  <DiagramEdge from="source" to="control" label="Deploy" />
+  <DiagramEdge from="control" to="gateway" />
+  <DiagramEdge from="control" to="portal" />
+</Diagram>
 
 ### Multiple regions
 
@@ -112,7 +146,23 @@ balancer to route traffic to the closest region. This provides low latency
 access to your APIs for end-users around the world. The load balancer also
 handles failover in case of an outage in one region.
 
-<ManagedDedicatedMultiRegionArchitecture />
+<Diagram height="h-64">
+  <DiagramNode id="client">Client</DiagramNode>
+  <DiagramNode id="lb">Load Balancer</DiagramNode>
+  <DiagramNode id="region1" variant="zuplo">
+    API Gateway (Region 1)
+  </DiagramNode>
+  <DiagramNode id="region2" variant="zuplo">
+    API Gateway (Region 2)
+  </DiagramNode>
+  <DiagramNode id="region3" variant="zuplo">
+    API Gateway (Region 3)
+  </DiagramNode>
+  <DiagramEdge from="client" to="lb" />
+  <DiagramEdge from="lb" to="region1" />
+  <DiagramEdge from="lb" to="region2" />
+  <DiagramEdge from="lb" to="region3" />
+</Diagram>
 
 ### Instances
 
@@ -141,4 +191,18 @@ The most common setup is where your `main` branch deploys to production and all
 other branches deploy to a non-production environment, but this is fully
 customizable.
 
-<ManagedDedicatedEnvironmentsArchitecture />
+<Diagram height="h-56">
+  <DiagramNode id="source">Source Control</DiagramNode>
+  <DiagramNode id="control" variant="zuplo">
+    Control Plane
+  </DiagramNode>
+  <DiagramNode id="prod" variant="zuplo">
+    API Gateway (Prod)
+  </DiagramNode>
+  <DiagramNode id="non-prod" variant="zuplo">
+    API Gateway (Non-Prod)
+  </DiagramNode>
+  <DiagramEdge from="source" to="control" label="Deploy" />
+  <DiagramEdge from="control" to="prod" />
+  <DiagramEdge from="control" to="non-prod" />
+</Diagram>

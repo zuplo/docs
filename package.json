@@ -32,13 +32,14 @@
     "guides:frontmatter": "node --env-file ./.env --import ./scripts/setup-react.mjs --import tsx/esm --loader ./scripts/css-loader.mjs scripts/add-guide-frontmatter.ts"
   },
   "dependencies": {
+    "@dagrejs/dagre": "^1.1.8",
     "@phosphor-icons/react": "^2.1.10",
     "@sentry/react": "^10.28.0",
     "@sentry/vite-plugin": "^4.3.0",
     "@vercel/microfrontends": "^2.0.0",
     "@xyflow/react": "^12.9.0",
     "elkjs": "^0.11.0",
-    "lucide-react": "^0.516.0",
+    "lucide-react": "^0.555.0",
     "mermaid": "^11.12.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -46,6 +47,7 @@
   },
   "devDependencies": {
     "@anthropic-ai/claude-agent-sdk": "^0.1.50",
+    "@types/dagre": "^0.7.53",
     "@types/json-schema": "7.0.15",
     "@types/node": "^22.10.7",
     "@types/react": "^19.0.7",

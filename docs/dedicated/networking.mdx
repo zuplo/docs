@@ -30,7 +30,19 @@ In this setup your VPC isn't exposed to the public internet at all. Instead,
 your Zuplo API Gateway will use a network connection such as AWS Transit
 Gateway, PrivateLink, or VPC Peering to connect to your backend services.
 
-<ZuploIngressWithManagedDedicated />
+<Diagram height="h-48">
+  <DiagramNode id="client">Client</DiagramNode>
+  <DiagramGroup id="dedicated-vpc" label="Dedicated VPC">
+    <DiagramNode id="gateway" variant="zuplo">
+      Zuplo API Gateway
+    </DiagramNode>
+  </DiagramGroup>
+  <DiagramGroup id="customer-vpc" label="Customer VPC">
+    <DiagramNode id="backend">Backend</DiagramNode>
+  </DiagramGroup>
+  <DiagramEdge from="client" to="gateway" />
+  <DiagramEdge from="gateway" to="backend" />
+</Diagram>
 
 ## Customer VPC Ingress to Zuplo API Gateway
 
@@ -40,4 +52,18 @@ security products in front of your API Gateway, Zuplo can be configured to
 accept traffic from your VPC then route it to your backend. Your backend could
 be in the same VPC as your ingress or in another VPC.
 
-<CustomerIngressWithManagedDedicated />
+<Diagram height="h-64">
+  <DiagramNode id="client">Client</DiagramNode>
+  <DiagramGroup id="customer-vpc" label="Customer VPC">
+    <DiagramNode id="waf">WAF</DiagramNode>
+    <DiagramNode id="backend">Backend</DiagramNode>
+  </DiagramGroup>
+  <DiagramGroup id="dedicated-vpc" label="Dedicated VPC">
+    <DiagramNode id="gateway" variant="zuplo">
+      Zuplo API Gateway
+    </DiagramNode>
+  </DiagramGroup>
+  <DiagramEdge from="client" to="waf" />
+  <DiagramEdge from="waf" to="gateway" />
+  <DiagramEdge from="gateway" to="backend" fromSide="left" toSide="right" />
+</Diagram>
