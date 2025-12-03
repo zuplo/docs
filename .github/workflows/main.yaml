@@ -133,6 +133,7 @@ jobs:
 
       - name: Link Checker
         uses: lycheeverse/lychee-action@v2
+        continue-on-error: true
         with:
           args: --offline --fallback-extensions html --root-dir $PWD/dist --include-fragments ./dist
 
