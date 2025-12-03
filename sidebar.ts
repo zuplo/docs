@@ -477,6 +477,7 @@ export const apiGateway: Navigation = [
           "articles/log-plugin-splunk",
           "articles/log-plugin-sumo",
           "articles/custom-logging-example",
+          "articles/log-request-response-data",
         ],
       },
       {

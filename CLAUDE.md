@@ -54,3 +54,13 @@ code in this repository.
   extension.
 - When linking to internal pages, check that the page actually exists before
   making up a link. ONLY USE REAL LINKS.
+
+## Zuplo Docs Content
+
+When writing or editing documentation, always use the
+`mcp__docs__search-zuplo-docs`, `mcp__docs__ask-question-about-zuplo` tool first
+to:
+
+- Match existing terminology and style
+- Avoid duplicating content
+- Find related docs to cross-reference
