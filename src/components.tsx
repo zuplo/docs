@@ -22,6 +22,14 @@ import {
   CliDoc,
 } from "./components/CliCommand.js";
 import { YouTubeEmbed } from "./components/YouTubeEmbed.js";
+import {
+  Diagram,
+  DiagramNode,
+  DiagramEdge,
+  DiagramActor,
+  DiagramMessage,
+  DiagramGroup,
+} from "./components/Diagram.js";
 
 const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
 
@@ -111,22 +119,11 @@ export const mdxComponents = {
   CliIntro,
   CliDoc,
   YouTubeEmbed,
-  ZuploIngressWithManagedDedicated: lazy(
-    () => import("./diagrams/ZuploIngressWithManagedDedicated.js"),
-  ),
-  CustomerIngressWithManagedDedicated: lazy(
-    () => import("./diagrams/CustomerIngressWithManagedDedicated.js"),
-  ),
-  ManagedDedicatedArchitecture: lazy(
-    () => import("./diagrams/ManagedDedicatedArchitecture.js"),
-  ),
-  ManagedDedicatedDeploymentArchitecture: lazy(
-    () => import("./diagrams/ManagedDedicatedDeploymentArchitecture.js"),
-  ),
-  ManagedDedicatedMultiRegionArchitecture: lazy(
-    () => import("./diagrams/ManagedDedicatedMultiRegionArchitecture.js"),
-  ),
-  ManagedDedicatedEnvironmentsArchitecture: lazy(
-    () => import("./diagrams/ManagedDedicatedEnvironmentsArchitecture.js"),
-  ),
+  // Inline diagram components
+  Diagram,
+  DiagramNode,
+  DiagramEdge,
+  DiagramActor,
+  DiagramMessage,
+  DiagramGroup,
 };
