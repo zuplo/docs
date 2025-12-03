@@ -1,0 +1,344 @@
+---
+title: MCP Server Configuration Migration Guide
+sidebar_label: Configuration Migration Guide
+---
+
+This guide explains how to migrate from the deprecated MCP server configuration
+syntax to the new consolidated format introduced in November 2025.
+
+## What Changed
+
+The new configuration consolidates and simplifies MCP server setup:
+
+**Handler Options:**
+
+- ✅ **New**: `operations` array with simple `{ file, id }` references
+- ❌ **Deprecated**: `files`, `tools`, `prompts`, `resources` arrays
+
+**Operation Extensions:**
+
+- ✅ **New**: Single `x-zuplo-route.mcp` extension with `type` field
+- ❌ **Deprecated**: Separate `x-zuplo-mcp-tool`, `x-zuplo-mcp-prompt`,
+  `x-zuplo-mcp-resource`, `x-zuplo-mcp-graphql` extensions
+
+## Migration Steps
+
+### Step 1: Update Handler Options
+
+**Old Syntax:**
+
+```json
+{
+  "handler": {
+    "export": "mcpServerHandler",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "name": "my MCP server",
+      "version": "0.0.0",
+      "files": [
+        {
+          "path": "./config/routes.oas.json",
+          "operationIds": ["list-users", "create-user"]
+        }
+      ],
+      "prompts": [
+        {
+          "path": "./config/routes.oas.json",
+          "operationIds": ["greeting"]
+        }
+      ],
+      "resources": [
+        {
+          "path": "./config/routes.oas.json",
+          "operationIds": ["html"]
+        }
+      ]
+    }
+  }
+}
+```
+
+**New Syntax:**
+
+```json
+{
+  "handler": {
+    "export": "mcpServerHandler",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "name": "my MCP server",
+      "version": "0.0.0",
+      "operations": [
+        { "file": "./config/routes.oas.json", "id": "list-users" },
+        { "file": "./config/routes.oas.json", "id": "create-user" },
+        { "file": "./config/routes.oas.json", "id": "greeting" },
+        { "file": "./config/routes.oas.json", "id": "html" }
+      ]
+    }
+  }
+}
+```
+
+:::note
+
+All operations (tools, prompts, resources) now go into a single `operations`
+array. The type is determined by the `x-zuplo-route.mcp.type` field on each
+operation.
+
+:::
+
+### Step 2: Update Operation Extensions
+
+### Tools
+
+**Old Syntax:**
+
+```json
+{
+  "paths": {
+    "/users": {
+      "get": {
+        "operationId": "list-users",
+        "summary": "List all users",
+        "x-zuplo-route": {
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)"
+          }
+        },
+        "x-zuplo-mcp-tool": {
+          "name": "get_all_users",
+          "description": "Use this tool to retrieve a list of all registered users"
+        }
+      }
+    }
+  }
+}
+```
+
+**New Syntax:**
+
+```json
+{
+  "paths": {
+    "/users": {
+      "get": {
+        "operationId": "list-users",
+        "summary": "List all users",
+        "x-zuplo-route": {
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)"
+          },
+          "mcp": {
+            "type": "tool",
+            "name": "get_all_users",
+            "description": "Use this tool to retrieve a list of all registered users"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### Prompts
+
+**Old Syntax:**
+
+```json
+{
+  "paths": {
+    "/greeting": {
+      "post": {
+        "operationId": "greeting",
+        "summary": "Generate a greeting message",
+        "x-zuplo-mcp-prompt": {
+          "name": "greeting_generator",
+          "description": "Generate a personalized greeting message"
+        }
+      }
+    }
+  }
+}
+```
+
+**New Syntax:**
+
+```json
+{
+  "paths": {
+    "/greeting": {
+      "post": {
+        "operationId": "greeting",
+        "summary": "Generate a greeting message",
+        "x-zuplo-route": {
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)"
+          },
+          "mcp": {
+            "type": "prompt",
+            "name": "greeting_generator",
+            "description": "Generate a personalized greeting message"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### Resources
+
+**Old Syntax:**
+
+```json
+{
+  "paths": {
+    "/html": {
+      "get": {
+        "operationId": "html",
+        "summary": "HTML document",
+        "x-zuplo-mcp-resource": {
+          "name": "html_doc",
+          "description": "An HTML document resource",
+          "uri": "ui://html",
+          "mimeType": "text/html"
+        }
+      }
+    }
+  }
+}
+```
+
+**New Syntax:**
+
+```json
+{
+  "paths": {
+    "/html": {
+      "get": {
+        "operationId": "html",
+        "summary": "HTML document",
+        "x-zuplo-route": {
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)"
+          },
+          "mcp": {
+            "type": "resource",
+            "name": "html_doc",
+            "description": "An HTML document resource",
+            "uri": "ui://html",
+            "mimeType": "text/html"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### GraphQL
+
+**Old Syntax:**
+
+```json
+{
+  "paths": {
+    "/graphql": {
+      "post": {
+        "operationId": "graphql-api",
+        "summary": "GraphQL API endpoint",
+        "x-zuplo-mcp-graphql": {
+          "enabled": true,
+          "introspectionToolName": "graphql_introspect",
+          "executeToolName": "graphql_execute"
+        }
+      }
+    }
+  }
+}
+```
+
+**New Syntax:**
+
+```json
+{
+  "paths": {
+    "/graphql": {
+      "post": {
+        "operationId": "graphql-api",
+        "summary": "GraphQL API endpoint",
+        "x-zuplo-route": {
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)"
+          },
+          "mcp": {
+            "type": "graphql",
+            "enabled": true,
+            "introspectionTool": {
+              "name": "graphql_introspect",
+              "description": "Introspect the GraphQL schema"
+            },
+            "executeTool": {
+              "name": "graphql_execute",
+              "description": "Execute a GraphQL query"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## New Features
+
+### Enabled Flag
+
+The new syntax supports an `enabled` flag on all types to conditionally include
+operations:
+
+```json
+{
+  "x-zuplo-route": {
+    "mcp": {
+      "type": "tool",
+      "name": "disabled_tool",
+      "enabled": false
+    }
+  }
+}
+```
+
+When `enabled: false`, the operation is skipped during registration without
+needing to remove it from the configuration.
+
+### Improved Validation
+
+The new format includes OpenAPI schema validation via `oneOf` constraints,
+providing better IDE support and error messages.
+
+## Quick Migration Checklist
+
+- [ ] Replace `files`, `tools`, `prompts`, `resources` arrays with single
+      `operations` array
+- [ ] Change `path` to `file` and `operationIds` to individual `{ file, id }`
+      objects
+- [ ] Move `x-zuplo-mcp-tool` into `x-zuplo-route.mcp` with `type: "tool"`
+- [ ] Move `x-zuplo-mcp-prompt` into `x-zuplo-route.mcp` with `type: "prompt"`
+- [ ] Move `x-zuplo-mcp-resource` into `x-zuplo-route.mcp` with
+      `type: "resource"`
+- [ ] Move `x-zuplo-mcp-graphql` into `x-zuplo-route.mcp` with `type: "graphql"`
+- [ ] Update GraphQL field names: `introspectionToolName` →
+      `introspectionTool.name`, `executeToolName` → `executeTool.name`
+- [ ] Test your MCP server to ensure all operations are registered correctly
+
+## Backward Compatibility
+
+The old syntax is currently marked as deprecated but still functional. However,
+it will be removed in a future release, so migration is recommended as soon as
+possible.
