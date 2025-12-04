@@ -449,6 +449,11 @@ export const apiGateway: Navigation = [
     type: "category",
     label: "MCP Server",
     items: [
+      {
+        type: "doc",
+        file: "mcp-server/configuration-migration-guide",
+        display: "hide",
+      },
       "mcp-server/introduction",
       "mcp-server/tools",
       "mcp-server/prompts",
