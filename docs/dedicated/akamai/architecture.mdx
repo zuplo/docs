@@ -1,0 +1,280 @@
+---
+title: Akamai Dedicated Architecture
+sidebar_label: Architecture
+description:
+  Architecture overview for Zuplo API Gateway deployments on Akamai Connected
+  Cloud.
+---
+
+Zuplo integrates with Akamai Connected Cloud to provide a secure, highly
+available API platform. This document provides a high-level architecture
+overview of how Zuplo deploys within the Akamai ecosystem, leveraging Akamai's
+edge platform for global traffic management and secure connectivity.
+
+## Overview
+
+A typical Zuplo deployment on Akamai Connected Cloud consists of the following
+components:
+
+1. **Akamai CDN (Edge Servers)** - Akamai's globally distributed edge network
+   handles incoming client requests, providing caching, DDoS protection, and
+   edge security.
+2. **Akamai Global Traffic Manager (GTM)** - Routes traffic to the appropriate
+   Zuplo API Gateway instances based on geographic location, health status, and
+   load balancing policies.
+3. **Zuplo API Gateway** - Deployed on Akamai Connected Cloud, the gateway
+   handles authentication, authorization, rate limiting, and request routing.
+   Origin IP ACL ensures only Akamai edge servers can reach the gateway.
+4. **Backend Services** - Your origin servers can be hosted on Akamai compute,
+   customer VPCs, on-premise data centers, or public cloud providers.
+
+This architecture provides a seamless, first-class API management solution that
+integrates natively with Akamai's infrastructure.
+
+## Architecture
+
+The following diagram shows how client requests flow through the Akamai platform
+to Zuplo and your backend services:
+
+<Diagram height="h-64">
+  <DiagramNode id="client">Client</DiagramNode>
+  <DiagramGroup id="akamai-edge" label="Akamai Edge Platform">
+    <DiagramNode id="cdn" variant="blue">
+      Akamai CDN
+    </DiagramNode>
+    <DiagramNode id="gtm" variant="blue">
+      Global Traffic Manager
+    </DiagramNode>
+  </DiagramGroup>
+  <DiagramGroup id="akamai-cloud" label="Akamai Connected Cloud">
+    <DiagramNode id="gateway" variant="zuplo">
+      Zuplo API Gateway
+    </DiagramNode>
+  </DiagramGroup>
+  <DiagramGroup id="backends" label="Backend Services">
+    <DiagramNode id="backend">Backend API</DiagramNode>
+  </DiagramGroup>
+  <DiagramEdge from="client" to="cdn" />
+  <DiagramEdge from="cdn" to="gtm" fromSide="bottom" toSide="top" />
+  <DiagramEdge from="gtm" to="gateway" label="Origin IP ACL" />
+  <DiagramEdge from="gateway" to="backend" />
+</Diagram>
+
+### Request flow
+
+1. **Client to Akamai CDN** - Clients send requests to your API domain. Akamai's
+   edge servers receive the request at the nearest point of presence (PoP).
+2. **CDN to GTM** - The edge server forwards the request to Akamai Global
+   Traffic Manager, which determines the optimal Zuplo instance to handle the
+   request.
+3. **GTM to Zuplo** - GTM routes the request to a Zuplo API Gateway. Origin IP
+   ACL ensures only traffic from Akamai's edge network reaches the gateway.
+4. **Zuplo to Backend** - The Zuplo API Gateway processes the request (applying
+   policies, authentication, rate limiting) and forwards it to your backend
+   services.
+
+### Akamai Global Traffic Manager
+
+Akamai GTM provides intelligent traffic routing with the following capabilities:
+
+- **Geographic routing** - Route requests to the nearest regional gateway for
+  low latency
+- **Automatic failover** - Redirect traffic when a data center or gateway
+  becomes unavailable
+- **Load balancing** - Distribute traffic across multiple gateway instances
+  using weighted round-robin or performance-based routing
+- **Health monitoring** - Monitor the health of Zuplo gateway instances using
+  liveness tests and remove unhealthy targets from rotation
+
+GTM uses
+[liveness tests](https://techdocs.akamai.com/gtm/docs/managing-liveness-tests)
+to continuously monitor the health of your Zuplo deployments. When a gateway
+fails health checks, GTM automatically routes traffic to healthy instances,
+providing seamless failover.
+
+### Secure connectivity with Origin IP ACL
+
+The connection between Akamai edge servers and Zuplo API Gateways uses
+[Origin IP ACL](https://techdocs.akamai.com/origin-ip-acl/docs/welcome) to
+restrict access to the gateway. Origin IP ACL ensures that only requests from
+Akamai's edge network can reach your Zuplo origin. This provides:
+
+- **Origin protection** - Requests to your Zuplo gateway can only originate from
+  Akamai's edge servers
+- **Simplified management** - Akamai maintains a stable list of CIDR blocks to
+  configure in your firewall
+- **Automatic updates** - Subscribe to Akamai's Firewall Rules Notification tool
+  to receive alerts when IP ranges change
+
+All traffic between Akamai edge and origin uses TLS encryption. Origin IP ACL
+adds an additional layer of access control by restricting which IP addresses can
+connect to your gateway.
+
+## Multi-region deployment
+
+Deploy your Zuplo API Gateway to multiple regions on Akamai Connected Cloud for
+high availability, lower latency, and disaster recovery. GTM intelligently
+routes traffic to the closest healthy region.
+
+<Diagram height="h-[500px]" direction="vertical">
+  <DiagramNode id="client">Client</DiagramNode>
+  <DiagramGroup id="akamai-edge" label="Akamai Edge Platform">
+    <DiagramNode id="cdn" variant="blue">
+      Akamai CDN
+    </DiagramNode>
+    <DiagramNode id="gtm" variant="blue">
+      Global Traffic Manager
+    </DiagramNode>
+  </DiagramGroup>
+  <DiagramGroup id="region1" label="Akamai Cloud - Region 1">
+    <DiagramNode id="gateway1" variant="zuplo">
+      Zuplo API Gateway
+    </DiagramNode>
+    <DiagramNode id="backend1" variant="green">
+      Backend (Region 1)
+    </DiagramNode>
+  </DiagramGroup>
+  <DiagramGroup id="region2" label="Akamai Cloud - Region 2">
+    <DiagramNode id="gateway2" variant="zuplo">
+      Zuplo API Gateway
+    </DiagramNode>
+    <DiagramNode id="backend2" variant="green">
+      Backend (Region 2)
+    </DiagramNode>
+  </DiagramGroup>
+  <DiagramGroup id="region3" label="Akamai Cloud - Region 3">
+    <DiagramNode id="gateway3" variant="zuplo">
+      Zuplo API Gateway
+    </DiagramNode>
+    <DiagramNode id="backend3" variant="green">
+      Backend (Region 3)
+    </DiagramNode>
+  </DiagramGroup>
+  <DiagramEdge from="client" to="cdn" />
+  <DiagramEdge from="cdn" to="gtm" fromSide="bottom" toSide="top" />
+  <DiagramEdge from="gtm" to="gateway1" />
+  <DiagramEdge from="gtm" to="gateway2" />
+  <DiagramEdge from="gtm" to="gateway3" />
+  <DiagramEdge from="gateway1" to="backend1" fromSide="bottom" toSide="top" />
+  <DiagramEdge from="gateway2" to="backend2" fromSide="bottom" toSide="top" />
+  <DiagramEdge from="gateway3" to="backend3" fromSide="bottom" toSide="top" />
+</Diagram>
+
+### Benefits of multi-region deployment
+
+- **Low latency** - Users connect to the nearest regional gateway
+- **High availability** - Regional failures don't affect global availability
+- **Disaster recovery** - GTM automatically fails over to healthy regions
+- **Compliance** - Meet data residency requirements by deploying to specific
+  regions
+
+### GTM failover configuration
+
+Configure GTM properties with appropriate settings:
+
+- **Routing delay** - Time to wait before routing away from an unhealthy data
+  center
+- **Recovery delay** - Time to wait before routing back to a recovered data
+  center
+- **Health check intervals** - Frequency of liveness tests against gateway
+  endpoints
+
+## Backend connectivity
+
+Zuplo API Gateway supports multiple methods for securing connections to your
+backend services. Most authentication methods work regardless of where your
+backend is hosted, giving you flexibility to choose the approach that best fits
+your security requirements.
+
+<Diagram height="h-[300px]" direction="vertical">
+  <DiagramGroup id="akamai-cloud" label="Akamai Connected Cloud">
+    <DiagramNode id="gateway" variant="zuplo">
+      Zuplo API Gateway
+    </DiagramNode>
+  </DiagramGroup>
+  <DiagramGroup id="akamai-compute" label="Akamai Compute">
+    <DiagramNode id="akamai-backend" variant="blue">
+      Akamai Services
+    </DiagramNode>
+  </DiagramGroup>
+  <DiagramGroup id="customer-vpc" label="Customer VPC">
+    <DiagramNode id="vpc-backend" variant="green">
+      Private Cloud Backend
+    </DiagramNode>
+  </DiagramGroup>
+  <DiagramGroup id="on-premise" label="On-Premise">
+    <DiagramNode id="datacenter" variant="orange">
+      Data Center Backend
+    </DiagramNode>
+  </DiagramGroup>
+  <DiagramGroup id="public-cloud" label="Public Cloud">
+    <DiagramNode id="aws" variant="yellow">
+      AWS / GCP / Azure
+    </DiagramNode>
+  </DiagramGroup>
+  <DiagramEdge from="gateway" to="akamai-backend" label="mTLS" />
+  <DiagramEdge from="gateway" to="vpc-backend" label="Private Link" />
+  <DiagramEdge from="gateway" to="datacenter" label="VPN / mTLS" />
+  <DiagramEdge from="gateway" to="aws" label="Federated Auth" />
+</Diagram>
+
+### Authentication methods
+
+The following authentication methods can be used to secure connections between
+Zuplo and your backend services. For complete documentation, see
+[Securing your backend](../../articles/securing-your-backend.mdx).
+
+| Method                      | Description                                                                                                                                        |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Shared Secret / API Key** | Add a secret header to requests that only the gateway knows. Simple to implement and widely used by companies like Stripe and Supabase.            |
+| **Zuplo JWT Service**       | Issue signed JWTs that your backend validates using Zuplo's JWKS endpoint. Provides cryptographic proof that requests originate from your gateway. |
+| **mTLS (Mutual TLS)**       | Certificate-based authentication where both gateway and backend present certificates. Provides zero-trust security for enterprise requirements.    |
+| **Cloud Provider IAM**      | Use AWS IAM, GCP Identity-Aware Proxy, or Azure AD to authorize requests. No credentials to manage - uses federated identity.                      |
+| **Secure Tunnel (VPN)**     | WireGuard-based tunnel for backends that can't be exposed to the internet. Useful for on-premise or bare-metal deployments.                        |
+| **Private Network**         | VPC peering, PrivateLink, or Transit Gateway for private connectivity without traversing the public internet.                                      |
+
+### Recommendations by backend location
+
+While most authentication methods work anywhere, some approaches are better
+suited for specific scenarios:
+
+| Backend Location             | Recommended Methods                               | Notes                                                                       |
+| ---------------------------- | ------------------------------------------------- | --------------------------------------------------------------------------- |
+| **Akamai Connected Cloud**   | Shared secret, Zuplo JWT, mTLS                    | All methods work well; choose based on your security requirements           |
+| **AWS**                      | AWS IAM (federated identity), mTLS, shared secret | IAM provides credential-free auth; works with Lambda, API Gateway, ECS, EKS |
+| **GCP**                      | GCP Identity-Aware Proxy, GCP Service Auth, mTLS  | IAP provides zero-trust access to Cloud Run, GKE, and Compute Engine        |
+| **Azure**                    | Azure AD Service Auth, mTLS, shared secret        | Azure AD integrates with App Service, Functions, and AKS                    |
+| **On-Premise / Data Center** | Secure tunnel, mTLS, shared secret                | Tunnel allows private connectivity; mTLS provides strong authentication     |
+| **Third-Party APIs**         | Shared secret, API keys, mTLS                     | Use whatever the third-party API supports                                   |
+
+### Choosing an authentication method
+
+Consider these factors when selecting an authentication method:
+
+- **Simplicity** - Shared secrets are easiest to implement and work everywhere
+- **Security** - mTLS and cloud IAM provide the strongest authentication
+- **Credential management** - Federated identity (AWS/GCP/Azure IAM) eliminates
+  credential rotation
+- **Network isolation** - Private networking and tunnels keep traffic off the
+  public internet
+- **Compliance** - mTLS is often required for enterprise and regulated
+  environments
+
+## CDN configuration
+
+For detailed instructions on configuring Akamai CDN properties for your Zuplo
+deployment, see [Setting up Akamai CDNs](./cdn.mdx). This guide covers:
+
+- Property hostname configuration for API gateway and developer portal
+- Origin server settings with host header forwarding
+- Origin IP ACL configuration for secure edge-to-origin connectivity
+- Caching behaviors for API responses
+
+## Next steps
+
+- [Setting up Akamai CDNs](./cdn.mdx) - Configure Akamai CDN properties for your
+  deployment
+- [Networking](../networking.mdx) - Learn about networking options for managed
+  dedicated deployments
+- [Architecture](../architecture.mdx) - General managed dedicated architecture
+  overview

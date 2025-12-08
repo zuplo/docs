@@ -239,6 +239,7 @@ Choose an appropriate height based on diagram complexity:
 - `h-64` - Standard diagrams with groups
 - `h-80` - Larger diagrams or sequence diagrams with many messages
 - `h-96` - Complex diagrams
+- `h-[300px]` - Custom height for very large diagrams
 
 ### When to Use Groups
 

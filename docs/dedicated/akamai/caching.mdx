@@ -1,0 +1,212 @@
+---
+title: Controlling Akamai CDN Caching
+sidebar_label: CDN Caching
+description:
+  How to control Akamai CDN caching behavior using response headers from your
+  Zuplo API Gateway.
+---
+
+<!-- vale Vale.Spelling = NO -->
+
+When running Zuplo on Akamai Connected Cloud, your API Gateway can control how
+the Akamai CDN caches responses by setting the `Cache-Control` header. This
+allows you to optimize caching behavior for different endpoints without
+modifying Akamai Property Manager configurations.
+
+## How Akamai caching works
+
+Akamai's CDN can cache responses at edge servers to reduce load to your Zuplo
+API Gateway and improve response times for clients.
+
+<Diagram type="sequence" height="h-[420px]">
+  <DiagramActor id="client" variant="yellow">
+    Client
+  </DiagramActor>
+  <DiagramActor id="cdn" variant="blue">
+    Akamai CDN
+  </DiagramActor>
+  <DiagramActor id="gateway" variant="zuplo">
+    Zuplo
+  </DiagramActor>
+  <DiagramActor id="backend" variant="green">
+    Backend
+  </DiagramActor>
+  <DiagramMessage from="client" to="cdn">
+    Request (cache miss)
+  </DiagramMessage>
+  <DiagramMessage from="cdn" to="gateway">
+    Forward request
+  </DiagramMessage>
+  <DiagramMessage from="gateway" to="backend">
+    Forward request
+  </DiagramMessage>
+  <DiagramMessage from="backend" to="gateway">
+    Response
+  </DiagramMessage>
+  <DiagramMessage from="gateway" to="cdn">
+    Response + Cache-Control headers
+  </DiagramMessage>
+  <DiagramMessage from="cdn" to="client">
+    Response (cached at edge)
+  </DiagramMessage>
+</Diagram>
+
+When a request arrives, Akamai checks if a cached response exists. On a cache
+miss, the request goes to Zuplo, which can set cache headers on the response.
+Akamai caches the response according to those headers and serves subsequent
+requests directly from the edge cache.
+
+The CDN determines caching behavior based on:
+
+1. **Akamai Property Manager settings** - Default caching rules configured in
+   your CDN property
+2. **Origin response headers** - Headers sent by Zuplo that can override or
+   influence default behavior
+
+When your Akamai property is configured to "Honor origin Cache-Control and
+Expires" headers, Zuplo can control caching behavior on a per-response basis.
+
+For complete details on Akamai's caching behavior, see the
+[Akamai caching documentation](https://techdocs.akamai.com/property-mgr/docs/caching-2).
+
+## Cache-Control header
+
+The `Cache-Control` header controls caching for both the CDN and downstream
+clients (browsers). Akamai honors the following directives when configured to
+respect origin headers:
+
+| Directive         | Description                                                 |
+| ----------------- | ----------------------------------------------------------- |
+| `max-age`         | Cache duration for browsers and downstream caches (seconds) |
+| `s-maxage`        | Cache duration for shared caches like CDNs (seconds)        |
+| `no-cache`        | Revalidate with origin before serving cached content        |
+| `no-store`        | Don't cache the response at all                             |
+| `private`         | Only allow browser caching, not CDN caching                 |
+| `public`          | Allow caching by CDNs and browsers                          |
+| `must-revalidate` | Must revalidate after max-age expires                       |
+
+### Using s-maxage for CDN caching
+
+The `s-maxage` directive is specifically for shared caches like CDNs. When both
+`max-age` and `s-maxage` are present, Akamai uses `s-maxage` for edge caching
+and forwards `max-age` to browsers:
+
+```
+Cache-Control: public, max-age=60, s-maxage=3600
+```
+
+This example caches content at the CDN for 1 hour while instructing browsers to
+cache for only 1 minute.
+
+### Common Cache-Control patterns
+
+| Scenario                   | Header Value                                         |
+| -------------------------- | ---------------------------------------------------- |
+| CDN: 1 hour, Browser: none | `Cache-Control: public, s-maxage=3600, max-age=0`    |
+| CDN: 1 day, Browser: 5 min | `Cache-Control: public, s-maxage=86400, max-age=300` |
+| No caching                 | `Cache-Control: no-store`                            |
+| Browser only, no CDN       | `Cache-Control: private, max-age=3600`               |
+
+## Setting cache headers in Zuplo
+
+### Using the Set Headers policy
+
+The simplest way to add cache headers is using the
+[Set Headers Outbound Policy](../../policies/set-headers-outbound.mdx):
+
+```json title="config/policies.json"
+{
+  "name": "cache-one-hour",
+  "policyType": "set-headers-outbound",
+  "handler": {
+    "export": "SetHeadersOutboundPolicy",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "headers": [
+        {
+          "name": "Cache-Control",
+          "value": "public, max-age=60, s-maxage=3600"
+        }
+      ]
+    }
+  }
+}
+```
+
+This configuration caches responses at the CDN for 1 hour while allowing
+browsers to cache for only 1 minute.
+
+### Using custom code
+
+For dynamic cache control based on response content or status, use a custom
+outbound policy:
+
+```typescript title="modules/cache-control.ts"
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export default async function (
+  response: Response,
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  const headers = new Headers(response.headers);
+
+  // Cache successful responses for 1 hour at CDN, 1 minute in browser
+  if (response.status >= 200 && response.status < 300) {
+    headers.set("Cache-Control", "public, max-age=60, s-maxage=3600");
+  }
+  // Don't cache error responses
+  else if (response.status >= 400) {
+    headers.set("Cache-Control", "no-store");
+  }
+
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}
+```
+
+## Downstream cacheability
+
+By default, Akamai sends the smaller of the origin's `Cache-Control` max-age and
+the remaining edge cache lifetime to clients. This ensures browsers don't cache
+content longer than it remains valid at the edge.
+
+You can control downstream (client) caching independently using Property Manager
+settings or by setting explicit `max-age` values in your `Cache-Control` header.
+
+For more information, see
+[Akamai's downstream cacheability documentation](https://techdocs.akamai.com/property-mgr/docs/downstream-cacheability).
+
+## Best practices
+
+1. **Use s-maxage for CDN caching** - Separate CDN and browser cache durations
+   for better control
+2. **Don't cache authenticated responses** - Use `private` or `no-store` for
+   user-specific data
+3. **Set appropriate Vary headers** - If responses vary by header (like
+   `Accept-Language`), include a `Vary` header
+
+## Akamai Property Manager configuration
+
+For Zuplo to control caching via headers, ensure your Akamai CDN property is
+configured to honor origin headers:
+
+1. In Property Manager, navigate to your property's caching behavior
+2. Set **Caching Option** to "Honor origin Cache-Control and Expires"
+3. Enable the Cache-Control directives you want to honor (max-age, s-maxage,
+   etc.)
+4. Set a **Default Max-age** as a fallback when origin headers are missing
+
+For detailed CDN setup instructions, see [Setting up Akamai CDNs](./cdn.mdx).
+
+## Related resources
+
+- [Set Headers Policy](../../policies/set-headers-outbound.mdx) - Add headers to
+  responses
+- [Caching Policy](../../policies/caching-inbound.mdx) - Zuplo's built-in
+  response caching
+- [Akamai Caching Documentation](https://techdocs.akamai.com/property-mgr/docs/caching-2) -
+  Complete Akamai caching reference

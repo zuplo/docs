@@ -130,8 +130,10 @@ const SimpleNode = memo(
           position={Position.Bottom}
           className="!bg-transparent !w-0 !h-0 !border-0 !min-w-0 !min-h-0"
         />
-        <span className="text-center line-clamp-2 leading-tight">
-          {data.label}
+        <span className="text-center line-clamp-2 leading-tight whitespace-pre-line">
+          {data.label.includes("\n")
+            ? data.label
+            : data.label.replace(/ (\([^)]+\))$/, "\n$1")}
         </span>
       </div>
     );
