@@ -3,42 +3,48 @@ title: Node Modules
 sidebar_label: Node Modules
 ---
 
-Zuplo provides certain node modules that you can use in your API Gateway. Zuplo
-itself doesn't run Node.js, but instead runs a custom JavaScript engine that's
-designed to be fast and secure. The Zuplo engine is compatible with certain node
-modules that don't use native code or certain Node.js specific features.
+Zuplo itself doesn't run Node.js, but instead runs a custom JavaScript engine
+that's designed to be fast and secure. However, the Zuplo engine is compatible
+with certain node modules that don't use native code or certain Node.js specific
+features like the file system.
 
-:::caution{title="Advanced Usage"}
+## Custom Modules
 
-Using node modules is an advanced feature of Zuplo. In most cases, you should
-use the built-in Zuplo features to build your API Gateway. Node modules aren't
-fully tested and may not work as you expect.
+If you would like to use a node module, you can bundle modules inside of your
+own project. This process is straightforward using standard tools like
+[ESBuild](https://esbuild.github.io/) or [TSDown](https://tsdown.dev) to bundle
+your code along with any dependencies into a single file that's included in your
+Zuplo project.
 
-Instead of using node modules, we recommend calling APIs directly using fetch.
-In most cases, it's easy to have ChatGPT or other AI tools write the code
-required to call an API.
+You can find a complete example of how to bundle your own node modules in the
+[Bundling Custom Node Modules example](https://github.com/zuplo/zuplo/tree/main/examples/custom-module).
+
+The process is typically as quick as running the following commands:
+
+```bash
+npm install your-package-name
+npx tsdown ./node_modules/your-package-name --format esm --platform browser --out-dir ./modules/third-party/your-package-name
+```
+
+The module can then be imported and used in your Zuplo project like so:
+
+```ts
+import { YourPackage } from "./modules/third-party/your-package-name.mjs";
+```
+
+Be sure to test your bundled code thoroughly to ensure it works as expected in
+the Zuplo environment.
+
+## Bundled Node Modules
+
+:::danger{title="Deprecated"}
+
+Using the bundled node modules is no longer recommended. As these modules are
+used by multiple customers, they may not be the version you need or may not work
+as you expect. Instead, we recommend bundling your own node modules inside of
+your project. See the section on [custom modules](#custom-modules)
 
 :::
-
-If you require a module that's not in this list, you can also bundle custom
-modules inside of your own project. This process does require some knowledge of
-node and npm, but it allows you to use any module or version of the module. To
-learn how to bundle your own modules, see the
-[sample on GitHub](https://github.com/zuplo/zuplo/tree/main/examples/custom-module)
-
-## Zuplo Portal Types
-
-When referencing a custom module in the Zuplo Portal, you might see that the
-module has a red underline in your code editor. Some modules aren't typed or
-their types can't be bundled to use with the Zuplo Portal.
-
-You can ignore these errors as they won't affect the functionality of the
-module. Alternatively, if you use
-[local development](../articles/local-development.mdx) you can
-[install the module locally](../articles/local-development-installing-packages.mdx)
-to enable code completion and type checking.
-
-## Node Modules
 
 Below are the currently installed modules.
 
@@ -52,5 +58,10 @@ functionality in these modules may not work at all. Even when we say a module is
 your code thoroughly before deploying it to production.
 
 :::
+
+When developing in the Zuplo portal using the bundled modules, you will see a
+red underline on the module types. We do not provide type definitions for these
+modules. You can ignore these editor errors as this wont impact the build
+(assuming the modules are used correctly).
 
 <BundlesTable />
