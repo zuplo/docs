@@ -659,7 +659,11 @@ export const platform: Navigation = [
           {
             type: "category",
             label: "Akamai",
-            items: ["dedicated/akamai/cdn"],
+            items: [
+              "dedicated/akamai/architecture",
+              "dedicated/akamai/cdn",
+              "dedicated/akamai/caching",
+            ],
           },
         ],
       },
