@@ -46,6 +46,7 @@ export const guides: Navigation = [
   "articles/per-user-rate-limits-using-db",
   "articles/rick-and-morty-api-developer-portal-example",
   "articles/s3-signed-url-uploads",
+  "articles/sharing-code-across-projects",
   "articles/testing-graphql",
   "articles/use-openapi-extension-data",
   "articles/versioning-on-zuplo",
