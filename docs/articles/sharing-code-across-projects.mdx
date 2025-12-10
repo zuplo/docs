@@ -1,0 +1,412 @@
+---
+title: Sharing Code Across Zuplo Projects
+sidebar_label: Sharing Code Across Projects
+description:
+  Learn how to create a shared npm package containing TypeScript modules that
+  can be reused across multiple Zuplo projects.
+tags:
+  - custom-code
+  - deployment
+---
+
+When you have multiple Zuplo projects that share common functionality like
+custom policies, handlers, or utility functions, you can create a shared npm
+package to avoid duplicating code. This guide shows how to create a reusable
+TypeScript module package and automatically copy the source files into your
+Zuplo projects.
+
+## Overview
+
+The approach is straightforward:
+
+1. Create an npm package containing your shared TypeScript code and a
+   `postinstall` script that copies files to the consumer's `modules` folder
+2. Publish it to npm or a private registry (or reference it directly via Git)
+3. Install the package in your Zuplo projects - the `postinstall` script
+   automatically copies the `.ts` files into `./modules`
+
+:::note
+
+Since Zuplo compiles TypeScript at deployment time, you ship raw TypeScript
+source files rather than pre-compiled JavaScript. This ensures your shared code
+integrates seamlessly with Zuplo's build process.
+
+:::
+
+## Creating the Shared Package
+
+### Project Structure
+
+Create a new npm package with the following structure:
+
+```
+my-shared-zuplo-modules/
+├── package.json
+├── scripts/
+│   └── copy-to-modules.mjs
+├── src/
+│   ├── policies/
+│   │   └── custom-auth-policy.ts
+│   ├── handlers/
+│   │   └── custom-handler.ts
+│   └── utils/
+│       └── helpers.ts
+└── README.md
+```
+
+### Package Configuration
+
+Configure your `package.json` to include the TypeScript source files and a
+`postinstall` script that copies them to the consumer's `modules` folder:
+
+```json title="my-shared-zuplo-modules/package.json"
+{
+  "name": "@your-org/shared-zuplo-modules",
+  "version": "1.0.0",
+  "description": "Shared Zuplo modules for custom policies and handlers",
+  "files": ["src/**/*.ts", "scripts/**/*.mjs"],
+  "scripts": {
+    "postinstall": "node ./scripts/copy-to-modules.mjs"
+  },
+  "peerDependencies": {
+    "@zuplo/runtime": "^1.0.0"
+  },
+  "devDependencies": {
+    "@zuplo/runtime": "^1.0.0",
+    "typescript": "^5.0.0"
+  }
+}
+```
+
+Key points:
+
+- The `files` array includes both the source files and the copy script
+- The `postinstall` script runs automatically when the package is installed
+- Use `peerDependencies` for `@zuplo/runtime` since consumers provide this
+- No build step is needed because you're shipping raw TypeScript
+
+### Copy Script
+
+Create a script in your shared package that copies files to the consumer's
+`modules` folder. The script adds a header comment to each file indicating it
+was auto-generated and should not be edited directly:
+
+```js title="my-shared-zuplo-modules/scripts/copy-to-modules.mjs"
+import {
+  cpSync,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  statSync,
+  writeFileSync,
+} from "fs";
+import { dirname, join, resolve } from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+// Source: the src directory in this package
+const sourceDir = resolve(__dirname, "..", "src");
+
+// Destination: the modules/shared folder in the consuming project
+// Navigate up from node_modules/@your-org/shared-zuplo-modules/scripts
+const projectRoot = resolve(__dirname, "..", "..", "..", "..");
+const destDir = join(projectRoot, "modules", "shared");
+
+// Read package.json to get package name and version
+const packageJson = JSON.parse(
+  readFileSync(resolve(__dirname, "..", "package.json"), "utf-8"),
+);
+const packageInfo = `${packageJson.name}@${packageJson.version}`;
+
+// Header comment to add to copied files
+const header = `/**
+ * AUTO-GENERATED FILE - DO NOT EDIT DIRECTLY
+ *
+ * This file was copied from ${packageInfo}
+ * Any changes made here will be overwritten when the package is updated.
+ *
+ * To modify this code, edit the source in the shared package and republish.
+ */
+
+`;
+
+// Recursively process and copy files
+function copyWithHeader(src, dest) {
+  if (!existsSync(dest)) {
+    mkdirSync(dest, { recursive: true });
+  }
+
+  const entries = readdirSync(src);
+
+  for (const entry of entries) {
+    const srcPath = join(src, entry);
+    const destPath = join(dest, entry);
+
+    if (statSync(srcPath).isDirectory()) {
+      copyWithHeader(srcPath, destPath);
+    } else if (entry.endsWith(".ts")) {
+      // Add header to TypeScript files
+      const content = readFileSync(srcPath, "utf-8");
+      writeFileSync(destPath, header + content);
+    } else {
+      // Copy other files as-is
+      cpSync(srcPath, destPath);
+    }
+  }
+}
+
+// Copy all files with headers
+if (existsSync(sourceDir)) {
+  copyWithHeader(sourceDir, destDir);
+  console.log(`✅ Copied shared modules to ${destDir}`);
+} else {
+  console.warn(`⚠️ Source directory not found: ${sourceDir}`);
+}
+```
+
+This script runs automatically when someone installs your package, copying your
+TypeScript source files directly into their Zuplo project's `modules/shared`
+folder with a header comment indicating the source.
+
+### Example Shared Code
+
+Create your shared modules using standard Zuplo patterns:
+
+```ts title="my-shared-zuplo-modules/src/policies/custom-auth-policy.ts"
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export interface CustomAuthOptions {
+  headerName: string;
+  allowedValues: string[];
+}
+
+export default async function customAuthPolicy(
+  request: ZuploRequest,
+  context: ZuploContext,
+  options: CustomAuthOptions,
+  policyName: string,
+): Promise<ZuploRequest | Response> {
+  const headerValue = request.headers.get(options.headerName);
+
+  if (!headerValue) {
+    return new Response(`Missing ${options.headerName} header`, {
+      status: 401,
+    });
+  }
+
+  if (!options.allowedValues.includes(headerValue)) {
+    return new Response("Unauthorized", { status: 403 });
+  }
+
+  return request;
+}
+```
+
+```ts title="my-shared-zuplo-modules/src/utils/helpers.ts"
+import { ZuploContext } from "@zuplo/runtime";
+
+export function formatRequestId(context: ZuploContext): string {
+  return `req-${context.requestId.slice(0, 8)}`;
+}
+
+export function parseJsonSafely<T>(text: string): T | null {
+  try {
+    return JSON.parse(text) as T;
+  } catch {
+    return null;
+  }
+}
+```
+
+### Publishing the Package
+
+Publish to npm or your private registry:
+
+```bash
+# Public npm
+npm publish --access public
+
+# Private npm registry
+npm publish --registry https://your-registry.example.com
+
+# Or use npm link for local development
+npm link
+```
+
+Alternatively, you can reference the package directly from a Git repository
+without publishing:
+
+```json title="package.json"
+{
+  "dependencies": {
+    "@your-org/shared-zuplo-modules": "github:your-org/shared-zuplo-modules#v1.0.0"
+  }
+}
+```
+
+## Using the Shared Package in Zuplo Projects
+
+### Install the Package
+
+In your Zuplo project, install the shared package:
+
+```bash
+npm install @your-org/shared-zuplo-modules
+```
+
+The package's `postinstall` script automatically copies the TypeScript files to
+your `modules/shared` folder. After installation, your project structure looks
+like this:
+
+```
+your-zuplo-project/
+├── modules/
+│   ├── shared/           # Automatically copied from the shared package
+│   │   ├── policies/
+│   │   │   └── custom-auth-policy.ts
+│   │   ├── handlers/
+│   │   │   └── custom-handler.ts
+│   │   └── utils/
+│   │       └── helpers.ts
+│   └── my-handler.ts     # Your project-specific modules
+├── config/
+│   ├── routes.oas.json
+│   └── policies.json
+└── package.json
+```
+
+### Import and Use the Shared Code
+
+Import the shared modules using relative paths from your project modules:
+
+```ts title="modules/my-handler.ts"
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+import { formatRequestId, parseJsonSafely } from "./shared/utils/helpers";
+
+export default async function myHandler(
+  request: ZuploRequest,
+  context: ZuploContext,
+): Promise<Response> {
+  const requestId = formatRequestId(context);
+  context.log.info(`Processing request: ${requestId}`);
+
+  const body = parseJsonSafely<{ name: string }>(await request.text());
+
+  return new Response(JSON.stringify({ requestId, data: body }), {
+    headers: { "content-type": "application/json" },
+  });
+}
+```
+
+Reference shared policies in your `policies.json`:
+
+```json title="config/policies.json"
+{
+  "policies": [
+    {
+      "name": "custom-auth",
+      "policyType": "custom-code-inbound",
+      "handler": {
+        "export": "default",
+        "module": "$import(./modules/shared/policies/custom-auth-policy)",
+        "options": {
+          "headerName": "x-api-key",
+          "allowedValues": ["key1", "key2"]
+        }
+      }
+    }
+  ]
+}
+```
+
+## Version Management
+
+To ensure consistency, pin your shared package versions:
+
+```json title="package.json"
+{
+  "dependencies": {
+    "@your-org/shared-zuplo-modules": "1.2.3"
+  }
+}
+```
+
+Use a lockfile (`package-lock.json` or `pnpm-lock.yaml`) and commit it to ensure
+all team members and CI/CD pipelines use the same version.
+
+## Source Control
+
+### Commit the Copied Files
+
+The copied shared modules must be committed to your Git repository. Zuplo
+deployments require all source files to be present in the repository - they are
+not generated during the build process.
+
+After installing or updating the shared package, commit the changes:
+
+```bash
+npm install @your-org/shared-zuplo-modules
+git add modules/shared/
+git commit -m "Update shared modules to v1.2.3"
+```
+
+The header comments added by the copy script help identify these files as
+generated code that should not be edited directly. If you need to make changes,
+update the source in the shared package and republish.
+
+### Updating Shared Modules
+
+When you update the shared package version, the `postinstall` script overwrites
+the existing files with the new version. Review the changes before committing:
+
+```bash
+npm update @your-org/shared-zuplo-modules
+git diff modules/shared/
+git add modules/shared/
+git commit -m "Update shared modules to v1.3.0"
+```
+
+## Troubleshooting
+
+### Files Not Copying
+
+If files aren't being copied after installing the shared package:
+
+1. Verify the shared package is installed:
+   `ls node_modules/@your-org/shared-zuplo-modules`
+2. Check the package's `postinstall` script ran by looking for the success
+   message in the install output
+3. Verify the `scripts/copy-to-modules.mjs` file is included in the package's
+   `files` array
+4. Check the path calculations in the copy script are correct for your package
+   structure
+
+### TypeScript Errors
+
+If you see TypeScript errors after copying:
+
+1. Ensure `@zuplo/runtime` versions match between the shared package and your
+   project
+2. Check that all required dependencies are available
+3. Run `npm run typecheck` to identify specific issues
+
+### Import Path Issues
+
+Use relative imports from your modules:
+
+```ts
+// ✅ Correct - relative path from your module
+import { helper } from "./shared/utils/helpers";
+
+// ❌ Incorrect - absolute or package-style import
+import { helper } from "@your-org/shared-zuplo-modules/utils/helpers";
+```
+
+## Related Resources
+
+- [Share code across request handlers and policies](../programmable-api/reusing-code.mdx)
+- [Node Modules](../programmable-api/node-modules.mdx)
+- [Custom Code Inbound Policy](../policies/custom-code-inbound.mdx)
+- [Custom Handler](../handlers/custom-handler.mdx)
