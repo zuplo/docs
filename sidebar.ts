@@ -562,7 +562,11 @@ export const aiGateway: Navigation = [
   {
     type: "category",
     label: "Providers",
-    items: ["ai-gateway/providers", "ai-gateway/managing-providers"],
+    items: [
+      "ai-gateway/providers",
+      "ai-gateway/managing-providers",
+      "ai-gateway/custom-providers",
+    ],
   },
   {
     type: "category",
