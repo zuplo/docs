@@ -30,6 +30,7 @@ import {
   DiagramMessage,
   DiagramGroup,
 } from "./components/Diagram.js";
+import { Faq, FaqItem } from "./components/Faq.js";
 
 const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
 
@@ -126,4 +127,7 @@ export const mdxComponents = {
   DiagramActor,
   DiagramMessage,
   DiagramGroup,
+  // FAQ components
+  Faq,
+  FaqItem,
 };
