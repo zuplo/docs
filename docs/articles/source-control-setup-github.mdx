@@ -7,99 +7,120 @@ Connect your Zuplo project to GitHub for source control and automatic
 deployments. Every push to your repository deploys automatically — no CI/CD
 configuration required.
 
-To begin, go to your project in the Zuplo portal and open to the **Settings**
-tab, then select **Source Control**. If your project isn't already connected to
-GitHub click the **Connect to GitHub** button and follow the auth flow. You'll
-need to grant permissions for any GitHub organizations you want to work with.
+## Connect Your Project to GitHub
 
-![Connect GitHub](../../public/media/step-4-deploying-to-the-edge/image-1.png)
+This guide assumes you have a Zuplo project created. If you don't have one yet,
+follow the steps in
+[Step 1 - Setup a Basic Gateway](./step-1-setup-basic-gateway.mdx) to create a
+new Zuplo project.
 
-Next, a dialog will open asking you to authorize Zuplo. Click the **Authorize
-Zuplo** button.
+<Stepper>
 
-<Framed size="sm">
+1. Connect to GitHub
 
-![Zuplo GitHub permission](../../public/media/source-control-setup-github/d6194a80-b6d6-429e-85a6-ae1cb4a3375e.png)
+   Go to your project in the Zuplo portal and open to the **Settings** tab, then
+   select **Source Control**. If your project isn't already connected to GitHub
+   click the **Connect to GitHub** button and follow the auth flow. You'll need
+   to grant permissions for any GitHub organizations you want to work with.
 
-</Framed>
+   ![Connect GitHub](../../public/media/step-4-deploying-to-the-edge/image-1.png)
 
-<Callout type="tip" title="GitHub Permissions" >
+1. **Authorize Zuplo**
 
-The permission "Act on your behalf" sounds a bit scary - however, this is a
-standard GitHub permission and by default Zuplo can't actually do anything with
-this. In order to perform actions on your behalf you must grant Zuplo access to
-a specific repository (shown in the next steps.).
+   A dialog will open asking you to authorize Zuplo. Click the **Authorize
+   Zuplo** button.
 
-You can
-[read more about this permission on GitHub's docs](https://docs.github.com/en/apps/using-github-apps/authorizing-github-apps#about-github-apps-acting-on-your-behalf).
+   <Framed size="sm">
 
-</Callout>
+   ![Zuplo GitHub permission](../../public/media/source-control-setup-github/d6194a80-b6d6-429e-85a6-ae1cb4a3375e.png)
 
-After you have connected the GitHub app, it needs to be granted permission to
-edit a repository. If this is your first time connecting Zuplo, you will be
-immediately asked to select a GitHub Org to install Zuplo. Select the org you
-want to use.
+   </Framed>
 
-<Framed size="sm">
+   :::tip{title="GitHub Permissions"}
 
-![Installing Zuplo app](../../public/media/source-control-setup-github/eef76bd7-4d26-4f86-96e8-89ebede03beb.png)
+   The permission "Act on your behalf" sounds a bit scary - however, this is a
+   standard GitHub permission and by default Zuplo can't actually do anything
+   with this. In order to perform actions on your behalf you must grant Zuplo
+   access to a specific repository (shown in the next steps).
 
-</Framed>
+   You can
+   [read more about this permission on GitHub's docs](https://docs.github.com/en/apps/using-github-apps/authorizing-github-apps#about-github-apps-acting-on-your-behalf).
 
-Next, you will be asked to select the repositories that you want Zuplo to
-access. The easiest thing is to just select **All Repositories**, but if you
-want fine-grain control, you can select a specific repository.
+   :::
 
-<Framed size="sm">
+1. **Select a GitHub organization**
 
-![Giving Zuplo repository access](../../public/media/source-control-setup-github/ff482269-9aa2-44c3-8266-b2682b3d6ea5.png)
+   After you have connected the GitHub app, it needs to be granted permission to
+   edit a repository. If this is your first time connecting Zuplo, you will be
+   immediately asked to select a GitHub Org to install Zuplo. Select the org you
+   want to use.
 
-</Framed>
+   <Framed size="sm">
 
-<Callout type="caution" title="Existing Installation" >
+   ![Installing Zuplo app](../../public/media/source-control-setup-github/eef76bd7-4d26-4f86-96e8-89ebede03beb.png)
 
-The next step is only if you already have Zuplo installed in a GitHub org and
-need to add another organization.
+   </Framed>
 
-</Callout>
+1. **Select repositories**
 
-If you weren't prompted to select a GitHub org, it's likely that you are already
-a member of an account that has authorized Zuplo. To add Zuplo to a new
-organization click **Add GitHub Account** in the org picker list.
+   You will be asked to select the repositories that you want Zuplo to access.
+   The easiest thing is to just select **All Repositories**, but if you want
+   fine-grain control, you can select a specific repository.
 
-![Connect Org](../../public/media/step-4-deploying-to-the-edge/image-2.png)
+   <Framed size="sm">
 
-## 2/ Connect GitHub to your Project
+   ![Giving Zuplo repository access](../../public/media/source-control-setup-github/ff482269-9aa2-44c3-8266-b2682b3d6ea5.png)
 
-With your GitHub App configured, you can now return to the Zuplo portal. In the
-**Source Control** settings you should now see a list of GitHub repositories.
-Create a new repository by clicking the **Create new repository** button. You
-will be prompted that this will open GitHub. Click to continue.
+   </Framed>
 
-![Create Repository](../../public/media/step-4-deploying-to-the-edge/image-3.png)
+   :::caution{title="Existing Installation"}
 
-In the GitHub UI, you can rename your repository if you want. Click the **Create
-repository** button at the bottom of the page and return to the Zuplo Portal.
+   If you weren't prompted to select a GitHub org, it's likely that you are
+   already a member of an account that has authorized Zuplo. To add Zuplo to a
+   new organization click **Add GitHub Account** in the org picker list.
 
-The portal will reload and you will see your new repository listed. Click
-**Connect** to connect Zuplo to that repository.
+   ![Connect Org](../../public/media/step-4-deploying-to-the-edge/image-2.png)
 
-![Connect](../../public/media/step-4-deploying-to-the-edge/image-4.png)
+   :::
 
-After the connection succeeds you will see a link to your GitHub repository.
+1. **Create a repository**
 
-![Connected Repository](../../public/media/step-4-deploying-to-the-edge/image-5.png)
+   With your GitHub App configured, return to the Zuplo portal. In the **Source
+   Control** settings you should now see a list of GitHub repositories. Create a
+   new repository by clicking the **Create new repository** button. You will be
+   prompted that this will open GitHub. Click to continue.
 
-Click the link to return to GitHub. You should see a green check next to the
-commit hash (1). When you hover your mouse over that you'll see the Zuplo
-deployment was successful. Click **Details** (2) to open the deployment info.
+   ![Create Repository](../../public/media/step-4-deploying-to-the-edge/image-3.png)
 
-![Zuplo deployment running](../../public/media/source-control-setup-github/0a9932eb-7c16-49cf-9720-0beb450724eb.png)
+   In the GitHub UI, you can rename your repository if you want. Click the
+   **Create repository** button at the bottom of the page and return to the
+   Zuplo Portal.
 
-On the deployment page, you will see **Deployment has Completed!!** and below
-that's the link to your new environment.
+1. **Connect your repository**
 
-![Zuplo deployment result](../../public/media/source-control-setup-github/26fa58b6-7a5a-4627-bd9f-246972639f12.png)
+   The portal will reload and you will see your new repository listed. Click
+   **Connect** to connect Zuplo to that repository.
+
+   ![Connect](../../public/media/step-4-deploying-to-the-edge/image-4.png)
+
+   After the connection succeeds you will see a link to your GitHub repository.
+
+   ![Connected Repository](../../public/media/step-4-deploying-to-the-edge/image-5.png)
+
+1. **Verify deployment**
+
+   Click the link to return to GitHub. You should see a green check next to the
+   commit hash (1). When you hover your mouse over that you'll see the Zuplo
+   deployment was successful. Click **Details** (2) to open the deployment info.
+
+   ![Zuplo deployment running](../../public/media/source-control-setup-github/0a9932eb-7c16-49cf-9720-0beb450724eb.png)
+
+   On the deployment page, you will see **Deployment has Completed!!** and below
+   that's the link to your new environment.
+
+   ![Zuplo deployment result](../../public/media/source-control-setup-github/26fa58b6-7a5a-4627-bd9f-246972639f12.png)
+
+</Stepper>
 
 ## Connecting Existing Repositories
 
@@ -126,3 +147,26 @@ With GitHub connected, you get:
   with approval gates and multi-stage deployments
 - **[Branch-Based Deployments](./branch-based-deployments.mdx)** — How branches
   map to environments
+
+## Frequently Asked Questions
+
+<Faq>
+  <FaqItem question="What happens if I disconnect my repository?">
+    If you disconnect your repository, you can go back to source control
+    settings and reconnect it.
+  </FaqItem>
+  <FaqItem question="What happens if I rename my repository?">
+    Renaming your repository will break the connection. You must disconnect and
+    reconnect to restore the link.
+  </FaqItem>
+  <FaqItem question="Can I connect multiple Zuplo projects to the same repo?">
+    No, each Zuplo project must be connected to a unique GitHub repository.
+  </FaqItem>
+  <FaqItem question="My project isn't deploying, what do I do?">
+    First, check the deployment status in GitHub. If there is an error message,
+    follow the instructions to resolve it. Next, check that the [Zuplo GitHub
+    app](https://github.com/apps/zuplo) is installed in your organization and
+    has access to the repository where your Zuplo projects are located. If you
+    need help, contact Zuplo support.
+  </FaqItem>
+</Faq>
