@@ -1,0 +1,47 @@
+---
+title: Using Custom Providers
+sidebar_label: Custom Providers
+---
+
+Zuplo's AI Gateway supports the addition of custom AI providers. This allows
+users to route their AI Gateway Apps to self hosted services and models,
+providing an additional layer of control, security and governance when using
+these models in production.
+
+## Adding a Custom AI Provider
+
+To add a custom AI provider to your Zuplo AI Gateway, follow these steps:
+
+<Stepper>
+
+1. Navigate to the **Settings** > **AI Providers** section of your AI Gateway
+   project in the [Zuplo Portal](https://portal.zuplo.com).
+
+1. Click on the **Add Provider** button.
+
+1. Select the **Custom** option from the Custom Providers section of the list
+
+1. Specify a label for the custom provider instance. You can change the label
+   later if required.
+
+1. Specify the API URL of the custom provider you are using.
+
+1. Enter the API Key for the selected provider (if there is no API key required,
+   you can leave this blank).
+
+1. Finally, add the available models that are hosted with your custom provider,
+   along with their type. Optionally, you can add a dollar cost for input and
+   output tokens if you wish to track this via the AI Gateway.
+
+1. Click **Create**.
+
+</Stepper>
+
+## Modify, Update or Delete your Custom AI Provider
+
+Existing providers can be modified, updated or deleted by navigating to the
+**Settings** > **AI Providers** section and clicking the **Edit** or **Delete**
+icon next to the custom provider you want to modify, update or delete.
+
+Further information can be found in the
+[Managing Providers](./managing-providers.mdx) guide.
