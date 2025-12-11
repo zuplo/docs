@@ -1070,7 +1070,7 @@ export function Diagram({
         style={{ backgroundColor: "#F7F9FB", borderWidth: "1px" }}
         className="rounded-md"
       >
-        <Background color="#ccc" variant={BackgroundVariant.Dots} gap={10} />
+        <Background color="#ccc" variant={BackgroundVariant.Dots} gap={15} />
         {showControls && <Controls showInteractive={false} />}
       </ReactFlow>
     </div>
