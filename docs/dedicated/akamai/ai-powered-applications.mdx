@@ -1,0 +1,223 @@
+---
+title: AI-Powered Applications on Akamai
+sidebar_label: AI-Powered Applications
+description:
+  Reference architecture for secure, AI-powered applications on Akamai Connected
+  Cloud with Zuplo AI Gateway, MCP servers, and Akamai AI Firewall.
+---
+
+This document describes a reference architecture for AI-powered applications
+running on Akamai Connected Cloud. The architecture uses Zuplo AI Gateway with
+MCP server capabilities and Akamai AI Firewall to enable secure,
+enterprise-grade AI applications that can access internal data systems while
+maintaining strict security and compliance controls.
+
+## Overview
+
+Enterprise AI applications face several challenges:
+
+- **Data access** - AI models need access to live customer data from internal
+  systems to provide accurate, personalized responses
+- **Security threats** - AI-specific attacks like prompt injection can
+  manipulate models into revealing sensitive information or behaving
+  unexpectedly
+- **Data leakage** - Models may inadvertently expose PII, credentials, or other
+  sensitive data in their responses
+- **Cost management** - Uncontrolled AI usage can lead to unexpected costs from
+  LLM API calls
+- **Compliance** - Organizations need audit trails and governance controls for
+  AI interactions
+
+This architecture addresses these challenges by combining Akamai's edge security
+platform, Zuplo's AI Gateway with MCP server capabilities, and Akamai AI
+Firewall.
+
+## Architecture
+
+The following diagram shows the complete architecture:
+
+<Diagram height="h-56" direction="horizontal">
+  <DiagramNode id="chat-app">AI Chat Application</DiagramNode>
+  <DiagramGroup id="edge" label="Akamai Edge Platform">
+    <DiagramNode id="waf" variant="blue">
+      WAF + DDoS
+    </DiagramNode>
+    <DiagramNode id="cdn" variant="blue">
+      Akamai CDN
+    </DiagramNode>
+    <DiagramNode id="ai-firewall" variant="orange">
+      AI Firewall
+    </DiagramNode>
+  </DiagramGroup>
+  <DiagramGroup id="gateway" label="Zuplo AI Gateway">
+    <DiagramNode id="ai-gateway" variant="zuplo">
+      AI Gateway
+    </DiagramNode>
+    <DiagramNode id="mcp-server" variant="zuplo">
+      MCP Server
+    </DiagramNode>
+  </DiagramGroup>
+  <DiagramGroup id="backend" label="Akamai Connected Cloud">
+    <DiagramNode id="llm" variant="green">
+      AI Model (LLM)
+    </DiagramNode>
+    <DiagramNode id="api" variant="green">
+      Internal Data API
+    </DiagramNode>
+  </DiagramGroup>
+  <DiagramEdge from="chat-app" to="waf" />
+  <DiagramEdge from="waf" to="cdn" fromSide="bottom" toSide="top" />
+  <DiagramEdge from="cdn" to="ai-gateway" />
+  <DiagramEdge
+    from="ai-gateway"
+    to="ai-firewall"
+    fromSide="left"
+    toSide="right"
+    lineStyle="dashed"
+  />
+  <DiagramEdge
+    from="ai-gateway"
+    to="mcp-server"
+    fromSide="bottom"
+    toSide="top"
+  />
+  <DiagramEdge from="mcp-server" to="llm" />
+  <DiagramEdge from="mcp-server" to="api" />
+</Diagram>
+
+### Components
+
+| Component               | Description                                                                                                  |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **AI Chat Application** | Customer-facing chat interface that sends AI requests through the Akamai platform.                           |
+| **WAF + DDoS**          | Akamai's web application firewall and DDoS protection at the edge.                                           |
+| **Akamai CDN**          | Global content delivery network that routes requests to the appropriate backend services.                    |
+| **Zuplo AI Gateway**    | Routes AI requests to configured LLM providers. Applies cost controls, rate limiting, and security policies. |
+| **Akamai AI Firewall**  | Analyzes AI interactions in real-time to detect and block prompt injection, PII leakage, and toxic content.  |
+| **MCP Server**          | Exposes internal APIs as tools that the AI model can discover and invoke to retrieve live customer data.     |
+| **AI Model (LLM)**      | Language model that generates responses, optionally trained on domain-specific knowledge.                    |
+| **Internal Data API**   | Backend services that provide access to customer records, account information, and other business data.      |
+
+## Request Flow
+
+A typical interaction flows through the system as follows:
+
+1. **Application sends request** - The AI chat application sends a request to
+   the Akamai edge platform.
+
+2. **Edge security** - Akamai WAF and DDoS protection inspect the request for
+   malicious patterns and attacks before routing through the CDN.
+
+3. **CDN routes to AI Gateway** - The Akamai CDN forwards the request to the
+   Zuplo AI Gateway, which applies authentication, rate limiting, and cost
+   controls.
+
+4. **AI Firewall inspects request** - The AI Gateway sends requests to the
+   Akamai AI Firewall, which analyzes prompts for injection attempts, sensitive
+   data, and policy violations.
+
+5. **Model invokes MCP tools** - When the AI model needs customer data to answer
+   a question, it invokes MCP server tools to query internal APIs.
+
+6. **MCP server retrieves data** - The MCP server executes the tool call against
+   the internal data API, returning structured information to the model.
+
+7. **AI Firewall inspects response** - The model's response passes through the
+   AI Firewall, which checks for PII leakage and inappropriate content.
+
+8. **Response delivered to application** - The validated response streams back
+   through the Akamai platform to the chat application.
+
+## MCP Server for Data Access
+
+The [MCP Server Handler](../../handlers/mcp-server.mdx) transforms internal APIs
+into tools that AI models can discover and invoke. This pattern allows AI
+applications to access live data while maintaining security through the
+gateway's authentication and authorization policies.
+
+Rather than embedding static data in the model or relying on retrieval-augmented
+generation (RAG) alone, the MCP server enables the model to make real-time API
+calls to fetch current information. The gateway enforces access controls on
+every tool invocation, ensuring the model can only access data the requesting
+user is authorized to see.
+
+For more information, see the
+[MCP Server documentation](../../mcp-server/introduction.mdx).
+
+## AI Firewall Protection
+
+The [Akamai AI Firewall](../../ai-gateway/policies/akamai-ai-firewall.mdx)
+provides enterprise-grade security for AI interactions:
+
+- **Prompt injection defense** - Detects and blocks attempts to manipulate the
+  AI model through deceptive inputs
+- **Data loss prevention** - Identifies sensitive data (personal identifiers,
+  credit cards, credentials) in both requests and responses
+- **Toxic content filtering** - Prevents inappropriate or harmful content from
+  being generated
+- **Adversarial attack protection** - Guards against model exploitation attempts
+
+When the firewall detects a threat, it can take one of three actions:
+
+- **Monitor** - Log the threat for analysis without blocking
+- **Modify** - Remove or redact sensitive content while allowing the request
+- **Deny** - Block the request entirely and return an error
+
+## Cost and Usage Controls
+
+The Zuplo AI Gateway provides hierarchical budget controls to manage AI
+spending:
+
+- **Organization limits** - Maximum daily and monthly spending across all AI
+  usage
+- **Team budgets** - Allocated budgets for departments or customer segments
+- **Application limits** - Per-application or per-use-case cost controls
+- **Rate limiting** - Request throttling to prevent abuse
+
+## Security Model
+
+This architecture enforces security at multiple layers:
+
+**Edge Security** - Akamai WAF and DDoS protection filter malicious traffic
+before it reaches the AI infrastructure.
+
+**API Authentication** - The AI Gateway authenticates all requests using API
+keys, JWT tokens, or other credentials before processing.
+
+**AI-Specific Security** - The Akamai AI Firewall analyzes AI interactions for
+prompt injection, data leakage, and policy violations.
+
+**Data Access Controls** - The MCP server mediates all data access through
+controlled API endpoints, preventing direct database access and enforcing
+field-level permissions.
+
+**Audit Trail** - All AI interactions flow through the gateway, providing
+complete audit logs for compliance and security analysis.
+
+## Deployment
+
+Zuplo provides a fully managed deployment experience on Akamai Connected Cloud.
+The Zuplo account team handles infrastructure provisioning, configuration, and
+ongoing maintenance.
+
+Deployment options include:
+
+- **Any Akamai region** - Deploy to Akamai Cloud regions that best serve users
+  and meet data residency requirements
+- **Multi-region availability** - Distribute the AI Gateway across multiple
+  regions with automatic failover through Akamai GTM
+- **Custom networking** - Private connectivity to backend services hosted on
+  Akamai, other cloud providers, or on-premises
+- **Flexible scaling** - Capacity scaling based on traffic patterns and
+  performance requirements
+
+## Related Resources
+
+- [Akamai Dedicated Architecture](./architecture.mdx) - Overview of Zuplo on
+  Akamai Connected Cloud
+- [MCP Server Handler](../../handlers/mcp-server.mdx) - Technical documentation
+  for MCP server configuration
+- [Akamai AI Firewall](../../ai-gateway/policies/akamai-ai-firewall.mdx) - AI
+  security policy configuration
+- [Zuplo AI Gateway](../../ai-gateway/introduction.mdx) - Introduction to AI
+  Gateway capabilities
