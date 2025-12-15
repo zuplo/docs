@@ -354,6 +354,8 @@ interface DiagramEdgeProps {
   variant?: EdgeVariant;
   fromSide?: "left" | "right" | "top" | "bottom";
   toSide?: "left" | "right" | "top" | "bottom";
+  lineStyle?: "solid" | "dashed" | "dotted";
+  animated?: boolean;
 }
 
 interface DiagramActorProps {
@@ -658,6 +660,15 @@ function parseFlowDiagram(
       const showFromArrow = props.fromArrow === true;
       const edgeStyle =
         edgeVariants[props.variant ?? "default"] ?? edgeVariants.default;
+
+      // Determine strokeDasharray based on lineStyle
+      let strokeDasharray: string | undefined;
+      if (props.lineStyle === "dashed") {
+        strokeDasharray = "5,5";
+      } else if (props.lineStyle === "dotted") {
+        strokeDasharray = "2,2";
+      }
+
       parsedEdges.push({
         id: `${props.from}-${props.to}`,
         source: props.from,
@@ -665,13 +676,18 @@ function parseFlowDiagram(
         sourceHandle: props.fromSide ? `${props.fromSide}-source` : undefined,
         targetHandle: props.toSide ? `${props.toSide}-target` : undefined,
         type: props.type ?? "default",
+        animated: props.animated,
         markerEnd: showToArrow
           ? { type: MarkerType.ArrowClosed, color: edgeStyle.markerColor }
           : undefined,
         markerStart: showFromArrow
           ? { type: MarkerType.ArrowClosed, color: edgeStyle.markerColor }
           : undefined,
-        style: { stroke: edgeStyle.stroke, strokeWidth: 1.5 },
+        style: {
+          stroke: edgeStyle.stroke,
+          strokeWidth: 1.5,
+          strokeDasharray,
+        },
         label: props.label,
         labelStyle: { fontSize: 10, fill: "#6b7280", fontWeight: 400 },
         labelBgStyle: {

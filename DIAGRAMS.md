@@ -55,17 +55,19 @@ A node in the diagram.
 
 An edge (connection) between nodes.
 
-| Prop        | Type                                           | Default   | Description                         |
-| ----------- | ---------------------------------------------- | --------- | ----------------------------------- |
-| `from`      | string                                         | Required  | Source node ID                      |
-| `to`        | string                                         | Required  | Target node ID                      |
-| `label`     | string                                         | -         | Optional label on the edge          |
-| `type`      | `"straight"` \| `"step"` \| `"smoothstep"`     | `default` | Edge line style (bezier by default) |
-| `fromArrow` | boolean                                        | `false`   | Show arrow at source                |
-| `toArrow`   | boolean                                        | `true`    | Show arrow at target                |
-| `variant`   | EdgeVariant                                    | `default` | Color variant                       |
-| `fromSide`  | `"left"` \| `"right"` \| `"top"` \| `"bottom"` | -         | Explicit source connection side     |
-| `toSide`    | `"left"` \| `"right"` \| `"top"` \| `"bottom"` | -         | Explicit target connection side     |
+| Prop        | Type                                           | Default   | Description                           |
+| ----------- | ---------------------------------------------- | --------- | ------------------------------------- |
+| `from`      | string                                         | Required  | Source node ID                        |
+| `to`        | string                                         | Required  | Target node ID                        |
+| `label`     | string                                         | -         | Optional label on the edge            |
+| `type`      | `"straight"` \| `"step"` \| `"smoothstep"`     | `default` | Edge path type (bezier by default)    |
+| `fromArrow` | boolean                                        | `false`   | Show arrow at source                  |
+| `toArrow`   | boolean                                        | `true`    | Show arrow at target                  |
+| `variant`   | EdgeVariant                                    | `default` | Color variant                         |
+| `fromSide`  | `"left"` \| `"right"` \| `"top"` \| `"bottom"` | -         | Explicit source connection side       |
+| `toSide`    | `"left"` \| `"right"` \| `"top"` \| `"bottom"` | -         | Explicit target connection side       |
+| `lineStyle` | `"solid"` \| `"dashed"` \| `"dotted"`          | `solid`   | Line style for the edge               |
+| `animated`  | boolean                                        | `false`   | Animate the edge with a moving effect |
 
 #### `<DiagramGroup>`
 
@@ -157,6 +159,27 @@ When the automatic edge routing doesn't produce the desired result, use
   </DiagramNode>
   <DiagramEdge from="source" to="control" label="Deploy" />
   <DiagramEdge from="control" to="gateway" />
+</Diagram>
+```
+
+#### Dashed and Dotted Edges
+
+Use `lineStyle` to create dashed or dotted edges, useful for showing optional
+connections or different types of relationships:
+
+```tsx
+<Diagram height="h-56">
+  <DiagramNode id="client">Client</DiagramNode>
+  <DiagramNode id="gateway" variant="zuplo">
+    API Gateway
+  </DiagramNode>
+  <DiagramNode id="cache" variant="blue">
+    Cache
+  </DiagramNode>
+  <DiagramNode id="backend">Backend</DiagramNode>
+  <DiagramEdge from="client" to="gateway" />
+  <DiagramEdge from="gateway" to="cache" lineStyle="dashed" label="Optional" />
+  <DiagramEdge from="gateway" to="backend" />
 </Diagram>
 ```
 

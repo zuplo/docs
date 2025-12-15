@@ -667,6 +667,7 @@ export const platform: Navigation = [
               "dedicated/akamai/architecture",
               "dedicated/akamai/cdn",
               "dedicated/akamai/caching",
+              "dedicated/akamai/ai-powered-applications",
             ],
           },
         ],
