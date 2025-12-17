@@ -69,11 +69,11 @@ file:
 
 ```ts title="modules/zuplo.runtime.ts"
 import {
-  ZuploRequest,
-  HydrolixRequestLoggerPlugin,
-  HydrolixDefaultEntry,
+  defaultGenerateHydrolixEntry,
   environment,
-  defaultGenerateHydrolixEntry
+  HydrolixDefaultEntry,
+  HydrolixRequestLoggerPlugin,
+  RuntimeExtensions
 } from "@zuplo/runtime";
 
 export function runtimeInit(runtime: RuntimeExtensions) {
