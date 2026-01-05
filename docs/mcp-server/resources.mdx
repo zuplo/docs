@@ -71,6 +71,7 @@ To provide MCP specific metadata for the resource, use the `mcp` property within
   `"text/html"`, `"text/css"`, `"application/json"`). Falls back to the
   response's Content-Type header or `"text/plain"`.
 - `enabled` (optional) - Whether this resource is enabled. Defaults to `true`.
+- `_meta` (`object`: optional) - An object containing any arbitrary metadata.
 
 Without the `mcp` configuration, the MCP server will attempt to register it as a
 tool, or if configured as a resource via legacy methods, use the defaults
