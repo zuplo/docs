@@ -132,18 +132,33 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
       label: "API Reference",
       to: "/api",
     },
+    {
+      type: "link",
+      label: "API Reference (Early Access)",
+      to: "/api-beta",
+    },
   ],
   mdx: {
     components: mdxComponents,
   },
-  apis: {
-    type: "file",
-    input: "./api.json",
-    path: "api",
-    options: {
-      expandAllTags: true,
+  apis: [
+    {
+      type: "file",
+      input: "./api.json",
+      path: "api",
+      options: {
+        expandAllTags: true,
+      },
     },
-  },
+    {
+      type: "file",
+      input: "./api-early-access.json",
+      path: "api-beta",
+      options: {
+        expandAllTags: true,
+      },
+    },
+  ],
   docs: {
     files: ["/docs/**/!(*.partial).{md,mdx}"],
     defaultOptions: {
