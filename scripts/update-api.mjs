@@ -7,7 +7,7 @@ const [response, responseBeta] = await Promise.all([
       "Accept-Encoding": "identity",
     },
   }),
-  fetch("https://dev.zuplo.com/openapi-early-access-features", {
+  fetch("https://dev.zuplo.com/openapi-preview", {
     headers: {
       Accept: "application/json",
       "Accept-Encoding": "identity",
@@ -22,9 +22,5 @@ writeFileSync("./api.json", JSON.stringify(data, null, 2), "utf-8");
 
 const dataBeta = await responseBeta.json();
 dataBeta.servers[0].url = "https://dev.zuplo.com";
-dataBeta.servers[0].description = "Zuplo API (Early Access)";
-writeFileSync(
-  "./api-early-access.json",
-  JSON.stringify(dataBeta, null, 2),
-  "utf-8",
-);
+dataBeta.servers[0].description = "Zuplo API (Preview)";
+writeFileSync("./api-preview.json", JSON.stringify(dataBeta, null, 2), "utf-8");

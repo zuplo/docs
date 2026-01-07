@@ -64,7 +64,7 @@ public/robots.txt
 public/sitemap.xml
 public/sitemap-*.xml
 api.json
-api-early-access.json
+api-preview.json
 build/
 .next/
 docs/dev-portal/zudoku/

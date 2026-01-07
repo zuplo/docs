@@ -134,7 +134,7 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
     },
     {
       type: "link",
-      label: "API Reference (Early Access)",
+      label: "API Reference (Preview)",
       to: "/api-beta",
     },
   ],
@@ -152,7 +152,7 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
     },
     {
       type: "file",
-      input: "./api-early-access.json",
+      input: "./api-preview.json",
       path: "api-beta",
       options: {
         expandAllTags: true,
