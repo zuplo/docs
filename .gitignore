@@ -64,6 +64,7 @@ public/robots.txt
 public/sitemap.xml
 public/sitemap-*.xml
 api.json
+api-preview.json
 build/
 .next/
 docs/dev-portal/zudoku/
@@ -85,7 +86,7 @@ docs/dev-portal/zudoku/
 !.styles/config/vocabularies/Base
 
 
-# Screenshots 
+# Screenshots
 auth.json
 
 # docs generation
