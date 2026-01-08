@@ -132,11 +132,6 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
       label: "API Reference",
       to: "/api",
     },
-    {
-      type: "link",
-      label: "API Reference (Preview)",
-      to: "/api-preview",
-    },
   ],
   mdx: {
     components: mdxComponents,
@@ -146,14 +141,6 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
       type: "file",
       input: "./api.json",
       path: "api",
-      options: {
-        expandAllTags: true,
-      },
-    },
-    {
-      type: "file",
-      input: "./api-preview.json",
-      path: "api-preview",
       options: {
         expandAllTags: true,
       },
