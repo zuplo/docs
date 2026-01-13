@@ -41,6 +41,20 @@ passes to hook C.
 This change enables more predictable behavior when composing multiple response
 transformations.
 
+### 501 for Unsupported HTTP Methods
+
+This compatibility date changes how unsupported HTTP methods are handled.
+Requests using non-standard HTTP methods such as WebDAV methods (`PROPFIND`,
+`MKCOL`, `COPY`, etc.) now return a proper `501 Not Implemented` response
+instead of a `500 Internal Server Error`.
+
+**Before this flag:** Unsupported HTTP methods returned a
+`500 Internal Server Error`.
+
+**After this flag:** Unsupported HTTP methods return a `501 Not Implemented`
+response with an [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807)
+`application/problem+json` body.
+
 ## 2025-02-06
 
 This compatibility date introduces a number of breaking changes to improve the
