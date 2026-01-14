@@ -88,3 +88,28 @@ details.
   events in the environment where your API runs. It's provided in your logs for
   potential troubleshooting. Normally, it's recommended to rely on the
   `requestId` for tracing.
+
+## Custom Log Properties
+
+In addition to the default fields, you can also add custom fields to your logs.
+This can be done using the `context.log.setLogProperties!` method.
+
+```ts
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export default async function policy(
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  context.log.setLogProperties!({ customProperty: "value" });
+  context.log.info("Hello World");
+  return request;
+}
+```
+
+These properties will be included in all subsequent log messages for that
+request. If the property already exists, it will be overwritten.
+
+The log properties will be exported in a format native to the plugin you are
+using. For example, in the case of the OpenTelemetry plugin, the properties will
+be included in the `attributes` field of the log record.
