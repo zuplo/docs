@@ -1,0 +1,250 @@
+---
+title: Plans
+sidebar_label: Overview
+---
+
+:::warning
+
+The Monetization APIs are in preview and subject to change. Features and
+endpoints documented here may be modified as we refine the service based on
+customer feedback.
+
+:::
+
+Plans are subscription tiers that package features together. They represent the
+rows on your pricing page - Free, Pro, Enterprise - each with different feature
+access and usage limits. Plans define what customers get when they subscribe.
+
+## Plan Structure
+
+Plans follow a hierarchical structure where each level defines a specific aspect
+of your pricing:
+
+<Mermaid
+  chart={`flowchart TD
+    Plan[Plan]
+    Phases[Phases]
+    RateCards[Rate Cards]
+    Price[Price]
+    Entitlement[Entitlements]
+    Feature[Feature]
+    Meter[Meter]
+
+    Plan --> Phases
+    Phases --> RateCards
+    RateCards --> Price
+    RateCards --> Entitlement
+    Entitlement --> Feature
+    Feature --> Meter`}
+
+/>
+
+| Entity          | Description                                           |
+| --------------- | ----------------------------------------------------- |
+| **Plan**        | A subscription tier (e.g., Pro, Enterprise)           |
+| **Phase**       | A time period within a plan (e.g., trial, default)    |
+| **Rate Card**   | Pricing and entitlements for a feature within a phase |
+| **Price**       | The pricing model (flat, tiered, package, etc.)       |
+| **Entitlement** | Usage limits and access controls for customers        |
+| **Feature**     | A capability that can be metered or toggled           |
+| **Meter**       | Tracks usage data for metered features                |
+
+Plans contain **phases**, and each phase contains **rate cards** that define
+pricing and entitlements. See [Rate Cards](./rate-cards.mdx) for details on
+configuring pricing within plans.
+
+:::note
+
+Before creating a plan, you must first define the [Features](./features.mdx)
+that will be included. Plans reference features by their `key`, so features must
+exist before they can be added to rate cards.
+
+:::
+
+## Plan Lifecycle
+
+Plans move through a defined lifecycle:
+
+1. **Draft** - Initial state when created. Can be modified freely.
+2. **Active** - Published and available for subscriptions. Cannot be modified.
+3. **Archived** - No longer available for new subscriptions but existing
+   subscriptions continue.
+
+## Example: Pro Plan with Trial
+
+This example creates a Pro plan with:
+
+- A 1-week free trial phase with 1,000 API calls
+- A default phase with $99/month subscription and 10,000 included API calls
+- Overage pricing at $0.01 per additional call
+- Static features for premium access
+
+For step-by-step examples building plans from simple to complex, see
+[Plan Examples](./plan-examples.mdx).
+
+```shell
+curl \
+  https://dev.zuplo.com/v3/metering/$BUCKET_ID/plans \
+  --request POST \
+  --header "Authorization: Bearer $ZAPI_KEY" \
+  --header "Content-Type: application/json" \
+  --data @- << EOF
+{
+  "key": "pro",
+  "name": "Pro Plan",
+  "description": "For growing teams with a 1-week free trial",
+  "currency": "USD",
+  "billingCadence": "P1M",
+  "phases": [
+    {
+      "key": "trial",
+      "name": "Trial",
+      "duration": "P1W",
+      "rateCards": [
+        {
+          "type": "flat_fee",
+          "key": "api_requests",
+          "name": "API Requests (Trial)",
+          "featureKey": "api_requests",
+          "billingCadence": null,
+          "price": null,
+          "entitlementTemplate": {
+            "type": "metered",
+            "issueAfterReset": 1000,
+            "isSoftLimit": false,
+            "usagePeriod": "P1W"
+          }
+        },
+        {
+          "type": "flat_fee",
+          "key": "priority_support",
+          "name": "Priority Support (Trial)",
+          "featureKey": "priority_support",
+          "billingCadence": null,
+          "price": null,
+          "entitlementTemplate": {
+            "type": "boolean",
+            "config": true
+          }
+        }
+      ]
+    },
+    {
+      "key": "default",
+      "name": "Default",
+      "duration": null,
+      "rateCards": [
+        {
+          "type": "usage_based",
+          "key": "api_requests",
+          "name": "API Requests",
+          "featureKey": "api_requests",
+          "billingCadence": "P1M",
+          "entitlementTemplate": {
+            "type": "metered",
+            "issueAfterReset": 10000,
+            "isSoftLimit": true,
+            "usagePeriod": "P1M"
+          },
+          "price": {
+            "type": "tiered",
+            "mode": "graduated",
+            "tiers": [
+              {
+                "upToAmount": "10000",
+                "flatPrice": { "type": "flat", "amount": "99.00" },
+                "unitPrice": null
+              },
+              {
+                "flatPrice": null,
+                "unitPrice": { "type": "unit", "amount": "0.01" }
+              }
+            ]
+          }
+        },
+        {
+          "type": "flat_fee",
+          "key": "priority_support",
+          "name": "Priority Support",
+          "featureKey": "priority_support",
+          "billingCadence": null,
+          "price": null,
+          "entitlementTemplate": {
+            "type": "boolean",
+            "config": true
+          }
+        }
+      ]
+    }
+  ]
+}
+EOF
+```
+
+### How This Plan Works
+
+| Phase   | Duration | API Requests       | Cost      |
+| ------- | -------- | ------------------ | --------- |
+| Trial   | 1 week   | 1,000 (hard limit) | Free      |
+| Default | Ongoing  | 10,000 included    | $99/month |
+
+After the trial ends, customers automatically move to the default phase. In the
+default phase, the first 10,000 API requests are included in the $99 monthly
+fee. Additional requests are billed at $0.01 each (soft limit allows overage).
+
+## Plan Properties
+
+| Property         | Required | Description                                                   |
+| ---------------- | -------- | ------------------------------------------------------------- |
+| `key`            | Yes      | Unique identifier for the plan                                |
+| `name`           | Yes      | Human-readable display name                                   |
+| `currency`       | Yes      | Three-letter ISO currency code (e.g., `USD`)                  |
+| `billingCadence` | Yes      | Billing period as ISO 8601 duration (e.g., `P1M` for monthly) |
+| `phases`         | Yes      | Array of plan phases with rate cards                          |
+| `description`    | No       | Detailed description of the plan                              |
+| `metadata`       | No       | Custom key-value pairs for your own use                       |
+
+## Phase Properties
+
+| Property    | Required | Description                                                           |
+| ----------- | -------- | --------------------------------------------------------------------- |
+| `key`       | Yes      | Unique identifier for the phase within the plan                       |
+| `name`      | Yes      | Human-readable display name                                           |
+| `duration`  | No       | ISO 8601 duration (e.g., `P1W` for 1 week). Omit for the final phase. |
+| `rateCards` | Yes      | Array of rate cards defining pricing and entitlements                 |
+
+## Publishing a Plan
+
+:::caution
+
+Plans must be published before customers can subscribe to them. A newly created
+plan starts in `draft` status and is not available for subscriptions until
+published.
+
+:::
+
+Transition a draft plan to active status:
+
+```shell
+curl \
+  https://dev.zuplo.com/v3/metering/$BUCKET_ID/plans/$PLAN_ID/publish \
+  --request POST \
+  --header "Authorization: Bearer $ZAPI_KEY"
+```
+
+Once published, a plan cannot be modified. To make changes, you must create a
+new version of the plan.
+
+## Common Billing Cadences
+
+| Duration | Description |
+| -------- | ----------- |
+| `P1W`    | Weekly      |
+| `P1M`    | Monthly     |
+| `P3M`    | Quarterly   |
+| `P1Y`    | Yearly      |
+
+## API Reference
+
+For complete API operations (list, get, update, delete, archive), see the
+[Plans API Reference](../../api/metering-plans).
