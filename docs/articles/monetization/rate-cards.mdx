@@ -1,0 +1,151 @@
+---
+title: Rate Cards
+sidebar_label: Rate Cards
+---
+
+:::warning
+
+The Monetization APIs are in preview and subject to change.
+
+:::
+
+Rate cards define the pricing and entitlements for features within a plan. Each
+rate card connects a feature to a price and optionally sets usage limits or
+access controls. Rate cards are the building blocks that turn your product
+catalog into a monetizable offering.
+
+## What Rate Cards Define
+
+A rate card consists of:
+
+- **Key and Name** - Identifiers for the rate card (auto-filled from feature if
+  linked)
+- **Feature** - Optional link to a feature from your product catalog
+- **Price** - How much to charge (see [Pricing Models](./pricing-models.mdx))
+- **Entitlement** - Optional usage limits or access controls
+- **Billing Cadence** - How often to bill (monthly, one-time, etc.)
+
+## Rate Card Types
+
+### Flat Fee Rate Cards
+
+Flat fee rate cards charge a fixed amount, either as a one-time charge or
+recurring fee. Use these for:
+
+- Setup fees or onboarding charges
+- Monthly or annual subscription fees
+- Access fees for premium features
+
+```json
+{
+  "type": "flat_fee",
+  "key": "platform_fee",
+  "name": "Platform Fee",
+  "billingCadence": "P1M",
+  "price": {
+    "type": "flat",
+    "amount": "99.00"
+  }
+}
+```
+
+When `billingCadence` is set (e.g., `P1M` for monthly), the fee recurs each
+billing period. When `billingCadence` is `null`, the fee is charged once per
+subscription phase.
+
+### Usage-Based Rate Cards
+
+Usage-based rate cards charge based on metered consumption. These require a
+feature linked to a meter. Use these for:
+
+- Pay-per-request API pricing
+- Token-based AI model pricing
+- Data transfer charges
+
+```json
+{
+  "type": "usage_based",
+  "key": "api_calls",
+  "name": "API Calls",
+  "featureKey": "api_calls",
+  "billingCadence": "P1M",
+  "price": {
+    "type": "unit",
+    "amount": "0.001"
+  }
+}
+```
+
+Usage-based rate cards support multiple pricing models. See
+[Pricing Models](./pricing-models.mdx) for details on unit, tiered, package, and
+dynamic pricing.
+
+## Rate Cards With Features
+
+When a rate card is linked to a feature via `featureKey`:
+
+- The rate card's `key` and `name` are pre-filled from the feature
+- You can define entitlements to control access or set usage limits
+- For metered features, the rate card can track and bill based on usage
+
+### Entitlement Types
+
+Entitlements define what customers get access to:
+
+| Type      | Description                                    |
+| --------- | ---------------------------------------------- |
+| `boolean` | Simple on/off access to a feature              |
+| `static`  | Access with custom configuration (JSON)        |
+| `metered` | Access with usage tracking and optional limits |
+
+#### Metered Entitlements
+
+Metered entitlements are the most common for usage-based pricing. They can
+include:
+
+- **Usage limits** - Cap how much a customer can use
+- **Soft limits** - Allow overage beyond the limit (with overage charges)
+- **Initial grants** - Starting balance that resets each period
+
+```json
+{
+  "type": "usage_based",
+  "key": "api_calls",
+  "name": "API Calls",
+  "featureKey": "api_calls",
+  "billingCadence": "P1M",
+  "price": {
+    "type": "unit",
+    "amount": "0.001"
+  },
+  "entitlementTemplate": {
+    "type": "metered",
+    "issueAfterReset": 10000,
+    "isSoftLimit": false
+  }
+}
+```
+
+This example grants 10,000 API calls per billing period with a hard limit.
+
+## Rate Cards Without Features
+
+Rate cards without features can only use flat fee pricing. The `key` and `name`
+must be manually specified and will appear on invoices. These are useful for:
+
+- Platform fees unrelated to specific features
+- Service charges
+- Custom line items
+
+## Free Items
+
+You can offer free items in three ways:
+
+1. **Omit the price** - No price means free, and no payment method is required
+2. **Set price to $0** - Explicit free, but payment method may still be required
+3. **Apply 100% discount** - Shows original value with discount applied
+
+## Adding Rate Cards to Plans
+
+Rate cards are added to plan phases. See [Plans](./plans.mdx) for a complete
+example of creating a plan with trial and default phases using rate cards.

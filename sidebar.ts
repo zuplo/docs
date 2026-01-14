@@ -443,7 +443,22 @@ export const apiGateway: Navigation = [
   {
     type: "category",
     label: "Monetization",
-    items: ["articles/monetization", "articles/monetization-enterprise"],
+    items: [
+      "articles/monetization",
+      "articles/monetization-enterprise",
+      {
+        type: "category",
+        label: "Monetization API (Preview)",
+        items: [
+          "articles/monetization/index",
+          "articles/monetization/meters",
+          "articles/monetization/features",
+          "articles/monetization/plans",
+          "articles/monetization/rate-cards",
+          "articles/monetization/pricing-models",
+        ],
+      },
+    ],
   },
   {
     type: "category",

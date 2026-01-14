@@ -1,0 +1,117 @@
+---
+title: Features
+sidebar_label: Features
+---
+
+:::warning
+
+The Monetization APIs are in preview and subject to change.
+
+:::
+
+Features describe what your API offers to customers. They represent the
+capabilities in your API product - access to specific endpoints, usage
+allowances, premium functionality, or any other aspect you want to track or
+gate.
+
+## Metered vs Static Features
+
+Features come in two types:
+
+- **Metered features** are linked to a meter and track consumption. Use these
+  for usage-based capabilities like API calls, tokens, or data transfer.
+- **Static features** have no meter attached. Use these for boolean capabilities
+  like "access to premium endpoints" or "priority support".
+
+## Feature Properties
+
+| Property    | Required | Description                                                            |
+| ----------- | -------- | ---------------------------------------------------------------------- |
+| `key`       | Yes      | Unique identifier (lowercase alphanumeric and underscores, 1-64 chars) |
+| `name`      | Yes      | Human-readable display name                                            |
+| `meterSlug` | No       | Links this feature to a meter for usage tracking                       |
+| `metadata`  | No       | Custom key-value pairs for your own use                                |
+
+:::note
+
+Features cannot be updated after creation - they can only be archived. Plan your
+feature structure carefully before creating them.
+
+:::
+
+## Creating a Feature
+
+Create a metered feature linked to an API requests meter:
+
+```shell
+curl \
+  https://dev.zuplo.com/v3/metering/$BUCKET_ID/features \
+  --request POST \
+  --header "Authorization: Bearer $ZAPI_KEY" \
+  --header "Content-Type: application/json" \
+  --data @- << EOF
+{
+  "key": "api_calls",
+  "name": "API Calls",
+  "meterSlug": "api_requests"
+}
+EOF
+```
+
+The response includes the created feature:
+
+```json
+{
+  "id": "01ARZ3NDEKTSV4RRFFQ69G5FAV",
+  "key": "api_calls",
+  "name": "API Calls",
+  "meterSlug": "api_requests",
+  "createdAt": "2024-01-01T01:01:01.001Z",
+  "updatedAt": "2024-01-01T01:01:01.001Z"
+}
+```
+
+### Creating a Static Feature
+
+For features without usage tracking, omit the `meterSlug`:
+
+```shell
+curl \
+  https://dev.zuplo.com/v3/metering/$BUCKET_ID/features \
+  --request POST \
+  --header "Authorization: Bearer $ZAPI_KEY" \
+  --header "Content-Type: application/json" \
+  --data @- << EOF
+{
+  "key": "priority_support",
+  "name": "Priority Support"
+}
+EOF
+```
+
+## Archiving a Feature
+
+Features cannot be deleted, only archived. Archiving a feature prevents it from
+being added to new plans but does not affect existing entitlements.
+
+```shell
+curl \
+  https://dev.zuplo.com/v3/metering/$BUCKET_ID/features/01ARZ3NDEKTSV4RRFFQ69G5FAV \
+  --request DELETE \
+  --header "Authorization: Bearer $ZAPI_KEY"
+```
+
+This returns a `204 No Content` response on success.
+
+:::note
+
+Once a feature is archived, it cannot be unarchived. If you need to reuse the
+same key, you must first delete any existing entitlements that reference the
+archived feature.
+
+:::
+
+## API Reference
+
+For complete API operations (list, get, archive), see the
+[Features API Reference](../../api/metering-features).
