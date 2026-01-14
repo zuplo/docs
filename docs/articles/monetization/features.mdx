@@ -89,28 +89,6 @@ curl \
 EOF
 ```
 
-## Archiving a Feature
-
-Features cannot be deleted, only archived. Archiving a feature prevents it from
-being added to new plans but does not affect existing entitlements.
-
-```shell
-curl \
-  https://dev.zuplo.com/v3/metering/$BUCKET_ID/features/01ARZ3NDEKTSV4RRFFQ69G5FAV \
-  --request DELETE \
-  --header "Authorization: Bearer $ZAPI_KEY"
-```
-
-This returns a `204 No Content` response on success.
-
-:::note
-
-Once a feature is archived, it cannot be unarchived. If you need to reuse the
-same key, you must first delete any existing entitlements that reference the
-archived feature.
-
-:::
-
 ## API Reference
 
 For complete API operations (list, get, archive), see the

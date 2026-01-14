@@ -1,17 +1,53 @@
 ---
 title: Plans
-sidebar_label: Plans
+sidebar_label: Overview
 ---
 
 :::warning
 
-The Monetization APIs are in preview and subject to change.
+The Monetization APIs are in preview and subject to change. Features and
+endpoints documented here may be modified as we refine the service based on
+customer feedback.
 
 :::
 
 Plans are subscription tiers that package features together. They represent the
 rows on your pricing page - Free, Pro, Enterprise - each with different feature
 access and usage limits. Plans define what customers get when they subscribe.
+
+## Plan Structure
+
+Plans follow a hierarchical structure where each level defines a specific aspect
+of your pricing:
+
+<Mermaid
+  chart={`flowchart TD
+    Plan[Plan]
+    Phases[Phases]
+    RateCards[Rate Cards]
+    Price[Price]
+    Entitlement[Entitlements]
+    Feature[Feature]
+    Meter[Meter]
+
+    Plan --> Phases
+    Phases --> RateCards
+    RateCards --> Price
+    RateCards --> Entitlement
+    Entitlement --> Feature
+    Feature --> Meter`}
+
+/>
+
+| Entity          | Description                                           |
+| --------------- | ----------------------------------------------------- |
+| **Plan**        | A subscription tier (e.g., Pro, Enterprise)           |
+| **Phase**       | A time period within a plan (e.g., trial, default)    |
+| **Rate Card**   | Pricing and entitlements for a feature within a phase |
+| **Price**       | The pricing model (flat, tiered, package, etc.)       |
+| **Entitlement** | Usage limits and access controls for customers        |
+| **Feature**     | A capability that can be metered or toggled           |
+| **Meter**       | Tracks usage data for metered features                |
 
 Plans contain **phases**, and each phase contains **rate cards** that define
 pricing and entitlements. See [Rate Cards](./rate-cards.mdx) for details on
@@ -43,6 +79,9 @@ This example creates a Pro plan with:
 - Overage pricing at $0.01 per additional call
 - Static features for premium access
 
+For step-by-step examples building plans from simple to complex, see
+[Plan Examples](./plan-examples.mdx).
+
 ```shell
 curl \
   https://dev.zuplo.com/v3/metering/$BUCKET_ID/plans \
@@ -64,16 +103,25 @@ curl \
       "rateCards": [
         {
           "type": "flat_fee",
-          "featureKey": "api_calls",
+          "key": "api_requests",
+          "name": "API Requests (Trial)",
+          "featureKey": "api_requests",
+          "billingCadence": null,
+          "price": null,
           "entitlementTemplate": {
             "type": "metered",
             "issueAfterReset": 1000,
-            "isSoftLimit": false
+            "isSoftLimit": false,
+            "usagePeriod": "P1W"
           }
         },
         {
           "type": "flat_fee",
+          "key": "priority_support",
+          "name": "Priority Support (Trial)",
           "featureKey": "priority_support",
+          "billingCadence": null,
+          "price": null,
           "entitlementTemplate": {
             "type": "boolean",
             "config": true
@@ -84,44 +132,43 @@ curl \
     {
       "key": "default",
       "name": "Default",
+      "duration": null,
       "rateCards": [
         {
-          "type": "flat_fee",
-          "key": "monthly_fee",
-          "name": "Monthly Subscription",
-          "billingCadence": "P1M",
-          "price": {
-            "type": "flat",
-            "amount": "99.00"
-          }
-        },
-        {
           "type": "usage_based",
-          "featureKey": "api_calls",
+          "key": "api_requests",
+          "name": "API Requests",
+          "featureKey": "api_requests",
           "billingCadence": "P1M",
           "entitlementTemplate": {
             "type": "metered",
             "issueAfterReset": 10000,
-            "isSoftLimit": true
+            "isSoftLimit": true,
+            "usagePeriod": "P1M"
           },
           "price": {
             "type": "tiered",
             "mode": "graduated",
             "tiers": [
               {
-                "upToAmount": 10000,
-                "flatPrice": { "amount": "0" }
+                "upToAmount": "10000",
+                "flatPrice": { "type": "flat", "amount": "99.00" },
+                "unitPrice": null
               },
               {
-                "upToAmount": null,
-                "unitPrice": { "amount": "0.01" }
+                "flatPrice": null,
+                "unitPrice": { "type": "unit", "amount": "0.01" }
               }
             ]
           }
         },
         {
           "type": "flat_fee",
+          "key": "priority_support",
+          "name": "Priority Support",
           "featureKey": "priority_support",
+          "billingCadence": null,
+          "price": null,
           "entitlementTemplate": {
             "type": "boolean",
             "config": true
@@ -136,14 +183,14 @@ EOF
 
 ### How This Plan Works
 
-| Phase   | Duration | API Calls          | Cost      |
+| Phase   | Duration | API Requests       | Cost      |
 | ------- | -------- | ------------------ | --------- |
 | Trial   | 1 week   | 1,000 (hard limit) | Free      |
 | Default | Ongoing  | 10,000 included    | $99/month |
 
 After the trial ends, customers automatically move to the default phase. In the
-default phase, the first 10,000 API calls are included in the $99 monthly fee.
-Additional calls are billed at $0.01 each (soft limit allows overage).
+default phase, the first 10,000 API requests are included in the $99 monthly
+fee. Additional requests are billed at $0.01 each (soft limit allows overage).
 
 ## Plan Properties
 
@@ -168,7 +215,15 @@ Additional calls are billed at $0.01 each (soft limit allows overage).
 
 ## Publishing a Plan
 
-Transition a draft plan to active status, making it available for subscriptions:
+:::caution
+
+Plans must be published before customers can subscribe to them. A newly created
+plan starts in `draft` status and is not available for subscriptions until
+published.
+
+:::
+
+Transition a draft plan to active status:
 
 ```shell
 curl \
@@ -176,6 +231,9 @@ curl \
   --request POST \
   --header "Authorization: Bearer $ZAPI_KEY"
 ```
+
+Once published, a plan cannot be modified. To make changes, you must create a
+new version of the plan.
 
 ## Common Billing Cadences
 

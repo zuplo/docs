@@ -1,0 +1,365 @@
+---
+title: Plan Examples
+sidebar_label: Examples
+---
+
+:::warning
+
+The Monetization APIs are in preview and subject to change. Features and
+endpoints documented here may be modified as we refine the service based on
+customer feedback.
+
+:::
+
+This guide walks through progressively building a plan, starting simple and
+adding complexity. All examples assume you have already created:
+
+- A meter called `api_requests` that tracks API calls
+- A feature called `api_requests` linked to that meter
+
+## 1. Basic Fixed Monthly Plan
+
+A simple plan with a flat $9.99/month fee and 1,000 API requests included.
+
+```shell
+curl \
+  https://dev.zuplo.com/v3/metering/$BUCKET_ID/plans \
+  --request POST \
+  --header "Authorization: Bearer $ZAPI_KEY" \
+  --header "Content-Type: application/json" \
+  --data @- << EOF
+{
+  "key": "starter",
+  "name": "Starter Plan",
+  "description": "1,000 API requests per month",
+  "currency": "USD",
+  "billingCadence": "P1M",
+  "phases": [
+    {
+      "key": "default",
+      "name": "Default",
+      "duration": null,
+      "rateCards": [
+        {
+          "type": "flat_fee",
+          "key": "api_requests",
+          "name": "API Requests",
+          "featureKey": "api_requests",
+          "billingCadence": "P1M",
+          "price": {
+            "type": "flat",
+            "amount": "9.99"
+          },
+          "entitlementTemplate": {
+            "type": "metered",
+            "issueAfterReset": 1000,
+            "isSoftLimit": false,
+            "usagePeriod": "P1M"
+          }
+        }
+      ]
+    }
+  ]
+}
+EOF
+```
+
+**What this does:**
+
+- Charges $9.99 at the start of each month
+- Grants 1,000 API requests per month
+- Hard limit (`isSoftLimit: false`) - requests are blocked after 1,000
+
+## 2. Add a Free Trial
+
+Building on the previous example, add a 2-week free trial with 1,000 requests.
+
+```shell
+curl \
+  https://dev.zuplo.com/v3/metering/$BUCKET_ID/plans \
+  --request POST \
+  --header "Authorization: Bearer $ZAPI_KEY" \
+  --header "Content-Type: application/json" \
+  --data @- << EOF
+{
+  "key": "starter",
+  "name": "Starter Plan",
+  "description": "1,000 API requests per month with 2-week free trial",
+  "currency": "USD",
+  "billingCadence": "P1M",
+  "phases": [
+    {
+      "key": "trial",
+      "name": "Free Trial",
+      "duration": "P2W",
+      "rateCards": [
+        {
+          "type": "flat_fee",
+          "key": "api_requests",
+          "name": "API Requests (Trial)",
+          "featureKey": "api_requests",
+          "billingCadence": null,
+          "price": null,
+          "entitlementTemplate": {
+            "type": "metered",
+            "issueAfterReset": 1000,
+            "isSoftLimit": false,
+            "usagePeriod": "P2W"
+          }
+        }
+      ]
+    },
+    {
+      "key": "default",
+      "name": "Default",
+      "duration": null,
+      "rateCards": [
+        {
+          "type": "flat_fee",
+          "key": "api_requests",
+          "name": "API Requests",
+          "featureKey": "api_requests",
+          "billingCadence": "P1M",
+          "price": {
+            "type": "flat",
+            "amount": "9.99"
+          },
+          "entitlementTemplate": {
+            "type": "metered",
+            "issueAfterReset": 1000,
+            "isSoftLimit": false,
+            "usagePeriod": "P1M"
+          }
+        }
+      ]
+    }
+  ]
+}
+EOF
+```
+
+**What changed:**
+
+- Added a `trial` phase with `duration: "P2W"` (2 weeks)
+- Trial phase has `price: null` and `billingCadence: null` - it's free
+- After 2 weeks, customer automatically moves to the `default` phase
+
+## 3. Add Overage Charges
+
+Now allow customers to exceed their quota and charge $0.01 per additional
+request after the first 1,000.
+
+```shell
+curl \
+  https://dev.zuplo.com/v3/metering/$BUCKET_ID/plans \
+  --request POST \
+  --header "Authorization: Bearer $ZAPI_KEY" \
+  --header "Content-Type: application/json" \
+  --data @- << EOF
+{
+  "key": "starter",
+  "name": "Starter Plan",
+  "description": "1,000 API requests per month with 2-week free trial and overages",
+  "currency": "USD",
+  "billingCadence": "P1M",
+  "phases": [
+    {
+      "key": "trial",
+      "name": "Free Trial",
+      "duration": "P2W",
+      "rateCards": [
+        {
+          "type": "flat_fee",
+          "key": "api_requests",
+          "name": "API Requests (Trial)",
+          "featureKey": "api_requests",
+          "billingCadence": null,
+          "price": null,
+          "entitlementTemplate": {
+            "type": "metered",
+            "issueAfterReset": 1000,
+            "isSoftLimit": false,
+            "usagePeriod": "P2W"
+          }
+        }
+      ]
+    },
+    {
+      "key": "default",
+      "name": "Default",
+      "duration": null,
+      "rateCards": [
+        {
+          "type": "usage_based",
+          "key": "api_requests",
+          "name": "API Requests",
+          "featureKey": "api_requests",
+          "billingCadence": "P1M",
+          "entitlementTemplate": {
+            "type": "metered",
+            "issueAfterReset": 1000,
+            "isSoftLimit": true,
+            "usagePeriod": "P1M"
+          },
+          "price": {
+            "type": "tiered",
+            "mode": "graduated",
+            "tiers": [
+              {
+                "upToAmount": "1000",
+                "flatPrice": { "type": "flat", "amount": "9.99" },
+                "unitPrice": null
+              },
+              {
+                "flatPrice": null,
+                "unitPrice": { "type": "unit", "amount": "0.01" }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
+EOF
+```
+
+**What changed:**
+
+- Changed the rate card from `flat_fee` to `usage_based`
+- Changed `isSoftLimit` to `true` - requests continue after 1,000
+- Combined base fee and overage into tiered pricing: first 1,000 cost $9.99
+  flat, then $0.01 per additional request
+
+**Example billing:**
+
+| Usage | Base Fee | Overage             | Total  |
+| ----- | -------- | ------------------- | ------ |
+| 500   | $9.99    | $0                  | $9.99  |
+| 1,000 | $9.99    | $0                  | $9.99  |
+| 1,500 | $9.99    | 500 × $0.01 = $5    | $14.99 |
+| 5,000 | $9.99    | 4,000 × $0.01 = $40 | $49.99 |
+
+## 4. Add Static Entitlements
+
+Finally, add a static entitlement for "large payloads" that grants premium
+features without metering.
+
+:::note
+
+Before adding the `large_payloads` rate card, you must first create a feature
+with `key: "large_payloads"`.
+
+:::
+
+```shell
+curl \
+  https://dev.zuplo.com/v3/metering/$BUCKET_ID/plans \
+  --request POST \
+  --header "Authorization: Bearer $ZAPI_KEY" \
+  --header "Content-Type: application/json" \
+  --data @- << EOF
+{
+  "key": "starter",
+  "name": "Starter Plan",
+  "description": "1,000 API requests per month with 2-week free trial and overages",
+  "currency": "USD",
+  "billingCadence": "P1M",
+  "phases": [
+    {
+      "key": "trial",
+      "name": "Free Trial",
+      "duration": "P2W",
+      "rateCards": [
+        {
+          "type": "flat_fee",
+          "key": "api_requests",
+          "name": "API Requests (Trial)",
+          "featureKey": "api_requests",
+          "billingCadence": null,
+          "price": null,
+          "entitlementTemplate": {
+            "type": "metered",
+            "issueAfterReset": 1000,
+            "isSoftLimit": false,
+            "usagePeriod": "P2W"
+          }
+        },
+        {
+          "type": "flat_fee",
+          "key": "large_payloads",
+          "name": "Large Payloads (Trial)",
+          "featureKey": "large_payloads",
+          "billingCadence": null,
+          "price": null,
+          "entitlementTemplate": {
+            "type": "boolean",
+            "config": true
+          }
+        }
+      ]
+    },
+    {
+      "key": "default",
+      "name": "Default",
+      "duration": null,
+      "rateCards": [
+        {
+          "type": "usage_based",
+          "key": "api_requests",
+          "name": "API Requests",
+          "featureKey": "api_requests",
+          "billingCadence": "P1M",
+          "entitlementTemplate": {
+            "type": "metered",
+            "issueAfterReset": 1000,
+            "isSoftLimit": true,
+            "usagePeriod": "P1M"
+          },
+          "price": {
+            "type": "tiered",
+            "mode": "graduated",
+            "tiers": [
+              {
+                "upToAmount": "1000",
+                "flatPrice": { "type": "flat", "amount": "9.99" },
+                "unitPrice": null
+              },
+              {
+                "flatPrice": null,
+                "unitPrice": { "type": "unit", "amount": "0.01" }
+              }
+            ]
+          }
+        },
+        {
+          "type": "flat_fee",
+          "key": "large_payloads",
+          "name": "Large Payloads",
+          "featureKey": "large_payloads",
+          "billingCadence": null,
+          "price": null,
+          "entitlementTemplate": {
+            "type": "boolean",
+            "config": true
+          }
+        }
+      ]
+    }
+  ]
+}
+EOF
+```
+
+**What changed:**
+
+- Added `large_payloads` rate card to both phases
+- Uses `type: "boolean"` with `config: true` to grant the feature
+- No meter required - this is a static on/off entitlement
+
+**Final plan summary:**
+
+| Phase   | Duration | API Requests       | Large Payloads | Cost        |
+| ------- | -------- | ------------------ | -------------- | ----------- |
+| Trial   | 2 weeks  | 1,000 (hard limit) | Enabled        | Free        |
+| Default | Ongoing  | 1,000 + overages   | Enabled        | $9.99/month |

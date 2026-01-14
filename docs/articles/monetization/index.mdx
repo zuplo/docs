@@ -88,9 +88,10 @@ All examples in this documentation assume the following environment variables
 are set in your terminal:
 
 ```bash
-# Your Metering Bucket ID (Found in Settings > Project Information)
+# Your Metering Bucket (could be working-copy, preview, or production) ID
+# (Found in Project Services > Bucket Details)
 export BUCKET_ID=your-bucket-id
-# Your Zuplo API Key (Found in Settings > Zuplo API Keys)
+# Your Zuplo API Key (Found in Account Settings > Zuplo API Keys)
 export ZAPI_KEY=zpka_YOUR_API_KEY
 ```
 
@@ -101,6 +102,3 @@ curl \
   https://dev.zuplo.com/v3/metering/$BUCKET_ID/meters \
   --header "Authorization: Bearer $ZAPI_KEY"
 ```
-
-See [Zuplo API Keys](../accounts/zuplo-api-keys.mdx) for more information on
-obtaining an API key.

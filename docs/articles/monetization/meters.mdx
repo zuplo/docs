@@ -5,7 +5,9 @@ sidebar_label: Meters
 
 :::warning
 
-The Monetization APIs are in preview and subject to change.
+The Monetization APIs are in preview and subject to change. Features and
+endpoints documented here may be modified as we refine the service based on
+customer feedback.
 
 :::
 
@@ -39,7 +41,8 @@ Track the total number of API requests per customer:
 }
 ```
 
-Each `api_request` event should include a `count` field (typically `1`):
+Each `api_request` event should include a `count` field (typically `1`), as
+shown below:
 
 ```json
 {
