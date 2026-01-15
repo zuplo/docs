@@ -80,25 +80,9 @@ access and usage limits.
 
 [Learn more about Plans →](./plans.mdx)
 
-## API Authentication
+## Next Steps
 
-All Monetization API requests require authentication using a Zuplo API key.
-
-All examples in this documentation assume the following environment variables
-are set in your terminal:
-
-```bash
-# Your Metering Bucket (could be working-copy, preview, or production) ID
-# (Found in Project Services > Bucket Details)
-export BUCKET_ID=your-bucket-id
-# Your Zuplo API Key (Found in Account Settings > Zuplo API Keys)
-export ZAPI_KEY=zpka_YOUR_API_KEY
-```
-
-Include your API key in the `Authorization` header:
-
-```shell
-curl \
-  https://dev.zuplo.com/v3/metering/$BUCKET_ID/meters \
-  --header "Authorization: Bearer $ZAPI_KEY"
-```
+- [API Access](./api-access.mdx) - Learn about buckets and authentication
+- [Meters](./meters.mdx) - Track usage data from your API
+- [Features](./features.mdx) - Define the capabilities your API offers
+- [Plans](./plans.mdx) - Package features into subscription tiers
