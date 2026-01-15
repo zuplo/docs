@@ -11,6 +11,7 @@ Zuplo supports logging to the following sources:
 - Datadog (Beta)
 - Dynatrace (Beta)
 - New Relic (Beta)
+- OpenTelemetry (Beta)
 
 If you would like to log to a different source, reach out to support@zuplo.com
 and we'd be happy to work with you to add a new logging plugin.
@@ -281,3 +282,90 @@ can use a tool like the
 aggregation.
 
 :::
+
+### OpenTelemetry (Beta)
+
+The OpenTelemetry metrics plugin sends metrics to any OpenTelemetry-compatible
+collector using the
+[OTLP HTTP JSON format](https://opentelemetry.io/docs/specs/otlp/#json-protobuf-encoding).
+This allows you to integrate with a wide variety of observability backends that
+support OpenTelemetry, including Grafana, Jaeger, Honeycomb, and many others.
+
+By default, we send all metrics to your OpenTelemetry collector. However, you
+have the option below to configure which metrics you want to send.
+
+```ts
+import {
+  RuntimeExtensions,
+  OTelMetricsPlugin,
+  environment,
+} from "@zuplo/runtime";
+
+export function runtimeInit(runtime: RuntimeExtensions) {
+  runtime.addPlugin(
+    new OTelMetricsPlugin({
+      // The OTLP HTTP endpoint URL for your collector
+      url: "https://otel-collector.example.com:4318/v1/metrics",
+      // Optional headers for authentication
+      headers: {
+        Authorization: `Bearer ${environment.OTEL_API_KEY}`,
+      },
+      // Resource attributes to include with all metrics
+      attributes: {
+        "service.name": "my-api",
+        "deployment.environment": environment.ENVIRONMENT ?? "development",
+      },
+      metrics: {
+        latency: true,
+        requestContentLength: true,
+        responseContentLength: true,
+      },
+      // You can also choose to add additional attributes to include in the metrics
+      include: {
+        country: false,
+        httpMethod: false,
+        statusCode: false,
+        path: false,
+      },
+    }),
+  );
+}
+```
+
+The plugin uses
+[OpenTelemetry semantic conventions](https://opentelemetry.io/docs/specs/semconv/)
+for metric names and attributes:
+
+| Metric                  | Name                             | Unit |
+| ----------------------- | -------------------------------- | ---- |
+| Request latency         | `http.server.request.duration`   | ms   |
+| Request content length  | `http.server.request.body.size`  | By   |
+| Response content length | `http.server.response.body.size` | By   |
+
+When `include` options are enabled, the following attributes are added:
+
+| Option       | Attribute                     |
+| ------------ | ----------------------------- |
+| `country`    | `client.geo.country_iso_code` |
+| `httpMethod` | `http.request.method`         |
+| `statusCode` | `http.response.status_code`   |
+| `path`       | `http.route`                  |
+
+The above configuration applies globally for all metrics sent to your
+OpenTelemetry collector. If you wish to dynamically configure information for a
+particular ZuploContext, you can use the `OTelMetricsPlugin` in your code.
+Currently, the only configuration you can set is the attributes. The values you
+set here will be appended to those set globally in the `zuplo.runtime.ts` file.
+
+```ts
+import { ZuploContext, ZuploRequest, OTelMetricsPlugin } from "@zuplo/runtime";
+
+export default async function (request: ZuploRequest, context: ZuploContext) {
+  const someValue = "hello";
+  OTelMetricsPlugin.setContext(context, {
+    attributes: { "my.custom.attribute": someValue },
+  });
+
+  return "What zup?";
+}
+```
