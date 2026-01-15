@@ -451,6 +451,7 @@ export const apiGateway: Navigation = [
         label: "Monetization API (Preview)",
         items: [
           "articles/monetization/index",
+          "articles/monetization/api-access",
           "articles/monetization/meters",
           "articles/monetization/features",
           {
