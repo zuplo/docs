@@ -41,7 +41,7 @@
     "elkjs": "^0.11.0",
     "lucide-react": "^0.555.0",
     "mermaid": "^11.12.1",
-    "react": "^19.0.0",
+    "react": "^19.2.3",
     "react-dom": "^19.0.0",
     "zudoku": "^0.67.0"
   },
@@ -50,7 +50,7 @@
     "@types/dagre": "^0.7.53",
     "@types/json-schema": "7.0.15",
     "@types/node": "^22.10.7",
-    "@types/react": "^19.0.7",
+    "@types/react": "^19.2.9",
     "@types/react-dom": "^19.0.2",
     "@typescript-eslint/parser": "^8.48.1",
     "concurrently": "^9.2.1",
