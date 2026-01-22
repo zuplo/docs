@@ -4,8 +4,8 @@ sidebar_label: OpenTelemetry
 ---
 
 Zuplo ships with an OpenTelemetry plugin that allows you to collect and export
-telemetry data from your Zuplo API. Currently, the OpenTelemetry plugin
-implements tracing. Metrics and logging support are planned for future releases.
+telemetry data from your Zuplo API. The OpenTelemetry plugin supports tracing
+and logging. Metrics support is planned for future releases.
 
 <EnterpriseFeature name="OpenTelemetry" />
 
@@ -92,13 +92,56 @@ This will result in a span that has the following spans:
 |    |    |--- GET https://api.example.com/world
 ```
 
+## Logging
+
+Logging can be enabled by configuring the `logUrl` property in the OpenTelemetry
+plugin configuration, as shown in
+[Tracing and Logging Configuration](#tracing-and-logging-configuration). When
+enabled, logs will be exported to the specified endpoint in OpenTelemetry
+format.
+
+To add OpenTelemetry logs in your Zuplo handlers and policies, you can use the
+`context.log` object as shown below:
+
+```ts
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export default async function policy(
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  context.log.info("Hello World");
+  return request;
+}
+```
+
+You can also set additional custom log properties using
+`context.log.setLogProperties!`:
+
+```ts
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export default async function policy(
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  context.log.setLogProperties!({ customProperty: "value" });
+  context.log.info("Hello World");
+  return request;
+}
+```
+
+After setting a custom property, all subsequent log messages will include that
+property.
+
+These logs will be exported to the configured log endpoint in OpenTelemetry
+format. The log message will be in the `message` field and the custom properties
+will be in the `attributes` field.
+
 ## Setup
 
-Adding OpenTelemetry tracing to your Zuplo API is done by adding the
+Adding OpenTelemetry to your Zuplo API is done by adding the
 `OpenTelemetryPlugin` in the `zuplo.runtime.ts` file as shown below.
-
-For most providers you will set values for `exporter.url` and
-`exporter.headers`. It's common for providers to use a header for authorization.
 
 :::warning{title="OpenTelemetry Protocol"}
 
@@ -110,20 +153,96 @@ convert the JSON format to the format required by your service.
 
 :::
 
+### Basic Tracing Configuration
+
+For most providers you will set values for `exporter.url` and
+`exporter.headers`. It's common for providers to use a header for authorization.
+
 ```ts title="zuplo.runtime.ts"
 import { OpenTelemetryPlugin } from "@zuplo/otel";
 import { RuntimeExtensions, environment } from "@zuplo/runtime";
+
 export function runtimeInit(runtime: RuntimeExtensions) {
   runtime.addPlugin(
     new OpenTelemetryPlugin({
       exporter: {
-        url: "https://otlp.example.com",
+        url: "https://otel-collector.example.com/v1/traces",
         headers: {
-          Authorization: `Bearer ${environment.OTEL_API_KEY}`,
+          "api-key": environment.OTEL_API_KEY,
         },
       },
       service: {
         name: "my-api",
+        version: "1.0.0",
+      },
+    }),
+  );
+}
+```
+
+### Advanced Tracing Configuration
+
+The OpenTelemetry plugin supports additional configuration options for advanced
+use cases, including sampling and post-processing of spans.
+
+```ts title="zuplo.runtime.ts"
+import { OpenTelemetryPlugin } from "@zuplo/otel";
+import { RuntimeExtensions, environment } from "@zuplo/runtime";
+
+export function runtimeInit(runtime: RuntimeExtensions) {
+  runtime.addPlugin(
+    new OpenTelemetryPlugin({
+      exporter: {
+        url: "https://otel-collector.example.com/v1/traces",
+        headers: { "api-key": environment.OTEL_API_KEY },
+      },
+      service: {
+        name: "my-api",
+        version: "1.0.0",
+      },
+      // Optional post processor to modify spans before export
+      postProcessor: (spans) => {
+        for (const span of spans) {
+          (
+            span as unknown as { attributes: Record<string, unknown> }
+          ).attributes["post.processed"] = true;
+        }
+        return spans;
+      },
+      sampling: {
+        headSampler: {
+          ratio: 0.1, // Sample 10% of requests
+        },
+      },
+    }),
+  );
+}
+```
+
+### Tracing and Logging Configuration
+
+Logging is only enabled when specifically configured with its own endpoint using
+the `logUrl` property. When using both tracing and logging, you can configure
+them with separate endpoints.
+
+```ts title="zuplo.runtime.ts"
+import { OpenTelemetryPlugin } from "@zuplo/otel";
+import { RuntimeExtensions, environment } from "@zuplo/runtime";
+
+export function runtimeInit(runtime: RuntimeExtensions) {
+  runtime.addPlugin(
+    new OpenTelemetryPlugin({
+      logUrl: "https://otel-collector.example.com/v1/logs",
+      traceUrl: "https://otel-collector.example.com/v1/traces",
+      headers: { "api-key": environment.OTEL_API_KEY },
+      service: {
+        name: "my-api",
+        version: "1.0.0",
+      },
+      sampling: {
+        headSampler: {
+          ratio: 0.1, // Sample 10% of requests
+        },
       },
     }),
   );

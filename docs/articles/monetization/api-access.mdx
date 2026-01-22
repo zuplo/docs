@@ -1,0 +1,68 @@
+---
+title: API Access
+sidebar_label: API Access
+---
+
+:::warning
+
+The Monetization APIs are in preview and subject to change. Features and
+endpoints documented here may be modified as we refine the service based on
+customer feedback.
+
+:::
+
+## Buckets
+
+Each Zuplo project includes three isolated buckets that mirror your
+[environment structure](../environments.mdx):
+
+| Bucket           | Purpose                                                       |
+| ---------------- | ------------------------------------------------------------- |
+| **Working Copy** | Your development sandbox for building and testing             |
+| **Preview**      | Staging environments for validating changes before production |
+| **Production**   | Your live environment serving real customers                  |
+
+Meters, features, plans, and subscriptions are all scoped to a specific bucket.
+This isolation enables independent development workflows where you can:
+
+- **Experiment freely** - Test new pricing models or usage tracking in
+  development without affecting production data
+- **Validate changes** - Promote your product catalog configuration through
+  preview environments before going live
+- **Maintain separation** - Keep development test data completely isolated from
+  production customer usage
+
+When you're satisfied with your configuration in one bucket, you can recreate
+that same configuration in another bucket to promote changes through your
+deployment pipeline.
+
+## Authentication
+
+All Monetization API requests require authentication using a Zuplo API key.
+
+All examples in this documentation assume the following environment variables
+are set in your terminal:
+
+```bash
+# Your Bucket ID (could be working-copy, preview, or production)
+# (Found in Project Services > Bucket Details)
+export BUCKET_ID=your-bucket-id
+# Your Zuplo API Key (Found in Account Settings > Zuplo API Keys)
+export ZAPI_KEY=zpka_YOUR_API_KEY
+```
+
+Include your API key in the `Authorization` header:
+
+```shell
+curl \
+  https://dev.zuplo.com/v3/metering/$BUCKET_ID/meters \
+  --header "Authorization: Bearer $ZAPI_KEY"
+```
+
+## API Reference
+
+For complete API operations, see the API Reference documentation:
+
+- [Meters API](../../api/metering-meters)
+- [Features API](../../api/metering-features)
+- [Plans API](../../api/metering-plans)

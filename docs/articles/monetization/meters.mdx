@@ -1,0 +1,122 @@
+---
+title: Meters
+sidebar_label: Meters
+---
+
+:::warning
+
+The Monetization APIs are in preview and subject to change. Features and
+endpoints documented here may be modified as we refine the service based on
+customer feedback.
+
+:::
+
+Meters aggregate usage data from your API. They watch for specific event types,
+extract numeric values, and sum them over configurable time windows.
+
+## How Meters Work
+
+A meter is configured with:
+
+- **Event type** - Which events to process (e.g., `api_request`, `completion`)
+- **Value property** - JSONPath to extract the numeric value from event data
+- **Aggregation** - How to combine values (typically `SUM`)
+
+When events are ingested, the meter matches events by type, extracts the
+specified value, and aggregates it per customer over time.
+
+## Common Examples
+
+### API Request Counting
+
+Track the total number of API requests per customer:
+
+```json
+{
+  "slug": "api_requests",
+  "name": "API Requests",
+  "eventType": "api_request",
+  "aggregation": "SUM",
+  "valueProperty": "$.count"
+}
+```
+
+Each `api_request` event should include a `count` field (typically `1`), as
+shown below:
+
+```json
+{
+  "type": "api_request",
+  "subject": "customer-123",
+  "data": {
+    "count": 1,
+    "method": "GET",
+    "route": "/products/:id"
+  }
+}
+```
+
+### Token Usage
+
+Track LLM token consumption for AI applications:
+
+```json
+{
+  "slug": "tokens_total",
+  "name": "Token Usage",
+  "eventType": "completion",
+  "aggregation": "SUM",
+  "valueProperty": "$.tokens"
+}
+```
+
+Report token usage after each completion:
+
+```json
+{
+  "type": "completion",
+  "subject": "customer-123",
+  "data": {
+    "tokens": 1250,
+    "model": "gpt-4"
+  }
+}
+```
+
+### Data Transfer
+
+Track bytes transferred:
+
+```json
+{
+  "slug": "data_transfer",
+  "name": "Data Transfer (bytes)",
+  "eventType": "response",
+  "aggregation": "SUM",
+  "valueProperty": "$.bytes"
+}
+```
+
+## Creating a Meter
+
+```shell
+curl \
+  https://dev.zuplo.com/v3/metering/$BUCKET_ID/meters \
+  --request POST \
+  --header "Authorization: Bearer $ZAPI_KEY" \
+  --header "Content-Type: application/json" \
+  --data @- << EOF
+{
+  "slug": "api_requests",
+  "name": "API Requests",
+  "eventType": "api_request",
+  "aggregation": "SUM",
+  "valueProperty": "$.count"
+}
+EOF
+```
+
+## API Reference
+
+For complete API operations (list, get, update, delete), see the
+[Meters API Reference](../../api/metering-meters).

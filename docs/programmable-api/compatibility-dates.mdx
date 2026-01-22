@@ -12,6 +12,49 @@ project. The `zuplo.jsonc` file is created by default for new projects and
 contains the default configuration. For more information on the `zuplo.jsonc`
 file, see the [Zuplo Project Configuration](./zuplo-json.mdx) documentation.
 
+## 2026-03-01
+
+:::warning
+
+This compatibility date is a future date and is subject to change before it
+becomes active by default. You may modify your `zuplo.jsonc` to take advantage
+of this today.
+
+:::
+
+### Chain Response Sending Hooks
+
+This compatibility date changes how response sending hooks behave when multiple
+hooks are registered. With this flag enabled, response sending hooks
+(`context.addResponseSendingHook` and `runtime.addResponseSendingHook`) chain
+properly, where each hook receives the response from the previous hook instead
+of the original response.
+
+**Before this flag:** All hooks received the **_original_** response, so only
+the last hook's output was used.
+
+**After this flag:** Hooks are chained properly, each receiving the **_previous
+hook's response_**. For example, if you register three hooks A, B, and C in a
+policy in that order, hook A's response passes to hook B, then hook B's response
+passes to hook C.
+
+This change enables more predictable behavior when composing multiple response
+transformations.
+
+### 501 for Unsupported HTTP Methods
+
+This compatibility date changes how unsupported HTTP methods are handled.
+Requests using non-standard HTTP methods such as WebDAV methods (`PROPFIND`,
+`MKCOL`, `COPY`, etc.) now return a proper `501 Not Implemented` response
+instead of a `500 Internal Server Error`.
+
+**Before this flag:** Unsupported HTTP methods returned a
+`500 Internal Server Error`.
+
+**After this flag:** Unsupported HTTP methods return a `501 Not Implemented`
+response with an [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807)
+`application/problem+json` body.
+
 ## 2025-02-06
 
 This compatibility date introduces a number of breaking changes to improve the

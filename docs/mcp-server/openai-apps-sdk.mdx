@@ -5,9 +5,9 @@ sidebar_label: OpenAI Apps SDK
 
 The [OpenAI Apps SDK](https://developers.openai.com/apps-sdk) is an integration
 of MCP that lets you expose applications to ChatGPT. Zuplo's MCP Server provides
-built-in support for the Apps SDK through the `ZuploMcpSdk` class, which allows
-you to access incoming request metadata and set response metadata required for
-ChatGPT widget rendering.
+built-in support for the Apps SDK through `tools`, `resources`, and the
+`ZuploMcpSdk` class, which allows you to optionally access incoming request
+metadata and set response metadata required for ChatGPT widget rendering.
 
 :::warning
 
@@ -16,7 +16,61 @@ and subject to change!
 
 :::
 
-## ZuploMcpSdk
+## `tools`
+
+MCP tools define the functionality of your app. Zuplo MCP servers support tools
+for the OpenAI Apps SDK with `_meta` metadata through the `x-zuplo-route.mcp`
+configuration. Learn more about configuration options for `tools` in
+[the MCP Server Tools documentation](./tools).
+
+## `resources`
+
+MCP resources are how your app's sandboxed widgets are displayed in the chat
+interface. Zuplo MCP servers support resources for the OpenAI Apps SDK with
+`_meta` metadata through the `x-zuplo-route.mcp` configuration. Learn more about
+configuration options for `resources` in
+[the MCP Server Resources documentation](./resources).
+
+## Configuring metadata
+
+When configuring and describing your tools and resources, you may need to set
+specific `annotations` and static `_meta` for when ChatGPT inspects these
+entities. `_meta` is the main way that the OpenAI Apps SDK interfaces with an
+MCP server. For example, an application may want to set a `readOnlyHint`
+annotation on a tool and define that the tool renders a component for your
+application with the static `_meta["openai/outputTemplate"]` metadata:
+
+```json
+"x-zuplo-route": {
+  "corsPolicy": "none",
+  "handler": {
+    "export": "default",
+    "module": "$import(./modules/weather)"
+  },
+  "mcp": {
+    "type": "tool",
+    "name": "get_current_weather",
+    "description": "Retrieve and render application weather component",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "_meta": {
+      "openai/toolInvocation/invoking": "Getting weather ...",
+      "openai/toolInvocation/invoked": "Weather ready!",
+      "openai/outputTemplate": "ui://widget/weather.html"
+    }
+  }
+}
+```
+
+The resource defined at `ui://widget/weather.html` can then be used to render
+the app. Learn more about this in
+[the Zuplo MCP Server Tools documentation](./tools),
+[the OpenAI Apps SDK documentation for defining tools](https://developers.openai.com/apps-sdk/plan/tools)
+and
+[the OpenAI Apps SDK documentation for setting up tools and resources](https://developers.openai.com/apps-sdk/build/mcp-server).
+
+## `ZuploMcpSdk`
 
 The `ZuploMcpSdk` class in the `@zuplo/runtime` provides methods to interact
 with an MCP request and response metadata, which is essential for building
@@ -24,7 +78,7 @@ ChatGPT Apps that return `structuredContent` and `_meta` payloads _out of band_
 of the typical API response flow.
 
 This means that you can still use your existing APIs as MCP tools for your
-OpenAI Apps SDK application while wrapping them with a custom module with
+OpenAI Apps SDK application while wrapping them with a custom module that uses
 `ZuploMcpSdk` in order to propagate `_meta` application state.
 
 ### Usage
@@ -98,39 +152,6 @@ sdk.setRawCallToolResult({
   },
 });
 ```
-
-## Configuring tool `annotations` and `_meta`
-
-When configuring and describing your tools, you may need to set specific
-`annotations` and static `_meta` for when ChatGPT performs a `tools/list`. For
-example, some applications may want to set a `readOnlyHint` annotation on a tool
-or define that a tool renders a component of your application with a static
-`_meta["openai/outputTemplate"]`.
-
-```json
-"x-zuplo-route": {
-  "corsPolicy": "none",
-  "handler": {
-    "export": "default",
-    "module": "$import(./modules/weather)"
-  },
-  "mcp": {
-    "type": "tool",
-    "name": "get_current_weather",
-    "description": "Retrieve and render application weather component",
-    "annotations": {
-      "readOnlyHint": true
-    },
-    "_meta": {
-      "openai/toolInvocation/invoking": "Getting weather ...",
-      "openai/toolInvocation/invoked": "Weather ready!"
-    }
-  }
-}
-```
-
-Learn more about this in [the Zuplo MCP Server Tools documentation](./tools) and
-[the OpenAI Apps SDK documentation for defining tools](https://developers.openai.com/apps-sdk/plan/tools).
 
 ---
 

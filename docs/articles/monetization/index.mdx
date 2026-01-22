@@ -1,0 +1,80 @@
+---
+title: Monetization API Overview
+sidebar_label: Overview
+---
+
+:::warning
+
+The Monetization APIs are in preview and subject to change. Features and
+endpoints documented here may be modified as we refine the service based on
+customer feedback.
+
+:::
+
+Zuplo's Monetization API is a first-party metering and billing solution built
+directly into the Zuplo platform. Developed from years of collaboration with our
+enterprise customers and design partners, this API distills the patterns and
+requirements we've seen across hundreds of API monetization implementations into
+a streamlined, production-ready service.
+
+## Built from Real-World Experience
+
+While Zuplo continues to support
+[integrations with third-party billing platforms](../monetization.mdx) like
+Amberflo, Moesif, and Stripe, we've learned that many teams need a tightly
+integrated, API-native metering solution. The Monetization API brings the
+capabilities we've built for
+[enterprise customers](../monetization-enterprise.mdx) into a self-service API
+that any Zuplo user can adopt.
+
+This API reflects lessons learned from:
+
+- **Enterprise deployments** tracking billions of API calls monthly
+- **Design partners** who shaped the feature set through real usage
+- **Production workloads** that validated the architecture at scale
+
+## What the Monetization API Provides
+
+- **Usage metering** - Track API calls, tokens, bytes, or any custom metric
+- **Product catalog** - Define features and plans that map to your pricing page
+- **Real-time queries** - Check usage instantly for quota enforcement or
+  customer dashboards
+- **Subscription management** - Connect usage to customers and billing periods
+
+## Core Concepts
+
+The Monetization API is built around three primary resources that form your
+**Product Catalog**:
+
+### Meters
+
+Meters aggregate usage data from your API. You define an event type to watch and
+a value to extract, and the meter sums those values across time windows and
+customers. Use meters to track API calls, tokens processed, bytes transferred,
+or any numeric metric.
+
+[Learn more about Meters →](./meters.mdx)
+
+### Features
+
+Features describe what your API offers. These are the capabilities in your API
+product - access to specific endpoints, higher rate limits, premium response
+formats, or advanced functionality. Each feature can be tied to a meter to track
+consumption.
+
+[Learn more about Features →](./features.mdx)
+
+### Plans
+
+Plans are subscription tiers that package features together. They represent the
+rows on your pricing page - Free, Pro, Enterprise - each with different feature
+access and usage limits.
+
+[Learn more about Plans →](./plans.mdx)
+
+## Next Steps
+
+- [API Access](./api-access.mdx) - Learn about buckets and authentication
+- [Meters](./meters.mdx) - Track usage data from your API
+- [Features](./features.mdx) - Define the capabilities your API offers
+- [Plans](./plans.mdx) - Package features into subscription tiers

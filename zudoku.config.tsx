@@ -136,14 +136,16 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
   mdx: {
     components: mdxComponents,
   },
-  apis: {
-    type: "file",
-    input: "./api.json",
-    path: "api",
-    options: {
-      expandAllTags: true,
+  apis: [
+    {
+      type: "file",
+      input: "./api.json",
+      path: "api",
+      options: {
+        expandAllTags: true,
+      },
     },
-  },
+  ],
   docs: {
     files: ["/docs/**/!(*.partial).{md,mdx}"],
     defaultOptions: {

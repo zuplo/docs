@@ -4,6 +4,7 @@
   "cli/dev",
   "cli/docs",
   "cli/editor",
+  "cli/init",
   "cli/link",
   "cli/list",
   "cli/mtls-certificate-create",
