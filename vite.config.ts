@@ -16,11 +16,14 @@ export default defineConfig({
   plugins: [
     microfrontends(),
     // Put the Sentry vite plugin after all other plugins
-    process.env.VERCEL &&
-      sentryVitePlugin({
-        authToken: process.env.SENTRY_AUTH_TOKEN,
-        org: "zuplo",
-        project: "docs",
-      }),
+    ...[
+      process.env.VERCEL
+        ? sentryVitePlugin({
+            authToken: process.env.SENTRY_AUTH_TOKEN,
+            org: "zuplo",
+            project: "docs",
+          })
+        : [],
+    ],
   ],
 });
