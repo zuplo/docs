@@ -23,10 +23,10 @@ export const GuidesPage = () => {
     if (newCategories.length > 0) {
       setSearchParams(
         { categories: newCategories.join(",") },
-        { replace: true },
+        { replace: true, preventScrollReset: true },
       );
     } else {
-      setSearchParams({}, { replace: true });
+      setSearchParams({}, { replace: true, preventScrollReset: true });
     }
   };
 
@@ -72,7 +72,7 @@ export const GuidesPage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 my-5">
         {/* Sidebar */}
         <aside className="lg:col-span-1">
-          <div className="sticky top-4">
+          <div className="sticky top-[calc(var(--header-height)+1rem)]">
             <h2 className="text-xl font-semibold mb-4">Filter Guides</h2>
             <div className="space-y-3">
               {categories.map((category) => (
