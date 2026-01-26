@@ -36,7 +36,7 @@
     "@phosphor-icons/react": "^2.1.10",
     "@sentry/react": "^10.28.0",
     "@sentry/vite-plugin": "^4.3.0",
-    "@vercel/microfrontends": "^2.0.0",
+    "@vercel/microfrontends": "^2.3.0",
     "@xyflow/react": "^12.9.0",
     "elkjs": "^0.11.0",
     "lucide-react": "^0.562.0",
@@ -46,7 +46,7 @@
     "zudoku": "^0.67.0"
   },
   "devDependencies": {
-    "@anthropic-ai/claude-agent-sdk": "^0.2.15",
+    "@anthropic-ai/claude-agent-sdk": "^0.2.19",
     "@types/dagre": "^0.7.53",
     "@types/json-schema": "7.0.15",
     "@types/node": "^22.10.7",
