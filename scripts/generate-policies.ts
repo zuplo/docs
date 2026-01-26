@@ -77,6 +77,27 @@ function invariant(condition: unknown, message: string): asserts condition {
   throw new Error(message);
 }
 
+/**
+ * Recursively removes all properties that start with an underscore from an object
+ */
+function stripUnderscoreProperties<T>(obj: T): T {
+  if (obj === null || typeof obj !== "object") {
+    return obj;
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.map((item) => stripUnderscoreProperties(item)) as T;
+  }
+
+  const result: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(obj)) {
+    if (!key.startsWith("_")) {
+      result[key] = stripUnderscoreProperties(value);
+    }
+  }
+  return result as T;
+}
+
 type PolicyProduct = "ai-gateway" | "api-gateway" | "mcp-gateway";
 type PolicySchema = JSONSchema7 & {
   isBeta?: boolean;
@@ -253,9 +274,7 @@ for (const schemaPath of policySchemas) {
       module: `$import(./modules/${policyId})`,
     };
   } else if (examples && examples.length > 0) {
-    const example = { ...examples[0] };
-    delete (example as any)._name;
-    meta.defaultHandler = example;
+    meta.defaultHandler = stripUnderscoreProperties(examples[0]);
   } else {
     meta.defaultHandler = {
       export: (handler.properties.export as JSONSchema7).const,
@@ -282,7 +301,7 @@ for (const schemaPath of policySchemas) {
     code = {
       name: `my-${policyId}-policy`,
       policyType: policyId,
-      handler: examples[0],
+      handler: stripUnderscoreProperties(examples[0]),
     };
   } else if (schema.isCustom) {
     code = {
