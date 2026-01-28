@@ -52,6 +52,7 @@ export const guides: Navigation = [
   "articles/versioning-on-zuplo",
   "guides/canary-routing-for-employees",
   "guides/geolocation-backend-routing",
+  "guides/user-based-backend-routing",
   "guides/modify-openapi-paths",
   "guides/modify-openapi-paths",
   "guides/openapi-overlays",
