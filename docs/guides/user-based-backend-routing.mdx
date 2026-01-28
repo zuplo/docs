@@ -1,0 +1,437 @@
+---
+title: Route to Backends Based on User Identity
+sidebar_label: User-Based Backend Routing
+description:
+  Learn how to create a Zuplo policy that routes requests to different backends
+  based on API key metadata or JWT claims for multi-tenant and environment
+  isolation scenarios.
+tags:
+  - backends
+  - custom-code
+  - authentication
+---
+
+This guide explains how to create a Zuplo policy that routes requests to
+different backend URLs based on user identity information, such as API key
+metadata or JWT custom claims.
+
+## Overview
+
+Many API providers need to route different users to different backend
+environments. Common scenarios include:
+
+- **Environment separation** - Route users to sandbox or production backends
+  based on their API key, similar to how Stripe uses test and live API keys
+- **Customer isolation** - Route each customer to their own isolated backend
+  environment for data privacy or compliance requirements
+- **Hybrid multi-tenant** - Route some customers to dedicated backends while
+  others use a shared multi-tenant environment
+
+Zuplo's programmable gateway makes these routing patterns simple to implement
+with custom policies that read user data from API keys or JWT tokens.
+
+## How It Works
+
+When a request is authenticated using Zuplo's
+[API Key Authentication](../policies/api-key-inbound.mdx) or any
+[JWT Authentication](../policies/open-id-jwt-auth-inbound.mdx) policy, user
+information becomes available on `request.user`:
+
+- `request.user.sub` - The unique identifier for the user
+- `request.user.data` - Additional metadata (API key metadata or JWT claims)
+
+Your custom policy reads this data and determines the appropriate backend URL
+for the request.
+
+## Use Case 1: Environment-Based Routing (Stripe-Style Keys)
+
+Companies like Stripe use separate API keys for sandbox and production
+environments. Users get a test key (`sk_test_...`) for development and a live
+key (`sk_live_...`) for production, both hitting the same API endpoint.
+
+You can implement this pattern by storing an `environment` property in your API
+key metadata:
+
+```typescript
+// modules/environment-routing.ts
+import { ZuploContext, ZuploRequest, environment } from "@zuplo/runtime";
+
+export default async function policy(
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  // Get the environment from API key metadata or JWT claims
+  const userEnvironment = request.user?.data?.environment;
+
+  if (userEnvironment === "sandbox") {
+    context.custom.downstreamUrl = environment.SANDBOX_BACKEND_URL;
+    context.log.info("Routing to sandbox environment");
+  } else if (userEnvironment === "production") {
+    context.custom.downstreamUrl = environment.PRODUCTION_BACKEND_URL;
+    context.log.info("Routing to production environment");
+  } else {
+    throw new Error("Unknown environment in user data");
+  }
+
+  return request;
+}
+```
+
+When creating API keys in the Zuplo portal, set the metadata to include the
+environment:
+
+```json
+{
+  "environment": "sandbox"
+}
+```
+
+Or for production keys:
+
+```json
+{
+  "environment": "production"
+}
+```
+
+## Use Case 2: Customer-Specific Backend Routing
+
+For B2B APIs where each customer needs their own isolated backend (for
+compliance, data residency, or white-label deployments), you can route based on
+customer-specific configuration.
+
+### Using a Configuration File
+
+For smaller deployments, store routing configuration in a JSON file:
+
+```json
+// config/customers.json
+[
+  {
+    "customerId": "acme-corp",
+    "environmentName": "acme",
+    "backendUrl": "https://acme.tenants.example.com"
+  },
+  {
+    "customerId": "wayne-ent",
+    "environmentName": "wayne",
+    "backendUrl": "https://wayne.tenants.example.com"
+  },
+  {
+    "customerId": "stark-ind",
+    "environmentName": "stark",
+    "backendUrl": "https://stark.tenants.example.com"
+  }
+]
+```
+
+Create a policy that reads the customer ID from user data and looks up the
+backend:
+
+```typescript
+// modules/customer-routing.ts
+import { HttpProblems, ZuploContext, ZuploRequest } from "@zuplo/runtime";
+import customers from "../config/customers.json";
+
+interface CustomerConfig {
+  customerId: string;
+  environmentName: string;
+  backendUrl: string;
+}
+
+export default async function policy(
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  // Get customer ID from API key metadata or JWT claims
+  const customerId = request.user?.data?.customerId;
+
+  if (!customerId) {
+    context.log.warn("No customer ID found in user data");
+    return HttpProblems.unauthorized(request, context, {
+      detail: "Customer identification required",
+    });
+  }
+
+  // Find the customer's routing configuration
+  const customer = (customers as CustomerConfig[]).find(
+    (c) => c.customerId === customerId,
+  );
+
+  if (!customer) {
+    context.log.error(`Customer configuration not found: ${customerId}`);
+    return HttpProblems.forbidden(request, context, {
+      detail: "Customer not configured",
+    });
+  }
+
+  // Set the downstream URL for use by the handler
+  context.custom.downstreamUrl = customer.backendUrl;
+
+  context.log.info({
+    message: "Routing request to customer backend",
+    customerId,
+    backend: customer.backendUrl,
+  });
+
+  return request;
+}
+```
+
+### Using BackgroundLoader for Dynamic Configuration
+
+For production deployments with frequently changing customer configurations, use
+the [BackgroundLoader](../programmable-api/background-loader.mdx) to fetch
+routing data from an external service while minimizing latency:
+
+```typescript
+// modules/customer-routing-dynamic.ts
+import {
+  BackgroundLoader,
+  HttpProblems,
+  ZuploContext,
+  ZuploRequest,
+  environment,
+} from "@zuplo/runtime";
+
+interface CustomerConfig {
+  customerId: string;
+  backendUrl: string;
+}
+
+// Create the background loader at module level
+const customerConfigLoader = new BackgroundLoader<CustomerConfig[]>(
+  async () => {
+    const response = await fetch(environment.CUSTOMER_CONFIG_API_URL, {
+      headers: {
+        Authorization: `Bearer ${environment.CONFIG_API_TOKEN}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to load customer config: ${response.status}`);
+    }
+
+    return response.json();
+  },
+  {
+    ttlSeconds: 300, // Cache for 5 minutes
+    loaderTimeoutSeconds: 10,
+  },
+);
+
+export default async function policy(
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  const customerId = request.user?.data?.customerId;
+
+  if (!customerId) {
+    return HttpProblems.unauthorized(request, context, {
+      detail: "Customer identification required",
+    });
+  }
+
+  // Load customer configurations (returns cached data immediately if available)
+  const customers = await customerConfigLoader.get("customers");
+  const customer = customers.find((c) => c.customerId === customerId);
+
+  if (!customer) {
+    context.log.error(`Customer not found: ${customerId}`);
+    return HttpProblems.forbidden(request, context, {
+      detail: "Customer not configured",
+    });
+  }
+
+  context.custom.downstreamUrl = customer.backendUrl;
+
+  return request;
+}
+```
+
+The `BackgroundLoader` provides significant advantages for production use:
+
+- Returns cached data immediately when available
+- Refreshes data in the background without blocking requests
+- Only blocks when the cache is empty or expired
+- Ensures only one request per key is active at any time
+
+## Use Case 3: Hybrid Multi-Tenant Routing
+
+Some architectures use a mix of dedicated and shared backends. Premium customers
+get isolated environments while others use a shared multi-tenant backend:
+
+```typescript
+// modules/hybrid-routing.ts
+import { ZuploContext, ZuploRequest, environment } from "@zuplo/runtime";
+import dedicatedCustomers from "../config/dedicated-customers.json";
+
+interface DedicatedCustomer {
+  customerId: string;
+  backendUrl: string;
+}
+
+export default async function policy(
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  const customerId = request.user?.data?.customerId;
+
+  // Check if this customer has a dedicated backend
+  const dedicatedConfig = (dedicatedCustomers as DedicatedCustomer[]).find(
+    (c) => c.customerId === customerId,
+  );
+
+  if (dedicatedConfig) {
+    // Route to dedicated backend
+    context.custom.downstreamUrl = dedicatedConfig.backendUrl;
+    context.log.info({
+      message: "Routing to dedicated backend",
+      customerId,
+      type: "dedicated",
+    });
+  } else {
+    // Route to shared multi-tenant backend
+    context.custom.downstreamUrl = environment.MULTI_TENANT_BACKEND_URL;
+    context.log.info({
+      message: "Routing to shared backend",
+      customerId: customerId ?? "anonymous",
+      type: "shared",
+    });
+  }
+
+  return request;
+}
+```
+
+## Using JWT Claims for Routing
+
+If you're using JWT authentication instead of API keys, the same patterns apply.
+JWT custom claims are available on `request.user.data`:
+
+```typescript
+// modules/jwt-based-routing.ts
+import { ZuploContext, ZuploRequest, environment } from "@zuplo/runtime";
+
+export default async function policy(
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  // Access JWT custom claims
+  const tenantId = request.user?.data?.tenant_id;
+  const tier = request.user?.data?.subscription_tier;
+
+  if (tier === "enterprise" && tenantId) {
+    // Enterprise customers with tenant ID get dedicated backends
+    context.custom.downstreamUrl = `https://${tenantId}.api.example.com`;
+  } else {
+    // Standard tier uses shared infrastructure
+    context.custom.downstreamUrl = environment.SHARED_BACKEND_URL;
+  }
+
+  return request;
+}
+```
+
+## Wiring Up the Policy
+
+### Policy Configuration
+
+Add your routing policy to `config/policies.json`:
+
+```json
+{
+  "name": "customer-routing",
+  "policyType": "custom-code-inbound",
+  "handler": {
+    "export": "default",
+    "module": "$import(./modules/customer-routing)"
+  }
+}
+```
+
+### Route Configuration
+
+Add the policy to your routes, placing it after authentication:
+
+```json
+{
+  "paths": {
+    "/api/v1/{+path}": {
+      "x-zuplo-path": {
+        "pathMode": "open-api"
+      },
+      "get": {
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlRewriteHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "rewritePattern": "${context.custom.downstreamUrl}/${params.path}"
+            }
+          },
+          "policies": {
+            "inbound": ["api-key-auth", "customer-routing"]
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+The policy sets `context.custom.downstreamUrl`, and the URL Rewrite handler uses
+that value to forward the request to the correct backend.
+
+## Benefits of This Approach
+
+### Single Entry Point
+
+Customers access your API through one consistent URL regardless of their backend
+environment. This simplifies documentation, SDKs, and client implementations.
+
+### Centralized Policy Enforcement
+
+Authentication, rate limiting, and other policies are enforced uniformly at the
+gateway before requests reach any backend. This ensures consistent security and
+compliance across all environments.
+
+### Flexible Routing Logic
+
+Zuplo's custom code capability means you can implement any routing logic you
+need:
+
+- Route based on geographic regions
+- Implement A/B testing with traffic splitting
+- Handle failover between primary and backup backends
+- Combine multiple factors (user tier + geography + load balancing)
+
+### Operational Simplicity
+
+Manage routing configuration centrally rather than maintaining separate gateway
+deployments for each environment or customer.
+
+## Best Practices
+
+1. **Always validate user data** - Check that required fields exist before using
+   them for routing decisions
+2. **Provide sensible defaults** - Have a fallback for cases where routing
+   configuration is missing
+3. **Log routing decisions** - Include customer ID and selected backend in logs
+   for debugging
+4. **Use environment variables** - Store backend URLs in environment variables
+   rather than hardcoding them
+5. **Consider caching** - For dynamic configurations, use `BackgroundLoader` or
+   `MemoryZoneReadThroughCache` to minimize latency
+
+## Next Steps
+
+- Learn about [custom policies](../policies/custom-code-inbound.mdx)
+- Explore the [BackgroundLoader](../programmable-api/background-loader.mdx) for
+  dynamic configuration
+- Set up [API Key Authentication](../policies/api-key-inbound.mdx) with metadata
+- Configure [JWT Authentication](../policies/open-id-jwt-auth-inbound.mdx) with
+  custom claims
+- Review [environment variables](../articles/environment-variables.mdx) for
+  managing backend URLs
