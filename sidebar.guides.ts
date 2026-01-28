@@ -54,6 +54,5 @@ export const guides: Navigation = [
   "guides/geolocation-backend-routing",
   "guides/user-based-backend-routing",
   "guides/modify-openapi-paths",
-  "guides/modify-openapi-paths",
   "guides/openapi-overlays",
 ];
