@@ -1,5 +1,9 @@
 [
   {
+    "type": "filter",
+    "placeholder": "Filter documentation"
+  },
+  {
     "type": "category",
     "label": "Configuration",
     "icon": "settings",
