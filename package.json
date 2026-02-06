@@ -43,7 +43,7 @@
     "mermaid": "^11.12.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "zudoku": "^0.68.0"
+    "zudoku": "^0.68.1"
   },
   "devDependencies": {
     "@anthropic-ai/claude-agent-sdk": "^0.2.19",
