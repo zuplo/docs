@@ -3,8 +3,7 @@
     {
       "files": "*.md(x)?",
       "options": {
-        "proseWrap": "always",
-        "embeddedLanguageFormatting": "off"
+        "proseWrap": "always"
       }
     }
   ]
