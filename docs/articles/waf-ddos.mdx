@@ -2,23 +2,29 @@
 title: Zuplo + WAF/DDoS Services
 ---
 
-A common setup for customers using Zuplo (or any API Gateway) is how to setup a
-WAF and DDoS protection in front of their API Gateway. Because Zuplo is deployed
-to the edge (meaning lots of different locations all around the world close to
-your customers), it's important that your WAF/DDoS services also support
-edge-based deployments. Configuring a legacy WAF solution that runs in one or
-only a few data centers in front of Zuplo will result in increased latency and
-suboptimal experiences for your end users. This document outlines the various
-strategies as well as the recommended setup for several popular services.
+Many customers using Zuplo (or any other API Gateway) often choose to deploy WAF
+and DDoS protection in front of their gateway. You can use any WAF - we have
+customers today using Azure, AWS, Akamai, CloudFlare and many other options.
 
-When picking WAF + DDoS services to run in front of your Zuplo API Gateway
-consider the following:
+However, there are some things to consider depending on how you host Zuplo
+(edge, dedicated, or self-hosted).
 
-- What level of customization do you require for your WAF + DDoS? If common
-  configurations are enough, consider Zuplo Managed WAF.
-- Is your WAF/DDoS service also deployed at the edge?
-- How can you ensure that requests can't bypass your WAF/DDoS and make requests
-  directly to your API Gateway?
+If for some reason these don't work for you - we can also offer a managed WAF as
+part of your Zuplo Enterprise agreement; contact sales to discuss.
+
+More details on some third-party WAF solutions are included below.
+
+## Managed Edge Deployments
+
+Zuplo when running on the managed edge is running in over 300 data centers
+around the world. If you care about worldwide presence, be sure to choose a WAF
+that is globally distributed as all traffic will be routed through your WAF.
+
+## Managed Dedicated and Self-hosted Deployments
+
+Customers typically use a WAF offered by their selected hosting platform (e.g.
+Azure, Akamai, AWS etc) to simplify management, improve latency and reduce
+bandwidth costs.
 
 ## Zuplo Managed WAF
 
@@ -67,16 +73,38 @@ If you require the ability to finely control your WAF Rules or are using a
 third-party WAF provider, Zuplo integrates seamlessly with popular edge-based
 WAF solutions.
 
+### Akamai App & API Protector
+
+Akamai's App & API Protector provides comprehensive WAF and DDoS protection with
+a global edge network. Akamai offers advanced bot management, API security, and
+DDoS mitigation that works well with Zuplo's edge-deployed architecture. With
+over 4,000 edge locations worldwide, Akamai ensures minimal latency when
+protecting your Zuplo API Gateway.
+
+Key features include:
+
+- Advanced bot detection and mitigation
+- API-specific security rules and rate limiting
+- Real-time threat intelligence
+- Automatic protection against OWASP Top 10 vulnerabilities
+- DDoS protection across all layers
+
+Akamai's extensive edge network ensures that security checks happen close to
+your users, maintaining the low-latency benefits of Zuplo's edge deployment.
+
+- [Akamai Edge Locations](https://www.akamai.com/why-akamai/our-edge-platform)
+
 ### Cloudflare WAF + DDoS
 
 Cloudflare is the easiest solution for custom WAF + DDoS in front of your Zuplo
-API Gateway. Because Zuplo is already terminated with Cloudflare, the
-integration is seamless and requires virtually zero configuration. Simply point
-your Cloudflare managed domain to Zuplo and you are protected. You can fully
-customize your WAF, firewall, DDoS or any other security configuration offered
-by Cloudflare. When a request comes into Cloudflare, it will be routed first
-through your account's configuration, then will be sent to your Zuplo API
-Gateway. The same thing happens on the outbound as well.
+API Gateway deployed as managed-edge. Because managed-edge is already terminated
+with Cloudflare, the integration is seamless and requires virtually zero
+configuration. Simply point your Cloudflare managed domain to Zuplo and you are
+protected. You can fully customize your WAF, firewall, DDoS or any other
+security configuration offered by Cloudflare. When a request comes into
+Cloudflare, it will be routed first through your account's configuration, then
+will be sent to your Zuplo API Gateway. The same thing happens on the outbound
+as well.
 
 A custom domain configured on Zuplo that utilizes Cloudflare DNS is completely
 protected from requests bypassing your WAF and hitting Zuplo directly.
@@ -110,24 +138,3 @@ For more information on AWS Shield and WAF, see the following links:
 
 - [Configuring Zuplo + AWS WAF & Shield](./waf-ddos-aws-waf-shield.mdx)
 - [AWS Cloudfront Locations](https://aws.amazon.com/cloudfront/features/?whats-new-cloudfront&whats-new-cloudfront.sort-by=item.additionalFields.postDateTime&whats-new-cloudfront.sort-order=desc)
-
-### Akamai App & API Protector
-
-Akamai's App & API Protector provides comprehensive WAF and DDoS protection with
-a global edge network. Akamai offers advanced bot management, API security, and
-DDoS mitigation that works well with Zuplo's edge-deployed architecture. With
-over 4,000 edge locations worldwide, Akamai ensures minimal latency when
-protecting your Zuplo API Gateway.
-
-Key features include:
-
-- Advanced bot detection and mitigation
-- API-specific security rules and rate limiting
-- Real-time threat intelligence
-- Automatic protection against OWASP Top 10 vulnerabilities
-- DDoS protection across all layers
-
-Akamai's extensive edge network ensures that security checks happen close to
-your users, maintaining the low-latency benefits of Zuplo's edge deployment.
-
-- [Akamai Edge Locations](https://www.akamai.com/why-akamai/our-edge-platform)
