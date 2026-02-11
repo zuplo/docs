@@ -4,7 +4,7 @@
   "type": "module",
   "version": "0.0.0",
   "engines": {
-    "node": "22.x"
+    "node": "24.x"
   },
   "scripts": {
     "dev": "zudoku dev",
@@ -49,7 +49,7 @@
     "@anthropic-ai/claude-agent-sdk": "^0.2.19",
     "@types/dagre": "^0.7.53",
     "@types/json-schema": "7.0.15",
-    "@types/node": "^22.10.7",
+    "@types/node": "^24.0.0",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.2",
     "@typescript-eslint/parser": "^8.48.1",
