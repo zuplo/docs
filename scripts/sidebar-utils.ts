@@ -99,11 +99,3 @@ export async function findMarkdownFile(
 
   return null;
 }
-
-/**
- * Extracts all document paths from a flat array of navigation items (like guides)
- * Filters out non-string items
- */
-export function extractDocsFromArray(items: Navigation): string[] {
-  return items.filter((item): item is string => typeof item === "string");
-}

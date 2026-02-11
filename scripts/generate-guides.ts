@@ -3,6 +3,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import matter from "gray-matter";
 import { format } from "prettier";
 import { guides, categories } from "../sidebar.guides.js";
+import { extractDocsFromNavigation } from "./sidebar-utils.js";
 
 interface Guide {
   id: string;
@@ -18,13 +19,15 @@ const generatedGuides: Guide[] = [];
 // Create slug set for validation
 const validSlugs = new Set(categories.map((cat) => cat.slug));
 
-// Process each guide from the sidebar
-for (const guidePath of guides) {
-  // Skip non-string items (in case there are category objects)
-  if (typeof guidePath !== "string") {
-    continue;
-  }
+// Extract doc paths only from category items (skip top-level docs like the overview page)
+const guidePaths = extractDocsFromNavigation(
+  (guides as any[]).filter(
+    (item) => typeof item === "string" || item?.type === "category",
+  ),
+);
 
+// Process each guide from the sidebar
+for (const guidePath of guidePaths) {
   // Try both .md and .mdx extensions
   const possiblePaths = [
     path.join(projectDir, "docs", `${guidePath}.md`),

@@ -1,5 +1,5 @@
 import esbuild from "esbuild";
-import { writeFile } from "fs/promises";
+import { readdir, readFile, stat, writeFile } from "fs/promises";
 import { resolve } from "path";
 
 const categoriesToRemove = ["Deployment"];
@@ -9,6 +9,74 @@ const extractedDir = process.env.EXTRACTED_DIR;
 if (!extractedDir) {
   throw new Error("No extracted dir provided");
 }
+
+async function getExcludedDocs(
+  dir: string,
+  prefix: string,
+): Promise<Set<string>> {
+  const excluded = new Set<string>();
+  let files: string[];
+  try {
+    files = await readdir(dir);
+  } catch {
+    return excluded;
+  }
+
+  for (const file of files) {
+    const filePath = resolve(dir, file);
+    const fileStat = await stat(filePath);
+
+    if (fileStat.isDirectory()) {
+      const subExcluded = await getExcludedDocs(filePath, `${prefix}/${file}`);
+      for (const item of subExcluded) {
+        excluded.add(item);
+      }
+    } else if (file.endsWith(".md") || file.endsWith(".mdx")) {
+      const content = await readFile(filePath, "utf8");
+      const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+      if (frontmatterMatch && /^zuplo:\s*false$/m.test(frontmatterMatch[1])) {
+        const docPath = `${prefix}/${file.replace(/\.mdx?$/, "")}`;
+        excluded.add(docPath);
+      }
+    }
+  }
+
+  return excluded;
+}
+
+function filterExcludedDocs(items: any[], excluded: Set<string>): any[] {
+  return items
+    .filter((item) => {
+      if (typeof item === "string") {
+        return !excluded.has(item);
+      }
+      if (item.type === "doc" && item.id) {
+        return !excluded.has(item.id);
+      }
+      if (item.type === "filter") {
+        return false;
+      }
+      return true;
+    })
+    .map((item) => {
+      if (item.type === "category" && item.items) {
+        return { ...item, items: filterExcludedDocs(item.items, excluded) };
+      }
+      return item;
+    })
+    .filter((item) => {
+      // Remove empty categories after filtering
+      if (item.type === "category" && item.items) {
+        return item.items.length > 0;
+      }
+      return true;
+    });
+}
+
+const excludedDocs = await getExcludedDocs(
+  resolve(extractedDir, "docs/pages/docs"),
+  "docs",
+);
 
 const zudokuConfigPath = resolve(extractedDir, "./docs/sidebar.ts");
 const outfile = resolve("./node_modules/.zuplo-docs/zudoku.sidebar.js");
@@ -26,6 +94,8 @@ const combined = [...docs, ...components].filter(
   (item) =>
     !categoriesToRemove.includes(item.label) && !docsToRemove.includes(item),
 );
+
+const filtered = filterExcludedDocs(combined, excludedDocs);
 
 function updatePaths(item: any) {
   if (typeof item === "string") {
@@ -46,7 +116,7 @@ function updatePaths(item: any) {
   return item;
 }
 
-const sidebar = updatePaths(combined);
+const sidebar = updatePaths(filtered);
 
 // Group categories with only component items under a "Components" category
 function groupComponentCategories(items: any) {

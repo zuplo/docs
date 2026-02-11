@@ -1,9 +1,5 @@
 [
   {
-    "type": "filter",
-    "placeholder": "Filter documentation"
-  },
-  {
     "type": "category",
     "label": "Configuration",
     "icon": "settings",
@@ -29,14 +25,6 @@
       "dev-portal/zudoku/markdown/mdx",
       "dev-portal/zudoku/markdown/admonitions",
       "dev-portal/zudoku/markdown/code-blocks"
-    ]
-  },
-  {
-    "type": "category",
-    "label": "Concepts",
-    "icon": "shapes",
-    "items": [
-      "dev-portal/zudoku/concepts/auth-provider-api-identities"
     ]
   },
   {
@@ -88,7 +76,6 @@
       "dev-portal/zudoku/guides/custom-pages",
       "dev-portal/zudoku/guides/mermaid",
       "dev-portal/zudoku/guides/using-multiple-apis",
-      "dev-portal/zudoku/guides/managing-api-keys-and-identities",
       "dev-portal/zudoku/guides/transforming-examples",
       "dev-portal/zudoku/guides/processors"
     ]
