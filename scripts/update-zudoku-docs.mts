@@ -17,6 +17,14 @@ const directoryPath = new URL("../docs/dev-portal/zudoku", import.meta.url)
 
 const IGNORE_FILES = ["quickstart.md"];
 
+function hasZuploFalse(content: string): boolean {
+  const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+  if (frontmatterMatch) {
+    return /^zuplo:\s*false$/m.test(frontmatterMatch[1]);
+  }
+  return false;
+}
+
 async function updateDocs(dir: string) {
   try {
     const files = await fs.readdir(dir);
@@ -44,6 +52,13 @@ async function updateDocs(dir: string) {
         }
 
         let content = await fs.readFile(filePath, "utf8");
+
+        // Remove files with zuplo: false in frontmatter
+        if (hasZuploFalse(content)) {
+          await fs.unlink(filePath);
+          console.log(`Removed file (zuplo: false): ${filePath}`);
+          continue;
+        }
 
         content = content
           .replace(new RegExp(/\bZudoku\s/, "g"), "Dev Portal ")

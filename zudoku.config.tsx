@@ -1,9 +1,9 @@
 import type { ZudokuConfig, ZudokuPlugin } from "zudoku";
 import { aiGateway, apiGateway, devPortal, platform } from "./sidebar.js";
+import { guides } from "./sidebar.guides.js";
 import { mdxComponents } from "./src/components.js";
 import { HeadNavigation } from "./src/components/HeadNavigation.js";
 import { LandingPage } from "./src/pages/LandingPage.js";
-import { GuidesPage } from "./src/pages/GuidesPage.js";
 
 const inkeepMetadataPlugin: ZudokuPlugin = {
   getHead: ({ location }) => {
@@ -100,32 +100,35 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
       path: "/",
       element: <LandingPage />,
     },
-
     {
       type: "category",
       label: "API Management",
+      link: "/api-management/introduction",
       items: apiGateway,
     },
     {
       type: "category",
       label: "AI Gateway",
+      link: "/ai-gateway/introduction",
       items: aiGateway,
     },
     {
       type: "category",
       label: "Developer Portal",
+      link: "/dev-portal/introduction",
       items: devPortal,
     },
     {
       type: "category",
       label: "Platform",
+      link: "/articles/hosting-options",
       items: platform,
     },
     {
-      type: "custom-page",
+      type: "category",
       label: "Guides",
-      path: "/guides",
-      element: <GuidesPage />,
+      link: "/guides/overview",
+      items: guides,
     },
     {
       type: "link",

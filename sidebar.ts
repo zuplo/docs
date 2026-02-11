@@ -256,6 +256,10 @@ const programming: Navigation = [
 ];
 
 export const apiGateway: Navigation = [
+  {
+    type: "filter",
+    placeholder: "Filter documentation",
+  },
   "api-management/introduction",
   {
     type: "category",
@@ -579,6 +583,10 @@ export const apiGateway: Navigation = [
 ];
 
 export const aiGateway: Navigation = [
+  {
+    type: "filter",
+    placeholder: "Filter documentation",
+  },
   "ai-gateway/introduction",
   "ai-gateway/getting-started",
   "ai-gateway/universal-api",
@@ -627,6 +635,10 @@ export const aiGateway: Navigation = [
 
 export const devPortal: Navigation = [
   {
+    type: "filter",
+    placeholder: "Filter documentation",
+  },
+  {
     type: "category",
     label: "Getting started",
     icon: "sparkles",
@@ -654,6 +666,10 @@ export const devPortal: Navigation = [
 ];
 
 export const platform: Navigation = [
+  {
+    type: "filter",
+    placeholder: "Filter documentation",
+  },
   // {
   //   type: "category",
   //   label: "Use Cases",

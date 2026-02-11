@@ -5,7 +5,7 @@ import { guides, categories } from "../sidebar.guides.js";
 import {
   projectDir,
   findMarkdownFile,
-  extractDocsFromArray,
+  extractDocsFromNavigation,
 } from "./sidebar-utils.js";
 
 interface FrontmatterUpdate {
@@ -194,7 +194,7 @@ async function main() {
     process.exit(1);
   }
 
-  const guidePaths = extractDocsFromArray(guides);
+  const guidePaths = extractDocsFromNavigation(guides);
   console.log(`Processing ${guidePaths.length} guides...\n`);
 
   let updatedCount = 0;

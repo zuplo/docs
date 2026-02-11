@@ -31,6 +31,7 @@ import {
   DiagramGroup,
 } from "./components/Diagram.js";
 import { Faq, FaqItem } from "./components/Faq.js";
+import { GuidesPage } from "./pages/GuidesPage.js";
 
 const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
 
@@ -130,4 +131,5 @@ export const mdxComponents = {
   // FAQ components
   Faq,
   FaqItem,
+  GuidesPage,
 };
