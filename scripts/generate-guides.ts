@@ -19,8 +19,12 @@ const generatedGuides: Guide[] = [];
 // Create slug set for validation
 const validSlugs = new Set(categories.map((cat) => cat.slug));
 
-// Extract all doc paths from the (possibly nested) navigation structure
-const guidePaths = extractDocsFromNavigation(guides);
+// Extract doc paths only from category items (skip top-level docs like the overview page)
+const guidePaths = extractDocsFromNavigation(
+  (guides as any[]).filter(
+    (item) => typeof item === "string" || item?.type === "category",
+  ),
+);
 
 // Process each guide from the sidebar
 for (const guidePath of guidePaths) {
