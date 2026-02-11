@@ -13,8 +13,10 @@ async function main() {
   });
 
   // Convert to the format used in sidebar (without docs/ prefix and without extension)
+  // Exclude index/overview pages which are not guides
   const guidePaths = guideFiles
     .map((file) => file.replace(/^docs\//, "").replace(/\.mdx?$/, ""))
+    .filter((file) => !file.endsWith("/index") && !file.endsWith("/overview"))
     .sort();
 
   console.log(`Found ${guidePaths.length} guide(s) in docs/guides/\n`);
