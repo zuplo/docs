@@ -105,6 +105,7 @@ const policies: Navigation = [
       "policies/set-status-outbound",
       "policies/xml-to-json-outbound",
       "policies/replace-string-outbound",
+      "policies/http-deprecation-outbound",
     ],
   },
   {
