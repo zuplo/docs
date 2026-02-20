@@ -76,6 +76,7 @@
       "dev-portal/zudoku/guides/custom-pages",
       "dev-portal/zudoku/guides/mermaid",
       "dev-portal/zudoku/guides/using-multiple-apis",
+      "dev-portal/zudoku/guides/navigation-rules",
       "dev-portal/zudoku/guides/transforming-examples",
       "dev-portal/zudoku/guides/processors"
     ]
