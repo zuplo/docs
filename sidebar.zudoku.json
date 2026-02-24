@@ -117,6 +117,7 @@
         "type": "category",
         "label": "Documentation",
         "items": [
+          "dev-portal/zudoku/components/code-tabs",
           "dev-portal/zudoku/components/mermaid",
           "dev-portal/zudoku/components/playground",
           "dev-portal/zudoku/components/secret",
