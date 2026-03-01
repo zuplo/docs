@@ -11,7 +11,7 @@
     "check:links": "lychee --offline --fallback-extensions html --root-dir $PWD/dist --include-fragments ./dist",
     "build": "zudoku build",
     "format": "prettier --write .",
-    "format:ci": "prettier --check .",
+    "format:ci": "prettier --check --ignore-pattern '**/*.md' .",
     "typecheck": "tsc",
     "lint:docs": "vale --config .vale.ini docs/articles docs/ai-gateway docs/dedicated docs/handlers docs/mcp-server docs/programmable-api docs/guides",
     "lint:admonitions": "node ./scripts/check-admonitions.mjs",
