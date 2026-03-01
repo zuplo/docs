@@ -64,7 +64,12 @@ async function updateDocs(dir: string) {
           .replace(new RegExp(/\bZudoku\s/, "g"), "Dev Portal ")
           // Rewrite internal links
           .replace(/(?<=\]\()\/docs/g, "/dev-portal/zudoku") // Replace /docs with /dev-portal/zudoku
-          .replace(/(?<=\]\()\/(?!dev-portal\/zudoku)/g, "/dev-portal/zudoku/"); // Add /dev-portal/zudoku/ to links that don't start with /docs
+          .replace(/(?<=\]\()\/(?!dev-portal\/zudoku)/g, "/dev-portal/zudoku/") // Add /dev-portal/zudoku/ to links that don't start with /docs
+          // Replace links to theme-playground with the zudoku.dev URL
+          .replace(
+            /\[([^\]]*)\]\(\/dev-portal\/zudoku\/theme-playground\)/g,
+            "[$1](https://zudoku.dev/docs/theme-playground)",
+          );
 
         // // Insert text after frontmatter
         // const frontmatterEndIndex = content.indexOf("---", 3) + 3;

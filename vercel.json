@@ -474,6 +474,11 @@
       "permanent": true
     },
     {
+      "source": "/docs/policies",
+      "destination": "/docs/policies/overview",
+      "permanent": true
+    },
+    {
       "source": "/docs/overview/how-does-zuplo-work{/}?",
       "destination": "/docs/articles/what-is-zuplo",
       "permanent": true
