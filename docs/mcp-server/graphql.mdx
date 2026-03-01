@@ -153,8 +153,7 @@ For example:
 
 For more complex scenarios like bounded mutations or queries with complex logic,
 you can create custom GraphQL tools as endpoints using the Zuplo
-[custom MCP tool patterns](./mcp-server-custom-tools.mdx) and the `graphql`
-library.
+[custom MCP tool patterns](./custom-tools.mdx) and the `graphql` library.
 
 Here's a simple example of a custom bounded GraphQL query that expects an `id`
 input from the MCP client:
@@ -232,12 +231,11 @@ export default async function handler(
 ```
 
 For more complex custom tools with validation, error handling, and multi-step
-workflows, see the [Custom Tools documentation](./mcp-server-custom-tools.mdx).
+workflows, see the [Custom Tools documentation](./custom-tools.mdx).
 
 ## See Also
 
-- [MCP Server Handler](./mcp-server.mdx) - Main MCP Server documentation
-- [Custom Tools](./mcp-server-custom-tools.mdx) - Build custom MCP tools with
-  complex logic
+- [MCP Server Handler](./introduction.mdx) - Main MCP Server documentation
+- [Custom Tools](./custom-tools.mdx) - Build custom MCP tools with complex logic
 - [GraphQL Best Practices](https://graphql.org/learn/best-practices/) -
   GraphQL.org recommendations
