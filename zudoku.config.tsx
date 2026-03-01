@@ -40,15 +40,7 @@ const config: ZudokuConfig = {
     generator: "Zudoku",
     favicon: "https://cdn.zuplo.com/www/favicon.svg",
   },
-  redirects: [
-    { from: "/policies/index", to: "/policies/overview" },
-    { from: "/programmable-api/index", to: "/programmable-api/overview" },
-    { from: "/policies", to: "/policies/overview" },
-    {
-      from: "/dev-portal/zudoku/theme-playground",
-      to: "https://zudoku.dev/docs/theme-playground",
-    },
-  ],
+  redirects: [],
   theme: {
     dark: {
       primary: "316 91% 45%",
