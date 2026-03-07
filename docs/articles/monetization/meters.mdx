@@ -18,67 +18,69 @@ extract numeric values, and sum them over configurable time windows.
 
 A meter is configured with:
 
-- **Event type** - Which events to process (e.g., `api_request`, `completion`)
-- **Value property** - JSONPath to extract the numeric value from event data
+- **Event type** - Which events to process (e.g., `requests`, `tokens`)
+- **Value property** - JSONPath to extract the numeric value from event data.
+  Events use `$.total` as the standard value property.
 - **Aggregation** - How to combine values (typically `SUM`)
 
-When events are ingested, the meter matches events by type, extracts the
-specified value, and aggregates it per customer over time.
+Events are sent as [CloudEvents](https://cloudevents.io/). The meter matches
+events by type, extracts the value from `$.total`, and aggregates it per
+subscription over time.
 
 ## Common Examples
 
 ### API Request Counting
 
-Track the total number of API requests per customer:
+Track the total number of API requests:
 
 ```json
 {
-  "slug": "api_requests",
+  "slug": "requests",
   "name": "API Requests",
-  "eventType": "api_request",
+  "eventType": "requests",
   "aggregation": "SUM",
-  "valueProperty": "$.count"
+  "valueProperty": "$.total"
 }
 ```
 
-Each `api_request` event should include a `count` field (typically `1`), as
-shown below:
+Each event contains the subscription ID as the `subject` and a `total` field
+with the quantity to record:
 
 ```json
 {
-  "type": "api_request",
-  "subject": "customer-123",
+  "type": "requests",
+  "subject": "sub_xxxxxxxx",
+  "source": "monetization-policy",
   "data": {
-    "count": 1,
-    "method": "GET",
-    "route": "/products/:id"
+    "total": 1
   }
 }
 ```
 
 ### Token Usage
 
-Track LLM token consumption for AI applications:
+Track token consumption for AI applications:
 
 ```json
 {
-  "slug": "tokens_total",
+  "slug": "tokens",
   "name": "Token Usage",
-  "eventType": "completion",
+  "eventType": "tokens",
   "aggregation": "SUM",
-  "valueProperty": "$.tokens"
+  "valueProperty": "$.total"
 }
 ```
 
-Report token usage after each completion:
+Each event reports a fixed quantity per request. For example, if a meter is
+configured to report 50 tokens per request:
 
 ```json
 {
-  "type": "completion",
-  "subject": "customer-123",
+  "type": "tokens",
+  "subject": "sub_xxxxxxxx",
+  "source": "monetization-policy",
   "data": {
-    "tokens": 1250,
-    "model": "gpt-4"
+    "total": 50
   }
 }
 ```
@@ -91,11 +93,22 @@ Track bytes transferred:
 {
   "slug": "data_transfer",
   "name": "Data Transfer (bytes)",
-  "eventType": "response",
+  "eventType": "data_transfer",
   "aggregation": "SUM",
-  "valueProperty": "$.bytes"
+  "valueProperty": "$.total"
 }
 ```
+
+## Naming Consistency
+
+The meter `eventType` must match the key used in three places:
+
+1. The meter's `slug` and `eventType`
+2. The key in the monetization policy's `meters` configuration
+3. The `featureKey` on the plan's entitlement
+
+If these don't match, usage is not tracked correctly against the subscription's
+entitlements.
 
 ## Creating a Meter
 
@@ -107,11 +120,11 @@ curl \
   --header "Content-Type: application/json" \
   --data @- << EOF
 {
-  "slug": "api_requests",
+  "slug": "requests",
   "name": "API Requests",
-  "eventType": "api_request",
+  "eventType": "requests",
   "aggregation": "SUM",
-  "valueProperty": "$.count"
+  "valueProperty": "$.total"
 }
 EOF
 ```
