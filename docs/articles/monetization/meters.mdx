@@ -23,9 +23,8 @@ A meter is configured with:
   Events use `$.total` as the standard value property.
 - **Aggregation** - How to combine values (typically `SUM`)
 
-Events are sent as [CloudEvents](https://cloudevents.io/). The meter matches
-events by type, extracts the value from `$.total`, and aggregates it per
-subscription over time.
+When events are ingested, the meter matches events by type, extracts the
+specified value, and aggregates it per customer over time.
 
 ## Common Examples
 
