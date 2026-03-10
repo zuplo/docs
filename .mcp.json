@@ -3,6 +3,10 @@
     "docs": {
       "type": "http",
       "url": "https://mcp.inkeep.com/zuplo/mcp"
+    },
+    "notion": {
+      "type": "http",
+      "url": "https://mcp.notion.com/mcp"
     }
   }
 }
