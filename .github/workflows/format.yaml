@@ -1,0 +1,92 @@
+name: Format (Web Edits)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  format:
+    # Only attempt to push if the PR branch is in the same repo (not a fork)
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Detect if PR contains Web UI commits
+        id: webui
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const pr = context.payload.pull_request.number;
+
+            // List commits on the PR
+            const commits = await github.paginate(
+              github.rest.pulls.listCommits,
+              { owner, repo, pull_number: pr, per_page: 100 }
+            );
+
+            // GitHub web editor commits are typically committed by `web-flow`
+            const hasWebFlow = commits.some(c => c.committer?.login === "web-flow");
+
+            core.setOutput("is_webui", hasWebFlow ? "true" : "false");
+
+      - name: Checkout PR branch
+        if: ${{ steps.webui.outputs.is_webui == 'true' }}
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Setup Node
+        if: ${{ steps.webui.outputs.is_webui == 'true' }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install deps
+        if: ${{ steps.webui.outputs.is_webui == 'true' }}
+        run: npm ci
+
+      - name: Get changed files
+        if: ${{ steps.webui.outputs.is_webui == 'true' }}
+        id: changed
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const pr = context.payload.pull_request.number;
+
+            const files = await github.paginate(
+              github.rest.pulls.listFiles,
+              { owner, repo, pull_number: pr, per_page: 100 }
+            );
+
+            // Only include added or modified files (not removed)
+            const paths = files
+              .filter(f => f.status !== "removed")
+              .map(f => f.filename);
+
+            core.setOutput("files", paths.join("\n"));
+
+      - name: Format changed files
+        if: ${{ steps.webui.outputs.is_webui == 'true' && steps.changed.outputs.files != '' }}
+        run: |
+          echo "${{ steps.changed.outputs.files }}" | xargs npx prettier --write --ignore-unknown
+
+      - name: Commit & push (only if changes)
+        if: ${{ steps.webui.outputs.is_webui == 'true' }}
+        run: |
+          if git diff --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: format files (web UI PR)"
+          git push
