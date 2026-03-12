@@ -8,10 +8,10 @@ sending metrics to a variety of services. If you want your logs to be sent to
 your metrics service, you can enable one of Zuplo's logging plugins. Currently,
 Zuplo supports logging to the following sources:
 
-- Datadog (Beta)
-- Dynatrace (Beta)
-- New Relic (Beta)
-- OpenTelemetry (Beta)
+- Datadog
+- Dynatrace
+- New Relic
+- OpenTelemetry
 
 If you would like to log to a different source, reach out to support@zuplo.com
 and we'd be happy to work with you to add a new logging plugin.
@@ -41,7 +41,7 @@ Zuplo supports the following metrics:
 
 Below, you will find details on each metrics plugin.
 
-### Datadog (Beta)
+### Datadog
 
 By default, we send all metrics to Datadog. However, you have the option below
 to configure which metrics you want to send.
@@ -122,7 +122,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 }
 ```
 
-### Dynatrace (Beta)
+### Dynatrace
 
 By default, we send all metrics to Dynatrace. However, you have the option below
 to configure which metrics you want to send.
@@ -204,7 +204,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 }
 ```
 
-### New Relic (Beta)
+### New Relic
 
 By default, we send all metrics to New Relic. However, you have the option below
 to configure which metrics you want to send.
@@ -283,7 +283,7 @@ aggregation.
 
 :::
 
-### OpenTelemetry (Beta)
+### OpenTelemetry
 
 The OpenTelemetry metrics plugin sends metrics to any OpenTelemetry-compatible
 collector using the
