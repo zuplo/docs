@@ -78,6 +78,8 @@ export function runtimeInit(runtime: RuntimeExtensions) {
   runtime.addPlugin(
     new DatadogMetricsPlugin({
       apiKey: environment.Datadog_API_KEY,
+      // Pass your Datadog site host;
+      url: "https://api.us5.datadoghq.com",
       // You can add what tags you want.
       // See https://docs.Datadoghq.com/tagging/#defining-tags for more information
       tags: [
