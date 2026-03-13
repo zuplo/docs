@@ -43,8 +43,9 @@ Below, you will find details on each metrics plugin.
 
 ### Datadog (Beta)
 
-By default, we send all metrics to Datadog. However, you have the option below
-to configure which metrics you want to send.
+By default, Zuplo sends metrics to Datadog in `seriesMode` for backwards
+compatibility. You can switch to `distributionMode` if you want Datadog
+distribution ingestion and percentile/count analytics across edge replicas.
 
 Due to the pricing model of Datadog, we recommend being thrifty with what's
 being sent. Refer to
@@ -54,16 +55,17 @@ tags since those are counted as separate metrics. This
 [article by Datadog](https://www.Datadoghq.com/blog/the-power-of-tagged-metrics/)
 has some good guidelines.
 
-:::warning{title="Metrics Aggregation"}
+### Datadog metric modes
 
-Your Zuplo API can be deployed to many edge locations. Each location will send
-metrics to Datadog independently. For low volume APIs this may be okay, but
-typically you will want to aggregate metrics before sending to Datadog. You can
-use a tool like the
-[OpenTelemetry Collector](https://opentelemetry.io/docs/collector/) for the
-aggregation.
+| Mode               | Ingestion path                | Metric names emitted                                                                              | Best for                                                                 |
+| ------------------ | ----------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `seriesMode`       | `/api/v2/series`              | `zuplo.request.latency`, `zuplo.request.content_length`, `zuplo.response.content_length`          | Backwards compatibility with existing dashboards/monitors                |
+| `distributionMode` | `/api/v1/distribution_points` | `zuplo.request.latency.v2`, `zuplo.request.content_length.v2`, `zuplo.response.content_length.v2` | Accurate request populations and percentile queries (`p95`, `p99`, etc.) |
 
-:::
+When you use `distributionMode`, all three metrics are sent as Datadog
+distributions and use the `.v2` suffix.
+
+### Series mode (default / backwards compatible)
 
 ```ts
 import {
@@ -98,6 +100,67 @@ export function runtimeInit(runtime: RuntimeExtensions) {
   );
 }
 ```
+
+### Distribution mode (recommended for global request analytics)
+
+```ts
+import {
+  RuntimeExtensions,
+  DatadogMetricsPlugin,
+  environment,
+} from "@zuplo/runtime";
+
+export function runtimeInit(runtime: RuntimeExtensions) {
+  runtime.addPlugin(
+    new DatadogMetricsPlugin({
+      apiKey: environment.Datadog_API_KEY,
+      metricMode: "distributionMode",
+      // Pass your Datadog site host;
+      url: "https://api.us5.datadoghq.com",
+      tags: [
+        "app:my-service-name",
+        `environment:${environment.ENVIRONMENT ?? "DEVELOPMENT"}`,
+      ],
+      metrics: {
+        latency: true,
+        requestContentLength: true,
+        responseContentLength: true,
+      },
+      include: {
+        country: false,
+        httpMethod: false,
+        statusCode: false,
+      },
+    }),
+  );
+}
+```
+
+### v1 vs v2 metric names
+
+Switching to `distributionMode` changes the metric names. Update dashboards and
+monitors to use the `.v2` metrics:
+
+| Previous (`seriesMode`)         | New (`distributionMode`)           |
+| ------------------------------- | ---------------------------------- |
+| `zuplo.request.latency`         | `zuplo.request.latency.v2`         |
+| `zuplo.request.content_length`  | `zuplo.request.content_length.v2`  |
+| `zuplo.response.content_length` | `zuplo.response.content_length.v2` |
+
+Example Datadog queries in `distributionMode`:
+
+- Requests per minute: `count:zuplo.request.latency.v2{...}.rollup(sum,60)`
+- Requests per hour: `count:zuplo.request.latency.v2{...}.rollup(sum,3600)`
+- p95 latency: `p95:zuplo.request.latency.v2{...}`
+- p99 latency: `p99:zuplo.request.latency.v2{...}`
+
+:::warning{title="Migration note"}
+
+`distributionMode` does not overwrite old metric names. It emits new `.v2`
+metrics. If you switch modes, dashboards/monitors that reference old metric
+names will need to be updated.
+
+:::
 
 The above configuration applies globally for all metrics send to Datadog. If you
 wish to dynamically configure information for a particular ZuploContext, you can
