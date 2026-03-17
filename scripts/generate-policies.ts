@@ -132,8 +132,11 @@ const policyFiles = ["intro.md", "doc.md", "icon.svg", "policy.ts"] as const;
 const uiPolicies: {
   id: string;
   name: string | undefined;
-  isDeprecated?: boolean;
-  isHidden?: boolean;
+  isDeprecated: boolean;
+  isPaidAddOn: boolean;
+  isEnterprise: boolean;
+  isCustom: boolean;
+  isHidden: boolean;
   icon: string | undefined;
   products: PolicyProduct[];
 }[] = [];
@@ -241,8 +244,11 @@ for (const schemaPath of policySchemas) {
     id: policyId,
     name: schema.title,
     icon,
-    isDeprecated: schema.isDeprecated,
-    isHidden: schema.isHidden,
+    isDeprecated: Boolean(schema.isDeprecated),
+    isHidden: Boolean(schema.isHidden),
+    isPaidAddOn: Boolean(schema.isPaidAddOn),
+    isEnterprise: Boolean(schema.isEnterprise),
+    isCustom: Boolean(schema.isCustom),
     products: schema.products,
   });
 
