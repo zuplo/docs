@@ -4,7 +4,6 @@
   "type": "object",
   "title": "Access Control List",
   "isCustom": true,
-  "isPaidAddOn": false,
   "products": ["api-gateway"],
   "description": "The access control list inbound policy limits access to resources based on parameters on the authenticated user.",
   "required": ["handler"],
