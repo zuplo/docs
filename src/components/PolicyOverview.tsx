@@ -12,22 +12,35 @@ export const PolicyOverview = ({
     id: string;
     name: string;
     icon: string;
-    isDeprecated?: boolean;
-    isHidden?: boolean;
+    isDeprecated: boolean;
+    isPaidAddOn: boolean;
+    isEnterprise: boolean;
+    isCustom: boolean;
+    isHidden: boolean;
     products: ProductType[];
   }>;
   product: ProductType;
 }) => {
   const [input, setInput] = useState("");
+  const [planFilter, setPlanFilter] = useState<
+    "all" | "enterprise" | "builder"
+  >("all");
 
   const filteredPolicies = policies
     .sort((a, b) => a.name.localeCompare(b.name))
     .filter((policy) => {
-      return (
-        !policy.isDeprecated &&
-        !policy.isHidden &&
-        policy.products.includes(product)
-      );
+      if (
+        policy.isDeprecated ||
+        policy.isHidden ||
+        !policy.products.includes(product)
+      ) {
+        return false;
+      }
+      if (planFilter === "enterprise")
+        return policy.isPaidAddOn || policy.isEnterprise;
+      if (planFilter === "builder")
+        return !policy.isPaidAddOn && !policy.isEnterprise;
+      return true;
     });
   const inboundPolicies = filteredPolicies.filter(
     (policy) =>
@@ -58,6 +71,26 @@ export const PolicyOverview = ({
             <XCircleIcon size={20} />
           </Button>
         )}
+      </div>
+      <div className="flex items-center gap-2 mt-4">
+        <span className="text-sm text-muted-foreground font-medium">Plan:</span>
+        {(["all", "enterprise", "builder"] as const).map((f) => (
+          <button
+            key={f}
+            onClick={() => setPlanFilter(f)}
+            className={`text-sm px-3 py-1 rounded-full border transition-colors capitalize ${
+              planFilter === f
+                ? "bg-primary text-primary-foreground border-primary"
+                : "border-border hover:bg-accent"
+            }`}
+          >
+            {f === "all"
+              ? "All"
+              : f === "enterprise"
+                ? "Enterprise"
+                : "Builder / Free"}
+          </button>
+        ))}
       </div>
       <h2 className="text-2xl font-bold">Inbound Policies</h2>
       <div
@@ -97,14 +130,22 @@ const PolicyCard = (policy: {
   id: string;
   name: string;
   icon: string;
-  isDeprecated?: boolean;
-  isHidden?: boolean;
+  isDeprecated: boolean;
+  isHidden: boolean;
+  isPaidAddOn: boolean;
+  isEnterprise: boolean;
+  isCustom: boolean;
 }) => (
   <Link
     to={`/policies/${policy.id}`}
     key={policy.id}
-    className="flex items-center gap-4 rounded-lg border border-border shadow-sm p-4 transition-colors hover:bg-accent md:h-36 md:flex-col md:justify-center md:px-5 md:py-6 md:text-center no-underline"
+    className="relative overflow-hidden flex items-center gap-4 rounded-lg border border-border shadow-sm p-4 transition-colors hover:bg-accent md:h-36 md:flex-col md:justify-center md:px-5 md:py-6 md:text-center no-underline"
   >
+    {(policy.isPaidAddOn || policy.isEnterprise) && (
+      <div className="absolute top-[14px] right-[-22px] w-24 text-center rotate-45 bg-black text-white text-[10px] font-bold py-0.5 shadow-sm">
+        Enterprise
+      </div>
+    )}
     <div className="rounded-lg bg-primary/10 p-2 flex items-center justify-center">
       <div
         className="mask-icon h-6 w-6 bg-primary md:h-8 md:w-8"
