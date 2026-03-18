@@ -4,7 +4,6 @@
   "type": "object",
   "title": "HMAC Auth",
   "isCustom": true,
-  "isPaidAddOn": false,
   "products": ["api-gateway"],
   "description": "Authenticate requests using the HMAC-SHA256 authentication scheme.",
   "required": ["handler"],
