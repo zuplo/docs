@@ -87,8 +87,8 @@ export const PolicyOverview = ({
             {f === "all"
               ? "All"
               : f === "enterprise"
-                ? "Enterprise"
-                : "Builder / Free"}
+                ? "Enterprise Add-On"
+                : "Included"}
           </button>
         ))}
       </div>
@@ -143,7 +143,7 @@ const PolicyCard = (policy: {
   >
     {(policy.isPaidAddOn || policy.isEnterprise) && (
       <div className="absolute top-[14px] right-[-22px] w-24 text-center rotate-45 bg-black text-white text-[10px] font-bold py-0.5 shadow-sm">
-        Enterprise
+        Add-On
       </div>
     )}
     <div className="rounded-lg bg-primary/10 p-2 flex items-center justify-center">
