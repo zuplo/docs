@@ -8,3 +8,4 @@ public/policies/*
 dist/
 node_modules/
 temp/
+**/*.md
