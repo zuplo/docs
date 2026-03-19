@@ -453,22 +453,42 @@ export const apiGateway: Navigation = [
       "articles/monetization-enterprise",
       {
         type: "category",
-        label: "Monetization API (Preview)",
+        label: "Monetization API",
         items: [
           "articles/monetization/index",
-          "articles/monetization/api-access",
-          "articles/monetization/meters",
-          "articles/monetization/features",
+          "articles/monetization/quickstart",
           {
             type: "category",
-            label: "Plans",
+            label: "Concepts",
             items: [
+              "articles/monetization/meters",
+              "articles/monetization/features",
               "articles/monetization/plans",
               "articles/monetization/rate-cards",
               "articles/monetization/pricing-models",
+              "articles/monetization/billing-models",
+            ],
+          },
+          {
+            type: "category",
+            label: "Guides",
+            items: [
+              "articles/monetization/stripe-integration",
+              "articles/monetization/developer-portal",
+              "articles/monetization/monetization-policy",
+              "articles/monetization/subscription-lifecycle",
+              "articles/monetization/migration-guide",
+            ],
+          },
+          {
+            type: "category",
+            label: "Reference",
+            items: [
+              "articles/monetization/api-access",
               "articles/monetization/plan-examples",
             ],
           },
+          "articles/monetization/troubleshooting",
         ],
       },
     ],
