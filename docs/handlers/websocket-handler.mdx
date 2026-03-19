@@ -57,10 +57,11 @@ Your configuration will look like below:
 
 ## Handler Options
 
-The WebSocket Handler can be configured via `options` property. It has the
-following configuration properties
+The WebSocket Handler accepts the following options in the `options` property:
 
-- `rewritePattern` - the URL the incoming pathname will be appended to.
+- **`rewritePattern`** (required): The URL pattern for the backend WebSocket
+  endpoint. Supports JavaScript string interpolation syntax for dynamic URL
+  construction based on request data and environment variables.
 
 Similar to other handlers using `rewritePattern`, it supports JavaScript string
 interpolation syntax and can be used to shape the URL based on data from the

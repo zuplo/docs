@@ -1,6 +1,42 @@
 ---
-title: Unknown Error (MAIN_MOD_ERROR)
+title: Unknown Error (UNKNOWN_ERROR)
 ---
 
-This in an unhandled error in the Zuplo runtime. Contact support@zuplo.com for
-assistance.
+This is an unhandled error in the Zuplo runtime. The error does not match any
+known error category.
+
+## Common scenarios
+
+- **Unhandled exception in custom code** - A request handler or policy throws an
+  unexpected error that is not caught by a try/catch block.
+- **Unexpected runtime behavior** - An edge case in the runtime produces an
+  error that is not categorized.
+- **Third-party service failures** - An external service call fails in an
+  unexpected way that is not handled by the code.
+
+## How to debug
+
+1. Check the runtime logs for the full error message and stack trace.
+2. Look for the specific request ID in the logs to find related log entries.
+3. Review recent code changes for potential unhandled error paths.
+4. Add try/catch blocks around external service calls and other error-prone code
+   to handle errors gracefully.
+
+## What to include when contacting support
+
+If the error persists and you cannot identify the cause, contact
+[Zuplo support](../articles/support.mdx) with the following information:
+
+- The **request ID** from the error response.
+- The **timestamp** of when the error occurred.
+- The **route path** and **HTTP method** of the failing request.
+- Any **recent changes** to the project code or configuration.
+- Relevant **log entries** from around the time of the error.
+
+:::tip
+
+Adding structured logging to request handlers makes it easier to diagnose
+unknown errors. See [Logging](../articles/logging.mdx) for details on
+configuring log output.
+
+:::

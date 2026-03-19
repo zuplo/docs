@@ -26,7 +26,7 @@ web server, or operating system.
 :::note
 
 This article uses GKE as the example backend, but any GCP service that can be
-setup behind an HTTP Load Balancer can be used.
+set up behind an HTTP Load Balancer can be used.
 
 :::
 
@@ -176,7 +176,7 @@ to call the IAP protected API.
 The last thing required is to configure Zuplo with a service account and policy
 so that it can securely call your API. Follow the instructions on the
 [Upstream GCP Service Auth Policy document](../policies/upstream-gcp-service-auth-inbound.mdx)
-to setup the policy.
+to set up the policy.
 
 With the policy setup, create a route in your Zuplo portal that points to your
 API. When you make a request you will once again see a successful response.

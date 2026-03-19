@@ -2,4 +2,44 @@
 title: Build Error (BUILD_ERROR)
 ---
 
-There was an error building your project. See the build logs for more details.
+There was an error building your project. The gateway returns this error when
+the project fails to compile during deployment.
+
+## Common causes
+
+- **TypeScript errors** - Type mismatches, missing type definitions, or invalid
+  TypeScript syntax prevent the project from compiling.
+- **Missing imports** - A module or package referenced in the code is not
+  installed or does not exist.
+- **Invalid route configuration** - The `routes.oas.json` file contains syntax
+  errors or references policies or handlers that do not exist.
+- **Incompatible dependencies** - A package dependency has version conflicts or
+  is not compatible with the Zuplo runtime.
+
+## How to access build logs
+
+1. Open the Zuplo portal and navigate to the project.
+2. Check the deployment logs for detailed error messages and stack traces.
+3. For local development, run the build locally to see the full error output.
+
+## How to fix
+
+1. Read the error message carefully. Build errors typically include the file
+   name, line number, and a description of the issue.
+2. Fix any TypeScript compilation errors by checking types and imports.
+3. Verify that all referenced modules are listed in `package.json` and properly
+   installed.
+4. Validate the `routes.oas.json` file to ensure all handler and policy
+   references are correct.
+
+:::tip
+
+Run builds locally before deploying to catch errors early. See
+[Local Development](../articles/local-development.mdx) for setup instructions.
+
+:::
+
+## Related resources
+
+- [Local Development](../articles/local-development.mdx)
+- [Local Development Troubleshooting](../articles/local-development-troubleshooting.mdx)

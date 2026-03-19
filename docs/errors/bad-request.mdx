@@ -2,4 +2,38 @@
 title: Bad Request (BAD_REQUEST)
 ---
 
-The request was invalid. See errors for more information.
+The request was invalid. The response body typically contains specific error
+details explaining what went wrong.
+
+## Common causes
+
+- **Malformed JSON body** - The request body contains invalid JSON, such as
+  missing commas, unclosed brackets, or trailing commas.
+- **Missing required fields** - The request is missing one or more fields that
+  the API expects.
+- **Invalid Content-Type header** - The `Content-Type` header does not match the
+  format of the request body. For example, sending JSON without setting
+  `Content-Type: application/json`.
+- **Invalid parameter types** - A field value does not match the expected type,
+  such as sending a string where a number is required.
+
+## How to debug
+
+1. Check the response body for specific error messages. Zuplo returns detailed
+   error information that identifies the exact issue.
+2. Validate the request body using a JSON linter or validator before sending.
+3. Verify that all required headers are present and correctly formatted.
+4. Compare the request against the API documentation to ensure all required
+   fields are included with the correct types.
+
+:::tip
+
+Use a tool like `curl -v` or an API client such as Postman to inspect the full
+request and response, including headers and body.
+
+:::
+
+## Related errors
+
+If the request body fails JSON Schema validation, see
+[Schema Validation Failed](./schema-validation-failed.mdx) for more details.

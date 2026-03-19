@@ -23,7 +23,7 @@ that is globally distributed as all traffic will be routed through your WAF.
 ## Managed Dedicated and Self-hosted Deployments
 
 Customers typically use a WAF offered by their selected hosting platform (e.g.
-Azure, Akamai, AWS etc) to simplify management, improve latency and reduce
+Azure, Akamai, AWS, etc.) to simplify management, improve latency and reduce
 bandwidth costs.
 
 ## Zuplo Managed WAF
@@ -125,11 +125,11 @@ the two products together.
 - [Configuring Zuplo + Fastly](./waf-ddos-fastly.mdx)
 - [Fastly Edge Locations](https://www.fastly.com/network-map/)
 
-### AWS Shield + AWS WAF + Cloudfront
+### AWS Shield + AWS WAF + CloudFront
 
-AWS offers DDoS (Shield) and WAF products that run at Cloudfront edge locations.
+AWS offers DDoS (Shield) and WAF products that run at CloudFront edge locations.
 This is another good option for edge-based WAF/DDoS protection in front of your
-Zuplo API Gateway. AWS Cloudfront is also in hundreds of edge locations that are
+Zuplo API Gateway. AWS CloudFront is also in hundreds of edge locations that are
 very close to Cloudflare locations (again, this isn't something either company
 discloses, but we suspect there is significant overlap in the physical locations
 used by AWS and Cloudflare).
@@ -137,4 +137,4 @@ used by AWS and Cloudflare).
 For more information on AWS Shield and WAF, see the following links:
 
 - [Configuring Zuplo + AWS WAF & Shield](./waf-ddos-aws-waf-shield.mdx)
-- [AWS Cloudfront Locations](https://aws.amazon.com/cloudfront/features/?whats-new-cloudfront&whats-new-cloudfront.sort-by=item.additionalFields.postDateTime&whats-new-cloudfront.sort-order=desc)
+- [AWS CloudFront Locations](https://aws.amazon.com/cloudfront/features/?whats-new-cloudfront&whats-new-cloudfront.sort-by=item.additionalFields.postDateTime&whats-new-cloudfront.sort-order=desc)

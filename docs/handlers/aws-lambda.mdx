@@ -7,26 +7,29 @@ The AWS Lambda handler is used to send requests to AWS Lambda. This handler can
 be used as an alternative to AWS API Gateway when exposing Lambda functions as
 an API or HTTP endpoint.
 
-Note: Many customers use Zuplo's AWS Lambda handler as a replacement for using
-AWS API Gateway, however it shouldn't be considered a complete fire-and-forget
-replacement. Some features, such as the way certain errors are handled may
-differ. We recommend testing your API to ensure the behavior is as you expect,
-especially in migration scenarios.
+:::note
+
+Many customers use the Zuplo AWS Lambda handler as a replacement for AWS API
+Gateway, however it should not be considered a complete fire-and-forget
+replacement. Some features, such as error handling behavior, may differ. Test
+your API to ensure the behavior meets your expectations, especially in migration
+scenarios.
+
+:::
 
 ## IAM Permissions
 
-Zuplo will need to be granted access to execute your Lambda function. It's
-recommended you create an
+Zuplo requires access to execute your Lambda function. Create an
 [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)
-and grant that account only the permission needed to invoke the lambda function.
-The IAM user doesn't require console access, only API access. The IAM user used
-by Zuplo requires the
+and grant that account only the permission needed to invoke the Lambda function.
+The IAM user does not require console access, only API access. The IAM user
+requires the
 [**AWSLambdaRole**](https://docs.aws.amazon.com/lambda/latest/dg/access-control-identity-based.html)
 role. This role can be scoped to only the specific Lambda functions required.
 
 ## Setup via Portal
 
-To setup the AWS Lambda handler in the portal UI, select the AWS Lambda handler
+To set up the AWS Lambda handler in the portal UI, select the AWS Lambda handler
 on any route.
 
 ![AWS handler configuration](../../public/media/aws-lambda/aa9dc09d-6636-4a8b-94bc-ee28bb779fc8.png)
@@ -42,9 +45,8 @@ Instead use environment variables like `$env(AWS_SECURE_ACCESS_KEY)`
 
 ## Setup via routes.oas.json
 
-The AWS Lambda handler can be setup by editing the `routes.oas.json` file
-directly by configuring the `handler` property on any route's `x-zuplo-route`
-property.
+Set up the AWS Lambda handler by editing the `routes.oas.json` file directly.
+Configure the `handler` property on any route's `x-zuplo-route` property.
 
 ```json
 {
@@ -60,6 +62,30 @@ property.
   }
 }
 ```
+
+## Options
+
+The AWS Lambda handler accepts the following options:
+
+- **`accessKeyId`** (required): The AWS access key ID for authentication. Use an
+  environment variable reference like `$env(AWS_ACCESS_KEY_ID)`.
+- **`secretAccessKey`** (required): The AWS secret access key. Use an
+  environment variable reference like `$env(AWS_SECURE_ACCESS_KEY)`.
+- **`functionName`** (required): The name of the AWS Lambda function to invoke.
+- **`region`** (required): The AWS region where the Lambda function runs (e.g.,
+  `us-east-2`).
+- **`binaryMediaTypes`** (optional): An array of content types to convert to
+  base64-encoded strings when sending to the Lambda function.
+- **`returnAmazonTraceIdHeader`** (optional): When `true`, includes the
+  `X-Amzn-Trace-Id` header in the response. Default: `false`.
+- **`useLambdaProxyIntegration`** (optional): When `true`, sends the request
+  using the AWS API Gateway event format. Default: `false`.
+- **`payloadFormatVersion`** (optional): The API Gateway payload format version.
+  Set to `"1.0"` or `"2.0"`. Only applies when `useLambdaProxyIntegration` is
+  `true`.
+- **`useAwsResourcePathStyle`** (optional): When `true`, converts Zuplo-style
+  path parameters (`:param`) to AWS-style (`{param}`) in `resourcePath`.
+  Default: `false`.
 
 ## Binary Media Types
 
