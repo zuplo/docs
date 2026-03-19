@@ -69,8 +69,8 @@ set var.data = strftime({"%s"}, now) + "," + server.datacenter;
 set bereq.http.X-Signature = var.data + "," + digest.hmac_sha256(var.zuplo_auth_secret, var.data);
 ```
 
-In Zuplo, you can utilize the a custom code inbound policy to limit traffic to
-only those requests that include the signed header.
+In Zuplo, you can utilize a custom code inbound policy to limit traffic to only
+those requests that include the signed header.
 
 ```json title="/config/policies.json"
 {
