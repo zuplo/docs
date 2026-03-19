@@ -8,30 +8,26 @@ tags:
   - custom-code
 ---
 
-This is a brief guide explaining how you might approach versioning your APIs on
-Zuplo. We use Zuplo internally at Zuplo and this is our approach.
+This guide explains how to approach versioning APIs on Zuplo.
 
-The focus of our versioning approach leans on URL-based versioning which is our
-recommended approach, read more at
+The recommended versioning approach uses URL-based versioning. Read more at
 [How to version an API](https://zuplo.com/blog/2022/05/17/how-to-version-an-api).
 
 ## Separate OpenAPI files
 
-We recommend having separate OpenAPI files for different major versions of your
-API. Fortunately, a single project in Zuplo can have as many OpenAPI routing
-files as you like. The default one we create for you `routes.oas.json` can be
-renamed, as shown here:
+A best practice is to have separate OpenAPI files for different major versions
+of an API. A single Zuplo project can have as many OpenAPI routing files as
+needed. The default `routes.oas.json` file can be renamed, as shown here:
 
 ![Multiple OpenAPI files](../../public/media/versioning-on-zuplo/multiple-openapi-files.png)
 
 Note you can create a new OpenAPI file by clicking the '+' icon shown.
 
-Each routing file would now have it's own routes, each prefixed by `/v1` and
+Each routing file would now have its own routes, each prefixed by `/v1` and
 `/v2`.
 
-We also recommend updating the `info` properties in your OpenAPI file and
-include the version as this will help your users disambiguate the version in
-your developer portal:
+Also update the `info` properties in the OpenAPI file to include the version.
+This helps users disambiguate versions in the developer portal:
 
 ```json
 {
@@ -43,8 +39,9 @@ your developer portal:
 }
 ```
 
-When Zuplo generates your developer-portal we put each OpenAPI version into it's
-own document and allow users to pick. This is currently presented in a dropdown:
+When Zuplo generates the developer portal, each OpenAPI version appears in its
+own document, allowing users to select the version. This is presented as a
+dropdown:
 
 ![Multiple APIs in docs](../../public/media/versioning-on-zuplo/multiple-apis-in-docs.png)
 
