@@ -48,11 +48,7 @@ To set up the JWT Service Plugin, you need to register it in your
 `zuplo.runtime.ts` file.
 
 ```ts title="modules/zuplo.runtime.ts"
-import {
-  RuntimeExtensions,
-  DataDogLoggingPlugin,
-  JwtServicePlugin,
-} from "@zuplo/runtime";
+import { RuntimeExtensions, JwtServicePlugin } from "@zuplo/runtime";
 
 export function runtimeInit(runtime: RuntimeExtensions) {
   // Default configuration (no options)
