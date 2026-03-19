@@ -4,21 +4,22 @@ title: Metrics Plugins
 
 An essential part of any application is the ability to continuously monitor its
 performance in production to detect any issues. Zuplo provides support for
-sending metrics to a variety of services. If you want your logs to be sent to
-your metrics service, you can enable one of Zuplo's logging plugins. Currently,
-Zuplo supports logging to the following sources:
+sending metrics to a variety of services. If you want metrics to be sent to your
+metrics service, you can enable one of Zuplo's metrics plugins. Currently, Zuplo
+supports metrics for the following sources:
 
 - Datadog (Beta)
 - Dynatrace (Beta)
 - New Relic (Beta)
 - OpenTelemetry (Beta)
 
-If you would like to log to a different source, reach out to support@zuplo.com
-and we'd be happy to work with you to add a new logging plugin.
+If you would like to send metrics to a different source, reach out to
+support@zuplo.com and we'd be happy to work with you to add a new metrics
+plugin.
 
-To configure your logging, you must create a `zuplo.runtime.ts` file in the
-`modules`. The examples below show the content of the file with each of the
-different logging plugins.
+To configure your metrics plugins, you must create a `zuplo.runtime.ts` file in
+the `modules`. The examples below show the content of the file with each of the
+different metrics plugins.
 
 <EnterpriseFeature name="Custom metrics" />
 
@@ -43,8 +44,18 @@ Below, you will find details on each metrics plugin.
 
 ### Datadog (Beta)
 
-By default, we send all metrics to Datadog. However, you have the option below
-to configure which metrics you want to send.
+For new Datadog integrations, use `distributionMode` and Datadog's distribution
+endpoint (`/api/v1/distribution_points`).
+
+`seriesMode` is kept as the default only for backwards compatibility with
+existing users and dashboards.
+
+:::tip{title="Recommendation"}
+
+Use `distributionMode` for new deployments. Use `seriesMode` only if you need to
+keep legacy dashboards/monitors on old metric names.
+
+:::
 
 Due to the pricing model of Datadog, we recommend being thrifty with what's
 being sent. Refer to
@@ -54,16 +65,25 @@ tags since those are counted as separate metrics. This
 [article by Datadog](https://www.Datadoghq.com/blog/the-power-of-tagged-metrics/)
 has some good guidelines.
 
-:::warning{title="Metrics Aggregation"}
+### Datadog metric modes
 
-Your Zuplo API can be deployed to many edge locations. Each location will send
-metrics to Datadog independently. For low volume APIs this may be okay, but
-typically you will want to aggregate metrics before sending to Datadog. You can
-use a tool like the
-[OpenTelemetry Collector](https://opentelemetry.io/docs/collector/) for the
-aggregation.
+| Mode               | Ingestion path                | Metric names emitted                                                                              | Best for                                                                                    |
+| ------------------ | ----------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `distributionMode` | `/api/v1/distribution_points` | `zuplo.request.latency.v2`, `zuplo.request.content_length.v2`, `zuplo.response.content_length.v2` | Recommended for new setups, accurate request populations, percentile queries (`p95`, `p99`) |
+| `seriesMode`       | `/api/v2/series`              | `zuplo.request.latency`, `zuplo.request.content_length`, `zuplo.response.content_length`          | Backwards compatibility with existing dashboards/monitors                                   |
+
+When you use `distributionMode`, all three metrics are sent as Datadog
+distributions and use the `.v2` suffix.
+
+:::warning{title="Legacy mode behavior"}
+
+At high concurrency across edge replicas, same-second values with matching tags
+can collapse in Datadog's timeseries model when using `seriesMode`. Prefer
+`distributionMode` for request counting and percentile analytics.
 
 :::
+
+### Series mode (legacy / backwards compatibility)
 
 ```ts
 import {
@@ -76,6 +96,8 @@ export function runtimeInit(runtime: RuntimeExtensions) {
   runtime.addPlugin(
     new DatadogMetricsPlugin({
       apiKey: environment.Datadog_API_KEY,
+      // Pass your Datadog site host;
+      url: "https://api.us5.datadoghq.com",
       // You can add what tags you want.
       // See https://docs.Datadoghq.com/tagging/#defining-tags for more information
       tags: [
@@ -98,6 +120,96 @@ export function runtimeInit(runtime: RuntimeExtensions) {
   );
 }
 ```
+
+### Distribution mode (recommended for global request analytics)
+
+```ts
+import {
+  RuntimeExtensions,
+  DatadogMetricsPlugin,
+  environment,
+} from "@zuplo/runtime";
+
+export function runtimeInit(runtime: RuntimeExtensions) {
+  runtime.addPlugin(
+    new DatadogMetricsPlugin({
+      apiKey: environment.Datadog_API_KEY,
+      metricMode: "distributionMode",
+      // Pass your Datadog site host;
+      url: "https://api.us5.datadoghq.com",
+      tags: [
+        "app:my-service-name",
+        `environment:${environment.ENVIRONMENT ?? "DEVELOPMENT"}`,
+      ],
+      metrics: {
+        latency: true,
+        requestContentLength: true,
+        responseContentLength: true,
+      },
+      include: {
+        country: false,
+        httpMethod: false,
+        statusCode: false,
+      },
+    }),
+  );
+}
+```
+
+### Enable percentile aggregations in Datadog
+
+`distributionMode` sends distribution metrics, but percentile queries (`p50`,
+`p75`, `p90`, `p95`, `p99`) are only available after you enable percentile
+aggregations for those metrics in Datadog. See Datadog's
+[distribution metrics documentation](https://docs.datadoghq.com/metrics/distributions/)
+for details.
+
+To enable percentiles in Datadog:
+
+1. Go to **Metrics > Summary**.
+2. Open one of your Zuplo distribution metrics (for example
+   `zuplo.request.latency.v2`).
+3. In the metric side panel, set **Percentiles** to **ON**.
+4. Repeat for other distribution metrics you want percentile queries on
+   (`zuplo.request.content_length.v2`, `zuplo.response.content_length.v2`).
+
+Consequence of enabling percentiles:
+
+- You unlock percentile queries (`p50`, `p75`, `p90`, `p95`, `p99`), threshold
+  queries, and standard deviation queries.
+- It can increase custom metrics usage/billing. For distributions, enabling
+  percentile aggregations adds an additional custom metric volume of
+  `5 * (tag value combinations)`, making the total
+  `2 * 5 * (tag value combinations)` for that metric. See Datadog's
+  [custom metrics billing docs](https://docs.datadoghq.com/account_management/billing/custom_metrics/).
+- It does not change ingestion mode; it changes which aggregations are queryable
+  in Datadog.
+
+### v1 vs v2 metric names
+
+Switching to `distributionMode` changes the metric names. Update dashboards and
+monitors to use the `.v2` metrics:
+
+| Previous (`seriesMode`)         | New (`distributionMode`)           |
+| ------------------------------- | ---------------------------------- |
+| `zuplo.request.latency`         | `zuplo.request.latency.v2`         |
+| `zuplo.request.content_length`  | `zuplo.request.content_length.v2`  |
+| `zuplo.response.content_length` | `zuplo.response.content_length.v2` |
+
+Example Datadog queries in `distributionMode`:
+
+- Requests per minute: `count:zuplo.request.latency.v2{...}.rollup(sum,60)`
+- Requests per hour: `count:zuplo.request.latency.v2{...}.rollup(sum,3600)`
+- p95 latency: `p95:zuplo.request.latency.v2{...}`
+- p99 latency: `p99:zuplo.request.latency.v2{...}`
+
+:::warning{title="Migration note"}
+
+`distributionMode` does not overwrite old metric names. It emits new `.v2`
+metrics. If you switch modes, dashboards/monitors that reference old metric
+names will need to be updated.
+
+:::
 
 The above configuration applies globally for all metrics send to Datadog. If you
 wish to dynamically configure information for a particular ZuploContext, you can
@@ -289,7 +401,7 @@ The OpenTelemetry metrics plugin sends metrics to any OpenTelemetry-compatible
 collector using the
 [OTLP HTTP JSON format](https://opentelemetry.io/docs/specs/otlp/#json-protobuf-encoding).
 This allows you to integrate with a wide variety of observability backends that
-support OpenTelemetry, including Grafana, Jaeger, Honeycomb, and many others.
+support OpenTelemetry, including Grafana, Honeycomb, and many others.
 
 By default, we send all metrics to your OpenTelemetry collector. However, you
 have the option below to configure which metrics you want to send.
