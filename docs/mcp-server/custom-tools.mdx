@@ -361,8 +361,7 @@ gateway.
 }
 ```
 
-Then, simply add this operation as to an MCP server to make it available as a
-tool:
+Then, simply add this operation to an MCP server to make it available as a tool:
 
 ```json
 {
@@ -471,7 +470,7 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 ### Debugging Tips
 
 1. **Enable Debug Logging**: Use `context.log.debug()` liberally and turn on
-   [debug mode in your MCP server](../handlers/mcp-server)
+   [debug mode in your MCP server](../handlers/mcp-server.mdx)
 2. **Test Components Separately**: Test API routes and business logic
    independently
 3. **Use MCP Inspector**: Interactive testing is invaluable for development
@@ -480,9 +479,9 @@ export default async function (request: ZuploRequest, context: ZuploContext) {
 
 ## Learn More
 
-- [MCP Server Handler](../handlers/mcp-server) - For simple route-to-tool
+- [MCP Server Handler](../handlers/mcp-server.mdx) - For simple route-to-tool
   mapping
-- [Model Context Protocol Overview](../mcp-server/introduction) - Understanding
-  MCP concepts
+- [Model Context Protocol Overview](../mcp-server/introduction.mdx) -
+  Understanding MCP concepts
 - [MCP Specification](https://modelcontextprotocol.io/specification/) - Official
   protocol documentation
