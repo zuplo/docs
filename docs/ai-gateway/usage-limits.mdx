@@ -2,3 +2,88 @@
 title: "Usage Limits & Thresholds"
 sidebar_label: "Usage Limits"
 ---
+
+The Zuplo AI Gateway provides hierarchical usage limits and budget controls to
+manage LLM spending across your organization. Limits can be set at the
+organization, team, and application levels.
+
+## Budget Hierarchy
+
+Budget limits cascade down through your organizational structure:
+
+- **Root Team** - Organization-wide limits (for example, $1,000/day)
+- **Sub-Teams** - Team-specific limits that cannot exceed the parent team's
+  budget (for example, $500/day for the Engineering team)
+- **Applications** - Per-app limits for granular control (for example, $10/day
+  for a hackathon project)
+
+A sub-team's budget can never exceed the available budget from its parent team.
+Similarly, an application's budget cannot exceed its owning team's budget.
+
+## Configuring Limits
+
+### Daily Budgets
+
+Set a maximum daily spend for a team or application. When the daily budget is
+reached, requests are either blocked or flagged with a warning depending on your
+enforcement configuration.
+
+To configure daily budgets:
+
+1. Navigate to your AI Gateway project in the
+   [Zuplo Portal](https://portal.zuplo.com)
+2. Select the **Teams** or **Apps** tab
+3. Click on the team or app to edit
+4. Click **Settings** and configure the **Daily Budget** field
+5. Click **Save Changes**
+
+### Monthly Budgets
+
+Set a maximum monthly spend for applications. Monthly budgets reset on the first
+day of each calendar month.
+
+### Rate Limits
+
+In addition to budget-based limits, you can configure request rate limits to
+control the volume of requests flowing through the gateway.
+
+## Enforcement Modes
+
+When a limit is reached, the AI Gateway can operate in two modes:
+
+- **Enforce** - Requests are blocked and an error response is returned to the
+  caller
+- **Warn** - Requests are allowed through but a warning notification is
+  generated
+
+## Monitoring Usage
+
+Track current usage and spending through the AI Gateway dashboard:
+
+1. Navigate to your AI Gateway project
+2. Click on an app and select **Dashboard**
+3. View real-time metrics including:
+   - Request count
+   - Token usage (input and output)
+   - Current spending against budget
+   - Time to first byte
+
+## Semantic Caching
+
+Enable semantic caching on applications to reduce costs by identifying and
+returning cached responses for similar prompts. This can significantly reduce
+token usage and spending, especially for applications with repeated or similar
+queries.
+
+To enable semantic caching:
+
+1. Navigate to your app settings
+2. Enable **Semantic Caching**
+3. Save your changes
+
+## Related Resources
+
+- [Getting Started](./getting-started.mdx) - Set up your first AI Gateway
+  project with budget controls
+- [Managing Teams](./managing-teams.mdx) - Configure team-level budgets
+- [Managing Apps](./managing-apps.mdx) - Configure app-level limits
