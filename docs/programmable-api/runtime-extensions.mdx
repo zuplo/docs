@@ -159,7 +159,7 @@ interface OnRequestHook {
 **Example:**
 
 ```ts
-import { RuntimeExtensions } from "@zuplo/runtime";
+import { RuntimeExtensions, environment } from "@zuplo/runtime";
 
 export function runtimeInit(runtime: RuntimeExtensions) {
   runtime.addRequestHook(async (request, context) => {
@@ -177,7 +177,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
 
   // Example: Early response for maintenance mode
   runtime.addRequestHook((request, context) => {
-    if (process.env.MAINTENANCE_MODE === "true") {
+    if (environment.MAINTENANCE_MODE === "true") {
       return new Response("Service temporarily unavailable", {
         status: 503,
         headers: { "Retry-After": "3600" },
