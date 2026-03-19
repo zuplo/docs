@@ -581,6 +581,17 @@ export const apiGateway: Navigation = [
       "articles/api-key-buckets",
     ],
   },
+  {
+    type: "category",
+    label: "Migration Guides",
+    items: [
+      "articles/migration-overview",
+      "articles/migrate-from-kong",
+      "articles/migrate-from-apigee",
+      "articles/migrate-from-aws-api-gateway",
+      "articles/migrate-from-azure-apim",
+    ],
+  },
 ];
 
 export const aiGateway: Navigation = [
