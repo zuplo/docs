@@ -61,7 +61,7 @@ Let's get started.
 
    :::info{title="What's a Module?"}
 
-   Modules are Typescript functions that you can execute within Zuplo. They're
+   Modules are TypeScript functions that you can execute within Zuplo. They're
    typically used to add custom code within the request/response pipeline (ex.
    custom policies or request handlers). You can even perform network requests
    and use libraries within these modules.
@@ -76,7 +76,7 @@ Let's get started.
    export function rateLimit(request: ZuploRequest, context: ZuploContext) {
      const user = request.user;
 
-     // premium customers get 1000 requests per mintue
+     // premium customers get 1000 requests per minute
      if (user.data.customerType === "premium") {
        return {
          key: user.sub,

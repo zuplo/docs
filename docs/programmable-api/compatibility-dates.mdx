@@ -4,7 +4,7 @@ title: Compatibility Dates
 
 Zuplo is constantly shipping updates to the underlying runtime of projects.
 Occasionally, these updates aren't backwards compatible. In order to ensure that
-your project continues to build, deploy and operate as you expect it you can set
+your project continues to build, deploy, and operate as you expect, you can set
 a compatibility date to lock in the behavior and APIs of the runtime.
 
 The compatibility date is set in the `zuplo.jsonc` file at the root of your
@@ -98,8 +98,8 @@ set global attributes on logs. This was a legacy feature that was added before
 the current plugin system existed. This feature has been removed. Log plugins
 should be enabled using the [documented plugin system](../articles/logging.mdx).
 
-If you are using setting any of the following in your code, you should migrate
-to the plugin configuration instead.
+If you are setting any of the following in your code, you should migrate to the
+plugin configuration instead.
 
 ```ts
 context.custom["__ddtags"]; // Sets tags

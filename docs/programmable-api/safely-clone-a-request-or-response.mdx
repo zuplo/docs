@@ -8,9 +8,9 @@ to the downwind service or back to the client respectively.
 
 ![Lifecycle](../../public/media/safely-clone-a-request-or-response/f70d62c0-8bdd-4476-9fd6-fe2dad7ae3a2.png)
 
-When we do this inside the Zuplo gateway in a
-[Request Handler](../handlers/custom-handler.mdx) we've to be careful to clone
-the request or response to avoid causing a `body-used` exception.
+When doing this inside the Zuplo gateway in a
+[Request Handler](../handlers/custom-handler.mdx), be careful to clone the
+request or response to avoid causing a `body-used` exception.
 
 A `body-used` exception occurs when a `.body` property of a request or response,
 which is of type `ReadableStream`, has already been read. These properties can
@@ -26,25 +26,25 @@ Let’s imagine we want to log both the request body and response body of a
 proxied call to a downwind service
 
 ```ts
-export default async async function(req: ZuploRequest, ctx: ZuploContext) {
-	// pretend we want to log the request and response body
-	const reqClone = req.clone();
+export default async function (req: ZuploRequest, ctx: ZuploContext) {
+  // pretend we want to log the request and response body
+  const reqClone = req.clone();
   const reqBody = await reqClone.text();
-	ctx.log.debug(reqBody);
+  ctx.log.debug(reqBody);
 
-	// we can now safely re-use this body to call the downstream
-	// service
-	const response = await fetch('https://downwind-url.com/foo/bar', {
-		method: req.method,
-		body: req.body;
-	});
+  // we can now safely re-use this body to call the downstream
+  // service
+  const response = await fetch("https://downwind-url.com/foo/bar", {
+    method: req.method,
+    body: req.body,
+  });
 
-	const resClone = response.clone();
-	const resBody = await resClone.text();
-	req.logger.debug(resBody);
+  const resClone = response.clone();
+  const resBody = await resClone.text();
+  ctx.log.debug(resBody);
 
-	// we can now safely use the original response
-	return response;
+  // we can now safely use the original response
+  return response;
 }
 ```
 
@@ -52,6 +52,6 @@ If you don’t need to read the body - we recommend against cloning the request 
 response as it will make your gateway more memory efficient and increase
 performance.
 
-> Note - in [policies](../policies), if you need to read the body we always
-> recommend using `.clone()` first, as you don’t know what the end request
-> handler might want to do with the originals.
+> Note - in [policies](../policies/overview.mdx), if you need to read the body
+> we always recommend using `.clone()` first, as you don’t know what the end
+> request handler might want to do with the originals.
