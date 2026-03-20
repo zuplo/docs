@@ -230,9 +230,28 @@ MonetizationInboundPolicy.addMeters(context, {
 });
 ```
 
-When using dynamic metering, configure the policy with the meter key but omit it
-from the static `meters` option (or set it to `0`), and set the value
-dynamically in your handler.
+You can also read the current runtime meter values at any point:
+
+```typescript
+const meters = MonetizationInboundPolicy.getMeters(context);
+// { tokens_used: 150 }
+```
+
+### How meter values are merged
+
+The final metering hook combines static and runtime values before usage is sent:
+
+- `options.meters` provides the static base values
+- `setMeters` replaces the current runtime meter map, overriding matching static
+  keys
+- `addMeters` accumulates into the runtime meter map, then combines additively
+  with static values
+- If both static and runtime maps are empty, metering is skipped
+
+For a meter key like `api` with `options.meters.api = 1`:
+
+- `setMeters(context, { api: 50 })` sends `api: 50` (replaces static value)
+- `addMeters(context, { api: 50 })` sends `api: 51` (adds to static value)
 
 ## Error responses
 

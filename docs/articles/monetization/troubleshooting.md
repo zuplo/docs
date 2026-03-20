@@ -17,7 +17,7 @@ sidebar_label: Troubleshooting
    access is blocked.
 
    ```bash
-   curl https://dev.zuplo.com/v1/metering/{bucketId}/subscriptions?customerId={CUSTOMER_ID} \
+   curl https://dev.zuplo.com/v3/metering/{bucketId}/customers/{CUSTOMER_ID}/subscriptions \
      -H "Authorization: Bearer {API_KEY}"
    ```
 
@@ -129,12 +129,12 @@ entitlements don't change.
 ### Check subscription state via the API
 
 ```bash
-# List all subscriptions for a customer
-curl https://dev.zuplo.com/v1/metering/{bucketId}/subscriptions?customerId={CUSTOMER_ID} \
+# List subscriptions for a customer
+curl https://dev.zuplo.com/v3/metering/{bucketId}/customers/{CUSTOMER_ID}/subscriptions \
   -H "Authorization: Bearer {API_KEY}"
 
-# Get current quota for a subscription
-curl https://dev.zuplo.com/v1/metering/{bucketId}/subscriptions/{subscriptionId}/quotas \
+# Check subscription access and entitlements
+curl https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions/{subscriptionId}/access \
   -H "Authorization: Bearer {API_KEY}"
 ```
 
@@ -152,13 +152,6 @@ curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/meters/{meterIdOrSlug}
     "windowSize": "DAY"
   }'
 ```
-
-### Check Stripe webhook delivery
-
-1. Open Stripe Dashboard → Developers → Webhooks
-2. Click on the Zuplo webhook endpoint
-3. Review recent events — look for failed deliveries (red)
-4. Click on individual events to see the request/response details
 
 ### Test with cURL
 

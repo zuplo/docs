@@ -177,10 +177,10 @@ Create each plan via the API or Portal UI, then publish.
 
 Even if you had Stripe connected in V1, you need to establish a new connection:
 
-1. Navigate to **Settings → Monetization → Billing**
-2. Click **Connect Stripe Account**
-3. Authorize the same Stripe account you were using
-4. New Stripe Products and Prices are created corresponding to your V3 plans
+1. Navigate to **Services → Monetization Service → Payment Provider**
+2. Click **Configure** on the Stripe card
+3. Enter a name and paste your Stripe API key
+4. New Stripe Products and Prices are created when you publish your V3 plans
 
 :::note
 
@@ -267,7 +267,7 @@ For each existing subscriber:
 3. Verify the migration by checking quota and access
 
 ```bash
-curl -X POST https://dev.zuplo.com/v1/metering/{bucketId}/subscriptions \
+curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions \
   -H "Authorization: Bearer {API_KEY}" \
   -H "Content-Type: application/json" \
   -d '{

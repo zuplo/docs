@@ -43,10 +43,25 @@ Before setting up monetization in the portal, ensure:
 
 ## Enabling monetization in the portal
 
-1. Navigate to **Developer Portal → Settings**
-2. Under **Monetization**, toggle **Enable Monetization**
-3. Connect Stripe if not already connected
-4. Publish at least one plan
+Add the monetization plugin to your Developer Portal configuration. Open
+`docs/zudoku.config.tsx` in your project and add the plugin:
+
+```tsx
+import { zuploMonetizationPlugin } from "@zuplo/zudoku-plugin-monetization";
+
+const config: ZudokuConfig = {
+  // ... your existing config
+  plugins: [
+    zuploMonetizationPlugin(),
+    // ... any other plugins you have
+  ],
+};
+```
+
+Save and deploy. Once the plugin is enabled, ensure:
+
+1. Stripe is connected (see [Stripe Integration](./stripe-integration.md))
+2. At least one plan is published
 
 ## Configuring the pricing page
 

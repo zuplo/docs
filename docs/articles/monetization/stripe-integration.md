@@ -29,30 +29,29 @@ metering. Stripe is the source of truth for payment state.
 
 ## Connecting your Stripe account
 
-### Via the Zuplo Portal (recommended)
+### Via the Zuplo Portal
 
-1. Navigate to **Settings → Monetization → Billing** in the Zuplo Portal
-2. Click **Connect Stripe Account**
-3. Authorize Zuplo to manage Stripe objects on your behalf, including products,
-   prices, customers, and subscriptions
-4. You are redirected back to Zuplo with the connection confirmed
+1. Navigate to **Services → Monetization Service → Payment Provider**
+2. Click **Configure** on the Stripe card
+3. Enter a **Name** and paste your **Stripe API Key**
+4. Click **Save**
+
+The connection authorizes Zuplo to manage Stripe objects on your behalf,
+including products, prices, customers, and subscriptions.
 
 ### Test mode vs. live mode
 
-Connect in Stripe **test mode** first to validate your configuration end-to-end.
-Test mode uses Stripe's test card numbers (e.g., `4242 4242 4242 4242`) and
-never charges real money.
+Connect with a Stripe **test** key (`sk_test_...`) first to validate your
+configuration end-to-end. Test mode uses Stripe's test card numbers (e.g.,
+`4242 4242 4242 4242`) and never charges real money.
 
-When you're ready to go live:
+When you're ready to go live, update to your live key (`sk_live_...`).
 
-1. Toggle to live mode in Stripe
-2. Reconnect your Stripe account in the Zuplo Portal
-3. Republish your plans (new Products/Prices are created in live mode)
+:::caution
 
-:::note
-
-Test mode and live mode are separate environments in Stripe. Products,
-customers, and subscriptions don't transfer between them.
+Always use your Stripe **test** key while developing. Test mode and live mode
+are separate environments in Stripe. Products, customers, and subscriptions
+don't transfer between them.
 
 :::
 

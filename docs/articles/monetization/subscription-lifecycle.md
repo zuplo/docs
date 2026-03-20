@@ -43,7 +43,7 @@ outside the Developer Portal (custom frontend, sales-assisted onboarding,
 internal tooling):
 
 ```bash
-curl -X POST https://dev.zuplo.com/v1/metering/{bucketId}/subscriptions \
+curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions \
   -H "Authorization: Bearer {API_KEY}" \
   -H "Content-Type: application/json" \
   -d '{
@@ -177,7 +177,7 @@ Customers can change plans from the Subscriptions page in the Developer Portal:
 ### Programmatic (API)
 
 ```bash
-curl -X PATCH https://dev.zuplo.com/v1/metering/{bucketId}/subscriptions/{subscriptionId} \
+curl -X PATCH https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions/{subscriptionId} \
   -H "Authorization: Bearer {API_KEY}" \
   -H "Content-Type: application/json" \
   -d '{
@@ -225,7 +225,7 @@ Customers can cancel from the Developer Portal subscriptions page:
 ### Programmatic cancellation
 
 ```bash
-curl -X POST https://dev.zuplo.com/v1/metering/{bucketId}/subscriptions/{subscriptionId}/cancel \
+curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions/{subscriptionId}/cancel \
   -H "Authorization: Bearer {API_KEY}"
 ```
 
@@ -243,7 +243,7 @@ A canceled subscription (scheduled for end-of-period) can be reactivated before
 the period ends:
 
 ```bash
-curl -X POST https://dev.zuplo.com/v1/metering/{bucketId}/subscriptions/{subscriptionId}/unschedule-cancelation \
+curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions/{subscriptionId}/unschedule-cancelation \
   -H "Authorization: Bearer {API_KEY}"
 ```
 
@@ -252,7 +252,7 @@ This removes the pending cancellation. The subscription continues as normal.
 A fully canceled subscription (past the period end) can be restored:
 
 ```bash
-curl -X POST https://dev.zuplo.com/v1/metering/{bucketId}/subscriptions/{subscriptionId}/restore \
+curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions/{subscriptionId}/restore \
   -H "Authorization: Bearer {API_KEY}"
 ```
 

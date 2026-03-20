@@ -194,14 +194,15 @@ curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/plans/{planId}/publish
 
 ## Step 4: Connect Stripe
 
-Navigate to **Settings → Monetization → Billing** in the Zuplo Portal.
-
-1. Click **Connect Stripe Account**
-2. Authorize Zuplo to access your Stripe account (use test mode for initial
-   setup)
-3. Zuplo automatically creates Stripe Products and Prices corresponding to your
-   published plans
-4. Verify in the Stripe Dashboard that the products appear under **Products**
+1. Go to your [Stripe Dashboard](https://dashboard.stripe.com) and make sure
+   you're in **sandbox mode**
+2. Go to **Developers > API keys** and copy your **Secret key** (starts with
+   `sk_test_`)
+3. In the Zuplo Portal, navigate to **Services → Monetization Service → Payment
+   Provider**
+4. Click **Configure** on the Stripe card
+5. Enter a **Name** and paste your **Stripe API Key**, then click **Save**
+6. When you publish plans, Stripe Products and Prices are created automatically
 
 When a customer subscribes through your Developer Portal, Zuplo:
 
@@ -266,8 +267,22 @@ monetization policy replaces it.
 The Developer Portal provides the self-serve experience for your customers:
 browsing plans, subscribing, managing API keys, and viewing usage.
 
-Enable monetization in the Zuplo Portal under **Developer Portal → Settings →
-Monetization**. Once enabled, your Developer Portal shows:
+Add the monetization plugin to your Developer Portal. Open
+`docs/zudoku.config.tsx` in your project and add:
+
+```tsx
+import { zuploMonetizationPlugin } from "@zuplo/zudoku-plugin-monetization";
+
+const config: ZudokuConfig = {
+  // ... your existing config
+  plugins: [
+    zuploMonetizationPlugin(),
+    // ... any other plugins
+  ],
+};
+```
+
+Save and deploy. Your Developer Portal now shows:
 
 - A **Pricing** page displaying your published plans with feature comparisons
 - A **Subscribe** button that launches Stripe Checkout
