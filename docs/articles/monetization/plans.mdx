@@ -1,6 +1,6 @@
 ---
 title: Plans
-sidebar_label: Overview
+sidebar_label: Plans
 ---
 
 :::warning
@@ -194,15 +194,16 @@ fee. Additional requests are billed at $0.01 each (soft limit allows overage).
 
 ## Plan Properties
 
-| Property         | Required | Description                                                   |
-| ---------------- | -------- | ------------------------------------------------------------- |
-| `key`            | Yes      | Unique identifier for the plan                                |
-| `name`           | Yes      | Human-readable display name                                   |
-| `currency`       | Yes      | Three-letter ISO currency code (e.g., `USD`)                  |
-| `billingCadence` | Yes      | Billing period as ISO 8601 duration (e.g., `P1M` for monthly) |
-| `phases`         | Yes      | Array of plan phases with rate cards                          |
-| `description`    | No       | Detailed description of the plan                              |
-| `metadata`       | No       | Custom key-value pairs for your own use                       |
+| Property          | Required | Description                                                   |
+| ----------------- | -------- | ------------------------------------------------------------- |
+| `key`             | Yes      | Unique identifier for the plan                                |
+| `name`            | Yes      | Human-readable display name                                   |
+| `currency`        | Yes      | Three-letter ISO currency code (e.g., `USD`)                  |
+| `billingCadence`  | Yes      | Billing period as ISO 8601 duration (e.g., `P1M` for monthly) |
+| `phases`          | Yes      | Array of plan phases with rate cards                          |
+| `description`     | No       | Detailed description of the plan                              |
+| `metadata`        | No       | Custom key-value pairs for your own use                       |
+| `proRatingConfig` | No       | Proration settings (see below)                                |
 
 ## Phase Properties
 
@@ -212,6 +213,23 @@ fee. Additional requests are billed at $0.01 each (soft limit allows overage).
 | `name`      | Yes      | Human-readable display name                                           |
 | `duration`  | No       | ISO 8601 duration (e.g., `P1W` for 1 week). Omit for the final phase. |
 | `rateCards` | Yes      | Array of rate cards defining pricing and entitlements                 |
+
+## Proration
+
+Plans support automatic proration when customers upgrade or downgrade
+mid-billing-period. Enable proration with the `proRatingConfig` property:
+
+```json
+{
+  "proRatingConfig": {
+    "enabled": true,
+    "mode": "max_consumption_based"
+  }
+}
+```
+
+When proration is enabled, charges are automatically adjusted based on the
+portion of the billing period remaining at the time of the plan change.
 
 ## Publishing a Plan
 
