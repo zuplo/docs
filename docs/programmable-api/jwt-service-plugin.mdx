@@ -8,7 +8,7 @@ The JWT Service Plugin allows you to create and issue short-lived JSON Web
 Tokens (JWTs) within your Zuplo API. This plugin is useful for scenarios where
 you need to issue tokens for authentication, authorization, or other purposes.
 
-The plugin essentially turns your Zuplo API into it's own identity provider that
+The plugin essentially turns your Zuplo API into its own identity provider that
 can issue JWTs. Your Zuplo API will also serve the standard
 `/.well-known/openid-configuration` endpoint and associated JWKS endpoint which
 can be used by clients to discover the public keys used to verify the JWTs
@@ -48,11 +48,7 @@ To set up the JWT Service Plugin, you need to register it in your
 `zuplo.runtime.ts` file.
 
 ```ts title="modules/zuplo.runtime.ts"
-import {
-  RuntimeExtensions,
-  DataDogLoggingPlugin,
-  JwtServicePlugin,
-} from "@zuplo/runtime";
+import { RuntimeExtensions, JwtServicePlugin } from "@zuplo/runtime";
 
 export function runtimeInit(runtime: RuntimeExtensions) {
   // Default configuration (no options)

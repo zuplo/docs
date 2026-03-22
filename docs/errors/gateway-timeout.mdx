@@ -1,0 +1,33 @@
+---
+title: Gateway Timeout (GATEWAY_TIMEOUT)
+---
+
+The upstream server did not respond within the allowed time.
+
+## Common Causes
+
+- **Slow upstream** — The backend server is taking too long to process the
+  request.
+- **Network issues** — Connectivity problems between Zuplo and the upstream
+  server.
+- **Large payloads** — The request or response body is very large and takes too
+  long to transfer.
+- **Upstream overload** — The backend server is under heavy load and unable to
+  respond in time.
+
+## How to Fix
+
+### For API Consumers
+
+- Retry the request after a short delay.
+- Check if the upstream service is experiencing known issues.
+- Reduce the request payload size if possible.
+
+### For API Operators
+
+- Verify the upstream server is healthy and responding.
+- Check the URL Forward or URL Rewrite handler configuration to ensure the
+  upstream URL is correct.
+- Review upstream server logs for errors or slow queries.
+- Consider increasing the timeout configuration if the upstream legitimately
+  needs more time to respond.

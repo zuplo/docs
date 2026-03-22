@@ -1,0 +1,31 @@
+---
+title: Rate Limit Exceeded (RATE_LIMIT_EXCEEDED)
+---
+
+The request was rejected because the client exceeded the configured rate limit.
+
+## Common Causes
+
+- **Too many requests** — The client sent more requests than the rate limit
+  policy allows within the configured time window.
+- **Shared rate limit** — Multiple clients or API keys share a rate limit pool
+  that has been exhausted.
+- **Burst traffic** — A sudden spike in requests exceeded the allowed burst
+  capacity.
+
+## How to Fix
+
+- **Check the `Retry-After` header** — The response typically includes a
+  `Retry-After` header indicating how long to wait before sending another
+  request.
+- **Implement backoff** — Add exponential backoff and retry logic to the client.
+- **Request a higher limit** — If the current rate limit is too restrictive,
+  contact the API provider about upgrading the plan or adjusting limits.
+
+## For API Operators
+
+- Review the rate limiting policy configuration in the route settings.
+- Consider using
+  [dynamic rate limiting](../articles/step-5-dynamic-rate-limiting.mdx) to set
+  different limits per customer tier.
+- Check the rate limit metrics to determine if limits need adjustment.

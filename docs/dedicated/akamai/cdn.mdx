@@ -19,7 +19,7 @@ for more details.
 ### Domains
 
 Before you configure the CDN for your API Gateway and Developer Portal, you will
-to decide how you would like your domains to be setup. Generally, you will
+to decide how you would like your domains to be set up. Generally, you will
 provision two types of domains - a static domain for production and wildcard
 domains for preview environments.
 
@@ -95,9 +95,9 @@ After configuring the CDN domains, make the following behavior changes:
    ![Set variable behavior](../../../public/media/managed-dedicated-akamai/regex-behaviour.png)
 
 2. Configure the Origin URL to point to the URL given to you by Zuplo for your
-   API gateway. Ensure that the Forward Host Header is configured to be the a
-   Custom Value, and the value should be the variable you created in the
-   previous step. This would look something similar to below:
+   API gateway. Ensure that the Forward Host Header is configured to be a Custom
+   Value, and the value should be the variable you created in the previous step.
+   This would look something similar to below:
    ![API gateway origin URL](../../../public/media/managed-dedicated-akamai/api_gateway_origin_url.png)
 
 3. Turn on Content Targeting (Edgescape) in the Geolocation rule in the Property
@@ -151,6 +151,6 @@ Under the Default Rule page, add the following behaviors:
 
 Congratulations, you've set up your Akamai CDN to serve your API Gateway and
 Developer Portal! At this point, you should be able to test that these things
-are working by either hitting an endpoint in your API gateway (e.g
+are working by either hitting an endpoint in your API gateway (e.g.,
 mygateway.com/my/endpoint), or navigating to a page in your developer portal
-(e.g myportal.com/home).
+(e.g., myportal.com/home).

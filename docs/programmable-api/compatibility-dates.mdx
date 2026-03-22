@@ -4,7 +4,7 @@ title: Compatibility Dates
 
 Zuplo is constantly shipping updates to the underlying runtime of projects.
 Occasionally, these updates aren't backwards compatible. In order to ensure that
-your project continues to build, deploy and operate as you expect it you can set
+your project continues to build, deploy, and operate as you expect, you can set
 a compatibility date to lock in the behavior and APIs of the runtime.
 
 The compatibility date is set in the `zuplo.jsonc` file at the root of your
@@ -14,11 +14,11 @@ file, see the [Zuplo Project Configuration](./zuplo-json.mdx) documentation.
 
 ## 2026-03-01
 
-:::warning
+:::note
 
-This compatibility date is a future date and is subject to change before it
-becomes active by default. You may modify your `zuplo.jsonc` to take advantage
-of this today.
+This compatibility date is the default for projects created after March
+1st, 2026. Existing projects should update their `zuplo.jsonc` to take advantage
+of this change.
 
 :::
 
@@ -98,8 +98,8 @@ set global attributes on logs. This was a legacy feature that was added before
 the current plugin system existed. This feature has been removed. Log plugins
 should be enabled using the [documented plugin system](../articles/logging.mdx).
 
-If you are using setting any of the following in your code, you should migrate
-to the plugin configuration instead.
+If you are setting any of the following in your code, you should migrate to the
+plugin configuration instead.
 
 ```ts
 context.custom["__ddtags"]; // Sets tags
@@ -160,14 +160,14 @@ deployments regardless of compatibility date. Existing customers are encouraged
 to update their compatibility date to `2024-03-14` and test their projects to
 ensure that they continue to operate as expected.
 
-We expect that this new build process will roll out to all customers (regardless
-of compatibility date) by the end of April 2024.
+This new build process has rolled out to all customers regardless of
+compatibility date.
 
 ## 2024-01-15
 
-This compatibility date includes a several breaking changes to improve the
-overall behavior of Zuplo APIs. This compatibility date is the default for any
-projects created after Jan. 15th, 2024.
+This compatibility date includes several breaking changes to improve the overall
+behavior of Zuplo APIs. This compatibility date is the default for any projects
+created after Jan. 15th, 2024.
 
 ### Run Outbound Policies on All Responses
 

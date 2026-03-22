@@ -57,7 +57,7 @@ import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
 import { BackgroundLoader } from "@zuplo/runtime";
 
 const loaderFunction = async (key: string) => {
-  // TODO - consider stronger error handling and checking here
+  // Add error handling and validation as needed for your use case
   const result = await fetch(`https://example-config-service.com/${key}`);
   const data = await result.json();
   return data;

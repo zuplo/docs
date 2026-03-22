@@ -13,7 +13,7 @@ performed the change, when it occurred, and what resources were affected.
 :::note{title="Beta Feature"}
 
 Audit logs are currently in beta. During the beta period not all events may be
-captured. We're working towards full coverage.
+captured. Full coverage is in progress.
 
 :::
 
@@ -217,3 +217,11 @@ exceed 30 days. The start date must be before the end date.
 - Date range queries can't exceed 30 days
 - Some automated system actions may not generate audit logs
 - Logs are immutable and can't be modified or deleted
+
+:::tip
+
+Account audit logs track administrative activities. To log API request and
+response data flowing through the gateway, see the
+[Audit Log Plugin](../../programmable-api/audit-log.mdx).
+
+:::

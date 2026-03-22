@@ -2,4 +2,50 @@
 title: Schema Validation Failed (SCHEMA_VALIDATION_FAILED)
 ---
 
-Incoming body didn't pass schema validation.
+The incoming request body did not pass schema validation. The gateway validates
+the request body against a JSON Schema defined in the route configuration and
+rejects requests that do not conform.
+
+## How schema validation works
+
+When a route has a request body schema defined in the OpenAPI specification,
+Zuplo automatically validates incoming request bodies against that schema. If
+validation fails, the gateway returns a `400 Bad Request` response with details
+about which fields failed validation.
+
+## Common validation errors
+
+- **Missing required fields** - The request body is missing one or more fields
+  marked as `required` in the schema.
+- **Wrong data type** - A field value does not match the expected type (for
+  example, a string where a number is expected).
+- **Invalid enum value** - A field value is not one of the allowed values
+  defined in an `enum` constraint.
+- **Pattern mismatch** - A string field does not match the regular expression
+  defined in the `pattern` property.
+- **Out of range** - A numeric value falls outside the `minimum` or `maximum`
+  bounds defined in the schema.
+
+## How to fix
+
+1. Read the error response body carefully. It contains specific details about
+   which fields failed validation and why.
+2. Compare the request body against the JSON Schema defined in the route
+   configuration.
+3. Ensure all required fields are present and have the correct data types.
+4. Validate the request body locally using a JSON Schema validator before
+   sending the request.
+
+:::tip
+
+The validation error response includes the path to the invalid field and a
+description of the constraint that failed. Use this information to quickly
+identify and fix the issue.
+
+:::
+
+## How to configure schemas
+
+Define request body schemas in the `routes.oas.json` file using standard JSON
+Schema syntax within the OpenAPI `requestBody` definition. The schema specifies
+required fields, data types, formats, and constraints for the request body.

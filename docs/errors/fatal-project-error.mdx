@@ -2,5 +2,38 @@
 title: Zuplo Fatal Project Error (FATAL_PROJECT_ERROR)
 ---
 
-There was a fatal error loading your Zuplo project. See the logs for more
-details.
+There was a fatal error loading your Zuplo project. This error indicates a
+critical failure that prevents the project from starting.
+
+## Common causes
+
+- **Corrupted deployment** - The deployment artifacts are invalid or incomplete.
+- **Critical configuration errors** - The project configuration contains errors
+  that prevent the runtime from initializing.
+- **Infrastructure issues** - A temporary platform issue may prevent the project
+  from loading.
+
+## Recovery steps
+
+1. Check the deployment logs in the Zuplo portal for specific error details.
+2. Try redeploying the project. This resolves issues caused by transient
+   infrastructure problems.
+3. Review recent changes to the project configuration, routes, or code for
+   anything that could cause a fatal error.
+4. Roll back to a previous working deployment if available.
+
+:::caution
+
+This error affects all routes in the project. No requests can be processed until
+the issue is resolved.
+
+:::
+
+## When to contact support
+
+Contact [Zuplo support](../articles/support.mdx) if:
+
+- Redeploying does not resolve the error.
+- No recent changes were made to the project.
+- The error persists across multiple deployment attempts.
+- The deployment logs do not contain actionable error information.

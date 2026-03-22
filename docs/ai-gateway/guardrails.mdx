@@ -2,3 +2,64 @@
 title: Zuplo AI Guardrails
 sidebar_label: Overview
 ---
+
+The Zuplo AI Gateway supports guardrails to protect your AI-powered applications
+from security threats, ensure compliance, and maintain quality in both requests
+and responses flowing through the gateway.
+
+## Available Guardrail Policies
+
+### Akamai AI Firewall
+
+The [Akamai AI Firewall](./policies/akamai-ai-firewall.mdx) provides
+enterprise-grade security for AI applications, including:
+
+- **Prompt injection defense** - Protects against attackers manipulating AI
+  models through deceptive inputs
+- **Data loss prevention (DLP)** - Detects and blocks sensitive data leaks in
+  AI-generated responses and incoming requests
+- **Toxic content filtering** - Flags hate speech, misinformation, and offensive
+  content
+- **Adversarial AI security** - Protects against remote code execution, model
+  back doors, and data poisoning attacks
+
+## Observability & Tracing
+
+Guardrails work alongside observability policies to provide visibility into AI
+interactions:
+
+- [Comet Opik Tracing](./policies/comet-opik-tracing.mdx) - Trace and monitor AI
+  interactions with Comet's Opik platform
+- [Galileo Tracing](./policies/galileo-tracing.mdx) - Monitor AI quality and
+  performance with Galileo
+
+## How Guardrails Work
+
+Guardrails are applied as policies on your AI Gateway routes. They inspect both
+inbound requests (prompts sent to LLM providers) and outbound responses (content
+returned from LLM providers) in real-time.
+
+When a guardrail detects a policy violation:
+
+1. The request or response is blocked before reaching its destination
+2. An appropriate error response is returned to the caller
+3. The violation is logged for audit and monitoring purposes
+
+## Getting Started
+
+To add guardrails to your AI Gateway:
+
+1. Navigate to your AI Gateway project in the
+   [Zuplo Portal](https://portal.zuplo.com)
+2. Open the **Code** tab and select your `routes.oas.json` file
+3. Select the route for your AI Gateway endpoint
+4. Click **Add Policy** and search for the guardrail you want to add
+5. Configure the policy settings and click **OK**
+6. Save your changes to deploy
+
+## Custom Guardrails
+
+You can build custom guardrails using Zuplo's programmable gateway. Create a
+custom inbound or outbound policy that inspects request/response content and
+applies your own rules. This allows you to implement organization-specific
+content policies, regulatory compliance checks, or domain-specific validation.

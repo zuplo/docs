@@ -3,14 +3,15 @@ title: Redirect Handler
 sidebar_label: Redirect
 ---
 
-The Redirect Handler sends a redirect HTTP response to the client. You can
-specify whether this is 301 (Permanent) or 302 (Temporary), or specify a custom
-status in routes.oas.json.
+The Redirect Handler sends a redirect HTTP response to the client. Use it to
+redirect traffic from one URL to another, such as directing users from a
+deprecated endpoint to its replacement or redirecting a root path to
+documentation.
 
 ## Setup via Portal
 
 The Redirect Handler can be added to any route using the Route Designer. Open
-the **Route Designer** by navigating to the **Code Editor** tab then click
+the **Route Designer** by navigating to the **Files** tab then click
 **routes.oas.json**. Inside any route, select **Redirect** from the **Request
 Handlers** drop-down.
 
@@ -18,9 +19,9 @@ In the text box enter the URL location for the redirect.
 
 ## Setup in routes.oas.json
 
-You can also configure the Redirect Handler directly in the **routes.oas.json**
-file, for example, as in the route below (which is redirecting requests at the
-root of your domain to your docs page at /docs).
+Configure the Redirect Handler directly in the **routes.oas.json** file. The
+following example redirects requests at the root of a domain to a docs page at
+`/docs`:
 
 ```json
 "paths": {
@@ -47,3 +48,68 @@ root of your domain to your docs page at /docs).
   }
 }
 ```
+
+## Options
+
+The Redirect Handler accepts the following options:
+
+- **`location`** (required): The URL or path to redirect the client to.
+  - Type: `string`
+  - Supports absolute URLs (e.g., `https://example.com/docs`) and relative paths
+    (e.g., `/docs`)
+
+- **`status`** (optional): The HTTP status code for the redirect response.
+  - Type: `number`
+  - Default: `302`
+  - Common values:
+    - `301` - Permanent redirect. Browsers and search engines cache this
+      redirect. Use for endpoints that have permanently moved.
+    - `302` - Temporary redirect (default). The client should continue using the
+      original URL for future requests.
+    - `307` - Temporary redirect that preserves the HTTP method. Unlike `302`,
+      the client must use the same method (POST, PUT, etc.) when following the
+      redirect.
+    - `308` - Permanent redirect that preserves the HTTP method. Like `301`, but
+      the client must use the same method when following the redirect.
+
+### Examples
+
+**Permanent redirect to an external URL:**
+
+```json
+{
+  "handler": {
+    "module": "$import(@zuplo/runtime)",
+    "export": "redirectHandler",
+    "options": {
+      "location": "https://newapi.example.com/v2",
+      "status": 301
+    }
+  }
+}
+```
+
+**Temporary redirect preserving the HTTP method:**
+
+```json
+{
+  "handler": {
+    "module": "$import(@zuplo/runtime)",
+    "export": "redirectHandler",
+    "options": {
+      "location": "/maintenance",
+      "status": 307
+    }
+  }
+}
+```
+
+## Common Use Cases
+
+- **API versioning**: Redirect requests from an old API version to the current
+  version using a `301` permanent redirect.
+- **Documentation entry point**: Redirect the root path (`/`) to a documentation
+  page or developer portal.
+- **Deprecated endpoints**: Redirect traffic from removed endpoints to their
+  replacements.
+- **Domain migration**: Redirect requests from a legacy domain to a new domain.

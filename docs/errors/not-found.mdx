@@ -2,4 +2,42 @@
 title: Not Found Error (NOT_FOUND)
 ---
 
-No route matched this request.
+No route matched this request. The gateway could not find a configured route
+that matches the request path and HTTP method.
+
+## Common causes
+
+- **Incorrect request path** - The URL path does not match any route defined in
+  the routes configuration. Check for typos, missing path segments, or incorrect
+  casing.
+- **Wrong HTTP method** - The route exists but is configured for a different
+  HTTP method. For example, sending a `POST` request to a route that only
+  accepts `GET`.
+- **Route not deployed** - The route configuration has not been deployed to the
+  current environment. Verify the latest deployment includes the expected route.
+- **Missing path parameters** - The URL is missing required path segments or
+  parameters that the route expects.
+
+## How to debug
+
+1. Open the route designer in the Zuplo portal and verify the route exists with
+   the correct path and method.
+2. Check that the environment you are calling matches the environment where the
+   route is deployed.
+3. Verify the base URL is correct, including the project name and environment
+   subdomain.
+4. Review recent deployments to confirm the route configuration has been
+   published.
+
+:::tip
+
+Zuplo supports a custom not-found handler that allows you to customize the
+response when no route matches. See
+[Not Found Handler](../programmable-api/not-found-handler.mdx) for details.
+
+:::
+
+## Related resources
+
+- [Routes Designer](../articles/local-development-routes-designer.mdx)
+- [Deploying to the Edge](../articles/step-4-deploying-to-the-edge.mdx)

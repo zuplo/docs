@@ -6,18 +6,18 @@ title: Zuplo Identity Token
 
 Each deployment of Zuplo is issued a unique OAuth client identity. This identity
 can be used to create ID Tokens that can be used to securely identify requests
-from your Zuplo API that are made to outside services. This is token can also be
+from your Zuplo API that are made to outside services. This token can also be
 used for purposes such as Identity Federation to securely call APIs in other
 Cloud Services like GCP or AWS.
 
-To create a Zuplo Identity Token simply run the following code from withing a
+To create a Zuplo Identity Token simply run the following code from within a
 policy, handler, or module in your Zuplo API.
 
 ```ts
 import { ZuploServices, ZuploContext, ZuploRequest } from "@zuplo/runtime";
 
 export default async function handler(
-  request: ZuploRequeset,
+  request: ZuploRequest,
   context: ZuploContext,
 ) {
   const idToken = await ZuploServices.getIDToken(context, {

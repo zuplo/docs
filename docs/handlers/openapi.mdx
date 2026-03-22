@@ -3,34 +3,32 @@ title: OpenAPI Spec Handler
 sidebar_label: OpenAPI Spec Handler
 ---
 
-The OpenAPI Spec handler can be used to serve a public version of your OpenAPI
-specification file. The OpenAPI file will be stripped of Zuplo gateway
-configuration (ex. `x-zuplo-*` extensions) and enriched with data based on the
-implementation of the gateway. For example, if you configured your route to be
-protected by the [API Key policy](../policies/api-key-inbound.mdx), we will
-automatically document the `Authorization` header within the generated OpenAPI
-spec.
+The OpenAPI Spec handler serves a public version of your OpenAPI specification
+file. The handler strips Zuplo gateway configuration (such as `x-zuplo-*`
+extensions) and enriches the spec with data based on the gateway implementation.
+For example, if a route uses API key authentication, the handler automatically
+documents the `Authorization` header in the generated OpenAPI spec.
 
 ## Setup via Portal
 
-The Forward Handler can be added to any route using the Route Designer. Open the
-**Route Designer** by navigating to the **Files** tab then click
+The OpenAPI Spec Handler can be added to any route using the Route Designer.
+Open the **Route Designer** by navigating to the **Files** tab then click
 **routes.oas.json**. Inside any route, select **OpenAPI Spec** from the
 **Request Handlers** drop-down.
 
-The handler should be defaulted to the OpenAPI file you currently have open, but
-you can change it to serve a different OpenAPI file via the dropdown.
+The handler defaults to the OpenAPI file currently open, but you can change it
+to serve a different OpenAPI file via the dropdown.
 
 ## Setup via routes.oas.json
 
-The OpenAPI Spec handler can also be added manually to the **routes.oas.json**
-file with the following route configuration.
+Add the OpenAPI Spec handler manually to the **routes.oas.json** file with the
+following route configuration:
 
 ```json
 "paths": {
-  "/open-api-spec": {
+  "/openapi": {
     "get": {
-      "summary": "New Route",
+      "summary": "OpenAPI Specification",
       "x-zuplo-route": {
         "corsPolicy": "none",
         "handler": {
@@ -51,7 +49,30 @@ file with the following route configuration.
 
 ## Options
 
-The OpenAPI Spec handler can be configured via `options` as follows:
+The OpenAPI Spec handler accepts the following options:
 
-- `openApiFilePath` - the file path of an OpenAPI file within the `config`
-  folder. The file name must end with `.oas.json`.
+- **`openApiFilePath`** (required): The file path of an OpenAPI file within the
+  `config` folder.
+  - Type: `string`
+  - The file name must end with `.oas.json`.
+  - Example: `"./config/routes.oas.json"`
+
+## How It Works
+
+When a request hits the route with this handler, the handler:
+
+1. Reads the specified OpenAPI file from the project configuration.
+2. Removes all Zuplo-specific extensions (`x-zuplo-*` properties) that are not
+   relevant to API consumers.
+3. Enriches the spec with information derived from the gateway configuration,
+   such as authentication requirements inferred from applied policies.
+4. Returns the cleaned and enriched OpenAPI spec as a JSON response.
+
+## Common Use Cases
+
+- **Developer portal integration**: Serve the OpenAPI spec at a known endpoint
+  for developer portals or documentation tools to consume.
+- **Client SDK generation**: Provide an endpoint that CI/CD pipelines or
+  developers can use to generate client SDKs from the latest API spec.
+- **API discovery**: Expose the spec so that API consumers can explore available
+  endpoints and their requirements.

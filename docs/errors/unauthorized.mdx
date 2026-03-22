@@ -2,8 +2,49 @@
 title: Unauthorized Error (UNAUTHORIZED)
 ---
 
-Possible causes:
+The request failed authentication. The gateway could not verify the identity of
+the caller.
 
-- No `authorization` header was set
-- The `authorization` header is invalid
-- The user isn't authorized
+## Common causes
+
+- **No `authorization` header** - The request does not include an
+  `authorization` header. Most authentication policies require this header to be
+  present.
+- **Invalid `authorization` header** - The header value is malformed or uses an
+  incorrect format. For bearer tokens, the expected format is
+  `Authorization: Bearer <token>`.
+- **Expired or revoked credentials** - The token or API key has expired, been
+  revoked, or is otherwise no longer valid.
+- **Wrong authentication scheme** - The request uses a different authentication
+  method than the one configured on the route (for example, sending a bearer
+  token when the route expects an API key).
+
+## How to test authentication
+
+1. Verify the token or API key is valid and has not expired.
+2. Confirm the `authorization` header format matches the expected scheme.
+3. Test with a known-good credential to rule out token-specific issues.
+4. Check the authentication policy configuration in the route designer to ensure
+   it matches the expected authentication method.
+
+:::note
+
+API key authentication in Zuplo uses the `Authorization: Bearer <api-key>`
+header format by default. See
+[API Key Authentication](../articles/api-key-authentication.mdx) for
+configuration details.
+
+:::
+
+## Common mistakes
+
+- Including extra whitespace or newline characters in the token value.
+- Sending the token as a query parameter instead of a header.
+- Using the wrong API key for the target environment (for example, a development
+  key against production).
+- Forgetting to add an authentication policy to the route.
+
+## Related resources
+
+- [API Key Authentication](../articles/api-key-authentication.mdx)
+- [API Key Administration](../articles/api-key-administration.mdx)

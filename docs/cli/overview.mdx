@@ -24,3 +24,55 @@ The Zuplo CLI is built using Node.js. It requires a minimum version of Node.js
 
 1. After installing the CLI, you can use the `zuplo` command to interact with
    Zuplo.
+
+### Verifying Installation
+
+Run the following command to confirm the CLI is installed correctly:
+
+```bash
+zuplo --version
+```
+
+### Updating
+
+To update the Zuplo CLI to the latest version, run the same install command:
+
+```bash
+npm install -g zuplo@latest
+```
+
+## Quick Start
+
+After installing the CLI, log in to your Zuplo account and deploy a project:
+
+```bash
+zuplo login
+zuplo deploy --project my-project
+```
+
+For details on authentication options, including API key usage for CI/CD
+pipelines, see [Authentication](./authentication.mdx).
+
+## Commands
+
+| Command | Description |
+| --- | --- |
+| [`deploy`](./deploy.mdx) | Deploy a Zuplo project to an environment |
+| [`dev`](./dev.mdx) | Start a local development server |
+| [`test`](./test.mdx) | Run API tests against a deployment |
+| [`init`](./init.mdx) | Initialize a new Zuplo project in the current directory |
+| [`link`](./link.mdx) | Link a local directory to an existing Zuplo project |
+| [`list`](./list.mdx) | List available Zuplo projects |
+| [`delete`](./delete.mdx) | Delete a Zuplo project or environment |
+| [`login`](./authentication.mdx) | Authenticate with your Zuplo account via OAuth |
+| [`variable-create`](./variable-create.mdx) | Create an environment variable |
+| [`variable-update`](./variable-update.mdx) | Update an environment variable |
+| [`tunnel-create`](./tunnel-create.mdx) | Create a new tunnel |
+| [`tunnel-list`](./tunnel-list.mdx) | List tunnels for a project |
+| [`tunnel-delete`](./tunnel-delete.mdx) | Delete a tunnel |
+
+For a complete list of commands and flags, run `zuplo --help` or see
+[Global Options](./global-options.mdx).
+
+To scaffold a new project without installing the CLI, see
+[create-zuplo-api](./create-zuplo-api.mdx).

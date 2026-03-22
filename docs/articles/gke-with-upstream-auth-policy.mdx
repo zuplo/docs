@@ -26,7 +26,7 @@ web server, or operating system.
 :::note
 
 This article uses GKE as the example backend, but any GCP service that can be
-setup behind an HTTP Load Balancer can be used.
+set up behind an HTTP Load Balancer can be used.
 
 :::
 
@@ -166,7 +166,7 @@ you be shown a screen that blocks access to the application.
 Your API is now completely inaccessible to unauthorized requests.
 
 In order to allow your Zuplo Gateway access you need to
-[grant it's service account permission](https://cloud.google.com/iap/docs/managing-access)
+[grant its service account permission](https://cloud.google.com/iap/docs/managing-access)
 to call the IAP protected API.
 
 ![Add principals](../../public/media/gke-with-upstream-auth-policy/ecadec32-753b-4716-afb5-fafa69c91499.png)
@@ -176,7 +176,7 @@ to call the IAP protected API.
 The last thing required is to configure Zuplo with a service account and policy
 so that it can securely call your API. Follow the instructions on the
 [Upstream GCP Service Auth Policy document](../policies/upstream-gcp-service-auth-inbound.mdx)
-to setup the policy.
+to set up the policy.
 
 With the policy setup, create a route in your Zuplo portal that points to your
 API. When you make a request you will once again see a successful response.

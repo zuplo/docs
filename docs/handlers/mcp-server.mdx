@@ -218,7 +218,7 @@ Tools are the main way that AI agents can discover capabilities from MCP
 servers. They are flexible, lite weight ways to execute some functionality,
 query some data, or perform an action on the user's behalf.
 
-Routes configured as MCP prompts may include the `x-zuplo-route.mcp` extension
+Routes configured as MCP tools may include the `x-zuplo-route.mcp` extension
 with `type: "tool"` in their OpenAPI definition. By default, without the
 `x-zuplo-route.mcp` configuration, the MCP server handler will assume the
 provided operation is a "tool". See [MCP Server Tools](../mcp-server/tools.mdx)
@@ -331,7 +331,7 @@ things:
 
 For an example of a basic configuration of an Authorization Server with Auth0,
 see:
-[Setting up Auth0 as an Authentication Server for MCP OAuth Authentication](../articles/configuring-auth0-for-mcp-auth).
+[Setting up Auth0 as an Authentication Server for MCP OAuth Authentication](../articles/configuring-auth0-for-mcp-auth.mdx).
 
 Once you have configured your authorization server, you can do the following to
 enable OAuth authentication on your MCP Server:
@@ -398,18 +398,18 @@ enable OAuth authentication on your MCP Server:
    ```
 
    See the
-   [OAuth Protected Resource Plugin docs](../programmable-api/oauth-protected-resource-plugin)
+   [OAuth Protected Resource Plugin docs](../programmable-api/oauth-protected-resource-plugin.mdx)
    for more details.
 
 ### API Key Auth
 
 An MCP server on Zuplo can be configured to use an API key from a query
 parameter using the
-[Query Parameter to Header Policy](../../policies/query-param-to-header-inbound).
+[Query Parameter to Header Policy](../policies/query-param-to-header-inbound.mdx).
 
 :::warning
 
-Currently, API keys aren't supported directly by MCP. But using a API key via
+Currently, API keys aren't supported directly by MCP. But using an API key via
 query params transformed through your Zuplo gateway is a great way to get up and
 running quickly with an MCP server.
 
@@ -464,7 +464,7 @@ Then, to secure your MCP endpoint, add the "query param to header" policy
 }
 ```
 
-Will will effectively transform the query param into a `Authorization: Bearer`
+This will effectively transform the query param into an `Authorization: Bearer`
 header and pass those through to other routes on your gateway.
 
 Then, when using MCP clients, simply add your API key as a query param! For
@@ -656,9 +656,9 @@ If you have configured OAuth authentication for your MCP Server, you can use the
 MCP Inspector to test the OAuth flow.
 
 Hit the **Open Auth Settings** button in the Inspector UI to start the OAuth
-flow. When first setting up the OAuth flow, it's recommmended to use the
-**Guided OAuth Flow** which you will see when you open the OAuth settings. This
-will allow you to debug the flow step by step.
+flow. When first setting up the OAuth flow, it's recommended to use the **Guided
+OAuth Flow** which you will see when you open the OAuth settings. This will
+allow you to debug the flow step by step.
 
 The OAuth flow involves the following steps, as shown in the MCP inspector
 guided auth flow. After you've checked each step, click the **Continue** button

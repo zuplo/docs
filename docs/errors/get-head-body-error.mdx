@@ -2,5 +2,40 @@
 title: GET/HEAD Body Error (GET_HEAD_BODY_ERROR)
 ---
 
-By definition, a GET/HEAD request can't have a body. See:
-https://fetch.spec.whatwg.org/
+A GET or HEAD request included a body, which is not allowed. The
+[Fetch specification](https://fetch.spec.whatwg.org/) defines that GET and HEAD
+requests must not have a request body.
+
+## Why this happens
+
+The HTTP specification states that GET and HEAD requests are intended for
+retrieving resources and should not include a request body. While some HTTP
+clients allow sending a body with GET requests, the Zuplo runtime enforces the
+specification and rejects these requests.
+
+## How to fix
+
+- **Use a different HTTP method** - If the request needs to send data in the
+  body, use `POST`, `PUT`, or `PATCH` instead of `GET` or `HEAD`.
+- **Move data to query parameters** - If the request must remain a `GET`,
+  convert the body data to URL query parameters.
+- **Remove the body** - If the body was included unintentionally, remove it from
+  the request.
+
+## Common causes
+
+- **HTTP client defaults** - Some HTTP client libraries or frameworks
+  automatically attach a body to requests, even for GET methods. Check the
+  client configuration.
+- **Copied request configuration** - A request configuration copied from a POST
+  endpoint may still include a body when adapted for a GET endpoint.
+- **Framework behavior** - Certain frontend frameworks or API testing tools may
+  silently include an empty body or content-type header on GET requests.
+
+:::note
+
+This is a client-side issue. Update the request on the calling side to remove
+the body or change the HTTP method. No changes are needed on the Zuplo gateway
+configuration.
+
+:::

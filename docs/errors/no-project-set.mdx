@@ -2,5 +2,40 @@
 title: No Project Set Error (NO_PROJECT_SET)
 ---
 
-This is a local development error likely caused by trying to run a project that
-can't build or an invalid project.
+This is a local development error that occurs when the Zuplo development server
+cannot load or find a valid project.
+
+## Common causes
+
+- **Build failure** - The project fails to build, preventing the local
+  development server from loading it. Check the terminal output for build
+  errors.
+- **Invalid project structure** - The project is missing required files such as
+  `routes.oas.json` or `package.json`.
+- **Wrong working directory** - The development server is started from a
+  directory that does not contain a Zuplo project.
+- **Corrupted dependencies** - The `node_modules` directory is missing or
+  contains corrupted packages.
+
+## Steps to fix
+
+1. Verify the terminal output for build errors and fix any reported issues.
+2. Confirm the project directory contains the required Zuplo project files
+   (`routes.oas.json`, `package.json`, and a `modules` directory).
+3. Ensure the development server starts from the root of the Zuplo project
+   directory.
+4. Delete the `node_modules` directory and run `npm install` to reinstall
+   dependencies.
+5. Restart the local development server after making changes.
+
+:::tip
+
+For additional troubleshooting help with local development, see
+[Local Development Troubleshooting](../articles/local-development-troubleshooting.mdx).
+
+:::
+
+## Related resources
+
+- [Local Development](../articles/local-development.mdx)
+- [Local Development Troubleshooting](../articles/local-development-troubleshooting.mdx)

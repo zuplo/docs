@@ -10,7 +10,7 @@ sidebar_label: "Step 3 - API Key Auth"
 
 In this guide we'll add API Key authentication to a route. You can do this for
 any Zuplo project but will need a route, consider completing
-[Step 1](./step-1-setup-basic-gateway.mdx) first.
+[Step 1](./step-1-setup-basic-gateway-local.mdx) first.
 
 API Key authentication is one of our most popular **policies** as implementing
 this authentication method is considered one of the easiest to use by developers
@@ -158,8 +158,8 @@ Let's get started.
     --header 'Authorization: Bearer zpka_d67b7e241bb948758f415b79aa8exxxx_2efbxxxx'
     ```
 
-    You should get a 401 Unauthorized response - as we'ven't supplied the API
-    key yet. Add an new `authorization` header with the value
+    You should get a 401 Unauthorized response - as we haven't supplied the API
+    key yet. Add a new `authorization` header with the value
     `Bearer <YOUR_API_KEY>` and insert the API Key you got from the developer
     portal.
 
@@ -194,3 +194,6 @@ Let's get started.
     :::
 
 </Stepper>
+
+**NEXT** Try
+[Step 4 - Connect Source Control and Deploy to the Edge](./step-4-deploying-to-the-edge.mdx).
