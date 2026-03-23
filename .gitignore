@@ -44,6 +44,7 @@ yarn-error.log*
 generated/
 /docs/policies/*
 !/docs/policies/overview.mdx
+!/docs/policies/*.images.ts
 
 # CLI Generated Docs
 /docs/cli/*
