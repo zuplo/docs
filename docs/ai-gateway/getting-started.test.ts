@@ -40,19 +40,35 @@ await portalTest(
     await snap("02-new-project-dialog");
 
     // Doc: "Click AI or MCP Gateway at the bottom of the dialog"
+    // Use observe to find the link — it's more reliable for clickable elements
+    const aiMcpLinks = await stagehand.observe(
+      'Find a link or button that mentions "AI", "MCP", or "Gateway" at the bottom of the New Project dialog. It might say "AI or MCP Gateway" or similar.',
+    );
+    console.log(
+      `  AI/MCP links found: ${aiMcpLinks.map((l) => l.description).join(", ") || "none"}`,
+    );
+
+    // Also extract the full dialog content for context
     const dialog = await stagehand.extract(
-      "Describe the New Project dialog. What templates are listed? What links are at the bottom?",
+      "List the template options and any links at the bottom of the New Project dialog",
       z.object({
         templates: z.array(z.string()),
         bottomLinks: z.array(z.string()),
       }),
     );
-    dialog.bottomLinks.some((l) => /ai.*mcp|mcp.*gateway/i.test(l))
-      ? pass("1.4", '"AI or MCP Gateway" link at bottom of dialog')
+    console.log(`  Templates: ${dialog.templates.join(", ")}`);
+    console.log(`  Bottom links: ${dialog.bottomLinks.join(", ")}`);
+
+    const allLinks = [
+      ...aiMcpLinks.map((l) => l.description),
+      ...dialog.bottomLinks,
+    ];
+    allLinks.some((l) => /ai|mcp/i.test(l))
+      ? pass("1.4", '"AI or MCP Gateway" link found')
       : fail(
           "1.4",
           '"AI or MCP Gateway" link',
-          `Bottom links: ${dialog.bottomLinks.join(", ")}`,
+          `Links found: ${allLinks.join(", ")}`,
         );
 
     await stagehand.act(

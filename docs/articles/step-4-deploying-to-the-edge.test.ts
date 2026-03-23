@@ -3,46 +3,42 @@
  *
  * Run: npx tsx docs/articles/step-4-deploying-to-the-edge.test.ts
  */
-import { z } from "zod";
 import { portalTest } from "../../scripts/lib/portal-test.ts";
 
 await portalTest(
   "step-4-deploying",
-  async ({ stagehand, page, snap, report }) => {
+  async ({ stagehand, page, snap, getSettingsLinks, report }) => {
     const { pass, fail } = report;
 
     await stagehand.act("Click on the first project");
     await page.waitForTimeout(3000);
 
-    // Doc: 'click Settings, then select Source Control'
     console.log("=== Settings > Source Control ===");
     await stagehand.act('Click "Settings" in the navigation');
     await page.waitForTimeout(2000);
 
-    const sidebar = await stagehand.extract(
-      "List sidebar sections",
-      z.object({ sections: z.array(z.string()) }),
-    );
+    const links = await getSettingsLinks();
+    console.log(`  Sidebar links: ${links.join(", ")}`);
 
-    sidebar.sections.some((s) => /source control/i.test(s))
-      ? pass("source-control", '"Source Control" exists')
+    links.some((s) => /source control/i.test(s))
+      ? pass("source-control", '"Source Control" in sidebar')
       : fail(
           "source-control",
           '"Source Control"',
-          `Sections: ${sidebar.sections.join(", ")}`,
+          `Links: ${links.join(", ")}`,
         );
 
-    await stagehand.act('Click "Source Control"');
+    await stagehand.act('Click "Source Control" in the sidebar');
     await page.waitForTimeout(2000);
     await snap("01-source-control");
 
-    // Doc: "Connect to GitHub button"
     const connectBtn = await stagehand.observe(
       'Find "Connect to GitHub" button',
     );
     connectBtn.length > 0
-      ? pass("connect-github", '"Connect to GitHub" button')
+      ? pass("connect-github", '"Connect to GitHub" button found')
       : pass("github-connected", "GitHub may already be connected");
+    await snap("02-source-control-detail");
   },
   import.meta.filename,
 );

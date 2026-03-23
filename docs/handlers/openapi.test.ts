@@ -54,29 +54,97 @@ await portalTest(
       await page.waitForTimeout(2000);
       await snap("02-route-designer");
 
-      // Doc: 'select "OpenAPI Spec" from the Request Handlers drop-down'
       // Click on a route to see handler options
       await stagehand.act("Click on the first route in the route list");
       await page.waitForTimeout(1000);
+      await snap("03-route-selected");
 
-      const handlerDropdown = await stagehand.extract(
-        "Is there a Request Handler dropdown? What handler options are available?",
-        z.object({
-          hasDropdown: z.boolean(),
-          handlers: z.array(z.string()),
-        }),
+      // The handler is shown as a dropdown labeled "Handler" with a value
+      // like "URL Rewrite". We need to click the dropdown to open it.
+      // Use Playwright to find and click the actual select/dropdown element
+      // since Stagehand may not reliably open custom dropdowns.
+      const handlerSelect = page.locator(
+        'select:near(:text("Handler")), [role="combobox"]:near(:text("Handler")), [data-slot="select-trigger"]:near(:text("Handler"))',
       );
-      console.log(`  Handler dropdown: ${handlerDropdown.hasDropdown}`);
-      console.log(`  Handlers: ${handlerDropdown.handlers.join(", ")}`);
 
-      handlerDropdown.handlers.some((h) => /openapi.spec/i.test(h))
-        ? pass("openapi-handler", '"OpenAPI Spec" in handler dropdown')
-        : fail(
-            "openapi-handler",
-            '"OpenAPI Spec" handler',
-            `Handlers: ${handlerDropdown.handlers.join(", ")}`,
+      if (
+        await handlerSelect
+          .first()
+          .isVisible({ timeout: 3000 })
+          .catch(() => false)
+      ) {
+        await handlerSelect.first().click();
+        await page.waitForTimeout(1000);
+        await snap("04-handler-dropdown-open");
+
+        // Extract all visible options
+        const options = await page
+          .locator(
+            '[role="option"], option, [role="menuitem"], [data-slot="select-item"]',
+          )
+          .allTextContents();
+        const handlerOptions = options.map((t) => t.trim()).filter(Boolean);
+        console.log(
+          `  Handler options (Playwright): ${handlerOptions.join(", ")}`,
+        );
+
+        if (handlerOptions.length === 0) {
+          // Fallback: try Stagehand extract on the open dropdown
+          const extracted = await stagehand.extract(
+            "List ALL options visible in the currently open dropdown menu for the Request Handler",
+            z.object({ handlers: z.array(z.string()) }),
           );
-      await snap("03-handler-dropdown");
+          console.log(
+            `  Handler options (Stagehand): ${extracted.handlers.join(", ")}`,
+          );
+          handlerOptions.push(...extracted.handlers);
+        }
+
+        for (const handler of [
+          "OpenAPI Spec",
+          "URL Forward",
+          "URL Rewrite",
+          "Redirect",
+          "AWS Lambda",
+        ]) {
+          const found = handlerOptions.some((h) =>
+            new RegExp(handler.replace(/\s+/g, "."), "i").test(h),
+          );
+          found
+            ? pass(`handler-${handler}`, `"${handler}" in dropdown`)
+            : fail(
+                `handler-${handler}`,
+                `"${handler}"`,
+                `Not in: ${handlerOptions.join(", ")}`,
+              );
+        }
+
+        // Close dropdown
+        await page.keyboard.press("Escape");
+      } else {
+        // Try Stagehand as fallback
+        await stagehand.act(
+          'Click on the Handler dropdown that currently shows "URL Rewrite" or "URL Forward" to open the list of handler options',
+        );
+        await page.waitForTimeout(1000);
+        await snap("04-handler-dropdown-open");
+
+        const handlerOptions = await stagehand.extract(
+          "List ALL handler options visible in the open dropdown",
+          z.object({ handlers: z.array(z.string()) }),
+        );
+        console.log(`  Handlers: ${handlerOptions.handlers.join(", ")}`);
+
+        handlerOptions.handlers.some((h) => /openapi|open.api/i.test(h))
+          ? pass("openapi-handler", '"OpenAPI Spec" in handler dropdown')
+          : fail(
+              "openapi-handler",
+              '"OpenAPI Spec"',
+              `Handlers: ${handlerOptions.handlers.join(", ")}`,
+            );
+      }
+
+      await snap("05-handlers-verified");
     }
   },
   import.meta.filename,

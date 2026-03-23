@@ -116,6 +116,8 @@ export interface TestContext {
   page: Page;
   /** Screenshot helper: snap("step-name") */
   snap: (name: string) => Promise<string>;
+  /** Extract settings sidebar link texts using Playwright */
+  getSettingsLinks: () => Promise<string[]>;
   /** Finding reporter */
   report: ReturnType<typeof createReporter>;
   /** Portal base URL */
@@ -165,7 +167,7 @@ export async function portalTest(
   await pwContext.addInitScript({
     content: `try { if (location.hostname.includes('portal.zuplo.com') || location.hostname.includes('zuplosite.com')) localStorage.setItem('ZUPLO_AGENT_TOKEN', ${JSON.stringify(tokenJson)}); } catch(e) {}`,
   });
-  await page.goto(PORTAL_URL, { waitUntil: "networkidle", timeout: 30000 });
+  await page.goto(PORTAL_URL, { waitUntil: "networkidle", timeout: 60000 });
   await page.waitForTimeout(3000);
   console.log(`Authenticated: ${page.url()}\n`);
 
@@ -176,10 +178,37 @@ export async function portalTest(
     return path;
   };
 
+  /**
+   * Extract settings sidebar links using Playwright.
+   * Stagehand returns IDs for custom sidebar components,
+   * so we use Playwright to get the actual link text.
+   */
+  const getSettingsLinks = async (): Promise<string[]> => {
+    const allLinks = await page.locator("a").allTextContents();
+    return allLinks
+      .map((t) => t.trim())
+      .filter(
+        (t) =>
+          t &&
+          !t.match(/^\d/) &&
+          t.length < 50 &&
+          /general|api key|environment|members|source|custom|billing|zuplo|usage|ai provider|security|audit/i.test(
+            t,
+          ),
+      );
+  };
+
   const report = createReporter();
 
   try {
-    await testFn({ stagehand, page, snap, report, portalUrl: PORTAL_URL });
+    await testFn({
+      stagehand,
+      page,
+      snap,
+      getSettingsLinks,
+      report,
+      portalUrl: PORTAL_URL,
+    });
     report.summary();
   } finally {
     await stagehand.close();

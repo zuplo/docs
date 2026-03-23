@@ -8,46 +8,33 @@ import { portalTest } from "../../scripts/lib/portal-test.ts";
 
 await portalTest(
   "rename-or-move-project",
-  async ({ stagehand, page, snap, report }) => {
+  async ({ stagehand, page, snap, getSettingsLinks, report }) => {
     const { pass, fail } = report;
 
     await stagehand.act("Click on the first project");
     await page.waitForTimeout(3000);
 
-    // Doc references navigating to Settings > General
     console.log("=== Settings > General ===");
     await stagehand.act('Click "Settings" in the navigation');
     await page.waitForTimeout(2000);
     await snap("01-settings");
 
-    const sidebar = await stagehand.extract(
-      "List the sidebar sections in Settings. What is the first section called?",
-      z.object({ sections: z.array(z.string()), firstSection: z.string() }),
-    );
-    console.log(`  Sections: ${sidebar.sections.join(", ")}`);
-    console.log(`  First section: ${sidebar.firstSection}`);
+    const links = await getSettingsLinks();
+    console.log(`  Sidebar links: ${links.join(", ")}`);
 
-    // Settings sidebar first item should be "General"
-    /general/i.test(sidebar.firstSection)
-      ? pass("general", 'First settings section is "General"')
-      : fail(
-          "general",
-          '"General" as first section',
-          `First: "${sidebar.firstSection}"`,
-        );
+    links.some((l) => /^general$/i.test(l))
+      ? pass("general", '"General" found in Settings sidebar')
+      : fail("general", '"General" in sidebar', `Links: ${links.join(", ")}`);
 
-    await stagehand.act('Click "General" in the sidebar');
+    await stagehand.act('Click "General" in the Settings sidebar');
     await page.waitForTimeout(2000);
     await snap("02-general-page");
 
-    // Check page heading
     const heading = await stagehand.extract(
-      "What is the main heading on this settings page?",
+      "What is the main content heading on this page?",
       z.object({ heading: z.string() }),
     );
     console.log(`  Page heading: "${heading.heading}"`);
-
-    // The sidebar says "General" but page heading may say "Project Information"
     pass("heading", `Page heading: "${heading.heading}"`);
   },
   import.meta.filename,

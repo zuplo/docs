@@ -24,7 +24,6 @@ await portalTest(
     else await stagehand.act("Click on the first project");
     await page.waitForTimeout(3000);
 
-    // Doc: "navigating to the Code tab then click routes.oas.json"
     console.log("=== Verify Redirect handler in Route Designer ===");
     await stagehand.act('Click "Code" in the navigation');
     await page.waitForTimeout(2000);
@@ -34,19 +33,58 @@ await portalTest(
     await page.waitForTimeout(1000);
     await snap("01-route-selected");
 
-    // Doc: 'select "Redirect" from the Request Handlers drop-down'
-    const handlers = await stagehand.extract(
-      "What handler options are available in the Request Handler dropdown?",
-      z.object({ handlers: z.array(z.string()) }),
+    // Open handler dropdown using Playwright for reliability
+    const handlerSelect = page.locator(
+      'select:near(:text("Handler")), [role="combobox"]:near(:text("Handler")), [data-slot="select-trigger"]:near(:text("Handler"))',
     );
-    handlers.handlers.some((h) => /redirect/i.test(h))
-      ? pass("redirect-handler", '"Redirect" in handler dropdown')
-      : fail(
-          "redirect-handler",
-          '"Redirect" handler',
-          `Handlers: ${handlers.handlers.join(", ")}`,
-        );
-    await snap("02-handlers");
+
+    if (
+      await handlerSelect
+        .first()
+        .isVisible({ timeout: 3000 })
+        .catch(() => false)
+    ) {
+      await handlerSelect.first().click();
+      await page.waitForTimeout(1000);
+      await snap("02-handler-dropdown-open");
+
+      const options = await page
+        .locator(
+          '[role="option"], option, [role="menuitem"], [data-slot="select-item"]',
+        )
+        .allTextContents();
+      const handlerOptions = options.map((t) => t.trim()).filter(Boolean);
+      console.log(`  Handler options: ${handlerOptions.join(", ")}`);
+
+      handlerOptions.some((h) => /redirect/i.test(h))
+        ? pass("redirect-handler", '"Redirect" in handler dropdown')
+        : fail(
+            "redirect-handler",
+            '"Redirect"',
+            `Options: ${handlerOptions.join(", ")}`,
+          );
+
+      await page.keyboard.press("Escape");
+    } else {
+      // Fallback: use stagehand
+      await stagehand.act("Click on the Handler dropdown to open it");
+      await page.waitForTimeout(1000);
+      await snap("02-handler-dropdown-open");
+
+      const handlers = await stagehand.extract(
+        "List ALL handler options in the open dropdown",
+        z.object({ handlers: z.array(z.string()) }),
+      );
+      handlers.handlers.some((h) => /redirect/i.test(h))
+        ? pass("redirect-handler", '"Redirect" in dropdown')
+        : fail(
+            "redirect-handler",
+            '"Redirect"',
+            `Options: ${handlers.handlers.join(", ")}`,
+          );
+    }
+
+    await snap("03-verified");
   },
   import.meta.filename,
 );
