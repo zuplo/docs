@@ -7,6 +7,11 @@
  *
  * If the existing image is outdated, the new screenshot is saved as a
  * replacement candidate next to the original.
+ *
+ * IMPORTANT: When screenshotting dialogs/modals, always remove
+ * border-radius, border, and box-shadow first. The docs use a
+ * ModalScreenshot component that adds its own styling, so the raw
+ * image must have square corners and no border.
  */
 import { Stagehand } from "@browserbasehq/stagehand";
 import { chromium, type Page } from "playwright-core";
@@ -108,9 +113,12 @@ export async function imageTest(
   await stagehandPage.goto("about:blank");
 
   const pwBrowser = await chromium.connectOverCDP(stagehand.connectURL());
-  const pwContext = pwBrowser.contexts()[0];
-  // Use the stagehand's existing page, not a new one
-  const page = pwContext.pages()[0];
+  // Create a 2x context for high-resolution (Retina) screenshots
+  const pwContext = await pwBrowser.newContext({
+    viewport: { width: 1440, height: 900 },
+    deviceScaleFactor: 2,
+  });
+  const page = await pwContext.newPage();
 
   // Auth
   const tokenJson = JSON.stringify({
