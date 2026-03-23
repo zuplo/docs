@@ -36,8 +36,12 @@ enqueue(entry: T, context: ZuploContext): void
 ## Example
 
 ```ts
-
-import { ZuploContext, ZuploRequest, BackgroundDispatcher, environment } from "@zuplo/runtime";
+import {
+  ZuploContext,
+  ZuploRequest,
+  BackgroundDispatcher,
+  environment,
+} from "@zuplo/runtime";
 
 // The type that identifies the entries
 // to be batched
@@ -45,44 +49,40 @@ interface ExampleEntry {
   message: string;
 }
 
-
 // The dispatch function that will be invoked by the
 // BatchDispatcher at most every 'n' milliseconds
-const dispatchFunction<TestEntry> = async (entries) => {
-
-    // consider implementing a retry or backup call
-    // if the data being transmitted is important
-    await fetch(`https://example-logging-service.com/`,
-    {
-        method: "POST",
-        headers: {
-            "api-key": environment.MY_LOGGING_API_KEY
-        }
-        body: JSON.stringify(entries)
-    })
+const dispatchFunction = async (entries: ExampleEntry[]) => {
+  // consider implementing a retry or backup call
+  // if the data being transmitted is important
+  await fetch(`https://example-logging-service.com/`, {
+    method: "POST",
+    headers: {
+      "api-key": environment.MY_LOGGING_API_KEY,
+    },
+    body: JSON.stringify(entries),
+  });
 };
 
 // The dispatcher is typically initiated at the module level
 // so it can be shared by requests. Note that the msDelay is set
 // to 100ms.
-const backgroundDispatcher = new BackgroundDispatcher<TestEntry>(
+const backgroundDispatcher = new BackgroundDispatcher<ExampleEntry>(
   dispatchFunction,
-  { msDelay: 100 }
+  { msDelay: 100 },
 );
-
 
 // This is an example Request Handler that used the component, a simple
 // "Hello World" handler.
 export default async function (request: ZuploRequest, context: ZuploContext) {
   backgroundDispatcher.enqueue(
     {
-        message: `new request on '${request.url}' with id ${context.requestId}`
+      message: `new request on '${request.url}' with id ${context.requestId}`,
     },
-    context);
+    context,
+  );
 
   return "Hello World!";
 }
-
 ```
 
 The dispatcher invokes the dispatch function with batched records at most every

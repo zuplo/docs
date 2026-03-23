@@ -25,7 +25,7 @@ This article walks you through our security policies:
 Without restrictions, a client can send deeply nested queries that could
 potentially overwhelm your server, resulting in a Denial of Service (DoS)
 attack. This is because deeply nested queries can cause the server to process a
-huge amount of data and operations. While this might be a planed attack, it
+huge amount of data and operations. While this might be a planned attack, it
 could also be a mistake by a client who is unaware of the query depth limit.
 
 ### b. Query Complexity
@@ -42,10 +42,10 @@ attackers in production.
 
 ## 2. Add your GraphQL API & setting up Policies
 
-### Setup POST endpoint
+### Set Up POST Endpoint
 
-If you didn't already do so, you need to setup a POST endpoint in your API. This
-endpoint will be used to send the GraphQL queries to your API. We'll use the
+If you didn't already do so, you need to set up a POST endpoint in your API.
+This endpoint will be used to send the GraphQL queries to your API. The
 urlRewriteHandler to rewrite the request to your GraphQL API. For this example
 let's assume your GraphQL API is hosted at `https://api.example.com/graphql`.
 
@@ -115,8 +115,8 @@ from consuming excessive server resources.
 
 ### b. GraphQL Complexity Limit
 
-We can extend the same policy to also check for compexity. By defining a max for
-each type of operation, and then it limits the total complexity a query can
+We can extend the same policy to also check for complexity. By defining a max
+for each type of operation, and then it limits the total complexity a query can
 have. In order to use the Complexity Limit you need to allow introspection in
 your GraphQL API.
 
@@ -173,8 +173,8 @@ insights into your GraphQL schema, thereby reducing potential attack vectors.
 ## 4. Example Repository
 
 For those who prefer a hands-on approach or wish to see these configurations in
-action, we've created a GitHub repository with everything set up. This
-repository offers a comprehensive example of how to configure and secure a
-GraphQL API using Zuplo. Check out the
+action, there is a GitHub repository with everything set up. This repository
+offers a comprehensive example of how to configure and secure a GraphQL API
+using Zuplo. Check out the
 [GraphQL API with Zuplo example repository](https://github.com/zuplo/zuplo-graphql-example)
 to dive deeper.

@@ -48,8 +48,8 @@ Let's get started.
 
    ![Customer Metadata](../../public/media/step-3-add-rate-limiting/image-2.png)
 
-   Now that we've users with different `customerType`, we can utilize this
-   information to rate limit them differently.
+   Now that there are users with different `customerType`, this information can
+   be used to rate limit them differently.
 
 1. Add a Custom Code Module
 
@@ -61,7 +61,7 @@ Let's get started.
 
    :::info{title="What's a Module?"}
 
-   Modules are Typescript functions that you can execute within Zuplo. They're
+   Modules are TypeScript functions that you can execute within Zuplo. They're
    typically used to add custom code within the request/response pipeline (ex.
    custom policies or request handlers). You can even perform network requests
    and use libraries within these modules.
@@ -76,7 +76,7 @@ Let's get started.
    export function rateLimit(request: ZuploRequest, context: ZuploContext) {
      const user = request.user;
 
-     // premium customers get 1000 requests per mintue
+     // premium customers get 1000 requests per minute
      if (user.data.customerType === "premium") {
        return {
          key: user.sub,
@@ -133,7 +133,7 @@ Let's get started.
    to indicate the module and function to run. Make sure to save once you've
    made your changes.
 
-   ## 4/ Test your Policy
+1. Test your Policy
 
    Using the Test modal, you can try your dynamic rate limiting. You can grab
    the key for each consumer back in the Services tab where you created them.

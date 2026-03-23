@@ -3,8 +3,8 @@ title: Configuring Zuplo with AWS WAF + Shield
 sidebar_label: AWS WAF + Shield
 ---
 
-AWS WAF + Shield run at AWS Cloudfront edge locations. Zuplo can be configured
-to run as a custom backend behind Cloudfront.
+AWS WAF + Shield run at AWS CloudFront edge locations. Zuplo can be configured
+to run as a custom backend behind CloudFront.
 
 ## Securing Zuplo from Direct Access
 
@@ -20,14 +20,14 @@ directly.
 
 ### IP Address Restrictions
 
-Amazon maintains a list of Cloudfront IP addresses (separate from other AWS
+Amazon maintains a list of CloudFront IP addresses (separate from other AWS
 uses) that you can use to restrict access to your API Gateway. This is a good
-way to ensure that only Cloudfront can access your API Gateway. However, as
-Cloudfront is available to any AWS customer, this method isn't sufficient to
+way to ensure that only CloudFront can access your API Gateway. However, as
+CloudFront is available to any AWS customer, this method isn't sufficient to
 protect unauthorized traffic from hitting your API Gateway.
 
 In Zuplo, you can utilize the IP Address Restriction policy to limit traffic to
-only the Cloudfront IP addresses. You don't need to provide the address list
+only the CloudFront IP addresses. You don't need to provide the address list
 manually, instead you can utilize the built-in list as shown below.
 
 ```json
@@ -44,13 +44,13 @@ manually, instead you can utilize the built-in list as shown below.
 }
 ```
 
-With this policy in place, only Cloudfront traffic will be allowed to hit your
+With this policy in place, only CloudFront traffic will be allowed to hit your
 Zuplo API Gateway.
 
 ### Custom Headers
 
-Another way to ensure that traffic is coming from Cloudfront is to use custom
-headers. Custom headers can be added to your Cloudfront distribution and then
+Another way to ensure that traffic is coming from CloudFront is to use custom
+headers. Custom headers can be added to your CloudFront distribution and then
 checked by your API Gateway. This provides an additional layer of security on
 top of IP address restrictions and prevents any unauthorized traffic from
 hitting your API Gateway - regardless of the source.

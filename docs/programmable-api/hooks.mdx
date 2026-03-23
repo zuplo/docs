@@ -399,7 +399,7 @@ export default async function handler(
     // Add handler-specific headers
     const headers = new Headers(response.headers);
     headers.set("X-Handler", "custom-api");
-    headers.set("X-Processing-Node", process.env.REGION || "unknown");
+    headers.set("X-Processing-Node", environment.REGION || "unknown");
 
     return new Response(response.body, {
       status: response.status,
@@ -537,13 +537,13 @@ export class CustomObservabilityPlugin extends SystemRuntimePlugin {
 
 ```ts
 // In zuplo.runtime.ts - Register the plugin
-import { RuntimeExtensions } from "@zuplo/runtime";
+import { RuntimeExtensions, environment } from "@zuplo/runtime";
 import { CustomObservabilityPlugin } from "./modules/custom-observability-plugin";
 
 export function runtimeInit(runtime: RuntimeExtensions) {
   const observabilityPlugin = new CustomObservabilityPlugin({
     metricsEndpoint: "https://metrics.example.com/api/events",
-    apiKey: process.env.METRICS_API_KEY!,
+    apiKey: environment.METRICS_API_KEY,
     enableTracing: true,
   });
 

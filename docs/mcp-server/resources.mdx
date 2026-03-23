@@ -56,11 +56,11 @@ method:
 To provide MCP specific metadata for the resource, use the `mcp` property within
 `x-zuplo-route`:
 
-- `type`: Must be set to `"resource"` otherwise the MCP server handle will
+- `type`: Must be set to `"resource"` otherwise the MCP server handler will
   default to "tool".
 - `name` (optional) - The identifier for the MCP resource. Defaults to the
   operation's `operationId`. If no `operationId` is provided, falls back to an
-  auth-generated name.
+  auto-generated name.
 - `description` (optional) - Description of what the resource provides. Falls
   back to the operation's `description` or `summary`. If those fields are not
   provided, falls back to an auto-generated description.
@@ -114,7 +114,7 @@ Add resource configuration to your MCP Server handler options using the
 ```
 
 See further details in the
-[MCP Server Handler documentation](../handlers/mcp-server).
+[MCP Server Handler documentation](../handlers/mcp-server.mdx).
 
 ## Route Handler Implementation
 

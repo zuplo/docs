@@ -4,7 +4,7 @@ sidebar_label: Overview
 ---
 
 Zuplo Managed Edge is a serverless deployment model where your Zuplo projects
-run at the edge across 300+ data centers worldwide. This is our most popular
+run at the edge across 300+ data centers worldwide. This is the most popular
 hosting option and the default choice for all Zuplo projects. Managed Edge
 provides automatic scaling, global distribution, and enterprise-grade
 performance without requiring any infrastructure management.

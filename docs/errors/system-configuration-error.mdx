@@ -2,5 +2,43 @@
 title: System Configuration Error (SYSTEM_CONFIGURATION_ERROR)
 ---
 
-The runtime environment isn't correctly configured. One or more environment
-variables are missing.
+The runtime environment is not correctly configured. One or more required
+environment variables are missing or invalid.
+
+## Common causes
+
+- **Missing environment variables** - An environment variable referenced in the
+  project code or configuration is not set in the current environment.
+- **Wrong environment** - The request is hitting an environment (such as staging
+  or preview) where the required variables have not been configured.
+- **Deleted or renamed variables** - An environment variable was recently
+  deleted or renamed, but the code still references the old name.
+
+## How to check environment variables
+
+1. Open the Zuplo portal and navigate to the project settings.
+2. Review the environment variables for the target environment and verify all
+   required variables are present.
+3. Check the runtime logs for specific messages about which variable is missing.
+4. Compare the environment variables across environments to find discrepancies.
+
+:::note
+
+Environment variables are scoped to each environment. A variable set in
+production may not exist in staging or preview environments. Verify that all
+required variables are configured in every environment where the project is
+deployed.
+
+:::
+
+## How to fix
+
+1. Identify the missing variable from the error logs.
+2. Add the variable in the Zuplo portal under the project's environment variable
+   settings.
+3. Redeploy the project after adding the variable.
+
+## Related resources
+
+- [Environment Variables](../articles/environment-variables.mdx)
+- [Local Development Environment Variables](../articles/local-development-env-variables.mdx)

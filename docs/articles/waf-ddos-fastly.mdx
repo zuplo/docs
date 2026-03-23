@@ -69,8 +69,8 @@ set var.data = strftime({"%s"}, now) + "," + server.datacenter;
 set bereq.http.X-Signature = var.data + "," + digest.hmac_sha256(var.zuplo_auth_secret, var.data);
 ```
 
-In Zuplo, you can utilize the a custom code inbound policy to limit traffic to
-only those requests that include the signed header.
+In Zuplo, you can utilize a custom code inbound policy to limit traffic to only
+those requests that include the signed header.
 
 ```json title="/config/policies.json"
 {
@@ -180,8 +180,8 @@ be allowed to hit your Zuplo API Gateway.
 
 ### JWT Header
 
-Another way to ensure that traffic is coming from Fastly is to use add a JWT
-header to the outgoing request. JWT headers can be added using a
+Another way to ensure that traffic is coming from Fastly is to add a JWT header
+to the outgoing request. JWT headers can be added using a
 [VLC Snippet](https://docs.fastly.com/en/guides/about-vcl-snippets) and then
 checked by your API Gateway. This provides an additional layer of security on
 top of IP address restrictions and prevents any unauthorized traffic from

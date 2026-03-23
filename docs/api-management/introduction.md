@@ -67,8 +67,8 @@ backend can be written in any language that speaks HTTP, such as Go, Node.js,
 ## Integrations
 
 Zuplo integrates with platforms like Datadog, New Relic and GCP Cloud Logging
-for monitoring and observability. We continuously add new integrations based on
-customer needs, so [reach out](../articles/support.mdx) if you need support for
+for monitoring and observability. New integrations are continuously added based
+on customer needs. [Reach out](../articles/support.mdx) if you need support for
 a specific tool.
 
 ## Runtime
@@ -98,7 +98,7 @@ and can be tuned to meet specific performance goals.
 Zuplo is designed to work seamlessly with services across cloud providers
 including AWS, Azure, GCP, and on-premise environments.
 
-Our distributed architecture and
+The distributed architecture and
 [connectivity options](../articles/securing-your-backend.mdx) ensure secure,
 performant connections to your backend, wherever it runs.
 

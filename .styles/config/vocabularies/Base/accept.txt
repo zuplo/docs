@@ -4,7 +4,7 @@ backend
 failover
 onboarding
 asdf
-VMWare
+VMware
 Datadog
 Dynatrace
 URLPattern
@@ -16,7 +16,7 @@ AWS
 (?i)JSON
 JSONPath
 MDN
-Lamdba
+Lambda
 routes.oas.json
 Dev
 Vite
@@ -47,7 +47,6 @@ monorepo
 subfolder
 [Tt]odos
 [Ss]ubrequests
-Datadog
 Checkly
 Keycloak
 [Mm]isconfigured
@@ -80,13 +79,10 @@ href
 hackathon
 [Cc]hatbot
 [Cc]hatbots
-Datadog
 Splunk
-Datadog
-VMware
 Hydrolix
 Opik
-Cloudfront
+CloudFront
 cyber
 HTTPie
 YCombinator
