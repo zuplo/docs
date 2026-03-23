@@ -67,8 +67,9 @@ backend can be written in any language that speaks HTTP, such as Go, Node.js,
 ## Integrations
 
 Zuplo integrates with platforms like Datadog, New Relic and GCP Cloud Logging
-for monitoring and observability. New integrations are continuously added based on customer needs.
-[Reach out](../articles/support.mdx) if you need support for a specific tool.
+for monitoring and observability. New integrations are continuously added based
+on customer needs. [Reach out](../articles/support.mdx) if you need support for
+a specific tool.
 
 ## Runtime
 
