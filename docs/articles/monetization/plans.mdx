@@ -20,24 +20,21 @@ access and usage limits. Plans define what customers get when they subscribe.
 Plans follow a hierarchical structure where each level defines a specific aspect
 of your pricing:
 
-<Mermaid
-  chart={`flowchart TD
-    Plan[Plan]
-    Phases[Phases]
-    RateCards[Rate Cards]
-    Price[Price]
-    Entitlement[Entitlements]
-    Feature[Feature]
-    Meter[Meter]
-
-    Plan --> Phases
-    Phases --> RateCards
-    RateCards --> Price
-    RateCards --> Entitlement
-    Entitlement --> Feature
-    Feature --> Meter`}
-
-/>
+<Diagram height="h-96">
+  <DiagramNode id="plan">Plan</DiagramNode>
+  <DiagramNode id="phase">Phase</DiagramNode>
+  <DiagramNode id="ratecard">Rate Card</DiagramNode>
+  <DiagramNode id="price">Price</DiagramNode>
+  <DiagramNode id="entitlement">Entitlement</DiagramNode>
+  <DiagramNode id="feature">Feature</DiagramNode>
+  <DiagramNode id="meter">Meter</DiagramNode>
+  <DiagramEdge from="plan" to="phase" />
+  <DiagramEdge from="phase" to="ratecard" />
+  <DiagramEdge from="ratecard" to="price" />
+  <DiagramEdge from="ratecard" to="entitlement" />
+  <DiagramEdge from="entitlement" to="feature" />
+  <DiagramEdge from="feature" to="meter" />
+</Diagram>
 
 | Entity          | Description                                           |
 | --------------- | ----------------------------------------------------- |

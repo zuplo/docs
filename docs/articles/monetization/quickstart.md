@@ -1,253 +1,311 @@
 ---
-title: Quickstart — Monetize Your API in 30 Minutes
+title: Quickstart — Monetize Your API
 sidebar_label: Quickstart
 ---
 
-This guide walks you through going from an unmonetized API to a fully metered,
-quota-enforced, Stripe-billed API with a self-serve Developer Portal. By the
-end, your customers will be able to browse plans, subscribe via Stripe Checkout,
-get API keys scoped to their plan, and hit real quota limits.
+This guide walks you through setting up API monetization from scratch. By the
+end, your customers can browse plans, subscribe via Stripe Checkout, get API
+keys scoped to their plan, and hit real quota limits.
 
 ## Prerequisites
 
-- A Zuplo account with an existing API project (routes configured and working)
-- A [Stripe account](https://stripe.com) (test mode is fine for setup)
-- The Developer Portal enabled on your project (uses Auth0 or custom auth)
+- A Zuplo account
+- A [Stripe account](https://stripe.com) (sandbox mode is fine for setup)
 
-## Step 1: Create a meter
+## Step 1: Create a new project
 
-Meters define what you're counting. Start with the most common meter: request
-counting.
+:::caution
 
-Navigate to **Settings → Monetization → Meters** in the Zuplo Portal, or use the
-API:
+Use a fresh project for this guide. Since monetization is still in preview, this
+keeps your existing work safe from any breaking changes.
 
-```bash
-curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/meters \
-  -H "Authorization: Bearer {YOUR_API_KEY}" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "slug": "api_requests",
-    "name": "API Requests",
-    "eventType": "api_request",
-    "aggregation": "COUNT"
-  }'
-```
+:::
 
-**Key fields:**
+1. Go to [portal.zuplo.com](https://portal.zuplo.com) and sign in.
+2. Click **New Project** in the top right corner.
+3. Select **API Management (+ MCP Server)**.
+4. Select **Starter Project (Recommended)** — it comes with endpoints ready to
+   monetize.
+5. Connect your project to source control by following the
+   [GitHub setup guide](../source-control-setup-github.md).
 
-| Field           | Description                                                                             |
-| --------------- | --------------------------------------------------------------------------------------- |
-| `slug`          | Unique identifier used in policy configuration and API calls                            |
-| `eventType`     | The type of event this meter watches for                                                |
-| `aggregation`   | `COUNT` (count each event) or `SUM` (sum a numeric value from the event payload)        |
-| `valueProperty` | JSONPath to the numeric value when using `SUM` (e.g., `$.tokens` for AI token metering) |
+## Step 2: Enable the monetization plugin
 
-> **Finding your `bucketId`:** Go to **Settings → Project Information** in the
-> Zuplo Portal. The `bucketId` is listed under your project details.
+Add the monetization plugin to your Developer Portal configuration.
 
-## Step 2: Create a feature
+1. In your project, navigate to the **Code** tab.
+2. In the file tree, open `docs/zudoku.config.tsx`.
+3. Add the monetization plugin import at the top of the file:
 
-Features connect meters to your product catalog. Create a metered feature for
-your API requests meter:
+   ```tsx
+   import { zuploMonetizationPlugin } from "@zuplo/zudoku-plugin-monetization";
+   ```
 
-```bash
-curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/features \
-  -H "Authorization: Bearer {YOUR_API_KEY}" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "key": "api_calls",
-    "name": "API Calls",
-    "meterSlug": "api_requests"
-  }'
-```
+4. Add the plugin to the `plugins` array in your config:
 
-You can also create **static features** (boolean on/off toggles) that don't link
-to a meter:
+   ```tsx
+   const config: ZudokuConfig = {
+     // ... your existing config
+     plugins: [
+       zuploMonetizationPlugin(),
+       // ... any other plugins
+     ],
+   };
+   ```
 
-```json
-{
-  "key": "priority_support",
-  "name": "Priority Support"
-}
-```
+5. Save the file and wait for the environment to deploy.
 
-## Step 3: Create a plan
+## Step 3: Configure the Monetization Service
 
-Plans define your pricing tiers. Here's a typical two-tier setup with a free
-tier and a paid Pro tier:
+1. Navigate to the **Services** tab in your project.
+2. Select the environment you want to configure (e.g., **Working Copy**).
+3. Click **Configure** on the **Monetization Service** card.
 
-### Free plan
+## Step 4: Create a meter
 
-```bash
-curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/plans \
-  -H "Authorization: Bearer {YOUR_API_KEY}" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "key": "free",
-    "name": "Free",
-    "currency": "USD",
-    "billingCadence": "P1M",
-    "phases": [
-      {
-        "key": "default",
-        "name": "Free Tier",
-        "duration": null,
-        "rateCards": [
-          {
-            "type": "flat_fee",
-            "key": "api_calls",
-            "name": "API Calls",
-            "featureKey": "api_calls",
-            "billingCadence": null,
-            "price": null,
-            "entitlementTemplate": {
-              "type": "metered",
-              "issueAfterReset": 1000,
-              "isSoftLimit": false
-            }
-          }
-        ]
-      }
-    ]
-  }'
-```
+Meters track what you want to measure — API calls, tokens processed, data
+transferred, etc.
 
-This gives free-tier users 1,000 API calls per month with a hard limit — once
-they hit 1,000, they get `403 Forbidden` until the next billing period.
+1. In the Monetization Service, click the **Meters** tab.
+2. Click **Add Meter** and select **Blank Meter**.
+3. Fill in the meter details:
+   - **Name**: `API`
+   - **Event**: `api`
+   - **Description**: `API Calls`
+   - **Aggregation**: `SUM`
+   - **Value Property**: `$.total`
+4. Click **Add Meter** to save.
+
+A few things to note:
+
+- **Event** — The type of event the meter listens for.
+- **Aggregation** — How values are combined (`SUM`, `COUNT`, `MAX`, etc.).
+- **Value Property** — A JSONPath expression to extract the value from events.
+
+## Step 5: Create features
+
+Features define what your customers get access to. They can be tied to meters
+(for usage-based features) or standalone (for boolean features like "Metadata
+Support").
+
+In the Monetization Service, click the **Features** tab, then click **Add
+Feature** for each of the following:
+
+**1. API Feature** (linked to the meter):
+
+- **Name**: `api`
+- **Key**: `api`
+- **Linked Meter**: `API`
+
+**2. Monthly Fee Feature** (for flat-rate billing):
+
+- **Name**: `Monthly Fee`
+- **Key**: `monthly_fee`
+- **Linked Meter**: leave empty
+
+**3. Metadata Support Feature** (a boolean feature):
+
+- **Name**: `Metadata Support`
+- **Key**: `metadata_support`
+- **Linked Meter**: leave empty
+
+## Step 6: Create plans
+
+Plans bring together your features with pricing and entitlements. Create three
+plans to give your customers options:
+
+| Plan      | Monthly Fee | Included Requests | Overage Rate | Metadata Support |
+| --------- | ----------- | ----------------- | ------------ | ---------------- |
+| Developer | $9.99       | 1,000             | $0.10/req    | No               |
+| Pro       | $19.99      | 5,000             | $0.05/req    | Yes              |
+| Business  | $29.99      | 10,000            | $0.01/req    | Yes              |
+
+### Developer plan
+
+1. In the **Plans** tab, click **Create Plan**.
+2. Fill in the plan details:
+   - **Plan Name**: `Developer`
+   - **Key**: `developer`
+3. Click **Create Draft**.
+4. Configure the rate cards:
+
+   **Monthly Fee** rate card:
+   - **Pricing Model**: Flat fee
+   - **Billing Cadence**: Monthly
+   - **Payment Term**: In advance
+   - **Price**: $9.99
+   - **Entitlement**: No entitlement
+
+   **api** rate card:
+   - **Pricing Model**: Tiered
+   - **Billing Cadence**: Monthly
+   - **Price Mode**: Graduated
+   - **Tier 1**: First Unit `0`, Last Unit `1000`, Unit Price $0, Flat Price $0
+   - **Tier 2**: First Unit `1001`, to infinity, Unit Price $0.10, Flat Price $0
+   - **Entitlement**: Metered (track usage)
+   - **Usage Limit**: `1000`
+   - **Soft limit**: enabled
+
+5. Click **Save**.
 
 ### Pro plan
 
-```bash
-curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/plans \
-  -H "Authorization: Bearer {YOUR_API_KEY}" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "key": "pro",
-    "name": "Pro",
-    "currency": "USD",
-    "billingCadence": "P1M",
-    "phases": [
-      {
-        "key": "default",
-        "name": "Pro Monthly",
-        "duration": null,
-        "rateCards": [
-          {
-            "type": "usage_based",
-            "key": "api_calls",
-            "name": "API Calls",
-            "featureKey": "api_calls",
-            "billingCadence": "P1M",
-            "price": {
-              "type": "tiered",
-              "mode": "graduated",
-              "tiers": [
-                {
-                  "upToAmount": "50000",
-                  "flatPrice": { "type": "flat", "amount": "99.00" },
-                  "unitPrice": null
-                },
-                {
-                  "flatPrice": null,
-                  "unitPrice": { "type": "unit", "amount": "0.50" }
-                }
-              ]
-            },
-            "entitlementTemplate": {
-              "type": "metered",
-              "issueAfterReset": 50000,
-              "isSoftLimit": true
-            }
-          },
-          {
-            "type": "flat_fee",
-            "key": "priority_support",
-            "name": "Priority Support",
-            "featureKey": "priority_support",
-            "billingCadence": null,
-            "price": null,
-            "entitlementTemplate": {
-              "type": "boolean",
-              "config": true
-            }
-          }
-        ]
-      }
-    ]
-  }'
-```
+1. Click **Create Plan**.
+2. Fill in:
+   - **Plan Name**: `Pro`
+   - **Key**: `pro`
+3. Click **Create Draft**.
+4. Configure the rate cards:
 
-This creates a Pro plan at $99/month with 50,000 API calls included. The soft
-limit means customers can exceed 50,000 requests — they are billed $0.50 per
-additional request as overage. Pro users also get the Priority Support static
-feature.
+   **Monthly Fee** rate card:
+   - **Pricing Model**: Flat fee
+   - **Billing Cadence**: Monthly
+   - **Payment Term**: In advance
+   - **Price**: $19.99
+   - **Entitlement**: No entitlement
 
-### Publish the plans
+   **api** rate card:
+   - **Pricing Model**: Tiered
+   - **Billing Cadence**: Monthly
+   - **Price Mode**: Graduated
+   - **Tier 1**: First Unit `0`, Last Unit `5000`, Unit Price $0, Flat Price $0
+   - **Tier 2**: First Unit `5001`, to infinity, Unit Price $0.05, Flat Price $0
+   - **Entitlement**: Metered (track usage)
+   - **Usage Limit**: `5000`
+   - **Soft limit**: enabled
 
-Plans are created in `draft` status. Publish them to make them available:
+   **Metadata Support** rate card:
+   - **Entitlement**: Boolean
+   - **Enabled**: true
 
-```bash
-curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/plans/{planId}/publish \
-  -H "Authorization: Bearer {YOUR_API_KEY}"
-```
+5. Click **Save**.
 
-## Step 4: Connect Stripe
+### Business plan
+
+1. Click **Create Plan**.
+2. Fill in:
+   - **Plan Name**: `Business`
+   - **Key**: `business`
+3. Click **Create Draft**.
+4. Configure the rate cards:
+
+   **Monthly Fee** rate card:
+   - **Pricing Model**: Flat fee
+   - **Billing Cadence**: Monthly
+   - **Payment Term**: In advance
+   - **Price**: $29.99
+   - **Entitlement**: No entitlement
+
+   **api** rate card:
+   - **Pricing Model**: Tiered
+   - **Billing Cadence**: Monthly
+   - **Price Mode**: Graduated
+   - **Tier 1**: First Unit `0`, Last Unit `10000`, Unit Price $0, Flat Price $0
+   - **Tier 2**: First Unit `10001`, to infinity, Unit Price $0.01, Flat Price
+     $0
+   - **Entitlement**: Metered (track usage)
+   - **Usage Limit**: `10000`
+   - **Soft limit**: enabled
+
+   **Metadata Support** rate card:
+   - **Pricing Model**: Free
+   - **Entitlement**: Boolean (on/off)
+
+5. Click **Save**.
+
+### Reorder your plans
+
+The order of plans on the Plans tab determines how they appear on the pricing
+page. Drag and drop the plans using the handle on the top-left corner of each
+card to reorder them as **Developer**, **Pro**, **Business**.
+
+### Publish your plans
+
+Each plan starts as a draft. Publish each one before customers can subscribe.
+
+1. On each plan card, click the **...** context menu.
+2. Select **Publish Plan**.
+3. Repeat for all three plans.
+
+For more plan configurations (including trial periods and multiple tiers), see
+[Plan Examples](./plan-examples.mdx).
+
+## Step 7: Connect Stripe
+
+For testing, use Stripe's sandbox mode so you can simulate payments without real
+charges.
 
 1. Go to your [Stripe Dashboard](https://dashboard.stripe.com) and make sure
-   you're in **sandbox mode**
+   you're in **sandbox mode** (toggle in the top-right corner).
 2. Go to **Developers > API keys** and copy your **Secret key** (starts with
-   `sk_test_`)
-3. In the Zuplo Portal, navigate to **Services → Monetization Service → Payment
-   Provider**
-4. Click **Configure** on the Stripe card
-5. Enter a **Name** and paste your **Stripe API Key**, then click **Save**
-6. When you publish plans, Stripe Products and Prices are created automatically
+   `sk_test_`).
+3. In the Monetization Service, click **Payment Provider** in the left sidebar.
+4. Click **Configure** on the Stripe card.
+5. Enter a **Name** and paste your **Stripe API Key**, then click **Save**.
 
-When a customer subscribes through your Developer Portal, Zuplo:
+:::warning
 
-- Creates a Stripe Customer (or links to an existing one)
-- Creates a Stripe Subscription matching the plan
-- Generates an API key scoped to the subscription's entitlements
-- Keeps subscription and payment state synchronized automatically
+Always use your Stripe **test** key (`sk_test_...`) while following this guide.
+This creates a sandbox environment where you can safely test subscriptions and
+payments without processing real transactions. When you're ready for production,
+update to your live key (`sk_live_...`).
 
-## Step 5: Add the Monetization policy to your routes
+:::
 
-The `MonetizationInboundPolicy` handles authentication, subscription validation,
-quota enforcement, and metering. Add it to every route you want to meter and
-protect.
+## Step 8: Add the monetization policy
 
-In your `routes.oas.json`, add the policy to the route's `x-zuplo-route`
-configuration:
+The monetization policy checks entitlements and tracks usage on every request.
+
+### Define the policy
+
+Open `config/policies.json` and add:
 
 ```json
 {
-  "paths": {
-    "/api/v1/characters": {
-      "get": {
-        "x-zuplo-route": {
-          "policies": {
-            "inbound": ["monetization-inbound"]
+  "policies": [
+    {
+      "name": "monetization-v3",
+      "policyType": "monetization-inbound",
+      "handler": {
+        "module": "$import(@zuplo/runtime)",
+        "export": "MonetizationInboundPolicy",
+        "options": {
+          "meters": {
+            "api": 1
           }
         }
       }
     }
-  }
+  ]
 }
 ```
 
-Then define the policy in `policies.json`:
+The `meters` field maps the meter slug (created in Step 4) to the number of
+units each request consumes.
+
+### Apply the policy to routes
+
+Open `config/routes.oas.json` and add the policy to the routes you want to
+monetize:
 
 ```json
 {
-  "name": "monetization-inbound",
-  "policyType": "monetization-inbound",
-  "handler": {
-    "export": "MonetizationInboundPolicy",
-    "module": "$import(@zuplo/runtime)",
-    "options": {
-      "meters": {
-        "api_requests": 1
+  "paths": {
+    "/todos": {
+      "get": {
+        "summary": "Get all todos",
+        "x-zuplo-route": {
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "https://todo.zuplo.io"
+            }
+          },
+          "policies": {
+            "inbound": ["monetization-v3"]
+          }
+        }
       }
     }
   }
@@ -257,68 +315,46 @@ Then define the policy in `policies.json`:
 :::note
 
 The `MonetizationInboundPolicy` handles API key authentication internally. You
-do not need a separate `api-key-auth` policy on monetized routes — the
-monetization policy replaces it.
+do not need a separate `api-key-auth` policy on monetized routes.
 
 :::
 
-## Step 6: Configure the Developer Portal
+## Step 9: Deploy and test
 
-The Developer Portal provides the self-serve experience for your customers:
-browsing plans, subscribing, managing API keys, and viewing usage.
+1. Commit and push your changes.
+2. Wait for the deployment to complete in the Zuplo Portal.
+3. Navigate to your Developer Portal.
 
-Add the monetization plugin to your Developer Portal. Open
-`docs/zudoku.config.tsx` in your project and add:
+### Subscribe to a plan
 
-```tsx
-import { zuploMonetizationPlugin } from "@zuplo/zudoku-plugin-monetization";
+1. Open the **Pricing** tab in your Developer Portal.
+2. Click **Subscribe** on one of the available plans.
+3. Enter payment information. Since you're using Stripe sandbox, use
+   [test card numbers](https://docs.stripe.com/testing) — no real charges are
+   made.
+4. After the subscription is confirmed, you can see your usage dashboard and API
+   keys.
 
-const config: ZudokuConfig = {
-  // ... your existing config
-  plugins: [
-    zuploMonetizationPlugin(),
-    // ... any other plugins
-  ],
-};
-```
+### Make API calls
 
-Save and deploy. Your Developer Portal now shows:
-
-- A **Pricing** page displaying your published plans with feature comparisons
-- A **Subscribe** button that launches Stripe Checkout
-- A **Subscriptions** page where customers see their active plans, usage, and
-  API keys
-- A **Usage** dashboard showing quota consumption for the current billing period
-
-## Step 7: Test the flow
-
-1. Open your Developer Portal in a browser
-2. Sign up or log in as a test customer
-3. Navigate to the Pricing page and subscribe to the Free plan
-4. Copy the generated API key from the Subscriptions page
-5. Make API requests using the key:
+Copy the API key from your subscription and make requests:
 
 ```bash
-# This should succeed (within free tier quota)
-curl -H "Authorization: Bearer {CUSTOMER_API_KEY}" \
-  https://your-api.zuplo.dev/api/v1/characters
-
-# After 1,000 requests, this should return 403 Forbidden
-curl -H "Authorization: Bearer {CUSTOMER_API_KEY}" \
-  https://your-api.zuplo.dev/api/v1/characters
+curl --request GET \
+  --url https://<your-gateway-url>/todos \
+  --header 'Authorization: Bearer <your-api-key>'
 ```
 
-6. Upgrade to the Pro plan via the Developer Portal to verify the plan change
-   flows through Stripe and updates the customer's quota in real time.
+Head back to the Developer Portal to see your `api` meter decrement with each
+call.
 
 ## Next steps
 
-- **[Meters](./meters.mdx)**, **[Features](./features.mdx)**,
-  **[Plans](./plans.mdx)**, **[Rate Cards](./rate-cards.mdx)** — Understand the
-  core monetization primitives in depth
-- **[Billing Models Guide](./billing-models.md)** — Choose the right pricing
-  strategy for your API
-- **[Monetization Policy Reference](./monetization-policy.md)** — Advanced
-  policy configuration (multi-meter, selective metering, dynamic metering)
-- **[Subscription Lifecycle](./subscription-lifecycle.md)** — Manage trials,
-  upgrades, downgrades, and cancellations
+- [Billing Models](./billing-models.md) — Choose the right pricing strategy
+- [Private Plans](./private-plans.md) — Invite-only plans for specific users
+- [Tax Collection](./tax-collection.md) — Enable VAT, sales tax, or GST on
+  invoices
+- [Monetization Policy Reference](./monetization-policy.md) — Advanced policy
+  configuration
+- [Subscription Lifecycle](./subscription-lifecycle.md) — Manage trials,
+  upgrades, and cancellations

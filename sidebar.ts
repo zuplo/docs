@@ -477,7 +477,8 @@ export const apiGateway: Navigation = [
               "articles/monetization/developer-portal",
               "articles/monetization/monetization-policy",
               "articles/monetization/subscription-lifecycle",
-              "articles/monetization/migration-guide",
+              "articles/monetization/private-plans",
+              "articles/monetization/tax-collection",
             ],
           },
           {

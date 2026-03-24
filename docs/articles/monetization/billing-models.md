@@ -130,6 +130,15 @@ charged in advance at the start of each billing period.
 
 ## Pay-as-you-go
 
+:::caution{title="Coming Soon"}
+
+Pay-as-you-go billing is supported by the underlying monetization models, but
+the developer portal pricing table experience has not been fully tested for this
+billing model yet. If you need pure pay-as-you-go pricing, contact
+[support](mailto:support@zuplo.com) to discuss your use case.
+
+:::
+
 No upfront commitment. The customer provides a credit card, uses the API as much
 as they want, and is billed monthly in arrears for actual usage.
 
