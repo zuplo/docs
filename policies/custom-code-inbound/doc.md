@@ -46,7 +46,7 @@ import { ZuploRequest } from "@zuplo/runtime";
 
 export default async function(
 	request: ZuploRequest,
-	context: ZuploContext
+	context: ZuploContext,
 	options: any,
 	policyName: string) {
   	const apiKeyHeader = request.headers.get("api-key");
