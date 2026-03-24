@@ -3,6 +3,16 @@ title: Quickstart — Monetize Your API
 sidebar_label: Quickstart
 ---
 
+:::note{title="Beta"}
+
+API Monetization is currently in beta. The APIs and features documented here are
+stable, but you should evaluate them in a non-production environment first.
+Monetization is free to use during the beta period. To use monetization in
+production, [contact us](https://zuplo.com/contact). Production pricing has not
+yet been announced.
+
+:::
+
 This guide walks you through setting up API monetization from scratch. By the
 end, your customers can browse plans, subscribe via Stripe Checkout, get API
 keys scoped to their plan, and hit real quota limits.

@@ -3,6 +3,16 @@ title: Developer Portal Setup
 sidebar_label: Developer Portal
 ---
 
+:::note{title="Beta"}
+
+API Monetization is currently in beta. The APIs and features documented here are
+stable, but you should evaluate them in a non-production environment first.
+Monetization is free to use during the beta period. To use monetization in
+production, [contact us](https://zuplo.com/contact). Production pricing has not
+yet been announced.
+
+:::
+
 The Developer Portal is the self-serve storefront for your monetized API.
 Customers browse plans, subscribe, manage their API keys, and monitor usage —
 all without contacting your team. The portal is built on

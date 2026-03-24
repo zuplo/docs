@@ -3,6 +3,16 @@ title: Troubleshooting & FAQ
 sidebar_label: Troubleshooting
 ---
 
+:::note{title="Beta"}
+
+API Monetization is currently in beta. The APIs and features documented here are
+stable, but you should evaluate them in a non-production environment first.
+Monetization is free to use during the beta period. To use monetization in
+production, [contact us](https://zuplo.com/contact). Production pricing has not
+yet been announced.
+
+:::
+
 ## Common issues
 
 ### Customer gets 403 Forbidden instead of expected access

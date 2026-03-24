@@ -3,6 +3,16 @@ title: Stripe Integration
 sidebar_label: Stripe Integration
 ---
 
+:::note{title="Beta"}
+
+API Monetization is currently in beta. The APIs and features documented here are
+stable, but you should evaluate them in a non-production environment first.
+Monetization is free to use during the beta period. To use monetization in
+production, [contact us](https://zuplo.com/contact). Production pricing has not
+yet been announced.
+
+:::
+
 Zuplo uses Stripe to handle payment processing, subscription billing, and
 invoicing. Zuplo handles metering, quota enforcement, and subscription state —
 Stripe handles money.

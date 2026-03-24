@@ -3,6 +3,16 @@ title: Subscription Lifecycle
 sidebar_label: Subscription Lifecycle
 ---
 
+:::note{title="Beta"}
+
+API Monetization is currently in beta. The APIs and features documented here are
+stable, but you should evaluate them in a non-production environment first.
+Monetization is free to use during the beta period. To use monetization in
+production, [contact us](https://zuplo.com/contact). Production pricing has not
+yet been announced.
+
+:::
+
 This guide covers the full lifecycle of a customer subscription: creation,
 trials, upgrades, downgrades, cancellation, and reactivation.
 

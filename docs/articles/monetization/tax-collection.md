@@ -3,6 +3,16 @@ title: Tax Collection — Enabling Stripe Tax
 sidebar_label: Tax Collection
 ---
 
+:::note{title="Beta"}
+
+API Monetization is currently in beta. The APIs and features documented here are
+stable, but you should evaluate them in a non-production environment first.
+Monetization is free to use during the beta period. To use monetization in
+production, [contact us](https://zuplo.com/contact). Production pricing has not
+yet been announced.
+
+:::
+
 Zuplo supports automatic tax collection through Stripe Tax. When enabled, taxes
 (such as VAT, sales tax, or GST) are automatically calculated and added to your
 customers' invoices.

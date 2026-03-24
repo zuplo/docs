@@ -3,6 +3,16 @@ title: Private Plans — Invite-Only Subscriptions
 sidebar_label: Private Plans
 ---
 
+:::note{title="Beta"}
+
+API Monetization is currently in beta. The APIs and features documented here are
+stable, but you should evaluate them in a non-production environment first.
+Monetization is free to use during the beta period. To use monetization in
+production, [contact us](https://zuplo.com/contact). Production pricing has not
+yet been announced.
+
+:::
+
 Private plans are hidden from the public pricing table and can only be accessed
 by users you explicitly invite. Use private plans for custom enterprise pricing,
 partner deals, or beta testing with specific users.

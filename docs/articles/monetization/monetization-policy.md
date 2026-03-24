@@ -3,6 +3,16 @@ title: Monetization Policy Reference
 sidebar_label: Monetization Policy
 ---
 
+:::note{title="Beta"}
+
+API Monetization is currently in beta. The APIs and features documented here are
+stable, but you should evaluate them in a non-production environment first.
+Monetization is free to use during the beta period. To use monetization in
+production, [contact us](https://zuplo.com/contact). Production pricing has not
+yet been announced.
+
+:::
+
 The `MonetizationInboundPolicy` is the gateway enforcement mechanism. It runs on
 every request to a protected route, authenticates the API key, checks the
 customer's subscription and payment status, enforces quota, meters the request,
