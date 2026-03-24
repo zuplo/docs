@@ -199,12 +199,22 @@ ${renderMd(generateOptions(options))}`
   return html;
 };
 
+const policyConfig = await import(
+  path.join(projectDir, "policies/config.json")
+).then((m) => m.default);
+
 const policyData: any = {
-  config: await import(path.join(projectDir, "policies/config.json")).then(
-    (m) => m.default,
-  ),
+  config: policyConfig,
   policies: [],
 };
+
+const policyDataLite: any = {
+  config: policyConfig,
+  policies: [],
+};
+
+const cdnIconDir = path.join(projectDir, "cdn-policy-icons");
+await fs.mkdir(cdnIconDir, { recursive: true });
 
 for (const schemaPath of policySchemas) {
   const schemaDirName = path.dirname(schemaPath);
@@ -300,6 +310,14 @@ for (const schemaPath of policySchemas) {
   }
 
   policyData.policies.push(meta);
+
+  // Build lite version with CDN icon URL instead of embedded base64
+  const metaLite = { ...meta };
+  if (icon) {
+    metaLite.icon = `https://cdn.zuplo.com/portal/policy-icons/${policyId}.svg`;
+    await fs.writeFile(path.join(cdnIconDir, `${policyId}.svg`), icon);
+  }
+  policyDataLite.policies.push(metaLite);
 
   let code: { name: string; policyType: string; handler: object };
 
@@ -432,6 +450,11 @@ await fs.writeFile(
 await fs.writeFile(
   path.join(projectDir, "policies.v5.json"),
   JSON.stringify(policyData, null, 2),
+);
+
+await fs.writeFile(
+  path.join(projectDir, "policies-lite.v6.json"),
+  JSON.stringify(policyDataLite, null, 2),
 );
 
 function generateOptions(schema?: JSONSchema7) {
