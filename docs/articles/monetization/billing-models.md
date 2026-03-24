@@ -378,6 +378,15 @@ through the integrated billing system.
 
 ## Credits / tokens (prepaid)
 
+:::caution{title="Coming Soon"}
+
+Credit/token-based billing is supported by the underlying monetization models,
+but the developer portal experience has not been fully tested for this billing
+model yet. If you need prepaid credit billing, contact
+[sales@zuplo.com](mailto:sales@zuplo.com) to discuss your use case.
+
+:::
+
 Customers buy credit bundles in advance. Each API call (or token, or byte)
 consumes a defined number of credits. When credits are exhausted, service stops
 until the customer tops up.
