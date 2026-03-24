@@ -1,0 +1,286 @@
+---
+title: Configuring CORS
+sidebar_label: CORS
+---
+
+Cross-Origin Resource Sharing (CORS) controls which web applications on
+different domains can access your API. Zuplo handles CORS at the gateway level,
+automatically responding to preflight requests and adding the appropriate
+headers to responses.
+
+## Built-in Policies
+
+Every route has a `corsPolicy` property in its `x-zuplo-route` configuration.
+Zuplo provides two built-in policies:
+
+### `none`
+
+Disables CORS for the route. All CORS headers are stripped from responses, and
+preflight `OPTIONS` requests return a `404` response. This is the default when
+no `corsPolicy` is set.
+
+```json title="config/routes.oas.json"
+"x-zuplo-route": {
+  "corsPolicy": "none",
+  "handler": {
+    "export": "urlForwardHandler",
+    "module": "$import(@zuplo/runtime)"
+  }
+}
+```
+
+### `anything-goes`
+
+Allows any origin, method, and header. This is useful for development or
+internal APIs but is **not recommended for production**. It sets:
+
+- `Access-Control-Allow-Origin`: The requesting origin (reflected back)
+- `Access-Control-Allow-Methods`: The route's configured methods
+- `Access-Control-Allow-Headers`: `*`
+- `Access-Control-Expose-Headers`: `*`
+- `Access-Control-Allow-Credentials`: `true`
+- `Access-Control-Max-Age`: `600`
+
+```json title="config/routes.oas.json"
+"x-zuplo-route": {
+  "corsPolicy": "anything-goes",
+  "handler": {
+    "export": "urlForwardHandler",
+    "module": "$import(@zuplo/runtime)"
+  }
+}
+```
+
+## Custom CORS Policies
+
+For production use, create custom CORS policies with fine-grained control over
+which origins, methods, and headers are allowed.
+
+Custom CORS policies are defined in the `policies.json` file alongside regular
+policies, under the `corsPolicies` array:
+
+```json title="config/policies.json"
+{
+  "policies": [],
+  "corsPolicies": [
+    {
+      "name": "my-cors-policy",
+      "allowedOrigins": [
+        "https://app.example.com",
+        "https://admin.example.com"
+      ],
+      "allowedMethods": ["GET", "POST", "PUT", "DELETE"],
+      "allowedHeaders": ["Authorization", "Content-Type"],
+      "exposeHeaders": ["X-Request-Id"],
+      "maxAge": 3600,
+      "allowCredentials": true
+    }
+  ]
+}
+```
+
+Then reference the policy by name on each route:
+
+```json title="config/routes.oas.json"
+"x-zuplo-route": {
+  "corsPolicy": "my-cors-policy",
+  "handler": {
+    "export": "urlForwardHandler",
+    "module": "$import(@zuplo/runtime)"
+  }
+}
+```
+
+You can also select the CORS policy from the route designer dropdown in the
+Zuplo Portal.
+
+### Policy Properties
+
+| Property           | Type                   | Required | Description                                                                                                    |
+| ------------------ | ---------------------- | -------- | -------------------------------------------------------------------------------------------------------------- |
+| `name`             | `string`               | Yes      | A unique name used to reference this policy on routes.                                                         |
+| `allowedOrigins`   | `string[]` or `string` | Yes      | Origins permitted to make cross-origin requests. Supports wildcards (see [Origin Matching](#origin-matching)). |
+| `allowedMethods`   | `string[]` or `string` | No       | HTTP methods allowed for cross-origin requests (e.g., `GET`, `POST`).                                          |
+| `allowedHeaders`   | `string[]` or `string` | No       | Request headers the client can send. Use `*` to allow any header.                                              |
+| `exposeHeaders`    | `string[]` or `string` | No       | Response headers the browser can access from JavaScript.                                                       |
+| `maxAge`           | `number`               | No       | Time in seconds the browser caches preflight results.                                                          |
+| `allowCredentials` | `boolean`              | No       | Whether to include credentials (cookies, authorization headers) in cross-origin requests.                      |
+
+All list properties (`allowedOrigins`, `allowedMethods`, `allowedHeaders`,
+`exposeHeaders`) accept either a JSON array of strings or a single
+comma-separated string:
+
+```json
+// Array format
+"allowedOrigins": ["https://app.example.com", "https://admin.example.com"]
+
+// Comma-separated string format
+"allowedOrigins": "https://app.example.com, https://admin.example.com"
+```
+
+:::warning
+
+Do not include a trailing `/` on origin values. For example,
+`https://example.com` is valid but `https://example.com/` does not work.
+
+:::
+
+## Origin Matching
+
+The `allowedOrigins` property supports several matching patterns:
+
+### Exact Match
+
+Specify the full origin including the protocol:
+
+```json
+"allowedOrigins": ["https://app.example.com"]
+```
+
+Origin matching is case-insensitive, so `https://APP.EXAMPLE.COM` matches
+`https://app.example.com`.
+
+### Wildcard (`*`)
+
+Allow any origin:
+
+```json
+"allowedOrigins": ["*"]
+```
+
+### Subdomain Wildcards
+
+Use `*.` to match a single subdomain level:
+
+```json
+"allowedOrigins": ["https://*.example.com"]
+```
+
+This matches `https://app.example.com` and `https://api.example.com`, but does
+**not** match:
+
+- `https://example.com` (no subdomain)
+- `https://v2.api.example.com` (multi-level subdomain)
+
+### Wildcards with Ports
+
+Subdomain wildcards work with ports:
+
+```json
+"allowedOrigins": ["http://*.localhost:3000"]
+```
+
+This matches `http://app.localhost:3000` but not `http://localhost:3000`.
+
+### Multiple Patterns
+
+Combine exact origins and wildcard patterns:
+
+```json
+"allowedOrigins": [
+  "https://*.example.com",
+  "https://specific.domain.com",
+  "http://localhost:3000"
+]
+```
+
+## Using Environment Variables
+
+Use [environment variables](./environment-variables.mdx) to configure different
+origins per environment:
+
+```json title="config/policies.json"
+{
+  "corsPolicies": [
+    {
+      "name": "my-cors-policy",
+      "allowedOrigins": "$env(ALLOWED_ORIGINS)",
+      "allowedHeaders": "$env(ALLOWED_HEADERS)",
+      "allowedMethods": ["GET", "POST", "PUT"],
+      "maxAge": 600,
+      "allowCredentials": true
+    }
+  ]
+}
+```
+
+Set the environment variable as a comma-separated string:
+
+```
+ALLOWED_ORIGINS=https://app.example.com, https://admin.example.com
+```
+
+Environment variables work for `allowedOrigins`, `allowedMethods`,
+`allowedHeaders`, and `exposeHeaders`.
+
+## How CORS Works in Zuplo
+
+### Preflight Requests
+
+When a browser makes a cross-origin request that requires preflight, it sends an
+`OPTIONS` request with `Origin` and `Access-Control-Request-Method` headers.
+Zuplo handles these automatically:
+
+1. Zuplo matches the `OPTIONS` request path and the requested method to a
+   configured route.
+2. If the route has a CORS policy, Zuplo checks whether the request origin
+   matches the policy's `allowedOrigins`.
+3. If the origin matches, Zuplo responds with a `200 OK` and the appropriate
+   CORS headers.
+4. If the origin does not match or the route has no CORS policy, Zuplo responds
+   with a `404 Not Found`.
+
+Preflight handling runs before any policies or handlers on the route.
+
+### Simple Requests
+
+For simple cross-origin requests (e.g., `GET` with standard headers), there is
+no preflight. Zuplo adds CORS headers to the response based on the route's
+policy. If the origin does not match, no CORS headers are added and the browser
+blocks the response.
+
+### Header Precedence
+
+Zuplo strips any existing CORS headers from upstream responses before applying
+the configured policy headers. This prevents conflicts and ensures the gateway
+is the single source of truth for CORS configuration.
+
+## Troubleshooting
+
+### No CORS headers in response
+
+- Verify the route has a `corsPolicy` set (not `none`).
+- Check that the request includes an `Origin` header. Browsers add this
+  automatically for cross-origin requests, but tools like `curl` do not.
+- Confirm the `Origin` value matches one of the `allowedOrigins` patterns
+  exactly (including the protocol like `https://`).
+
+### Preflight returns 404
+
+- Ensure the `corsPolicy` on the matching route is not set to `none`.
+- Verify the `Access-Control-Request-Method` header in the preflight request
+  matches a method configured on the route.
+- Check that the request path matches an existing route.
+
+### Preflight returns 400
+
+- The preflight request must include both the `Origin` and
+  `Access-Control-Request-Method` headers. A `400` response means one or both
+  are missing.
+
+### Wildcard subdomain not matching
+
+- The `*.` pattern only matches a **single** subdomain level.
+  `https://*.example.com` does not match `https://v2.api.example.com`.
+- The `*.` pattern does not match the base domain. `https://*.example.com` does
+  not match `https://example.com`. Add the base domain separately if needed.
+
+### Credentials not working
+
+- Set `allowCredentials` to `true` in the CORS policy.
+- When using credentials, `allowedOrigins` cannot rely on a literal `*` being
+  sent as the `Access-Control-Allow-Origin` header value. Zuplo reflects the
+  actual requesting origin instead, which is compatible with credentials.
+
+For more details on CORS, see the MDN documentation:
+[Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).

@@ -298,6 +298,7 @@ export const apiGateway: Navigation = [
     items: [
       "articles/development-options",
       "articles/routing",
+      "articles/cors",
       "articles/openapi",
       "articles/update-zup-in-github-action",
       "articles/environments",
