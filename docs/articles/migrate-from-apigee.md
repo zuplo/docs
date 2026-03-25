@@ -7,6 +7,37 @@ This guide walks through migrating from Google Apigee (including Apigee X,
 Apigee hybrid, and legacy Apigee Edge) to Zuplo. It covers the key differences,
 concept mapping, policy translation, and a step-by-step migration process.
 
+:::caution{title="Apigee Edge End of Life"}
+
+Apigee Edge for Private Cloud v4.53 reached end of life on April 11, 2026. The
+final version (v4.53.01) reaches end of life on **February 26, 2027**. After
+these dates, Google provides no security patches, bug fixes, or support. If you
+are still running Apigee Edge, now is the time to migrate.
+
+:::
+
+## Pre-migration checklist
+
+Before starting your migration, gather the following from your Apigee
+environment:
+
+- [ ] **API proxy inventory** — List all active API proxies, their base paths,
+      and target endpoints
+- [ ] **OpenAPI specs** — Export specs for each proxy (or document endpoints if
+      specs don't exist)
+- [ ] **Policy audit** — List every policy attached to each proxy
+      (authentication, rate limiting, transformation, etc.)
+- [ ] **Environment configuration** — Document KVM entries, target servers,
+      keystores, and virtual host settings
+- [ ] **Developer portal content** — Export API documentation, custom pages, and
+      developer account data
+- [ ] **CI/CD pipeline configuration** — Document your current deployment
+      process and any automation scripts
+- [ ] **Traffic patterns** — Understand request volumes, peak usage times, and
+      geographic distribution of API consumers
+- [ ] **Custom Java callouts** — Identify any Java callouts that will need
+      translation to TypeScript
+
 ## Why teams migrate from Apigee
 
 Apigee is one of the oldest API management platforms, acquired by Google
@@ -138,6 +169,84 @@ not across regions by default.
 
 :::
 
+Here is an example of translating an Apigee OAuthV2 verification policy to a
+Zuplo JWT authentication policy.
+
+**Apigee OAuthV2 policy:**
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OAuthV2 name="VerifyAccessToken">
+  <Operation>VerifyAccessToken</Operation>
+  <ExternalAuthorization>false</ExternalAuthorization>
+  <SupportedGrantTypes>
+    <GrantType>client_credentials</GrantType>
+  </SupportedGrantTypes>
+</OAuthV2>
+```
+
+**Zuplo JWT authentication policy configuration:**
+
+```json
+{
+  "name": "jwt-auth-inbound",
+  "policyType": "open-id-jwt-auth-inbound",
+  "handler": {
+    "export": "OpenIdJwtInboundPolicy",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "issuer": "$env(AUTH_ISSUER)",
+      "audience": "$env(AUTH_AUDIENCE)",
+      "jwkUrl": "$env(AUTH_JWK_URL)",
+      "allowUnauthenticatedRequests": false
+    }
+  }
+}
+```
+
+:::note
+
+Apigee can act as a full OAuth 2.0 server (issuing and managing tokens). Zuplo
+validates tokens issued by external identity providers (Auth0, Cognito, Clerk,
+Firebase, Supabase, or any OIDC-compliant provider). If you are using Apigee as
+your OAuth server, you will need to move token issuance to a dedicated identity
+provider during migration.
+
+:::
+
+Here is an example of translating an Apigee ResponseCache to a Zuplo caching
+policy.
+
+**Apigee ResponseCache policy:**
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ResponseCache name="Cache-Response">
+  <CacheKey>
+    <KeyFragment ref="request.uri"/>
+  </CacheKey>
+  <ExpirySettings>
+    <TimeoutInSec>300</TimeoutInSec>
+  </ExpirySettings>
+</ResponseCache>
+```
+
+**Zuplo caching policy configuration:**
+
+```json
+{
+  "name": "caching-inbound",
+  "policyType": "caching-inbound",
+  "handler": {
+    "export": "CachingInboundPolicy",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "expirationSecondsTtl": 300
+    }
+  }
+}
+```
+
 ### Step 4: Translate JavaScript callouts to TypeScript
 
 If you use Apigee JavaScript callouts, rewrite them as Zuplo custom code
@@ -237,9 +346,59 @@ without the complexity of moving to Apigee X:
 - **Skip the Apigee X migration** — Instead of migrating from Edge to X (which
   Google recommends but requires significant effort), migrate directly to Zuplo.
 - **Eliminate infrastructure** — Apigee Edge requires managing on-premises
-  infrastructure. Zuplo is fully managed.
+  infrastructure (Cassandra, ZooKeeper, Qpid clusters). Zuplo is fully managed.
 - **Reduce costs** — Apigee X pricing is often higher than Edge licensing. Zuplo
   offers transparent, usage-based pricing starting with a free tier.
+- **No GCP dependency** — Apigee X requires Google Cloud Platform. Apigee hybrid
+  still requires GCP for its control plane. Zuplo is cloud-agnostic and can
+  front backends on any cloud provider.
+
+### Apigee Edge end-of-life timeline
+
+| Version | End-of-life date      | Status        |
+| ------- | --------------------- | ------------- |
+| 4.52.00 | August 31, 2024       | EOL reached   |
+| 4.52.01 | September 30, 2025    | EOL reached   |
+| 4.52.02 | December 31, 2025     | EOL reached   |
+| 4.53.00 | April 11, 2026        | EOL reached   |
+| 4.53.01 | **February 26, 2027** | Final version |
+
+After end of life, Google provides no security patches, bug fixes, hot fixes, or
+technical support for that version.
+
+## Common migration gotchas
+
+**Encrypted KVM entries cannot be exported.** Apigee's management API does not
+return values for encrypted Key Value Map entries. You will need to manually
+re-enter these values as Zuplo secret environment variables.
+
+**Apigee's OAuth server has no direct equivalent.** If you use Apigee to issue
+and manage OAuth tokens (not just validate them), you will need to move token
+issuance to a dedicated identity provider such as Auth0, Cognito, or Clerk.
+Zuplo validates tokens from external providers but does not act as an OAuth
+server.
+
+**Shared flows become reusable modules.** Apigee shared flows that are
+referenced across multiple proxies should be refactored into reusable TypeScript
+modules. See [Reusing Code](../programmable-api/reusing-code.md).
+
+**Java callouts require rewriting.** Apigee Java callouts have no direct
+TypeScript equivalent. Evaluate each callout and rewrite the logic as a
+[custom code policy](../policies/custom-code-inbound.md). In most cases, the
+TypeScript version will be simpler because you have access to the full npm
+ecosystem and standard web APIs.
+
+**Apigee analytics must be replaced.** Apigee's built-in analytics dashboards
+and custom reports do not migrate. Zuplo provides built-in analytics and
+integrates with observability platforms like [Datadog](./log-plugins/datadog.md)
+and [Google Cloud Logging](./log-plugins/gcp-cloud-logging.md) for advanced
+reporting.
+
+**Test with representative traffic before cutover.** Use Zuplo's
+[branch-based deployments](./branch-based-deployments.md) to create a preview
+environment and route a subset of traffic through Zuplo before migrating
+production traffic. Compare response codes, latencies, and payload correctness
+between both gateways.
 
 ## Next steps
 
