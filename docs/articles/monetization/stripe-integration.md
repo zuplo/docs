@@ -157,7 +157,7 @@ Portal links to this from the subscription management page.
 To enable the Stripe Customer Portal:
 
 1. Configure the Customer Portal in your
-   [Stripe Dashboard → Settings → Customer Portal](https://dashboard.stripe.com/settings/billing/portal)
+   [Stripe Dashboard → Settings → Billing → Customer Portal](https://dashboard.stripe.com/settings/billing/portal)
 2. Enable the features you want (update payment method, view invoices, cancel
    subscription)
 3. The Developer Portal automatically includes a "Manage Billing" link that

@@ -76,7 +76,7 @@ Save and deploy. Once the plugin is enabled, ensure:
 
 ### Plan display order
 
-Control plan display order in the Zuplo Portal under **Settings →
+Control plan display order in the Zuplo Portal under **Services →
 Monetization**. Plans can be reordered using drag-and-drop.
 
 ### Feature comparison matrix
