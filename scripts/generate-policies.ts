@@ -453,7 +453,7 @@ await fs.writeFile(
 );
 
 await fs.writeFile(
-  path.join(projectDir, "policies-lite.v6.json"),
+  path.join(projectDir, "policies.v6.json"),
   JSON.stringify(policyDataLite, null, 2),
 );
 
