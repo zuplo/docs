@@ -131,12 +131,13 @@ plans to give your customers options:
 
 ### Developer plan
 
-1. In the **Plans** tab, click **Create Plan**.
+1. In the **Plans** tab, click **Add Plan**.
 2. Fill in the plan details:
    - **Plan Name**: `Developer`
    - **Key**: `developer`
 3. Click **Create Draft**.
-4. Configure the rate cards:
+4. Configure the rate cards by selecting features from the **Add feature**
+   dropdown in the **Features & Rate Cards** section:
 
    **Monthly Fee** rate card:
    - **Pricing Model**: Flat fee
@@ -184,8 +185,8 @@ plans to give your customers options:
    - **Soft limit**: enabled
 
    **Metadata Support** rate card:
-   - **Entitlement**: Boolean
-   - **Enabled**: true
+   - **Pricing Model**: Free
+   - **Entitlement**: Boolean (on/off)
 
 5. Click **Save**.
 
@@ -290,7 +291,7 @@ Open `config/policies.json` and add:
 ```
 
 The `meters` field maps the meter slug (created in Step 4) to the number of
-units each request consumes.
+units each request consumes. In the case of this guide, it's `api`.
 
 ### Apply the policy to routes
 
