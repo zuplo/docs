@@ -68,10 +68,10 @@ jobs:
             content-type: image/svg+xml
             cache-control: public, max-age=86400, stale-while-revalidate=30
 
-      - name: Upload the Policies Lite v6
+      - name: Upload the Policies v6
         uses: "google-github-actions/upload-cloud-storage@v3"
         with:
-          path: policies-lite.v6.json
+          path: policies.v6.json
           process_gcloudignore: false
           destination: cdn.zuplo.com/portal
           headers: |-
