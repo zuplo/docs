@@ -12,9 +12,25 @@ announced.
 
 :::
 
-This guide walks you through setting up API monetization from scratch. By the
-end, your customers can browse plans, subscribe via Stripe Checkout, get API
-keys scoped to their plan, and hit real quota limits.
+This guide walks you through setting up API monetization from scratch.
+
+## Outcomes
+
+By the end of this quickstart, you have:
+
+- **A pricing page** in your Developer Portal where customers can browse and
+  compare plans
+- **Stripe-powered checkout** so customers can subscribe and pay directly
+- **Plan-scoped API keys** that are automatically issued when a customer
+  subscribes
+- **Usage metering** that tracks API calls per subscription in real time
+- **Quota enforcement** that limits or bills for overages based on each
+  customer's plan
+
+![The final pricing table that this quickstart creates](/media/monetization/pricing-table.png)
+
+You'll set up three example plans (Developer, Pro, and Business) with tiered
+pricing, included request quotas, and per-request overage billing.
 
 ## Prerequisites
 
@@ -35,8 +51,9 @@ keeps your existing work safe from any breaking changes.
 3. Select **API Management (+ MCP Server)**.
 4. Select **Starter Project (Recommended)** — it comes with endpoints ready to
    monetize.
-5. Connect your project to source control by following the
-   [GitHub setup guide](../source-control-setup-github.md).
+5. (Optional) Connect your project to source control by following the
+   [GitHub setup guide](../source-control-setup-github.md). This isn't required
+   for monetization, but is recommended for managing your project long-term.
 
 ## Step 2: Enable the monetization plugin
 
@@ -79,17 +96,13 @@ transferred, etc.
 2. Click **Add Meter** and select **Blank Meter**.
 3. Fill in the meter details:
    - **Name**: `API`
-   - **Event**: `api`
+   - **Event**: `api` — the type of event this meter listens for.
    - **Description**: `API Calls`
-   - **Aggregation**: `SUM`
-   - **Value Property**: `$.total`
+   - **Aggregation**: `SUM` — how values are combined (other options include
+     `COUNT`, `MAX`, etc.).
+   - **Value Property**: `$.total` — a JSONPath expression that extracts the
+     value from each event.
 4. Click **Add Meter** to save.
-
-A few things to note:
-
-- **Event** — The type of event the meter listens for.
-- **Aggregation** — How values are combined (`SUM`, `COUNT`, `MAX`, etc.).
-- **Value Property** — A JSONPath expression to extract the value from events.
 
 ## Step 5: Create features
 
@@ -100,36 +113,18 @@ Support").
 In the Monetization Service, click the **Features** tab, then click **Add
 Feature** for each of the following:
 
-**1. API Feature** (linked to the meter):
-
-- **Name**: `api`
-- **Key**: `api`
-- **Linked Meter**: `API`
-
-**2. Monthly Fee Feature** (for flat-rate billing):
-
-- **Name**: `Monthly Fee`
-- **Key**: `monthly_fee`
-- **Linked Meter**: leave empty
-
-**3. Metadata Support Feature** (a boolean feature):
-
-- **Name**: `Metadata Support`
-- **Key**: `metadata_support`
-- **Linked Meter**: leave empty
+| Name             | Key                | Linked Meter | Purpose                       |
+| ---------------- | ------------------ | ------------ | ----------------------------- |
+| api              | `api`              | API          | Usage-based (linked to meter) |
+| Monthly Fee      | `monthly_fee`      | —            | Flat-rate billing             |
+| Metadata Support | `metadata_support` | —            | Boolean on/off feature        |
 
 ## Step 6: Create plans
 
 Plans bring together your features with pricing and entitlements. Create three
-plans to give your customers options:
+plans to give your customers options.
 
-| Plan      | Monthly Fee | Included Requests | Overage Rate | Metadata Support |
-| --------- | ----------- | ----------------- | ------------ | ---------------- |
-| Developer | $9.99       | 1,000             | $0.10/req    | No               |
-| Pro       | $19.99      | 5,000             | $0.05/req    | Yes              |
-| Business  | $29.99      | 10,000            | $0.01/req    | Yes              |
-
-### Developer plan
+### Create the Developer plan
 
 1. In the **Plans** tab, click **Add Plan**.
 2. Fill in the plan details:
@@ -158,70 +153,25 @@ plans to give your customers options:
 
 5. Click **Save**.
 
-### Pro plan
+### Create the Pro and Business plans
 
-1. Click **Create Plan**.
-2. Fill in:
-   - **Plan Name**: `Pro`
-   - **Key**: `pro`
-3. Click **Create Draft**.
-4. Configure the rate cards:
+Repeat the same steps above to create the **Pro** and **Business** plans using
+the values in the table below. The only structural differences are the pricing
+amounts and that Pro and Business include a **Metadata Support** rate card (set
+**Pricing Model** to `Free` and **Entitlement** to `Boolean (on/off)`).
 
-   **Monthly Fee** rate card:
-   - **Pricing Model**: Flat fee
-   - **Billing Cadence**: Monthly
-   - **Payment Term**: In advance
-   - **Price**: $19.99
-   - **Entitlement**: No entitlement
+| Plan      | Key         | Monthly Fee | Included Requests | Overage Rate | Metadata Support |
+| --------- | ----------- | ----------- | ----------------- | ------------ | ---------------- |
+| Developer | `developer` | $9.99       | 1,000             | $0.10/req    | No               |
+| Pro       | `pro`       | $19.99      | 5,000             | $0.05/req    | Yes              |
+| Business  | `business`  | $29.99      | 10,000            | $0.01/req    | Yes              |
 
-   **api** rate card:
-   - **Pricing Model**: Tiered
-   - **Billing Cadence**: Monthly
-   - **Price Mode**: Graduated
-   - **Tier 1**: First Unit `0`, Last Unit `5000`, Unit Price $0, Flat Price $0
-   - **Tier 2**: First Unit `5001`, to infinity, Unit Price $0.05, Flat Price $0
-   - **Entitlement**: Metered (track usage)
-   - **Usage Limit**: `5000`
-   - **Soft limit**: enabled
+For the **api** rate card on each plan, set **Tier 1** Last Unit to the
+"Included Requests" value and **Tier 2** Unit Price to the "Overage Rate" value.
+The **Usage Limit** should match the "Included Requests" value. Enable **Soft
+limit** on all plans.
 
-   **Metadata Support** rate card:
-   - **Pricing Model**: Free
-   - **Entitlement**: Boolean (on/off)
-
-5. Click **Save**.
-
-### Business plan
-
-1. Click **Create Plan**.
-2. Fill in:
-   - **Plan Name**: `Business`
-   - **Key**: `business`
-3. Click **Create Draft**.
-4. Configure the rate cards:
-
-   **Monthly Fee** rate card:
-   - **Pricing Model**: Flat fee
-   - **Billing Cadence**: Monthly
-   - **Payment Term**: In advance
-   - **Price**: $29.99
-   - **Entitlement**: No entitlement
-
-   **api** rate card:
-   - **Pricing Model**: Tiered
-   - **Billing Cadence**: Monthly
-   - **Price Mode**: Graduated
-   - **Tier 1**: First Unit `0`, Last Unit `10000`, Unit Price $0, Flat Price $0
-   - **Tier 2**: First Unit `10001`, to infinity, Unit Price $0.01, Flat Price
-     $0
-   - **Entitlement**: Metered (track usage)
-   - **Usage Limit**: `10000`
-   - **Soft limit**: enabled
-
-   **Metadata Support** rate card:
-   - **Pricing Model**: Free
-   - **Entitlement**: Boolean (on/off)
-
-5. Click **Save**.
+![Tiered units setup](/media/monetization/tiered-units.png)
 
 ### Reorder your plans
 
@@ -266,61 +216,49 @@ update to your live key (`sk_live_...`).
 
 The monetization policy checks entitlements and tracks usage on every request.
 
-### Define the policy
+### Add the policy to your routes
 
-Open `config/policies.json` and add:
+Click on the **Code** tab and select **policies.json** from the **config**
+directory.
 
-```json
-{
-  "policies": [
-    {
-      "name": "monetization-v3",
-      "policyType": "monetization-inbound",
-      "handler": {
-        "module": "$import(@zuplo/runtime)",
-        "export": "MonetizationInboundPolicy",
-        "options": {
-          "meters": {
-            "api": 1
-          }
-        }
-      }
-    }
-  ]
-}
-```
+1. Click on **Create Policy > Create Inbound Policy**.
+2. Select the **Monetization** policy from the list of policies, and click
+   **Continue**.
 
-The `meters` field maps the meter slug (created in Step 4) to the number of
-units each request consumes. In the case of this guide, it's `api`.
+![Monetization policy in the policy picker list](/media/monetization/monetization-policy.png)
 
-### Apply the policy to routes
-
-Open `config/routes.oas.json` and add the policy to the routes you want to
-monetize:
+3. In the **Meters** configuration field, replace the default value `requests`
+   with `api` to match the meter you created in Step 4. This field maps the
+   meter slug to the number of units each request consumes.
 
 ```json
 {
-  "paths": {
-    "/todos": {
-      "get": {
-        "summary": "Get all todos",
-        "x-zuplo-route": {
-          "handler": {
-            "export": "urlForwardHandler",
-            "module": "$import(@zuplo/runtime)",
-            "options": {
-              "baseUrl": "https://todo.zuplo.io"
-            }
-          },
-          "policies": {
-            "inbound": ["monetization-v3"]
-          }
-        }
-      }
+  "export": "MonetizationInboundPolicy",
+  "module": "$import(@zuplo/runtime)",
+  "options": {
+    "cacheTtlSeconds": 60,
+    "meters": {
+      "api": 1 // default is "requests": 1
     }
   }
 }
 ```
+
+4. Click on **Create Policy**.
+
+### Apply the policy to routes
+
+Next, you need to apply the Monetization policy to some or all of your routes.
+
+1. Click on the three-dot menu on the **monetization-inbound** policy.
+2. Select **Apply Policy**.
+3. Choose individual routes that you want to count towards the metered requests,
+   or click **Select All** to add the policy to every route in the project.
+
+![Adding the policy to add routes](/media/monetization/policy-add-routes.png)
+
+4. Click on **Apply**.
+5. Click on **Save** in your project to publish the changes
 
 :::note
 
@@ -331,9 +269,8 @@ do not need a separate `api-key-auth` policy on monetized routes.
 
 ## Step 9: Deploy and test
 
-1. Commit and push your changes.
-2. Wait for the deployment to complete in the Zuplo Portal.
-3. Navigate to your Developer Portal.
+With the Monetization policy live on your API routes, you can now test the
+end-to-end flow.
 
 ### Subscribe to a plan
 
@@ -343,9 +280,11 @@ do not need a separate `api-key-auth` policy on monetized routes.
    [test card numbers](https://docs.stripe.com/testing) — no real charges are
    made.
 4. After the subscription is confirmed, you can see your usage dashboard and API
-   keys.
+   key.
 
-### Make API calls
+![The subscription page in the Developer Portal](/media/monetization/subscribed-state.png)
+
+### Test: Make API calls
 
 Copy the API key from your subscription and make requests:
 
@@ -355,10 +294,14 @@ curl --request GET \
   --header 'Authorization: Bearer <your-api-key>'
 ```
 
-Head back to the Developer Portal to see your `api` meter decrement with each
-call.
+Head back to the Developer Portal to see your usage dashboard update with each
+call. You should see the `api` meter count increase toward your plan's limit.
 
 ## Next steps
+
+Now you have run through the process of setting up Monetization on an example
+project, familiarize yourself with these other aspects and start integrating it
+into your own project.
 
 - [Billing Models](./billing-models.md) — Choose the right pricing strategy
 - [Private Plans](./private-plans.md) — Invite-only plans for specific users
