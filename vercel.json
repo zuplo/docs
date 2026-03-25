@@ -19,6 +19,16 @@
       "permanent": true
     },
     {
+      "source": "/docs/articles/monetization/concepts",
+      "destination": "/docs/articles/monetization/meters",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/monetization/api-reference",
+      "destination": "/docs/articles/monetization/api-access",
+      "permanent": true
+    },
+    {
       "source": "/docs/articles/local-development-api-keys",
       "destination": "/docs/articles/local-development-services",
       "permanent": true

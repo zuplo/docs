@@ -1,80 +1,112 @@
 ---
-title: Monetization API Overview
+title: API Monetization with Zuplo
 sidebar_label: Overview
 ---
 
-:::warning
+:::note{title="Beta"}
 
-The Monetization APIs are in preview and subject to change. Features and
-endpoints documented here may be modified as we refine the service based on
-customer feedback.
+API Monetization is in beta and free to try. The APIs are stable but should be
+evaluated in non-production environments first. To go to production, contact
+[sales@zuplo.com](mailto:sales@zuplo.com). Production pricing has not yet been
+announced.
 
 :::
 
-Zuplo's Monetization API is a first-party metering and billing solution built
-directly into the Zuplo platform. Developed from years of collaboration with our
-enterprise customers and design partners, this API distills the patterns and
-requirements we've seen across hundreds of API monetization implementations into
-a streamlined, production-ready service.
+Zuplo's API Monetization lets you charge for your API directly from your gateway
+— no external metering services, no webhook spaghetti, no state sync headaches.
+Define your pricing, connect Stripe, and start billing. Zuplo handles metering,
+quota enforcement, and subscription management as a single integrated system.
 
-## Built from Real-World Experience
+## Why monetize at the gateway?
 
-While Zuplo continues to support
-[integrations with third-party billing platforms](../monetization.mdx) like
-Amberflo, Moesif, and Stripe, we've learned that many teams need a tightly
-integrated, API-native metering solution. The Monetization API brings the
-capabilities we've built for
-[enterprise customers](../monetization-enterprise.mdx) into a self-service API
-that any Zuplo user can adopt.
+Most teams attempting API monetization cobble together three separate systems: a
+metering service to count usage, a billing platform to charge customers, and
+custom gateway logic to enforce limits. These systems inevitably drift apart. A
+customer exceeds their quota but metering hasn't synced yet. A subscription
+cancels in Stripe but the gateway still grants access. A webhook fails silently
+and invoices come out wrong.
 
-This API reflects lessons learned from:
+Zuplo eliminates this by making the gateway the single source of truth. Every
+request that hits your API is metered, enforced, and billed through one system.
+When a customer's quota runs out, they get a `429` immediately — not five
+minutes later when a batch job catches up.
 
-- **Enterprise deployments** tracking billions of API calls monthly
-- **Design partners** who shaped the feature set through real usage
-- **Production workloads** that validated the architecture at scale
+## Core concepts
 
-## What the Monetization API Provides
+Zuplo Monetization is built on four primitives:
 
-- **Usage metering** - Track API calls, tokens, bytes, or any custom metric
-- **Product catalog** - Define features and plans that map to your pricing page
-- **Real-time queries** - Check usage instantly for quota enforcement or
-  customer dashboards
-- **Subscription management** - Connect usage to customers and billing periods
+**[Meters](./meters.mdx)** count things. Every API call, every token consumed,
+every byte transferred. You define what to count and how to aggregate it (count
+events or sum a value from the response).
 
-## Core Concepts
+**[Features](./features.mdx)** connect meters to your product catalog. A metered
+feature like "API Calls" links to a meter and enables quota tracking. A static
+feature like "Priority Support" is a simple on/off toggle — the customer either
+has it or doesn't.
 
-The Monetization API is built around three primary resources that form your
-**Product Catalog**:
+**[Plans](./plans.mdx)** are subscription tiers your customers purchase. Each
+plan contains one or more phases with rate cards that define pricing and
+entitlements. Plans support versioning, multiple currencies, and configurable
+billing cadences (monthly, quarterly, annual).
 
-### Meters
+**[Rate cards](./rate-cards.mdx)** are the pricing atoms within a plan phase.
+Each rate card ties a feature to a price and specifies the entitlement: how much
+the customer gets, whether the limit is hard (blocked at quota) or soft (overage
+billing), and what [pricing model](./pricing-models.mdx) applies (flat fee,
+per-unit, tiered, volume, or package).
 
-Meters aggregate usage data from your API. You define an event type to watch and
-a value to extract, and the meter sums those values across time windows and
-customers. Use meters to track API calls, tokens processed, bytes transferred,
-or any numeric metric.
+## Supported billing models
 
-[Learn more about Meters →](./meters.mdx)
+| Model                    | How it works                                                                    | Example                                       |
+| ------------------------ | ------------------------------------------------------------------------------- | --------------------------------------------- |
+| **Fixed monthly quotas** | Flat monthly price with included allowance. Hard limit at quota.                | $99/mo for 10,000 requests                    |
+| **Pay-as-you-go**        | No upfront cost. Bill in arrears for actual usage.                              | $0.01 per request, billed monthly             |
+| **Quotas with overages** | Monthly price for base allowance. Overage billed per-unit in arrears.           | $99/mo for 10K requests + $0.005/request over |
+| **Credits / tokens**     | Prepaid credit bundles that burn down with usage. Service stops when exhausted. | Buy 50,000 credits for $49                    |
 
-### Features
+Plans can combine multiple billing models and support free tiers, free trials
+with automatic conversion to paid, and multiple subscriptions per customer.
 
-Features describe what your API offers. These are the capabilities in your API
-product - access to specific endpoints, higher rate limits, premium response
-formats, or advanced functionality. Each feature can be tied to a meter to track
-consumption.
+## What you get
 
-[Learn more about Features →](./features.mdx)
+- **Built-in metering** — Count requests, tokens, bytes, or any custom
+  dimension. No external metering service required.
+- **Real-time quota enforcement** — Customers hitting their limit get a
+  `429 Too Many Requests` response instantly, not after a batch sync.
+- **Stripe billing integration** — Subscriptions, invoicing, and payment
+  collection handled by Stripe. Zuplo keeps access state synchronized
+  automatically.
+- **Self-serve Developer Portal** — Pricing page, plan selection, checkout,
+  subscription management, usage dashboards, and API key management built into
+  the Zudoku-powered portal.
+- **Programmable everything** — Custom policies, webhooks, and the Zuplo
+  Developer API give you full control when the defaults aren't enough.
+- **Trial and phase support** — Model free trials that auto-convert to paid
+  plans without writing transition logic.
 
-### Plans
+## Getting started
 
-Plans are subscription tiers that package features together. They represent the
-rows on your pricing page - Free, Pro, Enterprise - each with different feature
-access and usage limits.
+Follow the [Quickstart Guide](./quickstart.md) to go from zero to a monetized
+API in under 30 minutes. You'll create meters, define a plan with pricing, wire
+up Stripe, and configure your gateway to enforce quotas.
 
-[Learn more about Plans →](./plans.mdx)
+## Documentation map
 
-## Next Steps
-
-- [API Access](./api-access.mdx) - Learn about buckets and authentication
-- [Meters](./meters.mdx) - Track usage data from your API
-- [Features](./features.mdx) - Define the capabilities your API offers
-- [Plans](./plans.mdx) - Package features into subscription tiers
+| Document                                                  | What it covers                                           |
+| --------------------------------------------------------- | -------------------------------------------------------- |
+| [Quickstart](./quickstart.md)                             | End-to-end setup in 30 minutes                           |
+| [Meters](./meters.mdx)                                    | How meters track usage dimensions                        |
+| [Features](./features.mdx)                                | Connecting meters to your product catalog                |
+| [Plans](./plans.mdx)                                      | Plan structure, phases, lifecycle, and publishing        |
+| [Rate Cards](./rate-cards.mdx)                            | Pricing and entitlements within plans                    |
+| [Pricing Models](./pricing-models.mdx)                    | Flat, per-unit, tiered, volume, and package pricing      |
+| [Billing Models Guide](./billing-models.md)               | Choosing the right pricing strategy for your business    |
+| [Stripe Integration](./stripe-integration.md)             | Connecting Stripe and managing payments                  |
+| [Developer Portal Setup](./developer-portal.md)           | Configuring the self-serve portal for your customers     |
+| [Monetization Policy Reference](./monetization-policy.md) | Configuring the `MonetizationInboundPolicy` per-route    |
+| [API Access](./api-access.mdx)                            | Authentication, buckets, and API reference links         |
+| [Subscription Lifecycle](./subscription-lifecycle.md)     | Managing trials, upgrades, downgrades, and cancellations |
+| [Private Plans](./private-plans.md)                       | Invite-only plans for specific users                     |
+| [Tax Collection](./tax-collection.md)                     | Enabling VAT, sales tax, or GST via Stripe Tax           |
+| [Plan Examples](./plan-examples.mdx)                      | Real-world plan configurations                           |
+| [Troubleshooting](./troubleshooting.md)                   | Common issues, debugging, and FAQ                        |

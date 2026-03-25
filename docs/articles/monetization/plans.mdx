@@ -1,13 +1,14 @@
 ---
 title: Plans
-sidebar_label: Overview
+sidebar_label: Plans
 ---
 
-:::warning
+:::note{title="Beta"}
 
-The Monetization APIs are in preview and subject to change. Features and
-endpoints documented here may be modified as we refine the service based on
-customer feedback.
+API Monetization is in beta and free to try. The APIs are stable but should be
+evaluated in non-production environments first. To go to production, contact
+[sales@zuplo.com](mailto:sales@zuplo.com). Production pricing has not yet been
+announced.
 
 :::
 
@@ -20,24 +21,21 @@ access and usage limits. Plans define what customers get when they subscribe.
 Plans follow a hierarchical structure where each level defines a specific aspect
 of your pricing:
 
-<Mermaid
-  chart={`flowchart TD
-    Plan[Plan]
-    Phases[Phases]
-    RateCards[Rate Cards]
-    Price[Price]
-    Entitlement[Entitlements]
-    Feature[Feature]
-    Meter[Meter]
-
-    Plan --> Phases
-    Phases --> RateCards
-    RateCards --> Price
-    RateCards --> Entitlement
-    Entitlement --> Feature
-    Feature --> Meter`}
-
-/>
+<Diagram height="h-96">
+  <DiagramNode id="plan">Plan</DiagramNode>
+  <DiagramNode id="phase">Phase</DiagramNode>
+  <DiagramNode id="ratecard">Rate Card</DiagramNode>
+  <DiagramNode id="price">Price</DiagramNode>
+  <DiagramNode id="entitlement">Entitlement</DiagramNode>
+  <DiagramNode id="feature">Feature</DiagramNode>
+  <DiagramNode id="meter">Meter</DiagramNode>
+  <DiagramEdge from="plan" to="phase" />
+  <DiagramEdge from="phase" to="ratecard" />
+  <DiagramEdge from="ratecard" to="price" />
+  <DiagramEdge from="ratecard" to="entitlement" />
+  <DiagramEdge from="entitlement" to="feature" />
+  <DiagramEdge from="feature" to="meter" />
+</Diagram>
 
 | Entity          | Description                                           |
 | --------------- | ----------------------------------------------------- |
@@ -194,15 +192,16 @@ fee. Additional requests are billed at $0.01 each (soft limit allows overage).
 
 ## Plan Properties
 
-| Property         | Required | Description                                                   |
-| ---------------- | -------- | ------------------------------------------------------------- |
-| `key`            | Yes      | Unique identifier for the plan                                |
-| `name`           | Yes      | Human-readable display name                                   |
-| `currency`       | Yes      | Three-letter ISO currency code (e.g., `USD`)                  |
-| `billingCadence` | Yes      | Billing period as ISO 8601 duration (e.g., `P1M` for monthly) |
-| `phases`         | Yes      | Array of plan phases with rate cards                          |
-| `description`    | No       | Detailed description of the plan                              |
-| `metadata`       | No       | Custom key-value pairs for your own use                       |
+| Property          | Required | Description                                                   |
+| ----------------- | -------- | ------------------------------------------------------------- |
+| `key`             | Yes      | Unique identifier for the plan                                |
+| `name`            | Yes      | Human-readable display name                                   |
+| `currency`        | Yes      | Three-letter ISO currency code (e.g., `USD`)                  |
+| `billingCadence`  | Yes      | Billing period as ISO 8601 duration (e.g., `P1M` for monthly) |
+| `phases`          | Yes      | Array of plan phases with rate cards                          |
+| `description`     | No       | Detailed description of the plan                              |
+| `metadata`        | No       | Custom key-value pairs for your own use                       |
+| `proRatingConfig` | No       | Proration settings (see below)                                |
 
 ## Phase Properties
 
@@ -212,6 +211,23 @@ fee. Additional requests are billed at $0.01 each (soft limit allows overage).
 | `name`      | Yes      | Human-readable display name                                           |
 | `duration`  | No       | ISO 8601 duration (e.g., `P1W` for 1 week). Omit for the final phase. |
 | `rateCards` | Yes      | Array of rate cards defining pricing and entitlements                 |
+
+## Proration
+
+Plans support automatic proration when customers upgrade or downgrade
+mid-billing-period. Enable proration with the `proRatingConfig` property:
+
+```json
+{
+  "proRatingConfig": {
+    "enabled": true,
+    "mode": "max_consumption_based"
+  }
+}
+```
+
+When proration is enabled, charges are automatically adjusted based on the
+portion of the billing period remaining at the time of the plan change.
 
 ## Publishing a Plan
 
