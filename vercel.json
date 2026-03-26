@@ -1322,6 +1322,21 @@
       "source": "/docs/articles/custom-deployment-strategies{/}?",
       "destination": "/docs/articles/custom-ci-cd",
       "permanent": true
+    },
+    {
+      "source": "/docs/articles/monetization{/}?",
+      "destination": "/docs/articles/monetization-integrations",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/monetization-enterprise{/}?",
+      "destination": "/docs/articles/monetization-custom",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/stripe-monetization-plugin{/}?",
+      "destination": "/docs/articles/monetization",
+      "permanent": true
     }
   ],
   "rewrites": [
