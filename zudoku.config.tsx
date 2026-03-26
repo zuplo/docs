@@ -40,20 +40,7 @@ const config: ZudokuConfig = {
     generator: "Zudoku",
     favicon: "https://cdn.zuplo.com/www/favicon.svg",
   },
-  redirects: [
-    {
-      from: "/docs/articles/monetization",
-      to: "/docs/articles/monetization-integrations",
-    },
-    {
-      from: "/docs/articles/monetization-enterprise",
-      to: "/docs/articles/monetization-custom",
-    },
-    {
-      from: "/docs/articles/stripe-monetization-plugin",
-      to: "/docs/articles/monetization",
-    },
-  ],
+  redirects: [],
   theme: {
     dark: {
       primary: "316 91% 45%",
