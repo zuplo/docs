@@ -450,7 +450,11 @@ export const apiGateway: Navigation = [
     type: "category",
     label: "Monetization",
     items: [
-      "articles/monetization/index",
+      {
+        type: "doc",
+        file: "articles/monetization/index",
+        path: "articles/monetization",
+      },
       "articles/monetization/quickstart",
       {
         type: "category",
