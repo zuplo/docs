@@ -1324,11 +1324,6 @@
       "permanent": true
     },
     {
-      "source": "/docs/articles/monetization{/}?",
-      "destination": "/docs/articles/monetization-integrations",
-      "permanent": true
-    },
-    {
       "source": "/docs/articles/monetization-enterprise{/}?",
       "destination": "/docs/articles/monetization-custom",
       "permanent": true
