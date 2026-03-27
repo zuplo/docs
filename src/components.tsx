@@ -33,6 +33,7 @@ import {
 import { Faq, FaqItem } from "./components/Faq.js";
 import { GuidesOverview } from "./components/GuidesOverview.js";
 import { RequestLifecycle } from "./components/RequestLifecycle.js";
+import { DocsHome } from "./components/DocsHome.js";
 
 const iconStyle = { display: "inline", verticalAlign: "-0.125em" };
 
@@ -134,4 +135,5 @@ export const mdxComponents = {
   FaqItem,
   GuidesOverview,
   RequestLifecycle,
+  DocsHome,
 };
