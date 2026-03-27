@@ -172,9 +172,20 @@ plans to give your customers options.
 
 ### Create additional plans
 
-Repeat the same steps above to create the **Pro** plan using the values in the
-table below. The only structural differences are the pricing amounts and that
-Pro includes a **Metadata Support** rate card (set **Pricing Model** to `Free`
+You don't have to complete all the above steps again to create the next plan.
+You can duplicate a plan you already created.
+
+Click the **Pricing** tab in the left sidebar, then on the **...** context menu
+on the right of the Developer Plan.
+
+![The duplicate plan feature is a huge time saver](/media/monetization/duplicate-plan.png)
+
+This will create a copy of the Developer plan that you can rename.
+
+Using the values in the table below, set up a new plan named **Pro**.
+
+The only structural differences are the pricing, request amounts, and the
+addition of a **Metadata Support** rate card (set **Pricing Model** to `Free`
 and **Entitlement** to `Boolean (on/off)`).
 
 | Plan      | Key         | Monthly Fee | Included Requests | Overage Rate | Metadata Support |
