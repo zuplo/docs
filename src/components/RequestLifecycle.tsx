@@ -328,9 +328,9 @@ export function RequestLifecycle() {
 
   return (
     <div className="not-prose my-8">
-      <div className="flex flex-col lg:flex-row items-start gap-0">
+      <div className="flex flex-col lg:flex-row items-stretch gap-0">
         {/* Pipeline (vertical) */}
-        <div className="lg:w-[230px] shrink-0">
+        <div className="lg:w-[240px] shrink-0">
           {stages.map((stage, i) => {
             const c = colors[stage.color];
             const isSelected = selected.id === stage.id;
@@ -362,7 +362,7 @@ export function RequestLifecycle() {
 
                 {/* Label */}
                 <div
-                  className={`pl-2.5 flex items-center ${isEndpoint ? "py-1.5" : "py-0.5"}`}
+                  className={`pl-3 flex items-center ${isEndpoint ? "py-2" : "py-1"}`}
                 >
                   {isEndpoint ? (
                     <span className="text-[11px] font-medium text-gray-400 dark:text-gray-500">
@@ -373,31 +373,34 @@ export function RequestLifecycle() {
                       <button
                         onClick={() => setSelected(stage)}
                         className={[
-                          "w-[190px] px-3 py-2 rounded-lg border text-left transition-all duration-150 cursor-pointer",
-                          isSelected ? c.pillActive : c.pillBg,
+                          "w-[195px] px-3.5 py-2.5 rounded-lg border text-left transition-all duration-150 cursor-pointer",
+                          isSelected
+                            ? "bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 shadow-sm"
+                            : "bg-transparent border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50",
                         ].join(" ")}
                       >
                         <span
-                          className={`font-semibold block leading-tight text-[13px] ${c.text}`}
+                          className={[
+                            "font-semibold block leading-tight text-[13px]",
+                            isSelected
+                              ? c.text
+                              : "text-gray-700 dark:text-gray-300",
+                          ].join(" ")}
                         >
                           {stage.label}
                         </span>
-                        {stage.scope && (
-                          <span className="text-[10px] text-gray-400 dark:text-gray-500 leading-none">
-                            {stage.scope}
-                            {stage.canShortCircuit && (
-                              <span className="ml-1 opacity-60">
-                                &middot; can short-circuit
-                              </span>
-                            )}
-                          </span>
-                        )}
+                        <span className="text-[10px] text-gray-400 dark:text-gray-500 leading-none">
+                          {stage.scope}
+                          {stage.canShortCircuit && (
+                            <span className="ml-1 opacity-60">
+                              &middot; can short-circuit
+                            </span>
+                          )}
+                        </span>
                       </button>
                       {/* Connector line to panel */}
                       {isSelected && (
-                        <div
-                          className={`hidden lg:block h-[2px] w-4 ${cm.connector}`}
-                        />
+                        <div className="hidden lg:block h-[2px] w-5 bg-gray-200 dark:bg-gray-700" />
                       )}
                     </div>
                   )}
@@ -407,41 +410,39 @@ export function RequestLifecycle() {
           })}
         </div>
 
-        {/* Detail panel (right side, always visible) */}
-        <div className="flex-1 min-w-0 mt-4 lg:mt-0">
+        {/* Detail panel (right side, fills height) */}
+        <div className="flex-1 min-w-0 mt-4 lg:mt-0 flex">
           <div
-            className={`rounded-xl border-l-4 border border-gray-100 dark:border-gray-800 ${cm.panelAccent} bg-white dark:bg-gray-900/50 p-6 lg:sticky lg:top-4 transition-all duration-200 shadow-sm`}
+            className={`rounded-xl border-l-4 border border-gray-200 dark:border-gray-700 ${cm.panelAccent} bg-white dark:bg-gray-900/50 p-8 transition-all duration-200 flex-1`}
           >
-            <div className="mb-5">
-              <div className="flex items-center gap-2.5">
+            <div className="mb-6">
+              <div className="flex items-center gap-3">
                 <h3 className={`font-bold text-xl m-0 ${cm.text}`}>
                   {selected.label}
                 </h3>
                 {selected.scope && (
-                  <span
-                    className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${cm.badge}`}
-                  >
+                  <span className="text-[10px] font-medium px-2 py-0.5 rounded-full border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">
                     {selected.scope}
                   </span>
                 )}
               </div>
             </div>
 
-            <div className="mb-5">
-              <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-2 border-b border-gray-100 dark:border-gray-800 pb-1">
+            <div className="mb-6">
+              <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-3 border-b border-gray-100 dark:border-gray-800 pb-1.5">
                 When to use
               </h4>
-              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed m-0">
+              <p className="text-[15px] text-gray-700 dark:text-gray-300 leading-relaxed m-0">
                 {selected.why}
               </p>
             </div>
 
             {selected.details && (
-              <div className="mb-5">
-                <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-2 border-b border-gray-100 dark:border-gray-800 pb-1">
+              <div className="mb-6">
+                <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-3 border-b border-gray-100 dark:border-gray-800 pb-1.5">
                   How it works
                 </h4>
-                <div className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed [&_p]:mb-2 [&_p:last-child]:mb-0 [&_code]:text-xs [&_code]:bg-gray-100 [&_code]:dark:bg-gray-800 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded-md [&_code]:font-mono">
+                <div className="text-[15px] text-gray-600 dark:text-gray-400 leading-relaxed [&_p]:mb-3 [&_p:last-child]:mb-0 [&_code]:text-[13px] [&_code]:bg-gray-100 [&_code]:dark:bg-gray-800 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded-md [&_code]:font-mono">
                   {selected.details}
                 </div>
               </div>
@@ -449,15 +450,15 @@ export function RequestLifecycle() {
 
             {selected.links.length > 0 && (
               <div>
-                <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-2.5 border-b border-gray-100 dark:border-gray-800 pb-1">
+                <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-3 border-b border-gray-100 dark:border-gray-800 pb-1.5">
                   Learn more
                 </h4>
-                <div className="flex flex-wrap gap-x-4 gap-y-1.5">
+                <div className="flex flex-wrap gap-x-5 gap-y-2">
                   {selected.links.map((link) => (
                     <a
                       key={link.href}
                       href={link.href}
-                      className={`text-sm font-medium no-underline hover:underline ${cm.link}`}
+                      className={`text-[15px] font-medium no-underline hover:underline ${cm.link}`}
                     >
                       {link.label} &rarr;
                     </a>
