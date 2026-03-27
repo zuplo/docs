@@ -412,58 +412,62 @@ export function RequestLifecycle() {
 
         {/* Detail panel (right side, fills height) */}
         <div className="flex-1 min-w-0 mt-4 lg:mt-0 flex">
-          <div className="rounded-xl border border-gray-150 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-900/30 p-8 transition-all duration-200 flex-1">
-            <div className="mb-6">
-              <div className="flex items-center gap-3">
-                <h3 className={`font-bold text-xl m-0 ${cm.text}`}>
-                  {selected.label}
-                </h3>
-                {selected.scope && (
-                  <span className="text-[10px] font-medium px-2 py-0.5 rounded-full border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">
-                    {selected.scope}
-                  </span>
-                )}
+          <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 overflow-hidden transition-all duration-200 flex-1">
+            {/* Colored top bar */}
+            <div className={`h-1 ${cm.dot}`} />
+            <div className="p-8">
+              <div className="mb-6">
+                <div className="flex items-center gap-3">
+                  <h3 className="font-bold text-xl m-0 text-gray-900 dark:text-gray-100">
+                    {selected.label}
+                  </h3>
+                  {selected.scope && (
+                    <span className="text-[10px] font-medium px-2 py-0.5 rounded-full border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">
+                      {selected.scope}
+                    </span>
+                  )}
+                </div>
               </div>
-            </div>
 
-            <div className="mb-6">
-              <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-3 border-b border-gray-100 dark:border-gray-800 pb-1.5">
-                When to use
-              </h4>
-              <p className="text-[15px] text-gray-700 dark:text-gray-300 leading-relaxed m-0">
-                {selected.why}
-              </p>
-            </div>
-
-            {selected.details && (
               <div className="mb-6">
                 <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-3 border-b border-gray-100 dark:border-gray-800 pb-1.5">
-                  How it works
+                  When to use
                 </h4>
-                <div className="text-[15px] text-gray-600 dark:text-gray-400 leading-relaxed [&_p]:mb-3 [&_p:last-child]:mb-0 [&_code]:text-[13px] [&_code]:bg-gray-100 [&_code]:dark:bg-gray-800 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded-md [&_code]:font-mono">
-                  {selected.details}
-                </div>
+                <p className="text-[15px] text-gray-700 dark:text-gray-300 leading-relaxed m-0">
+                  {selected.why}
+                </p>
               </div>
-            )}
 
-            {selected.links.length > 0 && (
-              <div>
-                <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-3 border-b border-gray-100 dark:border-gray-800 pb-1.5">
-                  Learn more
-                </h4>
-                <div className="flex flex-wrap gap-x-5 gap-y-2">
-                  {selected.links.map((link) => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      className={`text-[15px] font-medium no-underline hover:underline ${cm.link}`}
-                    >
-                      {link.label} &rarr;
-                    </a>
-                  ))}
+              {selected.details && (
+                <div className="mb-6">
+                  <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-3 border-b border-gray-100 dark:border-gray-800 pb-1.5">
+                    How it works
+                  </h4>
+                  <div className="text-[15px] text-gray-600 dark:text-gray-400 leading-relaxed [&_p]:mb-3 [&_p:last-child]:mb-0 [&_code]:text-[13px] [&_code]:bg-gray-100 [&_code]:dark:bg-gray-800 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded-md [&_code]:font-mono">
+                    {selected.details}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+
+              {selected.links.length > 0 && (
+                <div>
+                  <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-3 border-b border-gray-100 dark:border-gray-800 pb-1.5">
+                    Learn more
+                  </h4>
+                  <div className="flex flex-wrap gap-x-5 gap-y-2">
+                    {selected.links.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        className={`text-[15px] font-medium no-underline hover:underline ${cm.link}`}
+                      >
+                        {link.label} &rarr;
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
