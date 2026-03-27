@@ -345,11 +345,9 @@ export function RequestLifecycle() {
               >
                 {/* Vertical line + dot */}
                 <div className="flex flex-col items-center w-6 shrink-0">
-                  {i > 0 && (
-                    <div
-                      className={`w-[2px] flex-1 ${colors[stages[i - 1].color].line}`}
-                    />
-                  )}
+                  <div
+                    className={`w-[2px] flex-1 ${i === 0 ? "bg-gray-200 dark:bg-gray-700" : colors[stages[i - 1].color].line}`}
+                  />
                   <div
                     className={[
                       "rounded-full shrink-0",
@@ -357,7 +355,9 @@ export function RequestLifecycle() {
                       c.dot,
                     ].join(" ")}
                   />
-                  {!isLast && <div className={`w-[2px] flex-1 ${c.line}`} />}
+                  <div
+                    className={`w-[2px] flex-1 ${isLast ? "bg-gray-200 dark:bg-gray-700" : c.line}`}
+                  />
                 </div>
 
                 {/* Label */}
