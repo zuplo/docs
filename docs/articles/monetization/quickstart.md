@@ -115,7 +115,7 @@ Feature** for each of the following:
 
 | Name             | Key                | Linked Meter | Purpose                       |
 | ---------------- | ------------------ | ------------ | ----------------------------- |
-| API Requests     | `api_requests`     | Requests     | Usage-based (linked to meter) |
+| API Requests     | `requests`         | Requests     | Usage-based (linked to meter) |
 | Monthly Fee      | `monthly_fee`      | —            | Flat-rate billing             |
 | Metadata Support | `metadata_support` | —            | Boolean on/off feature        |
 
