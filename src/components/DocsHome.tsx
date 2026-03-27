@@ -175,16 +175,11 @@ const sections: Section[] = [
 export function DocsHome() {
   return (
     <div className="not-prose">
-      {/* Hero */}
-      <div className="mb-10">
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-100 mb-3">
-          Zuplo Documentation
-        </h1>
-        <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl">
-          Build, secure, and scale APIs with a fully-managed, programmable API
-          gateway. Deploy globally in seconds with Git-based workflows.
-        </p>
-      </div>
+      {/* Subtitle */}
+      <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mb-10">
+        Build, secure, and scale APIs with a fully-managed, programmable API
+        gateway. Deploy globally in seconds with Git-based workflows.
+      </p>
 
       {/* Product cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-12">
