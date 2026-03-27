@@ -390,9 +390,8 @@ ecosystem and standard web APIs.
 
 **Apigee analytics must be replaced.** Apigee's built-in analytics dashboards
 and custom reports do not migrate. Zuplo provides built-in analytics and
-integrates with observability platforms like [Datadog](./log-plugins/datadog.md)
-and [Google Cloud Logging](./log-plugins/gcp-cloud-logging.md) for advanced
-reporting.
+integrates with observability platforms like [Datadog](./log-plugin-datadog.mdx)
+and [Google Cloud Logging](./log-plugin-gcp.mdx) for advanced reporting.
 
 **Test with representative traffic before cutover.** Use Zuplo's
 [branch-based deployments](./branch-based-deployments.md) to create a preview
