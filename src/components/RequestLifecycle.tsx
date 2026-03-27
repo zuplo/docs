@@ -440,7 +440,9 @@ function DetailContent({
 }
 
 export function RequestLifecycle() {
-  const [selected, setSelected] = useState<Stage>(interactiveStages[0]);
+  const defaultStage =
+    interactiveStages.find((s) => s.id === "inbound") ?? interactiveStages[0];
+  const [selected, setSelected] = useState<Stage>(defaultStage);
   const cm = colors[selected.color];
 
   return (
