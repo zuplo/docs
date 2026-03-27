@@ -330,7 +330,7 @@ export function RequestLifecycle() {
     <div className="not-prose my-8">
       <div className="flex flex-col lg:flex-row items-stretch gap-0">
         {/* Pipeline (vertical) */}
-        <div className="lg:w-[240px] shrink-0">
+        <div className="lg:w-[240px] shrink-0 flex flex-col">
           {stages.map((stage, i) => {
             const c = colors[stage.color];
             const isSelected = selected.id === stage.id;
@@ -420,7 +420,7 @@ export function RequestLifecycle() {
         </div>
 
         {/* Detail panel (right side, fills height) */}
-        <div className="flex-1 min-w-0 mt-4 lg:mt-0 flex">
+        <div className="flex-1 min-w-0 mt-4 lg:mt-0 flex flex-col">
           <div
             className={`rounded-xl border-2 ${cm.panelBorder} bg-white dark:bg-gray-900/50 transition-all duration-200 flex-1`}
           >
