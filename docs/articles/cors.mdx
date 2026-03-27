@@ -282,5 +282,166 @@ is the single source of truth for CORS configuration.
   sent as the `Access-Control-Allow-Origin` header value. Zuplo reflects the
   actual requesting origin instead, which is compatible with credentials.
 
+### Backend CORS headers conflicting with Zuplo
+
+If your backend service sends its own `Access-Control-*` headers, they can
+conflict with the headers Zuplo sets from the CORS policy. Zuplo strips existing
+CORS headers from upstream responses before applying the configured policy, but
+if you have custom outbound policies that interact with the response, backend
+CORS headers may leak through.
+
+To prevent conflicts, use the
+[Remove Response Headers](../policies/remove-headers-outbound.mdx) outbound
+policy to explicitly strip CORS headers from your backend response:
+
+```json title="config/policies.json"
+{
+  "name": "strip-backend-cors-headers",
+  "policyType": "remove-headers-outbound",
+  "handler": {
+    "export": "RemoveHeadersOutboundPolicy",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "headers": [
+        "access-control-allow-origin",
+        "access-control-allow-methods",
+        "access-control-allow-headers",
+        "access-control-expose-headers",
+        "access-control-allow-credentials",
+        "access-control-max-age"
+      ]
+    }
+  }
+}
+```
+
+Alternatively, disable CORS on your backend entirely and let Zuplo be the single
+source of truth for CORS configuration.
+
+### Browser shows "CORS error" but the real issue is a 401 or 403
+
+When an API request fails with a `401 Unauthorized` or `403 Forbidden` response,
+the browser often reports it as a CORS error. This happens because the error
+response may not include the required `Access-Control-Allow-Origin` header, so
+the browser blocks access to the response entirely and surfaces a generic CORS
+message.
+
+This is especially common when an inbound policy (such as API key
+authentication) rejects the request before the handler runs. The preflight
+`OPTIONS` request succeeds because it runs before any policies, but the actual
+`GET` or `POST` request gets rejected by the authentication policy.
+
+To diagnose this:
+
+1. Check the request in the browser's Network tab. Look at the actual HTTP
+   status code -- if it is `401` or `403`, the problem is authentication, not
+   CORS.
+2. Test the same request with `curl` and include an `Origin` header to see the
+   full response:
+   ```bash
+   curl -v -H "Origin: https://app.example.com" \
+     -H "Authorization: Bearer YOUR_TOKEN" \
+     https://your-api.zuplo.dev/your-route
+   ```
+3. Fix the underlying authentication issue. Once the request returns a
+   successful response, the CORS headers are included and the browser error goes
+   away.
+
+### CORS headers lost in custom outbound policies
+
+When a custom outbound policy creates a new `Response` object, CORS headers that
+Zuplo added can be lost if the new response does not carry them forward. Zuplo
+applies CORS headers after the handler runs but before outbound policies
+execute, so any outbound policy that replaces the response must preserve the
+existing headers.
+
+Always pass the original response headers when constructing a new `Response`:
+
+```ts title="modules/my-outbound-policy.ts"
+export default async function (
+  response: Response,
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  const data = await response.json();
+
+  // Transform the data as needed
+  data.transformed = true;
+
+  // Preserve headers (including CORS headers) from the original response
+  return new Response(JSON.stringify(data), {
+    status: response.status,
+    headers: response.headers,
+  });
+}
+```
+
+If you need to modify headers, copy them into a new `Headers` object first:
+
+```ts
+const headers = new Headers(response.headers);
+headers.set("x-custom-header", "value");
+
+return new Response(body, {
+  status: response.status,
+  headers,
+});
+```
+
+Avoid constructing a `Response` with no headers argument or with an empty
+`Headers` object, as this drops all CORS headers and causes the browser to block
+the response.
+
+### CORS on localhost during development
+
+When developing locally, the browser enforces CORS even for `localhost`. Common
+issues include:
+
+- **Port mismatch**: `http://localhost:3000` and `http://localhost:5173` are
+  different origins. Add each port you use to `allowedOrigins`.
+- **Protocol mismatch**: `http://localhost:3000` and `https://localhost:3000`
+  are different origins. Make sure the protocol matches.
+- **Missing localhost**: If you use a custom CORS policy without `localhost` in
+  `allowedOrigins`, browser requests from your local development server are
+  blocked.
+
+For development, either add your local origins to a custom CORS policy:
+
+```json
+"allowedOrigins": [
+  "https://app.example.com",
+  "http://localhost:3000",
+  "http://localhost:5173"
+]
+```
+
+Or use [environment variables](./environment-variables.mdx) to keep production
+and development origins separate:
+
+```json title="config/policies.json"
+{
+  "corsPolicies": [
+    {
+      "name": "my-cors-policy",
+      "allowedOrigins": "$env(ALLOWED_ORIGINS)"
+    }
+  ]
+}
+```
+
+Then set different values per environment:
+
+- **Production**: `ALLOWED_ORIGINS=https://app.example.com`
+- **Development**:
+  `ALLOWED_ORIGINS=https://app.example.com, http://localhost:3000`
+
+:::tip
+
+Use the `anything-goes` built-in policy for quick local testing when you do not
+need to validate CORS behavior. Switch to a custom policy before deploying to
+production.
+
+:::
+
 For more details on CORS, see the MDN documentation:
 [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
