@@ -5,8 +5,6 @@ import cliSidebar from "./sidebar.cli.json";
 const policies: Navigation = [
   "policies/overview",
   "articles/policies",
-  "articles/multiple-auth-policies",
-  "articles/graphql-security",
   {
     type: "category",
     label: "Authentication",
@@ -48,7 +46,6 @@ const policies: Navigation = [
     items: [
       "policies/rate-limit-inbound",
       "policies/complex-rate-limit-inbound",
-      "articles/per-user-rate-limits-using-db",
       "policies/audit-log-inbound",
       "policies/request-validation-inbound",
       "policies/web-bot-auth-inbound",
@@ -159,6 +156,15 @@ const policies: Navigation = [
       "articles/custom-audit-log-policy",
     ],
   },
+  {
+    type: "category",
+    label: "Guides",
+    items: [
+      "articles/multiple-auth-policies",
+      "articles/graphql-security",
+      "articles/per-user-rate-limits-using-db",
+    ],
+  },
 ];
 
 const programming: Navigation = [
@@ -200,7 +206,6 @@ const programming: Navigation = [
       "programmable-api/context-data",
       "programmable-api/background-loader",
       "programmable-api/background-dispatcher",
-      "articles/lazy-load-configuration-into-cache",
     ],
   },
   {
@@ -265,7 +270,6 @@ const devPortalItems: Navigation = [
   "dev-portal/local-development",
   "dev-portal/updating",
   "dev-portal/node-modules",
-  "articles/rick-and-morty-api-developer-portal-example",
   ...(zudokuSidebar as Navigation).map((item) => {
     if (typeof item === "object" && item.type === "category") {
       if (item.label === "Guides") {
@@ -274,6 +278,7 @@ const devPortalItems: Navigation = [
           items: [
             ...item.items,
             "dev-portal/dev-portal-create-consumer-on-auth",
+            "articles/rick-and-morty-api-developer-portal-example",
           ],
         };
       }
@@ -323,65 +328,14 @@ export const documentation: Navigation = [
     label: "Development",
     items: [
       "articles/development-options",
-      {
-        type: "category",
-        label: "Routing & OpenAPI",
-        items: [
-          "articles/routing",
-          "articles/advanced-path-matching",
-          "articles/cors",
-          "articles/openapi",
-          "articles/openapi-server-urls",
-          "articles/convert-urls-to-openapi",
-          "articles/use-openapi-extension-data",
-          "articles/versioning-on-zuplo",
-          "guides/modify-openapi-paths",
-          "guides/openapi-overlays",
-          "guides/canary-routing-for-employees",
-          "guides/geolocation-backend-routing",
-          "guides/user-based-backend-routing",
-        ],
-      },
-      {
-        type: "category",
-        label: "Environments & Configuration",
-        items: [
-          "articles/environments",
-          "articles/environment-variables",
-          "articles/branch-based-deployments",
-          "articles/terraform",
-          "articles/update-zup-in-github-action",
-        ],
-      },
-      {
-        type: "category",
-        label: "Testing & Debugging",
-        items: [
-          "articles/testing",
-          "articles/bypass-policy-for-testing",
-          "articles/testing-graphql",
-          "articles/health-checks",
-          "articles/performance-testing",
-        ],
-      },
-      {
-        type: "category",
-        label: "Request Handling",
-        items: [
-          "articles/non-standard-ports",
-          "articles/handling-form-data",
-          "articles/s3-signed-url-uploads",
-          "articles/check-ip-address",
-        ],
-      },
-      {
-        type: "category",
-        label: "Code Sharing & Integrations",
-        items: [
-          "articles/sharing-code-across-projects",
-          "articles/add-api-to-backstage",
-        ],
-      },
+      "articles/routing",
+      "articles/openapi",
+      "articles/cors",
+      "articles/environments",
+      "articles/environment-variables",
+      "articles/branch-based-deployments",
+      "articles/testing",
+      "articles/terraform",
       {
         type: "category",
         label: "Local Development",
@@ -394,6 +348,34 @@ export const documentation: Navigation = [
           "articles/local-development-env-variables",
           "articles/tsconfig",
           "articles/local-development-troubleshooting",
+        ],
+      },
+      {
+        type: "category",
+        label: "Guides",
+        items: [
+          "articles/advanced-path-matching",
+          "articles/versioning-on-zuplo",
+          "articles/openapi-server-urls",
+          "articles/convert-urls-to-openapi",
+          "articles/use-openapi-extension-data",
+          "guides/modify-openapi-paths",
+          "guides/openapi-overlays",
+          "guides/canary-routing-for-employees",
+          "guides/geolocation-backend-routing",
+          "guides/user-based-backend-routing",
+          "articles/bypass-policy-for-testing",
+          "articles/testing-graphql",
+          "articles/health-checks",
+          "articles/performance-testing",
+          "articles/non-standard-ports",
+          "articles/handling-form-data",
+          "articles/s3-signed-url-uploads",
+          "articles/check-ip-address",
+          "articles/lazy-load-configuration-into-cache",
+          "articles/sharing-code-across-projects",
+          "articles/add-api-to-backstage",
+          "articles/update-zup-in-github-action",
         ],
       },
     ],
@@ -445,9 +427,15 @@ export const documentation: Navigation = [
       "mcp-server/graphql",
       "mcp-server/custom-tools",
       "mcp-server/openai-apps-sdk",
-      "articles/configuring-auth0-for-mcp-auth",
-      "articles/configuring-okta-for-mcp-auth",
-      "articles/manual-mcp-oauth-testing",
+      {
+        type: "category",
+        label: "Guides",
+        items: [
+          "articles/configuring-auth0-for-mcp-auth",
+          "articles/configuring-okta-for-mcp-auth",
+          "articles/manual-mcp-oauth-testing",
+        ],
+      },
     ],
   },
   {
@@ -655,8 +643,6 @@ export const documentation: Navigation = [
           "articles/log-plugin-new-relic",
           "articles/log-plugin-splunk",
           "articles/log-plugin-sumo",
-          "articles/custom-logging-example",
-          "articles/log-request-response-data",
         ],
       },
       {
@@ -672,7 +658,15 @@ export const documentation: Navigation = [
       "articles/metrics-plugins",
       "articles/opentelemetry",
       "articles/monitoring-your-gateway",
-      "articles/archiving-requests-to-storage",
+      {
+        type: "category",
+        label: "Guides",
+        items: [
+          "articles/custom-logging-example",
+          "articles/log-request-response-data",
+          "articles/archiving-requests-to-storage",
+        ],
+      },
     ],
   },
   {
