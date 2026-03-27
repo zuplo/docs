@@ -1,0 +1,120 @@
+---
+title: How Zuplo Works
+---
+
+Zuplo is a programmable API gateway that runs at the edge. This page explains
+the architecture, runtime, and deployment model.
+
+## Architecture
+
+Zuplo sits between your clients and your backend APIs. Clients send requests to
+Zuplo, which applies policies (authentication, rate limiting, validation, etc.),
+then forwards the request to your backend. Responses pass back through outbound
+policies before reaching the client.
+
+```
+Clients (browsers, mobile, servers, IoT)
+              │
+              ▼
+┌───────────────────────────┐
+│     Zuplo API Gateway     │
+│  ┌─────────────────────┐  │
+│  │  Inbound Policies   │  │  Authentication, rate limiting, validation
+│  ├─────────────────────┤  │
+│  │      Handler        │  │  Forward to backend, custom logic
+│  ├─────────────────────┤  │
+│  │  Outbound Policies  │  │  Transform responses, add headers
+│  └─────────────────────┘  │
+└───────────────────────────┘
+              │
+              ▼
+       Your Backend API
+  (AWS, Azure, GCP, on-premise)
+```
+
+Zuplo is cloud-agnostic. It works with backends running on any cloud provider or
+private infrastructure. Multiple
+[secure connectivity options](../articles/securing-your-backend.mdx) are
+available including mTLS, shared secrets, and secure tunnels.
+
+## Edge runtime
+
+Zuplo's runtime is based on Web Worker technology, the same foundational
+approach used by platforms like Deno Deploy, Vercel Edge Functions, and
+Cloudflare Workers. Code runs in lightweight V8 isolates rather than containers
+or virtual machines.
+
+This architecture provides:
+
+- **Near-zero cold starts** - isolates start in milliseconds, not seconds
+- **High throughput** - tested at over 10,000 requests per second with policies
+  enabled
+- **Low latency** - the gateway typically adds 20-30ms for basic request
+  processing
+- **Web Standards** - built on familiar browser APIs like
+  [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API),
+  [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request),
+  [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response), and
+  [Web Crypto](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API)
+
+Custom code is written in TypeScript or JavaScript. Your backend can be written
+in any language that speaks HTTP.
+
+See [Web Standard APIs](../programmable-api/web-standard-apis.mdx) and
+[Platform Limits](../articles/limits.mdx) for specifics on available APIs and
+constraints.
+
+## Deployment model
+
+Zuplo offers three hosting options:
+
+- **[Managed Edge](../managed-edge/overview.md)** - Runs in 300+ data centers
+  worldwide. Deploys in seconds via Git. Best for most use cases.
+- **[Managed Dedicated](../dedicated/overview.mdx)** - Dedicated infrastructure
+  in your preferred cloud region. For teams with compliance, data residency, or
+  performance isolation requirements.
+- **[Self-Hosted](../self-hosted/overview.md)** - Run Zuplo in your own
+  infrastructure.
+
+All hosting options use the same runtime, configuration, and APIs. Your project
+code works identically across all three.
+
+## GitOps workflow
+
+Everything in Zuplo is defined as code and stored in source control. The typical
+workflow is:
+
+1. **Develop** locally or in the Zuplo Portal
+2. **Push** to your Git repository (GitHub, GitLab, Bitbucket, or Azure DevOps)
+3. **Deploy** automatically - Zuplo builds and deploys your gateway globally
+
+Deployments complete in seconds. Each Git branch gets its own isolated
+environment with its own URL, making it easy to test changes before merging to
+production.
+
+See [Environments](../articles/environments.mdx) and
+[Source Control](../articles/source-control.mdx) for details.
+
+## Protocols
+
+Zuplo can proxy any HTTP traffic including REST, GraphQL, WebSockets, and other
+HTTP-based protocols. HTTP/2 is fully supported.
+
+## Programmability
+
+While most API gateways limit you to configuration, Zuplo lets you write custom
+logic that runs in-process at the gateway layer:
+
+- **[Custom policies](../policies/custom-code-inbound.mdx)** - intercept
+  requests and responses with TypeScript
+- **[Custom handlers](../handlers/custom-handler.mdx)** - implement entire
+  request handlers in code
+- **[Runtime extensions](../programmable-api/runtime-extensions.mdx)** - add
+  global hooks that run on every request
+
+Custom code has access to the full
+[Programming API](../programmable-api/overview.mdx) including caching, logging,
+environment variables, and more.
+
+See [Request Lifecycle](./request-lifecycle.md) for details on how these
+extension points compose together.

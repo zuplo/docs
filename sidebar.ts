@@ -331,6 +331,7 @@ export const documentation: Navigation = [
     type: "category",
     label: "Concepts",
     items: [
+      "concepts/how-zuplo-works",
       "concepts/request-lifecycle",
       "concepts/project-structure",
       "articles/routing",
