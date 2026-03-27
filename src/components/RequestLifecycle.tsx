@@ -359,7 +359,7 @@ export function RequestLifecycle() {
 
                 {/* Label */}
                 <div
-                  className={`flex items-center ${isEndpoint ? "py-2 pl-3" : "py-1 -ml-1"}`}
+                  className={`flex items-center ${isEndpoint ? "py-2 pl-3" : "py-1 -ml-1.5"}`}
                 >
                   {isEndpoint ? (
                     <span className="text-[13px] font-semibold text-gray-500 dark:text-gray-400">
@@ -369,7 +369,7 @@ export function RequestLifecycle() {
                     <div className="flex items-center">
                       {/* Colored connector from dot to box (only when selected) */}
                       <div
-                        className={`w-4 h-[2px] transition-colors duration-150 ${isSelected ? cm.connector : "bg-transparent"}`}
+                        className={`w-5 h-[2px] transition-colors duration-150 ${isSelected ? cm.connector : "bg-transparent"}`}
                       />
                       <button
                         onClick={() => setSelected(stage)}
