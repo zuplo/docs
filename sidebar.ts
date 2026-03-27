@@ -295,6 +295,7 @@ export const documentation: Navigation = [
     type: "doc",
     file: "index",
     label: "Home",
+    display: "hide",
   },
   "api-management/introduction",
   {
