@@ -334,6 +334,7 @@ export const documentation: Navigation = [
       "concepts/how-zuplo-works",
       "concepts/request-lifecycle",
       "concepts/project-structure",
+      "concepts/authentication",
       "articles/routing",
       "articles/policies",
       "articles/openapi",
