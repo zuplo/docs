@@ -336,6 +336,7 @@ export const documentation: Navigation = [
       "concepts/request-lifecycle",
       "concepts/project-structure",
       "concepts/authentication",
+      "concepts/api-keys",
       "concepts/rate-limiting",
       "articles/routing",
       "articles/policies",
