@@ -1,6 +1,5 @@
 import type { ZudokuConfig, ZudokuPlugin } from "zudoku";
 import { documentation } from "./sidebar.js";
-import { guides } from "./sidebar.guides.js";
 import { mdxComponents } from "./src/components.js";
 import { HeadNavigation } from "./src/components/HeadNavigation.js";
 import { LandingPage } from "./src/pages/LandingPage.js";
@@ -97,12 +96,6 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
       label: "Documentation",
       link: "/api-management/introduction",
       items: documentation,
-    },
-    {
-      type: "category",
-      label: "Guides",
-      link: "/guides/overview",
-      items: guides,
     },
     {
       type: "link",
