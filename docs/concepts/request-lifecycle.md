@@ -1,0 +1,149 @@
+---
+title: Request Lifecycle
+---
+
+Every request that reaches Zuplo passes through a well-defined pipeline of
+stages. Understanding this pipeline helps you choose the right extension point
+for your use case.
+
+## Pipeline overview
+
+```
+Client Request
+     │
+     ▼
+┌─────────────────────┐
+│  Pre-Routing Hooks   │  Global hooks that run before route matching
+└─────────┬───────────┘
+          ▼
+┌─────────────────────┐
+│   Route Matching     │  Match by HTTP method + path from OpenAPI spec
+└─────────┬───────────┘
+          ▼
+┌─────────────────────┐
+│   Request Hooks      │  Global hooks that run after routing
+└─────────┬───────────┘
+          ▼
+┌─────────────────────┐
+│  Inbound Policies    │  Authentication, rate limiting, validation, etc.
+└─────────┬───────────┘
+          ▼
+┌─────────────────────┐
+│      Handler         │  Forward to backend, custom logic, or redirect
+└─────────┬───────────┘
+          ▼
+┌─────────────────────┐
+│  Outbound Policies   │  Transform responses, add headers, etc.
+└─────────┬───────────┘
+          ▼
+┌─────────────────────┐
+│   Response Hooks     │  Modify response before sending
+└─────────┬───────────┘
+          ▼
+┌─────────────────────┐
+│ Response Final Hooks │  Logging, analytics (read-only)
+└─────────┬───────────┘
+          ▼
+     Client Response
+```
+
+## Stages
+
+### 1. Pre-routing hooks
+
+Pre-routing hooks run before the request is matched to any route. They receive a
+standard `Request` object and return a (possibly modified) `Request`. Use these
+for URL normalization, version-based routing, or trailing-slash cleanup.
+
+Pre-routing hooks are registered globally in
+[`zuplo.runtime.ts`](../programmable-api/runtime-extensions.mdx) using
+`runtime.addPreRoutingHook()`.
+
+### 2. Route matching
+
+Zuplo matches the request by HTTP method and path using your OpenAPI
+specification. Routes are matched in the order they appear in the OpenAPI
+file(s), and files are processed in alphabetical order. More specific paths
+should be listed before general ones.
+
+See [Routing](../articles/routing.mdx) for details on path modes and matching
+rules.
+
+### 3. Request hooks
+
+After a route is matched, global request hooks run. They receive a
+`ZuploRequest` and `ZuploContext` and can either return a modified request to
+continue the pipeline, or return a `Response` to short-circuit and skip all
+remaining stages.
+
+### 4. Inbound policies
+
+Inbound policies execute in the order they are listed on the route. Each policy
+can inspect or modify the request, or short-circuit the pipeline by returning a
+`Response` (for example, returning a 401 for unauthenticated requests).
+
+Policies are configured in `config/policies.json` and attached to routes in the
+OpenAPI spec via the `x-zuplo-route.policies.inbound` array.
+
+See [Policies](../articles/policies.mdx) for details.
+
+### 5. Handler
+
+The handler is the core logic for the route. Built-in handlers include
+[URL Forward](../handlers/url-forward.mdx) (proxy to a backend),
+[URL Rewrite](../handlers/url-rewrite.mdx),
+[Function Handler](../handlers/custom-handler.mdx) (custom TypeScript code), and
+others.
+
+The handler receives the `ZuploRequest` (as modified by inbound policies) and
+returns a `Response`.
+
+### 6. Outbound policies
+
+Outbound policies run after the handler returns a response. They execute in
+order and can transform the response body, add or remove headers, or replace the
+response entirely.
+
+Outbound policies are attached to routes via the
+`x-zuplo-route.policies.outbound` array.
+
+### 7. Response hooks
+
+Response sending hooks can modify the `Response` before it reaches the client.
+They can be registered globally via `runtime.addResponseSendingHook()` or
+per-request via `context.addResponseSendingHook()` inside a handler.
+
+Global hooks run before handler-specific hooks.
+
+### 8. Response final hooks
+
+Final hooks run after all response processing but before the response is sent.
+They **cannot modify the response** and are intended for logging, analytics, and
+metrics. Use `context.waitUntil()` inside final hooks for non-blocking
+background work like sending analytics events.
+
+## Short-circuiting
+
+At several stages, the pipeline can be short-circuited by returning a `Response`
+instead of passing the request through:
+
+- **Pre-routing hooks** can return a `Response` to skip routing entirely
+- **Request hooks** can return a `Response` to skip policies and the handler
+- **Inbound policies** can return a `Response` (e.g., 401 Unauthorized) to skip
+  the handler and outbound policies
+
+This is how authentication policies work: they check credentials and return an
+error response if the request is not authorized, preventing it from reaching
+your backend.
+
+## Extension points summary
+
+| Extension Point      | Scope                | Can Modify               |
+| -------------------- | -------------------- | ------------------------ |
+| Pre-routing hooks    | Global               | Request URL/headers      |
+| Request hooks        | Global               | Request or short-circuit |
+| Inbound policies     | Per-route            | Request or short-circuit |
+| Handler              | Per-route            | Produces response        |
+| Outbound policies    | Per-route            | Response                 |
+| Response hooks       | Global + per-request | Response                 |
+| Response final hooks | Global + per-request | Nothing (read-only)      |

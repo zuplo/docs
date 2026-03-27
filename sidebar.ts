@@ -4,7 +4,6 @@ import cliSidebar from "./sidebar.cli.json";
 
 const policies: Navigation = [
   "policies/overview",
-  "articles/policies",
   {
     type: "category",
     label: "Authentication",
@@ -330,13 +329,22 @@ export const documentation: Navigation = [
   },
   {
     type: "category",
+    label: "Concepts",
+    items: [
+      "concepts/request-lifecycle",
+      "concepts/project-structure",
+      "articles/routing",
+      "articles/policies",
+      "articles/openapi",
+      "articles/environments",
+      "articles/development-options",
+    ],
+  },
+  {
+    type: "category",
     label: "Development",
     items: [
-      "articles/development-options",
-      "articles/routing",
-      "articles/openapi",
       "articles/cors",
-      "articles/environments",
       "articles/environment-variables",
       "articles/branch-based-deployments",
       "articles/testing",
