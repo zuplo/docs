@@ -445,64 +445,92 @@ export function RequestLifecycle() {
 
   return (
     <div className="not-prose my-8">
-      {/* Mobile: full-width accordion */}
-      <div className="lg:hidden space-y-1">
-        {stages.map((stage) => {
-          if (stage.isEndpoint) {
-            return (
-              <div
-                key={stage.id}
-                className="px-4 py-2 text-[13px] font-medium text-gray-400 dark:text-gray-500"
-              >
-                {stage.label}
-              </div>
-            );
-          }
-
+      {/* Mobile: timeline accordion */}
+      <div className="lg:hidden">
+        {stages.map((stage, i) => {
           const c = colors[stage.color];
-          const isSelected = selected.id === stage.id;
+          const isSelected = !stage.isEndpoint && selected.id === stage.id;
+          const isLast = i === stages.length - 1;
+          const prevColor =
+            i > 0 ? colors[stages[i - 1].color].line : "bg-transparent";
 
           return (
             <div key={stage.id}>
-              <button
-                onClick={() => setSelected(stage)}
-                className={[
-                  "w-full px-4 py-3 rounded-lg border-l-[3px] text-left transition-all duration-150 cursor-pointer flex items-center justify-between",
-                  isSelected
-                    ? `${c.panelBorder.split(" ")[0]} bg-white dark:bg-gray-800 shadow-sm`
-                    : "border-l-transparent hover:bg-gray-50 dark:hover:bg-gray-800/50",
-                ].join(" ")}
-              >
-                <div>
-                  <span
-                    className={[
-                      "font-semibold block text-[14px]",
-                      isSelected ? c.text : "text-gray-700 dark:text-gray-300",
-                    ].join(" ")}
-                  >
-                    {stage.label}
-                  </span>
-                  <span className="text-[11px] text-gray-400 dark:text-gray-500">
-                    {stage.scope}
-                  </span>
-                </div>
-                <svg
-                  className={`w-4 h-4 text-gray-400 transition-transform duration-200 shrink-0 ${isSelected ? "rotate-180" : ""}`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19 9l-7 7-7-7"
+              {/* Stage row */}
+              <div className="flex">
+                {/* Timeline rail */}
+                <div className="w-8 shrink-0 flex flex-col items-center">
+                  <div
+                    className={`w-[2px] flex-1 ${i === 0 ? "bg-transparent" : prevColor}`}
                   />
-                </svg>
-              </button>
+                  <div
+                    className={`rounded-full shrink-0 ${stage.isEndpoint ? "w-2.5 h-2.5" : "w-3 h-3"} ${c.dot}`}
+                  />
+                  <div
+                    className={`w-[2px] flex-1 ${isLast ? "bg-transparent" : c.line}`}
+                  />
+                </div>
+                {/* Content */}
+                <div className="flex-1 min-w-0 py-1">
+                  {stage.isEndpoint ? (
+                    <div className="py-1.5 px-1">
+                      <span className="text-[13px] font-semibold text-gray-500 dark:text-gray-400">
+                        {stage.label}
+                      </span>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => setSelected(stage)}
+                      className={[
+                        "w-full px-3 py-2.5 rounded-lg border text-left transition-all duration-150 cursor-pointer flex items-center justify-between gap-2",
+                        isSelected
+                          ? "bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 shadow-sm"
+                          : "bg-transparent border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50",
+                      ].join(" ")}
+                    >
+                      <div>
+                        <span
+                          className={`font-semibold block text-[14px] ${isSelected ? c.text : "text-gray-700 dark:text-gray-300"}`}
+                        >
+                          {stage.label}
+                        </span>
+                        <span className="text-[10px] text-gray-400 dark:text-gray-500">
+                          {stage.scope}
+                          {stage.canShortCircuit && (
+                            <span className="ml-1 opacity-60">
+                              &middot; can short-circuit
+                            </span>
+                          )}
+                        </span>
+                      </div>
+                      <svg
+                        className={`w-4 h-4 text-gray-400 transition-transform duration-200 shrink-0 ${isSelected ? "rotate-180" : ""}`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
+                  )}
+                </div>
+              </div>
+              {/* Expanded detail with timeline continuation */}
               {isSelected && (
-                <div className="border border-gray-200 dark:border-gray-700 rounded-lg mt-1 mb-2 bg-white dark:bg-gray-900/50">
-                  <DetailContent stage={stage} compact />
+                <div className="flex">
+                  <div className="w-8 shrink-0 flex justify-center">
+                    <div className={`w-[2px] ${c.line}`} />
+                  </div>
+                  <div className="flex-1 min-w-0 pb-1">
+                    <div className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900/50">
+                      <DetailContent stage={stage} compact />
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
