@@ -413,12 +413,12 @@ export function RequestLifecycle() {
         {/* Detail panel (right side, fills height) */}
         <div className="flex-1 min-w-0 mt-4 lg:mt-0 flex">
           <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 overflow-hidden transition-all duration-200 flex-1">
-            {/* Colored top bar */}
-            <div className={`h-1 ${cm.dot}`} />
+            {/* Colored header bar */}
+            <div className={`h-1.5 ${cm.dot}`} />
             <div className="p-8">
               <div className="mb-6">
                 <div className="flex items-center gap-3">
-                  <h3 className="font-bold text-xl m-0 text-gray-900 dark:text-gray-100">
+                  <h3 className={`font-bold text-xl m-0 ${cm.text}`}>
                     {selected.label}
                   </h3>
                   {selected.scope && (
@@ -459,7 +459,7 @@ export function RequestLifecycle() {
                       <a
                         key={link.href}
                         href={link.href}
-                        className={`text-[15px] font-medium no-underline hover:underline ${cm.link}`}
+                        className="text-[15px] font-medium no-underline hover:underline text-gray-700 dark:text-gray-300"
                       >
                         {link.label} &rarr;
                       </a>
