@@ -23,6 +23,16 @@ error description.
 npx zuplo build
 ```
 
+You can also add TypeScript to your project and run type checking directly:
+
+```bash
+npm install -D typescript
+npx tsc --noEmit
+```
+
+This catches type errors before you deploy and integrates with most editors for
+inline feedback.
+
 ### Module resolution failures
 
 Imports that do not start with `./` or `../` and have no matching `paths`
