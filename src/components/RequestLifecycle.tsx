@@ -365,7 +365,7 @@ export function RequestLifecycle() {
                   className={`pl-3 flex items-center ${isEndpoint ? "py-2" : "py-1"}`}
                 >
                   {isEndpoint ? (
-                    <span className="text-[11px] font-medium text-gray-400 dark:text-gray-500">
+                    <span className="text-[13px] font-semibold text-gray-500 dark:text-gray-400">
                       {stage.label}
                     </span>
                   ) : (
