@@ -412,9 +412,7 @@ export function RequestLifecycle() {
 
         {/* Detail panel (right side, fills height) */}
         <div className="flex-1 min-w-0 mt-4 lg:mt-0 flex">
-          <div
-            className={`rounded-xl border-l-4 border border-gray-200 dark:border-gray-700 ${cm.panelAccent} bg-white dark:bg-gray-900/50 p-8 transition-all duration-200 flex-1`}
-          >
+          <div className="rounded-xl border border-gray-150 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-900/30 p-8 transition-all duration-200 flex-1">
             <div className="mb-6">
               <div className="flex items-center gap-3">
                 <h3 className={`font-bold text-xl m-0 ${cm.text}`}>
