@@ -7,14 +7,14 @@
       "group": "build",
       "problemMatcher": [],
       "label": "Build",
-      "detail": "npm run ci:pre && docusaurus build && npm run ci:post"
+      "detail": "pnpm run ci:pre && docusaurus build && pnpm run ci:post"
     },
     {
       "type": "npm",
       "script": "start",
       "problemMatcher": [],
       "label": "Run",
-      "detail": "concurrently \"npm run start:policies\" \"npm run start:docusaurus\""
+      "detail": "concurrently \"pnpm run start:policies\" \"pnpm run start:docusaurus\""
     },
     {
       "type": "npm",

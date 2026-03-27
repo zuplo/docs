@@ -46,7 +46,7 @@ The deploy command pushes your changes to production.
 
 ### 4. The Generation Script
 
-Run `npm run cli:generate` to:
+Run `pnpm run cli:generate` to:
 
 1. Download latest `cli.json` from CDN
 2. Save to local `cli.json` file
@@ -187,9 +187,9 @@ sidebar_label: command name
 ## Workflow
 
 1. **Update CLI**: Publish new CLI version to CDN
-2. **Generate Docs**: Run `npm run cli:generate`
+2. **Generate Docs**: Run `pnpm run cli:generate`
 3. **Add Custom Content**: Create/edit `.partial.mdx` files as needed
-4. **Regenerate**: Run `npm run cli:generate` again to merge partial content
+4. **Regenerate**: Run `pnpm run cli:generate` again to merge partial content
 5. **Review**: Check generated files and sidebar
 
 ## File Locations
@@ -211,7 +211,7 @@ sidebar_label: command name
 - Use standard MDX features (code blocks, links, lists, etc.) in partial files
 - The script runs automatically in CI when publishing new CLI versions
 - The sidebar is automatically sorted alphabetically
-- Run `npm run cli:generate` locally to preview docs before committing
+- Run `pnpm run cli:generate` locally to preview docs before committing
 
 ## Example Output
 

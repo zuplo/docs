@@ -22,7 +22,7 @@ RUN apt update && apt install -y less \
   jq
 
 # Ensure default node user has access to /usr/local/share
-RUN mkdir -p /usr/local/share/npm-global && \
+RUN mkdir -p /usr/local/share/pnpm-global && \
   chown -R node:node /usr/local/share
 
 ARG USERNAME=node
@@ -50,9 +50,10 @@ RUN ARCH=$(dpkg --print-architecture) && \
 # Set up non-root user
 USER node
 
-# Install global packages
-ENV NPM_CONFIG_PREFIX=/usr/local/share/npm-global
-ENV PATH=$PATH:/usr/local/share/npm-global/bin
+# Install pnpm and global packages
+RUN corepack enable && corepack prepare pnpm@latest --activate
+ENV PNPM_HOME=/usr/local/share/pnpm-global
+ENV PATH=$PATH:/usr/local/share/pnpm-global
 
 # Set the default shell to zsh rather than sh
 ENV SHELL=/bin/zsh
@@ -67,7 +68,7 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
   -x
 
 # Install Claude
-RUN npm install -g @anthropic-ai/claude-code
+RUN pnpm add -g @anthropic-ai/claude-code
 
 # Copy and set up firewall script
 COPY init-firewall.sh /usr/local/bin/

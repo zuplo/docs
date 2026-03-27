@@ -77,7 +77,7 @@ async function main() {
 
     if (hasErrors) {
       console.error(
-        "\n💡 Run 'npm run guides:sync' to automatically sync the guides.",
+        "\n💡 Run 'pnpm run guides:sync' to automatically sync the guides.",
       );
       process.exit(1);
     }

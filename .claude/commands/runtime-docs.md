@@ -96,7 +96,7 @@ conceptual guides while maintaining cross-references.
      - Logging (logger.md vs logging.mdx)
      - Caching (cache/zone-cache vs caching articles)
 
-6. Format all documentation using `npm run format`
+6. Format all documentation using `pnpm run format`
 
 7. Important notes:
    - Handlers are already documented in `/docs/handlers` - augment if needed

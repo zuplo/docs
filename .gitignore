@@ -58,6 +58,7 @@ generated/
 
 
 yarn.lock
+package-lock.json
 .vercel
 
 # Generated Content
