@@ -400,7 +400,9 @@ export function RequestLifecycle() {
                       </button>
                       {/* Connector line to panel */}
                       {isSelected && (
-                        <div className="hidden lg:block h-[2px] w-5 bg-gray-200 dark:bg-gray-700" />
+                        <div
+                          className={`hidden lg:block h-[2px] w-5 ${cm.connector}`}
+                        />
                       )}
                     </div>
                   )}
@@ -412,9 +414,9 @@ export function RequestLifecycle() {
 
         {/* Detail panel (right side, fills height) */}
         <div className="flex-1 min-w-0 mt-4 lg:mt-0 flex">
-          <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 overflow-hidden transition-all duration-200 flex-1">
-            {/* Colored header bar */}
-            <div className={`h-1.5 ${cm.dot}`} />
+          <div
+            className={`rounded-xl border-2 ${cm.panelBorder} bg-white dark:bg-gray-900/50 transition-all duration-200 flex-1`}
+          >
             <div className="p-8">
               <div className="mb-6">
                 <div className="flex items-center gap-3">
