@@ -386,7 +386,7 @@ export function RequestLifecycle() {
         </div>
 
         {/* Detail panel */}
-        <div className="flex-1 min-w-0 mt-4 lg:mt-0 flex flex-col">
+        <div className="flex-1 min-w-0 mt-4 lg:mt-1 flex flex-col">
           <div
             className={`rounded-xl border-2 ${cm.panelBorder} bg-white dark:bg-gray-900/50 transition-all duration-200 flex-1`}
           >
