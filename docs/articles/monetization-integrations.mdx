@@ -1,0 +1,104 @@
+---
+title: Third-Party Monetization Integrations
+sidebar_label: Third-Party Integrations
+---
+
+Zuplo's [built-in Monetization](./monetization/index.mdx) handles metering,
+billing, and quota enforcement natively at the gateway. For teams with existing
+billing infrastructure or specialized requirements, Zuplo also integrates with
+third-party metering and billing platforms through policies and the programmable
+gateway.
+
+## When to use third-party integrations
+
+Third-party integrations make sense when you:
+
+- Already have an established billing pipeline you want to keep
+- Need a platform-specific feature that Zuplo Monetization does not yet cover
+- Want to combine Zuplo's gateway with a dedicated analytics or metering vendor
+
+For most teams starting fresh, the
+[built-in Monetization](./monetization/index.mdx) is the fastest path — it
+removes the need to synchronize state between separate metering, billing, and
+gateway systems.
+
+## Available integrations
+
+### Amberflo
+
+The [Amberflo Metering Policy](../policies/amberflo-metering-inbound.mdx)
+enables real-time usage metering and billing through
+[Amberflo](https://www.amberflo.io/), a usage-based billing platform:
+
+- **Real-time event ingestion** — Track usage events with sub-second latency
+- **Flexible metering** — Define custom meters for any billable metric
+- **Usage-based pricing** — Support complex pricing models and tiers
+- **Customer dashboards** — Provide usage visibility to your customers
+
+### Moesif
+
+The [Moesif Analytics Policy](../policies/moesif-inbound.mdx) integrates with
+[Moesif](https://www.moesif.com/) for API analytics and monetization:
+
+- **API analytics** — Deep insights into API usage patterns and customer
+  behavior
+- **Usage tracking** — Monitor API calls, latency, and error rates
+- **Customer segmentation** — Analyze usage by customer cohorts
+- **Billing alerts** — Set up notifications for usage thresholds
+
+Learn how Zuplo and Moesif work together:
+[API Observability and Monetization at the Edge](https://www.moesif.com/blog/api-monetization/Moesif-Zuplo-API-Observability-and-Monetization-At-The-Edge/)
+
+### Stripe (direct)
+
+[Stripe](https://stripe.com) can be used directly with Zuplo's programmable
+gateway for custom billing flows:
+
+- **Custom integrations** — Use Stripe's APIs with Zuplo's programmable gateway
+- **Webhooks** — Process subscription events and update access in real-time with
+  the
+  [Stripe Webhook Verification Policy](../policies/stripe-webhook-verification-inbound.mdx)
+- **Tiered access** — Different rate limits and features per subscription level
+
+:::tip
+
+Zuplo's built-in Monetization already includes a
+[native Stripe integration](./monetization/stripe-integration.md) that handles
+subscription management, invoicing, and payment collection automatically. Use
+the direct Stripe integration only if you need full control over the billing
+flow.
+
+:::
+
+## Building custom integrations
+
+Zuplo's programmable gateway lets you integrate with any billing or metering
+provider.
+
+### Custom policies
+
+Create [custom inbound](../policies/custom-code-inbound.mdx) and
+[outbound policies](../policies/custom-code-outbound.mdx) to:
+
+- Send usage events to an external metering service
+- Look up entitlements from an external billing system
+- Calculate dynamic pricing based on request or response characteristics
+
+### Hooks
+
+Use Zuplo's [hooks system](../programmable-api/hooks.mdx) to:
+
+- Forward usage data to your billing pipeline
+- Update customer limits in real-time
+- Stream metrics to external systems using plugins like the
+  [Azure Event Hubs Plugin](./plugin-azure-event-hubs.mdx)
+
+### Developer Portal
+
+The [Zuplo Developer Portal](../dev-portal/introduction.mdx) supports custom
+pages and plugins for billing UI:
+
+- [Custom pages](../dev-portal/zudoku/guides/custom-pages.md) for pricing,
+  billing, and account management
+- [Custom plugins](../dev-portal/zudoku/custom-plugins.md) to embed billing
+  widgets and dashboards

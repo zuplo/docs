@@ -7,8 +7,7 @@ sidebar_label: Quickstart
 
 API Monetization is in beta and free to try. The APIs are stable but should be
 evaluated in non-production environments first. To go to production, contact
-[sales@zuplo.com](mailto:sales@zuplo.com). Production pricing has not yet been
-announced.
+[sales@zuplo.com](mailto:sales@zuplo.com).
 
 :::
 
@@ -27,10 +26,10 @@ By the end of this quickstart, you have:
 - **Quota enforcement** that limits or bills for overages based on each
   customer's plan
 
-![The final pricing table that this quickstart creates](/media/monetization/pricing-table.png)
+![The final pricing table that this quickstart creates](../../../public/media/monetization/pricing-table.png)
 
-You'll set up three example plans (Developer, Pro, and Business) with tiered
-pricing, included request quotas, and per-request overage billing.
+You'll set up two example plans (Developer and Pro) with tiered pricing,
+included request quotas, and per-request overage billing.
 
 ## Prerequisites
 
@@ -48,10 +47,11 @@ keeps your existing work safe from any breaking changes.
 
 1. Go to [portal.zuplo.com](https://portal.zuplo.com) and sign in.
 2. Click **New Project** in the top right corner.
-3. Select **API Management (+ MCP Server)**.
+3. Enter a **Project name** or use the randomly chosen name Zuplo provides.
 4. Select **Starter Project (Recommended)** — it comes with endpoints ready to
    monetize.
-5. (Optional) Connect your project to source control by following the
+5. (Optional) Connect your project to source control by clicking the **Connect
+   to GitHub** button on the project page, or by following the
    [GitHub setup guide](../source-control-setup-github.md). This isn't required
    for monetization, but is recommended for managing your project long-term.
 
@@ -95,9 +95,9 @@ transferred, etc.
 1. In the Monetization Service, click the **Meters** tab.
 2. Click **Add Meter** and select **Blank Meter**.
 3. Fill in the meter details:
-   - **Name**: `API`
-   - **Event**: `api` — the type of event this meter listens for.
-   - **Description**: `API Calls`
+   - **Name**: `Requests`
+   - **Event**: `requests` — the type of event this meter listens for.
+   - **Description**: `API Requests`
    - **Aggregation**: `SUM` — how values are combined (other options include
      `COUNT`, `MAX`, etc.).
    - **Value Property**: `$.total` — a JSONPath expression that extracts the
@@ -115,13 +115,13 @@ Feature** for each of the following:
 
 | Name             | Key                | Linked Meter | Purpose                       |
 | ---------------- | ------------------ | ------------ | ----------------------------- |
-| api              | `api`              | API          | Usage-based (linked to meter) |
+| API Requests     | `requests`         | Requests     | Usage-based (linked to meter) |
 | Monthly Fee      | `monthly_fee`      | —            | Flat-rate billing             |
 | Metadata Support | `metadata_support` | —            | Boolean on/off feature        |
 
 ## Step 6: Create plans
 
-Plans bring together your features with pricing and entitlements. Create three
+Plans bring together your features with pricing and entitlements. Create two
 plans to give your customers options.
 
 ### Create the Developer plan
@@ -132,60 +132,79 @@ plans to give your customers options.
    - **Key**: `developer`
 3. Click **Create Draft**.
 4. Configure the rate cards by selecting features from the **Add feature**
-   dropdown in the **Features & Rate Cards** section:
+   dropdown in the **Features & Rate Cards**:
 
-   **Monthly Fee** rate card:
-   - **Pricing Model**: Flat fee
-   - **Billing Cadence**: Monthly
-   - **Payment Term**: In advance
-   - **Price**: $9.99
-   - **Entitlement**: No entitlement
+   ![The add feature dropdown showing the location of the Monthly Fee feature](/media/monetization/add-feature-dropdown.png)
 
-   **api** rate card:
-   - **Pricing Model**: Tiered
-   - **Billing Cadence**: Monthly
-   - **Price Mode**: Graduated
-   - **Tier 1**: First Unit `0`, Last Unit `1000`, Unit Price $0, Flat Price $0
-   - **Tier 2**: First Unit `1001`, to infinity, Unit Price $0.10, Flat Price $0
-   - **Entitlement**: Metered (track usage)
-   - **Usage Limit**: `1000`
-   - **Soft limit**: enabled
+   Click on the **Monthly Fee** feature and set it up as shown below:
+
+   **Monthly Fee**:
+
+   | Setting         | Value          |
+   | --------------- | -------------- |
+   | Pricing Model   | Flat fee       |
+   | Billing Cadence | Monthly        |
+   | Payment Term    | In advance     |
+   | Price           | $9.99          |
+   | Entitlement     | No entitlement |
+
+   Next, click **Add feature** again and choose the **API Requests** feature and
+   set it up as shown below:
+
+   **API Requests**:
+
+   | Setting         | Value                                                                                             |
+   | --------------- | ------------------------------------------------------------------------------------------------- |
+   | Pricing Model   | Tiered                                                                                            |
+   | Billing Cadence | Monthly                                                                                           |
+   | Price Mode      | Graduated                                                                                         |
+   | Tier 1          | Click `+ add another tier` and set First Unit `0`, Last Unit `1000`, Unit Price $0, Flat Price $0 |
+   | Tier 2          | First Unit `1001`, to infinity, Unit Price $0.10, Flat Price $0                                   |
+   | Entitlement     | Metered (track usage)                                                                             |
+   | Usage Limit     | `1000`                                                                                            |
+   | Soft limit      | Enabled                                                                                           |
+
+   Your **Features & Rate Cards** section should now look like this:
+
+   ![A completed features and rate cards section](/media/monetization/features-rate-cards-complete.png)
 
 5. Click **Save**.
 
-### Create the Pro and Business plans
+### Create additional plans
 
-Repeat the same steps above to create the **Pro** and **Business** plans using
-the values in the table below. The only structural differences are the pricing
-amounts and that Pro and Business include a **Metadata Support** rate card (set
-**Pricing Model** to `Free` and **Entitlement** to `Boolean (on/off)`).
+Repeat the same steps above to create the **Pro** plan using the values in the
+table below. The only structural differences are the pricing amounts and that
+Pro includes a **Metadata Support** rate card (set **Pricing Model** to `Free`
+and **Entitlement** to `Boolean (on/off)`).
 
 | Plan      | Key         | Monthly Fee | Included Requests | Overage Rate | Metadata Support |
 | --------- | ----------- | ----------- | ----------------- | ------------ | ---------------- |
 | Developer | `developer` | $9.99       | 1,000             | $0.10/req    | No               |
 | Pro       | `pro`       | $19.99      | 5,000             | $0.05/req    | Yes              |
-| Business  | `business`  | $29.99      | 10,000            | $0.01/req    | Yes              |
 
-For the **api** rate card on each plan, set **Tier 1** Last Unit to the
+For the **API Requests** rate card on each plan, set **Tier 1** Last Unit to the
 "Included Requests" value and **Tier 2** Unit Price to the "Overage Rate" value.
 The **Usage Limit** should match the "Included Requests" value. Enable **Soft
 limit** on all plans.
 
-![Tiered units setup](/media/monetization/tiered-units.png)
+![Tiered units setup](../../../public/media/monetization/tiered-units.png)
 
 ### Reorder your plans
 
-The order of plans on the Plans tab determines how they appear on the pricing
-page. Drag and drop the plans using the handle on the top-left corner of each
-card to reorder them as **Developer**, **Pro**, **Business**.
+The **Pricing Table** in the left sidebar determines how plans appear on the
+pricing page. **Drag and drop** the plans using the handle on the top-left
+corner of each card to reorder them as **Developer** and **Pro**.
+
+![Reordering plans in the Pricing Table tab](/media/monetization/reorder-plans.png)
 
 ### Publish your plans
 
 Each plan starts as a draft. Publish each one before customers can subscribe.
 
-1. On each plan card, click the **...** context menu.
+1. On the **Pricing** tab, click the **...** context menu on the plan you want
+   to publish.
 2. Select **Publish Plan**.
-3. Repeat for all three plans.
+3. Repeat for all plans.
 
 For more plan configurations (including trial periods and multiple tiers), see
 [Plan Examples](./plan-examples.mdx).
@@ -225,11 +244,11 @@ directory.
 2. Select the **Monetization** policy from the list of policies, and click
    **Continue**.
 
-![Monetization policy in the policy picker list](/media/monetization/monetization-policy.png)
+![Monetization policy in the policy picker list](../../../public/media/monetization/monetization-policy.png)
 
-3. In the **Meters** configuration field, replace the default value `requests`
-   with `api` to match the meter you created in Step 4. This field maps the
-   meter slug to the number of units each request consumes.
+3. In the **Meters** configuration field, you can keep the default value of
+   `requests` set `1` to match the meter you created in _Step 4_. This field
+   maps the meter slug to the number of units each request consumes.
 
 ```json
 {
@@ -238,7 +257,7 @@ directory.
   "options": {
     "cacheTtlSeconds": 60,
     "meters": {
-      "api": 1 // default is "requests": 1
+      "requests": 1
     }
   }
 }
@@ -255,7 +274,7 @@ Next, you need to apply the Monetization policy to some or all of your routes.
 3. Choose individual routes that you want to count towards the metered requests,
    or click **Select All** to add the policy to every route in the project.
 
-![Adding the policy to add routes](/media/monetization/policy-add-routes.png)
+![Adding the policy to add routes](../../../public/media/monetization/policy-add-routes.png)
 
 4. Click on **Apply**.
 5. Click on **Save** in your project to publish the changes
@@ -274,7 +293,8 @@ end-to-end flow.
 
 ### Subscribe to a plan
 
-1. Open the **Pricing** tab in your Developer Portal.
+1. Open the **Pricing** tab in your Developer Portal (you can get the URL for
+   this from the **Deployment URLs** dropdown in your project).
 2. Click **Subscribe** on one of the available plans.
 3. Enter payment information. Since you're using Stripe sandbox, use
    [test card numbers](https://docs.stripe.com/testing) — no real charges are
@@ -282,7 +302,7 @@ end-to-end flow.
 4. After the subscription is confirmed, you can see your usage dashboard and API
    key.
 
-![The subscription page in the Developer Portal](/media/monetization/subscribed-state.png)
+![The subscription page in the Developer Portal](../../../public/media/monetization/subscribed-state.png)
 
 ### Test: Make API calls
 
@@ -295,7 +315,10 @@ curl --request GET \
 ```
 
 Head back to the Developer Portal to see your usage dashboard update with each
-call. You should see the `api` meter count increase toward your plan's limit.
+call. You should see the `API Requests` meter count increase toward your plan's
+limit.
+
+![Usage of requests in the Developer Portal](/media/monetization/usage.png)
 
 ## Next steps
 

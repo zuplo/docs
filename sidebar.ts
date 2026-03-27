@@ -4,7 +4,6 @@ import cliSidebar from "./sidebar.cli.json";
 
 const policies: Navigation = [
   "policies/overview",
-  "articles/policies",
   {
     type: "category",
     label: "Authentication",
@@ -156,6 +155,15 @@ const policies: Navigation = [
       "articles/custom-audit-log-policy",
     ],
   },
+  {
+    type: "category",
+    label: "Guides",
+    items: [
+      "articles/multiple-auth-policies",
+      "articles/graphql-security",
+      "articles/per-user-rate-limits-using-db",
+    ],
+  },
 ];
 
 const programming: Navigation = [
@@ -256,10 +264,38 @@ const programming: Navigation = [
   },
 ];
 
-export const apiGateway: Navigation = [
+const devPortalItems: Navigation = [
+  "dev-portal/introduction",
+  "dev-portal/local-development",
+  "dev-portal/updating",
+  "dev-portal/node-modules",
+  ...(zudokuSidebar as Navigation).map((item) => {
+    if (typeof item === "object" && item.type === "category") {
+      if (item.label === "Guides") {
+        return {
+          ...item,
+          items: [
+            ...item.items,
+            "dev-portal/dev-portal-create-consumer-on-auth",
+            "articles/rick-and-morty-api-developer-portal-example",
+          ],
+        };
+      }
+    }
+    return item;
+  }),
+];
+
+export const documentation: Navigation = [
   {
     type: "filter",
     placeholder: "Filter documentation",
+  },
+  {
+    type: "doc",
+    file: "home",
+    label: "Home",
+    display: "hide",
   },
   "api-management/introduction",
   {
@@ -294,18 +330,33 @@ export const apiGateway: Navigation = [
   },
   {
     type: "category",
+    label: "Concepts",
+    items: [
+      "concepts/how-zuplo-works",
+      "concepts/request-lifecycle",
+      "concepts/project-structure",
+      "concepts/authentication",
+      "concepts/api-keys",
+      "concepts/rate-limiting",
+      "articles/routing",
+      "articles/policies",
+      "articles/openapi",
+      "articles/environments",
+      "concepts/source-control-and-deployment",
+      "articles/development-options",
+    ],
+  },
+  {
+    type: "category",
     label: "Development",
     items: [
-      "articles/development-options",
-      "articles/routing",
       "articles/cors",
-      "articles/openapi",
-      "articles/update-zup-in-github-action",
-      "articles/environments",
-      "articles/branch-based-deployments",
       "articles/environment-variables",
+      "articles/branch-based-deployments",
       "articles/testing",
+      "articles/troubleshooting",
       "articles/terraform",
+      "articles/custom-code-patterns",
       {
         type: "category",
         label: "Local Development",
@@ -320,6 +371,193 @@ export const apiGateway: Navigation = [
           "articles/local-development-troubleshooting",
         ],
       },
+      {
+        type: "category",
+        label: "Guides",
+        items: [
+          "articles/advanced-path-matching",
+          "articles/versioning-on-zuplo",
+          "articles/openapi-server-urls",
+          "articles/convert-urls-to-openapi",
+          "articles/use-openapi-extension-data",
+          "guides/modify-openapi-paths",
+          "guides/openapi-overlays",
+          "guides/canary-routing-for-employees",
+          "guides/geolocation-backend-routing",
+          "guides/user-based-backend-routing",
+          "articles/bypass-policy-for-testing",
+          "articles/testing-graphql",
+          "articles/health-checks",
+          "articles/performance-testing",
+          "articles/non-standard-ports",
+          "articles/handling-form-data",
+          "articles/s3-signed-url-uploads",
+          "articles/check-ip-address",
+          "articles/lazy-load-configuration-into-cache",
+          "articles/sharing-code-across-projects",
+          "articles/add-api-to-backstage",
+          "articles/update-zup-in-github-action",
+        ],
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Policies",
+    items: policies,
+  },
+  {
+    type: "category",
+    label: "Handlers",
+    items: [
+      "handlers/url-forward",
+      "handlers/url-rewrite",
+      "handlers/custom-handler",
+      "handlers/aws-lambda",
+      "handlers/mcp-server",
+      "handlers/redirect",
+      "handlers/openapi",
+      "handlers/system-handlers",
+      "handlers/websocket-handler",
+    ],
+  },
+  {
+    type: "category",
+    label: "API Keys",
+    items: [
+      "articles/api-key-management",
+      "articles/api-key-administration",
+      "articles/api-key-authentication",
+      "articles/api-key-end-users",
+      "articles/api-key-api",
+      "articles/api-key-react-component",
+      "articles/api-key-leak-detection",
+      "articles/api-key-service-limits",
+      "articles/api-key-buckets",
+    ],
+  },
+  {
+    type: "category",
+    label: "MCP Server",
+    items: [
+      "mcp-server/introduction",
+      "mcp-server/tools",
+      "mcp-server/prompts",
+      "mcp-server/resources",
+      "mcp-server/testing",
+      "mcp-server/graphql",
+      "mcp-server/custom-tools",
+      "mcp-server/openai-apps-sdk",
+      {
+        type: "category",
+        label: "Guides",
+        items: [
+          "articles/configuring-auth0-for-mcp-auth",
+          "articles/configuring-okta-for-mcp-auth",
+          "articles/manual-mcp-oauth-testing",
+        ],
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "AI Gateway",
+    items: [
+      "ai-gateway/introduction",
+      "ai-gateway/getting-started",
+      "ai-gateway/universal-api",
+      {
+        type: "category",
+        label: "Providers",
+        items: [
+          "ai-gateway/providers",
+          "ai-gateway/managing-providers",
+          "ai-gateway/custom-providers",
+        ],
+      },
+      {
+        type: "category",
+        label: "Teams",
+        items: ["ai-gateway/teams", "ai-gateway/managing-teams"],
+      },
+      {
+        type: "category",
+        label: "Apps",
+        items: ["ai-gateway/apps", "ai-gateway/managing-apps"],
+      },
+      {
+        type: "category",
+        label: "Guardrails & Policies",
+        items: [
+          "ai-gateway/policies/akamai-ai-firewall",
+          "ai-gateway/policies/comet-opik-tracing",
+          "ai-gateway/policies/galileo-tracing",
+        ],
+      },
+      {
+        type: "category",
+        label: "Integrations",
+        items: [
+          "ai-gateway/integrations/ai-sdk",
+          "ai-gateway/integrations/claude-code",
+          "ai-gateway/integrations/codex",
+          "ai-gateway/integrations/goose",
+          "ai-gateway/integrations/langchain",
+          "ai-gateway/integrations/openai",
+        ],
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Developer Portal",
+    items: devPortalItems,
+  },
+  {
+    type: "category",
+    label: "Monetization",
+    items: [
+      {
+        type: "doc",
+        file: "articles/monetization/index",
+        path: "articles/monetization",
+      },
+      "articles/monetization/quickstart",
+      {
+        type: "category",
+        label: "Concepts",
+        items: [
+          "articles/monetization/meters",
+          "articles/monetization/features",
+          "articles/monetization/plans",
+          "articles/monetization/rate-cards",
+          "articles/monetization/pricing-models",
+          "articles/monetization/billing-models",
+        ],
+      },
+      {
+        type: "category",
+        label: "Guides",
+        items: [
+          "articles/monetization/stripe-integration",
+          "articles/monetization/developer-portal",
+          "articles/monetization/monetization-policy",
+          "articles/monetization/subscription-lifecycle",
+          "articles/monetization/private-plans",
+          "articles/monetization/tax-collection",
+        ],
+      },
+      {
+        type: "category",
+        label: "Reference",
+        items: [
+          "articles/monetization/api-access",
+          "articles/monetization/plan-examples",
+        ],
+      },
+      "articles/monetization/troubleshooting",
+      "articles/monetization-integrations",
+      "articles/monetization-custom",
     ],
   },
   {
@@ -352,61 +590,43 @@ export const apiGateway: Navigation = [
       {
         type: "category",
         label: "GitLab",
+        link: "articles/custom-ci-cd-gitlab",
         items: [
           "articles/source-control-setup-gitlab",
-          {
-            type: "category",
-            label: "CI/CD Pipelines",
-            link: "articles/custom-ci-cd-gitlab",
-            items: [
-              "articles/ci-cd-gitlab/basic-deployment",
-              "articles/ci-cd-gitlab/deploy-and-test",
-              "articles/ci-cd-gitlab/mr-preview-environments",
-              "articles/ci-cd-gitlab/local-testing",
-              "articles/ci-cd-gitlab/tag-based-releases",
-              "articles/ci-cd-gitlab/multi-stage-deployment",
-            ],
-          },
+          "articles/ci-cd-gitlab/basic-deployment",
+          "articles/ci-cd-gitlab/deploy-and-test",
+          "articles/ci-cd-gitlab/mr-preview-environments",
+          "articles/ci-cd-gitlab/local-testing",
+          "articles/ci-cd-gitlab/tag-based-releases",
+          "articles/ci-cd-gitlab/multi-stage-deployment",
         ],
       },
       {
         type: "category",
         label: "Bitbucket",
+        link: "articles/custom-ci-cd-bitbucket",
         items: [
           "articles/source-control-setup-bitbucket",
-          {
-            type: "category",
-            label: "CI/CD Pipelines",
-            link: "articles/custom-ci-cd-bitbucket",
-            items: [
-              "articles/ci-cd-bitbucket/basic-deployment",
-              "articles/ci-cd-bitbucket/deploy-and-test",
-              "articles/ci-cd-bitbucket/pr-preview-environments",
-              "articles/ci-cd-bitbucket/local-testing",
-              "articles/ci-cd-bitbucket/tag-based-releases",
-              "articles/ci-cd-bitbucket/multi-stage-deployment",
-            ],
-          },
+          "articles/ci-cd-bitbucket/basic-deployment",
+          "articles/ci-cd-bitbucket/deploy-and-test",
+          "articles/ci-cd-bitbucket/pr-preview-environments",
+          "articles/ci-cd-bitbucket/local-testing",
+          "articles/ci-cd-bitbucket/tag-based-releases",
+          "articles/ci-cd-bitbucket/multi-stage-deployment",
         ],
       },
       {
         type: "category",
         label: "Azure DevOps",
+        link: "articles/custom-ci-cd-azure",
         items: [
           "articles/source-control-setup-azure",
-          {
-            type: "category",
-            label: "CI/CD Pipelines",
-            link: "articles/custom-ci-cd-azure",
-            items: [
-              "articles/ci-cd-azure/basic-deployment",
-              "articles/ci-cd-azure/deploy-and-test",
-              "articles/ci-cd-azure/pr-preview-environments",
-              "articles/ci-cd-azure/local-testing",
-              "articles/ci-cd-azure/tag-based-releases",
-              "articles/ci-cd-azure/multi-stage-deployment",
-            ],
-          },
+          "articles/ci-cd-azure/basic-deployment",
+          "articles/ci-cd-azure/deploy-and-test",
+          "articles/ci-cd-azure/pr-preview-environments",
+          "articles/ci-cd-azure/local-testing",
+          "articles/ci-cd-azure/tag-based-releases",
+          "articles/ci-cd-azure/multi-stage-deployment",
         ],
       },
       {
@@ -428,89 +648,6 @@ export const apiGateway: Navigation = [
   },
   {
     type: "category",
-    label: "Policies",
-    items: policies,
-  },
-  {
-    type: "category",
-    label: "Handlers",
-    items: [
-      "handlers/url-forward",
-      "handlers/url-rewrite",
-      "handlers/custom-handler",
-      "handlers/aws-lambda",
-      "handlers/mcp-server",
-      "handlers/redirect",
-      "handlers/openapi",
-      "handlers/system-handlers",
-      "handlers/websocket-handler",
-    ],
-  },
-  {
-    type: "category",
-    label: "Monetization",
-    items: [
-      "articles/monetization",
-      "articles/monetization-enterprise",
-      {
-        type: "category",
-        label: "Monetization API",
-        items: [
-          "articles/monetization/index",
-          "articles/monetization/quickstart",
-          {
-            type: "category",
-            label: "Concepts",
-            items: [
-              "articles/monetization/meters",
-              "articles/monetization/features",
-              "articles/monetization/plans",
-              "articles/monetization/rate-cards",
-              "articles/monetization/pricing-models",
-              "articles/monetization/billing-models",
-            ],
-          },
-          {
-            type: "category",
-            label: "Guides",
-            items: [
-              "articles/monetization/stripe-integration",
-              "articles/monetization/developer-portal",
-              "articles/monetization/monetization-policy",
-              "articles/monetization/subscription-lifecycle",
-              "articles/monetization/private-plans",
-              "articles/monetization/tax-collection",
-            ],
-          },
-          {
-            type: "category",
-            label: "Reference",
-            items: [
-              "articles/monetization/api-access",
-              "articles/monetization/plan-examples",
-            ],
-          },
-          "articles/monetization/troubleshooting",
-        ],
-      },
-    ],
-  },
-  {
-    type: "category",
-    label: "MCP Server",
-    items: [
-      "mcp-server/introduction",
-      "mcp-server/tools",
-      "mcp-server/prompts",
-      "mcp-server/resources",
-      "mcp-server/testing",
-      "mcp-server/graphql",
-      "mcp-server/custom-tools",
-      "mcp-server/openai-apps-sdk",
-    ],
-  },
-  {
-    type: "category",
     label: "Observability",
     items: [
       {
@@ -527,8 +664,6 @@ export const apiGateway: Navigation = [
           "articles/log-plugin-new-relic",
           "articles/log-plugin-splunk",
           "articles/log-plugin-sumo",
-          "articles/custom-logging-example",
-          "articles/log-request-response-data",
         ],
       },
       {
@@ -544,13 +679,48 @@ export const apiGateway: Navigation = [
       "articles/metrics-plugins",
       "articles/opentelemetry",
       "articles/monitoring-your-gateway",
-      "articles/performance-testing",
+      {
+        type: "category",
+        label: "Guides",
+        items: [
+          "articles/custom-logging-example",
+          "articles/log-request-response-data",
+          "articles/archiving-requests-to-storage",
+        ],
+      },
     ],
   },
   {
     label: "Networking & Infrastructure",
     type: "category",
     items: [
+      "articles/hosting-options",
+      {
+        type: "category",
+        label: "Managed Dedicated",
+        items: [
+          "dedicated/overview",
+          "dedicated/source-control",
+          "dedicated/architecture",
+          "dedicated/networking",
+          "dedicated/custom-domains",
+          "dedicated/federated-gateways",
+          "dedicated/akamai/architecture",
+          "dedicated/akamai/cdn",
+          "dedicated/akamai/caching",
+          "dedicated/akamai/ai-powered-applications",
+        ],
+      },
+      {
+        type: "doc",
+        label: "Managed Edge",
+        file: "managed-edge/overview",
+      },
+      {
+        type: "doc",
+        label: "Self Hosted",
+        file: "self-hosted/overview",
+      },
       {
         type: "category",
         label: "Custom Domains",
@@ -590,176 +760,7 @@ export const apiGateway: Navigation = [
   },
   {
     type: "category",
-    label: "API Keys",
-    items: [
-      "articles/api-key-management",
-      "articles/api-key-administration",
-      "articles/api-key-authentication",
-      "articles/api-key-end-users",
-      "articles/api-key-api",
-      "articles/api-key-react-component",
-      "articles/api-key-leak-detection",
-      "articles/api-key-service-limits",
-      "articles/api-key-buckets",
-    ],
-  },
-  {
-    type: "category",
-    label: "Migration Guides",
-    items: [
-      "articles/migration-overview",
-      "articles/migrate-from-kong",
-      "articles/migrate-from-apigee",
-      "articles/migrate-from-aws-api-gateway",
-      "articles/migrate-from-azure-apim",
-    ],
-  },
-];
-
-export const aiGateway: Navigation = [
-  {
-    type: "filter",
-    placeholder: "Filter documentation",
-  },
-  "ai-gateway/introduction",
-  "ai-gateway/getting-started",
-  "ai-gateway/universal-api",
-  {
-    type: "category",
-    label: "Providers",
-    items: [
-      "ai-gateway/providers",
-      "ai-gateway/managing-providers",
-      "ai-gateway/custom-providers",
-    ],
-  },
-  {
-    type: "category",
-    label: "Teams",
-    items: ["ai-gateway/teams", "ai-gateway/managing-teams"],
-  },
-  {
-    type: "category",
-    label: "Apps",
-    items: ["ai-gateway/apps", "ai-gateway/managing-apps"],
-  },
-
-  {
-    type: "category",
-    label: "Guardrails & Policies",
-    items: [
-      "ai-gateway/policies/akamai-ai-firewall",
-      "ai-gateway/policies/comet-opik-tracing",
-      "ai-gateway/policies/galileo-tracing",
-    ],
-  },
-  {
-    type: "category",
-    label: "Integrations",
-    items: [
-      "ai-gateway/integrations/ai-sdk",
-      "ai-gateway/integrations/claude-code",
-      "ai-gateway/integrations/codex",
-      "ai-gateway/integrations/goose",
-      "ai-gateway/integrations/langchain",
-      "ai-gateway/integrations/openai",
-    ],
-  },
-];
-
-export const devPortal: Navigation = [
-  {
-    type: "filter",
-    placeholder: "Filter documentation",
-  },
-  {
-    type: "category",
-    label: "Getting started",
-    icon: "sparkles",
-    items: [
-      "dev-portal/introduction",
-      "dev-portal/local-development",
-      "dev-portal/updating",
-      "dev-portal/node-modules",
-    ],
-  },
-  ...(zudokuSidebar as Navigation).map((item) => {
-    if (typeof item === "object" && item.type === "category") {
-      if (item.label === "Guides") {
-        return {
-          ...item,
-          items: [
-            ...item.items,
-            "dev-portal/dev-portal-create-consumer-on-auth",
-          ],
-        };
-      }
-    }
-    return item;
-  }),
-];
-
-export const platform: Navigation = [
-  {
-    type: "filter",
-    placeholder: "Filter documentation",
-  },
-  // {
-  //   type: "category",
-  //   label: "Use Cases",
-  //   collapsed: false,
-  //   items: [
-  //     {
-  //       type: "link",
-  //       to: "/foo",
-  //       label: "Protect Your API",
-  //     },
-  //   ],
-  // },
-  {
-    type: "category",
-    label: "Hosting Options",
-    collapsed: false,
-    items: [
-      "articles/hosting-options",
-      {
-        type: "category",
-        label: "Managed Dedicated",
-        items: [
-          "dedicated/overview",
-          "dedicated/source-control",
-          "dedicated/architecture",
-          "dedicated/networking",
-          "dedicated/custom-domains",
-          "dedicated/federated-gateways",
-          {
-            type: "category",
-            label: "Akamai",
-            items: [
-              "dedicated/akamai/architecture",
-              "dedicated/akamai/cdn",
-              "dedicated/akamai/caching",
-              "dedicated/akamai/ai-powered-applications",
-            ],
-          },
-        ],
-      },
-      {
-        type: "doc",
-        label: "Managed Edge",
-        file: "managed-edge/overview",
-      },
-      {
-        type: "doc",
-        label: "Self Hosted",
-        file: "self-hosted/overview",
-      },
-    ],
-  },
-  {
-    type: "category",
     label: "Account Management",
-    collapsed: false,
     items: [
       {
         type: "category",
@@ -793,7 +794,6 @@ export const platform: Navigation = [
       },
     ],
   },
-
   {
     type: "category",
     label: "Programming API",
@@ -812,10 +812,20 @@ export const platform: Navigation = [
     ],
   },
   {
+    type: "category",
+    label: "Migration Guides",
+    items: [
+      "articles/migration-overview",
+      "articles/migrate-from-kong",
+      "articles/migrate-from-apigee",
+      "articles/migrate-from-aws-api-gateway",
+      "articles/migrate-from-azure-apim",
+    ],
+  },
+  {
     type: "doc",
     file: "articles/limits",
   },
-
   {
     type: "doc",
     file: "articles/security",

@@ -10,12 +10,17 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "/docs",
+      "destination": "/docs/home",
       "permanent": true
     },
     {
+      "source": "/docs",
+      "destination": "/docs/home",
+      "permanent": false
+    },
+    {
       "source": "/docs/articles/what-is-zuplo",
-      "destination": "/docs",
+      "destination": "/api-management/introduction",
       "permanent": true
     },
     {
@@ -1321,6 +1326,16 @@
     {
       "source": "/docs/articles/custom-deployment-strategies{/}?",
       "destination": "/docs/articles/custom-ci-cd",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/monetization-enterprise{/}?",
+      "destination": "/docs/articles/monetization-custom",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/stripe-monetization-plugin{/}?",
+      "destination": "/docs/articles/monetization",
       "permanent": true
     }
   ],
