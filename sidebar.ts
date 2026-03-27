@@ -389,6 +389,7 @@ export const documentation: Navigation = [
           "articles/testing-graphql",
           "articles/health-checks",
           "articles/performance-testing",
+          "articles/troubleshooting-slow-responses",
           "articles/non-standard-ports",
           "articles/handling-form-data",
           "articles/s3-signed-url-uploads",
