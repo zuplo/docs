@@ -357,6 +357,88 @@ const colors = {
 
 const interactiveStages = stages.filter((s) => !s.isEndpoint);
 
+function DetailContent({
+  stage,
+  compact,
+}: {
+  stage: Stage;
+  compact?: boolean;
+}) {
+  const c = colors[stage.color];
+  const padding = compact ? "p-4" : "p-8";
+  const titleSize = compact ? "text-lg" : "text-xl";
+  const textSize = compact ? "text-[13px]" : "text-[15px]";
+
+  return (
+    <div className={padding}>
+      <div className="mb-4">
+        <div className="flex items-center gap-2.5">
+          <h3 className={`font-bold ${titleSize} m-0 ${c.text}`}>
+            {stage.label}
+          </h3>
+          {stage.scope && (
+            <span className="text-[10px] font-medium px-2 py-0.5 rounded-full border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">
+              {stage.scope}
+            </span>
+          )}
+        </div>
+      </div>
+
+      <div className="mb-4">
+        <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-2 border-b border-gray-100 dark:border-gray-800 pb-1.5">
+          When to use
+        </h4>
+        <p
+          className={`${textSize} text-gray-700 dark:text-gray-300 leading-relaxed m-0`}
+        >
+          {stage.why}
+        </p>
+      </div>
+
+      {stage.details && (
+        <div className="mb-4">
+          <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-2 border-b border-gray-100 dark:border-gray-800 pb-1.5">
+            How it works
+          </h4>
+          <div
+            className={`${textSize} text-gray-600 dark:text-gray-400 leading-relaxed [&_p]:mb-2 [&_p:last-child]:mb-0 [&_code]:text-[13px] [&_code]:bg-gray-100 [&_code]:dark:bg-gray-800 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded-md [&_code]:font-mono`}
+          >
+            {stage.details}
+          </div>
+        </div>
+      )}
+
+      {stage.links.length > 0 && (
+        <div>
+          <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-2 border-b border-gray-100 dark:border-gray-800 pb-1.5">
+            Learn more
+          </h4>
+          <div
+            className={`grid gap-2.5 ${compact ? "grid-cols-1" : "grid-cols-1 sm:grid-cols-2 gap-3"}`}
+          >
+            {stage.links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="block no-underline group"
+              >
+                <span className="text-[13px] font-medium text-gray-700 dark:text-gray-300 group-hover:underline">
+                  {link.label} &rarr;
+                </span>
+                {link.description && (
+                  <span className="block text-[11px] text-gray-400 dark:text-gray-500 mt-0.5">
+                    {link.description}
+                  </span>
+                )}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function RequestLifecycle() {
   const [selected, setSelected] = useState<Stage>(interactiveStages[0]);
   const cm = colors[selected.color];
@@ -366,7 +448,6 @@ export function RequestLifecycle() {
       <div className="flex flex-col lg:flex-row items-stretch gap-0">
         {/* Pipeline (vertical) */}
         <div className="lg:w-[240px] shrink-0 flex flex-col">
-          {/* Stages */}
           {stages.map((stage, i) => {
             const c = colors[stage.color];
             const isSelected = selected.id === stage.id;
@@ -375,152 +456,105 @@ export function RequestLifecycle() {
               i > 0 ? colors[stages[i - 1].color].line : "bg-transparent";
 
             return (
-              <div key={stage.id} className="flex items-center">
-                {/* Dot column - fixed width, dot always vertically centered */}
-                <div className="w-6 shrink-0 self-stretch flex flex-col items-center">
-                  <div
-                    className={`w-[2px] flex-1 ${i === 0 ? "bg-transparent" : prevColor}`}
-                  />
-                  <div
-                    className={[
-                      "rounded-full shrink-0",
-                      stage.isEndpoint ? "w-2.5 h-2.5" : "w-3 h-3",
-                      c.dot,
-                    ].join(" ")}
-                  />
-                  <div
-                    className={`w-[2px] flex-1 ${isLast ? "bg-transparent" : c.line}`}
-                  />
-                </div>
+              <div key={stage.id}>
+                <div className="flex items-center">
+                  {/* Dot column */}
+                  <div className="w-6 shrink-0 self-stretch flex flex-col items-center">
+                    <div
+                      className={`w-[2px] flex-1 ${i === 0 ? "bg-transparent" : prevColor}`}
+                    />
+                    <div
+                      className={[
+                        "rounded-full shrink-0",
+                        stage.isEndpoint ? "w-2.5 h-2.5" : "w-3 h-3",
+                        c.dot,
+                      ].join(" ")}
+                    />
+                    <div
+                      className={`w-[2px] flex-1 ${isLast ? "bg-transparent" : c.line}`}
+                    />
+                  </div>
 
-                {/* Connector + box */}
-                <div className="flex items-center py-1">
-                  {/* Connector from dot to box */}
-                  <div
-                    className={[
-                      "w-4 h-[2px] -ml-1.5 shrink-0",
-                      !stage.isEndpoint && isSelected
-                        ? cm.connector
-                        : "bg-transparent",
-                    ].join(" ")}
-                  />
+                  {/* Connector + box */}
+                  <div className="flex items-center py-1 -ml-1.5">
+                    <div
+                      className={[
+                        "w-4 h-[2px] shrink-0",
+                        !stage.isEndpoint && isSelected
+                          ? cm.connector
+                          : "bg-transparent",
+                      ].join(" ")}
+                    />
 
-                  {stage.isEndpoint ? (
-                    <div className="w-[195px] px-3.5 py-2 rounded-lg border border-dashed border-gray-300 dark:border-gray-600">
-                      <span className="text-[13px] font-semibold text-gray-500 dark:text-gray-400">
-                        {stage.label}
-                      </span>
-                    </div>
-                  ) : (
-                    <>
-                      <button
-                        onClick={() => setSelected(stage)}
-                        className={[
-                          "w-[195px] px-3.5 py-2.5 rounded-lg border text-left transition-all duration-150 cursor-pointer",
-                          isSelected
-                            ? "bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 shadow-sm"
-                            : "bg-transparent border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50",
-                        ].join(" ")}
-                      >
-                        <span
-                          className={[
-                            "font-semibold block leading-tight text-[13px]",
-                            isSelected
-                              ? c.text
-                              : "text-gray-700 dark:text-gray-300",
-                          ].join(" ")}
-                        >
+                    {stage.isEndpoint ? (
+                      <div className="w-[195px] px-3.5 py-2 rounded-lg border border-dashed border-gray-300 dark:border-gray-600">
+                        <span className="text-[13px] font-semibold text-gray-500 dark:text-gray-400">
                           {stage.label}
                         </span>
-                        <span className="text-[10px] text-gray-400 dark:text-gray-500 leading-none">
-                          {stage.scope}
-                          {stage.canShortCircuit && (
-                            <span className="ml-1 opacity-60">
-                              &middot; can short-circuit
-                            </span>
-                          )}
-                        </span>
-                      </button>
+                      </div>
+                    ) : (
+                      <>
+                        <button
+                          onClick={() => setSelected(stage)}
+                          className={[
+                            "w-[195px] px-3.5 py-2.5 rounded-lg border text-left transition-all duration-150 cursor-pointer",
+                            isSelected
+                              ? "bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 shadow-sm"
+                              : "bg-transparent border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50",
+                          ].join(" ")}
+                        >
+                          <span
+                            className={[
+                              "font-semibold block leading-tight text-[13px]",
+                              isSelected
+                                ? c.text
+                                : "text-gray-700 dark:text-gray-300",
+                            ].join(" ")}
+                          >
+                            {stage.label}
+                          </span>
+                          <span className="text-[10px] text-gray-400 dark:text-gray-500 leading-none">
+                            {stage.scope}
+                            {stage.canShortCircuit && (
+                              <span className="ml-1 opacity-60">
+                                &middot; can short-circuit
+                              </span>
+                            )}
+                          </span>
+                        </button>
 
-                      {/* Connector to panel */}
-                      {isSelected && (
-                        <div
-                          className={`hidden lg:block h-[2px] w-5 ${cm.connector}`}
-                        />
-                      )}
-                    </>
-                  )}
+                        {/* Connector to panel (desktop only) */}
+                        {isSelected && (
+                          <div
+                            className={`hidden lg:block h-[2px] w-5 ${cm.connector}`}
+                          />
+                        )}
+                      </>
+                    )}
+                  </div>
                 </div>
+
+                {/* Inline detail accordion (mobile only) */}
+                {isSelected && !stage.isEndpoint && (
+                  <div className="lg:hidden ml-6 my-1">
+                    <div
+                      className={`rounded-lg border-2 ${cm.panelBorder} bg-white dark:bg-gray-900/50`}
+                    >
+                      <DetailContent stage={stage} compact />
+                    </div>
+                  </div>
+                )}
               </div>
             );
           })}
         </div>
 
-        {/* Detail panel */}
-        <div className="flex-1 min-w-0 mt-4 lg:mt-1 flex flex-col">
+        {/* Detail panel (desktop only) */}
+        <div className="hidden lg:flex flex-1 min-w-0 lg:mt-1 flex-col">
           <div
             className={`rounded-xl border-2 ${cm.panelBorder} bg-white dark:bg-gray-900/50 transition-all duration-200 flex-1`}
           >
-            <div className="p-8">
-              <div className="mb-6">
-                <div className="flex items-center gap-3">
-                  <h3 className={`font-bold text-xl m-0 ${cm.text}`}>
-                    {selected.label}
-                  </h3>
-                  {selected.scope && (
-                    <span className="text-[10px] font-medium px-2 py-0.5 rounded-full border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">
-                      {selected.scope}
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              <div className="mb-6">
-                <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-3 border-b border-gray-100 dark:border-gray-800 pb-1.5">
-                  When to use
-                </h4>
-                <p className="text-[15px] text-gray-700 dark:text-gray-300 leading-relaxed m-0">
-                  {selected.why}
-                </p>
-              </div>
-
-              {selected.details && (
-                <div className="mb-6">
-                  <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-3 border-b border-gray-100 dark:border-gray-800 pb-1.5">
-                    How it works
-                  </h4>
-                  <div className="text-[15px] text-gray-600 dark:text-gray-400 leading-relaxed [&_p]:mb-3 [&_p:last-child]:mb-0 [&_code]:text-[13px] [&_code]:bg-gray-100 [&_code]:dark:bg-gray-800 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded-md [&_code]:font-mono">
-                    {selected.details}
-                  </div>
-                </div>
-              )}
-
-              {selected.links.length > 0 && (
-                <div>
-                  <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-3 border-b border-gray-100 dark:border-gray-800 pb-1.5">
-                    Learn more
-                  </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {selected.links.map((link) => (
-                      <a
-                        key={link.href}
-                        href={link.href}
-                        className="block no-underline group"
-                      >
-                        <span className="text-[14px] font-medium text-gray-700 dark:text-gray-300 group-hover:underline">
-                          {link.label} &rarr;
-                        </span>
-                        {link.description && (
-                          <span className="block text-[12px] text-gray-400 dark:text-gray-500 mt-0.5">
-                            {link.description}
-                          </span>
-                        )}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
+            <DetailContent stage={selected} />
           </div>
         </div>
       </div>
