@@ -3,7 +3,7 @@
 ## Prerequisites
 
 - Node.js (v18 or higher)
-- npm
+- pnpm
 - Git LFS (Large File Storage)
 
 ## Getting Started
@@ -33,13 +33,13 @@ git lfs ls-files
 ### Installation
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### Local Development
 
 ```
-npm run dev
+pnpm run dev
 ```
 
 This command starts a local development server and opens up a browser window.
@@ -52,13 +52,13 @@ reload changes to zuplo policies. You must have the `core` repository cloned in
 the same parent directory as this repository.
 
 ```
-npm run dev:policies
+pnpm run dev:policies
 ```
 
 ### Build
 
 ```
-npm run build
+pnpm run build
 ```
 
 This command generates static content into the `build` directory and can be

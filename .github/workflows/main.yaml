@@ -11,14 +11,15 @@ jobs:
       - uses: actions/checkout@v6
         with:
           lfs: "true"
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v6
         with:
           node-version-file: ".nvmrc"
-          cache: "npm"
-      - run: npm ci
-      - run: npm run format:ci
-      - run: npm run guides:check
-      - run: npm run lint:admonitions
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run format:ci
+      - run: pnpm run guides:check
+      - run: pnpm run lint:admonitions
 
   static-assets:
     name: Upload Static Assets
@@ -36,12 +37,13 @@ jobs:
       - uses: actions/checkout@v6
         with:
           lfs: "true"
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v6
         with:
           node-version-file: ".nvmrc"
-          cache: "npm"
-      - run: npm ci
-      - run: npm run build
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build
       - id: "auth"
         name: "Authenticate to Google Cloud"
         uses: "google-github-actions/auth@v3"
@@ -114,13 +116,14 @@ jobs:
       - uses: actions/checkout@v6
         with:
           lfs: "true"
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v6
         with:
           node-version-file: ".nvmrc"
-          cache: "npm"
-      - run: npm ci
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
 
-      - run: npm run build
+      - run: pnpm run build
 
       - name: Restore lychee cache
         id: cache-lychee

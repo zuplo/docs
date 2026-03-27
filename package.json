@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "version": "0.0.0",
+  "packageManager": "pnpm@10.29.3",
   "engines": {
     "node": "24.x"
   },
@@ -12,15 +13,15 @@
     "build": "zudoku build",
     "format": "prettier --write .",
     "format:ci": "prettier --check --ignore-pattern '**/*.md' .",
-    "typecheck": "tsc",
+    "typecheck": "tsgo --noEmit",
     "lint:docs": "vale --config .vale.ini docs/articles docs/ai-gateway docs/dedicated docs/handlers docs/mcp-server docs/programmable-api docs/guides",
     "lint:admonitions": "node ./scripts/check-admonitions.mjs",
-    "postinstall": "npm run policies:get && npm run policies:generate && npm run errors:generate && npm run cli:generate && npm run api:get && npm run zudoku:get && npm run guides:generate",
+    "postinstall": "pnpm run policies:get && pnpm run policies:generate && pnpm run errors:generate && pnpm run cli:generate && pnpm run api:get && pnpm run zudoku:get && pnpm run guides:generate",
     "zudoku:get": "sh ./scripts/get-zudoku.sh",
     "policies:get": "sh ./scripts/get-policies.sh",
     "policies:generate": "tsx scripts/generate-policies.ts",
     "policies:watch": "nodemon",
-    "dev:policies": "concurrently \"npm:dev\" \"npm:policies:watch\"",
+    "dev:policies": "concurrently \"pnpm:dev\" \"pnpm:policies:watch\"",
     "api:get": "node ./scripts/update-api.mjs",
     "errors:generate": "tsx scripts/generate-errors.ts",
     "cli:generate": "tsx scripts/generate-cli-docs.ts",
@@ -49,10 +50,14 @@
     "@anthropic-ai/claude-agent-sdk": "^0.2.19",
     "@types/dagre": "^0.7.53",
     "@types/json-schema": "7.0.15",
+    "@types/mdast": "^4.0.4",
     "@types/node": "^24.0.0",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.2",
+    "@types/unist": "^3.0.3",
     "@typescript-eslint/parser": "^8.48.1",
+    "@typescript/native-preview": "7.0.0-dev.20260327.2",
+    "clsx": "^2.1.1",
     "concurrently": "^9.2.1",
     "esbuild": "^0.27.0",
     "eslint": "^9.38.0",
@@ -60,12 +65,24 @@
     "eslint-plugin-prettier": "^5.5.4",
     "gray-matter": "4.0.3",
     "lefthook": "^2.0.4",
+    "mdast-util-directive": "^3.1.0",
+    "minimatch": "^10.2.4",
     "nodemon": "^3.1.10",
     "prettier": "^3.7.4",
     "safe-marked": "16.0.0",
+    "tailwind-merge": "^3.5.0",
     "tsx": "^4.20.6",
     "typescript": "^5.8.3",
     "unified": "^11.0.5",
-    "vfile": "^6.0.3"
+    "unist-util-visit": "^5.1.0",
+    "vfile": "^6.0.3",
+    "vite": "^8.0.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@sentry/cli",
+      "esbuild",
+      "lefthook"
+    ]
   }
 }

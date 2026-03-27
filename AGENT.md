@@ -2,13 +2,13 @@
 
 Commands:
 
-- Dev: `npm run dev` - Start local development server
-- Build: `npm run build` - Generate static content with Zudoku
+- Dev: `pnpm run dev` - Start local development server
+- Build: `pnpm run build` - Generate static content with Zudoku
 - Test: No automated tests found
-- Typecheck: `npm run typecheck` - Run TypeScript checks
-- Lint (links): `npm run check` - Check assets and external links
+- Typecheck: `pnpm run typecheck` - Run TypeScript checks (uses tsgo)
+- Lint (links): `pnpm run check` - Check assets and external links
 - Lint (text): `make lint` - Run Vale for style and errors
-- Format: `npm run format` - Run Prettier
+- Format: `pnpm run format` - Run Prettier
 
 Architecture:
 

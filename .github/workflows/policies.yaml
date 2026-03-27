@@ -19,11 +19,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v4
       - name: Use Node.js
         uses: actions/setup-node@v6
         with:
           node-version-file: ".nvmrc"
-          cache: "npm"
+          cache: "pnpm"
 
       - id: "auth"
         name: "Authenticate to Google Cloud"
@@ -34,8 +35,8 @@ jobs:
           service_account: "github-actions-docs@zuplo-production.iam.gserviceaccount.com"
           access_token_lifetime: "300s"
 
-      - run: npm install
-      - run: npm run policies:generate
+      - run: pnpm install
+      - run: pnpm run policies:generate
 
       - name: Upload the Policies v4
         uses: "google-github-actions/upload-cloud-storage@v3"
