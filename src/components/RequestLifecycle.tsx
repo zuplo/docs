@@ -339,7 +339,10 @@ export function RequestLifecycle() {
             const isLast = i === stages.length - 1;
 
             return (
-              <div key={stage.id} className="flex items-stretch">
+              <div
+                key={stage.id}
+                className={`flex ${isEndpoint ? "items-center" : "items-stretch"}`}
+              >
                 {/* Vertical line + dot */}
                 <div className="flex flex-col items-center w-6 shrink-0">
                   {i > 0 && (
