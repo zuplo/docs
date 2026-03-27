@@ -20,7 +20,7 @@
     },
     {
       "source": "/docs/articles/what-is-zuplo",
-      "destination": "/docs",
+      "destination": "/api-management/introduction",
       "permanent": true
     },
     {
