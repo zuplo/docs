@@ -17,10 +17,10 @@ Type mismatches, missing type definitions, or invalid syntax prevent the build
 from completing. Check the deployment logs for the file name, line number, and
 error description.
 
-**Fix:** Run your build locally before deploying to catch these errors early:
+**Fix:** Run the build locally before deploying to catch these errors early:
 
 ```bash
-npx zuplo test
+npx zuplo build
 ```
 
 ### Module resolution failures
