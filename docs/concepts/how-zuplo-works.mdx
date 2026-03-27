@@ -26,10 +26,10 @@ policies before reaching the client.
     </DiagramNode>
   </DiagramGroup>
   <DiagramNode id="backend">Your Backend API</DiagramNode>
-  <DiagramEdge from="clients" to="inbound" />
+  <DiagramEdge from="clients" to="zuplo" />
   <DiagramEdge from="inbound" to="handler" fromSide="bottom" toSide="top" />
   <DiagramEdge from="handler" to="outbound" fromSide="bottom" toSide="top" />
-  <DiagramEdge from="handler" to="backend" />
+  <DiagramEdge from="zuplo" to="backend" />
 </Diagram>
 
 Zuplo is cloud-agnostic. It works with backends running on any cloud provider or
