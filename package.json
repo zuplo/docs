@@ -68,7 +68,8 @@
     "tsx": "^4.20.6",
     "typescript": "^5.8.3",
     "unified": "^11.0.5",
-    "vfile": "^6.0.3"
+    "vfile": "^6.0.3",
+    "vite": "^8.0.3"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
