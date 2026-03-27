@@ -40,16 +40,17 @@ import { myFunction } from "./modules/my-module";
 `compilerOptions.paths` in your `tsconfig.json`. See
 [TypeScript Configuration](./tsconfig.mdx) for details.
 
-### Missing dependencies
+### Missing or incompatible packages
 
-A package referenced in your code is not listed in `package.json` or is not
-installed.
+Zuplo does not run Node.js and does not run `npm install` during deployment.
+Only npm packages that don't use native code or Node.js-specific APIs (like the
+filesystem or `child_process`) are compatible. Packages must be installed
+locally and their bundled output checked into source control.
 
-**Fix:** Install the missing package:
-
-```bash
-npm install <package-name>
-```
+**Fix:** Install the package locally, verify it works with `zuplo dev`, and
+ensure the compiled output is committed to your repository. See
+[Node Modules](../programmable-api/node-modules.mdx) for details on package
+compatibility and limitations.
 
 ### Invalid route configuration
 
