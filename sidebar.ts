@@ -336,6 +336,7 @@ export const documentation: Navigation = [
       "concepts/request-lifecycle",
       "concepts/project-structure",
       "concepts/authentication",
+      "concepts/rate-limiting",
       "articles/routing",
       "articles/policies",
       "articles/openapi",
@@ -353,6 +354,7 @@ export const documentation: Navigation = [
       "articles/branch-based-deployments",
       "articles/testing",
       "articles/terraform",
+      "articles/custom-code-patterns",
       {
         type: "category",
         label: "Local Development",
