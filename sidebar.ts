@@ -256,7 +256,28 @@ const programming: Navigation = [
   },
 ];
 
-export const apiGateway: Navigation = [
+const devPortalItems: Navigation = [
+  "dev-portal/introduction",
+  "dev-portal/local-development",
+  "dev-portal/updating",
+  "dev-portal/node-modules",
+  ...(zudokuSidebar as Navigation).map((item) => {
+    if (typeof item === "object" && item.type === "category") {
+      if (item.label === "Guides") {
+        return {
+          ...item,
+          items: [
+            ...item.items,
+            "dev-portal/dev-portal-create-consumer-on-auth",
+          ],
+        };
+      }
+    }
+    return item;
+  }),
+];
+
+export const documentation: Navigation = [
   {
     type: "filter",
     placeholder: "Filter documentation",
@@ -448,6 +469,21 @@ export const apiGateway: Navigation = [
   },
   {
     type: "category",
+    label: "API Keys",
+    items: [
+      "articles/api-key-management",
+      "articles/api-key-administration",
+      "articles/api-key-authentication",
+      "articles/api-key-end-users",
+      "articles/api-key-api",
+      "articles/api-key-react-component",
+      "articles/api-key-leak-detection",
+      "articles/api-key-service-limits",
+      "articles/api-key-buckets",
+    ],
+  },
+  {
+    type: "category",
     label: "Monetization",
     items: [
       {
@@ -492,6 +528,60 @@ export const apiGateway: Navigation = [
       "articles/monetization-integrations",
       "articles/monetization-custom",
     ],
+  },
+  {
+    type: "category",
+    label: "AI Gateway",
+    items: [
+      "ai-gateway/introduction",
+      "ai-gateway/getting-started",
+      "ai-gateway/universal-api",
+      {
+        type: "category",
+        label: "Providers",
+        items: [
+          "ai-gateway/providers",
+          "ai-gateway/managing-providers",
+          "ai-gateway/custom-providers",
+        ],
+      },
+      {
+        type: "category",
+        label: "Teams",
+        items: ["ai-gateway/teams", "ai-gateway/managing-teams"],
+      },
+      {
+        type: "category",
+        label: "Apps",
+        items: ["ai-gateway/apps", "ai-gateway/managing-apps"],
+      },
+      {
+        type: "category",
+        label: "Guardrails & Policies",
+        items: [
+          "ai-gateway/policies/akamai-ai-firewall",
+          "ai-gateway/policies/comet-opik-tracing",
+          "ai-gateway/policies/galileo-tracing",
+        ],
+      },
+      {
+        type: "category",
+        label: "Integrations",
+        items: [
+          "ai-gateway/integrations/ai-sdk",
+          "ai-gateway/integrations/claude-code",
+          "ai-gateway/integrations/codex",
+          "ai-gateway/integrations/goose",
+          "ai-gateway/integrations/langchain",
+          "ai-gateway/integrations/openai",
+        ],
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Developer Portal",
+    items: devPortalItems,
   },
   {
     type: "category",
@@ -551,6 +641,45 @@ export const apiGateway: Navigation = [
     items: [
       {
         type: "category",
+        label: "Hosting Options",
+        items: [
+          "articles/hosting-options",
+          {
+            type: "category",
+            label: "Managed Dedicated",
+            items: [
+              "dedicated/overview",
+              "dedicated/source-control",
+              "dedicated/architecture",
+              "dedicated/networking",
+              "dedicated/custom-domains",
+              "dedicated/federated-gateways",
+              {
+                type: "category",
+                label: "Akamai",
+                items: [
+                  "dedicated/akamai/architecture",
+                  "dedicated/akamai/cdn",
+                  "dedicated/akamai/caching",
+                  "dedicated/akamai/ai-powered-applications",
+                ],
+              },
+            ],
+          },
+          {
+            type: "doc",
+            label: "Managed Edge",
+            file: "managed-edge/overview",
+          },
+          {
+            type: "doc",
+            label: "Self Hosted",
+            file: "self-hosted/overview",
+          },
+        ],
+      },
+      {
+        type: "category",
         label: "Custom Domains",
         items: ["articles/custom-domains", "articles/fastly-zuplo-host-setup"],
       },
@@ -588,176 +717,7 @@ export const apiGateway: Navigation = [
   },
   {
     type: "category",
-    label: "API Keys",
-    items: [
-      "articles/api-key-management",
-      "articles/api-key-administration",
-      "articles/api-key-authentication",
-      "articles/api-key-end-users",
-      "articles/api-key-api",
-      "articles/api-key-react-component",
-      "articles/api-key-leak-detection",
-      "articles/api-key-service-limits",
-      "articles/api-key-buckets",
-    ],
-  },
-  {
-    type: "category",
-    label: "Migration Guides",
-    items: [
-      "articles/migration-overview",
-      "articles/migrate-from-kong",
-      "articles/migrate-from-apigee",
-      "articles/migrate-from-aws-api-gateway",
-      "articles/migrate-from-azure-apim",
-    ],
-  },
-];
-
-export const aiGateway: Navigation = [
-  {
-    type: "filter",
-    placeholder: "Filter documentation",
-  },
-  "ai-gateway/introduction",
-  "ai-gateway/getting-started",
-  "ai-gateway/universal-api",
-  {
-    type: "category",
-    label: "Providers",
-    items: [
-      "ai-gateway/providers",
-      "ai-gateway/managing-providers",
-      "ai-gateway/custom-providers",
-    ],
-  },
-  {
-    type: "category",
-    label: "Teams",
-    items: ["ai-gateway/teams", "ai-gateway/managing-teams"],
-  },
-  {
-    type: "category",
-    label: "Apps",
-    items: ["ai-gateway/apps", "ai-gateway/managing-apps"],
-  },
-
-  {
-    type: "category",
-    label: "Guardrails & Policies",
-    items: [
-      "ai-gateway/policies/akamai-ai-firewall",
-      "ai-gateway/policies/comet-opik-tracing",
-      "ai-gateway/policies/galileo-tracing",
-    ],
-  },
-  {
-    type: "category",
-    label: "Integrations",
-    items: [
-      "ai-gateway/integrations/ai-sdk",
-      "ai-gateway/integrations/claude-code",
-      "ai-gateway/integrations/codex",
-      "ai-gateway/integrations/goose",
-      "ai-gateway/integrations/langchain",
-      "ai-gateway/integrations/openai",
-    ],
-  },
-];
-
-export const devPortal: Navigation = [
-  {
-    type: "filter",
-    placeholder: "Filter documentation",
-  },
-  {
-    type: "category",
-    label: "Getting started",
-    icon: "sparkles",
-    items: [
-      "dev-portal/introduction",
-      "dev-portal/local-development",
-      "dev-portal/updating",
-      "dev-portal/node-modules",
-    ],
-  },
-  ...(zudokuSidebar as Navigation).map((item) => {
-    if (typeof item === "object" && item.type === "category") {
-      if (item.label === "Guides") {
-        return {
-          ...item,
-          items: [
-            ...item.items,
-            "dev-portal/dev-portal-create-consumer-on-auth",
-          ],
-        };
-      }
-    }
-    return item;
-  }),
-];
-
-export const platform: Navigation = [
-  {
-    type: "filter",
-    placeholder: "Filter documentation",
-  },
-  // {
-  //   type: "category",
-  //   label: "Use Cases",
-  //   collapsed: false,
-  //   items: [
-  //     {
-  //       type: "link",
-  //       to: "/foo",
-  //       label: "Protect Your API",
-  //     },
-  //   ],
-  // },
-  {
-    type: "category",
-    label: "Hosting Options",
-    collapsed: false,
-    items: [
-      "articles/hosting-options",
-      {
-        type: "category",
-        label: "Managed Dedicated",
-        items: [
-          "dedicated/overview",
-          "dedicated/source-control",
-          "dedicated/architecture",
-          "dedicated/networking",
-          "dedicated/custom-domains",
-          "dedicated/federated-gateways",
-          {
-            type: "category",
-            label: "Akamai",
-            items: [
-              "dedicated/akamai/architecture",
-              "dedicated/akamai/cdn",
-              "dedicated/akamai/caching",
-              "dedicated/akamai/ai-powered-applications",
-            ],
-          },
-        ],
-      },
-      {
-        type: "doc",
-        label: "Managed Edge",
-        file: "managed-edge/overview",
-      },
-      {
-        type: "doc",
-        label: "Self Hosted",
-        file: "self-hosted/overview",
-      },
-    ],
-  },
-  {
-    type: "category",
     label: "Account Management",
-    collapsed: false,
     items: [
       {
         type: "category",
@@ -791,7 +751,17 @@ export const platform: Navigation = [
       },
     ],
   },
-
+  {
+    type: "category",
+    label: "Migration Guides",
+    items: [
+      "articles/migration-overview",
+      "articles/migrate-from-kong",
+      "articles/migrate-from-apigee",
+      "articles/migrate-from-aws-api-gateway",
+      "articles/migrate-from-azure-apim",
+    ],
+  },
   {
     type: "category",
     label: "Programming API",
@@ -813,7 +783,6 @@ export const platform: Navigation = [
     type: "doc",
     file: "articles/limits",
   },
-
   {
     type: "doc",
     file: "articles/security",
