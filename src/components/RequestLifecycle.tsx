@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 interface Stage {
   id: string;
@@ -440,10 +440,32 @@ function DetailContent({
 }
 
 export function RequestLifecycle() {
+  const getStageFromHash = () => {
+    if (typeof window === "undefined") return null;
+    const hash = window.location.hash.replace("#", "");
+    return interactiveStages.find((s) => s.id === hash);
+  };
+
   const defaultStage =
-    interactiveStages.find((s) => s.id === "inbound") ?? interactiveStages[0];
+    getStageFromHash() ??
+    interactiveStages.find((s) => s.id === "inbound") ??
+    interactiveStages[0];
   const [selected, setSelected] = useState<Stage>(defaultStage);
   const cm = colors[selected.color];
+
+  const selectStage = (stage: Stage) => {
+    setSelected(stage);
+    window.history.replaceState(null, "", `#${stage.id}`);
+  };
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const stage = getStageFromHash();
+      if (stage) setSelected(stage);
+    };
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
 
   return (
     <div className="not-prose my-8">
@@ -482,7 +504,7 @@ export function RequestLifecycle() {
                     </div>
                   ) : (
                     <button
-                      onClick={() => setSelected(stage)}
+                      onClick={() => selectStage(stage)}
                       className={[
                         "w-full px-3 py-2.5 rounded-lg border text-left transition-all duration-150 cursor-pointer flex items-center justify-between gap-2",
                         isSelected
@@ -590,7 +612,7 @@ export function RequestLifecycle() {
                   ) : (
                     <>
                       <button
-                        onClick={() => setSelected(stage)}
+                        onClick={() => selectStage(stage)}
                         className={[
                           "w-[195px] px-3.5 py-2.5 rounded-lg border text-left transition-all duration-150 cursor-pointer",
                           isSelected
