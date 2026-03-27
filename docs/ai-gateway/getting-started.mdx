@@ -16,10 +16,11 @@ initial configuration to making your first LLM request through Zuplo.
 ## Step 1: Create an AI Gateway Project
 
 1. Log into your Zuplo account
-2. Click **Create New Project**
-3. Select the **AI Gateway** template
-4. Give your project a name (for example, "MyCompany AI Gateway")
-5. Click **Create Project**
+2. Navigate to **Projects**
+3. Click **New Project**
+4. Click **AI or MCP Gateway** at the bottom of the dialog
+5. Give your project a name (for example, "MyCompany AI Gateway")
+6. Click **Create Project**
 
 Your AI Gateway project will be created in seconds. You'll notice the interface
 includes Apps, Teams, and a setup guide to help you get started.
@@ -60,10 +61,11 @@ you're starting solo, you'll need at least one team.
 1. Click **Create Team**
 2. Name your team (for example, "Root" or your company name)
 3. Choose an icon for easy identification
-4. Set organization-wide limits (optional) by clicking on **Settings**:
-   - **Daily Budget**: Maximum spend per day (for example, $1,000)
+4. Click **Create Team**
+5. Set organization-wide limits (optional) by selecting the **Usage & Limits**
+   tab:
+   - **Budget Limit**: Maximum spend per day (for example, $1,000)
    - **Rate Limits**: Request limits if needed
-5. Click **Create**
 
 ### Creating Sub-Teams (Optional)
 
@@ -90,15 +92,16 @@ Gateway. Each app gets its own unique URL and API key.
      Support Bot")
    - **Team**: Select which team owns this app
    - **Provider**: Choose your LLM provider (for example, OpenAI)
-   - **Model**: Select the specific model (for example, GPT-4o) for completions
-     and/or embeddings
+   - **Completions**: Select the model for chat completions (for example,
+     GPT-4o)
+   - **Embeddings**: Select the model for embeddings (optional)
 3. Set application-level budgets:
    - **Daily Limit**: (for example, $1/day for a hackathon project)
    - **Monthly Limit**: (for example, $10/month)
 4. Enable **Semantic Caching** (optional):
    - Caches similar prompts to reduce costs and improve performance
    - Best for applications with repeated queries
-5. Click **Create**
+5. Click **Create App**
 
 ### Access Your App Credentials
 
