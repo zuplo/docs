@@ -353,6 +353,7 @@ export const documentation: Navigation = [
       "articles/environment-variables",
       "articles/branch-based-deployments",
       "articles/testing",
+      "articles/troubleshooting",
       "articles/terraform",
       "articles/custom-code-patterns",
       {
