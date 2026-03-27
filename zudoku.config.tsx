@@ -1,9 +1,7 @@
 import type { ZudokuConfig, ZudokuPlugin } from "zudoku";
-import { aiGateway, apiGateway, devPortal, platform } from "./sidebar.js";
-import { guides } from "./sidebar.guides.js";
+import { documentation } from "./sidebar.js";
 import { mdxComponents } from "./src/components.js";
 import { HeadNavigation } from "./src/components/HeadNavigation.js";
-import { LandingPage } from "./src/pages/LandingPage.js";
 
 const inkeepMetadataPlugin: ZudokuPlugin = {
   getHead: ({ location }) => {
@@ -65,7 +63,6 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
           <script>
             {`window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };`}
           </script>
-          <script src="https://static.claydar.com/init.v1.js?id=cAbtSg98sY"></script>
         </>
       ),
     },
@@ -88,39 +85,10 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
   },
   navigation: [
     {
-      type: "custom-page",
-      path: "/",
-      element: <LandingPage />,
-    },
-    {
       type: "category",
-      label: "API Management",
-      link: "/api-management/introduction",
-      items: apiGateway,
-    },
-    {
-      type: "category",
-      label: "AI Gateway",
-      link: "/ai-gateway/introduction",
-      items: aiGateway,
-    },
-    {
-      type: "category",
-      label: "Developer Portal",
-      link: "/dev-portal/introduction",
-      items: devPortal,
-    },
-    {
-      type: "category",
-      label: "Platform",
-      link: "/articles/hosting-options",
-      items: platform,
-    },
-    {
-      type: "category",
-      label: "Guides",
-      link: "/guides/overview",
-      items: guides,
+      label: "Documentation",
+      link: "/home",
+      items: documentation,
     },
     {
       type: "link",

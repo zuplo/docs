@@ -17,10 +17,75 @@ This is the most popular option and is used by companies like Supabase,
 Firebase, and Stripe to secure their own APIs. In this solution the backend
 requires a secret that's known only by the gateway. This is usually an opaque
 key sent as a header on every request to the origin. Zuplo adds this to the
-request - the client is never aware of the secret. An example of how to set this
-up, is show in the
-[Securing your backend with a Shared Secret](./securing-backend-shared-secret.mdx)
-article.
+request - the client is never aware of the secret.
+
+### Step 1: Set an environment variable
+
+Set an [environment variable](./environment-variables.mdx) in your Zuplo
+project. This variable is a secret that only your Zuplo project and your backend
+know. It is sent as a header on every request to your backend API.
+
+Open the **Settings** section of your project and select **Environment
+Variables**. Create a new variable and name it `BACKEND_SECRET`. Set the value
+to a secure, random value. Ensure that the value is marked as a secret.
+
+![Set Environment Variable](../../public/media/securing-backend-shared-secret/image.png)
+
+### Step 2: Create a set header policy
+
+Create a policy that sets the `BACKEND_SECRET` as a header on the request to
+your backend API. This policy is an inbound policy that runs before the request
+is sent to your backend.
+
+Navigate to the route you want to secure and add a new policy. Select the **Add
+or Set Request Headers** policy type and configure it as follows:
+
+![Set Header Policy](../../public/media/securing-backend-shared-secret/image-1.png)
+
+The configuration uses the environment variable via the `$env(BACKEND_SECRET)`
+selector as shown below.
+
+```json
+{
+  "name": "set-backend-secret",
+  "policyType": "set-headers-inbound",
+  "handler": {
+    "export": "SetHeadersInboundPolicy",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "headers": [
+        {
+          "name": "backend-secret",
+          "value": "$env(BACKEND_SECRET)"
+        }
+      ]
+    }
+  }
+}
+```
+
+Add this policy to any of the routes in your API that call your secure backend.
+
+### Step 3: Verify the secret on your backend
+
+Verify the secret on your backend. The implementation depends on the framework
+and language you use, but the typical pattern is to use middleware to check the
+header value. If the header does not match the secret, return a 401 Unauthorized
+response.
+
+An example using a Node.js Express middleware:
+
+```js
+const express = require("express");
+const app = express();
+
+app.use((req, res, next) => {
+  if (req.headers["backend-secret"] !== process.env.BACKEND_SECRET) {
+    return res.status(401).send("Unauthorized");
+  }
+  next();
+});
+```
 
 ## 2/ Federated Authentication
 

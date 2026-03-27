@@ -302,9 +302,36 @@ SpacerNode.displayName = "SpacerNode";
 // Using React Flow's recommended sub-flow pattern
 const GroupNode = memo(({ data }: { data: { label: string } }) => {
   return (
-    <div className="absolute top-1 left-2 text-xs text-gray-500 font-medium">
-      {data.label}
-    </div>
+    <>
+      <div className="absolute top-1 left-2 text-xs text-gray-500 font-medium">
+        {data.label}
+      </div>
+      {/* Handles so edges can connect to the group boundary */}
+      <Handle
+        id="left-target"
+        type="target"
+        position={Position.Left}
+        className="!bg-transparent !w-0 !h-0 !border-0 !min-w-0 !min-h-0"
+      />
+      <Handle
+        id="left-source"
+        type="source"
+        position={Position.Left}
+        className="!bg-transparent !w-0 !h-0 !border-0 !min-w-0 !min-h-0"
+      />
+      <Handle
+        id="right-target"
+        type="target"
+        position={Position.Right}
+        className="!bg-transparent !w-0 !h-0 !border-0 !min-w-0 !min-h-0"
+      />
+      <Handle
+        id="right-source"
+        type="source"
+        position={Position.Right}
+        className="!bg-transparent !w-0 !h-0 !border-0 !min-w-0 !min-h-0"
+      />
+    </>
   );
 });
 GroupNode.displayName = "GroupNode";

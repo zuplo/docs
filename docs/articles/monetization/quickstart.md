@@ -26,7 +26,7 @@ By the end of this quickstart, you have:
 - **Quota enforcement** that limits or bills for overages based on each
   customer's plan
 
-![The final pricing table that this quickstart creates](/media/monetization/pricing-table.png)
+![The final pricing table that this quickstart creates](../../../public/media/monetization/pricing-table.png)
 
 You'll set up two example plans (Developer and Pro) with tiered pricing,
 included request quotas, and per-request overage billing.
@@ -187,7 +187,7 @@ For the **API Requests** rate card on each plan, set **Tier 1** Last Unit to the
 The **Usage Limit** should match the "Included Requests" value. Enable **Soft
 limit** on all plans.
 
-![Tiered units setup](/media/monetization/tiered-units.png)
+![Tiered units setup](../../../public/media/monetization/tiered-units.png)
 
 ### Reorder your plans
 
@@ -244,7 +244,7 @@ directory.
 2. Select the **Monetization** policy from the list of policies, and click
    **Continue**.
 
-![Monetization policy in the policy picker list](/media/monetization/monetization-policy.png)
+![Monetization policy in the policy picker list](../../../public/media/monetization/monetization-policy.png)
 
 3. In the **Meters** configuration field, you can keep the default value of
    `requests` set `1` to match the meter you created in _Step 4_. This field
@@ -274,7 +274,7 @@ Next, you need to apply the Monetization policy to some or all of your routes.
 3. Choose individual routes that you want to count towards the metered requests,
    or click **Select All** to add the policy to every route in the project.
 
-![Adding the policy to add routes](/media/monetization/policy-add-routes.png)
+![Adding the policy to add routes](../../../public/media/monetization/policy-add-routes.png)
 
 4. Click on **Apply**.
 5. Click on **Save** in your project to publish the changes
@@ -302,7 +302,7 @@ end-to-end flow.
 4. After the subscription is confirmed, you can see your usage dashboard and API
    key.
 
-![The subscription page in the Developer Portal](/media/monetization/subscribed-state.png)
+![The subscription page in the Developer Portal](../../../public/media/monetization/subscribed-state.png)
 
 ### Test: Make API calls
 

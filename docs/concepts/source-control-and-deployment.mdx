@@ -1,0 +1,229 @@
+---
+title: Source Control and Deployment
+---
+
+Zuplo uses a GitOps model where your API configuration lives in source control
+and deployments happen automatically when you push code. This page explains how
+the working copy, source control, branches, environments, and deployment options
+fit together.
+
+## Working copy
+
+Every developer gets a personal **working copy** environment when they use the
+Zuplo Portal. The working copy is a cloud-hosted development environment that
+deploys instantly when you save a file. You can think of it as your personal
+cloud sandbox.
+
+Working copy environments use a `.dev` URL (for example,
+`my-project-abc123.zuplo.dev`) and are optimized for rapid iteration rather than
+production traffic.
+
+:::note
+
+Working copy environments are available on the managed edge deployment model.
+For managed dedicated deployments, use
+[local development](../articles/local-development.mdx) instead.
+
+:::
+
+### Before connecting source control
+
+When you first create a project, your working copy is standalone. You can edit
+files in the portal, and Zuplo saves them. There is no Git repository involved
+yet. This is fine for prototyping and exploring Zuplo, but for team
+collaboration and production deployments you need source control.
+
+### After connecting source control
+
+When you connect a Git repository, the portal gains push/pull capabilities. You
+can commit your working copy changes to Git and pull changes from teammates.
+Your working copy becomes a personal branch-like workspace layered on top of the
+repository.
+
+## Connecting source control
+
+Zuplo supports four Git providers: GitHub, GitLab, Bitbucket, and Azure DevOps.
+The integration has two parts, and which parts you get depends on your provider.
+
+| Capability            | GitHub | GitLab           | Bitbucket        | Azure DevOps     |
+| --------------------- | ------ | ---------------- | ---------------- | ---------------- |
+| Portal push/pull      | Yes    | Yes (Enterprise) | Yes (Enterprise) | Yes (Enterprise) |
+| Automatic deployments | Yes    | No -- use CLI    | No -- use CLI    | No -- use CLI    |
+
+**GitHub** provides the most complete experience with both portal integration
+and automatic deployments on every push.
+
+**GitLab, Bitbucket, and Azure DevOps** provide portal integration for pushing
+and pulling code but do **not** include automatic deployments. You must set up
+CI/CD pipelines that call the Zuplo CLI to deploy. See
+[Custom CI/CD](../articles/custom-ci-cd.mdx) for details.
+
+## Branch to environment mapping
+
+Every Git branch maps to a Zuplo environment. The repository's default branch
+(typically `main`) maps to the **Production** environment. Every other branch
+maps to a **Preview** environment.
+
+<Diagram height="h-80">
+  <DiagramGroup id="git" label="Git Repository">
+    <DiagramNode id="main" variant="green">
+      main (default branch)
+    </DiagramNode>
+    <DiagramNode id="staging">staging</DiagramNode>
+    <DiagramNode id="feature">feature/auth</DiagramNode>
+  </DiagramGroup>
+  <DiagramGroup id="zuplo" label="Zuplo Environments">
+    <DiagramNode id="prod" variant="green">
+      Production
+    </DiagramNode>
+    <DiagramNode id="preview-staging" variant="blue">
+      Preview (staging)
+    </DiagramNode>
+    <DiagramNode id="preview-feature" variant="blue">
+      Preview (feature/auth)
+    </DiagramNode>
+  </DiagramGroup>
+  <DiagramEdge from="main" to="prod" />
+  <DiagramEdge from="staging" to="preview-staging" />
+  <DiagramEdge from="feature" to="preview-feature" />
+</Diagram>
+
+The environment name matches the branch name. For example, pushing to a branch
+called `staging` creates an environment named `staging` with a URL like
+`https://my-project-staging-abc1234.zuplo.app`.
+
+:::tip
+
+There is **no technical difference** between Production and Preview
+environments. Both run on the same infrastructure with identical performance
+characteristics. The distinction controls which set of
+[environment variables](../articles/environment-variables.mdx) and
+[API key buckets](../articles/api-key-buckets.mdx) apply by default. Some teams
+use Preview environments to serve production traffic for different regions or
+tenants.
+
+:::
+
+For full details on branch-based deployments, see
+[Branch-Based Deployments](../articles/branch-based-deployments.mdx).
+
+## Deployment options
+
+Zuplo offers two ways to deploy your API: the built-in GitHub integration and
+the Zuplo CLI.
+
+### GitHub integration (automatic)
+
+With GitHub connected, every push to any branch triggers an automatic
+deployment. Push to `main` and your Production environment updates within
+seconds. Push to a feature branch and a Preview environment is created or
+updated automatically.
+
+This is the recommended setup for most teams. No CI/CD configuration is
+required.
+
+**[Set up GitHub integration](../articles/source-control-setup-github.mdx)**
+
+### CLI deployment (for all other providers)
+
+For GitLab, Bitbucket, Azure DevOps, or any other Git provider, use the Zuplo
+CLI in your CI/CD pipeline to deploy.
+
+```bash
+npx zuplo deploy --api-key $ZUPLO_API_KEY
+```
+
+:::warning
+
+GitLab, Bitbucket, and Azure DevOps do **not** have built-in automatic
+deployments. You **must** configure CI/CD pipelines that run `zuplo deploy` to
+deploy your API. Without this, pushing code to your repository does not trigger
+a deployment.
+
+:::
+
+See the provider-specific CI/CD guides:
+
+- [GitLab CI/CD](../articles/custom-ci-cd-gitlab.mdx)
+- [Bitbucket Pipelines](../articles/custom-ci-cd-bitbucket.mdx)
+- [Azure DevOps Pipelines](../articles/custom-ci-cd-azure.mdx)
+- [CircleCI](../articles/custom-ci-cd-circleci.mdx)
+
+## CLI deploy and environment naming
+
+When you run `zuplo deploy`, the CLI determines the environment name using the
+following logic:
+
+1. If you pass `--environment my-env`, the CLI uses `my-env` as the environment
+   name.
+2. If you do not pass `--environment`, the CLI uses the **current Git branch
+   name** as the environment name.
+
+This means in a typical CI/CD pipeline, the deploy command automatically names
+the environment after the branch being built without any extra configuration.
+
+```bash
+# On the "staging" branch, this creates/updates the "staging" environment
+npx zuplo deploy --api-key $ZUPLO_API_KEY
+
+# Override the environment name explicitly
+npx zuplo deploy --api-key $ZUPLO_API_KEY --environment production
+```
+
+For full CLI deploy reference, see [CLI: deploy](../cli/deploy.mdx).
+
+## Environment URLs
+
+Each environment gets a unique URL based on the project name, environment name,
+and a unique identifier:
+
+| Environment  | Example URL                                    |
+| ------------ | ---------------------------------------------- |
+| Production   | `https://my-project-main-abc1234.zuplo.app`    |
+| Preview      | `https://my-project-staging-def5678.zuplo.app` |
+| Working Copy | `https://my-project-abc123.zuplo.dev`          |
+
+Production and Preview environments use the `.zuplo.app` domain. Working copy
+environments use the `.zuplo.dev` domain. You can configure
+[custom domains](../articles/custom-domains.mdx) for any non-working-copy
+environment.
+
+## Putting it all together
+
+The typical workflow from development to production looks like this:
+
+<Diagram direction="vertical" height="h-96">
+  <DiagramNode id="develop" variant="blue">
+    Develop (local or working copy)
+  </DiagramNode>
+  <DiagramNode id="push">Push to feature branch</DiagramNode>
+  <DiagramNode id="preview" variant="orange">
+    Preview environment deployed
+  </DiagramNode>
+  <DiagramNode id="merge">Merge to main</DiagramNode>
+  <DiagramNode id="production" variant="green">
+    Production environment updated
+  </DiagramNode>
+  <DiagramEdge from="develop" to="push" />
+  <DiagramEdge from="push" to="preview" />
+  <DiagramEdge from="preview" to="merge" />
+  <DiagramEdge from="merge" to="production" />
+</Diagram>
+
+1. **Develop** locally with `zuplo dev` or in the portal working copy.
+2. **Push** your changes to a feature branch. If using GitHub, a Preview
+   environment deploys automatically. If using another provider, your CI/CD
+   pipeline runs `zuplo deploy`.
+3. **Test** against the Preview environment URL.
+4. **Merge** to the default branch. The Production environment updates
+   automatically (GitHub) or via your CI/CD pipeline (other providers).
+
+## Next steps
+
+- [Environments](../articles/environments.mdx) -- Environment types and
+  configuration
+- [Source Control & Deployments](../articles/source-control.mdx) -- Provider
+  setup guides
+- [Custom CI/CD](../articles/custom-ci-cd.mdx) -- Build your own deployment
+  pipeline
+- [CLI: deploy](../cli/deploy.mdx) -- Full CLI deploy reference
