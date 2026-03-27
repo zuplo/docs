@@ -8,44 +8,41 @@ for your use case.
 
 ## Pipeline overview
 
-```
-Client Request
-     │
-     ▼
-┌─────────────────────┐
-│  Pre-Routing Hooks   │  Global hooks that run before route matching
-└─────────┬───────────┘
-          ▼
-┌─────────────────────┐
-│   Route Matching     │  Match by HTTP method + path from OpenAPI spec
-└─────────┬───────────┘
-          ▼
-┌─────────────────────┐
-│   Request Hooks      │  Global hooks that run after routing
-└─────────┬───────────┘
-          ▼
-┌─────────────────────┐
-│  Inbound Policies    │  Authentication, rate limiting, validation, etc.
-└─────────┬───────────┘
-          ▼
-┌─────────────────────┐
-│      Handler         │  Forward to backend, custom logic, or redirect
-└─────────┬───────────┘
-          ▼
-┌─────────────────────┐
-│  Outbound Policies   │  Transform responses, add headers, etc.
-└─────────┬───────────┘
-          ▼
-┌─────────────────────┐
-│   Response Hooks     │  Modify response before sending
-└─────────┬───────────┘
-          ▼
-┌─────────────────────┐
-│ Response Final Hooks │  Logging, analytics (read-only)
-└─────────┬───────────┘
-          ▼
-     Client Response
-```
+<Diagram direction="vertical" height="h-[500px]">
+  <DiagramNode id="request">Client Request</DiagramNode>
+  <DiagramNode id="pre-routing" variant="blue">
+    Pre-Routing Hooks
+  </DiagramNode>
+  <DiagramNode id="routing">Route Matching</DiagramNode>
+  <DiagramNode id="request-hooks" variant="blue">
+    Request Hooks
+  </DiagramNode>
+  <DiagramNode id="inbound" variant="zuplo">
+    Inbound Policies
+  </DiagramNode>
+  <DiagramNode id="handler" variant="green">
+    Handler
+  </DiagramNode>
+  <DiagramNode id="outbound" variant="zuplo">
+    Outbound Policies
+  </DiagramNode>
+  <DiagramNode id="response-hooks" variant="blue">
+    Response Hooks
+  </DiagramNode>
+  <DiagramNode id="final-hooks" variant="blue">
+    Final Hooks
+  </DiagramNode>
+  <DiagramNode id="response">Client Response</DiagramNode>
+  <DiagramEdge from="request" to="pre-routing" />
+  <DiagramEdge from="pre-routing" to="routing" />
+  <DiagramEdge from="routing" to="request-hooks" />
+  <DiagramEdge from="request-hooks" to="inbound" />
+  <DiagramEdge from="inbound" to="handler" />
+  <DiagramEdge from="handler" to="outbound" />
+  <DiagramEdge from="outbound" to="response-hooks" />
+  <DiagramEdge from="response-hooks" to="final-hooks" />
+  <DiagramEdge from="final-hooks" to="response" />
+</Diagram>
 
 ## Stages
 

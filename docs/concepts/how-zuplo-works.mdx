@@ -12,25 +12,25 @@ Zuplo, which applies policies (authentication, rate limiting, validation, etc.),
 then forwards the request to your backend. Responses pass back through outbound
 policies before reaching the client.
 
-```
-Clients (browsers, mobile, servers, IoT)
-              │
-              ▼
-┌───────────────────────────┐
-│     Zuplo API Gateway     │
-│  ┌─────────────────────┐  │
-│  │  Inbound Policies   │  │  Authentication, rate limiting, validation
-│  ├─────────────────────┤  │
-│  │      Handler        │  │  Forward to backend, custom logic
-│  ├─────────────────────┤  │
-│  │  Outbound Policies  │  │  Transform responses, add headers
-│  └─────────────────────┘  │
-└───────────────────────────┘
-              │
-              ▼
-       Your Backend API
-  (AWS, Azure, GCP, on-premise)
-```
+<Diagram height="h-72">
+  <DiagramNode id="clients">Clients</DiagramNode>
+  <DiagramGroup id="zuplo" label="Zuplo API Gateway">
+    <DiagramNode id="inbound" variant="zuplo">
+      Inbound Policies
+    </DiagramNode>
+    <DiagramNode id="handler" variant="zuplo">
+      Handler
+    </DiagramNode>
+    <DiagramNode id="outbound" variant="zuplo">
+      Outbound Policies
+    </DiagramNode>
+  </DiagramGroup>
+  <DiagramNode id="backend">Your Backend API</DiagramNode>
+  <DiagramEdge from="clients" to="inbound" />
+  <DiagramEdge from="inbound" to="handler" />
+  <DiagramEdge from="handler" to="outbound" />
+  <DiagramEdge from="outbound" to="backend" />
+</Diagram>
 
 Zuplo is cloud-agnostic. It works with backends running on any cloud provider or
 private infrastructure. Multiple
