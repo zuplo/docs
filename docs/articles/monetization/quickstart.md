@@ -7,8 +7,7 @@ sidebar_label: Quickstart
 
 API Monetization is in beta and free to try. The APIs are stable but should be
 evaluated in non-production environments first. To go to production, contact
-[sales@zuplo.com](mailto:sales@zuplo.com). Production pricing has not yet been
-announced.
+[sales@zuplo.com](mailto:sales@zuplo.com).
 
 :::
 
@@ -29,8 +28,8 @@ By the end of this quickstart, you have:
 
 ![The final pricing table that this quickstart creates](/media/monetization/pricing-table.png)
 
-You'll set up three example plans (Developer, Pro, and Business) with tiered
-pricing, included request quotas, and per-request overage billing.
+You'll set up two example plans (Developer and Pro) with tiered pricing,
+included request quotas, and per-request overage billing.
 
 ## Prerequisites
 
@@ -122,7 +121,7 @@ Feature** for each of the following:
 
 ## Step 6: Create plans
 
-Plans bring together your features with pricing and entitlements. Create three
+Plans bring together your features with pricing and entitlements. Create two
 plans to give your customers options.
 
 ### Create the Developer plan
@@ -133,40 +132,55 @@ plans to give your customers options.
    - **Key**: `developer`
 3. Click **Create Draft**.
 4. Configure the rate cards by selecting features from the **Add feature**
-   dropdown in the **Features & Rate Cards** section of the **Default** phase:
+   dropdown in the **Features & Rate Cards**:
 
-   **Monthly Fee** rate card:
-   - **Pricing Model**: Flat fee
-   - **Billing Cadence**: Monthly
-   - **Payment Term**: In advance
-   - **Price**: $9.99
-   - **Entitlement**: No entitlement
+   ![The add feature dropdown showing the location of the Monthly Fee feature](/media/monetization/add-feature-dropdown.png)
+
+   Click on the **Monthly Fee** feature and set it up as shown below:
+
+   **Monthly Fee**:
+
+   | Setting         | Value          |
+   | --------------- | -------------- |
+   | Pricing Model   | Flat fee       |
+   | Billing Cadence | Monthly        |
+   | Payment Term    | In advance     |
+   | Price           | $9.99          |
+   | Entitlement     | No entitlement |
+
+   Next, click **Add feature** again and choose the **API Requests** feature and
+   set it up as shown below:
 
    **API Requests** rate card:
-   - **Pricing Model**: Tiered
-   - **Billing Cadence**: Monthly
-   - **Price Mode**: Graduated
-   - **Tier 1**: Click `+ add another tier` and set First Unit `0`, Last Unit
-     `1000`, Unit Price $0, Flat Price $0
-   - **Tier 2**: First Unit `1001`, to infinity, Unit Price $0.10, Flat Price $0
-   - **Entitlement**: Metered (track usage)
-   - **Usage Limit**: `1000`
-   - **Soft limit**: enabled
+
+   | Setting         | Value                                                                                             |
+   | --------------- | ------------------------------------------------------------------------------------------------- |
+   | Pricing Model   | Tiered                                                                                            |
+   | Billing Cadence | Monthly                                                                                           |
+   | Price Mode      | Graduated                                                                                         |
+   | Tier 1          | Click `+ add another tier` and set First Unit `0`, Last Unit `1000`, Unit Price $0, Flat Price $0 |
+   | Tier 2          | First Unit `1001`, to infinity, Unit Price $0.10, Flat Price $0                                   |
+   | Entitlement     | Metered (track usage)                                                                             |
+   | Usage Limit     | `1000`                                                                                            |
+   | Soft limit      | Enabled                                                                                           |
+
+   Your **Features & Rate Cards** section should now look like this:
+
+   ![A completed features and rate cards section](/media/monetization/features-rate-cards-complete.png)
 
 5. Click **Save**.
 
-### Create the Pro and Business plans
+### Create additional plans
 
 Repeat the same steps above to create the **Pro** and **Business** plans using
 the values in the table below. The only structural differences are the pricing
-amounts and that Pro and Business include a **Metadata Support** rate card (set
-**Pricing Model** to `Free` and **Entitlement** to `Boolean (on/off)`).
+amounts and that Pro includes a **Metadata Support** rate card (set **Pricing
+Model** to `Free` and **Entitlement** to `Boolean (on/off)`).
 
 | Plan      | Key         | Monthly Fee | Included Requests | Overage Rate | Metadata Support |
 | --------- | ----------- | ----------- | ----------------- | ------------ | ---------------- |
 | Developer | `developer` | $9.99       | 1,000             | $0.10/req    | No               |
 | Pro       | `pro`       | $19.99      | 5,000             | $0.05/req    | Yes              |
-| Business  | `business`  | $29.99      | 10,000            | $0.01/req    | Yes              |
 
 For the **API Requests** rate card on each plan, set **Tier 1** Last Unit to the
 "Included Requests" value and **Tier 2** Unit Price to the "Overage Rate" value.
@@ -177,9 +191,11 @@ limit** on all plans.
 
 ### Reorder your plans
 
-The Pricing Table in the left sidebar shows determines how they appear on the
+The **Pricing Table** in the left sidebar determines how plans appear on the
 pricing page. **Drag and drop** the plans using the handle on the top-left
-corner of each card to reorder them as **Developer**, **Pro**, **Business**.
+corner of each card to reorder them as **Developer** and **Pro**.
+
+![Reordering plans in the Pricing Table tab](/media/monetization/reorder-plans.png)
 
 ### Publish your plans
 
@@ -188,7 +204,7 @@ Each plan starts as a draft. Publish each one before customers can subscribe.
 1. On the **Pricing** tab, click the **...** context menu on the plan you want
    to publish.
 2. Select **Publish Plan**.
-3. Repeat for all three plans.
+3. Repeat for all plans.
 
 For more plan configurations (including trial periods and multiple tiers), see
 [Plan Examples](./plan-examples.mdx).
