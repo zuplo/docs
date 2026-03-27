@@ -339,6 +339,7 @@ export const documentation: Navigation = [
       "articles/policies",
       "articles/openapi",
       "articles/environments",
+      "concepts/source-control-and-deployment",
       "articles/development-options",
     ],
   },
