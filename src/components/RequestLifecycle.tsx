@@ -377,7 +377,7 @@ function DetailContent({
             {stage.label}
           </h3>
           {stage.scope && (
-            <span className="text-[10px] font-medium px-2 py-0.5 rounded-full border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">
+            <span className="text-[10px] font-medium px-2 py-0.5 rounded-full border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400">
               {stage.scope}
             </span>
           )}
@@ -385,7 +385,7 @@ function DetailContent({
       </div>
 
       <div className="mb-4">
-        <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-2 border-b border-gray-100 dark:border-gray-800 pb-1.5">
+        <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-500 dark:text-gray-400 mb-2 border-b border-gray-200 dark:border-gray-800 pb-1.5">
           When to use
         </h4>
         <p
@@ -397,7 +397,7 @@ function DetailContent({
 
       {stage.details && (
         <div className="mb-4">
-          <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-2 border-b border-gray-100 dark:border-gray-800 pb-1.5">
+          <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-500 dark:text-gray-400 mb-2 border-b border-gray-200 dark:border-gray-800 pb-1.5">
             How it works
           </h4>
           <div
@@ -410,7 +410,7 @@ function DetailContent({
 
       {stage.links.length > 0 && (
         <div>
-          <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-2 border-b border-gray-100 dark:border-gray-800 pb-1.5">
+          <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-500 dark:text-gray-400 mb-2 border-b border-gray-200 dark:border-gray-800 pb-1.5">
             Learn more
           </h4>
           <div
@@ -426,7 +426,7 @@ function DetailContent({
                   {link.label} &rarr;
                 </span>
                 {link.description && (
-                  <span className="block text-[11px] text-gray-400 dark:text-gray-500 mt-0.5">
+                  <span className="block text-[12px] text-gray-500 dark:text-gray-400 mt-0.5">
                     {link.description}
                   </span>
                 )}
