@@ -9,5 +9,5 @@ pre-commit:
     guides-sync:
       glob: "docs/guides/**/*.{md,mdx}"
       run: |
-        npm run guides:sync
+        pnpm run guides:sync
         git add sidebar.guides.ts

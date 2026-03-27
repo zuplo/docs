@@ -5,12 +5,12 @@ code in this repository.
 
 ## Commands
 
-- Build: `npm run build` - Generate static content
-- Development: `npm run dev` - Start local development server
-- Lint (links): `npm run check` - Check assets and external links
+- Build: `pnpm run build` - Generate static content
+- Development: `pnpm run dev` - Start local development server
+- Lint (links): `pnpm run check` - Check assets and external links
 - Lint (text): `make lint` - Run Vale for style and errors
-- Format: `npm run format` - Run prettier
-- Typecheck: `npm run typecheck` - Run TypeScript checks
+- Format: `pnpm run format` - Run prettier
+- Typecheck: `pnpm run typecheck` - Run TypeScript checks (uses tsgo)
 
 ## Style Guidelines
 

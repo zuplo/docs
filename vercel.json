@@ -3,9 +3,9 @@
   "framework": null,
   "cleanUrls": true,
   "trailingSlash": false,
-  "devCommand": "npm run dev",
-  "buildCommand": "npm run build",
-  "installCommand": "npm install",
+  "devCommand": "pnpm run dev",
+  "buildCommand": "pnpm run typecheck && pnpm run build",
+  "installCommand": "pnpm install",
   "outputDirectory": "dist",
   "redirects": [
     {
