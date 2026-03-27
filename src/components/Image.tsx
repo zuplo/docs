@@ -13,12 +13,11 @@ export const Image = (
   }
 
   const url = useMemo(() => {
-    if (!props.src) {
+    if (!props.src || !props.src.startsWith("http")) {
       return null;
     }
     try {
-      const url = new URL(props.src);
-      return url;
+      return new URL(props.src);
     } catch (e) {
       console.error("Error parsing URL", props.src);
       return null;
