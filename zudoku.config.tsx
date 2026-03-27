@@ -2,7 +2,6 @@ import type { ZudokuConfig, ZudokuPlugin } from "zudoku";
 import { documentation } from "./sidebar.js";
 import { mdxComponents } from "./src/components.js";
 import { HeadNavigation } from "./src/components/HeadNavigation.js";
-import { LandingPage } from "./src/pages/LandingPage.js";
 
 const inkeepMetadataPlugin: ZudokuPlugin = {
   getHead: ({ location }) => {
@@ -87,14 +86,9 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
   },
   navigation: [
     {
-      type: "custom-page",
-      path: "/",
-      element: <LandingPage />,
-    },
-    {
       type: "category",
       label: "Documentation",
-      link: "/api-management/introduction",
+      link: "/index",
       items: documentation,
     },
     {

@@ -292,6 +292,11 @@ export const documentation: Navigation = [
     type: "filter",
     placeholder: "Filter documentation",
   },
+  {
+    type: "doc",
+    file: "index",
+    label: "Home",
+  },
   "api-management/introduction",
   {
     type: "category",
