@@ -318,6 +318,8 @@ Head back to the Developer Portal to see your usage dashboard update with each
 call. You should see the `API Requests` meter count increase toward your plan's
 limit.
 
+![Usage of requests in the Developer Portal](/media/monetization/usage.png)
+
 ## Next steps
 
 Now you have run through the process of setting up Monetization on an example
