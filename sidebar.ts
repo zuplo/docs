@@ -162,6 +162,7 @@ const policies: Navigation = [
       "articles/multiple-auth-policies",
       "articles/graphql-security",
       "articles/per-user-rate-limits-using-db",
+      "articles/composite-policy-reference",
     ],
   },
 ];
