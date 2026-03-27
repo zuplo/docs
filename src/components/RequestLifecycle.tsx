@@ -311,9 +311,7 @@ export function RequestLifecycle() {
               <div key={stage.id} className="flex items-center">
                 {/* Dot column - fixed width, dot always vertically centered */}
                 <div className="w-6 shrink-0 self-stretch flex flex-col items-center">
-                  <div
-                    className={`w-[2px] flex-1 ${i === 0 ? "bg-transparent" : prevColor}`}
-                  />
+                  {i > 0 && <div className={`w-[2px] flex-1 ${prevColor}`} />}
                   <div
                     className={[
                       "rounded-full shrink-0",
@@ -321,9 +319,7 @@ export function RequestLifecycle() {
                       c.dot,
                     ].join(" ")}
                   />
-                  <div
-                    className={`w-[2px] flex-1 ${isLast ? "bg-transparent" : c.line}`}
-                  />
+                  {!isLast && <div className={`w-[2px] flex-1 ${c.line}`} />}
                 </div>
 
                 {/* Connector + box */}
