@@ -1,0 +1,301 @@
+---
+title: Troubleshooting Slow API Response Times
+sidebar_label: Troubleshooting Slow Responses
+description:
+  Diagnose and fix slow API response times through your Zuplo gateway. Covers
+  backend latency, cold starts, DNS, policy overhead, and geographic routing.
+---
+
+When API responses through your Zuplo gateway are slower than expected, a
+systematic approach helps you identify the root cause quickly. This guide walks
+you through diagnosing latency issues — whether the source is the gateway, your
+backend, the network, or something else entirely.
+
+## Understanding API Gateway Latency
+
+Every API gateway adds some processing overhead to requests. For Zuplo, this
+overhead is minimal:
+
+- **Base latency**: Approximately 20–30ms with no policies enabled
+- **Per policy**: Most policies add 1–5ms each
+- **Complex policies**: Authentication, rate limiting, or custom code that makes
+  external calls can add 5–15ms
+
+Zuplo runs at the edge across 300+ data centers worldwide, so requests are
+processed close to the caller. In many cases, edge deployment actually _reduces_
+total latency compared to routing all traffic to a single-region backend.
+
+If you're seeing response times significantly higher than your backend's
+response time plus the expected gateway overhead, something else is contributing
+to the latency. The sections below help you identify what.
+
+## Diagnostic Checklist
+
+Work through these steps in order. Each one helps narrow down the source of the
+slowness.
+
+### 1. Measure Your Backend Directly
+
+Before investigating the gateway, confirm your backend's baseline response time
+by calling it directly (bypassing Zuplo):
+
+```bash
+curl -o /dev/null -s -w "Total time: %{time_total}s\nDNS: %{time_namelookup}s\nConnect: %{time_connect}s\nTTFB: %{time_starttransfer}s\n" https://your-backend.example.com/endpoint
+```
+
+Record the total time and time-to-first-byte (TTFB). The gateway cannot respond
+faster than the backend — if your backend takes 2 seconds, the response through
+Zuplo takes at least 2 seconds plus gateway overhead.
+
+### 2. Measure the Same Request Through Zuplo
+
+Run the same curl command against your Zuplo endpoint:
+
+```bash
+curl -o /dev/null -s -w "Total time: %{time_total}s\nDNS: %{time_namelookup}s\nConnect: %{time_connect}s\nTTFB: %{time_starttransfer}s\n" -H "Authorization: Bearer YOUR_TOKEN" https://your-api.zuplo.app/endpoint
+```
+
+Compare the two results. If the difference is within 20–50ms, the gateway is
+performing normally. If the difference is hundreds of milliseconds or more,
+continue with the steps below.
+
+### 3. Check Whether the Slowness Is Consistent
+
+Run the request through Zuplo multiple times:
+
+```bash
+for i in {1..10}; do
+  curl -o /dev/null -s -w "Request $i: %{time_total}s\n" -H "Authorization: Bearer YOUR_TOKEN" https://your-api.zuplo.app/endpoint
+done
+```
+
+Look at the pattern:
+
+- **Only the first request is slow**: This likely indicates a
+  [cold start](#cold-starts).
+- **Every request is slow**: The issue is probably your backend, network path,
+  or policy configuration.
+- **Intermittent slowness**: This could be DNS resolution, backend variability,
+  or geographic routing differences.
+
+### 4. Test from Multiple Locations
+
+Your latency experience depends on where requests originate. A request from the
+same continent as your backend has a very different network path than one from
+across the globe. Use tools like
+[curl from different machines](https://www.whatsmydns.net/) or distributed
+testing services to confirm whether the slowness is location-specific.
+
+## Common Causes and Solutions
+
+### Backend Response Time
+
+The most common cause of slow responses through any API gateway is a slow
+backend. The gateway adds its processing time _on top of_ whatever the backend
+takes.
+
+**How to identify**: Compare direct backend response times with gateway response
+times. If both are slow, the issue is the backend.
+
+**Solution**: Optimize your backend endpoints. Consider using Zuplo's
+[Caching policy](../policies/caching-inbound.mdx) to cache responses for
+endpoints that don't change frequently:
+
+```json title="config/policies.json"
+{
+  "name": "my-caching-inbound-policy",
+  "policyType": "caching-inbound",
+  "handler": {
+    "export": "CachingInboundPolicy",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "expirationSecondsTtl": 300,
+      "statusCodes": [200]
+    }
+  }
+}
+```
+
+For more fine-grained caching in custom code, use
+[ZoneCache](../programmable-api/zone-cache.mdx) to cache frequently accessed
+data like configuration or session information with low latency.
+
+### Geographic Distance Between Edge and Backend
+
+Zuplo processes requests at the edge location closest to the caller. If your
+backend is in a single region (for example, `us-east-1`), requests from users in
+Asia or Europe still need to travel to that region after reaching the nearest
+edge node.
+
+**How to identify**: Test from locations near your backend versus locations far
+from it. If latency scales with geographic distance, this is the cause.
+
+**Solutions**:
+
+- Deploy your backend in multiple regions
+- Use Zuplo's [Caching policy](../policies/caching-inbound.mdx) to serve cached
+  responses from the edge without reaching the backend
+- For internal or single-cloud traffic, consider
+  [Managed Dedicated](../dedicated/overview.mdx) deployment, which runs Zuplo
+  within your cloud provider's network for reduced latency by keeping traffic
+  within your infrastructure
+
+### DNS Resolution Delays
+
+Slow DNS resolution can add hundreds of milliseconds to request times,
+especially on the first request or when DNS records have short TTLs.
+
+**How to identify**: In the curl output, check the `time_namelookup` value. If
+it's over 100ms, DNS resolution is contributing to the latency.
+
+**Solution**: Ensure your backend's DNS records have reasonable TTL values (at
+least 60 seconds). If you're using a custom domain with Zuplo, verify the DNS
+configuration follows the [custom domains setup guide](./custom-domains.mdx).
+
+### Large Response Bodies
+
+Large response payloads take longer to transfer and serialize. A 10MB JSON
+response takes significantly longer than a 1KB response, regardless of the
+gateway.
+
+**How to identify**: Check the response body size of slow endpoints. If
+responses are consistently large (over 1MB), this may be a factor.
+
+**Solutions**:
+
+- Implement pagination in your API to return smaller response payloads
+- Use compression to reduce the size of response payloads over the network
+- Return only the fields the caller needs
+
+### Policy Execution Overhead
+
+While individual policies add minimal latency, a long chain of policies — or
+policies that make external API calls — can accumulate overhead.
+
+**How to identify**: Temporarily remove or disable policies one at a time and
+measure the response time after each change. If removing a specific policy
+significantly improves performance, that policy is the bottleneck.
+
+**Policy performance tiers**:
+
+- **Low impact (0–3ms)**: Header manipulation, simple validation, basic routing,
+  response caching (cache hits)
+- **Medium impact (3–10ms)**: API key authentication, rate limiting, request
+  logging, simple transformations
+- **Higher impact (10–20ms+)**: Large payload transformations, custom code with
+  external API calls
+
+:::tip
+
+Order your policies from least to most expensive, and use early-exit conditions
+where possible. For example, validate API keys before performing complex
+transformations. This way, unauthorized requests are rejected quickly without
+incurring the cost of downstream policies.
+
+:::
+
+### Cold Starts
+
+:::note
+
+Cold starts apply only to Zuplo's managed edge (serverless) deployment. If
+you're running Zuplo in a [Managed Dedicated](../dedicated/overview.mdx)
+environment, cold starts don't apply.
+
+:::
+
+On Zuplo's managed edge platform, the first request after a period of inactivity
+may experience a "cold start" — an additional 100–200ms of latency while a new
+worker initializes. After the first request, subsequent requests are served from
+warm workers with normal latency.
+
+**How to identify**: Only the first request (or first few requests) after a
+period of inactivity is slow. Subsequent requests are fast.
+
+**Solutions**:
+
+- **Keep-warm requests**: Send periodic synthetic requests to your API during
+  low-traffic periods to prevent workers from going cold. A simple scheduled
+  health check every few minutes is usually sufficient.
+- **Health check endpoints**: Set up a
+  [health check handler](./health-checks.mdx) and configure an external
+  monitoring service to ping it regularly. This keeps your gateway warm while
+  also monitoring availability.
+
+## Using Zuplo Observability Tools
+
+### Analytics Dashboard
+
+Zuplo's analytics dashboard provides at-a-glance visibility into your API's
+performance. Use it to:
+
+- Identify slow endpoints by reviewing request latency data
+- Filter by route, API key, or time period to isolate patterns
+- Spot error rate spikes that may correlate with latency issues
+- Track request volume trends that may indicate capacity-related slowness
+
+### Logging Integrations
+
+For deeper analysis, configure one of Zuplo's
+[logging integrations](./logging.mdx) to send request data to your preferred
+observability platform. Supported integrations include Datadog, New Relic,
+Splunk, AWS CloudWatch, Google Cloud Logging, and others.
+
+Each log entry includes the request ID (`zp-rid` header), which you can use to
+trace a specific request through the system. You can also measure and log
+execution time within custom policies to identify performance bottlenecks:
+
+```ts
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export default async function policy(
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  const start = Date.now();
+
+  // ... policy logic ...
+
+  const duration = Date.now() - start;
+  context.log.info(`Policy executed in ${duration}ms`);
+
+  return request;
+}
+```
+
+### Proactive Monitoring
+
+Set up [proactive monitoring](./monitoring-your-gateway.mdx) with health check
+endpoints for each backend and network configuration. Use an external monitoring
+service like Checkly, API Context, or Datadog Synthetics to continuously monitor
+response times and alert on degradation.
+
+## When to Contact Support
+
+If you've worked through the steps above and can't identify the source of
+latency, [contact Zuplo support](./support.mdx) with the following information:
+
+- **Your Zuplo project name and environment** (production, preview, etc.)
+- **The specific endpoint(s)** experiencing slow response times
+- **Curl output** showing both direct backend timing and timing through Zuplo
+  (use the curl commands from the [diagnostic checklist](#diagnostic-checklist)
+  above)
+- **Whether the issue is consistent or intermittent**, and if intermittent, any
+  patterns you've noticed (time of day, specific geographic regions, etc.)
+- **Your backend's geographic location** (cloud provider and region)
+- **The policies configured** on the affected route(s)
+
+This information helps the support team investigate efficiently and avoid
+back-and-forth diagnostic questions.
+
+## Related Resources
+
+- [Performance Testing Your API Gateway](./performance-testing.mdx) — How to
+  benchmark and compare gateway performance accurately
+- [Proactive Monitoring](./monitoring-your-gateway.mdx) — Setting up health
+  checks and monitoring for your gateway
+- [ZoneCache](../programmable-api/zone-cache.mdx) — Low-latency caching API for
+  frequently accessed data
+- [Caching Policy](../policies/caching-inbound.mdx) — Built-in response caching
+  to reduce backend load and improve response times
+- [Logging](./logging.mdx) — Configuring log integrations for observability
