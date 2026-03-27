@@ -10,8 +10,13 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "/docs",
+      "destination": "/docs/home",
       "permanent": true
+    },
+    {
+      "source": "/docs",
+      "destination": "/docs/home",
+      "permanent": false
     },
     {
       "source": "/docs/articles/what-is-zuplo",

@@ -293,10 +293,9 @@ export const documentation: Navigation = [
   },
   {
     type: "doc",
-    file: "index",
+    file: "home",
     label: "Home",
     display: "hide",
-    path: "/",
   },
   "api-management/introduction",
   {
