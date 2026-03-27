@@ -5,7 +5,7 @@ interface Stage {
   label: string;
   why: string;
   details: ReactNode;
-  links: { label: string; href: string }[];
+  links: { label: string; href: string; description?: string }[];
   color: "sky" | "violet" | "emerald" | "amber" | "gray";
   scope: string;
   canShortCircuit?: boolean;
@@ -43,8 +43,13 @@ const stages: Stage[] = [
       {
         label: "Runtime Extensions",
         href: "/docs/programmable-api/runtime-extensions",
+        description: "Register global hooks and plugins",
       },
-      { label: "Hooks Reference", href: "/docs/programmable-api/hooks" },
+      {
+        label: "Hooks Reference",
+        href: "/docs/programmable-api/hooks",
+        description: "All hook types and execution order",
+      },
     ],
     color: "sky",
     scope: "Global",
@@ -65,11 +70,20 @@ const stages: Stage[] = [
       </>
     ),
     links: [
-      { label: "Routing", href: "/docs/articles/routing" },
-      { label: "OpenAPI", href: "/docs/articles/openapi" },
+      {
+        label: "Routing",
+        href: "/docs/articles/routing",
+        description: "Path modes, matching order, and wildcards",
+      },
+      {
+        label: "OpenAPI",
+        href: "/docs/articles/openapi",
+        description: "How your OpenAPI spec drives routing",
+      },
       {
         label: "Advanced Path Matching",
         href: "/docs/articles/advanced-path-matching",
+        description: "Regex patterns and URL Pattern mode",
       },
     ],
     color: "sky",
@@ -95,8 +109,13 @@ const stages: Stage[] = [
       {
         label: "Runtime Extensions",
         href: "/docs/programmable-api/runtime-extensions",
+        description: "Register global hooks and plugins",
       },
-      { label: "ZuploContext", href: "/docs/programmable-api/zuplo-context" },
+      {
+        label: "ZuploContext",
+        href: "/docs/programmable-api/zuplo-context",
+        description: "Request context, logging, and route info",
+      },
     ],
     color: "sky",
     scope: "Global",
@@ -120,10 +139,26 @@ const stages: Stage[] = [
       </>
     ),
     links: [
-      { label: "Policy Fundamentals", href: "/docs/articles/policies" },
-      { label: "All Policies", href: "/docs/policies/overview" },
-      { label: "Custom Policies", href: "/docs/policies/custom-code-inbound" },
-      { label: "Authentication", href: "/docs/concepts/authentication" },
+      {
+        label: "Policy Fundamentals",
+        href: "/docs/articles/policies",
+        description: "How inbound and outbound policies work",
+      },
+      {
+        label: "All Policies",
+        href: "/docs/policies/overview",
+        description: "Browse 60+ built-in policies",
+      },
+      {
+        label: "Custom Policies",
+        href: "/docs/policies/custom-code-inbound",
+        description: "Write your own policy in TypeScript",
+      },
+      {
+        label: "Authentication",
+        href: "/docs/concepts/authentication",
+        description: "Auth methods and how request.user works",
+      },
     ],
     color: "violet",
     scope: "Per-route",
@@ -150,11 +185,20 @@ const stages: Stage[] = [
       </>
     ),
     links: [
-      { label: "URL Forward Handler", href: "/docs/handlers/url-forward" },
-      { label: "Function Handler", href: "/docs/handlers/custom-handler" },
+      {
+        label: "URL Forward Handler",
+        href: "/docs/handlers/url-forward",
+        description: "Proxy requests to your backend",
+      },
+      {
+        label: "Function Handler",
+        href: "/docs/handlers/custom-handler",
+        description: "Write custom route logic in TypeScript",
+      },
       {
         label: "Project Structure",
         href: "/docs/concepts/project-structure",
+        description: "How routes, handlers, and policies connect",
       },
     ],
     color: "emerald",
@@ -177,14 +221,20 @@ const stages: Stage[] = [
       </>
     ),
     links: [
-      { label: "Policy Fundamentals", href: "/docs/articles/policies" },
+      {
+        label: "Policy Fundamentals",
+        href: "/docs/articles/policies",
+        description: "How inbound and outbound policies work",
+      },
       {
         label: "Custom Outbound Policy",
         href: "/docs/policies/custom-code-outbound",
+        description: "Write response transformations in TypeScript",
       },
       {
         label: "Transform Body",
         href: "/docs/policies/transform-body-outbound",
+        description: "Modify JSON response bodies with expressions",
       },
     ],
     color: "violet",
@@ -204,10 +254,15 @@ const stages: Stage[] = [
       </>
     ),
     links: [
-      { label: "Hooks Reference", href: "/docs/programmable-api/hooks" },
+      {
+        label: "Hooks Reference",
+        href: "/docs/programmable-api/hooks",
+        description: "All hook types and execution order",
+      },
       {
         label: "Runtime Extensions",
         href: "/docs/programmable-api/runtime-extensions",
+        description: "Register global hooks and plugins",
       },
     ],
     color: "amber",
@@ -226,9 +281,21 @@ const stages: Stage[] = [
       </>
     ),
     links: [
-      { label: "Hooks Reference", href: "/docs/programmable-api/hooks" },
-      { label: "Logging", href: "/docs/articles/logging" },
-      { label: "OpenTelemetry", href: "/docs/articles/opentelemetry" },
+      {
+        label: "Hooks Reference",
+        href: "/docs/programmable-api/hooks",
+        description: "All hook types and execution order",
+      },
+      {
+        label: "Logging",
+        href: "/docs/articles/logging",
+        description: "Configure log shipping to external providers",
+      },
+      {
+        label: "OpenTelemetry",
+        href: "/docs/articles/opentelemetry",
+        description: "Distributed tracing and metrics",
+      },
     ],
     color: "amber",
     scope: "Global + per-request",
@@ -433,14 +500,21 @@ export function RequestLifecycle() {
                   <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-3 border-b border-gray-100 dark:border-gray-800 pb-1.5">
                     Learn more
                   </h4>
-                  <div className="flex flex-wrap gap-x-5 gap-y-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {selected.links.map((link) => (
                       <a
                         key={link.href}
                         href={link.href}
-                        className="text-[15px] font-medium no-underline hover:underline text-gray-700 dark:text-gray-300"
+                        className="block no-underline group"
                       >
-                        {link.label} &rarr;
+                        <span className="text-[14px] font-medium text-gray-700 dark:text-gray-300 group-hover:underline">
+                          {link.label} &rarr;
+                        </span>
+                        {link.description && (
+                          <span className="block text-[12px] text-gray-400 dark:text-gray-500 mt-0.5">
+                            {link.description}
+                          </span>
+                        )}
                       </a>
                     ))}
                   </div>
