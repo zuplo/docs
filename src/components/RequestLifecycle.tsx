@@ -3,412 +3,480 @@ import { useState, type ReactNode } from "react";
 interface Stage {
   id: string;
   label: string;
-  description: string;
+  why: string;
   details: ReactNode;
-  variant: "hook" | "policy" | "handler" | "routing" | "endpoint";
+  links: { label: string; href: string }[];
+  color: "sky" | "violet" | "emerald" | "amber" | "gray";
   scope: string;
+  canShortCircuit?: boolean;
 }
 
-const variantStyles = {
-  hook: {
-    bg: "bg-sky-50 dark:bg-sky-950/40",
-    border: "border-sky-300 dark:border-sky-700",
-    text: "text-sky-700 dark:text-sky-300",
-    dot: "bg-sky-400",
-    activeBg: "bg-sky-100 dark:bg-sky-900/60",
-    ring: "ring-sky-400/30",
+const stages: Stage[] = [
+  {
+    id: "client-in",
+    label: "Client Request",
+    why: "An HTTP request arrives at your Zuplo gateway from a browser, mobile app, server, or IoT device.",
+    details: <></>,
+    links: [],
+    color: "gray",
+    scope: "",
   },
-  policy: {
-    bg: "bg-fuchsia-50 dark:bg-fuchsia-950/40",
-    border: "border-fuchsia-300 dark:border-fuchsia-700",
-    text: "text-fuchsia-700 dark:text-fuchsia-300",
-    dot: "bg-fuchsia-400",
-    activeBg: "bg-fuchsia-100 dark:bg-fuchsia-900/60",
-    ring: "ring-fuchsia-400/30",
-  },
-  handler: {
-    bg: "bg-emerald-50 dark:bg-emerald-950/40",
-    border: "border-emerald-300 dark:border-emerald-700",
-    text: "text-emerald-700 dark:text-emerald-300",
-    dot: "bg-emerald-400",
-    activeBg: "bg-emerald-100 dark:bg-emerald-900/60",
-    ring: "ring-emerald-400/30",
-  },
-  routing: {
-    bg: "bg-amber-50 dark:bg-amber-950/40",
-    border: "border-amber-300 dark:border-amber-700",
-    text: "text-amber-700 dark:text-amber-300",
-    dot: "bg-amber-400",
-    activeBg: "bg-amber-100 dark:bg-amber-900/60",
-    ring: "ring-amber-400/30",
-  },
-  endpoint: {
-    bg: "bg-gray-50 dark:bg-gray-800/40",
-    border: "border-gray-300 dark:border-gray-600",
-    text: "text-gray-600 dark:text-gray-400",
-    dot: "bg-gray-400",
-    activeBg: "bg-gray-100 dark:bg-gray-800/60",
-    ring: "ring-gray-400/30",
-  },
-};
-
-const inboundStages: Stage[] = [
   {
     id: "pre-routing",
     label: "Pre-Routing Hooks",
-    description: "Global hooks before route matching",
+    why: "Modify the request URL or headers before Zuplo decides which route handles it. Common for URL normalization, API version routing, or trailing-slash cleanup.",
     details: (
       <>
         <p>
-          Run <strong>before</strong> the request is matched to any route.
           Receives a standard <code>Request</code> and returns a (possibly
           modified) <code>Request</code>.
         </p>
         <p>
-          <strong>Use for:</strong> URL normalization, version-based routing,
-          trailing-slash cleanup
-        </p>
-        <p>
-          <strong>Register:</strong> <code>runtime.addPreRoutingHook()</code> in{" "}
-          <code>zuplo.runtime.ts</code>
+          Register with <code>runtime.addPreRoutingHook()</code> in your{" "}
+          <code>zuplo.runtime.ts</code> file.
         </p>
       </>
     ),
-    variant: "hook",
+    links: [
+      {
+        label: "Runtime Extensions",
+        href: "/docs/programmable-api/runtime-extensions",
+      },
+      { label: "Hooks Reference", href: "/docs/programmable-api/hooks" },
+    ],
+    color: "sky",
     scope: "Global",
+    canShortCircuit: true,
   },
   {
     id: "routing",
     label: "Route Matching",
-    description: "Match by HTTP method + path",
+    why: "Zuplo uses your OpenAPI specification to match the request by HTTP method and path. Routes match in the order they appear in the file, so list specific paths before general ones.",
     details: (
       <>
         <p>
-          Matches the request by HTTP method and path using your OpenAPI
-          specification. Routes match in the order they appear in the file.
-        </p>
-        <p>
-          <strong>Tip:</strong> List specific paths before general ones (e.g.,{" "}
-          <code>/users/admin</code> before <code>/users/&#123;id&#125;</code>)
+          Supports <strong>OpenAPI mode</strong> (default) with{" "}
+          <code>/users/&#123;userId&#125;</code> syntax and{" "}
+          <strong>URL Pattern mode</strong> with regex support. Multiple OpenAPI
+          files are processed in alphabetical order.
         </p>
       </>
     ),
-    variant: "routing",
+    links: [
+      { label: "Routing", href: "/docs/articles/routing" },
+      { label: "OpenAPI", href: "/docs/articles/openapi" },
+      {
+        label: "Advanced Path Matching",
+        href: "/docs/articles/advanced-path-matching",
+      },
+    ],
+    color: "sky",
     scope: "Per-route",
   },
   {
     id: "request-hooks",
     label: "Request Hooks",
-    description: "Global hooks after routing",
+    why: "Run cross-cutting logic that needs route context but applies globally: correlation IDs, maintenance mode, request-level feature flags.",
     details: (
       <>
         <p>
-          Run after a route is matched. Can modify the request or short-circuit
-          by returning a <code>Response</code>.
+          Receives <code>ZuploRequest</code> and <code>ZuploContext</code>. Can
+          modify the request or short-circuit by returning a{" "}
+          <code>Response</code>.
         </p>
         <p>
-          <strong>Use for:</strong> Correlation IDs, maintenance mode,
-          request-level feature flags
-        </p>
-        <p>
-          <strong>Register:</strong> <code>runtime.addRequestHook()</code>
+          Register with <code>runtime.addRequestHook()</code>.
         </p>
       </>
     ),
-    variant: "hook",
+    links: [
+      {
+        label: "Runtime Extensions",
+        href: "/docs/programmable-api/runtime-extensions",
+      },
+      { label: "ZuploContext", href: "/docs/programmable-api/zuplo-context" },
+    ],
+    color: "sky",
     scope: "Global",
+    canShortCircuit: true,
   },
   {
-    id: "inbound-policies",
+    id: "inbound",
     label: "Inbound Policies",
-    description: "Auth, rate limiting, validation",
+    why: "The primary extension point for request processing. Add authentication, rate limiting, request validation, or any custom logic. Policies are reusable across routes and execute in order.",
     details: (
       <>
         <p>
-          Execute in order on the matched route. Each policy can modify the
-          request or <strong>short-circuit</strong> by returning a{" "}
-          <code>Response</code> (e.g., 401 Unauthorized).
+          Each policy can modify the request or <strong>short-circuit</strong>{" "}
+          by returning a <code>Response</code>. This is how auth policies block
+          unauthenticated requests before they reach your backend.
         </p>
         <p>
-          <strong>Examples:</strong> API key auth, JWT validation, rate
-          limiting, request validation, IP restrictions
-        </p>
-        <p>
-          <strong>Configure:</strong>{" "}
-          <code>x-zuplo-route.policies.inbound</code> in your OpenAPI spec
+          Configured via <code>x-zuplo-route.policies.inbound</code> in your
+          OpenAPI spec. Defined in <code>config/policies.json</code>.
         </p>
       </>
     ),
-    variant: "policy",
+    links: [
+      { label: "Policy Fundamentals", href: "/docs/articles/policies" },
+      { label: "All Policies", href: "/docs/policies/overview" },
+      { label: "Custom Policies", href: "/docs/policies/custom-code-inbound" },
+      { label: "Authentication", href: "/docs/concepts/authentication" },
+    ],
+    color: "violet",
+    scope: "Per-route",
+    canShortCircuit: true,
+  },
+  {
+    id: "handler",
+    label: "Handler",
+    why: "Every route has exactly one handler that defines what happens with the request. Most routes use URL Forward to proxy to a backend, but you can write custom logic in TypeScript.",
+    details: (
+      <>
+        <p>
+          Receives the <code>ZuploRequest</code> (as modified by inbound
+          policies) and returns a <code>Response</code>.
+        </p>
+        <p>
+          <strong>Built-in:</strong> URL Forward, URL Rewrite, Redirect, AWS
+          Lambda, MCP Server, OpenAPI Spec.
+        </p>
+        <p>
+          <strong>Custom:</strong> Write a Function Handler in TypeScript for
+          full control over the request and response.
+        </p>
+      </>
+    ),
+    links: [
+      { label: "URL Forward Handler", href: "/docs/handlers/url-forward" },
+      { label: "Function Handler", href: "/docs/handlers/custom-handler" },
+      { label: "All Handlers", href: "/docs/handlers/url-forward" },
+      {
+        label: "Project Structure",
+        href: "/docs/concepts/project-structure",
+      },
+    ],
+    color: "emerald",
     scope: "Per-route",
   },
-];
-
-const handlerStage: Stage = {
-  id: "handler",
-  label: "Handler",
-  description: "Route logic / backend call",
-  details: (
-    <>
-      <p>
-        The core logic for the route. Receives the <code>ZuploRequest</code> (as
-        modified by inbound policies) and returns a <code>Response</code>.
-      </p>
-      <p>
-        <strong>Built-in:</strong> URL Forward, URL Rewrite, Redirect, AWS
-        Lambda, MCP Server, OpenAPI Spec
-      </p>
-      <p>
-        <strong>Custom:</strong> Write a Function Handler in TypeScript for full
-        control
-      </p>
-    </>
-  ),
-  variant: "handler",
-  scope: "Per-route",
-};
-
-const outboundStages: Stage[] = [
   {
-    id: "outbound-policies",
+    id: "outbound",
     label: "Outbound Policies",
-    description: "Transform response",
+    why: "Transform responses before they reach the client. Remove sensitive headers, modify response bodies, convert formats (XML to JSON), or add caching headers.",
     details: (
       <>
         <p>
-          Run after the handler returns a response. Can transform the response
-          body, add/remove headers, or replace the response entirely.
+          Run after the handler returns a response. Can modify the body,
+          add/remove headers, or replace the response entirely.
         </p>
         <p>
-          <strong>Examples:</strong> Body transformation, header manipulation,
-          XML-to-JSON, string replacement
-        </p>
-        <p>
-          <strong>Configure:</strong>{" "}
-          <code>x-zuplo-route.policies.outbound</code> in your OpenAPI spec
+          Configured via <code>x-zuplo-route.policies.outbound</code> in your
+          OpenAPI spec.
         </p>
       </>
     ),
-    variant: "policy",
+    links: [
+      { label: "Policy Fundamentals", href: "/docs/articles/policies" },
+      {
+        label: "Custom Outbound Policy",
+        href: "/docs/policies/custom-code-outbound",
+      },
+      {
+        label: "Transform Body",
+        href: "/docs/policies/transform-body-outbound",
+      },
+    ],
+    color: "violet",
     scope: "Per-route",
   },
   {
     id: "response-hooks",
     label: "Response Hooks",
-    description: "Modify response before sending",
+    why: "Add security headers, CORS headers, or timing information to responses. Global hooks apply to all routes; per-request hooks target the current request only.",
     details: (
       <>
         <p>
-          Can modify the <code>Response</code> before it reaches the client.
+          Register globally with <code>runtime.addResponseSendingHook()</code>{" "}
+          or per-request with <code>context.addResponseSendingHook()</code>.
           Global hooks run before per-request hooks.
-        </p>
-        <p>
-          <strong>Use for:</strong> Security headers, CORS headers, response
-          timing
-        </p>
-        <p>
-          <strong>Register:</strong>{" "}
-          <code>runtime.addResponseSendingHook()</code> or{" "}
-          <code>context.addResponseSendingHook()</code>
         </p>
       </>
     ),
-    variant: "hook",
+    links: [
+      { label: "Hooks Reference", href: "/docs/programmable-api/hooks" },
+      {
+        label: "Runtime Extensions",
+        href: "/docs/programmable-api/runtime-extensions",
+      },
+    ],
+    color: "amber",
     scope: "Global + per-request",
   },
   {
     id: "final-hooks",
     label: "Final Hooks",
-    description: "Logging & analytics (read-only)",
+    why: "Send logs, analytics, or metrics after the response is finalized. These hooks cannot modify the response. Use context.waitUntil() for non-blocking background work like sending to an analytics service.",
     details: (
       <>
         <p>
-          Run after all response processing.{" "}
-          <strong>Cannot modify the response.</strong> Use{" "}
-          <code>context.waitUntil()</code> for non-blocking background work.
-        </p>
-        <p>
-          <strong>Use for:</strong> Logging, analytics, metrics, audit trails
-        </p>
-        <p>
-          <strong>Register:</strong>{" "}
-          <code>runtime.addResponseSendingFinalHook()</code>
+          Register with <code>runtime.addResponseSendingFinalHook()</code>.
+          Cannot modify the response — read-only access.
         </p>
       </>
     ),
-    variant: "hook",
+    links: [
+      { label: "Hooks Reference", href: "/docs/programmable-api/hooks" },
+      { label: "Logging", href: "/docs/articles/logging" },
+      { label: "OpenTelemetry", href: "/docs/articles/opentelemetry" },
+    ],
+    color: "amber",
     scope: "Global + per-request",
+  },
+  {
+    id: "client-out",
+    label: "Client Response",
+    why: "The final response is sent back to the client.",
+    details: <></>,
+    links: [],
+    color: "gray",
+    scope: "",
   },
 ];
 
-function StageNode({
-  stage,
-  isSelected,
-  onClick,
-}: {
-  stage: Stage;
-  isSelected: boolean;
-  onClick: () => void;
-}) {
-  const styles = variantStyles[stage.variant];
-
-  return (
-    <button
-      onClick={onClick}
-      className={[
-        "relative flex flex-col items-center justify-center rounded-xl border transition-all duration-200 cursor-pointer select-none min-w-[110px] px-4 py-2.5",
-        isSelected
-          ? `${styles.activeBg} ${styles.border} shadow-md ring-4 ${styles.ring} scale-[1.03]`
-          : `${styles.bg} ${styles.border} hover:shadow-sm hover:scale-[1.01]`,
-      ].join(" ")}
-    >
-      <span
-        className={`font-semibold text-sm leading-tight text-center ${styles.text}`}
-      >
-        {stage.label}
-      </span>
-    </button>
-  );
-}
-
-function PipelineLine({ direction }: { direction: "right" | "left" }) {
-  return (
-    <div className="flex items-center shrink-0 mx-0.5">
-      <div className="relative w-8 h-[2px] bg-gray-200 dark:bg-gray-700">
-        <div
-          className={[
-            "absolute top-1/2 -translate-y-1/2 w-0 h-0",
-            "border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent",
-            direction === "right"
-              ? "right-0 border-l-[6px] border-l-gray-300 dark:border-l-gray-600"
-              : "left-0 border-r-[6px] border-r-gray-300 dark:border-r-gray-600",
-          ].join(" ")}
-        />
-      </div>
-    </div>
-  );
-}
-
-function EndpointNode({ label }: { label: string }) {
-  return (
-    <div className="flex items-center justify-center rounded-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/40 px-5 py-2.5 min-w-[90px] shrink-0">
-      <span className="font-medium text-sm text-gray-500 dark:text-gray-400">
-        {label}
-      </span>
-    </div>
-  );
-}
+const colors = {
+  sky: {
+    dot: "bg-sky-400",
+    line: "bg-sky-200 dark:bg-sky-800",
+    pillBg:
+      "bg-sky-50 border-sky-200 hover:bg-sky-100 dark:bg-sky-950/50 dark:border-sky-800 dark:hover:bg-sky-900/60",
+    pillActive:
+      "bg-sky-100 border-sky-300 shadow-md ring-2 ring-sky-200/60 dark:bg-sky-900/70 dark:border-sky-600 dark:ring-sky-700/40",
+    text: "text-sky-700 dark:text-sky-300",
+    panel:
+      "border-sky-200 bg-gradient-to-br from-sky-50 to-white dark:border-sky-800 dark:from-sky-950/50 dark:to-gray-900/50",
+    link: "text-sky-600 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300",
+    badge: "bg-sky-100 text-sky-600 dark:bg-sky-900/50 dark:text-sky-400",
+  },
+  violet: {
+    dot: "bg-violet-400",
+    line: "bg-violet-200 dark:bg-violet-800",
+    pillBg:
+      "bg-violet-50 border-violet-200 hover:bg-violet-100 dark:bg-violet-950/50 dark:border-violet-800 dark:hover:bg-violet-900/60",
+    pillActive:
+      "bg-violet-100 border-violet-300 shadow-md ring-2 ring-violet-200/60 dark:bg-violet-900/70 dark:border-violet-600 dark:ring-violet-700/40",
+    text: "text-violet-700 dark:text-violet-300",
+    panel:
+      "border-violet-200 bg-gradient-to-br from-violet-50 to-white dark:border-violet-800 dark:from-violet-950/50 dark:to-gray-900/50",
+    link: "text-violet-600 hover:text-violet-700 dark:text-violet-400 dark:hover:text-violet-300",
+    badge:
+      "bg-violet-100 text-violet-600 dark:bg-violet-900/50 dark:text-violet-400",
+  },
+  emerald: {
+    dot: "bg-emerald-400",
+    line: "bg-emerald-200 dark:bg-emerald-800",
+    pillBg:
+      "bg-emerald-50 border-emerald-200 hover:bg-emerald-100 dark:bg-emerald-950/50 dark:border-emerald-800 dark:hover:bg-emerald-900/60",
+    pillActive:
+      "bg-emerald-100 border-emerald-300 shadow-md ring-2 ring-emerald-200/60 dark:bg-emerald-900/70 dark:border-emerald-600 dark:ring-emerald-700/40",
+    text: "text-emerald-700 dark:text-emerald-300",
+    panel:
+      "border-emerald-200 bg-gradient-to-br from-emerald-50 to-white dark:border-emerald-800 dark:from-emerald-950/50 dark:to-gray-900/50",
+    link: "text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300",
+    badge:
+      "bg-emerald-100 text-emerald-600 dark:bg-emerald-900/50 dark:text-emerald-400",
+  },
+  amber: {
+    dot: "bg-amber-400",
+    line: "bg-amber-200 dark:bg-amber-800",
+    pillBg:
+      "bg-amber-50 border-amber-200 hover:bg-amber-100 dark:bg-amber-950/50 dark:border-amber-800 dark:hover:bg-amber-900/60",
+    pillActive:
+      "bg-amber-100 border-amber-300 shadow-md ring-2 ring-amber-200/60 dark:bg-amber-900/70 dark:border-amber-600 dark:ring-amber-700/40",
+    text: "text-amber-700 dark:text-amber-300",
+    panel:
+      "border-amber-200 bg-gradient-to-br from-amber-50 to-white dark:border-amber-800 dark:from-amber-950/50 dark:to-gray-900/50",
+    link: "text-amber-600 hover:text-amber-700 dark:text-amber-400 dark:hover:text-amber-300",
+    badge:
+      "bg-amber-100 text-amber-600 dark:bg-amber-900/50 dark:text-amber-400",
+  },
+  gray: {
+    dot: "bg-gray-300 dark:bg-gray-600",
+    line: "bg-gray-200 dark:bg-gray-700",
+    pillBg:
+      "bg-gray-50 border-gray-200 dark:bg-gray-800/50 dark:border-gray-700",
+    pillActive:
+      "bg-gray-100 border-gray-300 dark:bg-gray-800/70 dark:border-gray-600",
+    text: "text-gray-500 dark:text-gray-400",
+    panel:
+      "border-gray-200 bg-gradient-to-br from-gray-50 to-white dark:border-gray-700 dark:from-gray-800/50 dark:to-gray-900/50",
+    link: "text-gray-500 dark:text-gray-400",
+    badge: "bg-gray-100 text-gray-500 dark:bg-gray-800/50 dark:text-gray-400",
+  },
+};
 
 export function RequestLifecycle() {
-  const [selectedStage, setSelectedStage] = useState<Stage | null>(null);
-
-  const handleClick = (stage: Stage) => {
-    setSelectedStage(selectedStage?.id === stage.id ? null : stage);
+  const [selected, setSelected] = useState<Stage | null>(null);
+  const toggle = (s: Stage) => {
+    if (s.id === "client-in" || s.id === "client-out") return;
+    setSelected(selected?.id === s.id ? null : s);
   };
-
-  const styles = selectedStage ? variantStyles[selectedStage.variant] : null;
+  const cm = selected ? colors[selected.color] : null;
 
   return (
-    <div className="not-prose my-8 space-y-6">
-      {/* Request flow */}
-      <div>
-        <div className="text-xs font-semibold tracking-wider text-sky-600 dark:text-sky-400 uppercase mb-3 flex items-center gap-1.5">
-          <span className="inline-block w-4 h-[2px] bg-sky-400 rounded-full" />
-          Request
+    <div className="not-prose my-8">
+      <div className="flex flex-col lg:flex-row gap-6">
+        {/* Pipeline (vertical) */}
+        <div className="lg:w-[280px] shrink-0">
+          <div className="flex flex-col items-start">
+            {stages.map((stage, i) => {
+              const c = colors[stage.color];
+              const isSelected = selected?.id === stage.id;
+              const isEndpoint =
+                stage.id === "client-in" || stage.id === "client-out";
+              const isHandler = stage.id === "handler";
+              const isLast = i === stages.length - 1;
+
+              return (
+                <div key={stage.id} className="flex items-stretch">
+                  {/* Vertical line + dot */}
+                  <div className="flex flex-col items-center w-8 shrink-0">
+                    {/* Top connector */}
+                    {i > 0 && (
+                      <div
+                        className={`w-[2px] flex-1 ${colors[stages[i - 1].color].line}`}
+                      />
+                    )}
+                    {/* Dot */}
+                    <div
+                      className={[
+                        "rounded-full shrink-0 border-2 border-white dark:border-gray-900",
+                        isHandler
+                          ? "w-4 h-4"
+                          : isEndpoint
+                            ? "w-3 h-3"
+                            : "w-3 h-3",
+                        c.dot,
+                        isSelected ? "ring-4 ring-current/20 scale-125" : "",
+                      ].join(" ")}
+                    />
+                    {/* Bottom connector */}
+                    {!isLast && <div className={`w-[2px] flex-1 ${c.line}`} />}
+                  </div>
+
+                  {/* Label */}
+                  <div className={`pb-2 pt-1 pl-3 ${isEndpoint ? "py-1" : ""}`}>
+                    {isEndpoint ? (
+                      <span className="text-xs font-medium text-gray-400 dark:text-gray-500">
+                        {stage.label}
+                      </span>
+                    ) : (
+                      <button
+                        onClick={() => toggle(stage)}
+                        className={[
+                          "px-3 py-1.5 rounded-lg border text-left transition-all duration-150 cursor-pointer block",
+                          isHandler ? "px-4 py-2" : "",
+                          isSelected ? c.pillActive : c.pillBg,
+                        ].join(" ")}
+                      >
+                        <span
+                          className={[
+                            "font-semibold block leading-tight",
+                            isHandler ? "text-sm" : "text-[13px]",
+                            c.text,
+                          ].join(" ")}
+                        >
+                          {stage.label}
+                        </span>
+                        {stage.scope && (
+                          <span className="text-[10px] text-gray-400 dark:text-gray-500">
+                            {stage.scope}
+                            {stage.canShortCircuit && (
+                              <span className="ml-1 opacity-60">
+                                - can short-circuit
+                              </span>
+                            )}
+                          </span>
+                        )}
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
-        <div className="flex items-center gap-0 overflow-x-auto pb-2">
-          <EndpointNode label="Client" />
-          <PipelineLine direction="right" />
-          {inboundStages.map((stage, i) => (
-            <div key={stage.id} className="contents">
-              <StageNode
-                stage={stage}
-                isSelected={selectedStage?.id === stage.id}
-                onClick={() => handleClick(stage)}
-              />
-              {i < inboundStages.length - 1 && (
-                <PipelineLine direction="right" />
+
+        {/* Detail panel (right side) */}
+        <div className="flex-1 min-w-0">
+          {selected && cm ? (
+            <div
+              className={`rounded-xl border p-6 lg:sticky lg:top-4 transition-all duration-200 ${cm.panel}`}
+            >
+              <div className="mb-4">
+                <div className="flex items-center gap-2 mb-1">
+                  <h3 className={`font-bold text-xl m-0 ${cm.text}`}>
+                    {selected.label}
+                  </h3>
+                  {selected.scope && (
+                    <span
+                      className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${cm.badge}`}
+                    >
+                      {selected.scope}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1.5">
+                  When to use
+                </h4>
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed m-0">
+                  {selected.why}
+                </p>
+              </div>
+
+              {selected.details && (
+                <div className="mb-4">
+                  <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1.5">
+                    How it works
+                  </h4>
+                  <div className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed [&_p]:mb-2 [&_p:last-child]:mb-0 [&_code]:text-xs [&_code]:bg-black/5 [&_code]:dark:bg-white/10 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded-md [&_code]:font-mono">
+                    {selected.details}
+                  </div>
+                </div>
+              )}
+
+              {selected.links.length > 0 && (
+                <div className="pt-3 border-t border-gray-200/50 dark:border-gray-700/50">
+                  <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-2">
+                    Learn more
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selected.links.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        className={`text-sm font-medium no-underline hover:underline ${cm.link}`}
+                      >
+                        {link.label} &rarr;
+                      </a>
+                    ))}
+                  </div>
+                </div>
               )}
             </div>
-          ))}
-          <PipelineLine direction="right" />
-          <StageNode
-            stage={handlerStage}
-            isSelected={selectedStage?.id === handlerStage.id}
-            onClick={() => handleClick(handlerStage)}
-          />
-        </div>
-      </div>
-
-      {/* Curved connector */}
-      <div className="flex justify-end pr-[55px]">
-        <div className="w-[2px] h-5 bg-gray-200 dark:bg-gray-700 rounded-full" />
-      </div>
-
-      {/* Response flow */}
-      <div>
-        <div className="text-xs font-semibold tracking-wider text-amber-600 dark:text-amber-400 uppercase mb-3 flex items-center gap-1.5">
-          <span className="inline-block w-4 h-[2px] bg-amber-400 rounded-full" />
-          Response
-        </div>
-        <div className="flex items-center gap-0 overflow-x-auto pb-2 flex-row-reverse">
-          <EndpointNode label="Client" />
-          <PipelineLine direction="left" />
-          {outboundStages
-            .slice()
-            .reverse()
-            .map((stage, i) => (
-              <div key={stage.id} className="contents">
-                <StageNode
-                  stage={stage}
-                  isSelected={selectedStage?.id === stage.id}
-                  onClick={() => handleClick(stage)}
-                />
-                {i < outboundStages.length - 1 && (
-                  <PipelineLine direction="left" />
-                )}
-              </div>
-            ))}
-          <PipelineLine direction="left" />
-          <StageNode
-            stage={handlerStage}
-            isSelected={selectedStage?.id === handlerStage.id}
-            onClick={() => handleClick(handlerStage)}
-          />
-        </div>
-      </div>
-
-      {/* Detail panel */}
-      {selectedStage && styles && (
-        <div
-          className={`rounded-xl border ${styles.border} ${styles.activeBg} p-5 transition-all duration-200`}
-        >
-          <div className="flex items-start justify-between gap-4 mb-3">
-            <div>
-              <h4 className={`font-bold text-lg m-0 ${styles.text}`}>
-                {selectedStage.label}
-              </h4>
-              <p className="text-sm text-gray-500 dark:text-gray-400 m-0 mt-0.5">
-                {selectedStage.description}
+          ) : (
+            <div className="rounded-xl border border-dashed border-gray-200 dark:border-gray-700 p-8 flex items-center justify-center lg:sticky lg:top-4 min-h-[200px]">
+              <p className="text-sm text-gray-400 dark:text-gray-500 italic m-0 text-center">
+                Select a stage in the pipeline to see what it does,
+                <br />
+                when to use it, and links to relevant documentation.
               </p>
             </div>
-            <span
-              className={`text-xs font-medium px-2.5 py-1 rounded-full border whitespace-nowrap ${styles.border} ${styles.text} ${styles.bg}`}
-            >
-              {selectedStage.scope}
-            </span>
-          </div>
-          <div className="text-sm leading-relaxed text-gray-700 dark:text-gray-300 [&_p]:mb-2 [&_p:last-child]:mb-0 [&_code]:text-xs [&_code]:bg-black/5 [&_code]:dark:bg-white/10 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded-md [&_code]:font-mono">
-            {selectedStage.details}
-          </div>
+          )}
         </div>
-      )}
-
-      {!selectedStage && (
-        <p className="text-center text-sm text-gray-400 dark:text-gray-500 italic">
-          Click any stage to learn more
-        </p>
-      )}
+      </div>
     </div>
   );
 }
