@@ -1,0 +1,350 @@
+---
+title: Deploying Zuplo from a Monorepo
+sidebar_label: Monorepo Deployment
+description:
+  "Deploy a Zuplo API gateway from a monorepo subdirectory using the Zuplo CLI
+  and GitHub Actions."
+---
+
+If your Zuplo API gateway lives inside a monorepo alongside other services, you
+can deploy it using the [Zuplo CLI](../cli/overview.mdx) and your CI/CD
+provider. Zuplo's
+[built-in GitHub integration](./source-control-setup-github.mdx) connects each
+project to a dedicated repository and deploys automatically on every push.
+Because it doesn't natively support projects located in a subdirectory, you need
+to use the Zuplo CLI with a [custom CI/CD pipeline](./custom-ci-cd.mdx) to
+deploy from the correct directory.
+
+This guide covers the project structure requirements, CI/CD configuration, local
+development, and common troubleshooting steps for monorepo setups.
+
+## Project structure
+
+A monorepo with a Zuplo project in a subdirectory typically looks like this:
+
+```text
+my-monorepo/
+├── apps/
+│   ├── web/                  # Frontend application
+│   └── backend/              # Backend service
+├── packages/
+│   └── api-gateway/          # Zuplo project
+│       ├── config/
+│       │   ├── routes.oas.json
+│       │   └── policies.json
+│       ├── modules/          # Custom TypeScript handlers and policies
+│       ├── tests/            # API tests
+│       ├── zuplo.jsonc
+│       └── package.json
+├── package.json              # Root package.json (workspaces)
+└── ...
+```
+
+The Zuplo subdirectory must contain these files at minimum:
+
+- **`zuplo.jsonc`** — Project configuration including `version`,
+  `compatibilityDate`, and `projectType`
+- **`package.json`** — Dependencies (must include `zuplo` as a dependency)
+- **`config/routes.oas.json`** — Route definitions in OpenAPI format
+- **`config/policies.json`** — Policy configuration
+
+The `config/policies.json` file must be valid JSON with a `policies` array. Each
+policy entry requires a `name`, `policyType`, and a `handler` object with
+`export`, `module`, and `options` fields. Here's an example:
+
+```json title="config/policies.json"
+{
+  "policies": [
+    {
+      "name": "my-rate-limit-inbound-policy",
+      "policyType": "rate-limit-inbound",
+      "handler": {
+        "export": "RateLimitInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "rateLimitBy": "ip",
+          "requestsAllowed": 100,
+          "timeWindowMinutes": 1
+        }
+      }
+    }
+  ]
+}
+```
+
+:::caution
+
+Every policy in `policies.json` must include the `handler` block with `export`,
+`module`, and `options`. Omitting the `handler` block causes schema validation
+errors during `zuplo deploy`.
+
+:::
+
+## GitHub Actions configuration
+
+The key to deploying from a subdirectory is setting `working-directory` on your
+job steps so the Zuplo CLI runs in the correct folder.
+
+### Basic deployment
+
+```yaml title=".github/workflows/deploy.yaml"
+name: Deploy Zuplo API
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "packages/api-gateway/**"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/api-gateway
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy to Zuplo
+        run: npx zuplo deploy --api-key "$ZUPLO_API_KEY"
+        env:
+          ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
+```
+
+This workflow:
+
+1. Triggers only when files in the Zuplo subdirectory change (via the `paths`
+   filter)
+2. Sets `working-directory` at the job level so every `run` step executes inside
+   the Zuplo project folder
+3. Installs dependencies and deploys using the Zuplo CLI
+
+:::tip
+
+Set `working-directory` at the `defaults.run` level of the job rather than on
+each individual step. This avoids accidentally running CLI commands from the
+repository root.
+
+:::
+
+### PR preview environments
+
+For preview deployments on pull requests, combine `working-directory` with
+environment cleanup:
+
+```yaml title=".github/workflows/pr-preview.yaml"
+name: PR Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    paths:
+      - "packages/api-gateway/**"
+
+jobs:
+  deploy:
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/api-gateway
+    env:
+      ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy to Zuplo
+        id: deploy
+        shell: bash
+        run: |
+          OUTPUT=$(npx zuplo deploy --api-key "$ZUPLO_API_KEY" 2>&1)
+          echo "$OUTPUT"
+          DEPLOYMENT_URL=$(echo "$OUTPUT" | grep -oP 'Deployed to \K(https://[^ ]+)')
+          echo "url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
+
+      - name: Comment PR with deployment URL
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🚀 Deployed to: ${{ steps.deploy.outputs.url }}`
+            })
+
+  cleanup:
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/api-gateway
+    env:
+      ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Delete environment
+        run: |
+          BRANCH_NAME="${{ github.head_ref }}"
+          ENV_NAME="${BRANCH_NAME//\//-}"
+          npx zuplo delete \
+            --environment "$ENV_NAME" \
+            --api-key "$ZUPLO_API_KEY" \
+            --wait
+```
+
+### Secrets and environment variables
+
+Store your Zuplo API key as a GitHub Actions secret:
+
+1. Go to [portal.zuplo.com](https://portal.zuplo.com) and navigate to your
+   account **Settings** > **API Keys**
+2. Copy the API key
+3. In your GitHub repository, go to **Settings** > **Secrets and variables** >
+   **Actions**
+4. Create a secret named `ZUPLO_API_KEY`
+
+For more details on CI/CD authentication, see the
+[Custom CI/CD](./custom-ci-cd.mdx) guide.
+
+:::note
+
+The examples above use GitHub Actions. If you use GitLab, Bitbucket, Azure
+DevOps, or CircleCI, the same principles apply — set the working directory to
+your Zuplo subdirectory and run `npx zuplo deploy`. See the provider-specific
+guides under [Custom CI/CD Pipelines](./custom-ci-cd.mdx) for detailed workflow
+examples.
+
+:::
+
+## Local development
+
+To run local development from a monorepo subdirectory, navigate to the Zuplo
+project folder and start the development server:
+
+```bash
+cd packages/api-gateway
+npm install
+npx zuplo dev
+```
+
+The `zuplo dev` command looks for `zuplo.jsonc` and the `config/` directory in
+the current working directory. Running it from the repository root instead of
+the Zuplo subdirectory causes resolution errors.
+
+If you use npm or pnpm workspaces, you can add a script to your root
+`package.json` to run local development from the workspace:
+
+```json title="Root package.json"
+{
+  "scripts": {
+    "dev:api-gateway": "npm -w packages/api-gateway run dev"
+  }
+}
+```
+
+For troubleshooting local development issues, see the
+[local development troubleshooting guide](./local-development-troubleshooting.mdx).
+
+## Troubleshooting
+
+### Schema validation errors in policies.json
+
+**Error**: `zuplo deploy` exits with code 1 and reports schema validation
+errors.
+
+This typically happens when `policies.json` is missing required fields. Every
+policy entry must include the full `handler` object:
+
+```json
+{
+  "name": "my-policy",
+  "policyType": "rate-limit-inbound",
+  "handler": {
+    "export": "RateLimitInboundPolicy",
+    "module": "$import(@zuplo/runtime)",
+    "options": {}
+  }
+}
+```
+
+**Common causes:**
+
+- Missing the `handler` block entirely
+- Missing `export` or `module` inside the `handler` block
+- Using an invalid `policyType` value
+
+### "Could not resolve .zuplo/worker.ts"
+
+**Error**: `npx zuplo dev` fails with "Could not resolve .zuplo/worker.ts".
+
+This error occurs when the CLI can't locate the project files. Verify that:
+
+- You're running the command from the Zuplo project directory (not the monorepo
+  root)
+- The `zuplo.jsonc` file exists in the current directory
+- Dependencies are installed (`npm install`)
+
+### Deployment health check timeouts
+
+**Error**: The build succeeds but the deployment fails with a health check
+timeout.
+
+After the CLI builds and uploads your project, Zuplo runs a health check against
+the deployed environment. Timeouts can indicate:
+
+- **Invalid route configuration** — Check `config/routes.oas.json` for syntax
+  errors or invalid handler references
+- **Missing modules** — Verify that any custom handler modules referenced in
+  `routes.oas.json` or `policies.json` exist in the `modules/` directory
+- **Missing environment variables** — If your policies or handlers reference
+  environment variables with `$env(VAR_NAME)`, make sure those variables are
+  configured in the Zuplo portal under your project's
+  [environment variables](./environment-variables.mdx)
+
+### Build succeeds but deploy fails
+
+If `npm install` and the build step complete successfully but `zuplo deploy`
+fails:
+
+- Confirm your `ZUPLO_API_KEY` is set correctly in your CI/CD secrets
+- Verify the project is correctly linked by running `npx zuplo link` or by
+  passing explicit `--project` and `--account` flags to `zuplo deploy`
+- Check that `working-directory` points to the correct subdirectory in your
+  workflow file
+
+## Next steps
+
+Once your monorepo deployment is working, consider these follow-up tasks:
+
+- **Set up branch-based environments** for staging and production with
+  [Branch-Based Deployments](./branch-based-deployments.mdx)
+- **Add API tests** to your CI pipeline using the patterns in
+  [Custom CI/CD Pipelines](./custom-ci-cd.mdx)
+- **Explore the full CLI** for additional commands in the
+  [Zuplo CLI Reference](../cli/overview.mdx)
+- **Configure local development** to work alongside your other services with
+  [Local Development](./local-development.mdx)
