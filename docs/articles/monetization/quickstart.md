@@ -48,10 +48,11 @@ keeps your existing work safe from any breaking changes.
 
 1. Go to [portal.zuplo.com](https://portal.zuplo.com) and sign in.
 2. Click **New Project** in the top right corner.
-3. Select **API Management (+ MCP Server)**.
+3. Enter a **Project name** or use the randomly chosen name Zuplo provides.
 4. Select **Starter Project (Recommended)** — it comes with endpoints ready to
    monetize.
-5. (Optional) Connect your project to source control by following the
+5. (Optional) Connect your project to source control by clicking the **Connect
+   to GitHub** button on the project page, or by following the
    [GitHub setup guide](../source-control-setup-github.md). This isn't required
    for monetization, but is recommended for managing your project long-term.
 
@@ -95,9 +96,9 @@ transferred, etc.
 1. In the Monetization Service, click the **Meters** tab.
 2. Click **Add Meter** and select **Blank Meter**.
 3. Fill in the meter details:
-   - **Name**: `API`
-   - **Event**: `api` — the type of event this meter listens for.
-   - **Description**: `API Calls`
+   - **Name**: `Requests`
+   - **Event**: `requests` — the type of event this meter listens for.
+   - **Description**: `API Requests`
    - **Aggregation**: `SUM` — how values are combined (other options include
      `COUNT`, `MAX`, etc.).
    - **Value Property**: `$.total` — a JSONPath expression that extracts the
@@ -115,7 +116,7 @@ Feature** for each of the following:
 
 | Name             | Key                | Linked Meter | Purpose                       |
 | ---------------- | ------------------ | ------------ | ----------------------------- |
-| api              | `api`              | API          | Usage-based (linked to meter) |
+| API Requests     | `api_requests`     | Requests     | Usage-based (linked to meter) |
 | Monthly Fee      | `monthly_fee`      | —            | Flat-rate billing             |
 | Metadata Support | `metadata_support` | —            | Boolean on/off feature        |
 
@@ -132,7 +133,7 @@ plans to give your customers options.
    - **Key**: `developer`
 3. Click **Create Draft**.
 4. Configure the rate cards by selecting features from the **Add feature**
-   dropdown in the **Features & Rate Cards** section:
+   dropdown in the **Features & Rate Cards** section of the **Default** phase:
 
    **Monthly Fee** rate card:
    - **Pricing Model**: Flat fee
@@ -141,11 +142,12 @@ plans to give your customers options.
    - **Price**: $9.99
    - **Entitlement**: No entitlement
 
-   **api** rate card:
+   **API Requests** rate card:
    - **Pricing Model**: Tiered
    - **Billing Cadence**: Monthly
    - **Price Mode**: Graduated
-   - **Tier 1**: First Unit `0`, Last Unit `1000`, Unit Price $0, Flat Price $0
+   - **Tier 1**: Click `+ add another tier` and set First Unit `0`, Last Unit
+     `1000`, Unit Price $0, Flat Price $0
    - **Tier 2**: First Unit `1001`, to infinity, Unit Price $0.10, Flat Price $0
    - **Entitlement**: Metered (track usage)
    - **Usage Limit**: `1000`
@@ -166,7 +168,7 @@ amounts and that Pro and Business include a **Metadata Support** rate card (set
 | Pro       | `pro`       | $19.99      | 5,000             | $0.05/req    | Yes              |
 | Business  | `business`  | $29.99      | 10,000            | $0.01/req    | Yes              |
 
-For the **api** rate card on each plan, set **Tier 1** Last Unit to the
+For the **API Requests** rate card on each plan, set **Tier 1** Last Unit to the
 "Included Requests" value and **Tier 2** Unit Price to the "Overage Rate" value.
 The **Usage Limit** should match the "Included Requests" value. Enable **Soft
 limit** on all plans.
@@ -175,15 +177,16 @@ limit** on all plans.
 
 ### Reorder your plans
 
-The order of plans on the Plans tab determines how they appear on the pricing
-page. Drag and drop the plans using the handle on the top-left corner of each
-card to reorder them as **Developer**, **Pro**, **Business**.
+The Pricing Table in the left sidebar shows determines how they appear on the
+pricing page. **Drag and drop** the plans using the handle on the top-left
+corner of each card to reorder them as **Developer**, **Pro**, **Business**.
 
 ### Publish your plans
 
 Each plan starts as a draft. Publish each one before customers can subscribe.
 
-1. On each plan card, click the **...** context menu.
+1. On the **Pricing** tab, click the **...** context menu on the plan you want
+   to publish.
 2. Select **Publish Plan**.
 3. Repeat for all three plans.
 
@@ -227,9 +230,9 @@ directory.
 
 ![Monetization policy in the policy picker list](/media/monetization/monetization-policy.png)
 
-3. In the **Meters** configuration field, replace the default value `requests`
-   with `api` to match the meter you created in Step 4. This field maps the
-   meter slug to the number of units each request consumes.
+3. In the **Meters** configuration field, you can keep the default value of
+   `requests` set `1` to match the meter you created in _Step 4_. This field
+   maps the meter slug to the number of units each request consumes.
 
 ```json
 {
@@ -238,7 +241,7 @@ directory.
   "options": {
     "cacheTtlSeconds": 60,
     "meters": {
-      "api": 1 // default is "requests": 1
+      "requests": 1
     }
   }
 }
@@ -274,7 +277,8 @@ end-to-end flow.
 
 ### Subscribe to a plan
 
-1. Open the **Pricing** tab in your Developer Portal.
+1. Open the **Pricing** tab in your Developer Portal (you can get the URL for
+   this from the **Deployment URLs** dropdown in your project).
 2. Click **Subscribe** on one of the available plans.
 3. Enter payment information. Since you're using Stripe sandbox, use
    [test card numbers](https://docs.stripe.com/testing) — no real charges are
@@ -295,7 +299,8 @@ curl --request GET \
 ```
 
 Head back to the Developer Portal to see your usage dashboard update with each
-call. You should see the `api` meter count increase toward your plan's limit.
+call. You should see the `API Requests` meter count increase toward your plan's
+limit.
 
 ## Next steps
 
