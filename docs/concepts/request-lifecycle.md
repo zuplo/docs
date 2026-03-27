@@ -147,3 +147,30 @@ your backend.
 | Outbound policies    | Per-route            | Response                 |
 | Response hooks       | Global + per-request | Response                 |
 | Response final hooks | Global + per-request | Nothing (read-only)      |
+
+## Choosing the right extension point
+
+**Use a policy** when you need reusable logic that applies to multiple routes.
+Policies are configured per-route in your OpenAPI spec and can be shared across
+any number of routes. Examples: authentication, rate limiting, request
+validation, header manipulation.
+
+**Use a handler** when you need to define the core behavior of a route -
+forwarding to a backend, generating a response, or implementing business logic.
+Each route has exactly one handler.
+
+**Use a hook** when you need logic that runs on every request globally,
+regardless of route. Examples: adding correlation IDs, security headers,
+logging, analytics.
+
+| I want to...                  | Use                        |
+| ----------------------------- | -------------------------- |
+| Authenticate requests         | Inbound policy             |
+| Rate limit requests           | Inbound policy             |
+| Validate request bodies       | Inbound policy             |
+| Forward to a backend          | Handler (URL Forward)      |
+| Return custom responses       | Handler (Function Handler) |
+| Transform response bodies     | Outbound policy            |
+| Add headers to all responses  | Response hook (global)     |
+| Log every request             | Response final hook        |
+| Normalize URLs before routing | Pre-routing hook           |

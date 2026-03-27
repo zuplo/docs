@@ -147,3 +147,28 @@ configuration and custom pages. See
    and policies
 
 All of this lives in Git and deploys automatically when you push.
+
+## The `$import()` syntax
+
+JSON configuration files (`routes.oas.json` and `policies.json`) use the
+`$import()` syntax to reference code modules. This is a Zuplo-specific syntax
+that resolves module references at build time.
+
+```json
+{
+  "module": "$import(@zuplo/runtime)"
+}
+```
+
+References starting with `@zuplo/runtime` point to built-in Zuplo modules
+(policies, handlers, and utilities).
+
+```json
+{
+  "module": "$import(./modules/my-handler)"
+}
+```
+
+References starting with `./modules/` point to your custom TypeScript files in
+the `modules/` directory. The `export` field specifies which named export to use
+from that module.
