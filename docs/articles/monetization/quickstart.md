@@ -151,7 +151,7 @@ plans to give your customers options.
    Next, click **Add feature** again and choose the **API Requests** feature and
    set it up as shown below:
 
-   **API Requests** rate card:
+   **API Requests**:
 
    | Setting         | Value                                                                                             |
    | --------------- | ------------------------------------------------------------------------------------------------- |
