@@ -63,7 +63,6 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
           <script>
             {`window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };`}
           </script>
-          <script src="https://static.claydar.com/init.v1.js?id=cAbtSg98sY"></script>
         </>
       ),
     },
