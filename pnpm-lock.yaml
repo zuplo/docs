@@ -53,6 +53,9 @@ importers:
       "@types/json-schema":
         specifier: 7.0.15
         version: 7.0.15
+      "@types/mdast":
+        specifier: ^4.0.4
+        version: 4.0.4
       "@types/node":
         specifier: ^24.0.0
         version: 24.12.0
@@ -62,12 +65,18 @@ importers:
       "@types/react-dom":
         specifier: ^19.0.2
         version: 19.2.3(@types/react@19.2.14)
+      "@types/unist":
+        specifier: ^3.0.3
+        version: 3.0.3
       "@typescript-eslint/parser":
         specifier: ^8.48.1
         version: 8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
       "@typescript/native-preview":
         specifier: 7.0.0-dev.20260327.2
         version: 7.0.0-dev.20260327.2
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       concurrently:
         specifier: ^9.2.1
         version: 9.2.1
@@ -89,6 +98,12 @@ importers:
       lefthook:
         specifier: ^2.0.4
         version: 2.1.4
+      mdast-util-directive:
+        specifier: ^3.1.0
+        version: 3.1.0
+      minimatch:
+        specifier: ^10.2.4
+        version: 10.2.4
       nodemon:
         specifier: ^3.1.10
         version: 3.1.14
@@ -98,6 +113,9 @@ importers:
       safe-marked:
         specifier: 16.0.0
         version: 16.0.0
+      tailwind-merge:
+        specifier: ^3.5.0
+        version: 3.5.0
       tsx:
         specifier: ^4.20.6
         version: 4.21.0
@@ -107,6 +125,9 @@ importers:
       unified:
         specifier: ^11.0.5
         version: 11.0.5
+      unist-util-visit:
+        specifier: ^5.1.0
+        version: 5.1.0
       vfile:
         specifier: ^6.0.3
         version: 6.0.3
