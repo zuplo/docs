@@ -15,7 +15,7 @@ const stages: Stage[] = [
   {
     id: "client-in",
     label: "Client Request",
-    why: "An HTTP request arrives at your Zuplo gateway from a browser, mobile app, server, or IoT device.",
+    why: "",
     details: <></>,
     links: [],
     color: "gray",
@@ -150,7 +150,6 @@ const stages: Stage[] = [
     links: [
       { label: "URL Forward Handler", href: "/docs/handlers/url-forward" },
       { label: "Function Handler", href: "/docs/handlers/custom-handler" },
-      { label: "All Handlers", href: "/docs/handlers/url-forward" },
       {
         label: "Project Structure",
         href: "/docs/concepts/project-structure",
@@ -235,7 +234,7 @@ const stages: Stage[] = [
   {
     id: "client-out",
     label: "Client Response",
-    why: "The final response is sent back to the client.",
+    why: "",
     details: <></>,
     links: [],
     color: "gray",
@@ -252,10 +251,11 @@ const colors = {
     pillActive:
       "bg-sky-100 border-sky-300 shadow-md ring-2 ring-sky-200/60 dark:bg-sky-900/70 dark:border-sky-600 dark:ring-sky-700/40",
     text: "text-sky-700 dark:text-sky-300",
-    panel:
-      "border-sky-200 bg-gradient-to-br from-sky-50 to-white dark:border-sky-800 dark:from-sky-950/50 dark:to-gray-900/50",
+    panelBorder: "border-sky-300 dark:border-sky-700",
+    panelAccent: "border-l-sky-400 dark:border-l-sky-500",
     link: "text-sky-600 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300",
     badge: "bg-sky-100 text-sky-600 dark:bg-sky-900/50 dark:text-sky-400",
+    connector: "bg-sky-300 dark:bg-sky-700",
   },
   violet: {
     dot: "bg-violet-400",
@@ -265,11 +265,12 @@ const colors = {
     pillActive:
       "bg-violet-100 border-violet-300 shadow-md ring-2 ring-violet-200/60 dark:bg-violet-900/70 dark:border-violet-600 dark:ring-violet-700/40",
     text: "text-violet-700 dark:text-violet-300",
-    panel:
-      "border-violet-200 bg-gradient-to-br from-violet-50 to-white dark:border-violet-800 dark:from-violet-950/50 dark:to-gray-900/50",
+    panelBorder: "border-violet-300 dark:border-violet-700",
+    panelAccent: "border-l-violet-400 dark:border-l-violet-500",
     link: "text-violet-600 hover:text-violet-700 dark:text-violet-400 dark:hover:text-violet-300",
     badge:
       "bg-violet-100 text-violet-600 dark:bg-violet-900/50 dark:text-violet-400",
+    connector: "bg-violet-300 dark:bg-violet-700",
   },
   emerald: {
     dot: "bg-emerald-400",
@@ -279,11 +280,12 @@ const colors = {
     pillActive:
       "bg-emerald-100 border-emerald-300 shadow-md ring-2 ring-emerald-200/60 dark:bg-emerald-900/70 dark:border-emerald-600 dark:ring-emerald-700/40",
     text: "text-emerald-700 dark:text-emerald-300",
-    panel:
-      "border-emerald-200 bg-gradient-to-br from-emerald-50 to-white dark:border-emerald-800 dark:from-emerald-950/50 dark:to-gray-900/50",
+    panelBorder: "border-emerald-300 dark:border-emerald-700",
+    panelAccent: "border-l-emerald-400 dark:border-l-emerald-500",
     link: "text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300",
     badge:
       "bg-emerald-100 text-emerald-600 dark:bg-emerald-900/50 dark:text-emerald-400",
+    connector: "bg-emerald-300 dark:bg-emerald-700",
   },
   amber: {
     dot: "bg-amber-400",
@@ -293,11 +295,12 @@ const colors = {
     pillActive:
       "bg-amber-100 border-amber-300 shadow-md ring-2 ring-amber-200/60 dark:bg-amber-900/70 dark:border-amber-600 dark:ring-amber-700/40",
     text: "text-amber-700 dark:text-amber-300",
-    panel:
-      "border-amber-200 bg-gradient-to-br from-amber-50 to-white dark:border-amber-800 dark:from-amber-950/50 dark:to-gray-900/50",
+    panelBorder: "border-amber-300 dark:border-amber-700",
+    panelAccent: "border-l-amber-400 dark:border-l-amber-500",
     link: "text-amber-600 hover:text-amber-700 dark:text-amber-400 dark:hover:text-amber-300",
     badge:
       "bg-amber-100 text-amber-600 dark:bg-amber-900/50 dark:text-amber-400",
+    connector: "bg-amber-300 dark:bg-amber-700",
   },
   gray: {
     dot: "bg-gray-300 dark:bg-gray-600",
@@ -307,174 +310,162 @@ const colors = {
     pillActive:
       "bg-gray-100 border-gray-300 dark:bg-gray-800/70 dark:border-gray-600",
     text: "text-gray-500 dark:text-gray-400",
-    panel:
-      "border-gray-200 bg-gradient-to-br from-gray-50 to-white dark:border-gray-700 dark:from-gray-800/50 dark:to-gray-900/50",
+    panelBorder: "border-gray-200 dark:border-gray-700",
+    panelAccent: "border-l-gray-300 dark:border-l-gray-600",
     link: "text-gray-500 dark:text-gray-400",
     badge: "bg-gray-100 text-gray-500 dark:bg-gray-800/50 dark:text-gray-400",
+    connector: "bg-gray-300 dark:bg-gray-700",
   },
 };
 
+const interactiveStages = stages.filter(
+  (s) => s.id !== "client-in" && s.id !== "client-out",
+);
+
 export function RequestLifecycle() {
-  const [selected, setSelected] = useState<Stage | null>(null);
-  const toggle = (s: Stage) => {
-    if (s.id === "client-in" || s.id === "client-out") return;
-    setSelected(selected?.id === s.id ? null : s);
-  };
-  const cm = selected ? colors[selected.color] : null;
+  const [selected, setSelected] = useState<Stage>(interactiveStages[0]);
+  const cm = colors[selected.color];
 
   return (
     <div className="not-prose my-8">
-      <div className="flex flex-col lg:flex-row gap-6">
+      <div className="flex flex-col lg:flex-row items-start gap-0">
         {/* Pipeline (vertical) */}
-        <div className="lg:w-[280px] shrink-0">
-          <div className="flex flex-col items-start">
-            {stages.map((stage, i) => {
-              const c = colors[stage.color];
-              const isSelected = selected?.id === stage.id;
-              const isEndpoint =
-                stage.id === "client-in" || stage.id === "client-out";
-              const isHandler = stage.id === "handler";
-              const isLast = i === stages.length - 1;
+        <div className="lg:w-[230px] shrink-0">
+          {stages.map((stage, i) => {
+            const c = colors[stage.color];
+            const isSelected = selected.id === stage.id;
+            const isEndpoint =
+              stage.id === "client-in" || stage.id === "client-out";
+            const isLast = i === stages.length - 1;
 
-              return (
-                <div key={stage.id} className="flex items-stretch">
-                  {/* Vertical line + dot */}
-                  <div className="flex flex-col items-center w-8 shrink-0">
-                    {/* Top connector */}
-                    {i > 0 && (
-                      <div
-                        className={`w-[2px] flex-1 ${colors[stages[i - 1].color].line}`}
-                      />
-                    )}
-                    {/* Dot */}
+            return (
+              <div key={stage.id} className="flex items-stretch">
+                {/* Vertical line + dot */}
+                <div className="flex flex-col items-center w-6 shrink-0">
+                  {i > 0 && (
                     <div
-                      className={[
-                        "rounded-full shrink-0 border-2 border-white dark:border-gray-900",
-                        isHandler
-                          ? "w-4 h-4"
-                          : isEndpoint
-                            ? "w-3 h-3"
-                            : "w-3 h-3",
-                        c.dot,
-                        isSelected ? "ring-4 ring-current/20 scale-125" : "",
-                      ].join(" ")}
+                      className={`w-[2px] flex-1 ${colors[stages[i - 1].color].line}`}
                     />
-                    {/* Bottom connector */}
-                    {!isLast && <div className={`w-[2px] flex-1 ${c.line}`} />}
-                  </div>
+                  )}
+                  <div
+                    className={[
+                      "rounded-full shrink-0 border-2 border-white dark:border-gray-900 transition-all duration-150",
+                      isEndpoint ? "w-2.5 h-2.5" : "w-3 h-3",
+                      c.dot,
+                      isSelected && !isEndpoint
+                        ? "ring-4 ring-current/20 scale-125"
+                        : "",
+                    ].join(" ")}
+                  />
+                  {!isLast && <div className={`w-[2px] flex-1 ${c.line}`} />}
+                </div>
 
-                  {/* Label */}
-                  <div className={`pb-2 pt-1 pl-3 ${isEndpoint ? "py-1" : ""}`}>
-                    {isEndpoint ? (
-                      <span className="text-xs font-medium text-gray-400 dark:text-gray-500">
-                        {stage.label}
-                      </span>
-                    ) : (
+                {/* Label */}
+                <div
+                  className={`pl-2.5 flex items-center ${isEndpoint ? "py-1.5" : "py-0.5"}`}
+                >
+                  {isEndpoint ? (
+                    <span className="text-[11px] font-medium text-gray-400 dark:text-gray-500">
+                      {stage.label}
+                    </span>
+                  ) : (
+                    <div className="flex items-center">
                       <button
-                        onClick={() => toggle(stage)}
+                        onClick={() => setSelected(stage)}
                         className={[
-                          "px-3 py-1.5 rounded-lg border text-left transition-all duration-150 cursor-pointer block",
-                          isHandler ? "px-4 py-2" : "",
+                          "w-[190px] px-3 py-2 rounded-lg border text-left transition-all duration-150 cursor-pointer",
                           isSelected ? c.pillActive : c.pillBg,
                         ].join(" ")}
                       >
                         <span
-                          className={[
-                            "font-semibold block leading-tight",
-                            isHandler ? "text-sm" : "text-[13px]",
-                            c.text,
-                          ].join(" ")}
+                          className={`font-semibold block leading-tight text-[13px] ${c.text}`}
                         >
                           {stage.label}
                         </span>
                         {stage.scope && (
-                          <span className="text-[10px] text-gray-400 dark:text-gray-500">
+                          <span className="text-[10px] text-gray-400 dark:text-gray-500 leading-none">
                             {stage.scope}
                             {stage.canShortCircuit && (
                               <span className="ml-1 opacity-60">
-                                - can short-circuit
+                                &middot; can short-circuit
                               </span>
                             )}
                           </span>
                         )}
                       </button>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Detail panel (right side) */}
-        <div className="flex-1 min-w-0">
-          {selected && cm ? (
-            <div
-              className={`rounded-xl border p-6 lg:sticky lg:top-4 transition-all duration-200 ${cm.panel}`}
-            >
-              <div className="mb-4">
-                <div className="flex items-center gap-2 mb-1">
-                  <h3 className={`font-bold text-xl m-0 ${cm.text}`}>
-                    {selected.label}
-                  </h3>
-                  {selected.scope && (
-                    <span
-                      className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${cm.badge}`}
-                    >
-                      {selected.scope}
-                    </span>
+                      {/* Connector line to panel */}
+                      {isSelected && (
+                        <div
+                          className={`hidden lg:block h-[2px] w-4 ${cm.connector}`}
+                        />
+                      )}
+                    </div>
                   )}
                 </div>
               </div>
+            );
+          })}
+        </div>
 
-              <div className="mb-4">
-                <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1.5">
-                  When to use
-                </h4>
-                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed m-0">
-                  {selected.why}
-                </p>
+        {/* Detail panel (right side, always visible) */}
+        <div className="flex-1 min-w-0 mt-4 lg:mt-0">
+          <div
+            className={`rounded-xl border-l-4 border border-gray-100 dark:border-gray-800 ${cm.panelAccent} bg-white dark:bg-gray-900/50 p-6 lg:sticky lg:top-4 transition-all duration-200 shadow-sm`}
+          >
+            <div className="mb-5">
+              <div className="flex items-center gap-2.5">
+                <h3 className={`font-bold text-xl m-0 ${cm.text}`}>
+                  {selected.label}
+                </h3>
+                {selected.scope && (
+                  <span
+                    className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${cm.badge}`}
+                  >
+                    {selected.scope}
+                  </span>
+                )}
               </div>
-
-              {selected.details && (
-                <div className="mb-4">
-                  <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1.5">
-                    How it works
-                  </h4>
-                  <div className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed [&_p]:mb-2 [&_p:last-child]:mb-0 [&_code]:text-xs [&_code]:bg-black/5 [&_code]:dark:bg-white/10 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded-md [&_code]:font-mono">
-                    {selected.details}
-                  </div>
-                </div>
-              )}
-
-              {selected.links.length > 0 && (
-                <div className="pt-3 border-t border-gray-200/50 dark:border-gray-700/50">
-                  <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-2">
-                    Learn more
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {selected.links.map((link) => (
-                      <a
-                        key={link.href}
-                        href={link.href}
-                        className={`text-sm font-medium no-underline hover:underline ${cm.link}`}
-                      >
-                        {link.label} &rarr;
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
-          ) : (
-            <div className="rounded-xl border border-dashed border-gray-200 dark:border-gray-700 p-8 flex items-center justify-center lg:sticky lg:top-4 min-h-[200px]">
-              <p className="text-sm text-gray-400 dark:text-gray-500 italic m-0 text-center">
-                Select a stage in the pipeline to see what it does,
-                <br />
-                when to use it, and links to relevant documentation.
+
+            <div className="mb-5">
+              <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-2 border-b border-gray-100 dark:border-gray-800 pb-1">
+                When to use
+              </h4>
+              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed m-0">
+                {selected.why}
               </p>
             </div>
-          )}
+
+            {selected.details && (
+              <div className="mb-5">
+                <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-2 border-b border-gray-100 dark:border-gray-800 pb-1">
+                  How it works
+                </h4>
+                <div className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed [&_p]:mb-2 [&_p:last-child]:mb-0 [&_code]:text-xs [&_code]:bg-gray-100 [&_code]:dark:bg-gray-800 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded-md [&_code]:font-mono">
+                  {selected.details}
+                </div>
+              </div>
+            )}
+
+            {selected.links.length > 0 && (
+              <div>
+                <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gray-400 dark:text-gray-500 mb-2.5 border-b border-gray-100 dark:border-gray-800 pb-1">
+                  Learn more
+                </h4>
+                <div className="flex flex-wrap gap-x-4 gap-y-1.5">
+                  {selected.links.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      className={`text-sm font-medium no-underline hover:underline ${cm.link}`}
+                    >
+                      {link.label} &rarr;
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

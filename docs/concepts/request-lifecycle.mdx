@@ -13,38 +13,44 @@ relevant documentation.
 At several stages, the pipeline can be short-circuited by returning a `Response`
 instead of passing the request through:
 
-- **Pre-routing hooks** can return a `Response` to skip routing entirely
-- **Request hooks** can return a `Response` to skip policies and the handler
-- **Inbound policies** can return a `Response` (e.g., 401 Unauthorized) to skip
-  the handler and outbound policies
+- **[Pre-routing hooks](../programmable-api/runtime-extensions.mdx)** can return
+  a `Response` to skip routing entirely
+- **[Request hooks](../programmable-api/hooks.mdx)** can return a `Response` to
+  skip policies and the handler
+- **[Inbound policies](../articles/policies.mdx)** can return a `Response`
+  (e.g., 401 Unauthorized) to skip the handler and outbound policies
 
-This is how authentication policies work: they check credentials and return an
-error response if the request is not authorized, preventing it from reaching
-your backend.
+This is how [authentication policies](./authentication.mdx) work: they check
+credentials and return an error response if the request is not authorized,
+preventing it from reaching your backend.
 
 ## Choosing the right extension point
 
-**Use a policy** when you need reusable logic that applies to multiple routes.
-Policies are configured per-route in your OpenAPI spec and can be shared across
-any number of routes. Examples: authentication, rate limiting, request
-validation, header manipulation.
+**Use a [policy](../articles/policies.mdx)** when you need reusable logic that
+applies to multiple routes. Policies are configured per-route in your
+[OpenAPI spec](../articles/openapi.mdx) and can be shared across any number of
+routes. Examples: [authentication](./authentication.mdx),
+[rate limiting](../policies/rate-limit-inbound.mdx),
+[request validation](../policies/request-validation-inbound.mdx),
+[header manipulation](../policies/set-headers-inbound.mdx).
 
-**Use a handler** when you need to define the core behavior of a route -
-forwarding to a backend, generating a response, or implementing business logic.
-Each route has exactly one handler.
+**Use a [handler](../handlers/custom-handler.mdx)** when you need to define the
+core behavior of a route -
+[forwarding to a backend](../handlers/url-forward.mdx), generating a response,
+or implementing business logic. Each route has exactly one handler.
 
-**Use a hook** when you need logic that runs on every request globally,
-regardless of route. Examples: adding correlation IDs, security headers,
-logging, analytics.
+**Use a [hook](../programmable-api/hooks.mdx)** when you need logic that runs on
+every request globally, regardless of route. Examples: adding correlation IDs,
+security headers, [logging](../articles/logging.mdx), analytics.
 
-| I want to...                  | Use                        |
-| ----------------------------- | -------------------------- |
-| Authenticate requests         | Inbound policy             |
-| Rate limit requests           | Inbound policy             |
-| Validate request bodies       | Inbound policy             |
-| Forward to a backend          | Handler (URL Forward)      |
-| Return custom responses       | Handler (Function Handler) |
-| Transform response bodies     | Outbound policy            |
-| Add headers to all responses  | Response hook (global)     |
-| Log every request             | Response final hook        |
-| Normalize URLs before routing | Pre-routing hook           |
+| I want to...                  | Use                                                            |
+| ----------------------------- | -------------------------------------------------------------- |
+| Authenticate requests         | [Inbound policy](./authentication.mdx)                         |
+| Rate limit requests           | [Inbound policy](../policies/rate-limit-inbound.mdx)           |
+| Validate request bodies       | [Inbound policy](../policies/request-validation-inbound.mdx)   |
+| Forward to a backend          | [URL Forward Handler](../handlers/url-forward.mdx)             |
+| Return custom responses       | [Function Handler](../handlers/custom-handler.mdx)             |
+| Transform response bodies     | [Outbound policy](../policies/transform-body-outbound.mdx)     |
+| Add headers to all responses  | [Response hook](../programmable-api/hooks.mdx)                 |
+| Log every request             | [Response final hook](../programmable-api/hooks.mdx)           |
+| Normalize URLs before routing | [Pre-routing hook](../programmable-api/runtime-extensions.mdx) |
