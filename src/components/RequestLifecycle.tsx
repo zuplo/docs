@@ -299,28 +299,21 @@ export function RequestLifecycle() {
       <div className="flex flex-col lg:flex-row items-stretch gap-0">
         {/* Pipeline (vertical) */}
         <div className="lg:w-[240px] shrink-0 flex flex-col">
-          {/* Top line extension */}
-          <div className="flex">
-            <div className="w-6 shrink-0 flex justify-center">
-              <div className="w-[2px] h-4 bg-gray-200 dark:bg-gray-700" />
-            </div>
-          </div>
-
           {/* Stages */}
           {stages.map((stage, i) => {
             const c = colors[stage.color];
             const isSelected = selected.id === stage.id;
             const isLast = i === stages.length - 1;
             const prevColor =
-              i > 0
-                ? colors[stages[i - 1].color].line
-                : "bg-gray-200 dark:bg-gray-700";
+              i > 0 ? colors[stages[i - 1].color].line : "bg-transparent";
 
             return (
               <div key={stage.id} className="flex items-center">
                 {/* Dot column - fixed width, dot always vertically centered */}
                 <div className="w-6 shrink-0 self-stretch flex flex-col items-center">
-                  <div className={`w-[2px] flex-1 ${prevColor}`} />
+                  <div
+                    className={`w-[2px] ${i === 0 ? "h-0" : "flex-1"} ${prevColor}`}
+                  />
                   <div
                     className={[
                       "rounded-full shrink-0",
@@ -329,7 +322,7 @@ export function RequestLifecycle() {
                     ].join(" ")}
                   />
                   <div
-                    className={`w-[2px] flex-1 ${isLast ? "bg-transparent" : c.line}`}
+                    className={`w-[2px] ${isLast ? "h-0" : "flex-1"} ${isLast ? "bg-transparent" : c.line}`}
                   />
                 </div>
 
@@ -394,13 +387,6 @@ export function RequestLifecycle() {
               </div>
             );
           })}
-
-          {/* Bottom line extension */}
-          <div className="flex">
-            <div className="w-6 shrink-0 flex justify-center">
-              <div className="w-[2px] h-4 bg-gray-200 dark:bg-gray-700" />
-            </div>
-          </div>
         </div>
 
         {/* Detail panel */}
