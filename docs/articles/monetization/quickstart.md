@@ -172,10 +172,10 @@ plans to give your customers options.
 
 ### Create additional plans
 
-Repeat the same steps above to create the **Pro** and **Business** plans using
-the values in the table below. The only structural differences are the pricing
-amounts and that Pro includes a **Metadata Support** rate card (set **Pricing
-Model** to `Free` and **Entitlement** to `Boolean (on/off)`).
+Repeat the same steps above to create the **Pro** plan using the values in the
+table below. The only structural differences are the pricing amounts and that
+Pro includes a **Metadata Support** rate card (set **Pricing Model** to `Free`
+and **Entitlement** to `Boolean (on/off)`).
 
 | Plan      | Key         | Monthly Fee | Included Requests | Overage Rate | Metadata Support |
 | --------- | ----------- | ----------- | ----------------- | ------------ | ---------------- |
