@@ -349,12 +349,9 @@ export function RequestLifecycle() {
                   )}
                   <div
                     className={[
-                      "rounded-full shrink-0 border-2 border-white dark:border-gray-900 transition-all duration-150",
+                      "rounded-full shrink-0",
                       isEndpoint ? "w-2.5 h-2.5" : "w-3 h-3",
                       c.dot,
-                      isSelected && !isEndpoint
-                        ? "ring-4 ring-current/20 scale-125"
-                        : "",
                     ].join(" ")}
                   />
                   {!isLast && <div className={`w-[2px] flex-1 ${c.line}`} />}
