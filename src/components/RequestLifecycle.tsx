@@ -312,7 +312,7 @@ export function RequestLifecycle() {
                 {/* Dot column - fixed width, dot always vertically centered */}
                 <div className="w-6 shrink-0 self-stretch flex flex-col items-center">
                   <div
-                    className={`w-[2px] ${i === 0 ? "h-0" : "flex-1"} ${prevColor}`}
+                    className={`w-[2px] flex-1 ${i === 0 ? "bg-transparent" : prevColor}`}
                   />
                   <div
                     className={[
@@ -322,7 +322,7 @@ export function RequestLifecycle() {
                     ].join(" ")}
                   />
                   <div
-                    className={`w-[2px] ${isLast ? "h-0" : "flex-1"} ${isLast ? "bg-transparent" : c.line}`}
+                    className={`w-[2px] flex-1 ${isLast ? "bg-transparent" : c.line}`}
                   />
                 </div>
 
