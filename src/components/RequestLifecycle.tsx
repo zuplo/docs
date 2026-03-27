@@ -362,7 +362,7 @@ export function RequestLifecycle() {
 
                 {/* Label */}
                 <div
-                  className={`pl-3 flex items-center ${isEndpoint ? "py-2" : "py-1"}`}
+                  className={`flex items-center ${isEndpoint ? "py-2 pl-3" : "py-1"}`}
                 >
                   {isEndpoint ? (
                     <span className="text-[13px] font-semibold text-gray-500 dark:text-gray-400">
@@ -370,6 +370,8 @@ export function RequestLifecycle() {
                     </span>
                   ) : (
                     <div className="flex items-center">
+                      {/* Colored connector from dot to box */}
+                      <div className={`w-3 h-[2px] ${c.connector}`} />
                       <button
                         onClick={() => setSelected(stage)}
                         className={[
@@ -401,7 +403,7 @@ export function RequestLifecycle() {
                       {/* Connector line to panel */}
                       {isSelected && (
                         <div
-                          className={`hidden lg:block h-[2px] w-5 ${cm.connector}`}
+                          className={`hidden lg:block h-0.5 w-5 ${cm.connector}`}
                         />
                       )}
                     </div>
