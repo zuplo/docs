@@ -445,9 +445,75 @@ export function RequestLifecycle() {
 
   return (
     <div className="not-prose my-8">
-      <div className="flex flex-col lg:flex-row items-stretch gap-0">
+      {/* Mobile: full-width accordion */}
+      <div className="lg:hidden space-y-1">
+        {stages.map((stage) => {
+          if (stage.isEndpoint) {
+            return (
+              <div
+                key={stage.id}
+                className="px-4 py-2 text-[13px] font-medium text-gray-400 dark:text-gray-500"
+              >
+                {stage.label}
+              </div>
+            );
+          }
+
+          const c = colors[stage.color];
+          const isSelected = selected.id === stage.id;
+
+          return (
+            <div key={stage.id}>
+              <button
+                onClick={() => setSelected(stage)}
+                className={[
+                  "w-full px-4 py-3 rounded-lg border-l-[3px] text-left transition-all duration-150 cursor-pointer flex items-center justify-between",
+                  isSelected
+                    ? `${c.panelBorder.split(" ")[0]} bg-white dark:bg-gray-800 shadow-sm`
+                    : "border-l-transparent hover:bg-gray-50 dark:hover:bg-gray-800/50",
+                ].join(" ")}
+              >
+                <div>
+                  <span
+                    className={[
+                      "font-semibold block text-[14px]",
+                      isSelected ? c.text : "text-gray-700 dark:text-gray-300",
+                    ].join(" ")}
+                  >
+                    {stage.label}
+                  </span>
+                  <span className="text-[11px] text-gray-400 dark:text-gray-500">
+                    {stage.scope}
+                  </span>
+                </div>
+                <svg
+                  className={`w-4 h-4 text-gray-400 transition-transform duration-200 shrink-0 ${isSelected ? "rotate-180" : ""}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+              {isSelected && (
+                <div className="border border-gray-200 dark:border-gray-700 rounded-lg mt-1 mb-2 bg-white dark:bg-gray-900/50">
+                  <DetailContent stage={stage} compact />
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Desktop: timeline + side panel */}
+      <div className="hidden lg:flex flex-row items-stretch gap-0">
         {/* Pipeline (vertical) */}
-        <div className="lg:w-[240px] shrink-0 flex flex-col">
+        <div className="w-[240px] shrink-0 flex flex-col">
           {stages.map((stage, i) => {
             const c = colors[stage.color];
             const isSelected = selected.id === stage.id;
@@ -456,101 +522,84 @@ export function RequestLifecycle() {
               i > 0 ? colors[stages[i - 1].color].line : "bg-transparent";
 
             return (
-              <div key={stage.id}>
-                <div className="flex items-center">
-                  {/* Dot column */}
-                  <div className="w-6 shrink-0 self-stretch flex flex-col items-center">
-                    <div
-                      className={`w-[2px] flex-1 ${i === 0 ? "bg-transparent" : prevColor}`}
-                    />
-                    <div
-                      className={[
-                        "rounded-full shrink-0",
-                        stage.isEndpoint ? "w-2.5 h-2.5" : "w-3 h-3",
-                        c.dot,
-                      ].join(" ")}
-                    />
-                    <div
-                      className={`w-[2px] flex-1 ${isLast ? "bg-transparent" : c.line}`}
-                    />
-                  </div>
-
-                  {/* Connector + box */}
-                  <div className="flex items-center py-1 -ml-1.5">
-                    <div
-                      className={[
-                        "w-4 h-[2px] shrink-0",
-                        !stage.isEndpoint && isSelected
-                          ? cm.connector
-                          : "bg-transparent",
-                      ].join(" ")}
-                    />
-
-                    {stage.isEndpoint ? (
-                      <div className="w-[195px] px-3.5 py-2 rounded-lg border border-dashed border-gray-300 dark:border-gray-600">
-                        <span className="text-[13px] font-semibold text-gray-500 dark:text-gray-400">
-                          {stage.label}
-                        </span>
-                      </div>
-                    ) : (
-                      <>
-                        <button
-                          onClick={() => setSelected(stage)}
-                          className={[
-                            "w-[195px] px-3.5 py-2.5 rounded-lg border text-left transition-all duration-150 cursor-pointer",
-                            isSelected
-                              ? "bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 shadow-sm"
-                              : "bg-transparent border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50",
-                          ].join(" ")}
-                        >
-                          <span
-                            className={[
-                              "font-semibold block leading-tight text-[13px]",
-                              isSelected
-                                ? c.text
-                                : "text-gray-700 dark:text-gray-300",
-                            ].join(" ")}
-                          >
-                            {stage.label}
-                          </span>
-                          <span className="text-[10px] text-gray-400 dark:text-gray-500 leading-none">
-                            {stage.scope}
-                            {stage.canShortCircuit && (
-                              <span className="ml-1 opacity-60">
-                                &middot; can short-circuit
-                              </span>
-                            )}
-                          </span>
-                        </button>
-
-                        {/* Connector to panel (desktop only) */}
-                        {isSelected && (
-                          <div
-                            className={`hidden lg:block h-[2px] w-5 ${cm.connector}`}
-                          />
-                        )}
-                      </>
-                    )}
-                  </div>
+              <div key={stage.id} className="flex items-center">
+                {/* Dot column */}
+                <div className="w-6 shrink-0 self-stretch flex flex-col items-center">
+                  <div
+                    className={`w-[2px] flex-1 ${i === 0 ? "bg-transparent" : prevColor}`}
+                  />
+                  <div
+                    className={[
+                      "rounded-full shrink-0",
+                      stage.isEndpoint ? "w-2.5 h-2.5" : "w-3 h-3",
+                      c.dot,
+                    ].join(" ")}
+                  />
+                  <div
+                    className={`w-[2px] flex-1 ${isLast ? "bg-transparent" : c.line}`}
+                  />
                 </div>
 
-                {/* Inline detail accordion (mobile only) */}
-                {isSelected && !stage.isEndpoint && (
-                  <div className="lg:hidden ml-6 my-1">
-                    <div
-                      className={`rounded-lg border-2 ${cm.panelBorder} bg-white dark:bg-gray-900/50`}
-                    >
-                      <DetailContent stage={stage} compact />
+                {/* Connector + box */}
+                <div className="flex items-center py-1 -ml-1.5">
+                  <div
+                    className={[
+                      "w-4 h-[2px] shrink-0",
+                      !stage.isEndpoint && isSelected
+                        ? cm.connector
+                        : "bg-transparent",
+                    ].join(" ")}
+                  />
+
+                  {stage.isEndpoint ? (
+                    <div className="w-[195px] px-3.5 py-2 rounded-lg border border-dashed border-gray-300 dark:border-gray-600">
+                      <span className="text-[13px] font-semibold text-gray-500 dark:text-gray-400">
+                        {stage.label}
+                      </span>
                     </div>
-                  </div>
-                )}
+                  ) : (
+                    <>
+                      <button
+                        onClick={() => setSelected(stage)}
+                        className={[
+                          "w-[195px] px-3.5 py-2.5 rounded-lg border text-left transition-all duration-150 cursor-pointer",
+                          isSelected
+                            ? "bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 shadow-sm"
+                            : "bg-transparent border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50",
+                        ].join(" ")}
+                      >
+                        <span
+                          className={[
+                            "font-semibold block leading-tight text-[13px]",
+                            isSelected
+                              ? c.text
+                              : "text-gray-700 dark:text-gray-300",
+                          ].join(" ")}
+                        >
+                          {stage.label}
+                        </span>
+                        <span className="text-[10px] text-gray-400 dark:text-gray-500 leading-none">
+                          {stage.scope}
+                          {stage.canShortCircuit && (
+                            <span className="ml-1 opacity-60">
+                              &middot; can short-circuit
+                            </span>
+                          )}
+                        </span>
+                      </button>
+                      {isSelected && (
+                        <div className={`h-[2px] w-5 ${cm.connector}`} />
+                      )}
+                    </>
+                  )}
+                </div>
               </div>
             );
           })}
         </div>
 
-        {/* Detail panel (desktop only) */}
-        <div className="hidden lg:flex flex-1 min-w-0 lg:mt-1 flex-col">
+        {/* Detail panel */}
+        <div className="flex-1 min-w-0 mt-1 flex flex-col">
           <div
             className={`rounded-xl border-2 ${cm.panelBorder} bg-white dark:bg-gray-900/50 transition-all duration-200 flex-1`}
           >
