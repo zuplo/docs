@@ -359,10 +359,10 @@ export function RequestLifecycle() {
 
                 {/* Label */}
                 <div
-                  className={`flex items-center ${isEndpoint ? "py-2 pl-3" : "py-1 -ml-1.5"}`}
+                  className={`flex items-center ${isEndpoint ? "py-2" : "py-1"} -ml-1.5`}
                 >
                   {isEndpoint ? (
-                    <span className="text-[13px] font-semibold text-gray-500 dark:text-gray-400">
+                    <span className="text-[13px] font-semibold text-gray-500 dark:text-gray-400 ml-5 pl-3.5">
                       {stage.label}
                     </span>
                   ) : (
