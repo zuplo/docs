@@ -643,6 +643,7 @@ export const documentation: Navigation = [
         ],
       },
       "articles/custom-ci-cd",
+      "articles/monorepo-deployment",
       "articles/rename-or-move-project",
     ],
   },
