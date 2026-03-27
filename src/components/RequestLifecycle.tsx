@@ -358,14 +358,15 @@ export function RequestLifecycle() {
                 </div>
 
                 {/* Label */}
-                <div
-                  className={`flex items-center ${isEndpoint ? "py-1.5 pl-2" : "py-1 -ml-1.5"}`}
-                >
+                <div className="flex items-center py-1 -ml-1.5">
                   {isEndpoint ? (
-                    <div className="w-[195px] px-3.5 py-2 rounded-lg border border-dashed border-gray-300 dark:border-gray-600">
-                      <span className="text-[13px] font-semibold text-gray-500 dark:text-gray-400">
-                        {stage.label}
-                      </span>
+                    <div className="flex items-center">
+                      <div className="w-5 shrink-0" />
+                      <div className="w-[195px] px-3.5 py-2 rounded-lg border border-dashed border-gray-300 dark:border-gray-600">
+                        <span className="text-[13px] font-semibold text-gray-500 dark:text-gray-400">
+                          {stage.label}
+                        </span>
+                      </div>
                     </div>
                   ) : (
                     <div className="flex items-center">
