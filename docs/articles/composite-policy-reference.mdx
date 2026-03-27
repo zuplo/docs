@@ -1,0 +1,284 @@
+---
+title: "Composite Policy: Limitations and Patterns"
+sidebar_label: Composite Policy Patterns
+description:
+  Understand the limitations of composite policies in Zuplo, including nesting
+  restrictions, and learn recommended patterns for reusing policy chains across
+  routes.
+tags:
+  - policies
+---
+
+Composite policies let you group multiple policies into a single reusable unit
+that you can apply across routes. While they simplify configuration and keep
+your `policies.json` organized, there are important limitations to understand —
+especially around nesting composite policies inside other composite policies.
+
+This guide covers those limitations, explains the error messages you might
+encounter, and provides recommended patterns for scaling policy management.
+
+## How composite policies work
+
+A composite policy references other policies by their `name` as defined in your
+`policies.json` file. When a route uses a composite policy, Zuplo executes each
+referenced policy in order, just as if you had listed them individually on the
+route.
+
+```json
+{
+  "name": "security-group",
+  "policyType": "composite-inbound",
+  "handler": {
+    "export": "CompositeInboundPolicy",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "policies": ["api-key-auth", "rate-limit", "request-validation"]
+    }
+  }
+}
+```
+
+In this example, any route that references `security-group` runs the
+`api-key-auth`, `rate-limit`, and `request-validation` policies in sequence.
+
+For full configuration details, see the
+[Composite Inbound Policy](../policies/composite-inbound.mdx) and
+[Composite Outbound Policy](../policies/composite-outbound.mdx) reference pages.
+
+## Limitations
+
+### Nested composite policies are not supported
+
+You cannot place a composite policy inside another composite policy. While
+Zuplo's configuration does not prevent you from referencing one composite policy
+in another composite policy's `policies` array, doing so leads to unexpected
+behavior at runtime.
+
+:::warning
+
+Nested composite policies are not supported. Always list all required policies
+directly in a single, flat composite policy. Nesting composites inside other
+composites can cause policies to malfunction or produce confusing errors.
+
+:::
+
+For example, the following configuration **does not work** as expected:
+
+```json title="❌ Unsupported: nested composites"
+[
+  {
+    "name": "shared-template",
+    "policyType": "composite-inbound",
+    "handler": {
+      "export": "CompositeInboundPolicy",
+      "module": "$import(@zuplo/runtime)",
+      "options": {
+        "policies": ["api-key-auth", "rate-limit"]
+      }
+    }
+  },
+  {
+    "name": "project-template",
+    "policyType": "composite-inbound",
+    "handler": {
+      "export": "CompositeInboundPolicy",
+      "module": "$import(@zuplo/runtime)",
+      "options": {
+        "policies": ["shared-template", "request-validation"]
+      }
+    }
+  }
+]
+```
+
+In this example, `project-template` references `shared-template`, which is
+itself a composite policy. This nesting causes the inner policies to not execute
+correctly.
+
+### Request validation inside nested composites
+
+One specific failure mode involves the
+[Request Validation policy](../policies/request-validation-inbound.mdx). When
+used inside a nested composite policy, the Request Validation policy may not be
+able to resolve the OpenAPI schema for the current route. You may see an error
+similar to:
+
+```
+No schema defined for method ...
+```
+
+This error does not mean your schema is missing from your OpenAPI specification.
+It indicates that the validation policy lost access to the route's schema
+context because of the unsupported nesting.
+
+### Circular references
+
+Composite policies that reference each other (directly or indirectly) create
+circular references that can cause your gateway to fail. Always verify that your
+composite policy chains do not form loops.
+
+## Recommended patterns for policy reuse
+
+### Use flat composite policies
+
+Instead of nesting composite policies, list every policy directly in a single
+composite:
+
+```json title="✅ Flat composite with all policies listed"
+{
+  "name": "project-template",
+  "policyType": "composite-inbound",
+  "handler": {
+    "export": "CompositeInboundPolicy",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "policies": [
+        "api-key-auth",
+        "rate-limit",
+        "request-validation",
+        "custom-logging"
+      ]
+    }
+  }
+}
+```
+
+This approach is explicit and avoids any nesting issues. The trade-off is that
+when a "shared" set of policies changes, you need to update every composite
+policy that includes them.
+
+### Create purpose-specific composite policies
+
+Group policies by function or security level. Rather than one universal
+composite, define composites that map to specific route requirements:
+
+```json title="policies.json"
+[
+  {
+    "name": "public-api-policies",
+    "policyType": "composite-inbound",
+    "handler": {
+      "export": "CompositeInboundPolicy",
+      "module": "$import(@zuplo/runtime)",
+      "options": {
+        "policies": ["rate-limit", "request-validation"]
+      }
+    }
+  },
+  {
+    "name": "authenticated-api-policies",
+    "policyType": "composite-inbound",
+    "handler": {
+      "export": "CompositeInboundPolicy",
+      "module": "$import(@zuplo/runtime)",
+      "options": {
+        "policies": [
+          "api-key-auth",
+          "rate-limit",
+          "request-validation",
+          "audit-log"
+        ]
+      }
+    }
+  }
+]
+```
+
+Routes can then reference the appropriate composite by name without needing to
+repeat individual policy lists.
+
+### Use custom policies for advanced composition
+
+When you need conditional logic or dynamic policy invocation, write a
+[custom code inbound policy](../policies/custom-code-inbound.mdx) that calls
+`context.invokeInboundPolicy()` programmatically:
+
+```ts title="modules/conditional-policies.ts"
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export default async function (request: ZuploRequest, context: ZuploContext) {
+  // Always run authentication
+  const authResult = await context.invokeInboundPolicy("api-key-auth", request);
+  if (authResult instanceof Response) {
+    return authResult;
+  }
+
+  // Always run rate limiting
+  const rateLimitResult = await context.invokeInboundPolicy(
+    "rate-limit",
+    authResult,
+  );
+  if (rateLimitResult instanceof Response) {
+    return rateLimitResult;
+  }
+
+  // Conditionally run validation based on method
+  if (request.method === "POST" || request.method === "PUT") {
+    const validationResult = await context.invokeInboundPolicy(
+      "request-validation",
+      rateLimitResult,
+    );
+    if (validationResult instanceof Response) {
+      return validationResult;
+    }
+    return validationResult;
+  }
+
+  // Skip validation for GET, DELETE, etc.
+  return rateLimitResult;
+}
+```
+
+This approach gives you full control over execution order and conditional logic.
+See
+[Conditional Policy Execution](../programmable-api/zuplo-context.mdx#conditional-policy-execution)
+for more examples.
+
+:::tip
+
+Use `context.invokeInboundPolicy()` when you need to programmatically decide
+which policies to run. Use composite policies when you have a fixed set of
+policies that always run together.
+
+:::
+
+## Error messages and troubleshooting
+
+### "No schema defined for method..."
+
+**Cause:** The Request Validation policy cannot find the OpenAPI schema for the
+current route. This commonly occurs when the validation policy runs inside a
+nested composite policy.
+
+**Fix:** Move the Request Validation policy out of any nested composite
+structure. List it directly in a flat composite policy or directly on the route.
+
+### Gateway may fail due to circular references
+
+**Cause:** Circular references in composite policy configuration. For example,
+policy A references policy B, and policy B references policy A.
+
+**Fix:** Review your `policies.json` and verify that no composite policy
+references another composite that eventually references it back. Trace the full
+chain of policy references to identify the loop.
+
+### Policies execute in unexpected order
+
+**Cause:** Policies within a composite run in the order listed in the `policies`
+array. If you have multiple composites on a route, each composite runs its
+policies sequentially, and the composites themselves run in the order they
+appear on the route.
+
+**Fix:** Verify the order of policies in your composite's `policies` array and
+the order of policies assigned to your route.
+
+## Summary
+
+- Composite policies group multiple policies into a single reusable reference.
+- **Nested composite policies are not supported.** Always use flat composites
+  that list all required policies directly.
+- The Request Validation policy produces a "No schema defined" error when used
+  inside nested composites.
+- For advanced composition logic, use `context.invokeInboundPolicy()` in a
+  custom code policy.
+- Avoid circular references between composite policies.
