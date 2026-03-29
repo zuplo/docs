@@ -196,18 +196,38 @@ curl -X PATCH https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions/{subscr
 
 ### Proration behavior
 
-When a customer changes plans mid-billing-period:
+When a customer changes plans mid-billing-period, Zuplo uses
+**max-consumption-based proration** to calculate a fair credit from the old
+plan. Instead of only considering how much time has passed, the system looks at
+both elapsed time and actual quota usage, then uses whichever is greater.
+
+This prevents situations where a customer consumes most of their quota early in
+the billing period, switches plans, and receives a large time-based credit that
+does not reflect their actual usage.
 
 **Upgrade (e.g., Starter → Pro):**
 
 - New entitlements take effect immediately
-- Stripe prorates the price difference for the remainder of the billing period
+- A proration credit from the old plan appears as a line-item discount on the
+  new plan's invoice
 
 **Downgrade (e.g., Pro → Starter):**
 
 - New (lower) entitlements take effect at the next billing cycle
-- Stripe issues a prorated credit for the price difference, applied to the next
+- A proration credit from the old plan is applied as a discount on the next
   invoice
+
+**Example:** A customer on Starter ($29/month, 10,000 requests) upgrades to Pro
+on day 15 of a 30-day period, having used 7,000 requests.
+
+| Factor             | Value          |
+| ------------------ | -------------- |
+| Time elapsed       | 50% (15 / 30)  |
+| Quota consumed     | 70% (7K / 10K) |
+| Max of the two     | 70%            |
+| **Credit applied** | **$8.70**      |
+
+The credit is applied once and is not carried forward to future billing cycles.
 
 ### Quota reset on plan change
 
