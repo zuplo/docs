@@ -302,6 +302,7 @@ export const documentation: Navigation = [
   {
     type: "category",
     label: "Getting Started",
+    icon: "rocket",
     items: [
       {
         type: "category",
@@ -332,6 +333,7 @@ export const documentation: Navigation = [
   {
     type: "category",
     label: "Concepts",
+    icon: "lightbulb",
     items: [
       "concepts/how-zuplo-works",
       "concepts/request-lifecycle",
@@ -350,6 +352,7 @@ export const documentation: Navigation = [
   {
     type: "category",
     label: "Development",
+    icon: "wrench",
     items: [
       "articles/cors",
       "articles/environment-variables",
@@ -406,11 +409,13 @@ export const documentation: Navigation = [
   {
     type: "category",
     label: "Policies",
+    icon: "shield-check",
     items: policies,
   },
   {
     type: "category",
     label: "Handlers",
+    icon: "route",
     items: [
       "handlers/url-forward",
       "handlers/url-rewrite",
@@ -426,6 +431,7 @@ export const documentation: Navigation = [
   {
     type: "category",
     label: "API Keys",
+    icon: "key",
     items: [
       "articles/api-key-management",
       "articles/api-key-administration",
@@ -441,6 +447,7 @@ export const documentation: Navigation = [
   {
     type: "category",
     label: "MCP Server",
+    icon: "bot",
     items: [
       "mcp-server/introduction",
       "mcp-server/tools",
@@ -464,6 +471,7 @@ export const documentation: Navigation = [
   {
     type: "category",
     label: "AI Gateway",
+    icon: "brain",
     items: [
       "ai-gateway/introduction",
       "ai-gateway/getting-started",
@@ -513,11 +521,13 @@ export const documentation: Navigation = [
   {
     type: "category",
     label: "Developer Portal",
+    icon: "book-open-text",
     items: devPortalItems,
   },
   {
     type: "category",
     label: "Monetization",
+    icon: "circle-dollar-sign",
     items: [
       {
         type: "doc",
@@ -564,7 +574,8 @@ export const documentation: Navigation = [
   },
   {
     type: "category",
-    label: "Source Control & Deployments",
+    label: "Deploying & Source Control",
+    icon: "git-branch",
     items: [
       "articles/source-control",
       {
@@ -652,6 +663,7 @@ export const documentation: Navigation = [
   {
     type: "category",
     label: "Observability",
+    icon: "eye",
     items: [
       {
         type: "category",
@@ -696,6 +708,7 @@ export const documentation: Navigation = [
   {
     label: "Networking & Infrastructure",
     type: "category",
+    icon: "cloud",
     items: [
       "articles/hosting-options",
       {
@@ -764,6 +777,7 @@ export const documentation: Navigation = [
   {
     type: "category",
     label: "Account Management",
+    icon: "users",
     items: [
       {
         type: "category",
@@ -800,11 +814,13 @@ export const documentation: Navigation = [
   {
     type: "category",
     label: "Programming API",
+    icon: "code",
     items: programming,
   },
   {
     type: "category",
     label: "Zuplo CLI",
+    icon: "terminal",
     items: [
       "cli/overview",
       "cli/create-zuplo-api",
@@ -817,6 +833,7 @@ export const documentation: Navigation = [
   {
     type: "category",
     label: "Migration Guides",
+    icon: "arrow-right-left",
     items: [
       "articles/migration-overview",
       "articles/migrate-from-kong",
