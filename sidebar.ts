@@ -294,8 +294,7 @@ export const documentation: Navigation = [
   },
   {
     type: "doc",
-    file: "home",
-    path: "/",
+    file: "index",
     label: "Home",
     display: "hide",
   },
