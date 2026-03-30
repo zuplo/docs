@@ -2,8 +2,9 @@ import { useEffect, useState, type ReactNode } from "react";
 
 const pulseKeyframes = `
 @keyframes lifecycle-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
-  50% { box-shadow: 0 0 0 5px currentColor; opacity: 0; }
+  0% { box-shadow: 0 0 0 0 currentColor; }
+  70% { box-shadow: 0 0 0 6px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
 }
 `;
 
