@@ -574,7 +574,7 @@ export const documentation: Navigation = [
   },
   {
     type: "category",
-    label: "Source Control & Deployment",
+    label: "Deploying & Source Control",
     icon: "git-branch",
     items: [
       "articles/source-control",
