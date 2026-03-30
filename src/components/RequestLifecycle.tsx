@@ -1,12 +1,24 @@
 import { useEffect, useState, type ReactNode } from "react";
 
+const pulseKeyframes = `
+@keyframes lifecycle-pulse {
+  0% { box-shadow: 0 0 0 0 currentColor; }
+  70% { box-shadow: 0 0 0 6px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+`;
+
+const pulseStyle = {
+  animation: "lifecycle-pulse 2s ease-in-out infinite",
+};
+
 interface Stage {
   id: string;
   label: string;
   why: string;
   details: ReactNode;
   links: { label: string; href: string; description?: string }[];
-  color: "sky" | "violet" | "emerald" | "amber" | "gray";
+  color: "sky" | "violet" | "emerald" | "gray";
   scope: string;
   canShortCircuit?: boolean;
   isEndpoint?: boolean;
@@ -201,7 +213,7 @@ const stages: Stage[] = [
         description: "How routes, handlers, and policies connect",
       },
     ],
-    color: "emerald",
+    color: "violet",
     scope: "Per-route",
   },
   {
@@ -265,7 +277,7 @@ const stages: Stage[] = [
         description: "Register global hooks and plugins",
       },
     ],
-    color: "amber",
+    color: "emerald",
     scope: "Global + per-request",
   },
   {
@@ -297,7 +309,7 @@ const stages: Stage[] = [
         description: "Distributed tracing and metrics",
       },
     ],
-    color: "amber",
+    color: "emerald",
     scope: "Global + per-request",
   },
   {
@@ -336,14 +348,6 @@ const colors = {
     panelBorder: "border-emerald-300 dark:border-emerald-700",
     link: "text-gray-700 dark:text-gray-300",
     connector: "bg-emerald-300 dark:bg-emerald-700",
-  },
-  amber: {
-    dot: "bg-amber-400",
-    line: "bg-amber-200 dark:bg-amber-800",
-    text: "text-amber-700 dark:text-amber-300",
-    panelBorder: "border-amber-300 dark:border-amber-700",
-    link: "text-gray-700 dark:text-gray-300",
-    connector: "bg-amber-300 dark:bg-amber-700",
   },
   gray: {
     dot: "bg-gray-300 dark:bg-gray-600",
@@ -446,10 +450,7 @@ export function RequestLifecycle() {
     return interactiveStages.find((s) => s.id === hash);
   };
 
-  const defaultStage =
-    getStageFromHash() ??
-    interactiveStages.find((s) => s.id === "inbound") ??
-    interactiveStages[0];
+  const defaultStage = getStageFromHash() ?? interactiveStages[0];
   const [selected, setSelected] = useState<Stage>(defaultStage);
   const cm = colors[selected.color];
 
@@ -469,6 +470,7 @@ export function RequestLifecycle() {
 
   return (
     <div className="not-prose my-8">
+      <style>{pulseKeyframes}</style>
       {/* Mobile: timeline accordion */}
       <div className="lg:hidden">
         {stages.map((stage, i) => {
@@ -488,7 +490,8 @@ export function RequestLifecycle() {
                     className={`w-[2px] flex-1 ${i === 0 ? "bg-transparent" : prevColor}`}
                   />
                   <div
-                    className={`rounded-full shrink-0 ${stage.isEndpoint ? "w-2.5 h-2.5" : "w-3 h-3"} ${c.dot}`}
+                    className={`rounded-full shrink-0 ${stage.isEndpoint ? "w-2.5 h-2.5" : "w-3 h-3"} ${c.dot} ${c.text}`}
+                    style={isSelected ? pulseStyle : undefined}
                   />
                   <div
                     className={`w-[2px] flex-1 ${isLast ? "bg-transparent" : c.line}`}
@@ -585,7 +588,9 @@ export function RequestLifecycle() {
                       "rounded-full shrink-0",
                       stage.isEndpoint ? "w-2.5 h-2.5" : "w-3 h-3",
                       c.dot,
+                      c.text,
                     ].join(" ")}
+                    style={isSelected ? pulseStyle : undefined}
                   />
                   <div
                     className={`w-[2px] flex-1 ${isLast ? "bg-transparent" : c.line}`}
