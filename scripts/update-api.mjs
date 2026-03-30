@@ -72,9 +72,7 @@ Authorization: Bearer YOUR_API_KEY
 
 API keys are scoped to your account, so a single key works for all projects under that account. If you belong to multiple accounts, make sure to select the correct one before creating a key.
 
-:::warning
-Keep your API key secure. Do not commit it to version control or share it publicly. Use environment variables to store your key in CI/CD environments.
-:::
+> **⚠️ Warning:** Keep your API key secure. Do not commit it to version control or share it publicly. Use environment variables to store your key in CI/CD environments.
 `,
   },
   paths: addPreviewWarningToPaths(
