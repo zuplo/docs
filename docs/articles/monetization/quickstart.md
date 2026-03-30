@@ -119,6 +119,14 @@ Feature** for each of the following:
 | Monthly Fee      | `monthly_fee`      | —            | Flat-rate billing             |
 | Metadata Support | `metadata_support` | —            | Boolean on/off feature        |
 
+:::tip{title="Key Naming Conventions"}
+
+When creating features that are metered, the key must match the key you set for
+the associated meter. For example, if your Requests meter key is `requests`,
+then your Requests feature key must also be `requests`.
+
+:::
+
 ## Step 6: Create plans
 
 Plans bring together your features with pricing and entitlements. Create two
