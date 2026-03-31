@@ -13,11 +13,12 @@ trap 'rm -rf "$STAGING_DIR"' EXIT
 
 echo "Staging docs bundle..."
 
-# 1. Copy markdown docs (preserve directory structure)
-rsync -a --include='*/' --include='*.md' --include='*.mdx' --exclude='*' \
-  "$PROJECT_DIR/docs/" "$STAGING_DIR/docs/"
+# 1. Copy markdown docs at root (no docs/ wrapper to avoid docs/docs/ nesting in npm).
+#    Exclude docs/policies/ since those are generated MDX duplicating the raw policy sources.
+rsync -a --exclude='/policies/' --include='*/' --include='*.md' --include='*.mdx' --exclude='*' \
+  "$PROJECT_DIR/docs/" "$STAGING_DIR/"
 # Remove empty directories left by the filter
-find "$STAGING_DIR/docs" -type d -empty -delete 2>/dev/null || true
+find "$STAGING_DIR" -type d -empty -delete 2>/dev/null || true
 
 # 2. Copy OpenAPI spec
 if [ -f "$PROJECT_DIR/api.json" ]; then
