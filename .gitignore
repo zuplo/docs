@@ -33,6 +33,7 @@ yarn-error.log*
 .env
 
 /policies.*.json
+/docs-bundle.zip
 /cdn-policy-icons
 /cli.json
 /src/errors.ts

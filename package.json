@@ -26,6 +26,7 @@
     "errors:generate": "tsx scripts/generate-errors.ts",
     "cli:generate": "tsx scripts/generate-cli-docs.ts",
     "guides:generate": "tsx scripts/generate-guides.ts",
+    "docs:bundle": "sh ./scripts/bundle-docs.sh",
     "guides:sync": "tsx scripts/sync-guides.ts",
     "guides:check": "tsx scripts/sync-guides.ts --check",
     "guides:unused-categories": "tsx scripts/find-unused-categories.ts",
