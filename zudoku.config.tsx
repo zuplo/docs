@@ -87,7 +87,10 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
     {
       type: "category",
       label: "Documentation",
-      link: "/",
+      link: {
+        path: "/",
+        file: "home.md",
+      },
       items: documentation,
     },
     {
