@@ -3,6 +3,12 @@ name: Bundle Docs
 on:
   push:
     branches: [main]
+    paths:
+      - "docs/**"
+      - "policies/**"
+      - "scripts/generate-policies.ts"
+      - "scripts/bundle-docs.sh"
+      - ".github/workflows/bundle-docs.yaml"
   workflow_dispatch:
 
 jobs:
