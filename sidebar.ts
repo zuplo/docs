@@ -295,6 +295,7 @@ export const documentation: Navigation = [
   {
     type: "doc",
     file: "home",
+    path: "/",
     label: "Home",
     display: "hide",
   },

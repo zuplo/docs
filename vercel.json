@@ -10,12 +10,12 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "/docs/home",
+      "destination": "/docs",
       "permanent": true
     },
     {
-      "source": "/docs",
-      "destination": "/docs/home",
+      "source": "/docs/home",
+      "destination": "/docs",
       "permanent": false
     },
     {
