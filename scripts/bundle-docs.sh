@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 set -euo pipefail
 
 # Bundle docs content into a zip for distribution in the zuplo npm module.
