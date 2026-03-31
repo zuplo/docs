@@ -355,6 +355,7 @@ export const documentation: Navigation = [
     label: "Development",
     icon: "wrench",
     items: [
+      "articles/ai-agents",
       "articles/cors",
       "articles/environment-variables",
       "articles/branch-based-deployments",
