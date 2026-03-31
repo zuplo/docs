@@ -141,6 +141,14 @@ const uiPolicies: {
   products: PolicyProduct[];
 }[] = [];
 
+const indexEntries: {
+  id: string;
+  name: string | undefined;
+  description: string | undefined;
+  isDeprecated: boolean;
+  products: PolicyProduct[];
+}[] = [];
+
 const getExampleHtml = async (
   policyId: string,
   schema: PolicySchema,
@@ -319,6 +327,15 @@ for (const schemaPath of policySchemas) {
   }
   policyDataV6.policies.push(metaV6);
 
+  // Collect entry for the policies index
+  indexEntries.push({
+    id: policyId,
+    name: schema.title,
+    description: schema.description,
+    isDeprecated: Boolean(schema.isDeprecated),
+    products: schema.products,
+  });
+
   let code: { name: string; policyType: string; handler: object };
 
   if (examples && examples.length > 0) {
@@ -455,6 +472,31 @@ await fs.writeFile(
 await fs.writeFile(
   path.join(projectDir, "policies.v6.json"),
   JSON.stringify(policyDataV6, null, 2),
+);
+
+// Generate _index.md for agent discovery
+const sortedEntries = indexEntries.sort((a, b) =>
+  (a.name ?? a.id).localeCompare(b.name ?? b.id),
+);
+const indexLines = [
+  "# Zuplo Policies",
+  "",
+  "| Policy ID | Name | Description | Products |",
+  "| --- | --- | --- | --- |",
+  ...sortedEntries.map((e) => {
+    const deprecated = e.isDeprecated ? " (deprecated)" : "";
+    const desc = (e.description ?? "")
+      .replace(/\|/g, "\\|")
+      .replace(/\n/g, " ");
+    return `| ${e.id} | ${e.name ?? e.id}${deprecated} | ${desc} | ${e.products.join(", ")} |`;
+  }),
+  "",
+];
+const generatedDir = path.join(projectDir, "generated");
+await fs.mkdir(generatedDir, { recursive: true });
+await fs.writeFile(
+  path.join(generatedDir, "policies-index.md"),
+  indexLines.join("\n"),
 );
 
 function generateOptions(schema?: JSONSchema7) {
