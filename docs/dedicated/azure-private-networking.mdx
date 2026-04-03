@@ -45,6 +45,8 @@ Why teams choose this pattern:
 
 - Access is scoped to a specific service instead of an entire network
 - It is easier to review from a security perspective
+- It avoids broader Layer 3 connectivity between VNets when you only need
+  private access to a specific service
 - Your wider VNet does not need to be exposed to Zuplo
 
 ### 2. VNet peering
@@ -73,10 +75,20 @@ networking.
 
 The pattern depends on how your environment is configured:
 
-- If your Container App uses **Private Endpoint**, Zuplo connects through
-  Private Link and private DNS
-- If your app is only reachable on private IPs inside your VNet, Zuplo connects
-  through **VNet peering**
+- If your **Container Apps environment** uses **Private Endpoint**, Zuplo
+  connects through Private Link and private DNS
+- If your Container Apps environment is internal and your app is reachable only
+  on private IPs inside your VNet, Zuplo connects through **VNet peering**
+
+Important details for Container Apps:
+
+- The private endpoint is created on the **managed environment**, not on an
+  individual container app
+- If you use an internal Container Apps environment, DNS must resolve the
+  environment's private address correctly
+- If you use app ingress set to **Internal**, that traffic is limited to the
+  same Container Apps environment. For private access from outside that
+  environment, use VNet-reachable ingress with the correct DNS setup
 
 This lets you keep Azure Container Apps private while still presenting a public
 API through Zuplo.
@@ -102,9 +114,18 @@ Private connectivity on Azure depends on DNS as much as it depends on routing.
 For private connectivity to work, Zuplo needs to resolve your backend to the
 correct private address. That usually means one of the following:
 
-- Linking the relevant Azure Private DNS zone
+- Linking the relevant Azure Private DNS zone to every VNet that needs to
+  resolve the private service
 - Forwarding DNS through your existing Azure DNS architecture
 - Using your shared DNS resolver strategy
+
+Common examples include:
+
+- `privatelink.azurewebsites.net` for Azure App Service private endpoints
+- `privatelink.{region}.azurecontainerapps.io` for Azure Container Apps private
+  endpoints
+- The Container Apps environment's own private DNS zone when you use an internal
+  environment
 
 Without the correct DNS configuration, the network path can exist while traffic
 still resolves to the public endpoint.
@@ -124,9 +145,15 @@ Before implementation, align on:
 
 In most Azure environments:
 
-- Use **Private Endpoint** when the backend supports it
+- Use **Private Endpoint** when the backend supports it, especially for Azure
+  PaaS services where you only need private access to a specific service
 - Use **VNet peering** when the backend is only reachable on private IPs inside
-  your VNet
+  your VNet or when Zuplo needs broader private connectivity into your Azure
+  network
+
+In practice, Private Endpoint is usually the cleaner fit for Azure Container
+Apps and App Service. VNet peering is usually the better fit for internal load
+balancers, private AKS services, or broader VNet-to-VNet connectivity.
 
 If you are evaluating Zuplo for a private Azure workload, those are the two
 patterns to expect.
