@@ -1,0 +1,124 @@
+---
+title: "Managed Dedicated: GCP Private Networking"
+sidebar_label: GCP Private Networking
+---
+
+Zuplo Managed Dedicated can run on Google Cloud and connect privately to
+backends that aren't exposed to the public internet. This includes services
+running inside your VPC, internal load balancers, GKE workloads, and services
+published through Private Service Connect.
+
+This page focuses on customer-facing requirements and the common GCP patterns
+used to connect Zuplo to private backends.
+
+## When to use this
+
+GCP private networking is a good fit when you need to:
+
+- Keep your backend off the public internet while still using Zuplo as the
+  public API entry point
+- Connect Zuplo to services running privately inside your Google Cloud network
+- Reach internal services over private IPs instead of public endpoints
+- Meet internal security or compliance requirements around network isolation
+
+## GCP connectivity options
+
+The two most common GCP patterns are:
+
+### 1. Private Service Connect
+
+This is usually the preferred option when your backend can be exposed through
+Private Service Connect.
+
+Typical use cases:
+
+- Services published privately through Private Service Connect
+- Single-service connectivity where you want service-level access instead of
+  broader VPC access
+- Architectures where you want to reduce network coupling between Zuplo and the
+  rest of your environment
+
+Why teams choose this pattern:
+
+- Access is scoped to a specific service instead of an entire VPC
+- It provides a clean service-oriented model for private access
+- It reduces the network coordination needed compared with broader peering
+  patterns
+
+### 2. VPC Network Peering
+
+This is the right option when Zuplo needs private network access into a
+customer-managed VPC and the backend is reachable by private IP.
+
+Typical use cases:
+
+- Internal load balancers
+- Private GKE services
+- Self-managed applications reachable only inside a VPC
+
+Why teams choose this pattern:
+
+- It is a simple fit for one-to-one VPC connectivity
+- Zuplo can reach internal services that are not exposed through Private Service
+  Connect
+- It works well when the backend lives in a small number of VPCs
+
+## What is required from your side
+
+The exact setup depends on your GCP design, but most projects need:
+
+- The Google Cloud region or regions where Zuplo should run
+- The target service details, such as project IDs, VPC names, internal load
+  balancers, or Private Service Connect service attachments
+- A DNS plan for private name resolution
+- Firewall rule approval
+- Non-overlapping IP ranges if VPC Network Peering is used
+
+If your team manages GCP through Terraform, Zuplo can work within that model.
+The ownership split depends on your environment and security model.
+
+## DNS requirements
+
+Private connectivity on Google Cloud depends on DNS as much as it depends on
+routing.
+
+For private connectivity to work, Zuplo needs to resolve your backend to the
+correct private address or endpoint. That usually means one of the following:
+
+- Using your existing Cloud DNS private zone design
+- Authorizing the relevant private zones across the connected networks
+- Using your shared DNS resolver strategy
+
+Without the correct DNS configuration, the network path can exist while traffic
+still resolves to the public endpoint.
+
+## Planning considerations
+
+Before implementation, align on:
+
+- Whether **Private Service Connect** or **VPC Network Peering** is the better
+  fit
+- Which environments need private connectivity, such as production only or both
+  production and non-production
+- IP range planning for peered VPCs
+- Which team owns the GCP networking changes
+- Whether the connection should be provisioned through Terraform
+
+## Recommendation
+
+In most Google Cloud environments:
+
+- Use **Private Service Connect** when the backend can be exposed as a private
+  service
+- Use **VPC Network Peering** when the backend is only reachable on private IPs
+  inside your VPC
+
+If you are evaluating Zuplo for a private GCP workload, those are the two
+patterns to expect.
+
+## Next steps
+
+- Review the general [Managed Dedicated networking](./networking.mdx) overview
+- Review [Managed Dedicated architecture](./architecture.mdx)
+- [Schedule time with Zuplo](https://book.zuplo.com) to review your GCP network
+  design
