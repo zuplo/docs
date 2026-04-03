@@ -10,55 +10,66 @@ requirements.
 Common configurations include:
 
 - Using Zuplo as the public ingress to your API and using network connectivity
-  such as AWS Transit Gateway, PrivateLink, or VPC Peering to connect to your
-  backend services.
+  such as PrivateLink, Private Service Connect, VNet or VPC peering, or
+  provider-native network hubs to connect to your backend services.
 - Restricting access to the public internet by configuring your API Gateway to
-  only accept traffic from specific IP ranges or VPCs allowing you to put WAFs,
-  IDS/IPS, or other security appliances in front of your API Gateway.
+  only accept traffic from specific IP ranges or private networks, allowing you
+  to put WAFs, IDS/IPS, or other security appliances in front of your API
+  Gateway.
 - Multiple dedicated managed instances of Zuplo can be deployed across multiple
   regions to provide high availability and disaster recovery.
 
 To discuss your networking requirements, please contact your account manager.
 
-## Zuplo Ingress to Customer VPC
+## Cloud-specific guidance
+
+- For AWS private backend connectivity, see
+  [AWS Private Networking](./aws-private-networking.mdx)
+- For Azure private backend connectivity, see
+  [Azure Private Networking](./azure-private-networking.mdx)
+- For Google Cloud private backend connectivity, see
+  [GCP Private Networking](./gcp-private-networking.mdx)
+
+## Zuplo Ingress to Customer Private Network
 
 The default setup for dedicated managed Zuplo is to use your Zuplo API Gateway
 as the public ingress to your API. This is the simplest setup and allows Zuplo
 to manage things like SSL certificates on your behalf.
 
-In this setup your VPC isn't exposed to the public internet at all. Instead,
-your Zuplo API Gateway will use a network connection such as AWS Transit
-Gateway, PrivateLink, or VPC Peering to connect to your backend services.
+In this setup your private network isn't exposed to the public internet at all.
+Instead, your Zuplo API Gateway uses a private network connection to reach your
+backend services.
 
 <Diagram height="h-48">
   <DiagramNode id="client">Client</DiagramNode>
-  <DiagramGroup id="dedicated-vpc" label="Dedicated VPC">
+  <DiagramGroup id="dedicated-vpc" label="Dedicated Network">
     <DiagramNode id="gateway" variant="zuplo">
       Zuplo API Gateway
     </DiagramNode>
   </DiagramGroup>
-  <DiagramGroup id="customer-vpc" label="Customer VPC">
+  <DiagramGroup id="customer-vpc" label="Customer Private Network">
     <DiagramNode id="backend">Backend</DiagramNode>
   </DiagramGroup>
   <DiagramEdge from="client" to="gateway" />
   <DiagramEdge from="gateway" to="backend" />
 </Diagram>
 
-## Customer VPC Ingress to Zuplo API Gateway
+## Customer Private Network Ingress to Zuplo API Gateway
 
 If you have custom networking requirements, such as using a static IP address
 you already own, or if you want to run services such as WAFs, IDS/IPS, or other
 security products in front of your API Gateway, Zuplo can be configured to
-accept traffic from your VPC then route it to your backend. Your backend could
-be in the same VPC as your ingress or in another VPC.
+accept traffic from your private network and then route it to your backend. Your
+backend could be in the same network as your ingress or in another private
+network.
 
 <Diagram height="h-64">
   <DiagramNode id="client">Client</DiagramNode>
-  <DiagramGroup id="customer-vpc" label="Customer VPC">
+  <DiagramGroup id="customer-vpc" label="Customer Private Network">
     <DiagramNode id="waf">WAF</DiagramNode>
     <DiagramNode id="backend">Backend</DiagramNode>
   </DiagramGroup>
-  <DiagramGroup id="dedicated-vpc" label="Dedicated VPC">
+  <DiagramGroup id="dedicated-vpc" label="Dedicated Network">
     <DiagramNode id="gateway" variant="zuplo">
       Zuplo API Gateway
     </DiagramNode>

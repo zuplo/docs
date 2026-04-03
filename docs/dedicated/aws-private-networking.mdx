@@ -1,0 +1,139 @@
+---
+title: "Managed Dedicated: AWS Private Networking"
+sidebar_label: AWS Private Networking
+---
+
+Zuplo Managed Dedicated can run on AWS and connect privately to backends that
+aren't exposed to the public internet. This includes private services running
+inside your VPC, internal load balancers, and services published through AWS
+PrivateLink.
+
+This page focuses on customer-facing requirements and the common AWS patterns
+used to connect Zuplo to private backends.
+
+## When to use this
+
+AWS private networking is a good fit when you need to:
+
+- Keep your backend off the public internet while still using Zuplo as the
+  public API entry point
+- Connect Zuplo to services running privately inside one or more AWS VPCs
+- Reach internal services over private IPs instead of public endpoints
+- Meet internal security or compliance requirements around network isolation
+
+## AWS connectivity options
+
+The three most common AWS patterns are:
+
+### 1. AWS PrivateLink
+
+This is usually the preferred option when your backend can be exposed as a
+PrivateLink service.
+
+Typical use cases:
+
+- Services published through an AWS PrivateLink endpoint service
+- Cross-account private service access
+- Single-service connectivity where you want service-level access instead of
+  broader VPC access
+
+Why teams choose this pattern:
+
+- Access is scoped to a specific service instead of an entire VPC
+- It works well across AWS accounts
+- It reduces the network coordination needed compared with broader peering
+  patterns
+
+### 2. VPC peering
+
+This is the right option when Zuplo needs private network access into a single
+customer VPC and the backend is reachable by private IP.
+
+Typical use cases:
+
+- Internal load balancers
+- Private ECS or EKS services
+- Self-managed applications reachable only inside a VPC
+
+Why teams choose this pattern:
+
+- It is a simple fit for one-to-one VPC connectivity
+- Zuplo can reach internal services that are not exposed through PrivateLink
+- It works well when the backend lives in a small number of VPCs
+
+### 3. Transit Gateway
+
+This is usually the best option when the customer already uses a hub-and-spoke
+AWS network design or needs connectivity across multiple VPCs.
+
+Typical use cases:
+
+- Multi-VPC AWS environments
+- Shared services VPCs
+- More complex enterprise network topologies
+
+Why teams choose this pattern:
+
+- It scales better than maintaining many point-to-point VPC peerings
+- It fits existing AWS network hub designs
+- It is often the cleanest option when Zuplo must reach multiple private
+  backends
+
+## What is required from your side
+
+The exact setup depends on your AWS design, but most projects need:
+
+- The AWS region or regions where Zuplo should run
+- The target service details, such as VPC IDs, account IDs, or PrivateLink
+  service details
+- A DNS plan for private name resolution
+- Route table and security group approval
+- Non-overlapping CIDR ranges if VPC peering or Transit Gateway is used
+
+If your team manages AWS through Terraform, Zuplo can work within that model.
+The ownership split depends on your environment and security model.
+
+## DNS requirements
+
+Private connectivity on AWS depends on DNS as much as it depends on routing.
+
+For private connectivity to work, Zuplo needs to resolve your backend to the
+correct private address or endpoint. That usually means one of the following:
+
+- Using private DNS with AWS PrivateLink
+- Using your existing Route 53 private hosted zone design
+- Using your shared DNS resolver strategy
+
+Without the correct DNS configuration, the network path can exist while traffic
+still resolves to the public endpoint.
+
+## Planning considerations
+
+Before implementation, align on:
+
+- Whether **PrivateLink**, **VPC peering**, or **Transit Gateway** is the better
+  fit
+- Which environments need private connectivity, such as production only or both
+  production and non-production
+- CIDR planning for peered or attached VPCs
+- Which team owns the AWS networking changes
+- Whether the connection should be provisioned through Terraform
+
+## Recommendation
+
+In most AWS environments:
+
+- Use **PrivateLink** when the backend can be published as a private service
+- Use **VPC peering** for simpler one-to-one private network connectivity
+- Use **Transit Gateway** when Zuplo needs to connect into a larger multi-VPC
+  AWS network
+
+If you are evaluating Zuplo for a private AWS workload, those are the three
+patterns to expect.
+
+## Next steps
+
+- Review the general [Managed Dedicated networking](./networking.mdx) overview
+- Review [Managed Dedicated architecture](./architecture.mdx)
+- [Schedule time with Zuplo](https://book.zuplo.com) to review your AWS network
+  design

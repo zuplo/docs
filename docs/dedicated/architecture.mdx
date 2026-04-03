@@ -6,8 +6,8 @@ sidebar_label: Architecture
 Zuplo's managed dedicated instances are highly available, scalable, and secure.
 With a managed dedicated instance of Zuplo, your API Gateway runs on isolated
 instances and, when running on a cloud provider that supports it, a dedicated
-VPC. This document outlines the components and architecture of a managed
-dedicated instance of a Zuplo API Gateway.
+network environment. This document outlines the components and architecture of a
+managed dedicated instance of a Zuplo API Gateway.
 
 ## Components
 
@@ -84,7 +84,7 @@ instance of Zuplo and how the components interact with each other.
 
 <Diagram height="h-64">
   <DiagramNode id="client">Client</DiagramNode>
-  <DiagramGroup id="dedicated-vpc" label="Dedicated VPC">
+  <DiagramGroup id="dedicated-vpc" label="Dedicated Network">
     <DiagramNode id="gateway" variant="zuplo">
       Zuplo API Gateway
     </DiagramNode>
@@ -92,7 +92,7 @@ instance of Zuplo and how the components interact with each other.
       Gateway Services
     </DiagramNode>
   </DiagramGroup>
-  <DiagramGroup id="customer-vpc" label="Customer VPC">
+  <DiagramGroup id="customer-vpc" label="Customer Private Network">
     <DiagramNode id="backend">Backend</DiagramNode>
   </DiagramGroup>
   <DiagramNode id="control" variant="zuplo">
@@ -175,7 +175,7 @@ hosts only the production deployment, while the non-production instance hosts
 many other deployments (for example staging, development, QA, or any feature
 branch deployments).
 
-Each instance operates in isolation and runs within its own VPC or network.
+Each instance operates in isolation and runs within its own network environment.
 
 It's possible to have multiple instances depending on your requirements. For
 example, some customers have separate instances for production, staging, and
