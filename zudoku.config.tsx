@@ -110,6 +110,7 @@ posthog.init('phc_xB1aydh7a41MW9TwUtLJjKme4izQiWf9zKbKhpysAiW', { person_profile
       path: "api",
       options: {
         expandAllTags: true,
+        showInfoPage: false,
       },
     },
   ],
