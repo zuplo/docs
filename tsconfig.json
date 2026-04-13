@@ -20,7 +20,8 @@
     "src/zudoku-env.d.ts",
     "sidebar.ts",
     "sidebar.guides.ts",
-    "zudoku.config.tsx"
+    "zudoku.config.tsx",
+    "middleware.ts"
   ],
   "exclude": ["node_modules", "policies", "temp", "dist", "dist2", "scripts"]
 }
