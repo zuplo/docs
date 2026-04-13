@@ -43,14 +43,17 @@ Track the total number of API requests:
 }
 ```
 
-Each event contains the subscription ID as the `subject` and a `total` field
-with the quantity to record:
+Each event contains the `subscription` ID linking it to a subscription and a
+`total` field in `data` with the quantity to record:
 
 ```json
 {
+  "id": "5c10fade-1c9e-4d6c-8275-c52c36731d3c",
+  "specversion": "1.0",
   "type": "requests",
-  "subject": "sub_xxxxxxxx",
   "source": "monetization-policy",
+  "subject": "customer-id",
+  "subscription": "01KNVXHQG356VA7T7W0V9N21GH",
   "data": {
     "total": 1
   }
@@ -76,9 +79,12 @@ configured to report 50 tokens per request:
 
 ```json
 {
+  "id": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+  "specversion": "1.0",
   "type": "tokens",
-  "subject": "sub_xxxxxxxx",
   "source": "monetization-policy",
+  "subject": "customer-id",
+  "subscription": "01KNVXHQG356VA7T7W0V9N21GH",
   "data": {
     "total": 50
   }
@@ -96,6 +102,22 @@ Track bytes transferred:
   "eventType": "data_transfer",
   "aggregation": "SUM",
   "valueProperty": "$.total"
+}
+```
+
+Each event reports the number of bytes transferred:
+
+```json
+{
+  "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+  "specversion": "1.0",
+  "type": "data_transfer",
+  "source": "monetization-policy",
+  "subject": "customer-id",
+  "subscription": "01KNVXHQG356VA7T7W0V9N21GH",
+  "data": {
+    "total": 4096
+  }
 }
 ```
 
