@@ -155,7 +155,7 @@ curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/meters/{meterIdOrSlug}
   -H "Authorization: Bearer {API_KEY}" \
   -H "Content-Type: application/json" \
   -d '{
-    "subject": "{SUBSCRIPTION_ID}",
+    "filterSubscription": ["{SUBSCRIPTION_ID}"],
     "from": "2026-03-01T00:00:00Z",
     "to": "2026-03-31T23:59:59Z",
     "windowSize": "DAY"
