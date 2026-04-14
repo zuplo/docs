@@ -42,6 +42,7 @@
     "icon": "lock",
     "items": [
       "dev-portal/zudoku/configuration/authentication",
+      "dev-portal/zudoku/configuration/oauth-security-schemes",
       "dev-portal/zudoku/configuration/protected-routes",
       {
         "type": "category",
