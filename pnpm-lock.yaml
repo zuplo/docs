@@ -45,8 +45,8 @@ importers:
         specifier: ^19.0.0
         version: 19.2.4(react@19.2.4)
       zudoku:
-        specifier: ^0.73.2
-        version: 0.73.2(@sentry/react@10.46.0(react@19.2.4))(@types/json-schema@7.0.15)(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(mermaid@11.13.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(use-sync-external-store@1.6.0(react@19.2.4))
+        specifier: ^0.74.1
+        version: 0.74.1(@sentry/react@10.46.0(react@19.2.4))(@types/json-schema@7.0.15)(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(mermaid@11.13.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(use-sync-external-store@1.6.0(react@19.2.4))
     devDependencies:
       '@anthropic-ai/claude-agent-sdk':
         specifier: ^0.2.19
@@ -590,8 +590,8 @@ packages:
     resolution: {integrity: sha512-ZpJxMqB+Qfe3rp6uszCQoag4nSw42icURnBRfFYSOmTgEeOe4rD0vYlbA8spvCu2TlCesNTlEN9BLWtQqLxabA==}
     engines: {node: '>=18.0.0'}
 
-  '@hono/node-server@1.19.11':
-    resolution: {integrity: sha512-dr8/3zEaB+p0D2n/IUrlPF1HZm586qgJNXK1a9fhg/PzdtkK7Ksd5l312tJX2yBuALqDYBlG20QEbayqPyxn+g==}
+  '@hono/node-server@1.19.13':
+    resolution: {integrity: sha512-TsQLe4i2gvoTtrHje625ngThGBySOgSK3Xo2XRYOdqGN1teR8+I7vchQC46uLJi8OF62YTYA3AhSpumtkhsaKQ==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       hono: ^4
@@ -2304,17 +2304,17 @@ packages:
     peerDependencies:
       vite: ^5.2.0 || ^6 || ^7
 
-  '@tanem/react-nprogress@6.0.2':
-    resolution: {integrity: sha512-SkBexef8gs8aquOMdyOFN/oSDsDUatDWDhH4R74KCjYc9ffsQJnReXVQKlbkyB9yv+B9MuG6+2g5YpvBNNQ7Vg==}
+  '@tanem/react-nprogress@6.0.3':
+    resolution: {integrity: sha512-OT3KZiJv/zGI/lEwX3gD9nzNnyUQuSdSL0BK3OJIUC3Prx3JD18u13TZRvzasEXxHPGzm6AtBEr6gYxPeVWjWw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  '@tanstack/query-core@5.90.20':
-    resolution: {integrity: sha512-OMD2HLpNouXEfZJWcKeVKUgQ5n+n3A2JFmBaScpNDUqSrQSjiveC7dKMe53uJUg1nDG16ttFPz2xfilz6i2uVg==}
+  '@tanstack/query-core@5.97.0':
+    resolution: {integrity: sha512-QdpLP5VzVMgo4VtaPppRA2W04UFjIqX+bxke/ZJhE5cfd5UPkRzqIAJQt9uXkQJjqE8LBOMbKv7f8HCsZltXlg==}
 
-  '@tanstack/react-query@5.90.21':
-    resolution: {integrity: sha512-0Lu6y5t+tvlTJMTO7oh5NSpJfpg/5D41LlThfepTixPYkJ0sE2Jj0m0f6yYqujBwIXlId87e234+MxG3D3g7kg==}
+  '@tanstack/react-query@5.97.0':
+    resolution: {integrity: sha512-y4So4eGcQoK2WVMAcDNZE9ofB/p5v1OlKvtc1F3uqHwrtifobT7q+ZnXk2mRkc8E84HKYSlAE9z6HXl2V0+ySQ==}
     peerDependencies:
       react: ^18 || ^19
 
@@ -3618,8 +3618,8 @@ packages:
   hoist-non-react-statics@3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
 
-  hono@4.12.5:
-    resolution: {integrity: sha512-3qq+FUBtlTHhtYxbxheZgY8NIFnkkC/MR8u5TTsr7YZ3wixryQ3cCwn3iZbg8p8B88iDBBAYSfZDS75t8MN7Vg==}
+  hono@4.12.12:
+    resolution: {integrity: sha512-p1JfQMKaceuCbpJKAPKVqyqviZdS0eUxH9v82oWo1kb9xjQ5wA6iP3FNVAPDFlz5/p7d45lO+BpSk1tuSZMF4Q==}
     engines: {node: '>=16.9.0'}
 
   html-encoding-sniffer@4.0.0:
@@ -5158,8 +5158,8 @@ packages:
   vfile@6.0.3:
     resolution: {integrity: sha512-KzIbH/9tXat2u30jf+smMwFCsno4wHVdNmzFyL+T/L3UGqqk6JKfVqOFOZEpZSHADH1k40ab6NUIXZq422ov3Q==}
 
-  vite@7.3.1:
-    resolution: {integrity: sha512-w+N7Hifpc3gRjZ63vYBXA56dvvRlNWRczTdmCBBa+CotUzAPf5b7YMdMR/8CQoeYE5LX3W4wj6RYTgonm1b9DA==}
+  vite@7.3.2:
+    resolution: {integrity: sha512-Bby3NOsna2jsjfLVOHKes8sGwgl4TT0E6vvpYgnAYDIF/tie7MRaFthmKuHx1NSXjiTueXH3do80FMQgvEktRg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -5380,8 +5380,8 @@ packages:
   zod@4.3.6:
     resolution: {integrity: sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==}
 
-  zudoku@0.73.2:
-    resolution: {integrity: sha512-2dHYdMbSmrZge690LC2TGywc3YPqx7q+2UUU1ENJ7smv9acw/N6fElJ4d8v2rFxX4XoRjstLiv2WSqdYSQUK4g==}
+  zudoku@0.74.1:
+    resolution: {integrity: sha512-8kMxlOu5Ms2zYN8GN67ORGwD6rkfG9HtHBvzhfUKLavwCpXha7JBanGb+HkV3etTjDWU9V6XXARL5N0Kb1SxjQ==}
     hasBin: true
     peerDependencies:
       '@azure/msal-browser': ^4.13.0
@@ -5882,9 +5882,9 @@ snapshots:
       '@repeaterjs/repeater': 3.0.6
       tslib: 2.8.1
 
-  '@hono/node-server@1.19.11(hono@4.12.5)':
+  '@hono/node-server@1.19.13(hono@4.12.12)':
     dependencies:
-      hono: 4.12.5
+      hono: 4.12.12
 
   '@humanfs/core@0.19.1': {}
 
@@ -7530,25 +7530,25 @@ snapshots:
       postcss-selector-parser: 6.0.10
       tailwindcss: 4.2.1
 
-  '@tailwindcss/vite@4.2.1(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.3))':
+  '@tailwindcss/vite@4.2.1(vite@7.3.2(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.3))':
     dependencies:
       '@tailwindcss/node': 4.2.1
       '@tailwindcss/oxide': 4.2.1
       tailwindcss: 4.2.1
-      vite: 7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.3)
+      vite: 7.3.2(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.3)
 
-  '@tanem/react-nprogress@6.0.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@tanem/react-nprogress@6.0.3(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@babel/runtime': 7.29.2
       hoist-non-react-statics: 3.3.2
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
-  '@tanstack/query-core@5.90.20': {}
+  '@tanstack/query-core@5.97.0': {}
 
-  '@tanstack/react-query@5.90.21(react@19.2.4)':
+  '@tanstack/react-query@5.97.0(react@19.2.4)':
     dependencies:
-      '@tanstack/query-core': 5.90.20
+      '@tanstack/query-core': 5.97.0
       react: 19.2.4
 
   '@tybys/wasm-util@0.10.1':
@@ -7886,7 +7886,7 @@ snapshots:
 
   '@vercel/oidc@3.2.0': {}
 
-  '@vitejs/plugin-react@5.1.4(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.3))':
+  '@vitejs/plugin-react@5.1.4(vite@7.3.2(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.3))':
     dependencies:
       '@babel/core': 7.29.0
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.29.0)
@@ -7894,7 +7894,7 @@ snapshots:
       '@rolldown/pluginutils': 1.0.0-rc.3
       '@types/babel__core': 7.20.5
       react-refresh: 0.18.0
-      vite: 7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.3)
+      vite: 7.3.2(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.3)
     transitivePeerDependencies:
       - supports-color
 
@@ -9039,7 +9039,7 @@ snapshots:
     dependencies:
       react-is: 16.13.1
 
-  hono@4.12.5: {}
+  hono@4.12.12: {}
 
   html-encoding-sniffer@4.0.0:
     dependencies:
@@ -10938,7 +10938,7 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.3):
+  vite@7.3.2(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.3):
     dependencies:
       esbuild: 0.27.4
       fdir: 6.5.0(picomatch@4.0.4)
@@ -11083,12 +11083,12 @@ snapshots:
 
   zod@4.3.6: {}
 
-  zudoku@0.73.2(@sentry/react@10.46.0(react@19.2.4))(@types/json-schema@7.0.15)(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(mermaid@11.13.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(use-sync-external-store@1.6.0(react@19.2.4)):
+  zudoku@0.74.1(@sentry/react@10.46.0(react@19.2.4))(@types/json-schema@7.0.15)(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(mermaid@11.13.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(use-sync-external-store@1.6.0(react@19.2.4)):
     dependencies:
       '@apidevtools/json-schema-ref-parser': 15.3.1(@types/json-schema@7.0.15)
       '@envelop/core': 5.5.1
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.13.1)
-      '@hono/node-server': 1.19.11(hono@4.12.5)
+      '@hono/node-server': 1.19.13(hono@4.12.12)
       '@lekoarts/rehype-meta-as-attributes': 3.0.3
       '@mdx-js/react': 3.1.1(@types/react@19.2.14)(react@19.2.4)
       '@mdx-js/rollup': 3.1.1(rollup@4.59.0)
@@ -11124,12 +11124,12 @@ snapshots:
       '@shikijs/themes': 3.23.0
       '@shikijs/transformers': 3.23.0
       '@tailwindcss/typography': 0.5.19(tailwindcss@4.2.1)
-      '@tailwindcss/vite': 4.2.1(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.3))
-      '@tanem/react-nprogress': 6.0.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      '@tanstack/react-query': 5.90.21(react@19.2.4)
+      '@tailwindcss/vite': 4.2.1(vite@7.3.2(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.3))
+      '@tanem/react-nprogress': 6.0.3(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@tanstack/react-query': 5.97.0(react@19.2.4)
       '@types/react': 19.2.14
       '@types/react-dom': 19.2.3(@types/react@19.2.14)
-      '@vitejs/plugin-react': 5.1.4(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.3))
+      '@vitejs/plugin-react': 5.1.4(vite@7.3.2(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.3))
       '@x0k/json-schema-merge': 1.0.2
       '@zudoku/httpsnippet': 10.0.9
       '@zudoku/react-helmet-async': 2.0.5(react@19.2.4)
@@ -11153,7 +11153,7 @@ snapshots:
       hast-util-heading-rank: 3.0.0
       hast-util-to-jsx-runtime: 2.3.6
       hast-util-to-string: 3.0.1
-      hono: 4.12.5
+      hono: 4.12.12
       http-terminator: 3.2.0
       javascript-stringify: 2.1.0
       json-schema-to-typescript-lite: 15.0.0
@@ -11200,7 +11200,7 @@ snapshots:
       unist-util-visit: 5.1.0
       vaul: 1.1.2(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       vfile: 6.0.3
-      vite: 7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.3)
+      vite: 7.3.2(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.3)
       yaml: 2.8.3
       yargs: 18.0.0
       zod: 4.3.6
