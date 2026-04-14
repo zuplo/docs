@@ -7,9 +7,13 @@ given time window. It protects your backend from traffic spikes, enforces fair
 usage across consumers, and enables tiered access for different customer plans.
 
 Zuplo's rate limiter uses a **sliding window algorithm** enforced globally
-across all edge locations. When a client exceeds the limit, they receive a
-`429 Too Many Requests` response with a `retry-after` header indicating when
-they can retry.
+across all edge locations. Unlike a fixed window algorithm (which resets
+counters at fixed intervals and can allow bursts at window boundaries), the
+sliding window continuously tracks requests over a rolling time period. This
+produces smoother, more predictable throttling behavior.
+
+When a client exceeds the limit, they receive a `429 Too Many Requests` response
+with a `retry-after` header indicating when they can retry.
 
 ## Rate limiting policies
 
@@ -73,12 +77,12 @@ example, counting compute units or tokens instead of raw requests).
 
 ## Choosing a policy
 
-| Scenario                                               | Policy                                        |
-| ------------------------------------------------------ | --------------------------------------------- |
-| Fixed requests-per-minute limit for all callers        | Rate Limiting                                 |
-| Different limits per customer tier (free vs. paid)     | Rate Limiting with a custom function          |
-| Counting multiple resources (requests + compute units) | Complex Rate Limiting                         |
-| Usage-based billing with variable cost per request     | Complex Rate Limiting with dynamic increments |
+| Scenario                                               | Policy                                                     |
+| ------------------------------------------------------ | ---------------------------------------------------------- |
+| Fixed requests-per-minute limit for all callers        | Rate Limiting                                              |
+| Different limits per customer tier (free vs. paid)     | Rate Limiting with a custom function                       |
+| Counting multiple resources (requests + compute units) | Complex Rate Limiting (enterprise)                         |
+| Usage-based billing with variable cost per request     | Complex Rate Limiting with dynamic increments (enterprise) |
 
 ## How `rateLimitBy` works
 
@@ -91,6 +95,15 @@ Groups requests by the client's IP address. No authentication is required. This
 is the simplest option and works well for public APIs or as a first layer of
 protection.
 
+:::caution
+
+Be aware that multiple clients behind the same corporate proxy, cloud NAT, or
+shared Wi-Fi network can share a single IP address. In these cases, IP-based
+rate limiting can unfairly throttle unrelated users. For authenticated APIs,
+prefer `rateLimitBy: "user"` instead.
+
+:::
+
 ### `user`
 
 Groups requests by the authenticated user's identity (`request.user.sub`). When
@@ -100,6 +113,14 @@ using JWT authentication, it comes from the token's `sub` claim.
 
 This is the recommended mode for authenticated APIs because it ties limits to
 the actual consumer rather than a shared IP address.
+
+:::note
+
+The `user` mode requires an authentication policy (such as API Key
+Authentication or JWT authentication) earlier in the policy pipeline. If no
+authenticated user is present on the request, the policy returns an error.
+
+:::
 
 ### `function`
 
@@ -224,17 +245,30 @@ These serve different purposes:
 You can apply multiple rate limiting policies to the same route. For example,
 you might enforce both a per-minute and a per-hour limit. When using multiple
 policies, apply the longest time window first, followed by shorter durations.
+This ordering ensures that the broadest limit is checked first — if a caller has
+exhausted their hourly quota, the request is rejected immediately without
+incrementing the shorter-duration counter.
 
 ## Additional options
 
 Both rate limiting policies support the following additional options:
 
 - `headerMode` - Set to `"retry-after"` (default) to include the `retry-after`
-  header in 429 responses, or `"none"` to omit it
-- `mode` - Set to `"strict"` (default) for synchronous enforcement, or `"async"`
-  for non-blocking checks that may allow some requests over the limit
-- `throwOnFailure` - Set to `true` to return an error if the rate limit service
-  is unreachable, or `false` (default) to allow the request through
+  header in 429 responses, or `"none"` to omit it. The `retry-after` value is
+  returned as a number of seconds (delay-seconds format).
+- `mode` - Set to `"strict"` (default) or `"async"`. In **strict** mode, the
+  request is held until the rate limit check completes — the backend is never
+  called if the limit is exceeded. This adds some latency to every request
+  because the check hits a globally distributed rate limit service. In **async**
+  mode, the request proceeds to the backend in parallel with the rate limit
+  check. This minimizes added latency but means some requests may get through
+  even after the limit is exceeded. Async mode is a good fit when low latency
+  matters more than exact enforcement.
+- `throwOnFailure` - Controls behavior when the rate limit service is
+  unreachable. When set to `false` (default), requests are allowed through
+  (fail-open). When set to `true`, the policy returns an error to the client.
+  The fail-open default prevents a rate limit service outage from blocking all
+  traffic to your API.
 
 ## Related resources
 

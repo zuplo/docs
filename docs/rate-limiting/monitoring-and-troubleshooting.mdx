@@ -1,0 +1,243 @@
+---
+title: Monitoring and Troubleshooting Rate Limits
+sidebar_label: Monitoring & Troubleshooting
+description:
+  Monitor rate limit events, debug unexpected 429 responses, and understand
+  failure modes.
+---
+
+Rate limiting only delivers value when you can observe it in action. Without
+visibility into which consumers hit limits, how often requests are rejected, and
+whether the rate limit service itself is healthy, you are operating blind. This
+guide covers how to monitor rate limit activity, understand failure modes,
+choose the right enforcement mode, and diagnose common issues.
+
+## Monitoring rate limit events
+
+Zuplo produces structured logs for every request, including those rejected with
+a `429 Too Many Requests` status code. Ship these logs to an external provider
+to build dashboards and alerts around rate limit activity.
+
+### Setting up log shipping
+
+Configure a [logging plugin](../articles/logging.mdx) in your `zuplo.runtime.ts`
+file to send logs to your observability platform. Zuplo supports AWS CloudWatch,
+Datadog, Dynatrace, Google Cloud Logging, Loki, New Relic, Splunk, Sumo Logic,
+and VMware Log Insight. You can also build a
+[custom logging plugin](../articles/custom-logging-example.mdx) for unsupported
+providers.
+
+### Filtering for rate-limited requests
+
+Every log entry includes default fields you can filter on:
+
+- **`requestId`** -- Correlate a specific rejected request end-to-end using the
+  `zp-rid` response header.
+- **`environment`** and **`environmentStage`** -- Distinguish between
+  `production`, `preview`, and `working-copy` environments.
+
+To break down rate-limited requests by consumer or IP, add custom log properties
+in a policy that runs before or alongside the rate limit check:
+
+```ts
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export default async function policy(
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  // Tag every log entry with the consumer identity for filtering
+  context.log.setLogProperties!({
+    rateLimitIdentity:
+      request.user?.sub ?? request.headers.get("true-client-ip") ?? "unknown",
+  });
+  return request;
+}
+```
+
+This adds a `rateLimitIdentity` field to all log entries for the request, making
+it straightforward to group 429 responses by consumer in your logging dashboard.
+
+### Setting up alerts
+
+Configure alerts in your logging provider for the following conditions:
+
+- **Spike in 429 responses** -- A sudden increase may indicate a
+  misconfiguration, an attack, or a legitimate traffic surge.
+- **429 rate exceeding a threshold** -- If more than a small percentage of
+  requests return 429, the rate limit may be set too low for normal traffic.
+- **Zero 429 responses over an extended period** -- If you expect rate limiting
+  to be active but see no rejections, the policy may not be attached to the
+  correct routes.
+
+### Metrics plugins
+
+For quantitative monitoring, Zuplo supports
+[metrics plugins](../articles/metrics-plugins.mdx) that send request latency,
+request size, and response size data to Datadog, Dynatrace, New Relic, or any
+OpenTelemetry-compatible collector. While these metrics do not track rate limit
+counters directly, the `statusCode` dimension (when enabled) allows you to chart
+429 response rates alongside overall request volume.
+
+## Understanding failure modes
+
+The rate limiting policies depend on a globally distributed rate limit service
+to track request counters. Understanding what happens when that service is
+unreachable helps you make the right availability tradeoff.
+
+### Fail-open (default)
+
+By default, `throwOnFailure` is set to `false`. If the rate limit service is
+unreachable, the policy allows the request through. This fail-open behavior
+prevents a rate limit service outage from blocking all traffic to your API.
+
+The tradeoff is that during an outage, rate limits are not enforced and clients
+can exceed their configured thresholds.
+
+### Fail-closed
+
+Set `throwOnFailure` to `true` to return an error when the rate limit service is
+unreachable. This guarantees that no request bypasses rate limiting, but it
+means a service disruption blocks all traffic on routes using that policy.
+
+```json
+{
+  "options": {
+    "rateLimitBy": "user",
+    "requestsAllowed": 100,
+    "timeWindowMinutes": 1,
+    "throwOnFailure": true
+  }
+}
+```
+
+:::warning
+
+Only use `throwOnFailure: true` when allowing unlimited traffic is more
+dangerous than rejecting all traffic. For most APIs, the fail-open default is
+the safer choice.
+
+:::
+
+### Detecting fail-open conditions
+
+Because fail-open requests succeed with a `200` (or other normal status code),
+they do not produce a 429 log entry. To detect when the rate limit service is
+unreachable, monitor for a sudden drop in 429 responses during periods when you
+expect rate limiting to be active. A complete absence of 429s alongside steady
+or increasing traffic volume is a strong signal that the service is in fail-open
+mode.
+
+## Strict vs. async mode in production
+
+The `mode` option controls whether the rate limit check blocks the request or
+runs in parallel with it.
+
+### Strict mode (default)
+
+In `strict` mode, every request waits for the rate limit service to confirm
+whether the request is within limits before proceeding to the backend. This
+provides exact enforcement -- no request exceeds the configured threshold.
+
+The tradeoff is added latency on every request due to the round-trip to the rate
+limit service.
+
+### Async mode
+
+In `async` mode, the request proceeds to the backend immediately while the rate
+limit check runs in parallel. If the check determines the limit is exceeded, the
+result applies to the _next_ request, not the current one.
+
+This means some requests may get through after the limit is reached. In
+practice, the overshoot depends on your request rate and the latency of the rate
+limit check. For an API receiving 100 requests per second with a 10ms check
+time, approximately one extra request may slip through per window.
+
+:::tip
+
+Use `async` mode when low latency matters more than exact enforcement -- for
+example, on high-throughput public endpoints where a few extra requests over the
+limit are acceptable. Use `strict` mode when precise enforcement is required,
+such as billing-sensitive endpoints or APIs with hard backend capacity limits.
+
+:::
+
+## Common troubleshooting scenarios
+
+### Unexpected 429 responses
+
+**Shared IP addresses.** When `rateLimitBy` is set to `"ip"`, multiple clients
+behind the same corporate proxy, cloud NAT, or shared Wi-Fi share a single rate
+limit bucket. One heavy user exhausts the limit for everyone on that IP. Switch
+to `rateLimitBy: "user"` for authenticated APIs to avoid this.
+
+**Missing authentication policy.** The `"user"` mode requires an authentication
+policy (such as API Key Authentication or JWT) earlier in the policy pipeline to
+populate `request.user`. If no authentication policy runs first, the rate limit
+policy returns an error instead of applying per-user limits. Verify that
+authentication appears before rate limiting in the route's inbound policy list.
+
+**Multiple rate limit policies on the same route.** If a route has both a
+per-minute and a per-hour rate limit policy, a request can be rejected by either
+one. Check all rate limit policies attached to the route, and verify the
+ordering (longest time window first, then shorter durations).
+
+**Lower limits than expected.** If you use a custom `rateLimitBy: "function"`,
+verify that the function returns the expected `requestsAllowed` and
+`timeWindowMinutes` values. Log the returned values during development to
+confirm the function resolves correctly for each consumer.
+
+### Rate limits not applying
+
+**Policy not attached to the route.** Defining a rate limit policy in
+`policies.json` does not activate it. The policy name must appear in the
+`policies.inbound` array of each route in `routes.oas.json` where you want it
+enforced. Verify the route configuration.
+
+**Typo in the policy name.** The policy name in `routes.oas.json` must exactly
+match the `name` field in `policies.json`. A mismatched name silently skips the
+policy. Check for case sensitivity and extra whitespace.
+
+**Custom function returning `undefined`.** When `rateLimitBy` is set to
+`"function"` and the identifier function returns `undefined`, rate limiting is
+skipped for that request entirely. This is by design -- it allows you to
+selectively exempt certain requests -- but it can cause confusion if the
+function has an unhandled code path that returns `undefined` unintentionally.
+
+### Different behavior across environments
+
+Rate limit counters are scoped per environment. Production, preview, and
+working-copy environments each maintain their own separate counters. A request
+that is rate-limited in production does not affect the counter in a preview
+environment, and vice versa.
+
+This means:
+
+- Testing rate limits in a preview branch does not interfere with production
+  traffic.
+- Rate limit thresholds you observe in a low-traffic preview environment may
+  behave differently under production load.
+- After deploying a new environment, counters start fresh.
+
+:::note
+
+If you observe rate limits triggering in one environment but not another,
+confirm that both environments use the same policy configuration and that the
+traffic volume is comparable.
+
+:::
+
+## Related resources
+
+- [Rate Limit Exceeded error](../errors/rate-limit-exceeded.mdx) --
+  Understanding the 429 response format and client-side remediation
+- [How rate limiting works](../concepts/rate-limiting.md) -- Algorithm details,
+  `rateLimitBy` modes, and combining policies
+- [Logging](../articles/logging.mdx) -- Configuring log shipping to external
+  providers
+- [Metrics Plugins](../articles/metrics-plugins.mdx) -- Sending request metrics
+  to Datadog, Dynatrace, New Relic, or OpenTelemetry
+- [Proactive monitoring](../articles/monitoring-your-gateway.mdx) -- Health
+  checks and end-to-end gateway monitoring
+- [Troubleshooting](../articles/troubleshooting.md) -- General gateway
+  troubleshooting guide

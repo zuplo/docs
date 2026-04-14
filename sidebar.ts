@@ -448,6 +448,35 @@ export const documentation: Navigation = [
   },
   {
     type: "category",
+    label: "Rate Limiting",
+    icon: "gauge",
+    items: [
+      "rate-limiting/overview",
+      "rate-limiting/getting-started",
+      "concepts/rate-limiting",
+      {
+        type: "category",
+        label: "Policies",
+        items: [
+          "policies/rate-limit-inbound",
+          "policies/complex-rate-limit-inbound",
+        ],
+      },
+      {
+        type: "category",
+        label: "Guides",
+        items: [
+          "rate-limiting/dynamic-rate-limiting",
+          "rate-limiting/combining-policies",
+          "articles/per-user-rate-limits-using-db",
+          "rate-limiting/monitoring-and-troubleshooting",
+        ],
+      },
+      "errors/rate-limit-exceeded",
+    ],
+  },
+  {
+    type: "category",
     label: "MCP Server",
     icon: "bot",
     items: [

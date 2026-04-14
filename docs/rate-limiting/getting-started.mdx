@@ -1,0 +1,163 @@
+---
+title: Getting Started with Rate Limiting
+sidebar_label: Getting Started
+description:
+  Add rate limiting to an existing Zuplo API gateway project in minutes.
+---
+
+This guide walks you through adding a basic rate limiting policy to an existing
+Zuplo project, attaching it to a route, and verifying that it works. For
+background on how rate limiting works in Zuplo, see the
+[Introduction](./overview.mdx).
+
+## Prerequisites
+
+- An existing Zuplo project with at least one route configured in
+  `config/routes.oas.json`
+- The [Zuplo CLI](../cli/overview.mdx) installed, or access to the
+  [Zuplo Portal](https://portal.zuplo.com)
+
+## 1. Add the policy
+
+Open `config/policies.json` and add a rate limiting policy to the `policies`
+array. This example limits each IP address to 2 requests per minute, which makes
+it easy to test.
+
+```json title="config/policies.json"
+{
+  "policies": [
+    {
+      "name": "rate-limit-inbound",
+      "policyType": "rate-limit-inbound",
+      "handler": {
+        "export": "RateLimitInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "rateLimitBy": "ip",
+          "requestsAllowed": 2,
+          "timeWindowMinutes": 1
+        }
+      }
+    }
+  ]
+}
+```
+
+The key options are:
+
+- **`rateLimitBy`** -- How to group requests into rate limit buckets. `"ip"`
+  groups by the caller's IP address and requires no authentication.
+- **`requestsAllowed`** -- The maximum number of requests allowed in the time
+  window.
+- **`timeWindowMinutes`** -- The length of the sliding time window in minutes.
+
+:::tip
+
+If your project already has other policies in `config/policies.json`, add the
+rate limiting entry to the existing `policies` array rather than replacing it.
+
+:::
+
+## 2. Attach the policy to a route
+
+Open `config/routes.oas.json` and add the policy name to the `policies.inbound`
+array inside the `x-zuplo-route` object of the route you want to protect.
+
+```json title="config/routes.oas.json"
+{
+  "paths": {
+    "/my-route": {
+      "get": {
+        "operationId": "get-my-route",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "https://api.example.com"
+            }
+          },
+          "policies": {
+            "inbound": ["rate-limit-inbound"]
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+The `"rate-limit-inbound"` string must match the `name` field from the policy
+you defined in `config/policies.json`. When a request hits this route, Zuplo
+runs each inbound policy in array order before forwarding to the handler.
+
+:::note
+
+You can attach the same policy to multiple routes. Add its name to the
+`policies.inbound` array on each route that needs rate limiting.
+
+:::
+
+## 3. Test the rate limit
+
+Start your local dev server (or deploy to a Zuplo environment) and send requests
+to the protected route. With the configuration above, the third request within a
+one-minute window returns a `429` response.
+
+:::note
+
+Rate limiting requires a connection to Zuplo cloud services. If you have not
+already done so, link your local project by running `npx zuplo link` and
+selecting an environment. See
+[Connecting to Zuplo Services Locally](../articles/local-development-services.mdx)
+for details.
+
+:::
+
+```bash
+# Send three requests in quick succession
+for i in 1 2 3; do
+  echo "--- Request $i ---"
+  curl -s -w "\nHTTP Status: %{http_code}\n" http://localhost:9000/my-route
+done
+```
+
+The first two requests return a `200` response from your upstream service. The
+third request returns a `429 Too Many Requests` response in
+[Problem Details](https://httpproblems.com) format:
+
+```json
+{
+  "type": "https://httpproblems.com/http-status/429",
+  "title": "Too Many Requests",
+  "status": 429,
+  "detail": "Rate limit exceeded",
+  "instance": "/my-route",
+  "trace": {
+    "requestId": "4d54e4ee-c003-4d75-aba9-e09a6d707b08",
+    "timestamp": "2026-04-14T12:00:00.000Z",
+    "buildId": "ec44e831-3a02-467e-a26c-7e401e4473bf"
+  }
+}
+```
+
+The response also includes a `Retry-After` header with the number of seconds
+until the client can send another request (for example, `Retry-After: 42`).
+
+:::tip
+
+Set `requestsAllowed` to a low number like `2` during development so you can
+trigger the limit quickly. Increase it before deploying to production.
+
+:::
+
+## Next steps
+
+- [How rate limiting works](../concepts/rate-limiting.md) -- Deep dive into
+  `rateLimitBy` modes, the sliding window algorithm, and advanced configuration
+  options
+- [Dynamic Rate Limiting](./dynamic-rate-limiting.mdx) -- Vary rate limits per
+  caller using a custom TypeScript function
+- [Rate Limiting policy reference](../policies/rate-limit-inbound.mdx) -- Full
+  list of policy options including `mode`, `headerMode`, and `throwOnFailure`

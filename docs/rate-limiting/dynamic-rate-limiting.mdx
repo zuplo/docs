@@ -1,0 +1,240 @@
+---
+title: Dynamic Rate Limiting
+sidebar_label: Dynamic Rate Limiting
+description:
+  Learn how to implement dynamic rate limiting with custom functions to apply
+  different limits based on customer tier, route, or any request property.
+---
+
+Static rate limits apply the same threshold to every caller. Dynamic rate
+limiting lets you determine limits at request time — so premium customers get
+higher throughput, free-tier users get a lower ceiling, and internal services
+can bypass limits entirely.
+
+Dynamic rate limiting works with both the
+[Rate Limiting policy](../policies/rate-limit-inbound.mdx) and the
+[Complex Rate Limiting policy](../policies/complex-rate-limit-inbound.mdx).
+
+## How it works
+
+When you set `rateLimitBy` to `"function"`, the policy calls a TypeScript
+function you provide on every request. That function returns a
+`CustomRateLimitDetails` object that tells the rate limiter:
+
+- **`key`** — The string used to group requests into buckets (e.g., a user ID or
+  API key consumer name).
+- **`requestsAllowed`** (optional) — Overrides the policy's default
+  `requestsAllowed` for this request.
+- **`timeWindowMinutes`** (optional) — Overrides the policy's default
+  `timeWindowMinutes` for this request.
+
+Returning `undefined` skips rate limiting for that request entirely.
+
+## Create a rate limit function
+
+Create a new module (for example `modules/rate-limit.ts`) with a function that
+inspects the request and returns the appropriate limits.
+
+The following example reads a `customerType` field from the authenticated user's
+metadata and applies different limits per tier:
+
+```ts title="modules/rate-limit.ts"
+import {
+  CustomRateLimitDetails,
+  ZuploContext,
+  ZuploRequest,
+} from "@zuplo/runtime";
+
+export function rateLimit(
+  request: ZuploRequest,
+  context: ZuploContext,
+  policyName: string,
+): CustomRateLimitDetails | undefined {
+  const user = request.user;
+
+  // Premium customers get 1000 requests per minute
+  if (user.data.customerType === "premium") {
+    return {
+      key: user.sub,
+      requestsAllowed: 1000,
+      timeWindowMinutes: 1,
+    };
+  }
+
+  // Free customers get 50 requests per minute
+  if (user.data.customerType === "free") {
+    return {
+      key: user.sub,
+      requestsAllowed: 50,
+      timeWindowMinutes: 1,
+    };
+  }
+
+  // Default for any other customer type
+  return {
+    key: user.sub,
+    requestsAllowed: 100,
+    timeWindowMinutes: 1,
+  };
+}
+```
+
+:::tip
+
+When using [API key authentication](../articles/api-key-authentication.mdx), the
+`user.data` object contains the metadata you set when creating the API key
+consumer. When using JWT authentication, it contains the decoded token claims.
+
+:::
+
+## Configure the policy
+
+Wire the function into the rate limiting policy by setting `rateLimitBy` to
+`"function"` and pointing the `identifier` option at your module:
+
+```json title="config/policies.json"
+{
+  "name": "my-dynamic-rate-limit-policy",
+  "policyType": "rate-limit-inbound",
+  "handler": {
+    "export": "RateLimitInboundPolicy",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "rateLimitBy": "function",
+      "requestsAllowed": 100,
+      "timeWindowMinutes": 1,
+      "identifier": {
+        "export": "rateLimit",
+        "module": "$import(./modules/rate-limit)"
+      }
+    }
+  }
+}
+```
+
+The `requestsAllowed` and `timeWindowMinutes` values in the policy configuration
+serve as defaults. Your function can override them per request, or omit them to
+use the defaults.
+
+## Common patterns
+
+### Tier-based limits from API key metadata
+
+Store a `plan` or `customerType` field in your API key consumer metadata, then
+branch on it in your rate limit function. This is the simplest approach and
+requires no external lookups.
+
+### Route-based limits
+
+Use `request.url` or `request.params` to apply different limits to different
+endpoints. For example, a search endpoint might allow 10 requests per minute
+while a read endpoint allows 100.
+
+```ts
+export function rateLimit(
+  request: ZuploRequest,
+  context: ZuploContext,
+  policyName: string,
+): CustomRateLimitDetails | undefined {
+  const isSearch = new URL(request.url).pathname.includes("/search");
+
+  return {
+    key: request.user.sub,
+    requestsAllowed: isSearch ? 10 : 100,
+    timeWindowMinutes: 1,
+  };
+}
+```
+
+### Method-based limits
+
+Apply different limits to read operations (GET) vs. write operations (POST, PUT,
+DELETE). Write-heavy endpoints often need tighter limits to protect backends:
+
+```ts
+export function rateLimit(
+  request: ZuploRequest,
+  context: ZuploContext,
+  policyName: string,
+): CustomRateLimitDetails | undefined {
+  const isWrite = ["POST", "PUT", "DELETE", "PATCH"].includes(request.method);
+
+  return {
+    key: request.user.sub,
+    requestsAllowed: isWrite ? 20 : 200,
+    timeWindowMinutes: 1,
+  };
+}
+```
+
+### Database-driven limits
+
+For limits that change frequently or are managed outside your gateway
+configuration, look them up from a database at request time. Use the
+[ZoneCache](../programmable-api/zone-cache.mdx) to avoid hitting the database on
+every request.
+
+See
+[Per-user rate limiting with a database](../articles/per-user-rate-limits-using-db.mdx)
+for a complete example using Supabase and ZoneCache.
+
+### Skip rate limiting for specific requests
+
+Return `undefined` to bypass rate limiting entirely. This is useful for health
+checks, internal services, or admin users:
+
+```ts
+export function rateLimit(
+  request: ZuploRequest,
+  context: ZuploContext,
+  policyName: string,
+): CustomRateLimitDetails | undefined {
+  if (request.user.data.role === "admin") {
+    return undefined;
+  }
+
+  return {
+    key: request.user.sub,
+    requestsAllowed: 100,
+    timeWindowMinutes: 1,
+  };
+}
+```
+
+## Testing
+
+To verify that dynamic limits are applied correctly, create API key consumers
+with different metadata values (for example, one with
+`{"customerType": "premium"}` and one with `{"customerType": "free"}`).
+
+Make requests with each key until you receive a `429 Too Many Requests`
+response. For example, with a free-tier key limited to 50 requests per minute:
+
+```bash
+# Replace with your API URL and key
+for i in $(seq 1 55); do
+  curl -s -o /dev/null -w "%{http_code}\n" \
+    -H "Authorization: Bearer YOUR_API_KEY" \
+    https://your-api.zuplo.dev/your-route
+done
+```
+
+The first 50 requests return `200`. Requests 51-55 return `429` with a
+`Retry-After` header. Repeat with the premium key and confirm the higher limit
+applies.
+
+:::tip
+
+Rate limit counters are per-environment. Preview and development environments
+have their own counters separate from production, so testing does not affect
+production limits.
+
+:::
+
+## Related resources
+
+- [How rate limiting works](../concepts/rate-limiting.md) — Full explanation of
+  `rateLimitBy` modes and configuration options
+- [Rate Limiting policy reference](../policies/rate-limit-inbound.mdx)
+- [Per-user rate limiting with a database](../articles/per-user-rate-limits-using-db.mdx)
+  — Advanced example with database lookups and caching

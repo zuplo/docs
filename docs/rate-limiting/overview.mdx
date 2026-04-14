@@ -1,0 +1,63 @@
+---
+title: Rate Limiting
+sidebar_label: Introduction
+---
+
+Rate limiting controls how many requests a client can make to your API within a
+given time window. It protects your backend from traffic spikes, enforces fair
+usage across consumers, and enables tiered access for different customer plans.
+
+Zuplo's rate limiter uses a sliding window algorithm enforced globally across
+all edge locations. When a client exceeds the limit, they receive a
+`429 Too Many Requests` response with a `Retry-After` header indicating when
+they can retry.
+
+## Policies
+
+Zuplo provides two rate limiting policies.
+
+The [Rate Limiting policy](../policies/rate-limit-inbound.mdx) enforces a single
+request counter per time window. Use it when you need a straightforward "X
+requests per Y minutes" limit.
+
+The [Complex Rate Limiting policy](../policies/complex-rate-limit-inbound.mdx)
+supports multiple named counters in a single policy, each tracking a different
+resource or unit of work. Use it for usage-based pricing where different
+endpoints consume different amounts of a resource. This policy requires an
+enterprise plan.
+
+## Dynamic rate limiting
+
+Static rate limits apply the same threshold to every caller. With dynamic rate
+limiting, you provide a custom TypeScript function that determines limits at
+request time — so premium customers get higher throughput, free-tier users get a
+lower ceiling, and internal services can bypass limits entirely.
+
+- [Dynamic Rate Limiting guide](./dynamic-rate-limiting.mdx) — Implement custom
+  rate limit functions
+- [Per-user rate limiting with a database](../articles/per-user-rate-limits-using-db.mdx)
+  — Advanced example using database lookups and the ZoneCache
+
+## Rate limiting and monetization
+
+If you use Zuplo's
+[Monetization](../articles/monetization/monetization-policy.md) feature, the
+monetization policy handles quota enforcement based on subscription plans. You
+can still add a rate limiting policy to provide per-second or per-minute spike
+protection on top of monthly billing quotas. These serve different purposes:
+
+- **Monetization quotas** enforce monthly or billing-period usage limits tied to
+  a subscription plan
+- **Rate limiting** protects against short-duration traffic spikes that could
+  overwhelm your backend
+
+## Next steps
+
+- [How rate limiting works](../concepts/rate-limiting.md) — Deep dive into the
+  algorithm, `rateLimitBy` modes, configuration options, and combining policies
+- [Rate Limiting policy reference](../policies/rate-limit-inbound.mdx) —
+  Configuration reference
+- [Complex Rate Limiting policy reference](../policies/complex-rate-limit-inbound.mdx)
+  — Multi-counter configuration reference
+- [Rate Limit Exceeded error](../errors/rate-limit-exceeded.mdx) —
+  Troubleshooting 429 responses
