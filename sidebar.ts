@@ -341,7 +341,6 @@ export const documentation: Navigation = [
       "concepts/project-structure",
       "concepts/authentication",
       "concepts/api-keys",
-      "rate-limiting/how-it-works",
       "articles/routing",
       "articles/policies",
       "articles/openapi",
