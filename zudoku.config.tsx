@@ -15,6 +15,13 @@ const inkeepMetadataPlugin: ZudokuPlugin = {
   },
 };
 
+const markdownAlternatePlugin: ZudokuPlugin = {
+  getHead: ({ location }) => {
+    const mdHref = `/docs${location.pathname === "/" ? "" : location.pathname}.md`;
+    return <link rel="alternate" type="text/markdown" href={mdHref} />;
+  },
+};
+
 const config: ZudokuConfig = {
   basePath: "/docs",
   canonicalUrlOrigin: "https://zuplo.com",
@@ -53,6 +60,7 @@ const config: ZudokuConfig = {
   },
   plugins: [
     inkeepMetadataPlugin,
+    markdownAlternatePlugin,
     {
       getHead: () => (
         <>
