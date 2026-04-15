@@ -471,7 +471,6 @@ export const documentation: Navigation = [
           "rate-limiting/monitoring-and-troubleshooting",
         ],
       },
-      "errors/rate-limit-exceeded",
     ],
   },
   {
