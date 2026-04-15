@@ -13,7 +13,29 @@ sliding window continuously tracks requests over a rolling time period. This
 produces smoother, more predictable throttling behavior.
 
 When a client exceeds the limit, they receive a `429 Too Many Requests` response
-with a `retry-after` header indicating when they can retry.
+with a `Retry-After` header indicating when they can retry.
+
+## Key terms
+
+A few terms show up repeatedly in the rate limiting docs. They are related but
+not interchangeable.
+
+- **Counter (or bucket)** — The running tally Zuplo keeps for a single caller
+  and a single policy. Each unique combination of policy `name` and caller
+  identifier gets its own counter. Two different policies tracking the same
+  caller do _not_ share a counter; two different callers under the same policy
+  do not share a counter either.
+- **Rate limit key** — The string value that identifies a caller for bucketing.
+  For `rateLimitBy: "ip"` the key is the client's IP address; for `"user"` it is
+  `request.user.sub`; for `"function"` it is whatever your custom function
+  returns as `CustomRateLimitDetails.key`; for `"all"` there is a single
+  implicit key shared by every request to the route.
+- **`identifier` option** — A field in the policy's configuration that points
+  Zuplo at your custom TypeScript function when `rateLimitBy` is `"function"`.
+  Zuplo calls that function on each request, and the function returns a
+  `CustomRateLimitDetails` object whose `key` property becomes the rate limit
+  key. In short: `identifier` is _where the function lives_; `key` is _what the
+  function returns_.
 
 ## Rate limiting policies
 
@@ -184,7 +206,7 @@ Returning `undefined` skips rate limiting for that request entirely.
 
 The function can also be `async` if you need to look up limits from a database
 or external service. See
-[Per-user rate limiting using a database](../articles/per-user-rate-limits-using-db.mdx)
+[Per-user rate limiting using a database](./per-user-rate-limits-using-db.mdx)
 for a complete example using the ZoneCache for performance.
 
 Wire the function into the policy configuration using the `identifier` option:
@@ -275,6 +297,6 @@ Both rate limiting policies support the following additional options:
 - [Rate Limiting policy reference](../policies/rate-limit-inbound.mdx)
 - [Complex Rate Limiting policy reference](../policies/complex-rate-limit-inbound.mdx)
 - [Dynamic Rate Limiting tutorial](../articles/step-5-dynamic-rate-limiting.mdx)
-- [Per-user rate limiting with a database](../articles/per-user-rate-limits-using-db.mdx)
+- [Per-user rate limiting with a database](./per-user-rate-limits-using-db.mdx)
 - [Quota policy](../policies/quota-inbound.mdx)
 - [Monetization policy](../articles/monetization/monetization-policy.md)

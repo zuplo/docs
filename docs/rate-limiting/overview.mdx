@@ -12,6 +12,29 @@ all edge locations. When a client exceeds the limit, they receive a
 `429 Too Many Requests` response with a `Retry-After` header indicating when
 they can retry.
 
+## Choosing your approach
+
+Pick a `rateLimitBy` mode and a policy based on what your API looks like today.
+If you are not sure, start from the first row that matches and read the linked
+guide.
+
+| Use case                                                    | `rateLimitBy` | Policy                                                                           | Learn more                                                                |
+| ----------------------------------------------------------- | ------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Public API with no authentication                           | `ip`          | [Rate Limiting](../policies/rate-limit-inbound.mdx)                              | [Getting Started](./getting-started.mdx)                                  |
+| Authenticated API, same limit for every consumer            | `user`        | [Rate Limiting](../policies/rate-limit-inbound.mdx)                              | [Combining Policies](./combining-policies.mdx)                            |
+| Tiered limits (free, pro, enterprise) from API key metadata | `function`    | [Rate Limiting](../policies/rate-limit-inbound.mdx) with a custom function       | [Dynamic Rate Limiting](./dynamic-rate-limiting.mdx)                      |
+| Tiered limits sourced from a database                       | `function`    | [Rate Limiting](../policies/rate-limit-inbound.mdx) with a custom function       | [Per-user limits with a database](./per-user-rate-limits-using-db.mdx)    |
+| Single global cap on an expensive endpoint                  | `all`         | [Rate Limiting](../policies/rate-limit-inbound.mdx)                              | [How rate limiting works](./how-it-works.md#all)                          |
+| Usage-based pricing counting multiple resources per request | `user`        | [Complex Rate Limiting](../policies/complex-rate-limit-inbound.mdx) (enterprise) | [How rate limiting works](./how-it-works.md#complex-rate-limiting-policy) |
+
+:::note
+
+`rateLimitBy: "user"` requires an authentication policy (such as API key or JWT
+authentication) earlier in the route's policy pipeline. Without it, the rate
+limit policy has no user to group requests by and returns an error.
+
+:::
+
 ## Policies
 
 Zuplo provides two rate limiting policies.
@@ -35,7 +58,7 @@ lower ceiling, and internal services can bypass limits entirely.
 
 - [Dynamic Rate Limiting guide](./dynamic-rate-limiting.mdx) — Implement custom
   rate limit functions
-- [Per-user rate limiting with a database](../articles/per-user-rate-limits-using-db.mdx)
+- [Per-user rate limiting with a database](./per-user-rate-limits-using-db.mdx)
   — Advanced example using database lookups and the ZoneCache
 
 ## Rate limiting and monetization
@@ -51,13 +74,28 @@ protection on top of monthly billing quotas. These serve different purposes:
 - **Rate limiting** protects against short-duration traffic spikes that could
   overwhelm your backend
 
-## Next steps
+## Recommended reading order
 
-- [How rate limiting works](../concepts/rate-limiting.md) — Deep dive into the
-  algorithm, `rateLimitBy` modes, configuration options, and combining policies
-- [Rate Limiting policy reference](../policies/rate-limit-inbound.mdx) —
-  Configuration reference
+If you are new to rate limiting in Zuplo, read these pages in order. Each one
+builds on the previous.
+
+1. [Getting Started](./getting-started.mdx) — Add a basic IP-based rate limit to
+   an existing project and confirm it works end to end.
+2. [How rate limiting works](./how-it-works.md) — Learn what the sliding window
+   algorithm does, what each `rateLimitBy` mode means, and which configuration
+   options are available.
+3. [Combining Policies](./combining-policies.mdx) — Stack multiple limits on the
+   same route and combine rate limiting with quotas or monetization.
+4. [Dynamic Rate Limiting](./dynamic-rate-limiting.mdx) — Vary limits per caller
+   by writing a small TypeScript function.
+5. [Monitoring and Troubleshooting](./monitoring-and-troubleshooting.mdx) —
+   Observe limits in production and diagnose unexpected behaviour.
+
+Reference material to bookmark:
+
+- [Rate Limiting policy reference](../policies/rate-limit-inbound.mdx) — Every
+  configuration option for the standard policy.
 - [Complex Rate Limiting policy reference](../policies/complex-rate-limit-inbound.mdx)
-  — Multi-counter configuration reference
-- [Rate Limit Exceeded error](../errors/rate-limit-exceeded.mdx) —
-  Troubleshooting 429 responses
+  — Multi-counter configuration (enterprise).
+- [Rate Limit Exceeded error](../errors/rate-limit-exceeded.mdx) — What a 429
+  response looks like and how to debug unexpected ones.

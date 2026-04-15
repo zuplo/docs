@@ -10,9 +10,9 @@ tags:
 ---
 
 In this example we show a more advanced implementation of
-[dynamic rate limiting](../rate-limiting/dynamic-rate-limiting.mdx). It uses a
-database lookup to get the customer details and combines that with the ZoneCache
-to improve performance, reduce latency and lower the load on the database.
+[dynamic rate limiting](./dynamic-rate-limiting.mdx). It uses a database lookup
+to get the customer details and combines that with the ZoneCache to improve
+performance, reduce latency and lower the load on the database.
 
 In this example we use [Supabase](https://supabase.com) as the database but you
 could use your own API, [Xata](https://xata.io),
@@ -21,8 +21,8 @@ all.
 
 If you haven't already, check out the
 [rate-limiting policy](../policies/rate-limit-inbound.mdx) and the
-[dynamic rate limiting guide](../rate-limiting/dynamic-rate-limiting.mdx). Then
-you should be oriented to how dynamic rate limiting works.
+[dynamic rate limiting guide](./dynamic-rate-limiting.mdx). Then you should be
+oriented to how dynamic rate limiting works.
 
 Below is a full implementation of a custom rate limiting function. In our
 example this is a module called `per-user-rate-limiting.ts`.

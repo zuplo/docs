@@ -13,9 +13,15 @@ background on how rate limiting works in Zuplo, see the
 ## Prerequisites
 
 - An existing Zuplo project with at least one route configured in
-  `config/routes.oas.json`
+  `config/routes.oas.json`.
 - The [Zuplo CLI](../cli/overview.mdx) installed, or access to the
-  [Zuplo Portal](https://portal.zuplo.com)
+  [Zuplo Portal](https://portal.zuplo.com).
+- To test rate limiting locally, the project must be linked to a Zuplo
+  environment. Run `npx zuplo link` once in the project directory and select an
+  environment. Rate limiting uses a globally distributed counter service, so an
+  unlinked local project cannot enforce limits. See
+  [Connecting to Zuplo Services Locally](../articles/local-development-services.mdx)
+  for more detail.
 
 ## 1. Add the policy
 
@@ -55,6 +61,18 @@ The key options are:
 
 If your project already has other policies in `config/policies.json`, add the
 rate limiting entry to the existing `policies` array rather than replacing it.
+
+:::
+
+:::warning
+
+The `name` field (`rate-limit-inbound` above) is what scopes the counter. Every
+route that references this exact name shares the same counter. If you later copy
+this policy block to create a second limit, change the `name` — a forgotten
+rename silently merges two unrelated limits into one. Policy names must also
+match exactly between `config/policies.json` and `config/routes.oas.json`; a
+typo there causes the policy to be skipped without any error. See
+[Counter scoping](./combining-policies.mdx#counter-scoping) for the full rules.
 
 :::
 
@@ -105,16 +123,6 @@ Start your local dev server (or deploy to a Zuplo environment) and send requests
 to the protected route. With the configuration above, the third request within a
 one-minute window returns a `429` response.
 
-:::note
-
-Rate limiting requires a connection to Zuplo cloud services. If you have not
-already done so, link your local project by running `npx zuplo link` and
-selecting an environment. See
-[Connecting to Zuplo Services Locally](../articles/local-development-services.mdx)
-for details.
-
-:::
-
 ```bash
 # Send three requests in quick succession
 for i in 1 2 3; do
@@ -145,19 +153,129 @@ third request returns a `429 Too Many Requests` response in
 The response also includes a `Retry-After` header with the number of seconds
 until the client can send another request (for example, `Retry-After: 42`).
 
-:::tip
+## 4. Choose production limits
 
-Set `requestsAllowed` to a low number like `2` during development so you can
-trigger the limit quickly. Increase it before deploying to production.
+The `requestsAllowed: 2` value above exists so the limit triggers on your third
+curl. Production APIs need numbers that reflect real usage. There is no single
+right answer, but these reference points from widely used APIs are a useful
+starting point:
+
+| API     | Typical per-consumer limit                                 |
+| ------- | ---------------------------------------------------------- |
+| Stripe  | 100 read and 100 write requests per second per account     |
+| GitHub  | 5,000 authenticated requests per hour per user             |
+| Twilio  | 100 requests per second per account (varies by resource)   |
+| Shopify | 40 requests per app per store (bucket refills at 2/second) |
+
+When sizing your own limit, consider three inputs:
+
+- **What your backend can sustain.** Start from a conservative fraction of your
+  backend's measured capacity so that a single caller cannot exhaust it.
+- **What legitimate callers actually do.** If p99 usage for your best customers
+  is 10 requests per minute, a 100-per-minute limit leaves headroom without
+  being permissive.
+- **How your customers are structured.** Per-API-key limits usually give tighter
+  control than per-IP; a single corporate IP can hide dozens of real users.
+
+It is almost always easier to _raise_ a limit in response to a support ticket
+than to _lower_ one that customers have started relying on. When in doubt, start
+low, measure, and increase.
+
+## 5. Rate limit authenticated users
+
+IP-based limits are a good first layer but they penalise every user behind a
+shared NAT or corporate proxy. For an authenticated API, limit per consumer
+instead. This requires an authentication policy earlier in the pipeline so that
+`request.user` is populated before the rate limit policy runs.
+
+The full policies configuration looks like this:
+
+```json title="config/policies.json"
+{
+  "policies": [
+    {
+      "name": "api-key-auth",
+      "policyType": "api-key-inbound",
+      "handler": {
+        "export": "ApiKeyInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "allowUnauthenticatedRequests": false
+        }
+      }
+    },
+    {
+      "name": "rate-limit-per-user",
+      "policyType": "rate-limit-inbound",
+      "handler": {
+        "export": "RateLimitInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "rateLimitBy": "user",
+          "requestsAllowed": 60,
+          "timeWindowMinutes": 1
+        }
+      }
+    }
+  ]
+}
+```
+
+Attach both policies to the route, with authentication first so the rate limit
+policy has a user to group by:
+
+```json title="config/routes.oas.json (excerpt)"
+{
+  "x-zuplo-route": {
+    "policies": {
+      "inbound": ["api-key-auth", "rate-limit-per-user"]
+    }
+  }
+}
+```
+
+Create two API keys in the Zuplo Portal (or with the CLI) so you can verify that
+each consumer has its own counter. Then send requests with each key:
+
+```bash
+# Replace with the tokens from your two API keys.
+KEY_A="zpka_xxxxxxxxxxxxxxxxxxxxxx"
+KEY_B="zpka_yyyyyyyyyyyyyyyyyyyyyy"
+
+# Burn through the limit on key A; key B should still succeed.
+for i in $(seq 1 61); do
+  curl -s -o /dev/null -w "A #$i: %{http_code}\n" \
+    -H "Authorization: Bearer $KEY_A" \
+    http://localhost:9000/my-route
+done
+
+curl -s -w "\nB #1: %{http_code}\n" \
+  -H "Authorization: Bearer $KEY_B" \
+  http://localhost:9000/my-route
+```
+
+Requests 1–60 for key A return `200`, request 61 returns `429`, and the first
+request for key B still returns `200`. That confirms the counter is scoped to
+each consumer, not shared across the API key pool.
+
+:::note
+
+See [API Key Authentication](../articles/api-key-authentication.mdx) for the
+full walkthrough of creating and managing API keys. If you use JWT
+authentication instead, replace the `api-key-auth` policy with your JWT policy —
+the rate limit policy works the same way as long as `request.user.sub` is
+populated.
 
 :::
 
 ## Next steps
 
-- [How rate limiting works](../concepts/rate-limiting.md) -- Deep dive into
-  `rateLimitBy` modes, the sliding window algorithm, and advanced configuration
-  options
-- [Dynamic Rate Limiting](./dynamic-rate-limiting.mdx) -- Vary rate limits per
-  caller using a custom TypeScript function
-- [Rate Limiting policy reference](../policies/rate-limit-inbound.mdx) -- Full
-  list of policy options including `mode`, `headerMode`, and `throwOnFailure`
+- [How rate limiting works](./how-it-works.md) — Deep dive into `rateLimitBy`
+  modes, the sliding window algorithm, and advanced configuration options.
+- [Combining Policies](./combining-policies.mdx) — Stack per-minute and per-hour
+  limits, and combine rate limiting with quotas or monetization.
+- [Dynamic Rate Limiting](./dynamic-rate-limiting.mdx) — Vary rate limits per
+  caller using a custom TypeScript function (for example, higher limits for paid
+  plans).
+- [Rate Limiting policy reference](../policies/rate-limit-inbound.mdx) — Full
+  list of policy options including `mode`, `headerMode`, and `throwOnFailure`.

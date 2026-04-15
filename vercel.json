@@ -465,7 +465,27 @@
     },
     {
       "source": "/docs/examples/per-user-rate-limits-using-db{/}?",
-      "destination": "/docs/articles/per-user-rate-limits-using-db",
+      "destination": "/docs/rate-limiting/per-user-rate-limits-using-db",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/per-user-rate-limits-using-db{/}?",
+      "destination": "/docs/rate-limiting/per-user-rate-limits-using-db",
+      "permanent": true
+    },
+    {
+      "source": "/docs/articles/per-user-rate-limits-using-db.md",
+      "destination": "/docs/rate-limiting/per-user-rate-limits-using-db.md",
+      "permanent": true
+    },
+    {
+      "source": "/docs/concepts/rate-limiting{/}?",
+      "destination": "/docs/rate-limiting/how-it-works",
+      "permanent": true
+    },
+    {
+      "source": "/docs/concepts/rate-limiting.md",
+      "destination": "/docs/rate-limiting/how-it-works.md",
       "permanent": true
     },
     {
