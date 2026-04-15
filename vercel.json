@@ -1352,6 +1352,11 @@
       "source": "/docs/articles/stripe-monetization-plugin{/}?",
       "destination": "/docs/articles/monetization",
       "permanent": true
+    },
+    {
+      "source": "/docs/dev-portal/zudoku/concepts/auth-provider-api-identities{/}?",
+      "destination": "/docs/dev-portal/auth-provider-api-identities",
+      "permanent": true
     }
   ],
   "rewrites": [
