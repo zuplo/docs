@@ -234,6 +234,76 @@ performance. Use it to:
 - Spot error rate spikes that may correlate with latency issues
 - Track request volume trends that may indicate capacity-related slowness
 
+### OpenTelemetry Tracing
+
+For the most detailed view of where time is spent in your request pipeline,
+enable [OpenTelemetry tracing](./opentelemetry.mdx). The OpenTelemetry plugin
+automatically instruments your API and provides span-level timing for each stage
+of the request lifecycle — including inbound policies, the handler, outbound
+policies, and any subrequests made via `fetch` in custom code.
+
+<EnterpriseFeature name="OpenTelemetry" />
+
+With tracing enabled, you can see exactly how long each policy and handler takes
+to execute, making it straightforward to identify which component is adding
+latency. The plugin also supports W3C trace propagation, so you can follow a
+request all the way from the client through Zuplo to your backend.
+
+To get started, add the `OpenTelemetryPlugin` in your `zuplo.runtime.ts` file
+and configure it to export trace data to any OpenTelemetry-compatible service
+such as [Honeycomb](https://honeycomb.io), [Dynatrace](https://dynatrace.com),
+[Jaeger](https://www.jaegertracing.io/), or an
+[OpenTelemetry Collector](https://opentelemetry.io/docs/collector/):
+
+```ts title="zuplo.runtime.ts"
+import { OpenTelemetryPlugin } from "@zuplo/otel";
+import { RuntimeExtensions, environment } from "@zuplo/runtime";
+
+export function runtimeInit(runtime: RuntimeExtensions) {
+  runtime.addPlugin(
+    new OpenTelemetryPlugin({
+      exporter: {
+        url: "https://otel-collector.example.com/v1/traces",
+        headers: {
+          "api-key": environment.OTEL_API_KEY,
+        },
+      },
+      service: {
+        name: "my-api",
+        version: "1.0.0",
+      },
+    }),
+  );
+}
+```
+
+You can also add custom spans within your policies to trace specific operations:
+
+```ts
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+import { trace } from "@opentelemetry/api";
+
+export default async function policy(
+  request: ZuploRequest,
+  context: ZuploContext,
+) {
+  const tracer = trace.getTracer("my-tracer");
+  return tracer.startActiveSpan("my-custom-operation", async (span) => {
+    span.setAttribute("endpoint", request.url);
+
+    try {
+      // ... policy logic with external calls ...
+      return request;
+    } finally {
+      span.end();
+    }
+  });
+}
+```
+
+For the full configuration reference, including sampling, post-processing, and
+logging, see the [OpenTelemetry documentation](./opentelemetry.mdx).
+
 ### Logging Integrations
 
 For deeper analysis, configure one of Zuplo's
@@ -290,6 +360,8 @@ back-and-forth diagnostic questions.
 
 ## Related Resources
 
+- [OpenTelemetry](./opentelemetry.mdx) — Distributed tracing and logging for
+  detailed request lifecycle visibility
 - [Performance Testing Your API Gateway](./performance-testing.mdx) — How to
   benchmark and compare gateway performance accurately
 - [Proactive Monitoring](./monitoring-your-gateway.mdx) — Setting up health
