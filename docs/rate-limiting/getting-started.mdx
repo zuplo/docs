@@ -2,13 +2,48 @@
 title: Getting Started with Rate Limiting
 sidebar_label: Getting Started
 description:
-  Add rate limiting to an existing Zuplo API gateway project in minutes.
+  Pick a rate limiting strategy and add it to an existing Zuplo project, with
+  hands-on examples for IP-based and authenticated per-user limits.
 ---
 
-This guide walks you through adding a basic rate limiting policy to an existing
-Zuplo project, attaching it to a route, and verifying that it works. For
-background on how rate limiting works in Zuplo, see the
-[Introduction](./overview.mdx).
+Rate limiting caps how many requests a client can make to your API within a time
+window. It protects your backend from traffic spikes, enforces fair usage across
+consumers, and supports tiered access for different customer plans. When a
+client exceeds the configured limit, they receive a `429 Too Many Requests`
+response with a `Retry-After` header indicating when they can retry.
+
+This guide walks you through picking a `rateLimitBy` strategy, adding the policy
+to a route, and testing it end to end. If you want the sliding window algorithm,
+every `rateLimitBy` mode in detail, and the full set of configuration levers,
+read [How Rate Limiting Works](./how-it-works.md) alongside or after this guide.
+
+## Choose an approach
+
+Pick a `rateLimitBy` mode based on what your API looks like today. If you are
+not sure, start from the first row that matches and follow the linked guide or
+section below.
+
+| Use case                                                    | `rateLimitBy` | Policy                                                                           | Learn more                                                                |
+| ----------------------------------------------------------- | ------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Public API with no authentication                           | `ip`          | [Rate Limiting](../policies/rate-limit-inbound.mdx)                              | Follow the steps below                                                    |
+| Authenticated API, same limit for every consumer            | `user`        | [Rate Limiting](../policies/rate-limit-inbound.mdx)                              | [§5 Rate limit authenticated users](#5-rate-limit-authenticated-users)    |
+| Tiered limits (free, pro, enterprise) from API key metadata | `function`    | [Rate Limiting](../policies/rate-limit-inbound.mdx) with a custom function       | [Dynamic Rate Limiting](./dynamic-rate-limiting.mdx)                      |
+| Tiered limits sourced from a database                       | `function`    | [Rate Limiting](../policies/rate-limit-inbound.mdx) with a custom function       | [Per-user limits with a database](./per-user-rate-limits-using-db.mdx)    |
+| Single global cap on an expensive endpoint                  | `all`         | [Rate Limiting](../policies/rate-limit-inbound.mdx)                              | [How rate limiting works](./how-it-works.md#all)                          |
+| Usage-based pricing counting multiple resources per request | `user`        | [Complex Rate Limiting](../policies/complex-rate-limit-inbound.mdx) (enterprise) | [How rate limiting works](./how-it-works.md#complex-rate-limiting-policy) |
+
+:::note
+
+`rateLimitBy: "user"` requires an authentication policy (such as API key or JWT
+authentication) earlier in the route's policy pipeline. Without it, the rate
+limit policy has no user to group requests by and returns an error. Section 5
+below walks through the full authenticated setup.
+
+:::
+
+For a definition of `rateLimitBy`, the sliding window algorithm, and the full
+list of configuration options (`mode`, `headerMode`, `throwOnFailure`, and
+more), see [How Rate Limiting Works](./how-it-works.md).
 
 ## Prerequisites
 
@@ -270,12 +305,35 @@ populated.
 
 ## Next steps
 
-- [How rate limiting works](./how-it-works.md) — Deep dive into `rateLimitBy`
-  modes, the sliding window algorithm, and advanced configuration options.
-- [Combining Policies](./combining-policies.mdx) — Stack per-minute and per-hour
-  limits, and combine rate limiting with quotas or monetization.
-- [Dynamic Rate Limiting](./dynamic-rate-limiting.mdx) — Vary rate limits per
-  caller using a custom TypeScript function (for example, higher limits for paid
+**Understand the mechanics:**
+
+- [How Rate Limiting Works](./how-it-works.md) — The sliding window algorithm,
+  every `rateLimitBy` mode in detail, and advanced options like `mode`,
+  `headerMode`, and `throwOnFailure`.
+
+**Customize the behavior:**
+
+- [Dynamic Rate Limiting](./dynamic-rate-limiting.mdx) — Vary limits per caller
+  using a custom TypeScript function (for example, higher limits for paid
   plans).
-- [Rate Limiting policy reference](../policies/rate-limit-inbound.mdx) — Full
-  list of policy options including `mode`, `headerMode`, and `throwOnFailure`.
+- [Per-user limits with a database](./per-user-rate-limits-using-db.mdx) — An
+  advanced example using ZoneCache and a database lookup to drive limits per
+  customer.
+
+**Combine with other policies:**
+
+- [Combining Policies](./combining-policies.mdx) — Stack per-minute and per-hour
+  limits, pair rate limiting with quotas, and layer in monetization.
+
+**Operate in production:**
+
+- [Monitoring and Troubleshooting](./monitoring-and-troubleshooting.mdx) —
+  Observe limits in production, alert on silent failures, and diagnose
+  unexpected 429s.
+
+**Reference:**
+
+- [Rate Limiting policy reference](../policies/rate-limit-inbound.mdx) — Every
+  configuration option for the standard policy.
+- [Complex Rate Limiting policy reference](../policies/complex-rate-limit-inbound.mdx)
+  — Multi-counter configuration for usage-based pricing (enterprise).

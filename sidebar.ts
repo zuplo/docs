@@ -451,7 +451,6 @@ export const documentation: Navigation = [
     label: "Rate Limiting",
     icon: "gauge",
     items: [
-      "rate-limiting/overview",
       "rate-limiting/getting-started",
       "rate-limiting/how-it-works",
       {

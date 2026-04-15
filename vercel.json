@@ -489,6 +489,16 @@
       "permanent": true
     },
     {
+      "source": "/docs/rate-limiting/overview{/}?",
+      "destination": "/docs/rate-limiting/getting-started",
+      "permanent": true
+    },
+    {
+      "source": "/docs/rate-limiting/overview.md",
+      "destination": "/docs/rate-limiting/getting-started.md",
+      "permanent": true
+    },
+    {
       "source": "/docs/examples/rick-and-morty-api-developer-portal-example{/}?",
       "destination": "/docs/articles/rick-and-morty-api-developer-portal-example",
       "permanent": true

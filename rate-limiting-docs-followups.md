@@ -14,8 +14,9 @@ the rate limiting documentation on `feat/add-rate-limiting-section`.
 
 Files in scope for the review (policy reference pages were explicitly excluded):
 
-- `docs/rate-limiting/overview.mdx`
-- `docs/rate-limiting/getting-started.mdx`
+- `docs/rate-limiting/getting-started.mdx` (absorbed the former
+  `docs/rate-limiting/overview.mdx` during the IA/tech-writer restructure — see
+  below)
 - `docs/rate-limiting/dynamic-rate-limiting.mdx`
 - `docs/rate-limiting/combining-policies.mdx`
 - `docs/rate-limiting/monitoring-and-troubleshooting.mdx`

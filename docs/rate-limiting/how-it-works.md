@@ -1,19 +1,19 @@
 ---
-title: Rate Limiting
+title: How Rate Limiting Works
+sidebar_label: How It Works
 ---
 
-Rate limiting controls how many requests a client can make to your API within a
-given time window. It protects your backend from traffic spikes, enforces fair
-usage across consumers, and enables tiered access for different customer plans.
+This page covers the mechanics behind Zuplo's rate limiter: how requests are
+counted, what each `rateLimitBy` mode does in detail, and every configuration
+option available. If you just want to add a rate limit to your API, start with
+the [Getting Started guide](./getting-started.mdx) instead — this page is the
+deep dive you can read alongside or after it.
 
 Zuplo's rate limiter uses a **sliding window algorithm** enforced globally
 across all edge locations. Unlike a fixed window algorithm (which resets
 counters at fixed intervals and can allow bursts at window boundaries), the
 sliding window continuously tracks requests over a rolling time period. This
 produces smoother, more predictable throttling behavior.
-
-When a client exceeds the limit, they receive a `429 Too Many Requests` response
-with a `Retry-After` header indicating when they can retry.
 
 ## Key terms
 
@@ -294,9 +294,23 @@ Both rate limiting policies support the following additional options:
 
 ## Related resources
 
-- [Rate Limiting policy reference](../policies/rate-limit-inbound.mdx)
+**Go deeper on configuration:**
+
+- [Rate Limiting policy reference](../policies/rate-limit-inbound.mdx) — Every
+  option for the standard policy.
 - [Complex Rate Limiting policy reference](../policies/complex-rate-limit-inbound.mdx)
+  — Multi-counter limits for usage-based pricing (enterprise).
+
+**Learn by example:**
+
 - [Dynamic Rate Limiting tutorial](../articles/step-5-dynamic-rate-limiting.mdx)
+  — Tiered limits by customer type.
 - [Per-user rate limiting with a database](./per-user-rate-limits-using-db.mdx)
-- [Quota policy](../policies/quota-inbound.mdx)
-- [Monetization policy](../articles/monetization/monetization-policy.md)
+  — Look up limits at request time using ZoneCache and a database.
+
+**Combine with other policies:**
+
+- [Quota policy](../policies/quota-inbound.mdx) — Monthly or billing-period
+  usage caps.
+- [Monetization policy](../articles/monetization/monetization-policy.md) —
+  Subscription-based access control and metering.
