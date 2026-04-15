@@ -37,79 +37,13 @@ not interchangeable.
   key. In short: `identifier` is _where the function lives_; `key` is _what the
   function returns_.
 
-## Rate limiting policies
-
-Zuplo provides two rate limiting policies, each suited to different levels of
-complexity.
-
-### Rate Limiting policy
-
-The [Rate Limiting policy](../policies/rate-limit-inbound.mdx) enforces a single
-request counter per time window. Configure a maximum number of requests, a time
-window, and how to identify callers.
-
-```json
-{
-  "name": "my-rate-limit-policy",
-  "policyType": "rate-limit-inbound",
-  "handler": {
-    "export": "RateLimitInboundPolicy",
-    "module": "$import(@zuplo/runtime)",
-    "options": {
-      "rateLimitBy": "user",
-      "requestsAllowed": 100,
-      "timeWindowMinutes": 1
-    }
-  }
-}
-```
-
-Use this policy when you need a straightforward "X requests per Y minutes"
-limit.
-
-### Complex Rate Limiting policy
-
-The [Complex Rate Limiting policy](../policies/complex-rate-limit-inbound.mdx)
-supports **multiple named counters** in a single policy. Each counter tracks a
-different resource or unit of work.
-
-```json
-{
-  "name": "my-complex-rate-limit-policy",
-  "policyType": "complex-rate-limit-inbound",
-  "handler": {
-    "export": "ComplexRateLimitInboundPolicy",
-    "module": "$import(@zuplo/runtime)",
-    "options": {
-      "rateLimitBy": "user",
-      "timeWindowMinutes": 1,
-      "limits": {
-        "requests": 100,
-        "compute": 500
-      }
-    }
-  }
-}
-```
-
-You can override counter increments programmatically per request using
-`ComplexRateLimitInboundPolicy.setIncrements()`. This is useful for usage-based
-pricing where different endpoints consume different amounts of a resource (for
-example, counting compute units or tokens instead of raw requests).
-
-## Choosing a policy
-
-| Scenario                                               | Policy                                                     |
-| ------------------------------------------------------ | ---------------------------------------------------------- |
-| Fixed requests-per-minute limit for all callers        | Rate Limiting                                              |
-| Different limits per customer tier (free vs. paid)     | Rate Limiting with a custom function                       |
-| Counting multiple resources (requests + compute units) | Complex Rate Limiting (enterprise)                         |
-| Usage-based billing with variable cost per request     | Complex Rate Limiting with dynamic increments (enterprise) |
-
 ## How `rateLimitBy` works
 
 The `rateLimitBy` option determines how the rate limiter groups requests into
-buckets. Both policies support the same four modes.
+buckets. Both the standard
+[Rate Limiting policy](../policies/rate-limit-inbound.mdx) and the
+[Complex Rate Limiting policy](../policies/complex-rate-limit-inbound.mdx)
+support the same four modes.
 
 ### `ip`
 
@@ -119,10 +53,10 @@ protection.
 
 :::caution
 
-Be aware that multiple clients behind the same corporate proxy, cloud NAT, or
-shared Wi-Fi network can share a single IP address. In these cases, IP-based
-rate limiting can unfairly throttle unrelated users. For authenticated APIs,
-prefer `rateLimitBy: "user"` instead.
+Multiple clients behind the same corporate proxy, cloud NAT, or shared Wi-Fi
+network can share a single IP address. In these cases, IP-based rate limiting
+can unfairly throttle unrelated users. For authenticated APIs, prefer
+`rateLimitBy: "user"` instead.
 
 :::
 
@@ -138,9 +72,11 @@ the actual consumer rather than a shared IP address.
 
 :::note
 
-The `user` mode requires an authentication policy (such as API Key
-Authentication or JWT authentication) earlier in the policy pipeline. If no
-authenticated user is present on the request, the policy returns an error.
+The `user` mode requires an authentication policy (such as API key or JWT
+authentication) earlier in the policy pipeline. If no authenticated user is
+present on the request, the policy returns an error. See
+[Getting Started §5](./getting-started.mdx#5-rate-limit-authenticated-users) for
+a full authenticated pipeline example.
 
 :::
 
@@ -149,10 +85,9 @@ authenticated user is present on the request, the policy returns an error.
 Groups requests using a custom TypeScript function that you provide. The
 function returns a `CustomRateLimitDetails` object containing a grouping key
 and, optionally, overridden values for `requestsAllowed` and
-`timeWindowMinutes`.
-
-This mode enables dynamic rate limiting where limits vary based on customer
-tier, route parameters, or any other request property.
+`timeWindowMinutes`. See
+[Custom rate limit functions](#custom-rate-limit-functions) below for the
+function signature and field reference.
 
 ### `all`
 
@@ -160,10 +95,12 @@ Applies a single shared counter across all requests to the route, regardless of
 who makes them. Use this for global rate limits on endpoints that call
 resource-constrained backends.
 
-## Dynamic rate limiting with custom functions
+## Custom rate limit functions
 
-When `rateLimitBy` is set to `"function"`, you provide a TypeScript module that
-determines the rate limit at request time. The function signature is:
+When `rateLimitBy` is set to `"function"`, Zuplo calls a TypeScript function you
+provide on every request. The function receives the request, context, and policy
+name, and returns a `CustomRateLimitDetails` object describing how to count that
+request.
 
 ```ts
 import {
@@ -177,108 +114,44 @@ export function rateLimit(
   context: ZuploContext,
   policyName: string,
 ): CustomRateLimitDetails | undefined {
-  const user = request.user;
-
-  if (user.data.customerType === "premium") {
-    return {
-      key: user.sub,
-      requestsAllowed: 1000,
-      timeWindowMinutes: 1,
-    };
-  }
-
   return {
-    key: user.sub,
-    requestsAllowed: 50,
+    key: request.user.sub,
+    requestsAllowed: 100,
     timeWindowMinutes: 1,
   };
 }
 ```
 
-The `CustomRateLimitDetails` object has the following properties:
+### `CustomRateLimitDetails`
 
-- `key` - The string used to group requests into rate limit buckets
-- `requestsAllowed` (optional) - Overrides the policy's `requestsAllowed` value
-- `timeWindowMinutes` (optional) - Overrides the policy's `timeWindowMinutes`
-  value
+- `key` (required) — The string used to group requests into rate limit buckets.
+- `requestsAllowed` (optional) — Overrides the policy's `requestsAllowed` value
+  for this request.
+- `timeWindowMinutes` (optional) — Overrides the policy's `timeWindowMinutes`
+  value for this request.
 
-Returning `undefined` skips rate limiting for that request entirely.
+Returning `undefined` skips rate limiting for the request entirely — useful for
+health checks or privileged callers. The function can also be `async` if you
+need to await a database lookup or external service call.
 
-The function can also be `async` if you need to look up limits from a database
-or external service. See
-[Per-user rate limiting using a database](./per-user-rate-limits-using-db.mdx)
-for a complete example using the ZoneCache for performance.
+Wire the function into the policy using the `identifier` option. The policy's
+configured `requestsAllowed` and `timeWindowMinutes` serve as defaults; the
+function can override them per request.
 
-Wire the function into the policy configuration using the `identifier` option:
-
-```json
-{
-  "export": "RateLimitInboundPolicy",
-  "module": "$import(@zuplo/runtime)",
-  "options": {
-    "rateLimitBy": "function",
-    "requestsAllowed": 50,
-    "timeWindowMinutes": 1,
-    "identifier": {
-      "export": "rateLimit",
-      "module": "$import(./modules/rate-limit)"
-    }
-  }
-}
-```
-
-:::note
-
-The `requestsAllowed` and `timeWindowMinutes` values in the policy configuration
-serve as defaults. The custom function can override them per request.
-
-:::
-
-## Combining rate limiting with authentication
-
-Rate limiting works best when combined with authentication so that limits apply
-per consumer rather than per IP. A typical policy pipeline is:
-
-1. **Authentication** (e.g., API Key Authentication) -- validates credentials
-   and populates `request.user`
-2. **Rate Limiting** with `rateLimitBy: "user"` -- enforces per-consumer limits
-   using `request.user.sub`
-
-With API key authentication, the consumer's metadata (stored when creating the
-key) is available at `request.user.data`. A custom rate limit function can read
-fields like `customerType` or `plan` from the metadata to apply tiered limits.
-
-## Rate limiting and monetization
-
-If you use Zuplo's
-[Monetization](../articles/monetization/monetization-policy.md) feature, the
-monetization policy handles quota enforcement based on subscription plans. You
-can still add a rate limiting policy after the monetization policy to provide
-per-second or per-minute spike protection on top of monthly billing quotas.
-These serve different purposes:
-
-- **Monetization quotas** enforce monthly or billing-period usage limits tied to
-  a subscription plan
-- **Rate limiting** protects against short-duration traffic spikes that could
-  overwhelm your backend
-
-## Combining multiple rate limit policies
-
-You can apply multiple rate limiting policies to the same route. For example,
-you might enforce both a per-minute and a per-hour limit. When using multiple
-policies, apply the longest time window first, followed by shorter durations.
-This ordering ensures that the broadest limit is checked first — if a caller has
-exhausted their hourly quota, the request is rejected immediately without
-incrementing the shorter-duration counter.
+For concrete walkthroughs (tier-based, route-based, method-based,
+database-backed, selective bypass), see
+[Dynamic Rate Limiting](./dynamic-rate-limiting.mdx). For an advanced
+database-backed example with caching, see
+[Per-user rate limiting with a database](./per-user-rate-limits-using-db.mdx).
 
 ## Additional options
 
 Both rate limiting policies support the following additional options:
 
-- `headerMode` - Set to `"retry-after"` (default) to include the `retry-after`
-  header in 429 responses, or `"none"` to omit it. The `retry-after` value is
+- `headerMode` — Set to `"retry-after"` (default) to include the `Retry-After`
+  header in 429 responses, or `"none"` to omit it. The `Retry-After` value is
   returned as a number of seconds (delay-seconds format).
-- `mode` - Set to `"strict"` (default) or `"async"`. In **strict** mode, the
+- `mode` — Set to `"strict"` (default) or `"async"`. In **strict** mode, the
   request is held until the rate limit check completes — the backend is never
   called if the limit is exceeded. This adds some latency to every request
   because the check hits a globally distributed rate limit service. In **async**
@@ -286,7 +159,7 @@ Both rate limiting policies support the following additional options:
   check. This minimizes added latency but means some requests may get through
   even after the limit is exceeded. Async mode is a good fit when low latency
   matters more than exact enforcement.
-- `throwOnFailure` - Controls behavior when the rate limit service is
+- `throwOnFailure` — Controls behavior when the rate limit service is
   unreachable. When set to `false` (default), requests are allowed through
   (fail-open). When set to `true`, the policy returns an error to the client.
   The fail-open default prevents a rate limit service outage from blocking all
@@ -310,6 +183,8 @@ Both rate limiting policies support the following additional options:
 
 **Combine with other policies:**
 
+- [Combining Policies](./combining-policies.mdx) — Stack multiple rate limits,
+  and pair rate limiting with quotas or monetization.
 - [Quota policy](../policies/quota-inbound.mdx) — Monthly or billing-period
   usage caps.
 - [Monetization policy](../articles/monetization/monetization-policy.md) —
