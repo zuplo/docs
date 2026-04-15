@@ -45,8 +45,8 @@ importers:
         specifier: ^19.0.0
         version: 19.2.4(react@19.2.4)
       zudoku:
-        specifier: ^0.74.2
-        version: 0.74.2(@sentry/react@10.46.0(react@19.2.4))(@types/json-schema@7.0.15)(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(mermaid@11.13.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(use-sync-external-store@1.6.0(react@19.2.4))
+        specifier: ^0.74.3
+        version: 0.74.3(@sentry/react@10.46.0(react@19.2.4))(@types/json-schema@7.0.15)(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(mermaid@11.13.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(use-sync-external-store@1.6.0(react@19.2.4))
     devDependencies:
       '@anthropic-ai/claude-agent-sdk':
         specifier: ^0.2.19
@@ -5380,8 +5380,8 @@ packages:
   zod@4.3.6:
     resolution: {integrity: sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==}
 
-  zudoku@0.74.2:
-    resolution: {integrity: sha512-LvDn3NYrbjqQWQ7LIxq3lo8+ZLCTPIBsvtIutMtHCxqGlLrySNJge9dgZ7CAqfiN4tudl1JGkWqqXNim3Qx/qg==}
+  zudoku@0.74.3:
+    resolution: {integrity: sha512-uhyOi9XvPboWl5YtTc0Kfg6JywmSK9WA0QrQCcldV5XyDguWnQ5IhuNuuQgXTISdCp0vKAEwwerdF7Xbjrkfrg==}
     hasBin: true
     peerDependencies:
       '@azure/msal-browser': ^4.13.0
@@ -11083,7 +11083,7 @@ snapshots:
 
   zod@4.3.6: {}
 
-  zudoku@0.74.2(@sentry/react@10.46.0(react@19.2.4))(@types/json-schema@7.0.15)(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(mermaid@11.13.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(use-sync-external-store@1.6.0(react@19.2.4)):
+  zudoku@0.74.3(@sentry/react@10.46.0(react@19.2.4))(@types/json-schema@7.0.15)(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(mermaid@11.13.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(use-sync-external-store@1.6.0(react@19.2.4)):
     dependencies:
       '@apidevtools/json-schema-ref-parser': 15.3.1(@types/json-schema@7.0.15)
       '@envelop/core': 5.5.1
