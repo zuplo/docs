@@ -1,6 +1,7 @@
 ---
 title: Custom API Identity Plugin
 sidebar_label: Custom API Identities
+navigation_icon: fingerprint
 description:
   Learn how to create a custom API identity plugin for the Dev Portal to
   authenticate API playground requests with OAuth JWT tokens or other custom
