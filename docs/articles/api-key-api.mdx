@@ -186,23 +186,53 @@ The response will look like this:
 
 ### Roll a Consumer's Keys
 
-Sometimes you will want to create a new key and expire the current keys. Instead
-of calling the API for each key and manually creating a new key, you can simply
-call the roll key endpoint.
+Key rotation is a critical part of API key lifecycle management. Instant
+revocation of a key can break every system that depends on it, so Zuplo supports
+**rolling transitions** — creating a new key while keeping the old key active
+for a defined grace period.
 
-:::tip{title="Tags for Request Authorization"}
+When you call the roll key endpoint, Zuplo:
 
-One useful feature of the API Key service is that most requests can have `tags`
-added to the query parameter even if they aren't get requests. This is useful
-when you want to call the API and ensure some basic condition is met without
-having to first do a GET to retrieve data on the object. For example, in the
-roll key request below the `orgId` tag is set on the request - this ensures that
-the consumer being updated is tagged with that org.
+1. Creates a new key with no expiration for the consumer
+2. Sets the `expiresOn` date on all existing keys to the value you specify
+
+This gives consumers time to update their integration to the new key before the
+old one stops working.
+
+#### Choosing a transition period
+
+The right `expiresOn` value depends on how quickly consumers can update their
+keys:
+
+- **Leaked key response** — set `expiresOn` to a past date or within minutes.
+  Security incidents demand immediate action; a brief disruption is preferable
+  to continued exposure.
+- **Routine rotation** — 24 to 72 hours gives most teams enough time to
+  propagate the new key through CI/CD pipelines, environment variables, and
+  secret managers.
+- **Scheduled rotation** — for large organizations, 7 to 14 days accommodates
+  deploy freezes, multi-team coordination, and staged rollouts.
+
+:::tip{title="Multiple keys per consumer"}
+
+Consumers can also manage rotation themselves by creating a second key,
+deploying it, verifying traffic, and then deleting the old key on their own
+schedule. This pattern avoids any expiration deadline and puts the consumer in
+full control.
 
 :::
 
-The following call with set all existing keys to have the expiration date set in
-the request body and will create a new key without an expiration.
+:::tip{title="Tags for Request Authorization"}
+
+Most API requests support `tags` as query parameters, even on non-GET requests.
+This lets you enforce conditions without a separate lookup. In the example
+below, the `orgId` tag ensures the consumer being updated belongs to that
+organization.
+
+:::
+
+The following call sets all existing keys to expire on the specified date and
+creates a new key without an expiration.
 
 ```shell
 export ORG_ID=1234
@@ -210,8 +240,9 @@ export CONSUMER_NAME=my-consumer
 curl \
   https://dev.zuplo.com/v1/accounts/$ACCOUNT_NAME/key-buckets/$BUCKET_NAME/consumers/$CONSUMER_NAME/roll-key?tag.orgId=$ORG_ID \
   --request POST \
-  --header "Authorization: Bearer $API_KEY"
-  --data '{"expiresOn":"2023-04-18"}'
+  --header "Authorization: Bearer $API_KEY" \
+  --header "Content-Type: application/json" \
+  --data '{"expiresOn":"2026-04-19T00:00:00.000Z"}'
 ```
 
 ## Reference

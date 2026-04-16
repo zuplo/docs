@@ -3,29 +3,39 @@ title: API Key Leak Detection
 sidebar_label: Leak Detection
 ---
 
-## API Key Format
+## API key format enables leak detection
 
-Zuplo uses a specially formatted API Key structure that allows us to
-[partner with GitHub's secret scanning](https://github.blog/changelog/2022-07-13-zuplo-is-now-a-github-secret-scanning-partner/)
-to protect your users from accidentally leaked keys.
+Zuplo API keys use a structured format — `zpka_<random>_<checksum>` — that is
+specifically designed to support automated leak detection. The `zpka_` prefix
+allows scanning tools to identify Zuplo keys using a simple regex pattern, and
+the checksum suffix allows the scanner to verify that a matched string is a real
+Zuplo key (not a false positive) without making a database call.
 
-We think the safety of your API key consumers is paramount, so this feature is
-available to all Zuplo customers, including free.
+This format is what makes Zuplo a
+[GitHub secret scanning partner](https://github.blog/changelog/2022-07-13-zuplo-is-now-a-github-secret-scanning-partner/).
+Leak detection is available to all Zuplo customers, including free.
 
-## API Key Leak Detection
+## How leak detection works
 
 API keys should never be stored in source control. Accidentally committing API
-keys to source control is a common attack vector that leads to compromises of
-organizations both large and small.
+keys is a common attack vector that leads to compromises of organizations both
+large and small.
 
 Zuplo participates in
 [GitHub's Secret Scanning](https://docs.github.com/en/code-security/secret-scanning/about-secret-scanning)
-program to detect if your or your customer's API Keys are checked into source
-control on GitHub.
+program. When a Zuplo API key is committed to any GitHub repository — public or
+private — the following flow executes:
 
-If an API Key for your Zuplo API Gateway is compromised by checking it into a
-public or private GitHub repository, Zuplo will be notified and can take action
-immediately.
+1. **Detection** — GitHub's scanners match the `zpka_` prefix pattern across all
+   repository content, including code, config files, and commit history.
+2. **Checksum verification** — GitHub verifies the key's checksum signature to
+   confirm it is a structurally valid Zuplo key, filtering out false positives.
+3. **Notification to Zuplo** — GitHub sends the matched key to Zuplo's secret
+   scanning endpoint.
+4. **Database lookup** — Zuplo checks the key against its key service to
+   determine if it is an active key and which consumer it belongs to.
+5. **Customer notification** — Zuplo sends leak alerts via email and in-app
+   notification, including the repository URL where the key was found.
 
 ## Leak Notifications
 
@@ -40,22 +50,17 @@ send. If you need the full API Key please contact support.
 
 :::
 
-## Recommended Actions
+## Recommended actions
 
-If you receive an alert that an API Key has been leaked, we recommend taking one
-of the following actions immediately.
+If you receive an alert that an API key has been leaked, take one of the
+following actions immediately.
 
-### Notify Your Customer
+### Roll the API key
 
-Notify your customer and ask them to login to your Zuplo powered developer
-portal and instruct them to roll the API Key. This way the old key is revoked
-and they get a new key.
-
-### Roll the API Key
-
-You can use the
-[Zuplo API to roll the API Key](https://dev.zuplo.com/docs/routes#roll-consumer-keys)
-for the consumer. This will create a new key and revoke the old key.
+The fastest way to respond is to roll the consumer's key. Rolling creates a new
+key and sets an expiration on all existing keys for that consumer. You can set
+the `expiresOn` value to give the consumer a short transition period to update
+their integration, or omit it to revoke the old key immediately.
 
 ```bash
 export ACCOUNT_NAME="your-account-name"
@@ -69,7 +74,26 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --data '
 {
-  "expiresOn": "2024-01-01T00:00:00.000Z"
+  "expiresOn": "2026-04-17T00:00:00.000Z"
 }
 '
 ```
+
+:::caution
+
+For leaked keys, keep the transition period as short as possible. A leaked key
+remains valid until the expiration date you set. If the leak represents an
+active threat, revoke the key immediately by setting `expiresOn` to a past date
+or deleting the key directly.
+
+:::
+
+For more on key rotation patterns and choosing transition periods, see
+[Roll a Consumer's Keys](./api-key-api.mdx#roll-a-consumers-keys).
+
+### Notify your customer
+
+If the leaked key belongs to an end-user who manages their own keys through your
+developer portal, notify them and instruct them to roll the key themselves. The
+developer portal provides a self-serve roll key flow so consumers can generate a
+new key and revoke the old one without contacting your team.
