@@ -28,8 +28,17 @@ for managing consumers in the portal.
 
 When a request includes an API key, the
 [API Key Authentication](../policies/api-key-inbound.mdx) policy validates it
-against Zuplo's globally distributed key service. Validation happens at the edge
-in 300+ data centers, keeping latency low and load off your backend.
+through a multi-step process at the edge in 300+ data centers:
+
+1. **Format check** — the key is checked for the correct `zpka_` prefix and
+   structure. Malformed keys are rejected immediately without any network call.
+2. **Checksum validation** — the key's built-in checksum signature is verified.
+   This catches typos and garbage keys in microseconds.
+3. **Cache lookup** — the edge checks its local cache for this key. If the key
+   was recently validated (or recently rejected), the cached result is used.
+4. **Key service lookup** — if the key is not cached, Zuplo's globally
+   distributed key service is queried. The result is then cached for the
+   configured TTL (default 60 seconds).
 
 Key changes (creation, revocation, deletion) replicate globally in seconds.
 
@@ -41,6 +50,16 @@ After successful validation, the policy populates `request.user`:
 This lets downstream policies and handlers make authorization decisions, apply
 per-consumer [rate limits](./rate-limiting.md), or forward identity to your
 backend.
+
+:::note
+
+The `cacheTtlSeconds` option on the API Key Authentication policy controls how
+long validation results are cached at each edge location. Higher values reduce
+latency but delay the effect of key revocation. A revoked key could still be
+accepted for up to `cacheTtlSeconds` after revocation. The default of 60 seconds
+is a good balance for most use cases.
+
+:::
 
 See [Authentication](./authentication.mdx) for how `request.user` works across
 all auth methods, and [RequestUser](../programmable-api/request-user.mdx) for
@@ -93,6 +112,10 @@ Use OAuth or JWT when:
 
 API keys and JWT/OAuth are not mutually exclusive. Many APIs use API keys for
 system-level access and OAuth for user-level actions.
+
+For a full comparison including a decision checklist and retrievable vs
+irretrievable keys, see
+[When to Use API Keys](../articles/when-to-use-api-keys.md).
 
 ## API key format
 

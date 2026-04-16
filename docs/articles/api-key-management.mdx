@@ -15,21 +15,10 @@ To start using Zuplo API Keys in only a few minutes
 
 :::
 
-## Why API keys?
-
-API keys are the standard authentication method for API-first companies like
-Stripe, Twilio, and SendGrid. They are the right choice when you need to
-authenticate an organization, system, or service rather than an individual user
-acting on their own behalf (which is where OAuth excels).
-
-Compared to JWT-based auth, API keys offer simpler developer experience — a
-single string in a header, easy to test with curl, and no token refresh flow.
-API keys are opaque, meaning they don't leak claim structure the way a decoded
-JWT does. And because each key maps to a consumer identity in Zuplo, you can
-revoke access instantly — you don't need to wait for a token to expire.
-
-For a deeper comparison, see the Zuplo blog post on
-[API key authentication best practices](https://zuplo.com/blog/api-key-authentication).
+Not sure if API keys are the right auth method? See
+[When to Use API Keys](./when-to-use-api-keys.md). For the practices that define
+a production-grade implementation, see
+[API Key Best Practices](./api-key-best-practices.mdx).
 
 ## What you get with Zuplo API keys
 
@@ -45,11 +34,13 @@ For a deeper comparison, see the Zuplo blog post on
   committed to any GitHub repository, you are notified immediately.
 - **Self-serve key management** — give your API consumers a
   [developer portal](./api-key-end-users.mdx) where they can create, view, roll,
-  and revoke their own keys.
-- **Edge validation** — keys are validated at the edge, keeping latency low and
-  your backend protected. See
-  [how validation works](../concepts/api-keys.md#how-validation-works) for
-  details on caching and replication.
+  and revoke their own keys. Or
+  [build key management into your own product](./api-key-self-serve-integration.mdx).
+- **Edge validation** — keys are validated through a multi-step process at the
+  edge: format check, checksum verification, cache lookup, then key service
+  query. See
+  [how validation works](../concepts/api-keys.md#how-validation-works) for the
+  full flow.
 - **Key rotation with transition periods** — the
   [roll-key API](./api-key-api.mdx#roll-a-consumers-keys) creates a new key and
   sets an expiration on existing keys, so consumers have time to migrate without
@@ -66,89 +57,21 @@ deleted, the change propagates to all 300+ edge locations within seconds,
 ensuring your API is never open to unauthorized access for longer than the
 configured cache TTL.
 
-## How authentication works
+## Key concepts
 
-When a request arrives at Zuplo with an API key, the
-[API Key Authentication policy](../policies/api-key-inbound.mdx) validates it
-through a multi-step process:
+The API key system has three core objects. For full details, see the
+[API Keys concepts page](../concepts/api-keys.md).
 
-1. **Format check** — the key is checked for the correct `zpka_` prefix and
-   structure. Malformed keys are rejected immediately without any network call.
-2. **Checksum validation** — the key's built-in checksum signature is verified.
-   This catches typos and garbage keys in microseconds.
-3. **Cache lookup** — the edge checks its local cache for this key. If the key
-   was recently validated (or recently rejected), the cached result is used.
-4. **Key service lookup** — if the key isn't cached, Zuplo's globally
-   distributed key service is queried. The result is then cached for the
-   configured TTL (default 60 seconds).
-
-After successful validation, `request.user` is populated with the consumer's
-identity and metadata, which downstream policies and handlers can use for
-authorization, rate limiting, and routing. See
-[how validation works](../concepts/api-keys.md#how-validation-works) for more
-details.
-
-:::note
-
-The `cacheTtlSeconds` option on the API Key Authentication policy controls how
-long validation results are cached at each edge location. Higher values reduce
-latency but delay the effect of key revocation. A revoked key could still be
-accepted for up to `cacheTtlSeconds` after revocation. The default of 60 seconds
-is a good balance for most use cases.
-
-:::
-
-## Key Concepts
-
-### Consumers
-
-An API Key Consumer is the identity that can invoke your API - typically people,
-customers, partners or services. A consumer can have multiple API Keys
-associated with it - but each key authorizes the same consumer (for example
-identity)
-
-### Consumer Metadata
-
-Each consumer can be assigned metadata. This information (a
-[small JSON object](./api-key-service-limits.mdx)) is made available to the
-runtime when a user access your API using that key.
-
-For example, a Consumer might have metadata that specifies the company they're a
-member of and the plan for the account.
-
-```json
-{
-  "companyId": 123,
-  "plan": "gold"
-}
-```
-
-### Consumer Tags
-
-Consumers can also have tags associated with them. Tags are simple key value
-pairs. Tags are used for management purposes only (for example querying
-consumers through the Zuplo API). Tags don't get sent to the runtime as part of
-authorization.
-
-For example, a Consumer might be tagged in order to track the customer
-associated with the consumer.
-
-```txt
-customer=1234
-```
-
-You can see more on how to use tags in the document on
-[managing consumers and keys using the API](./api-key-api.mdx)
-
-### API Keys
-
-API Keys are the actual string value used to authenticate with an API. Unlike
-some other forms of bearer tokens, API Keys don't contain any actual data within
-the key itself.
-
-Zuplo API Keys use a structured format: a `zpka_` prefix, a cryptographically
-random body, and a checksum signature. This format enables
-[leak detection via GitHub secret scanning](./api-key-leak-detection.mdx) and
-allows instant format validation without a database call. Zuplo's API Key
-management service also supports custom key formats (enterprise plan required),
-though custom formats lose leak detection support.
+- **Consumers** — the identities that own API keys. Each consumer has a unique
+  `name` within its bucket (used as `request.user.sub` at runtime), optional
+  [metadata](../concepts/api-keys.md#consumer-metadata) available on every
+  authenticated request, and optional
+  [tags](../concepts/api-keys.md#tags-vs-metadata) for management queries.
+- **API Keys** — the credential strings used to authenticate. Each consumer can
+  have multiple keys. All keys for a consumer share the same identity and
+  metadata. Keys use the `zpka_` format by default; enterprise customers can use
+  [custom key formats](../concepts/api-keys.md#api-key-format), though custom
+  formats lose leak detection support.
+- **Buckets** — group consumers for an environment. Each project has buckets for
+  production, preview, and development. See
+  [API Key Buckets](./api-key-buckets.mdx) for details.

@@ -43,10 +43,19 @@ You can find a demo of this component at https://api-key-manager.com.
 
 ## Zuplo Developer API
 
-Finally, if you want complete control over the entire experience, you can
-utilize Zuplo's Developer API to manage the full lifecycle of API Consumers and
-Keys.
+If you want complete control over the experience — for example, building an "API
+Keys" section directly into your product's settings page — you can use the
+[Zuplo Developer API](https://dev.zuplo.com/docs/) to manage the full lifecycle
+of consumers and keys from your own backend.
 
-For more information on using the API to manage consumers and keys, see
+This approach works with any tech stack. Your backend authenticates users with
+your own auth system, then proxies requests to the Zuplo Developer API to
+create, list, rotate, and delete keys on their behalf. You control the UI, the
+access rules, and the onboarding flow.
+
+For a complete implementation walkthrough including architecture, code examples,
+and security guidance, see
+[Build Self-Serve API Key Management in Your Product](./api-key-self-serve-integration.mdx).
+For the raw API operations, see
 [Programmatic API Key Management](./api-key-api.mdx) and the
-[Zuplo Developer API documentation](https://dev.zuplo.com).
+[Zuplo Developer API documentation](https://dev.zuplo.com/docs/).
