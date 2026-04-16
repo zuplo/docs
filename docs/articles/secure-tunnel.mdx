@@ -2,6 +2,18 @@
 title: Secure Tunnel
 ---
 
+:::caution{title="Linux Only"}
+
+Zuplo secure tunnels are officially supported on **Linux** environments only.
+The tunnel service is distributed as a Linux binary, and the
+[`zuplo/tunnel` Docker image](https://hub.docker.com/r/zuplo/tunnel) runs Linux
+containers. Whether you deploy the tunnel as a Docker container, on a virtual
+machine, or on bare metal, the underlying host must run Linux. This includes
+cloud container services (AWS ECS, Azure Container Instances, GCP Cloud Run,
+Kubernetes) which use Linux-based infrastructure by default.
+
+:::
+
 For customers running on bare metal, on-premises, or other non-cloud providers
 tunnels provides a way to secure your backend without mTLS or IAM.
 
@@ -19,9 +31,9 @@ private API. The benefits of a secure tunnel are:
 
 ## How does the Tunnel Work?
 
-The Zuplo tunnel can run on virtually any infrastructure. The most common way
-users install the tunnel is as a Docker container, but we can provide you a
-build in virtually any format (for example an Azure VM, etc.). The tunnel itself
+The Zuplo tunnel can run on virtually any Linux-based infrastructure. The most
+common way users install the tunnel is as a Docker container, but it can also
+run directly on a Linux virtual machine or bare-metal server. The tunnel itself
 is a lightweight service that when started makes an outbound connection to the
 Zuplo network and then through to your Zuplo Gateway.
 
