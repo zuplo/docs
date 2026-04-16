@@ -4,6 +4,18 @@ title: Tunnel Setup & Use
 
 <EnterpriseFeature name="Secure tunneling" />
 
+:::caution{title="Platform Requirement"}
+
+The Zuplo tunnel service is officially supported on **Linux** only. The
+[`zuplo/tunnel` Docker image](https://hub.docker.com/r/zuplo/tunnel) is a Linux
+container, and any non-containerized deployment must target a Linux host. Cloud
+container platforms (AWS ECS, Azure Container Instances, GCP Cloud Run,
+Kubernetes) run Linux containers by default and require no extra configuration.
+If you are deploying on a virtual machine or bare metal, ensure the host runs a
+supported Linux distribution.
+
+:::
+
 ## Setting up Tunnels
 
 A tunnel is a way to expose your _internal services_ to the Zuplo gateway
