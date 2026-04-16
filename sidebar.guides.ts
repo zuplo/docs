@@ -66,7 +66,7 @@ export const guides: Navigation = [
     type: "category",
     label: "Performance & Data",
     items: [
-      "articles/per-user-rate-limits-using-db",
+      "rate-limiting/per-user-rate-limits-using-db",
       "articles/lazy-load-configuration-into-cache",
       "articles/archiving-requests-to-storage",
       "articles/check-ip-address",

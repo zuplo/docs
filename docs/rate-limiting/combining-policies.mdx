@@ -1,0 +1,293 @@
+---
+title: Combining Rate Limit Policies
+sidebar_label: Combining Policies
+description:
+  Apply multiple rate limits to the same route, combine rate limiting with
+  quotas, and design multi-layer protection strategies.
+---
+
+Real-world APIs rarely need just one rate limiting boundary. A payment endpoint
+might need a per-minute burst limit to protect against runaway scripts _and_ a
+per-hour cap to enforce fair usage. A monetized API might pair a monthly quota
+with a per-second spike guard. Zuplo supports all of these patterns by letting
+you stack multiple policies on the same route.
+
+## Multiple rate limits on one route
+
+You can apply two or more rate limiting policies to a single route. Each policy
+maintains its own counter independently, and the request must pass every policy
+to reach the backend.
+
+A common pattern is combining a short-window burst limit with a longer-window
+sustained limit. The following example enforces both a 1,000-requests-per-hour
+ceiling and a 100-requests-per-minute burst limit on the same route.
+
+### Define the policies
+
+```json title="config/policies.json"
+{
+  "policies": [
+    {
+      "name": "rate-limit-hourly",
+      "policyType": "rate-limit-inbound",
+      "handler": {
+        "export": "RateLimitInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "rateLimitBy": "user",
+          "requestsAllowed": 1000,
+          "timeWindowMinutes": 60
+        }
+      }
+    },
+    {
+      "name": "rate-limit-per-minute",
+      "policyType": "rate-limit-inbound",
+      "handler": {
+        "export": "RateLimitInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "rateLimitBy": "user",
+          "requestsAllowed": 100,
+          "timeWindowMinutes": 1
+        }
+      }
+    }
+  ]
+}
+```
+
+### Attach them to a route
+
+List both policies in the route's inbound pipeline. Place the longest time
+window first:
+
+```json title="config/routes.oas.json (excerpt)"
+{
+  "x-zuplo-route": {
+    "policies": {
+      "inbound": ["rate-limit-hourly", "rate-limit-per-minute"]
+    }
+  }
+}
+```
+
+:::tip
+
+Apply the longest time window first. If a caller already exhausted the hourly
+quota, the request is rejected immediately without incrementing the per-minute
+counter. This avoids wasting counter writes on requests that would fail anyway.
+
+:::
+
+Each policy tracks its own sliding window counter scoped by its `name`. A
+request that passes the hourly check still gets evaluated against the per-minute
+check. If either policy rejects the request, the client receives a
+`429 Too Many Requests` response.
+
+## Rate limiting vs. quotas
+
+Rate limiting and quotas both cap usage, but they solve different problems.
+
+| Aspect            | Rate limiting                                       | Quota                                        |
+| ----------------- | --------------------------------------------------- | -------------------------------------------- |
+| **Time window**   | Short: seconds, minutes, or hours                   | Long: hourly, daily, weekly, or monthly      |
+| **Purpose**       | Protect backends from traffic spikes                | Enforce billing-period usage caps            |
+| **Counter reset** | Sliding window rolls continuously                   | Fixed period anchored to a start date        |
+| **Typical use**   | "100 requests per minute per user"                  | "10,000 requests per month per subscription" |
+| **Policy**        | [Rate Limiting](../policies/rate-limit-inbound.mdx) | [Quota](../policies/quota-inbound.mdx)       |
+
+Use rate limiting when you need to smooth traffic and prevent bursts. Use quotas
+when you need to enforce a usage allowance over a billing cycle. In many APIs,
+you use both together: a monthly quota to cap total usage and a per-minute rate
+limit to prevent any single caller from overwhelming the backend within that
+quota.
+
+### Example: quota plus rate limit
+
+```json title="config/policies.json"
+{
+  "policies": [
+    {
+      "name": "monthly-quota",
+      "policyType": "quota-inbound",
+      "handler": {
+        "export": "QuotaInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "period": "monthly",
+          "quotaBy": "user",
+          "allowances": {
+            "requests": 10000
+          }
+        }
+      }
+    },
+    {
+      "name": "burst-rate-limit",
+      "policyType": "rate-limit-inbound",
+      "handler": {
+        "export": "RateLimitInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "rateLimitBy": "user",
+          "requestsAllowed": 100,
+          "timeWindowMinutes": 1
+        }
+      }
+    }
+  ]
+}
+```
+
+On the route, place the quota policy first so that callers who already used
+their monthly allowance are rejected before the rate limit counter is
+incremented:
+
+```json title="config/routes.oas.json (excerpt)"
+{
+  "x-zuplo-route": {
+    "policies": {
+      "inbound": ["monthly-quota", "burst-rate-limit"]
+    }
+  }
+}
+```
+
+## Rate limiting with monetization
+
+The [Monetization policy](../articles/monetization/monetization-policy.md)
+handles subscription validation, quota enforcement, and metering in one step. It
+already enforces billing-period usage limits tied to the customer's plan, so you
+do not need a separate quota policy on monetized routes.
+
+Rate limiting is still valuable alongside monetization. A customer with a 50,000
+requests-per-month plan could theoretically send all 50,000 requests in a single
+minute, which would overwhelm your backend even though it falls within the
+monthly allowance. Adding a rate limiting policy prevents that spike.
+
+```json title="config/routes.oas.json (excerpt)"
+{
+  "x-zuplo-route": {
+    "policies": {
+      "inbound": ["monetization-inbound", "rate-limit-per-minute"]
+    }
+  }
+}
+```
+
+:::note
+
+The monetization policy handles API key authentication internally. You do not
+need a separate `api-key-auth` policy on monetized routes. Place the
+monetization policy first so that `request.user` is populated before the rate
+limit policy runs.
+
+:::
+
+These two layers are complementary:
+
+- **Monetization** enforces monthly or billing-period usage limits and tracks
+  metered usage for billing.
+- **Rate limiting** enforces per-minute or per-second spike protection to keep
+  your backend healthy.
+
+## Counter scoping
+
+Rate limit counters are scoped by the policy's `name` field combined with the
+caller identifier (user, IP, or custom key). Understanding this scoping is
+important when you apply the same policy type to multiple routes.
+
+### Shared counters
+
+If two routes reference the same policy name, they share a counter. A caller who
+makes 60 requests to `/orders` and 40 requests to `/products` — both using a
+policy named `rate-limit-per-minute` — counts as 100 total requests against that
+policy's limit.
+
+```json title="config/routes.oas.json (excerpt)"
+{
+  "paths": {
+    "/orders": {
+      "get": {
+        "x-zuplo-route": {
+          "policies": {
+            "inbound": ["rate-limit-per-minute"]
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "x-zuplo-route": {
+          "policies": {
+            "inbound": ["rate-limit-per-minute"]
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Shared counters are useful when you want a single global limit that applies
+across all routes for a given caller.
+
+### Independent counters
+
+To give each route its own counter, create separate policy instances with
+different names:
+
+```json title="config/policies.json"
+{
+  "policies": [
+    {
+      "name": "rate-limit-orders",
+      "policyType": "rate-limit-inbound",
+      "handler": {
+        "export": "RateLimitInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "rateLimitBy": "user",
+          "requestsAllowed": 100,
+          "timeWindowMinutes": 1
+        }
+      }
+    },
+    {
+      "name": "rate-limit-products",
+      "policyType": "rate-limit-inbound",
+      "handler": {
+        "export": "RateLimitInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "rateLimitBy": "user",
+          "requestsAllowed": 200,
+          "timeWindowMinutes": 1
+        }
+      }
+    }
+  ]
+}
+```
+
+Now a caller can make 100 requests per minute to `/orders` and 200 requests per
+minute to `/products` independently. Exhausting the orders limit does not affect
+the products limit.
+
+:::warning
+
+If you duplicate a policy definition and forget to change the `name`, both
+routes share the same counter. Always verify that policy names are distinct when
+you intend independent counters.
+
+:::
+
+## Related resources
+
+- [Rate Limiting policy reference](../policies/rate-limit-inbound.mdx)
+- [Complex Rate Limiting policy reference](../policies/complex-rate-limit-inbound.mdx)
+- [Quota policy reference](../policies/quota-inbound.mdx)
+- [Monetization policy](../articles/monetization/monetization-policy.md)
+- [How rate limiting works](./how-it-works.md)
+- [Dynamic Rate Limiting](./dynamic-rate-limiting.mdx)

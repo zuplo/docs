@@ -161,7 +161,7 @@ const policies: Navigation = [
     items: [
       "articles/multiple-auth-policies",
       "articles/graphql-security",
-      "articles/per-user-rate-limits-using-db",
+      "rate-limiting/per-user-rate-limits-using-db",
       "articles/composite-policy-reference",
     ],
   },
@@ -342,7 +342,6 @@ export const documentation: Navigation = [
       "concepts/project-structure",
       "concepts/authentication",
       "concepts/api-keys",
-      "concepts/rate-limiting",
       "articles/routing",
       "articles/policies",
       "articles/openapi",
@@ -445,6 +444,33 @@ export const documentation: Navigation = [
       "articles/api-key-leak-detection",
       "articles/api-key-service-limits",
       "articles/api-key-buckets",
+    ],
+  },
+  {
+    type: "category",
+    label: "Rate Limiting",
+    icon: "gauge",
+    items: [
+      "rate-limiting/getting-started",
+      "rate-limiting/how-it-works",
+      {
+        type: "category",
+        label: "Policies",
+        items: [
+          "policies/rate-limit-inbound",
+          "policies/complex-rate-limit-inbound",
+        ],
+      },
+      {
+        type: "category",
+        label: "Guides",
+        items: [
+          "rate-limiting/dynamic-rate-limiting",
+          "rate-limiting/combining-policies",
+          "rate-limiting/per-user-rate-limits-using-db",
+          "rate-limiting/monitoring-and-troubleshooting",
+        ],
+      },
     ],
   },
   {
