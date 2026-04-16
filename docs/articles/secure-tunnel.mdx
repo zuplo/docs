@@ -2,15 +2,13 @@
 title: Secure Tunnel
 ---
 
-:::caution{title="Linux Only"}
+:::note
 
-Zuplo secure tunnels are officially supported on **Linux** environments only.
-The tunnel service is distributed as a Linux binary, and the
-[`zuplo/tunnel` Docker image](https://hub.docker.com/r/zuplo/tunnel) runs Linux
-containers. Whether you deploy the tunnel as a Docker container, on a virtual
-machine, or on bare metal, the underlying host must run Linux. This includes
-cloud container services (AWS ECS, Azure Container Instances, GCP Cloud Run,
-Kubernetes) which use Linux-based infrastructure by default.
+The tunnel service is built for **Linux** and all official deployments — whether
+via the [`zuplo/tunnel` Docker image](https://hub.docker.com/r/zuplo/tunnel), a
+virtual machine, or bare metal — run on Linux. Cloud container platforms such as
+AWS ECS, Azure Container Instances, GCP Cloud Run, and Kubernetes use
+Linux-based infrastructure by default.
 
 :::
 
