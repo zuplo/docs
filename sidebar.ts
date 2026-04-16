@@ -277,6 +277,7 @@ const devPortalItems: Navigation = [
           ...item,
           items: [
             ...item.items,
+            "dev-portal/auth-provider-api-identities",
             "dev-portal/dev-portal-create-consumer-on-auth",
             "articles/rick-and-morty-api-developer-portal-example",
           ],
