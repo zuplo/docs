@@ -343,6 +343,7 @@ export const documentation: Navigation = [
       "concepts/authentication",
       "concepts/api-keys",
       "concepts/rate-limiting",
+      "concepts/api-errors",
       "articles/routing",
       "articles/policies",
       "articles/openapi",
