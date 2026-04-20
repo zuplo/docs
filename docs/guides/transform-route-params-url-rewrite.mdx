@@ -1,0 +1,307 @@
+---
+title: Transform Route Parameters for URL Rewrite
+sidebar_label: Transform Route Parameters
+description:
+  Learn how to use an inbound policy to transform route parameter values before
+  the URL Rewrite handler forwards the request to your backend.
+tags:
+  - custom-code
+  - backends
+---
+
+This guide explains how to transform incoming route parameter values in an
+inbound policy before the [URL Rewrite handler](../handlers/url-rewrite.mdx)
+uses them to build the upstream URL. This pattern is useful when your public API
+paths use different naming conventions than your internal backend.
+
+## Overview
+
+When you use the URL Rewrite handler, it builds the upstream URL by
+interpolating values like `${params.resourceType}` directly from the incoming
+route parameters. Sometimes, however, you need to **change** those values before
+the rewrite happens. Common scenarios include:
+
+- **Value mapping** — translating a public-facing parameter like `order` to an
+  internal value like `customerorder`
+- **Case normalization** — converting `Products` to `products` before forwarding
+- **Path translation** — mapping user-friendly slugs to internal identifiers
+
+The recommended approach is to read the route parameters in an inbound policy,
+transform them, store the results on
+[`context.custom`](../programmable-api/zuplo-context.mdx), and reference the
+transformed values in the URL Rewrite pattern.
+
+## Step-by-Step Example
+
+The solution has three parts: an **inbound policy** that reads `request.params`
+and stores transformed values on `context.custom`, a **URL Rewrite handler**
+that references those values using `${context.custom.*}` in the
+`rewritePattern`, and **route configuration** that wires the two together.
+
+Imagine your public API exposes a route like `/api/:resourceType/:resourceId`,
+but your backend expects the resource type to be prefixed with `customer`. A
+request to `/api/order/123` should be forwarded to
+`https://backend.example.com/api/customerorder/123`.
+
+### 1. Write the Inbound Policy
+
+Create a custom inbound policy that reads the route parameters, transforms the
+values, and stores them on `context.custom`:
+
+```ts title="modules/transform-params.ts"
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export default async function (
+  request: ZuploRequest,
+  context: ZuploContext,
+  options: any,
+  policyName: string,
+): Promise<ZuploRequest | Response> {
+  // Read the original route parameter
+  const resourceType = request.params.resourceType;
+
+  // Transform the value — prefix with "customer"
+  const transformedResourceType = `customer${resourceType}`;
+
+  // Store the transformed value on context.custom
+  context.custom.transformedResourceType = transformedResourceType;
+
+  context.log.info({
+    message: "Transformed route parameter",
+    original: resourceType,
+    transformed: transformedResourceType,
+  });
+
+  return request;
+}
+```
+
+### 2. Register the Policy
+
+Add the policy to `config/policies.json`:
+
+```json title="config/policies.json"
+{
+  "policies": [
+    {
+      "name": "transform-params",
+      "policyType": "custom-code-inbound",
+      "handler": {
+        "export": "default",
+        "module": "$import(./modules/transform-params)"
+      }
+    }
+  ]
+}
+```
+
+### 3. Configure the Route
+
+Define the route in `config/routes.oas.json` with the inbound policy and a URL
+Rewrite handler that references `context.custom`:
+
+```json title="config/routes.oas.json"
+{
+  "paths": {
+    "/api/{resourceType}/{resourceId}": {
+      "x-zuplo-path": {
+        "pathMode": "open-api"
+      },
+      "get": {
+        "summary": "Get resource by type and ID",
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "urlRewriteHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "rewritePattern": "https://backend.example.com/api/${context.custom.transformedResourceType}/${params.resourceId}"
+            }
+          },
+          "policies": {
+            "inbound": ["transform-params"]
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+With this configuration, a request to `/api/order/123` flows through the
+pipeline as follows:
+
+1. The route matches with `params.resourceType = "order"` and
+   `params.resourceId = "123"`
+2. The `transform-params` inbound policy runs and sets
+   `context.custom.transformedResourceType = "customerorder"`
+3. The URL Rewrite handler builds the upstream URL:
+   `https://backend.example.com/api/customerorder/123`
+
+## Common Pitfall: Modifying `request.params` Directly
+
+:::caution
+
+Do not try to transform route parameters by constructing a new `ZuploRequest`
+with modified `params` and expecting the URL Rewrite handler to pick them up.
+
+:::
+
+A common first attempt is to create a new
+[`ZuploRequest`](../programmable-api/zuplo-request.mdx) with different `params`:
+
+```ts
+// ⚠️ This approach does NOT work as expected with URL Rewrite
+const newRequest = new ZuploRequest(request, {
+  params: {
+    ...request.params,
+    resourceType: "customerorder",
+  },
+});
+return newRequest;
+```
+
+In practice, the URL Rewrite handler evaluates `${params.*}` against the
+route-level parameters rather than the request object returned by a policy. This
+means the rewritten URL may contain `undefined` segments instead of your
+transformed values. Use `context.custom` for reliable interpolation of
+transformed values — the URL Rewrite handler's `rewritePattern` fully supports
+`${context.custom.*}`, and values set in an inbound policy are available when
+the handler runs.
+
+## Variations
+
+### Using a Lookup Map
+
+For more complex mappings where the transformation is not a simple string
+operation, use a lookup object:
+
+```ts title="modules/transform-params-map.ts"
+import { ZuploContext, ZuploRequest, HttpProblems } from "@zuplo/runtime";
+
+// Map public resource types to internal names
+const RESOURCE_TYPE_MAP: Record<string, string> = {
+  order: "customerorder",
+  invoice: "billing-invoice",
+  profile: "user-profile",
+  subscription: "recurring-plan",
+};
+
+export default async function (
+  request: ZuploRequest,
+  context: ZuploContext,
+  options: any,
+  policyName: string,
+): Promise<ZuploRequest | Response> {
+  const resourceType = request.params.resourceType;
+  const mappedType = RESOURCE_TYPE_MAP[resourceType];
+
+  if (!mappedType) {
+    return HttpProblems.notFound(request, context, {
+      detail: `Unknown resource type: ${resourceType}`,
+    });
+  }
+
+  context.custom.transformedResourceType = mappedType;
+
+  return request;
+}
+```
+
+### Transforming Multiple Parameters
+
+You can transform any number of route parameters and store each on
+`context.custom`. Reference them individually in the rewrite pattern:
+
+```ts title="modules/transform-multiple-params.ts"
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export default async function (
+  request: ZuploRequest,
+  context: ZuploContext,
+  options: any,
+  policyName: string,
+): Promise<ZuploRequest | Response> {
+  // Normalize casing
+  context.custom.version = request.params.version?.toLowerCase();
+
+  // Map resource type
+  context.custom.resource =
+    request.params.resource === "users" ? "customers" : request.params.resource;
+
+  return request;
+}
+```
+
+Then use both values in the rewrite pattern:
+
+```json
+{
+  "rewritePattern": "https://backend.example.com/${context.custom.version}/${context.custom.resource}/${params.id}"
+}
+```
+
+### Combining with Body Transformation
+
+If your API also needs to transform values in the request body alongside route
+parameters, you can handle both in the same inbound policy. Create a new
+`ZuploRequest` with a modified body while storing the route parameter
+transformations on `context.custom`:
+
+```ts title="modules/transform-params-and-body.ts"
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export default async function (
+  request: ZuploRequest,
+  context: ZuploContext,
+  options: any,
+  policyName: string,
+): Promise<ZuploRequest | Response> {
+  // Transform route parameter
+  context.custom.transformedResourceType = `customer${request.params.resourceType}`;
+
+  // Transform the request body if present
+  if (request.headers.get("content-type")?.includes("application/json")) {
+    const body = await request.json();
+
+    // Map fields in the body to match the backend schema
+    const transformedBody = {
+      ...body,
+      type: context.custom.transformedResourceType,
+    };
+
+    // Return a new request with the modified body
+    return new ZuploRequest(request, {
+      body: JSON.stringify(transformedBody),
+    });
+  }
+
+  return request;
+}
+```
+
+## Best Practices
+
+- **Use descriptive keys on `context.custom`** — names like
+  `context.custom.transformedResourceType` are easier to debug than generic keys
+  like `context.custom.value`
+- **Log transformations** — use `context.log` to record original and transformed
+  values so you can trace issues in production
+- **Validate before transforming** — return an appropriate error response (using
+  [`HttpProblems`](../programmable-api/http-problems.mdx)) if a parameter value
+  is unexpected, rather than forwarding bad data to your backend
+- **Keep the policy focused** — if your transformation logic is complex,
+  consider splitting it into a separate utility module imported by the policy
+
+## Next Steps
+
+- [URL Rewrite Handler](../handlers/url-rewrite.mdx) — full reference for
+  rewrite patterns and available interpolation variables
+- [Custom Code Patterns](../articles/custom-code-patterns.md) — common patterns
+  for writing inbound policies, outbound policies, and handlers
+- [ZuploContext](../programmable-api/zuplo-context.mdx) — reference for
+  `context.custom` and other context properties
+- [ZuploRequest](../programmable-api/zuplo-request.mdx) — reference for
+  `request.params` and constructing new requests
+- [User-Based Backend Routing](./user-based-backend-routing.mdx) — a related
+  pattern using `context.custom` with URL Rewrite for routing by user identity
