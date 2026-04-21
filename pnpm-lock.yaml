@@ -45,8 +45,8 @@ importers:
         specifier: ^19.0.0
         version: 19.2.4(react@19.2.4)
       zudoku:
-        specifier: ^0.75.0
-        version: 0.75.0(@sentry/react@10.46.0(react@19.2.4))(@types/json-schema@7.0.15)(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(mermaid@11.13.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(use-sync-external-store@1.6.0(react@19.2.4))
+        specifier: ^0.75.1
+        version: 0.75.1(@sentry/react@10.46.0(react@19.2.4))(@types/json-schema@7.0.15)(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(mermaid@11.13.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(use-sync-external-store@1.6.0(react@19.2.4))
     devDependencies:
       '@anthropic-ai/claude-agent-sdk':
         specifier: ^0.2.19
@@ -251,6 +251,33 @@ packages:
   '@babel/types@7.29.0':
     resolution: {integrity: sha512-LwdZHpScM4Qz8Xw2iKSzS+cfglZzJGvofQICy7W7v4caru4EaAmyUuO6BGrbyQ2mYV11W0U8j5mBhd14dd3B0A==}
     engines: {node: '>=6.9.0'}
+
+  '@base-ui/react@1.4.1':
+    resolution: {integrity: sha512-Ab5/LIhcmL8BQcsBUYiOfkSDRdLpvgUBzMK30cu684JPcLclYlztharvCZyNNgzJtbAiREzI9q0pI5erHCMgCw==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      '@date-fns/tz': ^1.2.0
+      '@types/react': ^17 || ^18 || ^19
+      date-fns: ^4.0.0
+      react: ^17 || ^18 || ^19
+      react-dom: ^17 || ^18 || ^19
+    peerDependenciesMeta:
+      '@date-fns/tz':
+        optional: true
+      '@types/react':
+        optional: true
+      date-fns:
+        optional: true
+
+  '@base-ui/utils@0.2.8':
+    resolution: {integrity: sha512-jvOi+c+ftGlGotNcKnzPVg2IhCaDTB6/6R3JeqdjdXktuAJi3wKH9T7+svuaKh1mmfVU11UWzUZVH74JDfi/wQ==}
+    peerDependencies:
+      '@types/react': ^17 || ^18 || ^19
+      react: ^17 || ^18 || ^19
+      react-dom: ^17 || ^18 || ^19
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
 
   '@braintree/sanitize-url@7.1.2':
     resolution: {integrity: sha512-jigsZK+sMF/cuiB7sERuo9V7N9jx+dhmHHnQyDSVdpZwVutaBu7WvNYqMDLSgFgfB30n452TP3vjDAvFC973mA==}
@@ -1102,33 +1129,38 @@ packages:
   '@oxc-project/types@0.122.0':
     resolution: {integrity: sha512-oLAl5kBpV4w69UtFZ9xqcmTi+GENWOcPF7FCrczTiBbmC0ibXxCwyvZGbO39rCVEuLGAZM84DH0pUIyyv/YJzA==}
 
-  '@pagefind/darwin-arm64@1.5.0-beta.1':
-    resolution: {integrity: sha512-oOcnXy83NK+utpeHN3igrug7RpZpu0lLNpGOXfTKJaOc44lIvxnDI0ceJnwvRqDCl+KLSGpqn4uWczmEMtnikQ==}
+  '@pagefind/darwin-arm64@1.5.2':
+    resolution: {integrity: sha512-MXpI+7HsAdPkvJ0gk9xj9g541BCqBZOBbdwj9g6lB5LCj6kSV6nqDSjzcAJwvOsfu0fjwvC8hQU+ecfhp+MpiQ==}
     cpu: [arm64]
     os: [darwin]
 
-  '@pagefind/darwin-x64@1.5.0-beta.1':
-    resolution: {integrity: sha512-ZL2+L+rtjPv0sZ1CcrtuDqJgorkGr6DTcm3KargL2gvlIfup73GEZ1S0rNSLPIR1azUa+fuiW2dI8SEacCRcBQ==}
+  '@pagefind/darwin-x64@1.5.2':
+    resolution: {integrity: sha512-IojxFWMEJe0RQ7PQ3KXQsPIImNsbpPYpoZ+QUDrL8fAl/O27IX+LVLs74/UzEZy5uA2LD8Nz1AiwKr72vrkZQw==}
     cpu: [x64]
     os: [darwin]
 
-  '@pagefind/freebsd-x64@1.5.0-beta.1':
-    resolution: {integrity: sha512-OYUJUAipl8PX2kl5GJUd0Jt1lmzbeG2Ld0J6FWNZw3eEQ9Qs58bviuo7bg99xJEV8K//GO3PrD6JHzFI5umUJA==}
+  '@pagefind/freebsd-x64@1.5.2':
+    resolution: {integrity: sha512-7EVzo9+0w+2cbe671BtMj10UlNo83I+HrLVLfRxO731svHRJKUfJ/mo05gU14pe9PCfpKNQT8FS3Xc/oDN6pOA==}
     cpu: [x64]
     os: [freebsd]
 
-  '@pagefind/linux-arm64@1.5.0-beta.1':
-    resolution: {integrity: sha512-xaHp0iBnhC/jWRmwLZ5+x1f/DK1G9Z2rdXgNh7YTEes0hSaQwwu6JzAKjhH9K1rYClWnRDfHIF+SBu5MY48ecQ==}
+  '@pagefind/linux-arm64@1.5.2':
+    resolution: {integrity: sha512-Ovt9+K35sqzn8H3ZMXGwls4TD/wMJuvRtShHIsmUQREmaxjrDEX7gHckRCrwYJ4XE1H1p6HkLz3wukrAnsfXQw==}
     cpu: [arm64]
     os: [linux]
 
-  '@pagefind/linux-x64@1.5.0-beta.1':
-    resolution: {integrity: sha512-3UzHImmoMC1xTN3uD6myxKMDxygEQu+i4f1qRGAyetXudkK5ItlLZycAso6+e5Te0jNlDRDosTE5ulj+MuR4dg==}
+  '@pagefind/linux-x64@1.5.2':
+    resolution: {integrity: sha512-V+tFqHKXhQKq/WqPBD67AFy7scn1/aZID00ws4fSDd+1daSi5UHR9VVlRrOUYKxn3VuFQYRD7lYXdZK1WED1YA==}
     cpu: [x64]
     os: [linux]
 
-  '@pagefind/windows-x64@1.5.0-beta.1':
-    resolution: {integrity: sha512-A+D7zCNPdXXaUw2TIyTdrMSK61wq7yRluXL/b/dxFyBP/qycFV8wqIiLx14vQH+pKgXOeMdIkiLAA+HUnbPWwg==}
+  '@pagefind/windows-arm64@1.5.2':
+    resolution: {integrity: sha512-hN9Nh90fNW61nNRCW9ZyQrAj/mD0eRvmJ8NlTUzkbuW8kIzGJUi3cxjFkEcMZ5h/8FsKWD/VcouZl4yo1F7B6g==}
+    cpu: [arm64]
+    os: [win32]
+
+  '@pagefind/windows-x64@1.5.2':
+    resolution: {integrity: sha512-Fa2Iyw7kaDRzGMfNYNUXNW2zbL5FQVDgSOcbDHdzBrDEdpqOqg8TcZ68F22ol6NJ9IGzvUdmeyZypLW5dyhqsg==}
     cpu: [x64]
     os: [win32]
 
@@ -3618,8 +3650,8 @@ packages:
   hoist-non-react-statics@3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
 
-  hono@4.12.12:
-    resolution: {integrity: sha512-p1JfQMKaceuCbpJKAPKVqyqviZdS0eUxH9v82oWo1kb9xjQ5wA6iP3FNVAPDFlz5/p7d45lO+BpSk1tuSZMF4Q==}
+  hono@4.12.14:
+    resolution: {integrity: sha512-am5zfg3yu6sqn5yjKBNqhnTX7Cv+m00ox+7jbaKkrLMRJ4rAdldd1xPd/JzbBWspqaQv6RSTrgFN95EsfhC+7w==}
     engines: {node: '>=16.9.0'}
 
   html-encoding-sniffer@4.0.0:
@@ -4440,8 +4472,8 @@ packages:
   package-manager-detector@1.6.0:
     resolution: {integrity: sha512-61A5ThoTiDG/C8s8UMZwSorAGwMJ0ERVGj2OjoW5pAalsNOg15+iQiPzrLJ4jhZ1HJzmC2PIHT2oEiH3R5fzNA==}
 
-  pagefind@1.5.0-beta.1:
-    resolution: {integrity: sha512-TOOP7e1C7Nd82wWFu2P5ElIFbNLiqdrKlBz6/BpyeJ6t17NtldrQyPmsBiHsv+eu7E6uXo7lG9MYsUcLMk+6ew==}
+  pagefind@1.5.2:
+    resolution: {integrity: sha512-XTUaK0hXMCu2jszWE584JGQT7y284TmMV9l/HX3rnG5uo3rHI/uHU56XTyyyPFjeWEBxECbAi0CaFDJOONtG0Q==}
     hasBin: true
 
   parent-module@1.0.1:
@@ -4754,6 +4786,9 @@ packages:
 
   requires-port@1.0.0:
     resolution: {integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==}
+
+  reselect@5.1.1:
+    resolution: {integrity: sha512-K/BG6eIky/SBpzfHZv/dd+9JBFiS4SWV7FIujVyJRux6e45+73RaUHXLmIR1f7WOMaQ0U1km6qwklRQxpJJY0w==}
 
   resolve-from@4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
@@ -5380,8 +5415,8 @@ packages:
   zod@4.3.6:
     resolution: {integrity: sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==}
 
-  zudoku@0.75.0:
-    resolution: {integrity: sha512-cpkFNYzT/rBF7HikDglj6gwk24LGRLZ2oM2TBnUz2glsQkplys9Hc0AjUMlyMHytBo+H+5yoVrmtINSakpGl6w==}
+  zudoku@0.75.1:
+    resolution: {integrity: sha512-OsFZ67esxvajQtwSLGtqvpaGgPkbfKlPrf7LWlCJ1akyDgSIYrt2OD0EOl9ysOhlm5YmNXKHd0Hab/bqTYTtHQ==}
     hasBin: true
     peerDependencies:
       '@azure/msal-browser': ^4.13.0
@@ -5591,6 +5626,29 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
+
+  '@base-ui/react@1.4.1(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+    dependencies:
+      '@babel/runtime': 7.29.2
+      '@base-ui/utils': 0.2.8(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@floating-ui/react-dom': 2.1.8(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@floating-ui/utils': 0.2.11
+      react: 19.2.4
+      react-dom: 19.2.4(react@19.2.4)
+      use-sync-external-store: 1.6.0(react@19.2.4)
+    optionalDependencies:
+      '@types/react': 19.2.14
+
+  '@base-ui/utils@0.2.8(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+    dependencies:
+      '@babel/runtime': 7.29.2
+      '@floating-ui/utils': 0.2.11
+      react: 19.2.4
+      react-dom: 19.2.4(react@19.2.4)
+      reselect: 5.1.1
+      use-sync-external-store: 1.6.0(react@19.2.4)
+    optionalDependencies:
+      '@types/react': 19.2.14
 
   '@braintree/sanitize-url@7.1.2': {}
 
@@ -5882,9 +5940,9 @@ snapshots:
       '@repeaterjs/repeater': 3.0.6
       tslib: 2.8.1
 
-  '@hono/node-server@1.19.13(hono@4.12.12)':
+  '@hono/node-server@1.19.13(hono@4.12.14)':
     dependencies:
-      hono: 4.12.12
+      hono: 4.12.14
 
   '@humanfs/core@0.19.1': {}
 
@@ -6412,22 +6470,25 @@ snapshots:
 
   '@oxc-project/types@0.122.0': {}
 
-  '@pagefind/darwin-arm64@1.5.0-beta.1':
+  '@pagefind/darwin-arm64@1.5.2':
     optional: true
 
-  '@pagefind/darwin-x64@1.5.0-beta.1':
+  '@pagefind/darwin-x64@1.5.2':
     optional: true
 
-  '@pagefind/freebsd-x64@1.5.0-beta.1':
+  '@pagefind/freebsd-x64@1.5.2':
     optional: true
 
-  '@pagefind/linux-arm64@1.5.0-beta.1':
+  '@pagefind/linux-arm64@1.5.2':
     optional: true
 
-  '@pagefind/linux-x64@1.5.0-beta.1':
+  '@pagefind/linux-x64@1.5.2':
     optional: true
 
-  '@pagefind/windows-x64@1.5.0-beta.1':
+  '@pagefind/windows-arm64@1.5.2':
+    optional: true
+
+  '@pagefind/windows-x64@1.5.2':
     optional: true
 
   '@phosphor-icons/react@2.1.10(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
@@ -9039,7 +9100,7 @@ snapshots:
     dependencies:
       react-is: 16.13.1
 
-  hono@4.12.12: {}
+  hono@4.12.14: {}
 
   html-encoding-sniffer@4.0.0:
     dependencies:
@@ -10092,14 +10153,15 @@ snapshots:
 
   package-manager-detector@1.6.0: {}
 
-  pagefind@1.5.0-beta.1:
+  pagefind@1.5.2:
     optionalDependencies:
-      '@pagefind/darwin-arm64': 1.5.0-beta.1
-      '@pagefind/darwin-x64': 1.5.0-beta.1
-      '@pagefind/freebsd-x64': 1.5.0-beta.1
-      '@pagefind/linux-arm64': 1.5.0-beta.1
-      '@pagefind/linux-x64': 1.5.0-beta.1
-      '@pagefind/windows-x64': 1.5.0-beta.1
+      '@pagefind/darwin-arm64': 1.5.2
+      '@pagefind/darwin-x64': 1.5.2
+      '@pagefind/freebsd-x64': 1.5.2
+      '@pagefind/linux-arm64': 1.5.2
+      '@pagefind/linux-x64': 1.5.2
+      '@pagefind/windows-arm64': 1.5.2
+      '@pagefind/windows-x64': 1.5.2
 
   parent-module@1.0.1:
     dependencies:
@@ -10475,6 +10537,8 @@ snapshots:
       - supports-color
 
   requires-port@1.0.0: {}
+
+  reselect@5.1.1: {}
 
   resolve-from@4.0.0: {}
 
@@ -11083,12 +11147,13 @@ snapshots:
 
   zod@4.3.6: {}
 
-  zudoku@0.75.0(@sentry/react@10.46.0(react@19.2.4))(@types/json-schema@7.0.15)(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(mermaid@11.13.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(use-sync-external-store@1.6.0(react@19.2.4)):
+  zudoku@0.75.1(@sentry/react@10.46.0(react@19.2.4))(@types/json-schema@7.0.15)(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(mermaid@11.13.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(use-sync-external-store@1.6.0(react@19.2.4)):
     dependencies:
       '@apidevtools/json-schema-ref-parser': 15.3.1(@types/json-schema@7.0.15)
+      '@base-ui/react': 1.4.1(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@envelop/core': 5.5.1
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.13.2)
-      '@hono/node-server': 1.19.13(hono@4.12.12)
+      '@hono/node-server': 1.19.13(hono@4.12.14)
       '@lekoarts/rehype-meta-as-attributes': 3.0.3
       '@mdx-js/react': 3.1.1(@types/react@19.2.14)(react@19.2.4)
       '@mdx-js/rollup': 3.1.1(rollup@4.59.0)
@@ -11153,7 +11218,7 @@ snapshots:
       hast-util-heading-rank: 3.0.0
       hast-util-to-jsx-runtime: 2.3.6
       hast-util-to-string: 3.0.1
-      hono: 4.12.12
+      hono: 4.12.14
       http-terminator: 3.2.0
       javascript-stringify: 2.1.0
       json-schema-to-typescript-lite: 15.0.0
@@ -11168,7 +11233,7 @@ snapshots:
       next-themes: 0.4.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       oauth4webapi: 3.8.5
       openapi-types: 12.1.3
-      pagefind: 1.5.0-beta.1
+      pagefind: 1.5.2
       picocolors: 1.1.1
       piscina: 5.1.4
       posthog-node: 5.26.0
@@ -11209,9 +11274,11 @@ snapshots:
       '@sentry/react': 10.46.0(react@19.2.4)
       mermaid: 11.13.0
     transitivePeerDependencies:
+      - '@date-fns/tz'
       - '@emotion/is-prop-valid'
       - '@types/json-schema'
       - '@types/node'
+      - date-fns
       - immer
       - jiti
       - less
