@@ -3,14 +3,10 @@ title: API Keys Overview
 sidebar_label: Overview
 ---
 
-Zuplo allows developers to rapidly add API key based authentication to an API in
-minutes. There are several benefits to using Zuplo's API Key solution including
-
-- adheres to
-  [best practices of API Key implementation](https://zuplo.com/blog/2022/12/01/api-key-authentication)
-- includes [API Key Leak Detection & Notification](./api-key-leak-detection.mdx)
-- offers [out of the box and customizable solutions](./api-key-end-users.mdx)
-  for sharing API Keys
+Zuplo provides a fully managed API key authentication system that you can add to
+your API in minutes. Every key is validated at the edge across 300+ data
+centers, so authentication is fast for your consumers and offloads work from
+your backend.
 
 :::tip
 
@@ -19,30 +15,88 @@ To start using Zuplo API Keys in only a few minutes
 
 :::
 
-## Fully Managed API Key Solution
+## Why API keys?
 
-Zuplo builds and manages a global API Key solution that can handle millions (or
-billions) of API Keys and a virtually unlimited throughput to scale to the most
-demanding services.
+API keys are the standard authentication method for API-first companies like
+Stripe, Twilio, and SendGrid. They are the right choice when you need to
+authenticate an organization, system, or service rather than an individual user
+acting on their own behalf (which is where OAuth excels).
 
-The service handles global replication of API Keys allowing your end users to be
-authenticated to your API key with minimal latency. Keys are replicated around
-the world in only a few seconds. Similarly, when keys are revoked or deleted,
-the change replicates in seconds so that your API isn't open to unauthorized
-access.
+Compared to JWT-based auth, API keys offer simpler developer experience — a
+single string in a header, easy to test with curl, and no token refresh flow.
+API keys are opaque, meaning they don't leak claim structure the way a decoded
+JWT does. And because each key maps to a consumer identity in Zuplo, you can
+revoke access instantly — you don't need to wait for a token to expire.
 
-## API Key Authentication at the Edge
+For a deeper comparison, see the Zuplo blog post on
+[API key authentication best practices](https://zuplo.com/blog/api-key-authentication).
 
-Using Zuplo's API Key Authentication policy, your API is secured from
-unauthorized access. Authorization checks happen at the edge in 300+ data
-centers around the world. This keeps load off your backend and keeps your API
-fast for your end-users.
+## What you get with Zuplo API keys
 
-Zuplo manages all the complexity of replication, caching, and verifying your API
-keys so you don't have to.
+- **Thoughtful key format** — keys use a `zpka_` prefix, cryptographically
+  random body, and checksum signature. The prefix enables
+  [GitHub secret scanning](./api-key-leak-detection.mdx), the checksum allows
+  instant format validation without a database call, and the underscore
+  formatting means a double-click selects the entire key. See
+  [API key format](../concepts/api-keys.md#api-key-format) for the full
+  breakdown.
+- **Leak detection** — Zuplo is a
+  [GitHub secret scanning partner](./api-key-leak-detection.mdx). If a key is
+  committed to any GitHub repository, you are notified immediately.
+- **Self-serve key management** — give your API consumers a
+  [developer portal](./api-key-end-users.mdx) where they can create, view, roll,
+  and revoke their own keys.
+- **Edge validation** — keys are validated at the edge, keeping latency low and
+  your backend protected. See
+  [how validation works](../concepts/api-keys.md#how-validation-works) for
+  details on caching and replication.
+- **Key rotation with transition periods** — the
+  [roll-key API](./api-key-api.mdx#roll-a-consumers-keys) creates a new key and
+  sets an expiration on existing keys, so consumers have time to migrate without
+  downtime.
 
-Adding API Key authentication using Zuplo takes only a few minutes.
-[See the quickstart to get started](../articles/step-3-add-api-key-auth.mdx).
+## Fully managed global infrastructure
+
+Zuplo builds and manages the API key infrastructure so you don't have to. The
+service handles key storage, global replication, edge caching, and validation at
+scale — supporting millions of keys and virtually unlimited throughput.
+
+Keys replicate around the world in seconds. When a key is created, revoked, or
+deleted, the change propagates to all 300+ edge locations within seconds,
+ensuring your API is never open to unauthorized access for longer than the
+configured cache TTL.
+
+## How authentication works
+
+When a request arrives at Zuplo with an API key, the
+[API Key Authentication policy](../policies/api-key-inbound.mdx) validates it
+through a multi-step process:
+
+1. **Format check** — the key is checked for the correct `zpka_` prefix and
+   structure. Malformed keys are rejected immediately without any network call.
+2. **Checksum validation** — the key's built-in checksum signature is verified.
+   This catches typos and garbage keys in microseconds.
+3. **Cache lookup** — the edge checks its local cache for this key. If the key
+   was recently validated (or recently rejected), the cached result is used.
+4. **Key service lookup** — if the key isn't cached, Zuplo's globally
+   distributed key service is queried. The result is then cached for the
+   configured TTL (default 60 seconds).
+
+After successful validation, `request.user` is populated with the consumer's
+identity and metadata, which downstream policies and handlers can use for
+authorization, rate limiting, and routing. See
+[how validation works](../concepts/api-keys.md#how-validation-works) for more
+details.
+
+:::note
+
+The `cacheTtlSeconds` option on the API Key Authentication policy controls how
+long validation results are cached at each edge location. Higher values reduce
+latency but delay the effect of key revocation. A revoked key could still be
+accepted for up to `cacheTtlSeconds` after revocation. The default of 60 seconds
+is a good balance for most use cases.
+
+:::
 
 ## Key Concepts
 
@@ -92,9 +146,9 @@ API Keys are the actual string value used to authenticate with an API. Unlike
 some other forms of bearer tokens, API Keys don't contain any actual data within
 the key itself.
 
-Zuplo API Keys are prefixed with the string `zpka_` followed by
-cryptographically random characters and a signature. While Zuplo's API Key
-management service supports custom key formats (enterprise plan required), the
-structured format our the key enables us to offer
-[key leak detection services](./api-key-leak-detection.mdx) to keep your API
-secure.
+Zuplo API Keys use a structured format: a `zpka_` prefix, a cryptographically
+random body, and a checksum signature. This format enables
+[leak detection via GitHub secret scanning](./api-key-leak-detection.mdx) and
+allows instant format validation without a database call. Zuplo's API Key
+management service also supports custom key formats (enterprise plan required),
+though custom formats lose leak detection support.

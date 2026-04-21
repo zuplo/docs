@@ -3,10 +3,15 @@ title: ZoneCache
 sidebar_label: ZoneCache
 ---
 
-The ZoneCache stores data in a shared cache. This cache is in the same zone (the
-same data center or cluster) as your API - it's not globally distributed, but
-rather designed to be low-latency. Common uses include caching configuration,
-session, or other data that needs to be frequently accessed with low latency.
+The ZoneCache stores data in a shared cache that is local to a single zone (data
+center or cluster). Each zone maintains its own independent cache — data written
+in one zone is not synchronized or replicated to other zones. If the same data
+is needed in multiple zones, it must be written to each zone's cache
+independently.
+
+This makes ZoneCache ideal for caching configuration, reference data, or
+expensive API responses to reduce latency. It is not suitable for transactional,
+OLTP-style workloads where consistency across locations matters.
 
 The ZoneCache can store any JSON serializable data. Each cached item has a
 time-to-live (TTL) after which it expires and is removed from the cache. Each
@@ -112,15 +117,22 @@ promise rejections.
 
 ## When to use ZoneCache
 
-Use ZoneCache when you need low-latency access to frequently used data that's
-stored in a single zone. It's ideal for caching configuration data, session
-information, or results from external API calls that are expensive or slow to
-retrieve.
+ZoneCache works well for:
 
-Avoid using ZoneCache for large datasets or data that needs to be globally
-distributed, as it's designed for small, simple objects within a single zone. It
-is also not suitable to be used as an OLTP to read/write important data, it's
-just a cache - very useful but not a database or key/value store.
+- **Configuration and reference data** — API keys, feature flags, routing rules,
+  or other config that changes infrequently
+- **Expensive API responses** — results from slow or rate-limited upstream
+  services
+- **Computed data** — pre-processed results that are costly to regenerate
+
+:::caution{title="Not a distributed data store"}
+
+ZoneCache is a per-zone cache with **no cross-zone synchronization**. A `put()`
+in one data center has no effect on the cache in any other data center. Do not
+use it as a database, key/value store, or for any OLTP-style read/write
+workload. It is not appropriate for data where global consistency matters.
+
+:::
 
 ## Limits
 

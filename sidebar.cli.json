@@ -1,4 +1,8 @@
 [
+  "cli/custom-domain-create",
+  "cli/custom-domain-delete",
+  "cli/custom-domain-list",
+  "cli/custom-domain-update",
   "cli/delete",
   "cli/deploy",
   "cli/dev",

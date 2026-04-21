@@ -69,18 +69,78 @@ authorization and routing. Keep it small.
 **Tags** are key-value pairs used only for management (querying, filtering,
 organizing consumers via the API). Tags are not sent to the runtime.
 
-## API key format and leak detection
+## When to use API keys
 
-Zuplo API keys use a structured format prefixed with `zpka_` followed by
-cryptographically random characters and a signature. This format enables
-automatic [leak detection](../articles/api-key-leak-detection.mdx): if one of
-your keys appears in a public GitHub repository, Zuplo sends an alert with the
-token and the URL where it was found.
+API keys are the right authentication method when you need to identify an
+organization, system, or service calling your API. Companies like Stripe,
+Twilio, and SendGrid use API keys because they offer a simple developer
+experience — a single string in a header, easy to test with curl, and no token
+refresh flow.
 
-Leak detection is enabled automatically for all keys using the standard format.
+Use API keys when:
 
-See [API Key Leak Detection](../articles/api-key-leak-detection.mdx) for
-details.
+- Your API consumers are developers integrating server-to-server
+- You want simple, low-friction authentication (no OAuth dance)
+- You need to identify and rate-limit individual consumers
+- You want instant revocation capability (unlike JWTs, which are valid until
+  expiry)
+
+Use OAuth or JWT when:
+
+- You need to authenticate on behalf of an individual end-user
+- Your use case requires delegated authorization with scoped permissions
+- You are building a user-facing login flow
+
+API keys and JWT/OAuth are not mutually exclusive. Many APIs use API keys for
+system-level access and OAuth for user-level actions.
+
+## API key format
+
+Zuplo API keys use a structured three-part format:
+
+```
+zpka_<random>_<checksum>
+```
+
+Each part serves a specific purpose:
+
+- **`zpka_` prefix** — identifies the string as a Zuplo API key. This enables
+  automated [leak detection](../articles/api-key-leak-detection.mdx) via GitHub
+  secret scanning (scanners match the prefix pattern), helps support teams
+  identify key types during debugging, and distinguishes Zuplo keys from other
+  credentials in logs and config files.
+- **Random body** — a cryptographically random string that serves as the actual
+  credential. This portion is generated using a secure random source and
+  provides the entropy that makes each key unique.
+- **Checksum signature** — a suffix that allows instant format validation. When
+  a request arrives, Zuplo can verify the checksum mathematically in
+  microseconds to confirm the key is structurally valid before making any
+  network call. This rejects typos, truncated keys, and garbage strings without
+  touching the database.
+
+The underscore separators are also intentional — they ensure that a double-click
+on the key in most text editors and terminals selects the entire string,
+reducing the chance of accidentally copying a partial key.
+
+### Leak detection
+
+This key format is what makes Zuplo an official
+[GitHub secret scanning partner](https://github.blog/changelog/2022-07-13-zuplo-is-now-a-github-secret-scanning-partner/).
+If a Zuplo API key is committed to any GitHub repository, GitHub detects it,
+verifies the checksum, and notifies Zuplo. You receive an alert with the token
+and the repository URL where it was found. Leak detection is enabled
+automatically for all keys using the standard format and is available to all
+customers, including free.
+
+See [API Key Leak Detection](../articles/api-key-leak-detection.mdx) for the
+full scan flow and recommended response actions.
+
+:::note
+
+Enterprise customers can use custom key formats, but custom formats do not
+support leak detection.
+
+:::
 
 ## Self-serve key management
 

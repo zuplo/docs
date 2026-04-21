@@ -277,6 +277,7 @@ const devPortalItems: Navigation = [
           ...item,
           items: [
             ...item.items,
+            "dev-portal/auth-provider-api-identities",
             "dev-portal/dev-portal-create-consumer-on-auth",
             "articles/rick-and-morty-api-developer-portal-example",
           ],
@@ -342,6 +343,7 @@ export const documentation: Navigation = [
       "concepts/authentication",
       "concepts/api-keys",
       "concepts/rate-limiting",
+      "concepts/api-errors",
       "articles/routing",
       "articles/policies",
       "articles/openapi",

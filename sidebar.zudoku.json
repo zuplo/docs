@@ -33,7 +33,22 @@
     "icon": "globe",
     "items": [
       "dev-portal/zudoku/configuration/api-reference",
-      "dev-portal/zudoku/configuration/api-catalog"
+      "dev-portal/zudoku/configuration/api-catalog",
+      {
+        "type": "category",
+        "label": "Supported Extensions",
+        "icon": "puzzle",
+        "items": [
+          "dev-portal/zudoku/openapi-extensions/x-mcp",
+          "dev-portal/zudoku/openapi-extensions/x-mcp-server",
+          "dev-portal/zudoku/openapi-extensions/x-code-samples",
+          "dev-portal/zudoku/openapi-extensions/x-tag-groups",
+          "dev-portal/zudoku/openapi-extensions/x-display-name",
+          "dev-portal/zudoku/openapi-extensions/x-zudoku-collapsed",
+          "dev-portal/zudoku/openapi-extensions/x-zudoku-collapsible",
+          "dev-portal/zudoku/openapi-extensions/x-zudoku-playground-enabled"
+        ]
+      }
     ]
   },
   {
@@ -42,6 +57,7 @@
     "icon": "lock",
     "items": [
       "dev-portal/zudoku/configuration/authentication",
+      "dev-portal/zudoku/configuration/oauth-security-schemes",
       "dev-portal/zudoku/configuration/protected-routes",
       {
         "type": "category",
@@ -51,6 +67,7 @@
           "dev-portal/zudoku/configuration/authentication-auth0",
           "dev-portal/zudoku/configuration/authentication-clerk",
           "dev-portal/zudoku/configuration/authentication-azure-ad",
+          "dev-portal/zudoku/configuration/authentication-openid",
           "dev-portal/zudoku/configuration/authentication-pingfederate",
           "dev-portal/zudoku/configuration/authentication-supabase",
           "dev-portal/zudoku/configuration/authentication-firebase"
@@ -77,6 +94,7 @@
       "dev-portal/zudoku/guides/mermaid",
       "dev-portal/zudoku/guides/using-multiple-apis",
       "dev-portal/zudoku/guides/navigation-rules",
+      "dev-portal/zudoku/guides/redirects",
       "dev-portal/zudoku/guides/transforming-examples",
       "dev-portal/zudoku/guides/processors"
     ]
