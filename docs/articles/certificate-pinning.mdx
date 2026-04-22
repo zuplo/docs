@@ -12,10 +12,10 @@ for services that use short-lived, automatically rotated certificates.
 
 :::warning
 
-Zuplo doesn't recommend certificate pinning for APIs running on Zuplo-managed
-custom domains. Certificates are issued for short periods and rotate
-automatically, which can break pinned clients without notice. This page
-documents the trade-offs and the options available if pinning is still required.
+Zuplo strongly discourages certificate pinning for APIs running on Zuplo-managed
+custom domains. Certificates are short-lived and rotate automatically on a
+schedule outside of your control, which can break pinned clients without
+warning.
 
 :::
 
@@ -35,122 +35,43 @@ Let's Encrypt and have the following properties:
 
 Because rotation is automatic and the exact schedule isn't under your control,
 any client that pins a specific certificate or public key can stop working at
-any time. For most production APIs, this risk outweighs the marginal security
-benefit pinning provides.
+any time. For most production APIs, this risk far outweighs the marginal
+security benefit pinning provides.
 
 ## Recommended alternatives
 
 If you or your clients are concerned about man-in-the-middle attacks or
-unauthorized certificate issuance, consider these alternatives before
-implementing certificate pinning:
+unauthorized certificate issuance, use these alternatives instead of pinning:
 
-### HSTS headers
+- **[HTTP Strict Transport Security (HSTS)](https://https.cio.gov/hsts/)** to
+  force HTTPS and prevent protocol downgrade attacks.
+- **[CAA DNS records](./custom-domains.mdx#caa-records)** to restrict which
+  certificate authorities can issue certificates for your domain.
+- **[mTLS between the gateway and your backend](./securing-backend-mtls.mdx)**
+  to establish a strong trust boundary on the origin connection.
 
-[HTTP Strict Transport Security (HSTS)](https://https.cio.gov/hsts/) instructs
-browsers and HTTP clients to only connect to your domain over HTTPS. This
-protects against protocol downgrade attacks without requiring clients to track
-certificate rotation.
+## If a client insists on pinning
 
-### CAA records
+Pinning is strongly discouraged, but if a client application insists on it, they
+can self-serve. The public portion of the certificate is returned on every TLS
+handshake, so anyone connecting to your domain can retrieve it using standard
+tools like `openssl` or `curl`. Zuplo doesn't need to send the certificate and
+has no record of who has downloaded it.
 
-[Certification Authority Authorization (CAA)](https://datatracker.ietf.org/doc/html/rfc8659)
-DNS records restrict which certificate authorities are allowed to issue
-certificates for your domain. Add the records matching the authority Zuplo uses
-for your domain:
+If a client goes down this path, they should be aware that:
 
-```txt
-# CAA records for Let's Encrypt
-0 issue "letsencrypt.org"
-0 issuewild "letsencrypt.org"
-
-# CAA records for Google Trust Services
-0 issue "pki.goog; cansignhttpexchanges=yes"
-0 issuewild "pki.goog; cansignhttpexchanges=yes"
-```
-
-See the [Custom Domains CAA Records section](./custom-domains.mdx#caa-records)
-for more detail.
-
-### mTLS between gateway and backend
-
-If the goal is to establish a strong trust boundary between Zuplo and your
-backend service, use [mTLS authentication](./securing-backend-mtls.mdx) rather
-than pinning the public-facing certificate.
-
-## Retrieving the current certificate
-
-Zuplo doesn't need to send you the certificate. The public portion of any TLS
-certificate is served during every TLS handshake, so any client connecting to
-your domain can download it directly.
-
-:::note
-
-Only the public portion of the certificate (or its public key) is needed for
-pinning. Never ask Zuplo or anyone else to share the private key. Zuplo doesn't
-log or track certificate downloads, since retrieving the public certificate is
-part of every normal TLS handshake.
-
-:::
-
-### Extract the Subject Public Key Info (SPKI) pin
-
-Most modern pinning implementations (including HTTP Public Key Pinning
-replacements and mobile platform APIs) pin the SHA-256 hash of the **Subject
-Public Key Info** rather than the full certificate. SPKI pins survive
-certificate reissuance as long as the same key pair is used.
-
-```bash
-openssl s_client -connect api.example.com:443 -servername api.example.com </dev/null 2>/dev/null \
-  | openssl x509 -pubkey -noout \
-  | openssl pkey -pubin -outform der \
-  | openssl dgst -sha256 -binary \
-  | openssl enc -base64
-```
-
-### Extract a full certificate pin
-
-If your client pins the full certificate fingerprint, use:
-
-```bash
-openssl s_client -connect api.example.com:443 -servername api.example.com </dev/null 2>/dev/null \
-  | openssl x509 -outform der \
-  | openssl dgst -sha256 -binary \
-  | openssl enc -base64
-```
-
-### Download the certificate in PEM format
-
-To save the public certificate to a file:
-
-```bash
-openssl s_client -connect api.example.com:443 -servername api.example.com </dev/null 2>/dev/null \
-  | openssl x509 -outform pem > api.example.com.pem
-```
-
-Replace `api.example.com` with your own custom domain.
-
-## If you must pin
-
-If pinning is a hard requirement that can't be removed, follow these guidelines
-to reduce the risk of outages:
-
-- **Pin the SPKI, not the full certificate.** The public key can remain stable
-  across certificate renewals, while the certificate itself always changes on
-  rotation.
-- **Pin a backup key.** Most pinning libraries support multiple pins so you can
-  rotate keys without breaking clients.
-- **Monitor for certificate changes.** Set up automated monitoring that polls
-  the certificate fingerprint on a schedule and alerts when it changes so you
-  can react before clients break.
-- **Ship a kill switch.** Build a mechanism into your client to disable or
-  update pins remotely in case of an unexpected rotation.
+- Certificates rotate automatically and can change at any time.
+- Pinning the Subject Public Key Info (SPKI) hash is more resilient than pinning
+  the full certificate, but still not guaranteed to survive rotation.
+- The client is responsible for monitoring the certificate and updating their
+  pins before the next rotation breaks their application.
 
 ## Using your own long-lived SSL certificate
 
-If you need full control over the certificate rotation schedule so that pinning
-is viable, the only option is to supply your own SSL certificate for your domain
-and have Zuplo install it. Contact [support@zuplo.com](mailto:support@zuplo.com)
-to arrange this.
+If you truly need full control over certificate rotation, the only supported
+option is to supply your own SSL certificate for your domain and have Zuplo
+install it. Contact [support@zuplo.com](mailto:support@zuplo.com) to arrange
+this.
 
 :::caution
 
