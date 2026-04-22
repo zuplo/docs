@@ -747,7 +747,11 @@ export const documentation: Navigation = [
       {
         type: "category",
         label: "Custom Domains",
-        items: ["articles/custom-domains", "articles/fastly-zuplo-host-setup"],
+        items: [
+          "articles/custom-domains",
+          "articles/certificate-pinning",
+          "articles/fastly-zuplo-host-setup",
+        ],
       },
       {
         type: "category",
