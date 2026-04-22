@@ -1,0 +1,91 @@
+---
+title: Certificate Pinning
+sidebar_label: Certificate Pinning
+---
+
+Certificate pinning is a security technique where a client validates a server's
+TLS certificate against a known copy (or public key hash) stored locally in the
+client application. While this can mitigate certain classes of man-in-the-middle
+attacks, it's generally not recommended for modern APIs and is
+[especially problematic](https://scotthelme.co.uk/why-we-need-to-do-more-to-reduce-certificate-lifetimes/)
+for services that use short-lived, automatically rotated certificates.
+
+:::warning
+
+Zuplo strongly discourages certificate pinning for APIs running on Zuplo-managed
+custom domains. Certificates are short-lived and rotate automatically on a
+schedule outside of your control, which can break pinned clients without
+warning.
+
+:::
+
+## Why pinning is discouraged on Zuplo
+
+By default, Zuplo manages SSL certificates for your custom domain through
+Cloudflare. These certificates are issued by either Google Trust Services or
+Let's Encrypt and have the following properties:
+
+- Certificates are issued for **90 days**.
+- Certificates are automatically renewed approximately **30 days before
+  expiry**.
+- Rotation is **not guaranteed to follow a strict 90-day cadence**. Cloudflare
+  may rotate certificates earlier for security, operational, or infrastructure
+  reasons.
+- Rotation happens without advance notification to the gateway owner.
+
+Because rotation is automatic and the exact schedule isn't under your control,
+any client that pins a specific certificate or public key can stop working at
+any time. For most production APIs, this risk far outweighs the marginal
+security benefit pinning provides.
+
+## Recommended alternatives
+
+If you or your clients are concerned about man-in-the-middle attacks or
+unauthorized certificate issuance, use these alternatives instead of pinning:
+
+- **[HTTP Strict Transport Security (HSTS)](https://https.cio.gov/hsts/)** to
+  force HTTPS and prevent protocol downgrade attacks.
+- **[CAA DNS records](./custom-domains.mdx#caa-records)** to restrict which
+  certificate authorities can issue certificates for your domain.
+- **[mTLS between the gateway and your backend](./securing-backend-mtls.mdx)**
+  to establish a strong trust boundary on the origin connection.
+
+## If a client insists on pinning
+
+Pinning is strongly discouraged, but if a client application insists on it, they
+can self-serve. The public portion of the certificate is returned on every TLS
+handshake, so anyone connecting to your domain can retrieve it using standard
+tools like `openssl` or `curl`. Zuplo doesn't need to send the certificate and
+has no record of who has downloaded it.
+
+If a client goes down this path, they should be aware that:
+
+- Certificates rotate automatically and can change at any time.
+- Pinning the Subject Public Key Info (SPKI) hash is more resilient than pinning
+  the full certificate, but still not guaranteed to survive rotation.
+- The client is responsible for monitoring the certificate and updating their
+  pins before the next rotation breaks their application.
+
+## Using your own long-lived SSL certificate
+
+If you truly need full control over certificate rotation, the only supported
+option is to supply your own SSL certificate for your domain and have Zuplo
+install it. Contact [support@zuplo.com](mailto:support@zuplo.com) to arrange
+this.
+
+:::caution
+
+Using a custom, long-lived SSL certificate shifts all renewal responsibility to
+you. Expired certificates are a common cause of production outages. Before going
+down this path, verify that you have an established process for tracking
+expiration, renewing certificates ahead of time, and delivering the updated
+certificate to Zuplo.
+
+:::
+
+## Related documentation
+
+- [Custom Domains](./custom-domains.mdx)
+- [Managed SSL Certificates](./custom-domains.mdx#managed-ssl-certificates)
+- [mTLS Authentication](./securing-backend-mtls.mdx)
+- [Securing Your Backend](./securing-your-backend.mdx)
