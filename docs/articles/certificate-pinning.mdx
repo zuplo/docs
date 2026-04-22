@@ -28,8 +28,8 @@ Let's Encrypt and have the following properties:
 - Certificates are issued for **90 days**.
 - Certificates are automatically renewed approximately **30 days before
   expiry**.
-- Rotation is **not guaranteed to follow a strict 90-day cadence**. Cloudflare
-  may rotate certificates earlier for security, operational, or infrastructure
+- Rotation is **not guaranteed to follow a strict 90-day cadence**. We may
+  rotate certificates earlier for security, operational, or infrastructure
   reasons.
 - Rotation happens without advance notification to the gateway owner.
 
@@ -47,8 +47,6 @@ unauthorized certificate issuance, use these alternatives instead of pinning:
   force HTTPS and prevent protocol downgrade attacks.
 - **[CAA DNS records](./custom-domains.mdx#caa-records)** to restrict which
   certificate authorities can issue certificates for your domain.
-- **[mTLS between the gateway and your backend](./securing-backend-mtls.mdx)**
-  to establish a strong trust boundary on the origin connection.
 
 ## If a client insists on pinning
 
@@ -82,10 +80,3 @@ expiration, renewing certificates ahead of time, and delivering the updated
 certificate to Zuplo.
 
 :::
-
-## Related documentation
-
-- [Custom Domains](./custom-domains.mdx)
-- [Managed SSL Certificates](./custom-domains.mdx#managed-ssl-certificates)
-- [mTLS Authentication](./securing-backend-mtls.mdx)
-- [Securing Your Backend](./securing-your-backend.mdx)
