@@ -134,12 +134,12 @@ export async function getJwt(request: ZuploRequest, context: ZuploContext) {
 When the JWT Service Plugin is enabled, your Zuplo API acts as an identity
 provider with the following endpoints:
 
-- **Issuer URL**: `https://{deploymentName}.zuplo.com/__zuplo/issuer` (or your
+- **Issuer URL**: `https://{deploymentName}.zuplo.app/__zuplo/issuer` (or your
   custom domain if configured)
 - **OIDC Configuration**:
-  `https://{deploymentName}.zuplo.com/__zuplo/issuer/.well-known/openid-configuration`
+  `https://{deploymentName}.zuplo.app/__zuplo/issuer/.well-known/openid-configuration`
 - **JWKS Endpoint**:
-  `https://{deploymentName}.zuplo.com/__zuplo/issuer/.well-known/jwks.json`
+  `https://{deploymentName}.zuplo.app/__zuplo/issuer/.well-known/jwks.json`
 
 The OIDC configuration endpoint returns a standard OpenID Connect discovery
 document that includes the JWKS URI for retrieving the public keys used to
@@ -190,7 +190,7 @@ const jwt = require("jsonwebtoken");
 const jwksClient = require("jwks-rsa");
 
 // Replace with your actual Zuplo deployment name or custom domain
-const ISSUER = "https://my-api.zuplo.com/__zuplo/issuer";
+const ISSUER = "https://my-api.zuplo.app/__zuplo/issuer";
 
 // Create a JWKS client to fetch public keys
 const client = jwksClient({
@@ -259,7 +259,7 @@ app = FastAPI()
 security = HTTPBearer()
 
 # Replace with your actual Zuplo deployment name or custom domain
-ISSUER = "https://my-api.zuplo.com/__zuplo/issuer"
+ISSUER = "https://my-api.zuplo.app/__zuplo/issuer"
 JWKS_URL = f"{ISSUER}/.well-known/jwks.json"
 
 # Initialize JWKS client
@@ -314,8 +314,8 @@ ensure you are only allowing tokens from trusted issuers.
 import * as oauth from "oauth4webapi";
 
 const ALLOWED_ISSUERS = [
-  "https://my-api.zuplo.com/__zuplo/issuer",
-  "https://another-api.zuplo.com/__zuplo/issuer",
+  "https://my-api.zuplo.app/__zuplo/issuer",
+  "https://another-api.zuplo.app/__zuplo/issuer",
   // Add more allowed issuers as needed
 ];
 
