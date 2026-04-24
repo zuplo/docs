@@ -1,0 +1,199 @@
+---
+title: API Key Best Practices
+sidebar_label: Best Practices
+---
+
+A well-designed API key system handles much more than authentication. It covers
+key format, rotation, leak detection, caching, and the end-user experience. This
+guide covers the 8 practices that define a production-grade API key
+implementation and shows how each one works in Zuplo.
+
+If you have already decided that API keys are the right fit for your API, these
+are the practices that separate a production-grade implementation from a basic
+one.
+
+## 1. Use a structured, prefixed key format
+
+Key format is the foundation everything else in this guide builds on. Checksum
+validation, leak detection, and fast rejection all depend on a well-structured
+key.
+
+API keys should not be random strings with no structure. A good key format
+serves multiple purposes: identification, validation, and integration with
+security tooling.
+
+Zuplo API keys use the format `zpka_<random>_<checksum>`:
+
+- The **`zpka_` prefix** identifies the string as a Zuplo API key in logs,
+  config files, and security scans.
+- The **random body** provides the cryptographic entropy.
+- The **checksum suffix** enables instant format validation without a database
+  call.
+- **Underscore separators** allow double-click selection of the entire key in
+  most text editors and terminals. Keys that use hyphens, dots, or mixed
+  delimiters often result in partial selection, leading to accidental truncation
+  when copying.
+
+This structure means scanners, support teams, and automated tools can all
+identify and validate a Zuplo key on sight.
+
+See [API key format](../concepts/api-keys.md#api-key-format) for the full
+breakdown of each part.
+
+## 2. Enable checksum validation for fast rejection
+
+Building on the structured format, every API key request should go through a
+fast pre-check before touching any database or cache. If the key is malformed —
+a typo, a truncated copy-paste, or random garbage — it should be rejected in
+microseconds.
+
+Zuplo keys include a checksum signature that can be verified mathematically at
+the edge. This happens as part of the
+[validation flow](./api-key-management.mdx#how-authentication-works): the format
+and checksum are checked before any network call, rejecting invalid keys with
+near-zero cost.
+
+## 3. Support secret scanning and leak detection
+
+The structured prefix from practice 1 also enables automated leak detection. API
+keys inevitably end up in places they should not — committed to GitHub, pasted
+in Slack, logged in plaintext. A good key format makes automated detection
+possible.
+
+Zuplo is an official
+[GitHub secret scanning partner](https://github.blog/changelog/2022-07-13-zuplo-is-now-a-github-secret-scanning-partner/).
+When a `zpka_`-prefixed key is committed to any GitHub repository, GitHub
+detects it, verifies the checksum, and notifies Zuplo. You receive an alert with
+the repository URL where the key was found.
+
+This works because of the structured key format — the prefix provides a reliable
+regex pattern, and the checksum eliminates false positives. Leak detection is
+enabled automatically for all keys using the standard format and is available on
+all plans, including free.
+
+See [API Key Leak Detection](./api-key-leak-detection.mdx) for the full scan
+flow and recommended response actions.
+
+## 4. Support key rotation with transition periods
+
+Rotating an API key should not be an all-or-nothing event. Without a transition
+period, a routine key rotation becomes an incident — every system using the old
+key breaks simultaneously. A good rotation mechanism creates a new key while
+keeping the old one active for a defined grace period.
+
+Zuplo's [roll-key API](./api-key-api.mdx#roll-a-consumers-keys) does exactly
+this:
+
+1. Creates a new key with no expiration
+2. Sets an `expiresOn` date on existing keys that have no expiration
+
+This gives consumers time to update their integration before the old key stops
+working. The transition period is configurable — minutes for a leaked key
+response, days or weeks for routine rotation.
+
+Consumers can also manage rotation themselves by creating a second key,
+deploying it, verifying traffic, and then deleting the old key on their own
+schedule. Zuplo supports multiple active keys per consumer for this pattern.
+
+## 5. Use read-through caching at the edge
+
+Validating an API key on every request by hitting a central database adds
+latency and creates a single point of failure. A good system caches validation
+results close to the user.
+
+Zuplo validates API keys at the edge across 300+ data centers. After the first
+validation, the result is cached locally for the configured TTL (default 60
+seconds). Subsequent requests using the same key are served from cache with
+near-zero latency.
+
+The `cacheTtlSeconds` option on the
+[API Key Authentication policy](../policies/api-key-inbound.mdx) controls this
+trade-off:
+
+- **Higher values** reduce latency and database load but delay the effect of key
+  revocation.
+- **Lower values** make revocation faster but increase the frequency of key
+  service lookups.
+- **Default (60 seconds)** is a good balance for most use cases.
+
+Because validation results are cached at the edge, repeated requests with the
+same key — whether valid or invalid — are served from cache rather than hitting
+the key service on every call.
+
+## 6. Choose retrievable or irretrievable keys
+
+This is an architectural decision with security trade-offs in both directions.
+Irretrievable keys (shown once, stored as a hash) force consumers to save the
+key immediately, often in locations you don't control. Retrievable keys let
+consumers go back to the portal when they need the key again.
+
+**Zuplo keys are retrievable.** Consumers can view their keys in the developer
+portal or through the API. This reduces the support burden from lost keys and
+avoids pushing consumers toward insecure storage habits.
+
+For a deeper comparison, see
+[retrievable vs irretrievable keys](./when-to-use-api-keys.md#retrievable-vs-irretrievable-keys).
+
+## 7. Hide keys until needed in the UI
+
+Even with retrievable keys, the default display state should be masked. Keys
+should only be visible when the user explicitly asks to see them, and copying
+should be possible without revealing the key at all.
+
+The Zuplo Developer Portal follows this pattern — keys are masked by default,
+with explicit actions to reveal or copy.
+
+This protects against shoulder-surfing, screen recording, and accidental
+exposure in screenshots or screen shares.
+
+When building a custom integration with the
+[Zuplo Developer API](./api-key-self-serve-integration.mdx), use the
+`key-format=masked` parameter for list views and `key-format=visible` only
+behind an explicit reveal action.
+
+:::tip
+
+Advise your API consumers to store keys in environment variables or a secrets
+manager — never in source code or version control.
+
+:::
+
+## 8. Show key creation dates
+
+Consumers and administrators need to know when a key was created to make
+informed decisions about rotation. A key created three years ago with no
+rotation is a different risk profile than one created last week.
+
+Every Zuplo API key includes a `createdOn` timestamp that is visible in the
+portal, the developer portal, and through the API. This makes it easy to
+identify stale keys that should be rotated and to audit key age across your
+consumer base.
+
+## Putting it all together
+
+These 8 practices are not independent — they reinforce each other:
+
+- The **structured format** (practice 1) enables **checksum validation**
+  (practice 2) and **leak detection** (practice 3).
+- **Edge caching** (practice 5) makes the **checksum pre-check** (practice 2)
+  even faster by avoiding unnecessary cache lookups for malformed keys.
+- **Retrievable keys** (practice 6) combined with **masked display**
+  (practice 7) balance convenience with security.
+- **Rotation with transition periods** (practice 4) combined with **creation
+  dates** (practice 8) give teams the tools to manage key lifecycle without
+  downtime.
+
+Zuplo implements all 8 practices out of the box. There is no configuration
+needed to enable the key format, checksum validation, leak detection, or edge
+caching — they are built into the platform.
+
+## Next steps
+
+- [When to Use API Keys](./when-to-use-api-keys.md) — decide if API keys are the
+  right auth method for your API
+- [API Key Management Overview](./api-key-management.mdx) — get started with
+  Zuplo API keys
+- [Build Self-Serve API Key Management](./api-key-self-serve-integration.mdx) —
+  add key management to your own product
+- [API Key Leak Detection](./api-key-leak-detection.mdx) — how GitHub secret
+  scanning works with Zuplo keys

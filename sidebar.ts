@@ -438,10 +438,13 @@ export const documentation: Navigation = [
     icon: "key",
     items: [
       "articles/api-key-management",
+      "articles/when-to-use-api-keys",
+      "articles/api-key-best-practices",
       "articles/api-key-administration",
       "articles/api-key-authentication",
       "articles/api-key-end-users",
       "articles/api-key-api",
+      "articles/api-key-self-serve-integration",
       "articles/api-key-react-component",
       "articles/api-key-leak-detection",
       "articles/api-key-service-limits",

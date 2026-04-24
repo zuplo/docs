@@ -83,8 +83,23 @@ const MyComponent = () => {
 
 ## Backend API
 
-The API Key Manager component interacts with an API that allows authorized users
-to manage their own keys. The easiest way to get started is to use the
+The React component does not call the Zuplo Developer API directly. Instead, it
+talks to a backend API that you control — this backend authenticates the user
+with your own auth system, then proxies requests to the Zuplo Developer API
+using your Zuplo API key. This keeps your Zuplo credentials server-side and lets
+you enforce access control (for example, ensuring users can only manage keys for
+their own organization).
+
+The `<BASE_URL>` in the usage example above should point to this backend API.
+The `<ACCESS_TOKEN>` is your own auth token (session cookie, JWT, etc.) that
+your backend uses to identify the user.
+
+The easiest way to get started is to use the
 [Auth Translation API](https://github.com/zuplo/sample-auth-translation-api)
-sample and deploy it to [Zuplo](https://zuplo.com). By default this sample
-connects the [Zuplo API Key Management Service](./api-key-management.mdx).
+sample and deploy it to [Zuplo](https://zuplo.com). This sample provides the
+backend endpoints the component expects and connects to the
+[Zuplo API Key Management Service](./api-key-management.mdx) out of the box.
+
+For a full walkthrough of building this backend yourself (including the
+architecture, all API operations, and security considerations), see
+[Build Self-Serve API Key Management in Your Product](./api-key-self-serve-integration.mdx).

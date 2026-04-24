@@ -1,0 +1,444 @@
+---
+title: Build Self-Serve API Key Management in Your Product
+sidebar_label: Custom Integration
+---
+
+If you want your users to create, view, rotate, and delete API keys from within
+your own application rather than the Zuplo Developer Portal, you can build that
+experience using the [Zuplo Developer API](https://dev.zuplo.com/docs/). This
+guide walks through the architecture, the API operations you need, and the
+security considerations for a production integration.
+
+## Architecture
+
+A self-serve integration has three parts:
+
+1. **Your frontend** — the settings page or dashboard where users manage their
+   keys.
+2. **Your backend** — a server-side proxy that authenticates the user with your
+   own auth system, then calls the Zuplo Developer API on their behalf.
+3. **Zuplo Developer API** — the management API at `https://dev.zuplo.com` that
+   handles consumer and key CRUD operations.
+
+```
+User's browser  →  Your backend API (e.g., /api/keys)  →  Zuplo Developer API
+                    (auth + proxy)
+```
+
+The frontend calls API routes on your backend (for example, `/api/keys`), which
+authenticate the user and proxy the request to Zuplo. The frontend never
+communicates with the Zuplo Developer API directly.
+
+:::caution
+
+Never call the Zuplo Developer API directly from the browser. The API requires a
+Zuplo API key (a `Bearer` token) that grants full management access to your
+account's consumers and keys. Exposing it client-side would allow anyone to
+create, delete, or read keys for any consumer.
+
+:::
+
+Your backend acts as the security boundary. It verifies the user's identity
+using your own authentication (session cookie, JWT, etc.), determines which
+Zuplo consumer they map to, and proxies only the operations they are authorized
+to perform.
+
+## Prerequisites
+
+Before you start, you need:
+
+- A Zuplo project with the
+  [API Key Authentication policy](../policies/api-key-inbound.mdx) configured on
+  your routes.
+- A **Zuplo API key** for the Developer API. Create one in the Zuplo Portal
+  under **Settings > Zuplo API Keys**.
+  [More information](./accounts/zuplo-api-keys).
+- Your **account name** and **bucket name**. A bucket groups consumers for an
+  environment — each project has buckets for production, preview, and
+  development. Find these in the Zuplo Portal under **Settings > General**.
+- An application with server-side code and existing user authentication.
+
+All examples in this guide use these environment variables:
+
+```bash
+# Your Zuplo Account Name
+export ZUPLO_ACCOUNT=my-account
+# Your bucket name (found in Settings > General)
+export ZUPLO_BUCKET=my-bucket
+# Your Zuplo API Key (found in Settings > Zuplo API Keys)
+export ZUPLO_API_KEY=zpka_YOUR_API_KEY
+```
+
+## Mapping users to consumers
+
+A Zuplo **consumer** represents the identity behind one or more API keys. When a
+user in your application needs API access, you create a consumer for them in
+Zuplo.
+
+The consumer's `name` must be unique within the bucket and is used as
+`request.user.sub` when their key authenticates a request. A good pattern is to
+use a stable identifier from your system, such as `org_123` or `user_456`.
+
+Use **tags** to link the consumer back to your internal data. Tags are key-value
+pairs that you can filter on when listing or mutating consumers. For example,
+storing `orgId` as a tag lets you scope every API call to a specific
+organization, which is critical for [multi-tenant security](#secure-with-tags).
+
+Use **metadata** to store information that should be available at runtime when
+the key is used. This populates `request.user.data` and is commonly used for
+plan tiers, customer IDs, and feature flags.
+
+## Automating consumer creation on signup
+
+Rather than requiring users to manually request API access, create a Zuplo
+consumer as part of your signup or onboarding flow. When a new organization or
+user is created in your system, make a server-side call to create the consumer
+with the appropriate metadata and tags.
+
+Creating a consumer with a `name` that already exists returns a `409 Conflict`,
+so your backend should catch this response for retry safety (for example,
+treating 409 as a success if the consumer already belongs to the same user).
+
+If a consumer does not exist yet and you attempt to list its keys, the API
+returns a `404 Not Found`. Make sure your onboarding flow creates the consumer
+before your frontend tries to fetch keys.
+
+This is also the right place to sync billing information. For example, if a user
+upgrades their plan, update the consumer's metadata so that downstream policies
+and handlers see the new plan on the next authenticated request.
+
+## Core operations
+
+The following operations cover what most self-serve integrations need. Each
+section shows the API call your backend should make.
+
+:::note
+
+Consumers and API keys are subject to service limits. See
+[API Key Service Limits](./api-key-service-limits.mdx) for current maximums.
+
+:::
+
+### Create a consumer with an API key
+
+When a user requests API access for the first time, create a consumer and an
+initial API key in a single call by passing `?with-api-key=true`:
+
+```shell
+curl \
+  https://dev.zuplo.com/v1/accounts/$ZUPLO_ACCOUNT/key-buckets/$ZUPLO_BUCKET/consumers?with-api-key=true \
+  --request POST \
+  --header "Content-Type: application/json" \
+  --header "Authorization: Bearer $ZUPLO_API_KEY" \
+  --data @- << EOF
+{
+  "name": "org_123",
+  "description": "Acme Corp",
+  "metadata": {
+    "plan": "growth",
+    "customerId": "cust_abc"
+  },
+  "tags": {
+    "orgId": "org_123"
+  }
+}
+EOF
+```
+
+The response includes the consumer and an `apiKeys` array with the generated
+key:
+
+```json
+{
+  "id": "csmr_sikZcE754kJu17X8yahPFO8J",
+  "name": "org_123",
+  "description": "Acme Corp",
+  "createdOn": "2026-04-16T10:00:00.000Z",
+  "updatedOn": "2026-04-16T10:00:00.000Z",
+  "tags": { "orgId": "org_123" },
+  "metadata": { "plan": "growth", "customerId": "cust_abc" },
+  "apiKeys": [
+    {
+      "id": "key_AM7eAiR0BiaXTam951XmC9kK",
+      "createdOn": "2026-04-16T10:00:00.000Z",
+      "updatedOn": "2026-04-16T10:00:00.000Z",
+      "expiresOn": null,
+      "key": "zpka_d67b7e241bb948758f415b79aa8exxxx_2efbxxxx"
+    }
+  ]
+}
+```
+
+:::tip
+
+In production, include tags on every consumer you create and pass `tag.*` query
+parameters on every API call. This ensures proper ownership scoping. See
+[Secure with tags](#secure-with-tags) below for details.
+
+:::
+
+Display the `key` value to the user in your UI. Although Zuplo keys are
+retrievable, the standard UX pattern is to show the full key at creation time
+and display it masked on subsequent views.
+
+### List a consumer's API keys
+
+To render an "API Keys" page in your settings, fetch the consumer's keys:
+
+```shell
+curl \
+  https://dev.zuplo.com/v1/accounts/$ZUPLO_ACCOUNT/key-buckets/$ZUPLO_BUCKET/consumers/org_123/keys?key-format=masked \
+  --header "Authorization: Bearer $ZUPLO_API_KEY"
+```
+
+The `key-format` parameter controls how the key value appears in the response:
+
+- `masked` — returns a partially redacted key (e.g.,
+  `zpka_d67b...xxxx_2efbxxxx`). Use this for the default list view.
+- `visible` — returns the full key. Use this behind a "Reveal" button.
+- `none` — omits the key value entirely. Use this when you only need key
+  metadata (ID, dates, expiration).
+
+The response:
+
+```json
+{
+  "data": [
+    {
+      "id": "key_AM7eAiR0BiaXTam951XmC9kK",
+      "createdOn": "2026-04-16T10:00:00.000Z",
+      "updatedOn": "2026-04-16T10:00:00.000Z",
+      "expiresOn": null,
+      "key": "zpka_d67b...xxxx_2efbxxxx"
+    }
+  ]
+}
+```
+
+### Create an additional API key
+
+If a consumer needs more than one active key (for example, separate keys for
+staging and production), create a key directly:
+
+```shell
+curl \
+  https://dev.zuplo.com/v1/accounts/$ZUPLO_ACCOUNT/key-buckets/$ZUPLO_BUCKET/consumers/org_123/keys \
+  --request POST \
+  --header "Content-Type: application/json" \
+  --header "Authorization: Bearer $ZUPLO_API_KEY" \
+  --data '{"description": "Production key"}'
+```
+
+### Rotate a key
+
+Key rotation creates a new key and sets an expiration on existing keys, giving
+the user a transition period to switch over. Use the roll-key endpoint:
+
+```shell
+curl \
+  https://dev.zuplo.com/v1/accounts/$ZUPLO_ACCOUNT/key-buckets/$ZUPLO_BUCKET/consumers/org_123/roll-key \
+  --request POST \
+  --header "Content-Type: application/json" \
+  --header "Authorization: Bearer $ZUPLO_API_KEY" \
+  --data '{"expiresOn": "2026-04-19T00:00:00.000Z"}'
+```
+
+This sets `expiresOn` on **all** existing non-expired keys for that consumer and
+creates a new key with no expiration. If `expiresOn` is set to a date in the
+past, existing keys expire immediately — effectively an instant revocation with
+a new replacement key. In your UI, surface the transition period clearly — for
+example: "Your current key will remain active until April 19. Update your
+integration to use the new key before then."
+
+For guidance on choosing transition period lengths, see
+[choosing a transition period](./api-key-api.mdx#choosing-a-transition-period).
+
+### Delete a key
+
+To let users revoke a specific key immediately:
+
+```shell
+curl \
+  https://dev.zuplo.com/v1/accounts/$ZUPLO_ACCOUNT/key-buckets/$ZUPLO_BUCKET/consumers/org_123/keys/key_AM7eAiR0BiaXTam951XmC9kK \
+  --request DELETE \
+  --header "Authorization: Bearer $ZUPLO_API_KEY"
+```
+
+:::warning
+
+Key deletion is immediate and irreversible. Any request using that key will
+start receiving `401 Unauthorized` responses as soon as the edge cache expires
+(within [`cacheTtlSeconds`](../policies/api-key-inbound.mdx), default 60
+seconds). Surface a confirmation dialog in your UI before calling this endpoint.
+
+:::
+
+### Update consumer metadata
+
+When a user's plan changes or you need to update the information available at
+runtime, patch the consumer:
+
+```shell
+curl \
+  https://dev.zuplo.com/v1/accounts/$ZUPLO_ACCOUNT/key-buckets/$ZUPLO_BUCKET/consumers/org_123 \
+  --request PATCH \
+  --header "Content-Type: application/json" \
+  --header "Authorization: Bearer $ZUPLO_API_KEY" \
+  --data '{"metadata": {"plan": "enterprise", "customerId": "cust_abc"}}'
+```
+
+The updated metadata is available on the next request that authenticates with
+any of that consumer's keys (subject to cache TTL).
+
+## Secure with tags
+
+Tags are the primary mechanism for enforcing ownership in multi-tenant
+integrations. Most Zuplo Developer API endpoints accept `tag.*` query parameters
+that filter results and — critically — reject the request if the tag does not
+match.
+
+For example, if your backend knows the authenticated user belongs to `org_123`,
+append `?tag.orgId=org_123` to every call:
+
+```shell
+# List only consumers belonging to org_123
+curl \
+  "https://dev.zuplo.com/v1/accounts/$ZUPLO_ACCOUNT/key-buckets/$ZUPLO_BUCKET/consumers?tag.orgId=org_123&include-api-keys=true&key-format=masked" \
+  --header "Authorization: Bearer $ZUPLO_API_KEY"
+
+# Delete a consumer — fails if the consumer doesn't have tag orgId=org_123
+curl \
+  "https://dev.zuplo.com/v1/accounts/$ZUPLO_ACCOUNT/key-buckets/$ZUPLO_BUCKET/consumers/org_123?tag.orgId=org_123" \
+  --request DELETE \
+  --header "Authorization: Bearer $ZUPLO_API_KEY"
+```
+
+This prevents one user from operating on another user's consumers, even if they
+somehow obtain a valid consumer name. Your backend should always derive the tag
+value from the authenticated session — never from the request body or query
+string sent by the frontend.
+
+## Backend implementation example
+
+Here is a minimal Express.js example showing how to proxy key operations through
+your backend. Adapt this pattern to your framework and language.
+
+```typescript
+import express from "express";
+
+const app = express();
+app.use(express.json());
+
+const ZUPLO_BASE = "https://dev.zuplo.com/v1/accounts";
+const ZUPLO_ACCOUNT = process.env.ZUPLO_ACCOUNT;
+const ZUPLO_BUCKET = process.env.ZUPLO_BUCKET;
+const ZUPLO_API_KEY = process.env.ZUPLO_API_KEY;
+
+// TODO: Replace with your real auth middleware
+function getAuthenticatedOrg(req: express.Request): string | null {
+  // Example: extract the org ID from a verified JWT set by your auth middleware.
+  // In a real app, req.auth is populated by middleware like express-jwt or
+  // passport after verifying the token signature and expiration.
+  const auth = (req as any).auth;
+  return auth?.orgId ?? null;
+}
+
+// List keys for the authenticated user's consumer
+app.get("/api/keys", async (req, res) => {
+  const orgId = getAuthenticatedOrg(req);
+  if (!orgId) return res.status(401).json({ error: "Unauthorized" });
+
+  const response = await fetch(
+    `${ZUPLO_BASE}/${ZUPLO_ACCOUNT}/key-buckets/${ZUPLO_BUCKET}/consumers/${orgId}/keys?key-format=masked`,
+    {
+      headers: { Authorization: `Bearer ${ZUPLO_API_KEY}` },
+    },
+  );
+
+  res.status(response.status).json(await response.json());
+});
+
+// Create a new key for the authenticated user's consumer
+app.post("/api/keys", async (req, res) => {
+  const orgId = getAuthenticatedOrg(req);
+  if (!orgId) return res.status(401).json({ error: "Unauthorized" });
+
+  const response = await fetch(
+    `${ZUPLO_BASE}/${ZUPLO_ACCOUNT}/key-buckets/${ZUPLO_BUCKET}/consumers/${orgId}/keys`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${ZUPLO_API_KEY}`,
+      },
+      body: JSON.stringify({ description: req.body.description }),
+    },
+  );
+
+  res.status(response.status).json(await response.json());
+});
+
+// Rotate keys for the authenticated user's consumer
+app.post("/api/keys/rotate", async (req, res) => {
+  const orgId = getAuthenticatedOrg(req);
+  if (!orgId) return res.status(401).json({ error: "Unauthorized" });
+
+  const response = await fetch(
+    `${ZUPLO_BASE}/${ZUPLO_ACCOUNT}/key-buckets/${ZUPLO_BUCKET}/consumers/${orgId}/roll-key?tag.orgId=${orgId}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${ZUPLO_API_KEY}`,
+      },
+      body: JSON.stringify({ expiresOn: req.body.expiresOn }),
+    },
+  );
+
+  res.status(response.status).json(await response.json());
+});
+
+// Delete a specific key
+app.delete("/api/keys/:keyId", async (req, res) => {
+  const orgId = getAuthenticatedOrg(req);
+  if (!orgId) return res.status(401).json({ error: "Unauthorized" });
+
+  const response = await fetch(
+    `${ZUPLO_BASE}/${ZUPLO_ACCOUNT}/key-buckets/${ZUPLO_BUCKET}/consumers/${orgId}/keys/${req.params.keyId}?tag.orgId=${orgId}`,
+    {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${ZUPLO_API_KEY}` },
+    },
+  );
+
+  res.sendStatus(response.status);
+});
+```
+
+:::note
+
+This example omits error handling for brevity. In production, handle these key
+error responses from the Zuplo Developer API: `404` (consumer or key not found),
+`409` (consumer name already exists), and `429` (rate limited). See the
+[Zuplo Developer API documentation](https://dev.zuplo.com/docs/) for full
+details on error responses.
+
+:::
+
+## Integration options
+
+Depending on how much control you need, there are several ways to integrate:
+
+| Approach                                          | Effort | Control | Best for                          |
+| ------------------------------------------------- | ------ | ------- | --------------------------------- |
+| [Zuplo Developer Portal](./api-key-end-users.mdx) | None   | Low     | Teams that don't need a custom UI |
+| Custom UI with the Developer API (this guide)     | Medium | Full    | Any stack, full control over UX   |
+
+## Next steps
+
+- [API Key API reference](./api-key-api.mdx) — additional API operations
+  including querying consumers by tags and bulk key creation.
+- [Zuplo Developer API documentation](https://dev.zuplo.com/docs/) — full
+  endpoint reference for all consumer, key, bucket, and manager operations.
+- [API Key Authentication policy](../policies/api-key-inbound.mdx) — configure
+  how keys are validated on your routes.
