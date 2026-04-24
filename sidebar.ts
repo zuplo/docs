@@ -393,6 +393,7 @@ export const documentation: Navigation = [
           "guides/canary-routing-for-employees",
           "guides/geolocation-backend-routing",
           "guides/user-based-backend-routing",
+          "guides/transform-route-params-url-rewrite",
           "articles/bypass-policy-for-testing",
           "articles/testing-graphql",
           "articles/health-checks",
