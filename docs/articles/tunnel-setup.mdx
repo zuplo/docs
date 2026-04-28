@@ -22,6 +22,26 @@ A tunnel is a way to expose your _internal services_ to the Zuplo gateway
 without exposing it to the public internet. Your Zuplo Gateway accesses those
 services through the `service://` protocol.
 
+## Create the tunnel
+
+Before you deploy the tunnel container, create the tunnel in Zuplo using the
+CLI. This gives you the tunnel record in your account and the token that you
+will later provide to the container as `TUNNEL_TOKEN`.
+
+```bash
+zuplo tunnel create --tunnel-name <your-tunnel-name>
+zuplo tunnel list
+zuplo tunnel describe --tunnel-id <your-tunnel-id>
+```
+
+Use these commands as follows:
+
+1. Run `zuplo tunnel create` to create the tunnel.
+1. Run `zuplo tunnel list` to see the tunnels in your account and identify the
+   tunnel ID if you need it.
+1. Run `zuplo tunnel describe` with the tunnel ID to retrieve the tunnel details
+   and copy the token value you will use for `TUNNEL_TOKEN`.
+
 The easiest way to deploy your tunnel is using a Docker container. The three
 basic requirements for deploying a secure tunnel with Docker are:
 
