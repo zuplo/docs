@@ -54,13 +54,15 @@ Connect with a Stripe **test** key (`sk_test_...`) first to validate your
 configuration end-to-end. Test mode uses Stripe's test card numbers (e.g.,
 `4242 4242 4242 4242`) and never charges real money.
 
-When you're ready to go live, update to your live key (`sk_live_...`).
+When you're ready to go live, configure a separate Zuplo environment (e.g.,
+**Production**) with your live key (`sk_live_...`).
 
 :::caution
 
-Always use your Stripe **test** key while developing. Test mode and live mode
-are separate environments in Stripe. Products, customers, and subscriptions
-don't transfer between them.
+Use one Stripe key type per Zuplo environment — do not replace a test key with a
+live key in the same environment. Test mode and live mode are separate
+environments in Stripe. Products, customers, and subscriptions created in test
+mode don't transfer to live mode and vice versa.
 
 :::
 

@@ -84,7 +84,8 @@ Add the monetization plugin to your Developer Portal configuration.
 ## Step 3: Configure the Monetization Service
 
 1. Navigate to the **Services** tab in your project.
-2. Select the environment you want to configure (e.g., **Working Copy**).
+2. Select the environment you want to configure. We will use **Working Copy**
+   for this quickstart.
 3. Click **Configure** on the **Monetization Service** card.
 
 ## Step 4: Create a meter
@@ -243,10 +244,13 @@ charges.
 
 :::warning
 
-Always use your Stripe **test** key (`sk_test_...`) while following this guide.
-This creates a sandbox environment where you can safely test subscriptions and
-payments without processing real transactions. When you're ready for production,
-update to your live key (`sk_live_...`).
+Always use your Stripe **test** key (`sk_test_...`) in the **Working Copy**
+environment while following this guide. Stripe test keys run in a sandbox
+environment where you can safely test subscriptions and payments without
+processing real transactions. When you're ready for production, configure the
+**Production** environment with a live key (`sk_live_...`). Do not replace a
+test key with a live key in the same environment — use one key type per
+environment.
 
 :::
 
