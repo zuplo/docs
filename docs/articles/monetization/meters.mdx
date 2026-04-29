@@ -35,9 +35,9 @@ Track the total number of API requests:
 
 ```json
 {
-  "slug": "requests",
+  "slug": "api_requests",
   "name": "API Requests",
-  "eventType": "requests",
+  "eventType": "api_requests",
   "aggregation": "SUM",
   "valueProperty": "$.total"
 }
@@ -50,7 +50,7 @@ Each event contains the `subscription` ID linking it to a subscription and a
 {
   "id": "5c10fade-1c9e-4d6c-8275-c52c36731d3c",
   "specversion": "1.0",
-  "type": "requests",
+  "type": "api_requests",
   "source": "monetization-policy",
   "subject": "customer-id",
   "subscription": "01KNVXHQG356VA7T7W0V9N21GH",
@@ -142,9 +142,9 @@ curl \
   --header "Content-Type: application/json" \
   --data @- << EOF
 {
-  "slug": "requests",
+  "slug": "api_requests",
   "name": "API Requests",
-  "eventType": "requests",
+  "eventType": "api_requests",
   "aggregation": "SUM",
   "valueProperty": "$.total"
 }
