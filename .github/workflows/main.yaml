@@ -45,7 +45,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
         env:
-          NODE_OPTIONS: --max-old-space-size=6144
+          NODE_OPTIONS: --max-old-space-size=8192
       - id: "auth"
         name: "Authenticate to Google Cloud"
         uses: "google-github-actions/auth@v3"
@@ -127,7 +127,7 @@ jobs:
 
       - run: pnpm run build
         env:
-          NODE_OPTIONS: --max-old-space-size=6144
+          NODE_OPTIONS: --max-old-space-size=8192
 
       - name: Restore lychee cache
         id: cache-lychee

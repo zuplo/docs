@@ -21,15 +21,25 @@ The API key system has three core objects:
   metadata.
 
 See [API Key Management](../articles/api-key-management.mdx) for a full
-overview, and [API Key Administration](../articles/api-key-administration.mdx)
-for managing consumers in the portal.
+overview, and
+[Manage Keys in the Portal](../articles/api-key-administration.mdx) for managing
+consumers in the portal.
 
 ## How validation works
 
 When a request includes an API key, the
 [API Key Authentication](../policies/api-key-inbound.mdx) policy validates it
-against Zuplo's globally distributed key service. Validation happens at the edge
-in 300+ data centers, keeping latency low and load off your backend.
+through a multi-step process at the edge in 300+ data centers:
+
+1. **Format check** - the key is checked for the correct `zpka_` prefix and
+   structure. Malformed keys are rejected immediately without any network call.
+2. **Checksum validation** - the key's built-in checksum signature is verified.
+   This catches typos and garbage keys in microseconds.
+3. **Cache lookup** - the edge checks its local cache for this key. If the key
+   was recently validated (or recently rejected), the cached result is used.
+4. **Key service lookup** - if the key is not cached, Zuplo's globally
+   distributed key service is queried. The result is then cached for the
+   configured TTL (default 60 seconds).
 
 Key changes (creation, revocation, deletion) replicate globally in seconds.
 
@@ -41,6 +51,16 @@ After successful validation, the policy populates `request.user`:
 This lets downstream policies and handlers make authorization decisions, apply
 per-consumer [rate limits](./rate-limiting.md), or forward identity to your
 backend.
+
+:::note
+
+The `cacheTtlSeconds` option on the API Key Authentication policy controls how
+long validation results are cached at each edge location. Higher values reduce
+latency but delay the effect of key revocation. A revoked key could still be
+accepted for up to `cacheTtlSeconds` after revocation. The default of 60 seconds
+is a good balance for most use cases.
+
+:::
 
 See [Authentication](./authentication.mdx) for how `request.user` works across
 all auth methods, and [RequestUser](../programmable-api/request-user.mdx) for
@@ -74,7 +94,7 @@ organizing consumers via the API). Tags are not sent to the runtime.
 API keys are the right authentication method when you need to identify an
 organization, system, or service calling your API. Companies like Stripe,
 Twilio, and SendGrid use API keys because they offer a simple developer
-experience — a single string in a header, easy to test with curl, and no token
+experience - a single string in a header, easy to test with curl, and no token
 refresh flow.
 
 Use API keys when:
@@ -94,6 +114,10 @@ Use OAuth or JWT when:
 API keys and JWT/OAuth are not mutually exclusive. Many APIs use API keys for
 system-level access and OAuth for user-level actions.
 
+For a full comparison including a decision checklist and retrievable vs
+irretrievable keys, see
+[When to Use API Keys](../articles/when-to-use-api-keys.md).
+
 ## API key format
 
 Zuplo API keys use a structured three-part format:
@@ -104,21 +128,21 @@ zpka_<random>_<checksum>
 
 Each part serves a specific purpose:
 
-- **`zpka_` prefix** — identifies the string as a Zuplo API key. This enables
+- **`zpka_` prefix** - identifies the string as a Zuplo API key. This enables
   automated [leak detection](../articles/api-key-leak-detection.mdx) via GitHub
   secret scanning (scanners match the prefix pattern), helps support teams
   identify key types during debugging, and distinguishes Zuplo keys from other
   credentials in logs and config files.
-- **Random body** — a cryptographically random string that serves as the actual
+- **Random body** - a cryptographically random string that serves as the actual
   credential. This portion is generated using a secure random source and
   provides the entropy that makes each key unique.
-- **Checksum signature** — a suffix that allows instant format validation. When
+- **Checksum signature** - a suffix that allows instant format validation. When
   a request arrives, Zuplo can verify the checksum mathematically in
   microseconds to confirm the key is structurally valid before making any
   network call. This rejects typos, truncated keys, and garbage strings without
   touching the database.
 
-The underscore separators are also intentional — they ensure that a double-click
+The underscore separators are also intentional - they ensure that a double-click
 on the key in most text editors and terminals selects the entire string,
 reducing the chance of accidentally copying a partial key.
 
@@ -155,9 +179,6 @@ when a user signs in using
 [Auth0](../dev-portal/dev-portal-create-consumer-on-auth.mdx) or another
 identity provider.
 
-You can also embed the key management UI directly in your own application using
-the [API Key React Component](../articles/api-key-react-component.mdx).
-
 ## Buckets and environments
 
 Each project has separate buckets for production, preview, and working copy
@@ -187,20 +208,19 @@ See the [API Reference](/docs/api) for the complete endpoint documentation.
 
 ## Related documentation
 
-- [API Key Management](../articles/api-key-management.mdx) -- Overview and
+- [API Keys Overview](../articles/api-key-management.mdx) -- Overview and
   getting started
 - [API Key Authentication Policy](../policies/api-key-inbound.mdx) -- Policy
   configuration reference
-- [API Key Administration](../articles/api-key-administration.mdx) -- Managing
-  keys in the portal
-- [Using the API Key API](../articles/api-key-api.mdx) -- Programmatic
+- [Manage Keys in the Portal](../articles/api-key-administration.mdx) --
+  Managing keys in the portal
+- [Use the Developer API](../articles/api-key-api.mdx) -- Programmatic
   management
-- [End User Access](../articles/api-key-end-users.mdx) -- Self-serve in the
-  developer portal
-- [React Component](../articles/api-key-react-component.mdx) -- Embed key
-  management in your app
-- [Leak Detection](../articles/api-key-leak-detection.mdx) -- GitHub secret
-  scanning
-- [Buckets](../articles/api-key-buckets.mdx) -- Bucket configuration
-- [Service Limits](../articles/api-key-service-limits.mdx) -- Rate limits and
-  quotas
+- [Share Keys with End Users](../articles/api-key-end-users.mdx) -- Self-serve
+  in the developer portal
+- [API Key Leak Detection](../articles/api-key-leak-detection.mdx) -- GitHub
+  secret scanning
+- [Buckets and Environments](../articles/api-key-buckets.mdx) -- Bucket
+  configuration
+- [API Key Service Limits](../articles/api-key-service-limits.mdx) -- Rate
+  limits and quotas

@@ -1,6 +1,6 @@
 ---
-title: Using the API Key API
-sidebar_label: Using the API
+title: Use the Developer API
+sidebar_label: Developer API
 ---
 
 Zuplo runs a globally distributed API Key management service that scales to
@@ -12,6 +12,16 @@ Management of API Keys and consumers
 end-users in the Zuplo Developer Portal. However, all management operations
 regarding API Keys can also be performed using the
 [Zuplo Developer API](https://zuplo.com/docs/api/api-keys-keys).
+
+:::tip{title="Building API key management into your product?"}
+
+If you want to add self-serve API key creation, rotation, and deletion to your
+own application's UI, see
+[Build Self-Serve API Key Management in Your Product](./api-key-self-serve-integration.mdx)
+for a complete implementation guide with architecture, code examples, and
+security guidance.
+
+:::
 
 :::info
 
@@ -188,7 +198,7 @@ The response will look like this:
 
 Key rotation is a critical part of API key lifecycle management. Instant
 revocation of a key can break every system that depends on it, so Zuplo supports
-**rolling transitions** — creating a new key while keeping the old key active
+**rolling transitions** - creating a new key while keeping the old key active
 for a defined grace period.
 
 When you call the roll key endpoint, Zuplo:
@@ -204,13 +214,13 @@ old one stops working.
 The right `expiresOn` value depends on how quickly consumers can update their
 keys:
 
-- **Leaked key response** — set `expiresOn` to a past date or within minutes.
+- **Leaked key response** - set `expiresOn` to a past date or within minutes.
   Security incidents demand immediate action; a brief disruption is preferable
   to continued exposure.
-- **Routine rotation** — 24 to 72 hours gives most teams enough time to
+- **Routine rotation** - 24 to 72 hours gives most teams enough time to
   propagate the new key through CI/CD pipelines, environment variables, and
   secret managers.
-- **Scheduled rotation** — for large organizations, 7 to 14 days accommodates
+- **Scheduled rotation** - for large organizations, 7 to 14 days accommodates
   deploy freezes, multi-team coordination, and staged rollouts.
 
 :::tip{title="Multiple keys per consumer"}
