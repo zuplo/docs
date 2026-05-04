@@ -444,7 +444,6 @@ export const documentation: Navigation = [
       "articles/api-key-end-users",
       "articles/api-key-api",
       "articles/api-key-self-serve-integration",
-      "articles/api-key-react-component",
       "articles/api-key-leak-detection",
       "articles/api-key-service-limits",
       "articles/api-key-buckets",

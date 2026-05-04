@@ -15,8 +15,8 @@ creates friction for your consumers or security gaps in your API.
 |                          | API Keys                                                        | JWT (self-issued)                                                  | OAuth 2.0                                                        |
 | ------------------------ | --------------------------------------------------------------- | ------------------------------------------------------------------ | ---------------------------------------------------------------- |
 | **Identifies**           | An organization, system, or service                             | A user or service (claims embedded in token)                       | A user acting through a third-party app                          |
-| **Credential format**    | Opaque string — no embedded data                                | Encoded JSON with claims (readable by anyone)                      | Access token issued by an authorization server                   |
-| **Revocation**           | Instant — delete the key and it stops working                   | Not instant — valid until expiry (unless you maintain a blocklist) | Depends on token lifetime and refresh flow                       |
+| **Credential format**    | Opaque string - no embedded data                                | Encoded JSON with claims (readable by anyone)                      | Access token issued by an authorization server                   |
+| **Revocation**           | Instant - delete the key and it stops working                   | Not instant - valid until expiry (unless you maintain a blocklist) | Depends on token lifetime and refresh flow                       |
 | **Developer experience** | Single string in a header, works in curl                        | Requires token generation, sometimes a signing key                 | Requires redirect flow, client registration, token exchange      |
 | **Best for**             | Server-to-server integrations, developer platforms, public APIs | Internal service-to-service auth, short-lived sessions             | User-facing apps that need delegated access ("act on behalf of") |
 
@@ -31,20 +31,20 @@ intercepted in transit.
 ### When to use API keys
 
 API keys are the right choice when your API consumers are **organizations,
-services, or developers integrating server-to-server** — not individual
+services, or developers integrating server-to-server** - not individual
 end-users acting on their own behalf.
 
 This is why the most successful API-first companies use API keys:
 
-- **Stripe** — every API call uses an API key scoped to the organization
-- **Twilio** — Account SID + Auth Token (functionally an API key pair)
-- **SendGrid** — API keys with scoped permissions per key
-- **Datadog, Cloudflare, PagerDuty** — all use API keys for their public APIs
+- **Stripe** - every API call uses an API key scoped to the organization
+- **Twilio** - Account SID + Auth Token (functionally an API key pair)
+- **SendGrid** - API keys with scoped permissions per key
+- **Datadog, Cloudflare, PagerDuty** - all use API keys for their public APIs
 
 Use API keys when:
 
 - Your consumers are developers integrating with your API from their backend
-- You want the simplest possible developer experience — a single string, no
+- You want the simplest possible developer experience - a single string, no
   token refresh, works in curl
 - You need to identify and rate-limit individual consumers or organizations
 - You want the ability to revoke access instantly (unlike JWTs, which remain
@@ -65,7 +65,7 @@ from a browser or device.
 Use JWT or OAuth when:
 
 - You need to authenticate **on behalf of an individual end-user** (the redirect
-  and consent flow — often called the "OAuth dance" — exists for this reason)
+  and consent flow - often called the "OAuth dance" - exists for this reason)
 - Your use case requires **delegated authorization with scoped permissions**
   (e.g., "this app can read my repos but not delete them")
 - You are building a **user-facing login flow** where the user interacts with
@@ -77,7 +77,7 @@ Use JWT or OAuth when:
 | -------------------------------------------------------- | -------------------------------------- | --------------------------------------------- |
 | Are your consumers machines or backend services?         | API keys are a strong fit              | Consider OAuth for human users                |
 | Do you need delegated user consent ("act on behalf of")? | Use OAuth                              | API keys work well                            |
-| Do consumers need to refresh credentials periodically?   | OAuth handles this with refresh tokens | API keys are simpler — no refresh flow needed |
+| Do consumers need to refresh credentials periodically?   | OAuth handles this with refresh tokens | API keys are simpler - no refresh flow needed |
 
 ## Why API keys over JWTs for public APIs
 
@@ -101,7 +101,7 @@ measured in seconds.
 ### Opaque by design
 
 A JWT is a base64url-encoded JSON object. Anyone can decode it and see the
-claims inside — user IDs, email addresses, roles, org names. This is a feature
+claims inside - user IDs, email addresses, roles, org names. This is a feature
 when you need claims on the client side, but it is a liability when you are
 issuing credentials to third parties. Leaking a JWT leaks its contents.
 
@@ -112,11 +112,11 @@ Nothing is leaked if the key is intercepted, beyond the key itself.
 ### Instant revocation
 
 When you revoke a JWT, it remains valid until it expires. The only way to
-force-invalidate a JWT before expiry is to maintain a server-side blocklist —
+force-invalidate a JWT before expiry is to maintain a server-side blocklist -
 which eliminates the main advantage of JWTs (stateless validation).
 
 When you delete or expire an API key in Zuplo, the change propagates globally in
-seconds. A revoked key stops working as soon as edge caches refresh — within the
+seconds. A revoked key stops working as soon as edge caches refresh - within the
 configured `cacheTtlSeconds` (default 60 seconds). Compare this to a JWT with a
 15-minute or 1-hour expiry: there is no equivalent long expiry window to wait
 out.
@@ -127,7 +127,7 @@ With API keys, the identity is the key itself. Zuplo resolves the consumer on
 every request and populates `request.user` with the consumer's name and
 metadata. There is no token to decode, validate, or refresh.
 
-This makes downstream logic simpler — your handlers and policies always have a
+This makes downstream logic simpler - your handlers and policies always have a
 consistent `request.user.sub` and `request.user.data` regardless of which API
 key the consumer used.
 
@@ -144,13 +144,13 @@ hash).
 |                    | Retrievable                                            | Irretrievable                                            |
 | ------------------ | ------------------------------------------------------ | -------------------------------------------------------- |
 | **Examples**       | Twilio, Airtable                                       | Stripe, AWS                                              |
-| **After creation** | Consumer can view the key again in the portal          | Key is shown once — consumer must copy it immediately    |
-| **Storage**        | Key can be returned to authorized users                | Only a hash is stored — original key cannot be recovered |
+| **After creation** | Consumer can view the key again in the portal          | Key is shown once - consumer must copy it immediately    |
+| **Storage**        | Key can be returned to authorized users                | Only a hash is stored - original key cannot be recovered |
 | **Trade-off**      | More convenient; reduces support burden from lost keys | Forces immediate key storage discipline                  |
 
 The conventional wisdom is that irretrievable keys are more secure because they
 are never stored in plaintext. But this has a counterintuitive downside:
-**irretrievable keys force consumers to copy the key somewhere else** — often a
+**irretrievable keys force consumers to copy the key somewhere else** - often a
 password manager, a `.env` file, a Slack message, or a sticky note. The key
 still exists in plaintext, just in a location you don't control.
 
@@ -168,9 +168,9 @@ secrets.
 
 Many APIs use both. A common pattern:
 
-- **API keys** for system-level access — your customers' backends call your API
+- **API keys** for system-level access - your customers' backends call your API
   with an API key that identifies their organization
-- **OAuth** for user-level access — end-users authorize a third-party app to act
+- **OAuth** for user-level access - end-users authorize a third-party app to act
   on their behalf through your API
 
 Zuplo supports both patterns. You can apply
@@ -181,11 +181,11 @@ routes in the same project, or even
 
 ## Next steps
 
-- [API Key Management Overview](./api-key-management.mdx) — set up API key
+- [API Key Management Overview](./api-key-management.mdx) - set up API key
   authentication in minutes
-- [API Key Best Practices](./api-key-best-practices.mdx) — the 8 practices that
+- [API Key Best Practices](./api-key-best-practices.mdx) - the 8 practices that
   define a well-designed API key system
-- [API Key Authentication policy](../policies/api-key-inbound.mdx) — configure
+- [API Key Authentication policy](../policies/api-key-inbound.mdx) - configure
   the policy on your routes
-- [Authentication concepts](../concepts/authentication.mdx) — how all
+- [Authentication concepts](../concepts/authentication.mdx) - how all
   authentication methods work in Zuplo

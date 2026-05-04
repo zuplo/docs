@@ -13,11 +13,11 @@ security considerations for a production integration.
 
 A self-serve integration has three parts:
 
-1. **Your frontend** — the settings page or dashboard where users manage their
+1. **Your frontend** - the settings page or dashboard where users manage their
    keys.
-2. **Your backend** — a server-side proxy that authenticates the user with your
+2. **Your backend** - a server-side proxy that authenticates the user with your
    own auth system, then calls the Zuplo Developer API on their behalf.
-3. **Zuplo Developer API** — the management API at `https://dev.zuplo.com` that
+3. **Zuplo Developer API** - the management API at `https://dev.zuplo.com` that
    handles consumer and key CRUD operations.
 
 ```
@@ -54,7 +54,7 @@ Before you start, you need:
   under **Settings > Zuplo API Keys**.
   [More information](./accounts/zuplo-api-keys).
 - Your **account name** and **bucket name**. A bucket groups consumers for an
-  environment — each project has buckets for production, preview, and
+  environment - each project has buckets for production, preview, and
   development. Find these in the Zuplo Portal under **Settings > General**.
 - An application with server-side code and existing user authentication.
 
@@ -193,10 +193,10 @@ curl \
 
 The `key-format` parameter controls how the key value appears in the response:
 
-- `masked` — returns a partially redacted key (e.g.,
+- `masked` - returns a partially redacted key (e.g.,
   `zpka_d67b...xxxx_2efbxxxx`). Use this for the default list view.
-- `visible` — returns the full key. Use this behind a "Reveal" button.
-- `none` — omits the key value entirely. Use this when you only need key
+- `visible` - returns the full key. Use this behind a "Reveal" button.
+- `none` - omits the key value entirely. Use this when you only need key
   metadata (ID, dates, expiration).
 
 The response:
@@ -245,8 +245,8 @@ curl \
 
 This sets `expiresOn` on **all** existing non-expired keys for that consumer and
 creates a new key with no expiration. If `expiresOn` is set to a date in the
-past, existing keys expire immediately — effectively an instant revocation with
-a new replacement key. In your UI, surface the transition period clearly — for
+past, existing keys expire immediately - effectively an instant revocation with
+a new replacement key. In your UI, surface the transition period clearly - for
 example: "Your current key will remain active until April 19. Update your
 integration to use the new key before then."
 
@@ -294,7 +294,7 @@ any of that consumer's keys (subject to cache TTL).
 
 Tags are the primary mechanism for enforcing ownership in multi-tenant
 integrations. Most Zuplo Developer API endpoints accept `tag.*` query parameters
-that filter results and — critically — reject the request if the tag does not
+that filter results and - critically - reject the request if the tag does not
 match.
 
 For example, if your backend knows the authenticated user belongs to `org_123`,
@@ -306,7 +306,7 @@ curl \
   "https://dev.zuplo.com/v1/accounts/$ZUPLO_ACCOUNT/key-buckets/$ZUPLO_BUCKET/consumers?tag.orgId=org_123&include-api-keys=true&key-format=masked" \
   --header "Authorization: Bearer $ZUPLO_API_KEY"
 
-# Delete a consumer — fails if the consumer doesn't have tag orgId=org_123
+# Delete a consumer - fails if the consumer doesn't have tag orgId=org_123
 curl \
   "https://dev.zuplo.com/v1/accounts/$ZUPLO_ACCOUNT/key-buckets/$ZUPLO_BUCKET/consumers/org_123?tag.orgId=org_123" \
   --request DELETE \
@@ -315,7 +315,7 @@ curl \
 
 This prevents one user from operating on another user's consumers, even if they
 somehow obtain a valid consumer name. Your backend should always derive the tag
-value from the authenticated session — never from the request body or query
+value from the authenticated session - never from the request body or query
 string sent by the frontend.
 
 ## Backend implementation example
@@ -436,9 +436,9 @@ Depending on how much control you need, there are several ways to integrate:
 
 ## Next steps
 
-- [API Key API reference](./api-key-api.mdx) — additional API operations
+- [API Key API reference](./api-key-api.mdx) - additional API operations
   including querying consumers by tags and bulk key creation.
-- [Zuplo Developer API documentation](https://dev.zuplo.com/docs/) — full
+- [Zuplo Developer API documentation](https://dev.zuplo.com/docs/) - full
   endpoint reference for all consumer, key, bucket, and manager operations.
-- [API Key Authentication policy](../policies/api-key-inbound.mdx) — configure
+- [API Key Authentication policy](../policies/api-key-inbound.mdx) - configure
   how keys are validated on your routes.

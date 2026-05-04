@@ -30,13 +30,13 @@ When a request includes an API key, the
 [API Key Authentication](../policies/api-key-inbound.mdx) policy validates it
 through a multi-step process at the edge in 300+ data centers:
 
-1. **Format check** — the key is checked for the correct `zpka_` prefix and
+1. **Format check** - the key is checked for the correct `zpka_` prefix and
    structure. Malformed keys are rejected immediately without any network call.
-2. **Checksum validation** — the key's built-in checksum signature is verified.
+2. **Checksum validation** - the key's built-in checksum signature is verified.
    This catches typos and garbage keys in microseconds.
-3. **Cache lookup** — the edge checks its local cache for this key. If the key
+3. **Cache lookup** - the edge checks its local cache for this key. If the key
    was recently validated (or recently rejected), the cached result is used.
-4. **Key service lookup** — if the key is not cached, Zuplo's globally
+4. **Key service lookup** - if the key is not cached, Zuplo's globally
    distributed key service is queried. The result is then cached for the
    configured TTL (default 60 seconds).
 
@@ -93,7 +93,7 @@ organizing consumers via the API). Tags are not sent to the runtime.
 API keys are the right authentication method when you need to identify an
 organization, system, or service calling your API. Companies like Stripe,
 Twilio, and SendGrid use API keys because they offer a simple developer
-experience — a single string in a header, easy to test with curl, and no token
+experience - a single string in a header, easy to test with curl, and no token
 refresh flow.
 
 Use API keys when:
@@ -127,21 +127,21 @@ zpka_<random>_<checksum>
 
 Each part serves a specific purpose:
 
-- **`zpka_` prefix** — identifies the string as a Zuplo API key. This enables
+- **`zpka_` prefix** - identifies the string as a Zuplo API key. This enables
   automated [leak detection](../articles/api-key-leak-detection.mdx) via GitHub
   secret scanning (scanners match the prefix pattern), helps support teams
   identify key types during debugging, and distinguishes Zuplo keys from other
   credentials in logs and config files.
-- **Random body** — a cryptographically random string that serves as the actual
+- **Random body** - a cryptographically random string that serves as the actual
   credential. This portion is generated using a secure random source and
   provides the entropy that makes each key unique.
-- **Checksum signature** — a suffix that allows instant format validation. When
+- **Checksum signature** - a suffix that allows instant format validation. When
   a request arrives, Zuplo can verify the checksum mathematically in
   microseconds to confirm the key is structurally valid before making any
   network call. This rejects typos, truncated keys, and garbage strings without
   touching the database.
 
-The underscore separators are also intentional — they ensure that a double-click
+The underscore separators are also intentional - they ensure that a double-click
 on the key in most text editors and terminals selects the entire string,
 reducing the chance of accidentally copying a partial key.
 
@@ -177,9 +177,6 @@ portal, via the [Developer API](../articles/api-key-api.mdx), or automatically
 when a user signs in using
 [Auth0](../dev-portal/dev-portal-create-consumer-on-auth.mdx) or another
 identity provider.
-
-You can also embed the key management UI directly in your own application using
-the [API Key React Component](../articles/api-key-react-component.mdx).
 
 ## Buckets and environments
 
@@ -220,8 +217,6 @@ See the [API Reference](/docs/api) for the complete endpoint documentation.
   management
 - [End User Access](../articles/api-key-end-users.mdx) -- Self-serve in the
   developer portal
-- [React Component](../articles/api-key-react-component.mdx) -- Embed key
-  management in your app
 - [Leak Detection](../articles/api-key-leak-detection.mdx) -- GitHub secret
   scanning
 - [Buckets](../articles/api-key-buckets.mdx) -- Bucket configuration

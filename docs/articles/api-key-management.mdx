@@ -22,26 +22,26 @@ a production-grade implementation, see
 
 ## What you get with Zuplo API keys
 
-- **Thoughtful key format** — keys use a `zpka_` prefix, cryptographically
+- **Thoughtful key format** - keys use a `zpka_` prefix, cryptographically
   random body, and checksum signature. The prefix enables
   [GitHub secret scanning](./api-key-leak-detection.mdx), the checksum allows
   instant format validation without a database call, and the underscore
   formatting means a double-click selects the entire key. See
   [API key format](../concepts/api-keys.md#api-key-format) for the full
   breakdown.
-- **Leak detection** — Zuplo is a
+- **Leak detection** - Zuplo is a
   [GitHub secret scanning partner](./api-key-leak-detection.mdx). If a key is
   committed to any GitHub repository, you are notified immediately.
-- **Self-serve key management** — give your API consumers a
+- **Self-serve key management** - give your API consumers a
   [developer portal](./api-key-end-users.mdx) where they can create, view, roll,
   and revoke their own keys. Or
   [build key management into your own product](./api-key-self-serve-integration.mdx).
-- **Edge validation** — keys are validated through a multi-step process at the
+- **Edge validation** - keys are validated through a multi-step process at the
   edge: format check, checksum verification, cache lookup, then key service
   query. See
   [how validation works](../concepts/api-keys.md#how-validation-works) for the
   full flow.
-- **Key rotation with transition periods** — the
+- **Key rotation with transition periods** - the
   [roll-key API](./api-key-api.mdx#roll-a-consumers-keys) creates a new key and
   sets an expiration on existing keys, so consumers have time to migrate without
   downtime.
@@ -50,7 +50,7 @@ a production-grade implementation, see
 
 Zuplo builds and manages the API key infrastructure so you don't have to. The
 service handles key storage, global replication, edge caching, and validation at
-scale — supporting millions of keys and virtually unlimited throughput.
+scale - supporting millions of keys and virtually unlimited throughput.
 
 Keys replicate around the world in seconds. When a key is created, revoked, or
 deleted, the change propagates to all 300+ edge locations within seconds,
@@ -62,16 +62,16 @@ configured cache TTL.
 The API key system has three core objects. For full details, see the
 [API Keys concepts page](../concepts/api-keys.md).
 
-- **Consumers** — the identities that own API keys. Each consumer has a unique
+- **Consumers** - the identities that own API keys. Each consumer has a unique
   `name` within its bucket (used as `request.user.sub` at runtime), optional
   [metadata](../concepts/api-keys.md#consumer-metadata) available on every
   authenticated request, and optional
   [tags](../concepts/api-keys.md#tags-vs-metadata) for management queries.
-- **API Keys** — the credential strings used to authenticate. Each consumer can
+- **API Keys** - the credential strings used to authenticate. Each consumer can
   have multiple keys. All keys for a consumer share the same identity and
   metadata. Keys use the `zpka_` format by default; enterprise customers can use
   [custom key formats](../concepts/api-keys.md#api-key-format), though custom
   formats lose leak detection support.
-- **Buckets** — group consumers for an environment. Each project has buckets for
+- **Buckets** - group consumers for an environment. Each project has buckets for
   production, preview, and development. See
   [API Key Buckets](./api-key-buckets.mdx) for details.
