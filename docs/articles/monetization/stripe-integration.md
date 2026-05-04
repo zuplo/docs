@@ -66,6 +66,81 @@ mode don't transfer to live mode and vice versa.
 
 :::
 
+## Using a Stripe restricted key
+
+Zuplo accepts both **secret keys** (`sk_test_*`, `sk_live_*`) and **restricted
+keys** (`rk_test_*`, `rk_live_*`) when you connect Stripe. For production, use a
+restricted key — it follows the principle of least privilege and limits the
+blast radius if the credential is ever leaked.
+
+A Monetization V3 restricted key needs the following eight permissions. Leave
+every other permission set to **None**.
+
+| Stripe permission                                  | Level | Why Zuplo needs it                                                                 |
+| -------------------------------------------------- | ----- | ---------------------------------------------------------------------------------- |
+| Connect → Accounts                                 | Read  | Verifies the key on install and reads basic account details (country, currency)    |
+| Core → Customers                                   | Write | Creates and updates Stripe Customers when developers subscribe                     |
+| Core → Payment Methods                             | Read  | Displays saved cards in the customer portal                                        |
+| Checkout → Checkout Sessions                       | Write | Creates checkout sessions when developers add a payment method                     |
+| Billing → Customer portal                          | Write | Creates customer-portal sessions for self-service plan management                  |
+| Billing → Invoices                                 | Write | Issues, finalizes, and pays invoices for metered usage (also covers Invoice items) |
+| Tax → Tax Calculations and Transactions            | Write | Calculates tax via Stripe Tax when tax collection is enabled                       |
+| Webhook → Webhook Endpoints and Event Destinations | Write | Registers the webhook Zuplo uses to receive payment events                         |
+
+Zuplo doesn't use Stripe Subscriptions, Products, Prices, Payment Intents, Setup
+Intents, Refunds, or Stripe Billing Meters — leave all of those at **None**.
+
+### Create the restricted key
+
+1. In the Stripe Dashboard, go to **Developers → API keys → Create restricted
+   key**.
+2. Name the key something recognizable, for example `Zuplo Monetization (test)`
+   or `Zuplo Monetization (production)`.
+3. For each of the eight permissions above, set the level shown in the table.
+4. Click **Create key**, copy the value (`rk_test_...` or `rk_live_...`), and
+   paste it into **Services → Monetization Service → Payment Provider** in your
+   Zuplo project.
+
+:::caution
+
+Use a **test** restricted key (`rk_test_*`) for preview and working-copy
+environments, and a **live** restricted key (`rk_live_*`) for production. Zuplo
+rejects a live key on a non-production environment and vice versa.
+
+:::
+
+### Troubleshoot permission errors
+
+If you see an error like:
+
+```
+The provided key 'rk_test_...' does not have the required permissions for this endpoint.
+Having the 'rak_accounts_kyc_basic_read' permission would allow this request to continue.
+```
+
+The key is missing one of the permissions in the table above. Stripe's internal
+name in the error (`rak_<resource>_<action>`) maps to a row in the table. The
+most common omissions:
+
+- **`rak_accounts_kyc_basic_read`** → enable **Connect → Accounts** at **Read**.
+- **`rak_tax_calculations_*`** → enable **Tax → Tax Calculations and
+  Transactions** at **Write**.
+- **`rak_webhook_endpoints_*`** → enable **Webhook → Webhook Endpoints and Event
+  Destinations** at **Write**.
+- **`rak_invoices_*`** → enable **Billing → Invoices** at **Write**.
+
+Edit the key in the Stripe Dashboard, tick the missing permission, save, and
+retry the connection in Zuplo.
+
+### Rotate the key
+
+You can replace the connected key from the same **Payment Provider** screen. The
+new key must:
+
+- Use the same prefix mode (test or live) as the existing key.
+- Belong to the same Stripe account.
+- Carry all eight permissions above.
+
 ## What Zuplo creates in Stripe
 
 When you publish a plan, corresponding objects are created in Stripe
