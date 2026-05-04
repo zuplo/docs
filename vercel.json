@@ -224,6 +224,11 @@
       "permanent": true
     },
     {
+      "source": "/docs/policies/:slug([^/]+)-policy{/}?",
+      "destination": "/docs/policies/:slug",
+      "permanent": true
+    },
+    {
       "source": "/docs/projects/github-source-control{/}?",
       "destination": "/docs/articles/source-control",
       "permanent": true

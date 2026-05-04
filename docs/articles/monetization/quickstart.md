@@ -84,7 +84,8 @@ Add the monetization plugin to your Developer Portal configuration.
 ## Step 3: Configure the Monetization Service
 
 1. Navigate to the **Services** tab in your project.
-2. Select the environment you want to configure (e.g., **Working Copy**).
+2. Select the environment you want to configure. We will use **Working Copy**
+   for this quickstart.
 3. Click **Configure** on the **Monetization Service** card.
 
 ## Step 4: Create a meter
@@ -93,11 +94,11 @@ Meters track what you want to measure — API calls, tokens processed, data
 transferred, etc.
 
 1. In the Monetization Service, click the **Meters** tab.
-2. Click **Add Meter** and select **Blank Meter**.
-3. Fill in the meter details:
-   - **Name**: `Requests`
-   - **Event**: `requests` — the type of event this meter listens for.
-   - **Description**: `API Requests`
+2. Click **Add Meter** and select **API Requests** from the template list.
+3. Verify the pre-filled meter details:
+   - **Name**: `API Requests`
+   - **Event**: `api_requests` — the type of event this meter listens for.
+   - **Description**: `Counts all incoming API requests`
    - **Aggregation**: `SUM` — how values are combined (other options include
      `COUNT`, `MAX`, etc.).
    - **Value Property**: `$.total` — a JSONPath expression that extracts the
@@ -115,15 +116,18 @@ Feature** for each of the following:
 
 | Name             | Key                | Linked Meter | Purpose                       |
 | ---------------- | ------------------ | ------------ | ----------------------------- |
-| API Requests     | `requests`         | Requests     | Usage-based (linked to meter) |
+| API Requests     | `api_requests`     | API Requests | Usage-based (linked to meter) |
 | Monthly Fee      | `monthly_fee`      | —            | Flat-rate billing             |
 | Metadata Support | `metadata_support` | —            | Boolean on/off feature        |
 
 :::tip{title="Key Naming Conventions"}
 
-When creating features that are metered, the key must match the key you set for
-the associated meter. For example, if your Requests meter key is `requests`,
-then your Requests feature key must also be `requests`.
+The meter key, the feature key, and the key in the monetization policy's
+`meters` configuration must all match. For example, the API Requests meter key
+is `api_requests`, the feature key must also be `api_requests`, and the policy
+must use `"meters": { "api_requests": 1 }`.
+
+See [Naming Consistency](./meters.mdx#naming-consistency) for the full rule.
 
 :::
 
@@ -243,10 +247,13 @@ charges.
 
 :::warning
 
-Always use your Stripe **test** key (`sk_test_...`) while following this guide.
-This creates a sandbox environment where you can safely test subscriptions and
-payments without processing real transactions. When you're ready for production,
-update to your live key (`sk_live_...`).
+Always use your Stripe **test** key (`sk_test_...`) in the **Working Copy**
+environment while following this guide. Stripe test keys run in a sandbox
+environment where you can safely test subscriptions and payments without
+processing real transactions. When you're ready for production, configure the
+**Production** environment with a live key (`sk_live_...`). Do not replace a
+test key with a live key in the same environment — use one key type per
+environment.
 
 :::
 
@@ -265,9 +272,9 @@ directory.
 
 ![Monetization policy in the policy picker list](../../../public/media/monetization/monetization-policy.png)
 
-3. In the **Meters** configuration field, you can keep the default value of
-   `requests` set `1` to match the meter you created in _Step 4_. This field
-   maps the meter slug to the number of units each request consumes.
+3. In the **Meters** configuration field, set the key to `api_requests` with a
+   value of `1` to match the meter you created in _Step 4_. This field maps the
+   meter slug to the number of units each request consumes.
 
 ```json
 {
@@ -276,7 +283,7 @@ directory.
   "options": {
     "cacheTtlSeconds": 60,
     "meters": {
-      "requests": 1
+      "api_requests": 1
     }
   }
 }

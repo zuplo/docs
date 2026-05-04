@@ -64,11 +64,26 @@ variable named `MY_VAR` can't be set on say the **Production** environments.
 
 ## Reserved Environment Variables
 
-Environment variables can't start with `ZUPLO` or `__ZUPLO`.
+Environment variables can't start with `ZUPLO_` or `__ZUPLO`. The same
+restriction applies to names beginning with `ZUDOKU_`.
+
+If you need a variable that's exposed to the
+[Developer Portal](../dev-portal/introduction.mdx) build, prefix it with
+`ZUPLO_PUBLIC_` (or `ZUDOKU_PUBLIC_`). Public-prefixed variables are bundled
+into the portal's static output and **must not contain secrets**, as they're
+visible to anyone who loads the page.
 
 ## Using Environment Variables
 
-Environment variables can be used in several places within your Zuplo project:
+Environment variables can be used in several places in your Zuplo project. Each
+location has its own syntax:
+
+| Location                                              | Syntax                 | Resolved              |
+| ----------------------------------------------------- | ---------------------- | --------------------- |
+| Custom code (handlers, policies, hooks)               | `environment.VAR_NAME` | Runtime               |
+| Configuration files (`policies.json`, OpenAPI routes) | `$env(VAR_NAME)`       | Build time            |
+| URL Rewrite, URL Forward, and WebSocket handlers      | `${env.VAR_NAME}`      | Runtime (per request) |
+| Developer Portal config (`zudoku.config.ts`)          | `process.env.VAR_NAME` | Portal build time     |
 
 ### In Code
 
@@ -77,13 +92,44 @@ See the
 [Environment Variables API Reference](../programmable-api/environment.mdx) for
 detailed usage examples and patterns.
 
+```ts
+import { environment } from "@zuplo/runtime";
+
+const apiKey = environment.API_KEY; // string | undefined
+```
+
 ### In Configuration Files
 
-Inside some configuration files, environment variables can be referenced with
-the pattern `$env(MY_VAR)`.
+Inside policy options, route handler options, and CORS policy options,
+environment variables can be referenced with the `$env(VAR_NAME)` pattern.
+Substitutions happen at build time — the build replaces each `$env()` expression
+with a reference to the runtime `environment` object before the project is
+deployed.
 
-For example, in the `policies.json` file, an environment variable could be set
-on a policy option.
+#### Where `$env()` is allowed
+
+- `config/policies.json` — any property under `policies[].handler.options`,
+  including nested objects and array elements
+- `config/policies.json` — any direct property of a `corsPolicies[]` entry, such
+  as `allowedOrigins`, `allowedHeaders`, `allowedMethods`, `exposeHeaders`, and
+  `maxAge`
+- `config/routes.oas.json` (and other OpenAPI route files) — any property under
+  a route's `x-zuplo-route.handler.options`, including nested objects and array
+  elements
+
+`$env()` is **not** allowed in other locations such as policy `name`,
+`policyType`, `module`, route paths, or top-level OpenAPI fields. Using it
+elsewhere produces a build error:
+
+```text
+An $env() statement is not expected at this location.
+```
+
+#### Standalone substitution
+
+When the value is _only_ an `$env()` expression, the variable's value is
+inserted directly. The runtime type matches the type of the environment variable
+(always a string when set, `undefined` when not).
 
 ```json
 {
@@ -93,22 +139,129 @@ on a policy option.
     "export": "default",
     "module": "$import(./modules/YOUR_MODULE)",
     "options": {
-      "config1": "$env(MY_CONFIG_VAR)",
+      "apiKey": "$env(BACKEND_API_KEY)",
       "config2": true
     }
   }
 }
 ```
 
-### Rewrite & Forwarding Handler
+#### String interpolation
 
-When referencing environment variables inside of the URL Rewrite handler and the
-URL Forward handler, variables are substituted using JavaScript style string
-interpolation.
+You can mix `$env()` with literal text to compose a value. The build wraps the
+result in a JavaScript template literal that's evaluated at runtime, so each
+request gets the current value of the variable.
 
-```txt
-https://${env.API_URL}/path/to/call
+```json
+{
+  "options": {
+    "endpoint": "https://$env(API_HOST)/v1",
+    "userAgent": "MyGateway/$env(APP_VERSION) ($env(ENVIRONMENT_NAME))"
+  }
+}
 ```
+
+:::note
+
+If the variable isn't set, the interpolated portion resolves to an empty string.
+For example, with `API_HOST` unset, `"https://$env(API_HOST)/v1"` becomes
+`"https:///v1"`. Use a standalone `$env()` (no surrounding text) if you need to
+detect an unset variable in your handler or policy code.
+
+:::
+
+#### In arrays
+
+`$env()` works inside string array elements, including mixed arrays where some
+elements are static and others are interpolated:
+
+```json
+{
+  "options": {
+    "allowedKeys": ["$env(PRIMARY_KEY)", "$env(SECONDARY_KEY)"],
+    "tags": ["public", "$env(REGION)", "tier-$env(SERVICE_TIER)"]
+  }
+}
+```
+
+#### In nested objects
+
+`$env()` works at any depth within a handler or policy `options` object:
+
+```json
+{
+  "options": {
+    "database": {
+      "host": "$env(DB_HOST)",
+      "credentials": {
+        "username": "$env(DB_USER)",
+        "password": "$env(DB_PASSWORD)"
+      }
+    }
+  }
+}
+```
+
+#### Variable name rules
+
+The name inside `$env(...)` is matched literally up to the first closing
+parenthesis. Use only letters, digits, and underscores in the name — matching
+what the [Zuplo Portal](#environment-variable-editor) accepts when you create
+the variable.
+
+### Rewrite, Forwarding, and WebSocket Handlers
+
+The URL Rewrite handler's `rewritePattern`, the URL Forward handler's `baseUrl`,
+and the WebSocket handler's `rewritePattern` use a different syntax. These
+options are evaluated as JavaScript template literals at request time, so you
+reference variables with `${env.VAR_NAME}`:
+
+```json
+{
+  "handler": {
+    "export": "urlForwardHandler",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "baseUrl": "https://${env.BACKEND_HOST}"
+    }
+  }
+}
+```
+
+Because `rewritePattern` and `baseUrl` run as code, they also have access to the
+request, URL parts, route params, and query string. See the
+[URL Rewrite Handler](../handlers/url-rewrite.mdx) docs for the full list of
+available variables.
+
+:::caution
+
+Using `$env(VAR_NAME)` inside `rewritePattern` or `baseUrl` is the most common
+mistake. The build will warn you when it detects this, but the value will be
+passed through to the handler as a literal string and the rewrite will fail at
+runtime. Always use `${env.VAR_NAME}` in these two options.
+
+:::
+
+### In the Developer Portal
+
+The Developer Portal's `zudoku.config.ts` runs in Node-like build tooling and
+uses `process.env` rather than `$env()`:
+
+```ts title="zudoku.config.ts"
+const config: ZudokuConfig = {
+  authentication: {
+    type: "auth0",
+    domain: process.env.ZUPLO_PUBLIC_AUTH0_DOMAIN,
+    clientId: process.env.ZUPLO_PUBLIC_AUTH0_CLIENT_ID,
+  },
+};
+
+export default config;
+```
+
+Only variables prefixed with `ZUPLO_PUBLIC_` (or `ZUDOKU_PUBLIC_`) are available
+in the portal build, and their values are embedded into the client-side bundle.
+Don't use this prefix for any value that should remain private.
 
 ## System Environment Variables
 

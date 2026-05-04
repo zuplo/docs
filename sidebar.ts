@@ -343,6 +343,7 @@ export const documentation: Navigation = [
       "concepts/authentication",
       "concepts/api-keys",
       "concepts/rate-limiting",
+      "concepts/api-errors",
       "articles/routing",
       "articles/policies",
       "articles/openapi",
@@ -748,7 +749,11 @@ export const documentation: Navigation = [
       {
         type: "category",
         label: "Custom Domains",
-        items: ["articles/custom-domains", "articles/fastly-zuplo-host-setup"],
+        items: [
+          "articles/custom-domains",
+          "articles/certificate-pinning",
+          "articles/fastly-zuplo-host-setup",
+        ],
       },
       {
         type: "category",

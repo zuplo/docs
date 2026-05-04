@@ -58,17 +58,18 @@ This workflow:
 Place test files in the `tests` folder with the `.test.ts` extension:
 
 ```typescript title="tests/api.test.ts"
-import { describe, it, expect } from "@zuplo/test";
+import { describe, it } from "@zuplo/test";
+import { expect } from "chai";
 
 describe("API", () => {
   it("returns 200 for health check", async () => {
     const response = await fetch(`${ZUPLO_TEST_URL}/health`);
-    expect(response.status).toBe(200);
+    expect(response.status).to.equal(200);
   });
 
   it("requires authentication", async () => {
     const response = await fetch(`${ZUPLO_TEST_URL}/protected`);
-    expect(response.status).toBe(401);
+    expect(response.status).to.equal(401);
   });
 });
 ```
