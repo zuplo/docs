@@ -1,6 +1,6 @@
 ---
 title: When to Use API Keys
-sidebar_label: When to Use API Keys
+sidebar_label: When to Use Them
 ---
 
 Choosing the right authentication method is one of the first decisions you make
@@ -181,8 +181,8 @@ routes in the same project, or even
 
 ## Next steps
 
-- [API Key Management Overview](./api-key-management.mdx) - set up API key
-  authentication in minutes
+- [API Keys Overview](./api-key-management.mdx) - set up API key authentication
+  in minutes
 - [API Key Best Practices](./api-key-best-practices.mdx) - the 8 practices that
   define a well-designed API key system
 - [API Key Authentication policy](../policies/api-key-inbound.mdx) - configure

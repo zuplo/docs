@@ -21,8 +21,9 @@ The API key system has three core objects:
   metadata.
 
 See [API Key Management](../articles/api-key-management.mdx) for a full
-overview, and [API Key Administration](../articles/api-key-administration.mdx)
-for managing consumers in the portal.
+overview, and
+[Manage Keys in the Portal](../articles/api-key-administration.mdx) for managing
+consumers in the portal.
 
 ## How validation works
 
@@ -207,18 +208,19 @@ See the [API Reference](/docs/api) for the complete endpoint documentation.
 
 ## Related documentation
 
-- [API Key Management](../articles/api-key-management.mdx) -- Overview and
+- [API Keys Overview](../articles/api-key-management.mdx) -- Overview and
   getting started
 - [API Key Authentication Policy](../policies/api-key-inbound.mdx) -- Policy
   configuration reference
-- [API Key Administration](../articles/api-key-administration.mdx) -- Managing
-  keys in the portal
-- [Using the API Key API](../articles/api-key-api.mdx) -- Programmatic
+- [Manage Keys in the Portal](../articles/api-key-administration.mdx) --
+  Managing keys in the portal
+- [Use the Developer API](../articles/api-key-api.mdx) -- Programmatic
   management
-- [End User Access](../articles/api-key-end-users.mdx) -- Self-serve in the
-  developer portal
-- [Leak Detection](../articles/api-key-leak-detection.mdx) -- GitHub secret
-  scanning
-- [Buckets](../articles/api-key-buckets.mdx) -- Bucket configuration
-- [Service Limits](../articles/api-key-service-limits.mdx) -- Rate limits and
-  quotas
+- [Share Keys with End Users](../articles/api-key-end-users.mdx) -- Self-serve
+  in the developer portal
+- [API Key Leak Detection](../articles/api-key-leak-detection.mdx) -- GitHub
+  secret scanning
+- [Buckets and Environments](../articles/api-key-buckets.mdx) -- Bucket
+  configuration
+- [API Key Service Limits](../articles/api-key-service-limits.mdx) -- Rate
+  limits and quotas
