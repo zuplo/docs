@@ -1,0 +1,12 @@
+...@zuplo-theme.d2
+
+direction: right
+
+browser: "User's browser" { class: node }
+backend: "Your backend API\nauth + proxy, e.g. /api/keys" { class: node }
+zuplo: "Zuplo Developer API\ndev.zuplo.com" { class: zuplo }
+
+(** -> **)[*].class: flow
+
+browser -> backend: "request"
+backend -> zuplo: "proxied call"
