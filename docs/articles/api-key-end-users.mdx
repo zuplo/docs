@@ -3,46 +3,100 @@ title: Share Keys with End Users
 sidebar_label: End-User Access
 ---
 
-For any API Key to be useful it needs to be shared with the right end-user.
-Zuplo provides several options depending on the level of customization required.
+Once your API uses [API Key Authentication](../policies/api-key-inbound.mdx),
+the next step is getting a key into the hands of each consumer. Zuplo offers
+three options depending on who creates the key and where the management UI
+lives.
 
-## Dev & Testing
+A **consumer** is the identity that owns one or more API keys (typically a
+customer, team, or application). A **manager** is an email address assigned to a
+consumer that grants self-serve access. When a user signs in to a Developer
+Portal with an email matching the manager email, they see that consumer's keys
+on their settings page.
 
-For development and testing, the easiest way to obtain an API key is right in
-the [Zuplo Management Portal](https://portal.zuplo.com). From inside the **API
-Key Consumers** section in the **Settings** tab you can create and manage
-consumers and their keys.
+## Pick an option
 
-For quick access the newest, non-expired API key is shown in this section.
+| Want this experience                                               | Use                       |
+| ------------------------------------------------------------------ | ------------------------- |
+| Quickly create a key for yourself or a teammate during development | Zuplo Portal (admin only) |
+| Let consumers self-serve through a Zuplo-hosted UI                 | Zuplo Developer Portal    |
+| Build the key management UI inside your own product                | Zuplo Developer API       |
 
-![API key section](../../public/media/api-key-end-users/98a3d62f-1b61-4f41-8bac-665e0b02309e.png)
+The rest of this page expands on each option.
+
+:::note
+
+The **Zuplo Portal** ([portal.zuplo.com](https://portal.zuplo.com)) is your
+admin dashboard for building and operating your API. The **Zuplo Developer
+Portal** is the public, customer-facing site you publish for your API consumers.
+They are different products and serve different audiences.
+
+:::
+
+## Manual key creation (admin only)
+
+:::caution
+
+This flow is for development, testing, and ad-hoc use only. Creating keys by
+hand in the admin portal does not scale to a production user base.
+
+:::
+
+For development or one-off needs, the easiest way to obtain an API key is in the
+[Zuplo Portal](https://portal.zuplo.com). Open **Services > API Key Service**,
+click **Configure**, and you can view existing keys or create new keys for your
+consumers manually.
+
+![API key section](../../public/media/api-key-end-users/api-key-service.png)
 
 ## Zuplo Developer Portal
 
-If you are using Zuplo's integrated developer portal to share your API with your
-end-users, you can easily enable API Key management to authenticated users of
-the portal.
+If you publish a [Zuplo Developer Portal](../dev-portal/introduction.mdx) for
+your API consumers, you can let authenticated users manage their own keys
+without contacting your team.
 
-When API Key Managers log into the Developer Portal they can copy, manage, or
-create new API Keys.
+By default, a consumer's keys are visible to any signed-in user whose email
+matches a manager email assigned to that consumer. Consumers can copy and rotate
+the keys they have access to from the **API Keys** section of the portal.
 
-![API Keys in Developer Portal](../../public/media/api-key-dev-portal.png)
+![API Keys in Developer Portal](../../public/media/api-key-end-users/api-key-portal.png)
+
+The default Developer Portal does not include a self-serve flow for creating
+brand-new keys. To enable that you have two options:
+
+- **Roll your own self-serve flow.** Follow the
+  [Dev Portal with API Keys example](https://zuplo.com/examples/dev-portal-with-api-keys)
+  to add a "Create key" button backed by your own logic.
+- **Use Zuplo Monetization.**
+  [Monetization](https://zuplo.com/docs/articles/monetization) bundles
+  self-serve key creation with plans, metering, and an upgrade flow in one
+  developer portal. Self-serve via Monetization works on free plans during
+  development; production use of Monetization requires a paid Zuplo plan.
 
 ## Zuplo Developer API
 
-If you want complete control over the experience - for example, building an "API
-Keys" section directly into your product's settings page - you can use the
-[Zuplo Developer API](https://dev.zuplo.com/docs/) to manage the full lifecycle
-of consumers and keys from your own backend.
+Use the [Zuplo Developer API](https://dev.zuplo.com/docs/) when you want
+complete control over the experience, for example building an "API Keys" section
+directly into your product's settings page.
 
 This approach works with any tech stack. Your backend authenticates users with
 your own auth system, then proxies requests to the Zuplo Developer API to
 create, list, rotate, and delete keys on their behalf. You control the UI, the
 access rules, and the onboarding flow.
 
-For a complete implementation walkthrough including architecture, code examples,
-and security guidance, see
-[Build Self-Serve API Key Management in Your Product](./api-key-self-serve-integration.mdx).
-For the raw API operations, see
-[Programmatic API Key Management](./api-key-api.mdx) and the
-[Zuplo Developer API documentation](https://dev.zuplo.com/docs/).
+:::caution
+
+The Zuplo Developer API is a privileged, backend-only API. It accepts a
+management token that grants full access to your account's consumers and keys.
+Never call it from the browser.
+
+:::
+
+To get started:
+
+1. Read the
+   [Build Self-Serve Key Management](./api-key-self-serve-integration.mdx)
+   walkthrough for architecture, code examples, and security guidance.
+2. Refer to [Use the Developer API](./api-key-api.mdx) and the
+   [Zuplo Developer API documentation](https://dev.zuplo.com/docs/) for the raw
+   endpoint reference once you are implementing specific operations.
