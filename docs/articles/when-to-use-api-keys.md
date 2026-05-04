@@ -38,7 +38,7 @@ This is why the most successful API-first companies use API keys:
 
 - **Stripe** - every API call uses an API key scoped to the organization
 - **Twilio** - Account SID + Auth Token (functionally an API key pair)
-- **SendGrid** - API keys with scoped permissions per key
+- **Resend** - API keys with scoped permissions per key
 - **Datadog, Cloudflare, PagerDuty** - all use API keys for their public APIs
 
 Use API keys when:
