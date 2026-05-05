@@ -8,6 +8,7 @@
   "cli/dev",
   "cli/docs",
   "cli/editor",
+  "cli/info",
   "cli/init",
   "cli/link",
   "cli/list",
@@ -21,6 +22,7 @@
   "cli/openapi-merge",
   "cli/openapi-overlay",
   "cli/project-create",
+  "cli/project-info",
   "cli/source-migrate",
   "cli/source-upgrade",
   "cli/test",
@@ -32,5 +34,6 @@
   "cli/tunnel-services-describe",
   "cli/tunnel-services-update",
   "cli/variable-create",
-  "cli/variable-update"
+  "cli/variable-update",
+  "cli/whoami"
 ]

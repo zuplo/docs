@@ -108,7 +108,8 @@
       "dev-portal/zudoku/configuration/vite-config",
       "dev-portal/zudoku/configuration/slots",
       "dev-portal/zudoku/custom-plugins",
-      "dev-portal/zudoku/extending/events"
+      "dev-portal/zudoku/extending/events",
+      "dev-portal/zudoku/extending/hooks"
     ]
   },
   {
