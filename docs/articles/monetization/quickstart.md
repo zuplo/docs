@@ -245,6 +245,15 @@ charges.
 4. Click **Configure** on the Stripe card.
 5. Enter a **Name** and paste your **Stripe API Key**, then click **Save**.
 
+:::tip
+
+For production, prefer a Stripe **restricted key** (`rk_live_*`) over a secret
+key. See
+[Using a Stripe restricted key](./stripe-integration.md#using-a-stripe-restricted-key)
+for the exact permissions to enable.
+
+:::
+
 :::warning
 
 Always use your Stripe **test** key (`sk_test_...`) in the **Working Copy**
