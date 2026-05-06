@@ -62,9 +62,10 @@ Each event contains the `subscription` ID linking it to a subscription and a
 
 :::note
 
-Events emitted by the `MonetizationInboundPolicy` always set `subject` and
-`subscription` to the same subscription ULID. See
-[Monetization Policy](./monetization-policy.md) for how usage is recorded.
+The `MonetizationInboundPolicy` sets both `subject` and `subscription` to the
+same subscription ID. The CloudEvents spec uses `subject` as a generic event
+producer field; Zuplo populates it with the subscription ID so usage routes to
+the right entitlement.
 
 :::
 
