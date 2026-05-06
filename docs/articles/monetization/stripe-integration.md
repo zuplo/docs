@@ -22,16 +22,15 @@ The integration flow:
 
 1. You define plans, features, and meters in Zuplo
 2. You connect your Stripe account via the Zuplo Portal
-3. When you publish plans, corresponding Stripe Products and Prices are created
-   automatically
+3. Plans, features, and rate cards stay in Zuplo's catalog — Stripe is used only
+   at billing time
 4. Customers subscribe through your Developer Portal via Stripe Checkout
-5. Stripe processes the payment and creates the subscription
-6. A Zuplo subscription is created with an API key scoped to the plan's
-   entitlements
-7. As the customer uses the API, the monetization policy meters usage in real
+5. Stripe collects the payment method and Zuplo creates the subscription with an
+   API key scoped to the plan's entitlements
+6. As the customer uses the API, the monetization policy meters usage in real
    time
-8. For usage-based billing, usage is tracked continuously and billed through
-   Stripe automatically
+7. At the end of each billing period, Zuplo issues a Stripe Invoice for fixed
+   fees and usage-based charges
 
 Throughout this flow, Zuplo is the source of truth for access control and
 metering. Stripe is the source of truth for payment state.
@@ -45,8 +44,10 @@ metering. Stripe is the source of truth for payment state.
 3. Enter a **Name** and paste your **Stripe API Key**
 4. Click **Save**
 
-The connection authorizes Zuplo to manage Stripe objects on your behalf,
-including products, prices, customers, and subscriptions.
+The connection authorizes Zuplo to manage Stripe objects on your behalf —
+specifically Customers, Checkout Sessions, Customer Portal Sessions, Invoices,
+and Tax Calculations. See
+[What Zuplo creates in Stripe](#what-zuplo-creates-in-stripe) for the full list.
 
 ### Test mode vs. live mode
 
@@ -143,20 +144,29 @@ new key must:
 
 ## What Zuplo creates in Stripe
 
-When you publish a plan, corresponding objects are created in Stripe
-automatically:
+Zuplo's catalog (plans, features, rate cards, entitlements) is stored in Zuplo,
+not in Stripe. Publishing a plan does **not** create Stripe Products, Prices, or
+Subscriptions. Stripe is used only at the points where money or payment state is
+involved.
 
-| Zuplo concept        | Stripe object created            |
-| -------------------- | -------------------------------- |
-| Plan                 | Product                          |
-| Rate card (flat fee) | Price (recurring, fixed amount)  |
-| Rate card (per-unit) | Price (recurring, metered usage) |
-| Rate card (tiered)   | Price (recurring, tiered)        |
-| Feature entitlement  | Metadata on the Product          |
+The objects that Zuplo creates or manages in your Stripe account:
 
-You can see these in your Stripe Dashboard under **Products**. These objects are
-managed automatically — don't edit them directly in Stripe, as your changes may
-be overwritten on the next plan publish.
+| Object                          | When it's created                                                          |
+| ------------------------------- | -------------------------------------------------------------------------- |
+| Stripe Customer                 | When a developer first subscribes — one Stripe Customer per Zuplo customer |
+| Stripe Checkout Session         | When a developer subscribes to a plan that requires a payment method       |
+| Stripe Customer Portal Session  | When a developer opens **Manage Billing** in the Developer Portal          |
+| Stripe Invoice and Invoice Item | At the end of each billing period for fixed and usage-based charges        |
+| Stripe Tax Calculation          | At invoice time when [tax collection](./tax-collection.md) is enabled      |
+| Stripe Webhook Endpoint         | Once on connection, so Zuplo can react to payment events                   |
+
+Zuplo does **not** create Stripe Products, Prices, Subscriptions, Payment
+Intents, Setup Intents, Refunds, or Stripe Billing Meters. This matches the
+restricted-key permissions listed above — those scopes are intentionally left at
+**None**.
+
+You won't find a Zuplo plan listed under **Products** in your Stripe dashboard.
+To see what Zuplo has created, look under **Customers** and **Invoices**.
 
 ## Subscription flow
 
@@ -164,7 +174,8 @@ be overwritten on the next plan publish.
 
 When a customer clicks "Subscribe" in your Developer Portal:
 
-1. A Stripe Checkout Session is created with the selected plan's prices
+1. A Stripe Checkout Session is created so the customer can enter a payment
+   method
 2. The customer is redirected to Stripe Checkout to enter payment details
 3. On successful payment, the subscription is created
 4. An API key is generated scoped to the subscription's plan entitlements
@@ -175,8 +186,8 @@ When a customer clicks "Subscribe" in your Developer Portal:
 
 When a customer changes their plan through the Developer Portal:
 
-1. The Stripe Subscription is updated with the new plan's prices
-2. Charges are prorated automatically
+1. Zuplo records the plan change and recalculates the customer's entitlements
+2. Any prorated amount is reflected on the customer's next Stripe Invoice
 3. The customer's entitlements update immediately
 4. The API key remains the same; its associated quota changes in real time
 
