@@ -99,12 +99,12 @@ curl \
 EOF
 ```
 
-| Field                          | Type       | Description                                                                                                                                                          |
-| ------------------------------ | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Field                          | Type       | Description                                                                                                                                                                                         |
+| ------------------------------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `multipleSubscriptionsEnabled` | `boolean`  | Stored on the bucket. Reserved for future multi-subscription rules; today the Developer Portal create-subscription path enforces a single active subscription per customer regardless of this flag. |
-| `planOrder`                    | `string[]` | Ordered list of plan keys; drives pricing-page sort and upgrade/downgrade direction during plan changes                                                              |
-| `planSettings`                 | `object`   | Per-plan overrides keyed by plan key. The supported sub-key today is `visiblePhases` — an array of phase keys that should appear on the pricing page                 |
-| `maxPaymentOverdueDays`        | `integer`  | Bucket-default payment grace period. Must be ≥ 0. Defaults to `3` when not set                                                                                       |
+| `planOrder`                    | `string[]` | Ordered list of plan keys; drives pricing-page sort and upgrade/downgrade direction during plan changes                                                                                             |
+| `planSettings`                 | `object`   | Per-plan overrides keyed by plan key. The supported sub-key today is `visiblePhases` — an array of phase keys that should appear on the pricing page                                                |
+| `maxPaymentOverdueDays`        | `integer`  | Bucket-default payment grace period. Must be ≥ 0. Defaults to `3` when not set                                                                                                                      |
 
 The request body must include at least one of these fields. All four fields are
 optional in the request — the upsert preserves any field you don't send.
@@ -134,72 +134,82 @@ After deletion, GET returns the default body again.
 
 ## Stripe setup and billing readiness
 
-These endpoints script the Stripe integration that the
-[Monetization Service UI](./stripe-integration.md#connecting-your-stripe-account)
-runs interactively. They live on the Zuplo developer API (not OpenMeter), so the
-request shape is documented here.
+Most users connect Stripe through the
+[Zuplo Portal](./stripe-integration.md#connecting-your-stripe-account). For
+automated provisioning — CI scripts, infrastructure-as-code, or self-hosted
+control planes — the same flow is available via these API endpoints.
 
-### Connect a Stripe app
+### Install the Stripe app
 
-```http
-POST /v3/metering/{bucketId}/setup/stripe
-```
+Connect a Stripe account to a bucket and create the default billing profile in
+one call:
 
-Installs a Stripe app on the bucket and creates the default billing profile
-linked to that app.
-
-| Field         | Type      | Description                                                                                      |
-| ------------- | --------- | ------------------------------------------------------------------------------------------------ |
-| `apiKey`      | `string`  | Stripe secret or restricted key. Required.                                                       |
-| `name`        | `string`  | Display name for the app. Required.                                                              |
-| `taxEnabled`  | `boolean` | Initial value for `workflow.tax.enabled` on the billing profile. Optional; defaults to `false`.  |
-| `taxEnforced` | `boolean` | Initial value for `workflow.tax.enforced` on the billing profile. Optional; defaults to `false`. |
-| `country`     | `string`  | ISO 3166-1 alpha-2 supplier country for the billing profile. Optional; defaults to `"US"`.       |
-
-The request fails if the key prefix does not match the bucket environment:
-
-- Working-copy or preview buckets accept `sk_test_*` or `rk_test_*`.
-- Production buckets accept `sk_live_*` or `rk_live_*`.
-
-```bash
-curl -X POST "https://dev.zuplo.com/v3/metering/$BUCKET_ID/setup/stripe" \
+```shell
+curl \
+  https://dev.zuplo.com/v3/metering/$BUCKET_ID/setup/stripe \
+  --request POST \
   --header "Authorization: Bearer $ZAPI_KEY" \
   --header "Content-Type: application/json" \
-  --data '{
-    "apiKey": "rk_test_...",
-    "name": "Zuplo Monetization (test)",
-    "taxEnabled": false,
-    "country": "US"
-  }'
+  --data @- << EOF
+{
+  "apiKey": "rk_test_...",
+  "name": "Stripe Billing Profile",
+  "taxEnabled": false,
+  "taxEnforced": false,
+  "country": "US"
+}
+EOF
 ```
 
-### Read the connected Stripe app
+The endpoint validates the Stripe key prefix against the bucket's environment:
 
-```http
-GET /v3/metering/{bucketId}/setup/stripe
+- Working-copy and preview buckets accept `sk_test_*` or `rk_test_*`
+- Production buckets accept `sk_live_*` or `rk_live_*`
+
+The response returns the installed `appId`. The endpoint fails with a
+`409 Conflict` if a Stripe app is already installed for the bucket.
+
+### Read the current Stripe setup
+
+```shell
+curl \
+  https://dev.zuplo.com/v3/metering/$BUCKET_ID/setup/stripe \
+  --header "Authorization: Bearer $ZAPI_KEY"
 ```
 
-Returns a summary of the connected Stripe app, the matched billing profile, and
-connection-test status. Use this to confirm the integration is wired up before
-continuing.
+Returns the connected Stripe app summary and the billing profiles linked to it.
 
-### Add a billing profile to a Stripe app
+### Create an additional billing profile
 
-```http
-POST /v3/metering/{bucketId}/setup/stripe/{stripeAppId}/billing-profile
+To attach more billing profiles to the same Stripe app:
+
+```shell
+curl \
+  https://dev.zuplo.com/v3/metering/$BUCKET_ID/setup/stripe/$STRIPE_APP_ID/billing-profile \
+  --request POST \
+  --header "Authorization: Bearer $ZAPI_KEY" \
+  --header "Content-Type: application/json" \
+  --data @- << EOF
+{
+  "name": "EU Billing Profile",
+  "taxEnabled": true,
+  "taxEnforced": false,
+  "country": "DE"
+}
+EOF
 ```
-
-Creates an additional billing profile against an already-installed Stripe app.
-This is rarely needed — the default profile is created during initial setup. Use
-this endpoint to create per-supplier-country profiles.
 
 ### Check billing readiness
 
-```http
-GET /v3/metering/{bucketId}/billing-readiness
+A lightweight check for tooling that gates deploys on Stripe being connected:
+
+```shell
+curl \
+  https://dev.zuplo.com/v3/metering/$BUCKET_ID/billing-readiness \
+  --header "Authorization: Bearer $ZAPI_KEY"
 ```
 
-Returns:
+Response:
 
 ```json
 {
@@ -212,15 +222,27 @@ Returns:
 
 Use this in setup wizards to gate the UI on whether Stripe is connected.
 
-### Update an app
+### Update a connected app
 
-```http
-PUT /v3/metering/{bucketId}/apps/{appId}
+Rotate the Stripe key on an existing app, or update its name and metadata:
+
+```shell
+curl \
+  https://dev.zuplo.com/v3/metering/$BUCKET_ID/apps/$APP_ID \
+  --request PUT \
+  --header "Authorization: Bearer $ZAPI_KEY" \
+  --header "Content-Type: application/json" \
+  --data @- << EOF
+{
+  "type": "stripe",
+  "name": "Stripe Billing Profile",
+  "secretAPIKey": "rk_test_..."
+}
+EOF
 ```
 
-Replaces an app's configuration (name, description, metadata, and — for Stripe
-apps — `secretAPIKey`). The same key-prefix validation as `POST /setup/stripe`
-applies: a Stripe key must match the bucket environment.
+The same key-prefix validation applies — a live key is rejected on a
+non-production bucket and vice versa.
 
 ## API Reference
 

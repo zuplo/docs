@@ -206,8 +206,8 @@ curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions/{subscri
 
 `timing` accepts `"immediate"`, `"next_billing_cycle"`, or an RFC 3339 datetime
 for a scheduled change. The response includes both the closed-out (`current`)
-and newly-started (`next`) subscriptions. To preview the proration credit
-before committing, call
+and newly-started (`next`) subscriptions. To preview the proration credit before
+committing, call
 `POST /v3/metering/{bucketId}/subscriptions/{subscriptionId}/change/estimate-credit`
 with the same body.
 
@@ -281,8 +281,8 @@ curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions/{subscri
 
 - Omitted (or `"immediate"`) — the subscription is canceled immediately and
   access stops right away. Use this for refund-style flows.
-- `"next_billing_cycle"` — access continues until the end of the current
-  billing period, then is revoked. This matches the Developer Portal default.
+- `"next_billing_cycle"` — access continues until the end of the current billing
+  period, then is revoked. This matches the Developer Portal default.
 - An RFC 3339 timestamp — schedule cancellation at a specific time.
 
 ### Cancellation behavior

@@ -58,6 +58,15 @@ specifically Customers, Checkout Sessions, Customer Portal Sessions, Invoices,
 and Tax Calculations. See
 [What Zuplo creates in Stripe](#what-zuplo-creates-in-stripe) for the full list.
 
+:::tip
+
+To script the connection — for CI, infrastructure-as-code, or self-hosted
+control planes — use the
+[Stripe setup API endpoints](./api-access.mdx#stripe-setup-and-billing-readiness)
+instead of the Portal flow.
+
+:::
+
 ### Test mode vs. live mode
 
 Connect with a Stripe **test** key (`sk_test_...`) first to validate your
