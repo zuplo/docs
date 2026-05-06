@@ -144,9 +144,8 @@ new key must:
 
 ## What Zuplo creates in Stripe
 
-Zuplo's catalog (plans, features, rate cards, entitlements) is stored in Zuplo,
-not in Stripe. Publishing a plan does **not** create Stripe Products, Prices, or
-Subscriptions. Stripe is used only at the points where money or payment state is
+Zuplo's catalog — plans, features, rate cards, and entitlements — is stored in
+Zuplo. Stripe is used only at the points where money or payment state is
 involved.
 
 The objects that Zuplo creates or manages in your Stripe account:
@@ -160,13 +159,8 @@ The objects that Zuplo creates or manages in your Stripe account:
 | Stripe Tax Calculation          | At invoice time when [tax collection](./tax-collection.md) is enabled      |
 | Stripe Webhook Endpoint         | Once on connection, so Zuplo can react to payment events                   |
 
-Zuplo does **not** create Stripe Products, Prices, Subscriptions, Payment
-Intents, Setup Intents, Refunds, or Stripe Billing Meters. This matches the
-restricted-key permissions listed above — those scopes are intentionally left at
-**None**.
-
-You won't find a Zuplo plan listed under **Products** in your Stripe dashboard.
-To see what Zuplo has created, look under **Customers** and **Invoices**.
+To see what Zuplo has created, look under **Customers** and **Invoices** in your
+Stripe dashboard.
 
 ## Subscription flow
 
