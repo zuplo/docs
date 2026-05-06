@@ -62,43 +62,75 @@ curl \
 
 ## Bucket monetization configuration
 
-Each bucket has an optional `MonetizationConfiguration` record that holds
-bucket-wide defaults. The configuration is read by the runtime and the Developer
-Portal — it is not stored in OpenMeter.
+Each bucket has an optional `MonetizationConfiguration` that holds bucket-wide
+behavior — multi-subscription support, plan display order, plan-level overrides,
+and the default payment grace period. The configuration is read by the runtime
+and the Developer Portal; it is not stored in OpenMeter.
 
-| Method   | Path                                                 |
-| -------- | ---------------------------------------------------- |
-| `GET`    | `/v3/metering/{bucketId}/monetization-configuration` |
-| `PUT`    | `/v3/metering/{bucketId}/monetization-configuration` |
-| `DELETE` | `/v3/metering/{bucketId}/monetization-configuration` |
+### Read
 
-The `PUT` endpoint upserts the record. At least one of the four fields below
-must be present. Pass any combination — fields that are omitted retain their
-previous value.
-
-| Field                          | Type               | Description                                                                                                                                                                                                                                                                                                                                                    |
-| ------------------------------ | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `multipleSubscriptionsEnabled` | `boolean`          | Stored on the bucket. Reserved for future enforcement of multi-subscription rules; today the Developer Portal create-subscription path enforces a single active subscription per customer regardless of this flag.                                                                                                                                             |
-| `planOrder`                    | `string[]`         | Plan keys in display order. Drives the pricing page sort and is used by [plan changes](./subscription-lifecycle.md#plan-changes-upgrades-and-downgrades) to decide upgrade vs downgrade — moving to a plan with a higher (or equal) index is treated as an upgrade with `"immediate"` timing; a lower index is a downgrade with `"next_billing_cycle"` timing. |
-| `planSettings`                 | `object`           | Per-plan overrides keyed by plan key. The supported sub-key today is `visiblePhases` — an array of phase keys that should appear on the pricing page. Omitted means no filtering; `[]` hides all phases for that plan.                                                                                                                                         |
-| `maxPaymentOverdueDays`        | `integer` (`>= 0`) | Bucket-level grace period for overdue payments. Used as the lowest-priority value in the resolution chain: customer metadata → plan metadata → this bucket value → built-in default of `3` days. See [Subscription and payment validation](./monetization-policy.md#subscription-and-payment-validation).                                                      |
-
-```bash
-curl -X PUT "https://dev.zuplo.com/v3/metering/$BUCKET_ID/monetization-configuration" \
-  --header "Authorization: Bearer $ZAPI_KEY" \
-  --header "Content-Type: application/json" \
-  --data '{
-    "planOrder": ["free", "developer", "pro"],
-    "planSettings": {
-      "pro": { "visiblePhases": ["default"] }
-    },
-    "maxPaymentOverdueDays": 7
-  }'
+```shell
+curl \
+  https://dev.zuplo.com/v3/metering/$BUCKET_ID/monetization-configuration \
+  --header "Authorization: Bearer $ZAPI_KEY"
 ```
 
-`DELETE` removes the record entirely; `GET` on a bucket with no record returns
-the schema defaults (`multipleSubscriptionsEnabled: false`, `planOrder: []`,
-`planSettings: {}`, `maxPaymentOverdueDays: 3`).
+When no configuration row exists for the bucket, the endpoint returns a default
+body with `multipleSubscriptionsEnabled: false`, an empty `planOrder`, empty
+`planSettings`, and `maxPaymentOverdueDays: 3`.
+
+### Upsert
+
+```shell
+curl \
+  https://dev.zuplo.com/v3/metering/$BUCKET_ID/monetization-configuration \
+  --request PUT \
+  --header "Authorization: Bearer $ZAPI_KEY" \
+  --header "Content-Type: application/json" \
+  --data @- << EOF
+{
+  "multipleSubscriptionsEnabled": false,
+  "planOrder": ["free", "starter", "pro", "enterprise"],
+  "planSettings": {
+    "pro": { "visiblePhases": ["default"] }
+  },
+  "maxPaymentOverdueDays": 7
+}
+EOF
+```
+
+| Field                          | Type       | Description                                                                                                                                                          |
+| ------------------------------ | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `multipleSubscriptionsEnabled` | `boolean`  | Stored on the bucket. Reserved for future multi-subscription rules; today the Developer Portal create-subscription path enforces a single active subscription per customer regardless of this flag. |
+| `planOrder`                    | `string[]` | Ordered list of plan keys; drives pricing-page sort and upgrade/downgrade direction during plan changes                                                              |
+| `planSettings`                 | `object`   | Per-plan overrides keyed by plan key. The supported sub-key today is `visiblePhases` — an array of phase keys that should appear on the pricing page                 |
+| `maxPaymentOverdueDays`        | `integer`  | Bucket-default payment grace period. Must be ≥ 0. Defaults to `3` when not set                                                                                       |
+
+The request body must include at least one of these fields. All four fields are
+optional in the request — the upsert preserves any field you don't send.
+
+`planOrder` is consumed when a customer changes plans through the Developer
+Portal: a target plan whose index is greater than or equal to the current plan's
+index is treated as an upgrade (immediate timing); a lower index is treated as a
+downgrade (next-billing-cycle timing). Plans not listed in `planOrder` default
+to upgrade timing.
+
+`maxPaymentOverdueDays` is the lowest-precedence default for the payment grace
+period. See
+[Subscription and payment validation](./monetization-policy.md#subscription-and-payment-validation)
+for the full precedence chain (customer metadata → plan metadata → bucket
+configuration → built-in default).
+
+### Delete
+
+```shell
+curl \
+  https://dev.zuplo.com/v3/metering/$BUCKET_ID/monetization-configuration \
+  --request DELETE \
+  --header "Authorization: Bearer $ZAPI_KEY"
+```
+
+After deletion, GET returns the default body again.
 
 ## Stripe setup and billing readiness
 
