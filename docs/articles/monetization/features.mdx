@@ -44,7 +44,8 @@ feature structure carefully before creating them.
 
 ## Creating a Feature
 
-Create a metered feature linked to an API requests meter:
+Create a metered feature linked to the `api_requests` meter. The feature's `key`
+must match the meter's `slug`:
 
 ```shell
 curl \
@@ -54,8 +55,8 @@ curl \
   --header "Content-Type: application/json" \
   --data @- << EOF
 {
-  "key": "api_calls",
-  "name": "API Calls",
+  "key": "api_requests",
+  "name": "API Requests",
   "meterSlug": "api_requests"
 }
 EOF
@@ -66,11 +67,11 @@ The response includes the created feature:
 ```json
 {
   "id": "01ARZ3NDEKTSV4RRFFQ69G5FAV",
-  "key": "api_calls",
-  "name": "API Calls",
+  "key": "api_requests",
+  "name": "API Requests",
   "meterSlug": "api_requests",
-  "createdAt": "2024-01-01T01:01:01.001Z",
-  "updatedAt": "2024-01-01T01:01:01.001Z"
+  "createdAt": "2026-01-01T01:01:01.001Z",
+  "updatedAt": "2026-01-01T01:01:01.001Z"
 }
 ```
 
