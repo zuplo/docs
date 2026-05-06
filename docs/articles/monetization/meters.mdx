@@ -25,7 +25,7 @@ A meter is configured with:
 - **Aggregation** - How to combine values (typically `SUM`)
 
 When events are ingested, the meter matches events by type, extracts the
-specified value, and aggregates it per customer over time.
+specified value, and aggregates it per customer subscription over time.
 
 ## Common Examples
 
@@ -74,8 +74,13 @@ Track token consumption for AI applications:
 }
 ```
 
-Each event reports a fixed quantity per request. For example, if a meter is
-configured to report 50 tokens per request:
+The meter aggregates events from the gateway; the per-request quantity comes
+from the `MonetizationInboundPolicy`. Set a fixed cost per request in the
+policy's `meters` option, or call
+[`MonetizationInboundPolicy.setMeters`](./monetization-policy.md#dynamic-metering)
+from a custom outbound policy to report a value derived from the response — for
+example, the actual token count an LLM returned. An event for a request that
+consumed 50 tokens looks like this:
 
 ```json
 {
