@@ -28,7 +28,7 @@ and invoices come out wrong.
 
 Zuplo eliminates this by making the gateway the single source of truth. Every
 request that hits your API is metered, enforced, and billed through one system.
-When a customer's quota runs out, they get a `429` immediately — not five
+When a customer's quota runs out, they get a `403` immediately — not five
 minutes later when a batch job catches up.
 
 ## Core concepts
@@ -73,7 +73,7 @@ with automatic conversion to paid, and multiple subscriptions per customer.
 - **Built-in metering** — Count requests, tokens, bytes, or any custom
   dimension. No external metering service required.
 - **Real-time quota enforcement** — Customers hitting their limit get a
-  `429 Too Many Requests` response instantly, not after a batch sync.
+  `403 Forbidden` response instantly, not after a batch sync.
 - **Stripe billing integration** — Subscriptions, invoicing, and payment
   collection handled by Stripe. Zuplo keeps access state synchronized
   automatically.
