@@ -74,9 +74,10 @@ with automatic conversion to paid, and multiple subscriptions per customer.
   dimension. No external metering service required.
 - **Real-time quota enforcement** — Customers hitting their limit get a
   `403 Forbidden` response instantly, not after a batch sync.
-- **Stripe billing integration** — Subscriptions, invoicing, and payment
-  collection handled by Stripe. Zuplo keeps access state synchronized
-  automatically.
+- **Stripe billing integration** — Stripe handles checkout, payment, the billing
+  portal, and tax. Zuplo issues Stripe Invoices for fixed fees and metered usage
+  at the end of each billing period, and the gateway revokes access
+  automatically when a payment goes overdue past the configured grace period.
 - **Self-serve Developer Portal** — Pricing page, plan selection, checkout,
   subscription management, usage dashboards, and API key management built into
   the Zudoku-powered portal.
