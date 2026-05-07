@@ -57,17 +57,19 @@ curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions \
   -H "Authorization: Bearer {API_KEY}" \
   -H "Content-Type: application/json" \
   -d '{
-    "plan": { "key": "pro" },
-    "customerId": "01J9ZX2A8R0K8H6VG2C1A0K3WP"
+    "plan": { "key": "pro", "version": 1 },
+    "customerKey": "user_external_id",
+    "timing": "immediate"
   }'
 ```
 
-`plan` references the target plan by its `key` (and optionally `version`).
-Provide either `customerId` (the OpenMeter customer ULID, format
-`^[0-7][0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{25}$`) or `customerKey` (your own
-identifier). Optional fields include `timing` (`"immediate"` by default,
-`"next_billing_cycle"`, or an RFC 3339 timestamp), `startingPhase`, `name`,
-`description`, `metadata`, `alignment`, and `billingAnchor`.
+`plan` references the target plan by its `key` and (optionally) `version`.
+Identify the customer with either `customerId` (the OpenMeter customer ULID) or
+`customerKey` (your external customer identifier — for example, your Auth0 user
+ID); `customerId` takes precedence when both are sent. Set `timing` to
+`"immediate"` to start now, `"next_billing_cycle"` to defer activation, or an
+RFC 3339 timestamp to schedule. Optional fields: `name`, `description`,
+`metadata`, `billingAnchor`, `startingPhase`.
 
 ## Free trials
 
@@ -198,12 +200,14 @@ curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions/{subscri
   -H "Content-Type: application/json" \
   -d '{
     "timing": "immediate",
-    "plan": { "key": "enterprise" }
+    "plan": { "key": "enterprise", "version": 1 }
   }'
 ```
 
-`timing` accepts `"immediate"`, `"next_billing_cycle"`, or an RFC 3339
-timestamp. To preview the proration credit before committing, call
+`timing` accepts `"immediate"`, `"next_billing_cycle"`, or an RFC 3339 datetime
+for a scheduled change. The response includes both the closed-out (`current`)
+and newly-started (`next`) subscriptions. To preview the proration credit before
+committing, call
 `POST /v3/metering/{bucketId}/subscriptions/{subscriptionId}/change/estimate-credit`
 with the same body.
 
@@ -270,9 +274,7 @@ Customers can cancel from the Developer Portal subscriptions page:
 curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions/{subscriptionId}/cancel \
   -H "Authorization: Bearer {API_KEY}" \
   -H "Content-Type: application/json" \
-  -d '{
-    "timing": "next_billing_cycle"
-  }'
+  -d '{ "timing": "next_billing_cycle" }'
 ```
 
 `timing` controls when the cancellation takes effect:
@@ -301,9 +303,10 @@ curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions/{subscri
   -H "Authorization: Bearer {API_KEY}"
 ```
 
-This removes the pending cancellation. The subscription continues as normal. For
-a subscription whose period has already ended, create a new subscription on the
-same plan instead.
+This removes the pending cancellation. The subscription continues as normal.
+
+If the subscription has already ended, create a new subscription rather than
+restoring the old one.
 
 ## Multiple subscriptions
 

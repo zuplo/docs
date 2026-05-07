@@ -154,9 +154,9 @@ below it:
 
 1. **Customer metadata** — `zuplo_max_payment_overdue_days` on the customer
 2. **Plan metadata** — `zuplo_max_payment_overdue_days` on the plan
-3. **Bucket configuration** — `maxPaymentOverdueDays` on the bucket's
-   monetization configuration (PUT
-   `/v3/metering/{bucketId}/monetization-configuration`)
+3. **Bucket configuration** —
+   [`maxPaymentOverdueDays`](./api-access.mdx#bucket-monetization-configuration)
+   on the bucket's monetization configuration
 4. **Default** — `3` days
 
 Set the value to `0` to block requests immediately when payment is overdue.
@@ -296,20 +296,20 @@ the RFC 7807 Problem Details format:
 
 Common error details:
 
-| Condition                       | `detail` message                                                    |
-| ------------------------------- | ------------------------------------------------------------------- |
-| No auth header                  | `"No Authorization Header"`                                         |
-| Wrong auth scheme               | `"Invalid Authorization Scheme"`                                    |
-| Empty key after the auth scheme | `"No key present"`                                                  |
-| Cached invalid key or 401       | `"Authorization Failed"`                                            |
-| Invalid API key                 | `"API Key is invalid or does not have access to the API"`           |
-| Expired API key                 | `"API Key has expired."`                                            |
-| Expired subscription            | `"API Key has an expired subscription."`                            |
-| Subscription has no payment     | `"Subscription payment status is not available."`                   |
-| Payment not made                | `"Payment has not been made."`                                      |
-| Payment overdue                 | `"Payment is overdue. Please update your payment method."`          |
-| Quota exhausted                 | `"API Key has exceeded the allowed limit for \"X\" meter."`         |
-| Meter not in subscription       | `"API Key does not have \"X\" meter provided by the subscription."` |
+| Condition                          | `detail` message                                                    |
+| ---------------------------------- | ------------------------------------------------------------------- |
+| No auth header                     | `"No Authorization Header"`                                         |
+| Wrong auth scheme                  | `"Invalid Authorization Scheme"`                                    |
+| No key after the auth scheme       | `"No key present"`                                                  |
+| Cached invalid key or upstream 401 | `"Authorization Failed"`                                            |
+| Invalid API key                    | `"API Key is invalid or does not have access to the API"`           |
+| Expired API key                    | `"API Key has expired."`                                            |
+| Expired subscription               | `"API Key has an expired subscription."`                            |
+| Missing payment status             | `"Subscription payment status is not available."`                   |
+| Payment not made                   | `"Payment has not been made."`                                      |
+| Payment overdue                    | `"Payment is overdue. Please update your payment method."`          |
+| Quota exhausted                    | `"API Key has exceeded the allowed limit for \"X\" meter."`         |
+| Meter not in subscription          | `"API Key does not have \"X\" meter provided by the subscription."` |
 
 ## Pipeline ordering
 

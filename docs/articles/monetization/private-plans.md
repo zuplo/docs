@@ -109,10 +109,9 @@ Save the returned `id` — you need it to publish and invite users.
 
 :::note
 
-The plan `id` is a 26-character ULID (regex
-`^[0-7][0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{25}$`), separate from the human-friendly
-`key` you set on creation. The publish, invite, and other plan-scoped endpoints
-require the `id`, not the `key`.
+The plan `id` is a 26-character ULID. It's distinct from the human-friendly
+`key` field. Use the `id` (not the `key`) when calling `/publish` and
+`/plan-invites`.
 
 :::
 
