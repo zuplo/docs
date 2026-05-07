@@ -284,21 +284,26 @@ directory.
 3. In the **Meters** configuration field, set the key to `api_requests` with a
    value of `1` to match the meter you created in _Step 4_. This field maps the
    meter slug to the number of units each request consumes.
+4. Click on **Create Policy**.
+
+The Portal saves the policy to `policies.json` as a complete entry:
 
 ```json
 {
-  "export": "MonetizationInboundPolicy",
-  "module": "$import(@zuplo/runtime)",
-  "options": {
-    "cacheTtlSeconds": 60,
-    "meters": {
-      "api_requests": 1
+  "name": "monetization-inbound",
+  "policyType": "monetization-inbound",
+  "handler": {
+    "export": "MonetizationInboundPolicy",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "cacheTtlSeconds": 60,
+      "meters": {
+        "api_requests": 1
+      }
     }
   }
 }
 ```
-
-4. Click on **Create Policy**.
 
 ### Apply the policy to routes
 
