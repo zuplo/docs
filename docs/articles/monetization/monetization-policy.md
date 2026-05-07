@@ -19,24 +19,25 @@ and allows or blocks access.
 
 ## Basic configuration
 
-Add the policy in the Zuplo Portal under **Code → policies.json → Create Policy
-→ Monetization**. The policy editor shows the handler block:
+Add the policy to your `policies.json`:
 
 ```json
 {
-  "export": "MonetizationInboundPolicy",
-  "module": "$import(@zuplo/runtime)",
-  "options": {
-    "meters": {
-      "api_requests": 1
+  "name": "monetization-inbound",
+  "policyType": "monetization-inbound",
+  "handler": {
+    "export": "MonetizationInboundPolicy",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "meters": {
+        "api_requests": 1
+      }
     }
   }
 }
 ```
 
-The Portal saves this as a named entry inside `policies.json`, with the `name`
-and `policyType` fields filled in for you. Reference the policy from your
-route's inbound pipeline:
+Then reference it in your route's inbound policy pipeline:
 
 ```json
 {
@@ -162,43 +163,45 @@ Set the value to `0` to block requests immediately when payment is overdue.
 
 ## Multiple policies for different routes
 
-Different routes can have different metering configurations. Create one policy
-per configuration in the Portal — each one is a separate handler block:
-
-`monetization-standard`:
+Different routes can have different metering configurations. Define multiple
+policy instances in `policies.json`:
 
 ```json
-{
-  "export": "MonetizationInboundPolicy",
-  "module": "$import(@zuplo/runtime)",
-  "options": {
-    "meters": { "api_requests": 1 }
+[
+  {
+    "name": "monetization-standard",
+    "policyType": "monetization-inbound",
+    "handler": {
+      "export": "MonetizationInboundPolicy",
+      "module": "$import(@zuplo/runtime)",
+      "options": {
+        "meters": { "api_requests": 1 }
+      }
+    }
+  },
+  {
+    "name": "monetization-ai",
+    "policyType": "monetization-inbound",
+    "handler": {
+      "export": "MonetizationInboundPolicy",
+      "module": "$import(@zuplo/runtime)",
+      "options": {
+        "meters": { "api_requests": 1, "tokens": 1 }
+      }
+    }
+  },
+  {
+    "name": "monetization-premium",
+    "policyType": "monetization-inbound",
+    "handler": {
+      "export": "MonetizationInboundPolicy",
+      "module": "$import(@zuplo/runtime)",
+      "options": {
+        "meters": { "api_credits": 10 }
+      }
+    }
   }
-}
-```
-
-`monetization-ai`:
-
-```json
-{
-  "export": "MonetizationInboundPolicy",
-  "module": "$import(@zuplo/runtime)",
-  "options": {
-    "meters": { "api_requests": 1, "tokens": 1 }
-  }
-}
-```
-
-`monetization-premium`:
-
-```json
-{
-  "export": "MonetizationInboundPolicy",
-  "module": "$import(@zuplo/runtime)",
-  "options": {
-    "meters": { "api_credits": 10 }
-  }
-}
+]
 ```
 
 Apply each to the appropriate routes:
