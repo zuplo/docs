@@ -204,17 +204,26 @@ for the detailed model and examples.
 
 ### Cancellation
 
-When a customer cancels through the Developer Portal:
+When a customer cancels through the Developer Portal, the timing of the
+cancellation depends on whether the current phase has billable items:
 
-1. The subscription is scheduled to cancel at the end of the current billing
-   period (the portal sends `timing: "next_billing_cycle"`)
-2. The customer retains access until their current billing period ends
-3. At period end, access is revoked and the API key stops working
+- **Paid phases** — the portal sends `timing: "next_billing_cycle"`. The
+  subscription is scheduled to cancel at the end of the current billing
+  period, the customer retains access until then, and the API key stops
+  working at period end.
+- **Free phases** — the portal sends `timing: "immediate"`. With nothing to
+  invoice at period end, there's no billing period to wait out, so the
+  subscription cancels and access is revoked right away. Two situations fall
+  into this branch:
+  - The customer is on a **free trial phase** (the first phase of a plan
+    with a later paid phase) and cancels before the trial converts.
+  - The customer is on a **free plan** — a plan whose only phase has no
+    billable rate cards (every rate card's `price` is `null`).
 
 For programmatic cancellation, see
 [Cancellation](./subscription-lifecycle.md#cancellation) in the Subscription
-Lifecycle guide — the API endpoint accepts an optional `timing` parameter and
-cancels immediately when none is provided.
+Lifecycle guide — the API endpoint accepts a `timing` parameter to control
+this same behavior explicitly.
 
 ## Proration
 
