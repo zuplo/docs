@@ -107,6 +107,15 @@ curl -X POST "https://dev.zuplo.com/v3/metering/${ZUPLO_BUCKET_ID}/plans" \
 
 Save the returned `id` — you need it to publish and invite users.
 
+:::note
+
+The plan `id` is a 26-character ULID (regex
+`^[0-7][0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{25}$`), separate from the human-friendly
+`key` you set on creation. The publish, invite, and other plan-scoped endpoints
+require the `id`, not the `key`.
+
+:::
+
 The key difference from a public plan is `metadata.zuplo_private_plan` set to
 `"true"`. Everything else (rate cards, entitlements, pricing) works the same as
 public plans.

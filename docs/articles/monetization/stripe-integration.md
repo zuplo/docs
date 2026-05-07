@@ -44,6 +44,15 @@ metering. Stripe is the source of truth for payment state.
 3. Enter a **Name** and paste your **Stripe API Key**
 4. Click **Save**
 
+:::tip
+
+To script the same flow (CI, infrastructure-as-code, etc.) use the
+[Stripe setup API](./api-access.mdx#stripe-setup-and-billing-readiness) — it
+exposes `POST /setup/stripe`, `GET /billing-readiness`, and key-rotation
+endpoints with the same prefix validation as the UI.
+
+:::
+
 The connection authorizes Zuplo to manage Stripe objects on your behalf —
 specifically Customers, Checkout Sessions, Customer Portal Sessions, Invoices,
 and Tax Calculations. See
@@ -190,12 +199,17 @@ cycle.
 
 ### Cancellation
 
-When a customer cancels:
+When a customer cancels through the Developer Portal:
 
-1. The subscription is set to cancel at the end of the current billing period
-   (by default)
+1. The subscription is scheduled to cancel at the end of the current billing
+   period (the portal sends `timing: "next_billing_cycle"`)
 2. The customer retains access until their current billing period ends
 3. At period end, access is revoked and the API key stops working
+
+For programmatic cancellation, see
+[Cancellation](./subscription-lifecycle.md#cancellation) in the Subscription
+Lifecycle guide — the API endpoint accepts an optional `timing` parameter and
+cancels immediately when none is provided.
 
 ## Proration
 
@@ -227,8 +241,11 @@ Stripe retries the payment.
 | `failed`        | Access blocked after grace period (configurable) |
 | `uncollectible` | Access blocked                                   |
 
-The grace period is configurable via `zuplo_max_payment_overdue_days` metadata
-on the plan or customer (default: 3 days).
+The grace period is configurable, with customer metadata overriding plan
+metadata, which overrides the bucket-level `maxPaymentOverdueDays`. Default is 3
+days. See
+[Subscription and payment validation](./monetization-policy.md#subscription-and-payment-validation)
+for the full resolution order.
 
 ## Customer portal
 
@@ -265,13 +282,14 @@ After connecting Stripe and publishing plans:
 1. Open your Developer Portal
 2. Subscribe to a plan using test card `4242 4242 4242 4242`
 3. Verify in Stripe Dashboard:
-   - Customer created
-   - Subscription active
-   - Product and Price match your plan
+   - A **Customer** is created under **Customers**
+   - A **Checkout Session** appears for the subscribe flow
+   - At the end of the billing period, an **Invoice** is created under
+     **Invoices**
 4. Make API requests and verify:
    - Requests succeed within quota
    - `403 Forbidden` returned when quota exceeded (hard limit plans)
    - Usage visible in the Developer Portal dashboard
 5. Cancel the subscription and verify:
-   - Access revoked after billing period
-   - Stripe subscription shows canceled
+   - Access is revoked at the end of the billing period
+   - The subscription is marked as canceled in the Developer Portal

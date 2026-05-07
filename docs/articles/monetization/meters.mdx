@@ -52,13 +52,21 @@ Each event contains the `subscription` ID linking it to a subscription and a
   "specversion": "1.0",
   "type": "api_requests",
   "source": "monetization-policy",
-  "subject": "customer-id",
+  "subject": "01KNVXHQG356VA7T7W0V9N21GH",
   "subscription": "01KNVXHQG356VA7T7W0V9N21GH",
   "data": {
     "total": 1
   }
 }
 ```
+
+:::note
+
+Events emitted by the `MonetizationInboundPolicy` always set `subject` and
+`subscription` to the same subscription ULID. See
+[Monetization Policy](./monetization-policy.md) for how usage is recorded.
+
+:::
 
 ### Token Usage
 
@@ -83,7 +91,7 @@ configured to report 50 tokens per request:
   "specversion": "1.0",
   "type": "tokens",
   "source": "monetization-policy",
-  "subject": "customer-id",
+  "subject": "01KNVXHQG356VA7T7W0V9N21GH",
   "subscription": "01KNVXHQG356VA7T7W0V9N21GH",
   "data": {
     "total": 50
@@ -113,7 +121,7 @@ Each event reports the number of bytes transferred:
   "specversion": "1.0",
   "type": "data_transfer",
   "source": "monetization-policy",
-  "subject": "customer-id",
+  "subject": "01KNVXHQG356VA7T7W0V9N21GH",
   "subscription": "01KNVXHQG356VA7T7W0V9N21GH",
   "data": {
     "total": 4096
