@@ -19,25 +19,24 @@ and allows or blocks access.
 
 ## Basic configuration
 
-Add the policy to your `policies.json`:
+Add the policy in the Zuplo Portal under **Code → policies.json → Create Policy
+→ Monetization**. The policy editor shows the handler block:
 
 ```json
 {
-  "name": "monetization-inbound",
-  "policyType": "monetization-inbound",
-  "handler": {
-    "export": "MonetizationInboundPolicy",
-    "module": "$import(@zuplo/runtime)",
-    "options": {
-      "meters": {
-        "api_requests": 1
-      }
+  "export": "MonetizationInboundPolicy",
+  "module": "$import(@zuplo/runtime)",
+  "options": {
+    "meters": {
+      "api_requests": 1
     }
   }
 }
 ```
 
-Then reference it in your route's inbound policy pipeline:
+The Portal saves this as a named entry inside `policies.json`, with the `name`
+and `policyType` fields filled in for you. Reference the policy from your
+route's inbound pipeline:
 
 ```json
 {
@@ -53,8 +52,8 @@ Then reference it in your route's inbound policy pipeline:
 
 The `MonetizationInboundPolicy` handles API key authentication internally. It
 reads the API key from the `Authorization` header, validates it, and sets
-`request.user`. You do not need a separate `api-key-auth` policy on monetized
-routes — the monetization policy replaces it.
+`request.user`. You do not need a separate API key authentication policy
+(`api-key-inbound`) on monetized routes — the monetization policy replaces it.
 
 :::
 
@@ -62,7 +61,7 @@ routes — the monetization policy replaces it.
 
 | Option               | Type               | Default           | Description                                       |
 | -------------------- | ------------------ | ----------------- | ------------------------------------------------- |
-| `meters`             | object             | (required)        | Map of meter keys to increment values             |
+| `meters`             | object             | _(none)_          | Map of meter keys to increment values             |
 | `meterOnStatusCodes` | string or number[] | `"200-299"`       | Status code range to meter                        |
 | `authHeader`         | string             | `"authorization"` | Header to read the API key from                   |
 | `authScheme`         | string             | `"Bearer"`        | Expected auth scheme prefix                       |
@@ -71,7 +70,13 @@ routes — the monetization policy replaces it.
 ### `meters`
 
 The `meters` option defines which meters to increment and by how much when a
-request is processed. Values must be positive numbers.
+request is processed. Values must be non-negative numbers.
+
+If `meters` is omitted, the policy still authenticates the API key and validates
+the subscription's payment status, but no usage is recorded. If `meters` is
+provided, it must contain at least one entry — an empty object throws a
+configuration error. To track usage at runtime instead of from static config,
+see [Dynamic metering](#dynamic-metering).
 
 ```json
 // Increment the api_requests meter by 1 per request
@@ -143,53 +148,57 @@ When payment fails, a configurable grace period (default 3 days) allows
 continued access while retries are attempted. After the grace period, access is
 blocked until payment succeeds.
 
-The grace period is configurable via metadata on the plan or customer:
+The grace period resolves in this order, with each level overriding the one
+below it:
 
-- Plan metadata key: `zuplo_max_payment_overdue_days`
-- Customer metadata key: `zuplo_max_payment_overdue_days`
-- Default: `3` (days)
+1. **Customer metadata** — `zuplo_max_payment_overdue_days` on the customer
+2. **Plan metadata** — `zuplo_max_payment_overdue_days` on the plan
+3. **Bucket configuration** — `maxPaymentOverdueDays` on the bucket's
+   monetization configuration (PUT
+   `/v3/metering/{bucketId}/monetization-configuration`)
+4. **Default** — `3` days
+
+Set the value to `0` to block requests immediately when payment is overdue.
 
 ## Multiple policies for different routes
 
-Different routes can have different metering configurations. Define multiple
-policy instances:
+Different routes can have different metering configurations. Create one policy
+per configuration in the Portal — each one is a separate handler block:
+
+`monetization-standard`:
 
 ```json
-[
-  {
-    "name": "monetization-standard",
-    "policyType": "monetization-inbound",
-    "handler": {
-      "export": "MonetizationInboundPolicy",
-      "module": "$import(@zuplo/runtime)",
-      "options": {
-        "meters": { "api_requests": 1 }
-      }
-    }
-  },
-  {
-    "name": "monetization-ai",
-    "policyType": "monetization-inbound",
-    "handler": {
-      "export": "MonetizationInboundPolicy",
-      "module": "$import(@zuplo/runtime)",
-      "options": {
-        "meters": { "api_requests": 1, "tokens": 1 }
-      }
-    }
-  },
-  {
-    "name": "monetization-premium",
-    "policyType": "monetization-inbound",
-    "handler": {
-      "export": "MonetizationInboundPolicy",
-      "module": "$import(@zuplo/runtime)",
-      "options": {
-        "meters": { "api_credits": 10 }
-      }
-    }
+{
+  "export": "MonetizationInboundPolicy",
+  "module": "$import(@zuplo/runtime)",
+  "options": {
+    "meters": { "api_requests": 1 }
   }
-]
+}
+```
+
+`monetization-ai`:
+
+```json
+{
+  "export": "MonetizationInboundPolicy",
+  "module": "$import(@zuplo/runtime)",
+  "options": {
+    "meters": { "api_requests": 1, "tokens": 1 }
+  }
+}
+```
+
+`monetization-premium`:
+
+```json
+{
+  "export": "MonetizationInboundPolicy",
+  "module": "$import(@zuplo/runtime)",
+  "options": {
+    "meters": { "api_credits": 10 }
+  }
+}
 ```
 
 Apply each to the appropriate routes:
@@ -284,17 +293,20 @@ the RFC 7807 Problem Details format:
 
 Common error details:
 
-| Condition                 | `detail` message                                                    |
-| ------------------------- | ------------------------------------------------------------------- |
-| No auth header            | `"No Authorization Header"`                                         |
-| Wrong auth scheme         | `"Invalid Authorization Scheme"`                                    |
-| Invalid API key           | `"API Key is invalid or does not have access to the API"`           |
-| Expired API key           | `"API Key has expired."`                                            |
-| Expired subscription      | `"API Key has an expired subscription."`                            |
-| Payment not made          | `"Payment has not been made."`                                      |
-| Payment overdue           | `"Payment is overdue. Please update your payment method."`          |
-| Quota exhausted           | `"API Key has exceeded the allowed limit for \"X\" meter."`         |
-| Meter not in subscription | `"API Key does not have \"X\" meter provided by the subscription."` |
+| Condition                       | `detail` message                                                    |
+| ------------------------------- | ------------------------------------------------------------------- |
+| No auth header                  | `"No Authorization Header"`                                         |
+| Wrong auth scheme               | `"Invalid Authorization Scheme"`                                    |
+| Empty key after the auth scheme | `"No key present"`                                                  |
+| Cached invalid key or 401       | `"Authorization Failed"`                                            |
+| Invalid API key                 | `"API Key is invalid or does not have access to the API"`           |
+| Expired API key                 | `"API Key has expired."`                                            |
+| Expired subscription            | `"API Key has an expired subscription."`                            |
+| Subscription has no payment     | `"Subscription payment status is not available."`                   |
+| Payment not made                | `"Payment has not been made."`                                      |
+| Payment overdue                 | `"Payment is overdue. Please update your payment method."`          |
+| Quota exhausted                 | `"API Key has exceeded the allowed limit for \"X\" meter."`         |
+| Meter not in subscription       | `"API Key does not have \"X\" meter provided by the subscription."` |
 
 ## Pipeline ordering
 

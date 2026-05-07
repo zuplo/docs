@@ -30,8 +30,11 @@ announced.
      -H "Authorization: Bearer {API_KEY}"
    ```
 
-   Fix: Either resolve the payment issue in Stripe, or adjust the grace period
-   via `zuplo_max_payment_overdue_days` metadata on the plan or customer.
+   Fix: Either resolve the payment issue in Stripe, or adjust the grace period.
+   The window resolves customer metadata → plan metadata → bucket configuration
+   → 3-day default. See
+   [Subscription and payment validation](./monetization-policy.md#subscription-and-payment-validation)
+   for details.
 
 2. **Customer is using the wrong API key.** Each subscription generates its own
    key. If the customer has multiple subscriptions or regenerated their key,

@@ -317,7 +317,8 @@ Next, you need to apply the Monetization policy to some or all of your routes.
 :::note
 
 The `MonetizationInboundPolicy` handles API key authentication internally. You
-do not need a separate `api-key-auth` policy on monetized routes.
+do not need a separate API key authentication policy (`api-key-inbound`) on
+monetized routes.
 
 :::
 
