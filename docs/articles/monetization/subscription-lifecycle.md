@@ -27,8 +27,9 @@ trials, upgrades, downgrades, cancellation, and reactivation.
 :::note
 
 Access is also governed by payment status. If a payment is overdue beyond the
-grace period (default 3 days, configurable via `zuplo_max_payment_overdue_days`
-metadata), access is blocked even for active subscriptions.
+grace period (default 3 days), access is blocked even for active subscriptions.
+The grace period is configurable per-customer, per-plan, or per-bucket — see
+[Subscription and payment validation](./monetization-policy.md#subscription-and-payment-validation).
 
 :::
 
@@ -56,14 +57,17 @@ curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions \
   -H "Authorization: Bearer {API_KEY}" \
   -H "Content-Type: application/json" \
   -d '{
-    "customerId": "cus_abc123",
-    "planKey": "pro",
-    "stripeCustomerId": "cus_stripe_xyz"
+    "plan": { "key": "pro" },
+    "customerId": "01J9ZX2A8R0K8H6VG2C1A0K3WP"
   }'
 ```
 
-The `customerId` is the user's identifier in your auth system (Auth0 user ID,
-etc.). The `stripeCustomerId` is the customer's ID in Stripe.
+`plan` references the target plan by its `key` (and optionally `version`).
+Provide either `customerId` (the OpenMeter customer ULID, format
+`^[0-7][0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{25}$`) or `customerKey` (your own
+identifier). Optional fields include `timing` (`"immediate"` by default,
+`"next_billing_cycle"`, or an RFC 3339 timestamp), `startingPhase`, `name`,
+`description`, `metadata`, `alignment`, and `billingAnchor`.
 
 ## Free trials
 
@@ -185,14 +189,23 @@ Customers can change plans from the Subscriptions page in the Developer Portal:
 
 ### Programmatic (API)
 
+Plan changes go through the dedicated `change` endpoint, which closes the
+current subscription and starts a new one on the target plan:
+
 ```bash
-curl -X PATCH https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions/{subscriptionId} \
+curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions/{subscriptionId}/change \
   -H "Authorization: Bearer {API_KEY}" \
   -H "Content-Type: application/json" \
   -d '{
-    "planKey": "enterprise"
+    "timing": "immediate",
+    "plan": { "key": "enterprise" }
   }'
 ```
+
+`timing` accepts `"immediate"`, `"next_billing_cycle"`, or an RFC 3339
+timestamp. To preview the proration credit before committing, call
+`POST /v3/metering/{bucketId}/subscriptions/{subscriptionId}/change/estimate-credit`
+with the same body.
 
 ### Proration behavior
 
@@ -255,8 +268,20 @@ Customers can cancel from the Developer Portal subscriptions page:
 
 ```bash
 curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions/{subscriptionId}/cancel \
-  -H "Authorization: Bearer {API_KEY}"
+  -H "Authorization: Bearer {API_KEY}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "timing": "next_billing_cycle"
+  }'
 ```
+
+`timing` controls when the cancellation takes effect:
+
+- Omitted (or `"immediate"`) — the subscription is canceled immediately and
+  access stops right away. Use this for refund-style flows.
+- `"next_billing_cycle"` — access continues until the end of the current billing
+  period, then is revoked. This matches the Developer Portal default.
+- An RFC 3339 timestamp — schedule cancellation at a specific time.
 
 ### Cancellation behavior
 
@@ -276,14 +301,9 @@ curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions/{subscri
   -H "Authorization: Bearer {API_KEY}"
 ```
 
-This removes the pending cancellation. The subscription continues as normal.
-
-A fully canceled subscription (past the period end) can be restored:
-
-```bash
-curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions/{subscriptionId}/restore \
-  -H "Authorization: Bearer {API_KEY}"
-```
+This removes the pending cancellation. The subscription continues as normal. For
+a subscription whose period has already ended, create a new subscription on the
+same plan instead.
 
 ## Multiple subscriptions
 
