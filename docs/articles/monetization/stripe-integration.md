@@ -12,9 +12,9 @@ announced.
 
 :::
 
-Zuplo uses Stripe to handle payment processing, subscription billing, and
-invoicing. Zuplo handles metering, quota enforcement, and subscription state —
-Stripe handles money.
+Zuplo uses Stripe to collect payments. Zuplo is the system of record for plans,
+subscriptions, features, entitlements, and metered usage; Stripe is the system
+of record for **money** — customers, invoices, and payment collection.
 
 ## How it works
 
@@ -32,8 +32,11 @@ The integration flow:
 7. At the end of each billing period, Zuplo issues a Stripe Invoice for fixed
    fees and usage-based charges
 
-Throughout this flow, Zuplo is the source of truth for access control and
-metering. Stripe is the source of truth for payment state.
+Throughout this flow, Zuplo is the source of truth for access control,
+plans/rate cards, and metered usage. Stripe is the source of truth for payment
+state and tax. **Stripe Subscriptions, Products, Prices, and Billing Meters are
+not used** — Zuplo manages those concepts internally and only materializes them
+in Stripe at the moment a charge is needed (as invoice line items).
 
 ## Connecting your Stripe account
 
@@ -185,8 +188,10 @@ When a customer changes their plan through the Developer Portal:
 3. The customer's entitlements update immediately
 4. The API key remains the same; its associated quota changes in real time
 
-Upgrades take effect immediately. Downgrades take effect at the next billing
-cycle.
+Zuplo uses **max_consumption_based proration** so customers can't game
+mid-period upgrades and downgrades — see
+[Subscription Lifecycle → Proration behavior](./subscription-lifecycle.md#proration-behavior)
+for the detailed model and examples.
 
 ### Cancellation
 
@@ -197,21 +202,17 @@ When a customer cancels:
 2. The customer retains access until their current billing period ends
 3. At period end, access is revoked and the API key stops working
 
-## Proration
-
-When customers upgrade or downgrade mid-billing-period, charges are prorated
-automatically. Upgrades are charged the prorated difference for the remainder of
-the billing period. Downgrades result in a prorated credit applied to the next
-invoice.
-
 ## Usage-based billing
 
 For plans with usage-based pricing (per-unit, tiered, pay-as-you-go), usage is
 tracked in real time by the `MonetizationInboundPolicy`. Each API request
-increments the meter immediately. At the end of the billing period, usage is
-billed through Stripe automatically.
+increments the meter immediately. At the end of the billing period, Zuplo
+generates a Stripe Invoice with line items for the period's fixed fees and
+metered usage, and Stripe collects payment.
 
-You don't need to implement usage reporting or run any batch jobs.
+You don't need to implement usage reporting or run any batch jobs — and Zuplo
+does **not** call Stripe Billing Meters; metered usage is materialized as
+invoice line items directly.
 
 ## Handling failed payments
 
@@ -265,13 +266,19 @@ After connecting Stripe and publishing plans:
 1. Open your Developer Portal
 2. Subscribe to a plan using test card `4242 4242 4242 4242`
 3. Verify in Stripe Dashboard:
-   - Customer created
-   - Subscription active
-   - Product and Price match your plan
+   - **Customers** — a customer was created with correct metadata and test card
+     attached
+   - **Developers → Webhooks** — the Zuplo-managed webhook endpoint is
+     registered and recent events show `200` responses
 4. Make API requests and verify:
    - Requests succeed within quota
-   - `403 Forbidden` returned when quota exceeded (hard limit plans)
+   - `403 Forbidden` returned when quota exceeded (hard-limit plans)
    - Usage visible in the Developer Portal dashboard
-5. Cancel the subscription and verify:
-   - Access revoked after billing period
-   - Stripe subscription shows canceled
+5. Wait for the next billing cycle (or trigger a manual invoice in test mode)
+   and verify:
+   - **Invoices** — a Stripe Invoice was created with line items matching your
+     plan's fixed fees and metered usage
+6. Cancel the subscription in the Developer Portal and verify:
+   - Access is revoked after the billing period ends
+   - The Zuplo subscription shows `canceled` in the API and Developer Portal
+     (Stripe doesn't track this — there is no Stripe Subscription to look at)
