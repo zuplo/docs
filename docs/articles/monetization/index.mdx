@@ -28,8 +28,8 @@ and invoices come out wrong.
 
 Zuplo eliminates this by making the gateway the single source of truth. Every
 request that hits your API is metered, enforced, and billed through one system.
-When a customer's quota runs out, they get a `403` immediately — not five
-minutes later when a batch job catches up.
+When a customer's quota runs out, they get a `403 Forbidden` immediately — not
+five minutes later when a batch job catches up.
 
 ## Core concepts
 
@@ -94,21 +94,21 @@ pricing, wire up Stripe, and configure your gateway to enforce quotas.
 
 ## Documentation map
 
-| Document                                                               | What it covers                                           |
-| ---------------------------------------------------------------------- | -------------------------------------------------------- |
-| [Quickstart](./monetization/quickstart.md)                             | End-to-end setup in 30 minutes                           |
-| [Meters](./monetization/meters.mdx)                                    | How meters track usage dimensions                        |
-| [Features](./monetization/features.mdx)                                | Connecting meters to your product catalog                |
-| [Plans](./monetization/plans.mdx)                                      | Plan structure, phases, lifecycle, and publishing        |
-| [Rate Cards](./monetization/rate-cards.mdx)                            | Pricing and entitlements within plans                    |
-| [Pricing Models](./monetization/pricing-models.mdx)                    | Flat, per-unit, tiered, volume, and package pricing      |
-| [Billing Models Guide](./monetization/billing-models.md)               | Choosing the right pricing strategy for your business    |
-| [Stripe Integration](./monetization/stripe-integration.md)             | Connecting Stripe and managing payments                  |
-| [Developer Portal Setup](./monetization/developer-portal.md)           | Configuring the self-serve portal for your customers     |
-| [Monetization Policy Reference](./monetization/monetization-policy.md) | Configuring the `MonetizationInboundPolicy` per-route    |
-| [API Access](./monetization/api-access.mdx)                            | Authentication, buckets, and API reference links         |
-| [Subscription Lifecycle](./monetization/subscription-lifecycle.md)     | Managing trials, upgrades, downgrades, and cancellations |
-| [Private Plans](./monetization/private-plans.md)                       | Invite-only plans for specific users                     |
-| [Tax Collection](./monetization/tax-collection.md)                     | Enabling VAT, sales tax, or GST via Stripe Tax           |
-| [Plan Examples](./monetization/plan-examples.mdx)                      | Real-world plan configurations                           |
-| [Troubleshooting](./monetization/troubleshooting.md)                   | Common issues, debugging, and FAQ                        |
+| Document                                                               | What it covers                                                                        |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| [Quickstart](./monetization/quickstart.md)                             | End-to-end setup in 30 minutes                                                        |
+| [Meters](./monetization/meters.mdx)                                    | How meters track usage dimensions                                                     |
+| [Features](./monetization/features.mdx)                                | Connecting meters to your product catalog                                             |
+| [Plans](./monetization/plans.mdx)                                      | Plan structure, phases, lifecycle, and publishing                                     |
+| [Rate Cards](./monetization/rate-cards.mdx)                            | Pricing and entitlements within plans                                                 |
+| [Pricing Models](./monetization/pricing-models.mdx)                    | Flat, per-unit, tiered, volume, and package pricing                                   |
+| [Billing Models Guide](./monetization/billing-models.md)               | Choosing the right pricing strategy for your business                                 |
+| [Stripe Integration](./monetization/stripe-integration.md)             | Connecting Stripe and managing payments                                               |
+| [Developer Portal Setup](./monetization/developer-portal.md)           | Configuring the self-serve portal for your customers                                  |
+| [Monetization Policy Reference](./monetization/monetization-policy.md) | Configuring the `MonetizationInboundPolicy` per-route                                 |
+| [API Access](./monetization/api-access.mdx)                            | Authentication, buckets, bucket configuration, Stripe setup APIs, and reference links |
+| [Subscription Lifecycle](./monetization/subscription-lifecycle.md)     | Managing trials, upgrades, downgrades, and cancellations                              |
+| [Private Plans](./monetization/private-plans.md)                       | Invite-only plans for specific users                                                  |
+| [Tax Collection](./monetization/tax-collection.md)                     | Enabling VAT, sales tax, or GST via Stripe Tax                                        |
+| [Plan Examples](./monetization/plan-examples.mdx)                      | Real-world plan configurations                                                        |
+| [Troubleshooting](./monetization/troubleshooting.md)                   | Common issues, debugging, and FAQ                                                     |
