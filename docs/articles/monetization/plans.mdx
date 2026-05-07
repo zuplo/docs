@@ -73,9 +73,11 @@ Plans move through a defined lifecycle:
 This example creates a Pro plan with:
 
 - A 1-week free trial phase with 1,000 API calls
-- A default phase with $99/month subscription and 10,000 included API calls
-- Overage pricing at $0.01 per additional call
-- Static features for premium access
+- A `monthly_fee` flat-fee rate card on the default phase that charges $99 in
+  advance at the start of each billing period
+- A `usage_based` rate card with 10,000 included API requests per billing period
+  and $0.01 per request overage in arrears
+- A `priority_support` static feature granted on both phases
 
 For step-by-step examples building plans from simple to complex, see
 [Plan Examples](./plan-examples.mdx).
@@ -133,6 +135,18 @@ curl \
       "duration": null,
       "rateCards": [
         {
+          "type": "flat_fee",
+          "key": "monthly_fee",
+          "name": "Monthly Fee",
+          "featureKey": "monthly_fee",
+          "billingCadence": "P1M",
+          "price": {
+            "type": "flat",
+            "amount": "99.00",
+            "paymentTerm": "in_advance"
+          }
+        },
+        {
           "type": "usage_based",
           "key": "api_requests",
           "name": "API Requests",
@@ -150,8 +164,8 @@ curl \
             "tiers": [
               {
                 "upToAmount": "10000",
-                "flatPrice": { "type": "flat", "amount": "99.00" },
-                "unitPrice": null
+                "flatPrice": null,
+                "unitPrice": { "type": "unit", "amount": "0.00" }
               },
               {
                 "flatPrice": null,
@@ -186,9 +200,12 @@ EOF
 | Trial   | 1 week   | 1,000 (hard limit) | Free      |
 | Default | Ongoing  | 10,000 included    | $99/month |
 
-After the trial ends, customers automatically move to the default phase. In the
-default phase, the first 10,000 API requests are included in the $99 monthly
-fee. Additional requests are billed at $0.01 each (soft limit allows overage).
+After the trial ends, customers automatically move to the default phase. The $99
+monthly subscription fee is charged in advance at the start of each billing
+period via the `monthly_fee` flat-fee rate card. The plan includes 10,000 API
+requests per period; additional requests are billed at $0.01 each in arrears
+(the soft limit on the metered entitlement allows overage to flow through to the
+next invoice).
 
 ## Plan Properties
 
