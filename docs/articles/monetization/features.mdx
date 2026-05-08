@@ -95,34 +95,6 @@ curl \
 EOF
 ```
 
-### Creating a Billing-Only Feature
-
-Some plans charge a flat subscription fee that isn't tied to any entitlement — a
-monthly access fee, a setup fee, or a fixed retainer. Model these the same way
-as a static feature (no `meterSlug`), then attach them to a plan via a
-`flat_fee` rate card with no `entitlementTemplate` and a price whose
-`paymentTerm` is `"in_advance"`. Zuplo issues a Stripe Invoice for the fee at
-the start of each billing period.
-
-```shell
-curl \
-  https://dev.zuplo.com/v3/metering/$BUCKET_ID/features \
-  --request POST \
-  --header "Authorization: Bearer $ZAPI_KEY" \
-  --header "Content-Type: application/json" \
-  --data @- << EOF
-{
-  "key": "monthly_fee",
-  "name": "Monthly Fee"
-}
-EOF
-```
-
-Because the rate card carries no entitlement, the developer portal's
-feature-comparison matrix doesn't render a row for the feature — the price rolls
-into the plan's headline cost. See the Pro plan example in [Plans](./plans.mdx)
-for the rate-card shape.
-
 ## API Reference
 
 For complete API operations (list, get, archive), see the

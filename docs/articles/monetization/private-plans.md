@@ -54,7 +54,6 @@ curl -X POST "https://dev.zuplo.com/v3/metering/${ZUPLO_BUCKET_ID}/plans" \
         "rateCards": [
           {
             "billingCadence": "P1M",
-            "featureKey": "monthly_fee",
             "key": "monthly_fee",
             "name": "Monthly Fee",
             "price": {
