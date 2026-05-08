@@ -49,8 +49,9 @@ in the deploy job and retrieve it in the test job.
 
 1. **Disconnect Git integration** — If you're using GitLab CI/CD for
    deployments, disconnect the native Git integration to avoid duplicate
-   deployments. Go to **Settings** > **Source Control** and click
-   **Disconnect**.
+   deployments. Open your
+   [project settings](https://portal.zuplo.com/+/account/project/settings/general),
+   select **Source Control**, and click **Disconnect**.
 
 2. **Add your API key** — Store your Zuplo API key as a CI/CD variable. Go to
    **Settings** > **CI/CD** > **Variables** and add `ZUPLO_API_KEY`. Check

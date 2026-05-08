@@ -48,11 +48,15 @@ Before you start, you need:
   [API Key Authentication policy](../policies/api-key-inbound.mdx) configured on
   your routes.
 - A **Zuplo API key** for the Developer API. Create one in the Zuplo Portal
-  under **Settings > Zuplo API Keys**.
+  under
+  [**Account Settings → Zuplo API Keys**](https://portal.zuplo.com/+/account/settings/api-keys).
   [More information](./accounts/zuplo-api-keys).
 - Your **account name** and **bucket name**. A bucket groups consumers for an
   environment - each project has buckets for production, preview, and
-  development. Find these in the Zuplo Portal under **Settings > General**.
+  development. Find the bucket name on your project's
+  [**Services**](https://portal.zuplo.com/+/account/project/services) page, and
+  the account name in
+  [**Project Settings → General**](https://portal.zuplo.com/+/account/project/settings/general).
 - An application with server-side code and existing user authentication.
 
 All examples in this guide use these environment variables:
@@ -60,9 +64,9 @@ All examples in this guide use these environment variables:
 ```bash
 # Your Zuplo Account Name
 export ZUPLO_ACCOUNT=my-account
-# Your bucket name (found in Settings > General)
+# Your bucket name (found on your project's Services page)
 export ZUPLO_BUCKET=my-bucket
-# Your Zuplo API Key (found in Settings > Zuplo API Keys)
+# Your Zuplo API Key (found in Account Settings > Zuplo API Keys)
 export ZUPLO_API_KEY=zpka_YOUR_API_KEY
 ```
 

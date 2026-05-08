@@ -79,9 +79,10 @@ arrays.
 The gateway returns this error when the project has a critical configuration
 issue that prevents it from starting.
 
-**Fix:** Check the deployment logs in the Zuplo Portal for the specific error
-message. Common causes include invalid `zuplo.runtime.ts` configuration or
-broken runtime extensions.
+**Fix:** Check the deployment logs in the Zuplo Portal under
+[Environments](https://portal.zuplo.com/+/account/project/environments) for the
+specific error message. Common causes include invalid `zuplo.runtime.ts`
+configuration or broken runtime extensions.
 
 ### MAIN_MOD_ERROR
 
@@ -174,9 +175,10 @@ const response = await fetch("https://api.example.com/data", {
 
 ### Portal live logs
 
-The Zuplo Portal provides real-time log viewing for deployed environments.
-Navigate to your project in the portal and open the logs tab to see live request
-logs and any messages logged with `context.log`.
+The Zuplo Portal provides real-time log viewing for deployed environments. Open
+[Environments](https://portal.zuplo.com/+/account/project/environments), select
+the deployed environment, and open the logs tab to see live request logs and any
+messages logged with `context.log`.
 
 ### Using context.log
 

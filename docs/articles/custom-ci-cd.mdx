@@ -54,9 +54,9 @@ trivial to implement.
 :::warning{title="GitHub Users: Disconnect Automatic Deployments"}
 
 If you're using GitHub with custom CI/CD, disconnect the built-in integration to
-prevent double deployments:
-
-**Settings** > **Source Control** > **Disconnect**
+prevent double deployments. Open your
+[project settings](https://portal.zuplo.com/+/account/project/settings/general),
+select **Source Control**, and click **Disconnect**.
 
 GitLab, Bitbucket, and Azure DevOps don't have automatic deployments, so no
 disconnection is needed.
@@ -65,11 +65,9 @@ disconnection is needed.
 
 ## Getting Your API Key
 
-The CLI authenticates with an API key:
-
-1. Go to [portal.zuplo.com](https://portal.zuplo.com)
-2. Select your account
-3. Navigate to **Settings** > **API Keys**
+The CLI authenticates with an API key. Open
+[**Account Settings → API Keys**](https://portal.zuplo.com/+/account/settings/api-keys)
+in the Zuplo Portal to create one.
 
 Store this as a secret in your CI/CD provider (typically `ZUPLO_API_KEY`). Never
 commit API keys to your repository.
