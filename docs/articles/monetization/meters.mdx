@@ -43,8 +43,10 @@ Track the total number of API requests:
 }
 ```
 
-Each event contains the `subscription` ID linking it to a subscription and a
-`total` field in `data` with the quantity to record:
+Each event identifies the subscription being metered, the actor that drove
+the consumption, and how much to record. The `subscription` field carries the
+subscription ID, the `subject` field identifies the actor, and `data.total`
+carries the quantity:
 
 ```json
 {
@@ -52,7 +54,7 @@ Each event contains the `subscription` ID linking it to a subscription and a
   "specversion": "1.0",
   "type": "api_requests",
   "source": "monetization-policy",
-  "subject": "01KNVXHQG356VA7T7W0V9N21GH",
+  "subject": "acme-prod",
   "subscription": "01KNVXHQG356VA7T7W0V9N21GH",
   "data": {
     "total": 1
@@ -62,8 +64,13 @@ Each event contains the `subscription` ID linking it to a subscription and a
 
 :::note
 
-Events emitted by the `MonetizationInboundPolicy` always set `subject` and
-`subscription` to the same subscription ULID. See
+`subject` identifies _who_ consumed the subscription's entitlements on this
+request — typically the API key's consumer name, the end-user id, or another
+stable per-actor identifier. It is **not** the subscription id (use the
+`subscription` field for that) and is not used to route billing. Its purpose
+is to let you break down usage within a subscription so you can see which
+key, user, or agent drove the consumption — a single subscription will
+commonly emit events with many different `subject` values. See
 [Monetization Policy](./monetization-policy.md) for how usage is recorded.
 
 :::
@@ -96,7 +103,7 @@ consumed 50 tokens looks like this:
   "specversion": "1.0",
   "type": "tokens",
   "source": "monetization-policy",
-  "subject": "01KNVXHQG356VA7T7W0V9N21GH",
+  "subject": "acme-prod",
   "subscription": "01KNVXHQG356VA7T7W0V9N21GH",
   "data": {
     "total": 50
@@ -126,7 +133,7 @@ Each event reports the number of bytes transferred:
   "specversion": "1.0",
   "type": "data_transfer",
   "source": "monetization-policy",
-  "subject": "01KNVXHQG356VA7T7W0V9N21GH",
+  "subject": "acme-prod",
   "subscription": "01KNVXHQG356VA7T7W0V9N21GH",
   "data": {
     "total": 4096
