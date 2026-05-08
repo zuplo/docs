@@ -326,12 +326,11 @@ $100 = $599.
 :::note
 
 The $499 sits inside tier 1's `flatPrice`, not as a separate subscription fee.
-It's charged **in arrears** at the end of the billing period as part of the
-invoice's tiered usage line — and **only** when the customer has at least one
-request in tier 1. A customer who makes zero requests in the period pays $0,
-because they never enter tier 1. To collect $499 unconditionally at the start of
-every billing period (a true subscription fee), see
-[Example: Base fee in advance](#example-base-fee-in-advance) below.
+It's charged unconditionally for the period (regardless of actual usage), but
+**in arrears** — it appears on the invoice issued after the end of the billing
+period, as part of the invoice's tiered usage line. To collect $499 at the
+**start** of every billing period instead (a true in-advance subscription fee),
+see [Example: Base fee in advance](#example-base-fee-in-advance) below.
 
 :::
 
@@ -389,9 +388,9 @@ For high-volume APIs, you might want overage pricing that decreases at scale:
 
 :::note
 
-Like the previous example, the $499 sits inside tier 1's `flatPrice`. It's
-charged in arrears and only when the customer has any usage that lands in
-tier 1.
+Like the previous example, the $499 sits inside tier 1's `flatPrice` and is
+charged unconditionally for the period in arrears, as part of the invoice's
+tiered usage line.
 
 :::
 
@@ -458,14 +457,14 @@ $0 per unit for the included quota:
 }
 ```
 
-How this differs from putting the $499 inside tier 1's `flatPrice`:
+Both patterns charge the customer $499 for every billing period regardless of
+usage. The differences are timing and how the fee appears on the invoice:
 
-| Behavior                    | Tier-1 flat price (previous examples)                      | Separate flat-fee rate card (this example)              |
-| --------------------------- | ---------------------------------------------------------- | ------------------------------------------------------- |
-| When the $499 is charged    | End of period, in arrears                                  | Start of period, in advance                             |
-| Customer with zero usage    | Pays $0 — never enters tier 1                              | Pays $499 — the flat fee is unconditional               |
-| Visibility on pricing table | Computed from tier 1, only realized when usage exceeds 0   | Always shown as a $499/month subscription               |
-| Best for                    | Pay-when-you-use bundles where the bundle is a usage floor | True subscriptions where customers commit to a base fee |
+| Behavior                 | Tier-1 flat price (previous examples)                | Separate flat-fee rate card (this example)                                         |
+| ------------------------ | ---------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| When the $499 is charged | End of period, in arrears                            | Start of period, in advance                                                        |
+| Invoice presentation     | Single tiered usage line item that includes the $499 | Distinct line items: one for the $499, one for usage                               |
+| Best for                 | When end-of-period billing is acceptable             | True subscriptions where the fee should be collected upfront and listed separately |
 
 The `subscription_fee` rate card has no `featureKey` — it's a
 [rate card without a feature](./rate-cards.mdx#rate-cards-without-features), the
