@@ -53,7 +53,8 @@ API until their quota runs out. Clear and predictable for budgeting.
           "entitlementTemplate": {
             "type": "metered",
             "issueAfterReset": 1000,
-            "isSoftLimit": false
+            "isSoftLimit": false,
+            "usagePeriod": "P1M"
           }
         }
       ]
