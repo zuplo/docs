@@ -104,9 +104,9 @@ API is needed.
       "rateCards": [
         {
           "type": "flat_fee",
-          "key": "api_calls",
+          "key": "api_requests",
           "name": "API Calls",
-          "featureKey": "api_calls",
+          "featureKey": "api_requests",
           "billingCadence": null,
           "price": null,
           "entitlementTemplate": {
@@ -124,9 +124,9 @@ API is needed.
       "rateCards": [
         {
           "type": "usage_based",
-          "key": "api_calls",
+          "key": "api_requests",
           "name": "API Calls",
-          "featureKey": "api_calls",
+          "featureKey": "api_requests",
           "billingCadence": "P1M",
           "price": {
             "type": "tiered",

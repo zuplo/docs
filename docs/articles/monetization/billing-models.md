@@ -45,15 +45,16 @@ API until their quota runs out. Clear and predictable for budgeting.
       "rateCards": [
         {
           "type": "flat_fee",
-          "key": "api_calls",
+          "key": "api_requests",
           "name": "API Calls",
-          "featureKey": "api_calls",
+          "featureKey": "api_requests",
           "billingCadence": null,
           "price": null,
           "entitlementTemplate": {
             "type": "metered",
             "issueAfterReset": 1000,
-            "isSoftLimit": false
+            "isSoftLimit": false,
+            "usagePeriod": "P1M"
           }
         }
       ]
@@ -78,9 +79,9 @@ API until their quota runs out. Clear and predictable for budgeting.
       "rateCards": [
         {
           "type": "flat_fee",
-          "key": "api_calls",
+          "key": "api_requests",
           "name": "API Calls",
-          "featureKey": "api_calls",
+          "featureKey": "api_requests",
           "billingCadence": "P1M",
           "price": {
             "type": "flat",
@@ -114,9 +115,9 @@ API until their quota runs out. Clear and predictable for budgeting.
       "rateCards": [
         {
           "type": "flat_fee",
-          "key": "api_calls",
+          "key": "api_requests",
           "name": "API Calls",
-          "featureKey": "api_calls",
+          "featureKey": "api_requests",
           "billingCadence": "P1M",
           "price": {
             "type": "flat",
@@ -134,8 +135,9 @@ API until their quota runs out. Clear and predictable for budgeting.
 }
 ```
 
-**Stripe behavior:** Subscription created with a fixed-price line item. Payment
-charged in advance at the start of each billing period.
+**Stripe behavior:** At the start of each billing period, Zuplo issues a Stripe
+Invoice with a single fixed-price line item; Stripe collects the payment in
+advance.
 
 ## Pay-as-you-go
 
@@ -173,9 +175,9 @@ pay for what they use. No quota limits, no hard caps.
       "rateCards": [
         {
           "type": "usage_based",
-          "key": "api_calls",
+          "key": "api_requests",
           "name": "API Calls",
-          "featureKey": "api_calls",
+          "featureKey": "api_requests",
           "billingCadence": "P1M",
           "price": {
             "type": "unit",
@@ -199,7 +201,7 @@ quota and no hard limit — everything is billed per-unit.
 
 ```json
 {
-  "key": "paygo-graduated",
+  "key": "paygograduated",
   "name": "Pay As You Go",
   "currency": "USD",
   "billingCadence": "P1M",
@@ -211,9 +213,9 @@ quota and no hard limit — everything is billed per-unit.
       "rateCards": [
         {
           "type": "usage_based",
-          "key": "api_calls",
+          "key": "api_requests",
           "name": "API Calls",
-          "featureKey": "api_calls",
+          "featureKey": "api_requests",
           "billingCadence": "P1M",
           "price": {
             "type": "tiered",
@@ -221,14 +223,16 @@ quota and no hard limit — everything is billed per-unit.
             "tiers": [
               {
                 "upToAmount": "10000",
+                "flatPrice": null,
                 "unitPrice": { "type": "unit", "amount": "0.10" }
               },
               {
                 "upToAmount": "100000",
+                "flatPrice": null,
                 "unitPrice": { "type": "unit", "amount": "0.05" }
               },
               {
-                "upToAmount": null,
+                "flatPrice": null,
                 "unitPrice": { "type": "unit", "amount": "0.01" }
               }
             ]
@@ -244,9 +248,8 @@ quota and no hard limit — everything is billed per-unit.
 }
 ```
 
-**Stripe behavior:** Subscription with usage-based billing. Usage is tracked
-continuously and billed through the integrated billing system at the end of each
-period.
+**Stripe behavior:** At the end of each billing period, Zuplo issues a Stripe
+Invoice with usage-based line items in arrears; Stripe collects the payment.
 
 **Risk consideration:** Pay-as-you-go means you're extending credit. If a
 customer racks up significant usage and their card declines at invoicing time,
@@ -285,9 +288,9 @@ overage:
       "rateCards": [
         {
           "type": "usage_based",
-          "key": "api_calls",
+          "key": "api_requests",
           "name": "API Calls",
-          "featureKey": "api_calls",
+          "featureKey": "api_requests",
           "billingCadence": "P1M",
           "price": {
             "type": "tiered",
@@ -300,7 +303,7 @@ overage:
               },
               {
                 "flatPrice": null,
-                "unitPrice": { "type": "unit", "amount": "0.05" }
+                "unitPrice": { "type": "unit", "amount": "0.0005" }
               }
             ]
           },
@@ -316,9 +319,20 @@ overage:
 }
 ```
 
-$499/month for 1,000,000 requests. Requests beyond 1M are billed at $0.05 each.
-A customer using 1,200,000 requests pays $499 + (200,000 x $0.05) = $499 + $100
-= $599.
+$499 covers up to 1,000,000 requests. Requests beyond 1M are billed at $0.0005
+each. A customer using 1,200,000 requests pays $499 + (200,000 x $0.0005) =
+$499 + $100 = $599.
+
+:::note
+
+The $499 sits inside tier 1's `flatPrice`, not as a separate subscription fee.
+It's charged unconditionally for the period (regardless of actual usage), but
+**in arrears** — it appears on the invoice issued after the end of the billing
+period, as part of the invoice's tiered usage line. To collect $499 at the
+**start** of every billing period instead (a true in-advance subscription fee),
+see [Example: Base fee in advance](#example-base-fee-in-advance) below.
+
+:::
 
 ### Example: Graduated overage pricing
 
@@ -338,9 +352,9 @@ For high-volume APIs, you might want overage pricing that decreases at scale:
       "rateCards": [
         {
           "type": "usage_based",
-          "key": "api_calls",
+          "key": "api_requests",
           "name": "API Calls",
-          "featureKey": "api_calls",
+          "featureKey": "api_requests",
           "billingCadence": "P1M",
           "price": {
             "type": "tiered",
@@ -353,10 +367,10 @@ For high-volume APIs, you might want overage pricing that decreases at scale:
               },
               {
                 "upToAmount": "5000000",
-                "unitPrice": { "type": "unit", "amount": "0.05" }
+                "unitPrice": { "type": "unit", "amount": "0.0005" }
               },
               {
-                "unitPrice": { "type": "unit", "amount": "0.02" }
+                "unitPrice": { "type": "unit", "amount": "0.0002" }
               }
             ]
           },
@@ -372,9 +386,101 @@ For high-volume APIs, you might want overage pricing that decreases at scale:
 }
 ```
 
-**Stripe behavior:** Subscription with both a fixed-price component (advance
-payment) and a usage-based component (arrears). Usage is tracked and billed
-through the integrated billing system.
+:::note
+
+Like the previous example, the $499 sits inside tier 1's `flatPrice` and is
+charged unconditionally for the period in arrears, as part of the invoice's
+tiered usage line.
+
+:::
+
+### Example: Base fee in advance
+
+If you need the $499 collected unconditionally at the start of every billing
+period (a true subscription fee), split it into a separate `flat_fee` rate card
+with `paymentTerm: "in_advance"` and set the usage-based rate card's tier 1 to
+$0 per unit for the included quota:
+
+```json
+{
+  "key": "enterprise",
+  "name": "Enterprise",
+  "currency": "USD",
+  "billingCadence": "P1M",
+  "phases": [
+    {
+      "key": "default",
+      "name": "Enterprise Monthly",
+      "duration": null,
+      "rateCards": [
+        {
+          "type": "flat_fee",
+          "key": "subscription_fee",
+          "name": "Enterprise Subscription",
+          "billingCadence": "P1M",
+          "price": {
+            "type": "flat",
+            "amount": "499.00",
+            "paymentTerm": "in_advance"
+          }
+        },
+        {
+          "type": "usage_based",
+          "key": "api_requests",
+          "name": "API Calls",
+          "featureKey": "api_requests",
+          "billingCadence": "P1M",
+          "entitlementTemplate": {
+            "type": "metered",
+            "issueAfterReset": 1000000,
+            "isSoftLimit": true
+          },
+          "price": {
+            "type": "tiered",
+            "mode": "graduated",
+            "tiers": [
+              {
+                "upToAmount": "1000000",
+                "flatPrice": null,
+                "unitPrice": { "type": "unit", "amount": "0.00" }
+              },
+              {
+                "flatPrice": null,
+                "unitPrice": { "type": "unit", "amount": "0.0005" }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+Both patterns charge the customer $499 for every billing period regardless of
+usage. The differences are timing and how the fee appears on the invoice:
+
+| Behavior                 | Tier-1 flat price (previous examples)                | Separate flat-fee rate card (this example)                                         |
+| ------------------------ | ---------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| When the $499 is charged | End of period, in arrears                            | Start of period, in advance                                                        |
+| Invoice presentation     | Single tiered usage line item that includes the $499 | Distinct line items: one for the $499, one for usage                               |
+| Best for                 | When end-of-period billing is acceptable             | True subscriptions where the fee should be collected upfront and listed separately |
+
+The `subscription_fee` rate card has no `featureKey` — it's a
+[rate card without a feature](./rate-cards.mdx#rate-cards-without-features), the
+right shape for a billing-only line item that doesn't grant any entitlement.
+
+**Stripe behavior:** At the start of each billing period, Zuplo issues a single
+Stripe Invoice that includes both:
+
+- The $499 fixed-price line item from the `subscription_fee` rate card, charged
+  in advance for the period that's just starting.
+- Any usage-based line items for overage above 1M from the **previous** billing
+  period, charged in arrears.
+
+Stripe collects payment for the full invoice. The first billing period's invoice
+contains only the $499, since there's no prior period to bill overage for. No
+Stripe Subscription is created.
 
 ## Credits / tokens (prepaid)
 
