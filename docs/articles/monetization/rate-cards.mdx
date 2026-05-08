@@ -26,7 +26,9 @@ A rate card consists of:
 - **Feature** - Optional link to a feature from your product catalog
 - **Price** - How much to charge (see [Pricing Models](./pricing-models.mdx))
 - **Entitlement** - Optional usage limits or access controls
-- **Billing Cadence** - How often to bill (monthly, one-time, etc.)
+- **Billing Cadence** - How often this rate card produces a charge — distinct
+  from the plan's billing cadence, and constrained to align with it (see
+  [Billing Cadence](#billing-cadence) below)
 
 ## Rate Card Types
 
@@ -53,8 +55,9 @@ recurring fee. Use these for:
 }
 ```
 
-When `billingCadence` is set (e.g., `P1M` for monthly), the fee recurs each
-billing period. When `billingCadence` is `null`, the fee is charged once per
+When `billingCadence` is set (e.g., `P1M`), the flat fee recurs at that cadence
+— see [Billing Cadence](#billing-cadence) for the constraint relative to the
+plan's cadence. When `billingCadence` is `null`, the fee is charged once per
 subscription phase.
 
 The `paymentTerm` field controls when the charge is collected:
@@ -89,6 +92,36 @@ feature linked to a meter. Use these for:
 Usage-based rate cards support multiple pricing models. See
 [Pricing Models](./pricing-models.mdx) for details on unit, tiered, package, and
 dynamic pricing.
+
+## Billing Cadence
+
+A rate card's `billingCadence` controls how often this specific rate card
+produces a charge. It's distinct from the **plan's** `billingCadence`, which
+sets the overall invoice schedule for the subscription:
+
+- For **flat-fee** rate cards, the cadence determines how often the flat fee
+  recurs. Set it to `null` to charge once per subscription phase (a setup fee,
+  onboarding charge, or other one-time payment).
+- For **usage-based** rate cards, the cadence is required and determines the
+  period over which metered usage is aggregated and emitted as an invoice line.
+
+### Alignment with the plan
+
+The rate card's cadence must align with the plan's `billingCadence`. Two
+cadences align when:
+
+- They are identical (e.g., plan `P1M` and rate card `P1M`), or
+- The shorter one divides the longer one without remainder (e.g., plan `P1M`
+  with a rate card at `P3M`, or plan `P1Y` with a rate card at `P1M`).
+
+Plans accept these `billingCadence` values: `PT1H`, `P1D`, `P1W`, `P2W`, `P4W`,
+`P1M`, `P3M`, `P6M`, `P12M`, `P1Y`. A rate card with a cadence that doesn't
+align (for example, `P2M` on a `P3M` plan, where neither divides the other) is
+rejected at plan creation.
+
+This rule exists for invoice-generation correctness: it guarantees that every
+rate-card cycle ends on a plan-invoice boundary, so a single charge from this
+rate card lands on exactly one customer invoice rather than straddling two.
 
 ## Rate Cards With Features
 
