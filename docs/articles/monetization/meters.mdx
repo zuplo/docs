@@ -43,8 +43,8 @@ Track the total number of API requests:
 }
 ```
 
-Each event identifies the subscription being metered, the actor that drove
-the consumption, and how much to record. The `subscription` field carries the
+Each event identifies the subscription being metered, the actor that drove the
+consumption, and how much to record. The `subscription` field carries the
 subscription ID, the `subject` field identifies the actor, and `data.total`
 carries the quantity:
 
@@ -67,10 +67,10 @@ carries the quantity:
 `subject` identifies _who_ consumed the subscription's entitlements on this
 request — typically the API key's consumer name, the end-user id, or another
 stable per-actor identifier. It is **not** the subscription id (use the
-`subscription` field for that) and is not used to route billing. Its purpose
-is to let you break down usage within a subscription so you can see which
-key, user, or agent drove the consumption — a single subscription will
-commonly emit events with many different `subject` values. See
+`subscription` field for that) and is not used to route billing. Its purpose is
+to let you break down usage within a subscription so you can see which key,
+user, or agent drove the consumption — a single subscription will commonly emit
+events with many different `subject` values. See
 [Monetization Policy](./monetization-policy.md) for how usage is recorded.
 
 :::
