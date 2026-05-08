@@ -76,7 +76,7 @@ Per-unit pricing charges a fixed amount for each unit of metered usage. Use
 ```json
 {
   "type": "usage_based",
-  "featureKey": "api_calls",
+  "featureKey": "api_requests",
   "billingCadence": "P1M",
   "price": {
     "type": "unit",
@@ -104,7 +104,7 @@ Each unit is charged according to the tier it falls into:
 ```json
 {
   "type": "usage_based",
-  "featureKey": "api_calls",
+  "featureKey": "api_requests",
   "billingCadence": "P1M",
   "price": {
     "type": "tiered",
@@ -139,7 +139,7 @@ All units are charged at the rate of the highest tier reached:
 ```json
 {
   "type": "usage_based",
-  "featureKey": "api_calls",
+  "featureKey": "api_requests",
   "billingCadence": "P1M",
   "price": {
     "type": "tiered",
@@ -171,7 +171,7 @@ common pattern for "X calls included, then $Y per additional call":
 ```json
 {
   "type": "usage_based",
-  "featureKey": "api_calls",
+  "featureKey": "api_requests",
   "billingCadence": "P1M",
   "price": {
     "type": "tiered",
@@ -199,7 +199,7 @@ Package pricing sells usage in fixed bundles rather than individual units:
 ```json
 {
   "type": "usage_based",
-  "featureKey": "api_calls",
+  "featureKey": "api_requests",
   "billingCadence": "P1M",
   "price": {
     "type": "package",

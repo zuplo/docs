@@ -45,9 +45,9 @@ API until their quota runs out. Clear and predictable for budgeting.
       "rateCards": [
         {
           "type": "flat_fee",
-          "key": "api_calls",
+          "key": "api_requests",
           "name": "API Calls",
-          "featureKey": "api_calls",
+          "featureKey": "api_requests",
           "billingCadence": null,
           "price": null,
           "entitlementTemplate": {
@@ -78,9 +78,9 @@ API until their quota runs out. Clear and predictable for budgeting.
       "rateCards": [
         {
           "type": "flat_fee",
-          "key": "api_calls",
+          "key": "api_requests",
           "name": "API Calls",
-          "featureKey": "api_calls",
+          "featureKey": "api_requests",
           "billingCadence": "P1M",
           "price": {
             "type": "flat",
@@ -114,9 +114,9 @@ API until their quota runs out. Clear and predictable for budgeting.
       "rateCards": [
         {
           "type": "flat_fee",
-          "key": "api_calls",
+          "key": "api_requests",
           "name": "API Calls",
-          "featureKey": "api_calls",
+          "featureKey": "api_requests",
           "billingCadence": "P1M",
           "price": {
             "type": "flat",
@@ -173,9 +173,9 @@ pay for what they use. No quota limits, no hard caps.
       "rateCards": [
         {
           "type": "usage_based",
-          "key": "api_calls",
+          "key": "api_requests",
           "name": "API Calls",
-          "featureKey": "api_calls",
+          "featureKey": "api_requests",
           "billingCadence": "P1M",
           "price": {
             "type": "unit",
@@ -211,9 +211,9 @@ quota and no hard limit — everything is billed per-unit.
       "rateCards": [
         {
           "type": "usage_based",
-          "key": "api_calls",
+          "key": "api_requests",
           "name": "API Calls",
-          "featureKey": "api_calls",
+          "featureKey": "api_requests",
           "billingCadence": "P1M",
           "price": {
             "type": "tiered",
@@ -285,9 +285,9 @@ overage:
       "rateCards": [
         {
           "type": "usage_based",
-          "key": "api_calls",
+          "key": "api_requests",
           "name": "API Calls",
-          "featureKey": "api_calls",
+          "featureKey": "api_requests",
           "billingCadence": "P1M",
           "price": {
             "type": "tiered",
@@ -338,9 +338,9 @@ For high-volume APIs, you might want overage pricing that decreases at scale:
       "rateCards": [
         {
           "type": "usage_based",
-          "key": "api_calls",
+          "key": "api_requests",
           "name": "API Calls",
-          "featureKey": "api_calls",
+          "featureKey": "api_requests",
           "billingCadence": "P1M",
           "price": {
             "type": "tiered",
