@@ -303,7 +303,7 @@ overage:
               },
               {
                 "flatPrice": null,
-                "unitPrice": { "type": "unit", "amount": "0.05" }
+                "unitPrice": { "type": "unit", "amount": "0.0005" }
               }
             ]
           },
@@ -319,9 +319,9 @@ overage:
 }
 ```
 
-$499 covers up to 1,000,000 requests. Requests beyond 1M are billed at $0.05
-each. A customer using 1,200,000 requests pays $499 + (200,000 x $0.05) = $499 +
-$100 = $599.
+$499 covers up to 1,000,000 requests. Requests beyond 1M are billed at $0.0005
+each. A customer using 1,200,000 requests pays $499 + (200,000 x $0.0005) =
+$499 + $100 = $599.
 
 :::note
 
@@ -367,10 +367,10 @@ For high-volume APIs, you might want overage pricing that decreases at scale:
               },
               {
                 "upToAmount": "5000000",
-                "unitPrice": { "type": "unit", "amount": "0.05" }
+                "unitPrice": { "type": "unit", "amount": "0.0005" }
               },
               {
-                "unitPrice": { "type": "unit", "amount": "0.02" }
+                "unitPrice": { "type": "unit", "amount": "0.0002" }
               }
             ]
           },
@@ -446,7 +446,7 @@ $0 per unit for the included quota:
               },
               {
                 "flatPrice": null,
-                "unitPrice": { "type": "unit", "amount": "0.05" }
+                "unitPrice": { "type": "unit", "amount": "0.0005" }
               }
             ]
           }
