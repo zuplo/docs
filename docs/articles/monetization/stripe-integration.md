@@ -42,7 +42,8 @@ in Stripe at the moment a charge is needed (as invoice line items).
 
 ### Via the Zuplo Portal
 
-1. Open [**Services**](https://portal.zuplo.com/+/account/project/services),
+1. Open your project's
+   [**Services**](https://portal.zuplo.com/+/account/project/services) page,
    select the Monetization Service, then go to **Payment Provider**
 2. Click **Configure** on the Stripe card
 3. Enter a **Name** and paste your **Stripe API Key**
@@ -113,8 +114,9 @@ Intents, Refunds, or Stripe Billing Meters — leave all of those at **None**.
 3. For each of the eight permissions above, set the level shown in the table.
 4. Click **Create key**, copy the value (`rk_test_...` or `rk_live_...`), and
    paste it into the Monetization Service's **Payment Provider** screen (open
-   [**Services**](https://portal.zuplo.com/+/account/project/services), then the
-   Monetization Service) in your Zuplo project.
+   your project's
+   [**Services**](https://portal.zuplo.com/+/account/project/services) page,
+   then the Monetization Service) in your Zuplo project.
 
 :::caution
 

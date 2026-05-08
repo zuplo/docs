@@ -46,7 +46,8 @@ keeps your existing work safe from any breaking changes.
 :::
 
 1. Go to [portal.zuplo.com](https://portal.zuplo.com) and sign in.
-2. [Create a new project](https://portal.zuplo.com/+/account/projects/new).
+2. Click **New Project** in the top right corner
+   ([open](https://portal.zuplo.com/+/account/projects/new)).
 3. Enter a **Project name** or use the randomly chosen name Zuplo provides.
 4. Select **Starter Project (Recommended)** — it comes with endpoints ready to
    monetize.

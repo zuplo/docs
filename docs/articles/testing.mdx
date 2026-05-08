@@ -78,11 +78,10 @@ The `.env.zuplo` file can contain sensitive information. Add it to your
 :::
 
 Once linked, services like the API Key Authentication policy work locally using
-the same API key bucket as the linked environment. You can create API key
-consumers under
-[Services](https://portal.zuplo.com/+/account/project/services) > **API Key
-Service** in the Zuplo Portal, then call your local gateway with the generated
-key:
+the same API key bucket as the linked environment. In the Zuplo Portal, open the
+[**Services**](https://portal.zuplo.com/+/account/project/services) tab in your
+project and select **API Key Service** to create API key consumers, then call
+your local gateway with the generated key:
 
 ```bash
 curl http://localhost:9000/your-route \
