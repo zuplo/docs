@@ -69,6 +69,14 @@ async function updateDocs(dir: string) {
           .replace(
             /\[([^\]]*)\]\(\/dev-portal\/zudoku\/theme-playground\)/g,
             "[$1](https://zudoku.dev/docs/theme-playground)",
+          )
+          // Redirect the upstream "Documenting MCP Servers" guide link to the
+          // Zuplo-specific guide. The upstream guide is excluded (zuplo: false)
+          // because Zuplo's mcpServerHandler adds x-mcp-server automatically;
+          // the Zuplo version reframes the guide for external/proxied servers.
+          .replace(
+            /\[([^\]]*)\]\(\/dev-portal\/zudoku\/guides\/mcp-servers\)/g,
+            "[$1](/docs/dev-portal/documenting-mcp-servers)",
           );
 
         // // Insert text after frontmatter

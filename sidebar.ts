@@ -279,6 +279,7 @@ const devPortalItems: Navigation = [
             ...item.items,
             "dev-portal/auth-provider-api-identities",
             "dev-portal/dev-portal-create-consumer-on-auth",
+            "dev-portal/documenting-mcp-servers",
             "articles/rick-and-morty-api-developer-portal-example",
           ],
         };
