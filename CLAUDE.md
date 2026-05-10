@@ -55,6 +55,27 @@ code in this repository.
 - When linking to internal pages, check that the page actually exists before
   making up a link. ONLY USE REAL LINKS.
 
+## Portal Shortcut Links
+
+When docs tell readers to navigate to a page in the Zuplo Portal, link directly
+using the `/+/` shortcut URL format. These resolve to the reader's active
+account or project automatically — no need to know their slugs.
+
+- Account-level: `https://portal.zuplo.com/+/account/{path}`
+- Project-level: `https://portal.zuplo.com/+/account/project/{path}`
+
+Two non-negotiable rules:
+
+1. Keep the navigation breadcrumb in prose (e.g.,
+   `Open **Account Settings → Members**`). A reader who doesn't click should
+   still know where to go in the UI.
+2. Don't deep-link past pages that require slugs (specific environments, builds,
+   buckets, apps, teams). Link to the parent list instead.
+
+See
+[`contributors/portal-shortcut-links.md`](./contributors/portal-shortcut-links.md)
+for the full URL list, examples, and writing patterns.
+
 ## Zuplo Docs Content
 
 When writing or editing documentation, always use the
