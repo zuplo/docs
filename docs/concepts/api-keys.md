@@ -23,7 +23,8 @@ The API key system has three core objects:
 See [API Key Management](../articles/api-key-management.mdx) for a full
 overview, and
 [Manage Keys in the Portal](../articles/api-key-administration.mdx) for managing
-consumers in the portal.
+consumers under [Services](https://portal.zuplo.com/+/account/project/services)
+in your project.
 
 ## How validation works
 
@@ -76,8 +77,8 @@ when the consumer's key is used. Common uses:
   backend
 - **Organization**: `{"orgId": 456}` for multi-tenant routing
 
-Metadata is set when creating a consumer via the
-[portal](../articles/api-key-administration.mdx),
+Set metadata when creating a consumer via the
+[portal](https://portal.zuplo.com/+/account/project/services),
 [Developer API](../articles/api-key-api.mdx), or
 [developer portal self-serve](#self-serve-key-management).
 
@@ -173,11 +174,11 @@ self-serve API key management. Your API consumers can sign in to the portal and
 create, view, and delete their own keys without contacting your team.
 
 To enable self-serve access, assign a **manager** to a consumer. Managers are
-identified by email and identity provider subject. This can be done in the
-portal, via the [Developer API](../articles/api-key-api.mdx), or automatically
-when a user signs in using
-[Auth0](../dev-portal/dev-portal-create-consumer-on-auth.mdx) or another
-identity provider.
+identified by email and identity provider subject. You can assign a manager in
+the [portal](https://portal.zuplo.com/+/account/project/services), via the
+[Developer API](../articles/api-key-api.mdx), or automatically when a user signs
+in using [Auth0](../dev-portal/dev-portal-create-consumer-on-auth.mdx) or
+another identity provider.
 
 ## Buckets and environments
 

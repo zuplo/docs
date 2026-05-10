@@ -221,8 +221,8 @@ Replace Kong's JWT plugin with one of Zuplo's JWT authentication policies:
 
 ### Step 5: Set up your project and deploy
 
-1. Create a new project in the [Zuplo Portal](https://portal.zuplo.com/signup)
-   or using the [Zuplo CLI](../cli/overview.md).
+1. [Create a new project](https://portal.zuplo.com/+/account/projects/new) in
+   the Zuplo Portal or using the [Zuplo CLI](../cli/overview.md).
 2. Import your OpenAPI spec as the route configuration file.
 3. Add policies to your routes.
 4. Connect your project to [source control](./source-control.md).

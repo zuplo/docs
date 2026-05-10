@@ -42,7 +42,9 @@ in Stripe at the moment a charge is needed (as invoice line items).
 
 ### Via the Zuplo Portal
 
-1. Navigate to **Services → Monetization Service → Payment Provider**
+1. Open your project's
+   [**Services**](https://portal.zuplo.com/+/account/project/services) page,
+   select the Monetization Service, then go to **Payment Provider**
 2. Click **Configure** on the Stripe card
 3. Enter a **Name** and paste your **Stripe API Key**
 4. Click **Save**
@@ -111,8 +113,10 @@ Intents, Refunds, or Stripe Billing Meters — leave all of those at **None**.
    or `Zuplo Monetization (production)`.
 3. For each of the eight permissions above, set the level shown in the table.
 4. Click **Create key**, copy the value (`rk_test_...` or `rk_live_...`), and
-   paste it into **Services → Monetization Service → Payment Provider** in your
-   Zuplo project.
+   paste it into the Monetization Service's **Payment Provider** screen (open
+   your project's
+   [**Services**](https://portal.zuplo.com/+/account/project/services) page,
+   then the Monetization Service) in your Zuplo project.
 
 :::caution
 
@@ -208,22 +212,22 @@ When a customer cancels through the Developer Portal, the timing of the
 cancellation depends on whether the current phase has billable items:
 
 - **Paid phases** — the portal sends `timing: "next_billing_cycle"`. The
-  subscription is scheduled to cancel at the end of the current billing
-  period, the customer retains access until then, and the API key stops
-  working at period end.
+  subscription is scheduled to cancel at the end of the current billing period,
+  the customer retains access until then, and the API key stops working at
+  period end.
 - **Free phases** — the portal sends `timing: "immediate"`. With nothing to
   invoice at period end, there's no billing period to wait out, so the
   subscription cancels and access is revoked right away. Two situations fall
   into this branch:
-  - The customer is on a **free trial phase** (the first phase of a plan
-    with a later paid phase) and cancels before the trial converts.
-  - The customer is on a **free plan** — a plan whose only phase has no
-    billable rate cards (every rate card's `price` is `null`).
+  - The customer is on a **free trial phase** (the first phase of a plan with a
+    later paid phase) and cancels before the trial converts.
+  - The customer is on a **free plan** — a plan whose only phase has no billable
+    rate cards (every rate card's `price` is `null`).
 
 For programmatic cancellation, see
 [Cancellation](./subscription-lifecycle.md#cancellation) in the Subscription
-Lifecycle guide — the API endpoint accepts a `timing` parameter to control
-this same behavior explicitly.
+Lifecycle guide — the API endpoint accepts a `timing` parameter to control this
+same behavior explicitly.
 
 ## Proration
 

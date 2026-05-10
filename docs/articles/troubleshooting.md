@@ -79,7 +79,9 @@ arrays.
 The gateway returns this error when the project has a critical configuration
 issue that prevents it from starting.
 
-**Fix:** Check the deployment logs in the Zuplo Portal for the specific error
+**Fix:** Check the deployment logs in the Zuplo Portal — open the
+[**Environments**](https://portal.zuplo.com/+/account/project/environments) tab
+in your project and select the failing environment to see the specific error
 message. Common causes include invalid `zuplo.runtime.ts` configuration or
 broken runtime extensions.
 
@@ -174,9 +176,10 @@ const response = await fetch("https://api.example.com/data", {
 
 ### Portal live logs
 
-The Zuplo Portal provides real-time log viewing for deployed environments.
-Navigate to your project in the portal and open the logs tab to see live request
-logs and any messages logged with `context.log`.
+The Zuplo Portal provides real-time log viewing for deployed environments. Open
+the [**Environments**](https://portal.zuplo.com/+/account/project/environments)
+tab in your project, select the deployed environment, and open the logs tab to
+see live request logs and any messages logged with `context.log`.
 
 ### Using context.log
 

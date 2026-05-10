@@ -76,8 +76,10 @@ Save and deploy. Once the plugin is enabled, ensure:
 
 ### Plan display order
 
-Control plan display order in the Zuplo Portal under **Services →
-Monetization**. Plans can be reordered using drag-and-drop.
+Control plan display order from your project's
+[**Services**](https://portal.zuplo.com/+/account/project/services) page in the
+Zuplo Portal — open the Monetization Service. Plans can be reordered using
+drag-and-drop.
 
 ### Feature comparison matrix
 
@@ -158,7 +160,9 @@ use the same fonts, colors, and layout as the rest of your portal.
 The Developer Portal runs at `https://your-project.zuplo.dev/docs` by default.
 For production, configure a custom domain:
 
-1. Navigate to **Settings → Custom Domains** in the Zuplo Portal
+1. Open
+   [**Account Settings → Custom Domains**](https://portal.zuplo.com/+/account/settings/custom-domains)
+   in the Zuplo Portal
 2. Add your domain (e.g., `developers.your-company.com`)
 3. Configure the DNS records as instructed
 4. SSL is provisioned automatically

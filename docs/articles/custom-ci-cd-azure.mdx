@@ -51,8 +51,9 @@ CLI outputs `Deployed to https://...` which you can parse with `grep` or `sed`.
 
 1. **Disconnect Git integration** — If you're using Azure Pipelines for
    deployments, disconnect the native Git integration to avoid duplicate
-   deployments. Go to **Settings** > **Source Control** and click
-   **Disconnect**.
+   deployments. Open your
+   [project settings](https://portal.zuplo.com/+/account/project/settings/general),
+   select **Source Control**, and click **Disconnect**.
 
 2. **Add your API key** — Store your Zuplo API key as a pipeline variable or in
    a variable group. Go to **Pipelines** > **Library** to create a variable

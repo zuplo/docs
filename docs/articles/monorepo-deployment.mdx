@@ -220,8 +220,7 @@ jobs:
 
 Store your Zuplo API key as a GitHub Actions secret:
 
-1. Go to [portal.zuplo.com](https://portal.zuplo.com) and navigate to your
-   account **Settings** > **API Keys**
+1. In the Zuplo Portal, navigate to your account **Settings** > **API Keys**
 2. Copy the API key
 3. In your GitHub repository, go to **Settings** > **Secrets and variables** >
    **Actions**
@@ -322,7 +321,7 @@ the deployed environment. Timeouts can indicate:
   `routes.oas.json` or `policies.json` exist in the `modules/` directory
 - **Missing environment variables** — If your policies or handlers reference
   environment variables with `$env(VAR_NAME)`, make sure those variables are
-  configured in the Zuplo portal under your project's
+  configured in the Zuplo Portal under your project's
   [environment variables](./environment-variables.mdx)
 
 ### Build succeeds but deploy fails
