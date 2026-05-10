@@ -72,8 +72,9 @@ Two non-negotiable rules:
 2. Don't deep-link past pages that require slugs (specific environments, builds,
    buckets, apps, teams). Link to the parent list instead.
 
-See [`.claude/portal-shortcut-links.md`](./.claude/portal-shortcut-links.md) for
-the full URL list, examples, and writing patterns.
+See
+[`contributors/portal-shortcut-links.md`](./contributors/portal-shortcut-links.md)
+for the full URL list, examples, and writing patterns.
 
 ## Zuplo Docs Content
 
