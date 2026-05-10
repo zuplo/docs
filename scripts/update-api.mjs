@@ -51,9 +51,29 @@ const merged = {
   ],
   info: {
     ...data.info,
+    title: "Zuplo Developer API",
     version: "1.0.0",
-    description:
-      "This API allows you to manage your Zuplo account, including creating and managing projects, environments, and more.",
+    description: `The Zuplo Developer API lets you programmatically manage your Zuplo account, projects, environments, tunnels, custom domains, and more. Use it to automate workflows, integrate with CI/CD pipelines, or build custom tooling on top of Zuplo.
+
+## Authentication
+
+All API requests require a **Bearer token** in the \`Authorization\` header:
+
+\`\`\`
+Authorization: Bearer YOUR_API_KEY
+\`\`\`
+
+### Creating an API Key
+
+1. Navigate to [portal.zuplo.com](https://portal.zuplo.com) and log in.
+2. Select the account you want to work with.
+3. Go to **Settings** > **API Keys**.
+4. Click **Create New Key** or copy an existing key.
+
+API keys are scoped to your account, so a single key works for all projects under that account. If you belong to multiple accounts, make sure to select the correct one before creating a key.
+
+> **⚠️ Warning:** Keep your API key secure. Do not commit it to version control or share it publicly. Use environment variables to store your key in CI/CD environments.
+`,
   },
   paths: addPreviewWarningToPaths(
     Object.fromEntries(
