@@ -1,0 +1,223 @@
+---
+title: Documenting MCP Servers
+sidebar_label: Documenting MCP Servers
+navigation_icon: bot
+description:
+  Use the x-mcp-server OpenAPI extension to render an MCP setup card in the Dev
+  Portal for external or proxied MCP servers.
+---
+
+The Dev Portal renders a dedicated
+[Model Context Protocol (MCP)](https://modelcontextprotocol.io/) setup UI for
+any OpenAPI operation that includes the `x-mcp-server` extension. The card
+replaces the standard request/response view with the MCP endpoint URL, a copy
+button, and tabbed installation instructions for Claude, ChatGPT, Cursor, VS
+Code, and a generic config.
+
+:::tip{title="Building an MCP server on Zuplo?"}
+
+If your MCP server uses Zuplo's
+[MCP Server Handler](/docs/handlers/mcp-server.mdx), the `x-mcp-server`
+extension is added to your OpenAPI spec automatically. Skip this guide — there
+is nothing to configure. See the
+[MCP Server overview](/docs/mcp-server/introduction.mdx) for the build path.
+
+:::
+
+## When to use this guide
+
+Use this guide when you want to surface an MCP server in your Dev Portal that
+you are **not** building with Zuplo's MCP Server Handler. Common scenarios:
+
+- You proxy a third-party MCP server through a Zuplo route (for example, with a
+  [URL forward](/docs/handlers/url-forward.mdx) or
+  [custom handler](/docs/handlers/custom-handler.mdx)) and want to publish setup
+  instructions for it.
+- You hand-author an OpenAPI spec for an MCP server hosted outside Zuplo.
+- You catalog multiple MCP servers — some yours, some external — in a single Dev
+  Portal.
+
+In every case, this guide covers only the **documentation** side: how the Dev
+Portal renders the MCP card. Authentication, rate limiting, and any other
+gateway behavior is configured on the underlying route as usual.
+
+## Adding the extension
+
+Add `x-mcp-server` to the operation that represents the MCP endpoint. MCP
+servers typically use `POST`, but the extension works on any HTTP method.
+
+```json title="openapi.json"
+{
+  "paths": {
+    "/mcp": {
+      "post": {
+        "summary": "Acme Docs MCP",
+        "description": "MCP endpoint for searching Acme's documentation.",
+        "operationId": "acmeDocsMcp",
+        "x-mcp-server": {
+          "name": "acme-docs",
+          "version": "1.0.0",
+          "tools": [
+            {
+              "name": "search_docs",
+              "description": "Search the documentation"
+            },
+            {
+              "name": "get_page",
+              "description": "Retrieve a specific documentation page"
+            }
+          ]
+        },
+        "responses": {
+          "200": {
+            "description": "MCP response"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+For a quick setup with no metadata, use the shorthand `"x-mcp-server": true`.
+The operation `summary` is then used as the server name.
+
+## Extension properties
+
+| Property  | Type     | Required | Description                                                                                                          |
+| --------- | -------- | -------- | -------------------------------------------------------------------------------------------------------------------- |
+| `name`    | `string` | No       | Display name used in the generated client config snippets. Falls back to the operation `summary`, then `mcp-server`. |
+| `version` | `string` | No       | Version metadata. Included for completeness; not currently rendered in the UI.                                       |
+| `tools`   | `array`  | No       | Tool metadata. Used by Zuplo enrichment; not currently rendered in the UI.                                           |
+
+Each entry in `tools` accepts:
+
+| Property      | Type     | Required | Description                     |
+| ------------- | -------- | -------- | ------------------------------- |
+| `name`        | `string` | Yes      | Tool name                       |
+| `description` | `string` | No       | Human-readable tool description |
+
+## MCP URL resolution
+
+The displayed MCP URL is constructed from the **server URL** of the API plus the
+**path** of the operation. The server URL comes from the OpenAPI `servers` array
+(or the operation-level `servers` override, when present).
+
+For example:
+
+```json
+{
+  "servers": [{ "url": "https://api.example.com" }],
+  "paths": {
+    "/mcp/docs": {
+      "post": {
+        "x-mcp-server": { "name": "docs-mcp" },
+        "responses": { "200": { "description": "OK" } }
+      }
+    }
+  }
+}
+```
+
+The displayed MCP URL is `https://api.example.com/mcp/docs`. Make sure the
+server URL points to wherever the MCP server actually accepts requests — for
+proxied servers, that is typically your Zuplo gateway URL.
+
+## Complete example
+
+This minimal but complete OpenAPI spec produces an MCP endpoint page in the Dev
+Portal:
+
+```json title="mcp-api.json"
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Acme Docs MCP",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.example.com",
+      "description": "Production"
+    }
+  ],
+  "paths": {
+    "/mcp": {
+      "post": {
+        "tags": ["MCP"],
+        "summary": "Acme Docs MCP",
+        "description": "MCP endpoint for searching Acme's documentation.",
+        "operationId": "acmeDocsMcp",
+        "x-mcp-server": {
+          "name": "acme-docs",
+          "version": "1.0.0",
+          "tools": [
+            {
+              "name": "search_docs",
+              "description": "Search the documentation"
+            }
+          ]
+        },
+        "responses": {
+          "200": {
+            "description": "MCP response"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Reference the spec from your Dev Portal config (see
+[API Reference](./zudoku/configuration/api-reference.md) for the full `apis`
+configuration):
+
+```tsx title="zudoku.config.tsx"
+import type { ZudokuConfig } from "zudoku";
+
+const config: ZudokuConfig = {
+  apis: [
+    {
+      type: "file",
+      input: "./mcp-api.json",
+      path: "mcp",
+    },
+  ],
+  navigation: [
+    {
+      type: "link",
+      label: "MCP Server",
+      to: "/mcp",
+      icon: "bot",
+    },
+  ],
+};
+
+export default config;
+```
+
+## Generated UI
+
+When the Dev Portal detects `x-mcp-server` on an operation, the page renders:
+
+- **MCP Endpoint card** — the full URL with a copy button.
+- **AI Tool Configuration** tabs with setup instructions for:
+  - **Claude** — add via the Connectors UI or the `claude mcp add` CLI command.
+  - **ChatGPT** — app setup via Settings → Apps → Advanced Settings.
+  - **Cursor** — `mcp.json` configuration (global or project-level).
+  - **VS Code** — `.vscode/mcp.json` with native HTTP transport for GitHub
+    Copilot.
+  - **Generic** — standard `mcp.json` format compatible with most MCP clients.
+
+The standard method badge, request body, parameters, and sidecar panels are
+hidden for MCP endpoints because they use a different interaction model.
+
+## Related
+
+- [`x-mcp-server` extension reference](./zudoku/openapi-extensions/x-mcp-server.md)
+  — the underlying OpenAPI extension.
+- [MCP Server Handler](/docs/handlers/mcp-server.mdx) — build an MCP server on
+  Zuplo (and skip this guide entirely).
+- [MCP Server overview](/docs/mcp-server/introduction.mdx) — concepts,
+  capabilities, and the Zuplo-native build path.
