@@ -63,7 +63,7 @@ curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions \
 ```
 
 `plan` references the target plan by its `key` (and optionally `version`).
-Provide either `customerId` (the OpenMeter customer ULID, format
+Provide either `customerId` (the Zuplo customer ULID, format
 `^[0-7][0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{25}$`) or `customerKey` (your own
 identifier). Optional fields include `timing` (`"immediate"` by default,
 `"next_billing_cycle"`, or an RFC 3339 timestamp), `startingPhase`, `name`,
