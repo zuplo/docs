@@ -116,10 +116,8 @@ unverified traffic or allows it through, depending on configuration.
   on your account. When `true`, the policy lets traffic through but still
   attaches certificate metadata when a parseable client certificate is present —
   useful for staged rollouts or logging-only modes.
-- `certIssuerDN` (optional): The fully qualified issuer distinguished name that
-  the client certificate must be signed by. Set this when you have multiple CAs
-  on your account and want a given route to accept certificates from only one of
-  them. Setting this by default is recommended.
+- `certIssuerDN`: The fully qualified issuer distinguished name that the client
+  certificate must be signed by.
 
 See the full [policy reference](../policies/mtls-auth-inbound.md) for all
 options.
