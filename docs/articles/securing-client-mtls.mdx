@@ -78,6 +78,13 @@ zuplo ca-certificate list --account your-account
 See the [`ca-certificate` CLI reference](../cli/ca-certificate-create.md) for
 all available subcommands (`create`, `list`, `describe`, `update`, `delete`).
 
+:::tip{title="Using an intermediate CA"}
+
+If your client certificates are issued by an intermediate CA (rather than
+directly by your root), upload the **intermediate** itself as the CA — not the
+root. The client certs used must be directly signed by the CA certificate you
+provide to Zuplo. :::
+
 ## 2/ Add the mTLS Auth Inbound Policy
 
 Add the [`mtls-auth-inbound`](../policies/mtls-auth-inbound.md) policy to any
