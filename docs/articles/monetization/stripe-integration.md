@@ -46,7 +46,7 @@ in Stripe at the moment a charge is needed (as invoice line items).
    [**Services**](https://portal.zuplo.com/+/account/project/services) page,
    select the Monetization Service, then go to **Payment Provider**
 2. Click **Configure** on the Stripe card
-3. Enter a **Name** and paste your **Stripe API Key**
+3. Paste your **Stripe API Key**
 4. Click **Save**
 
 :::tip
@@ -229,13 +229,6 @@ For programmatic cancellation, see
 Lifecycle guide — the API endpoint accepts a `timing` parameter to control this
 same behavior explicitly.
 
-## Proration
-
-When customers upgrade or downgrade mid-billing-period, charges are prorated
-automatically. Upgrades are charged the prorated difference for the remainder of
-the billing period. Downgrades result in a prorated credit applied to the next
-invoice.
-
 ## Usage-based billing
 
 For plans with usage-based pricing (per-unit, tiered, pay-as-you-go), usage is
@@ -278,8 +271,7 @@ To enable the Stripe Customer Portal:
 
 1. Configure the Customer Portal in your
    [Stripe Dashboard → Settings → Billing → Customer Portal](https://dashboard.stripe.com/settings/billing/portal)
-2. Enable the features you want (update payment method, view invoices, cancel
-   subscription)
+2. Enable the features you want (update payment method, view invoices)
 3. The Developer Portal automatically includes a "Manage Billing" link that
    opens the Stripe Customer Portal
 
