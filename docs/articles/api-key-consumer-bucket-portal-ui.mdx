@@ -1,0 +1,221 @@
+---
+title: Create Consumers in a Specific Bucket
+sidebar_label: Consumers in a Specific Bucket
+description:
+  Learn how to create API key consumers in a specific bucket using the Zuplo
+  portal UI, including bucket selection, environment mapping, and
+  troubleshooting.
+---
+
+When you create an API key consumer in the Zuplo portal, it is placed into a
+**bucket**. By default, each project has three buckets — one for production, one
+for development (working copy), and one shared across preview environments. If
+you need to place a consumer in a specific bucket — for example, to isolate keys
+per environment or to use a custom bucket — you can do this entirely from the
+portal UI.
+
+This guide walks you through selecting a bucket and creating a consumer in that
+bucket using the portal's **Services** screen.
+
+:::note
+
+For general API key management (creating consumers, viewing keys, assigning
+managers), see [Manage Keys in the Portal](./api-key-administration.mdx). This
+guide focuses specifically on selecting a target bucket before creating a
+consumer.
+
+:::
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- A Zuplo project with at least one deployed environment (see the
+  [getting started tutorial](./step-1-setup-basic-gateway.mdx) if you need to
+  create one)
+- The [API Key Authentication policy](../policies/api-key-inbound.mdx)
+  configured on your routes
+- Appropriate permissions to manage API key consumers in your project
+
+## Understanding buckets and environments
+
+Zuplo automatically creates three buckets for every project:
+
+- **Production** — used by the production environment (your default Git branch)
+- **Shared** — used by all preview environments (non-default branches)
+- **Working copy** — used by the development (working copy) environment
+
+Each bucket isolates its consumers and keys. An API key created in the
+production bucket only authenticates requests to the production environment, and
+a key in the shared bucket only works against preview environments.
+
+For more detail on how buckets map to environments, see
+[Buckets and Environments](./api-key-buckets.mdx).
+
+### When you need a non-default bucket
+
+You might need to target a specific bucket when:
+
+- **Per-environment isolation** — You want separate consumers for staging vs.
+  production so that test keys never work in production.
+- **Custom buckets** — Your team has created additional buckets (for example, a
+  QA bucket or a tenant-specific bucket) via the
+  [Developer API](./api-key-api.mdx) and you want to add consumers to them.
+- **Shared buckets across projects** — Enterprise customers sharing a bucket
+  across multiple projects need to create consumers in the correct shared
+  bucket.
+
+## Find your buckets in the portal
+
+1. Open your project in the [Zuplo Portal](https://portal.zuplo.com).
+2. Navigate to the
+   [**Services**](https://portal.zuplo.com/+/account/project/services) page.
+3. You will see the **API Key Service** listed. Use the **environment dropdown**
+   at the top to filter which buckets are displayed.
+   - Select **All Environments** to see every bucket in your project.
+   - Select a specific environment (for example, **Production** or **Working
+     Copy**) to see only the bucket associated with that environment.
+
+Each environment shows its associated bucket. The bucket used by the production
+environment is the production bucket, and so on.
+
+## Create a consumer in a specific bucket
+
+1. On the **Services** page, use the environment dropdown to select the
+   environment whose bucket you want to create the consumer in. For example,
+   select **Production** to work with the production bucket.
+2. Click the **Configure** button on the API Key Service card for that
+   environment. This opens the bucket's consumer list.
+3. Click **Create Consumer**.
+4. Fill in the consumer details:
+   - **Name** — A unique identifier for the consumer within this bucket. This
+     value becomes `request.user.sub` at runtime.
+   - **Description** (optional) — A human-readable description of the consumer.
+   - **Metadata** (optional) — A JSON object available at runtime as
+     `request.user.data`. Use this for plan information, customer IDs, or other
+     data your policies need.
+   - **Tags** (optional) — Key-value pairs for organizing and querying consumers
+     via the API. Tags are not available at runtime.
+   - **Managers** (optional) — Email addresses of users who can manage this
+     consumer's keys through the
+     [Developer Portal](../dev-portal/introduction.mdx).
+5. Click **OK** to create the consumer.
+6. Confirm the consumer appears in the list for the selected environment's
+   bucket.
+
+Once created, the consumer's API key only authenticates requests routed through
+an environment whose API Key Authentication policy resolves to that same bucket.
+
+## How bucket selection affects key validation
+
+The [API Key Authentication policy](../policies/api-key-inbound.mdx) determines
+which bucket to validate keys against. When you don't set a `bucketName` in the
+policy options, it defaults to the bucket that matches the current environment:
+
+- Requests to the **production** environment validate against the production
+  bucket.
+- Requests to a **preview** environment validate against the shared bucket.
+- Requests to the **working copy** environment validate against the working copy
+  bucket.
+
+If you have created a consumer in a custom bucket, you need to set the
+`bucketName` (or `bucketId`) option on the API Key Authentication policy so that
+the policy knows to look in that bucket:
+
+```json
+{
+  "export": "ApiKeyInboundPolicy",
+  "module": "$import(@zuplo/runtime)",
+  "options": {
+    "bucketName": "my-custom-bucket",
+    "allowUnauthenticatedRequests": false
+  }
+}
+```
+
+:::caution
+
+If the consumer lives in one bucket but the API Key Authentication policy is
+configured to check a different bucket, the key will not be found and the
+request returns a `401 Unauthorized` response. Always make sure the policy's
+bucket matches the bucket where you created the consumer.
+
+:::
+
+## Using the Developer API instead
+
+If you prefer to script consumer creation — for example, as part of an
+onboarding flow or CI/CD pipeline — you can use the
+[Zuplo Developer API](./api-key-api.mdx) to create consumers in any bucket
+programmatically:
+
+```bash
+curl \
+  https://dev.zuplo.com/v1/accounts/$ACCOUNT_NAME/key-buckets/$BUCKET_NAME/consumers?with-api-key=true \
+  --request POST \
+  --header "Content-type: application/json" \
+  --header "Authorization: Bearer $ZAPI_KEY" \
+  --data '{
+    "name": "my-consumer",
+    "description": "Created via API",
+    "metadata": { "plan": "gold" }
+  }'
+```
+
+Replace `$ACCOUNT_NAME` with your Zuplo account name, `$BUCKET_NAME` with the
+target bucket name, and `$ZAPI_KEY` with your
+[Zuplo API key](./accounts/zuplo-api-keys.mdx).
+
+For the full API reference, see the
+[Developer API documentation](https://dev.zuplo.com/docs).
+
+## Troubleshooting
+
+### "My API key returns 401 Unauthorized"
+
+This is usually a bucket mismatch. The consumer was created in one bucket, but
+the API Key Authentication policy on the route is checking a different bucket.
+
+To fix this:
+
+1. In the portal, navigate to **Services** and confirm which bucket the consumer
+   is in by checking which environment's bucket list it appears under.
+2. Open your route configuration and check the API Key Authentication policy. If
+   it has a `bucketName` or `bucketId` option, verify it matches the bucket
+   where the consumer was created. If it has no `bucketName`, the policy uses
+   the default bucket for the current environment.
+3. Either move the consumer to the correct bucket (by creating a new consumer in
+   the right bucket) or update the policy's `bucketName` to match.
+
+### "I don't see the bucket I'm looking for"
+
+- **Check the environment dropdown** — Make sure you have selected **All
+  Environments** on the Services page to see every bucket.
+- **Custom buckets** — Custom buckets created via the Developer API are
+  associated with your account, not a specific environment. They appear when you
+  filter by **All Environments**. If you still don't see the bucket, verify it
+  was created under the correct account using the
+  [list buckets API endpoint](https://dev.zuplo.com/docs).
+- **Permissions** — Ensure your user role has permission to view and manage API
+  key consumers. Account-level roles control access to the Services page.
+
+### "I created a consumer but it doesn't appear in the expected environment"
+
+Consumers belong to a specific bucket, not an environment directly. If you
+created a consumer while viewing the **Shared** environment, the consumer is in
+the shared bucket and only works for preview environments. Switch the
+environment dropdown to **All Environments** or the specific environment to find
+where the consumer was created.
+
+## Related documentation
+
+- [Buckets and Environments](./api-key-buckets.mdx) — How buckets map to
+  environments
+- [Manage Keys in the Portal](./api-key-administration.mdx) — General portal
+  management walkthrough
+- [API Key Authentication policy](../policies/api-key-inbound.mdx) — Policy
+  configuration reference including `bucketName`
+- [Use the Developer API](./api-key-api.mdx) — Programmatic consumer management
+- [Create an API Key Consumer on Login](../dev-portal/dev-portal-create-consumer-on-auth.mdx)
+  — Automatically create consumers when users sign in
+- [Environments](./environments.mdx) — How environments work in Zuplo

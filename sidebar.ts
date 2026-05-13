@@ -443,6 +443,7 @@ export const documentation: Navigation = [
       "articles/api-key-best-practices",
       "articles/api-key-authentication",
       "articles/api-key-administration",
+      "articles/api-key-consumer-bucket-portal-ui",
       "articles/api-key-end-users",
       "articles/api-key-api",
       "articles/api-key-self-serve-integration",
