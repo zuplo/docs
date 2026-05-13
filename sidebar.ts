@@ -359,7 +359,6 @@ export const documentation: Navigation = [
     label: "Development",
     icon: "wrench",
     items: [
-      "articles/ai-agents",
       "articles/cors",
       "articles/environment-variables",
       "articles/branch-based-deployments",
@@ -475,6 +474,18 @@ export const documentation: Navigation = [
           "articles/manual-mcp-oauth-testing",
         ],
       },
+    ],
+  },
+  {
+    type: "category",
+    label: "Build with AI",
+    icon: "sparkles",
+    items: [
+      "build-with-ai/overview",
+      "articles/ai-agents",
+      "build-with-ai/skills",
+      "build-with-ai/docs-mcp-server",
+      "build-with-ai/zuplo-mcp-server",
     ],
   },
   {

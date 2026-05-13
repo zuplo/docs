@@ -1,0 +1,175 @@
+---
+title: Zuplo MCP Server
+sidebar_label: Zuplo MCP Server
+---
+
+The Zuplo MCP server exposes the [Zuplo Developer API](https://dev.zuplo.com)
+through the [Model Context Protocol](https://modelcontextprotocol.io). Agents
+can manage accounts, deployments, API keys, custom domains, tunnels, audit logs,
+and more — all in a single, authenticated session.
+
+**Endpoint:** `https://dev.zuplo.com/mcp`
+
+Unlike the [Docs MCP server](./docs-mcp-server.md), this server is authenticated
+and performs **real operations against your Zuplo account**. Use it carefully.
+
+:::caution
+
+Connecting an agent to this server gives it the same permissions as the API key
+you authenticate with. Scope the API key tightly (project, environment,
+permissions) and treat the token like any other production credential.
+
+:::
+
+## Authentication
+
+Authenticate using a [Zuplo API key](../articles/accounts/zuplo-api-keys.md).
+Create one in the Zuplo Portal under
+[**Account Settings → API Keys**](https://portal.zuplo.com/+/account/settings/api-keys),
+then pass it as a bearer token:
+
+```http
+Authorization: Bearer <ZUPLO_API_KEY>
+```
+
+The API key determines which accounts, projects, and operations the agent can
+access — only the resources granted to the key are exposed as MCP tools at
+runtime.
+
+## What it does
+
+The server exposes the Developer API surface as MCP tools. Capabilities include:
+
+| Area                  | What agents can do                                                                         |
+| --------------------- | ------------------------------------------------------------------------------------------ |
+| **Accounts**          | List accounts and identify the caller (`WhoAmI`).                                          |
+| **Projects**          | List projects and environments in an account.                                              |
+| **Deployments**       | List, read, redeploy, and delete deployments. Upload sources and check deployment status.  |
+| **API Key Buckets**   | Create, list, read, update, and delete API key buckets.                                    |
+| **API Key Consumers** | Create, list, read, update, delete, and roll keys for consumers. Manage consumer managers. |
+| **API Keys**          | Create (single or bulk), list, read, update, and delete keys for a consumer.               |
+| **Custom Domains**    | Create, list, update, and delete custom domains.                                           |
+| **Client mTLS CAs**   | Create, list, update, and delete client mTLS CA certificates.                              |
+| **Tunnels**           | Create, list, read, update, and delete tunnels. Configure and inspect tunneled services.   |
+| **Variables**         | Create and update environment variables on a project branch.                               |
+| **Audit Logs**        | Query audit logs with filtering and pagination.                                            |
+| **Analytics**         | Get recent calls and request statistics by status code for a deployment.                   |
+
+The full tool catalog is generated from the Developer API's OpenAPI spec, so new
+endpoints become available as MCP tools automatically when the API ships them.
+
+## Add it to your client
+
+### Claude Code
+
+Add the server to `.claude/settings.json`. Store the API key in an environment
+variable rather than committing it:
+
+```json title=".claude/settings.json"
+{
+  "mcpServers": {
+    "zuplo": {
+      "type": "http",
+      "url": "https://dev.zuplo.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${ZUPLO_API_KEY}"
+      }
+    }
+  }
+}
+```
+
+Then export the key in your shell:
+
+```bash
+export ZUPLO_API_KEY="zpka_..."
+```
+
+### Cursor
+
+Add the server to `.cursor/mcp.json`:
+
+```json title=".cursor/mcp.json"
+{
+  "mcpServers": {
+    "zuplo": {
+      "url": "https://dev.zuplo.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${ZUPLO_API_KEY}"
+      }
+    }
+  }
+}
+```
+
+### VS Code (GitHub Copilot)
+
+Add the server to `.vscode/mcp.json`. VS Code prompts for the API key on first
+use:
+
+```json title=".vscode/mcp.json"
+{
+  "inputs": [
+    {
+      "id": "zuplo-api-key",
+      "type": "promptString",
+      "description": "Zuplo API key",
+      "password": true
+    }
+  ],
+  "servers": {
+    "zuplo": {
+      "type": "http",
+      "url": "https://dev.zuplo.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${input:zuplo-api-key}"
+      }
+    }
+  }
+}
+```
+
+### Other clients
+
+Any MCP-compatible client that supports streamable HTTP and custom headers
+works. Send the API key in the `Authorization` header as a bearer token.
+
+## Example workflows
+
+Once connected, ask the agent to drive Zuplo through natural-language prompts:
+
+- _"List all deployments in the `production` environment of project `my-api`."_
+- _"Create a new API key consumer named `acme-corp` and generate a key that
+  expires in 30 days."_
+- _"Roll all API keys for consumer `legacy-client` and set a 7-day expiration on
+  the old key."_
+- _"Show me the request stats by status code for the latest deployment over the
+  last 24 hours."_
+- _"Add `api.example.com` as a custom domain on the `production` environment."_
+- _"Set the environment variable `STRIPE_API_KEY` on the `main` branch."_
+
+## Security best practices
+
+1. **Use short-lived, narrowly-scoped API keys.** Create a dedicated key per
+   agent session or project; don't reuse a single all-powerful key.
+2. **Restrict permissions.** Limit the key to the smallest set of projects,
+   environments, and permissions the agent needs. See
+   [API Keys](../articles/accounts/zuplo-api-keys.md) for the full permissions
+   model.
+3. **Never commit keys.** Store them in environment variables or a secret
+   manager — not in `.claude/settings.json` or `.cursor/mcp.json`.
+4. **Audit usage.** Use the `ListAuditLogsService` tool or the
+   [Audit Logs](../articles/accounts/audit-logs.md) view in the Portal to review
+   what the agent did.
+5. **Revoke when done.** Delete the API key from the Portal as soon as the
+   session is over.
+
+## Related
+
+- [Zuplo Developer API](https://dev.zuplo.com) — the underlying REST API.
+- [Zuplo API Keys](../articles/accounts/zuplo-api-keys.md) — create and manage
+  the API keys used to authenticate this MCP server.
+- [Docs MCP Server](./docs-mcp-server.md) — pair this with the docs server so
+  agents can both read docs and operate the gateway.
+- [Audit Logs](../articles/accounts/audit-logs.md) — review changes made by an
+  agent.

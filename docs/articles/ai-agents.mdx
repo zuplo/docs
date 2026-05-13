@@ -1,5 +1,5 @@
 ---
-title: Set up your Zuplo project for AI coding agents
+title: AI Coding Agents
 sidebar_label: AI Coding Agents
 ---
 
@@ -8,9 +8,19 @@ allowing AI coding agents to reference accurate, up-to-date APIs and patterns.
 An `AGENTS.md` file at the root of your project directs agents to these bundled
 docs instead of their training data.
 
+For task-specific playbooks and Zuplo capabilities beyond documentation lookup,
+see:
+
+- [Agent Skills](../build-with-ai/skills.md) — install the official skills from
+  [`zuplo/tools`](https://github.com/zuplo/tools).
+- [Docs MCP Server](../build-with-ai/docs-mcp-server.md) — real-time search and
+  Q&A across the full Zuplo documentation.
+- [Zuplo MCP Server](../build-with-ai/zuplo-mcp-server.md) — manage your Zuplo
+  account programmatically from agents.
+
 ## How it works
 
-When you install `zuplo`, the full Zuplo documentation is bundled at
+Installing `zuplo` bundles the full Zuplo documentation at
 `node_modules/zuplo/docs/`. The bundled docs cover policies, handlers, concepts,
 guides, CLI reference, and more:
 
@@ -38,8 +48,8 @@ Code, Cursor, GitHub Copilot, Windsurf, and others — automatically read
 
 ### New projects
 
-When you create a new project with `create-zuplo-api`, the `AGENTS.md` and
-`CLAUDE.md` files are generated automatically. No additional setup is needed:
+Creating a new project with `create-zuplo-api` generates the `AGENTS.md` and
+`CLAUDE.md` files automatically. No additional setup is needed:
 
 ```bash
 npx create-zuplo-api@latest
@@ -84,86 +94,26 @@ outdated training data.
 You can add your own project-specific instructions to `AGENTS.md` or `CLAUDE.md`
 alongside the Zuplo defaults.
 
-## Install official skills
+## Going further
 
-For a richer experience, install the official
-[Zuplo agent skills](https://github.com/zuplo/tools). Skills provide
-specialized, task-specific guidance that goes beyond general documentation
-lookup — they teach agents how to set up projects, configure policies, write
-handlers, set up monetization, and more.
+Once `AGENTS.md` is in place, layer on the rest of Zuplo's agent tooling:
 
-### What are agent skills?
-
-[Agent skills](https://agentskills.io) are structured instruction files that AI
-coding agents load automatically. Each skill focuses on a specific domain and
-includes step-by-step guidance, code patterns, and references to documentation.
-
-### Available skills
-
-| Skill                   | Description                                                                                                          |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| **zuplo-guide**         | Comprehensive gateway guide — documentation lookup, request pipeline, route/policy configuration, custom handlers.   |
-| **zuplo-project-setup** | Step-by-step new project setup — scaffolding, routes, auth, rate limiting, CORS, env vars, deployment.               |
-| **zuplo-policies**      | Policy configuration — built-in policy catalog, custom code policies, wiring policies to routes.                     |
-| **zuplo-handlers**      | Request handlers — URL forwarding/rewriting, redirects, custom TypeScript handlers, Lambda, WebSockets, MCP servers. |
-| **zuplo-monetization**  | API monetization — meters, plans, Stripe billing, subscriptions, usage tracking.                                     |
-| **zuplo-cli**           | CLI reference — local dev, deployment, env vars, tunnels, OpenAPI tools, project management.                         |
-| **zudoku-guide**        | Comprehensive Zudoku framework guide — setup, configuration, OpenAPI integration, plugins, auth, theming.            |
-
-### Install skills
-
-Install the skills from GitHub:
-
-```bash
-npx skills add zuplo/tools
-```
-
-Or via `.well-known` discovery:
-
-```bash
-npx skills add https://zuplo.com/
-```
-
-After installation, agents automatically load the relevant skills when working
-in your project.
-
-## Optional: Add the MCP server
-
-For search and Q&A across all Zuplo documentation, you can also add the Zuplo
-MCP server. This gives agents the ability to search docs and ask questions in
-real-time.
-
-For **Claude Code**, add to `.claude/settings.json`:
-
-```json title=".claude/settings.json"
-{
-  "mcpServers": {
-    "zuplo-docs": {
-      "type": "http",
-      "url": "https://dev.zuplo.com/mcp/docs"
-    }
-  }
-}
-```
-
-:::tip
-
-The MCP server is optional. The bundled docs in `node_modules/zuplo/docs/`
-provide complete, version-matched documentation without any network requests.
-The MCP server is useful for broader search and Q&A across all Zuplo
-documentation.
-
-:::
+1. [**Install the official skills**](../build-with-ai/skills.md) for
+   task-specific playbooks on project setup, policies, handlers, monetization,
+   and more.
+2. [**Add the Docs MCP server**](../build-with-ai/docs-mcp-server.md) for
+   real-time search and Q&A across the full documentation.
+3. [**Add the Zuplo MCP server**](../build-with-ai/zuplo-mcp-server.md) to let
+   agents drive your Zuplo account — deploy, manage API keys, inspect logs, and
+   more.
 
 ## Summary
 
-There are three ways to give AI coding agents access to Zuplo documentation,
-listed in priority order:
+The recommended setup, in priority order:
 
-1. **Bundled docs** (recommended) — always available at
-   `node_modules/zuplo/docs/`, version-matched, no setup required beyond
-   `AGENTS.md`
-2. **Agent skills** — install from [zuplo/tools](https://github.com/zuplo/tools)
-   for task-specific guidance on project setup, policies, handlers,
-   monetization, and more
-3. **MCP server** — add the Zuplo docs MCP server for real-time search and Q&A
+1. **Bundled docs** — always available at `node_modules/zuplo/docs/`,
+   version-matched, no setup required beyond `AGENTS.md`.
+2. **[Agent skills](../build-with-ai/skills.md)** — task-specific guidance from
+   [`zuplo/tools`](https://github.com/zuplo/tools).
+3. **[MCP servers](../build-with-ai/overview.md)** — real-time docs search and
+   programmatic gateway management.

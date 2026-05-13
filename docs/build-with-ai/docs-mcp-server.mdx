@@ -1,0 +1,97 @@
+---
+title: Docs MCP Server
+sidebar_label: Docs MCP Server
+---
+
+The Zuplo Docs MCP server exposes the full Zuplo documentation through the
+[Model Context Protocol](https://modelcontextprotocol.io). AI agents can search,
+ask questions, and pull in accurate, up-to-date answers without leaving the
+editor.
+
+**Endpoint:** `https://dev.zuplo.com/mcp/docs`
+
+This server is public — no authentication required.
+
+## What it does
+
+The Docs MCP server provides two tools:
+
+| Tool                       | Purpose                                                                                                       |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `search-zuplo-docs`        | Semantic search across all Zuplo documentation. Useful for finding pages on policies, handlers, and concepts. |
+| `ask-question-about-zuplo` | Ask a natural-language question. The server returns a synthesized answer grounded in the docs.                |
+
+## Add it to your client
+
+### Claude Code
+
+Add the server to `.claude/settings.json`:
+
+```json title=".claude/settings.json"
+{
+  "mcpServers": {
+    "zuplo-docs": {
+      "type": "http",
+      "url": "https://dev.zuplo.com/mcp/docs"
+    }
+  }
+}
+```
+
+### Cursor
+
+Add the server to `.cursor/mcp.json`:
+
+```json title=".cursor/mcp.json"
+{
+  "mcpServers": {
+    "zuplo-docs": {
+      "url": "https://dev.zuplo.com/mcp/docs"
+    }
+  }
+}
+```
+
+### VS Code (GitHub Copilot)
+
+Add the server to `.vscode/mcp.json`:
+
+```json title=".vscode/mcp.json"
+{
+  "servers": {
+    "zuplo-docs": {
+      "type": "http",
+      "url": "https://dev.zuplo.com/mcp/docs"
+    }
+  }
+}
+```
+
+### Other clients
+
+Most MCP-compatible clients accept a streamable HTTP endpoint. Point them at
+`https://dev.zuplo.com/mcp/docs` — no headers or credentials needed.
+
+## When to use it
+
+The Docs MCP server is most useful when:
+
+- You want answers grounded in the **latest** docs, even when the agent's
+  training data is stale.
+- You're working outside a Zuplo project, so the bundled
+  `node_modules/zuplo/docs/` isn't available.
+- You want a one-question lookup ("How do I configure the rate-limit policy?")
+  without manually opening the docs site.
+
+For project-local work, prefer the
+[bundled docs in `node_modules/zuplo/docs/`](../articles/ai-agents.md) — they
+match your installed Zuplo version and don't require a network round-trip.
+
+## Related
+
+- [AI Coding Agents](../articles/ai-agents.md) — how to set up `AGENTS.md` and
+  bundled docs.
+- [Agent Skills](./skills.md) — task-specific guidance that complements the docs
+  MCP server.
+- [Zuplo MCP Server](./zuplo-mcp-server.md) — manage your Zuplo account
+  programmatically from agents.
