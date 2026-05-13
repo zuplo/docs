@@ -479,8 +479,7 @@ Stripe Invoice that includes both:
   period, charged in arrears.
 
 Stripe collects payment for the full invoice. The first billing period's invoice
-contains only the $499, since there's no prior period to bill overage for. No
-Stripe Subscription is created.
+contains only the $499, since there's no prior period to bill overage for.
 
 ## Credits / tokens (prepaid)
 
@@ -509,10 +508,10 @@ credits run out, then buy more. No ongoing subscription commitment.
 
 ```json
 {
-  "key": "credits-small",
+  "key": "credits_small",
   "name": "50,000 Credits",
   "currency": "USD",
-  "billingCadence": null,
+  "billingCadence": "P1M",
   "phases": [
     {
       "key": "default",
@@ -520,20 +519,15 @@ credits run out, then buy more. No ongoing subscription commitment.
       "duration": null,
       "rateCards": [
         {
-          "type": "usage_based",
-          "key": "api_credits",
-          "name": "API Credits",
-          "featureKey": "api_credits",
+          "type": "flat_fee",
+          "key": "api_requests",
+          "name": "50,000 API Credits",
+          "featureKey": "api_requests",
           "billingCadence": null,
           "price": {
-            "type": "package",
+            "type": "flat",
             "amount": "49.00",
-            "quantityPerPackage": 50000
-          },
-          "entitlementTemplate": {
-            "type": "metered",
-            "issueAfterReset": 50000,
-            "isSoftLimit": false
+            "paymentTerm": "in_advance"
           }
         }
       ]
@@ -546,10 +540,10 @@ credits run out, then buy more. No ongoing subscription commitment.
 
 ```json
 {
-  "key": "credits-large",
+  "key": "credits_large",
   "name": "500,000 Credits",
   "currency": "USD",
-  "billingCadence": null,
+  "billingCadence": "P1M",
   "phases": [
     {
       "key": "default",
@@ -557,20 +551,15 @@ credits run out, then buy more. No ongoing subscription commitment.
       "duration": null,
       "rateCards": [
         {
-          "type": "usage_based",
-          "key": "api_credits",
-          "name": "API Credits",
-          "featureKey": "api_credits",
+          "type": "flat_fee",
+          "key": "api_requests",
+          "name": "500,000 API Credits",
+          "featureKey": "api_requests",
           "billingCadence": null,
           "price": {
-            "type": "package",
+            "type": "flat",
             "amount": "299.00",
-            "quantityPerPackage": 500000
-          },
-          "entitlementTemplate": {
-            "type": "metered",
-            "issueAfterReset": 500000,
-            "isSoftLimit": false
+            "paymentTerm": "in_advance"
           }
         }
       ]
