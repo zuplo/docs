@@ -762,6 +762,7 @@ export const documentation: Navigation = [
         items: [
           "articles/securing-your-backend",
           "articles/securing-backend-mtls",
+          "articles/securing-client-mtls",
           "articles/gke-with-upstream-auth-policy",
           {
             type: "category",

@@ -1,0 +1,277 @@
+---
+title: Client mTLS Authentication
+---
+
+<EnterpriseFeature name="Client mTLS" />
+
+Client mTLS authentication lets your Zuplo gateway verify the identity of
+clients calling your API using certificates issued by a Certificate Authority
+(CA) that you control. Both the client and the gateway authenticate each other
+during the TLS handshake, so only clients holding a certificate signed by your
+CA can reach your API.
+
+This is useful when you need strong, cryptographic authentication of partners,
+devices, or services — for example IoT fleets, B2B integrations, or zero-trust
+internal APIs — without distributing API keys or OAuth credentials.
+
+## How Client mTLS Works
+
+When a client calls your Zuplo gateway:
+
+1. The client presents a certificate issued by your CA during the TLS handshake.
+2. Zuplo's edge verifies the certificate against the CA you've uploaded and
+   passes the verification result (and parsed certificate) to your gateway
+   workers.
+3. The [`mtls-auth-inbound`](../policies/mtls-auth-inbound.md) policy on your
+   route reads the verification result, enforces it, and attaches the parsed
+   certificate metadata to `request.user.data.mtlsAuth` for use in your handlers
+   and downstream policies.
+
+CA certificates are scoped to your Zuplo **account**, not a single project or
+deployment. Once a CA is uploaded, every gateway domain on the account will
+verify presented client certificates against it. The policy on each route
+controls whether unverified traffic is rejected or allowed through.
+
+## Prerequisites
+
+Before you begin, you need:
+
+- A public CA certificate (PEM-encoded) that issued — or will issue — the client
+  certificates you want to accept
+- The [Zuplo CLI](../cli/overview.mdx) installed and authenticated
+- A Zuplo project where you can add the `mtls-auth-inbound` policy to a route
+
+:::note
+
+You only upload your **public CA certificate** to Zuplo. Private keys and issued
+client certificates stay with you and your clients.
+
+:::
+
+## 1/ Upload Your CA Certificate
+
+Use the Zuplo CLI to upload your CA certificate. The CA is registered against
+your account and is automatically made available on all of your gateway domains.
+
+```bash
+zuplo ca-certificate create \
+  --name my_ca \
+  --cert ./ca.pem \
+  --account your-account
+```
+
+**Parameters:**
+
+- `--name`: A unique identifier for the CA. Must be a valid JavaScript
+  identifier (letters, digits, `_`, `$`; cannot start with a digit).
+- `--cert`: Path to the PEM-encoded CA certificate
+  (`-----BEGIN CERTIFICATE-----` ...). DER is not supported.
+- `--account`: Your Zuplo account name.
+
+The command returns the new CA's ID (prefixed with `mtlsca_`). You can list all
+CAs on the account at any time:
+
+```bash
+zuplo ca-certificate list --account your-account
+```
+
+See the [`ca-certificate` CLI reference](../cli/ca-certificate-create.md) for
+all available subcommands (`create`, `list`, `describe`, `update`, `delete`).
+
+## 2/ Add the mTLS Auth Inbound Policy
+
+Add the [`mtls-auth-inbound`](../policies/mtls-auth-inbound.md) policy to any
+route that should require a verified client certificate. The policy reads the
+verification result that Zuplo's edge attached to the request and either rejects
+unverified traffic or allows it through, depending on configuration.
+
+```json title="config/policies.json"
+{
+  "name": "my-mtls-auth-inbound-policy",
+  "policyType": "mtls-auth-inbound",
+  "handler": {
+    "export": "MTLSAuthInboundPolicy",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "allowUnauthenticatedRequests": false,
+      "certIssuerDN": "CN=example-ca, O=Example, C=US"
+    }
+  }
+}
+```
+
+**Key options:**
+
+- `allowUnauthenticatedRequests` (default `false`): When `false`, the policy
+  rejects requests that don't present a valid client certificate signed by a CA
+  on your account. When `true`, the policy lets traffic through but still
+  attaches certificate metadata when a parseable client certificate is present —
+  useful for staged rollouts or logging-only modes.
+- `certIssuerDN` (optional): The fully qualified issuer distinguished name that
+  the client certificate must be signed by. Set this when you have multiple CAs
+  on your account and want a given route to accept certificates from only one of
+  them. Setting this by default is recommended.
+
+See the full [policy reference](../policies/mtls-auth-inbound.md) for all
+options.
+
+:::tip{title="Finding your certIssuerDN value"}
+
+The issuer DN of a client certificate is the subject DN of the CA that signed
+it. Read it directly from your CA's PEM file with `openssl`:
+
+```bash
+openssl x509 -in ca.pem -noout -subject -nameopt RFC2253
+```
+
+This prints something like `subject=CN=example-ca,O=Example,C=US`. Copy the part
+after `subject=` into `certIssuerDN`. The policy tolerates casing and whitespace
+differences, but not RDN reordering, so keep the order produced by `openssl`
+as-is.
+
+:::
+
+## 3/ Read Certificate Metadata in Your Handler
+
+When verification succeeds, the policy attaches parsed certificate metadata to
+`request.user.data.mtlsAuth`. If `request.user` does not already exist, the
+policy also sets `request.user.sub` to the certificate subject.
+
+```ts
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export default async function (request: ZuploRequest, context: ZuploContext) {
+  const mtls = request.user?.data?.mtlsAuth;
+
+  if (!mtls) {
+    return new Response("No client certificate", { status: 401 });
+  }
+
+  context.log.info("Authenticated client", {
+    subject: mtls.subject,
+    issuer: mtls.issuer,
+    fingerprint: mtls.sha256Fingerprint,
+  });
+
+  // Authorize based on certificate subject, fingerprint, etc.
+  return new Response(`Hello, ${mtls.subject}`);
+}
+```
+
+The metadata object includes:
+
+- `subject` — the client certificate subject DN
+- `issuer` — the issuer DN (the CA that signed the certificate)
+- `notBefore` / `notAfter` — validity window in ISO 8601 format
+- `sha256Fingerprint` — SHA-256 digest of the DER-encoded certificate, uppercase
+  hex with colon separators (e.g. `AB:CD:EF:...`). Useful for pinning specific
+  client certificates.
+
+The raw client certificate is also available on
+`context.incomingRequestProperties.clientCert` in
+[RFC 9440](https://datatracker.ietf.org/doc/html/rfc9440#section-2.2) format
+(Base64-encoded DER, colon-wrapped) if you need to perform custom parsing or
+forward it to a backend.
+
+## Managing CA Certificates
+
+### Listing CAs
+
+```bash
+zuplo ca-certificate list --account your-account
+```
+
+### Inspecting a CA
+
+```bash
+zuplo ca-certificate describe \
+  --cert-id mtlsca_abc123 \
+  --account your-account
+```
+
+### Renaming a CA
+
+Only the name can be updated; to replace the certificate body, delete the CA and
+create a new one.
+
+```bash
+zuplo ca-certificate update \
+  --cert-id mtlsca_abc123 \
+  --name renamed_ca \
+  --account your-account
+```
+
+### Deleting a CA
+
+```bash
+zuplo ca-certificate delete \
+  --cert-id mtlsca_abc123 \
+  --account your-account
+```
+
+:::caution
+
+Deleting a CA stops verification for client certificates issued by it on all of
+your gateway domains. Routes that use `mtls-auth-inbound` with
+`allowUnauthenticatedRequests: false` will start rejecting those clients
+immediately. Rotate to a new CA and update your clients before deleting the old
+CA.
+
+:::
+
+### Rotating a CA
+
+To rotate the CA without downtime:
+
+1. Upload the new CA alongside the existing one with
+   `zuplo ca-certificate create`.
+2. Reissue client certificates from the new CA and distribute them to your
+   clients.
+3. If your route uses `certIssuerDN`, update it to accept the new issuer
+   (temporarily allow either issuer at the application level, or stage the
+   change behind `allowUnauthenticatedRequests: true` during cutover).
+4. Once all clients have moved to the new CA, delete the old CA with
+   `zuplo ca-certificate delete`.
+
+## Local Development
+
+The `mtls-auth-inbound` policy relies on verification metadata supplied by
+Zuplo's edge proxy and does not work in local development with `zuplo dev`. Test
+the policy in a working-copy or preview environment.
+
+## Troubleshooting
+
+### Requests are rejected with 401
+
+- Confirm the client is presenting a certificate signed by a CA that's been
+  uploaded with `zuplo ca-certificate list`.
+- If you've set `certIssuerDN`, verify it matches
+  `request.user.data.mtlsAuth.issuer` exactly (casing and whitespace are
+  tolerated, but RDN order is not).
+- Temporarily set `allowUnauthenticatedRequests: true` and log
+  `context.incomingRequestProperties.clientMtlsVerificationStatus` and
+  `context.incomingRequestProperties.clientMtlsVerificationReason` to see why
+  verification failed.
+
+### `request.user.data.mtlsAuth` is missing
+
+- The policy only attaches metadata when a parseable client certificate is
+  present on the request. Confirm the client is sending one.
+- Verify the route includes the `mtls-auth-inbound` policy.
+
+### Custom domains
+
+When a CA is uploaded, it's automatically associated with Zuplo's managed
+gateway domains. If you use a custom domain and your clients aren't being
+verified against it, contact [support@zuplo.com](mailto:support@zuplo.com).
+
+## Additional Resources
+
+- [`mtls-auth-inbound` policy reference](../policies/mtls-auth-inbound.md)
+- [`ca-certificate` CLI reference](../cli/ca-certificate-create.md)
+- [Gateway to Origin mTLS Authentication](./securing-backend-mtls.mdx) — the
+  reverse direction, where Zuplo authenticates to your backend with a client
+  certificate
+
+If you need help configuring client mTLS for your account, contact us at
+[support@zuplo.com](mailto:support@zuplo.com).
