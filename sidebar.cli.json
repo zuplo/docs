@@ -1,4 +1,9 @@
 [
+  "cli/ca-certificate-create",
+  "cli/ca-certificate-delete",
+  "cli/ca-certificate-describe",
+  "cli/ca-certificate-list",
+  "cli/ca-certificate-update",
   "cli/custom-domain-create",
   "cli/custom-domain-delete",
   "cli/custom-domain-list",

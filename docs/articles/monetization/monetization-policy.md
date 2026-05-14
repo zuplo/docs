@@ -296,20 +296,22 @@ the RFC 7807 Problem Details format:
 
 Common error details:
 
-| Condition                       | `detail` message                                                    |
-| ------------------------------- | ------------------------------------------------------------------- |
-| No auth header                  | `"No Authorization Header"`                                         |
-| Wrong auth scheme               | `"Invalid Authorization Scheme"`                                    |
-| Empty key after the auth scheme | `"No key present"`                                                  |
-| Cached invalid key or 401       | `"Authorization Failed"`                                            |
-| Invalid API key                 | `"API Key is invalid or does not have access to the API"`           |
-| Expired API key                 | `"API Key has expired."`                                            |
-| Expired subscription            | `"API Key has an expired subscription."`                            |
-| Subscription has no payment     | `"Subscription payment status is not available."`                   |
-| Payment not made                | `"Payment has not been made."`                                      |
-| Payment overdue                 | `"Payment is overdue. Please update your payment method."`          |
-| Quota exhausted                 | `"API Key has exceeded the allowed limit for \"X\" meter."`         |
-| Meter not in subscription       | `"API Key does not have \"X\" meter provided by the subscription."` |
+| Condition                        | `detail` message                                                    |
+| -------------------------------- | ------------------------------------------------------------------- |
+| No auth header                   | `"No Authorization Header"`                                         |
+| Wrong auth scheme                | `"Invalid Authorization Scheme"`                                    |
+| Empty key after the auth scheme  | `"No key present"`                                                  |
+| Cached invalid key or 401        | `"Authorization Failed"`                                            |
+| Invalid API key                  | `"API Key is invalid or does not have access to the API"`           |
+| Expired API key                  | `"API Key has expired."`                                            |
+| Expired subscription             | `"API Key has an expired subscription."`                            |
+| Subscription has no payment      | `"Subscription payment status is not available."`                   |
+| Payment not made                 | `"Payment has not been made."`                                      |
+| Payment overdue                  | `"Payment is overdue. Please update your payment method."`          |
+| Subscription has no entitlements | `"Subscription entitlements are not available."`                    |
+| Meter not in subscription        | `"API Key does not have \"X\" meter provided by the subscription."` |
+| Quota exhausted                  | `"API Key has exceeded the allowed limit for \"X\" meter."`         |
+| Meter access denied              | `"API Key does not have access to \"X\" meter."`                    |
 
 ## Pipeline ordering
 

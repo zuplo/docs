@@ -163,6 +163,7 @@ const policies: Navigation = [
       "articles/graphql-security",
       "articles/per-user-rate-limits-using-db",
       "articles/composite-policy-reference",
+      "articles/securing-the-gateway-with-client-mtls",
     ],
   },
 ];
@@ -443,6 +444,7 @@ export const documentation: Navigation = [
       "articles/api-key-best-practices",
       "articles/api-key-authentication",
       "articles/api-key-administration",
+      "articles/api-key-consumer-bucket-portal-ui",
       "articles/api-key-end-users",
       "articles/api-key-api",
       "articles/api-key-self-serve-integration",
