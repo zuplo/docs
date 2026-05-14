@@ -163,6 +163,7 @@ const policies: Navigation = [
       "articles/graphql-security",
       "articles/per-user-rate-limits-using-db",
       "articles/composite-policy-reference",
+      "articles/securing-the-gateway-with-client-mtls",
     ],
   },
 ];
