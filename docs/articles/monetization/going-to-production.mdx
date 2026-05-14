@@ -18,17 +18,16 @@ announced.
 You have built out your monetization configuration in Stripe test mode and your
 customers are ready to pay real money. This guide covers:
 
-- The **pre-production checklist** — items to verify before enabling real
-  charges
-- **Billing model readiness** — which pricing models are production-ready today
-- **Stripe live-mode cutover** — step-by-step instructions to connect live
+- The **pre-production checklist**: items to verify before enabling real charges
+- **Billing model readiness**: which pricing models are production-ready today
+- **Stripe live-mode cutover**: step-by-step instructions to connect live
   payments
-- **Beta limitations** — constraints to design around before launch
+- **Beta limitations**: constraints to design around before launch
 
 ## Before you start
 
 Going to production with monetization requires coordination with the Zuplo team.
-The monetization feature is currently in **public beta** — the APIs are stable
+The monetization feature is currently in **public beta**. The APIs are stable
 and the core billing flows work end-to-end, but production pricing for the
 monetization feature itself has not yet been announced.
 
@@ -68,7 +67,7 @@ every check; the sections below give the detail and links.
 Your Developer Portal must have an authentication provider configured so that
 customers can sign in, subscribe, and manage their API keys. Verify that your
 auth provider (Auth0, Clerk, or a custom OpenID Connect provider) works
-correctly across all environments — working copy, preview, and production.
+correctly across all environments: working copy, preview, and production.
 
 See
 [Developer Portal Setup → Prerequisites](./developer-portal.md#prerequisites)
@@ -78,7 +77,7 @@ for details.
 
 Confirm that your production bucket has the same meters, features, and plans you
 tested in your working-copy or preview bucket. Monetization configuration is
-scoped per-bucket, so you must recreate it in production — it does not
+scoped per-bucket, so you must recreate it in production. It does not
 automatically promote between environments.
 
 Key checks:
@@ -90,7 +89,7 @@ Key checks:
 - **Plans are published.** Draft plans are not visible to customers. Publish
   each plan from the Monetization Service in the Zuplo Portal.
 - **Currency is correct.** Plans support any ISO 4217 currency code (USD, EUR,
-  AUD, GBP, etc.). Verify the `currency` field on every plan — you cannot change
+  AUD, GBP, etc.). Verify the `currency` field on every plan. You cannot change
   it after customers subscribe.
 - **Plan ordering is set.** The
   [monetization configuration](./api-access.mdx#bucket-monetization-configuration)
@@ -101,7 +100,7 @@ Key checks:
 
 Your production environment must use a Stripe **live** key (`sk_live_*` or
 `rk_live_*`). Test keys and live keys are completely separate environments in
-Stripe — customers, invoices, and payment methods created in test mode do not
+Stripe. Customers, invoices, and payment methods created in test mode do not
 exist in live mode.
 
 :::tip
@@ -129,7 +128,7 @@ verify:
 
 | Setting              | What to check                                                    | Reference                                                                              |
 | -------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| **Supplier country** | Set correctly — tax calculations depend on this value            | [Enable tax collection](./tax-collection.md#enable-tax-collection)                     |
+| **Supplier country** | Set correctly. Tax calculations depend on this value             | [Enable tax collection](./tax-collection.md#enable-tax-collection)                     |
 | **Tax collection**   | Tax registrations added in Stripe and `workflow.tax.enabled` set | [Add tax registrations in Stripe](./tax-collection.md#add-tax-registrations-in-stripe) |
 | **Tax behavior**     | Inclusive vs. exclusive matches your pricing page                | [Tax behavior configuration](./tax-collection.md#tax-behavior-configuration)           |
 
@@ -156,7 +155,7 @@ Verify the webhook is healthy:
 
 1. Find the Zuplo-managed endpoint.
 
-1. Confirm recent deliveries show `2xx` responses (typically `201 OK`) — not
+1. Confirm recent deliveries show `2xx` responses (typically `201 OK`), not
    failures or timeouts.
 
 </Stepper>
@@ -185,7 +184,7 @@ Test both paths in your working-copy environment before going live:
 
 1. Subscribe to a plan with a low quota (e.g., 10 requests).
 
-1. Exceed the quota and verify the correct behavior — either a `403` response
+1. Exceed the quota and verify the correct behavior: either a `403` response
    (hard limit) or continued access with usage counting above the entitlement
    (soft limit).
 
@@ -243,7 +242,7 @@ right model for your launch based on current readiness.
 | Pay-as-you-go                | Limited portal support | Underlying model works; portal pricing table not fully tested |
 | Credits / tokens (prepaid)   | Limited portal support | Underlying model works; portal experience not fully tested    |
 
-### Fixed monthly quotas — production-ready
+### Fixed monthly quotas (production-ready)
 
 The most common and most stable model. Customers pay a flat monthly price for an
 included number of requests. When the quota is exhausted, the API returns
@@ -256,7 +255,7 @@ See
 [Billing Models → Fixed monthly quotas](./billing-models.md#fixed-monthly-quotas)
 for configuration examples.
 
-### Monthly quotas with overages — production-ready
+### Monthly quotas with overages (production-ready)
 
 A hybrid model where customers pay a base price for an included allowance, with
 per-unit overage billing in arrears for usage above the limit. This is modeled
@@ -266,7 +265,7 @@ Fully supported end-to-end. See
 [Billing Models → Monthly quotas with overages](./billing-models.md#monthly-quotas-with-overages)
 for examples.
 
-### Pay-as-you-go — limited portal support
+### Pay-as-you-go (limited portal support)
 
 Pure pay-as-you-go billing (no upfront cost, bill entirely in arrears for actual
 usage) is supported by the underlying monetization models, but the **Developer
@@ -280,7 +279,7 @@ current workarounds.
 See [Billing Models → Pay-as-you-go](./billing-models.md#pay-as-you-go) for the
 data model and configuration.
 
-### Credits / tokens (prepaid) — limited portal support
+### Credits / tokens (prepaid, limited portal support)
 
 Credit/token-based billing is supported by the underlying data model, but the
 **Developer Portal experience has not been fully tested** for this billing
@@ -298,7 +297,7 @@ for configuration examples.
 A common point of confusion: Zuplo does **not** use Stripe Billing Meters,
 Stripe Subscriptions, Stripe Products, or Stripe Prices. Zuplo manages plans,
 subscriptions, metering, and entitlements internally. Stripe is used only for
-**money** — collecting payments and issuing invoices.
+**money**: collecting payments and issuing invoices.
 
 ![API requests are metered by Zuplo's MonetizationInboundPolicy, aggregated and priced inside the Zuplo platform, then materialized as a Stripe invoice at the end of the billing period for Stripe to collect from the customer](../../../public/media/monetization-going-to-production/metering-flow.png)
 
@@ -306,7 +305,7 @@ The flow works like this:
 
 1. Every API request that hits a monetized route is metered in real time by the
    `MonetizationInboundPolicy`.
-2. Usage events are aggregated internally by Zuplo — they are not sent to Stripe
+2. Usage events are aggregated internally by Zuplo. They are not sent to Stripe
    as individual events.
 3. At the end of each billing period, Zuplo calculates the total usage, applies
    the plan's pricing model (flat fee, tiered, per-unit, etc.), and creates a
@@ -329,7 +328,7 @@ Usage is materialized as invoice line items at billing time only.
 To verify that metering is working:
 
 1. Make API requests to a monetized endpoint.
-2. Check the Developer Portal usage dashboard — it should show real-time usage.
+2. Check the Developer Portal usage dashboard. It should show real-time usage.
 3. Query the meter directly via the API:
 
 ```bash
@@ -468,7 +467,7 @@ each environment separately using the APIs documented in
 
 By default, each customer can hold one active subscription at a time.
 Multi-subscription support (e.g., a primary subscription plus a credit pack) is
-available on request — contact [sales@zuplo.com](mailto:sales@zuplo.com) to
+available on request. Contact [sales@zuplo.com](mailto:sales@zuplo.com) to
 enable it for your bucket.
 
 See
@@ -485,7 +484,7 @@ exceed what the Free and Builder tiers offer.
 
 | Plan                    | Gateway devs | Custom domains | Support                     | Production fit                                                    |
 | ----------------------- | ------------ | -------------- | --------------------------- | ----------------------------------------------------------------- |
-| **Free**                | Up to 2      | 0              | Community                   | Testing monetization only — not suitable for production billing   |
+| **Free**                | Up to 2      | 0              | Community                   | Testing monetization only; not suitable for production billing    |
 | **Builder** ($25/mo)    | Up to 2      | 2              | Community                   | Small-scale production if you don't need more team members or SLA |
 | **Enterprise** (custom) | Custom       | Custom         | Priority, SLA up to 99.999% | Required for >2 devs, additional domains, log retention, or SLA   |
 
@@ -513,7 +512,7 @@ To help the team resolve your issue quickly, include:
 | Account slug       | Your Zuplo account identifier                          |
 | Project slug       | The project with monetization enabled                  |
 | Bucket ID          | Project Services → Bucket Details                      |
-| Stripe account ID  | Stripe Dashboard → Settings — starts with `acct_`      |
+| Stripe account ID  | Stripe Dashboard → Settings, starts with `acct_`       |
 | Plan keys          | The plan keys involved in the issue                    |
 | Subscription ID    | If the issue is subscription-specific                  |
 | Steps to reproduce | What you did, what you expected, what happened instead |
@@ -525,8 +524,8 @@ your first real charge, your monetized API is in production. Monitor your
 [Stripe Dashboard](https://dashboard.stripe.com) webhooks and invoices closely
 during the first billing cycle.
 
-- [Troubleshooting](./troubleshooting.md) — common issues and debugging tools
-- [Subscription Lifecycle](./subscription-lifecycle.md) — managing ongoing
+- [Troubleshooting](./troubleshooting.md): common issues and debugging tools
+- [Subscription Lifecycle](./subscription-lifecycle.md): managing ongoing
   upgrades, downgrades, and cancellations
-- [Billing Models Guide](./billing-models.md) — exploring additional pricing
+- [Billing Models Guide](./billing-models.md): exploring additional pricing
   strategies as your business grows

@@ -1,24 +1,50 @@
 ...@zuplo-theme.d2
 
+vars: {
+  d2-config: {
+    layout-engine: elk
+    pad: 20
+  }
+}
+
 direction: right
 
-client: "API request" { class: node }
+client: "API request" {
+  class: node
+  style.font-size: 26
+}
 
 platform: "Zuplo platform (metering, plans, subscriptions)" {
   class: group
-  policy: "MonetizationInboundPolicy" { class: zuplo }
-  aggregate: "Aggregate usage\n+ apply plan pricing" { class: node }
-  policy -> aggregate: "meter event"
+  style.font-size: 18
+
+  policy: "MonetizationInboundPolicy" {
+    class: zuplo
+    style.font-size: 26
+  }
+  aggregate: "Aggregate & price" {
+    class: node
+    style.font-size: 26
+  }
+  policy -> aggregate: "meter event" { style.font-size: 18 }
 }
 
 stripe: "Stripe (money only)" {
   class: group
-  invoice: "Invoice\n(line items)" { class: node }
-  customer: "Customer charged" { class: success }
-  invoice -> customer: "collect"
+  style.font-size: 18
+
+  invoice: "Invoice" {
+    class: node
+    style.font-size: 26
+  }
+  customer: "Customer charged" {
+    class: success
+    style.font-size: 26
+  }
+  invoice -> customer: "collect" { style.font-size: 18 }
 }
 
 (** -> **)[*].class: flow
 
-client -> platform.policy: "request"
-platform.aggregate -> stripe.invoice: "end of billing period"
+client -> platform.policy: "request" { style.font-size: 18 }
+platform.aggregate -> stripe.invoice: "end of billing period" { style.font-size: 18 }
