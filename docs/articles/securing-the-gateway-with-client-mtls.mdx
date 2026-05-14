@@ -184,6 +184,27 @@ The raw client certificate is also available on
 (Base64-encoded DER, colon-wrapped) if you need to perform custom parsing or
 forward it to a backend.
 
+## 4/ Test with curl
+
+Once your CA is uploaded and the policy is on the route, you can verify the
+end-to-end flow with `curl`. You'll need a client certificate and private key
+issued by the CA you uploaded.
+
+Send the certificate and key with `--cert` and `--key`:
+
+```bash
+curl --cert ./client.pem --key ./client.key \
+  https://your-gateway.zuplo.app/v1/example
+```
+
+Confirm that:
+
+- A request **without** `--cert` is rejected with `401` when
+  `allowUnauthenticatedRequests` is `false`.
+- A request with a certificate signed by your uploaded CA succeeds and your
+  handler sees the parsed certificate on `request.user.data.mtlsAuth`.
+- A request with a certificate signed by a different CA is rejected.
+
 ## Managing CA Certificates
 
 ### Listing CAs
@@ -282,8 +303,8 @@ gateway domains. A custom domain must be _active_ in the dashboard (check the
 Settings/Custom Domains sidebar) before CA verification will become active on
 that custom domain.
 
-If you use a custom domain and your clients aren't being verified against it,
-contact [support@zuplo.com](mailto:support@zuplo.com).
+If you add a custom domain later and your clients aren't being verified against
+it, contact [support@zuplo.com](mailto:support@zuplo.com).
 
 ## Additional Resources
 
