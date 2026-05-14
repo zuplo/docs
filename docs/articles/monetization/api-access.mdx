@@ -65,7 +65,7 @@ curl \
 
 Each bucket has an optional `MonetizationConfiguration` record that holds
 bucket-wide defaults. The configuration is read by the runtime and the Developer
-Portal — it is not stored in OpenMeter.
+Portal.
 
 | Method   | Path                                                 |
 | -------- | ---------------------------------------------------- |
@@ -105,8 +105,8 @@ the schema defaults (`multipleSubscriptionsEnabled: false`, `planOrder: []`,
 
 These endpoints script the Stripe integration that the
 [Monetization Service UI](./stripe-integration.md#connecting-your-stripe-account)
-runs interactively. They live on the Zuplo developer API (not OpenMeter), so the
-request shape is documented here.
+runs interactively. They live on the Zuplo developer API, so the request shape
+is documented here.
 
 ### Connect a Stripe app
 
