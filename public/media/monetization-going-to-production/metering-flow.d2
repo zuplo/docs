@@ -1,0 +1,24 @@
+...@zuplo-theme.d2
+
+direction: right
+
+client: "API request" { class: node }
+
+platform: "Zuplo platform (metering, plans, subscriptions)" {
+  class: group
+  policy: "MonetizationInboundPolicy" { class: zuplo }
+  aggregate: "Aggregate usage\n+ apply plan pricing" { class: node }
+  policy -> aggregate: "meter event"
+}
+
+stripe: "Stripe (money only)" {
+  class: group
+  invoice: "Invoice\n(line items)" { class: node }
+  customer: "Customer charged" { class: success }
+  invoice -> customer: "collect"
+}
+
+(** -> **)[*].class: flow
+
+client -> platform.policy: "request"
+platform.aggregate -> stripe.invoice: "end of billing period"
