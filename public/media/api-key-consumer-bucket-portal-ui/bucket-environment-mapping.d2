@@ -1,0 +1,32 @@
+...@zuplo-theme.d2
+
+direction: right
+
+title: "Default bucket-to-environment mapping" {
+  near: top-center
+  shape: text
+  style.font-size: 20
+  style.bold: true
+}
+
+envs: "Environments" {
+  class: group
+
+  prod_env: "Production" { class: success }
+  preview_env: "Preview" { class: info }
+  dev_env: "Development" { class: code }
+}
+
+buckets: "Buckets" {
+  class: group
+
+  prod_bucket: "Production" { class: zuplo }
+  preview_bucket: "Preview" { class: node }
+  dev_bucket: "Development" { class: node }
+}
+
+(** -> **)[*].class: flow
+
+envs.prod_env -> buckets.prod_bucket: "default branch"
+envs.preview_env -> buckets.preview_bucket: "non-default branches"
+envs.dev_env -> buckets.dev_bucket: "local / working copy"
