@@ -1,7 +1,14 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Claude Code
-.claude/worktrees
+# Claude Code: ignore everything in .claude/ except tracked
+# config/commands/skills/agents/hooks. Add new tracked paths here
+# with a leading "!".
+.claude/*
+!.claude/settings.json
+!.claude/commands/
+!.claude/skills/
+!.claude/agents/
+!.claude/hooks/
 
 # dependencies
 /node_modules
