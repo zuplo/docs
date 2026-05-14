@@ -163,6 +163,7 @@ const policies: Navigation = [
       "articles/graphql-security",
       "articles/per-user-rate-limits-using-db",
       "articles/composite-policy-reference",
+      "articles/securing-the-gateway-with-client-mtls",
     ],
   },
 ];
@@ -762,7 +763,6 @@ export const documentation: Navigation = [
         items: [
           "articles/securing-your-backend",
           "articles/securing-backend-mtls",
-          "articles/securing-client-mtls",
           "articles/gke-with-upstream-auth-policy",
           {
             type: "category",

@@ -5,14 +5,10 @@ title: Client mTLS Authentication
 <EnterpriseFeature name="Client mTLS" />
 
 Client mTLS authentication lets your Zuplo gateway verify the identity of
-clients calling your API using certificates issued by a Certificate Authority
-(CA) that you control. Both the client and the gateway authenticate each other
-during the TLS handshake, so only clients holding a certificate signed by your
-CA can reach your API.
-
-This is useful when you need strong, cryptographic authentication of partners,
-devices, or services — for example IoT fleets, B2B integrations, or zero-trust
-internal APIs — without distributing API keys or OAuth credentials.
+clients calling your API using certificates issued by your own Certificate
+Authority (CA). Both the client and the gateway authenticate each other during
+the TLS handshake, so only clients holding a certificate signed by your CA can
+reach your API.
 
 ## How Client mTLS Works
 
@@ -52,6 +48,14 @@ client certificates stay with you and your clients.
 
 Use the Zuplo CLI to upload your CA certificate. The CA is registered against
 your account and is automatically made available on all of your gateway domains.
+
+First, authenticate your client:
+
+```bash
+zuplo login
+```
+
+Then you can create a CA by running:
 
 ```bash
 zuplo ca-certificate create \
@@ -234,11 +238,16 @@ To rotate the CA without downtime:
    `zuplo ca-certificate create`.
 2. Reissue client certificates from the new CA and distribute them to your
    clients.
-3. If your route uses `certIssuerDN`, update it to accept the new issuer
-   (temporarily allow either issuer at the application level, or stage the
-   change behind `allowUnauthenticatedRequests: true` during cutover).
-4. Once all clients have moved to the new CA, delete the old CA with
+3. Once all clients have moved to the new CA, delete the old CA with
    `zuplo ca-certificate delete`.
+
+If you've followed the common practice of preserving the CA's subject DN across
+the rotation (only the key, serial, and validity dates change), the issuer DN on
+newly issued client certificates is identical to the previous one and
+**`certIssuerDN` does not need to change**. If the rotation deliberately changes
+the CA's subject DN, update `certIssuerDN` to match the new value before cutting
+clients over — or temporarily set `allowUnauthenticatedRequests: true` to allow
+both issuers during the transition.
 
 ## Local Development
 
