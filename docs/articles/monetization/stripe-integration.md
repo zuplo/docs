@@ -49,15 +49,6 @@ in Stripe at the moment a charge is needed (as invoice line items).
 3. Paste your **Stripe API Key**
 4. Click **Save**
 
-:::tip
-
-To script the same flow (CI, infrastructure-as-code, etc.) use the
-[Stripe setup API](./api-access.mdx#stripe-setup-and-billing-readiness) — it
-exposes `POST /setup/stripe`, `GET /billing-readiness`, and key-rotation
-endpoints with the same prefix validation as the UI.
-
-:::
-
 The connection authorizes Zuplo to manage Stripe objects on your behalf —
 specifically Customers, Checkout Sessions, Customer Portal Sessions, Invoices,
 and Tax Calculations. See
@@ -255,9 +246,8 @@ Stripe retries the payment.
 | `failed`        | Access blocked after grace period (configurable) |
 | `uncollectible` | Access blocked                                   |
 
-The grace period is configurable, with customer metadata overriding plan
-metadata, which overrides the bucket-level `maxPaymentOverdueDays`. Default is 3
-days. See
+The grace period is configurable via customer or plan metadata, with customer
+metadata overriding plan metadata. Default is 3 days. See
 [Subscription and payment validation](./monetization-policy.md#subscription-and-payment-validation)
 for the full resolution order.
 
