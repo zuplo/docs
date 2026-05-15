@@ -195,30 +195,46 @@ products.
 
 ### What happens if Stripe is down?
 
-Zuplo caches subscription and quota state locally. If Stripe is temporarily
-unavailable, existing customers continue to have access based on their cached
-subscription state. New subscriptions and plan changes require Stripe to be
-available.
+Zuplo's API request path doesn't go through Stripe. The runtime validates each
+request against Zuplo's own subscription store, so existing customers keep
+access while Stripe is unavailable. New paid subscriptions and billing-affecting
+plan changes do need Stripe and have to wait; free plans skip Stripe Checkout
+entirely and still work. If Stripe misses scheduled payments during the outage,
+the [grace period](./monetization-policy.md#subscription-and-payment-validation)
+(default 3 days) absorbs them once Stripe recovers and reports the failures.
 
 ### Can I use currencies other than USD?
 
 Yes. Plans support any ISO 4217 currency code. Set the `currency` field when
 creating a plan. You can offer the same plan in multiple currencies by creating
-separate plan objects (e.g., `pro-usd` and `pro-eur`).
+separate plan objects (e.g., `pro_usd` and `pro_eur`).
 
 ### How are overages calculated?
 
-Overages are modeled using graduated tiered pricing. The first tier covers the
-included allowance at a flat price, and subsequent tiers charge per-unit for
-usage beyond the allowance. See [Pricing Models](./pricing-models.mdx) for
-details.
+Overage uses graduated tiered pricing on a `usage_based` rate card. Every tier
+has two price slots, `flatPrice` and `unitPrice` — either or both can be set
+(each may be 0), and a tier charges its flat price plus its per-unit price
+times the units consumed inside the tier. All tier-based charges are billed in
+arrears at the end of the billing cycle. The entitlement must set
+`isSoftLimit: true`, otherwise the policy returns 403 at the quota line and
+there's no overage to bill.
+
+For example, tier 1 with `flatPrice: $499` covers the first 1M requests; tier 2
+with `unitPrice: $0.0005` covers each request after. A customer who used 1.2M
+requests invoices $499 + (200,000 × $0.0005) = $599 at the end of the period.
+
+If you need a fixed fee billed at the **start** of the cycle instead, add a
+separate billing-only rate card alongside the usage-based one (no `featureKey`,
+`paymentTerm: "in_advance"`) — see
+[Base fee in advance](./billing-models.md#example-base-fee-in-advance). For the
+full rate card shape, see
+[Included Usage with Overage](./pricing-models.mdx#included-usage-with-overage).
 
 ### Can I set spending limits for pay-as-you-go customers?
 
 You can set a hard entitlement limit that acts as a spending cap (e.g., max
 100,000 requests regardless of willingness to pay). Alternatively, use a custom
-policy to check current usage against a configurable limit, or set up Stripe
-billing alerts to notify customers approaching a threshold.
+policy to check current usage against a configurable limit.
 
 ### Do meters count retried requests?
 

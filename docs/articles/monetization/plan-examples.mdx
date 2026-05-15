@@ -191,6 +191,17 @@ curl \
       "duration": null,
       "rateCards": [
         {
+          "type": "flat_fee",
+          "key": "subscription_fee",
+          "name": "Starter Plan Subscription",
+          "billingCadence": "P1M",
+          "price": {
+            "type": "flat",
+            "amount": "9.99",
+            "paymentTerm": "in_advance"
+          }
+        },
+        {
           "type": "usage_based",
           "key": "api_requests",
           "name": "API Requests",
@@ -208,7 +219,7 @@ curl \
             "tiers": [
               {
                 "upToAmount": "1000",
-                "flatPrice": { "type": "flat", "amount": "9.99" },
+                "flatPrice": { "type": "flat", "amount": "0.00" },
                 "unitPrice": null
               },
               {
@@ -227,10 +238,16 @@ EOF
 
 **What changed:**
 
-- Changed the rate card from `flat_fee` to `usage_based`
-- Changed `isSoftLimit` to `true` - requests continue after 1,000
-- Combined base fee and overage into tiered pricing: first 1,000 cost $9.99
-  flat, then $0.01 per additional request
+- Split the default phase into two rate cards: a billing-only `flat_fee` rate
+  card (no `featureKey`, `paymentTerm: "in_advance"`) that collects the $9.99
+  subscription fee at the start of each billing period, and a `usage_based`
+  rate card that grants the entitlement and prices overage
+- Tier 1's `flatPrice` is set to $0 because the $9.99 is now collected by the
+  separate `flat_fee` rate card — leaving it at $9.99 here would double-charge
+  the customer in arrears at the end of the period
+- Changed `isSoftLimit` to `true` so requests continue past 1,000 and tier 2
+  applies — overage is billed at $0.01 per request above the allowance, in
+  arrears at the end of the period
 
 **Example billing:**
 
@@ -306,6 +323,17 @@ curl \
       "duration": null,
       "rateCards": [
         {
+          "type": "flat_fee",
+          "key": "subscription_fee",
+          "name": "Starter Plan Subscription",
+          "billingCadence": "P1M",
+          "price": {
+            "type": "flat",
+            "amount": "9.99",
+            "paymentTerm": "in_advance"
+          }
+        },
+        {
           "type": "usage_based",
           "key": "api_requests",
           "name": "API Requests",
@@ -323,7 +351,7 @@ curl \
             "tiers": [
               {
                 "upToAmount": "1000",
-                "flatPrice": { "type": "flat", "amount": "9.99" },
+                "flatPrice": { "type": "flat", "amount": "0.00" },
                 "unitPrice": null
               },
               {
