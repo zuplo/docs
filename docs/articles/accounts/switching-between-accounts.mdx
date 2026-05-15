@@ -1,0 +1,170 @@
+---
+title: Switching Between Accounts
+sidebar_label: Switching Accounts
+---
+
+If you belong to more than one Zuplo account — for example, your own personal
+account plus an account you were invited to join — you can switch between them
+in the Zuplo Portal without signing out.
+
+This guide walks you through accepting an invitation, finding the account
+switcher, and troubleshooting common issues when you can't see an account you
+expect to have access to.
+
+## How multi-account membership works
+
+When you first sign up for Zuplo, an account is automatically created for you.
+Other Zuplo users can then invite you to their accounts by entering your email
+address on their
+[Account Settings → Members](https://portal.zuplo.com/+/account/settings/members)
+page. Once you accept the invitation, you become a member of that account in
+addition to your own.
+
+Each account is independent. Projects, billing, custom domains, and API keys all
+belong to a specific account. When you switch accounts in the portal, you see
+only the resources that belong to the account you switched into.
+
+:::tip
+
+Plan-tier features (Free, Builder, Enterprise) are attached to the **account**,
+not to your user. If you are invited to a Builder-tier account, you get access
+to Builder features while working inside that account — even if your own
+personal account is on the Free tier.
+
+:::
+
+## Accept the invitation
+
+When an account admin invites you, Zuplo sends an invitation email to the
+address they entered. To accept:
+
+<Stepper>
+
+1. Open the invitation email and click the link to accept the invitation.
+1. If you are not already signed in to the Zuplo Portal, you will be prompted to
+   sign in. Make sure you sign in with the **same email address** the invitation
+   was sent to (see
+   [Identity mismatch](#i-accepted-the-invitation-but-i-dont-see-the-account)
+   below).
+1. After signing in, the invited account will appear in your account list.
+
+</Stepper>
+
+:::caution
+
+The invitation must be accepted using the same identity (email address) it was
+sent to. If the invitation was sent to `you@company.com` but you sign in with a
+different Google account or a different email-password combination, Zuplo treats
+those as separate users and the invitation won't apply to the identity you are
+signed in with.
+
+:::
+
+## Switch to a different account
+
+Once you belong to multiple accounts, you can switch between them in the Zuplo
+Portal:
+
+<Stepper>
+
+1. Click your avatar or user icon in the **top-right corner** of the portal.
+1. In the dropdown menu, you will see a list of accounts you belong to. The
+   currently active account is indicated in the menu.
+1. Select the account you want to switch to.
+1. The portal reloads in the context of the selected account, showing that
+   account's projects, settings, and resources.
+
+</Stepper>
+
+After switching, all navigation within the portal — including project lists,
+account settings, billing, and logs — reflects the selected account.
+
+## What each role can see and do
+
+Your role in the invited account determines what you can access. The account
+admin assigns your role when they invite you, and can change it later.
+
+- **Admin** — Full access to the account, including billing, member management,
+  all projects, and all environments (including production).
+- **Developer** — Can view projects, custom domains, tunnels, usage, and members
+  at the account level. Within projects, can edit preview and development
+  environments but cannot modify production resources or account settings.
+- **Member** — Can view the account but has no account-level or project-level
+  permissions by default. An admin can grant project-specific roles to give
+  members access to individual projects.
+
+:::note
+
+Role-Based Access Control (RBAC) with Developer and Member roles is an
+enterprise feature. On non-enterprise accounts, all invited users are added as
+**Admin** by default.
+
+:::
+
+For the full permission matrix, see
+[Role Permissions](./roles-and-permissions.mdx).
+
+## Troubleshooting
+
+### I accepted the invitation but I don't see the account
+
+This is almost always an **identity mismatch**. Zuplo supports signing in with
+Google, GitHub, and email-password. Different sign-in methods can be treated as
+separate identities, even if the underlying email address is the same.
+
+Work through this checklist:
+
+- **Check the email address on the invitation.** The invitation was sent to a
+  specific email address. Confirm it matches exactly the email you use to sign
+  in to Zuplo.
+- **Check your sign-in method.** If the invitation was sent to `you@company.com`
+  and you usually sign in with Google OAuth using that same email, that should
+  work. However, if you created a separate email-password account with the same
+  address, Zuplo may treat these as different identities. Try signing in with
+  the method that matches how the invitation was sent.
+- **Click the invitation link again.** Open the original invitation email and
+  click the accept link while you are signed in with the correct identity. If
+  you were signed in with a different identity when you first clicked it, the
+  invitation may have been applied to the wrong account.
+- **Ask the account admin to verify.** The admin can check
+  [Account Settings → Members](https://portal.zuplo.com/+/account/settings/members)
+  to confirm the invitation status. If the invitation shows as pending, it
+  hasn't been accepted yet. The admin can also remove and re-send the invitation
+  to ensure it goes to the right email.
+
+### I see the account but not its projects
+
+If you switched into an account but the project list appears empty or you can't
+open a specific project, check the following:
+
+- **Your account-level role may not include project visibility.** Users with the
+  **Member** role at the account level cannot view projects unless they have
+  been granted a project-level role by an admin. Ask the account admin to assign
+  you a role on the specific project you need access to. See
+  [Managing Project Members](./managing-project-members.mdx) for details.
+- **The project may require source control access.** Some projects are connected
+  to a GitHub, GitLab, Bitbucket, or Azure DevOps repository. You may need
+  access to the linked repository in addition to your Zuplo project role.
+
+### The invited account is on a Builder plan — do I get Builder features?
+
+Yes. Plan-tier features are attached to the **account**, not to individual
+users. When you are working inside a Builder-tier account, you have access to
+all Builder features that your role permits, regardless of what plan your own
+personal account is on.
+
+When you switch back to your personal account, you will only have access to the
+features available on your personal account's plan.
+
+## Related topics
+
+- [Managing Account Members](./managing-account-members.mdx) — How to invite
+  users and manage their roles (admin perspective).
+- [Managing Project Members](./managing-project-members.mdx) — How to grant
+  project-level access to account members.
+- [Role Permissions](./roles-and-permissions.mdx) — Full permission matrix for
+  account and project roles.
+- [User Profile](../users/profile.mdx) — How your profile information is managed
+  by your identity provider.
+- [Multifactor Authentication](../users/multifactor-authentication.mdx) — How to
+  enable MFA for your user account.

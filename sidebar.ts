@@ -803,6 +803,7 @@ export const documentation: Navigation = [
           "articles/accounts/roles-and-permissions",
           "articles/accounts/managing-account-members",
           "articles/accounts/managing-project-members",
+          "articles/accounts/switching-between-accounts",
         ],
       },
       {
