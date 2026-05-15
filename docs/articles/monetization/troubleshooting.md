@@ -26,8 +26,8 @@ announced.
    access is blocked.
 
    ```bash
-   curl https://dev.zuplo.com/v3/metering/{bucketId}/customers/{CUSTOMER_ID}/subscriptions \
-     -H "Authorization: Bearer {API_KEY}"
+   curl https://dev.zuplo.com/v3/metering/${BUCKET_ID}/customers/${CUSTOMER_ID}/subscriptions \
+     -H "Authorization: Bearer ${API_KEY}"
    ```
 
    Fix: Either resolve the payment issue in Stripe, or adjust the grace period.
@@ -142,27 +142,29 @@ entitlements don't change.
 
 ```bash
 # List subscriptions for a customer
-curl https://dev.zuplo.com/v3/metering/{bucketId}/customers/{CUSTOMER_ID}/subscriptions \
-  -H "Authorization: Bearer {API_KEY}"
+curl https://dev.zuplo.com/v3/metering/${BUCKET_ID}/customers/${CUSTOMER_ID}/subscriptions \
+  -H "Authorization: Bearer ${API_KEY}"
 
 # Check subscription access and entitlements
-curl https://dev.zuplo.com/v3/metering/{bucketId}/subscriptions/{subscriptionId}/access \
-  -H "Authorization: Bearer {API_KEY}"
+curl https://dev.zuplo.com/v3/metering/${BUCKET_ID}/subscriptions/${SUBSCRIPTION_ID}/access \
+  -H "Authorization: Bearer ${API_KEY}"
 ```
 
 ### Check meter usage
 
 ```bash
 # Query meter usage for the current month
-curl -X POST https://dev.zuplo.com/v3/metering/{bucketId}/meters/{meterIdOrSlug}/query \
-  -H "Authorization: Bearer {API_KEY}" \
+curl -X POST https://dev.zuplo.com/v3/metering/${BUCKET_ID}/meters/${METER_ID_OR_SLUG}/query \
+  -H "Authorization: Bearer ${API_KEY}" \
   -H "Content-Type: application/json" \
-  -d '{
-    "filterSubscription": ["{SUBSCRIPTION_ID}"],
-    "from": "2026-03-01T00:00:00Z",
-    "to": "2026-03-31T23:59:59Z",
-    "windowSize": "DAY"
-  }'
+  -d @- <<EOF
+{
+  "filterSubscription": ["${SUBSCRIPTION_ID}"],
+  "from": "2026-03-01T00:00:00Z",
+  "to": "2026-12-31T23:59:59Z",
+  "windowSize": "DAY"
+}
+EOF
 ```
 
 ### Test with cURL
@@ -171,7 +173,7 @@ Verify the full flow manually:
 
 ```bash
 # Make a request to a monetized endpoint
-curl -v -H "Authorization: Bearer {CUSTOMER_API_KEY}" \
+curl -v -H "Authorization: Bearer ${CUSTOMER_API_KEY}" \
   https://your-api.zuplo.dev/api/v1/resource
 
 # Check the response status and body for error details
@@ -213,11 +215,11 @@ separate plan objects (e.g., `pro_usd` and `pro_eur`).
 
 Overage uses graduated tiered pricing on a `usage_based` rate card. Every tier
 has two price slots, `flatPrice` and `unitPrice` — either or both can be set
-(each may be 0), and a tier charges its flat price plus its per-unit price
-times the units consumed inside the tier. All tier-based charges are billed in
-arrears at the end of the billing cycle. The entitlement must set
-`isSoftLimit: true`, otherwise the policy returns 403 at the quota line and
-there's no overage to bill.
+(each may be 0), and a tier charges its flat price plus its per-unit price times
+the units consumed inside the tier. All tier-based charges are billed in arrears
+at the end of the billing cycle. The entitlement must set `isSoftLimit: true`,
+otherwise the policy returns 403 at the quota line and there's no overage to
+bill.
 
 For example, tier 1 with `flatPrice: $499` covers the first 1M requests; tier 2
 with `unitPrice: $0.0005` covers each request after. A customer who used 1.2M
