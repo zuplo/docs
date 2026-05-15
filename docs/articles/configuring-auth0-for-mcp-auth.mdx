@@ -17,6 +17,15 @@ authentication for your MCP Server.
 
 This guide will assume that you already have a working Auth0 account and tenant.
 
+:::note
+
+This guide is an example of how you can set up your Auth0 tenant for MCP OAuth
+support. It is recommended that you consult the
+[Auth0 documentation](https://auth0.com/ai/docs/mcp/guides/registering-your-mcp-client-application)
+for more information.
+
+:::
+
 ### Create an Auth0 API
 
 First, you will need to create an Auth0 API. This API will be used to represent
@@ -29,18 +38,6 @@ your MCP Server.
    at `https://my-gateway.zuplo.dev/mcp`, then the identifier would be
    `https://my-gateway.zuplo.dev/mcp`. **The trailing slash isn't required.**
 3. Leave the **Signing Algorithm** as `RS256` and click **Create**.
-
-### Enable Dynamic Client Registration
-
-Next, you will need to enable Dynamic Client Registration for the API you just
-created.
-
-1. In the Auth0 dashboard, navigate to the tenant settings in **Settings** on
-   the left hand sidebar.
-2. Navigate to the **Advanced** tab.
-3. Scroll down to the **Settings** section and check the toggle for **OIDC
-   Dynamic Application Registration**. Also ensure that the **Enable Application
-   Connections** toggle is checked.
 
 ### Configure the Connection
 
@@ -80,12 +77,45 @@ Next, you will need to configure an Auth0 Connection for your API.
    --data '{ "is_domain_connection": true }'
    ```
 
-5. Configure a Default Audience by clicking on Settings > General. Then in the
-   API Authorization Settings, modify the Default Audience. See the Auth0 doc on
-   [API Authorization Settings](https://auth0.com/docs/get-started/tenant-settings#api-authorization-settings)
-   for more information on how to configure a default audience. The audience
-   should be the identifier of the API you created in
-   [Create an Auth0 API](#create-an-auth0-api).
+5. Enable Resource Parameter Compatibility Profile. See the
+   [Auth0 tenant settings docs](https://auth0.com/docs/get-started/tenant-settings)
+   for more information.
+
+After completing these changes to your Auth0 tenant, you will need to enable
+CIMD or DCR (or both) on your Auth0 tenant.
+
+### Enable CIMD for MCP OAuth
+
+To use CIMD for MCP OAuth authentication, do the following:
+
+1. In the Auth0 dashboard, navigate to the tenant settings in **Settings** on
+   the left hand sidebar.
+2. Navigate to the **Advanced** tab.
+3. Scroll down to the **Settings** section and check the toggle for **Client ID
+   Metadata Document (CIMD) Registration**.
+4. Register the MCP clients via their public CIMD client data metadata URL by
+   clicking "Create Application" and then "Import from URL". Note that for all
+   the MCP clients you want to support, you will need to obtain the metadata URL
+   and register each application individually.
+
+See the official
+[Auth0 docs](https://auth0.com/ai/docs/mcp/guides/registering-your-mcp-client-application/manual-cimd-registration)
+for more information.
+
+### Enabling DCR for MCP OAuth
+
+To use DCR for MCP OAuth authentication, do the following:
+
+1. In the Auth0 dashboard, navigate to the tenant settings in **Settings** on
+   the left hand sidebar.
+2. Navigate to the **Advanced** tab.
+3. Scroll down to the **Settings** section and check the toggle for **Dynamic
+   Client Registration (DCR)**. Also ensure that the **Enable Application
+   Connections** toggle is checked.
+
+See the official
+[Auth0 docs](https://auth0.com/ai/docs/mcp/guides/registering-your-mcp-client-application/dynamic-client-registration)
+for more information.
 
 ### Configure OAuth on Zuplo
 
@@ -184,3 +214,13 @@ open the OAuth settings. This will allow you to debug the flow step by step.
 You should be able to hit the **Continue** button in the Inspector UI at each
 step of the flow successfully. If you need more help debugging, see
 [Testing OAuth on Zuplo](../handlers/mcp-server.mdx#oauth-testing).
+
+:::note
+
+When testing CIMD authentication, you will need an MCP client with a CIMD
+compatible client metadata URL. Currently, MCP Inspector does not have this, so
+it is recommended that you test with another client like the Claude Code CLI
+(Client Metadata URI as of May 2026 is
+https://claude.ai/oauth/claude-code-client-metadata).
+
+:::
