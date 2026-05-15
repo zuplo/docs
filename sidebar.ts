@@ -671,6 +671,37 @@ export const documentation: Navigation = [
   },
   {
     type: "category",
+    label: "Analytics",
+    icon: "chart-line",
+    items: [
+      "analytics/overview",
+      "analytics/access-and-entitlements",
+      "analytics/shared-controls",
+      {
+        type: "category",
+        label: "Tabs",
+        items: [
+          "analytics/tabs/requests",
+          "analytics/tabs/origins",
+          "analytics/tabs/consumers",
+          "analytics/tabs/agents",
+          "analytics/tabs/ai-gateway",
+          "analytics/tabs/mcp-gateway",
+          "analytics/tabs/mcp-server",
+        ],
+      },
+      {
+        type: "category",
+        label: "Reference",
+        items: [
+          "analytics/reference/metrics-glossary",
+          "analytics/reference/url-parameters",
+        ],
+      },
+    ],
+  },
+  {
+    type: "category",
     label: "Observability",
     icon: "eye",
     items: [
