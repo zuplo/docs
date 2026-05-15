@@ -154,10 +154,7 @@ below it:
 
 1. **Customer metadata** — `zuplo_max_payment_overdue_days` on the customer
 2. **Plan metadata** — `zuplo_max_payment_overdue_days` on the plan
-3. **Bucket configuration** — `maxPaymentOverdueDays` on the bucket's
-   monetization configuration (PUT
-   `/v3/metering/{bucketId}/monetization-configuration`)
-4. **Default** — `3` days
+3. **Default** — `3` days
 
 Set the value to `0` to block requests immediately when payment is overdue.
 

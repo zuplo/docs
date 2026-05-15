@@ -31,8 +31,7 @@ announced.
    ```
 
    Fix: Either resolve the payment issue in Stripe, or adjust the grace period.
-   The window resolves customer metadata → plan metadata → bucket configuration
-   → 3-day default. See
+   The window resolves customer metadata → plan metadata → 3-day default. See
    [Subscription and payment validation](./monetization-policy.md#subscription-and-payment-validation)
    for details.
 
