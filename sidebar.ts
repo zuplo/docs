@@ -566,6 +566,7 @@ export const documentation: Navigation = [
           "articles/monetization/subscription-lifecycle",
           "articles/monetization/private-plans",
           "articles/monetization/tax-collection",
+          "articles/monetization/going-to-production",
         ],
       },
       {
