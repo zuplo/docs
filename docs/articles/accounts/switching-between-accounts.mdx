@@ -1,0 +1,160 @@
+---
+title: Switching Between Accounts
+sidebar_label: Switching Accounts
+---
+
+If you belong to more than one Zuplo account (for example, your own personal
+account plus an account you were invited to join), you can switch between them
+in the Zuplo Portal without signing out.
+
+This guide covers accepting an invitation, finding the account switcher, and
+troubleshooting common issues when you can't see an account you expect to have
+access to.
+
+:::caution{title="Sign in with the same identity"}
+
+The invitation must be accepted using the same identity (email address and
+sign-in method) it was sent to. Zuplo treats Google sign-in, GitHub sign-in, and
+email-password as separate identities, even when they share an email address. If
+you click an invitation while signed in with a different identity, the
+invitation does not apply.
+
+:::
+
+## Accept an account invitation
+
+When an account admin invites you, Zuplo sends an invitation email to the
+address they entered.
+
+<Stepper>
+
+1. Open the invitation email and click the link to accept the invitation.
+1. If you are not already signed in to the Zuplo Portal, sign in with the **same
+   email address and method** the invitation was sent to. See
+   [I accepted the invitation but I don't see the account](#i-accepted-the-invitation-but-i-dont-see-the-account)
+   if you hit a mismatch.
+1. After signing in, the invited account appears in the **Switch Account**
+   submenu of your avatar dropdown.
+
+</Stepper>
+
+## Switch accounts in the portal
+
+Once you belong to multiple accounts, switch between them from the avatar menu.
+
+<Stepper>
+
+1. Click your avatar in the **top-right corner** of the portal. The currently
+   active account name appears at the top of the dropdown.
+1. Hover over **Switch Account** to open the submenu, which lists every account
+   you belong to.
+1. Select the account you want to switch to.
+1. The portal reloads in the context of the selected account, showing that
+   account's projects, settings, and resources.
+
+</Stepper>
+
+After switching, all navigation within the portal (project lists, account
+settings, billing, logs) reflects the selected account.
+
+## How multi-account membership works
+
+When you first sign up for Zuplo, an account is automatically created for you.
+An admin on another account can then invite you by opening their avatar menu,
+selecting **Account Settings → Members**, clicking **Invite to account**, and
+entering your email address and role. Once you accept, you become a member of
+that account in addition to your own.
+
+Each account is independent. Projects, billing, custom domains, and API keys all
+belong to a specific account. When you switch accounts in the portal, you see
+only the resources that belong to the account you switched into.
+
+## Roles in an invited account
+
+Your role in the invited account determines what you can access. The account
+admin assigns your role at invitation and can update it later. For the full
+permission matrix, see [Role Permissions](./roles-and-permissions.mdx).
+
+:::note
+
+Role-Based Access Control (RBAC) with Developer and Member roles is an
+enterprise feature. On non-enterprise accounts, all invited users are added as
+**Admin** by default.
+
+:::
+
+## Troubleshooting
+
+### I accepted the invitation but I don't see the account
+
+This is almost always an **identity mismatch**. Zuplo supports signing in with
+Google, GitHub, and email-password. Different sign-in methods are treated as
+separate identities, even when the underlying email address is the same.
+
+Work through this checklist:
+
+- **Check the email address on the invitation.** Confirm it matches exactly the
+  email you use to sign in to Zuplo.
+- **Check your sign-in method.** If the invitation was sent to `you@company.com`
+  and you usually sign in with Google OAuth using that same email, that
+  combination should work. But if you also created a separate email-password
+  account with the same address, Zuplo treats those as different identities.
+  Sign in with the method that matches how the invitation was sent.
+- **Click the invitation link again.** Open the original invitation email and
+  click the accept link while signed in with the correct identity. If you were
+  signed in with a different identity the first time, the invitation may have
+  been applied to the wrong account.
+- **Ask the account admin to verify.** The admin can check **Account Settings →
+  Members** to confirm the invitation status. If it shows as pending, it hasn't
+  been accepted yet. The admin can also remove and re-send the invitation to
+  ensure it goes to the right email.
+
+### I see the account but not its projects
+
+If you switched into an account but the project list appears empty or you can't
+open a specific project, check the following:
+
+- **Your account-level role may not include project visibility.** Users with the
+  **Member** role at the account level cannot view projects unless an admin has
+  granted them a project-level role. Ask the account admin to assign you a role
+  on the specific project you need access to. See
+  [Managing Project Members](./managing-project-members.mdx) for details.
+- **The project may require source control access.** Some projects are connected
+  to a GitHub, GitLab, Bitbucket, or Azure DevOps repository. You may need
+  access to the linked repository in addition to your Zuplo project role.
+
+### Why doesn't my invitation link work?
+
+Invitation links can fail for a few reasons:
+
+- **The link is expired or already used.** Ask the account admin to resend the
+  invitation from **Account Settings → Members**.
+- **The link was opened while signed in as the wrong identity.** Sign out, open
+  the invitation in a fresh browser session, and sign in with the address the
+  invitation was sent to.
+
+### Why don't I see the account switcher in my avatar menu?
+
+The **Switch Account** submenu only lists other accounts when you belong to more
+than one. If hovering **Switch Account** shows only your current account, you
+belong to a single account. Ask the relevant account admin to send (or resend)
+an invitation to your address.
+
+### Do I get the invited account's plan features?
+
+Yes. Plan-tier features (Free, Builder, Enterprise) are attached to the
+**account**, not to individual users. While working inside a higher-tier
+account, you have access to all features your role permits on that plan,
+regardless of your personal account's plan.
+
+When you switch back to your personal account, you have access only to the
+features available on your personal account's plan.
+
+## Related topics
+
+- [Managing Account Members](./managing-account-members.mdx): How to invite
+  users and manage their roles (admin perspective).
+- [Managing Project Members](./managing-project-members.mdx): How to grant
+  project-level access to account members.
+- [Role Permissions](./roles-and-permissions.mdx): Full permission matrix for
+  account and project roles.
