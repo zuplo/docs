@@ -132,16 +132,6 @@ verify:
 | **Tax collection**   | Tax registrations added in Stripe and `workflow.tax.enabled` set | [Add tax registrations in Stripe](./tax-collection.md#add-tax-registrations-in-stripe) |
 | **Tax behavior**     | Inclusive vs. exclusive matches your pricing page                | [Tax behavior configuration](./tax-collection.md#tax-behavior-configuration)           |
 
-Check billing readiness programmatically:
-
-```bash
-curl "https://dev.zuplo.com/v3/metering/$BUCKET_ID/billing-readiness" \
-  -H "Authorization: Bearer $ZAPI_KEY"
-```
-
-The response confirms whether Stripe is connected and a default billing profile
-exists.
-
 ### Webhook endpoint validated
 
 When you connect Stripe, Zuplo registers a webhook endpoint automatically so it
@@ -198,14 +188,14 @@ the gateway enforces limits.
 
 Before real money is on the line, walk through every lifecycle state:
 
-| State          | How to test                                                                                                                                                   |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Subscribe      | Subscribe to a plan via the Developer Portal using [Stripe test cards](https://docs.stripe.com/testing)                                                       |
-| Upgrade        | Move from a lower plan to a higher plan. Entitlements should change immediately and the proration credit should appear on the next invoice                    |
-| Downgrade      | Move from a higher plan to a lower plan. The change should take effect at the next billing cycle, not immediately                                             |
-| Cancel         | Cancel a subscription. Access should continue until the billing period ends, then be revoked                                                                  |
-| Reactivate     | Reactivate a canceled subscription before the period ends. Access should be restored                                                                          |
-| Failed payment | Use Stripe test card `4000 0000 0000 9995` (declined) to verify grace period behavior and that access is blocked after the configured `maxPaymentOverdueDays` |
+| State          | How to test                                                                                                                                                                                   |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Subscribe      | Subscribe to a plan via the Developer Portal using [Stripe test cards](https://docs.stripe.com/testing)                                                                                       |
+| Upgrade        | Move from a lower plan to a higher plan. Entitlements should change immediately and the proration credit should appear on the next invoice                                                    |
+| Downgrade      | Move from a higher plan to a lower plan. The change should take effect at the next billing cycle, not immediately                                                                             |
+| Cancel         | Cancel a subscription. Access should continue until the billing period ends, then be revoked                                                                                                  |
+| Reactivate     | Reactivate a canceled subscription before the period ends. Access should be restored                                                                                                          |
+| Failed payment | Use Stripe test card `4000 0000 0000 0341` (attaches to customer but fails on charge) to verify grace period behavior and that access is blocked after the configured `maxPaymentOverdueDays` |
 
 See [Subscription Lifecycle](./subscription-lifecycle.md) for the full details
 on each state transition.
