@@ -395,6 +395,7 @@ export const documentation: Navigation = [
           "guides/canary-routing-for-employees",
           "guides/geolocation-backend-routing",
           "guides/user-based-backend-routing",
+          "guides/proxying-between-zuplo-gateways",
           "articles/bypass-policy-for-testing",
           "articles/testing-graphql",
           "articles/health-checks",
