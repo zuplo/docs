@@ -1,3 +1,7 @@
+// Fetches the Developer API OpenAPI spec from dev.zuplo.com and merges
+// the main spec with the preview spec into ./api.json. New endpoints
+// (including MCP servers under /mcp) appear automatically once they
+// land in the upstream OpenAPI output.
 import { writeFileSync } from "fs";
 
 const [response, responseBeta] = await Promise.all([
