@@ -119,7 +119,6 @@ Feature** for each of the following:
 | Name             | Key                | Linked Meter | Purpose                       |
 | ---------------- | ------------------ | ------------ | ----------------------------- |
 | API Requests     | `api_requests`     | API Requests | Usage-based (linked to meter) |
-| Monthly Fee      | `monthly_fee`      | —            | Flat-rate billing             |
 | Metadata Support | `metadata_support` | —            | Boolean on/off feature        |
 
 :::tip{title="Key Naming Conventions"}
@@ -145,25 +144,29 @@ plans to give your customers options.
    - **Plan Name**: `Developer`
    - **Key**: `developer`
 3. Click **Create Draft**.
-4. Configure the rate cards by selecting features from the **Add feature**
-   dropdown in the **Features & Rate Cards**:
+4. Configure the rate cards from the **Add rate card** dropdown in the
+   **Features & Rate Cards** section. The dropdown groups rate cards by whether
+   they're tied to a feature; the **Billing-only** section at the bottom lets
+   you add a flat-rate line item that isn't tied to any feature.
 
-   ![The add feature dropdown showing the location of the Monthly Fee feature](/media/monetization/add-feature-dropdown.png)
+   ![The Add rate card dropdown with the New billing-only fee option](/media/monetization/add-feature-dropdown.png)
 
-   Click on the **Monthly Fee** feature and set it up as shown below:
+   Under **Billing-only**, click **New billing-only fee**. The Portal pre-fills
+   the name as `Subscription Fee` and the key as `subscription_fee`. Leave those
+   as-is and set the rest as shown below:
 
-   **Monthly Fee**:
+   **Subscription Fee**:
 
-   | Setting         | Value          |
-   | --------------- | -------------- |
-   | Pricing Model   | Flat fee       |
-   | Billing Cadence | Monthly        |
-   | Payment Term    | In advance     |
-   | Price           | $9.99          |
-   | Entitlement     | No entitlement |
+   | Setting         | Value               |
+   | --------------- | ------------------- |
+   | Feature         | None (billing-only) |
+   | Pricing Model   | Flat fee            |
+   | Billing Cadence | Monthly             |
+   | Payment Term    | In advance          |
+   | Price           | $9.99               |
 
-   Next, click **Add feature** again and choose the **API Requests** feature and
-   set it up as shown below:
+   Next, click **Add rate card** again. Under **Existing Features**, choose
+   **API Requests** and set it up as shown below:
 
    **API Requests**:
 
@@ -202,10 +205,10 @@ The only structural differences are the pricing, request amounts, and the
 addition of a **Metadata Support** rate card (set **Pricing Model** to `Free`
 and **Entitlement** to `Boolean (on/off)`).
 
-| Plan      | Key         | Monthly Fee | Included Requests | Overage Rate | Metadata Support |
-| --------- | ----------- | ----------- | ----------------- | ------------ | ---------------- |
-| Developer | `developer` | $9.99       | 1,000             | $0.10/req    | No               |
-| Pro       | `pro`       | $19.99      | 5,000             | $0.05/req    | Yes              |
+| Plan      | Key         | Subscription Fee | Included Requests | Overage Rate | Metadata Support |
+| --------- | ----------- | ---------------- | ----------------- | ------------ | ---------------- |
+| Developer | `developer` | $9.99            | 1,000             | $0.10/req    | No               |
+| Pro       | `pro`       | $19.99           | 5,000             | $0.05/req    | Yes              |
 
 For the **API Requests** rate card on each plan, set **Tier 1** Last Unit to the
 "Included Requests" value and **Tier 2** Unit Price to the "Overage Rate" value.
