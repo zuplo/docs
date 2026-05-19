@@ -1,0 +1,409 @@
+---
+title: Proxying Between Zuplo Gateways
+sidebar_label: Proxying Between Gateways
+description:
+  Learn how to proxy requests from one Zuplo project to another using the URL
+  Forward Handler or a custom fetch handler, propagate authentication, surface
+  upstream errors, and troubleshoot 522 timeouts.
+tags:
+  - backends
+  - deployment
+  - custom-code
+  - authentication
+---
+
+Some architectures call for one Zuplo gateway to sit in front of one or more
+other Zuplo gateways. A "product" gateway might aggregate several team-owned
+"member" gateways, a BFF might fan out to multiple internal APIs, or a migration
+might route a subset of traffic through a new project while the old one still
+serves the rest.
+
+This guide covers the patterns, auth propagation strategies, error-handling
+pitfalls, and troubleshooting steps you need when the upstream is another Zuplo
+project.
+
+## When this pattern makes sense
+
+- **Product-of-products** — A single public API endpoint forwards different path
+  prefixes to separate Zuplo projects, each owned by a different team.
+- **Backend for frontend (BFF)** — A gateway aggregates data from multiple
+  downstream Zuplo-managed APIs into a single response.
+- **Tenant routing** — Requests are routed to different Zuplo projects based on
+  tenant identity or API key metadata. See
+  [User-Based Backend Routing](./user-based-backend-routing.mdx) for a detailed
+  walkthrough of this approach.
+- **Gradual migration** — During a migration, a new gateway forwards unhandled
+  routes to the old gateway.
+
+If you use a Managed Dedicated deployment with an enterprise plan, consider
+[Federated Gateways](../dedicated/federated-gateways.mdx) instead. Federated
+Gateways is an enterprise add-on that uses the `local://` protocol for
+inter-environment communication within the same dedicated instance, avoiding the
+public internet and providing lower latency.
+
+## Choosing an approach
+
+### Pattern A: URL Forward Handler
+
+The [URL Forward Handler](../handlers/url-forward.mdx) is the simplest option.
+It proxies the request — method, headers, and body — to the downstream Zuplo
+project without writing any code.
+
+```json
+{
+  "handler": {
+    "export": "urlForwardHandler",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "baseUrl": "${env.DOWNSTREAM_GATEWAY_URL}"
+    }
+  }
+}
+```
+
+Store the downstream URL (for example
+`https://member-api-main-abc123.zuplo.app`) in an
+[environment variable](../articles/environment-variables.mdx) so you can change
+it per environment without modifying route configuration.
+
+The URL Forward Handler appends the incoming path to the `baseUrl`. If the outer
+gateway receives `GET /orders/123` and the `baseUrl` is
+`https://member-api-main-abc123.zuplo.app`, the forwarded request goes to
+`https://member-api-main-abc123.zuplo.app/orders/123`.
+
+**When to use this pattern:**
+
+- You want zero-code proxying and are happy forwarding the request as-is.
+- You do not need to inspect or transform the upstream response before returning
+  it to the caller.
+
+### Pattern B: Custom fetch handler
+
+A [Function Handler](../handlers/custom-handler.mdx) gives you full control over
+the outbound request and lets you inspect the upstream response before returning
+it to the caller. This is the recommended pattern when you need to propagate
+authentication credentials, transform the response, or surface upstream error
+details.
+
+```typescript
+import { ZuploContext, ZuploRequest, environment } from "@zuplo/runtime";
+
+export default async function (
+  request: ZuploRequest,
+  context: ZuploContext,
+): Promise<Response> {
+  const url = new URL(request.url);
+  const upstreamUrl = `${environment.DOWNSTREAM_GATEWAY_URL}${url.pathname}${url.search}`;
+
+  const upstreamResponse = await fetch(upstreamUrl, {
+    method: request.method,
+    headers: request.headers,
+    body: request.body,
+  });
+
+  // Return the upstream response directly, preserving status and headers
+  return new Response(upstreamResponse.body, {
+    status: upstreamResponse.status,
+    headers: upstreamResponse.headers,
+  });
+}
+```
+
+**When to use this pattern:**
+
+- You need to add, remove, or transform headers before forwarding.
+- You need to read the upstream response body (for example, to merge responses
+  from multiple downstreams).
+- You want to return the exact upstream status code and body to the caller
+  instead of receiving an opaque 522. See
+  [Surfacing upstream errors](#surfacing-upstream-errors-instead-of-522) below.
+
+### Pattern C: Federated Gateways (Managed Dedicated)
+
+On a [Managed Dedicated](../dedicated/federated-gateways.mdx) plan, use the
+`local://` protocol to call other environments in the same instance:
+
+```json
+{
+  "handler": {
+    "export": "urlForwardHandler",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "baseUrl": "local://member-api-main-abc123"
+    }
+  }
+}
+```
+
+This avoids the public internet entirely. The Lambda handler is not supported
+for federated calls — use URL Forward, URL Rewrite, or a Function Handler
+instead.
+
+## Propagating authentication
+
+When the outer gateway authenticates a request (using
+[API Key Authentication](../concepts/api-keys.md),
+[JWT authentication](../concepts/authentication.mdx), or another method), the
+inner gateway still needs to trust that request. There are several patterns for
+propagating identity between gateways.
+
+### Forward the original credential
+
+The simplest approach is to forward the caller's original `Authorization` header
+(or API key header) to the downstream gateway. Both the URL Forward Handler and
+the custom fetch handler forward request headers by default, so if the
+downstream gateway accepts the same credentials, this works without extra
+configuration.
+
+:::caution
+
+If the outer and inner gateways use different API key buckets or different JWT
+issuers, forwarding the original credential does not work. Use one of the
+patterns below instead.
+
+:::
+
+### Shared secret header
+
+Store a shared secret in an
+[environment variable](../articles/environment-variables.mdx) on both projects.
+On the outer gateway, use a
+[Set Headers policy](../policies/set-headers-inbound.mdx) to add the secret as a
+custom header. On the inner gateway, validate the header in an inbound policy or
+use the same Set Headers policy to check the value.
+
+```json
+{
+  "name": "set-backend-secret",
+  "policyType": "set-headers-inbound",
+  "handler": {
+    "export": "SetHeadersInboundPolicy",
+    "module": "$import(@zuplo/runtime)",
+    "options": {
+      "headers": [
+        {
+          "name": "x-gateway-secret",
+          "value": "$env(DOWNSTREAM_SECRET)"
+        }
+      ]
+    }
+  }
+}
+```
+
+See [Securing your backend](../articles/securing-your-backend.mdx) for a
+complete walkthrough of this approach.
+
+### Upstream Zuplo JWT
+
+The [Upstream Zuplo JWT policy](../policies/upstream-zuplo-jwt-auth-inbound.mdx)
+generates a short-lived, self-signed JWT and attaches it to the outbound
+request. Configure the inner gateway to validate this JWT using the
+[OpenID JWT Authentication policy](../policies/open-id-jwt-auth-inbound.mdx)
+with Zuplo's JWKS endpoint.
+
+This is the most robust option for service-to-service authentication between
+Zuplo projects because it does not require sharing static secrets and the token
+includes claims you can use for authorization on the downstream side.
+
+## Surfacing upstream errors instead of 522
+
+A common problem when proxying between Zuplo gateways: the downstream gateway
+returns a `401 Unauthorized` (or another error), but the caller sees a `522`
+instead.
+
+### Why this happens
+
+Zuplo's managed edge environment uses connection-level timeouts between the
+gateway and the origin server. A `522` status code means a connection-level
+failure occurred between the gateway and the upstream. The
+[Platform Limits](../articles/limits.mdx) documentation lists two scenarios that
+produce a 522: a Complete TCP Connection timeout at 19 seconds and a TCP ACK
+Timeout at 90 seconds.
+
+A `522` can also appear when the upstream closes the connection unexpectedly —
+for example, if the downstream gateway rejects the TLS handshake, returns a
+connection reset, or takes too long to send the response headers.
+
+When the downstream Zuplo project returns an HTTP error like `401` or `500`,
+that is **not** a 522. The 522 means the connection itself failed before an HTTP
+response was received. If you are seeing 522 instead of the expected upstream
+error, the issue is at the network or TLS layer, not the HTTP layer.
+
+### Common causes of 522 between Zuplo projects
+
+- **DNS resolution failure** — The downstream URL is incorrect or the
+  environment no longer exists.
+- **TLS handshake failure** — Misconfigured custom domain or certificate issue
+  on the downstream project.
+- **Connection timeout** — The downstream project takes longer than 19 seconds
+  to accept the TCP connection, usually because it is overloaded or
+  misconfigured.
+- **Egress restrictions** — In some network configurations, outbound connections
+  from one Zuplo project to another may be restricted.
+
+### Returning the actual upstream error
+
+If the TCP connection succeeds but the upstream returns an HTTP error (like 401
+or 500), the URL Forward Handler already returns that status code to the caller.
+You do not need to do anything extra — the upstream's status and body flow
+through.
+
+If you need more control (for example, to log the upstream error or transform it
+before returning), use a custom fetch handler:
+
+```typescript
+import { ZuploContext, ZuploRequest, environment } from "@zuplo/runtime";
+
+export default async function (
+  request: ZuploRequest,
+  context: ZuploContext,
+): Promise<Response> {
+  const url = new URL(request.url);
+  const upstreamUrl = `${environment.DOWNSTREAM_GATEWAY_URL}${url.pathname}${url.search}`;
+
+  try {
+    const upstreamResponse = await fetch(upstreamUrl, {
+      method: request.method,
+      headers: request.headers,
+      body: request.body,
+    });
+
+    if (!upstreamResponse.ok) {
+      context.log.warn(
+        `Upstream returned ${upstreamResponse.status} for ${url.pathname}`,
+      );
+    }
+
+    return new Response(upstreamResponse.body, {
+      status: upstreamResponse.status,
+      headers: upstreamResponse.headers,
+    });
+  } catch (error) {
+    context.log.error(`Failed to reach upstream: ${error}`);
+    return new Response(
+      JSON.stringify({
+        type: "https://httpproblems.com/http-status/502",
+        title: "Bad Gateway",
+        status: 502,
+        detail: "The upstream service is unreachable.",
+      }),
+      {
+        status: 502,
+        headers: { "content-type": "application/problem+json" },
+      },
+    );
+  }
+}
+```
+
+This handler catches connection-level errors (which would otherwise surface as
+a 522) and returns a structured `502 Bad Gateway` response. When the upstream
+does return an HTTP response, the status and body pass through unchanged.
+
+## Custom domains across the fleet
+
+When multiple Zuplo projects form a gateway chain, decide where to attach your
+[custom domain](../articles/custom-domains.mdx):
+
+- **Outer gateway only** — The most common setup. Attach your custom domain (for
+  example, `api.example.com`) to the outer gateway project and let the inner
+  gateways use their default `*.zuplo.app` URLs. Callers only see your custom
+  domain.
+- **Every gateway** — Useful when internal teams also call the inner gateways
+  directly for testing or monitoring. Each project gets its own custom domain.
+
+:::tip
+
+Putting the custom domain only on the outer gateway simplifies DNS management
+and certificate renewal. The inner gateways are implementation details that
+callers do not need to know about.
+
+:::
+
+## Cost considerations
+
+Each Zuplo project in the request chain counts as its own project toward your
+plan's request allowance. A single client request that fans out to three
+downstream Zuplo projects results in four request counts: one on the outer
+gateway and one on each downstream project.
+
+Review [Platform Limits](../articles/limits.mdx) and your plan's monthly request
+allowance before designing a fan-out architecture. If the request volume is
+high, consider whether a single Zuplo project with path-based routing can
+replace the multi-project topology.
+
+## Troubleshooting
+
+### 522 with no logs on the downstream project
+
+The outer gateway's runtime could not establish a TCP connection to the
+downstream project. The request never reached the inner gateway, so there are no
+logs there.
+
+**Checklist:**
+
+1. Verify the downstream URL is correct. Check the environment variable value in
+   the outer gateway project. A typo in the environment name (for example,
+   `main` instead of `main-abc123`) produces a DNS failure.
+2. Confirm the downstream project is deployed and its environment is active.
+   Open the downstream project in the [Zuplo Portal](https://portal.zuplo.com)
+   and check the environment status.
+3. If using a custom domain on the downstream project, verify the DNS CNAME
+   record points to `cname.zuplo.app` and the certificate is valid.
+
+### 522 only when forwarding to another Zuplo project
+
+Requests to `httpbin.org` or other external services work fine, but requests to
+`*.zuplo.app` return 522.
+
+**Checklist:**
+
+1. Check that the downstream Zuplo project's environment is not a development
+   environment (ending in `.zuplo.dev`). Development environments have stricter
+   rate limits (1,000 requests per minute) and may reject connections under
+   load.
+2. Verify TLS is working — the outer gateway connects to the downstream over
+   HTTPS. If the downstream has a custom domain with certificate issues, the TLS
+   handshake fails and produces a 522.
+3. Look at the outer gateway's logs for connection error details. The Zuplo
+   runtime logs include the error message when an outbound `fetch` fails.
+
+### Caller receives the upstream 401 directly
+
+This is the expected behavior. The URL Forward Handler and custom fetch handlers
+both return the upstream's HTTP status and body as-is. If the caller sees `401`,
+the downstream project rejected the request at the HTTP level (not a connection
+failure).
+
+If the downstream uses API key authentication and the caller's key is not valid
+on the downstream project, the downstream returns `401`. Review the
+[Propagating authentication](#propagating-authentication) section to choose the
+right credential strategy.
+
+### Mismatched response content types
+
+The downstream project returns JSON but the caller receives an unexpected
+content type or an empty body.
+
+**Checklist:**
+
+1. Verify the downstream route is configured to return the expected content
+   type. Check the handler and outbound policies on the downstream project.
+2. If using a custom fetch handler on the outer gateway, make sure you are
+   forwarding the upstream's `content-type` header. The example handler in
+   [Pattern B](#pattern-b-custom-fetch-handler) preserves all upstream headers.
+3. Check whether an outbound policy on the outer gateway transforms or strips
+   the response body.
+
+## Related resources
+
+- [URL Forward Handler](../handlers/url-forward.mdx)
+- [Function Handler](../handlers/custom-handler.mdx)
+- [Federated Gateways (Managed Dedicated)](../dedicated/federated-gateways.mdx)
+- [Securing your backend](../articles/securing-your-backend.mdx)
+- [Platform Limits](../articles/limits.mdx)
+- [Gateway Timeout error](../errors/gateway-timeout.mdx)
+- [Request Lifecycle](../concepts/request-lifecycle.mdx)
+- [Custom Domains](../articles/custom-domains.mdx)
+- [Environment Variables](../articles/environment-variables.mdx)
