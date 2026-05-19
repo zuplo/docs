@@ -1,0 +1,131 @@
+---
+title: Agent Skills
+sidebar_label: Agent Skills
+---
+
+[Agent skills](https://agentskills.io) are structured instruction files that AI
+coding agents load automatically. Each skill focuses on a specific domain and
+includes step-by-step guidance, code patterns, and references to the relevant
+documentation.
+
+The official Zuplo skills live in
+[`zuplo/tools`](https://github.com/zuplo/tools). They cover gateway
+configuration, monetization, the CLI, and the Zudoku developer portal — so
+agents have task-specific playbooks instead of relying on training data that may
+be out of date.
+
+## Available skills
+
+### Zuplo
+
+| Skill                  | Description                                                                                                                                                                      |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **zuplo-guide**        | Comprehensive gateway guide — documentation lookup, request pipeline, route and policy configuration, custom handlers, and deployment. Start here for general Zuplo development. |
+| **zuplo-monetization** | API monetization — meters, plans, Stripe billing, subscriptions, usage tracking, private plans, and tax collection.                                                              |
+| **zuplo-cli**          | CLI reference — local development, deployment, environment variables, tunnels, OpenAPI tools, mTLS, and project management.                                                      |
+
+### Zudoku (Developer Portal)
+
+| Skill            | Description                                                                                                                                |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **zudoku-guide** | Comprehensive Zudoku framework guide — setup, configuration, OpenAPI integration, plugins, auth, theming, troubleshooting, and migrations. |
+
+## Installation
+
+### Claude Code
+
+Register the repo as a plugin marketplace, then install the skills:
+
+```bash
+/plugin marketplace add zuplo/tools
+/plugin install zuplo-skills@zuplo-tools
+/plugin install zudoku-skills@zuplo-tools
+```
+
+### Cursor
+
+Open **Cursor Settings → Rules → Add Rule → Remote Rule (GitHub)** and enter
+`https://github.com/zuplo/tools`. Or copy the skill directories into your
+project:
+
+```txt
+.cursor/skills/
+├── zuplo-guide/SKILL.md
+├── zuplo-monetization/SKILL.md
+├── zuplo-cli/SKILL.md
+└── zudoku-guide/SKILL.md
+```
+
+Skills placed in `.cursor/skills/`, `.agents/skills/`, or `~/.cursor/skills/`
+are auto-discovered.
+
+### GitHub Copilot and VS Code
+
+Copilot reads `AGENTS.md` at the repo root automatically. Add the Zuplo
+`AGENTS.md` to your project for project-level context:
+
+```bash
+curl -o AGENTS.md https://raw.githubusercontent.com/zuplo/tools/main/AGENTS.md
+```
+
+You can also use the `/create-skill` command in Copilot chat and reference the
+skills in [`zuplo/tools`](https://github.com/zuplo/tools) as a starting point.
+
+### Codex (OpenAI)
+
+Codex reads `AGENTS.md` at the repo root. Add the Zuplo `AGENTS.md` to your
+project so Codex picks up project-level context.
+
+### Using the `skills` CLI
+
+The cross-client
+[`skills` CLI](https://github.com/cloudflare/agent-skills-discovery-rfc)
+installs skills directly:
+
+```bash
+npx skills add zuplo/tools
+```
+
+Or via `.well-known` discovery:
+
+```bash
+npx skills add https://zuplo.com/
+npx skills add https://zudoku.dev/
+```
+
+### Manual install
+
+```bash
+git clone https://github.com/zuplo/tools.git
+```
+
+Then copy the skill directories you need into your project's skills directory.
+
+## How skills find documentation
+
+All Zuplo skills look up documentation in this order:
+
+1. **Local docs from `node_modules/zuplo/docs/`** (preferred). The `zuplo` npm
+   package ships with the full Zuplo documentation, version-matched to your
+   installed Zuplo version. See [AI Coding Agents](../articles/ai-agents.md) for
+   setup details.
+2. **The [Zuplo Docs MCP server](./docs-mcp-server.md)** for search and Q&A
+   across the full documentation.
+3. **Fetch docs via URL** as a fallback (`https://zuplo.com/docs/`).
+
+:::tip
+
+Combine the skills with the [Zuplo MCP server](./zuplo-mcp-server.md) to let
+your agent both write the code and operate the gateway — for example, scaffold a
+route locally, then deploy and inspect logs without leaving the session.
+
+:::
+
+## Contributing
+
+The skills are MIT-licensed. To improve them:
+
+1. Fork [`zuplo/tools`](https://github.com/zuplo/tools).
+2. Update the relevant `SKILL.md` file.
+3. Test with your own development workflow.
+4. Open a pull request.

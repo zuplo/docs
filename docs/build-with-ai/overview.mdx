@@ -1,0 +1,68 @@
+---
+title: Build with AI
+sidebar_label: Overview
+---
+
+Zuplo gives AI coding agents — Claude Code, Cursor, GitHub Copilot, Codex,
+Windsurf, and others — first-class support for building, configuring, and
+managing your API gateway. This section covers the tools, skills, and Model
+Context Protocol (MCP) servers that make Zuplo agent-ready.
+
+## What's included
+
+| Tool                                         | Purpose                                                                                                                                                     |
+| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [AI Coding Agents](../articles/ai-agents.md) | Configure `AGENTS.md` and use version-matched docs bundled with the `zuplo` npm package.                                                                    |
+| [Agent Skills](./skills.md)                  | Install the official Zuplo and Zudoku skills from [`zuplo/tools`](https://github.com/zuplo/tools) for task-specific agent guidance.                         |
+| [Docs MCP Server](./docs-mcp-server.md)      | Connect agents to `https://dev.zuplo.com/mcp/docs` for real-time search and Q&A across Zuplo documentation.                                                 |
+| [Zuplo MCP Server](./zuplo-mcp-server.md)    | Connect agents to `https://dev.zuplo.com/mcp` to manage accounts, deployments, API keys, custom domains, tunnels, and more through the Zuplo Developer API. |
+
+## How the pieces fit together
+
+The pieces are complementary — they work best when using them together:
+
+1. **`AGENTS.md` and bundled docs** keep agents grounded in your project's
+   installed Zuplo version. No network calls required.
+2. **Skills** add task-specific playbooks for common workflows (project setup,
+   policies, monetization, CLI usage).
+3. **MCP servers** give agents live capabilities — searching the latest docs and
+   driving your Zuplo account programmatically.
+
+:::tip
+
+If you're starting fresh, run `npx create-zuplo-api@latest` — it scaffolds
+`AGENTS.md` and `CLAUDE.md` for you. Then install the skills and add the MCP
+servers as needed.
+
+:::
+
+## Quick start
+
+Add both MCP servers to Claude Code by editing `.claude/settings.json`:
+
+```json title=".claude/settings.json"
+{
+  "mcpServers": {
+    "zuplo-docs": {
+      "type": "http",
+      "url": "https://dev.zuplo.com/mcp/docs"
+    },
+    "zuplo": {
+      "type": "http",
+      "url": "https://dev.zuplo.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${ZUPLO_API_KEY}"
+      }
+    }
+  }
+}
+```
+
+Install the official skills:
+
+```bash
+npx skills add zuplo/tools
+```
+
+See the linked pages above for client-specific setup, authentication, and the
+full list of available tools.
